@@ -12,7 +12,7 @@ module Aws::SFN
     class ActivityAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified activity does not exist.</p>
@@ -21,7 +21,7 @@ module Aws::SFN
     class ActivityDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity that failed during an execution.</p>
@@ -35,7 +35,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of activities has been reached. Existing activities must be deleted
@@ -45,7 +45,7 @@ module Aws::SFN
     class ActivityLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity.</p>
@@ -91,7 +91,7 @@ module Aws::SFN
       :name,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity schedule failure that occurred during an
@@ -106,7 +106,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity scheduled during an execution.</p>
@@ -132,11 +132,11 @@ module Aws::SFN
       :timeout_in_seconds,
       :heartbeat_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
-        options[:heartbeat_in_seconds] =  unless options.key?(:heartbeat_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
+        options[:heartbeat_in_seconds] = nil unless options.key?(:heartbeat_in_seconds)
         super
       end
     end
@@ -149,7 +149,7 @@ module Aws::SFN
     class ActivityStartedEventDetails < Struct.new(
       :worker_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity that successfully terminated during an
@@ -164,7 +164,7 @@ module Aws::SFN
       :output,
       :output_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an activity timeout that occurred during an execution.</p>
@@ -178,7 +178,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of workers concurrently polling for activity tasks has been
@@ -188,7 +188,7 @@ module Aws::SFN
     class ActivityWorkerLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about assigned variables in an execution history event.</p>
@@ -199,7 +199,7 @@ module Aws::SFN
     class AssignedVariablesDetails < Struct.new(
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -218,7 +218,7 @@ module Aws::SFN
       :billed_memory_used_in_mb,
       :billed_duration_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:billed_memory_used_in_mb] = 0 unless options.key?(:billed_memory_used_in_mb)
@@ -235,7 +235,7 @@ module Aws::SFN
     class CloudWatchEventsExecutionDataDetails < Struct.new(
       :included,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:included] = false unless options.key?(:included)
@@ -252,7 +252,7 @@ module Aws::SFN
     class CloudWatchLogsLogGroup < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state. This error occurs when there're concurrent requests for <a>DeleteStateMachineVersion</a>, <a>PublishStateMachineVersion</a>, or <a>UpdateStateMachine</a> with the <code>publish</code> parameter set to <code>true</code>.</p>
@@ -262,7 +262,7 @@ module Aws::SFN
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -314,7 +314,7 @@ module Aws::SFN
       :tags,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_arn
@@ -327,7 +327,7 @@ module Aws::SFN
       :activity_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -349,7 +349,7 @@ module Aws::SFN
       :name,
       :routing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_alias_arn
@@ -362,7 +362,7 @@ module Aws::SFN
       :state_machine_alias_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -447,7 +447,7 @@ module Aws::SFN
       :version_description,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -464,7 +464,7 @@ module Aws::SFN
       :creation_date,
       :state_machine_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_arn
@@ -473,12 +473,12 @@ module Aws::SFN
     class DeleteActivityInput < Struct.new(
       :activity_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteActivityOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_alias_arn
@@ -487,12 +487,12 @@ module Aws::SFN
     class DeleteStateMachineAliasInput < Struct.new(
       :state_machine_alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineAliasOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -501,12 +501,12 @@ module Aws::SFN
     class DeleteStateMachineInput < Struct.new(
       :state_machine_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_version_arn
@@ -515,12 +515,12 @@ module Aws::SFN
     class DeleteStateMachineVersionInput < Struct.new(
       :state_machine_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStateMachineVersionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_arn
@@ -529,7 +529,7 @@ module Aws::SFN
     class DescribeActivityInput < Struct.new(
       :activity_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_arn
@@ -578,7 +578,7 @@ module Aws::SFN
       :creation_date,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -591,7 +591,7 @@ module Aws::SFN
       :execution_arn,
       :included_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -768,7 +768,7 @@ module Aws::SFN
       :redrive_status,
       :redrive_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_run_arn
@@ -777,7 +777,7 @@ module Aws::SFN
     class DescribeMapRunInput < Struct.new(
       :map_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_run_arn
@@ -830,7 +830,7 @@ module Aws::SFN
       :redrive_count,
       :redrive_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_concurrency] = 0 unless options.key?(:max_concurrency)
@@ -846,7 +846,7 @@ module Aws::SFN
     class DescribeStateMachineAliasInput < Struct.new(
       :state_machine_alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_alias_arn
@@ -876,7 +876,7 @@ module Aws::SFN
       :creation_date,
       :update_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -889,7 +889,7 @@ module Aws::SFN
       :execution_arn,
       :included_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -945,7 +945,7 @@ module Aws::SFN
       :encryption_configuration,
       :variable_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -964,7 +964,7 @@ module Aws::SFN
       :state_machine_arn,
       :included_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -1062,7 +1062,7 @@ module Aws::SFN
       :encryption_configuration,
       :variable_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings to configure server-side encryption. </p>
@@ -1088,12 +1088,7 @@ module Aws::SFN
       :kms_data_key_reuse_period_seconds,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      AWS_OWNED_KEY = 'AWS_OWNED_KEY'
-      CUSTOMER_MANAGED_KMS_KEY = 'CUSTOMER_MANAGED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an evaluation failure that occurred while processing a state, for example, when a JSONata expression throws an error. This event will only be present in state machines that have <b> QueryLanguage</b> set to JSONata, or individual states set to JSONata.</p>
@@ -1115,7 +1110,7 @@ module Aws::SFN
       :location,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an abort of an execution.</p>
@@ -1129,7 +1124,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The execution has the same <code>name</code> as another execution (but a different
@@ -1143,7 +1138,7 @@ module Aws::SFN
     class ExecutionAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified execution does not exist.</p>
@@ -1152,7 +1147,7 @@ module Aws::SFN
     class ExecutionDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an execution failure event.</p>
@@ -1166,7 +1161,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of running executions has been reached. Running executions must end or
@@ -1176,7 +1171,7 @@ module Aws::SFN
     class ExecutionLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an execution.</p>
@@ -1261,10 +1256,10 @@ module Aws::SFN
       :redrive_count,
       :redrive_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:item_count] =  unless options.key?(:item_count)
+        options[:item_count] = nil unless options.key?(:item_count)
         super
       end
     end
@@ -1275,18 +1270,7 @@ module Aws::SFN
     class ExecutionNotRedrivable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionRedriveFilter
-      REDRIVEN = 'REDRIVEN'
-      NOT_REDRIVEN = 'NOT_REDRIVEN'
-    end
-
-    module ExecutionRedriveStatus
-      REDRIVABLE = 'REDRIVABLE'
-      NOT_REDRIVABLE = 'NOT_REDRIVABLE'
-      REDRIVABLE_BY_MAP_RUN = 'REDRIVABLE_BY_MAP_RUN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a redriven execution.</p>
@@ -1296,7 +1280,7 @@ module Aws::SFN
     class ExecutionRedrivenEventDetails < Struct.new(
       :redrive_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the start of the execution.</p>
@@ -1322,16 +1306,7 @@ module Aws::SFN
       :state_machine_alias_arn,
       :state_machine_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
-      ABORTED = 'ABORTED'
-      PENDING_REDRIVE = 'PENDING_REDRIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the successful termination of the execution.</p>
@@ -1345,7 +1320,7 @@ module Aws::SFN
       :output,
       :output_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the execution timeout that occurred during the execution.</p>
@@ -1359,7 +1334,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_arn
@@ -1374,7 +1349,7 @@ module Aws::SFN
       :activity_arn,
       :worker_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -1390,7 +1365,7 @@ module Aws::SFN
       :task_token,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -1419,7 +1394,7 @@ module Aws::SFN
       :next_token,
       :include_execution_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -1433,7 +1408,7 @@ module Aws::SFN
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the events of an execution.</p>
@@ -1606,7 +1581,7 @@ module Aws::SFN
       :map_run_redriven_event_details,
       :evaluation_failed_event_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:id] = 0 unless options.key?(:id)
@@ -1623,82 +1598,12 @@ module Aws::SFN
     class HistoryEventExecutionDataDetails < Struct.new(
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
         super
       end
-    end
-
-    module HistoryEventType
-      ActivityFailed = 'ActivityFailed'
-      ActivityScheduled = 'ActivityScheduled'
-      ActivityScheduleFailed = 'ActivityScheduleFailed'
-      ActivityStarted = 'ActivityStarted'
-      ActivitySucceeded = 'ActivitySucceeded'
-      ActivityTimedOut = 'ActivityTimedOut'
-      ChoiceStateEntered = 'ChoiceStateEntered'
-      ChoiceStateExited = 'ChoiceStateExited'
-      ExecutionAborted = 'ExecutionAborted'
-      ExecutionFailed = 'ExecutionFailed'
-      ExecutionStarted = 'ExecutionStarted'
-      ExecutionSucceeded = 'ExecutionSucceeded'
-      ExecutionTimedOut = 'ExecutionTimedOut'
-      FailStateEntered = 'FailStateEntered'
-      LambdaFunctionFailed = 'LambdaFunctionFailed'
-      LambdaFunctionScheduled = 'LambdaFunctionScheduled'
-      LambdaFunctionScheduleFailed = 'LambdaFunctionScheduleFailed'
-      LambdaFunctionStarted = 'LambdaFunctionStarted'
-      LambdaFunctionStartFailed = 'LambdaFunctionStartFailed'
-      LambdaFunctionSucceeded = 'LambdaFunctionSucceeded'
-      LambdaFunctionTimedOut = 'LambdaFunctionTimedOut'
-      MapIterationAborted = 'MapIterationAborted'
-      MapIterationFailed = 'MapIterationFailed'
-      MapIterationStarted = 'MapIterationStarted'
-      MapIterationSucceeded = 'MapIterationSucceeded'
-      MapStateAborted = 'MapStateAborted'
-      MapStateEntered = 'MapStateEntered'
-      MapStateExited = 'MapStateExited'
-      MapStateFailed = 'MapStateFailed'
-      MapStateStarted = 'MapStateStarted'
-      MapStateSucceeded = 'MapStateSucceeded'
-      ParallelStateAborted = 'ParallelStateAborted'
-      ParallelStateEntered = 'ParallelStateEntered'
-      ParallelStateExited = 'ParallelStateExited'
-      ParallelStateFailed = 'ParallelStateFailed'
-      ParallelStateStarted = 'ParallelStateStarted'
-      ParallelStateSucceeded = 'ParallelStateSucceeded'
-      PassStateEntered = 'PassStateEntered'
-      PassStateExited = 'PassStateExited'
-      SucceedStateEntered = 'SucceedStateEntered'
-      SucceedStateExited = 'SucceedStateExited'
-      TaskFailed = 'TaskFailed'
-      TaskScheduled = 'TaskScheduled'
-      TaskStarted = 'TaskStarted'
-      TaskStartFailed = 'TaskStartFailed'
-      TaskStateAborted = 'TaskStateAborted'
-      TaskStateEntered = 'TaskStateEntered'
-      TaskStateExited = 'TaskStateExited'
-      TaskSubmitFailed = 'TaskSubmitFailed'
-      TaskSubmitted = 'TaskSubmitted'
-      TaskSucceeded = 'TaskSucceeded'
-      TaskTimedOut = 'TaskTimedOut'
-      WaitStateAborted = 'WaitStateAborted'
-      WaitStateEntered = 'WaitStateEntered'
-      WaitStateExited = 'WaitStateExited'
-      MapRunAborted = 'MapRunAborted'
-      MapRunFailed = 'MapRunFailed'
-      MapRunStarted = 'MapRunStarted'
-      MapRunSucceeded = 'MapRunSucceeded'
-      ExecutionRedriven = 'ExecutionRedriven'
-      MapRunRedriven = 'MapRunRedriven'
-      EvaluationFailed = 'EvaluationFailed'
-    end
-
-    module IncludedData
-      ALL_DATA = 'ALL_DATA'
-      METADATA_ONLY = 'METADATA_ONLY'
     end
 
     # <p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP request and response information.</p>
@@ -1745,7 +1650,7 @@ module Aws::SFN
       :response,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP request information.</p>
@@ -1771,7 +1676,7 @@ module Aws::SFN
       :headers,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional details about the state's execution, including its input and output data processing flow, and HTTP response information. The <code>inspectionLevel</code> request parameter specifies which details are returned.</p>
@@ -1797,13 +1702,7 @@ module Aws::SFN
       :headers,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InspectionLevel
-      INFO = 'INFO'
-      DEBUG = 'DEBUG'
-      TRACE = 'TRACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Amazon Resource Name (ARN) is not valid.</p>
@@ -1812,7 +1711,7 @@ module Aws::SFN
     class InvalidArn < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Amazon States Language definition is not valid.</p>
@@ -1821,7 +1720,7 @@ module Aws::SFN
     class InvalidDefinition < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Received when <code>encryptionConfiguration</code> is specified but various conditions exist which make the configuration invalid. For example, if <code>type</code> is set to <code>CUSTOMER_MANAGED_KMS_KEY</code>, but <code>kmsKeyId</code> is null, or <code>kmsDataKeyReusePeriodSeconds</code> is not between 60 and 900, or the KMS key is not symmetric or inactive.</p>
@@ -1830,7 +1729,7 @@ module Aws::SFN
     class InvalidEncryptionConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided JSON input data is not valid.</p>
@@ -1839,7 +1738,7 @@ module Aws::SFN
     class InvalidExecutionInput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration is not valid.</p>
@@ -1848,7 +1747,7 @@ module Aws::SFN
     class InvalidLoggingConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided name is not valid.</p>
@@ -1857,7 +1756,7 @@ module Aws::SFN
     class InvalidName < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided JSON output data is not valid.</p>
@@ -1866,7 +1765,7 @@ module Aws::SFN
     class InvalidOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided token is not valid.</p>
@@ -1875,7 +1774,7 @@ module Aws::SFN
     class InvalidToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your <code>tracingConfiguration</code> key does not match, or <code>enabled</code> has not
@@ -1885,7 +1784,7 @@ module Aws::SFN
     class InvalidTracingConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Either your KMS key policy or API caller does not have the required permissions.</p>
@@ -1894,7 +1793,7 @@ module Aws::SFN
     class KmsAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KMS key is not in valid state, for example: Disabled or Deleted.</p>
@@ -1907,15 +1806,7 @@ module Aws::SFN
       :kms_key_state,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KmsKeyState
-      DISABLED = 'DISABLED'
-      PENDING_DELETION = 'PENDING_DELETION'
-      PENDING_IMPORT = 'PENDING_IMPORT'
-      UNAVAILABLE = 'UNAVAILABLE'
-      CREATING = 'CREATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Received when KMS returns <code>ThrottlingException</code> for a KMS call that Step Functions makes on behalf of the caller.</p>
@@ -1924,7 +1815,7 @@ module Aws::SFN
     class KmsThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Lambda function that failed during an execution.</p>
@@ -1938,7 +1829,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a failed Lambda function schedule event that occurred during an
@@ -1953,7 +1844,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Lambda function scheduled during an execution.</p>
@@ -1979,10 +1870,10 @@ module Aws::SFN
       :timeout_in_seconds,
       :task_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
         super
       end
     end
@@ -1998,7 +1889,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Lambda function that successfully terminated during an
@@ -2013,7 +1904,7 @@ module Aws::SFN
       :output,
       :output_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Lambda function timeout that occurred during an execution.</p>
@@ -2027,7 +1918,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2043,7 +1934,7 @@ module Aws::SFN
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -2057,7 +1948,7 @@ module Aws::SFN
       :activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2101,7 +1992,7 @@ module Aws::SFN
       :map_run_arn,
       :redrive_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute executions
@@ -2115,7 +2006,7 @@ module Aws::SFN
       :executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -2135,7 +2026,7 @@ module Aws::SFN
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_runs
@@ -2149,7 +2040,7 @@ module Aws::SFN
       :map_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2170,7 +2061,7 @@ module Aws::SFN
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_aliases
@@ -2184,7 +2075,7 @@ module Aws::SFN
       :state_machine_aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2204,7 +2095,7 @@ module Aws::SFN
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_versions
@@ -2218,7 +2109,7 @@ module Aws::SFN
       :state_machine_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2234,7 +2125,7 @@ module Aws::SFN
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machines
@@ -2247,7 +2138,7 @@ module Aws::SFN
       :state_machines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2256,7 +2147,7 @@ module Aws::SFN
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2265,7 +2156,7 @@ module Aws::SFN
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2275,14 +2166,7 @@ module Aws::SFN
     class LogDestination < Struct.new(
       :cloud_watch_logs_log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      ALL = 'ALL'
-      ERROR = 'ERROR'
-      FATAL = 'FATAL'
-      OFF = 'OFF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs
@@ -2303,7 +2187,7 @@ module Aws::SFN
       :include_execution_data,
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_execution_data] = false unless options.key?(:include_execution_data)
@@ -2322,7 +2206,7 @@ module Aws::SFN
       :name,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:index] = 0 unless options.key?(:index)
@@ -2373,7 +2257,7 @@ module Aws::SFN
       :failures_not_redrivable,
       :pending_redrive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:pending] = 0 unless options.key?(:pending)
@@ -2399,7 +2283,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about items that were processed in all of the child workflow executions that were started by a Map Run.</p>
@@ -2445,7 +2329,7 @@ module Aws::SFN
       :failures_not_redrivable,
       :pending_redrive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:pending] = 0 unless options.key?(:pending)
@@ -2483,7 +2367,7 @@ module Aws::SFN
       :start_date,
       :stop_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Map Run that was redriven.</p>
@@ -2497,7 +2381,7 @@ module Aws::SFN
       :map_run_arn,
       :redrive_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Map Run that was started during a state machine execution.</p>
@@ -2507,14 +2391,7 @@ module Aws::SFN
     class MapRunStartedEventDetails < Struct.new(
       :map_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MapRunStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      ABORTED = 'ABORTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a Map state that was started.</p>
@@ -2524,7 +2401,7 @@ module Aws::SFN
     class MapStateStartedEventDetails < Struct.new(
       :length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:length] = 0 unless options.key?(:length)
@@ -2539,7 +2416,7 @@ module Aws::SFN
     class MissingRequiredParameter < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2565,7 +2442,7 @@ module Aws::SFN
       :revision_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_date
@@ -2578,7 +2455,7 @@ module Aws::SFN
       :creation_date,
       :state_machine_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -2591,7 +2468,7 @@ module Aws::SFN
       :execution_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redrive_date
@@ -2600,7 +2477,7 @@ module Aws::SFN
     class RedriveExecutionOutput < Struct.new(
       :redrive_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Could not find the referenced resource.</p>
@@ -2612,7 +2489,7 @@ module Aws::SFN
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the routing configuration of a state machine alias. In a routing
@@ -2630,7 +2507,7 @@ module Aws::SFN
       :state_machine_version_arn,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -2654,12 +2531,12 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendTaskFailureOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -2670,12 +2547,12 @@ module Aws::SFN
     class SendTaskHeartbeatInput < Struct.new(
       :task_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendTaskHeartbeatOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -2690,12 +2567,12 @@ module Aws::SFN
       :task_token,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendTaskSuccessOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -2705,7 +2582,7 @@ module Aws::SFN
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2801,7 +2678,7 @@ module Aws::SFN
       :input,
       :trace_header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -2814,7 +2691,7 @@ module Aws::SFN
       :execution_arn,
       :start_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -2854,7 +2731,7 @@ module Aws::SFN
       :trace_header,
       :included_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -2925,7 +2802,7 @@ module Aws::SFN
       :trace_header,
       :billing_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a state entered during an execution.</p>
@@ -2943,7 +2820,7 @@ module Aws::SFN
       :input,
       :input_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an exit from a state during an execution.</p>
@@ -2997,7 +2874,7 @@ module Aws::SFN
       :assigned_variables,
       :assigned_variables_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a specific state machine alias.</p>
@@ -3011,7 +2888,7 @@ module Aws::SFN
       :state_machine_alias_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A state machine with the same name but a different definition or role ARN already
@@ -3021,7 +2898,7 @@ module Aws::SFN
     class StateMachineAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified state machine is being deleted.</p>
@@ -3030,7 +2907,7 @@ module Aws::SFN
     class StateMachineDeleting < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified state machine does not exist.</p>
@@ -3039,7 +2916,7 @@ module Aws::SFN
     class StateMachineDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of state machines has been reached. Existing state machines must be
@@ -3049,7 +2926,7 @@ module Aws::SFN
     class StateMachineLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the state machine.</p>
@@ -3099,17 +2976,7 @@ module Aws::SFN
       :type,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StateMachineStatus
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-    end
-
-    module StateMachineType
-      STANDARD = 'STANDARD'
-      EXPRESS = 'EXPRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>State machine type is not supported.</p>
@@ -3118,7 +2985,7 @@ module Aws::SFN
     class StateMachineTypeNotSupported < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a specific state machine version.</p>
@@ -3132,7 +2999,7 @@ module Aws::SFN
       :state_machine_version_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_arn
@@ -3149,7 +3016,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stop_date
@@ -3158,13 +3025,7 @@ module Aws::SFN
     class StopExecutionOutput < Struct.new(
       :stop_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SyncExecutionStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags are key-value pairs that can be associated with Step Functions state machines and
@@ -3184,7 +3045,7 @@ module Aws::SFN
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3198,12 +3059,12 @@ module Aws::SFN
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the credentials that Step Functions uses for a task.</p>
@@ -3213,7 +3074,7 @@ module Aws::SFN
     class TaskCredentials < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The activity does not exist.</p>
@@ -3222,7 +3083,7 @@ module Aws::SFN
     class TaskDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a task failure event.</p>
@@ -3244,7 +3105,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a task scheduled during an execution.</p>
@@ -3279,11 +3140,11 @@ module Aws::SFN
       :heartbeat_in_seconds,
       :task_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
-        options[:heartbeat_in_seconds] =  unless options.key?(:heartbeat_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
+        options[:heartbeat_in_seconds] = nil unless options.key?(:heartbeat_in_seconds)
         super
       end
     end
@@ -3307,7 +3168,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the start of a task during an execution.</p>
@@ -3321,7 +3182,7 @@ module Aws::SFN
       :resource_type,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a task that failed to submit during an execution.</p>
@@ -3343,7 +3204,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a task submitted to a resource .</p>
@@ -3365,7 +3226,7 @@ module Aws::SFN
       :output,
       :output_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the successful completion of a task state.</p>
@@ -3388,7 +3249,7 @@ module Aws::SFN
       :output,
       :output_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task token has either expired or the task associated with the token has already been closed.</p>
@@ -3397,7 +3258,7 @@ module Aws::SFN
     class TaskTimedOut < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a resource timeout that occurred during an execution.</p>
@@ -3419,14 +3280,7 @@ module Aws::SFN
       :error,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestExecutionStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      RETRIABLE = 'RETRIABLE'
-      CAUGHT_ERROR = 'CAUGHT_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -3472,7 +3326,7 @@ module Aws::SFN
       :reveal_secrets,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -3501,7 +3355,7 @@ module Aws::SFN
       :next_state,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the number of tags allowed for a resource. See the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html"> Limits Topic</a> in the
@@ -3514,7 +3368,7 @@ module Aws::SFN
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Selects whether or not the state machine's X-Ray tracing is enabled. Default is
@@ -3526,7 +3380,7 @@ module Aws::SFN
     class TracingConfiguration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -3544,12 +3398,12 @@ module Aws::SFN
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_run_arn
@@ -3570,12 +3424,12 @@ module Aws::SFN
       :tolerated_failure_percentage,
       :tolerated_failure_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMapRunOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_alias_arn
@@ -3593,7 +3447,7 @@ module Aws::SFN
       :description,
       :routing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_date
@@ -3602,7 +3456,7 @@ module Aws::SFN
     class UpdateStateMachineAliasOutput < Struct.new(
       :update_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state_machine_arn
@@ -3643,7 +3497,7 @@ module Aws::SFN
       :version_description,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_date
@@ -3661,7 +3515,7 @@ module Aws::SFN
       :revision_id,
       :state_machine_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes potential issues found during state machine validation. Rather than raise an
@@ -3776,7 +3630,7 @@ module Aws::SFN
       :message,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -3799,7 +3653,7 @@ module Aws::SFN
       :severity,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -3817,17 +3671,7 @@ module Aws::SFN
       :diagnostics,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidateStateMachineDefinitionResultCode
-      OK = 'OK'
-      FAIL = 'FAIL'
-    end
-
-    module ValidateStateMachineDefinitionSeverity
-      ERROR = 'ERROR'
-      WARNING = 'WARNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -3840,14 +3684,7 @@ module Aws::SFN
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      API_DOES_NOT_SUPPORT_LABELED_ARNS = 'API_DOES_NOT_SUPPORT_LABELED_ARNS'
-      MISSING_REQUIRED_PARAMETER = 'MISSING_REQUIRED_PARAMETER'
-      CANNOT_UPDATE_COMPLETED_MAP_RUN = 'CANNOT_UPDATE_COMPLETED_MAP_RUN'
-      INVALID_ROUTING_CONFIGURATION = 'INVALID_ROUTING_CONFIGURATION'
+      include ::Smithy::Schema::Structure
     end
 
   end

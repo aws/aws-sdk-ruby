@@ -12,7 +12,7 @@ module Aws::ApplicationCostProfiler
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -21,7 +21,7 @@ module Aws::ApplicationCostProfiler
     class DeleteReportDefinitionRequest < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -30,12 +30,7 @@ module Aws::ApplicationCostProfiler
     class DeleteReportDefinitionResult < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      CSV = 'CSV'
-      PARQUET = 'PARQUET'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -44,7 +39,7 @@ module Aws::ApplicationCostProfiler
     class GetReportDefinitionRequest < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -77,7 +72,7 @@ module Aws::ApplicationCostProfiler
       :created_at,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_s3_location
@@ -86,7 +81,7 @@ module Aws::ApplicationCostProfiler
     class ImportApplicationUsageRequest < Struct.new(
       :source_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -95,7 +90,7 @@ module Aws::ApplicationCostProfiler
     class ImportApplicationUsageResult < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -104,7 +99,7 @@ module Aws::ApplicationCostProfiler
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -117,7 +112,7 @@ module Aws::ApplicationCostProfiler
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_definitions
@@ -130,7 +125,7 @@ module Aws::ApplicationCostProfiler
       :report_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -157,7 +152,7 @@ module Aws::ApplicationCostProfiler
       :format,
       :destination_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -166,7 +161,7 @@ module Aws::ApplicationCostProfiler
     class PutReportDefinitionResult < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a report in AWS Application Cost Profiler.</p>
@@ -200,20 +195,7 @@ module Aws::ApplicationCostProfiler
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportFrequency
-      MONTHLY = 'MONTHLY'
-      DAILY = 'DAILY'
-      ALL = 'ALL'
-    end
-
-    module S3BucketRegion
-      AP_EAST_1 = 'ap-east-1'
-      ME_SOUTH_1 = 'me-south-1'
-      EU_SOUTH_1 = 'eu-south-1'
-      AF_SOUTH_1 = 'af-south-1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the Amazon Simple Storage Service (Amazon S3) location where AWS Application Cost Profiler
@@ -228,7 +210,7 @@ module Aws::ApplicationCostProfiler
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds one or more of the service quotas.</p>
@@ -237,7 +219,7 @@ module Aws::ApplicationCostProfiler
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the Amazon Simple Storage Service (Amazon S3) location where usage data is read
@@ -258,7 +240,7 @@ module Aws::ApplicationCostProfiler
       :key,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calls to AWS Application Cost Profiler API are throttled. The request was denied.</p>
@@ -267,7 +249,7 @@ module Aws::ApplicationCostProfiler
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -293,7 +275,7 @@ module Aws::ApplicationCostProfiler
       :format,
       :destination_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -302,7 +284,7 @@ module Aws::ApplicationCostProfiler
     class UpdateReportDefinitionResult < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints for the API.</p>
@@ -311,7 +293,7 @@ module Aws::ApplicationCostProfiler
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

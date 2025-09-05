@@ -12,7 +12,7 @@ module Aws::AppIntegrations
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the Application Association.</p>
@@ -30,7 +30,7 @@ module Aws::AppIntegrations
       :application_arn,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the application.</p>
@@ -40,7 +40,7 @@ module Aws::AppIntegrations
     class ApplicationConfig < Struct.new(
       :contact_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for where the application should be loaded from.</p>
@@ -50,7 +50,7 @@ module Aws::AppIntegrations
     class ApplicationSourceConfig < Struct.new(
       :external_url_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the Application.</p>
@@ -84,7 +84,7 @@ module Aws::AppIntegrations
       :last_modified_time,
       :is_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_service] = false unless options.key?(:is_service)
@@ -99,12 +99,7 @@ module Aws::AppIntegrations
     class ContactHandling < Struct.new(
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactHandlingScope
-      CROSS_CONTACTS = 'CROSS_CONTACTS'
-      PER_CONTACT = 'PER_CONTACT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -168,7 +163,7 @@ module Aws::AppIntegrations
       :application_config,
       :iframe_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -181,7 +176,7 @@ module Aws::AppIntegrations
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_identifier
@@ -218,7 +213,7 @@ module Aws::AppIntegrations
       :client_token,
       :execution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_association_id
@@ -231,7 +226,7 @@ module Aws::AppIntegrations
       :data_integration_association_id,
       :data_integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -275,7 +270,7 @@ module Aws::AppIntegrations
       :file_configuration,
       :object_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -327,7 +322,7 @@ module Aws::AppIntegrations
       :file_configuration,
       :object_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -359,7 +354,7 @@ module Aws::AppIntegrations
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_integration_arn
@@ -368,7 +363,7 @@ module Aws::AppIntegrations
     class CreateEventIntegrationResponse < Struct.new(
       :event_integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the DataIntegration association.</p>
@@ -399,7 +394,7 @@ module Aws::AppIntegrations
       :last_execution_status,
       :execution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the DataIntegration.</p>
@@ -417,7 +412,7 @@ module Aws::AppIntegrations
       :name,
       :source_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -426,12 +421,12 @@ module Aws::AppIntegrations
     class DeleteApplicationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_identifier
@@ -440,12 +435,12 @@ module Aws::AppIntegrations
     class DeleteDataIntegrationRequest < Struct.new(
       :data_integration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -454,12 +449,12 @@ module Aws::AppIntegrations
     class DeleteEventIntegrationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the specified name already exists.</p>
@@ -468,7 +463,7 @@ module Aws::AppIntegrations
     class DuplicateResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event filter.</p>
@@ -478,7 +473,7 @@ module Aws::AppIntegrations
     class EventFilter < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event integration.</p>
@@ -508,7 +503,7 @@ module Aws::AppIntegrations
       :event_bridge_bus,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event integration association.</p>
@@ -538,7 +533,7 @@ module Aws::AppIntegrations
       :event_bridge_rule_name,
       :client_association_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for how the files should be pulled from the source.</p>
@@ -556,18 +551,7 @@ module Aws::AppIntegrations
       :on_demand_configuration,
       :schedule_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionMode
-      ON_DEMAND = 'ON_DEMAND'
-      SCHEDULED = 'SCHEDULED'
-    end
-
-    module ExecutionStatus
-      COMPLETED = 'COMPLETED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The external URL source for the application.</p>
@@ -581,7 +565,7 @@ module Aws::AppIntegrations
       :access_url,
       :approved_origins,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for what files should be pulled from the source.</p>
@@ -595,7 +579,7 @@ module Aws::AppIntegrations
       :folders,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -604,7 +588,7 @@ module Aws::AppIntegrations
     class GetApplicationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -677,7 +661,7 @@ module Aws::AppIntegrations
       :application_config,
       :iframe_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_service] = false unless options.key?(:is_service)
@@ -691,7 +675,7 @@ module Aws::AppIntegrations
     class GetDataIntegrationRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -736,7 +720,7 @@ module Aws::AppIntegrations
       :file_configuration,
       :object_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -745,7 +729,7 @@ module Aws::AppIntegrations
     class GetEventIntegrationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -774,7 +758,7 @@ module Aws::AppIntegrations
       :event_filter,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The iframe configuration for the application.</p>
@@ -788,7 +772,7 @@ module Aws::AppIntegrations
       :allow,
       :sandbox,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed due to an error or failure with the service.</p>
@@ -797,7 +781,7 @@ module Aws::AppIntegrations
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid. </p>
@@ -806,7 +790,7 @@ module Aws::AppIntegrations
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The execution status of the last job.</p>
@@ -820,7 +804,7 @@ module Aws::AppIntegrations
       :execution_status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -838,7 +822,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_associations
@@ -851,7 +835,7 @@ module Aws::AppIntegrations
       :application_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -865,7 +849,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -878,7 +862,7 @@ module Aws::AppIntegrations
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_identifier
@@ -896,7 +880,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_associations
@@ -909,7 +893,7 @@ module Aws::AppIntegrations
       :data_integration_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -923,7 +907,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integrations
@@ -936,7 +920,7 @@ module Aws::AppIntegrations
       :data_integrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_integration_name
@@ -954,7 +938,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_integration_associations
@@ -967,7 +951,7 @@ module Aws::AppIntegrations
       :event_integration_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -981,7 +965,7 @@ module Aws::AppIntegrations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_integrations
@@ -994,7 +978,7 @@ module Aws::AppIntegrations
       :event_integrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1003,7 +987,7 @@ module Aws::AppIntegrations
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1012,7 +996,7 @@ module Aws::AppIntegrations
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and end time for data pull from the source.</p>
@@ -1028,7 +1012,7 @@ module Aws::AppIntegrations
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an event that the application publishes.</p>
@@ -1046,7 +1030,7 @@ module Aws::AppIntegrations
       :schema,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -1055,7 +1039,7 @@ module Aws::AppIntegrations
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The allowed quota for the resource has been exceeded.</p>
@@ -1064,7 +1048,7 @@ module Aws::AppIntegrations
     class ResourceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the data and how often it should be pulled from the source.</p>
@@ -1083,7 +1067,7 @@ module Aws::AppIntegrations
       :object,
       :schedule_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an event that the application subscribes.</p>
@@ -1097,7 +1081,7 @@ module Aws::AppIntegrations
       :event,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1110,12 +1094,12 @@ module Aws::AppIntegrations
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The throttling limit has been exceeded.</p>
@@ -1124,7 +1108,7 @@ module Aws::AppIntegrations
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not supported.</p>
@@ -1133,7 +1117,7 @@ module Aws::AppIntegrations
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1146,12 +1130,12 @@ module Aws::AppIntegrations
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1204,12 +1188,12 @@ module Aws::AppIntegrations
       :application_config,
       :iframe_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_integration_identifier
@@ -1226,12 +1210,12 @@ module Aws::AppIntegrations
       :data_integration_association_identifier,
       :execution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataIntegrationAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1248,12 +1232,12 @@ module Aws::AppIntegrations
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1266,12 +1250,12 @@ module Aws::AppIntegrations
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEventIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::PinpointSMSVoice
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The input you provided is invalid.
@@ -21,7 +21,7 @@ module Aws::PinpointSMSVoice
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
@@ -31,7 +31,7 @@ module Aws::PinpointSMSVoice
     class CallInstructionsMessageType < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
@@ -45,7 +45,7 @@ module Aws::PinpointSMSVoice
       :iam_role_arn,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Create a new event destination in a configuration set.
@@ -63,13 +63,13 @@ module Aws::PinpointSMSVoice
       :event_destination,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was created successfully.
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a new configuration set.
@@ -79,13 +79,13 @@ module Aws::PinpointSMSVoice
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the configuration set was successfully created.
     class CreateConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -98,13 +98,13 @@ module Aws::PinpointSMSVoice
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was deleted successfully.
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -113,13 +113,13 @@ module Aws::PinpointSMSVoice
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the configuration set was deleted successfully.
     class DeleteConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that defines an event destination.
@@ -149,7 +149,7 @@ module Aws::PinpointSMSVoice
       :name,
       :sns_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that defines a single event destination.
@@ -175,18 +175,7 @@ module Aws::PinpointSMSVoice
       :matching_event_types,
       :sns_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The types of events that are sent to the event destination.
-    module EventType
-      INITIATED_CALL = 'INITIATED_CALL'
-      RINGING = 'RINGING'
-      ANSWERED = 'ANSWERED'
-      COMPLETED_CALL = 'COMPLETED_CALL'
-      BUSY = 'BUSY'
-      FAILED = 'FAILED'
-      NO_ANSWER = 'NO_ANSWER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -195,7 +184,7 @@ module Aws::PinpointSMSVoice
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains information about an event destination.
@@ -205,7 +194,7 @@ module Aws::PinpointSMSVoice
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.
@@ -214,7 +203,7 @@ module Aws::PinpointSMSVoice
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
@@ -228,7 +217,7 @@ module Aws::PinpointSMSVoice
       :delivery_stream_arn,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # There are too many instances of the specified resource type.
@@ -237,7 +226,7 @@ module Aws::PinpointSMSVoice
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -250,7 +239,7 @@ module Aws::PinpointSMSVoice
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains information about the configuration sets for your account in the current region.
@@ -264,7 +253,7 @@ module Aws::PinpointSMSVoice
       :configuration_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The resource you attempted to access doesn't exist.
@@ -273,7 +262,7 @@ module Aws::PinpointSMSVoice
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that defines a message that contains unformatted text.
@@ -291,7 +280,7 @@ module Aws::PinpointSMSVoice
       :text,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that defines a message that contains SSML-formatted text.
@@ -309,7 +298,7 @@ module Aws::PinpointSMSVoice
       :text,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # SendVoiceMessageRequest
@@ -335,7 +324,7 @@ module Aws::PinpointSMSVoice
       :destination_phone_number,
       :origination_phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that that contains the Message ID of a Voice message that was sent successfully.
@@ -345,7 +334,7 @@ module Aws::PinpointSMSVoice
     class SendVoiceMessageResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains information about an event destination that sends data to Amazon SNS.
@@ -355,7 +344,7 @@ module Aws::PinpointSMSVoice
     class SnsDestination < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # You've issued too many requests to the resource. Wait a few minutes, and then try again.
@@ -364,7 +353,7 @@ module Aws::PinpointSMSVoice
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # UpdateConfigurationSetEventDestinationRequest
@@ -382,13 +371,13 @@ module Aws::PinpointSMSVoice
       :event_destination,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An empty object that indicates that the event destination was updated successfully.
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An object that contains a voice message and information about the recipient that you want to send it to.
@@ -406,7 +395,7 @@ module Aws::PinpointSMSVoice
       :plain_text_message,
       :ssml_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

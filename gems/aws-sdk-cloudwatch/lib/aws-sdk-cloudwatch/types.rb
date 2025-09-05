@@ -6,12 +6,6 @@ module Aws::CloudWatch
   # This module contains the types returned by client operations.
   module Types
 
-    module ActionsSuppressedBy
-      WaitPeriod = 'WaitPeriod'
-      ExtensionPeriod = 'ExtensionPeriod'
-      Alarm = 'Alarm'
-    end
-
     # <p>Represents the history of a specific alarm.</p>
     # @!attribute alarm_name
     #   <p>The descriptive name for the alarm.</p>
@@ -39,12 +33,7 @@ module Aws::CloudWatch
       :history_summary,
       :history_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlarmType
-      CompositeAlarm = 'CompositeAlarm'
-      MetricAlarm = 'MetricAlarm'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An anomaly detection model associated with a particular CloudWatch metric, statistic,
@@ -102,7 +91,7 @@ module Aws::CloudWatch
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration specifies details about how the anomaly detection model is to be
@@ -124,28 +113,7 @@ module Aws::CloudWatch
       :excluded_time_ranges,
       :metric_timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyDetectorStateValue
-      PENDING_TRAINING = 'PENDING_TRAINING'
-      TRAINED_INSUFFICIENT_DATA = 'TRAINED_INSUFFICIENT_DATA'
-      TRAINED = 'TRAINED'
-    end
-
-    module AnomalyDetectorType
-      SINGLE_METRIC = 'SINGLE_METRIC'
-      METRIC_MATH = 'METRIC_MATH'
-    end
-
-    module ComparisonOperator
-      GreaterThanOrEqualToThreshold = 'GreaterThanOrEqualToThreshold'
-      GreaterThanThreshold = 'GreaterThanThreshold'
-      LessThanThreshold = 'LessThanThreshold'
-      LessThanOrEqualToThreshold = 'LessThanOrEqualToThreshold'
-      LessThanLowerOrGreaterThanUpperThreshold = 'LessThanLowerOrGreaterThanUpperThreshold'
-      LessThanLowerThreshold = 'LessThanLowerThreshold'
-      GreaterThanUpperThreshold = 'GreaterThanUpperThreshold'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about a composite alarm.</p>
@@ -258,7 +226,7 @@ module Aws::CloudWatch
       :actions_suppressor_wait_period,
       :actions_suppressor_extension_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>More than one process tried to modify a resource at the same time.</p>
@@ -267,7 +235,7 @@ module Aws::CloudWatch
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation attempted to create a resource that already exists.</p>
@@ -276,7 +244,7 @@ module Aws::CloudWatch
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a specific dashboard.</p>
@@ -300,7 +268,7 @@ module Aws::CloudWatch
       :last_modified,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Some part of the dashboard data is invalid.</p>
@@ -312,7 +280,7 @@ module Aws::CloudWatch
       :message,
       :dashboard_validation_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified dashboard does not exist.</p>
@@ -321,7 +289,7 @@ module Aws::CloudWatch
     class DashboardNotFoundError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error or warning for the operation.</p>
@@ -335,7 +303,7 @@ module Aws::CloudWatch
       :data_path,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encapsulates the statistical data that CloudWatch computes from metric
@@ -375,7 +343,7 @@ module Aws::CloudWatch
       :unit,
       :extended_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_names
@@ -384,7 +352,7 @@ module Aws::CloudWatch
     class DeleteAlarmsInput < Struct.new(
       :alarm_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -481,12 +449,12 @@ module Aws::CloudWatch
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalyDetectorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_names
@@ -495,12 +463,12 @@ module Aws::CloudWatch
     class DeleteDashboardsInput < Struct.new(
       :dashboard_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDashboardsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_names
@@ -510,7 +478,7 @@ module Aws::CloudWatch
     class DeleteInsightRulesInput < Struct.new(
       :rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -520,7 +488,7 @@ module Aws::CloudWatch
     class DeleteInsightRulesOutput < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -529,12 +497,12 @@ module Aws::CloudWatch
     class DeleteMetricStreamInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMetricStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -576,7 +544,7 @@ module Aws::CloudWatch
       :next_token,
       :scan_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_history_items
@@ -589,7 +557,7 @@ module Aws::CloudWatch
       :alarm_history_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -625,7 +593,7 @@ module Aws::CloudWatch
       :period,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_alarms
@@ -634,7 +602,7 @@ module Aws::CloudWatch
     class DescribeAlarmsForMetricOutput < Struct.new(
       :metric_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_names
@@ -717,7 +685,7 @@ module Aws::CloudWatch
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute composite_alarms
@@ -734,7 +702,7 @@ module Aws::CloudWatch
       :metric_alarms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -774,7 +742,7 @@ module Aws::CloudWatch
       :dimensions,
       :anomaly_detector_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detectors
@@ -788,7 +756,7 @@ module Aws::CloudWatch
       :anomaly_detectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -803,7 +771,7 @@ module Aws::CloudWatch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -817,7 +785,7 @@ module Aws::CloudWatch
       :next_token,
       :insight_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dimension is a name/value pair that is part of the identity of a metric. Because
@@ -841,7 +809,7 @@ module Aws::CloudWatch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents filters for a dimension.</p>
@@ -855,7 +823,7 @@ module Aws::CloudWatch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_names
@@ -864,7 +832,7 @@ module Aws::CloudWatch
     class DisableAlarmActionsInput < Struct.new(
       :alarm_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_names
@@ -874,7 +842,7 @@ module Aws::CloudWatch
     class DisableInsightRulesInput < Struct.new(
       :rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -884,7 +852,7 @@ module Aws::CloudWatch
     class DisableInsightRulesOutput < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_names
@@ -893,7 +861,7 @@ module Aws::CloudWatch
     class EnableAlarmActionsInput < Struct.new(
       :alarm_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_names
@@ -903,7 +871,7 @@ module Aws::CloudWatch
     class EnableInsightRulesInput < Struct.new(
       :rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -913,7 +881,7 @@ module Aws::CloudWatch
     class EnableInsightRulesOutput < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity associated with metrics, to allow for finding related telemetry. An entity
@@ -945,7 +913,7 @@ module Aws::CloudWatch
       :key_attributes,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of metrics that are associated with an entity, such as a specific service
@@ -960,11 +928,7 @@ module Aws::CloudWatch
       :entity,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationState
-      PARTIAL_DATA = 'PARTIAL_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_name
@@ -973,7 +937,7 @@ module Aws::CloudWatch
     class GetDashboardInput < Struct.new(
       :dashboard_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_arn
@@ -992,7 +956,7 @@ module Aws::CloudWatch
       :dashboard_body,
       :dashboard_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -1075,7 +1039,7 @@ module Aws::CloudWatch
       :metrics,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_labels
@@ -1110,7 +1074,7 @@ module Aws::CloudWatch
       :contributors,
       :metric_datapoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_data_queries
@@ -1191,7 +1155,7 @@ module Aws::CloudWatch
       :max_datapoints,
       :label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_data_results
@@ -1215,7 +1179,7 @@ module Aws::CloudWatch
       :next_token,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -1324,7 +1288,7 @@ module Aws::CloudWatch
       :extended_statistics,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label
@@ -1337,7 +1301,7 @@ module Aws::CloudWatch
       :label,
       :datapoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1346,7 +1310,7 @@ module Aws::CloudWatch
     class GetMetricStreamInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1411,7 +1375,7 @@ module Aws::CloudWatch
       :statistics_configurations,
       :include_linked_accounts_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_widget
@@ -1469,7 +1433,7 @@ module Aws::CloudWatch
       :metric_widget,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_widget_image
@@ -1479,13 +1443,7 @@ module Aws::CloudWatch
     class GetMetricWidgetImageOutput < Struct.new(
       :metric_widget_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HistoryItemType
-      ConfigurationUpdate = 'ConfigurationUpdate'
-      StateUpdate = 'StateUpdate'
-      Action = 'Action'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the definition for a Contributor Insights rule. For more
@@ -1523,7 +1481,7 @@ module Aws::CloudWatch
       :managed_rule,
       :apply_on_transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the unique contributors found by a Contributor Insights rule. If the rule
@@ -1548,7 +1506,7 @@ module Aws::CloudWatch
       :approximate_aggregate_value,
       :datapoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One data point related to one contributor.</p>
@@ -1563,7 +1521,7 @@ module Aws::CloudWatch
       :timestamp,
       :approximate_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One data point from the metric time series returned in a Contributor Insights rule
@@ -1623,7 +1581,7 @@ module Aws::CloudWatch
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing has failed due to some unknown error, exception, or
@@ -1634,7 +1592,7 @@ module Aws::CloudWatch
     class InternalServiceFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data was not syntactically valid JSON.</p>
@@ -1644,7 +1602,7 @@ module Aws::CloudWatch
     class InvalidFormatFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The next token specified is invalid.</p>
@@ -1654,7 +1612,7 @@ module Aws::CloudWatch
     class InvalidNextToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters were used together that cannot be used together.</p>
@@ -1664,7 +1622,7 @@ module Aws::CloudWatch
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of an input parameter is bad or out-of-range.</p>
@@ -1674,7 +1632,7 @@ module Aws::CloudWatch
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure includes the <code>Timezone</code> parameter, which you can use to
@@ -1694,7 +1652,7 @@ module Aws::CloudWatch
     class LabelOptions < Struct.new(
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation exceeded one or more limits.</p>
@@ -1703,7 +1661,7 @@ module Aws::CloudWatch
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for alarms for this customer has already been reached.</p>
@@ -1713,7 +1671,7 @@ module Aws::CloudWatch
     class LimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_name_prefix
@@ -1729,7 +1687,7 @@ module Aws::CloudWatch
       :dashboard_name_prefix,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_entries
@@ -1742,7 +1700,7 @@ module Aws::CloudWatch
       :dashboard_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1762,7 +1720,7 @@ module Aws::CloudWatch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_rules
@@ -1777,7 +1735,7 @@ module Aws::CloudWatch
       :managed_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1791,7 +1749,7 @@ module Aws::CloudWatch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1805,7 +1763,7 @@ module Aws::CloudWatch
       :next_token,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -1851,7 +1809,7 @@ module Aws::CloudWatch
       :include_linked_accounts,
       :owning_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics
@@ -1872,7 +1830,7 @@ module Aws::CloudWatch
       :next_token,
       :owning_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1891,7 +1849,7 @@ module Aws::CloudWatch
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1900,7 +1858,7 @@ module Aws::CloudWatch
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the information that's required to enable a managed Contributor Insights
@@ -1931,7 +1889,7 @@ module Aws::CloudWatch
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about managed Contributor Insights rules, as returned by
@@ -1955,7 +1913,7 @@ module Aws::CloudWatch
       :resource_arn,
       :rule_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The status of a managed Contributor Insights rule. </p>
@@ -1970,7 +1928,7 @@ module Aws::CloudWatch
       :rule_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A message returned by the <code>GetMetricData</code>API, including a code and a
@@ -1990,7 +1948,7 @@ module Aws::CloudWatch
       :code,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a specific metric.</p>
@@ -2008,7 +1966,7 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about a metric alarm.</p>
@@ -2159,7 +2117,7 @@ module Aws::CloudWatch
       :evaluation_state,
       :state_transitioned_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object includes parameters that you can use to provide information to CloudWatch to help it build more accurate anomaly detection models.</p>
@@ -2173,7 +2131,7 @@ module Aws::CloudWatch
     class MetricCharacteristics < Struct.new(
       :periodic_spikes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure is used in both <code>GetMetricData</code> and
@@ -2272,7 +2230,7 @@ module Aws::CloudWatch
       :period,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>GetMetricData</code> call returns an array of <code>MetricDataResult</code>
@@ -2314,7 +2272,7 @@ module Aws::CloudWatch
       :status_code,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encapsulates the information sent to either create a metric or add new values to be
@@ -2386,7 +2344,7 @@ module Aws::CloudWatch
       :unit,
       :storage_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the CloudWatch math expression that provides the time series the anomaly
@@ -2405,7 +2363,7 @@ module Aws::CloudWatch
     class MetricMathAnomalyDetector < Struct.new(
       :metric_data_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the metric to be returned, along with the statistics, period,
@@ -2458,7 +2416,7 @@ module Aws::CloudWatch
       :stat,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the configuration information about one metric stream.</p>
@@ -2496,7 +2454,7 @@ module Aws::CloudWatch
       :state,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains a metric namespace and optionally, a list of metric names, to
@@ -2522,13 +2480,7 @@ module Aws::CloudWatch
       :namespace,
       :metric_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricStreamOutputFormat
-      JSON = 'json'
-      OPEN_TELEMETRY_0_7 = 'opentelemetry0.7'
-      OPEN_TELEMETRY_1_0 = 'opentelemetry1.0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,
@@ -2563,7 +2515,7 @@ module Aws::CloudWatch
       :include_metrics,
       :additional_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object contains the information for one metric that is to be streamed with
@@ -2578,7 +2530,7 @@ module Aws::CloudWatch
       :namespace,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input parameter that is required is missing.</p>
@@ -2588,7 +2540,7 @@ module Aws::CloudWatch
     class MissingRequiredParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This array is empty if the API operation was successful for all the rules specified in
@@ -2612,7 +2564,7 @@ module Aws::CloudWatch
       :failure_code,
       :failure_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -2724,12 +2676,12 @@ module Aws::CloudWatch
       :single_metric_anomaly_detector,
       :metric_math_anomaly_detector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAnomalyDetectorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions_enabled
@@ -2983,7 +2935,7 @@ module Aws::CloudWatch
       :actions_suppressor_wait_period,
       :actions_suppressor_extension_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_name
@@ -3001,7 +2953,7 @@ module Aws::CloudWatch
       :dashboard_name,
       :dashboard_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_validation_messages
@@ -3016,7 +2968,7 @@ module Aws::CloudWatch
     class PutDashboardOutput < Struct.new(
       :dashboard_validation_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -3062,12 +3014,12 @@ module Aws::CloudWatch
       :tags,
       :apply_on_transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutInsightRuleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_rules
@@ -3076,7 +3028,7 @@ module Aws::CloudWatch
     class PutManagedInsightRulesInput < Struct.new(
       :managed_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -3085,7 +3037,7 @@ module Aws::CloudWatch
     class PutManagedInsightRulesOutput < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -3677,7 +3629,7 @@ module Aws::CloudWatch
       :tags,
       :threshold_metric_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -3765,7 +3717,7 @@ module Aws::CloudWatch
       :entity_metric_data,
       :strict_entity_validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3850,7 +3802,7 @@ module Aws::CloudWatch
       :statistics_configurations,
       :include_linked_accounts_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3859,7 +3811,7 @@ module Aws::CloudWatch
     class PutMetricStreamOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one range of days or times to exclude from use for training an anomaly
@@ -3878,11 +3830,7 @@ module Aws::CloudWatch
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecentlyActive
-      PT3H = 'PT3H'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The named resource does not exist.</p>
@@ -3892,7 +3840,7 @@ module Aws::CloudWatch
     class ResourceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The named resource does not exist.</p>
@@ -3907,12 +3855,7 @@ module Aws::CloudWatch
       :resource_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanBy
-      TIMESTAMP_DESCENDING = 'TimestampDescending'
-      TIMESTAMP_ASCENDING = 'TimestampAscending'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -3936,7 +3879,7 @@ module Aws::CloudWatch
       :state_reason,
       :state_reason_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Designates the CloudWatch metric and statistic that provides the time series the
@@ -3967,37 +3910,7 @@ module Aws::CloudWatch
       :dimensions,
       :stat,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardUnit
-      Seconds = 'Seconds'
-      Microseconds = 'Microseconds'
-      Milliseconds = 'Milliseconds'
-      Bytes = 'Bytes'
-      Kilobytes = 'Kilobytes'
-      Megabytes = 'Megabytes'
-      Gigabytes = 'Gigabytes'
-      Terabytes = 'Terabytes'
-      Bits = 'Bits'
-      Kilobits = 'Kilobits'
-      Megabits = 'Megabits'
-      Gigabits = 'Gigabits'
-      Terabits = 'Terabits'
-      Percent = 'Percent'
-      Count = 'Count'
-      Bytes_Second = 'Bytes/Second'
-      Kilobytes_Second = 'Kilobytes/Second'
-      Megabytes_Second = 'Megabytes/Second'
-      Gigabytes_Second = 'Gigabytes/Second'
-      Terabytes_Second = 'Terabytes/Second'
-      Bits_Second = 'Bits/Second'
-      Kilobits_Second = 'Kilobits/Second'
-      Megabits_Second = 'Megabits/Second'
-      Gigabits_Second = 'Gigabits/Second'
-      Terabits_Second = 'Terabits/Second'
-      Count_Second = 'Count/Second'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -4009,26 +3922,12 @@ module Aws::CloudWatch
     class StartMetricStreamsInput < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartMetricStreamsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StateValue
-      OK = 'OK'
-      ALARM = 'ALARM'
-      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
-    end
-
-    module Statistic
-      SampleCount = 'SampleCount'
-      Average = 'Average'
-      Sum = 'Sum'
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of statistics that describes a specific metric. </p>
@@ -4050,14 +3949,7 @@ module Aws::CloudWatch
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusCode
-      COMPLETE = 'Complete'
-      INTERNAL_ERROR = 'InternalError'
-      PARTIAL_DATA = 'PartialData'
-      FORBIDDEN = 'Forbidden'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -4069,12 +3961,12 @@ module Aws::CloudWatch
     class StopMetricStreamsInput < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopMetricStreamsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair associated with a CloudWatch resource.</p>
@@ -4089,7 +3981,7 @@ module Aws::CloudWatch
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4112,12 +4004,12 @@ module Aws::CloudWatch
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4140,12 +4032,12 @@ module Aws::CloudWatch
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

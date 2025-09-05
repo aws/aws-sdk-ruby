@@ -13,7 +13,7 @@ module Aws::KinesisVideoSignaling
     class ClientLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -36,7 +36,7 @@ module Aws::KinesisVideoSignaling
       :service,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ice_server_list
@@ -45,7 +45,7 @@ module Aws::KinesisVideoSignaling
     class GetIceServerConfigResponse < Struct.new(
       :ice_server_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the ICE server connection data.</p>
@@ -69,7 +69,7 @@ module Aws::KinesisVideoSignaling
       :password,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for this input parameter is invalid.</p>
@@ -78,7 +78,7 @@ module Aws::KinesisVideoSignaling
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified client is invalid.</p>
@@ -87,7 +87,7 @@ module Aws::KinesisVideoSignaling
     class InvalidClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller is not authorized to perform this operation.</p>
@@ -96,7 +96,7 @@ module Aws::KinesisVideoSignaling
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is not found.</p>
@@ -105,7 +105,7 @@ module Aws::KinesisVideoSignaling
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -123,7 +123,7 @@ module Aws::KinesisVideoSignaling
       :sender_client_id,
       :message_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute answer
@@ -132,11 +132,7 @@ module Aws::KinesisVideoSignaling
     class SendAlexaOfferToMasterResponse < Struct.new(
       :answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Service
-      TURN = 'TURN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the client session is expired. Once the client is connected, the session is valid
@@ -147,7 +143,7 @@ module Aws::KinesisVideoSignaling
     class SessionExpiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

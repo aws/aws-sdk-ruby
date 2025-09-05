@@ -13,7 +13,7 @@ module Aws::InspectorScan
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.
@@ -32,17 +32,7 @@ module Aws::InspectorScan
       :reason,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InternalServerExceptionReason
-      FAILED_TO_GENERATE_SBOM = 'FAILED_TO_GENERATE_SBOM'
-      OTHER = 'OTHER'
-    end
-
-    module OutputFormat
-      CYCLONE_DX_1_5 = 'CYCLONE_DX_1_5'
-      INSPECTOR = 'INSPECTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sbom
@@ -55,7 +45,7 @@ module Aws::InspectorScan
       :sbom,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sbom
@@ -64,7 +54,7 @@ module Aws::InspectorScan
     class ScanSbomResponse < Struct.new(
       :sbom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.
@@ -79,7 +69,7 @@ module Aws::InspectorScan
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed validation due to missing required fields or having invalid inputs.</p>
@@ -96,7 +86,7 @@ module Aws::InspectorScan
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed validation due to missing required fields or having invalid inputs.
@@ -114,15 +104,7 @@ module Aws::InspectorScan
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      UNSUPPORTED_SBOM_TYPE = 'UNSUPPORTED_SBOM_TYPE'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
   end

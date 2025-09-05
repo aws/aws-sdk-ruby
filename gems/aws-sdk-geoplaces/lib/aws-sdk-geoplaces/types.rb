@@ -12,7 +12,7 @@ module Aws::GeoPlaces
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Position of the access point represented by longitude and latitude for a vehicle.</p>
@@ -22,7 +22,7 @@ module Aws::GeoPlaces
     class AccessPoint < Struct.new(
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates if the access location is restricted. Index correlates to that of an access point and indicates if access through this point has some form of restriction. </p>
@@ -36,7 +36,7 @@ module Aws::GeoPlaces
       :restricted,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The place address.</p>
@@ -106,7 +106,7 @@ module Aws::GeoPlaces
       :building,
       :secondary_address_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates how well the entire input matches the returned. It is equal to 1 if all input tokens are recognized and matched.</p>
@@ -164,7 +164,7 @@ module Aws::GeoPlaces
       :building,
       :secondary_address_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:country] = 0 unless options.key?(:country)
@@ -221,7 +221,7 @@ module Aws::GeoPlaces
       :sub_block,
       :street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the parts of the response element matched the input query by returning the sections of the response which matched to input query terms.</p>
@@ -283,7 +283,7 @@ module Aws::GeoPlaces
       :address_number,
       :building,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Autocomplete structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
@@ -305,7 +305,7 @@ module Aws::GeoPlaces
       :include_countries,
       :include_place_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the parts of the response element matched the input query by returning the sections of the response which matched to input query terms.</p>
@@ -319,7 +319,7 @@ module Aws::GeoPlaces
       :title,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_text
@@ -364,7 +364,7 @@ module Aws::GeoPlaces
       :intended_use,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -377,7 +377,7 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A result matching the input query text.</p>
@@ -415,7 +415,7 @@ module Aws::GeoPlaces
       :political_view,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -434,7 +434,7 @@ module Aws::GeoPlaces
       :name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Category of the <code>Place</code> returned. </p>
@@ -456,7 +456,7 @@ module Aws::GeoPlaces
       :localized_name,
       :primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates how well the returned title and address components matches the input TextQuery. For each component a score is provied with 1 indicating all tokens were matched and 0 indicating no tokens were matched.</p>
@@ -470,7 +470,7 @@ module Aws::GeoPlaces
       :title,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:title] = 0 unless options.key?(:title)
@@ -493,7 +493,7 @@ module Aws::GeoPlaces
       :value,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of potential contact methods for the result/place.</p>
@@ -515,7 +515,7 @@ module Aws::GeoPlaces
       :websites,
       :emails,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The alpha-2 or alpha-3 character code for the country that the results will be present in.</p>
@@ -533,7 +533,7 @@ module Aws::GeoPlaces
       :code3,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the starting and ending index of the country in the text query that match the found title. </p>
@@ -547,7 +547,7 @@ module Aws::GeoPlaces
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Circle</code> that all results must be in. </p>
@@ -562,10 +562,10 @@ module Aws::GeoPlaces
       :center,
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:radius] =  unless options.key?(:radius)
+        options[:radius] = nil unless options.key?(:radius)
         super
       end
     end
@@ -585,7 +585,7 @@ module Aws::GeoPlaces
       :id,
       :primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geocode structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
@@ -599,7 +599,7 @@ module Aws::GeoPlaces
       :include_countries,
       :include_place_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parsed components in the provided QueryText.</p>
@@ -613,7 +613,7 @@ module Aws::GeoPlaces
       :title,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parsed address components in the provided QueryText.</p>
@@ -671,7 +671,7 @@ module Aws::GeoPlaces
       :building,
       :secondary_address_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structured free text query allows you to search for places by the name or text representation of specific properties of the place. </p>
@@ -709,7 +709,7 @@ module Aws::GeoPlaces
       :address_number,
       :postal_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_text
@@ -754,7 +754,7 @@ module Aws::GeoPlaces
       :intended_use,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -767,7 +767,7 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Geocoded result.</p>
@@ -849,7 +849,7 @@ module Aws::GeoPlaces
       :main_address,
       :secondary_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -883,7 +883,7 @@ module Aws::GeoPlaces
       :intended_use,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute place_id
@@ -972,7 +972,7 @@ module Aws::GeoPlaces
       :main_address,
       :secondary_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the starting and ending index of the text query that match the found title.</p>
@@ -990,7 +990,7 @@ module Aws::GeoPlaces
       :end_index,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -999,7 +999,7 @@ module Aws::GeoPlaces
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>All Intersections that are near the provided address.</p>
@@ -1037,11 +1037,11 @@ module Aws::GeoPlaces
       :map_view,
       :access_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:distance] =  unless options.key?(:distance)
-        options[:route_distance] =  unless options.key?(:route_distance)
+        options[:distance] = nil unless options.key?(:distance)
+        options[:route_distance] = nil unless options.key?(:route_distance)
         super
       end
     end
@@ -1057,7 +1057,7 @@ module Aws::GeoPlaces
       :overall,
       :components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overall] = 0 unless options.key?(:overall)
@@ -1084,7 +1084,7 @@ module Aws::GeoPlaces
       :components,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Components of the opening hours object.</p>
@@ -1102,7 +1102,7 @@ module Aws::GeoPlaces
       :open_duration,
       :recurrence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parsed components in the provided QueryText.</p>
@@ -1124,7 +1124,7 @@ module Aws::GeoPlaces
       :value,
       :query_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a secondary address component parsed from the query text.</p>
@@ -1150,7 +1150,7 @@ module Aws::GeoPlaces
       :number,
       :designator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phoneme details.</p>
@@ -1164,7 +1164,7 @@ module Aws::GeoPlaces
       :title,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How to pronounce the various components of the address or place.</p>
@@ -1182,7 +1182,7 @@ module Aws::GeoPlaces
       :language,
       :preferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the postal code of the place or result.</p>
@@ -1208,7 +1208,7 @@ module Aws::GeoPlaces
       :usps_zip,
       :usps_zip_plus4,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Suggestions for refining individual query terms. Suggestions are returned as objects which note the term, suggested replacement, and its index in the query. </p>
@@ -1230,7 +1230,7 @@ module Aws::GeoPlaces
       :start_index,
       :end_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The region or state results should be to be present in. </p> <p>Example: <code>North Rhine-Westphalia</code>. </p>
@@ -1244,7 +1244,7 @@ module Aws::GeoPlaces
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the starting and ending index of the region in the text query that match the found title. </p>
@@ -1258,7 +1258,7 @@ module Aws::GeoPlaces
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Place that is related to the result item.</p>
@@ -1288,7 +1288,7 @@ module Aws::GeoPlaces
       :position,
       :access_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The included place types.</p>
@@ -1298,7 +1298,7 @@ module Aws::GeoPlaces
     class ReverseGeocodeFilter < Struct.new(
       :include_place_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_position
@@ -1339,7 +1339,7 @@ module Aws::GeoPlaces
       :intended_use,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -1352,7 +1352,7 @@ module Aws::GeoPlaces
       :pricing_bucket,
       :result_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned location from the <code>Reverse Geocode</code> action.</p>
@@ -1418,7 +1418,7 @@ module Aws::GeoPlaces
       :political_view,
       :intersections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -1461,7 +1461,7 @@ module Aws::GeoPlaces
       :include_food_types,
       :exclude_food_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_position
@@ -1506,7 +1506,7 @@ module Aws::GeoPlaces
       :next_token,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -1523,7 +1523,7 @@ module Aws::GeoPlaces
       :result_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search results of nearby places.</p>
@@ -1601,7 +1601,7 @@ module Aws::GeoPlaces
       :political_view,
       :phonemes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -1624,7 +1624,7 @@ module Aws::GeoPlaces
       :circle,
       :include_countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_text
@@ -1673,7 +1673,7 @@ module Aws::GeoPlaces
       :next_token,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -1690,7 +1690,7 @@ module Aws::GeoPlaces
       :result_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text search result.</p>
@@ -1768,7 +1768,7 @@ module Aws::GeoPlaces
       :political_view,
       :phonemes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -1783,7 +1783,7 @@ module Aws::GeoPlaces
     class SecondaryAddressComponent < Struct.new(
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Match score for a secondary address component in the result.</p>
@@ -1793,7 +1793,7 @@ module Aws::GeoPlaces
     class SecondaryAddressComponentMatchScore < Struct.new(
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number] = 0 unless options.key?(:number)
@@ -1836,7 +1836,7 @@ module Aws::GeoPlaces
       :direction,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sub-region.</p>
@@ -1850,7 +1850,7 @@ module Aws::GeoPlaces
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the starting and ending index of the sub-region in the text query that match the found title. </p>
@@ -1864,7 +1864,7 @@ module Aws::GeoPlaces
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the parts of the textQuery matched the input query by returning the sections of the response which matched to textQuery terms.</p>
@@ -1874,7 +1874,7 @@ module Aws::GeoPlaces
     class SuggestAddressHighlights < Struct.new(
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SuggestFilter structure which contains a set of inclusion/exclusion properties that results must possess in order to be returned as a result.</p>
@@ -1892,7 +1892,7 @@ module Aws::GeoPlaces
       :circle,
       :include_countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the parts of the textQuery matched the input query by returning the sections of the response which matched to textQuery terms.</p>
@@ -1906,7 +1906,7 @@ module Aws::GeoPlaces
       :title,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The suggested place results.</p>
@@ -1968,7 +1968,7 @@ module Aws::GeoPlaces
       :political_view,
       :phonemes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -1987,7 +1987,7 @@ module Aws::GeoPlaces
       :query_id,
       :query_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_text
@@ -2032,7 +2032,7 @@ module Aws::GeoPlaces
       :intended_use,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_bucket
@@ -2049,7 +2049,7 @@ module Aws::GeoPlaces
       :result_items,
       :query_refinements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resulting item from the suggested query.</p>
@@ -2075,7 +2075,7 @@ module Aws::GeoPlaces
       :query,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -2084,7 +2084,7 @@ module Aws::GeoPlaces
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time zone in which the place is located.</p>
@@ -2102,7 +2102,7 @@ module Aws::GeoPlaces
       :offset,
       :offset_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset_seconds] = 0 unless options.key?(:offset_seconds)
@@ -2117,7 +2117,7 @@ module Aws::GeoPlaces
     class UspsZip < Struct.new(
       :zip_classification_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The USPS zip+4 code.</p>
@@ -2127,7 +2127,7 @@ module Aws::GeoPlaces
     class UspsZipPlus4 < Struct.new(
       :record_type_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -2144,7 +2144,7 @@ module Aws::GeoPlaces
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the Amazon Location service.</p>
@@ -2158,7 +2158,7 @@ module Aws::GeoPlaces
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

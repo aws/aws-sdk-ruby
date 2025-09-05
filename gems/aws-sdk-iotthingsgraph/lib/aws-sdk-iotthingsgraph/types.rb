@@ -24,12 +24,12 @@ module Aws::IoTThingsGraph
       :entity_id,
       :namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateEntityToThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -43,7 +43,7 @@ module Aws::IoTThingsGraph
       :definition,
       :compatible_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -52,7 +52,7 @@ module Aws::IoTThingsGraph
     class CreateFlowTemplateResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -89,7 +89,7 @@ module Aws::IoTThingsGraph
       :metrics_configuration,
       :flow_actions_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -98,7 +98,7 @@ module Aws::IoTThingsGraph
     class CreateSystemInstanceResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -112,7 +112,7 @@ module Aws::IoTThingsGraph
       :definition,
       :compatible_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -121,7 +121,7 @@ module Aws::IoTThingsGraph
     class CreateSystemTemplateResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document that defines an entity. </p>
@@ -135,11 +135,7 @@ module Aws::IoTThingsGraph
       :language,
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DefinitionLanguage
-      GRAPHQL = 'GRAPHQL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -152,17 +148,17 @@ module Aws::IoTThingsGraph
     class DeleteFlowTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFlowTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNamespaceRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_arn
@@ -175,7 +171,7 @@ module Aws::IoTThingsGraph
       :namespace_arn,
       :namespace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -184,12 +180,12 @@ module Aws::IoTThingsGraph
     class DeleteSystemInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSystemInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -202,12 +198,12 @@ module Aws::IoTThingsGraph
     class DeleteSystemTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSystemTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the ID and revision number of a workflow or system that is part of a deployment.</p>
@@ -221,7 +217,7 @@ module Aws::IoTThingsGraph
       :id,
       :revision_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -234,7 +230,7 @@ module Aws::IoTThingsGraph
     class DeploySystemInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -247,12 +243,7 @@ module Aws::IoTThingsGraph
       :summary,
       :greengrass_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentTarget
-      GREENGRASS = 'GREENGRASS'
-      CLOUD = 'CLOUD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -265,12 +256,12 @@ module Aws::IoTThingsGraph
     class DeprecateFlowTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeprecateFlowTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -283,12 +274,12 @@ module Aws::IoTThingsGraph
     class DeprecateSystemTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeprecateSystemTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_name
@@ -297,7 +288,7 @@ module Aws::IoTThingsGraph
     class DescribeNamespaceRequest < Struct.new(
       :namespace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_arn
@@ -322,7 +313,7 @@ module Aws::IoTThingsGraph
       :tracking_namespace_version,
       :namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -335,12 +326,12 @@ module Aws::IoTThingsGraph
       :thing_name,
       :entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DissociateEntityFromThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an entity.</p>
@@ -366,7 +357,7 @@ module Aws::IoTThingsGraph
       :created_at,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters an entity search. Multiple filters function as OR criteria in the search. For example a search that includes 
@@ -383,47 +374,7 @@ module Aws::IoTThingsGraph
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityFilterName
-      NAME = 'NAME'
-      NAMESPACE = 'NAMESPACE'
-      SEMANTIC_TYPE_PATH = 'SEMANTIC_TYPE_PATH'
-      REFERENCED_ENTITY_ID = 'REFERENCED_ENTITY_ID'
-    end
-
-    module EntityType
-      DEVICE = 'DEVICE'
-      SERVICE = 'SERVICE'
-      DEVICE_MODEL = 'DEVICE_MODEL'
-      CAPABILITY = 'CAPABILITY'
-      STATE = 'STATE'
-      ACTION = 'ACTION'
-      EVENT = 'EVENT'
-      PROPERTY = 'PROPERTY'
-      MAPPING = 'MAPPING'
-      ENUM = 'ENUM'
-    end
-
-    module FlowExecutionEventType
-      EXECUTION_STARTED = 'EXECUTION_STARTED'
-      EXECUTION_FAILED = 'EXECUTION_FAILED'
-      EXECUTION_ABORTED = 'EXECUTION_ABORTED'
-      EXECUTION_SUCCEEDED = 'EXECUTION_SUCCEEDED'
-      STEP_STARTED = 'STEP_STARTED'
-      STEP_FAILED = 'STEP_FAILED'
-      STEP_SUCCEEDED = 'STEP_SUCCEEDED'
-      ACTIVITY_SCHEDULED = 'ACTIVITY_SCHEDULED'
-      ACTIVITY_STARTED = 'ACTIVITY_STARTED'
-      ACTIVITY_FAILED = 'ACTIVITY_FAILED'
-      ACTIVITY_SUCCEEDED = 'ACTIVITY_SUCCEEDED'
-      START_FLOW_EXECUTION_TASK = 'START_FLOW_EXECUTION_TASK'
-      SCHEDULE_NEXT_READY_STEPS_TASK = 'SCHEDULE_NEXT_READY_STEPS_TASK'
-      THING_ACTION_TASK = 'THING_ACTION_TASK'
-      THING_ACTION_TASK_FAILED = 'THING_ACTION_TASK_FAILED'
-      THING_ACTION_TASK_SUCCEEDED = 'THING_ACTION_TASK_SUCCEEDED'
-      ACKNOWLEDGE_TASK_MESSAGE = 'ACKNOWLEDGE_TASK_MESSAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a flow event.</p>
@@ -445,14 +396,7 @@ module Aws::IoTThingsGraph
       :timestamp,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowExecutionStatus
-      RUNNING = 'RUNNING'
-      ABORTED = 'ABORTED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains summary information about a flow execution.</p>
@@ -482,7 +426,7 @@ module Aws::IoTThingsGraph
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a workflow's definition and summary information.</p>
@@ -500,7 +444,7 @@ module Aws::IoTThingsGraph
       :definition,
       :validated_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters a workflow search.</p>
@@ -514,11 +458,7 @@ module Aws::IoTThingsGraph
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowTemplateFilterName
-      DEVICE_MODEL_ID = 'DEVICE_MODEL_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains summary information about a workflow.</p>
@@ -540,7 +480,7 @@ module Aws::IoTThingsGraph
       :revision_number,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -557,7 +497,7 @@ module Aws::IoTThingsGraph
       :ids,
       :namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute descriptions
@@ -566,7 +506,7 @@ module Aws::IoTThingsGraph
     class GetEntitiesResponse < Struct.new(
       :descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -583,7 +523,7 @@ module Aws::IoTThingsGraph
       :id,
       :revision_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -592,7 +532,7 @@ module Aws::IoTThingsGraph
     class GetFlowTemplateResponse < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -613,7 +553,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -626,12 +566,12 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetNamespaceDeletionStatusRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_arn
@@ -656,7 +596,7 @@ module Aws::IoTThingsGraph
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -669,7 +609,7 @@ module Aws::IoTThingsGraph
     class GetSystemInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -678,7 +618,7 @@ module Aws::IoTThingsGraph
     class GetSystemInstanceResponse < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -695,7 +635,7 @@ module Aws::IoTThingsGraph
       :id,
       :revision_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -704,7 +644,7 @@ module Aws::IoTThingsGraph
     class GetSystemTemplateResponse < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -725,7 +665,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -738,7 +678,7 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -747,7 +687,7 @@ module Aws::IoTThingsGraph
     class GetUploadStatusRequest < Struct.new(
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -780,7 +720,7 @@ module Aws::IoTThingsGraph
       :failure_reason,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -789,7 +729,7 @@ module Aws::IoTThingsGraph
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -798,7 +738,7 @@ module Aws::IoTThingsGraph
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -807,7 +747,7 @@ module Aws::IoTThingsGraph
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_execution_id
@@ -824,7 +764,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute messages
@@ -837,7 +777,7 @@ module Aws::IoTThingsGraph
       :messages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -854,7 +794,7 @@ module Aws::IoTThingsGraph
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -867,7 +807,7 @@ module Aws::IoTThingsGraph
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies whether cloud metrics are collected in a deployment and, if so, what role is used to collect metrics.</p>
@@ -881,22 +821,12 @@ module Aws::IoTThingsGraph
       :cloud_metric_enabled,
       :metric_rule_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cloud_metric_enabled] = false unless options.key?(:cloud_metric_enabled)
         super
       end
-    end
-
-    module NamespaceDeletionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-    end
-
-    module NamespaceDeletionStatusErrorCodes
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
     end
 
     # <p></p>
@@ -905,7 +835,7 @@ module Aws::IoTThingsGraph
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -914,7 +844,7 @@ module Aws::IoTThingsGraph
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -923,7 +853,7 @@ module Aws::IoTThingsGraph
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_types
@@ -952,7 +882,7 @@ module Aws::IoTThingsGraph
       :max_results,
       :namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute descriptions
@@ -965,7 +895,7 @@ module Aws::IoTThingsGraph
       :descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute system_instance_id
@@ -994,7 +924,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -1007,7 +937,7 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1024,7 +954,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -1037,7 +967,7 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1056,7 +986,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -1069,7 +999,7 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1086,7 +1016,7 @@ module Aws::IoTThingsGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -1099,7 +1029,7 @@ module Aws::IoTThingsGraph
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_id
@@ -1124,7 +1054,7 @@ module Aws::IoTThingsGraph
       :max_results,
       :namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute things
@@ -1137,18 +1067,7 @@ module Aws::IoTThingsGraph
       :things,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SystemInstanceDeploymentStatus
-      NOT_DEPLOYED = 'NOT_DEPLOYED'
-      BOOTSTRAP = 'BOOTSTRAP'
-      DEPLOY_IN_PROGRESS = 'DEPLOY_IN_PROGRESS'
-      DEPLOYED_IN_TARGET = 'DEPLOYED_IN_TARGET'
-      UNDEPLOY_IN_PROGRESS = 'UNDEPLOY_IN_PROGRESS'
-      FAILED = 'FAILED'
-      PENDING_DELETE = 'PENDING_DELETE'
-      DELETED_IN_TARGET = 'DELETED_IN_TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a system instance definition and summary information.</p>
@@ -1184,7 +1103,7 @@ module Aws::IoTThingsGraph
       :validated_dependency_revisions,
       :flow_actions_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters a system instance search. 
@@ -1200,13 +1119,7 @@ module Aws::IoTThingsGraph
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SystemInstanceFilterName
-      SYSTEM_TEMPLATE_ID = 'SYSTEM_TEMPLATE_ID'
-      STATUS = 'STATUS'
-      GREENGRASS_GROUP_NAME = 'GREENGRASS_GROUP_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains summary information about a system instance.</p>
@@ -1250,7 +1163,7 @@ module Aws::IoTThingsGraph
       :greengrass_group_id,
       :greengrass_group_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a system's definition document and summary information.</p>
@@ -1268,7 +1181,7 @@ module Aws::IoTThingsGraph
       :definition,
       :validated_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters a system search.</p>
@@ -1282,11 +1195,7 @@ module Aws::IoTThingsGraph
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SystemTemplateFilterName
-      FLOW_TEMPLATE_ID = 'FLOW_TEMPLATE_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a system.</p>
@@ -1308,7 +1217,7 @@ module Aws::IoTThingsGraph
       :revision_number,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value pair.</p>
@@ -1322,7 +1231,7 @@ module Aws::IoTThingsGraph
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1335,12 +1244,12 @@ module Aws::IoTThingsGraph
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An AWS IoT thing.</p>
@@ -1354,7 +1263,7 @@ module Aws::IoTThingsGraph
       :thing_arn,
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1363,7 +1272,7 @@ module Aws::IoTThingsGraph
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1372,7 +1281,7 @@ module Aws::IoTThingsGraph
     class UndeploySystemInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1381,7 +1290,7 @@ module Aws::IoTThingsGraph
     class UndeploySystemInstanceResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1395,12 +1304,12 @@ module Aws::IoTThingsGraph
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1423,7 +1332,7 @@ module Aws::IoTThingsGraph
       :definition,
       :compatible_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1432,7 +1341,7 @@ module Aws::IoTThingsGraph
     class UpdateFlowTemplateResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1454,7 +1363,7 @@ module Aws::IoTThingsGraph
       :definition,
       :compatible_namespace_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1463,7 +1372,7 @@ module Aws::IoTThingsGraph
     class UpdateSystemTemplateResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -1481,7 +1390,7 @@ module Aws::IoTThingsGraph
       :sync_with_public_namespace,
       :deprecate_existing_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -1490,13 +1399,7 @@ module Aws::IoTThingsGraph
     class UploadEntityDefinitionsResponse < Struct.new(
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UploadStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
   end

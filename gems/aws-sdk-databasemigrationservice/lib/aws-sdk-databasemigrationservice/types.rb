@@ -14,7 +14,7 @@ module Aws::DatabaseMigrationService
     class AccessDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a quota for an Amazon Web Services account, for example the number of replication instances
@@ -33,7 +33,7 @@ module Aws::DatabaseMigrationService
       :used,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:used] = 0 unless options.key?(:used)
@@ -56,13 +56,13 @@ module Aws::DatabaseMigrationService
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddTagsToResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -102,7 +102,7 @@ module Aws::DatabaseMigrationService
       :apply_action,
       :opt_in_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -112,23 +112,7 @@ module Aws::DatabaseMigrationService
     class ApplyPendingMaintenanceActionResponse < Struct.new(
       :resource_pending_maintenance_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentReportType
-      PDF = 'pdf'
-      CSV = 'csv'
-    end
-
-    module AuthMechanismValue
-      DEFAULT = 'default'
-      MONGODB_CR = 'mongodb_cr'
-      SCRAM_SHA_1 = 'scram_sha_1'
-    end
-
-    module AuthTypeValue
-      NO = 'no'
-      PASSWORD = 'password'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of an Availability Zone for use during database migration.
@@ -143,7 +127,7 @@ module Aws::DatabaseMigrationService
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the errors that occurred during the analysis of the source
@@ -162,7 +146,7 @@ module Aws::DatabaseMigrationService
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data
@@ -172,7 +156,7 @@ module Aws::DatabaseMigrationService
     class BatchStartRecommendationsRequest < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_entries
@@ -181,7 +165,7 @@ module Aws::DatabaseMigrationService
     class BatchStartRecommendationsResponse < Struct.new(
       :error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -191,7 +175,7 @@ module Aws::DatabaseMigrationService
     class CancelReplicationTaskAssessmentRunMessage < Struct.new(
       :replication_task_assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -202,18 +186,7 @@ module Aws::DatabaseMigrationService
     class CancelReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CannedAclForObjectsValue
-      NONE = 'none'
-      PRIVATE = 'private'
-      PUBLIC_READ = 'public-read'
-      PUBLIC_READ_WRITE = 'public-read-write'
-      AUTHENTICATED_READ = 'authenticated-read'
-      AWS_EXEC_READ = 'aws-exec-read'
-      BUCKET_OWNER_READ = 'bucket-owner-read'
-      BUCKET_OWNER_FULL_CONTROL = 'bucket-owner-full-control'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SSL certificate that can be used to encrypt connections between the endpoints and
@@ -264,13 +237,7 @@ module Aws::DatabaseMigrationService
       :signing_algorithm,
       :key_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CharLengthSemantics
-      DEFAULT = 'default'
-      CHAR = 'char'
-      BYTE = 'byte'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the last Fleet Advisor collector health check.</p>
@@ -293,7 +260,7 @@ module Aws::DatabaseMigrationService
       :web_collector_s3_access,
       :web_collector_granted_role_based_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified collector doesn't exist.</p>
@@ -302,7 +269,7 @@ module Aws::DatabaseMigrationService
     class CollectorNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Fleet Advisor collector.</p>
@@ -370,7 +337,7 @@ module Aws::DatabaseMigrationService
       :modified_date,
       :inventory_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Briefly describes a Fleet Advisor collector.</p>
@@ -384,17 +351,7 @@ module Aws::DatabaseMigrationService
       :collector_referenced_id,
       :collector_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CollectorStatus
-      UNREGISTERED = 'UNREGISTERED'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module CompressionTypeValue
-      NONE = 'none'
-      GZIP = 'gzip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration parameters for provisioning an DMS Serverless replication.</p>
@@ -472,7 +429,7 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_id,
       :vpc_security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the connection between an endpoint and a replication instance, including
@@ -528,7 +485,7 @@ module Aws::DatabaseMigrationService
       :endpoint_identifier,
       :replication_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration_name
@@ -590,7 +547,7 @@ module Aws::DatabaseMigrationService
       :tags,
       :selection_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration
@@ -599,7 +556,7 @@ module Aws::DatabaseMigrationService
     class CreateDataMigrationResponse < Struct.new(
       :data_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider_name
@@ -630,7 +587,7 @@ module Aws::DatabaseMigrationService
       :settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider
@@ -639,7 +596,7 @@ module Aws::DatabaseMigrationService
     class CreateDataProviderResponse < Struct.new(
       :data_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -887,7 +844,7 @@ module Aws::DatabaseMigrationService
       :gcp_my_sql_settings,
       :timestream_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -897,7 +854,7 @@ module Aws::DatabaseMigrationService
     class CreateEndpointResponse < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -946,7 +903,7 @@ module Aws::DatabaseMigrationService
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -956,7 +913,7 @@ module Aws::DatabaseMigrationService
     class CreateEventSubscriptionResponse < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collector_name
@@ -977,7 +934,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collector_referenced_id
@@ -1004,7 +961,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zone
@@ -1060,7 +1017,7 @@ module Aws::DatabaseMigrationService
       :subnet_group_identifier,
       :vpc_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -1069,7 +1026,7 @@ module Aws::DatabaseMigrationService
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_name
@@ -1110,7 +1067,7 @@ module Aws::DatabaseMigrationService
       :tags,
       :schema_conversion_application_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project
@@ -1119,7 +1076,7 @@ module Aws::DatabaseMigrationService
     class CreateMigrationProjectResponse < Struct.new(
       :migration_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1200,7 +1157,7 @@ module Aws::DatabaseMigrationService
       :resource_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1211,7 +1168,7 @@ module Aws::DatabaseMigrationService
     class CreateReplicationConfigResponse < Struct.new(
       :replication_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1348,7 +1305,7 @@ module Aws::DatabaseMigrationService
       :network_type,
       :kerberos_authentication_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1358,7 +1315,7 @@ module Aws::DatabaseMigrationService
     class CreateReplicationInstanceResponse < Struct.new(
       :replication_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1387,7 +1344,7 @@ module Aws::DatabaseMigrationService
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1397,7 +1354,7 @@ module Aws::DatabaseMigrationService
     class CreateReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1506,7 +1463,7 @@ module Aws::DatabaseMigrationService
       :task_data,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1516,12 +1473,7 @@ module Aws::DatabaseMigrationService
     class CreateReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataFormatValue
-      CSV = 'csv'
-      PARQUET = 'parquet'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object provides information about a DMS data migration.</p>
@@ -1598,7 +1550,7 @@ module Aws::DatabaseMigrationService
       :last_failure_message,
       :stop_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for configuring a data migration, including whether to enable CloudWatch logs,
@@ -1620,7 +1572,7 @@ module Aws::DatabaseMigrationService
       :cloudwatch_logs_enabled,
       :selection_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the data migration run, including start and stop time, latency, and
@@ -1663,7 +1615,7 @@ module Aws::DatabaseMigrationService
       :start_time,
       :stop_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:tables_loaded] = 0 unless options.key?(:tables_loaded)
@@ -1712,7 +1664,7 @@ module Aws::DatabaseMigrationService
       :virtual,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a data provider.</p>
@@ -1734,7 +1686,7 @@ module Aws::DatabaseMigrationService
       :data_provider_name,
       :data_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a data provider.</p>
@@ -1752,7 +1704,7 @@ module Aws::DatabaseMigrationService
       :secrets_manager_secret_id,
       :secrets_manager_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a data provider.</p>
@@ -1799,7 +1751,7 @@ module Aws::DatabaseMigrationService
       :mongo_db_settings,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RedshiftSettings < DataProviderSettings; end
       class PostgreSqlSettings < DataProviderSettings; end
@@ -1849,12 +1801,7 @@ module Aws::DatabaseMigrationService
       :os_architecture,
       :tooltip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseMode
-      DEFAULT = 'default'
-      BABELFISH = 'babelfish'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database in a Fleet Advisor collector inventory.</p>
@@ -1889,7 +1836,7 @@ module Aws::DatabaseMigrationService
       :software_details,
       :collectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database in a Fleet Advisor collector inventory.</p>
@@ -1912,22 +1859,7 @@ module Aws::DatabaseMigrationService
       :database_ip_address,
       :database_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatePartitionDelimiterValue
-      SLASH = 'SLASH'
-      UNDERSCORE = 'UNDERSCORE'
-      DASH = 'DASH'
-      NONE = 'NONE'
-    end
-
-    module DatePartitionSequenceValue
-      YYYYMMDD = 'YYYYMMDD'
-      YYYYMMDDHH = 'YYYYMMDDHH'
-      YYYYMM = 'YYYYMM'
-      MMYYYYDD = 'MMYYYYDD'
-      DDMMYYYY = 'DDMMYYYY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides error information about a schema conversion operation.</p>
@@ -1937,7 +1869,7 @@ module Aws::DatabaseMigrationService
     class DefaultErrorDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -1946,7 +1878,7 @@ module Aws::DatabaseMigrationService
     class DeleteCertificateMessage < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -1955,7 +1887,7 @@ module Aws::DatabaseMigrationService
     class DeleteCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collector_referenced_id
@@ -1964,7 +1896,7 @@ module Aws::DatabaseMigrationService
     class DeleteCollectorRequest < Struct.new(
       :collector_referenced_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1978,7 +1910,7 @@ module Aws::DatabaseMigrationService
       :endpoint_arn,
       :replication_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1988,7 +1920,7 @@ module Aws::DatabaseMigrationService
     class DeleteConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration_identifier
@@ -1997,7 +1929,7 @@ module Aws::DatabaseMigrationService
     class DeleteDataMigrationMessage < Struct.new(
       :data_migration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration
@@ -2006,7 +1938,7 @@ module Aws::DatabaseMigrationService
     class DeleteDataMigrationResponse < Struct.new(
       :data_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider_identifier
@@ -2015,7 +1947,7 @@ module Aws::DatabaseMigrationService
     class DeleteDataProviderMessage < Struct.new(
       :data_provider_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider
@@ -2024,7 +1956,7 @@ module Aws::DatabaseMigrationService
     class DeleteDataProviderResponse < Struct.new(
       :data_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2034,7 +1966,7 @@ module Aws::DatabaseMigrationService
     class DeleteEndpointMessage < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2044,7 +1976,7 @@ module Aws::DatabaseMigrationService
     class DeleteEndpointResponse < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2054,7 +1986,7 @@ module Aws::DatabaseMigrationService
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2064,7 +1996,7 @@ module Aws::DatabaseMigrationService
     class DeleteEventSubscriptionResponse < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_ids
@@ -2073,7 +2005,7 @@ module Aws::DatabaseMigrationService
     class DeleteFleetAdvisorDatabasesRequest < Struct.new(
       :database_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_ids
@@ -2082,7 +2014,7 @@ module Aws::DatabaseMigrationService
     class DeleteFleetAdvisorDatabasesResponse < Struct.new(
       :database_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_identifier
@@ -2091,7 +2023,7 @@ module Aws::DatabaseMigrationService
     class DeleteInstanceProfileMessage < Struct.new(
       :instance_profile_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -2100,7 +2032,7 @@ module Aws::DatabaseMigrationService
     class DeleteInstanceProfileResponse < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -2109,7 +2041,7 @@ module Aws::DatabaseMigrationService
     class DeleteMigrationProjectMessage < Struct.new(
       :migration_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project
@@ -2118,7 +2050,7 @@ module Aws::DatabaseMigrationService
     class DeleteMigrationProjectResponse < Struct.new(
       :migration_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2128,7 +2060,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationConfigMessage < Struct.new(
       :replication_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2139,7 +2071,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationConfigResponse < Struct.new(
       :replication_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2149,7 +2081,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationInstanceMessage < Struct.new(
       :replication_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2159,7 +2091,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationInstanceResponse < Struct.new(
       :replication_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2169,13 +2101,13 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteReplicationSubnetGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2185,7 +2117,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationTaskAssessmentRunMessage < Struct.new(
       :replication_task_assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2196,7 +2128,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2206,7 +2138,7 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2216,13 +2148,13 @@ module Aws::DatabaseMigrationService
     class DeleteReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2247,7 +2179,7 @@ module Aws::DatabaseMigrationService
       :account_quotas,
       :unique_account_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2294,7 +2226,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2316,7 +2248,7 @@ module Aws::DatabaseMigrationService
       :individual_assessment_names,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2339,7 +2271,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2353,7 +2285,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2378,7 +2310,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2394,7 +2326,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -2403,7 +2335,7 @@ module Aws::DatabaseMigrationService
     class DescribeConversionConfigurationMessage < Struct.new(
       :migration_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -2416,7 +2348,7 @@ module Aws::DatabaseMigrationService
       :migration_project_identifier,
       :conversion_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2449,7 +2381,7 @@ module Aws::DatabaseMigrationService
       :without_settings,
       :without_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migrations
@@ -2464,7 +2396,7 @@ module Aws::DatabaseMigrationService
       :data_migrations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2489,7 +2421,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2507,7 +2439,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :data_providers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_name
@@ -2528,7 +2460,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2544,7 +2476,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :endpoint_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2569,7 +2501,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2585,7 +2517,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :supported_endpoint_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2610,7 +2542,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2626,7 +2558,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_records
@@ -2643,7 +2575,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_versions
@@ -2659,7 +2591,7 @@ module Aws::DatabaseMigrationService
       :engine_versions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2674,7 +2606,7 @@ module Aws::DatabaseMigrationService
       :source_type,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2684,7 +2616,7 @@ module Aws::DatabaseMigrationService
     class DescribeEventCategoriesResponse < Struct.new(
       :event_category_group_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2714,7 +2646,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2730,7 +2662,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :event_subscriptions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2780,7 +2712,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2796,7 +2728,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -2824,7 +2756,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2842,7 +2774,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2877,7 +2809,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collectors
@@ -2894,7 +2826,7 @@ module Aws::DatabaseMigrationService
       :collectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2946,7 +2878,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute databases
@@ -2963,7 +2895,7 @@ module Aws::DatabaseMigrationService
       :databases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_records
@@ -2979,7 +2911,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis
@@ -2995,7 +2927,7 @@ module Aws::DatabaseMigrationService
       :analysis,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3031,7 +2963,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_advisor_schema_objects
@@ -3047,7 +2979,7 @@ module Aws::DatabaseMigrationService
       :fleet_advisor_schema_objects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3115,7 +3047,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_advisor_schemas
@@ -3131,7 +3063,7 @@ module Aws::DatabaseMigrationService
       :fleet_advisor_schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3156,7 +3088,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3174,7 +3106,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :instance_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -3202,7 +3134,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3220,7 +3152,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -3248,7 +3180,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3266,7 +3198,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -3294,7 +3226,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3312,7 +3244,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -3340,7 +3272,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3358,7 +3290,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -3384,7 +3316,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3402,7 +3334,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3438,7 +3370,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3456,7 +3388,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :migration_projects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3476,7 +3408,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3492,7 +3424,7 @@ module Aws::DatabaseMigrationService
       :orderable_replication_instances,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3520,7 +3452,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3536,7 +3468,7 @@ module Aws::DatabaseMigrationService
       :pending_maintenance_actions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3563,7 +3495,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3579,7 +3511,7 @@ module Aws::DatabaseMigrationService
       :next_token,
       :limitations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3607,7 +3539,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3624,7 +3556,7 @@ module Aws::DatabaseMigrationService
       :next_token,
       :recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3634,7 +3566,7 @@ module Aws::DatabaseMigrationService
     class DescribeRefreshSchemasStatusMessage < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3644,7 +3576,7 @@ module Aws::DatabaseMigrationService
     class DescribeRefreshSchemasStatusResponse < Struct.new(
       :refresh_schemas_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3666,7 +3598,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3683,7 +3615,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_instance_arn
@@ -3706,7 +3638,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_instance_arn
@@ -3726,7 +3658,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_task_logs,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3752,7 +3684,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3768,7 +3700,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3793,7 +3725,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3809,7 +3741,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3835,7 +3767,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3856,7 +3788,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_table_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3882,7 +3814,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3902,7 +3834,7 @@ module Aws::DatabaseMigrationService
       :bucket_name,
       :replication_task_assessment_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3929,7 +3861,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3946,7 +3878,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_task_assessment_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3972,7 +3904,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3989,7 +3921,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_task_individual_assessments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4021,7 +3953,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :without_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4037,7 +3969,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replication_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4061,7 +3993,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4077,7 +4009,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :replications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4101,7 +4033,7 @@ module Aws::DatabaseMigrationService
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4117,7 +4049,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4148,7 +4080,7 @@ module Aws::DatabaseMigrationService
       :marker,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4168,14 +4100,7 @@ module Aws::DatabaseMigrationService
       :table_statistics,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DmsSslModeValue
-      NONE = 'none'
-      REQUIRE = 'require'
-      VERIFY_CA = 'verify-ca'
-      VERIFY_FULL = 'verify-full'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings in JSON format for the DMS Transfer type source endpoint. </p>
@@ -4190,7 +4115,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a DocumentDB data provider.</p>
@@ -4217,7 +4142,7 @@ module Aws::DatabaseMigrationService
       :ssl_mode,
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a DocumentDB endpoint.</p>
@@ -4315,7 +4240,7 @@ module Aws::DatabaseMigrationService
       :use_update_look_up,
       :replicate_shard_collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to define an
@@ -4327,7 +4252,7 @@ module Aws::DatabaseMigrationService
     class DynamoDbSettings < Struct.new(
       :service_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an OpenSearch endpoint.</p>
@@ -4363,18 +4288,7 @@ module Aws::DatabaseMigrationService
       :error_retry_duration,
       :use_new_mapping_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncodingTypeValue
-      PLAIN = 'plain'
-      PLAIN_DICTIONARY = 'plain-dictionary'
-      RLE_DICTIONARY = 'rle-dictionary'
-    end
-
-    module EncryptionModeValue
-      SSE_S3 = 'sse-s3'
-      SSE_KMS = 'sse-kms'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an endpoint of a database instance in response to operations such as the
@@ -4580,7 +4494,7 @@ module Aws::DatabaseMigrationService
       :gcp_my_sql_settings,
       :timestream_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Endpoint settings.</p>
@@ -4625,14 +4539,7 @@ module Aws::DatabaseMigrationService
       :int_value_max,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointSettingTypeValue
-      STRING = 'string'
-      BOOLEAN = 'boolean'
-      INTEGER = 'integer'
-      ENUM = 'enum'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a replication instance version.</p>
@@ -4673,7 +4580,7 @@ module Aws::DatabaseMigrationService
       :force_upgrade_date,
       :available_upgrades,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides error information about a project.</p>
@@ -4684,7 +4591,7 @@ module Aws::DatabaseMigrationService
       :default_error_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DefaultErrorDetails < ErrorDetails; end
       class Unknown < ErrorDetails; end
@@ -4716,7 +4623,7 @@ module Aws::DatabaseMigrationService
       :event_categories,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists categories of events subscribed to, and generated by, the applicable DMS
@@ -4735,7 +4642,7 @@ module Aws::DatabaseMigrationService
       :source_type,
       :event_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event notification subscription created by the
@@ -4787,7 +4694,7 @@ module Aws::DatabaseMigrationService
       :event_categories_list,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -4813,7 +4720,7 @@ module Aws::DatabaseMigrationService
       :file_name,
       :assessment_report_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pdf_report
@@ -4826,7 +4733,7 @@ module Aws::DatabaseMigrationService
       :pdf_report,
       :csv_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an exported metadata model assessment.</p>
@@ -4840,7 +4747,7 @@ module Aws::DatabaseMigrationService
       :s3_object_key,
       :object_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a metadata model assessment exported to SQL.</p>
@@ -4854,7 +4761,7 @@ module Aws::DatabaseMigrationService
       :s3_object_key,
       :object_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dependency threw an exception.</p>
@@ -4863,7 +4770,7 @@ module Aws::DatabaseMigrationService
     class FailedDependencyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the name and value of a filter object. This filter is used to limit the
@@ -4883,7 +4790,7 @@ module Aws::DatabaseMigrationService
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a large-scale assessment (LSA) analysis run by a Fleet Advisor collector.</p>
@@ -4897,7 +4804,7 @@ module Aws::DatabaseMigrationService
       :lsa_analysis_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a schema object in a Fleet Advisor collector inventory.</p>
@@ -4946,7 +4853,7 @@ module Aws::DatabaseMigrationService
       :code_line_count,
       :code_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings in JSON format for the source GCP MySQL endpoint.</p>
@@ -5055,7 +4962,7 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an IBM Db2 LUW endpoint.</p>
@@ -5138,7 +5045,7 @@ module Aws::DatabaseMigrationService
       :max_file_size,
       :keep_csv_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an IBM DB2 LUW data provider.</p>
@@ -5173,7 +5080,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an IBM DB2 for z/OS data provider.</p>
@@ -5208,7 +5115,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_identifier
@@ -5235,7 +5142,7 @@ module Aws::DatabaseMigrationService
       :certificate_wallet,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -5244,7 +5151,7 @@ module Aws::DatabaseMigrationService
     class ImportCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an instance profile.</p>
@@ -5305,7 +5212,7 @@ module Aws::DatabaseMigrationService
       :subnet_group_identifier,
       :vpc_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are not enough resources allocated to the database migration.</p>
@@ -5315,7 +5222,7 @@ module Aws::DatabaseMigrationService
     class InsufficientResourceCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate was not valid.</p>
@@ -5324,7 +5231,7 @@ module Aws::DatabaseMigrationService
     class InvalidCertificateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action or operation requested isn't valid.</p>
@@ -5333,7 +5240,7 @@ module Aws::DatabaseMigrationService
     class InvalidOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is in a state that prevents it from being used for database migration.</p>
@@ -5343,7 +5250,7 @@ module Aws::DatabaseMigrationService
     class InvalidResourceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet provided isn't valid.</p>
@@ -5353,7 +5260,7 @@ module Aws::DatabaseMigrationService
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Fleet Advisor collector inventory.</p>
@@ -5367,7 +5274,7 @@ module Aws::DatabaseMigrationService
       :number_of_databases,
       :number_of_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ciphertext references a key that doesn't exist or that the DMS account doesn't have access to.</p>
@@ -5376,7 +5283,7 @@ module Aws::DatabaseMigrationService
     class KMSAccessDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified KMS key isn't enabled.</p>
@@ -5385,7 +5292,7 @@ module Aws::DatabaseMigrationService
     class KMSDisabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Key Management Service (KMS) error is preventing access to KMS.</p>
@@ -5394,7 +5301,7 @@ module Aws::DatabaseMigrationService
     class KMSFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the specified KMS resource isn't valid for this request.</p>
@@ -5403,7 +5310,7 @@ module Aws::DatabaseMigrationService
     class KMSInvalidStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DMS cannot access the KMS key.</p>
@@ -5413,7 +5320,7 @@ module Aws::DatabaseMigrationService
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified KMS entity or resource can't be found.</p>
@@ -5422,7 +5329,7 @@ module Aws::DatabaseMigrationService
     class KMSNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request triggered KMS request throttling.</p>
@@ -5431,19 +5338,7 @@ module Aws::DatabaseMigrationService
     class KMSThrottlingFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KafkaSaslMechanism
-      SCRAM_SHA_512 = 'scram-sha-512'
-      PLAIN = 'plain'
-    end
-
-    module KafkaSecurityProtocol
-      PLAINTEXT = 'plaintext'
-      SSL_AUTHENTICATION = 'ssl-authentication'
-      SSL_ENCRYPTION = 'ssl-encryption'
-      SASL_SSL = 'sasl-ssl'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes an Apache Kafka endpoint. This information includes
@@ -5580,12 +5475,7 @@ module Aws::DatabaseMigrationService
       :ssl_endpoint_identification_algorithm,
       :use_large_integer_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KafkaSslEndpointIdentificationAlgorithm
-      NONE = 'none'
-      HTTPS = 'https'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings required for kerberos authentication when creating the
@@ -5607,7 +5497,7 @@ module Aws::DatabaseMigrationService
       :key_cache_secret_iam_arn,
       :krb5_file_contents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes an Amazon Kinesis Data Stream endpoint. This
@@ -5680,7 +5570,7 @@ module Aws::DatabaseMigrationService
       :no_hex_prefix,
       :use_large_integer_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the limitations of target Amazon Web Services engines.</p>
@@ -5724,7 +5614,7 @@ module Aws::DatabaseMigrationService
       :impact,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5743,7 +5633,7 @@ module Aws::DatabaseMigrationService
       :resource_arn,
       :resource_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5753,13 +5643,7 @@ module Aws::DatabaseMigrationService
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LongVarcharMappingType
-      WSTRING = 'wstring'
-      CLOB = 'clob'
-      NCLOB = 'nclob'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a MariaDB data provider.</p>
@@ -5790,12 +5674,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageFormatValue
-      JSON = 'json'
-      JSON_UNFORMATTED = 'json-unformatted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a Microsoft SQL Server endpoint.</p>
@@ -5918,7 +5797,7 @@ module Aws::DatabaseMigrationService
       :force_lob_lookup,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a Microsoft SQL Server data provider.</p>
@@ -5953,7 +5832,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a migration project.</p>
@@ -6001,13 +5880,7 @@ module Aws::DatabaseMigrationService
       :description,
       :schema_conversion_application_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MigrationTypeValue
-      FULL_LOAD = 'full-load'
-      CDC = 'cdc'
-      FULL_LOAD_AND_CDC = 'full-load-and-cdc'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -6020,7 +5893,7 @@ module Aws::DatabaseMigrationService
       :migration_project_identifier,
       :conversion_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -6029,7 +5902,7 @@ module Aws::DatabaseMigrationService
     class ModifyConversionConfigurationResponse < Struct.new(
       :migration_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration_identifier
@@ -6072,7 +5945,7 @@ module Aws::DatabaseMigrationService
       :number_of_jobs,
       :selection_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration
@@ -6081,7 +5954,7 @@ module Aws::DatabaseMigrationService
     class ModifyDataMigrationResponse < Struct.new(
       :data_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider_identifier
@@ -6130,7 +6003,7 @@ module Aws::DatabaseMigrationService
       :exact_settings,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_provider
@@ -6139,7 +6012,7 @@ module Aws::DatabaseMigrationService
     class ModifyDataProviderResponse < Struct.new(
       :data_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6382,7 +6255,7 @@ module Aws::DatabaseMigrationService
       :gcp_my_sql_settings,
       :timestream_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6392,7 +6265,7 @@ module Aws::DatabaseMigrationService
     class ModifyEndpointResponse < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6422,7 +6295,7 @@ module Aws::DatabaseMigrationService
       :event_categories,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6432,7 +6305,7 @@ module Aws::DatabaseMigrationService
     class ModifyEventSubscriptionResponse < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_identifier
@@ -6488,7 +6361,7 @@ module Aws::DatabaseMigrationService
       :subnet_group_identifier,
       :vpc_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -6497,7 +6370,7 @@ module Aws::DatabaseMigrationService
     class ModifyInstanceProfileResponse < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -6538,7 +6411,7 @@ module Aws::DatabaseMigrationService
       :description,
       :schema_conversion_application_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project
@@ -6547,7 +6420,7 @@ module Aws::DatabaseMigrationService
     class ModifyMigrationProjectResponse < Struct.new(
       :migration_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6591,7 +6464,7 @@ module Aws::DatabaseMigrationService
       :source_endpoint_arn,
       :target_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_config
@@ -6600,7 +6473,7 @@ module Aws::DatabaseMigrationService
     class ModifyReplicationConfigResponse < Struct.new(
       :replication_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6701,7 +6574,7 @@ module Aws::DatabaseMigrationService
       :network_type,
       :kerberos_authentication_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6711,7 +6584,7 @@ module Aws::DatabaseMigrationService
     class ModifyReplicationInstanceResponse < Struct.new(
       :replication_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6729,7 +6602,7 @@ module Aws::DatabaseMigrationService
       :replication_subnet_group_description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6739,7 +6612,7 @@ module Aws::DatabaseMigrationService
     class ModifyReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6821,7 +6694,7 @@ module Aws::DatabaseMigrationService
       :cdc_stop_position,
       :task_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6831,7 +6704,7 @@ module Aws::DatabaseMigrationService
     class ModifyReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a MongoDB data provider.</p>
@@ -6872,7 +6745,7 @@ module Aws::DatabaseMigrationService
       :auth_source,
       :auth_mechanism,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a MongoDB endpoint.</p>
@@ -6991,7 +6864,7 @@ module Aws::DatabaseMigrationService
       :use_update_look_up,
       :replicate_shard_collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -7005,7 +6878,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :target_replication_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -7015,12 +6888,7 @@ module Aws::DatabaseMigrationService
     class MoveReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MySQLAuthenticationMethod
-      Password = 'password'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a MySQL endpoint.</p>
@@ -7143,7 +7011,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a MySQL data provider.</p>
@@ -7174,7 +7042,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an Amazon Neptune endpoint.</p>
@@ -7223,17 +7091,7 @@ module Aws::DatabaseMigrationService
       :max_retry_count,
       :iam_auth_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NestingLevelValue
-      NONE = 'none'
-      ONE = 'one'
-    end
-
-    module OracleAuthenticationMethod
-      Password = 'password'
-      Kerberos = 'kerberos'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an Oracle data provider.</p>
@@ -7296,7 +7154,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an Oracle endpoint.</p>
@@ -7639,7 +7497,7 @@ module Aws::DatabaseMigrationService
       :open_transaction_window,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In response to the <code>DescribeOrderableReplicationInstances</code> operation, this
@@ -7698,7 +7556,7 @@ module Aws::DatabaseMigrationService
       :availability_zones,
       :release_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_allocated_storage] = 0 unless options.key?(:min_allocated_storage)
@@ -7707,16 +7565,6 @@ module Aws::DatabaseMigrationService
         options[:included_allocated_storage] = 0 unless options.key?(:included_allocated_storage)
         super
       end
-    end
-
-    module OriginTypeValue
-      SOURCE = 'SOURCE'
-      TARGET = 'TARGET'
-    end
-
-    module ParquetVersionValue
-      PARQUET_1_0 = 'parquet-1-0'
-      PARQUET_2_0 = 'parquet-2-0'
     end
 
     # <p>Describes a maintenance action pending for an DMS resource, including when and how it
@@ -7759,18 +7607,7 @@ module Aws::DatabaseMigrationService
       :current_apply_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PluginNameValue
-      NO_PREFERENCE = 'no-preference'
-      TEST_DECODING = 'test-decoding'
-      PGLOGICAL = 'pglogical'
-    end
-
-    module PostgreSQLAuthenticationMethod
-      Password = 'password'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a PostgreSQL endpoint.</p>
@@ -7953,7 +7790,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a PostgreSQL data provider.</p>
@@ -7988,7 +7825,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results returned in <code>describe-replications</code> to display the results of the
@@ -8103,7 +7940,7 @@ module Aws::DatabaseMigrationService
       :result_kms_key_arn,
       :result_statistic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fail_on_assessment_failure] = false unless options.key?(:fail_on_assessment_failure)
@@ -8139,7 +7976,7 @@ module Aws::DatabaseMigrationService
       :date_new_provisioning_data_available,
       :reason_for_new_provisioning_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:provisioned_capacity_units] = 0 unless options.key?(:provisioned_capacity_units)
@@ -8197,7 +8034,7 @@ module Aws::DatabaseMigrationService
       :deployment_option,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes a recommendation of a target engine on
@@ -8214,7 +8051,7 @@ module Aws::DatabaseMigrationService
       :requirements_to_target,
       :target_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes the requirements to the target engine on
@@ -8252,7 +8089,7 @@ module Aws::DatabaseMigrationService
       :deployment_option,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_instance_arn
@@ -8276,7 +8113,7 @@ module Aws::DatabaseMigrationService
       :force_failover,
       :force_planned_failover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_instance
@@ -8285,7 +8122,7 @@ module Aws::DatabaseMigrationService
     class RebootReplicationInstanceResponse < Struct.new(
       :replication_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes a recommendation of a target engine.</p>
@@ -8335,7 +8172,7 @@ module Aws::DatabaseMigrationService
       :settings,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the target engine for the specified source database.</p>
@@ -8345,7 +8182,7 @@ module Aws::DatabaseMigrationService
     class RecommendationData < Struct.new(
       :rds_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the required target engine settings.</p>
@@ -8364,13 +8201,7 @@ module Aws::DatabaseMigrationService
       :instance_sizing_type,
       :workload_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedisAuthTypeValue
-      NONE = 'none'
-      AUTH_ROLE = 'auth-role'
-      AUTH_TOKEN = 'auth-token'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a Redis target endpoint.</p>
@@ -8418,7 +8249,7 @@ module Aws::DatabaseMigrationService
       :auth_password,
       :ssl_ca_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 0 unless options.key?(:port)
@@ -8449,7 +8280,7 @@ module Aws::DatabaseMigrationService
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an Amazon Redshift endpoint.</p>
@@ -8673,7 +8504,7 @@ module Aws::DatabaseMigrationService
       :secrets_manager_secret_id,
       :map_boolean_as_boolean,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8687,7 +8518,7 @@ module Aws::DatabaseMigrationService
       :endpoint_arn,
       :replication_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8697,7 +8528,7 @@ module Aws::DatabaseMigrationService
     class RefreshSchemasResponse < Struct.new(
       :refresh_schemas_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes status of a schema at an endpoint specified by the
@@ -8724,23 +8555,7 @@ module Aws::DatabaseMigrationService
       :last_refresh_date,
       :last_failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RefreshSchemasStatusTypeValue
-      SUCCESSFUL = 'successful'
-      FAILED = 'failed'
-      REFRESHING = 'refreshing'
-    end
-
-    module ReleaseStatusValues
-      BETA = 'beta'
-      PROD = 'prod'
-    end
-
-    module ReloadOptionValue
-      DATA_RELOAD = 'data-reload'
-      VALIDATE_ONLY = 'validate-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8760,7 +8575,7 @@ module Aws::DatabaseMigrationService
       :tables_to_reload,
       :reload_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8770,7 +8585,7 @@ module Aws::DatabaseMigrationService
     class ReloadReplicationTablesResponse < Struct.new(
       :replication_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_task_arn
@@ -8791,7 +8606,7 @@ module Aws::DatabaseMigrationService
       :tables_to_reload,
       :reload_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_task_arn
@@ -8800,7 +8615,7 @@ module Aws::DatabaseMigrationService
     class ReloadTablesResponse < Struct.new(
       :replication_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Removes one or more tags from an DMS resource.</p>
@@ -8815,13 +8630,13 @@ module Aws::DatabaseMigrationService
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class RemoveTagsFromResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes a serverless replication created by the
@@ -8992,7 +8807,7 @@ module Aws::DatabaseMigrationService
       :replication_last_stop_time,
       :replication_deprovision_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object provides configuration information about a serverless replication.</p>
@@ -9046,12 +8861,7 @@ module Aws::DatabaseMigrationService
       :replication_config_create_time,
       :replication_config_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationEndpointTypeValue
-      SOURCE = 'source'
-      TARGET = 'target'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a replication instance.</p>
@@ -9273,7 +9083,7 @@ module Aws::DatabaseMigrationService
       :network_type,
       :kerberos_authentication_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allocated_storage] = 0 unless options.key?(:allocated_storage)
@@ -9299,7 +9109,7 @@ module Aws::DatabaseMigrationService
       :replication_task_arn,
       :replication_instance_task_log_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:replication_instance_task_log_size] = 0 unless options.key?(:replication_instance_task_log_size)
@@ -9342,7 +9152,7 @@ module Aws::DatabaseMigrationService
       :engine_version,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object provides a collection of statistics about a serverless replication.</p>
@@ -9393,7 +9203,7 @@ module Aws::DatabaseMigrationService
       :full_load_start_date,
       :full_load_finish_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:full_load_progress_percent] = 0 unless options.key?(:full_load_progress_percent)
@@ -9436,7 +9246,7 @@ module Aws::DatabaseMigrationService
       :subnets,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.</p>
@@ -9446,7 +9256,7 @@ module Aws::DatabaseMigrationService
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes a replication task created by the
@@ -9745,7 +9555,7 @@ module Aws::DatabaseMigrationService
       :task_data,
       :target_replication_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The task assessment report in JSON format. </p>
@@ -9784,7 +9594,7 @@ module Aws::DatabaseMigrationService
       :assessment_results,
       :s3_object_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that describes a premigration assessment run that you have started
@@ -9912,7 +9722,7 @@ module Aws::DatabaseMigrationService
       :is_latest_task_assessment_run,
       :result_statistic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_latest_task_assessment_run] = false unless options.key?(:is_latest_task_assessment_run)
@@ -9932,7 +9742,7 @@ module Aws::DatabaseMigrationService
       :individual_assessment_count,
       :individual_assessment_completed_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:individual_assessment_count] = 0 unless options.key?(:individual_assessment_count)
@@ -9970,7 +9780,7 @@ module Aws::DatabaseMigrationService
       :cancelled,
       :skipped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:passed] = 0 unless options.key?(:passed)
@@ -10047,7 +9857,7 @@ module Aws::DatabaseMigrationService
       :status,
       :replication_task_individual_assessment_start_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In response to a request by the <code>DescribeReplicationTasks</code> operation, this
@@ -10100,7 +9910,7 @@ module Aws::DatabaseMigrationService
       :full_load_start_date,
       :full_load_finish_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:full_load_progress_percent] = 0 unless options.key?(:full_load_progress_percent)
@@ -10124,7 +9934,7 @@ module Aws::DatabaseMigrationService
       :message,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -10134,7 +9944,7 @@ module Aws::DatabaseMigrationService
     class ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies an DMS resource and any pending actions for it.</p>
@@ -10150,7 +9960,7 @@ module Aws::DatabaseMigrationService
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for this resource quota has been exceeded.</p>
@@ -10160,7 +9970,7 @@ module Aws::DatabaseMigrationService
     class ResourceQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lsa_analysis_id
@@ -10173,7 +9983,7 @@ module Aws::DatabaseMigrationService
       :lsa_analysis_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Insufficient privileges are preventing access to an Amazon S3 object.</p>
@@ -10182,7 +9992,7 @@ module Aws::DatabaseMigrationService
     class S3AccessDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified Amazon S3 bucket, bucket folder, or other object can't be
@@ -10192,7 +10002,7 @@ module Aws::DatabaseMigrationService
     class S3ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for exporting data to Amazon S3. </p>
@@ -10717,7 +10527,7 @@ module Aws::DatabaseMigrationService
       :expected_bucket_owner,
       :glue_catalog_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a schema conversion application.</p>
@@ -10731,7 +10541,7 @@ module Aws::DatabaseMigrationService
       :s3_bucket_path,
       :s3_bucket_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SNS topic is invalid.</p>
@@ -10741,7 +10551,7 @@ module Aws::DatabaseMigrationService
     class SNSInvalidTopicFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are not authorized for the SNS subscription.</p>
@@ -10751,13 +10561,7 @@ module Aws::DatabaseMigrationService
     class SNSNoAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SafeguardPolicy
-      RELY_ON_SQL_SERVER_REPLICATION_AGENT = 'rely-on-sql-server-replication-agent'
-      EXCLUSIVE_AUTOMATIC_TRUNCATION = 'exclusive-automatic-truncation'
-      SHARED_AUTOMATIC_TRUNCATION = 'shared-automatic-truncation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a schema conversion action.</p>
@@ -10783,7 +10587,7 @@ module Aws::DatabaseMigrationService
       :error,
       :export_sql_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a schema in a Fleet Advisor collector inventory.</p>
@@ -10826,7 +10630,7 @@ module Aws::DatabaseMigrationService
       :original_schema,
       :similarity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a schema in a Fleet Advisor collector inventory.</p>
@@ -10852,7 +10656,7 @@ module Aws::DatabaseMigrationService
       :database_name,
       :database_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a server in a Fleet Advisor collector inventory.</p>
@@ -10870,7 +10674,7 @@ module Aws::DatabaseMigrationService
       :ip_address,
       :server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines settings for a source data provider for a data migration.</p>
@@ -10893,21 +10697,7 @@ module Aws::DatabaseMigrationService
       :cdc_stop_time,
       :slot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      replication_instance = 'replication-instance'
-    end
-
-    module SqlServerAuthenticationMethod
-      Password = 'password'
-      Kerberos = 'kerberos'
-    end
-
-    module SslSecurityProtocolValue
-      PLAINTEXT = 'plaintext'
-      SSL_ENCRYPTION = 'ssl-encryption'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration_identifier
@@ -10922,7 +10712,7 @@ module Aws::DatabaseMigrationService
       :data_migration_identifier,
       :start_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration
@@ -10931,7 +10721,7 @@ module Aws::DatabaseMigrationService
     class StartDataMigrationResponse < Struct.new(
       :data_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -10940,7 +10730,7 @@ module Aws::DatabaseMigrationService
     class StartExtensionPackAssociationMessage < Struct.new(
       :migration_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -10949,7 +10739,7 @@ module Aws::DatabaseMigrationService
     class StartExtensionPackAssociationResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -10962,7 +10752,7 @@ module Aws::DatabaseMigrationService
       :migration_project_identifier,
       :selection_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -10971,7 +10761,7 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelAssessmentResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -10984,7 +10774,7 @@ module Aws::DatabaseMigrationService
       :migration_project_identifier,
       :selection_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -10993,7 +10783,7 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelConversionResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -11014,7 +10804,7 @@ module Aws::DatabaseMigrationService
       :origin,
       :file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -11023,7 +10813,7 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelExportAsScriptResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -11042,7 +10832,7 @@ module Aws::DatabaseMigrationService
       :selection_rules,
       :overwrite_extension_pack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -11051,7 +10841,7 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelExportToTargetResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_project_identifier
@@ -11072,7 +10862,7 @@ module Aws::DatabaseMigrationService
       :origin,
       :refresh,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_identifier
@@ -11081,7 +10871,7 @@ module Aws::DatabaseMigrationService
     class StartMetadataModelImportResponse < Struct.new(
       :request_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_id
@@ -11100,7 +10890,7 @@ module Aws::DatabaseMigrationService
       :database_id,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the source database to analyze and provide target
@@ -11115,7 +10905,7 @@ module Aws::DatabaseMigrationService
       :database_id,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11203,13 +10993,7 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartReplicationMigrationTypeValue
-      RELOAD_TARGET = 'reload-target'
-      RESUME_PROCESSING = 'resume-processing'
-      START_REPLICATION = 'start-replication'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11219,7 +11003,7 @@ module Aws::DatabaseMigrationService
     class StartReplicationResponse < Struct.new(
       :replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11229,7 +11013,7 @@ module Aws::DatabaseMigrationService
     class StartReplicationTaskAssessmentMessage < Struct.new(
       :replication_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11239,7 +11023,7 @@ module Aws::DatabaseMigrationService
     class StartReplicationTaskAssessmentResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11329,7 +11113,7 @@ module Aws::DatabaseMigrationService
       :exclude,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11339,7 +11123,7 @@ module Aws::DatabaseMigrationService
     class StartReplicationTaskAssessmentRunResponse < Struct.new(
       :replication_task_assessment_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11395,7 +11179,7 @@ module Aws::DatabaseMigrationService
       :cdc_start_position,
       :cdc_stop_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11405,13 +11189,7 @@ module Aws::DatabaseMigrationService
     class StartReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartReplicationTaskTypeValue
-      START_REPLICATION = 'start-replication'
-      RESUME_PROCESSING = 'resume-processing'
-      RELOAD_TARGET = 'reload-target'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration_identifier
@@ -11420,7 +11198,7 @@ module Aws::DatabaseMigrationService
     class StopDataMigrationMessage < Struct.new(
       :data_migration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_migration
@@ -11429,7 +11207,7 @@ module Aws::DatabaseMigrationService
     class StopDataMigrationResponse < Struct.new(
       :data_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11439,7 +11217,7 @@ module Aws::DatabaseMigrationService
     class StopReplicationMessage < Struct.new(
       :replication_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication
@@ -11448,7 +11226,7 @@ module Aws::DatabaseMigrationService
     class StopReplicationResponse < Struct.new(
       :replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11458,7 +11236,7 @@ module Aws::DatabaseMigrationService
     class StopReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11468,7 +11246,7 @@ module Aws::DatabaseMigrationService
     class StopReplicationTaskResponse < Struct.new(
       :replication_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage quota has been exceeded.</p>
@@ -11478,7 +11256,7 @@ module Aws::DatabaseMigrationService
     class StorageQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In response to a request by the <code>DescribeReplicationSubnetGroups</code> operation,
@@ -11498,7 +11276,7 @@ module Aws::DatabaseMigrationService
       :subnet_availability_zone,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subnet is already in use.</p>
@@ -11508,7 +11286,7 @@ module Aws::DatabaseMigrationService
     class SubnetAlreadyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about types of supported endpoints in response to a request by the
@@ -11548,7 +11326,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_engine_minimum_version,
       :engine_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:supports_cdc] = false unless options.key?(:supports_cdc)
@@ -11602,13 +11380,7 @@ module Aws::DatabaseMigrationService
       :secrets_manager_access_role_arn,
       :secrets_manager_secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TablePreparationMode
-      DO_NOTHING = 'do-nothing'
-      TRUNCATE = 'truncate'
-      DROP_TABLES_ON_TARGET = 'drop-tables-on-target'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a collection of table statistics in response to a request by the
@@ -11800,7 +11572,7 @@ module Aws::DatabaseMigrationService
       :resync_rows_failed,
       :resync_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inserts] = 0 unless options.key?(:inserts)
@@ -11828,7 +11600,7 @@ module Aws::DatabaseMigrationService
       :schema_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user-defined key-value pair that describes metadata added to an DMS resource and
@@ -11871,7 +11643,7 @@ module Aws::DatabaseMigrationService
       :value,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines settings for a target data provider for a data migration.</p>
@@ -11883,12 +11655,7 @@ module Aws::DatabaseMigrationService
     class TargetDataSetting < Struct.new(
       :table_preparation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetDbType
-      SPECIFIC_DATABASE = 'specific-database'
-      MULTIPLE_DATABASES = 'multiple-databases'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11902,7 +11669,7 @@ module Aws::DatabaseMigrationService
       :replication_instance_arn,
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11912,7 +11679,7 @@ module Aws::DatabaseMigrationService
     class TestConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines an Amazon Timestream endpoint.</p>
@@ -11951,14 +11718,7 @@ module Aws::DatabaseMigrationService
       :cdc_inserts_and_updates,
       :enable_magnetic_store_writes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TlogAccessMode
-      BackupOnly = 'BackupOnly'
-      PreferBackup = 'PreferBackup'
-      PreferTlog = 'PreferTlog'
-      TlogOnly = 'TlogOnly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11970,7 +11730,7 @@ module Aws::DatabaseMigrationService
     class UpdateSubscriptionsToEventBridgeMessage < Struct.new(
       :force_move,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11981,7 +11741,7 @@ module Aws::DatabaseMigrationService
     class UpdateSubscriptionsToEventBridgeResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An upgrade dependency is preventing the database migration.</p>
@@ -11991,13 +11751,7 @@ module Aws::DatabaseMigrationService
     class UpgradeDependencyFailureFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VersionStatus
-      UP_TO_DATE = 'UP_TO_DATE'
-      OUTDATED = 'OUTDATED'
-      UNSUPPORTED = 'UNSUPPORTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a security group associated with the virtual private cloud (VPC)
@@ -12012,7 +11766,7 @@ module Aws::DatabaseMigrationService
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

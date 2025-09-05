@@ -26,7 +26,7 @@ module Aws::RAM
       :resource_share_invitation_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitation
@@ -42,7 +42,7 @@ module Aws::RAM
       :resource_share_invitation,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -98,7 +98,7 @@ module Aws::RAM
       :client_token,
       :permission_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -115,7 +115,7 @@ module Aws::RAM
       :return_value,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -188,7 +188,7 @@ module Aws::RAM
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_associations
@@ -204,7 +204,7 @@ module Aws::RAM
       :resource_share_associations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes a managed permission associated with a resource share.</p>
@@ -294,7 +294,7 @@ module Aws::RAM
       :last_updated_time,
       :resource_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -369,7 +369,7 @@ module Aws::RAM
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission
@@ -385,7 +385,7 @@ module Aws::RAM
       :permission,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -443,7 +443,7 @@ module Aws::RAM
       :policy_template,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission
@@ -459,7 +459,7 @@ module Aws::RAM
       :permission,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -548,7 +548,7 @@ module Aws::RAM
       :permission_arns,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share
@@ -564,7 +564,7 @@ module Aws::RAM
       :resource_share,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -587,7 +587,7 @@ module Aws::RAM
       :permission_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -608,7 +608,7 @@ module Aws::RAM
       :client_token,
       :permission_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -642,7 +642,7 @@ module Aws::RAM
       :permission_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -663,7 +663,7 @@ module Aws::RAM
       :client_token,
       :permission_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -686,7 +686,7 @@ module Aws::RAM
       :resource_share_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -703,7 +703,7 @@ module Aws::RAM
       :return_value,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -731,7 +731,7 @@ module Aws::RAM
       :permission_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -748,7 +748,7 @@ module Aws::RAM
       :return_value,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -820,7 +820,7 @@ module Aws::RAM
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_associations
@@ -837,12 +837,12 @@ module Aws::RAM
       :resource_share_associations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableSharingWithAwsOrganizationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -852,7 +852,7 @@ module Aws::RAM
     class EnableSharingWithAwsOrganizationResponse < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -869,7 +869,7 @@ module Aws::RAM
       :permission_arn,
       :permission_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission
@@ -878,7 +878,7 @@ module Aws::RAM
     class GetPermissionResponse < Struct.new(
       :permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -911,7 +911,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies
@@ -928,7 +928,7 @@ module Aws::RAM
       :policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_type
@@ -993,7 +993,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_associations
@@ -1010,7 +1010,7 @@ module Aws::RAM
       :resource_share_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitation_arns
@@ -1045,7 +1045,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitations
@@ -1062,7 +1062,7 @@ module Aws::RAM
       :resource_share_invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arns
@@ -1137,7 +1137,7 @@ module Aws::RAM
       :permission_arn,
       :permission_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_shares
@@ -1154,7 +1154,7 @@ module Aws::RAM
       :resource_shares,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the client token input parameter matched one that was
@@ -1165,7 +1165,7 @@ module Aws::RAM
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified client token isn't valid.</p>
@@ -1174,7 +1174,7 @@ module Aws::RAM
     class InvalidClientTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified value for <code>MaxResults</code> isn't
@@ -1184,7 +1184,7 @@ module Aws::RAM
     class InvalidMaxResultsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified value for <code>NextToken</code> isn't
@@ -1195,7 +1195,7 @@ module Aws::RAM
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a parameter you specified isn't valid.</p>
@@ -1204,7 +1204,7 @@ module Aws::RAM
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a policy you specified isn't valid.</p>
@@ -1213,7 +1213,7 @@ module Aws::RAM
     class InvalidPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified resource type isn't valid.</p>
@@ -1222,7 +1222,7 @@ module Aws::RAM
     class InvalidResourceTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the requested operation isn't valid for the resource
@@ -1232,7 +1232,7 @@ module Aws::RAM
     class InvalidStateTransitionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitation_arn
@@ -1284,7 +1284,7 @@ module Aws::RAM
       :max_results,
       :resource_region_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -1302,7 +1302,7 @@ module Aws::RAM
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -1360,7 +1360,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -1377,7 +1377,7 @@ module Aws::RAM
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -1408,7 +1408,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -1425,7 +1425,7 @@ module Aws::RAM
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -1477,7 +1477,7 @@ module Aws::RAM
       :max_results,
       :permission_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -1494,7 +1494,7 @@ module Aws::RAM
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_owner
@@ -1593,7 +1593,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principals
@@ -1610,7 +1610,7 @@ module Aws::RAM
       :principals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_ids
@@ -1645,7 +1645,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replace_permission_associations_works
@@ -1662,7 +1662,7 @@ module Aws::RAM
       :replace_permission_associations_works,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -1692,7 +1692,7 @@ module Aws::RAM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -1709,7 +1709,7 @@ module Aws::RAM
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1757,7 +1757,7 @@ module Aws::RAM
       :max_results,
       :resource_region_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_types
@@ -1775,7 +1775,7 @@ module Aws::RAM
       :resource_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_owner
@@ -1864,7 +1864,7 @@ module Aws::RAM
       :max_results,
       :resource_region_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -1881,7 +1881,7 @@ module Aws::RAM
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> has a format that isn't
@@ -1891,7 +1891,7 @@ module Aws::RAM
     class MalformedArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the policy template that you provided isn't valid.</p>
@@ -1900,7 +1900,7 @@ module Aws::RAM
     class MalformedPolicyTemplateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a required input parameter is missing.</p>
@@ -1909,7 +1909,7 @@ module Aws::RAM
     class MissingRequiredParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the requested operation isn't permitted.</p>
@@ -1918,7 +1918,7 @@ module Aws::RAM
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a permission with the specified name already exists in
@@ -1928,13 +1928,7 @@ module Aws::RAM
     class PermissionAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionFeatureSet
-      CREATED_FROM_POLICY = 'CREATED_FROM_POLICY'
-      PROMOTING_TO_STANDARD = 'PROMOTING_TO_STANDARD'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it would exceed the maximum number of permissions you can
@@ -1945,25 +1939,7 @@ module Aws::RAM
     class PermissionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionStatus
-      ATTACHABLE = 'ATTACHABLE'
-      UNATTACHABLE = 'UNATTACHABLE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module PermissionType
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
-      AWS_MANAGED = 'AWS_MANAGED'
-    end
-
-    module PermissionTypeFilter
-      ALL = 'ALL'
-      AWS_MANAGED = 'AWS_MANAGED'
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it would exceed the limit for the number of versions you
@@ -1974,7 +1950,7 @@ module Aws::RAM
     class PermissionVersionsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a principal for use with Resource Access Manager.</p>
@@ -2014,7 +1990,7 @@ module Aws::RAM
       :last_updated_time,
       :external,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -2042,7 +2018,7 @@ module Aws::RAM
       :name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission
@@ -2058,7 +2034,7 @@ module Aws::RAM
       :permission,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -2067,7 +2043,7 @@ module Aws::RAM
     class PromoteResourceShareCreatedFromPolicyRequest < Struct.new(
       :resource_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -2077,7 +2053,7 @@ module Aws::RAM
     class PromoteResourceShareCreatedFromPolicyResponse < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitation_arn
@@ -2100,7 +2076,7 @@ module Aws::RAM
       :resource_share_invitation_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_invitation
@@ -2116,7 +2092,7 @@ module Aws::RAM
       :resource_share_invitation,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute from_permission_arn
@@ -2152,7 +2128,7 @@ module Aws::RAM
       :to_permission_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replace_permission_associations_work
@@ -2170,7 +2146,7 @@ module Aws::RAM
       :replace_permission_associations_work,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents the background work that RAM performs when you invoke
@@ -2235,13 +2211,7 @@ module Aws::RAM
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplacePermissionAssociationsWorkStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource associated with a resource share in RAM.</p>
@@ -2301,7 +2271,7 @@ module Aws::RAM
       :last_updated_time,
       :resource_region_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> was not found.</p>
@@ -2310,23 +2280,7 @@ module Aws::RAM
     class ResourceArnNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceOwner
-      SELF = 'SELF'
-      OTHER_ACCOUNTS = 'OTHER-ACCOUNTS'
-    end
-
-    module ResourceRegionScope
-      REGIONAL = 'REGIONAL'
-      GLOBAL = 'GLOBAL'
-    end
-
-    module ResourceRegionScopeFilter
-      ALL = 'ALL'
-      REGIONAL = 'REGIONAL'
-      GLOBAL = 'GLOBAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource share in RAM.</p>
@@ -2414,7 +2368,7 @@ module Aws::RAM
       :last_updated_time,
       :feature_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a resource share and either a principal or a resource.</p>
@@ -2482,26 +2436,7 @@ module Aws::RAM
       :last_updated_time,
       :external,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceShareAssociationStatus
-      ASSOCIATING = 'ASSOCIATING'
-      ASSOCIATED = 'ASSOCIATED'
-      FAILED = 'FAILED'
-      DISASSOCIATING = 'DISASSOCIATING'
-      DISASSOCIATED = 'DISASSOCIATED'
-    end
-
-    module ResourceShareAssociationType
-      PRINCIPAL = 'PRINCIPAL'
-      RESOURCE = 'RESOURCE'
-    end
-
-    module ResourceShareFeatureSet
-      CREATED_FROM_POLICY = 'CREATED_FROM_POLICY'
-      PROMOTING_TO_STANDARD = 'PROMOTING_TO_STANDARD'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an invitation for an Amazon Web Services account to join a resource share.</p>
@@ -2545,7 +2480,7 @@ module Aws::RAM
       :resource_share_associations,
       :receiver_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified invitation was already accepted.</p>
@@ -2554,7 +2489,7 @@ module Aws::RAM
     class ResourceShareInvitationAlreadyAcceptedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified invitation was already rejected.</p>
@@ -2563,7 +2498,7 @@ module Aws::RAM
     class ResourceShareInvitationAlreadyRejectedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> for an invitation was not
@@ -2573,7 +2508,7 @@ module Aws::RAM
     class ResourceShareInvitationArnNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified invitation is past its expiration date and
@@ -2583,14 +2518,7 @@ module Aws::RAM
     class ResourceShareInvitationExpiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceShareInvitationStatus
-      PENDING = 'PENDING'
-      ACCEPTED = 'ACCEPTED'
-      REJECTED = 'REJECTED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it would exceed the limit for resource shares for your account. To
@@ -2601,7 +2529,7 @@ module Aws::RAM
     class ResourceShareLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a RAM managed permission.</p>
@@ -2726,7 +2654,7 @@ module Aws::RAM
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an RAM permission.</p>
@@ -2826,23 +2754,7 @@ module Aws::RAM
       :feature_set,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceShareStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module ResourceStatus
-      AVAILABLE = 'AVAILABLE'
-      ZONAL_RESOURCE_INACCESSIBLE = 'ZONAL_RESOURCE_INACCESSIBLE'
-      LIMIT_EXCEEDED = 'LIMIT_EXCEEDED'
-      UNAVAILABLE = 'UNAVAILABLE'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the service could not respond to the request due to an
@@ -2852,7 +2764,7 @@ module Aws::RAM
     class ServerInternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a shareable resource type and the Amazon Web Services service to which resources
@@ -2887,7 +2799,7 @@ module Aws::RAM
       :service_name,
       :resource_region_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the service isn't available. Try again later.</p>
@@ -2896,7 +2808,7 @@ module Aws::RAM
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_arn
@@ -2924,7 +2836,7 @@ module Aws::RAM
       :permission_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -2940,7 +2852,7 @@ module Aws::RAM
       :return_value,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a tag. A tag is metadata that you can attach to your resources
@@ -2961,7 +2873,7 @@ module Aws::RAM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag key and optional list of possible values that you can use to filter results for
@@ -2977,7 +2889,7 @@ module Aws::RAM
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it would exceed the limit for tags for your
@@ -2987,7 +2899,7 @@ module Aws::RAM
     class TagLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified tag key is a reserved word and can't be
@@ -2997,7 +2909,7 @@ module Aws::RAM
     class TagPolicyViolationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -3019,12 +2931,12 @@ module Aws::RAM
       :tags,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it exceeded the rate at which you are allowed to perform
@@ -3034,7 +2946,7 @@ module Aws::RAM
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a specified resource couldn't be found.</p>
@@ -3043,7 +2955,7 @@ module Aws::RAM
     class UnknownResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There isn't an existing managed permission defined in RAM that has the same IAM permissions as
@@ -3053,7 +2965,7 @@ module Aws::RAM
     class UnmatchedPolicyPermissionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -3074,12 +2986,12 @@ module Aws::RAM
       :tag_keys,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share_arn
@@ -3111,7 +3023,7 @@ module Aws::RAM
       :allow_external_principals,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_share
@@ -3127,7 +3039,7 @@ module Aws::RAM
       :resource_share,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -18,7 +18,7 @@ module Aws::BedrockAgent
       :payload,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < APISchema; end
       class Payload < APISchema; end
@@ -31,7 +31,7 @@ module Aws::BedrockAgent
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.</p>
@@ -46,24 +46,11 @@ module Aws::BedrockAgent
       :custom_control,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Lambda < ActionGroupExecutor; end
       class CustomControl < ActionGroupExecutor; end
       class Unknown < ActionGroupExecutor; end
-    end
-
-    module ActionGroupSignature
-      AMAZON_USERINPUT = 'AMAZON.UserInput'
-      AMAZON_CODEINTERPRETER = 'AMAZON.CodeInterpreter'
-      ANTHROPIC_COMPUTER = 'ANTHROPIC.Computer'
-      ANTHROPIC_BASH = 'ANTHROPIC.Bash'
-      ANTHROPIC_TEXTEDITOR = 'ANTHROPIC.TextEditor'
-    end
-
-    module ActionGroupState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>Contains details about an action group.</p>
@@ -89,7 +76,7 @@ module Aws::BedrockAgent
       :description,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an agent.</p>
@@ -187,7 +174,7 @@ module Aws::BedrockAgent
       :memory_configuration,
       :agent_collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an action group.</p>
@@ -249,7 +236,7 @@ module Aws::BedrockAgent
       :function_schema,
       :action_group_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an alias of an agent.</p>
@@ -307,7 +294,7 @@ module Aws::BedrockAgent
       :failure_reasons,
       :alias_invocation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the history of the alias.</p>
@@ -325,7 +312,7 @@ module Aws::BedrockAgent
       :end_date,
       :start_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the routing configuration of the alias.</p>
@@ -339,16 +326,7 @@ module Aws::BedrockAgent
       :agent_version,
       :provisioned_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentAliasStatus
-      CREATING = 'CREATING'
-      PREPARED = 'PREPARED'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DISSOCIATED = 'DISSOCIATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an alias of an agent.</p>
@@ -386,13 +364,7 @@ module Aws::BedrockAgent
       :updated_at,
       :alias_invocation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentCollaboration
-      SUPERVISOR = 'SUPERVISOR'
-      SUPERVISOR_ROUTER = 'SUPERVISOR_ROUTER'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An agent collaborator.</p>
@@ -438,7 +410,7 @@ module Aws::BedrockAgent
       :relay_conversation_history,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An agent collaborator summary.</p>
@@ -480,7 +452,7 @@ module Aws::BedrockAgent
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An agent descriptor.</p>
@@ -490,7 +462,7 @@ module Aws::BedrockAgent
     class AgentDescriptor < Struct.new(
       :alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an agent node in your flow. You specify the agent to invoke at this point in the flow. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -500,7 +472,7 @@ module Aws::BedrockAgent
     class AgentFlowNodeConfiguration < Struct.new(
       :agent_alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a knowledge base that is associated with an agent.</p>
@@ -534,7 +506,7 @@ module Aws::BedrockAgent
       :updated_at,
       :knowledge_base_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a knowledge base associated with an agent.</p>
@@ -556,18 +528,7 @@ module Aws::BedrockAgent
       :knowledge_base_state,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatus
-      CREATING = 'CREATING'
-      PREPARING = 'PREPARING'
-      PREPARED = 'PREPARED'
-      NOT_PREPARED = 'NOT_PREPARED'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      VERSIONING = 'VERSIONING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an agent.</p>
@@ -601,7 +562,7 @@ module Aws::BedrockAgent
       :latest_agent_version,
       :guardrail_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a version of an agent.</p>
@@ -683,7 +644,7 @@ module Aws::BedrockAgent
       :memory_configuration,
       :agent_collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a version of an agent.</p>
@@ -717,21 +678,13 @@ module Aws::BedrockAgent
       :description,
       :guardrail_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Enum representing the invocation state of an agent alias
-    module AliasInvocationState
-      # Agent is actively processing requests
-      ACCEPT_INVOCATIONS = 'ACCEPT_INVOCATIONS'
-      # Agent is paused and will not accept new requests
-      REJECT_INVOCATIONS = 'REJECT_INVOCATIONS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines tools, at least one of which must be requested by the model. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
     class AnyToolChoice < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -764,7 +717,7 @@ module Aws::BedrockAgent
       :relay_conversation_history,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_collaborator
@@ -773,7 +726,7 @@ module Aws::BedrockAgent
     class AssociateAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -798,7 +751,7 @@ module Aws::BedrockAgent
       :description,
       :knowledge_base_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_knowledge_base
@@ -807,13 +760,13 @@ module Aws::BedrockAgent
     class AssociateAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines tools. The model automatically decides whether to call a tool or to generate text instead. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
     class AutoToolChoice < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for using Amazon Bedrock Data Automation as the parser for ingesting your data sources.</p>
@@ -823,7 +776,7 @@ module Aws::BedrockAgent
     class BedrockDataAutomationConfiguration < Struct.new(
       :parsing_modality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The vector configuration details for the Bedrock embeddings model.</p>
@@ -837,7 +790,7 @@ module Aws::BedrockAgent
       :dimensions,
       :embedding_data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for a foundation model used to parse documents for a data source.</p>
@@ -855,7 +808,7 @@ module Aws::BedrockAgent
       :parsing_prompt,
       :parsing_modality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Context enrichment configuration is used to provide additional context to the RAG application using Amazon Bedrock foundation models.</p>
@@ -869,7 +822,7 @@ module Aws::BedrockAgent
       :enrichment_strategy_configuration,
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about content defined inline in bytes.</p>
@@ -883,7 +836,7 @@ module Aws::BedrockAgent
       :mime_type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates where a cache checkpoint is located. All information before this checkpoint is cached to be accessed on subsequent requests.</p>
@@ -893,11 +846,7 @@ module Aws::BedrockAgent
     class CachePointBlock < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePointType
-      DEFAULT = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations to use a prompt in a conversational format. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -920,7 +869,7 @@ module Aws::BedrockAgent
       :input_variables,
       :tool_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about how to chunk the documents in the data source. A <i>chunk</i> refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.</p>
@@ -942,25 +891,13 @@ module Aws::BedrockAgent
       :hierarchical_chunking_configuration,
       :semantic_chunking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChunkingStrategy
-      FIXED_SIZE = 'FIXED_SIZE'
-      NONE = 'NONE'
-      HIERARCHICAL = 'HIERARCHICAL'
-      SEMANTIC = 'SEMANTIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a collector node in your flow. This node takes an iteration of inputs and consolidates them into an array in the output. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
     class CollectorFlowNodeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConcurrencyType
-      AUTOMATIC = 'Automatic'
-      MANUAL = 'Manual'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition node in your flow. You can specify conditions that determine which node comes next in the flow. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -970,7 +907,7 @@ module Aws::BedrockAgent
     class ConditionFlowNodeConfiguration < Struct.new(
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict performing an operation.</p>
@@ -979,12 +916,7 @@ module Aws::BedrockAgent
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluenceAuthType
-      BASIC = 'BASIC'
-      OAUTH2_CLIENT_CREDENTIALS = 'OAUTH2_CLIENT_CREDENTIALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the Confluence content. For example, configuring specific types of Confluence content.</p>
@@ -994,7 +926,7 @@ module Aws::BedrockAgent
     class ConfluenceCrawlerConfiguration < Struct.new(
       :filter_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information to connect to Confluence as your data source.</p>
@@ -1008,11 +940,7 @@ module Aws::BedrockAgent
       :source_configuration,
       :crawler_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluenceHostType
-      SAAS = 'SAAS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint information to connect to your Confluence data source.</p>
@@ -1034,7 +962,7 @@ module Aws::BedrockAgent
       :auth_type,
       :credentials_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the content for the message you pass to, or receive from a model. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -1050,16 +978,11 @@ module Aws::BedrockAgent
       :cache_point,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < ContentBlock; end
       class CachePoint < ContentBlock; end
       class Unknown < ContentBlock; end
-    end
-
-    module ContentDataSourceType
-      CUSTOM = 'CUSTOM'
-      S3 = 'S3'
     end
 
     # <p>Context enrichment configuration is used to provide additional context to the RAG application.</p>
@@ -1073,16 +996,7 @@ module Aws::BedrockAgent
       :type,
       :bedrock_foundation_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContextEnrichmentType
-      BEDROCK_FOUNDATION_MODEL = 'BEDROCK_FOUNDATION_MODEL'
-    end
-
-    module ConversationRole
-      USER = 'user'
-      ASSISTANT = 'assistant'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of filtering the data source content. For example, configuring regular expression patterns to include or exclude certain content.</p>
@@ -1096,11 +1010,7 @@ module Aws::BedrockAgent
       :type,
       :pattern_object_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CrawlFilterConfigurationType
-      PATTERN = 'PATTERN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1149,7 +1059,7 @@ module Aws::BedrockAgent
       :action_group_state,
       :function_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_action_group
@@ -1158,7 +1068,7 @@ module Aws::BedrockAgent
     class CreateAgentActionGroupResponse < Struct.new(
       :agent_action_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1187,7 +1097,7 @@ module Aws::BedrockAgent
       :routing_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_alias
@@ -1196,7 +1106,7 @@ module Aws::BedrockAgent
     class CreateAgentAliasResponse < Struct.new(
       :agent_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_name
@@ -1261,7 +1171,7 @@ module Aws::BedrockAgent
       :memory_configuration,
       :agent_collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent
@@ -1270,7 +1180,7 @@ module Aws::BedrockAgent
     class CreateAgentResponse < Struct.new(
       :agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1307,7 +1217,7 @@ module Aws::BedrockAgent
       :server_side_encryption_configuration,
       :vector_ingestion_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -1316,7 +1226,7 @@ module Aws::BedrockAgent
     class CreateDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1349,7 +1259,7 @@ module Aws::BedrockAgent
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1390,7 +1300,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1423,7 +1333,7 @@ module Aws::BedrockAgent
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1472,7 +1382,7 @@ module Aws::BedrockAgent
       :version,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -1489,7 +1399,7 @@ module Aws::BedrockAgent
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1534,7 +1444,7 @@ module Aws::BedrockAgent
       :version,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1567,7 +1477,7 @@ module Aws::BedrockAgent
       :storage_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -1576,7 +1486,7 @@ module Aws::BedrockAgent
     class CreateKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1609,7 +1519,7 @@ module Aws::BedrockAgent
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1654,7 +1564,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_identifier
@@ -1675,7 +1585,7 @@ module Aws::BedrockAgent
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1720,12 +1630,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CreationMode
-      DEFAULT = 'DEFAULT'
-      OVERRIDDEN = 'OVERRIDDEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a query, each of which defines information about example queries to help the query engine generate appropriate SQL queries.</p>
@@ -1739,7 +1644,7 @@ module Aws::BedrockAgent
       :natural_language,
       :sql,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the content to ingest into a knowledge base connected to a custom data source. Choose a <code>sourceType</code> and include the field that corresponds to it.</p>
@@ -1761,11 +1666,7 @@ module Aws::BedrockAgent
       :s3_location,
       :inline_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomControlMethod
-      RETURN_CONTROL = 'RETURN_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the identifier of the document to ingest into a custom data source.</p>
@@ -1775,7 +1676,7 @@ module Aws::BedrockAgent
     class CustomDocumentIdentifier < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details of custom orchestration. </p>
@@ -1785,7 +1686,7 @@ module Aws::BedrockAgent
     class CustomOrchestration < Struct.new(
       :executor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon S3 location of the file containing the content to ingest into a knowledge base connected to a custom data source.</p>
@@ -1799,12 +1700,7 @@ module Aws::BedrockAgent
       :uri,
       :bucket_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomSourceType
-      IN_LINE = 'IN_LINE'
-      S3_LOCATION = 'S3_LOCATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for customizing steps in the data source content ingestion pipeline.</p> <p>You can configure the data source to process documents with a Lambda function after they are parsed and converted into chunks. When you add a post-chunking transformation, the service stores chunked documents in an S3 bucket and invokes a Lambda function to process them.</p> <p>To process chunked documents with a Lambda function, define an S3 bucket path for input and output objects, and a transformation that specifies the Lambda function to invoke. You can use the Lambda function to customize how chunks are split, and the metadata for each chunk. </p>
@@ -1818,7 +1714,7 @@ module Aws::BedrockAgent
       :intermediate_storage,
       :transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a cyclic connection detected in the flow.</p>
@@ -1828,12 +1724,7 @@ module Aws::BedrockAgent
     class CyclicConnectionFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataDeletionPolicy
-      RETAIN = 'RETAIN'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a data source.</p>
@@ -1887,7 +1778,7 @@ module Aws::BedrockAgent
       :updated_at,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection configuration for the data source.</p>
@@ -1917,13 +1808,7 @@ module Aws::BedrockAgent
       :salesforce_configuration,
       :share_point_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceStatus
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      DELETE_UNSUCCESSFUL = 'DELETE_UNSUCCESSFUL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a data source.</p>
@@ -1953,17 +1838,7 @@ module Aws::BedrockAgent
       :description,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceType
-      S3 = 'S3'
-      WEB = 'WEB'
-      CONFLUENCE = 'CONFLUENCE'
-      SALESFORCE = 'SALESFORCE'
-      SHAREPOINT = 'SHAREPOINT'
-      CUSTOM = 'CUSTOM'
-      REDSHIFT_METADATA = 'REDSHIFT_METADATA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1984,12 +1859,12 @@ module Aws::BedrockAgent
       :action_group_id,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAgentActionGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2002,7 +1877,7 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2019,7 +1894,7 @@ module Aws::BedrockAgent
       :agent_alias_id,
       :agent_alias_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2032,7 +1907,7 @@ module Aws::BedrockAgent
       :agent_id,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2045,7 +1920,7 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2062,7 +1937,7 @@ module Aws::BedrockAgent
       :agent_version,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2079,7 +1954,7 @@ module Aws::BedrockAgent
       :agent_version,
       :agent_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2092,7 +1967,7 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2109,7 +1984,7 @@ module Aws::BedrockAgent
       :data_source_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -2122,7 +1997,7 @@ module Aws::BedrockAgent
       :flow_identifier,
       :alias_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_id
@@ -2135,7 +2010,7 @@ module Aws::BedrockAgent
       :flow_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -2148,7 +2023,7 @@ module Aws::BedrockAgent
       :flow_identifier,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2157,7 +2032,7 @@ module Aws::BedrockAgent
     class DeleteFlowResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -2174,7 +2049,7 @@ module Aws::BedrockAgent
       :flow_version,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2187,7 +2062,7 @@ module Aws::BedrockAgent
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2208,7 +2083,7 @@ module Aws::BedrockAgent
       :client_token,
       :document_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_details
@@ -2217,7 +2092,7 @@ module Aws::BedrockAgent
     class DeleteKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2226,7 +2101,7 @@ module Aws::BedrockAgent
     class DeleteKnowledgeBaseRequest < Struct.new(
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2239,7 +2114,7 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_identifier
@@ -2252,7 +2127,7 @@ module Aws::BedrockAgent
       :prompt_identifier,
       :prompt_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2265,7 +2140,7 @@ module Aws::BedrockAgent
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2282,12 +2157,12 @@ module Aws::BedrockAgent
       :agent_version,
       :collaborator_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAgentCollaboratorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2304,12 +2179,12 @@ module Aws::BedrockAgent
       :agent_version,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAgentKnowledgeBaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the content of a document. Choose a <code>dataSourceType</code> and include the field that corresponds to it.</p>
@@ -2327,7 +2202,7 @@ module Aws::BedrockAgent
       :custom,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that identifies the document.</p>
@@ -2345,7 +2220,7 @@ module Aws::BedrockAgent
       :s3,
       :custom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the metadata associate with the content to ingest into a knowledge base. Choose a <code>type</code> and include the field that corresponds to it.</p>
@@ -2363,22 +2238,7 @@ module Aws::BedrockAgent
       :inline_attributes,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentStatus
-      INDEXED = 'INDEXED'
-      PARTIALLY_INDEXED = 'PARTIALLY_INDEXED'
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
-      METADATA_PARTIALLY_INDEXED = 'METADATA_PARTIALLY_INDEXED'
-      METADATA_UPDATE_FAILED = 'METADATA_UPDATE_FAILED'
-      IGNORED = 'IGNORED'
-      NOT_FOUND = 'NOT_FOUND'
-      STARTING = 'STARTING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      DELETING = 'DELETING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about duplicate condition expressions found in a condition node.</p>
@@ -2392,7 +2252,7 @@ module Aws::BedrockAgent
       :node,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about duplicate connections found between two nodes in the flow.</p>
@@ -2406,13 +2266,7 @@ module Aws::BedrockAgent
       :source,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Bedrock models embedding data type. Can be either float32 or binary.</p>
-    module EmbeddingDataType
-      FLOAT32 = 'FLOAT32'
-      BINARY = 'BINARY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the embeddings model.</p>
@@ -2422,7 +2276,7 @@ module Aws::BedrockAgent
     class EmbeddingModelConfiguration < Struct.new(
       :bedrock_embedding_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The strategy used for performing context enrichment.</p>
@@ -2432,11 +2286,7 @@ module Aws::BedrockAgent
     class EnrichmentStrategyConfiguration < Struct.new(
       :method,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnrichmentStrategyMethod
-      CHUNK_ENTITY_EXTRACTION = 'CHUNK_ENTITY_EXTRACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a metadata field to include or exclude during the reranking process.</p>
@@ -2446,7 +2296,7 @@ module Aws::BedrockAgent
     class FieldForReranking < Struct.new(
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations for when you choose fixed-size chunking. If you set the <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>
@@ -2460,7 +2310,7 @@ module Aws::BedrockAgent
       :max_tokens,
       :overlap_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines how multiple nodes in a flow can run in parallel. Running nodes concurrently can improve your flow's performance.</p>
@@ -2474,7 +2324,7 @@ module Aws::BedrockAgent
       :type,
       :max_concurrency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a version that the alias maps to.</p>
@@ -2484,7 +2334,7 @@ module Aws::BedrockAgent
     class FlowAliasRoutingConfigurationListItem < Struct.new(
       :flow_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an alias of a flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowAliases.html#API_agent_ListFlowAliases_ResponseSyntax">ListFlowAliases response</a> </p> </li> </ul>
@@ -2526,7 +2376,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition in the condition node.</p>
@@ -2540,7 +2390,7 @@ module Aws::BedrockAgent
       :name,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a connection between a condition node and another node.</p>
@@ -2550,7 +2400,7 @@ module Aws::BedrockAgent
     class FlowConditionalConnectionConfiguration < Struct.new(
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a connection between two nodes in the flow.</p>
@@ -2576,7 +2426,7 @@ module Aws::BedrockAgent
       :target,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the connection.</p>
@@ -2591,16 +2441,11 @@ module Aws::BedrockAgent
       :conditional,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Data < FlowConnectionConfiguration; end
       class Conditional < FlowConnectionConfiguration; end
       class Unknown < FlowConnectionConfiguration; end
-    end
-
-    module FlowConnectionType
-      DATA = 'Data'
-      CONDITIONAL = 'Conditional'
     end
 
     # <p>The configuration of a connection originating from a node that isn't a Condition node.</p>
@@ -2614,7 +2459,7 @@ module Aws::BedrockAgent
       :source_output,
       :target_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the nodes and connections between nodes in the flow.</p>
@@ -2629,7 +2474,7 @@ module Aws::BedrockAgent
       :nodes,
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations about a node in the flow.</p>
@@ -2655,7 +2500,7 @@ module Aws::BedrockAgent
       :inputs,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a node in your flow. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -2726,7 +2571,7 @@ module Aws::BedrockAgent
       :loop_controller,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Input < FlowNodeConfiguration; end
       class Output < FlowNodeConfiguration; end
@@ -2745,14 +2590,6 @@ module Aws::BedrockAgent
       class LoopInput < FlowNodeConfiguration; end
       class LoopController < FlowNodeConfiguration; end
       class Unknown < FlowNodeConfiguration; end
-    end
-
-    module FlowNodeIODataType
-      STRING = 'String'
-      NUMBER = 'Number'
-      BOOLEAN = 'Boolean'
-      OBJECT = 'Object'
-      ARRAY = 'Array'
     end
 
     # <p>Contains configurations for an input in an Amazon Bedrock Flows node.</p>
@@ -2774,13 +2611,7 @@ module Aws::BedrockAgent
       :expression,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowNodeInputCategory
-      LOOP_CONDITION = 'LoopCondition'
-      RETURN_VALUE_TO_LOOP_START = 'ReturnValueToLoopStart'
-      EXIT_LOOP = 'ExitLoop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an output from a node.</p>
@@ -2794,33 +2625,7 @@ module Aws::BedrockAgent
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowNodeType
-      INPUT = 'Input'
-      OUTPUT = 'Output'
-      KNOWLEDGE_BASE = 'KnowledgeBase'
-      CONDITION = 'Condition'
-      LEX = 'Lex'
-      PROMPT = 'Prompt'
-      LAMBDA_FUNCTION = 'LambdaFunction'
-      STORAGE = 'Storage'
-      AGENT = 'Agent'
-      RETRIEVAL = 'Retrieval'
-      ITERATOR = 'Iterator'
-      COLLECTOR = 'Collector'
-      INLINE_CODE = 'InlineCode'
-      LOOP = 'Loop'
-      LOOP_INPUT = 'LoopInput'
-      LOOP_CONTROLLER = 'LoopController'
-    end
-
-    module FlowStatus
-      FAILED = 'Failed'
-      PREPARED = 'Prepared'
-      PREPARING = 'Preparing'
-      NOT_PREPARED = 'NotPrepared'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the definition of a flow.</p>
@@ -2858,7 +2663,7 @@ module Aws::BedrockAgent
       :updated_at,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about validation of the flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlow.html#API_agent_GetFlow_ResponseSyntax">GetFlow response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetFlowVersion.html#API_agent_GetFlowVersion_ResponseSyntax">GetFlowVersion response</a> </p> </li> </ul>
@@ -2880,7 +2685,7 @@ module Aws::BedrockAgent
       :details,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union type containing various possible validation issues in the flow.</p>
@@ -3019,7 +2824,7 @@ module Aws::BedrockAgent
       :invalid_loop_boundary,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CyclicConnection < FlowValidationDetails; end
       class DuplicateConnections < FlowValidationDetails; end
@@ -3057,47 +2862,6 @@ module Aws::BedrockAgent
       class Unknown < FlowValidationDetails; end
     end
 
-    module FlowValidationSeverity
-      WARNING = 'Warning'
-      ERROR = 'Error'
-    end
-
-    module FlowValidationType
-      CYCLIC_CONNECTION = 'CyclicConnection'
-      DUPLICATE_CONNECTIONS = 'DuplicateConnections'
-      DUPLICATE_CONDITION_EXPRESSION = 'DuplicateConditionExpression'
-      UNREACHABLE_NODE = 'UnreachableNode'
-      UNKNOWN_CONNECTION_SOURCE = 'UnknownConnectionSource'
-      UNKNOWN_CONNECTION_SOURCE_OUTPUT = 'UnknownConnectionSourceOutput'
-      UNKNOWN_CONNECTION_TARGET = 'UnknownConnectionTarget'
-      UNKNOWN_CONNECTION_TARGET_INPUT = 'UnknownConnectionTargetInput'
-      UNKNOWN_CONNECTION_CONDITION = 'UnknownConnectionCondition'
-      MALFORMED_CONDITION_EXPRESSION = 'MalformedConditionExpression'
-      MALFORMED_NODE_INPUT_EXPRESSION = 'MalformedNodeInputExpression'
-      MISMATCHED_NODE_INPUT_TYPE = 'MismatchedNodeInputType'
-      MISMATCHED_NODE_OUTPUT_TYPE = 'MismatchedNodeOutputType'
-      INCOMPATIBLE_CONNECTION_DATA_TYPE = 'IncompatibleConnectionDataType'
-      MISSING_CONNECTION_CONFIGURATION = 'MissingConnectionConfiguration'
-      MISSING_DEFAULT_CONDITION = 'MissingDefaultCondition'
-      MISSING_ENDING_NODES = 'MissingEndingNodes'
-      MISSING_NODE_CONFIGURATION = 'MissingNodeConfiguration'
-      MISSING_NODE_INPUT = 'MissingNodeInput'
-      MISSING_NODE_OUTPUT = 'MissingNodeOutput'
-      MISSING_STARTING_NODES = 'MissingStartingNodes'
-      MULTIPLE_NODE_INPUT_CONNECTIONS = 'MultipleNodeInputConnections'
-      UNFULFILLED_NODE_INPUT = 'UnfulfilledNodeInput'
-      UNSATISFIED_CONNECTION_CONDITIONS = 'UnsatisfiedConnectionConditions'
-      UNSPECIFIED = 'Unspecified'
-      UNKNOWN_NODE_INPUT = 'UnknownNodeInput'
-      UNKNOWN_NODE_OUTPUT = 'UnknownNodeOutput'
-      MISSING_LOOP_INPUT_NODE = 'MissingLoopInputNode'
-      MISSING_LOOP_CONTROLLER_NODE = 'MissingLoopControllerNode'
-      MULTIPLE_LOOP_INPUT_NODES = 'MultipleLoopInputNodes'
-      MULTIPLE_LOOP_CONTROLLER_NODES = 'MultipleLoopControllerNodes'
-      LOOP_INCOMPATIBLE_NODE_TYPE = 'LoopIncompatibleNodeType'
-      INVALID_LOOP_BOUNDARY = 'InvalidLoopBoundary'
-    end
-
     # <p>Contains information about a version of a flow.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListFlowVersions.html#API_agent_ListFlowVersions_ResponseSyntax">ListFlowVersions response</a> </p> </li> </ul>
     # @!attribute id
     #   <p>The unique identifier of the flow.</p>
@@ -3121,7 +2885,7 @@ module Aws::BedrockAgent
       :created_at,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax">GetAgentActionGroup response</a> </p> </li> </ul>
@@ -3143,7 +2907,7 @@ module Aws::BedrockAgent
       :parameters,
       :require_confirmation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax">GetAgentActionGroup response</a> </p> </li> </ul>
@@ -3154,7 +2918,7 @@ module Aws::BedrockAgent
       :functions,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Functions < FunctionSchema; end
       class Unknown < FunctionSchema; end
@@ -3174,7 +2938,7 @@ module Aws::BedrockAgent
       :agent_version,
       :action_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_action_group
@@ -3183,7 +2947,7 @@ module Aws::BedrockAgent
     class GetAgentActionGroupResponse < Struct.new(
       :agent_action_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -3196,7 +2960,7 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_alias
@@ -3205,7 +2969,7 @@ module Aws::BedrockAgent
     class GetAgentAliasResponse < Struct.new(
       :agent_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -3222,7 +2986,7 @@ module Aws::BedrockAgent
       :agent_version,
       :collaborator_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_collaborator
@@ -3231,7 +2995,7 @@ module Aws::BedrockAgent
     class GetAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -3248,7 +3012,7 @@ module Aws::BedrockAgent
       :agent_version,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_knowledge_base
@@ -3257,7 +3021,7 @@ module Aws::BedrockAgent
     class GetAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -3266,7 +3030,7 @@ module Aws::BedrockAgent
     class GetAgentRequest < Struct.new(
       :agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent
@@ -3275,7 +3039,7 @@ module Aws::BedrockAgent
     class GetAgentResponse < Struct.new(
       :agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -3288,7 +3052,7 @@ module Aws::BedrockAgent
       :agent_id,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_version
@@ -3297,7 +3061,7 @@ module Aws::BedrockAgent
     class GetAgentVersionResponse < Struct.new(
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3310,7 +3074,7 @@ module Aws::BedrockAgent
       :knowledge_base_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -3319,7 +3083,7 @@ module Aws::BedrockAgent
     class GetDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -3332,7 +3096,7 @@ module Aws::BedrockAgent
       :flow_identifier,
       :alias_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3373,7 +3137,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -3382,7 +3146,7 @@ module Aws::BedrockAgent
     class GetFlowRequest < Struct.new(
       :flow_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3435,7 +3199,7 @@ module Aws::BedrockAgent
       :definition,
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -3448,7 +3212,7 @@ module Aws::BedrockAgent
       :flow_identifier,
       :flow_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3493,7 +3257,7 @@ module Aws::BedrockAgent
       :version,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3510,7 +3274,7 @@ module Aws::BedrockAgent
       :data_source_id,
       :ingestion_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_job
@@ -3519,7 +3283,7 @@ module Aws::BedrockAgent
     class GetIngestionJobResponse < Struct.new(
       :ingestion_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3536,7 +3300,7 @@ module Aws::BedrockAgent
       :data_source_id,
       :document_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_details
@@ -3545,7 +3309,7 @@ module Aws::BedrockAgent
     class GetKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3554,7 +3318,7 @@ module Aws::BedrockAgent
     class GetKnowledgeBaseRequest < Struct.new(
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -3563,7 +3327,7 @@ module Aws::BedrockAgent
     class GetKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_identifier
@@ -3576,7 +3340,7 @@ module Aws::BedrockAgent
       :prompt_identifier,
       :prompt_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3621,7 +3385,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a guardrail associated with a resource.</p>
@@ -3635,7 +3399,7 @@ module Aws::BedrockAgent
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p> <p>You configure the number of tokens to overlap, or repeat across adjacent chunks. For example, if you set overlap tokens to 60, the last 60 tokens in the first chunk are also included at the beginning of the second chunk. For each layer, you must also configure the maximum number of tokens in a chunk.</p>
@@ -3649,7 +3413,7 @@ module Aws::BedrockAgent
       :level_configurations,
       :overlap_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Token settings for a layer in a hierarchical chunking configuration.</p>
@@ -3659,12 +3423,7 @@ module Aws::BedrockAgent
     class HierarchicalChunkingLevelConfiguration < Struct.new(
       :max_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IncludeExclude
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about incompatible data types in a connection between nodes.</p>
@@ -3674,14 +3433,7 @@ module Aws::BedrockAgent
     class IncompatibleConnectionDataTypeFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IncompatibleLoopNodeType
-      INPUT = 'Input'
-      CONDITION = 'Condition'
-      ITERATOR = 'Iterator'
-      COLLECTOR = 'Collector'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the <code>promptType</code>. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Inference parameters for foundation models</a>.</p>
@@ -3707,7 +3459,7 @@ module Aws::BedrockAgent
       :maximum_length,
       :stop_sequences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3728,7 +3480,7 @@ module Aws::BedrockAgent
       :client_token,
       :documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_details
@@ -3737,7 +3489,7 @@ module Aws::BedrockAgent
     class IngestKnowledgeBaseDocumentsResponse < Struct.new(
       :document_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a data ingestion job. Data sources are ingested into a knowledge base so that Large Language Models (LLMs) can use your data.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax">StartIngestionJob response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax">GetIngestionJob response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax">ListIngestionJob response</a> </p> </li> </ul>
@@ -3779,7 +3531,7 @@ module Aws::BedrockAgent
       :started_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a filter to filter the data.</p>
@@ -3797,15 +3549,7 @@ module Aws::BedrockAgent
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionJobFilterAttribute
-      STATUS = 'STATUS'
-    end
-
-    module IngestionJobFilterOperator
-      EQ = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters of sorting the data.</p>
@@ -3819,12 +3563,7 @@ module Aws::BedrockAgent
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionJobSortByAttribute
-      STATUS = 'STATUS'
-      STARTED_AT = 'STARTED_AT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the statistics for the data ingestion job.</p>
@@ -3858,7 +3597,7 @@ module Aws::BedrockAgent
       :number_of_documents_deleted,
       :number_of_documents_failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_documents_scanned] = 0 unless options.key?(:number_of_documents_scanned)
@@ -3870,15 +3609,6 @@ module Aws::BedrockAgent
         options[:number_of_documents_failed] = 0 unless options.key?(:number_of_documents_failed)
         super
       end
-    end
-
-    module IngestionJobStatus
-      STARTING = 'STARTING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
     end
 
     # <p>Contains details about a data ingestion job.</p>
@@ -3916,7 +3646,7 @@ module Aws::BedrockAgent
       :updated_at,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an inline code node in your flow. Inline code nodes let you write and execute code directly within your flow, enabling data transformations, custom logic, and integrations without needing an external Lambda function.</p>
@@ -3930,7 +3660,7 @@ module Aws::BedrockAgent
       :code,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about content defined inline to ingest into a data source. Choose a <code>type</code> and include the field that corresponds to it.</p>
@@ -3948,18 +3678,13 @@ module Aws::BedrockAgent
       :byte_content,
       :text_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InlineContentType
-      BYTE = 'BYTE'
-      TEXT = 'TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the input flow node for a flow. This node takes the input from flow invocation and passes it to the next node in the data type that you specify.</p>
     class InputFlowNodeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.</p>
@@ -3969,7 +3694,7 @@ module Aws::BedrockAgent
     class IntermediateStorage < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -3978,7 +3703,7 @@ module Aws::BedrockAgent
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that contains connections that violate loop boundary rules.</p>
@@ -3996,13 +3721,13 @@ module Aws::BedrockAgent
       :source,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an iterator node in a flow. Takes an input that is an array and iteratively sends each item of the array as an output to the following node. The size of the array is also returned in the output.</p> <p>The output flow node at the end of the flow iteration will return a response for each member of the array. To return only one response, you can include a collector node downstream from the iterator node.</p>
     class IteratorFlowNodeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for an Amazon Kendra knowledge base.</p>
@@ -4012,7 +3737,7 @@ module Aws::BedrockAgent
     class KendraKnowledgeBaseConfiguration < Struct.new(
       :kendra_index_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a knowledge base.</p>
@@ -4062,7 +3787,7 @@ module Aws::BedrockAgent
       :updated_at,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the vector embeddings configuration of the knowledge base.</p>
@@ -4084,7 +3809,7 @@ module Aws::BedrockAgent
       :kendra_knowledge_base_configuration,
       :sql_knowledge_base_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a document to ingest into a knowledge base and metadata to associate with it.</p>
@@ -4098,7 +3823,7 @@ module Aws::BedrockAgent
       :metadata,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for a document that was ingested or deleted.</p>
@@ -4128,7 +3853,7 @@ module Aws::BedrockAgent
       :status_reason,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a knowledge base node in a flow. This node takes a query as the input and returns, as the output, the retrieved responses directly (as an array) or a response generated based on the retrieved responses. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -4166,7 +3891,7 @@ module Aws::BedrockAgent
       :reranking_configuration,
       :orchestration_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures how the knowledge base orchestrates the retrieval and generation process, allowing for customization of prompts, inference parameters, and performance settings.</p>
@@ -4188,7 +3913,7 @@ module Aws::BedrockAgent
       :additional_model_request_fields,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a custom prompt template for orchestrating the retrieval and generation process.</p>
@@ -4198,32 +3923,7 @@ module Aws::BedrockAgent
     class KnowledgeBasePromptTemplate < Struct.new(
       :text_prompt_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KnowledgeBaseState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module KnowledgeBaseStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
-      DELETE_UNSUCCESSFUL = 'DELETE_UNSUCCESSFUL'
-    end
-
-    module KnowledgeBaseStorageType
-      OPENSEARCH_SERVERLESS = 'OPENSEARCH_SERVERLESS'
-      PINECONE = 'PINECONE'
-      REDIS_ENTERPRISE_CLOUD = 'REDIS_ENTERPRISE_CLOUD'
-      RDS = 'RDS'
-      MONGO_DB_ATLAS = 'MONGO_DB_ATLAS'
-      NEPTUNE_ANALYTICS = 'NEPTUNE_ANALYTICS'
-      OPENSEARCH_MANAGED_CLUSTER = 'OPENSEARCH_MANAGED_CLUSTER'
-      S3_VECTORS = 'S3_VECTORS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a knowledge base.</p>
@@ -4249,13 +3949,7 @@ module Aws::BedrockAgent
       :status,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KnowledgeBaseType
-      VECTOR = 'VECTOR'
-      KENDRA = 'KENDRA'
-      SQL = 'SQL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a Lambda function node in the flow. You specify the Lambda function to invoke and the inputs into the function. The output is the response that is defined in the Lambda function. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -4265,7 +3959,7 @@ module Aws::BedrockAgent
     class LambdaFunctionFlowNodeConfiguration < Struct.new(
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a Lex node in the flow. You specify a Amazon Lex bot to invoke. This node takes an utterance as the input and returns as the output the intent identified by the Amazon Lex bot. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -4279,7 +3973,7 @@ module Aws::BedrockAgent
       :bot_alias_arn,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -4300,7 +3994,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_group_summaries
@@ -4313,7 +4007,7 @@ module Aws::BedrockAgent
       :action_group_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -4330,7 +4024,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_alias_summaries
@@ -4343,7 +4037,7 @@ module Aws::BedrockAgent
       :agent_alias_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -4364,7 +4058,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_collaborator_summaries
@@ -4377,7 +4071,7 @@ module Aws::BedrockAgent
       :agent_collaborator_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -4398,7 +4092,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_knowledge_base_summaries
@@ -4411,7 +4105,7 @@ module Aws::BedrockAgent
       :agent_knowledge_base_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -4428,7 +4122,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_version_summaries
@@ -4441,7 +4135,7 @@ module Aws::BedrockAgent
       :agent_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4454,7 +4148,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_summaries
@@ -4467,7 +4161,7 @@ module Aws::BedrockAgent
       :agent_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -4484,7 +4178,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_summaries
@@ -4497,7 +4191,7 @@ module Aws::BedrockAgent
       :data_source_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -4514,7 +4208,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_alias_summaries
@@ -4527,7 +4221,7 @@ module Aws::BedrockAgent
       :flow_alias_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -4544,7 +4238,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_version_summaries
@@ -4557,7 +4251,7 @@ module Aws::BedrockAgent
       :flow_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4570,7 +4264,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_summaries
@@ -4583,7 +4277,7 @@ module Aws::BedrockAgent
       :flow_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -4612,7 +4306,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_job_summaries
@@ -4625,7 +4319,7 @@ module Aws::BedrockAgent
       :ingestion_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -4646,7 +4340,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_details
@@ -4659,7 +4353,7 @@ module Aws::BedrockAgent
       :document_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4672,7 +4366,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_summaries
@@ -4685,7 +4379,7 @@ module Aws::BedrockAgent
       :knowledge_base_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_identifier
@@ -4702,7 +4396,7 @@ module Aws::BedrockAgent
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_summaries
@@ -4715,7 +4409,7 @@ module Aws::BedrockAgent
       :prompt_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4724,7 +4418,7 @@ module Aws::BedrockAgent
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4733,7 +4427,7 @@ module Aws::BedrockAgent
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the controller node of a DoWhile loop in the flow.</p>
@@ -4747,7 +4441,7 @@ module Aws::BedrockAgent
       :continue_condition,
       :max_iterations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_iterations] = 10 unless options.key?(:max_iterations)
@@ -4762,7 +4456,7 @@ module Aws::BedrockAgent
     class LoopFlowNodeConfiguration < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that contains an incompatible node in a DoWhile loop.</p>
@@ -4780,13 +4474,13 @@ module Aws::BedrockAgent
       :incompatible_node_type,
       :incompatible_node_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the input node of a DoWhile loop in the flow.</p>
     class LoopInputFlowNodeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a malformed condition expression in a node.</p>
@@ -4804,7 +4498,7 @@ module Aws::BedrockAgent
       :condition,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a malformed input expression in a node.</p>
@@ -4822,7 +4516,7 @@ module Aws::BedrockAgent
       :input,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the memory configuration.</p>
@@ -4840,16 +4534,12 @@ module Aws::BedrockAgent
       :storage_days,
       :session_summary_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:storage_days] = 30 unless options.key?(:storage_days)
         super
       end
-    end
-
-    module MemoryType
-      SESSION_SUMMARY = 'SESSION_SUMMARY'
     end
 
     # <p>A message input or response from a model. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -4863,7 +4553,7 @@ module Aws::BedrockAgent
       :role,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a metadata attribute.</p>
@@ -4877,7 +4567,7 @@ module Aws::BedrockAgent
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the value of the metadata attribute. Choose a <code>type</code> and include the field that corresponds to it.</p>
@@ -4903,7 +4593,7 @@ module Aws::BedrockAgent
       :string_value,
       :string_list_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how metadata fields should be handled during the reranking process.</p>
@@ -4917,19 +4607,7 @@ module Aws::BedrockAgent
       :selection_mode,
       :selective_mode_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataSourceType
-      IN_LINE_ATTRIBUTE = 'IN_LINE_ATTRIBUTE'
-      S3_LOCATION = 'S3_LOCATION'
-    end
-
-    module MetadataValueType
-      BOOLEAN = 'BOOLEAN'
-      NUMBER = 'NUMBER'
-      STRING = 'STRING'
-      STRING_LIST = 'STRING_LIST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about mismatched input data types in a node.</p>
@@ -4947,7 +4625,7 @@ module Aws::BedrockAgent
       :input,
       :expected_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about mismatched output data types in a node.</p>
@@ -4965,7 +4643,7 @@ module Aws::BedrockAgent
       :output,
       :expected_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a connection missing required configuration.</p>
@@ -4975,7 +4653,7 @@ module Aws::BedrockAgent
     class MissingConnectionConfigurationFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a missing default condition in a conditional node.</p>
@@ -4985,13 +4663,13 @@ module Aws::BedrockAgent
     class MissingDefaultConditionFlowValidationDetails < Struct.new(
       :node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about missing ending nodes (such as FlowOutputNode) in the flow.</p>
     class MissingEndingNodesFlowValidationDetails < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that's missing a required <code>LoopController</code> node in a DoWhile loop.</p>
@@ -5001,7 +4679,7 @@ module Aws::BedrockAgent
     class MissingLoopControllerNodeFlowValidationDetails < Struct.new(
       :loop_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that's missing a required <code>LoopInput</code> node in a DoWhile loop.</p>
@@ -5011,7 +4689,7 @@ module Aws::BedrockAgent
     class MissingLoopInputNodeFlowValidationDetails < Struct.new(
       :loop_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a node missing a required configuration.</p>
@@ -5021,7 +4699,7 @@ module Aws::BedrockAgent
     class MissingNodeConfigurationFlowValidationDetails < Struct.new(
       :node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a missing required input in a node.</p>
@@ -5035,7 +4713,7 @@ module Aws::BedrockAgent
       :node,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a missing required output in a node.</p>
@@ -5049,13 +4727,13 @@ module Aws::BedrockAgent
       :node,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about missing starting nodes (such as FlowInputNode) in the flow.</p>
     class MissingStartingNodesFlowValidationDetails < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the storage configuration of the knowledge base in MongoDB Atlas. </p>
@@ -5093,7 +4771,7 @@ module Aws::BedrockAgent
       :endpoint_service_name,
       :text_index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5111,7 +4789,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that contains multiple <code>LoopController</code> nodes in a DoWhile loop.</p>
@@ -5121,7 +4799,7 @@ module Aws::BedrockAgent
     class MultipleLoopControllerNodesFlowValidationDetails < Struct.new(
       :loop_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a flow that contains multiple <code>LoopInput</code> nodes in a DoWhile loop.</p>
@@ -5131,7 +4809,7 @@ module Aws::BedrockAgent
     class MultipleLoopInputNodesFlowValidationDetails < Struct.new(
       :loop_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about multiple connections to a single node input.</p>
@@ -5145,7 +4823,7 @@ module Aws::BedrockAgent
       :node,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the storage configuration of the knowledge base in Amazon Neptune Analytics. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-neptune.html">Create a vector index in Amazon Neptune Analytics</a>.</p>
@@ -5159,7 +4837,7 @@ module Aws::BedrockAgent
       :graph_arn,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5173,7 +4851,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the Managed Cluster configuration of the knowledge base in Amazon OpenSearch Service. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-osm.html">Create a vector index in OpenSearch Managed Cluster</a>.</p>
@@ -5195,7 +4873,7 @@ module Aws::BedrockAgent
       :vector_index_name,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5213,7 +4891,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the storage configuration of the knowledge base in Amazon OpenSearch Service. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html">Create a vector index in Amazon OpenSearch Service</a>.</p>
@@ -5231,7 +4909,7 @@ module Aws::BedrockAgent
       :vector_index_name,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5249,7 +4927,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains details about the Lambda function containing the orchestration logic carried out upon invoking the custom orchestration. </p>
@@ -5260,21 +4938,16 @@ module Aws::BedrockAgent
       :lambda,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Lambda < OrchestrationExecutor; end
       class Unknown < OrchestrationExecutor; end
     end
 
-    module OrchestrationType
-      DEFAULT = 'DEFAULT'
-      CUSTOM_ORCHESTRATION = 'CUSTOM_ORCHESTRATION'
-    end
-
     # <p>Contains configurations for an output flow node in the flow. You specify the data type expected for the input into the node in the <code>type</code> field and how to return the final output in the <code>expression</code> field.</p>
     class OutputFlowNodeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a parameter in a function for an action group.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax">CreateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax">CreateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax">UpdateAgentActionGroup request</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax">UpdateAgentActionGroup response</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax">GetAgentActionGroup response</a> </p> </li> </ul>
@@ -5292,7 +4965,7 @@ module Aws::BedrockAgent
       :type,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for parsing document contents. If you exclude this field, the default parser converts the contents of each document into text before splitting it into chunks. Specify the parsing strategy to use in the <code>parsingStrategy</code> field and include the relevant configuration, or omit it to use the Amazon Bedrock default parser. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-advanced-parsing.html">Parsing options for your data source</a>.</p> <note> <p>If you specify <code>BEDROCK_DATA_AUTOMATION</code> or <code>BEDROCK_FOUNDATION_MODEL</code> and it fails to parse a file, the Amazon Bedrock default parser will be used instead.</p> </note>
@@ -5310,11 +4983,7 @@ module Aws::BedrockAgent
       :bedrock_foundation_model_configuration,
       :bedrock_data_automation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParsingModality
-      MULTIMODAL = 'MULTIMODAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Instructions for interpreting the contents of a document.</p>
@@ -5324,12 +4993,7 @@ module Aws::BedrockAgent
     class ParsingPrompt < Struct.new(
       :parsing_prompt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParsingStrategy
-      BEDROCK_FOUNDATION_MODEL = 'BEDROCK_FOUNDATION_MODEL'
-      BEDROCK_DATA_AUTOMATION = 'BEDROCK_DATA_AUTOMATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specific filters applied to your data source content. You can filter out or include certain content.</p>
@@ -5347,7 +5011,7 @@ module Aws::BedrockAgent
       :inclusion_filters,
       :exclusion_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of filtering certain objects or content types of the data source.</p>
@@ -5357,12 +5021,7 @@ module Aws::BedrockAgent
     class PatternObjectFilterConfiguration < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PerformanceConfigLatency
-      STANDARD = 'standard'
-      OPTIMIZED = 'optimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The performance-related configuration options for the knowledge base retrieval and generation process.</p>
@@ -5372,7 +5031,7 @@ module Aws::BedrockAgent
     class PerformanceConfiguration < Struct.new(
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latency] = 'standard' unless options.key?(:latency)
@@ -5399,7 +5058,7 @@ module Aws::BedrockAgent
       :namespace,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5413,7 +5072,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -5422,7 +5081,7 @@ module Aws::BedrockAgent
     class PrepareAgentRequest < Struct.new(
       :agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -5443,7 +5102,7 @@ module Aws::BedrockAgent
       :agent_version,
       :prepared_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_identifier
@@ -5452,7 +5111,7 @@ module Aws::BedrockAgent
     class PrepareFlowRequest < Struct.new(
       :flow_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5465,7 +5124,7 @@ module Aws::BedrockAgent
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications for an Amazon Bedrock agent with which to use the prompt. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a> and <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">Automate tasks in your application using conversational agents</a>.</p>
@@ -5476,7 +5135,7 @@ module Aws::BedrockAgent
     class PromptAgentResource < Struct.new(
       :agent_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations to override a prompt template in one part of an agent sequence. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html">Advanced prompts</a>.</p>
@@ -5514,7 +5173,7 @@ module Aws::BedrockAgent
       :foundation_model,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a prompt node in the flow. You can use a prompt from Prompt management or you can define one in this node. If the prompt contains variables, the inputs into this node will fill in the variables. The output from this node is the response generated by the model. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-nodes.html">Node types in a flow</a> in the Amazon Bedrock User Guide.</p>
@@ -5528,7 +5187,7 @@ module Aws::BedrockAgent
       :source_configuration,
       :guardrail_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a prompt defined inline in the node.</p>
@@ -5554,7 +5213,7 @@ module Aws::BedrockAgent
       :inference_configuration,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a prompt from Prompt management to use in a node.</p>
@@ -5564,7 +5223,7 @@ module Aws::BedrockAgent
     class PromptFlowNodeResourceConfiguration < Struct.new(
       :prompt_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a prompt and whether it is from Prompt management or defined inline.</p>
@@ -5579,7 +5238,7 @@ module Aws::BedrockAgent
       :inline,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Resource < PromptFlowNodeSourceConfiguration; end
       class Inline < PromptFlowNodeSourceConfiguration; end
@@ -5595,7 +5254,7 @@ module Aws::BedrockAgent
       :agent,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Agent < PromptGenAiResource; end
       class Unknown < PromptGenAiResource; end
@@ -5609,7 +5268,7 @@ module Aws::BedrockAgent
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < PromptInferenceConfiguration; end
       class Unknown < PromptInferenceConfiguration; end
@@ -5622,7 +5281,7 @@ module Aws::BedrockAgent
     class PromptInputVariable < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a key-value pair that defines a metadata tag and value to attach to a prompt variant. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -5637,7 +5296,7 @@ module Aws::BedrockAgent
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains inference configurations related to model inference for a prompt. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html">Inference parameters</a>.</p>
@@ -5659,7 +5318,7 @@ module Aws::BedrockAgent
       :max_tokens,
       :stop_sequences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations to override prompts in different parts of an agent sequence. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html">Advanced prompts</a>.</p>
@@ -5674,12 +5333,7 @@ module Aws::BedrockAgent
       :prompt_configurations,
       :override_lambda,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PromptState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a prompt in your Prompt management tool.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListPrompts.html#API_agent_ListPrompts_ResponseSyntax">ListPrompts response</a> </p> </li> </ul>
@@ -5713,7 +5367,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the message for a prompt. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html">Construct and store reusable prompts with Prompt management in Amazon Bedrock</a>.</p>
@@ -5728,24 +5382,11 @@ module Aws::BedrockAgent
       :chat,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < PromptTemplateConfiguration; end
       class Chat < PromptTemplateConfiguration; end
       class Unknown < PromptTemplateConfiguration; end
-    end
-
-    module PromptTemplateType
-      TEXT = 'TEXT'
-      CHAT = 'CHAT'
-    end
-
-    module PromptType
-      PRE_PROCESSING = 'PRE_PROCESSING'
-      ORCHESTRATION = 'ORCHESTRATION'
-      POST_PROCESSING = 'POST_PROCESSING'
-      KNOWLEDGE_BASE_RESPONSE_GENERATION = 'KNOWLEDGE_BASE_RESPONSE_GENERATION'
-      MEMORY_SUMMARIZATION = 'MEMORY_SUMMARIZATION'
     end
 
     # <p>Contains details about a variant of the prompt.</p>
@@ -5784,11 +5425,7 @@ module Aws::BedrockAgent
       :additional_model_request_fields,
       :gen_ai_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryEngineType
-      REDSHIFT = 'REDSHIFT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a column in the current table for the query engine to consider.</p>
@@ -5806,7 +5443,7 @@ module Aws::BedrockAgent
       :description,
       :inclusion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for query generation. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide..</p>
@@ -5820,7 +5457,7 @@ module Aws::BedrockAgent
       :execution_timeout_seconds,
       :generation_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>&gt;Contains configurations for context to use during query generation.</p>
@@ -5835,7 +5472,7 @@ module Aws::BedrockAgent
       :tables,
       :curated_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a table for the query engine to consider.</p>
@@ -5857,7 +5494,7 @@ module Aws::BedrockAgent
       :inclusion,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html">Create a vector index in Amazon RDS</a>.</p>
@@ -5883,7 +5520,7 @@ module Aws::BedrockAgent
       :table_name,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5909,7 +5546,7 @@ module Aws::BedrockAgent
       :metadata_field,
       :custom_metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the storage configuration of the knowledge base in Redis Enterprise Cloud. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html">Create a vector index in Redis Enterprise Cloud</a>.</p>
@@ -5931,7 +5568,7 @@ module Aws::BedrockAgent
       :credentials_secret_arn,
       :field_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields to which to map information about the vector store.</p>
@@ -5949,7 +5586,7 @@ module Aws::BedrockAgent
       :text_field,
       :metadata_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an Amazon Redshift database. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>
@@ -5967,7 +5604,7 @@ module Aws::BedrockAgent
       :query_engine_configuration,
       :query_generation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for authentication to an Amazon Redshift provisioned data warehouse. Specify the type of authentication to use in the <code>type</code> field and include the corresponding field. If you specify IAM authentication, you don't need to include another field.</p>
@@ -5985,13 +5622,7 @@ module Aws::BedrockAgent
       :database_user,
       :username_password_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedshiftProvisionedAuthType
-      IAM = 'IAM'
-      USERNAME_PASSWORD = 'USERNAME_PASSWORD'
-      USERNAME = 'USERNAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a provisioned Amazon Redshift query engine.</p>
@@ -6005,7 +5636,7 @@ module Aws::BedrockAgent
       :cluster_identifier,
       :auth_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for storage in Glue Data Catalog.</p>
@@ -6015,7 +5646,7 @@ module Aws::BedrockAgent
     class RedshiftQueryEngineAwsDataCatalogStorageConfiguration < Struct.new(
       :table_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for an Amazon Redshift query engine. Specify the type of query engine in <code>type</code> and include the corresponding field. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>
@@ -6033,7 +5664,7 @@ module Aws::BedrockAgent
       :serverless_configuration,
       :provisioned_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for storage in Amazon Redshift.</p>
@@ -6043,7 +5674,7 @@ module Aws::BedrockAgent
     class RedshiftQueryEngineRedshiftStorageConfiguration < Struct.new(
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for Amazon Redshift data storage. Specify the data storage service to use in the <code>type</code> field and include the corresponding field. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>
@@ -6061,17 +5692,7 @@ module Aws::BedrockAgent
       :aws_data_catalog_configuration,
       :redshift_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedshiftQueryEngineStorageType
-      REDSHIFT = 'REDSHIFT'
-      AWS_DATA_CATALOG = 'AWS_DATA_CATALOG'
-    end
-
-    module RedshiftQueryEngineType
-      SERVERLESS = 'SERVERLESS'
-      PROVISIONED = 'PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configurations for authentication to a Redshift Serverless. Specify the type of authentication to use in the <code>type</code> field and include the corresponding field. If you specify IAM authentication, you don't need to include another field.</p>
@@ -6085,12 +5706,7 @@ module Aws::BedrockAgent
       :type,
       :username_password_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedshiftServerlessAuthType
-      IAM = 'IAM'
-      USERNAME_PASSWORD = 'USERNAME_PASSWORD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for authentication to Amazon Redshift Serverless.</p>
@@ -6104,23 +5720,7 @@ module Aws::BedrockAgent
       :workgroup_arn,
       :auth_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelayConversationHistory
-      TO_COLLABORATOR = 'TO_COLLABORATOR'
-      DISABLED = 'DISABLED'
-    end
-
-    # <p>Whether the action requires user confirmation.</p>
-    module RequireConfirmation
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module RerankingMetadataSelectionMode
-      SELECTIVE = 'SELECTIVE'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the metadata fields to include or exclude during the reranking process when using selective mode.</p>
@@ -6135,7 +5735,7 @@ module Aws::BedrockAgent
       :fields_to_exclude,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
       class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration; end
@@ -6148,7 +5748,7 @@ module Aws::BedrockAgent
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a Retrieval node in a flow. This node retrieves data from the Amazon S3 location that you specify and returns it as the output.</p>
@@ -6158,7 +5758,7 @@ module Aws::BedrockAgent
     class RetrievalFlowNodeConfiguration < Struct.new(
       :service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the Amazon S3 location from which to retrieve data to return as the output from the node.</p>
@@ -6168,7 +5768,7 @@ module Aws::BedrockAgent
     class RetrievalFlowNodeS3Configuration < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the service to use for retrieving data to return as the output from the node.</p>
@@ -6179,7 +5779,7 @@ module Aws::BedrockAgent
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < RetrievalFlowNodeServiceConfiguration; end
       class Unknown < RetrievalFlowNodeServiceConfiguration; end
@@ -6192,7 +5792,7 @@ module Aws::BedrockAgent
     class S3Content < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information to connect to Amazon S3 as your data source.</p>
@@ -6210,7 +5810,7 @@ module Aws::BedrockAgent
       :inclusion_prefixes,
       :bucket_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier information for an Amazon S3 bucket.</p>
@@ -6224,7 +5824,7 @@ module Aws::BedrockAgent
       :s3_bucket_name,
       :s3_object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon S3 location.</p>
@@ -6234,7 +5834,7 @@ module Aws::BedrockAgent
     class S3Location < Struct.new(
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the storage configuration of the knowledge base for S3 vectors.</p>
@@ -6252,11 +5852,7 @@ module Aws::BedrockAgent
       :index_arn,
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceAuthType
-      OAUTH2_CLIENT_CREDENTIALS = 'OAUTH2_CLIENT_CREDENTIALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the Salesforce content. For example, configuring specific types of Salesforce content.</p>
@@ -6266,7 +5862,7 @@ module Aws::BedrockAgent
     class SalesforceCrawlerConfiguration < Struct.new(
       :filter_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information to connect to Salesforce as your data source.</p>
@@ -6280,7 +5876,7 @@ module Aws::BedrockAgent
       :source_configuration,
       :crawler_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint information to connect to your Salesforce data source.</p>
@@ -6298,7 +5894,7 @@ module Aws::BedrockAgent
       :auth_type,
       :credentials_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The seed or starting point URL. You should be authorized to crawl the URL.</p>
@@ -6308,7 +5904,7 @@ module Aws::BedrockAgent
     class SeedUrl < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into into smaller documents based on groups of similar content derived from the text with natural language processing.</p> <p>With semantic chunking, each sentence is compared to the next to determine how similar they are. You specify a threshold in the form of a percentile, where adjacent sentences that are less similar than that percentage of sentence pairs are divided into separate chunks. For example, if you set the threshold to 90, then the 10 percent of sentence pairs that are least similar are split. So if you have 101 sentences, 100 sentence pairs are compared, and the 10 with the least similarity are split, creating 11 chunks. These chunks are further split if they exceed the max token size.</p> <p>You must also specify a buffer size, which determines whether sentences are compared in isolation, or within a moving context window that includes the previous and following sentence. For example, if you set the buffer size to <code>1</code>, the embedding for sentence 10 is derived from sentences 9, 10, and 11 combined.</p>
@@ -6326,7 +5922,7 @@ module Aws::BedrockAgent
       :buffer_size,
       :breakpoint_percentile_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration for server-side encryption.</p>
@@ -6336,7 +5932,7 @@ module Aws::BedrockAgent
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeds the service quota. Resubmit your request later.</p>
@@ -6345,7 +5941,7 @@ module Aws::BedrockAgent
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for SESSION_SUMMARY memory type enabled for the agent.</p>
@@ -6355,17 +5951,12 @@ module Aws::BedrockAgent
     class SessionSummaryConfiguration < Struct.new(
       :max_recent_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_recent_sessions] =  unless options.key?(:max_recent_sessions)
+        options[:max_recent_sessions] = nil unless options.key?(:max_recent_sessions)
         super
       end
-    end
-
-    module SharePointAuthType
-      OAUTH2_CLIENT_CREDENTIALS = 'OAUTH2_CLIENT_CREDENTIALS'
-      OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS = 'OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS'
     end
 
     # <p>The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.</p>
@@ -6375,7 +5966,7 @@ module Aws::BedrockAgent
     class SharePointCrawlerConfiguration < Struct.new(
       :filter_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information to connect to SharePoint as your data source.</p>
@@ -6389,11 +5980,7 @@ module Aws::BedrockAgent
       :source_configuration,
       :crawler_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SharePointHostType
-      ONLINE = 'ONLINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint information to connect to your SharePoint data source.</p>
@@ -6423,12 +6010,7 @@ module Aws::BedrockAgent
       :auth_type,
       :credentials_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a specific tool that the model must request. No text is generated but the results of tool use are sent back to the model to help generate a response. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
@@ -6438,7 +6020,7 @@ module Aws::BedrockAgent
     class SpecificToolChoice < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a knowledge base connected to an SQL database. Specify the SQL database type in the <code>type</code> field and include the corresponding field. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-build-structured.html">Build a knowledge base by connecting to a structured data source</a> in the Amazon Bedrock User Guide.</p>
@@ -6452,7 +6034,7 @@ module Aws::BedrockAgent
       :type,
       :redshift_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6473,7 +6055,7 @@ module Aws::BedrockAgent
       :client_token,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_job
@@ -6482,11 +6064,7 @@ module Aws::BedrockAgent
     class StartIngestionJobResponse < Struct.new(
       :ingestion_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepType
-      POST_CHUNKING = 'POST_CHUNKING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6503,7 +6081,7 @@ module Aws::BedrockAgent
       :data_source_id,
       :ingestion_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_job
@@ -6512,7 +6090,7 @@ module Aws::BedrockAgent
     class StopIngestionJobResponse < Struct.new(
       :ingestion_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the storage configuration of the knowledge base.</p>
@@ -6554,7 +6132,7 @@ module Aws::BedrockAgent
       :neptune_analytics_configuration,
       :s3_vectors_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a Storage node in a flow. This node stores the input in an Amazon S3 location that you specify.</p>
@@ -6564,7 +6142,7 @@ module Aws::BedrockAgent
     class StorageFlowNodeConfiguration < Struct.new(
       :service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the Amazon S3 location in which to store the input into the node.</p>
@@ -6574,7 +6152,7 @@ module Aws::BedrockAgent
     class StorageFlowNodeS3Configuration < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for the service to use for storing the input into the node.</p>
@@ -6585,7 +6163,7 @@ module Aws::BedrockAgent
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < StorageFlowNodeServiceConfiguration; end
       class Unknown < StorageFlowNodeServiceConfiguration; end
@@ -6598,7 +6176,7 @@ module Aws::BedrockAgent
     class SupplementalDataStorageConfiguration < Struct.new(
       :storage_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a storage location for images extracted from multimodal documents in your data source.</p>
@@ -6612,15 +6190,7 @@ module Aws::BedrockAgent
       :type,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SupplementalDataStorageLocationType
-      S3 = 'S3'
-    end
-
-    module SupportedLanguages
-      PYTHON_3 = 'Python_3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a system prompt to provide context to the model or to describe how it should behave. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html">Create a prompt using Prompt management</a>.</p>
@@ -6636,7 +6206,7 @@ module Aws::BedrockAgent
       :cache_point,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < SystemContentBlock; end
       class CachePoint < SystemContentBlock; end
@@ -6653,12 +6223,12 @@ module Aws::BedrockAgent
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about content defined inline in text.</p>
@@ -6668,7 +6238,7 @@ module Aws::BedrockAgent
     class TextContentDoc < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a text prompt template. To include a variable, enclose a word in double curly braces as in <code>{{variable}}</code>.</p>
@@ -6687,7 +6257,7 @@ module Aws::BedrockAgent
       :cache_point,
       :input_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeds the limit. Resubmit your request later.</p>
@@ -6696,7 +6266,7 @@ module Aws::BedrockAgent
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for a tool that a model can use when generating a response. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
@@ -6711,7 +6281,7 @@ module Aws::BedrockAgent
       :cache_point,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ToolSpec < Tool; end
       class CachePoint < Tool; end
@@ -6735,7 +6305,7 @@ module Aws::BedrockAgent
       :tool,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Auto < ToolChoice; end
       class Any < ToolChoice; end
@@ -6754,7 +6324,7 @@ module Aws::BedrockAgent
       :tools,
       :tool_choice,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input schema for the tool. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Use a tool to complete an Amazon Bedrock model response</a>.</p>
@@ -6765,7 +6335,7 @@ module Aws::BedrockAgent
       :json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Json < ToolInputSchema; end
       class Unknown < ToolInputSchema; end
@@ -6786,7 +6356,7 @@ module Aws::BedrockAgent
       :description,
       :input_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom processing step for documents moving through a data source ingestion pipeline. To process documents after they have been converted into chunks, set the step to apply to <code>POST_CHUNKING</code>.</p>
@@ -6800,7 +6370,7 @@ module Aws::BedrockAgent
       :transformation_function,
       :step_to_apply,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Lambda function that processes documents.</p>
@@ -6810,7 +6380,7 @@ module Aws::BedrockAgent
     class TransformationFunction < Struct.new(
       :transformation_lambda_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Lambda function that processes documents.</p>
@@ -6820,15 +6390,7 @@ module Aws::BedrockAgent
     class TransformationLambdaConfiguration < Struct.new(
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      STRING = 'string'
-      NUMBER = 'number'
-      INTEGER = 'integer'
-      BOOLEAN = 'boolean'
-      ARRAY = 'array'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unfulfilled node input with no valid connections.</p>
@@ -6842,7 +6404,7 @@ module Aws::BedrockAgent
       :node,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown condition for a connection.</p>
@@ -6852,7 +6414,7 @@ module Aws::BedrockAgent
     class UnknownConnectionConditionFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown source node for a connection.</p>
@@ -6862,7 +6424,7 @@ module Aws::BedrockAgent
     class UnknownConnectionSourceFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown source output for a connection.</p>
@@ -6872,7 +6434,7 @@ module Aws::BedrockAgent
     class UnknownConnectionSourceOutputFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown target node for a connection.</p>
@@ -6882,7 +6444,7 @@ module Aws::BedrockAgent
     class UnknownConnectionTargetFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown target input for a connection.</p>
@@ -6892,7 +6454,7 @@ module Aws::BedrockAgent
     class UnknownConnectionTargetInputFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown input for a node.</p>
@@ -6906,7 +6468,7 @@ module Aws::BedrockAgent
       :node,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unknown output for a node.</p>
@@ -6920,7 +6482,7 @@ module Aws::BedrockAgent
       :node,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unreachable node in the flow. A node is unreachable when there are no paths to it from any starting node.</p>
@@ -6930,7 +6492,7 @@ module Aws::BedrockAgent
     class UnreachableNodeFlowValidationDetails < Struct.new(
       :node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about unsatisfied conditions for a connection. A condition is unsatisfied if it can never be true, for example two branches of condition node cannot be simultaneously true.</p>
@@ -6940,13 +6502,13 @@ module Aws::BedrockAgent
     class UnsatisfiedConnectionConditionsFlowValidationDetails < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an unspecified validation that doesn't fit other categories.</p>
     class UnspecifiedFlowValidationDetails < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6959,12 +6521,12 @@ module Aws::BedrockAgent
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -7013,7 +6575,7 @@ module Aws::BedrockAgent
       :api_schema,
       :function_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_action_group
@@ -7022,7 +6584,7 @@ module Aws::BedrockAgent
     class UpdateAgentActionGroupResponse < Struct.new(
       :agent_action_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -7051,7 +6613,7 @@ module Aws::BedrockAgent
       :routing_configuration,
       :alias_invocation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_alias
@@ -7060,7 +6622,7 @@ module Aws::BedrockAgent
     class UpdateAgentAliasResponse < Struct.new(
       :agent_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -7093,7 +6655,7 @@ module Aws::BedrockAgent
       :collaboration_instruction,
       :relay_conversation_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_collaborator
@@ -7102,7 +6664,7 @@ module Aws::BedrockAgent
     class UpdateAgentCollaboratorResponse < Struct.new(
       :agent_collaborator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -7127,7 +6689,7 @@ module Aws::BedrockAgent
       :description,
       :knowledge_base_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_knowledge_base
@@ -7136,7 +6698,7 @@ module Aws::BedrockAgent
     class UpdateAgentKnowledgeBaseResponse < Struct.new(
       :agent_knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -7197,7 +6759,7 @@ module Aws::BedrockAgent
       :memory_configuration,
       :agent_collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent
@@ -7206,7 +6768,7 @@ module Aws::BedrockAgent
     class UpdateAgentResponse < Struct.new(
       :agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -7243,7 +6805,7 @@ module Aws::BedrockAgent
       :server_side_encryption_configuration,
       :vector_ingestion_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -7252,7 +6814,7 @@ module Aws::BedrockAgent
     class UpdateDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7281,7 +6843,7 @@ module Aws::BedrockAgent
       :flow_identifier,
       :alias_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7322,7 +6884,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7351,7 +6913,7 @@ module Aws::BedrockAgent
       :definition,
       :flow_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7400,7 +6962,7 @@ module Aws::BedrockAgent
       :version,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -7429,7 +6991,7 @@ module Aws::BedrockAgent
       :knowledge_base_configuration,
       :storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -7438,7 +7000,7 @@ module Aws::BedrockAgent
     class UpdateKnowledgeBaseResponse < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7467,7 +7029,7 @@ module Aws::BedrockAgent
       :variants,
       :prompt_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7512,7 +7074,7 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of web URLs that you want to crawl. You should be authorized to crawl the URLs.</p>
@@ -7522,7 +7084,7 @@ module Aws::BedrockAgent
     class UrlConfiguration < Struct.new(
       :seed_urls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -7531,7 +7093,7 @@ module Aws::BedrockAgent
     class ValidateFlowDefinitionRequest < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute validations
@@ -7540,7 +7102,7 @@ module Aws::BedrockAgent
     class ValidateFlowDefinitionResponse < Struct.new(
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input validation failed. Check your request parameters and retry the request.</p>
@@ -7553,7 +7115,7 @@ module Aws::BedrockAgent
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an validation error.</p>
@@ -7567,7 +7129,7 @@ module Aws::BedrockAgent
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about how to ingest the documents in a data source.</p>
@@ -7589,7 +7151,7 @@ module Aws::BedrockAgent
       :parsing_configuration,
       :context_enrichment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the model used to create vector embeddings for the knowledge base.</p>
@@ -7607,7 +7169,7 @@ module Aws::BedrockAgent
       :embedding_model_configuration,
       :supplemental_data_storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the Amazon Bedrock reranker model to improve the relevance of retrieved results.</p>
@@ -7625,7 +7187,7 @@ module Aws::BedrockAgent
       :number_of_reranked_results,
       :metadata_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the Amazon Bedrock model used for reranking retrieved results.</p>
@@ -7639,7 +7201,7 @@ module Aws::BedrockAgent
       :model_arn,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how retrieved results from a knowledge base are reranked to improve relevance.</p>
@@ -7653,11 +7215,7 @@ module Aws::BedrockAgent
       :type,
       :bedrock_reranking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VectorSearchRerankingConfigurationType
-      BEDROCK_RERANKING_MODEL = 'BEDROCK_RERANKING_MODEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of web URLs that you want to crawl. You should be authorized to crawl the URLs.</p>
@@ -7687,7 +7245,7 @@ module Aws::BedrockAgent
       :user_agent,
       :user_agent_header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate limits for the URLs that you want to crawl. You should be authorized to crawl the URLs.</p>
@@ -7701,7 +7259,7 @@ module Aws::BedrockAgent
       :rate_limit,
       :max_pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the web data source.</p>
@@ -7715,12 +7273,7 @@ module Aws::BedrockAgent
       :source_configuration,
       :crawler_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebScopeType
-      HOST_ONLY = 'HOST_ONLY'
-      SUBDOMAINS = 'SUBDOMAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the URL/URLs for the web content that you want to crawl. You should be authorized to crawl the URLs.</p>
@@ -7730,7 +7283,7 @@ module Aws::BedrockAgent
     class WebSourceConfiguration < Struct.new(
       :url_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

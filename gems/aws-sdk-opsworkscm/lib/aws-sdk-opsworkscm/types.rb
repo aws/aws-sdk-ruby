@@ -43,7 +43,7 @@ module Aws::OpsWorksCM
       :maximum,
       :used,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -90,7 +90,7 @@ module Aws::OpsWorksCM
       :node_name,
       :engine_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_association_status_token
@@ -100,7 +100,7 @@ module Aws::OpsWorksCM
     class AssociateNodeResponse < Struct.new(
       :node_association_status_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a single backup.
@@ -252,19 +252,7 @@ module Aws::OpsWorksCM
       :tools_version,
       :user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackupStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      OK = 'OK'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-    end
-
-    module BackupType
-      AUTOMATED = 'AUTOMATED'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -305,7 +293,7 @@ module Aws::OpsWorksCM
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup
@@ -314,7 +302,7 @@ module Aws::OpsWorksCM
     class CreateBackupResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associate_public_ip_address
@@ -563,7 +551,7 @@ module Aws::OpsWorksCM
       :tags,
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -573,7 +561,7 @@ module Aws::OpsWorksCM
     class CreateServerResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -584,12 +572,12 @@ module Aws::OpsWorksCM
     class DeleteBackupRequest < Struct.new(
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBackupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -598,17 +586,17 @@ module Aws::OpsWorksCM
     class DeleteServerRequest < Struct.new(
       :server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountAttributesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -619,7 +607,7 @@ module Aws::OpsWorksCM
     class DescribeAccountAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -642,7 +630,7 @@ module Aws::OpsWorksCM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backups
@@ -656,7 +644,7 @@ module Aws::OpsWorksCM
       :backups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -684,7 +672,7 @@ module Aws::OpsWorksCM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_events
@@ -705,7 +693,7 @@ module Aws::OpsWorksCM
       :server_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_association_status_token
@@ -720,7 +708,7 @@ module Aws::OpsWorksCM
       :node_association_status_token,
       :server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_association_status
@@ -756,7 +744,7 @@ module Aws::OpsWorksCM
       :node_association_status,
       :engine_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -775,7 +763,7 @@ module Aws::OpsWorksCM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute servers
@@ -810,7 +798,7 @@ module Aws::OpsWorksCM
       :servers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -842,7 +830,7 @@ module Aws::OpsWorksCM
       :node_name,
       :engine_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_association_status_token
@@ -854,7 +842,7 @@ module Aws::OpsWorksCM
     class DisassociateNodeResponse < Struct.new(
       :node_association_status_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A name and value pair that is specific to the engine of the server.
@@ -871,7 +859,7 @@ module Aws::OpsWorksCM
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_attribute_name
@@ -914,7 +902,7 @@ module Aws::OpsWorksCM
       :server_name,
       :input_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_attribute
@@ -927,7 +915,7 @@ module Aws::OpsWorksCM
       :engine_attribute,
       :server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This occurs when the provided nextToken is not valid.
@@ -939,7 +927,7 @@ module Aws::OpsWorksCM
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is in a state that does not allow you to perform a specified action.
@@ -952,7 +940,7 @@ module Aws::OpsWorksCM
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit of servers or backups has been reached.
@@ -964,7 +952,7 @@ module Aws::OpsWorksCM
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -991,7 +979,7 @@ module Aws::OpsWorksCM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1004,40 +992,7 @@ module Aws::OpsWorksCM
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-    end
-
-    # <p>The status of the association or disassociation request.
-    #     </p>
-    #          <p class="title">
-    #             <b>Possible values:</b>
-    #          </p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>SUCCESS</code>: The association or disassociation succeeded.
-    #       </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>FAILED</code>: The association or disassociation failed.
-    #       </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>IN_PROGRESS</code>: The association or disassociation is still in progress.
-    #       </p>
-    #             </li>
-    #          </ul>
-    module NodeAssociationStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource cannot be created because it already exists.
@@ -1049,7 +1004,7 @@ module Aws::OpsWorksCM
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist, or access was denied.
@@ -1061,7 +1016,7 @@ module Aws::OpsWorksCM
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -1089,7 +1044,7 @@ module Aws::OpsWorksCM
       :instance_type,
       :key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -1099,7 +1054,7 @@ module Aws::OpsWorksCM
     class RestoreServerResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a configuration management server.
@@ -1276,7 +1231,7 @@ module Aws::OpsWorksCM
       :subnet_ids,
       :server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An event that is related to the server, such as the start of maintenance or backup.
@@ -1301,23 +1256,7 @@ module Aws::OpsWorksCM
       :message,
       :log_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerStatus
-      BACKING_UP = 'BACKING_UP'
-      CONNECTION_LOST = 'CONNECTION_LOST'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      MODIFYING = 'MODIFYING'
-      FAILED = 'FAILED'
-      HEALTHY = 'HEALTHY'
-      RUNNING = 'RUNNING'
-      RESTORING = 'RESTORING'
-      SETUP = 'SETUP'
-      UNDER_MAINTENANCE = 'UNDER_MAINTENANCE'
-      UNHEALTHY = 'UNHEALTHY'
-      TERMINATED = 'TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -1343,7 +1282,7 @@ module Aws::OpsWorksCM
       :server_name,
       :engine_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -1353,7 +1292,7 @@ module Aws::OpsWorksCM
     class StartMaintenanceResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map that contains tag keys and tag values to attach to an OpsWorks for Chef Automate 
@@ -1373,7 +1312,7 @@ module Aws::OpsWorksCM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1406,12 +1345,12 @@ module Aws::OpsWorksCM
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1425,12 +1364,12 @@ module Aws::OpsWorksCM
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_name
@@ -1450,7 +1389,7 @@ module Aws::OpsWorksCM
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -1460,7 +1399,7 @@ module Aws::OpsWorksCM
     class UpdateServerEngineAttributesResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disable_automated_backup
@@ -1501,7 +1440,7 @@ module Aws::OpsWorksCM
       :preferred_maintenance_window,
       :preferred_backup_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -1511,7 +1450,7 @@ module Aws::OpsWorksCM
     class UpdateServerResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the provided request parameters are not valid.
@@ -1523,7 +1462,7 @@ module Aws::OpsWorksCM
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

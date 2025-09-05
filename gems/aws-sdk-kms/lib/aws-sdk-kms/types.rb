@@ -6,15 +6,6 @@ module Aws::KMS
   # This module contains the types returned by client operations.
   module Types
 
-    module AlgorithmSpec
-      RSAES_PKCS1_V1_5 = 'RSAES_PKCS1_V1_5'
-      RSAES_OAEP_SHA_1 = 'RSAES_OAEP_SHA_1'
-      RSAES_OAEP_SHA_256 = 'RSAES_OAEP_SHA_256'
-      RSA_AES_KEY_WRAP_SHA_1 = 'RSA_AES_KEY_WRAP_SHA_1'
-      RSA_AES_KEY_WRAP_SHA_256 = 'RSA_AES_KEY_WRAP_SHA_256'
-      SM2PKE = 'SM2PKE'
-    end
-
     # <p>Contains information about an alias.</p>
     # @!attribute alias_name
     #   <p>String that contains the alias. This value begins with <code>alias/</code>.</p>
@@ -40,7 +31,7 @@ module Aws::KMS
       :creation_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create a resource that already
@@ -50,7 +41,7 @@ module Aws::KMS
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -72,7 +63,7 @@ module Aws::KMS
     class CancelKeyDeletionRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -81,7 +72,7 @@ module Aws::KMS
     class CancelKeyDeletionResponse < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified CloudHSM cluster is already associated with an
@@ -95,7 +86,7 @@ module Aws::KMS
     class CloudHsmClusterInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the associated CloudHSM cluster did not meet the
@@ -135,7 +126,7 @@ module Aws::KMS
     class CloudHsmClusterInvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the CloudHSM cluster associated with the CloudHSM key store is
@@ -147,7 +138,7 @@ module Aws::KMS
     class CloudHsmClusterNotActiveException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because KMS cannot find the CloudHSM cluster with the specified
@@ -157,7 +148,7 @@ module Aws::KMS
     class CloudHsmClusterNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified CloudHSM cluster has a different cluster
@@ -173,7 +164,7 @@ module Aws::KMS
     class CloudHsmClusterNotRelatedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because an automatic rotation of this key is currently in
@@ -183,7 +174,7 @@ module Aws::KMS
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -193,41 +184,12 @@ module Aws::KMS
     class ConnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ConnectCustomKeyStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionErrorCodeType
-      INVALID_CREDENTIALS = 'INVALID_CREDENTIALS'
-      CLUSTER_NOT_FOUND = 'CLUSTER_NOT_FOUND'
-      NETWORK_ERRORS = 'NETWORK_ERRORS'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      INSUFFICIENT_CLOUDHSM_HSMS = 'INSUFFICIENT_CLOUDHSM_HSMS'
-      USER_LOCKED_OUT = 'USER_LOCKED_OUT'
-      USER_NOT_FOUND = 'USER_NOT_FOUND'
-      USER_LOGGED_IN = 'USER_LOGGED_IN'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET = 'INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET'
-      XKS_PROXY_ACCESS_DENIED = 'XKS_PROXY_ACCESS_DENIED'
-      XKS_PROXY_NOT_REACHABLE = 'XKS_PROXY_NOT_REACHABLE'
-      XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND = 'XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND'
-      XKS_PROXY_INVALID_RESPONSE = 'XKS_PROXY_INVALID_RESPONSE'
-      XKS_PROXY_INVALID_CONFIGURATION = 'XKS_PROXY_INVALID_CONFIGURATION'
-      XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION = 'XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION'
-      XKS_PROXY_TIMED_OUT = 'XKS_PROXY_TIMED_OUT'
-      XKS_PROXY_INVALID_TLS_CONFIGURATION = 'XKS_PROXY_INVALID_TLS_CONFIGURATION'
-    end
-
-    module ConnectionStateType
-      CONNECTED = 'CONNECTED'
-      CONNECTING = 'CONNECTING'
-      FAILED = 'FAILED'
-      DISCONNECTED = 'DISCONNECTED'
-      DISCONNECTING = 'DISCONNECTING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -269,7 +231,7 @@ module Aws::KMS
       :alias_name,
       :target_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_name
@@ -431,7 +393,7 @@ module Aws::KMS
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -440,7 +402,7 @@ module Aws::KMS
     class CreateCustomKeyStoreResponse < Struct.new(
       :custom_key_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -555,7 +517,7 @@ module Aws::KMS
       :name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_token
@@ -571,7 +533,7 @@ module Aws::KMS
       :grant_token,
       :grant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -917,7 +879,7 @@ module Aws::KMS
       :multi_region,
       :xks_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_metadata
@@ -926,7 +888,7 @@ module Aws::KMS
     class CreateKeyResponse < Struct.new(
       :key_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the custom key store contains KMS keys. After verifying
@@ -938,7 +900,7 @@ module Aws::KMS
     class CustomKeyStoreHasCMKsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because of the <code>ConnectionState</code> of the custom key
@@ -980,7 +942,7 @@ module Aws::KMS
     class CustomKeyStoreInvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified custom key store name is already assigned
@@ -991,7 +953,7 @@ module Aws::KMS
     class CustomKeyStoreNameInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because KMS cannot find a custom key store with the specified
@@ -1001,12 +963,7 @@ module Aws::KMS
     class CustomKeyStoreNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomKeyStoreType
-      AWS_CLOUDHSM = 'AWS_CLOUDHSM'
-      EXTERNAL_KEY_STORE = 'EXTERNAL_KEY_STORE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about each custom key store in the custom key store list.</p>
@@ -1261,41 +1218,7 @@ module Aws::KMS
       :custom_key_store_type,
       :xks_proxy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @deprecated
-    #   This enum has been deprecated. Instead, use the KeySpec enum.
-    module CustomerMasterKeySpec
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      ECC_NIST_P256 = 'ECC_NIST_P256'
-      ECC_NIST_P384 = 'ECC_NIST_P384'
-      ECC_NIST_P521 = 'ECC_NIST_P521'
-      ECC_SECG_P256K1 = 'ECC_SECG_P256K1'
-      SYMMETRIC_DEFAULT = 'SYMMETRIC_DEFAULT'
-      HMAC_224 = 'HMAC_224'
-      HMAC_256 = 'HMAC_256'
-      HMAC_384 = 'HMAC_384'
-      HMAC_512 = 'HMAC_512'
-      SM2 = 'SM2'
-    end
-
-    module DataKeyPairSpec
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      ECC_NIST_P256 = 'ECC_NIST_P256'
-      ECC_NIST_P384 = 'ECC_NIST_P384'
-      ECC_NIST_P521 = 'ECC_NIST_P521'
-      ECC_SECG_P256K1 = 'ECC_SECG_P256K1'
-      SM2 = 'SM2'
-    end
-
-    module DataKeySpec
-      AES_256 = 'AES_256'
-      AES_128 = 'AES_128'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -1380,7 +1303,7 @@ module Aws::KMS
       :recipient,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1412,7 +1335,7 @@ module Aws::KMS
       :ciphertext_for_recipient,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -1422,7 +1345,7 @@ module Aws::KMS
     class DeleteAliasRequest < Struct.new(
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -1431,12 +1354,12 @@ module Aws::KMS
     class DeleteCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomKeyStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1467,7 +1390,7 @@ module Aws::KMS
       :key_id,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1480,7 +1403,7 @@ module Aws::KMS
       :key_id,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system timed out while trying to fulfill the request. You can retry the
@@ -1490,7 +1413,7 @@ module Aws::KMS
     class DependencyTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1575,7 +1498,7 @@ module Aws::KMS
       :dry_run,
       :recipient,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1614,7 +1537,7 @@ module Aws::KMS
       :key_agreement_algorithm,
       :key_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -1648,7 +1571,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_stores
@@ -1669,7 +1592,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -1713,7 +1636,7 @@ module Aws::KMS
       :key_id,
       :grant_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_metadata
@@ -1722,7 +1645,7 @@ module Aws::KMS
     class DescribeKeyResponse < Struct.new(
       :key_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1744,7 +1667,7 @@ module Aws::KMS
     class DisableKeyRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1769,7 +1692,7 @@ module Aws::KMS
     class DisableKeyRotationRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified KMS key is not enabled.</p>
@@ -1778,7 +1701,7 @@ module Aws::KMS
     class DisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -1787,12 +1710,12 @@ module Aws::KMS
     class DisconnectCustomKeyStoreRequest < Struct.new(
       :custom_key_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisconnectCustomKeyStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request was rejected because the DryRun parameter was specified. </p>
@@ -1801,7 +1724,7 @@ module Aws::KMS
     class DryRunOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1823,7 +1746,7 @@ module Aws::KMS
     class EnableKeyRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1858,7 +1781,7 @@ module Aws::KMS
       :key_id,
       :rotation_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1927,7 +1850,7 @@ module Aws::KMS
       :encryption_algorithm,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -1944,19 +1867,7 @@ module Aws::KMS
       :key_id,
       :encryption_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionAlgorithmSpec
-      SYMMETRIC_DEFAULT = 'SYMMETRIC_DEFAULT'
-      RSAES_OAEP_SHA_1 = 'RSAES_OAEP_SHA_1'
-      RSAES_OAEP_SHA_256 = 'RSAES_OAEP_SHA_256'
-      SM2PKE = 'SM2PKE'
-    end
-
-    module ExpirationModelType
-      KEY_MATERIAL_EXPIRES = 'KEY_MATERIAL_EXPIRES'
-      KEY_MATERIAL_DOES_NOT_EXPIRE = 'KEY_MATERIAL_DOES_NOT_EXPIRE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified import token is expired. Use <a>GetParametersForImport</a> to get a new import token and public key, use the new
@@ -1966,7 +1877,7 @@ module Aws::KMS
     class ExpiredImportTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_context
@@ -2045,7 +1956,7 @@ module Aws::KMS
       :recipient,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute private_key_ciphertext_blob
@@ -2084,7 +1995,7 @@ module Aws::KMS
       :ciphertext_for_recipient,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_context
@@ -2145,7 +2056,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute private_key_ciphertext_blob
@@ -2170,7 +2081,7 @@ module Aws::KMS
       :key_pair_spec,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2256,7 +2167,7 @@ module Aws::KMS
       :recipient,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -2289,7 +2200,7 @@ module Aws::KMS
       :ciphertext_for_recipient,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2355,7 +2266,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -2372,7 +2283,7 @@ module Aws::KMS
       :key_id,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -2410,7 +2321,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mac
@@ -2429,7 +2340,7 @@ module Aws::KMS
       :mac_algorithm,
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute number_of_bytes
@@ -2460,7 +2371,7 @@ module Aws::KMS
       :custom_key_store_id,
       :recipient,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plaintext
@@ -2479,7 +2390,7 @@ module Aws::KMS
       :plaintext,
       :ciphertext_for_recipient,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2507,7 +2418,7 @@ module Aws::KMS
       :key_id,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2520,7 +2431,7 @@ module Aws::KMS
       :policy,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2543,7 +2454,7 @@ module Aws::KMS
     class GetKeyRotationStatusRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_rotation_enabled
@@ -2571,7 +2482,7 @@ module Aws::KMS
       :next_rotation_date,
       :on_demand_rotation_start_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:key_rotation_enabled] = false unless options.key?(:key_rotation_enabled)
@@ -2650,7 +2561,7 @@ module Aws::KMS
       :wrapping_algorithm,
       :wrapping_key_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2675,7 +2586,7 @@ module Aws::KMS
       :public_key,
       :parameters_valid_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2711,7 +2622,7 @@ module Aws::KMS
       :key_id,
       :grant_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2768,7 +2679,7 @@ module Aws::KMS
       :signing_algorithms,
       :key_agreement_algorithms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to allow <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request
@@ -2806,7 +2717,7 @@ module Aws::KMS
       :encryption_context_subset,
       :encryption_context_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a grant.</p>
@@ -2854,27 +2765,7 @@ module Aws::KMS
       :operations,
       :constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GrantOperation
-      Decrypt = 'Decrypt'
-      Encrypt = 'Encrypt'
-      GenerateDataKey = 'GenerateDataKey'
-      GenerateDataKeyWithoutPlaintext = 'GenerateDataKeyWithoutPlaintext'
-      ReEncryptFrom = 'ReEncryptFrom'
-      ReEncryptTo = 'ReEncryptTo'
-      Sign = 'Sign'
-      Verify = 'Verify'
-      GetPublicKey = 'GetPublicKey'
-      CreateGrant = 'CreateGrant'
-      RetireGrant = 'RetireGrant'
-      DescribeKey = 'DescribeKey'
-      GenerateDataKeyPair = 'GenerateDataKeyPair'
-      GenerateDataKeyPairWithoutPlaintext = 'GenerateDataKeyPairWithoutPlaintext'
-      GenerateMac = 'GenerateMac'
-      VerifyMac = 'VerifyMac'
-      DeriveSharedSecret = 'DeriveSharedSecret'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2978,7 +2869,7 @@ module Aws::KMS
       :key_material_description,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -2991,22 +2882,7 @@ module Aws::KMS
       :key_id,
       :key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportState
-      IMPORTED = 'IMPORTED'
-      PENDING_IMPORT = 'PENDING_IMPORT'
-    end
-
-    module ImportType
-      NEW_KEY_MATERIAL = 'NEW_KEY_MATERIAL'
-      EXISTING_KEY_MATERIAL = 'EXISTING_KEY_MATERIAL'
-    end
-
-    module IncludeKeyMaterial
-      ALL_KEY_MATERIAL = 'ALL_KEY_MATERIAL'
-      ROTATIONS_ONLY = 'ROTATIONS_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified KMS key cannot decrypt the data. The
@@ -3018,7 +2894,7 @@ module Aws::KMS
     class IncorrectKeyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the key material in the request is, expired, invalid, or
@@ -3030,7 +2906,7 @@ module Aws::KMS
     class IncorrectKeyMaterialException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the trust anchor certificate in the request to create an
@@ -3042,7 +2918,7 @@ module Aws::KMS
     class IncorrectTrustAnchorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified alias name is not valid.</p>
@@ -3051,7 +2927,7 @@ module Aws::KMS
     class InvalidAliasNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a specified ARN, or an ARN in a key policy, is not
@@ -3061,7 +2937,7 @@ module Aws::KMS
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>From the <a>Decrypt</a> or <a>ReEncrypt</a> operation, the request
@@ -3075,7 +2951,7 @@ module Aws::KMS
     class InvalidCiphertextException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified <code>GrantId</code> is not valid.</p>
@@ -3084,7 +2960,7 @@ module Aws::KMS
     class InvalidGrantIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified grant token is not valid.</p>
@@ -3093,7 +2969,7 @@ module Aws::KMS
     class InvalidGrantTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the provided import token is invalid or is associated
@@ -3103,7 +2979,7 @@ module Aws::KMS
     class InvalidImportTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected for one of the following reasons: </p>
@@ -3131,7 +3007,7 @@ module Aws::KMS
     class InvalidKeyUsageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the marker that specifies where pagination should next
@@ -3141,7 +3017,7 @@ module Aws::KMS
     class InvalidMarkerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because an internal exception occurred. The request can be
@@ -3151,7 +3027,7 @@ module Aws::KMS
     class KMSInternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the HMAC verification failed. HMAC verification fails
@@ -3162,7 +3038,7 @@ module Aws::KMS
     class KMSInvalidMacException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the signature verification failed. Signature verification
@@ -3173,7 +3049,7 @@ module Aws::KMS
     class KMSInvalidSignatureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the state of the specified resource is not valid for this
@@ -3199,15 +3075,7 @@ module Aws::KMS
     class KMSInvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyAgreementAlgorithmSpec
-      ECDH = 'ECDH'
-    end
-
-    module KeyEncryptionMechanism
-      RSAES_OAEP_SHA_256 = 'RSAES_OAEP_SHA_256'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about each entry in the key list.</p>
@@ -3221,18 +3089,7 @@ module Aws::KMS
       :key_id,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyManagerType
-      AWS = 'AWS'
-      CUSTOMER = 'CUSTOMER'
-    end
-
-    module KeyMaterialState
-      NON_CURRENT = 'NON_CURRENT'
-      CURRENT = 'CURRENT'
-      PENDING_ROTATION = 'PENDING_ROTATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a KMS key.</p>
@@ -3421,42 +3278,12 @@ module Aws::KMS
       :xks_key_configuration,
       :current_key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module KeySpec
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      ECC_NIST_P256 = 'ECC_NIST_P256'
-      ECC_NIST_P384 = 'ECC_NIST_P384'
-      ECC_NIST_P521 = 'ECC_NIST_P521'
-      ECC_SECG_P256K1 = 'ECC_SECG_P256K1'
-      SYMMETRIC_DEFAULT = 'SYMMETRIC_DEFAULT'
-      HMAC_224 = 'HMAC_224'
-      HMAC_256 = 'HMAC_256'
-      HMAC_384 = 'HMAC_384'
-      HMAC_512 = 'HMAC_512'
-      SM2 = 'SM2'
-      ML_DSA_44 = 'ML_DSA_44'
-      ML_DSA_65 = 'ML_DSA_65'
-      ML_DSA_87 = 'ML_DSA_87'
-    end
-
-    module KeyState
-      Creating = 'Creating'
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-      PendingDeletion = 'PendingDeletion'
-      PendingImport = 'PendingImport'
-      PendingReplicaDeletion = 'PendingReplicaDeletion'
-      Unavailable = 'Unavailable'
-      Updating = 'Updating'
     end
 
     # <p>The request was rejected because the specified KMS key was not available. You can retry
@@ -3466,14 +3293,7 @@ module Aws::KMS
     class KeyUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyUsageType
-      SIGN_VERIFY = 'SIGN_VERIFY'
-      ENCRYPT_DECRYPT = 'ENCRYPT_DECRYPT'
-      GENERATE_VERIFY_MAC = 'GENERATE_VERIFY_MAC'
-      KEY_AGREEMENT = 'KEY_AGREEMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a length constraint or quota was exceeded. For more
@@ -3484,7 +3304,7 @@ module Aws::KMS
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -3523,7 +3343,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aliases
@@ -3544,7 +3364,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3570,7 +3390,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3622,7 +3442,7 @@ module Aws::KMS
       :grant_id,
       :grantee_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -3659,7 +3479,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_names
@@ -3680,7 +3500,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3731,7 +3551,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rotations
@@ -3755,7 +3575,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3779,7 +3599,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute keys
@@ -3800,7 +3620,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3843,7 +3663,7 @@ module Aws::KMS
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3868,7 +3688,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3894,7 +3714,7 @@ module Aws::KMS
       :next_marker,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -3929,14 +3749,7 @@ module Aws::KMS
       :marker,
       :retiring_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MacAlgorithmSpec
-      HMAC_SHA_224 = 'HMAC_SHA_224'
-      HMAC_SHA_256 = 'HMAC_SHA_256'
-      HMAC_SHA_384 = 'HMAC_SHA_384'
-      HMAC_SHA_512 = 'HMAC_SHA_512'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified policy is not syntactically or semantically
@@ -3946,13 +3759,7 @@ module Aws::KMS
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageType
-      RAW = 'RAW'
-      DIGEST = 'DIGEST'
-      EXTERNAL_MU = 'EXTERNAL_MU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of this multi-Region key. This field appears only when the KMS
@@ -3976,7 +3783,7 @@ module Aws::KMS
       :primary_key,
       :replica_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the primary or replica key in a multi-Region key.</p>
@@ -3990,12 +3797,7 @@ module Aws::KMS
       :arn,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MultiRegionKeyType
-      PRIMARY = 'PRIMARY'
-      REPLICA = 'REPLICA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified entity or resource could not be
@@ -4005,14 +3807,7 @@ module Aws::KMS
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginType
-      AWS_KMS = 'AWS_KMS'
-      EXTERNAL = 'EXTERNAL'
-      AWS_CLOUDHSM = 'AWS_CLOUDHSM'
-      EXTERNAL_KEY_STORE = 'EXTERNAL_KEY_STORE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4101,7 +3896,7 @@ module Aws::KMS
       :policy,
       :bypass_policy_lockout_safety_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -4225,7 +4020,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ciphertext_blob
@@ -4261,7 +4056,7 @@ module Aws::KMS
       :source_key_material_id,
       :destination_key_material_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the party that receives the response from the API
@@ -4281,7 +4076,7 @@ module Aws::KMS
       :key_encryption_algorithm,
       :attestation_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4406,7 +4201,7 @@ module Aws::KMS
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replica_key_metadata
@@ -4427,7 +4222,7 @@ module Aws::KMS
       :replica_policy,
       :replica_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_token
@@ -4462,7 +4257,7 @@ module Aws::KMS
       :grant_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4496,7 +4291,7 @@ module Aws::KMS
       :grant_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4522,7 +4317,7 @@ module Aws::KMS
     class RotateKeyOnDemandRequest < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4532,12 +4327,7 @@ module Aws::KMS
     class RotateKeyOnDemandResponse < Struct.new(
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RotationType
-      AUTOMATIC = 'AUTOMATIC'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each entry contains information about one of the key materials associated with a KMS
@@ -4602,7 +4392,7 @@ module Aws::KMS
       :rotation_date,
       :rotation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4638,7 +4428,7 @@ module Aws::KMS
       :key_id,
       :pending_window_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4667,7 +4457,7 @@ module Aws::KMS
       :key_state,
       :pending_window_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4771,7 +4561,7 @@ module Aws::KMS
       :signing_algorithm,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4803,21 +4593,7 @@ module Aws::KMS
       :signature,
       :signing_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SigningAlgorithmSpec
-      RSASSA_PSS_SHA_256 = 'RSASSA_PSS_SHA_256'
-      RSASSA_PSS_SHA_384 = 'RSASSA_PSS_SHA_384'
-      RSASSA_PSS_SHA_512 = 'RSASSA_PSS_SHA_512'
-      RSASSA_PKCS1_V1_5_SHA_256 = 'RSASSA_PKCS1_V1_5_SHA_256'
-      RSASSA_PKCS1_V1_5_SHA_384 = 'RSASSA_PKCS1_V1_5_SHA_384'
-      RSASSA_PKCS1_V1_5_SHA_512 = 'RSASSA_PKCS1_V1_5_SHA_512'
-      ECDSA_SHA_256 = 'ECDSA_SHA_256'
-      ECDSA_SHA_384 = 'ECDSA_SHA_384'
-      ECDSA_SHA_512 = 'ECDSA_SHA_512'
-      SM2DSA = 'SM2DSA'
-      ML_DSA_SHAKE_256 = 'ML_DSA_SHAKE_256'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are
@@ -4837,7 +4613,7 @@ module Aws::KMS
       :tag_key,
       :tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because one or more tags are not valid.</p>
@@ -4846,7 +4622,7 @@ module Aws::KMS
     class TagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4879,7 +4655,7 @@ module Aws::KMS
       :key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a specified parameter is not supported or a specified
@@ -4889,7 +4665,7 @@ module Aws::KMS
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -4915,7 +4691,7 @@ module Aws::KMS
       :key_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -4951,7 +4727,7 @@ module Aws::KMS
       :alias_name,
       :target_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_key_store_id
@@ -5056,12 +4832,12 @@ module Aws::KMS
       :xks_proxy_authentication_credential,
       :xks_proxy_connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCustomKeyStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -5090,7 +4866,7 @@ module Aws::KMS
       :key_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -5121,7 +4897,7 @@ module Aws::KMS
       :key_id,
       :primary_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -5164,7 +4940,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -5187,7 +4963,7 @@ module Aws::KMS
       :mac_valid,
       :mac_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mac_valid] = false unless options.key?(:mac_valid)
@@ -5301,7 +5077,7 @@ module Aws::KMS
       :grant_tokens,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -5322,19 +5098,12 @@ module Aws::KMS
       :signature_valid,
       :signing_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:signature_valid] = false unless options.key?(:signature_valid)
         super
       end
-    end
-
-    module WrappingKeySpec
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      SM2 = 'SM2'
     end
 
     # <p>The request was rejected because the (<code>XksKeyId</code>) is already associated with
@@ -5345,7 +5114,7 @@ module Aws::KMS
     class XksKeyAlreadyInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key">external key </a>that is
@@ -5364,7 +5133,7 @@ module Aws::KMS
     class XksKeyConfigurationType < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the external key specified by the <code>XksKeyId</code>
@@ -5376,7 +5145,7 @@ module Aws::KMS
     class XksKeyInvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the external key store proxy could not find the external
@@ -5391,7 +5160,7 @@ module Aws::KMS
     class XksKeyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>KMS uses the authentication credential to sign requests that it sends to the external
@@ -5409,7 +5178,7 @@ module Aws::KMS
       :access_key_id,
       :raw_secret_access_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the external key store proxy (XKS proxy). Your external key
@@ -5445,12 +5214,7 @@ module Aws::KMS
       :uri_path,
       :vpc_endpoint_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module XksProxyConnectivityType
-      PUBLIC_ENDPOINT = 'PUBLIC_ENDPOINT'
-      VPC_ENDPOINT_SERVICE = 'VPC_ENDPOINT_SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the proxy credentials failed to authenticate to the
@@ -5462,7 +5226,7 @@ module Aws::KMS
     class XksProxyIncorrectAuthenticationCredentialException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the external key store proxy is not configured correctly.
@@ -5472,7 +5236,7 @@ module Aws::KMS
     class XksProxyInvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5484,7 +5248,7 @@ module Aws::KMS
     class XksProxyInvalidResponseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already
@@ -5495,7 +5259,7 @@ module Aws::KMS
     class XksProxyUriEndpointInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>
@@ -5507,7 +5271,7 @@ module Aws::KMS
     class XksProxyUriInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>KMS was unable to reach the specified <code>XksProxyUriPath</code>. The path must be
@@ -5520,7 +5284,7 @@ module Aws::KMS
     class XksProxyUriUnreachableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified Amazon VPC endpoint service is already
@@ -5531,7 +5295,7 @@ module Aws::KMS
     class XksProxyVpcEndpointServiceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill
@@ -5544,7 +5308,7 @@ module Aws::KMS
     class XksProxyVpcEndpointServiceInvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because KMS could not find the specified VPC endpoint service.
@@ -5557,7 +5321,7 @@ module Aws::KMS
     class XksProxyVpcEndpointServiceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

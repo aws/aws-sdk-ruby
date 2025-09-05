@@ -22,7 +22,7 @@ module Aws::AuditManager
       :email_address,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An Amazon Web Services service such as Amazon S3 or CloudTrail.
@@ -47,7 +47,7 @@ module Aws::AuditManager
     class AWSService < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Your account isn't registered with Audit Manager. Check the delegated
@@ -57,24 +57,7 @@ module Aws::AuditManager
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      PENDING_ACTIVATION = 'PENDING_ACTIVATION'
-    end
-
-    module ActionEnum
-      CREATE = 'CREATE'
-      UPDATE_METADATA = 'UPDATE_METADATA'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DELETE = 'DELETE'
-      UNDER_REVIEW = 'UNDER_REVIEW'
-      REVIEWED = 'REVIEWED'
-      IMPORT_EVIDENCE = 'IMPORT_EVIDENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An entity that defines the scope of audit evidence collected by Audit Manager.
@@ -101,7 +84,7 @@ module Aws::AuditManager
       :framework,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The control entity that represents a standard control or a custom control in an Audit Manager assessment. </p>
@@ -146,7 +129,7 @@ module Aws::AuditManager
       :evidence_count,
       :assessment_report_evidence_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evidence_count] = 0 unless options.key?(:evidence_count)
@@ -193,7 +176,7 @@ module Aws::AuditManager
       :system_evidence_count,
       :manual_evidence_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:system_evidence_count] = 0 unless options.key?(:system_evidence_count)
@@ -284,7 +267,7 @@ module Aws::AuditManager
       :evidence_by_type_user_activity_count,
       :evidence_aws_service_source_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_evidence] = 0 unless options.key?(:total_evidence)
@@ -321,7 +304,7 @@ module Aws::AuditManager
       :metadata,
       :control_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata that's associated with a standard framework or a custom framework. </p>
@@ -372,7 +355,7 @@ module Aws::AuditManager
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:controls_count] = 0 unless options.key?(:controls_count)
@@ -445,7 +428,7 @@ module Aws::AuditManager
       :custom_controls_count,
       :compliance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata that's associated with the specified assessment. </p>
@@ -497,7 +480,7 @@ module Aws::AuditManager
       :creation_time,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A metadata object that's associated with an assessment in Audit Manager.
@@ -537,7 +520,7 @@ module Aws::AuditManager
       :creation_time,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A finalized document that's generated from an Audit Manager assessment. These
@@ -582,11 +565,7 @@ module Aws::AuditManager
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentReportDestinationType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error entity for assessment report evidence errors. This is used to provide more
@@ -605,7 +584,7 @@ module Aws::AuditManager
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata objects that are associated with the specified assessment report. </p>
@@ -643,13 +622,7 @@ module Aws::AuditManager
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentReportStatus
-      COMPLETE = 'COMPLETE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The location where Audit Manager saves assessment reports for the given
@@ -665,12 +638,7 @@ module Aws::AuditManager
       :destination_type,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -683,12 +651,12 @@ module Aws::AuditManager
       :assessment_id,
       :evidence_folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateAssessmentReportEvidenceFolderResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -705,7 +673,7 @@ module Aws::AuditManager
       :evidence_folder_id,
       :evidence_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence_ids
@@ -719,7 +687,7 @@ module Aws::AuditManager
       :evidence_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error entity for the <code>BatchCreateDelegationByAssessment</code> API. This is
@@ -740,7 +708,7 @@ module Aws::AuditManager
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_delegation_requests
@@ -753,7 +721,7 @@ module Aws::AuditManager
       :create_delegation_requests,
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegations
@@ -767,7 +735,7 @@ module Aws::AuditManager
       :delegations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error entity for the <code>BatchDeleteDelegationByAssessment</code> API. This is
@@ -788,7 +756,7 @@ module Aws::AuditManager
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegation_ids
@@ -801,7 +769,7 @@ module Aws::AuditManager
       :delegation_ids,
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -811,7 +779,7 @@ module Aws::AuditManager
     class BatchDeleteDelegationByAssessmentResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -828,7 +796,7 @@ module Aws::AuditManager
       :evidence_folder_id,
       :evidence_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence_ids
@@ -842,7 +810,7 @@ module Aws::AuditManager
       :evidence_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error entity for the <code>BatchImportEvidenceToAssessmentControl</code> API. This
@@ -863,7 +831,7 @@ module Aws::AuditManager
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -884,7 +852,7 @@ module Aws::AuditManager
       :control_id,
       :manual_evidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -894,7 +862,7 @@ module Aws::AuditManager
     class BatchImportEvidenceToAssessmentControlResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The record of a change within Audit Manager. For example, this could be the
@@ -922,7 +890,7 @@ module Aws::AuditManager
       :created_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A control in Audit Manager. </p>
@@ -997,7 +965,7 @@ module Aws::AuditManager
       :tags,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A comment that's posted by a user on a control. This includes the author's name, the
@@ -1016,7 +984,7 @@ module Aws::AuditManager
       :comment_body,
       :posted_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the latest analytics data for a specific control domain.</p>
@@ -1055,7 +1023,7 @@ module Aws::AuditManager
       :evidence_insights,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the latest analytics data for a specific control in a specific active
@@ -1085,7 +1053,7 @@ module Aws::AuditManager
       :control_set_name,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the latest analytics data for a specific control. </p>
@@ -1111,7 +1079,7 @@ module Aws::AuditManager
       :evidence_insights,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The data source that determines where Audit Manager collects evidence from for
@@ -1195,7 +1163,7 @@ module Aws::AuditManager
       :source_frequency,
       :troubleshooting_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata that's associated with the standard control or custom control. </p>
@@ -1226,14 +1194,7 @@ module Aws::AuditManager
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlResponse
-      MANUAL = 'MANUAL'
-      AUTOMATE = 'AUTOMATE'
-      DEFER = 'DEFER'
-      IGNORE = 'IGNORE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A set of controls in Audit Manager. </p>
@@ -1252,30 +1213,7 @@ module Aws::AuditManager
       :name,
       :controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlSetStatus
-      ACTIVE = 'ACTIVE'
-      UNDER_REVIEW = 'UNDER_REVIEW'
-      REVIEWED = 'REVIEWED'
-    end
-
-    module ControlState
-      ACTIVE = 'ACTIVE'
-      END_OF_SUPPORT = 'END_OF_SUPPORT'
-    end
-
-    module ControlStatus
-      UNDER_REVIEW = 'UNDER_REVIEW'
-      REVIEWED = 'REVIEWED'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module ControlType
-      STANDARD = 'Standard'
-      CUSTOM = 'Custom'
-      CORE = 'Core'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The control entity attributes that uniquely identify an existing control to be added to
@@ -1286,7 +1224,7 @@ module Aws::AuditManager
     class CreateAssessmentFrameworkControl < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This doesn't contain the control set ID. </p>
@@ -1301,7 +1239,7 @@ module Aws::AuditManager
       :name,
       :controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1331,7 +1269,7 @@ module Aws::AuditManager
       :control_sets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework
@@ -1340,7 +1278,7 @@ module Aws::AuditManager
     class CreateAssessmentFrameworkResponse < Struct.new(
       :framework,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1370,7 +1308,7 @@ module Aws::AuditManager
       :assessment_id,
       :query_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_report
@@ -1380,7 +1318,7 @@ module Aws::AuditManager
     class CreateAssessmentReportResponse < Struct.new(
       :assessment_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1425,7 +1363,7 @@ module Aws::AuditManager
       :framework_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -1435,7 +1373,7 @@ module Aws::AuditManager
     class CreateAssessmentResponse < Struct.new(
       :assessment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mapping attributes that determine the evidence source for a given control, along
@@ -1516,7 +1454,7 @@ module Aws::AuditManager
       :source_frequency,
       :troubleshooting_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1549,7 +1487,7 @@ module Aws::AuditManager
       :control_mapping_sources,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control
@@ -1558,7 +1496,7 @@ module Aws::AuditManager
     class CreateControlResponse < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A collection of attributes that's used to create a delegation for an assessment in
@@ -1589,15 +1527,7 @@ module Aws::AuditManager
       :role_arn,
       :role_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceType
-      AWS_CLOUDTRAIL = 'AWS_Cloudtrail'
-      AWS_CONFIG = 'AWS_Config'
-      AWS_SECURITY_HUB = 'AWS_Security_Hub'
-      AWS_API_CALL = 'AWS_API_Call'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default s3 bucket where Audit Manager saves the files that you export from evidence finder.</p>
@@ -1611,7 +1541,7 @@ module Aws::AuditManager
       :destination_type,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The assignment of a control set to a delegate for review. </p>
@@ -1670,7 +1600,7 @@ module Aws::AuditManager
       :comment,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata that's associated with the delegation. </p>
@@ -1704,13 +1634,7 @@ module Aws::AuditManager
       :creation_time,
       :control_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DelegationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      UNDER_REVIEW = 'UNDER_REVIEW'
-      COMPLETE = 'COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_id
@@ -1719,12 +1643,12 @@ module Aws::AuditManager
     class DeleteAssessmentFrameworkRequest < Struct.new(
       :framework_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentFrameworkResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1737,12 +1661,12 @@ module Aws::AuditManager
       :request_id,
       :request_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentFrameworkShareResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1755,12 +1679,12 @@ module Aws::AuditManager
       :assessment_id,
       :assessment_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentReportResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1769,12 +1693,12 @@ module Aws::AuditManager
     class DeleteAssessmentRequest < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssessmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_id
@@ -1783,22 +1707,17 @@ module Aws::AuditManager
     class DeleteControlRequest < Struct.new(
       :control_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteControlResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteResources
-      ALL = 'ALL'
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1807,7 +1726,7 @@ module Aws::AuditManager
     class DeregisterAccountResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -1816,12 +1735,12 @@ module Aws::AuditManager
     class DeregisterOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deregistration policy for the data that's stored in Audit Manager. You can
@@ -1858,7 +1777,7 @@ module Aws::AuditManager
     class DeregistrationPolicy < Struct.new(
       :delete_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1871,12 +1790,12 @@ module Aws::AuditManager
       :assessment_id,
       :evidence_folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAssessmentReportEvidenceFolderResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A record that contains the information needed to demonstrate compliance with the
@@ -1969,13 +1888,7 @@ module Aws::AuditManager
       :id,
       :assessment_report_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvidenceFinderBackfillStatus
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings object that specifies whether evidence finder is enabled. This object also
@@ -2046,14 +1959,7 @@ module Aws::AuditManager
       :backfill_status,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvidenceFinderEnablementStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ENABLE_IN_PROGRESS = 'ENABLE_IN_PROGRESS'
-      DISABLE_IN_PROGRESS = 'DISABLE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A breakdown of the latest compliance check status for the evidence in your Audit Manager assessments. </p>
@@ -2085,11 +1991,7 @@ module Aws::AuditManager
       :compliant_evidence_count,
       :inconclusive_evidence_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportDestinationType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The file that's used to structure and automate Audit Manager assessments for a
@@ -2163,7 +2065,7 @@ module Aws::AuditManager
       :last_updated_by,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata of a framework, such as the name, ID, or description. </p>
@@ -2186,17 +2088,12 @@ module Aws::AuditManager
       :logo,
       :compliance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FrameworkType
-      STANDARD = 'Standard'
-      CUSTOM = 'Custom'
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountStatusRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2205,7 +2102,7 @@ module Aws::AuditManager
     class GetAccountStatusResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_id
@@ -2214,7 +2111,7 @@ module Aws::AuditManager
     class GetAssessmentFrameworkRequest < Struct.new(
       :framework_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework
@@ -2228,7 +2125,7 @@ module Aws::AuditManager
     class GetAssessmentFrameworkResponse < Struct.new(
       :framework,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_report_id
@@ -2241,7 +2138,7 @@ module Aws::AuditManager
       :assessment_report_id,
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pre_signed_url
@@ -2251,7 +2148,7 @@ module Aws::AuditManager
     class GetAssessmentReportUrlResponse < Struct.new(
       :pre_signed_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2260,7 +2157,7 @@ module Aws::AuditManager
     class GetAssessmentRequest < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -2275,7 +2172,7 @@ module Aws::AuditManager
       :assessment,
       :user_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2300,7 +2197,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_logs
@@ -2313,7 +2210,7 @@ module Aws::AuditManager
       :change_logs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_id
@@ -2322,7 +2219,7 @@ module Aws::AuditManager
     class GetControlRequest < Struct.new(
       :control_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control
@@ -2331,7 +2228,7 @@ module Aws::AuditManager
     class GetControlResponse < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2344,7 +2241,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegations
@@ -2357,7 +2254,7 @@ module Aws::AuditManager
       :delegations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2382,7 +2279,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence
@@ -2396,7 +2293,7 @@ module Aws::AuditManager
       :evidence,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_name
@@ -2406,7 +2303,7 @@ module Aws::AuditManager
     class GetEvidenceFileUploadUrlRequest < Struct.new(
       :file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -2421,7 +2318,7 @@ module Aws::AuditManager
       :evidence_file_name,
       :upload_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2438,7 +2335,7 @@ module Aws::AuditManager
       :control_set_id,
       :evidence_folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence_folder
@@ -2447,7 +2344,7 @@ module Aws::AuditManager
     class GetEvidenceFolderResponse < Struct.new(
       :evidence_folder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2472,7 +2369,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence_folders
@@ -2486,7 +2383,7 @@ module Aws::AuditManager
       :evidence_folders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2503,7 +2400,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence_folders
@@ -2517,7 +2414,7 @@ module Aws::AuditManager
       :evidence_folders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2538,7 +2435,7 @@ module Aws::AuditManager
       :evidence_folder_id,
       :evidence_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evidence
@@ -2547,7 +2444,7 @@ module Aws::AuditManager
     class GetEvidenceResponse < Struct.new(
       :evidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2556,7 +2453,7 @@ module Aws::AuditManager
     class GetInsightsByAssessmentRequest < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insights
@@ -2566,12 +2463,12 @@ module Aws::AuditManager
     class GetInsightsByAssessmentResponse < Struct.new(
       :insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetInsightsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insights
@@ -2580,12 +2477,12 @@ module Aws::AuditManager
     class GetInsightsResponse < Struct.new(
       :insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetOrganizationAdminAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -2598,12 +2495,12 @@ module Aws::AuditManager
       :admin_account_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetServicesInScopeRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_metadata
@@ -2612,7 +2509,7 @@ module Aws::AuditManager
     class GetServicesInScopeResponse < Struct.new(
       :service_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -2621,7 +2518,7 @@ module Aws::AuditManager
     class GetSettingsRequest < Struct.new(
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute settings
@@ -2630,7 +2527,7 @@ module Aws::AuditManager
     class GetSettingsResponse < Struct.new(
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the latest analytics data for all your active assessments. </p>
@@ -2706,7 +2603,7 @@ module Aws::AuditManager
       :total_assessment_controls_count,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the latest analytics data for a specific active assessment.</p>
@@ -2780,7 +2677,7 @@ module Aws::AuditManager
       :total_assessment_controls_count,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An internal service error occurred during the processing of your request. Try again
@@ -2790,13 +2687,7 @@ module Aws::AuditManager
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeywordInputType
-      SELECT_FROM_LIST = 'SELECT_FROM_LIST'
-      UPLOAD_FILE = 'UPLOAD_FILE'
-      INPUT_TEXT = 'INPUT_TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_domain_id
@@ -2823,7 +2714,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_insights_by_assessment
@@ -2837,7 +2728,7 @@ module Aws::AuditManager
       :control_insights_by_assessment,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_type
@@ -2854,7 +2745,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_framework_share_requests
@@ -2868,7 +2759,7 @@ module Aws::AuditManager
       :assessment_framework_share_requests,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_type
@@ -2885,7 +2776,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_metadata_list
@@ -2899,7 +2790,7 @@ module Aws::AuditManager
       :framework_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2912,7 +2803,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_reports
@@ -2926,7 +2817,7 @@ module Aws::AuditManager
       :assessment_reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2943,7 +2834,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_metadata
@@ -2957,7 +2848,7 @@ module Aws::AuditManager
       :assessment_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -2974,7 +2865,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_domain_insights
@@ -2988,7 +2879,7 @@ module Aws::AuditManager
       :control_domain_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3001,7 +2892,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_domain_insights
@@ -3015,7 +2906,7 @@ module Aws::AuditManager
       :control_domain_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_domain_id
@@ -3038,7 +2929,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_insights_metadata
@@ -3052,7 +2943,7 @@ module Aws::AuditManager
       :control_insights_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_type
@@ -3092,7 +2983,7 @@ module Aws::AuditManager
       :max_results,
       :control_catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_metadata_list
@@ -3106,7 +2997,7 @@ module Aws::AuditManager
       :control_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -3123,7 +3014,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute keywords
@@ -3136,7 +3027,7 @@ module Aws::AuditManager
       :keywords,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3149,7 +3040,7 @@ module Aws::AuditManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notifications
@@ -3162,7 +3053,7 @@ module Aws::AuditManager
       :notifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3171,7 +3062,7 @@ module Aws::AuditManager
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3180,7 +3071,7 @@ module Aws::AuditManager
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Evidence that's manually added to a control in Audit Manager.
@@ -3203,7 +3094,7 @@ module Aws::AuditManager
       :text_response,
       :evidence_file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The notification that informs a user of an update in Audit Manager. For
@@ -3243,15 +3134,7 @@ module Aws::AuditManager
       :event_time,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObjectTypeEnum
-      ASSESSMENT = 'ASSESSMENT'
-      CONTROL_SET = 'CONTROL_SET'
-      CONTROL = 'CONTROL'
-      DELEGATION = 'DELEGATION'
-      ASSESSMENT_REPORT = 'ASSESSMENT_REPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key
@@ -3264,7 +3147,7 @@ module Aws::AuditManager
       :kms_key,
       :delegated_admin_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3273,7 +3156,7 @@ module Aws::AuditManager
     class RegisterAccountResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -3282,7 +3165,7 @@ module Aws::AuditManager
     class RegisterOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -3295,7 +3178,7 @@ module Aws::AuditManager
       :admin_account_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A system asset that's evaluated in an Audit Manager assessment. </p>
@@ -3333,7 +3216,7 @@ module Aws::AuditManager
       :value,
       :compliance_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The resource that's specified in the request can't be found. </p>
@@ -3350,7 +3233,7 @@ module Aws::AuditManager
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The wrapper that contains the Audit Manager role information of the current user.
@@ -3373,12 +3256,7 @@ module Aws::AuditManager
       :role_type,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoleType
-      PROCESS_OWNER = 'PROCESS_OWNER'
-      RESOURCE_OWNER = 'RESOURCE_OWNER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The wrapper that contains the Amazon Web Services accounts that are in
@@ -3413,7 +3291,7 @@ module Aws::AuditManager
       :aws_accounts,
       :aws_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata that's associated with the Amazon Web Services service. </p>
@@ -3436,7 +3314,7 @@ module Aws::AuditManager
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached your account quota for this resource type. To perform the requested
@@ -3448,18 +3326,7 @@ module Aws::AuditManager
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SettingAttribute
-      ALL = 'ALL'
-      IS_AWS_ORG_ENABLED = 'IS_AWS_ORG_ENABLED'
-      SNS_TOPIC = 'SNS_TOPIC'
-      DEFAULT_ASSESSMENT_REPORTS_DESTINATION = 'DEFAULT_ASSESSMENT_REPORTS_DESTINATION'
-      DEFAULT_PROCESS_OWNERS = 'DEFAULT_PROCESS_OWNERS'
-      EVIDENCE_FINDER_ENABLEMENT = 'EVIDENCE_FINDER_ENABLEMENT'
-      DEREGISTRATION_POLICY = 'DEREGISTRATION_POLICY'
-      DEFAULT_EXPORT_DESTINATION = 'DEFAULT_EXPORT_DESTINATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings object that holds all supported Audit Manager settings. </p>
@@ -3498,35 +3365,7 @@ module Aws::AuditManager
       :deregistration_policy,
       :default_export_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareRequestAction
-      ACCEPT = 'ACCEPT'
-      DECLINE = 'DECLINE'
-      REVOKE = 'REVOKE'
-    end
-
-    module ShareRequestStatus
-      ACTIVE = 'ACTIVE'
-      REPLICATING = 'REPLICATING'
-      SHARED = 'SHARED'
-      EXPIRING = 'EXPIRING'
-      FAILED = 'FAILED'
-      EXPIRED = 'EXPIRED'
-      DECLINED = 'DECLINED'
-      REVOKED = 'REVOKED'
-    end
-
-    module ShareRequestType
-      SENT = 'SENT'
-      RECEIVED = 'RECEIVED'
-    end
-
-    module SourceFrequency
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A keyword that relates to the control data source.</p>
@@ -3704,22 +3543,7 @@ module Aws::AuditManager
       :keyword_input_type,
       :keyword_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceSetUpOption
-      SYSTEM_CONTROLS_MAPPING = 'System_Controls_Mapping'
-      PROCEDURAL_CONTROLS_MAPPING = 'Procedural_Controls_Mapping'
-    end
-
-    module SourceType
-      AWS_CLOUDTRAIL = 'AWS_Cloudtrail'
-      AWS_CONFIG = 'AWS_Config'
-      AWS_SECURITY_HUB = 'AWS_Security_Hub'
-      AWS_API_CALL = 'AWS_API_Call'
-      MANUAL = 'MANUAL'
-      COMMON_CONTROL = 'Common_Control'
-      CORE_CONTROL = 'Core_Control'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_id
@@ -3740,7 +3564,7 @@ module Aws::AuditManager
       :destination_region,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_framework_share_request
@@ -3750,7 +3574,7 @@ module Aws::AuditManager
     class StartAssessmentFrameworkShareResponse < Struct.new(
       :assessment_framework_share_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3763,12 +3587,12 @@ module Aws::AuditManager
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -3777,7 +3601,7 @@ module Aws::AuditManager
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Short for uniform resource locator. A URL is used as a unique identifier to locate a
@@ -3792,7 +3616,7 @@ module Aws::AuditManager
       :hyperlink_name,
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3805,12 +3629,12 @@ module Aws::AuditManager
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -3835,7 +3659,7 @@ module Aws::AuditManager
       :control_status,
       :comment_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control
@@ -3845,7 +3669,7 @@ module Aws::AuditManager
     class UpdateAssessmentControlResponse < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -3866,7 +3690,7 @@ module Aws::AuditManager
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_set
@@ -3876,7 +3700,7 @@ module Aws::AuditManager
     class UpdateAssessmentControlSetStatusResponse < Struct.new(
       :control_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This doesn't contain the control set ID. </p>
@@ -3894,7 +3718,7 @@ module Aws::AuditManager
       :name,
       :controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework_id
@@ -3924,7 +3748,7 @@ module Aws::AuditManager
       :compliance_type,
       :control_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute framework
@@ -3933,7 +3757,7 @@ module Aws::AuditManager
     class UpdateAssessmentFrameworkResponse < Struct.new(
       :framework,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -3950,7 +3774,7 @@ module Aws::AuditManager
       :request_type,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_framework_share_request
@@ -3960,7 +3784,7 @@ module Aws::AuditManager
     class UpdateAssessmentFrameworkShareResponse < Struct.new(
       :assessment_framework_share_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -3990,7 +3814,7 @@ module Aws::AuditManager
       :assessment_reports_destination,
       :roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -4000,7 +3824,7 @@ module Aws::AuditManager
     class UpdateAssessmentResponse < Struct.new(
       :assessment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -4013,7 +3837,7 @@ module Aws::AuditManager
       :assessment_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -4023,7 +3847,7 @@ module Aws::AuditManager
     class UpdateAssessmentStatusResponse < Struct.new(
       :assessment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_id
@@ -4056,7 +3880,7 @@ module Aws::AuditManager
       :action_plan_instructions,
       :control_mapping_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control
@@ -4066,7 +3890,7 @@ module Aws::AuditManager
     class UpdateControlResponse < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sns_topic
@@ -4108,7 +3932,7 @@ module Aws::AuditManager
       :deregistration_policy,
       :default_export_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute settings
@@ -4117,7 +3941,7 @@ module Aws::AuditManager
     class UpdateSettingsResponse < Struct.new(
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_relative_path
@@ -4127,7 +3951,7 @@ module Aws::AuditManager
     class ValidateAssessmentReportIntegrityRequest < Struct.new(
       :s3_relative_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signature_valid
@@ -4153,7 +3977,7 @@ module Aws::AuditManager
       :signature_key_id,
       :validation_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request has invalid or missing parameters. </p>
@@ -4170,7 +3994,7 @@ module Aws::AuditManager
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Indicates that the request has invalid or missing parameters for the field. </p>
@@ -4184,14 +4008,7 @@ module Aws::AuditManager
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

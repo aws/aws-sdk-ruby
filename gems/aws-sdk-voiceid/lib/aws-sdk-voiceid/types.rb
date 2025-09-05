@@ -13,7 +13,7 @@ module Aws::VoiceID
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -30,7 +30,7 @@ module Aws::VoiceID
       :watchlist_id,
       :fraudster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fraudster
@@ -39,7 +39,7 @@ module Aws::VoiceID
     class AssociateFraudsterOutput < Struct.new(
       :fraudster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration used to authenticate a speaker during a session.</p>
@@ -49,7 +49,7 @@ module Aws::VoiceID
     class AuthenticationConfiguration < Struct.new(
       :acceptance_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication result produced by Voice ID, processed against the current session
@@ -100,7 +100,7 @@ module Aws::VoiceID
       :score,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to a conflict. Check the <code>ConflictType</code> and error
@@ -146,7 +146,7 @@ module Aws::VoiceID
       :message,
       :conflict_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -176,7 +176,7 @@ module Aws::VoiceID
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -185,7 +185,7 @@ module Aws::VoiceID
     class CreateDomainOutput < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -209,7 +209,7 @@ module Aws::VoiceID
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute watchlist
@@ -218,7 +218,7 @@ module Aws::VoiceID
     class CreateWatchlistOutput < Struct.new(
       :watchlist,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -227,7 +227,7 @@ module Aws::VoiceID
     class DeleteDomainInput < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -240,7 +240,7 @@ module Aws::VoiceID
       :domain_id,
       :fraudster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -253,7 +253,7 @@ module Aws::VoiceID
       :domain_id,
       :speaker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -266,7 +266,7 @@ module Aws::VoiceID
       :domain_id,
       :watchlist_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -275,7 +275,7 @@ module Aws::VoiceID
     class DescribeDomainInput < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -284,7 +284,7 @@ module Aws::VoiceID
     class DescribeDomainOutput < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -297,7 +297,7 @@ module Aws::VoiceID
       :domain_id,
       :fraudster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fraudster
@@ -306,7 +306,7 @@ module Aws::VoiceID
     class DescribeFraudsterOutput < Struct.new(
       :fraudster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -319,7 +319,7 @@ module Aws::VoiceID
       :domain_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -328,7 +328,7 @@ module Aws::VoiceID
     class DescribeFraudsterRegistrationJobOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -341,7 +341,7 @@ module Aws::VoiceID
       :domain_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -350,7 +350,7 @@ module Aws::VoiceID
     class DescribeSpeakerEnrollmentJobOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -363,7 +363,7 @@ module Aws::VoiceID
       :domain_id,
       :speaker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker
@@ -372,7 +372,7 @@ module Aws::VoiceID
     class DescribeSpeakerOutput < Struct.new(
       :speaker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -385,7 +385,7 @@ module Aws::VoiceID
       :domain_id,
       :watchlist_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute watchlist
@@ -394,7 +394,7 @@ module Aws::VoiceID
     class DescribeWatchlistOutput < Struct.new(
       :watchlist,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -411,7 +411,7 @@ module Aws::VoiceID
       :watchlist_id,
       :fraudster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fraudster
@@ -420,7 +420,7 @@ module Aws::VoiceID
     class DisassociateFraudsterOutput < Struct.new(
       :fraudster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a domain.</p>
@@ -469,7 +469,7 @@ module Aws::VoiceID
       :server_side_encryption_update_details,
       :watchlist_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a domain.</p>
@@ -518,7 +518,7 @@ module Aws::VoiceID
       :server_side_encryption_update_details,
       :watchlist_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations defining enrollment behavior for the batch job.</p>
@@ -536,7 +536,7 @@ module Aws::VoiceID
       :existing_enrollment_action,
       :fraud_detection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fraud detection configuration to be used during the batch speaker enrollment job.</p>
@@ -560,7 +560,7 @@ module Aws::VoiceID
       :risk_threshold,
       :watchlist_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -574,7 +574,7 @@ module Aws::VoiceID
       :domain_id,
       :session_name_or_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -613,7 +613,7 @@ module Aws::VoiceID
       :authentication_result,
       :fraud_detection_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains error details for a failed batch job.</p>
@@ -627,7 +627,7 @@ module Aws::VoiceID
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration used for performing fraud detection over a speaker during a
@@ -645,7 +645,7 @@ module Aws::VoiceID
       :risk_threshold,
       :watchlist_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fraud detection result produced by Voice ID, processed against the current
@@ -691,7 +691,7 @@ module Aws::VoiceID
       :reasons,
       :risk_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details regarding various fraud risk analyses performed against the current session
@@ -706,7 +706,7 @@ module Aws::VoiceID
       :known_fraudster_risk,
       :voice_spoofing_risk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a fraudster.</p>
@@ -728,7 +728,7 @@ module Aws::VoiceID
       :created_at,
       :watchlist_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a fraudster registration job.</p>
@@ -793,7 +793,7 @@ module Aws::VoiceID
       :failure_details,
       :job_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a fraudster registration job.</p>
@@ -836,7 +836,7 @@ module Aws::VoiceID
       :failure_details,
       :job_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a fraudster.
@@ -859,7 +859,7 @@ module Aws::VoiceID
       :created_at,
       :watchlist_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration containing input file information for a batch job.</p>
@@ -870,7 +870,7 @@ module Aws::VoiceID
     class InputDataConfig < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to an unknown error on the server side.</p>
@@ -879,7 +879,7 @@ module Aws::VoiceID
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the completion progress for a batch job.</p>
@@ -890,7 +890,7 @@ module Aws::VoiceID
     class JobProgress < Struct.new(
       :percent_complete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details produced as a result of performing known fraudster risk analysis on a
@@ -907,7 +907,7 @@ module Aws::VoiceID
       :risk_score,
       :generated_fraudster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -924,7 +924,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_summaries
@@ -940,7 +940,7 @@ module Aws::VoiceID
       :domain_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -965,7 +965,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_summaries
@@ -981,7 +981,7 @@ module Aws::VoiceID
       :job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1007,7 +1007,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fraudster_summaries
@@ -1025,7 +1025,7 @@ module Aws::VoiceID
       :fraudster_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1050,7 +1050,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_summaries
@@ -1066,7 +1066,7 @@ module Aws::VoiceID
       :job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1087,7 +1087,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_summaries
@@ -1104,7 +1104,7 @@ module Aws::VoiceID
       :speaker_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1114,7 +1114,7 @@ module Aws::VoiceID
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1123,7 +1123,7 @@ module Aws::VoiceID
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1146,7 +1146,7 @@ module Aws::VoiceID
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute watchlist_summaries
@@ -1164,7 +1164,7 @@ module Aws::VoiceID
       :watchlist_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1177,7 +1177,7 @@ module Aws::VoiceID
       :domain_id,
       :speaker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker
@@ -1186,7 +1186,7 @@ module Aws::VoiceID
     class OptOutSpeakerOutput < Struct.new(
       :speaker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration containing output file information for a batch job.</p>
@@ -1206,7 +1206,7 @@ module Aws::VoiceID
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration configuration to be used during the batch fraudster registration job.</p>
@@ -1229,7 +1229,7 @@ module Aws::VoiceID
       :fraudster_similarity_threshold,
       :watchlist_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource cannot be found. Check the <code>ResourceType</code> and error
@@ -1245,7 +1245,7 @@ module Aws::VoiceID
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration containing information about the customer managed key used for
@@ -1257,7 +1257,7 @@ module Aws::VoiceID
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the most recent server-side encryption configuration update. When the
@@ -1283,7 +1283,7 @@ module Aws::VoiceID
       :update_status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded the service quota. Refer to <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas">Voice ID Service Quotas</a> and try your request again.</p>
@@ -1292,7 +1292,7 @@ module Aws::VoiceID
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a speaker.</p>
@@ -1327,7 +1327,7 @@ module Aws::VoiceID
       :updated_at,
       :last_accessed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a speaker enrollment job.</p>
@@ -1391,7 +1391,7 @@ module Aws::VoiceID
       :failure_details,
       :job_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a speaker enrollment job.</p>
@@ -1434,7 +1434,7 @@ module Aws::VoiceID
       :failure_details,
       :job_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a speaker.</p>
@@ -1469,7 +1469,7 @@ module Aws::VoiceID
       :updated_at,
       :last_accessed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1515,7 +1515,7 @@ module Aws::VoiceID
       :input_data_config,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -1524,7 +1524,7 @@ module Aws::VoiceID
     class StartFraudsterRegistrationJobOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1568,7 +1568,7 @@ module Aws::VoiceID
       :input_data_config,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -1577,7 +1577,7 @@ module Aws::VoiceID
     class StartSpeakerEnrollmentJobOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags used to organize, track, or control access for this resource. For example, {
@@ -1594,7 +1594,7 @@ module Aws::VoiceID
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1607,12 +1607,12 @@ module Aws::VoiceID
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. Please slow down your request rate.
@@ -1624,7 +1624,7 @@ module Aws::VoiceID
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1638,12 +1638,12 @@ module Aws::VoiceID
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1670,7 +1670,7 @@ module Aws::VoiceID
       :description,
       :server_side_encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1679,7 +1679,7 @@ module Aws::VoiceID
     class UpdateDomainOutput < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1700,7 +1700,7 @@ module Aws::VoiceID
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute watchlist
@@ -1709,7 +1709,7 @@ module Aws::VoiceID
     class UpdateWatchlistOutput < Struct.new(
       :watchlist,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed one or more validations; check the error message for more
@@ -1719,7 +1719,7 @@ module Aws::VoiceID
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>
@@ -1729,7 +1729,7 @@ module Aws::VoiceID
     class VoiceSpoofingRisk < Struct.new(
       :risk_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information about a watchlist.</p>
@@ -1763,7 +1763,7 @@ module Aws::VoiceID
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_watchlist] = false unless options.key?(:default_watchlist)
@@ -1778,7 +1778,7 @@ module Aws::VoiceID
     class WatchlistDetails < Struct.new(
       :default_watchlist_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about a watchlist.</p>
@@ -1812,7 +1812,7 @@ module Aws::VoiceID
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_watchlist] = false unless options.key?(:default_watchlist)

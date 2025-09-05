@@ -12,7 +12,7 @@ module Aws::SocialMessaging
     class AccessDeniedByMetaException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -21,7 +21,7 @@ module Aws::SocialMessaging
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signup_callback
@@ -34,7 +34,7 @@ module Aws::SocialMessaging
       :signup_callback,
       :setup_finalization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signup_callback_result
@@ -47,7 +47,7 @@ module Aws::SocialMessaging
       :signup_callback_result,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_library_template
@@ -60,7 +60,7 @@ module Aws::SocialMessaging
       :meta_library_template,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_template_id
@@ -77,7 +77,7 @@ module Aws::SocialMessaging
       :template_status,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_definition
@@ -90,7 +90,7 @@ module Aws::SocialMessaging
       :template_definition,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -103,7 +103,7 @@ module Aws::SocialMessaging
       :id,
       :source_s3_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_header_handle
@@ -112,7 +112,7 @@ module Aws::SocialMessaging
     class CreateWhatsAppMessageTemplateMediaOutput < Struct.new(
       :meta_header_handle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_template_id
@@ -129,7 +129,7 @@ module Aws::SocialMessaging
       :template_status,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_id
@@ -146,7 +146,7 @@ module Aws::SocialMessaging
       :media_id,
       :origination_phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -155,7 +155,7 @@ module Aws::SocialMessaging
     class DeleteWhatsAppMessageMediaOutput < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_template_id
@@ -176,12 +176,12 @@ module Aws::SocialMessaging
       :id,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWhatsAppMessageTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when performing an action because a dependency would be broken.</p>
@@ -190,7 +190,7 @@ module Aws::SocialMessaging
     class DependencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -201,12 +201,12 @@ module Aws::SocialMessaging
     class DisassociateWhatsAppBusinessAccountInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWhatsAppBusinessAccountOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -218,7 +218,7 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -227,7 +227,7 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountOutput < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -239,7 +239,7 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountPhoneNumberInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -253,7 +253,7 @@ module Aws::SocialMessaging
       :phone_number,
       :linked_whats_app_business_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_id
@@ -282,7 +282,7 @@ module Aws::SocialMessaging
       :destination_s3_presigned_url,
       :destination_s3_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mime_type
@@ -295,7 +295,7 @@ module Aws::SocialMessaging
       :mime_type,
       :file_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_template_id
@@ -308,7 +308,7 @@ module Aws::SocialMessaging
       :meta_template_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -317,7 +317,7 @@ module Aws::SocialMessaging
     class GetWhatsAppMessageTemplateOutput < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or
@@ -327,7 +327,7 @@ module Aws::SocialMessaging
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters provided to the action are not valid.</p>
@@ -336,7 +336,7 @@ module Aws::SocialMessaging
     class InvalidParametersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for customizing the body content of a template from Meta's library.</p>
@@ -362,7 +362,7 @@ module Aws::SocialMessaging
       :add_track_package_link,
       :code_expiration_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for customizing buttons in a template from Meta's library.</p>
@@ -392,7 +392,7 @@ module Aws::SocialMessaging
       :zero_tap_terms_accepted,
       :supported_apps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a button in a template from Meta's library.</p>
@@ -426,7 +426,7 @@ module Aws::SocialMessaging
       :zero_tap_terms_accepted,
       :supported_apps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because it would exceed one or more service quotas or limits.</p>
@@ -435,7 +435,7 @@ module Aws::SocialMessaging
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of your linked WhatsApp Business Account.</p>
@@ -473,7 +473,7 @@ module Aws::SocialMessaging
       :event_destinations,
       :phone_numbers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains your WhatsApp registration status and details of any unregistered WhatsApp
@@ -496,7 +496,7 @@ module Aws::SocialMessaging
       :unregistered_whats_app_phone_numbers,
       :waba_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a linked WhatsApp Business Account.</p>
@@ -530,7 +530,7 @@ module Aws::SocialMessaging
       :waba_name,
       :event_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -543,7 +543,7 @@ module Aws::SocialMessaging
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute linked_accounts
@@ -556,7 +556,7 @@ module Aws::SocialMessaging
       :linked_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -565,7 +565,7 @@ module Aws::SocialMessaging
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -578,7 +578,7 @@ module Aws::SocialMessaging
       :status_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -595,7 +595,7 @@ module Aws::SocialMessaging
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates
@@ -608,7 +608,7 @@ module Aws::SocialMessaging
       :templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -629,7 +629,7 @@ module Aws::SocialMessaging
       :id,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meta_library_templates
@@ -642,7 +642,7 @@ module Aws::SocialMessaging
       :meta_library_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a template from Meta's library with customization options.</p>
@@ -672,7 +672,7 @@ module Aws::SocialMessaging
       :library_template_button_inputs,
       :library_template_body_inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the complete structure and content of a template in Meta's library.</p>
@@ -718,7 +718,7 @@ module Aws::SocialMessaging
       :template_buttons,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_phone_number_id
@@ -738,7 +738,7 @@ module Aws::SocialMessaging
       :source_s3_presigned_url,
       :source_s3_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_id
@@ -747,7 +747,7 @@ module Aws::SocialMessaging
     class PostWhatsAppMessageMediaOutput < Struct.new(
       :media_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -762,17 +762,12 @@ module Aws::SocialMessaging
       :id,
       :event_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutWhatsAppBusinessAccountEventDestinationsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      COMPLETE = 'COMPLETE'
-      INCOMPLETE = 'INCOMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was not found.</p>
@@ -781,7 +776,7 @@ module Aws::SocialMessaging
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information for the S3 bucket that contains media files.</p>
@@ -796,7 +791,7 @@ module Aws::SocialMessaging
       :bucket_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can use presigned URLs to grant time-limited access to objects in Amazon S3 without updating your bucket policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html">Working with presigned URLs</a> in the <i>Amazon S3
@@ -814,7 +809,7 @@ module Aws::SocialMessaging
       :url,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_phone_number_id
@@ -839,7 +834,7 @@ module Aws::SocialMessaging
       :message,
       :meta_api_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -848,7 +843,7 @@ module Aws::SocialMessaging
     class SendWhatsAppMessageOutput < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag for a resource.</p>
@@ -862,7 +857,7 @@ module Aws::SocialMessaging
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -875,7 +870,7 @@ module Aws::SocialMessaging
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -884,7 +879,7 @@ module Aws::SocialMessaging
     class TagResourceOutput < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a WhatsApp message template's key attributes.</p>
@@ -914,7 +909,7 @@ module Aws::SocialMessaging
       :template_language,
       :template_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -923,7 +918,7 @@ module Aws::SocialMessaging
     class ThrottledRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -936,7 +931,7 @@ module Aws::SocialMessaging
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -945,7 +940,7 @@ module Aws::SocialMessaging
     class UntagResourceOutput < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -966,12 +961,12 @@ module Aws::SocialMessaging
       :template_category,
       :template_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWhatsAppMessageTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains an invalid parameter value. </p>
@@ -980,7 +975,7 @@ module Aws::SocialMessaging
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration details for a linked phone number.</p>
@@ -1089,7 +1084,7 @@ module Aws::SocialMessaging
       :data_localization_region,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration details for a linked WhatsApp Business Account.</p>
@@ -1107,7 +1102,7 @@ module Aws::SocialMessaging
       :event_destinations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the event destination.</p>
@@ -1122,7 +1117,7 @@ module Aws::SocialMessaging
       :event_destination_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of your WhatsApp phone number.</p>
@@ -1160,7 +1155,7 @@ module Aws::SocialMessaging
       :quality_rating,
       :data_localization_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a linked phone number.</p>
@@ -1198,7 +1193,7 @@ module Aws::SocialMessaging
       :quality_rating,
       :data_localization_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of linking a WhatsApp Business Account to your Amazon Web Services account.</p>
@@ -1220,7 +1215,7 @@ module Aws::SocialMessaging
       :phone_number_parent,
       :waba,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the <code>accessToken</code> provided by Meta during signup.</p>
@@ -1234,7 +1229,7 @@ module Aws::SocialMessaging
       :access_token,
       :callback_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of WhatsAppSignupCallback.</p>
@@ -1248,7 +1243,7 @@ module Aws::SocialMessaging
       :associate_in_progress_token,
       :linked_accounts_with_incomplete_setup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

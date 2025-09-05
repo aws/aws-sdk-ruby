@@ -12,7 +12,7 @@ module Aws::OSIS
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options that specify the configuration of a persistent buffer.
@@ -23,7 +23,7 @@ module Aws::OSIS
     class BufferOptions < Struct.new(
       :persistent_buffer_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Progress details for a specific stage of a pipeline configuration change.</p>
@@ -45,14 +45,7 @@ module Aws::OSIS
       :description,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeProgressStageStatuses
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The progress details of a pipeline configuration change.</p>
@@ -74,19 +67,12 @@ module Aws::OSIS
       :total_number_of_stages,
       :change_progress_stages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_number_of_stages] = 0 unless options.key?(:total_number_of_stages)
         super
       end
-    end
-
-    module ChangeProgressStatuses
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
     end
 
     # <p>The destination for OpenSearch Ingestion logs sent to Amazon CloudWatch.</p>
@@ -98,7 +84,7 @@ module Aws::OSIS
     class CloudWatchLogDestination < Struct.new(
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client attempted to remove a resource that is currently in use.</p>
@@ -107,7 +93,7 @@ module Aws::OSIS
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -158,7 +144,7 @@ module Aws::OSIS
       :tags,
       :pipeline_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -167,7 +153,7 @@ module Aws::OSIS
     class CreatePipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -176,12 +162,12 @@ module Aws::OSIS
     class DeletePipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePipelineResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception is thrown when an operation has been disabled.</p>
@@ -190,7 +176,7 @@ module Aws::OSIS
     class DisabledOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to control how OpenSearch encrypts buffer data.</p>
@@ -201,7 +187,7 @@ module Aws::OSIS
     class EncryptionAtRestOptions < Struct.new(
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_name
@@ -214,7 +200,7 @@ module Aws::OSIS
       :blueprint_name,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint
@@ -227,7 +213,7 @@ module Aws::OSIS
       :blueprint,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -236,7 +222,7 @@ module Aws::OSIS
     class GetPipelineChangeProgressRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_progress_statuses
@@ -245,7 +231,7 @@ module Aws::OSIS
     class GetPipelineChangeProgressResponse < Struct.new(
       :change_progress_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -254,7 +240,7 @@ module Aws::OSIS
     class GetPipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -263,7 +249,7 @@ module Aws::OSIS
     class GetPipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because of an unknown error, exception, or failure (the failure is
@@ -273,7 +259,7 @@ module Aws::OSIS
     class InternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid pagination token provided in the request.</p>
@@ -282,7 +268,7 @@ module Aws::OSIS
     class InvalidPaginationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to create more than the allowed number of tags.</p>
@@ -291,12 +277,12 @@ module Aws::OSIS
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ListPipelineBlueprintsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprints
@@ -305,7 +291,7 @@ module Aws::OSIS
     class ListPipelineBlueprintsResponse < Struct.new(
       :blueprints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -321,7 +307,7 @@ module Aws::OSIS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -336,7 +322,7 @@ module Aws::OSIS
       :next_token,
       :pipelines,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -345,7 +331,7 @@ module Aws::OSIS
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -354,7 +340,7 @@ module Aws::OSIS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the values required to configure logging for the pipeline. If you don't
@@ -371,7 +357,7 @@ module Aws::OSIS
       :is_logging_enabled,
       :cloud_watch_log_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an existing OpenSearch Ingestion pipeline.</p>
@@ -455,7 +441,7 @@ module Aws::OSIS
       :tags,
       :pipeline_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_units] = 0 unless options.key?(:min_units)
@@ -491,7 +477,7 @@ module Aws::OSIS
       :service,
       :use_case,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an OpenSearch Ingestion blueprint.</p>
@@ -517,7 +503,7 @@ module Aws::OSIS
       :service,
       :use_case,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the destination of a pipeline.</p>
@@ -531,20 +517,7 @@ module Aws::OSIS
       :service_name,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      STARTING = 'STARTING'
-      START_FAILED = 'START_FAILED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a pipeline's current status.</p>
@@ -554,7 +527,7 @@ module Aws::OSIS
     class PipelineStatusReason < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an OpenSearch Ingestion pipeline.</p>
@@ -600,7 +573,7 @@ module Aws::OSIS
       :destinations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to create a resource that already exists.</p>
@@ -609,7 +582,7 @@ module Aws::OSIS
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to access or delete a resource that does not exist.</p>
@@ -618,7 +591,7 @@ module Aws::OSIS
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for information about VPC endpoints that were created to other services</p>
@@ -632,7 +605,7 @@ module Aws::OSIS
       :service_name,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -641,7 +614,7 @@ module Aws::OSIS
     class StartPipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -650,7 +623,7 @@ module Aws::OSIS
     class StartPipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -659,7 +632,7 @@ module Aws::OSIS
     class StopPipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -668,7 +641,7 @@ module Aws::OSIS
     class StopPipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag (key-value pair) for an OpenSearch Ingestion pipeline.</p>
@@ -685,7 +658,7 @@ module Aws::OSIS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -698,12 +671,12 @@ module Aws::OSIS
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -716,12 +689,12 @@ module Aws::OSIS
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -762,7 +735,7 @@ module Aws::OSIS
       :encryption_at_rest_options,
       :pipeline_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -771,7 +744,7 @@ module Aws::OSIS
     class UpdatePipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_configuration_body
@@ -782,7 +755,7 @@ module Aws::OSIS
     class ValidatePipelineRequest < Struct.new(
       :pipeline_configuration_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute is_valid
@@ -795,7 +768,7 @@ module Aws::OSIS
       :is_valid,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for missing or invalid input fields.</p>
@@ -804,7 +777,7 @@ module Aws::OSIS
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation message associated with a <code>ValidatePipeline</code> request in OpenSearch
@@ -815,7 +788,7 @@ module Aws::OSIS
     class ValidationMessage < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for attaching a VPC to pipeline.</p>
@@ -829,7 +802,7 @@ module Aws::OSIS
       :attach_to_vpc,
       :cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more
@@ -849,16 +822,7 @@ module Aws::OSIS
       :vpc_id,
       :vpc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcEndpointManagement
-      CUSTOMER = 'CUSTOMER'
-      SERVICE = 'SERVICE'
-    end
-
-    module VpcEndpointServiceName
-      OPENSEARCH_SERVERLESS = 'OPENSEARCH_SERVERLESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options that specify the subnets and security groups for an OpenSearch Ingestion
@@ -881,7 +845,7 @@ module Aws::OSIS
       :vpc_attachment_options,
       :vpc_endpoint_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

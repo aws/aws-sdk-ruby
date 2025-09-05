@@ -17,11 +17,7 @@ module Aws::SagemakerEdge
       :type,
       :sum,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChecksumType
-      Sha1 = 'SHA1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -43,7 +39,7 @@ module Aws::SagemakerEdge
       :checksum,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -81,7 +77,7 @@ module Aws::SagemakerEdge
       :status_reason,
       :rollback_failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the result of a deployment on an edge device that is registered with SageMaker Edge Manager.</p>
@@ -111,16 +107,7 @@ module Aws::SagemakerEdge
       :deployment_end_time,
       :deployment_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      Success = 'SUCCESS'
-      Fail = 'FAIL'
-    end
-
-    module DeploymentType
-      Model = 'Model'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment on an edge device that is registered with SageMaker Edge Manager.</p>
@@ -142,7 +129,7 @@ module Aws::SagemakerEdge
       :failure_handling_policy,
       :definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required for edge device metrics.</p>
@@ -164,12 +151,7 @@ module Aws::SagemakerEdge
       :value,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureHandlingPolicy
-      RollbackOnFailure = 'ROLLBACK_ON_FAILURE'
-      DoNothing = 'DO_NOTHING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_name
@@ -182,7 +164,7 @@ module Aws::SagemakerEdge
       :device_name,
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -191,7 +173,7 @@ module Aws::SagemakerEdge
     class GetDeploymentsResult < Struct.new(
       :deployments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_name
@@ -204,7 +186,7 @@ module Aws::SagemakerEdge
       :device_name,
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_registration
@@ -217,7 +199,7 @@ module Aws::SagemakerEdge
       :device_registration,
       :cache_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal failure occurred. Try your request again. If the problem 
@@ -227,7 +209,7 @@ module Aws::SagemakerEdge
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.</p>
@@ -253,12 +235,7 @@ module Aws::SagemakerEdge
       :latest_inference,
       :model_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelState
-      Deploy = 'DEPLOY'
-      Undeploy = 'UNDEPLOY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_metrics
@@ -287,7 +264,7 @@ module Aws::SagemakerEdge
       :device_fleet_name,
       :deployment_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -36,7 +36,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of group access control entries that allow or deny Active Directory groups based on their
@@ -69,7 +69,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can receive this error if you attempt to create a resource share when you don't have
@@ -82,12 +82,7 @@ module Aws::PcaConnectorAd
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessRight
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Allow or deny permissions for an Active Directory group to enroll or autoenroll certificates for a
@@ -104,7 +99,7 @@ module Aws::PcaConnectorAd
       :enroll,
       :auto_enroll,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application policies describe what the certificate can be used for.</p>
@@ -118,7 +113,7 @@ module Aws::PcaConnectorAd
       :critical,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application policies describe what the certificate can be used for.</p>
@@ -133,81 +128,11 @@ module Aws::PcaConnectorAd
       :policy_object_identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PolicyType < ApplicationPolicy; end
       class PolicyObjectIdentifier < ApplicationPolicy; end
       class Unknown < ApplicationPolicy; end
-    end
-
-    module ApplicationPolicyType
-      ALL_APPLICATION_POLICIES = 'ALL_APPLICATION_POLICIES'
-      ANY_PURPOSE = 'ANY_PURPOSE'
-      ATTESTATION_IDENTITY_KEY_CERTIFICATE = 'ATTESTATION_IDENTITY_KEY_CERTIFICATE'
-      CERTIFICATE_REQUEST_AGENT = 'CERTIFICATE_REQUEST_AGENT'
-      CLIENT_AUTHENTICATION = 'CLIENT_AUTHENTICATION'
-      CODE_SIGNING = 'CODE_SIGNING'
-      CTL_USAGE = 'CTL_USAGE'
-      DIGITAL_RIGHTS = 'DIGITAL_RIGHTS'
-      DIRECTORY_SERVICE_EMAIL_REPLICATION = 'DIRECTORY_SERVICE_EMAIL_REPLICATION'
-      DISALLOWED_LIST = 'DISALLOWED_LIST'
-      DNS_SERVER_TRUST = 'DNS_SERVER_TRUST'
-      DOCUMENT_ENCRYPTION = 'DOCUMENT_ENCRYPTION'
-      DOCUMENT_SIGNING = 'DOCUMENT_SIGNING'
-      DYNAMIC_CODE_GENERATOR = 'DYNAMIC_CODE_GENERATOR'
-      EARLY_LAUNCH_ANTIMALWARE_DRIVER = 'EARLY_LAUNCH_ANTIMALWARE_DRIVER'
-      EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = 'EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION'
-      ENCLAVE = 'ENCLAVE'
-      ENCRYPTING_FILE_SYSTEM = 'ENCRYPTING_FILE_SYSTEM'
-      ENDORSEMENT_KEY_CERTIFICATE = 'ENDORSEMENT_KEY_CERTIFICATE'
-      FILE_RECOVERY = 'FILE_RECOVERY'
-      HAL_EXTENSION = 'HAL_EXTENSION'
-      IP_SECURITY_END_SYSTEM = 'IP_SECURITY_END_SYSTEM'
-      IP_SECURITY_IKE_INTERMEDIATE = 'IP_SECURITY_IKE_INTERMEDIATE'
-      IP_SECURITY_TUNNEL_TERMINATION = 'IP_SECURITY_TUNNEL_TERMINATION'
-      IP_SECURITY_USER = 'IP_SECURITY_USER'
-      ISOLATED_USER_MODE = 'ISOLATED_USER_MODE'
-      KDC_AUTHENTICATION = 'KDC_AUTHENTICATION'
-      KERNEL_MODE_CODE_SIGNING = 'KERNEL_MODE_CODE_SIGNING'
-      KEY_PACK_LICENSES = 'KEY_PACK_LICENSES'
-      KEY_RECOVERY = 'KEY_RECOVERY'
-      KEY_RECOVERY_AGENT = 'KEY_RECOVERY_AGENT'
-      LICENSE_SERVER_VERIFICATION = 'LICENSE_SERVER_VERIFICATION'
-      LIFETIME_SIGNING = 'LIFETIME_SIGNING'
-      MICROSOFT_PUBLISHER = 'MICROSOFT_PUBLISHER'
-      MICROSOFT_TIME_STAMPING = 'MICROSOFT_TIME_STAMPING'
-      MICROSOFT_TRUST_LIST_SIGNING = 'MICROSOFT_TRUST_LIST_SIGNING'
-      OCSP_SIGNING = 'OCSP_SIGNING'
-      OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = 'OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION'
-      PLATFORM_CERTIFICATE = 'PLATFORM_CERTIFICATE'
-      PREVIEW_BUILD_SIGNING = 'PREVIEW_BUILD_SIGNING'
-      PRIVATE_KEY_ARCHIVAL = 'PRIVATE_KEY_ARCHIVAL'
-      PROTECTED_PROCESS_LIGHT_VERIFICATION = 'PROTECTED_PROCESS_LIGHT_VERIFICATION'
-      PROTECTED_PROCESS_VERIFICATION = 'PROTECTED_PROCESS_VERIFICATION'
-      QUALIFIED_SUBORDINATION = 'QUALIFIED_SUBORDINATION'
-      REVOKED_LIST_SIGNER = 'REVOKED_LIST_SIGNER'
-      ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION = 'ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION'
-      ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION = 'ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION'
-      ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL = 'ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL'
-      ROOT_LIST_SIGNER = 'ROOT_LIST_SIGNER'
-      SECURE_EMAIL = 'SECURE_EMAIL'
-      SERVER_AUTHENTICATION = 'SERVER_AUTHENTICATION'
-      SMART_CARD_LOGIN = 'SMART_CARD_LOGIN'
-      SPC_ENCRYPTED_DIGEST_RETRY_COUNT = 'SPC_ENCRYPTED_DIGEST_RETRY_COUNT'
-      SPC_RELAXED_PE_MARKER_CHECK = 'SPC_RELAXED_PE_MARKER_CHECK'
-      TIME_STAMPING = 'TIME_STAMPING'
-      WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION = 'WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION'
-      WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION = 'WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION'
-      WINDOWS_HARDWARE_DRIVER_VERIFICATION = 'WINDOWS_HARDWARE_DRIVER_VERIFICATION'
-      WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION = 'WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION'
-      WINDOWS_KITS_COMPONENT = 'WINDOWS_KITS_COMPONENT'
-      WINDOWS_RT_VERIFICATION = 'WINDOWS_RT_VERIFICATION'
-      WINDOWS_SOFTWARE_EXTENSION_VERIFICATION = 'WINDOWS_SOFTWARE_EXTENSION_VERIFICATION'
-      WINDOWS_STORE = 'WINDOWS_STORE'
-      WINDOWS_SYSTEM_COMPONENT_VERIFICATION = 'WINDOWS_SYSTEM_COMPONENT_VERIFICATION'
-      WINDOWS_TCB_COMPONENT = 'WINDOWS_TCB_COMPONENT'
-      WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT = 'WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT'
-      WINDOWS_UPDATE = 'WINDOWS_UPDATE'
     end
 
     # <p>Information describing the end of the validity period of the certificate. This parameter
@@ -236,30 +161,7 @@ module Aws::PcaConnectorAd
       :validity_period,
       :renewal_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientCompatibilityV2
-      WINDOWS_SERVER_2003 = 'WINDOWS_SERVER_2003'
-      WINDOWS_SERVER_2008 = 'WINDOWS_SERVER_2008'
-      WINDOWS_SERVER_2008_R2 = 'WINDOWS_SERVER_2008_R2'
-      WINDOWS_SERVER_2012 = 'WINDOWS_SERVER_2012'
-      WINDOWS_SERVER_2012_R2 = 'WINDOWS_SERVER_2012_R2'
-      WINDOWS_SERVER_2016 = 'WINDOWS_SERVER_2016'
-    end
-
-    module ClientCompatibilityV3
-      WINDOWS_SERVER_2008 = 'WINDOWS_SERVER_2008'
-      WINDOWS_SERVER_2008_R2 = 'WINDOWS_SERVER_2008_R2'
-      WINDOWS_SERVER_2012 = 'WINDOWS_SERVER_2012'
-      WINDOWS_SERVER_2012_R2 = 'WINDOWS_SERVER_2012_R2'
-      WINDOWS_SERVER_2016 = 'WINDOWS_SERVER_2016'
-    end
-
-    module ClientCompatibilityV4
-      WINDOWS_SERVER_2012 = 'WINDOWS_SERVER_2012'
-      WINDOWS_SERVER_2012_R2 = 'WINDOWS_SERVER_2012_R2'
-      WINDOWS_SERVER_2016 = 'WINDOWS_SERVER_2016'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request cannot be completed for one of the following reasons because the requested
@@ -277,7 +179,7 @@ module Aws::PcaConnectorAd
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services Private CA Connector for Active Directory is a service that links your Active Directory with Amazon Web Services Private CA. The connector brokers the
@@ -322,28 +224,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-    end
-
-    module ConnectorStatusReason
-      CA_CERTIFICATE_REGISTRATION_FAILED = 'CA_CERTIFICATE_REGISTRATION_FAILED'
-      DIRECTORY_ACCESS_DENIED = 'DIRECTORY_ACCESS_DENIED'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      INSUFFICIENT_FREE_ADDRESSES = 'INSUFFICIENT_FREE_ADDRESSES'
-      INVALID_SUBNET_IP_PROTOCOL = 'INVALID_SUBNET_IP_PROTOCOL'
-      PRIVATECA_ACCESS_DENIED = 'PRIVATECA_ACCESS_DENIED'
-      PRIVATECA_RESOURCE_NOT_FOUND = 'PRIVATECA_RESOURCE_NOT_FOUND'
-      SECURITY_GROUP_NOT_IN_VPC = 'SECURITY_GROUP_NOT_IN_VPC'
-      VPC_ACCESS_DENIED = 'VPC_ACCESS_DENIED'
-      VPC_ENDPOINT_LIMIT_EXCEEDED = 'VPC_ENDPOINT_LIMIT_EXCEEDED'
-      VPC_RESOURCE_NOT_FOUND = 'VPC_RESOURCE_NOT_FOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary description of the Amazon Web Services Private CA AD connectors belonging to an Amazon Web Services
@@ -387,7 +268,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -412,7 +293,7 @@ module Aws::PcaConnectorAd
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -421,7 +302,7 @@ module Aws::PcaConnectorAd
     class CreateConnectorResponse < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -438,7 +319,7 @@ module Aws::PcaConnectorAd
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -447,7 +328,7 @@ module Aws::PcaConnectorAd
     class CreateDirectoryRegistrationResponse < Struct.new(
       :directory_registration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -464,7 +345,7 @@ module Aws::PcaConnectorAd
       :connector_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -491,7 +372,7 @@ module Aws::PcaConnectorAd
       :access_rights,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -518,7 +399,7 @@ module Aws::PcaConnectorAd
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -527,7 +408,7 @@ module Aws::PcaConnectorAd
     class CreateTemplateResponse < Struct.new(
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -536,7 +417,7 @@ module Aws::PcaConnectorAd
     class DeleteConnectorRequest < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -545,7 +426,7 @@ module Aws::PcaConnectorAd
     class DeleteDirectoryRegistrationRequest < Struct.new(
       :directory_registration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -558,7 +439,7 @@ module Aws::PcaConnectorAd
       :directory_registration_arn,
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -572,7 +453,7 @@ module Aws::PcaConnectorAd
       :template_arn,
       :group_security_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -581,7 +462,7 @@ module Aws::PcaConnectorAd
     class DeleteTemplateRequest < Struct.new(
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The directory registration represents the authorization of the connector service with a
@@ -614,23 +495,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryRegistrationStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-    end
-
-    module DirectoryRegistrationStatusReason
-      DIRECTORY_ACCESS_DENIED = 'DIRECTORY_ACCESS_DENIED'
-      DIRECTORY_RESOURCE_NOT_FOUND = 'DIRECTORY_RESOURCE_NOT_FOUND'
-      DIRECTORY_NOT_ACTIVE = 'DIRECTORY_NOT_ACTIVE'
-      DIRECTORY_NOT_REACHABLE = 'DIRECTORY_NOT_REACHABLE'
-      DIRECTORY_TYPE_NOT_SUPPORTED = 'DIRECTORY_TYPE_NOT_SUPPORTED'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The directory registration represents the authorization of the connector service with
@@ -662,7 +527,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template configurations for v2 template schema.</p>
@@ -692,7 +557,7 @@ module Aws::PcaConnectorAd
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template configurations for v3 template schema.</p>
@@ -722,7 +587,7 @@ module Aws::PcaConnectorAd
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template configurations for v4 template schema.</p>
@@ -752,7 +617,7 @@ module Aws::PcaConnectorAd
       :no_security_extension,
       :enable_key_reuse_on_nt_token_keyset_storage_full,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Certificate extensions for v2 template schema</p>
@@ -767,7 +632,7 @@ module Aws::PcaConnectorAd
       :key_usage,
       :application_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Certificate extensions for v3 template schema</p>
@@ -782,7 +647,7 @@ module Aws::PcaConnectorAd
       :key_usage,
       :application_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Certificate extensions for v4 template schema</p>
@@ -797,7 +662,7 @@ module Aws::PcaConnectorAd
       :key_usage,
       :application_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>General flags for v2 template schema that defines if the template is for a machine or a
@@ -814,7 +679,7 @@ module Aws::PcaConnectorAd
       :auto_enrollment,
       :machine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>General flags for v3 template schema that defines if the template is for a machine or a
@@ -831,7 +696,7 @@ module Aws::PcaConnectorAd
       :auto_enrollment,
       :machine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>General flags for v4 template schema that defines if the template is for a machine or a
@@ -848,7 +713,7 @@ module Aws::PcaConnectorAd
       :auto_enrollment,
       :machine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -857,7 +722,7 @@ module Aws::PcaConnectorAd
     class GetConnectorRequest < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector
@@ -866,7 +731,7 @@ module Aws::PcaConnectorAd
     class GetConnectorResponse < Struct.new(
       :connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -875,7 +740,7 @@ module Aws::PcaConnectorAd
     class GetDirectoryRegistrationRequest < Struct.new(
       :directory_registration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration
@@ -885,7 +750,7 @@ module Aws::PcaConnectorAd
     class GetDirectoryRegistrationResponse < Struct.new(
       :directory_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registration_arn
@@ -898,7 +763,7 @@ module Aws::PcaConnectorAd
       :directory_registration_arn,
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal_name
@@ -907,7 +772,7 @@ module Aws::PcaConnectorAd
     class GetServicePrincipalNameResponse < Struct.new(
       :service_principal_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -921,7 +786,7 @@ module Aws::PcaConnectorAd
       :template_arn,
       :group_security_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_control_entry
@@ -931,7 +796,7 @@ module Aws::PcaConnectorAd
     class GetTemplateGroupAccessControlEntryResponse < Struct.new(
       :access_control_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -940,7 +805,7 @@ module Aws::PcaConnectorAd
     class GetTemplateRequest < Struct.new(
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -950,13 +815,7 @@ module Aws::PcaConnectorAd
     class GetTemplateResponse < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HashAlgorithm
-      SHA256 = 'SHA256'
-      SHA384 = 'SHA384'
-      SHA512 = 'SHA512'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure with
@@ -966,17 +825,7 @@ module Aws::PcaConnectorAd
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      IPV4 = 'IPV4'
-      DUALSTACK = 'DUALSTACK'
-    end
-
-    module KeySpec
-      KEY_EXCHANGE = 'KEY_EXCHANGE'
-      SIGNATURE = 'SIGNATURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key usage extension defines the purpose (e.g., encipherment, signature) of the key
@@ -992,7 +841,7 @@ module Aws::PcaConnectorAd
       :critical,
       :usage_flags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key usage flags represent the purpose (e.g., encipherment, signature) of the key
@@ -1023,7 +872,7 @@ module Aws::PcaConnectorAd
       :data_encipherment,
       :key_agreement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key usage property defines the purpose of the private key contained in the
@@ -1042,7 +891,7 @@ module Aws::PcaConnectorAd
       :property_flags,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PropertyType < KeyUsageProperty; end
       class PropertyFlags < KeyUsageProperty; end
@@ -1064,11 +913,7 @@ module Aws::PcaConnectorAd
       :key_agreement,
       :sign,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyUsagePropertyType
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1087,7 +932,7 @@ module Aws::PcaConnectorAd
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectors
@@ -1102,7 +947,7 @@ module Aws::PcaConnectorAd
       :connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1121,7 +966,7 @@ module Aws::PcaConnectorAd
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_registrations
@@ -1136,7 +981,7 @@ module Aws::PcaConnectorAd
       :directory_registrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1159,7 +1004,7 @@ module Aws::PcaConnectorAd
       :next_token,
       :directory_registration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal_names
@@ -1175,7 +1020,7 @@ module Aws::PcaConnectorAd
       :service_principal_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1184,7 +1029,7 @@ module Aws::PcaConnectorAd
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1193,7 +1038,7 @@ module Aws::PcaConnectorAd
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1216,7 +1061,7 @@ module Aws::PcaConnectorAd
       :next_token,
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_control_entries
@@ -1232,7 +1077,7 @@ module Aws::PcaConnectorAd
       :access_control_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1255,7 +1100,7 @@ module Aws::PcaConnectorAd
       :next_token,
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates
@@ -1270,14 +1115,7 @@ module Aws::PcaConnectorAd
       :templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrivateKeyAlgorithm
-      RSA = 'RSA'
-      ECDH_P256 = 'ECDH_P256'
-      ECDH_P384 = 'ECDH_P384'
-      ECDH_P521 = 'ECDH_P521'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the attributes of the private key.</p>
@@ -1296,7 +1134,7 @@ module Aws::PcaConnectorAd
       :key_spec,
       :crypto_providers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the attributes of the private key.</p>
@@ -1325,7 +1163,7 @@ module Aws::PcaConnectorAd
       :key_usage_property,
       :algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the attributes of the private key.</p>
@@ -1354,7 +1192,7 @@ module Aws::PcaConnectorAd
       :key_usage_property,
       :algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Private key flags for v2 templates specify the client compatibility, if the private key
@@ -1373,7 +1211,7 @@ module Aws::PcaConnectorAd
       :strong_key_protection_required,
       :client_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Private key flags for v3 templates specify the client compatibility, if the private key
@@ -1398,7 +1236,7 @@ module Aws::PcaConnectorAd
       :require_alternate_signature_algorithm,
       :client_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Private key flags for v4 templates specify the client compatibility, if the private key
@@ -1434,7 +1272,7 @@ module Aws::PcaConnectorAd
       :use_legacy_provider,
       :client_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access a nonexistent resource. The resource might not be
@@ -1452,7 +1290,7 @@ module Aws::PcaConnectorAd
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service principal name that the connector uses to authenticate with Active Directory.</p>
@@ -1483,23 +1321,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServicePrincipalNameStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-    end
-
-    module ServicePrincipalNameStatusReason
-      DIRECTORY_ACCESS_DENIED = 'DIRECTORY_ACCESS_DENIED'
-      DIRECTORY_NOT_REACHABLE = 'DIRECTORY_NOT_REACHABLE'
-      DIRECTORY_RESOURCE_NOT_FOUND = 'DIRECTORY_RESOURCE_NOT_FOUND'
-      SPN_EXISTS_ON_DIFFERENT_AD_OBJECT = 'SPN_EXISTS_ON_DIFFERENT_AD_OBJECT'
-      SPN_LIMIT_EXCEEDED = 'SPN_LIMIT_EXCEEDED'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service principal name that the connector uses to authenticate with Active Directory.</p>
@@ -1530,7 +1352,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -1555,7 +1377,7 @@ module Aws::PcaConnectorAd
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information to include in the subject name and alternate subject name of the
@@ -1607,7 +1429,7 @@ module Aws::PcaConnectorAd
       :require_common_name,
       :require_directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information to include in the subject name and alternate subject name of the
@@ -1659,7 +1481,7 @@ module Aws::PcaConnectorAd
       :require_common_name,
       :require_directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information to include in the subject name and alternate subject name of the
@@ -1711,7 +1533,7 @@ module Aws::PcaConnectorAd
       :require_common_name,
       :require_directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1724,7 +1546,7 @@ module Aws::PcaConnectorAd
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory compatible certificate template. Connectors issue certificates against these
@@ -1775,7 +1597,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template configuration to define the information included in certificates. Define
@@ -1802,7 +1624,7 @@ module Aws::PcaConnectorAd
       :template_v4,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TemplateV2 < TemplateDefinition; end
       class TemplateV3 < TemplateDefinition; end
@@ -1824,12 +1646,7 @@ module Aws::PcaConnectorAd
       :major_revision,
       :minor_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateStatus
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory compatible certificate template. Connectors issue certificates against these
@@ -1880,7 +1697,7 @@ module Aws::PcaConnectorAd
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>v2 template schema that uses Legacy Cryptographic Providers.</p>
@@ -1925,7 +1742,7 @@ module Aws::PcaConnectorAd
       :general_flags,
       :extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>v3 template schema that uses Key Storage Providers.</p>
@@ -1975,7 +1792,7 @@ module Aws::PcaConnectorAd
       :hash_algorithm,
       :extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>v4 template schema that can use either Legacy Cryptographic Providers or Key Storage
@@ -2029,7 +1846,7 @@ module Aws::PcaConnectorAd
       :hash_algorithm,
       :extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded. </p>
@@ -2046,7 +1863,7 @@ module Aws::PcaConnectorAd
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2060,7 +1877,7 @@ module Aws::PcaConnectorAd
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -2083,7 +1900,7 @@ module Aws::PcaConnectorAd
       :group_display_name,
       :access_rights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -2104,7 +1921,7 @@ module Aws::PcaConnectorAd
       :definition,
       :reenroll_all_certificate_holders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input validation error occurred. For example, invalid characters in a template name,
@@ -2119,19 +1936,7 @@ module Aws::PcaConnectorAd
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      INVALID_CA_SUBJECT = 'INVALID_CA_SUBJECT'
-      INVALID_PERMISSION = 'INVALID_PERMISSION'
-      INVALID_STATE = 'INVALID_STATE'
-      MISMATCHED_CONNECTOR = 'MISMATCHED_CONNECTOR'
-      MISMATCHED_VPC = 'MISMATCHED_VPC'
-      NO_CLIENT_TOKEN = 'NO_CLIENT_TOKEN'
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information describing the end of the validity period of the certificate. This parameter
@@ -2152,15 +1957,7 @@ module Aws::PcaConnectorAd
       :period_type,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidityPeriodType
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-      WEEKS = 'WEEKS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about your VPC and security groups used with the connector.</p>
@@ -2175,7 +1972,7 @@ module Aws::PcaConnectorAd
       :ip_address_type,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

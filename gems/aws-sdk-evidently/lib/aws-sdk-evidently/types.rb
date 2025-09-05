@@ -12,7 +12,7 @@ module Aws::Evidently
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -25,7 +25,7 @@ module Aws::Evidently
       :project,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -35,7 +35,7 @@ module Aws::Evidently
     class BatchEvaluateFeatureOutput < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the CloudWatch Logs log group where the project stores evaluation
@@ -47,7 +47,7 @@ module Aws::Evidently
     class CloudWatchLogsDestination < Struct.new(
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the CloudWatch Logs log group where the project stores evaluation
@@ -59,7 +59,7 @@ module Aws::Evidently
     class CloudWatchLogsDestinationConfig < Struct.new(
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource was in an inconsistent state during an update or a deletion.</p>
@@ -76,7 +76,7 @@ module Aws::Evidently
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -137,7 +137,7 @@ module Aws::Evidently
       :segment,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -147,7 +147,7 @@ module Aws::Evidently
     class CreateExperimentOutput < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -202,7 +202,7 @@ module Aws::Evidently
       :tags,
       :entity_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature
@@ -211,7 +211,7 @@ module Aws::Evidently
     class CreateFeatureOutput < Struct.new(
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -259,7 +259,7 @@ module Aws::Evidently
       :randomization_salt,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch
@@ -268,7 +268,7 @@ module Aws::Evidently
     class CreateLaunchOutput < Struct.new(
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -312,7 +312,7 @@ module Aws::Evidently
       :app_config_resource,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -321,7 +321,7 @@ module Aws::Evidently
     class CreateProjectOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -350,7 +350,7 @@ module Aws::Evidently
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment
@@ -359,7 +359,7 @@ module Aws::Evidently
     class CreateSegmentOutput < Struct.new(
       :segment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -372,12 +372,12 @@ module Aws::Evidently
       :project,
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteExperimentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -390,12 +390,12 @@ module Aws::Evidently
       :project,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFeatureOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -408,12 +408,12 @@ module Aws::Evidently
       :project,
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -422,12 +422,12 @@ module Aws::Evidently
     class DeleteProjectInput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment
@@ -436,12 +436,12 @@ module Aws::Evidently
     class DeleteSegmentInput < Struct.new(
       :segment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSegmentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -469,7 +469,7 @@ module Aws::Evidently
       :entity_id,
       :evaluation_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute variation
@@ -495,7 +495,7 @@ module Aws::Evidently
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure assigns a feature variation to one user session.</p>
@@ -516,7 +516,7 @@ module Aws::Evidently
       :entity_id,
       :evaluation_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure displays the results of one feature evaluation assignment to one user
@@ -555,7 +555,7 @@ module Aws::Evidently
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information about an evaluation rule for this feature, 
@@ -571,7 +571,7 @@ module Aws::Evidently
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information about one evaluation event or custom event sent to Evidently.
@@ -594,7 +594,7 @@ module Aws::Evidently
       :type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the configuration details of an experiment.</p>
@@ -682,7 +682,7 @@ module Aws::Evidently
       :online_ab_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sampling_rate] = 0 unless options.key?(:sampling_rate)
@@ -701,7 +701,7 @@ module Aws::Evidently
       :started_time,
       :ended_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains results of an experiment.</p>
@@ -723,7 +723,7 @@ module Aws::Evidently
       :report_name,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains experiment results for one metric that is monitored in
@@ -746,7 +746,7 @@ module Aws::Evidently
       :result_stat,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the time and date that Evidently completed the analysis of the experiment.</p>
@@ -756,7 +756,7 @@ module Aws::Evidently
     class ExperimentSchedule < Struct.new(
       :analysis_complete_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one Evidently feature in your account.</p>
@@ -832,7 +832,7 @@ module Aws::Evidently
       :tags,
       :entity_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one Evidently feature in your account.</p>
@@ -882,7 +882,7 @@ module Aws::Evidently
       :default_variation,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -895,7 +895,7 @@ module Aws::Evidently
       :project,
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -904,7 +904,7 @@ module Aws::Evidently
     class GetExperimentOutput < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -980,7 +980,7 @@ module Aws::Evidently
       :report_names,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results_data
@@ -1003,7 +1003,7 @@ module Aws::Evidently
       :timestamps,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1016,7 +1016,7 @@ module Aws::Evidently
       :project,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature
@@ -1025,7 +1025,7 @@ module Aws::Evidently
     class GetFeatureOutput < Struct.new(
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1038,7 +1038,7 @@ module Aws::Evidently
       :project,
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch
@@ -1047,7 +1047,7 @@ module Aws::Evidently
     class GetLaunchOutput < Struct.new(
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1056,7 +1056,7 @@ module Aws::Evidently
     class GetProjectInput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1065,7 +1065,7 @@ module Aws::Evidently
     class GetProjectOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment
@@ -1074,7 +1074,7 @@ module Aws::Evidently
     class GetSegmentInput < Struct.new(
       :segment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment
@@ -1083,7 +1083,7 @@ module Aws::Evidently
     class GetSegmentOutput < Struct.new(
       :segment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error while processing the request. Retry the request.</p>
@@ -1092,7 +1092,7 @@ module Aws::Evidently
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the configuration details of one Evidently launch.</p>
@@ -1162,7 +1162,7 @@ module Aws::Evidently
       :scheduled_splits_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the start and end times of the launch.</p>
@@ -1176,7 +1176,7 @@ module Aws::Evidently
       :started_time,
       :ended_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one launch group in a launch. A launch group is a variation of the feature
@@ -1195,7 +1195,7 @@ module Aws::Evidently
       :description,
       :feature_variations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one launch group in a launch. A launch group is a variation of
@@ -1218,7 +1218,7 @@ module Aws::Evidently
       :feature,
       :variation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1240,7 +1240,7 @@ module Aws::Evidently
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiments
@@ -1255,7 +1255,7 @@ module Aws::Evidently
       :experiments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1273,7 +1273,7 @@ module Aws::Evidently
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute features
@@ -1288,7 +1288,7 @@ module Aws::Evidently
       :features,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1310,7 +1310,7 @@ module Aws::Evidently
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launches
@@ -1325,7 +1325,7 @@ module Aws::Evidently
       :launches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1339,7 +1339,7 @@ module Aws::Evidently
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute projects
@@ -1353,7 +1353,7 @@ module Aws::Evidently
       :projects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment
@@ -1375,7 +1375,7 @@ module Aws::Evidently
       :next_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute referenced_by
@@ -1390,7 +1390,7 @@ module Aws::Evidently
       :referenced_by,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1404,7 +1404,7 @@ module Aws::Evidently
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segments
@@ -1418,7 +1418,7 @@ module Aws::Evidently
       :segments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1427,7 +1427,7 @@ module Aws::Evidently
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1436,7 +1436,7 @@ module Aws::Evidently
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines a metric that is being used to evaluate the variations
@@ -1466,7 +1466,7 @@ module Aws::Evidently
       :event_pattern,
       :unit_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines a metric that you want to use to evaluate the variations
@@ -1496,7 +1496,7 @@ module Aws::Evidently
       :event_pattern,
       :unit_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that tells Evidently whether higher or lower values are desired for a metric that is 
@@ -1516,7 +1516,7 @@ module Aws::Evidently
       :metric_definition,
       :desired_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to tell Evidently whether higher or lower values are desired for a metric that is 
@@ -1536,7 +1536,7 @@ module Aws::Evidently
       :metric_definition,
       :desired_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines a metric to be used to monitor performance of the variations during a launch.</p>
@@ -1546,7 +1546,7 @@ module Aws::Evidently
     class MetricMonitor < Struct.new(
       :metric_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines a metric to be used to monitor performance of the variations during a launch.</p>
@@ -1556,7 +1556,7 @@ module Aws::Evidently
     class MetricMonitorConfig < Struct.new(
       :metric_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration of which variation to use as the "control"
@@ -1575,7 +1575,7 @@ module Aws::Evidently
       :control_treatment_name,
       :treatment_weights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration of which variation to use as the "control"
@@ -1594,7 +1594,7 @@ module Aws::Evidently
       :control_treatment_name,
       :treatment_weights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines a project, which is the logical object in Evidently that can contain features, launches, and 
@@ -1661,7 +1661,7 @@ module Aws::Evidently
       :app_config_resource,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is a structure that defines the configuration of how your application 
@@ -1681,7 +1681,7 @@ module Aws::Evidently
       :environment_id,
       :configuration_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to configure client-side evaluation for your project. Client-side evaluation allows your application to assign 
@@ -1702,7 +1702,7 @@ module Aws::Evidently
       :application_id,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about where Evidently is to store
@@ -1719,7 +1719,7 @@ module Aws::Evidently
       :s3_destination,
       :cloud_watch_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about where Evidently is to store
@@ -1736,7 +1736,7 @@ module Aws::Evidently
       :s3_destination,
       :cloud_watch_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains configuration information about an Evidently project.</p>
@@ -1790,7 +1790,7 @@ module Aws::Evidently
       :active_experiment_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1804,7 +1804,7 @@ module Aws::Evidently
       :project,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_event_count
@@ -1818,7 +1818,7 @@ module Aws::Evidently
       :failed_event_count,
       :event_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains Evidently's response to the sent events, including an event ID and error codes, if any. </p>
@@ -1838,7 +1838,7 @@ module Aws::Evidently
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one experiment or launch that
@@ -1873,7 +1873,7 @@ module Aws::Evidently
       :end_time,
       :last_updated_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist.</p>
@@ -1890,7 +1890,7 @@ module Aws::Evidently
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the project stores evaluation events in an Amazon S3 bucket, this structure
@@ -1905,7 +1905,7 @@ module Aws::Evidently
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the project stores evaluation events in an Amazon S3 bucket, this structure
@@ -1920,7 +1920,7 @@ module Aws::Evidently
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the traffic allocation percentages among the feature
@@ -1952,7 +1952,7 @@ module Aws::Evidently
       :group_weights,
       :segment_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the traffic allocation percentages among the feature
@@ -1984,7 +1984,7 @@ module Aws::Evidently
       :group_weights,
       :segment_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of structures that define the traffic allocation percentages among the feature
@@ -1997,7 +1997,7 @@ module Aws::Evidently
     class ScheduledSplitsLaunchConfig < Struct.new(
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of structures that define the traffic allocation percentages among the feature
@@ -2010,7 +2010,7 @@ module Aws::Evidently
     class ScheduledSplitsLaunchDefinition < Struct.new(
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one audience <i>segment</i>. You can use segments
@@ -2058,7 +2058,7 @@ module Aws::Evidently
       :launch_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies a segment
@@ -2081,7 +2081,7 @@ module Aws::Evidently
       :evaluation_order,
       :weights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -2106,7 +2106,7 @@ module Aws::Evidently
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service was unavailable. Retry the request.</p>
@@ -2115,7 +2115,7 @@ module Aws::Evidently
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2133,7 +2133,7 @@ module Aws::Evidently
       :experiment,
       :analysis_complete_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute started_time
@@ -2142,7 +2142,7 @@ module Aws::Evidently
     class StartExperimentOutput < Struct.new(
       :started_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2155,7 +2155,7 @@ module Aws::Evidently
       :project,
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch
@@ -2164,7 +2164,7 @@ module Aws::Evidently
     class StartLaunchOutput < Struct.new(
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2186,7 +2186,7 @@ module Aws::Evidently
       :desired_state,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ended_time
@@ -2195,7 +2195,7 @@ module Aws::Evidently
     class StopExperimentOutput < Struct.new(
       :ended_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2217,7 +2217,7 @@ module Aws::Evidently
       :desired_state,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ended_time
@@ -2226,7 +2226,7 @@ module Aws::Evidently
     class StopLaunchOutput < Struct.new(
       :ended_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2239,12 +2239,12 @@ module Aws::Evidently
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pattern
@@ -2257,7 +2257,7 @@ module Aws::Evidently
       :pattern,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match
@@ -2266,7 +2266,7 @@ module Aws::Evidently
     class TestSegmentPatternOutput < Struct.new(
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because of request throttling. Retry the request.</p>
@@ -2283,7 +2283,7 @@ module Aws::Evidently
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature
@@ -2303,7 +2303,7 @@ module Aws::Evidently
       :description,
       :feature_variations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one treatment in an experiment. A treatment is a variation of the feature
@@ -2326,7 +2326,7 @@ module Aws::Evidently
       :feature,
       :variation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2339,12 +2339,12 @@ module Aws::Evidently
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2402,7 +2402,7 @@ module Aws::Evidently
       :remove_segment,
       :online_ab_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -2412,7 +2412,7 @@ module Aws::Evidently
     class UpdateExperimentOutput < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2464,7 +2464,7 @@ module Aws::Evidently
       :default_variation,
       :entity_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature
@@ -2473,7 +2473,7 @@ module Aws::Evidently
     class UpdateFeatureOutput < Struct.new(
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2512,7 +2512,7 @@ module Aws::Evidently
       :randomization_salt,
       :scheduled_splits_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch
@@ -2521,7 +2521,7 @@ module Aws::Evidently
     class UpdateLaunchOutput < Struct.new(
       :launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2539,7 +2539,7 @@ module Aws::Evidently
       :s3_destination,
       :cloud_watch_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2548,7 +2548,7 @@ module Aws::Evidently
     class UpdateProjectDataDeliveryOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2571,7 +2571,7 @@ module Aws::Evidently
       :app_config_resource,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -2580,7 +2580,7 @@ module Aws::Evidently
     class UpdateProjectOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a parameter in the request caused an error.</p>
@@ -2597,7 +2597,7 @@ module Aws::Evidently
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing an error name and message.</p>
@@ -2611,7 +2611,7 @@ module Aws::Evidently
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value assigned to a feature variation. This structure must contain exactly one
@@ -2640,7 +2640,7 @@ module Aws::Evidently
       :double_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BoolValue < VariableValue; end
       class StringValue < VariableValue; end
@@ -2660,7 +2660,7 @@ module Aws::Evidently
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the name and variation value of one variation of a feature.</p>
@@ -2674,7 +2674,7 @@ module Aws::Evidently
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

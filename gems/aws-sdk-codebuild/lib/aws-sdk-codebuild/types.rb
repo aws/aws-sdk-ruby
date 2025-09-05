@@ -12,7 +12,7 @@ module Aws::CodeBuild
     class AccountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CodeBuild access has been suspended for the calling Amazon Web Services account.</p>
@@ -21,31 +21,7 @@ module Aws::CodeBuild
     class AccountSuspendedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactNamespace
-      NONE = 'NONE'
-      BUILD_ID = 'BUILD_ID'
-    end
-
-    module ArtifactPackaging
-      NONE = 'NONE'
-      ZIP = 'ZIP'
-    end
-
-    module ArtifactsType
-      CODEPIPELINE = 'CODEPIPELINE'
-      S3 = 'S3'
-      NO_ARTIFACTS = 'NO_ARTIFACTS'
-    end
-
-    module AuthType
-      OAUTH = 'OAUTH'
-      BASIC_AUTH = 'BASIC_AUTH'
-      PERSONAL_ACCESS_TOKEN = 'PERSONAL_ACCESS_TOKEN'
-      CODECONNECTIONS = 'CODECONNECTIONS'
-      SECRETS_MANAGER = 'SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the auto-retry configuration for the build.</p>
@@ -71,7 +47,7 @@ module Aws::CodeBuild
       :next_auto_retry,
       :previous_auto_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -80,7 +56,7 @@ module Aws::CodeBuild
     class BatchDeleteBuildsInput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute builds_deleted
@@ -93,7 +69,7 @@ module Aws::CodeBuild
       :builds_deleted,
       :builds_not_deleted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -102,7 +78,7 @@ module Aws::CodeBuild
     class BatchGetBuildBatchesInput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_batches
@@ -116,7 +92,7 @@ module Aws::CodeBuild
       :build_batches,
       :build_batches_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -125,7 +101,7 @@ module Aws::CodeBuild
     class BatchGetBuildsInput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute builds
@@ -138,7 +114,7 @@ module Aws::CodeBuild
       :builds,
       :builds_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox_id
@@ -151,7 +127,7 @@ module Aws::CodeBuild
       :sandbox_id,
       :command_execution_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_executions
@@ -164,7 +140,7 @@ module Aws::CodeBuild
       :command_executions,
       :command_executions_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -173,7 +149,7 @@ module Aws::CodeBuild
     class BatchGetFleetsInput < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleets
@@ -186,7 +162,7 @@ module Aws::CodeBuild
       :fleets,
       :fleets_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -197,7 +173,7 @@ module Aws::CodeBuild
     class BatchGetProjectsInput < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute projects
@@ -210,7 +186,7 @@ module Aws::CodeBuild
       :projects,
       :projects_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_group_arns
@@ -221,7 +197,7 @@ module Aws::CodeBuild
     class BatchGetReportGroupsInput < Struct.new(
       :report_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_groups
@@ -238,7 +214,7 @@ module Aws::CodeBuild
       :report_groups,
       :report_groups_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_arns
@@ -249,7 +225,7 @@ module Aws::CodeBuild
     class BatchGetReportsInput < Struct.new(
       :report_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reports
@@ -266,7 +242,7 @@ module Aws::CodeBuild
       :reports,
       :reports_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -275,7 +251,7 @@ module Aws::CodeBuild
     class BatchGetSandboxesInput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandboxes
@@ -288,12 +264,7 @@ module Aws::CodeBuild
       :sandboxes,
       :sandboxes_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchReportModeType
-      REPORT_INDIVIDUAL_BUILDS = 'REPORT_INDIVIDUAL_BUILDS'
-      REPORT_AGGREGATED_BATCH = 'REPORT_AGGREGATED_BATCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies restrictions for the batch build.</p>
@@ -316,55 +287,7 @@ module Aws::CodeBuild
       :compute_types_allowed,
       :fleets_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the bucket owner's access for objects that another account uploads to their
-    #             Amazon S3 bucket. By default, only the account that uploads the objects to the bucket has
-    #             access to these objects. This property allows you to give the bucket owner access to
-    #             these objects.</p>
-    #          <note>
-    #             <p>To use this property, your CodeBuild service role must have the
-    #                     <code>s3:PutBucketAcl</code> permission. This permission allows CodeBuild to modify
-    #                 the access control list for the bucket.</p>
-    #          </note>
-    #          <p>This property can be one of the following values:</p>
-    #          <dl>
-    #             <dt>NONE</dt>
-    #             <dd>
-    #                <p>The bucket owner does not have access to the objects. This is the
-    #                         default.</p>
-    #             </dd>
-    #             <dt>READ_ONLY</dt>
-    #             <dd>
-    #                <p>The bucket owner has read-only access to the objects. The uploading account
-    #                         retains ownership of the objects.</p>
-    #             </dd>
-    #             <dt>FULL</dt>
-    #             <dd>
-    #                <p>The bucket owner has full access to the objects. Object ownership is determined
-    #                         by the following criteria:</p>
-    #                <ul>
-    #                   <li>
-    #                      <p>If the bucket is configured with the <b>Bucket
-    #                                     owner preferred</b> setting, the bucket owner owns the
-    #                                 objects. The uploading account will have object access as specified
-    #                                 by the bucket's policy.</p>
-    #                   </li>
-    #                   <li>
-    #                      <p>Otherwise, the uploading account retains ownership of the
-    #                                 objects.</p>
-    #                   </li>
-    #                </ul>
-    #                <p>For more information about Amazon S3 object ownership, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html">Controlling ownership of uploaded objects using S3
-    #                             Object Ownership</a> in the <i>Amazon Simple Storage Service User
-    #                         Guide</i>.</p>
-    #             </dd>
-    #          </dl>
-    module BucketOwnerAccess
-      NONE = 'NONE'
-      READ_ONLY = 'READ_ONLY'
-      FULL = 'FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a build.</p>
@@ -603,7 +526,7 @@ module Aws::CodeBuild
       :build_batch_arn,
       :auto_retry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:build_complete] = false unless options.key?(:build_complete)
@@ -698,7 +621,7 @@ module Aws::CodeBuild
       :artifact_identifier,
       :bucket_owner_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a batch build.</p>
@@ -898,7 +821,7 @@ module Aws::CodeBuild
       :debug_session_enabled,
       :report_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:complete] = false unless options.key?(:complete)
@@ -914,7 +837,7 @@ module Aws::CodeBuild
     class BuildBatchFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a stage for a batch build.</p>
@@ -1003,17 +926,7 @@ module Aws::CodeBuild
       :duration_in_seconds,
       :contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuildBatchPhaseType
-      SUBMITTED = 'SUBMITTED'
-      DOWNLOAD_BATCHSPEC = 'DOWNLOAD_BATCHSPEC'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMBINE_ARTIFACTS = 'COMBINE_ARTIFACTS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a batch build build group. Build groups are used to combine
@@ -1044,7 +957,7 @@ module Aws::CodeBuild
       :current_build_summary,
       :prior_build_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ignore_failure] = false unless options.key?(:ignore_failure)
@@ -1063,7 +976,7 @@ module Aws::CodeBuild
       :id,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a stage for a build.</p>
@@ -1168,21 +1081,7 @@ module Aws::CodeBuild
       :duration_in_seconds,
       :contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuildPhaseType
-      SUBMITTED = 'SUBMITTED'
-      QUEUED = 'QUEUED'
-      PROVISIONING = 'PROVISIONING'
-      DOWNLOAD_SOURCE = 'DOWNLOAD_SOURCE'
-      INSTALL = 'INSTALL'
-      PRE_BUILD = 'PRE_BUILD'
-      BUILD = 'BUILD'
-      POST_BUILD = 'POST_BUILD'
-      UPLOAD_ARTIFACTS = 'UPLOAD_ARTIFACTS'
-      FINALIZING = 'FINALIZING'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that defines how the CodeBuild build project reports the build status
@@ -1223,7 +1122,7 @@ module Aws::CodeBuild
       :context,
       :target_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a batch build group.</p>
@@ -1277,19 +1176,7 @@ module Aws::CodeBuild
       :primary_artifact,
       :secondary_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CacheMode
-      LOCAL_DOCKER_LAYER_CACHE = 'LOCAL_DOCKER_LAYER_CACHE'
-      LOCAL_SOURCE_CACHE = 'LOCAL_SOURCE_CACHE'
-      LOCAL_CUSTOM_CACHE = 'LOCAL_CUSTOM_CACHE'
-    end
-
-    module CacheType
-      NO_CACHE = 'NO_CACHE'
-      S3 = 'S3'
-      LOCAL = 'LOCAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about CloudWatch Logs for a build project. </p>
@@ -1319,7 +1206,7 @@ module Aws::CodeBuild
       :group_name,
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains code coverage report information.</p>
@@ -1369,7 +1256,7 @@ module Aws::CodeBuild
       :branches_missed,
       :expired,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a code coverage report.</p>
@@ -1403,7 +1290,7 @@ module Aws::CodeBuild
       :branches_covered,
       :branches_missed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains command execution information.</p>
@@ -1461,11 +1348,7 @@ module Aws::CodeBuild
       :logs,
       :sandbox_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommandType
-      SHELL = 'SHELL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains compute attributes. These attributes only need be specified when your project's or fleet's <code>computeType</code> is set to <code>ATTRIBUTE_BASED_COMPUTE</code> or <code>CUSTOM_INSTANCE_TYPE</code>.</p>
@@ -1491,22 +1374,7 @@ module Aws::CodeBuild
       :machine_type,
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeType
-      BUILD_GENERAL1_SMALL = 'BUILD_GENERAL1_SMALL'
-      BUILD_GENERAL1_MEDIUM = 'BUILD_GENERAL1_MEDIUM'
-      BUILD_GENERAL1_LARGE = 'BUILD_GENERAL1_LARGE'
-      BUILD_GENERAL1_XLARGE = 'BUILD_GENERAL1_XLARGE'
-      BUILD_GENERAL1_2XLARGE = 'BUILD_GENERAL1_2XLARGE'
-      BUILD_LAMBDA_1GB = 'BUILD_LAMBDA_1GB'
-      BUILD_LAMBDA_2GB = 'BUILD_LAMBDA_2GB'
-      BUILD_LAMBDA_4GB = 'BUILD_LAMBDA_4GB'
-      BUILD_LAMBDA_8GB = 'BUILD_LAMBDA_8GB'
-      BUILD_LAMBDA_10GB = 'BUILD_LAMBDA_10GB'
-      ATTRIBUTE_BASED_COMPUTE = 'ATTRIBUTE_BASED_COMPUTE'
-      CUSTOM_INSTANCE_TYPE = 'CUSTOM_INSTANCE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1742,7 +1610,7 @@ module Aws::CodeBuild
       :fleet_service_role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet
@@ -1751,7 +1619,7 @@ module Aws::CodeBuild
     class CreateFleetOutput < Struct.new(
       :fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1907,7 +1775,7 @@ module Aws::CodeBuild
       :concurrent_build_limit,
       :auto_retry_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -1916,7 +1784,7 @@ module Aws::CodeBuild
     class CreateProjectOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1947,7 +1815,7 @@ module Aws::CodeBuild
       :export_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_group
@@ -1958,7 +1826,7 @@ module Aws::CodeBuild
     class CreateReportGroupOutput < Struct.new(
       :report_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -2017,7 +1885,7 @@ module Aws::CodeBuild
       :scope_configuration,
       :pull_request_build_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook
@@ -2027,11 +1895,7 @@ module Aws::CodeBuild
     class CreateWebhookOutput < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CredentialProviderType
-      SECRETS_MANAGER = 'SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the debug session for a build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a
@@ -2048,7 +1912,7 @@ module Aws::CodeBuild
       :session_enabled,
       :session_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2057,7 +1921,7 @@ module Aws::CodeBuild
     class DeleteBuildBatchInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -2075,7 +1939,7 @@ module Aws::CodeBuild
       :builds_deleted,
       :builds_not_deleted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2084,12 +1948,12 @@ module Aws::CodeBuild
     class DeleteFleetInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2098,12 +1962,12 @@ module Aws::CodeBuild
     class DeleteProjectInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2120,12 +1984,12 @@ module Aws::CodeBuild
       :arn,
       :delete_reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReportGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2136,12 +2000,12 @@ module Aws::CodeBuild
     class DeleteReportInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReportOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2150,12 +2014,12 @@ module Aws::CodeBuild
     class DeleteResourcePolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2164,7 +2028,7 @@ module Aws::CodeBuild
     class DeleteSourceCredentialsInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2173,7 +2037,7 @@ module Aws::CodeBuild
     class DeleteSourceCredentialsOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -2182,12 +2046,12 @@ module Aws::CodeBuild
     class DeleteWebhookInput < Struct.new(
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWebhookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_arn
@@ -2234,7 +2098,7 @@ module Aws::CodeBuild
       :min_line_coverage_percentage,
       :max_line_coverage_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2248,7 +2112,7 @@ module Aws::CodeBuild
       :next_token,
       :code_coverages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_arn
@@ -2282,7 +2146,7 @@ module Aws::CodeBuild
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2303,7 +2167,7 @@ module Aws::CodeBuild
       :next_token,
       :test_cases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains docker server information.</p>
@@ -2352,7 +2216,7 @@ module Aws::CodeBuild
       :security_group_ids,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the status of the docker server.</p>
@@ -2366,7 +2230,7 @@ module Aws::CodeBuild
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Docker image that is managed by CodeBuild.</p>
@@ -2384,7 +2248,7 @@ module Aws::CodeBuild
       :description,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of Docker images that are related by programming language and are managed by
@@ -2400,7 +2264,7 @@ module Aws::CodeBuild
       :language,
       :images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of Docker images that are related by platform and are managed by CodeBuild.</p>
@@ -2415,22 +2279,7 @@ module Aws::CodeBuild
       :platform,
       :languages,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentType
-      WINDOWS_CONTAINER = 'WINDOWS_CONTAINER'
-      LINUX_CONTAINER = 'LINUX_CONTAINER'
-      LINUX_GPU_CONTAINER = 'LINUX_GPU_CONTAINER'
-      ARM_CONTAINER = 'ARM_CONTAINER'
-      WINDOWS_SERVER_2019_CONTAINER = 'WINDOWS_SERVER_2019_CONTAINER'
-      WINDOWS_SERVER_2022_CONTAINER = 'WINDOWS_SERVER_2022_CONTAINER'
-      LINUX_LAMBDA_CONTAINER = 'LINUX_LAMBDA_CONTAINER'
-      ARM_LAMBDA_CONTAINER = 'ARM_LAMBDA_CONTAINER'
-      LINUX_EC2 = 'LINUX_EC2'
-      ARM_EC2 = 'ARM_EC2'
-      WINDOWS_EC2 = 'WINDOWS_EC2'
-      MAC_ARM = 'MAC_ARM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an environment variable for a build project or a build.</p>
@@ -2480,13 +2329,7 @@ module Aws::CodeBuild
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentVariableType
-      PLAINTEXT = 'PLAINTEXT'
-      PARAMETER_STORE = 'PARAMETER_STORE'
-      SECRETS_MANAGER = 'SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an exported environment variable. </p>
@@ -2510,11 +2353,7 @@ module Aws::CodeBuild
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileSystemType
-      EFS = 'EFS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of dedicated instances for your build environment.</p>
@@ -2771,20 +2610,7 @@ module Aws::CodeBuild
       :fleet_service_role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetContextCode
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      ACTION_REQUIRED = 'ACTION_REQUIRED'
-      PENDING_DELETION = 'PENDING_DELETION'
-      INSUFFICIENT_CAPACITY = 'INSUFFICIENT_CAPACITY'
-    end
-
-    module FleetOverflowBehavior
-      QUEUE = 'QUEUE'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the proxy rule for your reserved capacity instances.</p>
@@ -2802,36 +2628,7 @@ module Aws::CodeBuild
       :effect,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetProxyRuleBehavior
-      ALLOW_ALL = 'ALLOW_ALL'
-      DENY_ALL = 'DENY_ALL'
-    end
-
-    module FleetProxyRuleEffectType
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
-    end
-
-    module FleetProxyRuleType
-      DOMAIN = 'DOMAIN'
-      IP = 'IP'
-    end
-
-    module FleetScalingMetricType
-      FLEET_UTILIZATION_RATE = 'FLEET_UTILIZATION_RATE'
-    end
-
-    module FleetScalingType
-      TARGET_TRACKING_SCALING = 'TARGET_TRACKING_SCALING'
-    end
-
-    module FleetSortByType
-      NAME = 'NAME'
-      CREATED_TIME = 'CREATED_TIME'
-      LAST_MODIFIED_TIME = 'LAST_MODIFIED_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the compute fleet.</p>
@@ -2893,18 +2690,7 @@ module Aws::CodeBuild
       :context,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetStatusCode
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      ROTATING = 'ROTATING'
-      PENDING_DELETION = 'PENDING_DELETION'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_ROLLBACK_FAILED = 'UPDATE_ROLLBACK_FAILED'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_group_arn
@@ -2982,7 +2768,7 @@ module Aws::CodeBuild
       :num_of_reports,
       :trend_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stats
@@ -2995,7 +2781,7 @@ module Aws::CodeBuild
       :stats,
       :raw_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3004,7 +2790,7 @@ module Aws::CodeBuild
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3013,7 +2799,7 @@ module Aws::CodeBuild
     class GetResourcePolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the Git submodules configuration for an CodeBuild build project.
@@ -3024,12 +2810,7 @@ module Aws::CodeBuild
     class GitSubmodulesConfig < Struct.new(
       :fetch_submodules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImagePullCredentialsType
-      CODEBUILD = 'CODEBUILD'
-      SERVICE_ROLE = 'SERVICE_ROLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -3061,7 +2842,7 @@ module Aws::CodeBuild
       :auth_type,
       :should_overwrite,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3070,7 +2851,7 @@ module Aws::CodeBuild
     class ImportSourceCredentialsOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input value that was provided is not valid.</p>
@@ -3079,7 +2860,7 @@ module Aws::CodeBuild
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -3088,25 +2869,12 @@ module Aws::CodeBuild
     class InvalidateProjectCacheInput < Struct.new(
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InvalidateProjectCacheOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageType
-      JAVA = 'JAVA'
-      PYTHON = 'PYTHON'
-      NODE_JS = 'NODE_JS'
-      RUBY = 'RUBY'
-      GOLANG = 'GOLANG'
-      DOCKER = 'DOCKER'
-      ANDROID = 'ANDROID'
-      DOTNET = 'DOTNET'
-      BASE = 'BASE'
-      PHP = 'PHP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -3145,7 +2913,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3160,7 +2928,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -3193,7 +2961,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3207,7 +2975,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -3243,7 +3011,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3260,7 +3028,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_order
@@ -3290,7 +3058,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3306,7 +3074,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox_id
@@ -3327,7 +3095,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_executions
@@ -3340,12 +3108,12 @@ module Aws::CodeBuild
       :command_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ListCuratedEnvironmentImagesInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platforms
@@ -3355,7 +3123,7 @@ module Aws::CodeBuild
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3412,7 +3180,7 @@ module Aws::CodeBuild
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3428,7 +3196,7 @@ module Aws::CodeBuild
       :next_token,
       :fleets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -3480,7 +3248,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3497,7 +3265,7 @@ module Aws::CodeBuild
       :next_token,
       :projects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_order
@@ -3547,7 +3315,7 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3568,7 +3336,7 @@ module Aws::CodeBuild
       :next_token,
       :report_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_group_arn
@@ -3608,7 +3376,7 @@ module Aws::CodeBuild
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3629,7 +3397,7 @@ module Aws::CodeBuild
       :next_token,
       :reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_order
@@ -3675,7 +3443,7 @@ module Aws::CodeBuild
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3696,7 +3464,7 @@ module Aws::CodeBuild
       :next_token,
       :reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -3717,7 +3485,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3730,7 +3498,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3747,7 +3515,7 @@ module Aws::CodeBuild
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3760,7 +3528,7 @@ module Aws::CodeBuild
       :ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -3810,7 +3578,7 @@ module Aws::CodeBuild
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3829,7 +3597,7 @@ module Aws::CodeBuild
       :next_token,
       :projects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_order
@@ -3879,7 +3647,7 @@ module Aws::CodeBuild
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3898,12 +3666,12 @@ module Aws::CodeBuild
       :next_token,
       :report_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ListSourceCredentialsInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_credentials_infos
@@ -3914,7 +3682,7 @@ module Aws::CodeBuild
     class ListSourceCredentialsOutput < Struct.new(
       :source_credentials_infos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about logs for a build project. These can be logs in CloudWatch Logs, built in a
@@ -3930,12 +3698,7 @@ module Aws::CodeBuild
       :cloud_watch_logs,
       :s3_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogsConfigStatusType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about build logs in CloudWatch Logs.</p>
@@ -3976,12 +3739,7 @@ module Aws::CodeBuild
       :cloud_watch_logs,
       :s3_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MachineType
-      GENERAL = 'GENERAL'
-      NVME = 'NVME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface.</p>
@@ -3995,7 +3753,7 @@ module Aws::CodeBuild
       :subnet_id,
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a problem with the underlying OAuth provider.</p>
@@ -4004,7 +3762,7 @@ module Aws::CodeBuild
     class OAuthProviderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional information about a build phase that has an error. You can use this
@@ -4020,14 +3778,7 @@ module Aws::CodeBuild
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlatformType
-      DEBIAN = 'DEBIAN'
-      AMAZON_LINUX = 'AMAZON_LINUX'
-      UBUNTU = 'UBUNTU'
-      WINDOWS_SERVER = 'WINDOWS_SERVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a build project.</p>
@@ -4220,7 +3971,7 @@ module Aws::CodeBuild
       :resource_access_role,
       :auto_retry_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build output artifacts for the build project.</p>
@@ -4463,7 +4214,7 @@ module Aws::CodeBuild
       :artifact_identifier,
       :bucket_owner_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build badge for the build project.</p>
@@ -4479,7 +4230,7 @@ module Aws::CodeBuild
       :badge_enabled,
       :badge_request_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:badge_enabled] = false unless options.key?(:badge_enabled)
@@ -4524,7 +4275,7 @@ module Aws::CodeBuild
       :timeout_in_mins,
       :batch_report_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the cache for the build project.</p>
@@ -4630,7 +4381,7 @@ module Aws::CodeBuild
       :modes,
       :cache_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build environment of the build project.</p>
@@ -4836,7 +4587,7 @@ module Aws::CodeBuild
       :image_pull_credentials_type,
       :docker_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a file system created by Amazon Elastic File System (EFS). For more
@@ -4883,7 +4634,7 @@ module Aws::CodeBuild
       :identifier,
       :mount_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the compute fleet of the build project. For more
@@ -4895,13 +4646,7 @@ module Aws::CodeBuild
     class ProjectFleet < Struct.new(
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectSortByType
-      NAME = 'NAME'
-      CREATED_TIME = 'CREATED_TIME'
-      LAST_MODIFIED_TIME = 'LAST_MODIFIED_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build input source code for the build project.</p>
@@ -5082,7 +4827,7 @@ module Aws::CodeBuild
       :insecure_ssl,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A source identifier and its corresponding version. </p>
@@ -5126,23 +4871,7 @@ module Aws::CodeBuild
       :source_identifier,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the visibility of the project's builds. Possible values are:</p>
-    #          <dl>
-    #             <dt>PUBLIC_READ</dt>
-    #             <dd>
-    #                <p>The project builds are visible to the public.</p>
-    #             </dd>
-    #             <dt>PRIVATE</dt>
-    #             <dd>
-    #                <p>The project builds are not visible to the public.</p>
-    #             </dd>
-    #          </dl>
-    module ProjectVisibilityType
-      PUBLIC_READ = 'PUBLIC_READ'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the proxy configurations that apply network access control to your reserved capacity instances.</p>
@@ -5156,30 +4885,7 @@ module Aws::CodeBuild
       :default_behavior,
       :ordered_proxy_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PullRequestBuildApproverRole
-      GITHUB_READ = 'GITHUB_READ'
-      GITHUB_TRIAGE = 'GITHUB_TRIAGE'
-      GITHUB_WRITE = 'GITHUB_WRITE'
-      GITHUB_MAINTAIN = 'GITHUB_MAINTAIN'
-      GITHUB_ADMIN = 'GITHUB_ADMIN'
-      GITLAB_GUEST = 'GITLAB_GUEST'
-      GITLAB_PLANNER = 'GITLAB_PLANNER'
-      GITLAB_REPORTER = 'GITLAB_REPORTER'
-      GITLAB_DEVELOPER = 'GITLAB_DEVELOPER'
-      GITLAB_MAINTAINER = 'GITLAB_MAINTAINER'
-      GITLAB_OWNER = 'GITLAB_OWNER'
-      BITBUCKET_READ = 'BITBUCKET_READ'
-      BITBUCKET_WRITE = 'BITBUCKET_WRITE'
-      BITBUCKET_ADMIN = 'BITBUCKET_ADMIN'
-    end
-
-    module PullRequestBuildCommentApproval
-      DISABLED = 'DISABLED'
-      ALL_PULL_REQUESTS = 'ALL_PULL_REQUESTS'
-      FORK_PULL_REQUESTS = 'FORK_PULL_REQUESTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests. This policy helps control when automated builds are executed based on contributor permissions and approval workflows.</p>
@@ -5207,7 +4913,7 @@ module Aws::CodeBuild
       :requires_comment_approval,
       :approver_roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -5223,7 +4929,7 @@ module Aws::CodeBuild
       :policy,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5233,7 +4939,7 @@ module Aws::CodeBuild
     class PutResourcePolicyOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about credentials that provide access to a private Docker registry. When
@@ -5265,7 +4971,7 @@ module Aws::CodeBuild
       :credential,
       :credential_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the results from running a series of test cases during the run of a
@@ -5337,12 +5043,7 @@ module Aws::CodeBuild
       :test_summary,
       :code_coverage_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportCodeCoverageSortByType
-      LINE_COVERAGE_PERCENTAGE = 'LINE_COVERAGE_PERCENTAGE'
-      FILE_PATH = 'FILE_PATH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the location where the run of a report is exported. </p>
@@ -5367,12 +5068,7 @@ module Aws::CodeBuild
       :export_config_type,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportExportConfigType
-      S3 = 'S3'
-      NO_EXPORT = 'NO_EXPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A filter used to return reports with the status specified by the input
@@ -5383,7 +5079,7 @@ module Aws::CodeBuild
     class ReportFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A series of reports. Each report contains information about the results from running a
@@ -5450,30 +5146,7 @@ module Aws::CodeBuild
       :tags,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportGroupSortByType
-      NAME = 'NAME'
-      CREATED_TIME = 'CREATED_TIME'
-      LAST_MODIFIED_TIME = 'LAST_MODIFIED_TIME'
-    end
-
-    module ReportGroupStatusType
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-    end
-
-    module ReportGroupTrendFieldType
-      PASS_RATE = 'PASS_RATE'
-      DURATION = 'DURATION'
-      TOTAL = 'TOTAL'
-      LINE_COVERAGE = 'LINE_COVERAGE'
-      LINES_COVERED = 'LINES_COVERED'
-      LINES_MISSED = 'LINES_MISSED'
-      BRANCH_COVERAGE = 'BRANCH_COVERAGE'
-      BRANCHES_COVERED = 'BRANCHES_COVERED'
-      BRANCHES_MISSED = 'BRANCHES_MISSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains trend statistics for a set of reports. The actual values depend on the type of
@@ -5492,25 +5165,7 @@ module Aws::CodeBuild
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportPackagingType
-      ZIP = 'ZIP'
-      NONE = 'NONE'
-    end
-
-    module ReportStatusType
-      GENERATING = 'GENERATING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      INCOMPLETE = 'INCOMPLETE'
-      DELETING = 'DELETING'
-    end
-
-    module ReportType
-      TEST = 'TEST'
-      CODE_COVERAGE = 'CODE_COVERAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the unmodified data for the report. For more information, see .</p>
@@ -5524,7 +5179,7 @@ module Aws::CodeBuild
       :report_arn,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a resolved build artifact. A resolved artifact is an artifact that is built and
@@ -5543,7 +5198,7 @@ module Aws::CodeBuild
       :location,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Web Services resource cannot be created, because an Amazon Web Services resource with the same
@@ -5553,7 +5208,7 @@ module Aws::CodeBuild
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Web Services resource cannot be found.</p>
@@ -5562,7 +5217,7 @@ module Aws::CodeBuild
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5583,7 +5238,7 @@ module Aws::CodeBuild
       :idempotency_token,
       :retry_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_batch
@@ -5592,12 +5247,7 @@ module Aws::CodeBuild
     class RetryBuildBatchOutput < Struct.new(
       :build_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetryBuildBatchType
-      RETRY_ALL_BUILDS = 'RETRY_ALL_BUILDS'
-      RETRY_FAILED_BUILDS = 'RETRY_FAILED_BUILDS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5614,7 +5264,7 @@ module Aws::CodeBuild
       :id,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -5623,7 +5273,7 @@ module Aws::CodeBuild
     class RetryBuildOutput < Struct.new(
       :build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about S3 logs for a build project. </p>
@@ -5701,7 +5351,7 @@ module Aws::CodeBuild
       :encryption_disabled,
       :bucket_owner_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the S3 bucket where the raw data of a report are exported. </p>
@@ -5744,7 +5394,7 @@ module Aws::CodeBuild
       :encryption_key,
       :encryption_disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Session Manager session.</p>
@@ -5762,7 +5412,7 @@ module Aws::CodeBuild
       :token_value,
       :stream_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains sandbox information.</p>
@@ -5855,7 +5505,7 @@ module Aws::CodeBuild
       :service_role,
       :current_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the sandbox session.</p>
@@ -5897,7 +5547,7 @@ module Aws::CodeBuild
       :logs,
       :network_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the sandbox phase.</p>
@@ -5954,7 +5604,7 @@ module Aws::CodeBuild
       :duration_in_seconds,
       :contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scaling configuration input of a compute fleet.</p>
@@ -5972,7 +5622,7 @@ module Aws::CodeBuild
       :target_tracking_scaling_configs,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scaling configuration output of a compute fleet.</p>
@@ -5994,7 +5644,7 @@ module Aws::CodeBuild
       :max_capacity,
       :desired_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information about the scope for a webhook. </p>
@@ -6012,25 +5662,7 @@ module Aws::CodeBuild
       :domain,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerType
-      GITHUB = 'GITHUB'
-      BITBUCKET = 'BITBUCKET'
-      GITHUB_ENTERPRISE = 'GITHUB_ENTERPRISE'
-      GITLAB = 'GITLAB'
-      GITLAB_SELF_MANAGED = 'GITLAB_SELF_MANAGED'
-    end
-
-    module SharedResourceSortByType
-      ARN = 'ARN'
-      MODIFIED_TIME = 'MODIFIED_TIME'
-    end
-
-    module SortOrderType
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the authorization settings for CodeBuild to access the source code to be
@@ -6045,13 +5677,7 @@ module Aws::CodeBuild
       :type,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceAuthType
-      OAUTH = 'OAUTH'
-      CODECONNECTIONS = 'CODECONNECTIONS'
-      SECRETS_MANAGER = 'SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the credentials for a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket
@@ -6076,19 +5702,7 @@ module Aws::CodeBuild
       :auth_type,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      CODECOMMIT = 'CODECOMMIT'
-      CODEPIPELINE = 'CODEPIPELINE'
-      GITHUB = 'GITHUB'
-      GITLAB = 'GITLAB'
-      GITLAB_SELF_MANAGED = 'GITLAB_SELF_MANAGED'
-      S3 = 'S3'
-      BITBUCKET = 'BITBUCKET'
-      GITHUB_ENTERPRISE = 'GITHUB_ENTERPRISE'
-      NO_SOURCE = 'NO_SOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -6314,7 +5928,7 @@ module Aws::CodeBuild
       :build_batch_config_override,
       :debug_session_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_batch
@@ -6323,7 +5937,7 @@ module Aws::CodeBuild
     class StartBuildBatchOutput < Struct.new(
       :build_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -6573,7 +6187,7 @@ module Aws::CodeBuild
       :fleet_override,
       :auto_retry_limit_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -6582,7 +6196,7 @@ module Aws::CodeBuild
     class StartBuildOutput < Struct.new(
       :build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox_id
@@ -6599,7 +6213,7 @@ module Aws::CodeBuild
       :command,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_execution
@@ -6608,7 +6222,7 @@ module Aws::CodeBuild
     class StartCommandExecutionOutput < Struct.new(
       :command_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox_id
@@ -6617,7 +6231,7 @@ module Aws::CodeBuild
     class StartSandboxConnectionInput < Struct.new(
       :sandbox_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ssm_session
@@ -6626,7 +6240,7 @@ module Aws::CodeBuild
     class StartSandboxConnectionOutput < Struct.new(
       :ssm_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -6639,7 +6253,7 @@ module Aws::CodeBuild
       :project_name,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox
@@ -6648,16 +6262,7 @@ module Aws::CodeBuild
     class StartSandboxOutput < Struct.new(
       :sandbox,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusType
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      FAULT = 'FAULT'
-      TIMED_OUT = 'TIMED_OUT'
-      IN_PROGRESS = 'IN_PROGRESS'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6666,7 +6271,7 @@ module Aws::CodeBuild
     class StopBuildBatchInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_batch
@@ -6675,7 +6280,7 @@ module Aws::CodeBuild
     class StopBuildBatchOutput < Struct.new(
       :build_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6684,7 +6289,7 @@ module Aws::CodeBuild
     class StopBuildInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -6693,7 +6298,7 @@ module Aws::CodeBuild
     class StopBuildOutput < Struct.new(
       :build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6702,7 +6307,7 @@ module Aws::CodeBuild
     class StopSandboxInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sandbox
@@ -6711,7 +6316,7 @@ module Aws::CodeBuild
     class StopSandboxOutput < Struct.new(
       :sandbox,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag, consisting of a key and a value.</p>
@@ -6726,7 +6331,7 @@ module Aws::CodeBuild
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines when a new instance is auto-scaled into the compute fleet.</p>
@@ -6740,7 +6345,7 @@ module Aws::CodeBuild
       :metric_type,
       :target_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a test case created using a framework such as NUnit or Cucumber. A
@@ -6788,7 +6393,7 @@ module Aws::CodeBuild
       :expired,
       :test_suite_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to return specific types of test cases. In order to pass the filter, the
@@ -6833,7 +6438,7 @@ module Aws::CodeBuild
       :status,
       :keyword,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a test report. </p>
@@ -6854,7 +6459,7 @@ module Aws::CodeBuild
       :status_counts,
       :duration_in_nano_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -7091,7 +6696,7 @@ module Aws::CodeBuild
       :fleet_service_role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet
@@ -7100,7 +6705,7 @@ module Aws::CodeBuild
     class UpdateFleetOutput < Struct.new(
       :fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7256,7 +6861,7 @@ module Aws::CodeBuild
       :concurrent_build_limit,
       :auto_retry_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project
@@ -7265,7 +6870,7 @@ module Aws::CodeBuild
     class UpdateProjectOutput < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -7293,7 +6898,7 @@ module Aws::CodeBuild
       :project_visibility,
       :resource_access_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -7320,7 +6925,7 @@ module Aws::CodeBuild
       :public_project_alias,
       :project_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -7357,7 +6962,7 @@ module Aws::CodeBuild
       :export_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_group
@@ -7368,7 +6973,7 @@ module Aws::CodeBuild
     class UpdateReportGroupOutput < Struct.new(
       :report_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -7414,7 +7019,7 @@ module Aws::CodeBuild
       :build_type,
       :pull_request_build_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook
@@ -7424,7 +7029,7 @@ module Aws::CodeBuild
     class UpdateWebhookOutput < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the VPC configuration that CodeBuild accesses.</p>
@@ -7442,7 +7047,7 @@ module Aws::CodeBuild
       :subnets,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a webhook that connects repository events to a build project in
@@ -7544,13 +7149,7 @@ module Aws::CodeBuild
       :status_message,
       :pull_request_build_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebhookBuildType
-      BUILD = 'BUILD'
-      BUILD_BATCH = 'BUILD_BATCH'
-      RUNNER_BUILDKITE_BUILD = 'RUNNER_BUILDKITE_BUILD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to determine which webhooks trigger a build. </p>
@@ -7733,34 +7332,7 @@ module Aws::CodeBuild
       :pattern,
       :exclude_matched_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebhookFilterType
-      EVENT = 'EVENT'
-      BASE_REF = 'BASE_REF'
-      HEAD_REF = 'HEAD_REF'
-      ACTOR_ACCOUNT_ID = 'ACTOR_ACCOUNT_ID'
-      FILE_PATH = 'FILE_PATH'
-      COMMIT_MESSAGE = 'COMMIT_MESSAGE'
-      WORKFLOW_NAME = 'WORKFLOW_NAME'
-      TAG_NAME = 'TAG_NAME'
-      RELEASE_NAME = 'RELEASE_NAME'
-      REPOSITORY_NAME = 'REPOSITORY_NAME'
-      ORGANIZATION_NAME = 'ORGANIZATION_NAME'
-    end
-
-    module WebhookScopeType
-      GITHUB_ORGANIZATION = 'GITHUB_ORGANIZATION'
-      GITHUB_GLOBAL = 'GITHUB_GLOBAL'
-      GITLAB_GROUP = 'GITLAB_GROUP'
-    end
-
-    module WebhookStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
   end

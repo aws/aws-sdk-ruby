@@ -23,11 +23,7 @@ module Aws::Translate
       :name,
       :terms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Brevity
-      ON = 'ON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another modification is being made. That modification must complete before you can make
@@ -37,7 +33,7 @@ module Aws::Translate
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict processing the request. Try your request again.</p>
@@ -46,7 +42,7 @@ module Aws::Translate
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -80,7 +76,7 @@ module Aws::Translate
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -94,7 +90,7 @@ module Aws::Translate
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -103,7 +99,7 @@ module Aws::Translate
     class DeleteParallelDataRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -116,7 +112,7 @@ module Aws::Translate
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -125,7 +121,7 @@ module Aws::Translate
     class DeleteTerminologyRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -135,7 +131,7 @@ module Aws::Translate
     class DescribeTextTranslationJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_translation_job_properties
@@ -145,7 +141,7 @@ module Aws::Translate
     class DescribeTextTranslationJobResponse < Struct.new(
       :text_translation_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The confidence that Amazon Comprehend accurately detected the source language is low. If a
@@ -161,25 +157,7 @@ module Aws::Translate
       :message,
       :detected_language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Directionality
-      UNI = 'UNI'
-      MULTI = 'MULTI'
-    end
-
-    module DisplayLanguageCode
-      DE = 'de'
-      EN = 'en'
-      ES = 'es'
-      FR = 'fr'
-      IT = 'it'
-      JA = 'ja'
-      KO = 'ko'
-      PT = 'pt'
-      ZH = 'zh'
-      ZH_TW = 'zh-TW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content and content type of a document.</p>
@@ -214,7 +192,7 @@ module Aws::Translate
       :content,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption key used to encrypt this object.</p>
@@ -228,16 +206,7 @@ module Aws::Translate
       :type,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionKeyType
-      KMS = 'KMS'
-    end
-
-    module Formality
-      FORMAL = 'FORMAL'
-      INFORMAL = 'INFORMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -246,7 +215,7 @@ module Aws::Translate
     class GetParallelDataRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parallel_data_properties
@@ -285,7 +254,7 @@ module Aws::Translate
       :auxiliary_data_location,
       :latest_update_attempt_auxiliary_data_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -303,7 +272,7 @@ module Aws::Translate
       :name,
       :terminology_data_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute terminology_properties
@@ -335,7 +304,7 @@ module Aws::Translate
       :terminology_data_location,
       :auxiliary_data_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -369,7 +338,7 @@ module Aws::Translate
       :encryption_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute terminology_properties
@@ -385,7 +354,7 @@ module Aws::Translate
       :terminology_properties,
       :auxiliary_data_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input configuration properties for requesting a batch translation job.</p>
@@ -442,7 +411,7 @@ module Aws::Translate
       :s3_uri,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -451,7 +420,7 @@ module Aws::Translate
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter specified for the operation is not valid. Specify a different filter.</p>
@@ -460,7 +429,7 @@ module Aws::Translate
     class InvalidFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of the parameter is not valid. Review the value of the parameter you are using
@@ -470,7 +439,7 @@ module Aws::Translate
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request that you made is not valid. Check your request to determine why it's not
@@ -480,7 +449,7 @@ module Aws::Translate
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of documents successfully and unsuccessfully processed during a translation
@@ -499,17 +468,7 @@ module Aws::Translate
       :documents_with_errors_count,
       :input_documents_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      COMPLETED_WITH_ERROR = 'COMPLETED_WITH_ERROR'
-      FAILED = 'FAILED'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A supported language.</p>
@@ -523,7 +482,7 @@ module Aws::Translate
       :language_name,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified limit has been exceeded. Review your request and retry it with a quantity
@@ -533,7 +492,7 @@ module Aws::Translate
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_language_code
@@ -551,7 +510,7 @@ module Aws::Translate
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute languages
@@ -569,7 +528,7 @@ module Aws::Translate
       :display_language_code,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -582,7 +541,7 @@ module Aws::Translate
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parallel_data_properties_list
@@ -596,7 +555,7 @@ module Aws::Translate
       :parallel_data_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -606,7 +565,7 @@ module Aws::Translate
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -618,7 +577,7 @@ module Aws::Translate
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -632,7 +591,7 @@ module Aws::Translate
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute terminology_properties_list
@@ -646,7 +605,7 @@ module Aws::Translate
       :terminology_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -664,7 +623,7 @@ module Aws::Translate
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_translation_job_properties_list
@@ -678,11 +637,7 @@ module Aws::Translate
       :text_translation_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MergeStrategy
-      OVERWRITE = 'OVERWRITE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration properties for a batch translation job.</p>
@@ -697,7 +652,7 @@ module Aws::Translate
       :s3_uri,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the format and S3 location of the parallel data input file.</p>
@@ -712,7 +667,7 @@ module Aws::Translate
       :s3_uri,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the most recent parallel data input file that was successfully imported
@@ -738,13 +693,7 @@ module Aws::Translate
       :repository_type,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParallelDataFormat
-      TSV = 'TSV'
-      CSV = 'CSV'
-      TMX = 'TMX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a parallel data resource.</p>
@@ -825,19 +774,7 @@ module Aws::Translate
       :latest_update_attempt_status,
       :latest_update_attempt_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParallelDataStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-    end
-
-    module Profanity
-      MASK = 'MASK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you are looking for has not been found. Review the resource you're looking
@@ -848,7 +785,7 @@ module Aws::Translate
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Translate service is temporarily unavailable. Wait a bit and then retry your
@@ -858,7 +795,7 @@ module Aws::Translate
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -946,7 +883,7 @@ module Aws::Translate
       :client_token,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -994,7 +931,7 @@ module Aws::Translate
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1003,7 +940,7 @@ module Aws::Translate
     class StopTextTranslationJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1017,7 +954,7 @@ module Aws::Translate
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that adds as a metadata to a resource used by Amazon Translate. </p>
@@ -1032,7 +969,7 @@ module Aws::Translate
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1047,12 +984,12 @@ module Aws::Translate
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The term being translated by the custom terminology.</p>
@@ -1066,7 +1003,7 @@ module Aws::Translate
       :source_text,
       :target_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data associated with the custom terminology. For information about the custom terminology file, see
@@ -1106,13 +1043,7 @@ module Aws::Translate
       :format,
       :directionality,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TerminologyDataFormat
-      CSV = 'CSV'
-      TMX = 'TMX'
-      TSV = 'TSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the custom terminology data.</p>
@@ -1138,7 +1069,7 @@ module Aws::Translate
       :repository_type,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the custom terminology.</p>
@@ -1215,7 +1146,7 @@ module Aws::Translate
       :skipped_term_count,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The size of the text you submitted exceeds the size limit. Reduce the size of the text or
@@ -1225,7 +1156,7 @@ module Aws::Translate
     class TextSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of translation jobs. For more information, see
@@ -1252,7 +1183,7 @@ module Aws::Translate
       :submitted_before_time,
       :submitted_after_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a translation job.</p>
@@ -1325,7 +1256,7 @@ module Aws::Translate
       :data_access_role_arn,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You have made too many requests within a short period of time. Wait for a short time and
@@ -1335,7 +1266,7 @@ module Aws::Translate
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have added too many tags to this resource. The maximum is 50 tags.</p>
@@ -1347,7 +1278,7 @@ module Aws::Translate
       :message,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -1400,7 +1331,7 @@ module Aws::Translate
       :target_language_code,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute translated_document
@@ -1438,7 +1369,7 @@ module Aws::Translate
       :applied_terminologies,
       :applied_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1490,7 +1421,7 @@ module Aws::Translate
       :target_language_code,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute translated_text
@@ -1516,7 +1447,7 @@ module Aws::Translate
       :applied_terminologies,
       :applied_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The translated content.</p>
@@ -1526,7 +1457,7 @@ module Aws::Translate
     class TranslatedDocument < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings to configure your translation output. You can configure the following options:</p>
@@ -1582,7 +1513,7 @@ module Aws::Translate
       :profanity,
       :brevity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requested display language code is not supported.</p>
@@ -1595,7 +1526,7 @@ module Aws::Translate
       :message,
       :display_language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Translate does not support translation from the language of the source text into the requested
@@ -1613,7 +1544,7 @@ module Aws::Translate
       :source_language_code,
       :target_language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1629,12 +1560,12 @@ module Aws::Translate
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1656,7 +1587,7 @@ module Aws::Translate
       :parallel_data_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1680,7 +1611,7 @@ module Aws::Translate
       :latest_update_attempt_status,
       :latest_update_attempt_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

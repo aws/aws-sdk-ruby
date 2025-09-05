@@ -6,24 +6,13 @@ module Aws::KinesisVideo
   # This module contains the types returned by client operations.
   module Types
 
-    module APIName
-      PUT_MEDIA = 'PUT_MEDIA'
-      GET_MEDIA = 'GET_MEDIA'
-      LIST_FRAGMENTS = 'LIST_FRAGMENTS'
-      GET_MEDIA_FOR_FRAGMENT_LIST = 'GET_MEDIA_FOR_FRAGMENT_LIST'
-      GET_HLS_STREAMING_SESSION_URL = 'GET_HLS_STREAMING_SESSION_URL'
-      GET_DASH_STREAMING_SESSION_URL = 'GET_DASH_STREAMING_SESSION_URL'
-      GET_CLIP = 'GET_CLIP'
-      GET_IMAGES = 'GET_IMAGES'
-    end
-
     # <p>You do not have required permissions to perform this operation.</p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum limit of active signaling channels for this Amazon Web Services account
@@ -33,7 +22,7 @@ module Aws::KinesisVideo
     class AccountChannelLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of streams created for the account is too high.</p>
@@ -42,7 +31,7 @@ module Aws::KinesisVideo
     class AccountStreamLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that encapsulates a signaling channel's metadata and properties.</p>
@@ -77,7 +66,7 @@ module Aws::KinesisVideo
       :single_master_configuration,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional input parameter for the <code>ListSignalingChannels</code> API. When this
@@ -95,23 +84,7 @@ module Aws::KinesisVideo
       :comparison_operator,
       :comparison_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelProtocol
-      WSS = 'WSS'
-      HTTPS = 'HTTPS'
-      WEBRTC = 'WEBRTC'
-    end
-
-    module ChannelRole
-      MASTER = 'MASTER'
-      VIEWER = 'VIEWER'
-    end
-
-    module ChannelType
-      SINGLE_MASTER = 'SINGLE_MASTER'
-      FULL_MESH = 'FULL_MESH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
@@ -121,16 +94,7 @@ module Aws::KinesisVideo
     class ClientLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      BEGINS_WITH = 'BEGINS_WITH'
-    end
-
-    module ConfigurationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -153,7 +117,7 @@ module Aws::KinesisVideo
       :single_master_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -162,7 +126,7 @@ module Aws::KinesisVideo
     class CreateSignalingChannelOutput < Struct.new(
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_name
@@ -213,7 +177,7 @@ module Aws::KinesisVideo
       :data_retention_in_hours,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -222,7 +186,7 @@ module Aws::KinesisVideo
     class CreateStreamOutput < Struct.new(
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -235,12 +199,12 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEdgeConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -256,12 +220,12 @@ module Aws::KinesisVideo
       :channel_arn,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSignalingChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -278,12 +242,12 @@ module Aws::KinesisVideo
       :stream_arn,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details required to delete the connection of the stream from the Edge Agent.</p>
@@ -308,7 +272,7 @@ module Aws::KinesisVideo
       :local_size_config,
       :delete_after_upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -323,7 +287,7 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -362,7 +326,7 @@ module Aws::KinesisVideo
       :edge_config,
       :edge_agent_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -375,7 +339,7 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_generation_configuration
@@ -384,7 +348,7 @@ module Aws::KinesisVideo
     class DescribeImageGenerationConfigurationOutput < Struct.new(
       :image_generation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -405,7 +369,7 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mapped_resource_configuration_list
@@ -418,7 +382,7 @@ module Aws::KinesisVideo
       :mapped_resource_configuration_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -431,7 +395,7 @@ module Aws::KinesisVideo
       :channel_name,
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_storage_configuration
@@ -440,7 +404,7 @@ module Aws::KinesisVideo
     class DescribeMediaStorageConfigurationOutput < Struct.new(
       :media_storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -453,7 +417,7 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_configuration
@@ -462,7 +426,7 @@ module Aws::KinesisVideo
     class DescribeNotificationConfigurationOutput < Struct.new(
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -475,7 +439,7 @@ module Aws::KinesisVideo
       :channel_name,
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_info
@@ -485,7 +449,7 @@ module Aws::KinesisVideo
     class DescribeSignalingChannelOutput < Struct.new(
       :channel_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -498,7 +462,7 @@ module Aws::KinesisVideo
       :stream_name,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_info
@@ -507,7 +471,7 @@ module Aws::KinesisVideo
     class DescribeStreamOutput < Struct.new(
       :stream_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Not implemented.
@@ -517,7 +481,7 @@ module Aws::KinesisVideo
     class DeviceStreamLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.</p>
@@ -531,7 +495,7 @@ module Aws::KinesisVideo
       :last_recorder_status,
       :last_uploader_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the stream's edge configuration that will be used to sync 
@@ -558,16 +522,7 @@ module Aws::KinesisVideo
       :uploader_config,
       :deletion_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      JPEG = 'JPEG'
-      PNG = 'PNG'
-    end
-
-    module FormatConfigKey
-      JPEGQuality = 'JPEGQuality'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -587,7 +542,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :api_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_endpoint
@@ -597,7 +552,7 @@ module Aws::KinesisVideo
     class GetDataEndpointOutput < Struct.new(
       :data_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -612,7 +567,7 @@ module Aws::KinesisVideo
       :channel_arn,
       :single_master_channel_endpoint_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_endpoint_list
@@ -621,7 +576,7 @@ module Aws::KinesisVideo
     class GetSignalingChannelEndpointOutput < Struct.new(
       :resource_endpoint_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the information required for the KVS images delivery. If null, the configuration will be deleted from the stream.</p>
@@ -669,7 +624,7 @@ module Aws::KinesisVideo
       :width_pixels,
       :height_pixels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the information required to deliver images to a customer.</p>
@@ -683,12 +638,7 @@ module Aws::KinesisVideo
       :uri,
       :destination_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageSelectorType
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for this input parameter is invalid.</p>
@@ -697,7 +647,7 @@ module Aws::KinesisVideo
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Not implemented.</p>
@@ -706,7 +656,7 @@ module Aws::KinesisVideo
     class InvalidDeviceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the <code>StreamARN</code> is invalid.</p>
@@ -715,7 +665,7 @@ module Aws::KinesisVideo
     class InvalidResourceFormatException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The latest status of a stream's edge recording job.</p>
@@ -737,7 +687,7 @@ module Aws::KinesisVideo
       :last_updated_time,
       :recorder_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The latest status of a stream’s edge to cloud uploader job.</p>
@@ -759,7 +709,7 @@ module Aws::KinesisVideo
       :last_updated_time,
       :uploader_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a single stream's edge configuration.</p>
@@ -795,7 +745,7 @@ module Aws::KinesisVideo
       :failed_status_details,
       :edge_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_device_arn
@@ -813,7 +763,7 @@ module Aws::KinesisVideo
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_configs
@@ -826,7 +776,7 @@ module Aws::KinesisVideo
       :edge_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -845,7 +795,7 @@ module Aws::KinesisVideo
       :next_token,
       :channel_name_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_info_list
@@ -859,7 +809,7 @@ module Aws::KinesisVideo
       :channel_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -880,7 +830,7 @@ module Aws::KinesisVideo
       :next_token,
       :stream_name_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_info_list
@@ -894,7 +844,7 @@ module Aws::KinesisVideo
       :stream_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -910,7 +860,7 @@ module Aws::KinesisVideo
       :next_token,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -925,7 +875,7 @@ module Aws::KinesisVideo
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -945,7 +895,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -960,7 +910,7 @@ module Aws::KinesisVideo
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details that include the maximum size of the media 
@@ -977,7 +927,7 @@ module Aws::KinesisVideo
       :max_local_media_size_in_mb,
       :strategy_on_full_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that encapsulates, or contains, the media storage configuration properties.</p>
@@ -991,7 +941,7 @@ module Aws::KinesisVideo
       :type,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details that consist of the credentials required 
@@ -1011,7 +961,7 @@ module Aws::KinesisVideo
       :media_uri_secret_arn,
       :media_uri_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that encapsulates, or contains, the media storage configuration
@@ -1037,17 +987,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaStorageConfigurationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module MediaUriType
-      RTSP_URI = 'RTSP_URI'
-      FILE_URI = 'FILE_URI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Stream data retention in hours is equal to zero.</p>
@@ -1056,7 +996,7 @@ module Aws::KinesisVideo
     class NoDataRetentionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller is not authorized to perform this operation.</p>
@@ -1065,7 +1005,7 @@ module Aws::KinesisVideo
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.</p>
@@ -1079,7 +1019,7 @@ module Aws::KinesisVideo
       :status,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the information required to deliver a notification to a customer.</p>
@@ -1089,7 +1029,7 @@ module Aws::KinesisVideo
     class NotificationDestinationConfig < Struct.new(
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as 
@@ -1110,13 +1050,7 @@ module Aws::KinesisVideo
       :media_source_config,
       :schedule_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecorderStatus
-      SUCCESS = 'SUCCESS'
-      USER_ERROR = 'USER_ERROR'
-      SYSTEM_ERROR = 'SYSTEM_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the endpoint of the signaling channel returned by the
@@ -1134,7 +1068,7 @@ module Aws::KinesisVideo
       :protocol,
       :resource_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When the input <code>StreamARN</code> or <code>ChannelARN</code>
@@ -1160,7 +1094,7 @@ module Aws::KinesisVideo
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Kinesis Video Streams can't find the stream that you specified.</p>
@@ -1169,7 +1103,7 @@ module Aws::KinesisVideo
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This API enables you to specify the duration that the camera,
@@ -1196,7 +1130,7 @@ module Aws::KinesisVideo
       :schedule_expression,
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the endpoint configuration for the <code>SINGLE_MASTER</code>
@@ -1219,7 +1153,7 @@ module Aws::KinesisVideo
       :protocols,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel
@@ -1231,7 +1165,7 @@ module Aws::KinesisVideo
     class SingleMasterConfiguration < Struct.new(
       :message_ttl_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1250,7 +1184,7 @@ module Aws::KinesisVideo
       :stream_arn,
       :edge_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1287,19 +1221,7 @@ module Aws::KinesisVideo
       :failed_status_details,
       :edge_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-    end
-
-    module StrategyOnFullSize
-      DELETE_OLDEST_MEDIA = 'DELETE_OLDEST_MEDIA'
-      DENY_NEW_MEDIA = 'DENY_NEW_MEDIA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Exception rendered when the Amazon Kinesis Video Stream can't find a stream's edge configuration
@@ -1309,7 +1231,7 @@ module Aws::KinesisVideo
     class StreamEdgeConfigurationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object describing a Kinesis video stream.</p>
@@ -1352,7 +1274,7 @@ module Aws::KinesisVideo
       :creation_time,
       :data_retention_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the condition that streams must satisfy to be returned when you list
@@ -1370,17 +1292,7 @@ module Aws::KinesisVideo
       :comparison_operator,
       :comparison_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SyncStatus
-      SYNCING = 'SYNCING'
-      ACKNOWLEDGED = 'ACKNOWLEDGED'
-      IN_SYNC = 'IN_SYNC'
-      SYNC_FAILED = 'SYNC_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETING_ACKNOWLEDGED = 'DELETING_ACKNOWLEDGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key and value pair that is associated with the specified signaling channel.</p>
@@ -1394,7 +1306,7 @@ module Aws::KinesisVideo
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1409,12 +1321,12 @@ module Aws::KinesisVideo
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -1433,12 +1345,12 @@ module Aws::KinesisVideo
       :stream_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the limit of tags that you can associate with the resource.
@@ -1448,7 +1360,7 @@ module Aws::KinesisVideo
     class TagsPerResourceExceededLimitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1462,12 +1374,12 @@ module Aws::KinesisVideo
       :resource_arn,
       :tag_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -1485,12 +1397,12 @@ module Aws::KinesisVideo
       :stream_name,
       :tag_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1519,17 +1431,12 @@ module Aws::KinesisVideo
       :operation,
       :data_retention_change_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateDataRetentionOperation
-      INCREASE_DATA_RETENTION = 'INCREASE_DATA_RETENTION'
-      DECREASE_DATA_RETENTION = 'DECREASE_DATA_RETENTION'
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataRetentionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1547,12 +1454,12 @@ module Aws::KinesisVideo
       :stream_arn,
       :image_generation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateImageGenerationConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1565,12 +1472,12 @@ module Aws::KinesisVideo
       :channel_arn,
       :media_storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMediaStorageConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1587,12 +1494,12 @@ module Aws::KinesisVideo
       :stream_arn,
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotificationConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1611,12 +1518,12 @@ module Aws::KinesisVideo
       :current_version,
       :single_master_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSignalingChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -1654,12 +1561,12 @@ module Aws::KinesisVideo
       :device_name,
       :media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that consists of the <code>ScheduleExpression</code>
@@ -1676,13 +1583,7 @@ module Aws::KinesisVideo
     class UploaderConfig < Struct.new(
       :schedule_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UploaderStatus
-      SUCCESS = 'SUCCESS'
-      USER_ERROR = 'USER_ERROR'
-      SYSTEM_ERROR = 'SYSTEM_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stream version that you specified is not the latest version. To get the latest
@@ -1693,7 +1594,7 @@ module Aws::KinesisVideo
     class VersionMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

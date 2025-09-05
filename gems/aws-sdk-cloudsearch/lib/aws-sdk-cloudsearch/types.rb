@@ -17,14 +17,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlgorithmicStemming
-      none = 'none'
-      minimal = 'minimal'
-      light = 'light'
-      full = 'full'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.</p>
@@ -50,7 +43,7 @@ module Aws::CloudSearch
       :japanese_tokenization_dictionary,
       :algorithmic_stemming,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.</p>
@@ -69,46 +62,7 @@ module Aws::CloudSearch
       :analysis_scheme_language,
       :analysis_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>An <a href="http://tools.ietf.org/html/rfc4646" target="_blank">IETF RFC 4646</a> language code or <code>mul</code>  for multiple languages.</p>
-    module AnalysisSchemeLanguage
-      ar = 'ar'
-      bg = 'bg'
-      ca = 'ca'
-      cs = 'cs'
-      da = 'da'
-      de = 'de'
-      el = 'el'
-      en = 'en'
-      es = 'es'
-      eu = 'eu'
-      fa = 'fa'
-      fi = 'fi'
-      fr = 'fr'
-      ga = 'ga'
-      gl = 'gl'
-      he = 'he'
-      hi = 'hi'
-      hu = 'hu'
-      hy = 'hy'
-      id = 'id'
-      it = 'it'
-      ja = 'ja'
-      ko = 'ko'
-      lv = 'lv'
-      mul = 'mul'
-      nl = 'nl'
-      no = 'no'
-      pt = 'pt'
-      ro = 'ro'
-      ru = 'ru'
-      sv = 'sv'
-      th = 'th'
-      tr = 'tr'
-      zh_Hans = 'zh-Hans'
-      zh_Hant = 'zh-Hant'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status and configuration of an  <code>AnalysisScheme</code>.</p>
@@ -122,7 +76,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status and configuration of the domain's availability options.</p>
@@ -136,7 +90,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:options] = false unless options.key?(:options)
@@ -155,7 +109,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>BuildSuggester</a></code> operation. Specifies the name of the domain you want to update.</p>
@@ -165,7 +119,7 @@ module Aws::CloudSearch
     class BuildSuggestersRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>BuildSuggester</code> request. Contains a list of the fields used for suggestions.</p>
@@ -175,7 +129,7 @@ module Aws::CloudSearch
     class BuildSuggestersResponse < Struct.new(
       :field_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>CreateDomain</a></code> operation. Specifies a name for the new search domain.</p>
@@ -185,7 +139,7 @@ module Aws::CloudSearch
     class CreateDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>CreateDomainRequest</code>. Contains the status of a newly created domain.</p>
@@ -195,7 +149,7 @@ module Aws::CloudSearch
     class CreateDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a field that contains an array of dates.  Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.</p>
@@ -221,7 +175,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z.  Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.</p>
@@ -264,7 +218,7 @@ module Aws::CloudSearch
       :return_enabled,
       :sort_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DefineAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme configuration.</p>
@@ -278,7 +232,7 @@ module Aws::CloudSearch
       :domain_name,
       :analysis_scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DefineAnalysisScheme</a></code> request. Contains the status of the newly-configured analysis scheme.</p>
@@ -288,7 +242,7 @@ module Aws::CloudSearch
     class DefineAnalysisSchemeResponse < Struct.new(
       :analysis_scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DefineExpression</a></code> operation. Specifies the name of the domain you want to update and the expression you want to configure.</p>
@@ -302,7 +256,7 @@ module Aws::CloudSearch
       :domain_name,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DefineExpression</code> request. Contains the status of the newly-configured expression.</p>
@@ -312,7 +266,7 @@ module Aws::CloudSearch
     class DefineExpressionResponse < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DefineIndexField</a></code> operation. Specifies the name of the domain you want to update and the index field configuration.</p>
@@ -326,7 +280,7 @@ module Aws::CloudSearch
       :domain_name,
       :index_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DefineIndexField</a></code> request. Contains the status of the newly-configured index field.</p>
@@ -336,7 +290,7 @@ module Aws::CloudSearch
     class DefineIndexFieldResponse < Struct.new(
       :index_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DefineSuggester</a></code> operation. Specifies the name of the domain you want to update and the suggester configuration.</p>
@@ -350,7 +304,7 @@ module Aws::CloudSearch
       :domain_name,
       :suggester,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DefineSuggester</code> request. Contains the status of the newly-configured suggester.</p>
@@ -360,7 +314,7 @@ module Aws::CloudSearch
     class DefineSuggesterResponse < Struct.new(
       :suggester,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete. </p>
@@ -374,7 +328,7 @@ module Aws::CloudSearch
       :domain_name,
       :analysis_scheme_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DeleteAnalysisScheme</code> request. Contains the status of the deleted analysis scheme.</p>
@@ -384,7 +338,7 @@ module Aws::CloudSearch
     class DeleteAnalysisSchemeResponse < Struct.new(
       :analysis_scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteDomain</a></code> operation. Specifies the name of the domain you want to delete.</p>
@@ -394,7 +348,7 @@ module Aws::CloudSearch
     class DeleteDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DeleteDomain</code> request. Contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.</p>
@@ -404,7 +358,7 @@ module Aws::CloudSearch
     class DeleteDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteExpression</a></code> operation. Specifies the name of the domain you want to update and the name of the expression you want to delete.</p>
@@ -418,7 +372,7 @@ module Aws::CloudSearch
       :domain_name,
       :expression_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DeleteExpression</a></code> request. Specifies the expression being deleted.</p>
@@ -428,7 +382,7 @@ module Aws::CloudSearch
     class DeleteExpressionResponse < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteIndexField</a></code> operation. Specifies the name of the domain you want to update and the name of the index field you want to delete.</p>
@@ -442,7 +396,7 @@ module Aws::CloudSearch
       :domain_name,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DeleteIndexField</a></code> request.</p>
@@ -452,7 +406,7 @@ module Aws::CloudSearch
     class DeleteIndexFieldResponse < Struct.new(
       :index_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteSuggester</a></code> operation. Specifies the name of the domain you want to update and name of the suggester you want to delete.</p>
@@ -466,7 +420,7 @@ module Aws::CloudSearch
       :domain_name,
       :suggester_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DeleteSuggester</code> request. Contains the status of the deleted suggester.</p>
@@ -476,7 +430,7 @@ module Aws::CloudSearch
     class DeleteSuggesterResponse < Struct.new(
       :suggester,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeAnalysisSchemes</a></code> operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>. </p>
@@ -494,7 +448,7 @@ module Aws::CloudSearch
       :analysis_scheme_names,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeAnalysisSchemes</code> request. Contains the analysis schemes configured for the domain specified in the request.</p>
@@ -504,7 +458,7 @@ module Aws::CloudSearch
     class DescribeAnalysisSchemesResponse < Struct.new(
       :analysis_schemes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.</p>
@@ -518,7 +472,7 @@ module Aws::CloudSearch
       :domain_name,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. </p>
@@ -528,7 +482,7 @@ module Aws::CloudSearch
     class DescribeAvailabilityOptionsResponse < Struct.new(
       :availability_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeDomainEndpointOptions</a></code> operation. Specify the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.</p>
@@ -542,7 +496,7 @@ module Aws::CloudSearch
       :domain_name,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainEndpointOptions</code> request. Contains the status and configuration of a search domain's endpoint options. </p>
@@ -552,7 +506,7 @@ module Aws::CloudSearch
     class DescribeDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation. By default shows the status of all domains. To restrict the response to particular domains, specify the names of the domains you want to describe.</p>
@@ -562,7 +516,7 @@ module Aws::CloudSearch
     class DescribeDomainsRequest < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomains</code> request. Contains the status of the domains specified in the request or all domains owned by the account.</p>
@@ -572,7 +526,7 @@ module Aws::CloudSearch
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeDomains</a></code> operation.
@@ -591,7 +545,7 @@ module Aws::CloudSearch
       :expression_names,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeExpressions</code> request. Contains the expressions configured for the domain specified in the request.</p>
@@ -601,7 +555,7 @@ module Aws::CloudSearch
     class DescribeExpressionsResponse < Struct.new(
       :expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show  the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>
@@ -619,7 +573,7 @@ module Aws::CloudSearch
       :field_names,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeIndexFields</code> request. Contains the index fields configured for the domain specified in the request.</p>
@@ -629,7 +583,7 @@ module Aws::CloudSearch
     class DescribeIndexFieldsResponse < Struct.new(
       :index_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeScalingParameters</a></code> operation. Specifies the name of the domain you want to describe. </p>
@@ -639,7 +593,7 @@ module Aws::CloudSearch
     class DescribeScalingParametersRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeScalingParameters</code> request. Contains the scaling parameters configured for the domain specified in the request.</p>
@@ -649,7 +603,7 @@ module Aws::CloudSearch
     class DescribeScalingParametersResponse < Struct.new(
       :scaling_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>
@@ -663,7 +617,7 @@ module Aws::CloudSearch
       :domain_name,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeServiceAccessPolicies</code> request.</p>
@@ -673,7 +627,7 @@ module Aws::CloudSearch
     class DescribeServiceAccessPoliciesResponse < Struct.new(
       :access_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeSuggester</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular suggesters, specify the names of the suggesters you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.</p>
@@ -691,7 +645,7 @@ module Aws::CloudSearch
       :suggester_names,
       :deployed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeSuggesters</code> request.</p>
@@ -701,7 +655,7 @@ module Aws::CloudSearch
     class DescribeSuggestersResponse < Struct.new(
       :suggesters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted an operation which is not enabled.</p>
@@ -715,7 +669,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a search suggester.</p>
@@ -739,7 +693,7 @@ module Aws::CloudSearch
       :fuzzy_matching,
       :sort_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain's endpoint options.</p>
@@ -753,7 +707,7 @@ module Aws::CloudSearch
       :enforce_https,
       :tls_security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration and status of the domain's endpoint options.</p>
@@ -767,7 +721,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of the search domain.</p>
@@ -824,7 +778,7 @@ module Aws::CloudSearch
       :search_instance_count,
       :limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a field that contains an array of double-precision 64-bit floating point values.  Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>.  All options are enabled by default.</p>
@@ -850,7 +804,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a double-precision 64-bit floating point field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.</p>
@@ -880,7 +834,7 @@ module Aws::CloudSearch
       :return_enabled,
       :sort_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results.  </p>
@@ -895,7 +849,7 @@ module Aws::CloudSearch
       :expression_name,
       :expression_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of an <code>Expression</code> and its current status.</p>
@@ -909,7 +863,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>IndexDocuments</a></code> operation. Specifies the name of the domain you want to re-index.</p>
@@ -919,7 +873,7 @@ module Aws::CloudSearch
     class IndexDocumentsRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an <code>IndexDocuments</code> request. Contains the status of the indexing operation, including the fields being indexed.</p>
@@ -929,7 +883,7 @@ module Aws::CloudSearch
     class IndexDocumentsResponse < Struct.new(
       :field_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.</p>
@@ -1000,7 +954,7 @@ module Aws::CloudSearch
       :text_array_options,
       :date_array_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of an <code>IndexField</code> and its current status.</p>
@@ -1014,22 +968,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>
-    module IndexFieldType
-      int = 'int'
-      double = 'double'
-      literal = 'literal'
-      text = 'text'
-      date = 'date'
-      latlon = 'latlon'
-      int_array = 'int-array'
-      double_array = 'double-array'
-      literal_array = 'literal-array'
-      text_array = 'text-array'
-      date_array = 'date-array'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a field that contains an array of 64-bit signed integers.  Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.</p>
@@ -1055,7 +994,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a 64-bit signed integer field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.</p>
@@ -1085,7 +1024,7 @@ module Aws::CloudSearch
       :return_enabled,
       :sort_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred while processing the request. If this problem persists,
@@ -1100,7 +1039,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it specified an invalid type definition.</p>
@@ -1114,7 +1053,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.</p>
@@ -1157,7 +1096,7 @@ module Aws::CloudSearch
       :return_enabled,
       :sort_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a resource limit has already been met.</p>
@@ -1171,7 +1110,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute maximum_replication_count
@@ -1182,7 +1121,7 @@ module Aws::CloudSearch
       :maximum_replication_count,
       :maximum_partition_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>ListDomainNames</code> request. Contains a list of the domains owned by an account.</p>
@@ -1192,7 +1131,7 @@ module Aws::CloudSearch
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a field that contains an array of literal strings.  Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.</p>
@@ -1218,7 +1157,7 @@ module Aws::CloudSearch
       :search_enabled,
       :return_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for literal field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.</p>
@@ -1261,21 +1200,7 @@ module Aws::CloudSearch
       :return_enabled,
       :sort_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The state of processing a change to an option. One of:</p>
-    #     <ul>
-    #       <li>RequiresIndexDocuments: The option's latest value will not be deployed until  <a>IndexDocuments</a> has been called and indexing is complete.</li>
-    #       <li>Processing: The option's latest value is in the process of being activated.</li>
-    #       <li>Active: The option's latest value is fully deployed. </li>
-    #       <li>FailedToValidate: The option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li>
-    #     </ul>
-    module OptionState
-      RequiresIndexDocuments = 'RequiresIndexDocuments'
-      Processing = 'Processing'
-      Active = 'Active'
-      FailedToValidate = 'FailedToValidate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of domain configuration option.</p>
@@ -1306,33 +1231,12 @@ module Aws::CloudSearch
       :state,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:update_version] = 0 unless options.key?(:update_version)
         super
       end
-    end
-
-    # <p>The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.</p>
-    module PartitionInstanceType
-      search_m1_small = 'search.m1.small'
-      search_m1_large = 'search.m1.large'
-      search_m2_xlarge = 'search.m2.xlarge'
-      search_m2_2xlarge = 'search.m2.2xlarge'
-      search_m3_medium = 'search.m3.medium'
-      search_m3_large = 'search.m3.large'
-      search_m3_xlarge = 'search.m3.xlarge'
-      search_m3_2xlarge = 'search.m3.2xlarge'
-      search_small = 'search.small'
-      search_medium = 'search.medium'
-      search_large = 'search.large'
-      search_xlarge = 'search.xlarge'
-      search_2xlarge = 'search.2xlarge'
-      search_previousgeneration_small = 'search.previousgeneration.small'
-      search_previousgeneration_large = 'search.previousgeneration.large'
-      search_previousgeneration_xlarge = 'search.previousgeneration.xlarge'
-      search_previousgeneration_2xlarge = 'search.previousgeneration.2xlarge'
     end
 
     # <p>The request was rejected because it attempted to create a resource that already exists.</p>
@@ -1346,7 +1250,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to reference a resource that does not exist.</p>
@@ -1360,7 +1264,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The desired instance type and desired number of replicas of each index partition.</p>
@@ -1379,7 +1283,7 @@ module Aws::CloudSearch
       :desired_replication_count,
       :desired_partition_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:desired_replication_count] = 0 unless options.key?(:desired_replication_count)
@@ -1399,7 +1303,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint to which service requests can be submitted.</p>
@@ -1409,7 +1313,7 @@ module Aws::CloudSearch
     class ServiceEndpoint < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. </p>
@@ -1424,13 +1328,7 @@ module Aws::CloudSearch
       :suggester_name,
       :document_suggester_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SuggesterFuzzyMatching
-      none = 'none'
-      low = 'low'
-      high = 'high'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a <code>Suggester</code> and its current status.</p>
@@ -1444,13 +1342,7 @@ module Aws::CloudSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The minimum required TLS version.</p>
-    module TLSSecurityPolicy
-      POLICY_MIN_TLS_1_0_2019_07 = 'Policy-Min-TLS-1-0-2019-07'
-      POLICY_MIN_TLS_1_2_2019_07 = 'Policy-Min-TLS-1-2-2019-07'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a field that contains an array of text strings.  Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.</p>
@@ -1476,7 +1368,7 @@ module Aws::CloudSearch
       :highlight_enabled,
       :analysis_scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for text field.  Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.</p>
@@ -1519,7 +1411,7 @@ module Aws::CloudSearch
       :highlight_enabled,
       :analysis_scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.</p>
@@ -1533,7 +1425,7 @@ module Aws::CloudSearch
       :domain_name,
       :multi_az,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain's availability options. </p>
@@ -1543,7 +1435,7 @@ module Aws::CloudSearch
     class UpdateAvailabilityOptionsResponse < Struct.new(
       :availability_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>UpdateDomainEndpointOptions</a></code> operation. Specifies the name of the domain you want to update and the domain endpoint options.</p>
@@ -1557,7 +1449,7 @@ module Aws::CloudSearch
       :domain_name,
       :domain_endpoint_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>UpdateDomainEndpointOptions</code> request. Contains the configuration and status of the domain's endpoint options. </p>
@@ -1567,7 +1459,7 @@ module Aws::CloudSearch
     class UpdateDomainEndpointOptionsResponse < Struct.new(
       :domain_endpoint_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>UpdateScalingParameters</a></code> operation. Specifies the name of the domain you want to update and the scaling parameters you want to configure.</p>
@@ -1581,7 +1473,7 @@ module Aws::CloudSearch
       :domain_name,
       :scaling_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>UpdateScalingParameters</code> request. Contains the status of the newly-configured scaling parameters.</p>
@@ -1591,7 +1483,7 @@ module Aws::CloudSearch
     class UpdateScalingParametersResponse < Struct.new(
       :scaling_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>UpdateServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to update and the access rules you want to configure.</p>
@@ -1605,7 +1497,7 @@ module Aws::CloudSearch
       :domain_name,
       :access_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an <code>UpdateServiceAccessPolicies</code> request. Contains the new access policies.</p>
@@ -1615,7 +1507,7 @@ module Aws::CloudSearch
     class UpdateServiceAccessPoliciesResponse < Struct.new(
       :access_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it has invalid parameters.</p>
@@ -1629,7 +1521,7 @@ module Aws::CloudSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

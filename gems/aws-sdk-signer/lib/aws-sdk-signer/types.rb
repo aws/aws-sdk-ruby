@@ -15,7 +15,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -65,7 +65,7 @@ module Aws::Signer
       :revision_id,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute revision_id
@@ -74,7 +74,7 @@ module Aws::Signer
     class AddProfilePermissionResponse < Struct.new(
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains invalid parameters for the ARN or tags. This exception also
@@ -87,7 +87,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -96,11 +96,7 @@ module Aws::Signer
     class CancelSigningProfileRequest < Struct.new(
       :profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Category
-      AWSIoT = 'AWSIoT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource encountered a conflicting state.</p>
@@ -112,7 +108,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -121,7 +117,7 @@ module Aws::Signer
     class DescribeSigningJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -205,7 +201,7 @@ module Aws::Signer
       :job_owner,
       :job_invoker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Points to an <code>S3Destination</code> object that contains information about your S3
@@ -216,12 +212,7 @@ module Aws::Signer
     class Destination < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionAlgorithm
-      RSA = 'RSA'
-      ECDSA = 'ECDSA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption algorithm options that are available to a code-signing job.</p>
@@ -235,7 +226,7 @@ module Aws::Signer
       :allowed_values,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signature_timestamp
@@ -283,7 +274,7 @@ module Aws::Signer
       :job_arn,
       :certificate_hashes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute revoked_entities
@@ -293,7 +284,7 @@ module Aws::Signer
     class GetRevocationStatusResponse < Struct.new(
       :revoked_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_id
@@ -302,7 +293,7 @@ module Aws::Signer
     class GetSigningPlatformRequest < Struct.new(
       :platform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_id
@@ -345,7 +336,7 @@ module Aws::Signer
       :max_size_in_mb,
       :revocation_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_size_in_mb] = 0 unless options.key?(:max_size_in_mb)
@@ -364,7 +355,7 @@ module Aws::Signer
       :profile_name,
       :profile_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -428,12 +419,7 @@ module Aws::Signer
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HashAlgorithm
-      SHA1 = 'SHA1'
-      SHA256 = 'SHA256'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hash algorithms that are available to a code-signing job.</p>
@@ -447,13 +433,7 @@ module Aws::Signer
       :allowed_values,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageFormat
-      JSON = 'JSON'
-      JSONEmbedded = 'JSONEmbedded'
-      JSONDetached = 'JSONDetached'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
@@ -465,7 +445,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -478,7 +458,7 @@ module Aws::Signer
       :profile_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute revision_id
@@ -499,7 +479,7 @@ module Aws::Signer
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:policy_size_bytes] = 0 unless options.key?(:policy_size_bytes)
@@ -555,7 +535,7 @@ module Aws::Signer
       :signature_expires_after,
       :job_invoker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -568,7 +548,7 @@ module Aws::Signer
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute category
@@ -595,7 +575,7 @@ module Aws::Signer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platforms
@@ -608,7 +588,7 @@ module Aws::Signer
       :platforms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_canceled
@@ -638,7 +618,7 @@ module Aws::Signer
       :platform_id,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profiles
@@ -653,7 +633,7 @@ module Aws::Signer
       :profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -662,7 +642,7 @@ module Aws::Signer
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -671,7 +651,7 @@ module Aws::Signer
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The signing profile was not found.</p>
@@ -683,7 +663,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cross-account permission for a signing profile.</p>
@@ -705,7 +685,7 @@ module Aws::Signer
       :statement_id,
       :profile_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -743,7 +723,7 @@ module Aws::Signer
       :signing_parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -760,7 +740,7 @@ module Aws::Signer
       :profile_version,
       :profile_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -777,7 +757,7 @@ module Aws::Signer
       :revision_id,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute revision_id
@@ -786,7 +766,7 @@ module Aws::Signer
     class RemoveProfilePermissionResponse < Struct.new(
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified resource could not be found.</p>
@@ -798,7 +778,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -815,7 +795,7 @@ module Aws::Signer
       :job_owner,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -838,7 +818,7 @@ module Aws::Signer
       :reason,
       :effective_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and prefix of the Amazon S3 bucket where AWS Signer saves your signed objects.</p>
@@ -853,7 +833,7 @@ module Aws::Signer
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 bucket name and key where Signer saved your signed code image.</p>
@@ -867,7 +847,7 @@ module Aws::Signer
       :bucket_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon S3 bucket where you saved your unsigned code.</p>
@@ -885,7 +865,7 @@ module Aws::Signer
       :key,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is making a request that exceeds service limits.</p>
@@ -897,7 +877,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -919,7 +899,7 @@ module Aws::Signer
       :payload,
       :payload_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -940,7 +920,7 @@ module Aws::Signer
       :metadata,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The validity period for a signing job.</p>
@@ -954,7 +934,7 @@ module Aws::Signer
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -970,7 +950,7 @@ module Aws::Signer
     class SignedObject < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a signing operation.</p>
@@ -984,7 +964,7 @@ module Aws::Signer
       :encryption_algorithm_options,
       :hash_algorithm_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A signing configuration that overrides the default encryption or hash algorithm of a
@@ -1001,7 +981,7 @@ module Aws::Signer
       :encryption_algorithm,
       :hash_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image format of a AWS Signer platform or profile.</p>
@@ -1015,7 +995,7 @@ module Aws::Signer
       :supported_formats,
       :default_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a signing job.</p>
@@ -1080,7 +1060,7 @@ module Aws::Signer
       :job_owner,
       :job_invoker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_revoked] = false unless options.key?(:is_revoked)
@@ -1103,7 +1083,7 @@ module Aws::Signer
       :revoked_at,
       :revoked_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ACM certificate that is used to sign your code.</p>
@@ -1114,7 +1094,7 @@ module Aws::Signer
     class SigningMaterial < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the signing configurations and parameters that are used to
@@ -1158,7 +1138,7 @@ module Aws::Signer
       :max_size_in_mb,
       :revocation_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_size_in_mb] = 0 unless options.key?(:max_size_in_mb)
@@ -1184,7 +1164,7 @@ module Aws::Signer
       :signing_configuration,
       :signing_image_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the ACM certificates and signing configuration parameters that
@@ -1235,7 +1215,7 @@ module Aws::Signer
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Revocation information for a signing profile.</p>
@@ -1253,19 +1233,7 @@ module Aws::Signer
       :revoked_at,
       :revoked_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SigningProfileStatus
-      Active = 'Active'
-      Canceled = 'Canceled'
-      Revoked = 'Revoked'
-    end
-
-    module SigningStatus
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Succeeded = 'Succeeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An <code>S3Source</code> object that contains information about the S3 bucket where
@@ -1276,7 +1244,7 @@ module Aws::Signer
     class Source < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -1304,7 +1272,7 @@ module Aws::Signer
       :client_request_token,
       :profile_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1317,7 +1285,7 @@ module Aws::Signer
       :job_id,
       :job_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1330,12 +1298,12 @@ module Aws::Signer
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1350,7 +1318,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The allowed number of job-signing requests has been exceeded.</p>
@@ -1363,7 +1331,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1376,12 +1344,12 @@ module Aws::Signer
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You signing certificate could not be validated.</p>
@@ -1393,13 +1361,7 @@ module Aws::Signer
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidityType
-      DAYS = 'DAYS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
+      include ::Smithy::Schema::Structure
     end
 
   end

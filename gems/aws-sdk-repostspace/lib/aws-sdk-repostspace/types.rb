@@ -12,7 +12,7 @@ module Aws::Repostspace
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -33,7 +33,7 @@ module Aws::Repostspace
       :accessor_ids,
       :channel_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute added_accessor_ids
@@ -46,7 +46,7 @@ module Aws::Repostspace
       :added_accessor_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -63,7 +63,7 @@ module Aws::Repostspace
       :accessor_ids,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute added_accessor_ids
@@ -76,7 +76,7 @@ module Aws::Repostspace
       :added_accessor_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that occurred during a batch operation.</p>
@@ -94,7 +94,7 @@ module Aws::Repostspace
       :error,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -115,7 +115,7 @@ module Aws::Repostspace
       :accessor_ids,
       :channel_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute removed_accessor_ids
@@ -128,7 +128,7 @@ module Aws::Repostspace
       :removed_accessor_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -145,7 +145,7 @@ module Aws::Repostspace
       :accessor_ids,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute removed_accessor_ids
@@ -158,7 +158,7 @@ module Aws::Repostspace
       :removed_accessor_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains some information about a channel in a private re:Post.</p>
@@ -200,28 +200,7 @@ module Aws::Repostspace
       :user_count,
       :group_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelRole
-      ASKER = 'ASKER'
-      EXPERT = 'EXPERT'
-      MODERATOR = 'MODERATOR'
-      SUPPORTREQUESTOR = 'SUPPORTREQUESTOR'
-    end
-
-    module ChannelStatus
-      CREATED = 'CREATED'
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETED = 'DELETED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
-    module ConfigurationStatus
-      CONFIGURED = 'CONFIGURED'
-      UNCONFIGURED = 'UNCONFIGURED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -238,7 +217,7 @@ module Aws::Repostspace
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -255,7 +234,7 @@ module Aws::Repostspace
       :channel_name,
       :channel_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_id
@@ -264,7 +243,7 @@ module Aws::Repostspace
     class CreateChannelOutput < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -301,7 +280,7 @@ module Aws::Repostspace
       :role_arn,
       :supported_email_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -310,7 +289,7 @@ module Aws::Repostspace
     class CreateSpaceOutput < Struct.new(
       :space_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -319,7 +298,7 @@ module Aws::Repostspace
     class DeleteSpaceInput < Struct.new(
       :space_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -332,18 +311,7 @@ module Aws::Repostspace
       :space_id,
       :admin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureEnableParameter
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module FeatureEnableStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      NOT_ALLOWED = 'NOT_ALLOWED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -356,7 +324,7 @@ module Aws::Repostspace
       :space_id,
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -393,7 +361,7 @@ module Aws::Repostspace
       :channel_roles,
       :channel_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -402,7 +370,7 @@ module Aws::Repostspace
     class GetSpaceInput < Struct.new(
       :space_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -507,7 +475,7 @@ module Aws::Repostspace
       :content_size,
       :supported_email_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -520,7 +488,7 @@ module Aws::Repostspace
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -537,7 +505,7 @@ module Aws::Repostspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels
@@ -550,7 +518,7 @@ module Aws::Repostspace
       :channels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -563,7 +531,7 @@ module Aws::Repostspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute spaces
@@ -576,7 +544,7 @@ module Aws::Repostspace
       :spaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -585,7 +553,7 @@ module Aws::Repostspace
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -594,7 +562,7 @@ module Aws::Repostspace
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -607,7 +575,7 @@ module Aws::Repostspace
       :space_id,
       :admin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist.</p>
@@ -624,14 +592,7 @@ module Aws::Repostspace
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Role
-      EXPERT = 'EXPERT'
-      MODERATOR = 'MODERATOR'
-      ADMINISTRATOR = 'ADMINISTRATOR'
-      SUPPORTREQUESTOR = 'SUPPORTREQUESTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -652,7 +613,7 @@ module Aws::Repostspace
       :title,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -677,7 +638,7 @@ module Aws::Repostspace
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains some information about a private re:Post in the account.</p>
@@ -751,7 +712,7 @@ module Aws::Repostspace
       :content_size,
       :supported_email_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -765,7 +726,7 @@ module Aws::Repostspace
       :enabled,
       :allowed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -779,7 +740,7 @@ module Aws::Repostspace
       :enabled,
       :allowed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -792,12 +753,12 @@ module Aws::Repostspace
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -818,12 +779,7 @@ module Aws::Repostspace
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TierLevel
-      BASIC = 'BASIC'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -836,12 +792,12 @@ module Aws::Repostspace
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -862,12 +818,12 @@ module Aws::Repostspace
       :channel_name,
       :channel_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_id
@@ -892,7 +848,7 @@ module Aws::Repostspace
       :role_arn,
       :supported_email_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -909,7 +865,7 @@ module Aws::Repostspace
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field that’s passed inside a request that resulted in an exception.</p>
@@ -923,20 +879,7 @@ module Aws::Repostspace
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
-    end
-
-    module VanityDomainStatus
-      PENDING = 'PENDING'
-      APPROVED = 'APPROVED'
-      UNAPPROVED = 'UNAPPROVED'
+      include ::Smithy::Schema::Structure
     end
 
   end

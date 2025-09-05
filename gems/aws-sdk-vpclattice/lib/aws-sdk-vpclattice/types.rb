@@ -12,7 +12,7 @@ module Aws::VPCLattice
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an access log subscription.</p>
@@ -50,7 +50,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -60,7 +60,7 @@ module Aws::VPCLattice
     class ArnResource < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -77,7 +77,7 @@ module Aws::VPCLattice
       :listener_identifier,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -90,7 +90,7 @@ module Aws::VPCLattice
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request conflicts with the current state of the resource. Updating or deleting a
@@ -108,7 +108,7 @@ module Aws::VPCLattice
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -137,7 +137,7 @@ module Aws::VPCLattice
       :service_network_log_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -166,7 +166,7 @@ module Aws::VPCLattice
       :service_network_log_type,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -205,7 +205,7 @@ module Aws::VPCLattice
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -242,7 +242,7 @@ module Aws::VPCLattice
       :service_id,
       :default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -315,7 +315,7 @@ module Aws::VPCLattice
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -373,7 +373,7 @@ module Aws::VPCLattice
       :created_at,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -410,7 +410,7 @@ module Aws::VPCLattice
       :ip_address_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -447,7 +447,7 @@ module Aws::VPCLattice
       :security_group_ids,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -489,7 +489,7 @@ module Aws::VPCLattice
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -521,7 +521,7 @@ module Aws::VPCLattice
       :priority,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -564,7 +564,7 @@ module Aws::VPCLattice
       :certificate_arn,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -603,7 +603,7 @@ module Aws::VPCLattice
       :tags,
       :sharing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -628,7 +628,7 @@ module Aws::VPCLattice
       :sharing_config,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -652,7 +652,7 @@ module Aws::VPCLattice
       :service_network_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -673,7 +673,7 @@ module Aws::VPCLattice
       :status,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -697,7 +697,7 @@ module Aws::VPCLattice
       :service_network_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -726,7 +726,7 @@ module Aws::VPCLattice
       :custom_domain_name,
       :dns_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -758,7 +758,7 @@ module Aws::VPCLattice
       :security_group_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -783,7 +783,7 @@ module Aws::VPCLattice
       :created_by,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -821,7 +821,7 @@ module Aws::VPCLattice
       :auth_type,
       :dns_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -850,7 +850,7 @@ module Aws::VPCLattice
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -881,7 +881,7 @@ module Aws::VPCLattice
       :config,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_subscription_identifier
@@ -890,12 +890,12 @@ module Aws::VPCLattice
     class DeleteAccessLogSubscriptionInput < Struct.new(
       :access_log_subscription_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessLogSubscriptionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -904,12 +904,12 @@ module Aws::VPCLattice
     class DeleteAuthPolicyInput < Struct.new(
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAuthPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -922,12 +922,12 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteListenerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_configuration_identifier
@@ -936,12 +936,12 @@ module Aws::VPCLattice
     class DeleteResourceConfigurationRequest < Struct.new(
       :resource_configuration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_endpoint_association_identifier
@@ -950,7 +950,7 @@ module Aws::VPCLattice
     class DeleteResourceEndpointAssociationRequest < Struct.new(
       :resource_endpoint_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -976,7 +976,7 @@ module Aws::VPCLattice
       :resource_configuration_arn,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_gateway_identifier
@@ -985,7 +985,7 @@ module Aws::VPCLattice
     class DeleteResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1006,7 +1006,7 @@ module Aws::VPCLattice
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1015,12 +1015,12 @@ module Aws::VPCLattice
     class DeleteResourcePolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -1037,12 +1037,12 @@ module Aws::VPCLattice
       :listener_identifier,
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -1051,7 +1051,7 @@ module Aws::VPCLattice
     class DeleteServiceInput < Struct.new(
       :service_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -1060,12 +1060,12 @@ module Aws::VPCLattice
     class DeleteServiceNetworkInput < Struct.new(
       :service_network_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceNetworkOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_resource_association_identifier
@@ -1074,7 +1074,7 @@ module Aws::VPCLattice
     class DeleteServiceNetworkResourceAssociationRequest < Struct.new(
       :service_network_resource_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1091,7 +1091,7 @@ module Aws::VPCLattice
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_service_association_identifier
@@ -1100,7 +1100,7 @@ module Aws::VPCLattice
     class DeleteServiceNetworkServiceAssociationInput < Struct.new(
       :service_network_service_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1119,7 +1119,7 @@ module Aws::VPCLattice
       :status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_vpc_association_identifier
@@ -1128,7 +1128,7 @@ module Aws::VPCLattice
     class DeleteServiceNetworkVpcAssociationInput < Struct.new(
       :service_network_vpc_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1147,7 +1147,7 @@ module Aws::VPCLattice
       :status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1170,7 +1170,7 @@ module Aws::VPCLattice
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -1179,7 +1179,7 @@ module Aws::VPCLattice
     class DeleteTargetGroupInput < Struct.new(
       :target_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1198,7 +1198,7 @@ module Aws::VPCLattice
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -1211,7 +1211,7 @@ module Aws::VPCLattice
       :target_group_identifier,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -1224,7 +1224,7 @@ module Aws::VPCLattice
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the DNS information of a service.</p>
@@ -1238,7 +1238,7 @@ module Aws::VPCLattice
       :domain_name,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DNS name of the resource.</p>
@@ -1252,7 +1252,7 @@ module Aws::VPCLattice
       :domain_name,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that returns a custom HTTP response.</p>
@@ -1262,7 +1262,7 @@ module Aws::VPCLattice
     class FixedResponseAction < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a forward action. You can use forward actions to route requests to one or more
@@ -1280,7 +1280,7 @@ module Aws::VPCLattice
     class ForwardAction < Struct.new(
       :target_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_subscription_identifier
@@ -1289,7 +1289,7 @@ module Aws::VPCLattice
     class GetAccessLogSubscriptionInput < Struct.new(
       :access_log_subscription_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1326,7 +1326,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -1335,7 +1335,7 @@ module Aws::VPCLattice
     class GetAuthPolicyInput < Struct.new(
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1359,7 +1359,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -1372,7 +1372,7 @@ module Aws::VPCLattice
       :service_identifier,
       :listener_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1417,7 +1417,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_configuration_identifier
@@ -1426,7 +1426,7 @@ module Aws::VPCLattice
     class GetResourceConfigurationRequest < Struct.new(
       :resource_configuration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1514,7 +1514,7 @@ module Aws::VPCLattice
       :failure_reason,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_gateway_identifier
@@ -1523,7 +1523,7 @@ module Aws::VPCLattice
     class GetResourceGatewayRequest < Struct.new(
       :resource_gateway_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1568,7 +1568,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1577,7 +1577,7 @@ module Aws::VPCLattice
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1586,7 +1586,7 @@ module Aws::VPCLattice
     class GetResourcePolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -1603,7 +1603,7 @@ module Aws::VPCLattice
       :listener_identifier,
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1644,7 +1644,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -1653,7 +1653,7 @@ module Aws::VPCLattice
     class GetServiceInput < Struct.new(
       :service_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -1662,7 +1662,7 @@ module Aws::VPCLattice
     class GetServiceNetworkInput < Struct.new(
       :service_network_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1703,7 +1703,7 @@ module Aws::VPCLattice
       :number_of_associated_vp_cs,
       :number_of_associated_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_resource_association_identifier
@@ -1712,7 +1712,7 @@ module Aws::VPCLattice
     class GetServiceNetworkResourceAssociationRequest < Struct.new(
       :service_network_resource_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1785,7 +1785,7 @@ module Aws::VPCLattice
       :dns_entry,
       :is_managed_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_service_association_identifier
@@ -1794,7 +1794,7 @@ module Aws::VPCLattice
     class GetServiceNetworkServiceAssociationInput < Struct.new(
       :service_network_service_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1859,7 +1859,7 @@ module Aws::VPCLattice
       :failure_message,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_vpc_association_identifier
@@ -1868,7 +1868,7 @@ module Aws::VPCLattice
     class GetServiceNetworkVpcAssociationInput < Struct.new(
       :service_network_vpc_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1925,7 +1925,7 @@ module Aws::VPCLattice
       :failure_code,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1978,7 +1978,7 @@ module Aws::VPCLattice
       :failure_code,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -1987,7 +1987,7 @@ module Aws::VPCLattice
     class GetTargetGroupInput < Struct.new(
       :target_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2036,7 +2036,7 @@ module Aws::VPCLattice
       :failure_message,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the constraints for a header match. Matches incoming requests with rule based on
@@ -2055,7 +2055,7 @@ module Aws::VPCLattice
       :match,
       :case_sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a header match type.</p>
@@ -2074,7 +2074,7 @@ module Aws::VPCLattice
       :contains,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Exact < HeaderMatchType; end
       class Prefix < HeaderMatchType; end
@@ -2137,7 +2137,7 @@ module Aws::VPCLattice
       :unhealthy_threshold_count,
       :matcher,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes criteria that can be applied to incoming requests.</p>
@@ -2156,7 +2156,7 @@ module Aws::VPCLattice
       :path_match,
       :header_matches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred while processing the request.</p>
@@ -2169,7 +2169,7 @@ module Aws::VPCLattice
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IP resource.</p>
@@ -2179,7 +2179,7 @@ module Aws::VPCLattice
     class IpResource < Struct.new(
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -2196,7 +2196,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2209,7 +2209,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -2226,7 +2226,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2239,7 +2239,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_gateway_identifier
@@ -2260,7 +2260,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2273,7 +2273,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_configuration_identifier
@@ -2302,7 +2302,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2315,7 +2315,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2328,7 +2328,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2341,7 +2341,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -2362,7 +2362,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2375,7 +2375,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -2396,7 +2396,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2409,7 +2409,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -2430,7 +2430,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2443,7 +2443,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -2464,7 +2464,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2477,7 +2477,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -2494,7 +2494,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2507,7 +2507,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2520,7 +2520,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2533,7 +2533,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2546,7 +2546,7 @@ module Aws::VPCLattice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2559,7 +2559,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2568,7 +2568,7 @@ module Aws::VPCLattice
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2577,7 +2577,7 @@ module Aws::VPCLattice
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2598,7 +2598,7 @@ module Aws::VPCLattice
       :vpc_identifier,
       :target_group_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2611,7 +2611,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -2632,7 +2632,7 @@ module Aws::VPCLattice
       :next_token,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2645,7 +2645,7 @@ module Aws::VPCLattice
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a listener.</p>
@@ -2679,7 +2679,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the codes to use when checking for a successful response from a target for health
@@ -2691,7 +2691,7 @@ module Aws::VPCLattice
       :http_code,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class HttpCode < Matcher; end
       class Unknown < Matcher; end
@@ -2709,7 +2709,7 @@ module Aws::VPCLattice
       :match,
       :case_sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path match type. Each rule can include only one of the following types of
@@ -2725,7 +2725,7 @@ module Aws::VPCLattice
       :prefix,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Exact < PathMatchType; end
       class Prefix < PathMatchType; end
@@ -2743,7 +2743,7 @@ module Aws::VPCLattice
       :resource_identifier,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2759,7 +2759,7 @@ module Aws::VPCLattice
       :policy,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2774,12 +2774,12 @@ module Aws::VPCLattice
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -2792,7 +2792,7 @@ module Aws::VPCLattice
       :target_group_identifier,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -2805,7 +2805,7 @@ module Aws::VPCLattice
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource configuration.</p>
@@ -2824,7 +2824,7 @@ module Aws::VPCLattice
       :arn_resource,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DnsResource < ResourceConfigurationDefinition; end
       class IpResource < ResourceConfigurationDefinition; end
@@ -2893,7 +2893,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a VPC endpoint association.</p>
@@ -2935,7 +2935,7 @@ module Aws::VPCLattice
       :created_by,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a resource gateway.</p>
@@ -2981,7 +2981,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist.</p>
@@ -2998,7 +2998,7 @@ module Aws::VPCLattice
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the action for a rule.</p>
@@ -3014,7 +3014,7 @@ module Aws::VPCLattice
       :fixed_response,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Forward < RuleAction; end
       class FixedResponse < RuleAction; end
@@ -3029,7 +3029,7 @@ module Aws::VPCLattice
       :http_match,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class HttpMatch < RuleMatch; end
       class Unknown < RuleMatch; end
@@ -3066,7 +3066,7 @@ module Aws::VPCLattice
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule update.</p>
@@ -3088,7 +3088,7 @@ module Aws::VPCLattice
       :priority,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule update that failed.</p>
@@ -3106,7 +3106,7 @@ module Aws::VPCLattice
       :failure_code,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a successful rule update.</p>
@@ -3140,7 +3140,7 @@ module Aws::VPCLattice
       :priority,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between a service network and a VPC endpoint.</p>
@@ -3174,7 +3174,7 @@ module Aws::VPCLattice
       :service_network_arn,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an association between a service network and a resource configuration.</p>
@@ -3240,7 +3240,7 @@ module Aws::VPCLattice
       :is_managed_association,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an association between a service network and a service.</p>
@@ -3298,7 +3298,7 @@ module Aws::VPCLattice
       :dns_entry,
       :custom_domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a service network.</p>
@@ -3336,7 +3336,7 @@ module Aws::VPCLattice
       :number_of_associated_services,
       :number_of_associated_resource_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an association between a service network and a VPC.</p>
@@ -3382,7 +3382,7 @@ module Aws::VPCLattice
       :vpc_id,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -3407,7 +3407,7 @@ module Aws::VPCLattice
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a service.</p>
@@ -3445,7 +3445,7 @@ module Aws::VPCLattice
       :custom_domain_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies if the service network should be enabled for sharing.</p>
@@ -3455,7 +3455,7 @@ module Aws::VPCLattice
     class SharingConfig < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3468,12 +3468,12 @@ module Aws::VPCLattice
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target.</p>
@@ -3491,7 +3491,7 @@ module Aws::VPCLattice
       :id,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target failure.</p>
@@ -3517,7 +3517,7 @@ module Aws::VPCLattice
       :failure_code,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a target group.</p>
@@ -3559,7 +3559,7 @@ module Aws::VPCLattice
       :health_check,
       :lambda_event_structure_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a target group.</p>
@@ -3622,7 +3622,7 @@ module Aws::VPCLattice
       :service_arns,
       :lambda_event_structure_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a target.</p>
@@ -3675,7 +3675,7 @@ module Aws::VPCLattice
       :status,
       :reason_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -3696,7 +3696,7 @@ module Aws::VPCLattice
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3709,12 +3709,12 @@ module Aws::VPCLattice
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_subscription_identifier
@@ -3727,7 +3727,7 @@ module Aws::VPCLattice
       :access_log_subscription_identifier,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3752,7 +3752,7 @@ module Aws::VPCLattice
       :resource_arn,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -3769,7 +3769,7 @@ module Aws::VPCLattice
       :listener_identifier,
       :default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3806,7 +3806,7 @@ module Aws::VPCLattice
       :service_id,
       :default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_configuration_identifier
@@ -3827,7 +3827,7 @@ module Aws::VPCLattice
       :allow_association_to_shareable_service_network,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3894,7 +3894,7 @@ module Aws::VPCLattice
       :status,
       :resource_configuration_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_gateway_identifier
@@ -3907,7 +3907,7 @@ module Aws::VPCLattice
       :resource_gateway_identifier,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3944,7 +3944,7 @@ module Aws::VPCLattice
       :security_group_ids,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -3973,7 +3973,7 @@ module Aws::VPCLattice
       :priority,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4006,7 +4006,7 @@ module Aws::VPCLattice
       :priority,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_identifier
@@ -4033,7 +4033,7 @@ module Aws::VPCLattice
       :certificate_arn,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_identifier
@@ -4056,7 +4056,7 @@ module Aws::VPCLattice
       :service_network_identifier,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4077,7 +4077,7 @@ module Aws::VPCLattice
       :arn,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_network_vpc_association_identifier
@@ -4090,7 +4090,7 @@ module Aws::VPCLattice
       :service_network_vpc_association_identifier,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4117,7 +4117,7 @@ module Aws::VPCLattice
       :created_by,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4146,7 +4146,7 @@ module Aws::VPCLattice
       :certificate_arn,
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_identifier
@@ -4159,7 +4159,7 @@ module Aws::VPCLattice
       :target_group_identifier,
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4188,7 +4188,7 @@ module Aws::VPCLattice
       :config,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input does not satisfy the constraints specified by an Amazon Web Services
@@ -4206,7 +4206,7 @@ module Aws::VPCLattice
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a validation failure.</p>
@@ -4220,7 +4220,7 @@ module Aws::VPCLattice
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the weight of a target group.</p>
@@ -4239,7 +4239,7 @@ module Aws::VPCLattice
       :target_group_identifier,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

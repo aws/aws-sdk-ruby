@@ -12,7 +12,7 @@ module Aws::SimSpaceWeaver
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon CloudWatch Logs log group for the simulation. For more information about log groups, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with log
@@ -26,7 +26,7 @@ module Aws::SimSpaceWeaver
     class CloudWatchLogsLogGroup < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -35,7 +35,7 @@ module Aws::SimSpaceWeaver
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -49,12 +49,12 @@ module Aws::SimSpaceWeaver
       :simulation,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSnapshotOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -71,12 +71,12 @@ module Aws::SimSpaceWeaver
       :domain,
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -85,12 +85,12 @@ module Aws::SimSpaceWeaver
     class DeleteSimulationOperationInput < Struct.new(
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSimulationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -107,7 +107,7 @@ module Aws::SimSpaceWeaver
       :domain,
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -144,7 +144,7 @@ module Aws::SimSpaceWeaver
       :description,
       :endpoint_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -153,7 +153,7 @@ module Aws::SimSpaceWeaver
     class DescribeSimulationOperationInput < Struct.new(
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -238,7 +238,7 @@ module Aws::SimSpaceWeaver
       :snapshot_s3_location,
       :start_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of app instances that run the same executable app code and have the same
@@ -277,7 +277,7 @@ module Aws::SimSpaceWeaver
       :name,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -286,7 +286,7 @@ module Aws::SimSpaceWeaver
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options that apply when the app starts. These options override default behavior.</p>
@@ -297,7 +297,7 @@ module Aws::SimSpaceWeaver
     class LaunchOverrides < Struct.new(
       :launch_commands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -322,7 +322,7 @@ module Aws::SimSpaceWeaver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps
@@ -339,7 +339,7 @@ module Aws::SimSpaceWeaver
       :apps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -356,7 +356,7 @@ module Aws::SimSpaceWeaver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulations
@@ -373,7 +373,7 @@ module Aws::SimSpaceWeaver
       :simulations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -383,7 +383,7 @@ module Aws::SimSpaceWeaver
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -392,7 +392,7 @@ module Aws::SimSpaceWeaver
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of additional state information, such as 
@@ -411,7 +411,7 @@ module Aws::SimSpaceWeaver
       :domains,
       :clocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location where SimSpace Weaver sends simulation log data.</p>
@@ -422,7 +422,7 @@ module Aws::SimSpaceWeaver
     class LogDestination < Struct.new(
       :cloud_watch_logs_log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration for a simulation.</p>
@@ -432,7 +432,7 @@ module Aws::SimSpaceWeaver
     class LoggingConfiguration < Struct.new(
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -441,7 +441,7 @@ module Aws::SimSpaceWeaver
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates a file.</p>
@@ -459,7 +459,7 @@ module Aws::SimSpaceWeaver
       :bucket_name,
       :object_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app .zip
@@ -481,7 +481,7 @@ module Aws::SimSpaceWeaver
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -490,7 +490,7 @@ module Aws::SimSpaceWeaver
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the network endpoint that you can use to connect to your custom or 
@@ -508,7 +508,7 @@ module Aws::SimSpaceWeaver
       :address,
       :ingress_port_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of metadata about the app.</p>
@@ -535,7 +535,7 @@ module Aws::SimSpaceWeaver
       :status,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of TCP/UDP ports for a custom or service app.</p>
@@ -554,7 +554,7 @@ module Aws::SimSpaceWeaver
       :declared,
       :actual,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information about the simulation clock.</p>
@@ -568,7 +568,7 @@ module Aws::SimSpaceWeaver
       :status,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of data about the simulation.</p>
@@ -596,7 +596,7 @@ module Aws::SimSpaceWeaver
       :status,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -627,7 +627,7 @@ module Aws::SimSpaceWeaver
       :description,
       :launch_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -644,7 +644,7 @@ module Aws::SimSpaceWeaver
       :domain,
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -653,12 +653,12 @@ module Aws::SimSpaceWeaver
     class StartClockOperationInput < Struct.new(
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartClockOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -717,7 +717,7 @@ module Aws::SimSpaceWeaver
       :tags,
       :snapshot_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -736,7 +736,7 @@ module Aws::SimSpaceWeaver
       :execution_id,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -753,12 +753,12 @@ module Aws::SimSpaceWeaver
       :domain,
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAppOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -767,12 +767,12 @@ module Aws::SimSpaceWeaver
     class StopClockOperationInput < Struct.new(
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopClockOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute simulation
@@ -781,12 +781,12 @@ module Aws::SimSpaceWeaver
     class StopSimulationOperationInput < Struct.new(
       :simulation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopSimulationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -801,12 +801,12 @@ module Aws::SimSpaceWeaver
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -815,7 +815,7 @@ module Aws::SimSpaceWeaver
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -830,12 +830,12 @@ module Aws::SimSpaceWeaver
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -844,7 +844,7 @@ module Aws::SimSpaceWeaver
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

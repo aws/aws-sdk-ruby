@@ -12,7 +12,7 @@ module Aws::Braket
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about the quantum task action, including the action type and program statistics.</p>
@@ -30,7 +30,7 @@ module Aws::Braket
       :program_count,
       :executable_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Amazon Braket hybrid job to be created. Specifies the container image the job uses and the paths to the Python scripts used for entry and training.</p>
@@ -44,7 +44,7 @@ module Aws::Braket
       :script_mode_config,
       :container_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Braket resource and the association type.</p>
@@ -58,7 +58,7 @@ module Aws::Braket
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -67,7 +67,7 @@ module Aws::Braket
     class CancelJobInput < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -80,7 +80,7 @@ module Aws::Braket
       :job_arn,
       :cancellation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_task_arn
@@ -93,7 +93,7 @@ module Aws::Braket
       :quantum_task_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_task_arn
@@ -106,7 +106,7 @@ module Aws::Braket
       :quantum_task_arn,
       :cancellation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred due to a conflict.</p>
@@ -115,7 +115,7 @@ module Aws::Braket
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container image used to create an Amazon Braket hybrid job.</p>
@@ -125,7 +125,7 @@ module Aws::Braket
     class ContainerImage < Struct.new(
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -182,7 +182,7 @@ module Aws::Braket
       :tags,
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -191,7 +191,7 @@ module Aws::Braket
     class CreateJobOutput < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -236,7 +236,7 @@ module Aws::Braket
       :job_token,
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_task_arn
@@ -245,7 +245,7 @@ module Aws::Braket
     class CreateQuantumTaskOutput < Struct.new(
       :quantum_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the source of the input data used by the Amazon Braket hybrid job.</p>
@@ -255,7 +255,7 @@ module Aws::Braket
     class DataSource < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the primary device used to create and run an Amazon Braket hybrid job.</p>
@@ -265,7 +265,7 @@ module Aws::Braket
     class DeviceConfig < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified device is currently offline.</p>
@@ -274,7 +274,7 @@ module Aws::Braket
     class DeviceOfflineException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about quantum tasks and hybrid jobs queued on a device.</p>
@@ -292,7 +292,7 @@ module Aws::Braket
       :queue_size,
       :queue_priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified device has been retired.</p>
@@ -301,7 +301,7 @@ module Aws::Braket
     class DeviceRetiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes information about the device.</p>
@@ -327,7 +327,7 @@ module Aws::Braket
       :device_type,
       :device_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_arn
@@ -336,7 +336,7 @@ module Aws::Braket
     class GetDeviceInput < Struct.new(
       :device_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_arn
@@ -369,7 +369,7 @@ module Aws::Braket
       :device_capabilities,
       :device_queue_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -382,7 +382,7 @@ module Aws::Braket
       :job_arn,
       :additional_attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -471,7 +471,7 @@ module Aws::Braket
       :queue_info,
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_task_arn
@@ -484,7 +484,7 @@ module Aws::Braket
       :quantum_task_arn,
       :additional_attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_task_arn
@@ -553,7 +553,7 @@ module Aws::Braket
       :num_successful_shots,
       :action_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the queue for a specified hybrid job.</p>
@@ -571,7 +571,7 @@ module Aws::Braket
       :position,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of parameters that specify the input channels, type of input data, and where it is located.</p>
@@ -589,7 +589,7 @@ module Aws::Braket
       :content_type,
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the resource instances to use while running the Amazon Braket hybrid job on Amazon Braket.</p>
@@ -607,7 +607,7 @@ module Aws::Braket
       :volume_size_in_gb,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because of an unknown error.</p>
@@ -616,7 +616,7 @@ module Aws::Braket
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the output locations for hybrid job checkpoint data.</p>
@@ -630,7 +630,7 @@ module Aws::Braket
       :local_path,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the type and time events that occurred related to the Amazon Braket hybrid job.</p>
@@ -648,7 +648,7 @@ module Aws::Braket
       :time_of_event,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the path to the S3 location where you want to store hybrid job artifacts and the encryption key used to store them.</p>
@@ -662,7 +662,7 @@ module Aws::Braket
       :kms_key_id,
       :s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies limits for how long an Amazon Braket hybrid job can run. </p>
@@ -672,7 +672,7 @@ module Aws::Braket
     class JobStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an Amazon Braket hybrid job.</p>
@@ -710,7 +710,7 @@ module Aws::Braket
       :ended_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -719,7 +719,7 @@ module Aws::Braket
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -728,7 +728,7 @@ module Aws::Braket
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about validation failures that occurred during the processing of a program set in a quantum task.</p>
@@ -746,7 +746,7 @@ module Aws::Braket
       :inputs_index,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The queue information for the specified quantum task.</p>
@@ -768,7 +768,7 @@ module Aws::Braket
       :queue_priority,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes information about a quantum task.</p>
@@ -810,7 +810,7 @@ module Aws::Braket
       :ended_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -819,7 +819,7 @@ module Aws::Braket
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon S3 storage used by the Amazon Braket hybrid job.</p>
@@ -829,7 +829,7 @@ module Aws::Braket
     class S3DataSource < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about algorithm scripts used for the Amazon Braket hybrid job.</p>
@@ -847,7 +847,7 @@ module Aws::Braket
       :s3_uri,
       :compression_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter used to search for devices.</p>
@@ -861,7 +861,7 @@ module Aws::Braket
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -878,7 +878,7 @@ module Aws::Braket
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute devices
@@ -891,7 +891,7 @@ module Aws::Braket
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to search for Amazon Braket hybrid jobs.</p>
@@ -909,7 +909,7 @@ module Aws::Braket
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -926,7 +926,7 @@ module Aws::Braket
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -939,7 +939,7 @@ module Aws::Braket
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to search for quantum tasks.</p>
@@ -957,7 +957,7 @@ module Aws::Braket
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -974,7 +974,7 @@ module Aws::Braket
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quantum_tasks
@@ -987,7 +987,7 @@ module Aws::Braket
       :quantum_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because a service quota is exceeded.</p>
@@ -996,7 +996,7 @@ module Aws::Braket
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1009,12 +1009,12 @@ module Aws::Braket
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API throttling rate limit is exceeded.</p>
@@ -1023,7 +1023,7 @@ module Aws::Braket
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1036,12 +1036,12 @@ module Aws::Braket
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input request failed to satisfy constraints expected by Amazon Braket.</p>
@@ -1058,7 +1058,7 @@ module Aws::Braket
       :reason,
       :program_set_validation_failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

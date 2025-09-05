@@ -22,12 +22,12 @@ module Aws::GuardDuty
       :administrator_id,
       :invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -50,14 +50,14 @@ module Aws::GuardDuty
       :master_id,
       :invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This output is deprecated, use AcceptAdministratorInvitationResponse instead
     class AcceptInvitationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the current access control policies for the bucket.</p>
@@ -73,7 +73,7 @@ module Aws::GuardDuty
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An access denied exception object.</p>
@@ -87,7 +87,7 @@ module Aws::GuardDuty
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the access keys.</p>
@@ -105,7 +105,7 @@ module Aws::GuardDuty
       :user_name,
       :user_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the access keys.</p>
@@ -127,7 +127,7 @@ module Aws::GuardDuty
       :user_name,
       :user_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the account.</p>
@@ -141,7 +141,7 @@ module Aws::GuardDuty
       :uid,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the account.</p>
@@ -183,7 +183,7 @@ module Aws::GuardDuty
       :account_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details of the GuardDuty member account that uses a free trial service.</p>
@@ -203,7 +203,7 @@ module Aws::GuardDuty
       :data_sources,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the account level permissions on the S3 bucket.</p>
@@ -213,7 +213,7 @@ module Aws::GuardDuty
     class AccountLevelPermissions < Struct.new(
       :block_public_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a list of map of accounts with the number of findings associated with each account.</p>
@@ -231,7 +231,7 @@ module Aws::GuardDuty
       :last_generated_at,
       :total_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about actions.</p>
@@ -277,7 +277,7 @@ module Aws::GuardDuty
       :kubernetes_role_binding_details,
       :kubernetes_role_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the actors involved in an attack sequence.</p>
@@ -301,7 +301,7 @@ module Aws::GuardDuty
       :session,
       :process,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a process involved in a GuardDuty finding, including process identification,
@@ -321,7 +321,7 @@ module Aws::GuardDuty
       :path,
       :sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the installed EKS add-on (GuardDuty security agent).</p>
@@ -335,7 +335,7 @@ module Aws::GuardDuty
       :addon_version,
       :addon_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account within the organization specified as the GuardDuty delegated
@@ -350,12 +350,7 @@ module Aws::GuardDuty
       :admin_account_id,
       :admin_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdminStatus
-      ENABLED = 'ENABLED'
-      DISABLE_IN_PROGRESS = 'DISABLE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the administrator account and invitation.</p>
@@ -378,7 +373,7 @@ module Aws::GuardDuty
       :relationship_status,
       :invited_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the installed GuardDuty security agent.</p>
@@ -388,7 +383,7 @@ module Aws::GuardDuty
     class AgentDetails < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the anomalies.</p>
@@ -402,7 +397,7 @@ module Aws::GuardDuty
       :profiles,
       :unusual,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the unusual anomalies.</p>
@@ -420,7 +415,7 @@ module Aws::GuardDuty
       :profile_subtype,
       :observations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the behavior of the anomaly that is new to GuardDuty.</p>
@@ -431,7 +426,7 @@ module Aws::GuardDuty
     class AnomalyUnusual < Struct.new(
       :behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -447,18 +442,12 @@ module Aws::GuardDuty
       :detector_id,
       :finding_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ArchiveFindingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoEnableMembers
-      NEW = 'NEW'
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Autonomous System (AS) associated with the network 
@@ -473,7 +462,7 @@ module Aws::GuardDuty
       :name,
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the API action.</p>
@@ -517,7 +506,7 @@ module Aws::GuardDuty
       :remote_account_details,
       :affected_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A bad request exception object.</p>
@@ -531,7 +520,7 @@ module Aws::GuardDuty
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on how the bucker owner's S3 Block Public Access settings are being
@@ -555,7 +544,7 @@ module Aws::GuardDuty
       :block_public_acls,
       :block_public_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the bucket level permissions for the S3 bucket.</p>
@@ -574,7 +563,7 @@ module Aws::GuardDuty
       :bucket_policy,
       :block_public_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the current bucket policies for the S3 bucket.</p>
@@ -590,7 +579,7 @@ module Aws::GuardDuty
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the city associated with the IP address.</p>
@@ -600,7 +589,7 @@ module Aws::GuardDuty
     class City < Struct.new(
       :city_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the status of CloudTrail as a data source for the detector.</p>
@@ -610,16 +599,7 @@ module Aws::GuardDuty
     class CloudTrailConfigurationResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the condition.</p>
@@ -693,7 +673,7 @@ module Aws::GuardDuty
       :less_than,
       :less_than_or_equal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request conflict exception object.</p>
@@ -707,7 +687,7 @@ module Aws::GuardDuty
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a container.</p>
@@ -743,7 +723,7 @@ module Aws::GuardDuty
       :volume_mounts,
       :security_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about container resources involved in a GuardDuty finding.
@@ -760,7 +740,7 @@ module Aws::GuardDuty
       :image,
       :image_uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon EC2 instance that is running 
@@ -776,7 +756,7 @@ module Aws::GuardDuty
       :covered_container_instances,
       :compatible_container_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the country where the remote IP address is located.</p>
@@ -790,7 +770,7 @@ module Aws::GuardDuty
       :country_code,
       :country_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon EC2 instance runtime 
@@ -833,7 +813,7 @@ module Aws::GuardDuty
       :agent_details,
       :management_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about Amazon ECS cluster runtime coverage details.</p>
@@ -853,7 +833,7 @@ module Aws::GuardDuty
       :fargate_details,
       :container_instance_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the EKS cluster that has a coverage status.</p>
@@ -885,7 +865,7 @@ module Aws::GuardDuty
       :addon_details,
       :management_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition that when matched will be added to the response of the
@@ -902,7 +882,7 @@ module Aws::GuardDuty
       :equals,
       :not_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the criteria used in the filter.</p>
@@ -913,7 +893,7 @@ module Aws::GuardDuty
     class CoverageFilterCriteria < Struct.new(
       :filter_criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition that when matched will be added to the response of the
@@ -932,21 +912,7 @@ module Aws::GuardDuty
       :criterion_key,
       :filter_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoverageFilterCriterionKey
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      CLUSTER_NAME = 'CLUSTER_NAME'
-      RESOURCE_TYPE = 'RESOURCE_TYPE'
-      COVERAGE_STATUS = 'COVERAGE_STATUS'
-      ADDON_VERSION = 'ADDON_VERSION'
-      MANAGEMENT_TYPE = 'MANAGEMENT_TYPE'
-      EKS_CLUSTER_NAME = 'EKS_CLUSTER_NAME'
-      ECS_CLUSTER_NAME = 'ECS_CLUSTER_NAME'
-      AGENT_VERSION = 'AGENT_VERSION'
-      INSTANCE_ID = 'INSTANCE_ID'
-      CLUSTER_ARN = 'CLUSTER_ARN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resource of the GuardDuty account.</p>
@@ -982,7 +948,7 @@ module Aws::GuardDuty
       :issue,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resource for each individual EKS cluster.</p>
@@ -1006,7 +972,7 @@ module Aws::GuardDuty
       :ecs_cluster_details,
       :ec2_instance_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the sorting criteria used in the coverage statistics.</p>
@@ -1024,19 +990,7 @@ module Aws::GuardDuty
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoverageSortKey
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      CLUSTER_NAME = 'CLUSTER_NAME'
-      COVERAGE_STATUS = 'COVERAGE_STATUS'
-      ISSUE = 'ISSUE'
-      ADDON_VERSION = 'ADDON_VERSION'
-      UPDATED_AT = 'UPDATED_AT'
-      EKS_CLUSTER_NAME = 'EKS_CLUSTER_NAME'
-      ECS_CLUSTER_NAME = 'ECS_CLUSTER_NAME'
-      INSTANCE_ID = 'INSTANCE_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the coverage statistics for a resource.</p>
@@ -1050,17 +1004,7 @@ module Aws::GuardDuty
       :count_by_resource_type,
       :count_by_coverage_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoverageStatisticsType
-      COUNT_BY_RESOURCE_TYPE = 'COUNT_BY_RESOURCE_TYPE'
-      COUNT_BY_COVERAGE_STATUS = 'COUNT_BY_COVERAGE_STATUS'
-    end
-
-    module CoverageStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable
@@ -1094,7 +1038,7 @@ module Aws::GuardDuty
       :tags,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1108,7 +1052,7 @@ module Aws::GuardDuty
       :detector_id,
       :unprocessed_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1472,7 +1416,7 @@ module Aws::GuardDuty
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1481,7 +1425,7 @@ module Aws::GuardDuty
     class CreateFilterResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1522,7 +1466,7 @@ module Aws::GuardDuty
       :tags,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set_id
@@ -1531,7 +1475,7 @@ module Aws::GuardDuty
     class CreateIPSetResponse < Struct.new(
       :ip_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1559,7 +1503,7 @@ module Aws::GuardDuty
       :actions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute malware_protection_plan_id
@@ -1568,7 +1512,7 @@ module Aws::GuardDuty
     class CreateMalwareProtectionPlanResponse < Struct.new(
       :malware_protection_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1585,7 +1529,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1595,7 +1539,7 @@ module Aws::GuardDuty
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the protected resource that
@@ -1608,7 +1552,7 @@ module Aws::GuardDuty
     class CreateProtectedResource < Struct.new(
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1633,7 +1577,7 @@ module Aws::GuardDuty
       :destination_properties,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_id
@@ -1642,7 +1586,7 @@ module Aws::GuardDuty
     class CreatePublishingDestinationResponse < Struct.new(
       :destination_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the protected S3 bucket resource.</p>
@@ -1657,7 +1601,7 @@ module Aws::GuardDuty
       :bucket_name,
       :object_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1672,12 +1616,12 @@ module Aws::GuardDuty
       :detector_id,
       :finding_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSampleFindingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1719,7 +1663,7 @@ module Aws::GuardDuty
       :tags,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute threat_intel_set_id
@@ -1728,17 +1672,7 @@ module Aws::GuardDuty
     class CreateThreatIntelSetResponse < Struct.new(
       :threat_intel_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CriterionKey
-      EC2_INSTANCE_ARN = 'EC2_INSTANCE_ARN'
-      SCAN_ID = 'SCAN_ID'
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      GUARDDUTY_FINDING_ID = 'GUARDDUTY_FINDING_ID'
-      SCAN_START_TIME = 'SCAN_START_TIME'
-      SCAN_STATUS = 'SCAN_STATUS'
-      SCAN_TYPE = 'SCAN_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the status of DNS logs as a data source.</p>
@@ -1748,16 +1682,7 @@ module Aws::GuardDuty
     class DNSLogsConfigurationResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSource
-      FLOW_LOGS = 'FLOW_LOGS'
-      CLOUD_TRAIL = 'CLOUD_TRAIL'
-      DNS_LOGS = 'DNS_LOGS'
-      S3_LOGS = 'S3_LOGS'
-      KUBERNETES_AUDIT_LOGS = 'KUBERNETES_AUDIT_LOGS'
-      EC2_MALWARE_SCAN = 'EC2_MALWARE_SCAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about which data sources are enabled.</p>
@@ -1775,7 +1700,7 @@ module Aws::GuardDuty
       :kubernetes,
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the status of data sources for the detector.</p>
@@ -1807,7 +1732,7 @@ module Aws::GuardDuty
       :kubernetes,
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about which data sources are enabled for the GuardDuty member
@@ -1818,12 +1743,7 @@ module Aws::GuardDuty
     class DataSourceFreeTrial < Struct.new(
       :free_trial_days_remaining,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about which data sources are enabled for the GuardDuty member
@@ -1854,7 +1774,7 @@ module Aws::GuardDuty
       :kubernetes,
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents list a map of dates with a count of total findings generated on each date.</p>
@@ -1878,7 +1798,7 @@ module Aws::GuardDuty
       :severity,
       :total_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1888,7 +1808,7 @@ module Aws::GuardDuty
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1898,7 +1818,7 @@ module Aws::GuardDuty
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the server side encryption method used in the S3 bucket. See
@@ -1915,7 +1835,7 @@ module Aws::GuardDuty
       :encryption_type,
       :kms_master_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1926,12 +1846,12 @@ module Aws::GuardDuty
     class DeleteDetectorRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1946,12 +1866,12 @@ module Aws::GuardDuty
       :detector_id,
       :filter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1966,12 +1886,12 @@ module Aws::GuardDuty
       :detector_id,
       :ip_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIPSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1981,7 +1901,7 @@ module Aws::GuardDuty
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1991,7 +1911,7 @@ module Aws::GuardDuty
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute malware_protection_plan_id
@@ -2000,7 +1920,7 @@ module Aws::GuardDuty
     class DeleteMalwareProtectionPlanRequest < Struct.new(
       :malware_protection_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2016,7 +1936,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -2025,7 +1945,7 @@ module Aws::GuardDuty
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2040,12 +1960,12 @@ module Aws::GuardDuty
       :detector_id,
       :destination_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePublishingDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2060,12 +1980,12 @@ module Aws::GuardDuty
       :detector_id,
       :threat_intel_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteThreatIntelSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2099,7 +2019,7 @@ module Aws::GuardDuty
       :filter_criteria,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scans
@@ -2113,7 +2033,7 @@ module Aws::GuardDuty
       :scans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2136,7 +2056,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -2200,7 +2120,7 @@ module Aws::GuardDuty
       :next_token,
       :auto_enable_organization_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2216,7 +2136,7 @@ module Aws::GuardDuty
       :detector_id,
       :destination_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_id
@@ -2244,7 +2164,7 @@ module Aws::GuardDuty
       :publishing_failure_start_timestamp,
       :destination_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the publishing destination, including the ID, type, and
@@ -2264,7 +2184,7 @@ module Aws::GuardDuty
       :destination_type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon Resource Name (ARN) of the resource to publish to, such as an S3
@@ -2282,11 +2202,7 @@ module Aws::GuardDuty
       :destination_arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the detected behavior.</p>
@@ -2301,7 +2217,7 @@ module Aws::GuardDuty
       :anomaly,
       :sequence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional configuration for a feature in your GuardDuty account.</p>
@@ -2315,7 +2231,7 @@ module Aws::GuardDuty
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional configuration.</p>
@@ -2334,17 +2250,7 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectorFeature
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      EBS_MALWARE_PROTECTION = 'EBS_MALWARE_PROTECTION'
-      RDS_LOGIN_EVENTS = 'RDS_LOGIN_EVENTS'
-      EKS_RUNTIME_MONITORING = 'EKS_RUNTIME_MONITORING'
-      LAMBDA_NETWORK_LOGS = 'LAMBDA_NETWORK_LOGS'
-      RUNTIME_MONITORING = 'RUNTIME_MONITORING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a GuardDuty feature.</p>
@@ -2367,7 +2273,7 @@ module Aws::GuardDuty
       :status,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a GuardDuty feature.</p>
@@ -2394,25 +2300,7 @@ module Aws::GuardDuty
       :updated_at,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectorFeatureResult
-      FLOW_LOGS = 'FLOW_LOGS'
-      CLOUD_TRAIL = 'CLOUD_TRAIL'
-      DNS_LOGS = 'DNS_LOGS'
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      EBS_MALWARE_PROTECTION = 'EBS_MALWARE_PROTECTION'
-      RDS_LOGIN_EVENTS = 'RDS_LOGIN_EVENTS'
-      EKS_RUNTIME_MONITORING = 'EKS_RUNTIME_MONITORING'
-      LAMBDA_NETWORK_LOGS = 'LAMBDA_NETWORK_LOGS'
-      RUNTIME_MONITORING = 'RUNTIME_MONITORING'
-    end
-
-    module DetectorStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -2422,12 +2310,12 @@ module Aws::GuardDuty
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2436,12 +2324,12 @@ module Aws::GuardDuty
     class DisassociateFromAdministratorAccountRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -2452,14 +2340,14 @@ module Aws::GuardDuty
     class DisassociateFromMasterAccountRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This output is deprecated, use DisassociateFromAdministratorAccountResponse instead
     class DisassociateFromMasterAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2474,7 +2362,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -2484,7 +2372,7 @@ module Aws::GuardDuty
     class DisassociateMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the DNS_REQUEST action described in this finding.</p>
@@ -2513,7 +2401,7 @@ module Aws::GuardDuty
       :domain_with_suffix,
       :vpc_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the domain.</p>
@@ -2523,12 +2411,7 @@ module Aws::GuardDuty
     class DomainDetails < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EbsSnapshotPreservation
-      NO_RETENTION = 'NO_RETENTION'
-      RETENTION_WITH_FINDING = 'RETENTION_WITH_FINDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains list of scanned and skipped EBS volumes with details.</p>
@@ -2542,7 +2425,7 @@ module Aws::GuardDuty
       :scanned_volume_details,
       :skipped_volume_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details from the malware scan that created a finding.</p>
@@ -2576,7 +2459,7 @@ module Aws::GuardDuty
       :scan_detections,
       :scan_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of scanning EBS volumes as a data source.</p>
@@ -2591,7 +2474,7 @@ module Aws::GuardDuty
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the potentially impacted Amazon EC2 instance resource.</p>
@@ -2637,7 +2520,7 @@ module Aws::GuardDuty
       :product_codes,
       :ec2_network_interface_uids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the elastic network interface of the Amazon EC2 instance.</p>
@@ -2667,7 +2550,7 @@ module Aws::GuardDuty
       :sub_net_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the details of the ECS Cluster.</p>
@@ -2705,7 +2588,7 @@ module Aws::GuardDuty
       :tags,
       :task_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the task in an ECS cluster.</p>
@@ -2755,7 +2638,7 @@ module Aws::GuardDuty
       :group,
       :launch_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon EKS cluster involved in a GuardDuty finding,
@@ -2782,7 +2665,7 @@ module Aws::GuardDuty
       :vpc_id,
       :ec2_instance_uids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the EKS cluster involved in a Kubernetes finding.</p>
@@ -2812,7 +2695,7 @@ module Aws::GuardDuty
       :tags,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -2822,12 +2705,12 @@ module Aws::GuardDuty
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the reason that the finding was generated.</p>
@@ -2837,7 +2720,7 @@ module Aws::GuardDuty
     class Evidence < Struct.new(
       :threat_intelligence_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about Amazon Web Services Fargate details associated with 
@@ -2865,28 +2748,7 @@ module Aws::GuardDuty
       :issues,
       :management_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureAdditionalConfiguration
-      EKS_ADDON_MANAGEMENT = 'EKS_ADDON_MANAGEMENT'
-      ECS_FARGATE_AGENT_MANAGEMENT = 'ECS_FARGATE_AGENT_MANAGEMENT'
-      EC2_AGENT_MANAGEMENT = 'EC2_AGENT_MANAGEMENT'
-    end
-
-    module FeatureStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module Feedback
-      USEFUL = 'USEFUL'
-      NOT_USEFUL = 'NOT_USEFUL'
-    end
-
-    module FilterAction
-      NOOP = 'NOOP'
-      ARCHIVE = 'ARCHIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the condition.</p>
@@ -2908,7 +2770,7 @@ module Aws::GuardDuty
       :greater_than,
       :less_than,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the criteria to be used in the filter for describing scan entries.</p>
@@ -2919,7 +2781,7 @@ module Aws::GuardDuty
     class FilterCriteria < Struct.new(
       :filter_criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition that when matched will be added to the response of the operation.
@@ -2937,7 +2799,7 @@ module Aws::GuardDuty
       :criterion_key,
       :filter_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the finding that is generated when abnormal or suspicious
@@ -3013,7 +2875,7 @@ module Aws::GuardDuty
       :updated_at,
       :associated_attack_sequence_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the criteria used for querying findings.</p>
@@ -3024,28 +2886,7 @@ module Aws::GuardDuty
     class FindingCriteria < Struct.new(
       :criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FindingPublishingFrequency
-      FIFTEEN_MINUTES = 'FIFTEEN_MINUTES'
-      ONE_HOUR = 'ONE_HOUR'
-      SIX_HOURS = 'SIX_HOURS'
-    end
-
-    module FindingResourceType
-      EC2_INSTANCE = 'EC2_INSTANCE'
-      EC2_NETWORK_INTERFACE = 'EC2_NETWORK_INTERFACE'
-      S3_BUCKET = 'S3_BUCKET'
-      S3_OBJECT = 'S3_OBJECT'
-      ACCESS_KEY = 'ACCESS_KEY'
-      EKS_CLUSTER = 'EKS_CLUSTER'
-      KUBERNETES_WORKLOAD = 'KUBERNETES_WORKLOAD'
-      CONTAINER = 'CONTAINER'
-    end
-
-    module FindingStatisticType
-      COUNT_BY_SEVERITY = 'COUNT_BY_SEVERITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about finding statistics.</p>
@@ -3082,7 +2923,7 @@ module Aws::GuardDuty
       :grouped_by_resource,
       :grouped_by_severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about each finding type associated with the 
@@ -3101,7 +2942,7 @@ module Aws::GuardDuty
       :last_generated_at,
       :total_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the status of VPC flow logs as a data source.</p>
@@ -3111,7 +2952,7 @@ module Aws::GuardDuty
     class FlowLogsConfigurationResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the free trial period for a feature.</p>
@@ -3125,21 +2966,7 @@ module Aws::GuardDuty
       :name,
       :free_trial_days_remaining,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FreeTrialFeatureResult
-      FLOW_LOGS = 'FLOW_LOGS'
-      CLOUD_TRAIL = 'CLOUD_TRAIL'
-      DNS_LOGS = 'DNS_LOGS'
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      EBS_MALWARE_PROTECTION = 'EBS_MALWARE_PROTECTION'
-      RDS_LOGIN_EVENTS = 'RDS_LOGIN_EVENTS'
-      EKS_RUNTIME_MONITORING = 'EKS_RUNTIME_MONITORING'
-      LAMBDA_NETWORK_LOGS = 'LAMBDA_NETWORK_LOGS'
-      FARGATE_RUNTIME_MONITORING = 'FARGATE_RUNTIME_MONITORING'
-      EC2_RUNTIME_MONITORING = 'EC2_RUNTIME_MONITORING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the location of the remote IP address. By default, GuardDuty
@@ -3154,7 +2981,7 @@ module Aws::GuardDuty
       :lat,
       :lon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3163,7 +2990,7 @@ module Aws::GuardDuty
     class GetAdministratorAccountRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute administrator
@@ -3172,7 +2999,7 @@ module Aws::GuardDuty
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3191,7 +3018,7 @@ module Aws::GuardDuty
       :filter_criteria,
       :statistics_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coverage_statistics
@@ -3201,7 +3028,7 @@ module Aws::GuardDuty
     class GetCoverageStatisticsResponse < Struct.new(
       :coverage_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3212,7 +3039,7 @@ module Aws::GuardDuty
     class GetDetectorRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_at
@@ -3251,7 +3078,7 @@ module Aws::GuardDuty
       :tags,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3266,7 +3093,7 @@ module Aws::GuardDuty
       :detector_id,
       :filter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3296,7 +3123,7 @@ module Aws::GuardDuty
       :finding_criteria,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3316,7 +3143,7 @@ module Aws::GuardDuty
       :finding_ids,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -3325,7 +3152,7 @@ module Aws::GuardDuty
     class GetFindingsResponse < Struct.new(
       :findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3362,7 +3189,7 @@ module Aws::GuardDuty
       :order_by,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_statistics
@@ -3376,7 +3203,7 @@ module Aws::GuardDuty
       :finding_statistics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3391,7 +3218,7 @@ module Aws::GuardDuty
       :detector_id,
       :ip_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3421,12 +3248,12 @@ module Aws::GuardDuty
       :tags,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations_count
@@ -3435,7 +3262,7 @@ module Aws::GuardDuty
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute malware_protection_plan_id
@@ -3444,7 +3271,7 @@ module Aws::GuardDuty
     class GetMalwareProtectionPlanRequest < Struct.new(
       :malware_protection_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3485,7 +3312,7 @@ module Aws::GuardDuty
       :status_reasons,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3496,7 +3323,7 @@ module Aws::GuardDuty
     class GetMalwareScanSettingsRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_resource_criteria
@@ -3509,7 +3336,7 @@ module Aws::GuardDuty
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3522,7 +3349,7 @@ module Aws::GuardDuty
     class GetMasterAccountRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3533,7 +3360,7 @@ module Aws::GuardDuty
     class GetMasterAccountResponse < Struct.new(
       :master,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3548,7 +3375,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_data_source_configurations
@@ -3562,7 +3389,7 @@ module Aws::GuardDuty
       :member_data_source_configurations,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3578,7 +3405,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -3592,7 +3419,7 @@ module Aws::GuardDuty
       :members,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_details
@@ -3601,7 +3428,7 @@ module Aws::GuardDuty
     class GetOrganizationStatisticsResponse < Struct.new(
       :organization_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3616,7 +3443,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -3631,7 +3458,7 @@ module Aws::GuardDuty
       :accounts,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3646,7 +3473,7 @@ module Aws::GuardDuty
       :detector_id,
       :threat_intel_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3677,7 +3504,7 @@ module Aws::GuardDuty
       :tags,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3713,7 +3540,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_statistics
@@ -3728,15 +3555,7 @@ module Aws::GuardDuty
       :usage_statistics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupByType
-      ACCOUNT = 'ACCOUNT'
-      DATE = 'DATE'
-      FINDING_TYPE = 'FINDING_TYPE'
-      RESOURCE = 'RESOURCE'
-      SEVERITY = 'SEVERITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of the highest severity threat detected during scan and number of
@@ -3755,7 +3574,7 @@ module Aws::GuardDuty
       :threat_name,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a pre-existing file or directory on the host machine that the volume maps
@@ -3766,7 +3585,7 @@ module Aws::GuardDuty
     class HostPath < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the EC2 instance profile.</p>
@@ -3780,7 +3599,7 @@ module Aws::GuardDuty
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the impersonated user.</p>
@@ -3794,7 +3613,7 @@ module Aws::GuardDuty
       :username,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the indicators that include a set of 
@@ -3816,26 +3635,7 @@ module Aws::GuardDuty
       :values,
       :title,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndicatorType
-      SUSPICIOUS_USER_AGENT = 'SUSPICIOUS_USER_AGENT'
-      SUSPICIOUS_NETWORK = 'SUSPICIOUS_NETWORK'
-      MALICIOUS_IP = 'MALICIOUS_IP'
-      TOR_IP = 'TOR_IP'
-      ATTACK_TACTIC = 'ATTACK_TACTIC'
-      HIGH_RISK_API = 'HIGH_RISK_API'
-      ATTACK_TECHNIQUE = 'ATTACK_TECHNIQUE'
-      UNUSUAL_API_FOR_ACCOUNT = 'UNUSUAL_API_FOR_ACCOUNT'
-      UNUSUAL_ASN_FOR_ACCOUNT = 'UNUSUAL_ASN_FOR_ACCOUNT'
-      UNUSUAL_ASN_FOR_USER = 'UNUSUAL_ASN_FOR_USER'
-      SUSPICIOUS_PROCESS = 'SUSPICIOUS_PROCESS'
-      MALICIOUS_DOMAIN = 'MALICIOUS_DOMAIN'
-      MALICIOUS_PROCESS = 'MALICIOUS_PROCESS'
-      CRYPTOMINING_IP = 'CRYPTOMINING_IP'
-      CRYPTOMINING_DOMAIN = 'CRYPTOMINING_DOMAIN'
-      CRYPTOMINING_PROCESS = 'CRYPTOMINING_PROCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the details of an instance.</p>
@@ -3894,7 +3694,7 @@ module Aws::GuardDuty
       :product_codes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error exception object.</p>
@@ -3908,7 +3708,7 @@ module Aws::GuardDuty
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the invitation to become a member account.</p>
@@ -3931,7 +3731,7 @@ module Aws::GuardDuty
       :relationship_status,
       :invited_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3957,7 +3757,7 @@ module Aws::GuardDuty
       :disable_email_notification,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -3967,26 +3767,7 @@ module Aws::GuardDuty
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpSetFormat
-      TXT = 'TXT'
-      STIX = 'STIX'
-      OTX_CSV = 'OTX_CSV'
-      ALIEN_VAULT = 'ALIEN_VAULT'
-      PROOF_POINT = 'PROOF_POINT'
-      FIRE_EYE = 'FIRE_EYE'
-    end
-
-    module IpSetStatus
-      INACTIVE = 'INACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      DEACTIVATING = 'DEACTIVATING'
-      ERROR = 'ERROR'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the nested item path and hash of the protected
@@ -4001,7 +3782,7 @@ module Aws::GuardDuty
       :nested_item_path,
       :hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Kubernetes API call action described in this finding.</p>
@@ -4052,7 +3833,7 @@ module Aws::GuardDuty
       :namespace,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether Kubernetes audit logs are enabled as a data source.</p>
@@ -4062,7 +3843,7 @@ module Aws::GuardDuty
     class KubernetesAuditLogsConfiguration < Struct.new(
       :enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether Kubernetes audit logs are enabled as a data source.</p>
@@ -4072,7 +3853,7 @@ module Aws::GuardDuty
     class KubernetesAuditLogsConfigurationResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether any Kubernetes data sources are enabled.</p>
@@ -4082,7 +3863,7 @@ module Aws::GuardDuty
     class KubernetesConfiguration < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether any Kubernetes logs will be enabled as a data source.</p>
@@ -4092,7 +3873,7 @@ module Aws::GuardDuty
     class KubernetesConfigurationResult < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the Kubernetes resources when it is enabled as a data
@@ -4103,7 +3884,7 @@ module Aws::GuardDuty
     class KubernetesDataSourceFreeTrial < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about Kubernetes resources such as a Kubernetes user or workload resource involved
@@ -4118,7 +3899,7 @@ module Aws::GuardDuty
       :kubernetes_user_details,
       :kubernetes_workload_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Kubernetes API for which you check if you have permission to call.</p>
@@ -4141,18 +3922,7 @@ module Aws::GuardDuty
       :namespace,
       :allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KubernetesResourcesTypes
-      PODS = 'PODS'
-      JOBS = 'JOBS'
-      CRONJOBS = 'CRONJOBS'
-      DEPLOYMENTS = 'DEPLOYMENTS'
-      DAEMONSETS = 'DAEMONSETS'
-      STATEFULSETS = 'STATEFULSETS'
-      REPLICASETS = 'REPLICASETS'
-      REPLICATIONCONTROLLERS = 'REPLICATIONCONTROLLERS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the role binding that grants the permission defined in a Kubernetes role.</p>
@@ -4180,7 +3950,7 @@ module Aws::GuardDuty
       :role_ref_name,
       :role_ref_kind,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Kubernetes role name and role type.</p>
@@ -4198,7 +3968,7 @@ module Aws::GuardDuty
       :name,
       :uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Kubernetes user involved in a Kubernetes finding.</p>
@@ -4225,7 +3995,7 @@ module Aws::GuardDuty
       :session_name,
       :impersonated_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about Kubernetes workloads involved in a GuardDuty finding,
@@ -4244,7 +4014,7 @@ module Aws::GuardDuty
       :namespace,
       :kubernetes_resources_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>
@@ -4290,7 +4060,7 @@ module Aws::GuardDuty
       :host_ipc,
       :host_pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Lambda function involved in the finding.</p>
@@ -4334,7 +4104,7 @@ module Aws::GuardDuty
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the runtime process details.</p>
@@ -4377,7 +4147,7 @@ module Aws::GuardDuty
       :euid,
       :parent_uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4407,7 +4177,7 @@ module Aws::GuardDuty
       :filter_criteria,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -4421,7 +4191,7 @@ module Aws::GuardDuty
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4438,7 +4208,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_ids
@@ -4452,7 +4222,7 @@ module Aws::GuardDuty
       :detector_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4475,7 +4245,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_names
@@ -4489,7 +4259,7 @@ module Aws::GuardDuty
       :filter_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4677,7 +4447,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_ids
@@ -4691,7 +4461,7 @@ module Aws::GuardDuty
       :finding_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4714,7 +4484,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set_ids
@@ -4728,7 +4498,7 @@ module Aws::GuardDuty
       :ip_set_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4745,7 +4515,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations
@@ -4759,7 +4529,7 @@ module Aws::GuardDuty
       :invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4772,7 +4542,7 @@ module Aws::GuardDuty
     class ListMalwareProtectionPlansRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute malware_protection_plans
@@ -4789,7 +4559,7 @@ module Aws::GuardDuty
       :malware_protection_plans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4821,7 +4591,7 @@ module Aws::GuardDuty
       :next_token,
       :only_associated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -4839,7 +4609,7 @@ module Aws::GuardDuty
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4855,7 +4625,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_accounts
@@ -4869,7 +4639,7 @@ module Aws::GuardDuty
       :admin_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4891,7 +4661,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destinations
@@ -4908,7 +4678,7 @@ module Aws::GuardDuty
       :destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4917,7 +4687,7 @@ module Aws::GuardDuty
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4926,7 +4696,7 @@ module Aws::GuardDuty
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -4949,7 +4719,7 @@ module Aws::GuardDuty
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute threat_intel_set_ids
@@ -4963,7 +4733,7 @@ module Aws::GuardDuty
       :threat_intel_set_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the local IP address of the connection.</p>
@@ -4977,7 +4747,7 @@ module Aws::GuardDuty
       :ip_address_v4,
       :ip_address_v6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the port for the local connection.</p>
@@ -4991,7 +4761,7 @@ module Aws::GuardDuty
       :port,
       :port_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the login attempts.</p>
@@ -5015,7 +4785,7 @@ module Aws::GuardDuty
       :failed_login_attempts,
       :successful_login_attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether Malware Protection will be enabled as a data source.</p>
@@ -5025,7 +4795,7 @@ module Aws::GuardDuty
     class MalwareProtectionConfiguration < Struct.new(
       :scan_ec2_instance_with_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the status of all Malware Protection data
@@ -5040,7 +4810,7 @@ module Aws::GuardDuty
       :scan_ec2_instance_with_findings,
       :service_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about Malware Protection when it is enabled as a data source.</p>
@@ -5051,7 +4821,7 @@ module Aws::GuardDuty
     class MalwareProtectionDataSourceFreeTrial < Struct.new(
       :scan_ec2_instance_with_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about whether the tags will be added to the S3 object after scanning.</p>
@@ -5061,13 +4831,7 @@ module Aws::GuardDuty
     class MalwareProtectionPlanActions < Struct.new(
       :tagging,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MalwareProtectionPlanStatus
-      ACTIVE = 'ACTIVE'
-      WARNING = 'WARNING'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the issue code and message associated to the status of
@@ -5085,7 +4849,7 @@ module Aws::GuardDuty
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Malware Protection plan resource.</p>
@@ -5095,7 +4859,7 @@ module Aws::GuardDuty
     class MalwareProtectionPlanSummary < Struct.new(
       :malware_protection_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about adding tags to the scanned S3 object after the scan result.</p>
@@ -5105,12 +4869,7 @@ module Aws::GuardDuty
     class MalwareProtectionPlanTaggingAction < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MalwareProtectionPlanTaggingActionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the malware scan that generated a GuardDuty finding.</p>
@@ -5121,13 +4880,7 @@ module Aws::GuardDuty
     class MalwareScanDetails < Struct.new(
       :threats,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagementType
-      AUTO_MANAGED = 'AUTO_MANAGED'
-      MANUAL = 'MANUAL'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the administrator account and invitation.</p>
@@ -5149,7 +4902,7 @@ module Aws::GuardDuty
       :relationship_status,
       :invited_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the member account. </p>
@@ -5187,7 +4940,7 @@ module Aws::GuardDuty
       :updated_at,
       :administrator_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional configuration for the member account.</p>
@@ -5201,7 +4954,7 @@ module Aws::GuardDuty
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional configuration for the member account.</p>
@@ -5222,7 +4975,7 @@ module Aws::GuardDuty
       :status,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on which data sources are enabled for a member account.</p>
@@ -5242,7 +4995,7 @@ module Aws::GuardDuty
       :data_sources,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the features for the member account.</p>
@@ -5260,7 +5013,7 @@ module Aws::GuardDuty
       :status,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the features for the member account.</p>
@@ -5283,12 +5036,7 @@ module Aws::GuardDuty
       :updated_at,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MfaStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the network connection.</p>
@@ -5298,7 +5046,7 @@ module Aws::GuardDuty
     class NetworkConnection < Struct.new(
       :direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the NETWORK_CONNECTION action described in the finding.</p>
@@ -5336,12 +5084,7 @@ module Aws::GuardDuty
       :remote_ip_details,
       :remote_port_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkDirection
-      INBOUND = 'INBOUND'
-      OUTBOUND = 'OUTBOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about network endpoints that were observed in the attack sequence.</p>
@@ -5375,7 +5118,7 @@ module Aws::GuardDuty
       :autonomous_system,
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about network endpoint location.</p>
@@ -5397,7 +5140,7 @@ module Aws::GuardDuty
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the elastic network interface of the EC2 instance.</p>
@@ -5443,7 +5186,7 @@ module Aws::GuardDuty
       :subnet_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the observed behavior.</p>
@@ -5453,34 +5196,7 @@ module Aws::GuardDuty
     class Observations < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderBy
-      ASC = 'ASC'
-      DESC = 'DESC'
-    end
-
-    module OrgFeature
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      EBS_MALWARE_PROTECTION = 'EBS_MALWARE_PROTECTION'
-      RDS_LOGIN_EVENTS = 'RDS_LOGIN_EVENTS'
-      EKS_RUNTIME_MONITORING = 'EKS_RUNTIME_MONITORING'
-      LAMBDA_NETWORK_LOGS = 'LAMBDA_NETWORK_LOGS'
-      RUNTIME_MONITORING = 'RUNTIME_MONITORING'
-    end
-
-    module OrgFeatureAdditionalConfiguration
-      EKS_ADDON_MANAGEMENT = 'EKS_ADDON_MANAGEMENT'
-      ECS_FARGATE_AGENT_MANAGEMENT = 'ECS_FARGATE_AGENT_MANAGEMENT'
-      EC2_AGENT_MANAGEMENT = 'EC2_AGENT_MANAGEMENT'
-    end
-
-    module OrgFeatureStatus
-      NEW = 'NEW'
-      NONE = 'NONE'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the ISP organization of the remote IP address.</p>
@@ -5503,7 +5219,7 @@ module Aws::GuardDuty
       :isp,
       :org,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of additional configurations which will be configured for the organization. </p>
@@ -5544,7 +5260,7 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of additional configuration which will be configured for the organization.</p>
@@ -5584,7 +5300,7 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on which data sources will be configured to be
@@ -5606,7 +5322,7 @@ module Aws::GuardDuty
       :kubernetes,
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on which data sources are automatically enabled for
@@ -5625,7 +5341,7 @@ module Aws::GuardDuty
       :kubernetes,
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about GuardDuty coverage statistics for members
@@ -5643,7 +5359,7 @@ module Aws::GuardDuty
       :updated_at,
       :organization_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization-wide EBS volumes scan configuration.</p>
@@ -5654,7 +5370,7 @@ module Aws::GuardDuty
     class OrganizationEbsVolumes < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the status of whether EBS volumes scanning will be
@@ -5666,7 +5382,7 @@ module Aws::GuardDuty
     class OrganizationEbsVolumesResult < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of features which will be configured for the organization.</p>
@@ -5708,7 +5424,7 @@ module Aws::GuardDuty
       :auto_enable,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of features which will be configured for the organization.</p>
@@ -5750,7 +5466,7 @@ module Aws::GuardDuty
       :auto_enable,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the number of accounts
@@ -5770,7 +5486,7 @@ module Aws::GuardDuty
       :enabled_accounts_count,
       :additional_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the coverage 
@@ -5787,7 +5503,7 @@ module Aws::GuardDuty
       :name,
       :enabled_accounts_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization-wide Kubernetes audit logs configuration.</p>
@@ -5798,7 +5514,7 @@ module Aws::GuardDuty
     class OrganizationKubernetesAuditLogsConfiguration < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current configuration of Kubernetes audit logs as a data source for the
@@ -5810,7 +5526,7 @@ module Aws::GuardDuty
     class OrganizationKubernetesAuditLogsConfigurationResult < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization-wide Kubernetes data sources configurations.</p>
@@ -5821,7 +5537,7 @@ module Aws::GuardDuty
     class OrganizationKubernetesConfiguration < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current configuration of all Kubernetes data sources for the organization.</p>
@@ -5832,7 +5548,7 @@ module Aws::GuardDuty
     class OrganizationKubernetesConfigurationResult < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization-wide Malware Protection configurations.</p>
@@ -5843,7 +5559,7 @@ module Aws::GuardDuty
     class OrganizationMalwareProtectionConfiguration < Struct.new(
       :scan_ec2_instance_with_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the status of all Malware Protection data source
@@ -5855,7 +5571,7 @@ module Aws::GuardDuty
     class OrganizationMalwareProtectionConfigurationResult < Struct.new(
       :scan_ec2_instance_with_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether S3 data event logs will be automatically enabled for new members of the
@@ -5867,7 +5583,7 @@ module Aws::GuardDuty
     class OrganizationS3LogsConfiguration < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current configuration of S3 data event logs as a data source for the
@@ -5879,7 +5595,7 @@ module Aws::GuardDuty
     class OrganizationS3LogsConfigurationResult < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization-wide EC2 instances with findings scan configuration.</p>
@@ -5890,7 +5606,7 @@ module Aws::GuardDuty
     class OrganizationScanEc2InstanceWithFindings < Struct.new(
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the status of scanning EC2 instances with findings
@@ -5901,7 +5617,7 @@ module Aws::GuardDuty
     class OrganizationScanEc2InstanceWithFindingsResult < Struct.new(
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the coverage statistics of the 
@@ -5935,7 +5651,7 @@ module Aws::GuardDuty
       :enabled_accounts_count,
       :count_by_feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the owner of the bucket.</p>
@@ -5948,7 +5664,7 @@ module Aws::GuardDuty
     class Owner < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about how permissions are configured for the S3 bucket.</p>
@@ -5962,7 +5678,7 @@ module Aws::GuardDuty
       :bucket_level_permissions,
       :account_level_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the PORT_PROBE action described in the finding.</p>
@@ -5976,7 +5692,7 @@ module Aws::GuardDuty
       :blocked,
       :port_probe_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the port probe details.</p>
@@ -5994,7 +5710,7 @@ module Aws::GuardDuty
       :local_ip_details,
       :remote_ip_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains other private IP address information of the EC2 instance.</p>
@@ -6008,7 +5724,7 @@ module Aws::GuardDuty
       :private_dns_name,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the observed process.</p>
@@ -6067,7 +5783,7 @@ module Aws::GuardDuty
       :euid,
       :lineage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the product code for the EC2 instance.</p>
@@ -6081,18 +5797,7 @@ module Aws::GuardDuty
       :code,
       :product_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfileSubtype
-      FREQUENT = 'FREQUENT'
-      INFREQUENT = 'INFREQUENT'
-      UNSEEN = 'UNSEEN'
-      RARE = 'RARE'
-    end
-
-    module ProfileType
-      FREQUENCY = 'FREQUENCY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the public access policies that apply to the S3 bucket.</p>
@@ -6107,7 +5812,7 @@ module Aws::GuardDuty
       :permission_configuration,
       :effective_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes public access policies that apply to the Amazon S3 bucket.</p>
@@ -6133,29 +5838,7 @@ module Aws::GuardDuty
       :public_acl_ignore_behavior,
       :public_bucket_restrict_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PublicAccessStatus
-      BLOCKED = 'BLOCKED'
-      ALLOWED = 'ALLOWED'
-    end
-
-    module PublicAclIgnoreBehavior
-      IGNORED = 'IGNORED'
-      NOT_IGNORED = 'NOT_IGNORED'
-    end
-
-    module PublicBucketRestrictBehavior
-      RESTRICTED = 'RESTRICTED'
-      NOT_RESTRICTED = 'NOT_RESTRICTED'
-    end
-
-    module PublishingStatus
-      PENDING_VERIFICATION = 'PENDING_VERIFICATION'
-      PUBLISHING = 'PUBLISHING'
-      UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY = 'UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the resource type <code>RDSDBInstance</code> involved in a
@@ -6189,7 +5872,7 @@ module Aws::GuardDuty
       :db_instance_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the user and authentication details for a database instance
@@ -6216,7 +5899,7 @@ module Aws::GuardDuty
       :ssl,
       :auth_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the resource type <code>RDSLimitlessDB</code> that is involved in a GuardDuty
@@ -6251,7 +5934,7 @@ module Aws::GuardDuty
       :db_cluster_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a login attempt was made to the potentially compromised database from a
@@ -6266,7 +5949,7 @@ module Aws::GuardDuty
       :remote_ip_details,
       :login_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the remote Amazon Web Services account that made the API call.</p>
@@ -6283,7 +5966,7 @@ module Aws::GuardDuty
       :account_id,
       :affiliated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the remote IP address of the connection.</p>
@@ -6313,7 +5996,7 @@ module Aws::GuardDuty
       :ip_address_v6,
       :organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the remote port.</p>
@@ -6327,7 +6010,7 @@ module Aws::GuardDuty
       :port,
       :port_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Web Services resource associated with the activity that prompted
@@ -6390,7 +6073,7 @@ module Aws::GuardDuty
       :rds_db_user_details,
       :lambda_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Web Services resource that is associated with the activity that prompted
@@ -6432,7 +6115,7 @@ module Aws::GuardDuty
       :kubernetes_workload,
       :container,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the resources that were scanned in the scan entry.</p>
@@ -6442,7 +6125,7 @@ module Aws::GuardDuty
     class ResourceDetails < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found.</p>
@@ -6456,7 +6139,7 @@ module Aws::GuardDuty
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about each resource type associated with the 
@@ -6529,13 +6212,7 @@ module Aws::GuardDuty
       :resource_type,
       :total_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      EKS = 'EKS'
-      ECS = 'ECS'
-      EC2 = 'EC2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Web Services resource that is associated with the GuardDuty finding.</p>
@@ -6578,7 +6255,7 @@ module Aws::GuardDuty
       :tags,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional information about the suspicious activity.</p>
@@ -6691,7 +6368,7 @@ module Aws::GuardDuty
       :command_line_example,
       :threat_file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the process and any required context values for a specific
@@ -6706,7 +6383,7 @@ module Aws::GuardDuty
       :process,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon S3 bucket policies and encryption.</p>
@@ -6754,7 +6431,7 @@ module Aws::GuardDuty
       :bucket_public_access,
       :s3_object_uids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the S3 bucket.</p>
@@ -6796,7 +6473,7 @@ module Aws::GuardDuty
       :public_access,
       :s3_object_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether S3 data event logs will be enabled as a data source.</p>
@@ -6806,7 +6483,7 @@ module Aws::GuardDuty
     class S3LogsConfiguration < Struct.new(
       :enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether S3 data event logs will be enabled as a data source.</p>
@@ -6817,7 +6494,7 @@ module Aws::GuardDuty
     class S3LogsConfigurationResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon S3 object.</p>
@@ -6836,7 +6513,7 @@ module Aws::GuardDuty
       :key,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the S3 object that was scanned</p>
@@ -6863,7 +6540,7 @@ module Aws::GuardDuty
       :hash,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about malware scans associated with GuardDuty Malware Protection for EC2.</p>
@@ -6935,7 +6612,7 @@ module Aws::GuardDuty
       :attached_volumes,
       :scan_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the condition.</p>
@@ -6947,7 +6624,7 @@ module Aws::GuardDuty
     class ScanCondition < Struct.new(
       :map_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the <code>key:value</code> pair to be matched against given resource property.</p>
@@ -6963,13 +6640,7 @@ module Aws::GuardDuty
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>An enum value representing possible resource properties to match with given scan
-    #       condition.</p>
-    module ScanCriterionKey
-      EC2_INSTANCE_TAG = 'EC2_INSTANCE_TAG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a complete view providing malware scan result details.</p>
@@ -6992,7 +6663,7 @@ module Aws::GuardDuty
       :highest_severity_threat_details,
       :threat_detected_by_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether Malware Protection for EC2 instances with findings will be enabled as a
@@ -7003,7 +6674,7 @@ module Aws::GuardDuty
     class ScanEc2InstanceWithFindings < Struct.new(
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the status of whether Malware Protection for EC2
@@ -7014,7 +6685,7 @@ module Aws::GuardDuty
     class ScanEc2InstanceWithFindingsResult < Struct.new(
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of infected file including name, file path and hash.</p>
@@ -7036,7 +6707,7 @@ module Aws::GuardDuty
       :hash,
       :file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about criteria used to filter resources before triggering malware
@@ -7053,12 +6724,7 @@ module Aws::GuardDuty
       :include,
       :exclude,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanResult
-      CLEAN = 'CLEAN'
-      INFECTED = 'INFECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of the scan.</p>
@@ -7068,14 +6734,7 @@ module Aws::GuardDuty
     class ScanResultDetails < Struct.new(
       :scan_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanStatus
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains files infected with the given threat providing details of malware name and
@@ -7098,12 +6757,7 @@ module Aws::GuardDuty
       :item_count,
       :file_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanType
-      GUARDDUTY_INITIATED = 'GUARDDUTY_INITIATED'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Total number of scanned files.</p>
@@ -7121,7 +6775,7 @@ module Aws::GuardDuty
       :files,
       :volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container security context.</p>
@@ -7135,7 +6789,7 @@ module Aws::GuardDuty
       :privileged,
       :allow_privilege_escalation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the security groups associated with the EC2 instance.</p>
@@ -7149,7 +6803,7 @@ module Aws::GuardDuty
       :group_id,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the GuardDuty attack sequence finding.</p>
@@ -7188,7 +6842,7 @@ module Aws::GuardDuty
       :sequence_indicators,
       :additional_sequence_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional information about the generated finding.</p>
@@ -7261,7 +6915,7 @@ module Aws::GuardDuty
       :detection,
       :malware_scan_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional information about the generated finding.</p>
@@ -7275,7 +6929,7 @@ module Aws::GuardDuty
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the authenticated session.</p>
@@ -7300,7 +6954,7 @@ module Aws::GuardDuty
       :created_time,
       :issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about severity level for each finding type.</p>
@@ -7318,7 +6972,7 @@ module Aws::GuardDuty
       :severity,
       :total_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the signals involved in the attack sequence.</p>
@@ -7406,17 +7060,7 @@ module Aws::GuardDuty
       :endpoint_ids,
       :signal_indicators,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignalType
-      FINDING = 'FINDING'
-      CLOUD_TRAIL = 'CLOUD_TRAIL'
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      FLOW_LOGS = 'FLOW_LOGS'
-      DNS_LOGS = 'DNS_LOGS'
-      RUNTIME_MONITORING = 'RUNTIME_MONITORING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the criteria used for sorting findings.</p>
@@ -7431,7 +7075,7 @@ module Aws::GuardDuty
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7440,7 +7084,7 @@ module Aws::GuardDuty
     class StartMalwareScanRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_id
@@ -7450,7 +7094,7 @@ module Aws::GuardDuty
     class StartMalwareScanResponse < Struct.new(
       :scan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7466,7 +7110,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -7476,7 +7120,7 @@ module Aws::GuardDuty
     class StartMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7492,7 +7136,7 @@ module Aws::GuardDuty
       :detector_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -7502,7 +7146,7 @@ module Aws::GuardDuty
     class StopMonitoringMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a tag key-value pair.</p>
@@ -7516,7 +7160,7 @@ module Aws::GuardDuty
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7529,12 +7173,12 @@ module Aws::GuardDuty
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the detected threats associated with the
@@ -7554,7 +7198,7 @@ module Aws::GuardDuty
       :source,
       :item_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about identified threats organized by threat name.</p>
@@ -7577,26 +7221,7 @@ module Aws::GuardDuty
       :shortened,
       :threat_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThreatIntelSetFormat
-      TXT = 'TXT'
-      STIX = 'STIX'
-      OTX_CSV = 'OTX_CSV'
-      ALIEN_VAULT = 'ALIEN_VAULT'
-      PROOF_POINT = 'PROOF_POINT'
-      FIRE_EYE = 'FIRE_EYE'
-    end
-
-    module ThreatIntelSetStatus
-      INACTIVE = 'INACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      DEACTIVATING = 'DEACTIVATING'
-      ERROR = 'ERROR'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance of a threat intelligence detail that constitutes evidence for the
@@ -7616,7 +7241,7 @@ module Aws::GuardDuty
       :threat_names,
       :threat_file_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains total number of infected files.</p>
@@ -7626,7 +7251,7 @@ module Aws::GuardDuty
     class ThreatsDetectedItemCount < Struct.new(
       :files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the total usage with the corresponding currency unit for that value.</p>
@@ -7640,7 +7265,7 @@ module Aws::GuardDuty
       :amount,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the reason the scan was triggered.</p>
@@ -7654,7 +7279,7 @@ module Aws::GuardDuty
       :guard_duty_finding_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7669,12 +7294,12 @@ module Aws::GuardDuty
       :detector_id,
       :finding_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UnarchiveFindingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the accounts that weren't processed.</p>
@@ -7688,7 +7313,7 @@ module Aws::GuardDuty
       :account_id,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the names of the data sources that couldn't be enabled.</p>
@@ -7699,7 +7324,7 @@ module Aws::GuardDuty
     class UnprocessedDataSourcesResult < Struct.new(
       :malware_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7712,12 +7337,12 @@ module Aws::GuardDuty
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7750,12 +7375,12 @@ module Aws::GuardDuty
       :data_sources,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7791,7 +7416,7 @@ module Aws::GuardDuty
       :rank,
       :finding_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7800,7 +7425,7 @@ module Aws::GuardDuty
     class UpdateFilterResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7824,12 +7449,12 @@ module Aws::GuardDuty
       :feedback,
       :comments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFindingsFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7860,12 +7485,12 @@ module Aws::GuardDuty
       :activate,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIPSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute malware_protection_plan_id
@@ -7889,7 +7514,7 @@ module Aws::GuardDuty
       :actions,
       :protected_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7909,12 +7534,12 @@ module Aws::GuardDuty
       :scan_resource_criteria,
       :ebs_snapshot_preservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMalwareScanSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -7939,7 +7564,7 @@ module Aws::GuardDuty
       :data_sources,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -7949,7 +7574,7 @@ module Aws::GuardDuty
     class UpdateMemberDetectorsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -8012,12 +7637,12 @@ module Aws::GuardDuty
       :features,
       :auto_enable_organization_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the protected resource 
@@ -8029,7 +7654,7 @@ module Aws::GuardDuty
     class UpdateProtectedResource < Struct.new(
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -8049,12 +7674,12 @@ module Aws::GuardDuty
       :destination_id,
       :destination_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePublishingDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the protected S3 bucket resource.</p>
@@ -8065,7 +7690,7 @@ module Aws::GuardDuty
     class UpdateS3BucketResource < Struct.new(
       :object_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -8098,12 +7723,12 @@ module Aws::GuardDuty
       :activate,
       :expected_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateThreatIntelSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the total of usage based on account IDs.</p>
@@ -8117,7 +7742,7 @@ module Aws::GuardDuty
       :account_id,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the criteria used to query usage statistics.</p>
@@ -8142,7 +7767,7 @@ module Aws::GuardDuty
       :resources,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the result of usage based on data source type.</p>
@@ -8156,23 +7781,7 @@ module Aws::GuardDuty
       :data_source,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageFeature
-      FLOW_LOGS = 'FLOW_LOGS'
-      CLOUD_TRAIL = 'CLOUD_TRAIL'
-      DNS_LOGS = 'DNS_LOGS'
-      S3_DATA_EVENTS = 'S3_DATA_EVENTS'
-      EKS_AUDIT_LOGS = 'EKS_AUDIT_LOGS'
-      EBS_MALWARE_PROTECTION = 'EBS_MALWARE_PROTECTION'
-      RDS_LOGIN_EVENTS = 'RDS_LOGIN_EVENTS'
-      LAMBDA_NETWORK_LOGS = 'LAMBDA_NETWORK_LOGS'
-      EKS_RUNTIME_MONITORING = 'EKS_RUNTIME_MONITORING'
-      FARGATE_RUNTIME_MONITORING = 'FARGATE_RUNTIME_MONITORING'
-      EC2_RUNTIME_MONITORING = 'EC2_RUNTIME_MONITORING'
-      RDS_DBI_PROTECTION_PROVISIONED = 'RDS_DBI_PROTECTION_PROVISIONED'
-      RDS_DBI_PROTECTION_SERVERLESS = 'RDS_DBI_PROTECTION_SERVERLESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the result of the total usage based on the feature.</p>
@@ -8186,7 +7795,7 @@ module Aws::GuardDuty
       :feature,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the sum of usage based on an Amazon Web Services resource.</p>
@@ -8200,16 +7809,7 @@ module Aws::GuardDuty
       :resource,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageStatisticType
-      SUM_BY_ACCOUNT = 'SUM_BY_ACCOUNT'
-      SUM_BY_DATA_SOURCE = 'SUM_BY_DATA_SOURCE'
-      SUM_BY_RESOURCE = 'SUM_BY_RESOURCE'
-      TOP_RESOURCES = 'TOP_RESOURCES'
-      SUM_BY_FEATURES = 'SUM_BY_FEATURES'
-      TOP_ACCOUNTS_BY_FEATURE = 'TOP_ACCOUNTS_BY_FEATURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for
@@ -8243,7 +7843,7 @@ module Aws::GuardDuty
       :top_resources,
       :sum_by_feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the total of usage based on the topmost 50 
@@ -8258,7 +7858,7 @@ module Aws::GuardDuty
       :account_id,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the usage statistics, calculated
@@ -8276,7 +7876,7 @@ module Aws::GuardDuty
       :feature,
       :accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the user involved in the attack sequence.</p>
@@ -8302,7 +7902,7 @@ module Aws::GuardDuty
       :credential_uid,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Volume used by the Kubernetes workload.</p>
@@ -8317,7 +7917,7 @@ module Aws::GuardDuty
       :name,
       :host_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains EBS volume details.</p>
@@ -8351,7 +7951,7 @@ module Aws::GuardDuty
       :snapshot_arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container volume mount.</p>
@@ -8365,7 +7965,7 @@ module Aws::GuardDuty
       :name,
       :mount_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Virtual Private Cloud configuration details associated with your Lambda function.</p>
@@ -8383,7 +7983,7 @@ module Aws::GuardDuty
       :vpc_id,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

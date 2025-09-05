@@ -50,7 +50,7 @@ module Aws::DeviceFarm
       :default_job_timeout_minutes,
       :skip_app_resign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid argument was specified.</p>
@@ -60,7 +60,7 @@ module Aws::DeviceFarm
     class ArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a test. Examples of artifacts include logs and
@@ -154,49 +154,7 @@ module Aws::DeviceFarm
       :extension,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactCategory
-      SCREENSHOT = 'SCREENSHOT'
-      FILE = 'FILE'
-      LOG = 'LOG'
-    end
-
-    module ArtifactType
-      UNKNOWN = 'UNKNOWN'
-      SCREENSHOT = 'SCREENSHOT'
-      DEVICE_LOG = 'DEVICE_LOG'
-      MESSAGE_LOG = 'MESSAGE_LOG'
-      VIDEO_LOG = 'VIDEO_LOG'
-      RESULT_LOG = 'RESULT_LOG'
-      SERVICE_LOG = 'SERVICE_LOG'
-      WEBKIT_LOG = 'WEBKIT_LOG'
-      INSTRUMENTATION_OUTPUT = 'INSTRUMENTATION_OUTPUT'
-      EXERCISER_MONKEY_OUTPUT = 'EXERCISER_MONKEY_OUTPUT'
-      CALABASH_JSON_OUTPUT = 'CALABASH_JSON_OUTPUT'
-      CALABASH_PRETTY_OUTPUT = 'CALABASH_PRETTY_OUTPUT'
-      CALABASH_STANDARD_OUTPUT = 'CALABASH_STANDARD_OUTPUT'
-      CALABASH_JAVA_XML_OUTPUT = 'CALABASH_JAVA_XML_OUTPUT'
-      AUTOMATION_OUTPUT = 'AUTOMATION_OUTPUT'
-      APPIUM_SERVER_OUTPUT = 'APPIUM_SERVER_OUTPUT'
-      APPIUM_JAVA_OUTPUT = 'APPIUM_JAVA_OUTPUT'
-      APPIUM_JAVA_XML_OUTPUT = 'APPIUM_JAVA_XML_OUTPUT'
-      APPIUM_PYTHON_OUTPUT = 'APPIUM_PYTHON_OUTPUT'
-      APPIUM_PYTHON_XML_OUTPUT = 'APPIUM_PYTHON_XML_OUTPUT'
-      EXPLORER_EVENT_LOG = 'EXPLORER_EVENT_LOG'
-      EXPLORER_SUMMARY_LOG = 'EXPLORER_SUMMARY_LOG'
-      APPLICATION_CRASH_REPORT = 'APPLICATION_CRASH_REPORT'
-      XCTEST_LOG = 'XCTEST_LOG'
-      VIDEO = 'VIDEO'
-      CUSTOMER_ARTIFACT = 'CUSTOMER_ARTIFACT'
-      CUSTOMER_ARTIFACT_LOG = 'CUSTOMER_ARTIFACT_LOG'
-      TESTSPEC_OUTPUT = 'TESTSPEC_OUTPUT'
-    end
-
-    module BillingMethod
-      METERED = 'METERED'
-      UNMETERED = 'UNMETERED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the amount of CPU that an app is using on a physical device. Does not represent system-wide
@@ -216,7 +174,7 @@ module Aws::DeviceFarm
       :architecture,
       :clock,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested object could not be deleted.</p>
@@ -225,7 +183,7 @@ module Aws::DeviceFarm
     class CannotDeleteException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents entity counters.</p>
@@ -259,7 +217,7 @@ module Aws::DeviceFarm
       :stopped,
       :skipped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the create device pool operation.</p>
@@ -290,7 +248,7 @@ module Aws::DeviceFarm
       :rules,
       :max_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a create device pool request.</p>
@@ -300,7 +258,7 @@ module Aws::DeviceFarm
     class CreateDevicePoolResult < Struct.new(
       :device_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -330,7 +288,7 @@ module Aws::DeviceFarm
       :exclude_app_packages_from_cleanup,
       :reboot_after_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -339,7 +297,7 @@ module Aws::DeviceFarm
     class CreateInstanceProfileResult < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -400,7 +358,7 @@ module Aws::DeviceFarm
       :uplink_loss_percent,
       :downlink_loss_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_profile
@@ -410,7 +368,7 @@ module Aws::DeviceFarm
     class CreateNetworkProfileResult < Struct.new(
       :network_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the create project operation.</p>
@@ -429,7 +387,7 @@ module Aws::DeviceFarm
       :default_job_timeout_minutes,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a create project request.</p>
@@ -439,7 +397,7 @@ module Aws::DeviceFarm
     class CreateProjectResult < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for a remote access session, including billing
@@ -458,7 +416,7 @@ module Aws::DeviceFarm
       :vpce_configuration_arns,
       :device_proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates and submits a request to start a remote access session.</p>
@@ -546,7 +504,7 @@ module Aws::DeviceFarm
       :interaction_mode,
       :skip_app_resign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the server response from a request to create a remote access
@@ -558,7 +516,7 @@ module Aws::DeviceFarm
     class CreateRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -575,7 +533,7 @@ module Aws::DeviceFarm
       :description,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_project
@@ -584,7 +542,7 @@ module Aws::DeviceFarm
     class CreateTestGridProjectResult < Struct.new(
       :test_grid_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -598,7 +556,7 @@ module Aws::DeviceFarm
       :project_arn,
       :expires_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -612,7 +570,7 @@ module Aws::DeviceFarm
       :url,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the create upload operation.</p>
@@ -729,7 +687,7 @@ module Aws::DeviceFarm
       :type,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a create upload request.</p>
@@ -739,7 +697,7 @@ module Aws::DeviceFarm
     class CreateUploadResult < Struct.new(
       :upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpce_configuration_name
@@ -762,7 +720,7 @@ module Aws::DeviceFarm
       :service_dns_name,
       :vpce_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpce_configuration
@@ -771,11 +729,7 @@ module Aws::DeviceFarm
     class CreateVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CurrencyCode
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object that specifies the paths where the artifacts generated by the customer's tests, on the
@@ -801,7 +755,7 @@ module Aws::DeviceFarm
       :android_paths,
       :device_host_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the delete device pool operation.</p>
@@ -811,13 +765,13 @@ module Aws::DeviceFarm
     class DeleteDevicePoolRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete device pool request.</p>
     class DeleteDevicePoolResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -827,12 +781,12 @@ module Aws::DeviceFarm
     class DeleteInstanceProfileRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceProfileResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -841,12 +795,12 @@ module Aws::DeviceFarm
     class DeleteNetworkProfileRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNetworkProfileResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the delete project operation.</p>
@@ -856,13 +810,13 @@ module Aws::DeviceFarm
     class DeleteProjectRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete project request.</p>
     class DeleteProjectResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete the specified remote access session.</p>
@@ -873,14 +827,14 @@ module Aws::DeviceFarm
     class DeleteRemoteAccessSessionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server when a request is made to delete the remote access
     #             session.</p>
     class DeleteRemoteAccessSessionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the delete run operation.</p>
@@ -890,13 +844,13 @@ module Aws::DeviceFarm
     class DeleteRunRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete run request.</p>
     class DeleteRunResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -905,12 +859,12 @@ module Aws::DeviceFarm
     class DeleteTestGridProjectRequest < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTestGridProjectResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the delete upload operation.</p>
@@ -920,13 +874,13 @@ module Aws::DeviceFarm
     class DeleteUploadRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a delete upload request.</p>
     class DeleteUploadResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -936,12 +890,12 @@ module Aws::DeviceFarm
     class DeleteVPCEConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVPCEConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a device type that an app is tested against.</p>
@@ -1053,30 +1007,7 @@ module Aws::DeviceFarm
       :instances,
       :availability,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceAttribute
-      ARN = 'ARN'
-      PLATFORM = 'PLATFORM'
-      FORM_FACTOR = 'FORM_FACTOR'
-      MANUFACTURER = 'MANUFACTURER'
-      REMOTE_ACCESS_ENABLED = 'REMOTE_ACCESS_ENABLED'
-      REMOTE_DEBUG_ENABLED = 'REMOTE_DEBUG_ENABLED'
-      APPIUM_VERSION = 'APPIUM_VERSION'
-      INSTANCE_ARN = 'INSTANCE_ARN'
-      INSTANCE_LABELS = 'INSTANCE_LABELS'
-      FLEET_TYPE = 'FLEET_TYPE'
-      OS_VERSION = 'OS_VERSION'
-      MODEL = 'MODEL'
-      AVAILABILITY = 'AVAILABILITY'
-    end
-
-    module DeviceAvailability
-      TEMPORARY_NOT_AVAILABLE = 'TEMPORARY_NOT_AVAILABLE'
-      BUSY = 'BUSY'
-      AVAILABLE = 'AVAILABLE'
-      HIGHLY_AVAILABLE = 'HIGHLY_AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a device filter used to select a set of devices to be included in a test
@@ -1217,27 +1148,7 @@ module Aws::DeviceFarm
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceFilterAttribute
-      ARN = 'ARN'
-      PLATFORM = 'PLATFORM'
-      OS_VERSION = 'OS_VERSION'
-      MODEL = 'MODEL'
-      AVAILABILITY = 'AVAILABILITY'
-      FORM_FACTOR = 'FORM_FACTOR'
-      MANUFACTURER = 'MANUFACTURER'
-      REMOTE_ACCESS_ENABLED = 'REMOTE_ACCESS_ENABLED'
-      REMOTE_DEBUG_ENABLED = 'REMOTE_DEBUG_ENABLED'
-      INSTANCE_ARN = 'INSTANCE_ARN'
-      INSTANCE_LABELS = 'INSTANCE_LABELS'
-      FLEET_TYPE = 'FLEET_TYPE'
-    end
-
-    module DeviceFormFactor
-      PHONE = 'PHONE'
-      TABLET = 'TABLET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the device instance.</p>
@@ -1267,7 +1178,7 @@ module Aws::DeviceFarm
       :udid,
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the total (metered or unmetered) minutes used by the resource to run
@@ -1289,12 +1200,7 @@ module Aws::DeviceFarm
       :metered,
       :unmetered,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DevicePlatform
-      ANDROID = 'ANDROID'
-      IOS = 'IOS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of device types.</p>
@@ -1340,7 +1246,7 @@ module Aws::DeviceFarm
       :rules,
       :max_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a device pool compatibility result.</p>
@@ -1358,12 +1264,7 @@ module Aws::DeviceFarm
       :compatible,
       :incompatibility_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DevicePoolType
-      CURATED = 'CURATED'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the http/s proxy configuration that will be applied to a device during a run.</p>
@@ -1377,7 +1278,7 @@ module Aws::DeviceFarm
       :host,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 3128 unless options.key?(:port)
@@ -1518,7 +1419,7 @@ module Aws::DeviceFarm
       :filters,
       :max_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the run results requested by the device selection configuration and how many devices were
@@ -1538,7 +1439,7 @@ module Aws::DeviceFarm
       :matched_devices_count,
       :max_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents configuration information about a test run, such as the execution
@@ -1568,40 +1469,13 @@ module Aws::DeviceFarm
       :video_capture,
       :skip_app_resign,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionResult
-      PENDING = 'PENDING'
-      PASSED = 'PASSED'
-      WARNED = 'WARNED'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
-      ERRORED = 'ERRORED'
-      STOPPED = 'STOPPED'
-    end
-
-    module ExecutionResultCode
-      PARSING_FAILED = 'PARSING_FAILED'
-      VPC_ENDPOINT_SETUP_FAILED = 'VPC_ENDPOINT_SETUP_FAILED'
-    end
-
-    module ExecutionStatus
-      PENDING = 'PENDING'
-      PENDING_CONCURRNECY = 'PENDING_CONCURRENCY'
-      PENDING_DEVICE = 'PENDING_DEVICE'
-      PROCESSING = 'PROCESSING'
-      SCHEDULING = 'SCHEDULING'
-      PREPARING = 'PREPARING'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      STOPPING = 'STOPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request sent to retrieve the account settings.</p>
     class GetAccountSettingsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the account settings return values from the
@@ -1612,7 +1486,7 @@ module Aws::DeviceFarm
     class GetAccountSettingsResult < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1622,7 +1496,7 @@ module Aws::DeviceFarm
     class GetDeviceInstanceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_instance
@@ -1631,7 +1505,7 @@ module Aws::DeviceFarm
     class GetDeviceInstanceResult < Struct.new(
       :device_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get device pool compatibility operation.</p>
@@ -1707,7 +1581,7 @@ module Aws::DeviceFarm
       :configuration,
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of describe device pool compatibility request.</p>
@@ -1721,7 +1595,7 @@ module Aws::DeviceFarm
       :compatible_devices,
       :incompatible_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get device pool operation.</p>
@@ -1731,7 +1605,7 @@ module Aws::DeviceFarm
     class GetDevicePoolRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get device pool request.</p>
@@ -1741,7 +1615,7 @@ module Aws::DeviceFarm
     class GetDevicePoolResult < Struct.new(
       :device_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get device request.</p>
@@ -1751,7 +1625,7 @@ module Aws::DeviceFarm
     class GetDeviceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get device request.</p>
@@ -1761,7 +1635,7 @@ module Aws::DeviceFarm
     class GetDeviceResult < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1770,7 +1644,7 @@ module Aws::DeviceFarm
     class GetInstanceProfileRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -1779,7 +1653,7 @@ module Aws::DeviceFarm
     class GetInstanceProfileResult < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get job operation.</p>
@@ -1789,7 +1663,7 @@ module Aws::DeviceFarm
     class GetJobRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get job request.</p>
@@ -1799,7 +1673,7 @@ module Aws::DeviceFarm
     class GetJobResult < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1808,7 +1682,7 @@ module Aws::DeviceFarm
     class GetNetworkProfileRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_profile
@@ -1817,7 +1691,7 @@ module Aws::DeviceFarm
     class GetNetworkProfileResult < Struct.new(
       :network_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to retrieve the offering status for the specified customer
@@ -1829,7 +1703,7 @@ module Aws::DeviceFarm
     class GetOfferingStatusRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the status result for a device offering.</p>
@@ -1848,7 +1722,7 @@ module Aws::DeviceFarm
       :next_period,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get project operation.</p>
@@ -1858,7 +1732,7 @@ module Aws::DeviceFarm
     class GetProjectRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get project request.</p>
@@ -1868,7 +1742,7 @@ module Aws::DeviceFarm
     class GetProjectResult < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get information about the specified remote access
@@ -1880,7 +1754,7 @@ module Aws::DeviceFarm
     class GetRemoteAccessSessionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server that lists detailed information about the
@@ -1892,7 +1766,7 @@ module Aws::DeviceFarm
     class GetRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get run operation.</p>
@@ -1902,7 +1776,7 @@ module Aws::DeviceFarm
     class GetRunRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get run request.</p>
@@ -1912,7 +1786,7 @@ module Aws::DeviceFarm
     class GetRunResult < Struct.new(
       :run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get suite operation.</p>
@@ -1922,7 +1796,7 @@ module Aws::DeviceFarm
     class GetSuiteRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get suite request.</p>
@@ -1932,7 +1806,7 @@ module Aws::DeviceFarm
     class GetSuiteResult < Struct.new(
       :suite,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1941,7 +1815,7 @@ module Aws::DeviceFarm
     class GetTestGridProjectRequest < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_project
@@ -1950,7 +1824,7 @@ module Aws::DeviceFarm
     class GetTestGridProjectResult < Struct.new(
       :test_grid_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1967,7 +1841,7 @@ module Aws::DeviceFarm
       :session_id,
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_session
@@ -1976,7 +1850,7 @@ module Aws::DeviceFarm
     class GetTestGridSessionResult < Struct.new(
       :test_grid_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get test operation.</p>
@@ -1986,7 +1860,7 @@ module Aws::DeviceFarm
     class GetTestRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get test request.</p>
@@ -1996,7 +1870,7 @@ module Aws::DeviceFarm
     class GetTestResult < Struct.new(
       :test,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the get upload operation.</p>
@@ -2006,7 +1880,7 @@ module Aws::DeviceFarm
     class GetUploadRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a get upload request.</p>
@@ -2017,7 +1891,7 @@ module Aws::DeviceFarm
     class GetUploadResult < Struct.new(
       :upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2027,7 +1901,7 @@ module Aws::DeviceFarm
     class GetVPCEConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpce_configuration
@@ -2036,7 +1910,7 @@ module Aws::DeviceFarm
     class GetVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity with the same name already exists.</p>
@@ -2046,7 +1920,7 @@ module Aws::DeviceFarm
     class IdempotencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about incompatibility.</p>
@@ -2081,7 +1955,7 @@ module Aws::DeviceFarm
       :message,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to install an Android application (in .apk format) or an iOS
@@ -2097,7 +1971,7 @@ module Aws::DeviceFarm
       :remote_access_session_arn,
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server after AWS Device Farm makes a request to
@@ -2108,7 +1982,7 @@ module Aws::DeviceFarm
     class InstallToRemoteAccessSessionResult < Struct.new(
       :app_upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the instance profile.</p>
@@ -2143,20 +2017,7 @@ module Aws::DeviceFarm
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStatus
-      IN_USE = 'IN_USE'
-      PREPARING = 'PREPARING'
-      AVAILABLE = 'AVAILABLE'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
-    end
-
-    module InteractionMode
-      INTERACTIVE = 'INTERACTIVE'
-      NO_VIDEO = 'NO_VIDEO'
-      VIDEO_ONLY = 'VIDEO_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal exception was raised in the service. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you see this
@@ -2166,7 +2027,7 @@ module Aws::DeviceFarm
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an error with the update request, or you do not have sufficient permissions
@@ -2176,7 +2037,7 @@ module Aws::DeviceFarm
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a device.</p>
@@ -2341,7 +2202,7 @@ module Aws::DeviceFarm
       :video_endpoint,
       :video_capture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit was exceeded.</p>
@@ -2351,7 +2212,7 @@ module Aws::DeviceFarm
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list artifacts operation.</p>
@@ -2382,7 +2243,7 @@ module Aws::DeviceFarm
       :type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list artifacts operation.</p>
@@ -2398,7 +2259,7 @@ module Aws::DeviceFarm
       :artifacts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2412,7 +2273,7 @@ module Aws::DeviceFarm
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_instances
@@ -2426,7 +2287,7 @@ module Aws::DeviceFarm
       :device_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list device pools request.</p>
@@ -2456,7 +2317,7 @@ module Aws::DeviceFarm
       :type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list device pools request.</p>
@@ -2472,7 +2333,7 @@ module Aws::DeviceFarm
       :device_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list devices request.</p>
@@ -2581,7 +2442,7 @@ module Aws::DeviceFarm
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list devices operation.</p>
@@ -2597,7 +2458,7 @@ module Aws::DeviceFarm
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2611,7 +2472,7 @@ module Aws::DeviceFarm
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profiles
@@ -2625,7 +2486,7 @@ module Aws::DeviceFarm
       :instance_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list jobs operation.</p>
@@ -2640,7 +2501,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list jobs request.</p>
@@ -2656,7 +2517,7 @@ module Aws::DeviceFarm
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2675,7 +2536,7 @@ module Aws::DeviceFarm
       :type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_profiles
@@ -2689,7 +2550,7 @@ module Aws::DeviceFarm
       :network_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2699,7 +2560,7 @@ module Aws::DeviceFarm
     class ListOfferingPromotionsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offering_promotions
@@ -2713,7 +2574,7 @@ module Aws::DeviceFarm
       :offering_promotions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list the offering transaction history.</p>
@@ -2724,7 +2585,7 @@ module Aws::DeviceFarm
     class ListOfferingTransactionsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the transaction log of the specified offerings.</p>
@@ -2740,7 +2601,7 @@ module Aws::DeviceFarm
       :offering_transactions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list all offerings.</p>
@@ -2751,7 +2612,7 @@ module Aws::DeviceFarm
     class ListOfferingsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the return values of the list of offerings.</p>
@@ -2766,7 +2627,7 @@ module Aws::DeviceFarm
       :offerings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list projects operation.</p>
@@ -2783,7 +2644,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list projects request.</p>
@@ -2799,7 +2660,7 @@ module Aws::DeviceFarm
       :projects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to return information about the remote access
@@ -2816,7 +2677,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server after AWS Device Farm makes a request to
@@ -2833,7 +2694,7 @@ module Aws::DeviceFarm
       :remote_access_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list runs operation.</p>
@@ -2849,7 +2710,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list runs request.</p>
@@ -2865,7 +2726,7 @@ module Aws::DeviceFarm
       :runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list samples operation.</p>
@@ -2880,7 +2741,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list samples request.</p>
@@ -2896,7 +2757,7 @@ module Aws::DeviceFarm
       :samples,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list suites operation.</p>
@@ -2911,7 +2772,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list suites request.</p>
@@ -2927,7 +2788,7 @@ module Aws::DeviceFarm
       :suites,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2940,7 +2801,7 @@ module Aws::DeviceFarm
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2950,7 +2811,7 @@ module Aws::DeviceFarm
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_result
@@ -2963,7 +2824,7 @@ module Aws::DeviceFarm
       :max_result,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_projects
@@ -2977,7 +2838,7 @@ module Aws::DeviceFarm
       :test_grid_projects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -2994,7 +2855,7 @@ module Aws::DeviceFarm
       :max_result,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -3007,7 +2868,7 @@ module Aws::DeviceFarm
       :actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -3028,7 +2889,7 @@ module Aws::DeviceFarm
       :max_result,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifacts
@@ -3041,7 +2902,7 @@ module Aws::DeviceFarm
       :artifacts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -3078,7 +2939,7 @@ module Aws::DeviceFarm
       :max_result,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_sessions
@@ -3091,7 +2952,7 @@ module Aws::DeviceFarm
       :test_grid_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list tests operation.</p>
@@ -3106,7 +2967,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list tests request.</p>
@@ -3122,7 +2983,7 @@ module Aws::DeviceFarm
       :tests,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list unique problems operation.</p>
@@ -3137,7 +2998,7 @@ module Aws::DeviceFarm
       :arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list unique problems request.</p>
@@ -3177,7 +3038,7 @@ module Aws::DeviceFarm
       :unique_problems,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the list uploads operation.</p>
@@ -3287,7 +3148,7 @@ module Aws::DeviceFarm
       :type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a list uploads request.</p>
@@ -3303,7 +3164,7 @@ module Aws::DeviceFarm
       :uploads,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3317,7 +3178,7 @@ module Aws::DeviceFarm
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpce_configurations
@@ -3332,7 +3193,7 @@ module Aws::DeviceFarm
       :vpce_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a latitude and longitude pair, expressed in geographic coordinate system degrees (for
@@ -3348,7 +3209,7 @@ module Aws::DeviceFarm
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A number that represents the monetary amount for an offering or transaction.</p>
@@ -3362,7 +3223,7 @@ module Aws::DeviceFarm
       :amount,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of settings that describes characteristics of a network profile.</p>
@@ -3423,18 +3284,13 @@ module Aws::DeviceFarm
       :uplink_loss_percent,
       :downlink_loss_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:uplink_loss_percent] = 0 unless options.key?(:uplink_loss_percent)
         options[:downlink_loss_percent] = 0 unless options.key?(:downlink_loss_percent)
         super
       end
-    end
-
-    module NetworkProfileType
-      CURATED = 'CURATED'
-      PRIVATE = 'PRIVATE'
     end
 
     # <p>Exception gets thrown when a user is not eligible to perform the specified
@@ -3445,7 +3301,7 @@ module Aws::DeviceFarm
     class NotEligibleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified entity was not found.</p>
@@ -3455,7 +3311,7 @@ module Aws::DeviceFarm
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the metadata of a device offering.</p>
@@ -3481,7 +3337,7 @@ module Aws::DeviceFarm
       :platform,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an offering promotion.</p>
@@ -3495,7 +3351,7 @@ module Aws::DeviceFarm
       :id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the offering.</p>
@@ -3517,7 +3373,7 @@ module Aws::DeviceFarm
       :quantity,
       :effective_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the metadata of an offering transaction.</p>
@@ -3543,17 +3399,7 @@ module Aws::DeviceFarm
       :created_on,
       :cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfferingTransactionType
-      PURCHASE = 'PURCHASE'
-      RENEW = 'RENEW'
-      SYSTEM = 'SYSTEM'
-    end
-
-    module OfferingType
-      RECURRING = 'RECURRING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a specific warning or failure.</p>
@@ -3611,7 +3457,7 @@ module Aws::DeviceFarm
       :result,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a problem detail.</p>
@@ -3625,7 +3471,7 @@ module Aws::DeviceFarm
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an operating-system neutral workspace for running and managing
@@ -3653,7 +3499,7 @@ module Aws::DeviceFarm
       :created,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request for a purchase offering.</p>
@@ -3671,7 +3517,7 @@ module Aws::DeviceFarm
       :quantity,
       :offering_promotion_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the purchase offering (for example, success or failure).</p>
@@ -3681,7 +3527,7 @@ module Aws::DeviceFarm
     class PurchaseOfferingResult < Struct.new(
       :offering_transaction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the set of radios and their states on a device. Examples of radios
@@ -3704,7 +3550,7 @@ module Aws::DeviceFarm
       :nfc,
       :gps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether charges for devices are recurring.</p>
@@ -3718,11 +3564,7 @@ module Aws::DeviceFarm
       :cost,
       :frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecurringChargeFrequency
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the remote access session.</p>
@@ -3907,7 +3749,7 @@ module Aws::DeviceFarm
       :vpc_config,
       :device_proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request that represents an offering renewal.</p>
@@ -3921,7 +3763,7 @@ module Aws::DeviceFarm
       :offering_id,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a renewal offering.</p>
@@ -3931,7 +3773,7 @@ module Aws::DeviceFarm
     class RenewOfferingResult < Struct.new(
       :offering_transaction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the screen resolution of a device in height and width, expressed in
@@ -3946,7 +3788,7 @@ module Aws::DeviceFarm
       :width,
       :height,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition for a device pool.</p>
@@ -4064,18 +3906,7 @@ module Aws::DeviceFarm
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleOperator
-      EQUALS = 'EQUALS'
-      LESS_THAN = 'LESS_THAN'
-      LESS_THAN_OR_EQUALS = 'LESS_THAN_OR_EQUALS'
-      GREATER_THAN = 'GREATER_THAN'
-      GREATER_THAN_OR_EQUALS = 'GREATER_THAN_OR_EQUALS'
-      IN = 'IN'
-      NOT_IN = 'NOT_IN'
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a test run on a set of devices with a given app package, test parameters, and so
@@ -4336,7 +4167,7 @@ module Aws::DeviceFarm
       :device_selection_result,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a sample of performance data.</p>
@@ -4414,27 +4245,7 @@ module Aws::DeviceFarm
       :type,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SampleType
-      CPU = 'CPU'
-      MEMORY = 'MEMORY'
-      THREADS = 'THREADS'
-      RX_RATE = 'RX_RATE'
-      TX_RATE = 'TX_RATE'
-      RX = 'RX'
-      TX = 'TX'
-      NATIVE_FRAMES = 'NATIVE_FRAMES'
-      NATIVE_FPS = 'NATIVE_FPS'
-      NATIVE_MIN_DRAWTIME = 'NATIVE_MIN_DRAWTIME'
-      NATIVE_AVG_DRAWTIME = 'NATIVE_AVG_DRAWTIME'
-      NATIVE_MAX_DRAWTIME = 'NATIVE_MAX_DRAWTIME'
-      OPENGL_FRAMES = 'OPENGL_FRAMES'
-      OPENGL_FPS = 'OPENGL_FPS'
-      OPENGL_MIN_DRAWTIME = 'OPENGL_MIN_DRAWTIME'
-      OPENGL_AVG_DRAWTIME = 'OPENGL_AVG_DRAWTIME'
-      OPENGL_MAX_DRAWTIME = 'OPENGL_MAX_DRAWTIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the settings for a run. Includes things like location, radio states,
@@ -4489,7 +4300,7 @@ module Aws::DeviceFarm
       :auxiliary_apps,
       :billing_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the schedule run operation.</p>
@@ -4536,7 +4347,7 @@ module Aws::DeviceFarm
       :configuration,
       :execution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of a schedule run request.</p>
@@ -4546,7 +4357,7 @@ module Aws::DeviceFarm
     class ScheduleRunResult < Struct.new(
       :run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents test settings. This data structure is passed in as the test parameter to ScheduleRun. For an
@@ -4712,7 +4523,7 @@ module Aws::DeviceFarm
       :filter,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a problem with the service account.</p>
@@ -4722,7 +4533,7 @@ module Aws::DeviceFarm
     class ServiceAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4731,7 +4542,7 @@ module Aws::DeviceFarm
     class StopJobRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -4740,7 +4551,7 @@ module Aws::DeviceFarm
     class StopJobResult < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to stop the remote access session.</p>
@@ -4750,7 +4561,7 @@ module Aws::DeviceFarm
     class StopRemoteAccessSessionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server that describes the remote access session
@@ -4762,7 +4573,7 @@ module Aws::DeviceFarm
     class StopRemoteAccessSessionResult < Struct.new(
       :remote_access_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to stop a specific run.</p>
@@ -4772,7 +4583,7 @@ module Aws::DeviceFarm
     class StopRunRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the results of your stop run attempt.</p>
@@ -4782,7 +4593,7 @@ module Aws::DeviceFarm
     class StopRunResult < Struct.new(
       :run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of one or more tests.</p>
@@ -4932,7 +4743,7 @@ module Aws::DeviceFarm
       :message,
       :device_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata that you apply to a resource to help you categorize and organize it. Each tag consists of a
@@ -4950,7 +4761,7 @@ module Aws::DeviceFarm
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation was not successful. Try again.</p>
@@ -4962,7 +4773,7 @@ module Aws::DeviceFarm
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request doesn't comply with the AWS Identity and Access Management (IAM) tag
@@ -4975,7 +4786,7 @@ module Aws::DeviceFarm
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4993,12 +4804,12 @@ module Aws::DeviceFarm
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition that is evaluated.</p>
@@ -5147,7 +4958,7 @@ module Aws::DeviceFarm
       :message,
       :device_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Selenium testing project. Projects are used to collect and collate sessions.</p>
@@ -5173,7 +4984,7 @@ module Aws::DeviceFarm
       :vpc_config,
       :created,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <a>TestGridSession</a> is a single instance of a browser launched from the URL provided by a
@@ -5204,7 +5015,7 @@ module Aws::DeviceFarm
       :billing_minutes,
       :selenium_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action taken by a <a>TestGridSession</a> browser instance.</p>
@@ -5230,7 +5041,7 @@ module Aws::DeviceFarm
       :status_code,
       :request_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Artifacts are video and other files that are produced in the process of running a browser in an automated
@@ -5252,24 +5063,7 @@ module Aws::DeviceFarm
       :type,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestGridSessionArtifactCategory
-      VIDEO = 'VIDEO'
-      LOG = 'LOG'
-    end
-
-    module TestGridSessionArtifactType
-      UNKNOWN = 'UNKNOWN'
-      VIDEO = 'VIDEO'
-      SELENIUM_LOG = 'SELENIUM_LOG'
-    end
-
-    module TestGridSessionStatus
-      ACTIVE = 'ACTIVE'
-      CLOSED = 'CLOSED'
-      ERRORED = 'ERRORED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC security groups and subnets that are attached to a project.</p>
@@ -5287,24 +5081,7 @@ module Aws::DeviceFarm
       :subnet_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestType
-      BUILTIN_FUZZ = 'BUILTIN_FUZZ'
-      APPIUM_JAVA_JUNIT = 'APPIUM_JAVA_JUNIT'
-      APPIUM_JAVA_TESTNG = 'APPIUM_JAVA_TESTNG'
-      APPIUM_PYTHON = 'APPIUM_PYTHON'
-      APPIUM_NODE = 'APPIUM_NODE'
-      APPIUM_RUBY = 'APPIUM_RUBY'
-      APPIUM_WEB_JAVA_JUNIT = 'APPIUM_WEB_JAVA_JUNIT'
-      APPIUM_WEB_JAVA_TESTNG = 'APPIUM_WEB_JAVA_TESTNG'
-      APPIUM_WEB_PYTHON = 'APPIUM_WEB_PYTHON'
-      APPIUM_WEB_NODE = 'APPIUM_WEB_NODE'
-      APPIUM_WEB_RUBY = 'APPIUM_WEB_RUBY'
-      INSTRUMENTATION = 'INSTRUMENTATION'
-      XCTEST = 'XCTEST'
-      XCTEST_UI = 'XCTEST_UI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags on the repository is over the limit. The maximum number of tags that
@@ -5317,7 +5094,7 @@ module Aws::DeviceFarm
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about free trial device minutes for an AWS
@@ -5332,7 +5109,7 @@ module Aws::DeviceFarm
       :total,
       :remaining,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of one or more problems, grouped by their result.</p>
@@ -5346,7 +5123,7 @@ module Aws::DeviceFarm
       :message,
       :problems,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5363,12 +5140,12 @@ module Aws::DeviceFarm
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5385,7 +5162,7 @@ module Aws::DeviceFarm
       :profile_arn,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_instance
@@ -5394,7 +5171,7 @@ module Aws::DeviceFarm
     class UpdateDeviceInstanceResult < Struct.new(
       :device_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the update device pool operation.</p>
@@ -5437,7 +5214,7 @@ module Aws::DeviceFarm
       :max_devices,
       :clear_max_devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of an update device pool request.</p>
@@ -5447,7 +5224,7 @@ module Aws::DeviceFarm
     class UpdateDevicePoolResult < Struct.new(
       :device_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5481,7 +5258,7 @@ module Aws::DeviceFarm
       :exclude_app_packages_from_cleanup,
       :reboot_after_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile
@@ -5490,7 +5267,7 @@ module Aws::DeviceFarm
     class UpdateInstanceProfileResult < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5553,7 +5330,7 @@ module Aws::DeviceFarm
       :uplink_loss_percent,
       :downlink_loss_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_profile
@@ -5562,7 +5339,7 @@ module Aws::DeviceFarm
     class UpdateNetworkProfileResult < Struct.new(
       :network_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to the update project operation.</p>
@@ -5584,7 +5361,7 @@ module Aws::DeviceFarm
       :default_job_timeout_minutes,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the result of an update project request.</p>
@@ -5594,7 +5371,7 @@ module Aws::DeviceFarm
     class UpdateProjectResult < Struct.new(
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -5615,7 +5392,7 @@ module Aws::DeviceFarm
       :description,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_grid_project
@@ -5624,7 +5401,7 @@ module Aws::DeviceFarm
     class UpdateTestGridProjectResult < Struct.new(
       :test_grid_project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5646,7 +5423,7 @@ module Aws::DeviceFarm
       :content_type,
       :edit_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload
@@ -5655,7 +5432,7 @@ module Aws::DeviceFarm
     class UpdateUploadResult < Struct.new(
       :upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5683,7 +5460,7 @@ module Aws::DeviceFarm
       :service_dns_name,
       :vpce_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpce_configuration
@@ -5692,7 +5469,7 @@ module Aws::DeviceFarm
     class UpdateVPCEConfigurationResult < Struct.new(
       :vpce_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An app or a set of one or more tests to upload or that have been
@@ -5854,54 +5631,7 @@ module Aws::DeviceFarm
       :message,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UploadCategory
-      CURATED = 'CURATED'
-      PRIVATE = 'PRIVATE'
-    end
-
-    module UploadStatus
-      INITIALIZED = 'INITIALIZED'
-      PROCESSING = 'PROCESSING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-    end
-
-    module UploadType
-      ANDROID_APP = 'ANDROID_APP'
-      IOS_APP = 'IOS_APP'
-      WEB_APP = 'WEB_APP'
-      EXTERNAL_DATA = 'EXTERNAL_DATA'
-      APPIUM_JAVA_JUNIT_TEST_PACKAGE = 'APPIUM_JAVA_JUNIT_TEST_PACKAGE'
-      APPIUM_JAVA_TESTNG_TEST_PACKAGE = 'APPIUM_JAVA_TESTNG_TEST_PACKAGE'
-      APPIUM_PYTHON_TEST_PACKAGE = 'APPIUM_PYTHON_TEST_PACKAGE'
-      APPIUM_NODE_TEST_PACKAGE = 'APPIUM_NODE_TEST_PACKAGE'
-      APPIUM_RUBY_TEST_PACKAGE = 'APPIUM_RUBY_TEST_PACKAGE'
-      APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE = 'APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE'
-      APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE = 'APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE'
-      APPIUM_WEB_PYTHON_TEST_PACKAGE = 'APPIUM_WEB_PYTHON_TEST_PACKAGE'
-      APPIUM_WEB_NODE_TEST_PACKAGE = 'APPIUM_WEB_NODE_TEST_PACKAGE'
-      APPIUM_WEB_RUBY_TEST_PACKAGE = 'APPIUM_WEB_RUBY_TEST_PACKAGE'
-      CALABASH_TEST_PACKAGE = 'CALABASH_TEST_PACKAGE'
-      INSTRUMENTATION_TEST_PACKAGE = 'INSTRUMENTATION_TEST_PACKAGE'
-      UIAUTOMATION_TEST_PACKAGE = 'UIAUTOMATION_TEST_PACKAGE'
-      UIAUTOMATOR_TEST_PACKAGE = 'UIAUTOMATOR_TEST_PACKAGE'
-      XCTEST_TEST_PACKAGE = 'XCTEST_TEST_PACKAGE'
-      XCTEST_UI_TEST_PACKAGE = 'XCTEST_UI_TEST_PACKAGE'
-      APPIUM_JAVA_JUNIT_TEST_SPEC = 'APPIUM_JAVA_JUNIT_TEST_SPEC'
-      APPIUM_JAVA_TESTNG_TEST_SPEC = 'APPIUM_JAVA_TESTNG_TEST_SPEC'
-      APPIUM_PYTHON_TEST_SPEC = 'APPIUM_PYTHON_TEST_SPEC'
-      APPIUM_NODE_TEST_SPEC = 'APPIUM_NODE_TEST_SPEC'
-      APPIUM_RUBY_TEST_SPEC = 'APPIUM_RUBY_TEST_SPEC'
-      APPIUM_WEB_JAVA_JUNIT_TEST_SPEC = 'APPIUM_WEB_JAVA_JUNIT_TEST_SPEC'
-      APPIUM_WEB_JAVA_TESTNG_TEST_SPEC = 'APPIUM_WEB_JAVA_TESTNG_TEST_SPEC'
-      APPIUM_WEB_PYTHON_TEST_SPEC = 'APPIUM_WEB_PYTHON_TEST_SPEC'
-      APPIUM_WEB_NODE_TEST_SPEC = 'APPIUM_WEB_NODE_TEST_SPEC'
-      APPIUM_WEB_RUBY_TEST_SPEC = 'APPIUM_WEB_RUBY_TEST_SPEC'
-      INSTRUMENTATION_TEST_SPEC = 'INSTRUMENTATION_TEST_SPEC'
-      XCTEST_UI_TEST_SPEC = 'XCTEST_UI_TEST_SPEC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an Amazon Virtual Private Cloud (VPC) endpoint configuration.</p>
@@ -5929,7 +5659,7 @@ module Aws::DeviceFarm
       :service_dns_name,
       :vpce_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the VPC configuration data necessary to interface with AWS Device Farm's services.</p>
@@ -5947,7 +5677,7 @@ module Aws::DeviceFarm
       :subnet_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,7 +13,7 @@ module Aws::Location
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for filtering API keys.</p>
@@ -23,7 +23,7 @@ module Aws::Location
     class ApiKeyFilter < Struct.new(
       :key_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>API Restrictions on the allowed actions, resources, and referers for an API key
@@ -219,7 +219,7 @@ module Aws::Location
       :allow_resources,
       :allow_referers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -240,12 +240,12 @@ module Aws::Location
       :tracker_name,
       :consumer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateTrackerConsumerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the tracker resource details.</p>
@@ -259,7 +259,7 @@ module Aws::Location
       :device_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -279,7 +279,7 @@ module Aws::Location
       :tracker_name,
       :device_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -288,7 +288,7 @@ module Aws::Location
     class BatchDeleteDevicePositionHistoryOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains error details for each geofence that failed to delete from the geofence
@@ -303,7 +303,7 @@ module Aws::Location
       :geofence_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -316,7 +316,7 @@ module Aws::Location
       :collection_name,
       :geofence_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -325,7 +325,7 @@ module Aws::Location
     class BatchDeleteGeofenceOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains error details for each device that failed to evaluate its position against
@@ -346,7 +346,7 @@ module Aws::Location
       :sample_time,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -361,7 +361,7 @@ module Aws::Location
       :collection_name,
       :device_position_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -371,7 +371,7 @@ module Aws::Location
     class BatchEvaluateGeofencesOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains error details for each device that didn't return a position.</p>
@@ -385,7 +385,7 @@ module Aws::Location
       :device_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -405,7 +405,7 @@ module Aws::Location
       :tracker_name,
       :device_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -420,7 +420,7 @@ module Aws::Location
       :errors,
       :device_positions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the batch request error details associated with the request.</p>
@@ -434,7 +434,7 @@ module Aws::Location
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains error details for each geofence that failed to be stored in a given geofence
@@ -449,7 +449,7 @@ module Aws::Location
       :geofence_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -462,7 +462,7 @@ module Aws::Location
       :collection_name,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successes
@@ -476,7 +476,7 @@ module Aws::Location
       :successes,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains geofence geometry details. </p>
@@ -507,7 +507,7 @@ module Aws::Location
       :geometry,
       :geofence_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of each geofence that was successfully stored in a given geofence
@@ -530,7 +530,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains  error details for each device that failed to update its position.</p>
@@ -550,7 +550,7 @@ module Aws::Location
       :sample_time,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -563,7 +563,7 @@ module Aws::Location
       :tracker_name,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -572,7 +572,7 @@ module Aws::Location
     class BatchUpdateDevicePositionOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about additional route preferences for requests that specify
@@ -595,7 +595,7 @@ module Aws::Location
       :avoid_ferries,
       :avoid_tolls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -766,7 +766,7 @@ module Aws::Location
       :optimize_for,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -898,7 +898,7 @@ module Aws::Location
       :truck_mode_options,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the result of the route matrix calculation.</p>
@@ -930,7 +930,7 @@ module Aws::Location
       :snapped_destination_positions,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the calculated route matrix.</p>
@@ -975,7 +975,7 @@ module Aws::Location
       :error_count,
       :distance_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the result of the route calculation. Metadata includes legs and route
@@ -1019,7 +1019,7 @@ module Aws::Location
       :legs,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the calculated route.</p>
@@ -1095,7 +1095,7 @@ module Aws::Location
       :duration_seconds,
       :distance_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about additional route preferences for requests that specify
@@ -1129,7 +1129,7 @@ module Aws::Location
       :dimensions,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cellular network communication infrastructure that the device uses.</p>
@@ -1139,7 +1139,7 @@ module Aws::Location
     class CellSignals < Struct.new(
       :lte_cell_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A circle on the earth, as defined by a center point and a radius.</p>
@@ -1156,7 +1156,7 @@ module Aws::Location
       :center,
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was unsuccessful because of a conflict.</p>
@@ -1165,7 +1165,7 @@ module Aws::Location
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -1240,7 +1240,7 @@ module Aws::Location
       :tags,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -1267,7 +1267,7 @@ module Aws::Location
       :collection_arn,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -1337,7 +1337,7 @@ module Aws::Location
       :no_expiry,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -1368,7 +1368,7 @@ module Aws::Location
       :key_name,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -1436,7 +1436,7 @@ module Aws::Location
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -1462,7 +1462,7 @@ module Aws::Location
       :map_arn,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -1562,7 +1562,7 @@ module Aws::Location
       :data_source_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -1588,7 +1588,7 @@ module Aws::Location
       :index_arn,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -1688,7 +1688,7 @@ module Aws::Location
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -1725,7 +1725,7 @@ module Aws::Location
       :calculator_arn,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -1856,7 +1856,7 @@ module Aws::Location
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -1882,7 +1882,7 @@ module Aws::Location
       :tracker_arn,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the data storage option chosen for requesting Places.</p>
@@ -1923,7 +1923,7 @@ module Aws::Location
     class DataSourceConfiguration < Struct.new(
       :intended_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -1932,12 +1932,12 @@ module Aws::Location
     class DeleteGeofenceCollectionInput < Struct.new(
       :collection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGeofenceCollectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -1955,12 +1955,12 @@ module Aws::Location
       :key_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKeyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -1969,12 +1969,12 @@ module Aws::Location
     class DeleteMapInput < Struct.new(
       :map_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMapOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -1983,12 +1983,12 @@ module Aws::Location
     class DeletePlaceIndexInput < Struct.new(
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePlaceIndexOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -1997,12 +1997,12 @@ module Aws::Location
     class DeleteRouteCalculatorInput < Struct.new(
       :calculator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRouteCalculatorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2011,12 +2011,12 @@ module Aws::Location
     class DeleteTrackerInput < Struct.new(
       :tracker_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTrackerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -2025,7 +2025,7 @@ module Aws::Location
     class DescribeGeofenceCollectionInput < Struct.new(
       :collection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -2089,7 +2089,7 @@ module Aws::Location
       :update_time,
       :geofence_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -2098,7 +2098,7 @@ module Aws::Location
     class DescribeKeyInput < Struct.new(
       :key_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -2151,7 +2151,7 @@ module Aws::Location
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -2160,7 +2160,7 @@ module Aws::Location
     class DescribeMapInput < Struct.new(
       :map_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -2214,7 +2214,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -2223,7 +2223,7 @@ module Aws::Location
     class DescribePlaceIndexInput < Struct.new(
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -2295,7 +2295,7 @@ module Aws::Location
       :data_source_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -2304,7 +2304,7 @@ module Aws::Location
     class DescribeRouteCalculatorInput < Struct.new(
       :calculator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -2385,7 +2385,7 @@ module Aws::Location
       :data_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2394,7 +2394,7 @@ module Aws::Location
     class DescribeTrackerInput < Struct.new(
       :tracker_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2473,7 +2473,7 @@ module Aws::Location
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the device position details.</p>
@@ -2505,7 +2505,7 @@ module Aws::Location
       :accuracy,
       :position_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the position update details for a device.</p>
@@ -2538,7 +2538,7 @@ module Aws::Location
       :accuracy,
       :position_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The device's position, IP address, and Wi-Fi access points.</p>
@@ -2573,7 +2573,7 @@ module Aws::Location
       :wi_fi_access_points,
       :cell_signals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2594,12 +2594,12 @@ module Aws::Location
       :tracker_name,
       :consumer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateTrackerConsumerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The device's position and speed.</p>
@@ -2613,7 +2613,7 @@ module Aws::Location
       :position,
       :speed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -2668,7 +2668,7 @@ module Aws::Location
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecasted_events
@@ -2690,7 +2690,7 @@ module Aws::Location
       :distance_unit,
       :speed_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A forecasted event represents a geofence event in relation to the requested device
@@ -2737,7 +2737,7 @@ module Aws::Location
       :forecasted_breach_time,
       :geofence_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:nearest_distance] = 0 unless options.key?(:nearest_distance)
@@ -2862,7 +2862,7 @@ module Aws::Location
       :geobuf,
       :multi_polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2914,7 +2914,7 @@ module Aws::Location
       :end_time_exclusive,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_positions
@@ -2928,7 +2928,7 @@ module Aws::Location
       :device_positions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -2941,7 +2941,7 @@ module Aws::Location
       :tracker_name,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -2972,7 +2972,7 @@ module Aws::Location
       :accuracy,
       :position_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -2985,7 +2985,7 @@ module Aws::Location
       :collection_name,
       :geofence_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geofence_id
@@ -3047,7 +3047,7 @@ module Aws::Location
       :update_time,
       :geofence_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -3156,7 +3156,7 @@ module Aws::Location
       :font_unicode_range,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://github.com/mapbox/node-fontnik Documentation
@@ -3174,7 +3174,7 @@ module Aws::Location
       :content_type,
       :cache_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -3215,7 +3215,7 @@ module Aws::Location
       :file_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -3234,7 +3234,7 @@ module Aws::Location
       :content_type,
       :cache_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -3248,7 +3248,7 @@ module Aws::Location
       :map_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -3267,7 +3267,7 @@ module Aws::Location
       :content_type,
       :cache_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -3293,7 +3293,7 @@ module Aws::Location
       :y,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -3311,7 +3311,7 @@ module Aws::Location
       :content_type,
       :cache_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -3346,7 +3346,7 @@ module Aws::Location
       :language,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute place
@@ -3355,7 +3355,7 @@ module Aws::Location
     class GetPlaceOutput < Struct.new(
       :place,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inferred state of the device, given the provided position, IP address, cellular signals, and Wi-Fi- access points.</p>
@@ -3377,7 +3377,7 @@ module Aws::Location
       :deviation_distance,
       :proxy_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed to process because of an unknown server error, exception, or failure.</p>
@@ -3386,7 +3386,7 @@ module Aws::Location
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the calculated route's details for each path between a pair of positions. The
@@ -3462,7 +3462,7 @@ module Aws::Location
       :geometry,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the geometry details for each path between a pair of positions. Used in
@@ -3482,7 +3482,7 @@ module Aws::Location
     class LegGeometry < Struct.new(
       :line_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -3508,7 +3508,7 @@ module Aws::Location
       :next_token,
       :filter_geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3522,7 +3522,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the tracker resource details.</p>
@@ -3549,7 +3549,7 @@ module Aws::Location
       :accuracy,
       :position_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3567,7 +3567,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3581,7 +3581,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the geofence collection details.</p>
@@ -3625,7 +3625,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of geofences stored in a given geofence collection.</p>
@@ -3692,7 +3692,7 @@ module Aws::Location
       :update_time,
       :geofence_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -3714,7 +3714,7 @@ module Aws::Location
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3728,7 +3728,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3751,7 +3751,7 @@ module Aws::Location
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3766,7 +3766,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API key resource listed in your Amazon Web Services account.</p>
@@ -3800,7 +3800,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3818,7 +3818,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3831,7 +3831,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of an existing map resource in your Amazon Web Services account.</p>
@@ -3866,7 +3866,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3884,7 +3884,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3898,7 +3898,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A place index resource listed in your Amazon Web Services account.</p>
@@ -3951,7 +3951,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3969,7 +3969,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3983,7 +3983,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A route calculator resource listed in your Amazon Web Services account.</p>
@@ -4049,7 +4049,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4065,7 +4065,7 @@ module Aws::Location
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4081,7 +4081,7 @@ module Aws::Location
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -4103,7 +4103,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumer_arns
@@ -4117,7 +4117,7 @@ module Aws::Location
       :consumer_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4135,7 +4135,7 @@ module Aws::Location
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -4150,7 +4150,7 @@ module Aws::Location
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the tracker resource details.</p>
@@ -4188,7 +4188,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Long-Term Evolution (LTE) network.</p>
@@ -4234,7 +4234,7 @@ module Aws::Location
       :rsrq,
       :tac,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cell_id] = 0 unless options.key?(:cell_id)
@@ -4253,7 +4253,7 @@ module Aws::Location
       :earfcn,
       :pci,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:earfcn] = 0 unless options.key?(:earfcn)
@@ -4285,7 +4285,7 @@ module Aws::Location
       :rsrp,
       :rsrq,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:earfcn] = 0 unless options.key?(:earfcn)
@@ -4462,7 +4462,7 @@ module Aws::Location
       :political_view,
       :custom_layers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the political view for the style.</p>
@@ -4488,7 +4488,7 @@ module Aws::Location
       :political_view,
       :custom_layers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about addresses or points of interest that match the search
@@ -4598,7 +4598,7 @@ module Aws::Location
       :supplemental_categories,
       :sub_municipality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Places uses a point geometry to specify a location or a Place.</p>
@@ -4619,7 +4619,7 @@ module Aws::Location
     class PlaceGeometry < Struct.new(
       :point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the level of certainty of the position.</p>
@@ -4630,7 +4630,7 @@ module Aws::Location
     class PositionalAccuracy < Struct.new(
       :horizontal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -4664,7 +4664,7 @@ module Aws::Location
       :geometry,
       :geofence_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geofence_id
@@ -4685,7 +4685,7 @@ module Aws::Location
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you've entered was not found in your AWS account.</p>
@@ -4694,7 +4694,7 @@ module Aws::Location
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result for the calculated route of one <code>DeparturePosition</code>
@@ -4714,7 +4714,7 @@ module Aws::Location
       :duration_seconds,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error corresponding to the calculation of a route between the
@@ -4774,7 +4774,7 @@ module Aws::Location
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a search result from a position search query that is run on a place index
@@ -4803,7 +4803,7 @@ module Aws::Location
       :distance,
       :place_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a place suggestion resulting from a place suggestion query that is run on a
@@ -4839,7 +4839,7 @@ module Aws::Location
       :categories,
       :supplemental_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a search result from a text search query that is run on a place index
@@ -4876,7 +4876,7 @@ module Aws::Location
       :relevance,
       :place_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -4922,7 +4922,7 @@ module Aws::Location
       :language,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -4938,7 +4938,7 @@ module Aws::Location
       :summary,
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the request sent by using
@@ -4978,7 +4978,7 @@ module Aws::Location
       :data_source,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -5073,7 +5073,7 @@ module Aws::Location
       :filter_categories,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -5089,7 +5089,7 @@ module Aws::Location
       :summary,
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the request sent by using
@@ -5150,7 +5150,7 @@ module Aws::Location
       :language,
       :filter_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -5245,7 +5245,7 @@ module Aws::Location
       :filter_categories,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -5265,7 +5265,7 @@ module Aws::Location
       :summary,
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the request sent by using <code>SearchPlaceIndexForText</code>.</p>
@@ -5333,7 +5333,7 @@ module Aws::Location
       :language,
       :filter_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation was denied because the request would exceed the maximum <a href="https://docs.aws.amazon.com/location/previous/developerguide/location-quotas.html">quota</a>
@@ -5344,7 +5344,7 @@ module Aws::Location
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an element of a leg within a route. A step contains instructions for how
@@ -5380,7 +5380,7 @@ module Aws::Location
       :duration_seconds,
       :geometry_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5425,12 +5425,12 @@ module Aws::Location
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because of request throttling.</p>
@@ -5439,7 +5439,7 @@ module Aws::Location
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a time zone. Includes the name of the time zone and the offset from
@@ -5456,7 +5456,7 @@ module Aws::Location
       :name,
       :offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geomerty used to filter device positions.</p>
@@ -5466,7 +5466,7 @@ module Aws::Location
     class TrackingFilterGeometry < Struct.new(
       :polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the truck dimensions in the unit of measurement that you
@@ -5522,7 +5522,7 @@ module Aws::Location
       :width,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the truck's weight specifications. Used to avoid roads that
@@ -5545,7 +5545,7 @@ module Aws::Location
       :total,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5566,12 +5566,12 @@ module Aws::Location
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -5599,7 +5599,7 @@ module Aws::Location
       :pricing_plan_data_source,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_name
@@ -5626,7 +5626,7 @@ module Aws::Location
       :collection_arn,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -5664,7 +5664,7 @@ module Aws::Location
       :force_update,
       :restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -5690,7 +5690,7 @@ module Aws::Location
       :key_name,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -5716,7 +5716,7 @@ module Aws::Location
       :description,
       :configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute map_name
@@ -5741,7 +5741,7 @@ module Aws::Location
       :map_arn,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -5766,7 +5766,7 @@ module Aws::Location
       :description,
       :data_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -5792,7 +5792,7 @@ module Aws::Location
       :index_arn,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -5813,7 +5813,7 @@ module Aws::Location
       :pricing_plan,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculator_name
@@ -5839,7 +5839,7 @@ module Aws::Location
       :calculator_arn,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -5916,7 +5916,7 @@ module Aws::Location
       :event_bridge_enabled,
       :kms_key_enable_geospatial_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -5941,7 +5941,7 @@ module Aws::Location
       :tracker_arn,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the AWS service. </p>
@@ -5958,7 +5958,7 @@ module Aws::Location
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the AWS service in a specified
@@ -5973,7 +5973,7 @@ module Aws::Location
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracker_name
@@ -5992,7 +5992,7 @@ module Aws::Location
       :device_state,
       :distance_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inferred_state
@@ -6019,7 +6019,7 @@ module Aws::Location
       :received_time,
       :distance_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Wi-Fi access point.</p>
@@ -6033,7 +6033,7 @@ module Aws::Location
       :mac_address,
       :rss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

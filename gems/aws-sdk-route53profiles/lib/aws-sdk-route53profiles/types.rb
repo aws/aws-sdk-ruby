@@ -14,7 +14,7 @@ module Aws::Route53Profiles
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -43,7 +43,7 @@ module Aws::Route53Profiles
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_association
@@ -54,7 +54,7 @@ module Aws::Route53Profiles
     class AssociateProfileResponse < Struct.new(
       :profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -84,7 +84,7 @@ module Aws::Route53Profiles
       :name,
       :resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association
@@ -95,7 +95,7 @@ module Aws::Route53Profiles
     class AssociateResourceToProfileResponse < Struct.new(
       :profile_resource_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -106,7 +106,7 @@ module Aws::Route53Profiles
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -131,7 +131,7 @@ module Aws::Route53Profiles
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -142,7 +142,7 @@ module Aws::Route53Profiles
     class CreateProfileResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -153,7 +153,7 @@ module Aws::Route53Profiles
     class DeleteProfileRequest < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -164,7 +164,7 @@ module Aws::Route53Profiles
     class DeleteProfileResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -181,7 +181,7 @@ module Aws::Route53Profiles
       :profile_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_association
@@ -192,7 +192,7 @@ module Aws::Route53Profiles
     class DisassociateProfileResponse < Struct.new(
       :profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -208,7 +208,7 @@ module Aws::Route53Profiles
       :profile_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association
@@ -219,7 +219,7 @@ module Aws::Route53Profiles
     class DisassociateResourceFromProfileResponse < Struct.new(
       :profile_resource_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_association_id
@@ -230,7 +230,7 @@ module Aws::Route53Profiles
     class GetProfileAssociationRequest < Struct.new(
       :profile_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_association
@@ -241,7 +241,7 @@ module Aws::Route53Profiles
     class GetProfileAssociationResponse < Struct.new(
       :profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -252,7 +252,7 @@ module Aws::Route53Profiles
     class GetProfileRequest < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association_id
@@ -264,7 +264,7 @@ module Aws::Route53Profiles
     class GetProfileResourceAssociationRequest < Struct.new(
       :profile_resource_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association
@@ -275,7 +275,7 @@ module Aws::Route53Profiles
     class GetProfileResourceAssociationResponse < Struct.new(
       :profile_resource_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -286,7 +286,7 @@ module Aws::Route53Profiles
     class GetProfileResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -297,7 +297,7 @@ module Aws::Route53Profiles
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -308,7 +308,7 @@ module Aws::Route53Profiles
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -325,7 +325,7 @@ module Aws::Route53Profiles
       :message,
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -342,7 +342,7 @@ module Aws::Route53Profiles
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -377,7 +377,7 @@ module Aws::Route53Profiles
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_associations
@@ -395,7 +395,7 @@ module Aws::Route53Profiles
       :profile_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -430,7 +430,7 @@ module Aws::Route53Profiles
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_associations
@@ -448,7 +448,7 @@ module Aws::Route53Profiles
       :profile_resource_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -471,7 +471,7 @@ module Aws::Route53Profiles
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_summaries
@@ -489,7 +489,7 @@ module Aws::Route53Profiles
       :profile_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -500,7 +500,7 @@ module Aws::Route53Profiles
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -511,7 +511,7 @@ module Aws::Route53Profiles
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -579,7 +579,7 @@ module Aws::Route53Profiles
       :modification_time,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -641,7 +641,7 @@ module Aws::Route53Profiles
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -715,16 +715,7 @@ module Aws::Route53Profiles
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfileStatus
-      COMPLETE = 'COMPLETE'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      CREATING = 'CREATING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -756,7 +747,7 @@ module Aws::Route53Profiles
       :name,
       :share_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -773,7 +764,7 @@ module Aws::Route53Profiles
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -790,13 +781,7 @@ module Aws::Route53Profiles
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareStatus
-      NOT_SHARED = 'NOT_SHARED'
-      SHARED_WITH_ME = 'SHARED_WITH_ME'
-      SHARED_BY_ME = 'SHARED_BY_ME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -816,7 +801,7 @@ module Aws::Route53Profiles
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -833,12 +818,12 @@ module Aws::Route53Profiles
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -849,7 +834,7 @@ module Aws::Route53Profiles
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -866,12 +851,12 @@ module Aws::Route53Profiles
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association_id
@@ -895,7 +880,7 @@ module Aws::Route53Profiles
       :name,
       :resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_resource_association
@@ -906,7 +891,7 @@ module Aws::Route53Profiles
     class UpdateProfileResourceAssociationResponse < Struct.new(
       :profile_resource_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -917,7 +902,7 @@ module Aws::Route53Profiles
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

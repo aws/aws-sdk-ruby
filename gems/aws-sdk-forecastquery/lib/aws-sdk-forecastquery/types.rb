@@ -18,7 +18,7 @@ module Aws::Forecastquery
       :timestamp,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.</p>
@@ -43,7 +43,7 @@ module Aws::Forecastquery
     class Forecast < Struct.new(
       :predictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value is invalid or is too long.</p>
@@ -52,7 +52,7 @@ module Aws::Forecastquery
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The token is not valid. Tokens expire after 24 hours.</p>
@@ -61,7 +61,7 @@ module Aws::Forecastquery
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second has been exceeded.</p>
@@ -70,7 +70,7 @@ module Aws::Forecastquery
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_arn
@@ -107,7 +107,7 @@ module Aws::Forecastquery
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast
@@ -116,7 +116,7 @@ module Aws::Forecastquery
     class QueryForecastResponse < Struct.new(
       :forecast,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_arn
@@ -151,7 +151,7 @@ module Aws::Forecastquery
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast
@@ -160,7 +160,7 @@ module Aws::Forecastquery
     class QueryWhatIfForecastResponse < Struct.new(
       :forecast,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -169,7 +169,7 @@ module Aws::Forecastquery
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find that resource. Check the information that you've provided and try
@@ -179,7 +179,7 @@ module Aws::Forecastquery
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

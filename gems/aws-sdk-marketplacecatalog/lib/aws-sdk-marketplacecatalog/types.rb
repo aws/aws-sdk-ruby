@@ -13,7 +13,7 @@ module Aws::MarketplaceCatalog
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on entity id of an AMI product.</p>
@@ -23,7 +23,7 @@ module Aws::MarketplaceCatalog
     class AmiProductEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for AMI products. Client can add only one wildcard filter and a maximum of 8
@@ -46,7 +46,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering based on the last modified date of AMI products.</p>
@@ -56,7 +56,7 @@ module Aws::MarketplaceCatalog
     class AmiProductLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>
@@ -70,7 +70,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Objects that allows sorting on AMI products based on certain fields and sorting order.</p>
@@ -84,14 +84,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmiProductSortBy
-      EntityId = 'EntityId'
-      LastModifiedDate = 'LastModifiedDate'
-      ProductTitle = 'ProductTitle'
-      Visibility = 'Visibility'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains summarized information about an AMI product.</p>
@@ -105,7 +98,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on product title.</p>
@@ -119,7 +112,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>
@@ -129,14 +122,7 @@ module Aws::MarketplaceCatalog
     class AmiProductVisibilityFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmiProductVisibilityString
-      Limited = 'Limited'
-      Public = 'Public'
-      Restricted = 'Restricted'
-      Draft = 'Draft'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_request_list
@@ -145,7 +131,7 @@ module Aws::MarketplaceCatalog
     class BatchDescribeEntitiesRequest < Struct.new(
       :entity_request_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_details
@@ -159,7 +145,7 @@ module Aws::MarketplaceCatalog
       :entity_details,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains an error code and error message.</p>
@@ -173,7 +159,7 @@ module Aws::MarketplaceCatalog
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -188,7 +174,7 @@ module Aws::MarketplaceCatalog
       :catalog,
       :change_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_id
@@ -201,7 +187,7 @@ module Aws::MarketplaceCatalog
       :change_set_id,
       :change_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the <code>ChangeType</code>, <code>Details</code>, and
@@ -242,7 +228,7 @@ module Aws::MarketplaceCatalog
       :details_document,
       :change_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a change set returned in a list of change sets when the
@@ -289,15 +275,7 @@ module Aws::MarketplaceCatalog
       :entity_id_list,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeStatus
-      PREPARING = 'PREPARING'
-      APPLYING = 'APPLYING'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object is a container for common summary information about the change. The
@@ -331,7 +309,7 @@ module Aws::MarketplaceCatalog
       :error_detail_list,
       :change_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on entity id of a container product.</p>
@@ -341,7 +319,7 @@ module Aws::MarketplaceCatalog
     class ContainerProductEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for container products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
@@ -363,7 +341,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering based on the last modified date of container products.</p>
@@ -373,7 +351,7 @@ module Aws::MarketplaceCatalog
     class ContainerProductLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>
@@ -387,7 +365,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Objects that allows sorting on container products based on certain fields and sorting order.</p>
@@ -401,14 +379,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerProductSortBy
-      EntityId = 'EntityId'
-      LastModifiedDate = 'LastModifiedDate'
-      ProductTitle = 'ProductTitle'
-      Visibility = 'Visibility'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains summarized information about a container product.</p>
@@ -422,7 +393,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on product title.</p>
@@ -436,7 +407,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>
@@ -446,14 +417,7 @@ module Aws::MarketplaceCatalog
     class ContainerProductVisibilityFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerProductVisibilityString
-      Limited = 'Limited'
-      Public = 'Public'
-      Restricted = 'Restricted'
-      Draft = 'Draft'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on entity id of a data product.</p>
@@ -463,7 +427,7 @@ module Aws::MarketplaceCatalog
     class DataProductEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for data products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
@@ -485,7 +449,7 @@ module Aws::MarketplaceCatalog
       :visibility,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering based on the last modified date of data products.</p>
@@ -495,7 +459,7 @@ module Aws::MarketplaceCatalog
     class DataProductLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>
@@ -509,7 +473,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Objects that allows sorting on data products based on certain fields and sorting order.</p>
@@ -523,14 +487,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataProductSortBy
-      EntityId = 'EntityId'
-      ProductTitle = 'ProductTitle'
-      Visibility = 'Visibility'
-      LastModifiedDate = 'LastModifiedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains summarized information about a data product.</p>
@@ -544,7 +501,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on product title.</p>
@@ -558,7 +515,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>
@@ -568,15 +525,7 @@ module Aws::MarketplaceCatalog
     class DataProductVisibilityFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataProductVisibilityString
-      Limited = 'Limited'
-      Public = 'Public'
-      Restricted = 'Restricted'
-      Unavailable = 'Unavailable'
-      Draft = 'Draft'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -586,12 +535,12 @@ module Aws::MarketplaceCatalog
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -607,7 +556,7 @@ module Aws::MarketplaceCatalog
       :catalog,
       :change_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_id
@@ -662,7 +611,7 @@ module Aws::MarketplaceCatalog
       :failure_description,
       :change_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -677,7 +626,7 @@ module Aws::MarketplaceCatalog
       :catalog,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_type
@@ -711,7 +660,7 @@ module Aws::MarketplaceCatalog
       :details,
       :details_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity contains data that describes your product, its supported features, and how
@@ -726,7 +675,7 @@ module Aws::MarketplaceCatalog
       :type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains metadata and details about the entity.</p>
@@ -753,7 +702,7 @@ module Aws::MarketplaceCatalog
       :last_modified_date,
       :details_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains entity ID and the catalog in which the entity is present.</p>
@@ -768,7 +717,7 @@ module Aws::MarketplaceCatalog
       :catalog,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object is a container for common summary information about the entity. The
@@ -832,7 +781,7 @@ module Aws::MarketplaceCatalog
       :resale_authorization_summary,
       :machine_learning_product_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields per entity type.</p>
@@ -867,7 +816,7 @@ module Aws::MarketplaceCatalog
       :machine_learning_product_filters,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DataProductFilters < EntityTypeFilters; end
       class SaaSProductFilters < EntityTypeFilters; end
@@ -911,7 +860,7 @@ module Aws::MarketplaceCatalog
       :machine_learning_product_sort,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DataProductSort < EntityTypeSort; end
       class SaaSProductSort < EntityTypeSort; end
@@ -934,12 +883,7 @@ module Aws::MarketplaceCatalog
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureCode
-      ClientError = 'CLIENT_ERROR'
-      ServerFault = 'SERVER_FAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter object, used to optionally filter results from calls to the
@@ -998,7 +942,7 @@ module Aws::MarketplaceCatalog
       :name,
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1008,7 +952,7 @@ module Aws::MarketplaceCatalog
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1017,12 +961,7 @@ module Aws::MarketplaceCatalog
     class GetResourcePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Intent
-      VALIDATE = 'VALIDATE'
-      APPLY = 'APPLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal service exception.</p>
@@ -1032,7 +971,7 @@ module Aws::MarketplaceCatalog
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1062,7 +1001,7 @@ module Aws::MarketplaceCatalog
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_summary_list
@@ -1075,7 +1014,7 @@ module Aws::MarketplaceCatalog
       :change_set_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1135,7 +1074,7 @@ module Aws::MarketplaceCatalog
       :entity_type_filters,
       :entity_type_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_summary_list
@@ -1148,7 +1087,7 @@ module Aws::MarketplaceCatalog
       :entity_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1158,7 +1097,7 @@ module Aws::MarketplaceCatalog
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1172,7 +1111,7 @@ module Aws::MarketplaceCatalog
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter for machine learning product entity IDs.</p>
@@ -1182,7 +1121,7 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filters that you can use with the ListEntities operation to filter machine learning products. You can filter by EntityId, LastModifiedDate, ProductTitle, and Visibility.</p>
@@ -1204,7 +1143,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter for machine learning product last modified date.</p>
@@ -1214,7 +1153,7 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date range for filtering machine learning products by their last modified date.</p>
@@ -1228,7 +1167,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort options for machine learning products.</p>
@@ -1242,15 +1181,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The fields that you can sort machine learning products by.</p>
-    module MachineLearningProductSortBy
-      EntityId = 'EntityId'
-      LastModifiedDate = 'LastModifiedDate'
-      ProductTitle = 'ProductTitle'
-      Visibility = 'Visibility'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a machine learning product.</p>
@@ -1264,7 +1195,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter for machine learning product titles.</p>
@@ -1278,7 +1209,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter for machine learning product visibility status.</p>
@@ -1288,33 +1219,7 @@ module Aws::MarketplaceCatalog
     class MachineLearningProductVisibilityFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The visibility status of a machine learning product. Valid values are:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>Limited</code> - The product is available to a limited set of buyers.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Public</code> - The product is publicly available to all buyers.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Restricted</code> - The product has restricted availability.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Draft</code> - The product is in draft state and not yet available to buyers.</p>
-    #             </li>
-    #          </ul>
-    module MachineLearningProductVisibilityString
-      Limited = 'Limited'
-      Public = 'Public'
-      Restricted = 'Restricted'
-      Draft = 'Draft'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer.</p>
@@ -1324,7 +1229,7 @@ module Aws::MarketplaceCatalog
     class OfferAvailabilityEndDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>AvailabilityEndDate</code> of an offer with date range as input.</p>
@@ -1338,7 +1243,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>BuyerAccounts</code> of an offer.</p>
@@ -1348,7 +1253,7 @@ module Aws::MarketplaceCatalog
     class OfferBuyerAccountsFilter < Struct.new(
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the entity id of an offer.</p>
@@ -1358,7 +1263,7 @@ module Aws::MarketplaceCatalog
     class OfferEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for offers entity. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
@@ -1408,7 +1313,7 @@ module Aws::MarketplaceCatalog
       :targeting,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>LastModifiedDate</code> of an offer.</p>
@@ -1418,7 +1323,7 @@ module Aws::MarketplaceCatalog
     class OfferLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>LastModifiedDate</code> of an offer with date range as input.</p>
@@ -1432,7 +1337,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>Name</code> of an offer.</p>
@@ -1446,7 +1351,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ProductId</code> of an offer.</p>
@@ -1456,7 +1361,7 @@ module Aws::MarketplaceCatalog
     class OfferProductIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ReleaseDate</code> of an offer.</p>
@@ -1466,7 +1371,7 @@ module Aws::MarketplaceCatalog
     class OfferReleaseDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ReleaseDate</code> of an offer with date range as input.</p>
@@ -1480,7 +1385,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer.</p>
@@ -1494,7 +1399,7 @@ module Aws::MarketplaceCatalog
     class OfferResaleAuthorizationIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows to sort offers.</p>
@@ -1508,20 +1413,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfferSortBy
-      EntityId = 'EntityId'
-      Name = 'Name'
-      ProductId = 'ProductId'
-      ResaleAuthorizationId = 'ResaleAuthorizationId'
-      ReleaseDate = 'ReleaseDate'
-      AvailabilityEndDate = 'AvailabilityEndDate'
-      BuyerAccounts = 'BuyerAccounts'
-      State = 'State'
-      Targeting = 'Targeting'
-      LastModifiedDate = 'LastModifiedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>State</code> of an offer.</p>
@@ -1531,12 +1423,7 @@ module Aws::MarketplaceCatalog
     class OfferStateFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfferStateString
-      Draft = 'Draft'
-      Released = 'Released'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized information about an offer.</p>
@@ -1574,7 +1461,7 @@ module Aws::MarketplaceCatalog
       :state,
       :targeting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>Targeting</code> of an offer.</p>
@@ -1584,19 +1471,7 @@ module Aws::MarketplaceCatalog
     class OfferTargetingFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfferTargetingString
-      BuyerAccounts = 'BuyerAccounts'
-      ParticipatingPrograms = 'ParticipatingPrograms'
-      CountryCodes = 'CountryCodes'
-      None = 'None'
-    end
-
-    module OwnershipType
-      SELF = 'SELF'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1610,12 +1485,12 @@ module Aws::MarketplaceCatalog
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization.</p>
@@ -1629,7 +1504,7 @@ module Aws::MarketplaceCatalog
       :date_range,
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on <code>AvailabilityEndDate</code> of a ResaleAuthorization with date range as input.</p>
@@ -1643,7 +1518,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization.</p>
@@ -1657,7 +1532,7 @@ module Aws::MarketplaceCatalog
       :date_range,
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on <code>CreatedDate</code> of a ResaleAuthorization with date range as input.</p>
@@ -1671,7 +1546,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on <code>EntityId</code> of a ResaleAuthorization.</p>
@@ -1681,7 +1556,7 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for resale authorization entity. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
@@ -1739,7 +1614,7 @@ module Aws::MarketplaceCatalog
       :offer_extended_status,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization.</p>
@@ -1749,7 +1624,7 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>LastModifiedDate</code> of a ResaleAuthorization with date range as input.</p>
@@ -1763,7 +1638,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ManufacturerAccountId</code> of a ResaleAuthorization.</p>
@@ -1777,7 +1652,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ManufacturerLegalName</code> of a ResaleAuthorization.</p>
@@ -1791,7 +1666,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>Name</code> of a ResaleAuthorization.</p>
@@ -1805,7 +1680,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>OfferExtendedStatus</code> of a ResaleAuthorization.</p>
@@ -1815,7 +1690,7 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationOfferExtendedStatusFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ProductId</code> of a ResaleAuthorization.</p>
@@ -1829,7 +1704,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ProductName</code> of a ResaleAuthorization.</p>
@@ -1843,7 +1718,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>ResellerAccountID</code> of a ResaleAuthorization.</p>
@@ -1857,7 +1732,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the ResellerLegalName of a ResaleAuthorization.</p>
@@ -1871,7 +1746,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows to sort ResaleAuthorization.</p>
@@ -1885,23 +1760,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResaleAuthorizationSortBy
-      EntityId = 'EntityId'
-      Name = 'Name'
-      ProductId = 'ProductId'
-      ProductName = 'ProductName'
-      ManufacturerAccountId = 'ManufacturerAccountId'
-      ManufacturerLegalName = 'ManufacturerLegalName'
-      ResellerAccountID = 'ResellerAccountID'
-      ResellerLegalName = 'ResellerLegalName'
-      Status = 'Status'
-      OfferExtendedStatus = 'OfferExtendedStatus'
-      CreatedDate = 'CreatedDate'
-      AvailabilityEndDate = 'AvailabilityEndDate'
-      LastModifiedDate = 'LastModifiedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows filtering on the <code>Status</code> of a ResaleAuthorization.</p>
@@ -1911,13 +1770,7 @@ module Aws::MarketplaceCatalog
     class ResaleAuthorizationStatusFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResaleAuthorizationStatusString
-      Draft = 'Draft'
-      Active = 'Active'
-      Restricted = 'Restricted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized information about a Resale Authorization.</p>
@@ -1967,7 +1820,7 @@ module Aws::MarketplaceCatalog
       :created_date,
       :availability_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is currently in use.</p>
@@ -1976,7 +1829,7 @@ module Aws::MarketplaceCatalog
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource wasn't found.</p>
@@ -1986,7 +1839,7 @@ module Aws::MarketplaceCatalog
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Currently, the specified resource is not supported.</p>
@@ -1995,7 +1848,7 @@ module Aws::MarketplaceCatalog
     class ResourceNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on entity id of a SaaS product.</p>
@@ -2005,7 +1858,7 @@ module Aws::MarketplaceCatalog
     class SaaSProductEntityIdFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing all the filter fields for SaaS products. Client can add only one wildcard filter and a maximum of 8 filters in a single <code>ListEntities</code> request.</p>
@@ -2027,7 +1880,7 @@ module Aws::MarketplaceCatalog
       :visibility,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering based on the last modified date of SaaS products</p>
@@ -2037,7 +1890,7 @@ module Aws::MarketplaceCatalog
     class SaaSProductLastModifiedDateFilter < Struct.new(
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains date range of the last modified date to be filtered on. You can optionally provide a <code>BeforeValue</code> and/or <code>AfterValue</code>. Both are inclusive.</p>
@@ -2051,7 +1904,7 @@ module Aws::MarketplaceCatalog
       :after_value,
       :before_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Objects that allows sorting on SaaS products based on certain fields and sorting order.</p>
@@ -2065,14 +1918,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SaaSProductSortBy
-      EntityId = 'EntityId'
-      ProductTitle = 'ProductTitle'
-      Visibility = 'Visibility'
-      LastModifiedDate = 'LastModifiedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that contains summarized information about a SaaS product.</p>
@@ -2086,7 +1932,7 @@ module Aws::MarketplaceCatalog
       :product_title,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on product title.</p>
@@ -2100,7 +1946,7 @@ module Aws::MarketplaceCatalog
       :value_list,
       :wild_card_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that allows filtering on the visibility of the product in the AWS Marketplace.</p>
@@ -2110,14 +1956,7 @@ module Aws::MarketplaceCatalog
     class SaaSProductVisibilityFilter < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SaaSProductVisibilityString
-      Limited = 'Limited'
-      Public = 'Public'
-      Restricted = 'Restricted'
-      Draft = 'Draft'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of open requests per account has been exceeded.</p>
@@ -2126,7 +1965,7 @@ module Aws::MarketplaceCatalog
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains two attributes, <code>SortBy</code> and
@@ -2147,12 +1986,7 @@ module Aws::MarketplaceCatalog
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2187,7 +2021,7 @@ module Aws::MarketplaceCatalog
       :change_set_tags,
       :intent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_id
@@ -2200,7 +2034,7 @@ module Aws::MarketplaceCatalog
       :change_set_id,
       :change_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of objects specifying each key name and value.</p>
@@ -2214,7 +2048,7 @@ module Aws::MarketplaceCatalog
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2229,12 +2063,12 @@ module Aws::MarketplaceCatalog
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many requests.</p>
@@ -2244,7 +2078,7 @@ module Aws::MarketplaceCatalog
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2259,12 +2093,12 @@ module Aws::MarketplaceCatalog
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred during validation.</p>
@@ -2274,7 +2108,7 @@ module Aws::MarketplaceCatalog
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

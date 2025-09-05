@@ -21,7 +21,7 @@ module Aws::IoTWireless
       :session_keys,
       :f_cnt_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ABP device object for LoRaWAN specification v1.1</p>
@@ -39,7 +39,7 @@ module Aws::IoTWireless
       :session_keys,
       :f_cnt_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User does not have permission to perform this action.</p>
@@ -48,7 +48,7 @@ module Aws::IoTWireless
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accuracy of the estimated position in meters. An empty value indicates that no
@@ -67,13 +67,7 @@ module Aws::IoTWireless
       :horizontal_accuracy,
       :vertical_accuracy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregationPeriod
-      OneHour = 'OneHour'
-      OneDay = 'OneDay'
-      OneWeek = 'OneWeek'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN application configuration, which can be used to perform geolocation.</p>
@@ -93,11 +87,7 @@ module Aws::IoTWireless
       :type,
       :destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationConfigType
-      SemtechGeoLocation = 'SemtechGeolocation'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sidewalk
@@ -122,7 +112,7 @@ module Aws::IoTWireless
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sidewalk
@@ -135,7 +125,7 @@ module Aws::IoTWireless
       :sidewalk,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -148,12 +138,12 @@ module Aws::IoTWireless
       :id,
       :multicast_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMulticastGroupWithFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -166,12 +156,12 @@ module Aws::IoTWireless
       :id,
       :wireless_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWirelessDeviceWithFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -184,12 +174,12 @@ module Aws::IoTWireless
       :id,
       :wireless_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWirelessDeviceWithMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -202,12 +192,12 @@ module Aws::IoTWireless
       :id,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWirelessDeviceWithThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -220,7 +210,7 @@ module Aws::IoTWireless
       :id,
       :iot_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iot_certificate_id
@@ -229,7 +219,7 @@ module Aws::IoTWireless
     class AssociateWirelessGatewayWithCertificateResponse < Struct.new(
       :iot_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -242,19 +232,12 @@ module Aws::IoTWireless
       :id,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWirelessGatewayWithThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Sidewalk device battery level.</p>
-    module BatteryLevel
-      NORMAL = 'normal'
-      LOW = 'low'
-      CRITICAL = 'critical'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Beaconing parameters for configuring the wireless gateways.</p>
@@ -268,7 +251,7 @@ module Aws::IoTWireless
       :data_rate,
       :frequencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -277,12 +260,12 @@ module Aws::IoTWireless
     class CancelMulticastGroupSessionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelMulticastGroupSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CDMA local ID information, which corresponds to the local identification parameters of
@@ -298,7 +281,7 @@ module Aws::IoTWireless
       :pn_offset,
       :cdma_channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CDMA object for network measurement reports.</p>
@@ -321,7 +304,7 @@ module Aws::IoTWireless
       :pilot_power,
       :base_station_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CDMA (Code-division multiple access) object.</p>
@@ -363,7 +346,7 @@ module Aws::IoTWireless
       :base_lng,
       :cdma_nmr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cell towers that were used to perform the measurements.</p>
@@ -389,7 +372,7 @@ module Aws::IoTWireless
       :lte,
       :cdma,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of sidewalk certificates.</p>
@@ -403,7 +386,7 @@ module Aws::IoTWireless
       :signing_alg,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
@@ -420,12 +403,7 @@ module Aws::IoTWireless
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionStatus
-      CONNECTED = 'Connected'
-      DISCONNECTED = 'Disconnected'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connection status event configuration object for enabling or disabling topic.</p>
@@ -441,7 +419,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :wireless_gateway_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connection status resource type event configuration object for enabling or disabling
@@ -453,7 +431,7 @@ module Aws::IoTWireless
     class ConnectionStatusResourceTypeEventConfiguration < Struct.new(
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -494,7 +472,7 @@ module Aws::IoTWireless
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -507,7 +485,7 @@ module Aws::IoTWireless
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -544,7 +522,7 @@ module Aws::IoTWireless
       :client_request_token,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -557,7 +535,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -627,7 +605,7 @@ module Aws::IoTWireless
       :fragment_interval_ms,
       :descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -640,7 +618,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -673,7 +651,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -686,7 +664,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -734,7 +712,7 @@ module Aws::IoTWireless
       :client_request_token,
       :multicast_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -747,7 +725,7 @@ module Aws::IoTWireless
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -780,7 +758,7 @@ module Aws::IoTWireless
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -793,7 +771,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -847,7 +825,7 @@ module Aws::IoTWireless
       :positioning,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -860,7 +838,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -897,7 +875,7 @@ module Aws::IoTWireless
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -910,7 +888,7 @@ module Aws::IoTWireless
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_create_tasks
@@ -945,7 +923,7 @@ module Aws::IoTWireless
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -958,7 +936,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -971,7 +949,7 @@ module Aws::IoTWireless
       :id,
       :wireless_gateway_task_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_gateway_task_definition_id
@@ -984,7 +962,7 @@ module Aws::IoTWireless
       :wireless_gateway_task_definition_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The device attestation key (DAK) information.</p>
@@ -1012,7 +990,7 @@ module Aws::IoTWireless
       :ap_id,
       :device_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1021,12 +999,12 @@ module Aws::IoTWireless
     class DeleteDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1035,12 +1013,12 @@ module Aws::IoTWireless
     class DeleteDeviceProfileRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDeviceProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1049,12 +1027,12 @@ module Aws::IoTWireless
     class DeleteFuotaTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1063,12 +1041,12 @@ module Aws::IoTWireless
     class DeleteMulticastGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_name
@@ -1077,12 +1055,12 @@ module Aws::IoTWireless
     class DeleteNetworkAnalyzerConfigurationRequest < Struct.new(
       :configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNetworkAnalyzerConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1101,12 +1079,12 @@ module Aws::IoTWireless
       :message_id,
       :wireless_device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueuedMessagesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1115,12 +1093,12 @@ module Aws::IoTWireless
     class DeleteServiceProfileRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1129,12 +1107,12 @@ module Aws::IoTWireless
     class DeleteWirelessDeviceImportTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWirelessDeviceImportTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1143,12 +1121,12 @@ module Aws::IoTWireless
     class DeleteWirelessDeviceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWirelessDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1157,12 +1135,12 @@ module Aws::IoTWireless
     class DeleteWirelessGatewayRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWirelessGatewayResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1171,12 +1149,12 @@ module Aws::IoTWireless
     class DeleteWirelessGatewayTaskDefinitionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWirelessGatewayTaskDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1185,12 +1163,12 @@ module Aws::IoTWireless
     class DeleteWirelessGatewayTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWirelessGatewayTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1204,12 +1182,12 @@ module Aws::IoTWireless
       :identifier,
       :wireless_device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterWirelessDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a destination.</p>
@@ -1239,7 +1217,7 @@ module Aws::IoTWireless
       :description,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a device profile.</p>
@@ -1257,12 +1235,7 @@ module Aws::IoTWireless
       :name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceProfileType
-      Sidewalk = 'Sidewalk'
-      LoRaWAN = 'LoRaWAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Device registration state event configuration object for enabling and disabling
@@ -1279,7 +1252,7 @@ module Aws::IoTWireless
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Device registration state resource type event configuration object for enabling or
@@ -1291,15 +1264,7 @@ module Aws::IoTWireless
     class DeviceRegistrationStateResourceTypeEventConfiguration < Struct.new(
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Device state defines the device status of sidewalk device.</p>
-    module DeviceState
-      PROVISIONED = 'Provisioned'
-      REGISTEREDNOTSEEN = 'RegisteredNotSeen'
-      REGISTEREDREACHABLE = 'RegisteredReachable'
-      REGISTEREDUNREACHABLE = 'RegisteredUnreachable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The required list of dimensions for the metric.</p>
@@ -1313,12 +1278,7 @@ module Aws::IoTWireless
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DimensionName
-      DeviceId = 'DeviceId'
-      GatewayId = 'GatewayId'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partner_account_id
@@ -1331,12 +1291,12 @@ module Aws::IoTWireless
       :partner_account_id,
       :partner_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAwsAccountFromPartnerAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1349,12 +1309,12 @@ module Aws::IoTWireless
       :id,
       :multicast_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMulticastGroupFromFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1367,12 +1327,12 @@ module Aws::IoTWireless
       :id,
       :wireless_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWirelessDeviceFromFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1385,12 +1345,12 @@ module Aws::IoTWireless
       :id,
       :wireless_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWirelessDeviceFromMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1399,12 +1359,12 @@ module Aws::IoTWireless
     class DisassociateWirelessDeviceFromThingRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWirelessDeviceFromThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1413,12 +1373,12 @@ module Aws::IoTWireless
     class DisassociateWirelessGatewayFromCertificateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWirelessGatewayFromCertificateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1427,24 +1387,12 @@ module Aws::IoTWireless
     class DisassociateWirelessGatewayFromThingRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWirelessGatewayFromThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>DlClass for LoRaWAM, valid values are ClassB and ClassC.</p>
-    module DlClass
-      ClassB = 'ClassB'
-      ClassC = 'ClassC'
-    end
-
-    module DownlinkMode
-      SEQUENTIAL = 'SEQUENTIAL'
-      CONCURRENT = 'CONCURRENT'
-      USING_UPLINK_GATEWAY = 'USING_UPLINK_GATEWAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message in the downlink queue.</p>
@@ -1469,16 +1417,7 @@ module Aws::IoTWireless
       :received_at,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Sidewalk device status notification.</p>
-    module Event
-      DISCOVERED = 'discovered'
-      LOST = 'lost'
-      ACK = 'ack'
-      NACK = 'nack'
-      PASSTHROUGH = 'passthrough'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Event configuration object for a single resource.</p>
@@ -1500,7 +1439,7 @@ module Aws::IoTWireless
       :partner_type,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object of all event configurations and the status of the event topics.</p>
@@ -1526,27 +1465,7 @@ module Aws::IoTWireless
       :connection_status,
       :message_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventNotificationPartnerType
-      Sidewalk = 'Sidewalk'
-    end
-
-    module EventNotificationResourceType
-      SidewalkAccount = 'SidewalkAccount'
-      WirelessDevice = 'WirelessDevice'
-      WirelessGateway = 'WirelessGateway'
-    end
-
-    module EventNotificationTopicStatus
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-    end
-
-    module ExpressionType
-      RuleName = 'RuleName'
-      MqttTopic = 'MqttTopic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of FPort assigned for different LoRaWAN application packages to use</p>
@@ -1573,23 +1492,7 @@ module Aws::IoTWireless
       :positioning,
       :applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a wireless device in a FUOTA task.</p>
-    module FuotaDeviceStatus
-      Initial = 'Initial'
-      Package_Not_Supported = 'Package_Not_Supported'
-      FragAlgo_unsupported = 'FragAlgo_unsupported'
-      Not_enough_memory = 'Not_enough_memory'
-      FragIndex_unsupported = 'FragIndex_unsupported'
-      Wrong_descriptor = 'Wrong_descriptor'
-      SessionCnt_replay = 'SessionCnt_replay'
-      MissingFrag = 'MissingFrag'
-      MemoryError = 'MemoryError'
-      MICError = 'MICError'
-      Successful = 'Successful'
-      Device_exist_in_conflict_fuota_task = 'Device_exist_in_conflict_fuota_task'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A FUOTA task.</p>
@@ -1607,12 +1510,7 @@ module Aws::IoTWireless
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The event for a log message, if the log message is tied to a FUOTA task.</p>
-    module FuotaTaskEvent
-      Fuota = 'Fuota'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for a FUOTA task event and can be used to set log levels for a
@@ -1631,7 +1529,7 @@ module Aws::IoTWireless
       :event,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for FUOTA tasks and can be used to set log levels for a specific type
@@ -1652,21 +1550,7 @@ module Aws::IoTWireless
       :log_level,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a FUOTA task.</p>
-    module FuotaTaskStatus
-      Pending = 'Pending'
-      FuotaSession_Waiting = 'FuotaSession_Waiting'
-      In_FuotaSession = 'In_FuotaSession'
-      FuotaDone = 'FuotaDone'
-      Delete_Waiting = 'Delete_Waiting'
-    end
-
-    # <p>The FUOTA task type.</p>
-    module FuotaTaskType
-      LoRaWAN = 'LoRaWAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gateway list item object that specifies the frequency and list of gateways for which
@@ -1683,7 +1567,7 @@ module Aws::IoTWireless
       :gateway_id,
       :downlink_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1692,7 +1576,7 @@ module Aws::IoTWireless
     class GetDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1721,7 +1605,7 @@ module Aws::IoTWireless
       :description,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1730,7 +1614,7 @@ module Aws::IoTWireless
     class GetDeviceProfileRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1755,12 +1639,12 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetEventConfigurationByResourceTypesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_registration_state
@@ -1785,7 +1669,7 @@ module Aws::IoTWireless
       :connection_status,
       :message_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1794,7 +1678,7 @@ module Aws::IoTWireless
     class GetFuotaTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1864,12 +1748,12 @@ module Aws::IoTWireless
       :fragment_interval_ms,
       :descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetLogLevelsByResourceTypesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_log_level
@@ -1892,12 +1776,12 @@ module Aws::IoTWireless
       :wireless_device_log_options,
       :fuota_task_log_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetMetricConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_metric
@@ -1906,7 +1790,7 @@ module Aws::IoTWireless
     class GetMetricConfigurationResponse < Struct.new(
       :summary_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_metric_queries
@@ -1915,7 +1799,7 @@ module Aws::IoTWireless
     class GetMetricsRequest < Struct.new(
       :summary_metric_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_metric_query_results
@@ -1924,7 +1808,7 @@ module Aws::IoTWireless
     class GetMetricsResponse < Struct.new(
       :summary_metric_query_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1933,7 +1817,7 @@ module Aws::IoTWireless
     class GetMulticastGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1967,7 +1851,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1976,7 +1860,7 @@ module Aws::IoTWireless
     class GetMulticastGroupSessionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lo_ra_wan
@@ -1985,7 +1869,7 @@ module Aws::IoTWireless
     class GetMulticastGroupSessionResponse < Struct.new(
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_name
@@ -1994,7 +1878,7 @@ module Aws::IoTWireless
     class GetNetworkAnalyzerConfigurationRequest < Struct.new(
       :configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trace_content
@@ -2030,7 +1914,7 @@ module Aws::IoTWireless
       :name,
       :multicast_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partner_account_id
@@ -2043,7 +1927,7 @@ module Aws::IoTWireless
       :partner_account_id,
       :partner_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sidewalk
@@ -2056,7 +1940,7 @@ module Aws::IoTWireless
       :sidewalk,
       :account_linked,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:account_linked] = false unless options.key?(:account_linked)
@@ -2076,7 +1960,7 @@ module Aws::IoTWireless
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -2092,7 +1976,7 @@ module Aws::IoTWireless
       :solvers,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wi_fi_access_points
@@ -2124,7 +2008,7 @@ module Aws::IoTWireless
       :gnss,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_json_payload
@@ -2137,7 +2021,7 @@ module Aws::IoTWireless
     class GetPositionEstimateResponse < Struct.new(
       :geo_json_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -2152,7 +2036,7 @@ module Aws::IoTWireless
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -2186,7 +2070,7 @@ module Aws::IoTWireless
       :solver_version,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2204,7 +2088,7 @@ module Aws::IoTWireless
       :identifier_type,
       :partner_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_registration_state
@@ -2229,7 +2113,7 @@ module Aws::IoTWireless
       :connection_status,
       :message_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -2244,7 +2128,7 @@ module Aws::IoTWireless
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_level
@@ -2255,7 +2139,7 @@ module Aws::IoTWireless
     class GetResourceLogLevelResponse < Struct.new(
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -2271,7 +2155,7 @@ module Aws::IoTWireless
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_json_payload
@@ -2282,7 +2166,7 @@ module Aws::IoTWireless
     class GetResourcePositionResponse < Struct.new(
       :geo_json_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -2293,7 +2177,7 @@ module Aws::IoTWireless
     class GetServiceEndpointRequest < Struct.new(
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -2310,7 +2194,7 @@ module Aws::IoTWireless
       :service_endpoint,
       :server_trust,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2319,7 +2203,7 @@ module Aws::IoTWireless
     class GetServiceProfileRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2340,7 +2224,7 @@ module Aws::IoTWireless
       :id,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2349,7 +2233,7 @@ module Aws::IoTWireless
     class GetWirelessDeviceImportTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2404,7 +2288,7 @@ module Aws::IoTWireless
       :onboarded_imported_device_count,
       :failed_imported_device_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2417,7 +2301,7 @@ module Aws::IoTWireless
       :identifier,
       :identifier_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -2468,7 +2352,7 @@ module Aws::IoTWireless
       :sidewalk,
       :positioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_device_id
@@ -2477,7 +2361,7 @@ module Aws::IoTWireless
     class GetWirelessDeviceStatisticsRequest < Struct.new(
       :wireless_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_device_id
@@ -2501,7 +2385,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2510,7 +2394,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayCertificateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iot_certificate_id
@@ -2524,7 +2408,7 @@ module Aws::IoTWireless
       :iot_certificate_id,
       :lo_ra_wan_network_server_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2533,7 +2417,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayFirmwareInformationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lo_ra_wan
@@ -2542,7 +2426,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayFirmwareInformationResponse < Struct.new(
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2555,7 +2439,7 @@ module Aws::IoTWireless
       :identifier,
       :identifier_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2589,7 +2473,7 @@ module Aws::IoTWireless
       :thing_name,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_gateway_id
@@ -2598,7 +2482,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayStatisticsRequest < Struct.new(
       :wireless_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_gateway_id
@@ -2618,7 +2502,7 @@ module Aws::IoTWireless
       :last_uplink_received_at,
       :connection_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2627,7 +2511,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayTaskDefinitionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_create_tasks
@@ -2650,7 +2534,7 @@ module Aws::IoTWireless
       :update,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_create_tasks] = false unless options.key?(:auto_create_tasks)
@@ -2664,7 +2548,7 @@ module Aws::IoTWireless
     class GetWirelessGatewayTaskRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wireless_gateway_id
@@ -2692,7 +2576,7 @@ module Aws::IoTWireless
       :task_created_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Global identity information.</p>
@@ -2706,7 +2590,7 @@ module Aws::IoTWireless
       :lac,
       :geran_cid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Global navigation satellite system (GNSS) object used for positioning.</p>
@@ -2744,7 +2628,7 @@ module Aws::IoTWireless
       :assist_altitude,
       :use2_d_solver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use2_d_solver] = false unless options.key?(:use2_d_solver)
@@ -2764,7 +2648,7 @@ module Aws::IoTWireless
       :bsic,
       :bcch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>GSM object for network measurement reports.</p>
@@ -2787,7 +2671,7 @@ module Aws::IoTWireless
       :rx_level,
       :global_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>GSM object.</p>
@@ -2827,24 +2711,7 @@ module Aws::IoTWireless
       :rx_level,
       :gsm_nmr,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdentifierType
-      PartnerAccountId = 'PartnerAccountId'
-      DevEui = 'DevEui'
-      GatewayEui = 'GatewayEui'
-      WirelessDeviceId = 'WirelessDeviceId'
-      WirelessGatewayId = 'WirelessGatewayId'
-    end
-
-    module ImportTaskStatus
-      INITIALIZING = 'INITIALIZING'
-      INITIALIZED = 'INITIALIZED'
-      PENDING = 'PENDING'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Sidewalk device that has been added to an import task.</p>
@@ -2866,7 +2733,7 @@ module Aws::IoTWireless
       :onboarding_status_reason,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a wireless device that has been added to an import task.</p>
@@ -2877,7 +2744,7 @@ module Aws::IoTWireless
     class ImportedWirelessDevice < Struct.new(
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred while processing a request.</p>
@@ -2886,7 +2753,7 @@ module Aws::IoTWireless
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IP address used for resolving device location.</p>
@@ -2896,7 +2763,7 @@ module Aws::IoTWireless
     class Ip < Struct.new(
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Join event configuration object for enabling or disabling topic.</p>
@@ -2911,7 +2778,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :wireless_device_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Join resource type event configuration object for enabling or disabling topic.</p>
@@ -2922,7 +2789,7 @@ module Aws::IoTWireless
     class JoinResourceTypeEventConfiguration < Struct.new(
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2937,7 +2804,7 @@ module Aws::IoTWireless
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2950,7 +2817,7 @@ module Aws::IoTWireless
       :next_token,
       :destination_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2970,7 +2837,7 @@ module Aws::IoTWireless
       :max_results,
       :device_profile_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2983,7 +2850,7 @@ module Aws::IoTWireless
       :next_token,
       :device_profile_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3005,7 +2872,7 @@ module Aws::IoTWireless
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3024,7 +2891,7 @@ module Aws::IoTWireless
       :destination_name,
       :imported_wireless_device_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -3043,7 +2910,7 @@ module Aws::IoTWireless
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3058,7 +2925,7 @@ module Aws::IoTWireless
       :next_token,
       :event_configurations_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3073,7 +2940,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3088,7 +2955,7 @@ module Aws::IoTWireless
       :next_token,
       :fuota_task_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3107,7 +2974,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3122,7 +2989,7 @@ module Aws::IoTWireless
       :next_token,
       :multicast_group_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3137,7 +3004,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3152,7 +3019,7 @@ module Aws::IoTWireless
       :next_token,
       :multicast_group_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3167,7 +3034,7 @@ module Aws::IoTWireless
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3180,7 +3047,7 @@ module Aws::IoTWireless
       :next_token,
       :network_analyzer_configuration_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3195,7 +3062,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3208,7 +3075,7 @@ module Aws::IoTWireless
       :next_token,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3229,7 +3096,7 @@ module Aws::IoTWireless
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3244,7 +3111,7 @@ module Aws::IoTWireless
       :position_configuration_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3268,7 +3135,7 @@ module Aws::IoTWireless
       :max_results,
       :wireless_device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3283,7 +3150,7 @@ module Aws::IoTWireless
       :next_token,
       :downlink_queue_messages_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3298,7 +3165,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3311,7 +3178,7 @@ module Aws::IoTWireless
       :next_token,
       :service_profile_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3320,7 +3187,7 @@ module Aws::IoTWireless
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3330,7 +3197,7 @@ module Aws::IoTWireless
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3344,7 +3211,7 @@ module Aws::IoTWireless
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3359,7 +3226,7 @@ module Aws::IoTWireless
       :next_token,
       :wireless_device_import_task_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3398,7 +3265,7 @@ module Aws::IoTWireless
       :fuota_task_id,
       :multicast_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3411,7 +3278,7 @@ module Aws::IoTWireless
       :next_token,
       :wireless_device_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3431,7 +3298,7 @@ module Aws::IoTWireless
       :next_token,
       :task_definition_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3444,7 +3311,7 @@ module Aws::IoTWireless
       :next_token,
       :task_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3459,7 +3326,7 @@ module Aws::IoTWireless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3472,7 +3339,7 @@ module Aws::IoTWireless
       :next_token,
       :wireless_gateway_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for LoRaWAN connection status resource type event configuration.</p>
@@ -3483,7 +3350,7 @@ module Aws::IoTWireless
     class LoRaWANConnectionStatusEventNotificationConfigurations < Struct.new(
       :gateway_eui_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for LoRaWAN connection status resource type event configuration.</p>
@@ -3494,7 +3361,7 @@ module Aws::IoTWireless
     class LoRaWANConnectionStatusResourceTypeEventConfiguration < Struct.new(
       :wireless_gateway_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN object for create functions.</p>
@@ -3532,7 +3399,7 @@ module Aws::IoTWireless
       :abp_v1_0_x,
       :f_ports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN device metatdata.</p>
@@ -3566,7 +3433,7 @@ module Aws::IoTWireless
       :gateways,
       :public_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANDeviceProfile object.</p>
@@ -3649,7 +3516,7 @@ module Aws::IoTWireless
       :supports_join,
       :supports32_bit_f_cnt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:supports_class_b] = false unless options.key?(:supports_class_b)
@@ -3666,7 +3533,7 @@ module Aws::IoTWireless
     class LoRaWANFuotaTask < Struct.new(
       :rf_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LoRaWAN information returned from getting a FUOTA task.</p>
@@ -3680,7 +3547,7 @@ module Aws::IoTWireless
       :rf_region,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANGateway object.</p>
@@ -3716,7 +3583,7 @@ module Aws::IoTWireless
       :beaconing,
       :max_eirp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANGatewayCurrentVersion object.</p>
@@ -3726,7 +3593,7 @@ module Aws::IoTWireless
     class LoRaWANGatewayCurrentVersion < Struct.new(
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN gateway metatdata.</p>
@@ -3744,7 +3611,7 @@ module Aws::IoTWireless
       :snr,
       :rssi,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANGatewayVersion object.</p>
@@ -3762,7 +3629,7 @@ module Aws::IoTWireless
       :model,
       :station,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANGetServiceProfileInfo object.</p>
@@ -3868,7 +3735,7 @@ module Aws::IoTWireless
       :nb_trans_min,
       :nb_trans_max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:add_gw_metadata] = false unless options.key?(:add_gw_metadata)
@@ -3892,7 +3759,7 @@ module Aws::IoTWireless
     class LoRaWANJoinEventNotificationConfigurations < Struct.new(
       :dev_eui_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for LoRaWAN join resource type event configuration.</p>
@@ -3902,7 +3769,7 @@ module Aws::IoTWireless
     class LoRaWANJoinResourceTypeEventConfiguration < Struct.new(
       :wireless_device_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN object for list functions.</p>
@@ -3912,7 +3779,7 @@ module Aws::IoTWireless
     class LoRaWANListDevice < Struct.new(
       :dev_eui,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LoRaWAN information that is to be used with the multicast group.</p>
@@ -3932,7 +3799,7 @@ module Aws::IoTWireless
       :dl_class,
       :participating_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LoRaWAN information that is to be returned from getting multicast group
@@ -3961,7 +3828,7 @@ module Aws::IoTWireless
       :number_of_devices_in_group,
       :participating_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata information of the LoRaWAN multicast group.</p>
@@ -3971,7 +3838,7 @@ module Aws::IoTWireless
     class LoRaWANMulticastMetadata < Struct.new(
       :f_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LoRaWAN information used with the multicast session.</p>
@@ -4002,7 +3869,7 @@ module Aws::IoTWireless
       :session_timeout,
       :ping_slot_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN public gateway metadata.</p>
@@ -4032,7 +3899,7 @@ module Aws::IoTWireless
       :rf_region,
       :dl_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN router info.</p>
@@ -4047,7 +3914,7 @@ module Aws::IoTWireless
       :f_port,
       :participating_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANServiceProfile object.</p>
@@ -4097,7 +3964,7 @@ module Aws::IoTWireless
       :nb_trans_min,
       :nb_trans_max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:add_gw_metadata] = false unless options.key?(:add_gw_metadata)
@@ -4114,7 +3981,7 @@ module Aws::IoTWireless
     class LoRaWANStartFuotaTask < Struct.new(
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWAN object for update functions.</p>
@@ -4140,7 +4007,7 @@ module Aws::IoTWireless
       :abp_v1_0_x,
       :f_ports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANUpdateGatewayTaskCreate object.</p>
@@ -4162,7 +4029,7 @@ module Aws::IoTWireless
       :current_version,
       :update_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LoRaWANUpdateGatewayTaskEntry object.</p>
@@ -4176,16 +4043,7 @@ module Aws::IoTWireless
       :current_version,
       :update_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The log level for a log message. The log levels can be disabled, or set to
-    #                 <code>ERROR</code> to display less verbose logs containing only error information,
-    #             or to <code>INFO</code> for more detailed logs.</p>
-    module LogLevel
-      INFO = 'INFO'
-      ERROR = 'ERROR'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LTE local identification (local ID) information.</p>
@@ -4200,7 +4058,7 @@ module Aws::IoTWireless
       :pci,
       :earfcn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>LTE object for network measurement reports.</p>
@@ -4229,7 +4087,7 @@ module Aws::IoTWireless
       :rsrp,
       :rsrq,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:eutran_cid] = 0 unless options.key?(:eutran_cid)
@@ -4283,7 +4141,7 @@ module Aws::IoTWireless
       :nr_capable,
       :lte_nmr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:nr_capable] = false unless options.key?(:nr_capable)
@@ -4306,7 +4164,7 @@ module Aws::IoTWireless
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Message delivery status resource type event configuration object for enabling or
@@ -4318,56 +4176,7 @@ module Aws::IoTWireless
     class MessageDeliveryStatusResourceTypeEventConfiguration < Struct.new(
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Sidewalk device message type. Default value is
-    #             <code>CUSTOM_COMMAND_ID_NOTIFY</code>.</p>
-    module MessageType
-      CUSTOM_COMMAND_ID_NOTIFY = 'CUSTOM_COMMAND_ID_NOTIFY'
-      CUSTOM_COMMAND_ID_GET = 'CUSTOM_COMMAND_ID_GET'
-      CUSTOM_COMMAND_ID_SET = 'CUSTOM_COMMAND_ID_SET'
-      CUSTOM_COMMAND_ID_RESP = 'CUSTOM_COMMAND_ID_RESP'
-    end
-
-    module MetricName
-      DeviceRSSI = 'DeviceRSSI'
-      DeviceSNR = 'DeviceSNR'
-      DeviceRoamingRSSI = 'DeviceRoamingRSSI'
-      DeviceRoamingSNR = 'DeviceRoamingSNR'
-      DeviceUplinkCount = 'DeviceUplinkCount'
-      DeviceDownlinkCount = 'DeviceDownlinkCount'
-      DeviceUplinkLostCount = 'DeviceUplinkLostCount'
-      DeviceUplinkLostRate = 'DeviceUplinkLostRate'
-      DeviceJoinRequestCount = 'DeviceJoinRequestCount'
-      DeviceJoinAcceptCount = 'DeviceJoinAcceptCount'
-      DeviceRoamingUplinkCount = 'DeviceRoamingUplinkCount'
-      DeviceRoamingDownlinkCount = 'DeviceRoamingDownlinkCount'
-      GatewayUpTime = 'GatewayUpTime'
-      GatewayDownTime = 'GatewayDownTime'
-      GatewayRSSI = 'GatewayRSSI'
-      GatewaySNR = 'GatewaySNR'
-      GatewayUplinkCount = 'GatewayUplinkCount'
-      GatewayDownlinkCount = 'GatewayDownlinkCount'
-      GatewayJoinRequestCount = 'GatewayJoinRequestCount'
-      GatewayJoinAcceptCount = 'GatewayJoinAcceptCount'
-      AwsAccountUplinkCount = 'AwsAccountUplinkCount'
-      AwsAccountDownlinkCount = 'AwsAccountDownlinkCount'
-      AwsAccountUplinkLostCount = 'AwsAccountUplinkLostCount'
-      AwsAccountUplinkLostRate = 'AwsAccountUplinkLostRate'
-      AwsAccountJoinRequestCount = 'AwsAccountJoinRequestCount'
-      AwsAccountJoinAcceptCount = 'AwsAccountJoinAcceptCount'
-      AwsAccountRoamingUplinkCount = 'AwsAccountRoamingUplinkCount'
-      AwsAccountRoamingDownlinkCount = 'AwsAccountRoamingDownlinkCount'
-      AwsAccountDeviceCount = 'AwsAccountDeviceCount'
-      AwsAccountGatewayCount = 'AwsAccountGatewayCount'
-      AwsAccountActiveDeviceCount = 'AwsAccountActiveDeviceCount'
-      AwsAccountActiveGatewayCount = 'AwsAccountActiveGatewayCount'
-    end
-
-    module MetricQueryStatus
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated values of the metric.</p>
@@ -4403,16 +4212,7 @@ module Aws::IoTWireless
       :std,
       :p90,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>
-    #             <code>FrameInfo</code> of your multicast group resources for the trace content. Use
-    #             FrameInfo to debug the multicast communication between your multicast groups and the
-    #             network server.</p>
-    module MulticastFrameInfo
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A multicast group.</p>
@@ -4430,7 +4230,7 @@ module Aws::IoTWireless
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A multicast group that is associated with a FUOTA task.</p>
@@ -4440,7 +4240,7 @@ module Aws::IoTWireless
     class MulticastGroupByFuotaTask < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Wireless metadata that is to be sent to multicast group.</p>
@@ -4450,7 +4250,7 @@ module Aws::IoTWireless
     class MulticastWirelessMetadata < Struct.new(
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network analyzer configurations.</p>
@@ -4464,14 +4264,7 @@ module Aws::IoTWireless
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OnboardStatus
-      INITIALIZED = 'INITIALIZED'
-      PENDING = 'PENDING'
-      ONBOARDED = 'ONBOARDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>OTAA device object for v1.0.x</p>
@@ -4495,7 +4288,7 @@ module Aws::IoTWireless
       :join_eui,
       :gen_app_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>OTAA device object for v1.1</p>
@@ -4513,7 +4306,7 @@ module Aws::IoTWireless
       :nwk_key,
       :join_eui,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify the list of gateways to which you want to send downlink data traffic when the
@@ -4535,7 +4328,7 @@ module Aws::IoTWireless
       :gateway_list,
       :transmission_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify the list of gateways to which you want to send the multicast downlink
@@ -4555,16 +4348,7 @@ module Aws::IoTWireless
       :gateway_list,
       :transmission_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartnerType
-      Sidewalk = 'Sidewalk'
-    end
-
-    module PositionConfigurationFec
-      ROSE = 'ROSE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The wrapper for a position configuration.</p>
@@ -4587,17 +4371,7 @@ module Aws::IoTWireless
       :solvers,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PositionConfigurationStatus
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-    end
-
-    module PositionResourceType
-      WirelessDevice = 'WirelessDevice'
-      WirelessGateway = 'WirelessGateway'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The wrapper for position solver configurations.</p>
@@ -4607,7 +4381,7 @@ module Aws::IoTWireless
     class PositionSolverConfigurations < Struct.new(
       :semtech_gnss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The wrapper for position solver details.</p>
@@ -4617,15 +4391,7 @@ module Aws::IoTWireless
     class PositionSolverDetails < Struct.new(
       :semtech_gnss,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PositionSolverProvider
-      SEMTECH = 'Semtech'
-    end
-
-    module PositionSolverType
-      GNSS = 'GNSS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The FPorts for the position information.</p>
@@ -4643,12 +4409,7 @@ module Aws::IoTWireless
       :stream,
       :gnss,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PositioningConfigStatus
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Proximity event configuration object for enabling and disabling relevant
@@ -4665,7 +4426,7 @@ module Aws::IoTWireless
       :sidewalk,
       :wireless_device_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Proximity resource type event configuration object for enabling or disabling
@@ -4677,7 +4438,7 @@ module Aws::IoTWireless
     class ProximityResourceTypeEventConfiguration < Struct.new(
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -4703,14 +4464,14 @@ module Aws::IoTWireless
       :solvers,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This operation is no longer supported.
     class PutPositionConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -4731,22 +4492,22 @@ module Aws::IoTWireless
       :resource_type,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourceLogLevelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetAllResourceLogLevelsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetAllResourceLogLevelsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -4761,12 +4522,12 @@ module Aws::IoTWireless
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetResourceLogLevelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource does not exist.</p>
@@ -4783,7 +4544,7 @@ module Aws::IoTWireless
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Semtech GNSS solver configuration.</p>
@@ -4797,7 +4558,7 @@ module Aws::IoTWireless
       :status,
       :fec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Semtech GNSS solver object.</p>
@@ -4819,7 +4580,7 @@ module Aws::IoTWireless
       :status,
       :fec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4836,7 +4597,7 @@ module Aws::IoTWireless
       :payload_data,
       :wireless_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -4845,7 +4606,7 @@ module Aws::IoTWireless
     class SendDataToMulticastGroupResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4867,7 +4628,7 @@ module Aws::IoTWireless
       :payload_data,
       :wireless_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -4876,7 +4637,7 @@ module Aws::IoTWireless
     class SendDataToWirelessDeviceResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a service profile.</p>
@@ -4894,7 +4655,7 @@ module Aws::IoTWireless
       :name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Session keys for ABP v1.1</p>
@@ -4908,7 +4669,7 @@ module Aws::IoTWireless
       :nwk_s_key,
       :app_s_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Session keys for ABP v1.1</p>
@@ -4930,7 +4691,7 @@ module Aws::IoTWireless
       :nwk_s_enc_key,
       :app_s_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Sidewalk account.</p>
@@ -4944,7 +4705,7 @@ module Aws::IoTWireless
       :amazon_id,
       :app_server_private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Sidewalk account.</p>
@@ -4962,13 +4723,13 @@ module Aws::IoTWireless
       :fingerprint,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk object for creating a device profile.</p>
     class SidewalkCreateDeviceProfile < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk object for creating a wireless device.</p>
@@ -4978,7 +4739,7 @@ module Aws::IoTWireless
     class SidewalkCreateWirelessDevice < Struct.new(
       :device_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk device object.</p>
@@ -5016,7 +4777,7 @@ module Aws::IoTWireless
       :certificate_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>MetaData for Sidewalk device.</p>
@@ -5038,7 +4799,7 @@ module Aws::IoTWireless
       :event,
       :device_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5050,7 +4811,7 @@ module Aws::IoTWireless
     class SidewalkEventNotificationConfigurations < Struct.new(
       :amazon_id_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets information about a Sidewalk device profile.</p>
@@ -5068,7 +4829,7 @@ module Aws::IoTWireless
       :qualification_status,
       :dak_certificate_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk-related information for devices in an import task that are being
@@ -5084,7 +4845,7 @@ module Aws::IoTWireless
       :device_creation_file_list,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk object used by list functions.</p>
@@ -5114,7 +4875,7 @@ module Aws::IoTWireless
       :device_profile_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk resource type event configuration object for enabling or disabling
@@ -5125,7 +4886,7 @@ module Aws::IoTWireless
     class SidewalkResourceTypeEventConfiguration < Struct.new(
       :wireless_device_event_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Sidewalk router.</p>
@@ -5144,7 +4905,7 @@ module Aws::IoTWireless
       :message_type,
       :ack_mode_retry_duration_secs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an import task created for an individual Sidewalk device.</p>
@@ -5155,7 +4916,7 @@ module Aws::IoTWireless
     class SidewalkSingleStartImportInfo < Struct.new(
       :sidewalk_manufacturing_sn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an import task created for bulk provisioning.</p>
@@ -5171,7 +4932,7 @@ module Aws::IoTWireless
       :device_creation_file,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk update.</p>
@@ -5181,7 +4942,7 @@ module Aws::IoTWireless
     class SidewalkUpdateAccount < Struct.new(
       :app_server_private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sidewalk object information for updating an import task.</p>
@@ -5192,13 +4953,7 @@ module Aws::IoTWireless
     class SidewalkUpdateImportInfo < Struct.new(
       :device_creation_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The certificate chain algorithm provided by sidewalk.</p>
-    module SigningAlg
-      Ed25519 = 'Ed25519'
-      P256r1 = 'P256r1'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5217,12 +4972,12 @@ module Aws::IoTWireless
       :query_string,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5241,12 +4996,12 @@ module Aws::IoTWireless
       :query_string,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5259,12 +5014,12 @@ module Aws::IoTWireless
       :id,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5277,12 +5032,12 @@ module Aws::IoTWireless
       :id,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartMulticastGroupSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -5316,7 +5071,7 @@ module Aws::IoTWireless
       :tags,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5329,7 +5084,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -5360,7 +5115,7 @@ module Aws::IoTWireless
       :tags,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5373,7 +5128,7 @@ module Aws::IoTWireless
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of summary metrics.</p>
@@ -5383,12 +5138,7 @@ module Aws::IoTWireless
     class SummaryMetricConfiguration < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SummaryMetricConfigurationStatus
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary metric query object.</p>
@@ -5418,7 +5168,7 @@ module Aws::IoTWireless
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the summary metrics aggregation operation.</p>
@@ -5468,24 +5218,7 @@ module Aws::IoTWireless
       :values,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Supported RfRegions</p>
-    module SupportedRfRegion
-      EU868 = 'EU868'
-      US915 = 'US915'
-      AU915 = 'AU915'
-      AS923_1 = 'AS923-1'
-      AS923_2 = 'AS923-2'
-      AS923_3 = 'AS923-3'
-      AS923_4 = 'AS923-4'
-      EU433 = 'EU433'
-      CN470 = 'CN470'
-      CN779 = 'CN779'
-      RU864 = 'RU864'
-      KR920 = 'KR920'
-      IN865 = 'IN865'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A simple label consisting of a customer-defined key-value pair</p>
@@ -5499,7 +5232,7 @@ module Aws::IoTWireless
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5513,12 +5246,12 @@ module Aws::IoTWireless
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TD-SCDMA local identification (local Id) information.</p>
@@ -5533,7 +5266,7 @@ module Aws::IoTWireless
       :uarfcn,
       :cell_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TD-SCDMA object for network measurement reports.</p>
@@ -5561,7 +5294,7 @@ module Aws::IoTWireless
       :rscp,
       :path_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TD-SCDMA object.</p>
@@ -5605,7 +5338,7 @@ module Aws::IoTWireless
       :path_loss,
       :tdscdma_nmr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5614,7 +5347,7 @@ module Aws::IoTWireless
     class TestWirelessDeviceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -5623,7 +5356,7 @@ module Aws::IoTWireless
     class TestWirelessDeviceResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because it exceeded the allowed API request rate.</p>
@@ -5632,7 +5365,7 @@ module Aws::IoTWireless
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because the resource can't have any more tags.</p>
@@ -5645,7 +5378,7 @@ module Aws::IoTWireless
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Trace content for your wireless devices, gateways, and multicast groups.</p>
@@ -5671,7 +5404,7 @@ module Aws::IoTWireless
       :log_level,
       :multicast_frame_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5684,12 +5417,12 @@ module Aws::IoTWireless
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ABP device object for LoRaWAN specification v1.0.x</p>
@@ -5699,7 +5432,7 @@ module Aws::IoTWireless
     class UpdateAbpV10X < Struct.new(
       :f_cnt_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ABP device object for LoRaWAN specification v1.1</p>
@@ -5709,7 +5442,7 @@ module Aws::IoTWireless
     class UpdateAbpV11 < Struct.new(
       :f_cnt_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5734,12 +5467,12 @@ module Aws::IoTWireless
       :description,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_registration_state
@@ -5769,12 +5502,12 @@ module Aws::IoTWireless
       :connection_status,
       :message_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEventConfigurationByResourceTypesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for updating the FPorts information.</p>
@@ -5789,7 +5522,7 @@ module Aws::IoTWireless
       :positioning,
       :applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5847,12 +5580,12 @@ module Aws::IoTWireless
       :fragment_interval_ms,
       :descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFuotaTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_log_level
@@ -5875,12 +5608,12 @@ module Aws::IoTWireless
       :wireless_device_log_options,
       :wireless_gateway_log_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLogLevelsByResourceTypesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_metric
@@ -5889,12 +5622,12 @@ module Aws::IoTWireless
     class UpdateMetricConfigurationRequest < Struct.new(
       :summary_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMetricConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5915,12 +5648,12 @@ module Aws::IoTWireless
       :description,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMulticastGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_name
@@ -5967,12 +5700,12 @@ module Aws::IoTWireless
       :multicast_groups_to_add,
       :multicast_groups_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNetworkAnalyzerConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sidewalk
@@ -5989,12 +5722,12 @@ module Aws::IoTWireless
       :partner_account_id,
       :partner_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePartnerAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -6013,14 +5746,14 @@ module Aws::IoTWireless
       :resource_type,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This operation is no longer supported.
     class UpdatePositionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -6059,12 +5792,12 @@ module Aws::IoTWireless
       :connection_status,
       :message_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceEventConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -6086,12 +5819,12 @@ module Aws::IoTWireless
       :resource_type,
       :geo_json_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourcePositionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6104,12 +5837,12 @@ module Aws::IoTWireless
       :id,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWirelessDeviceImportTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6143,12 +5876,12 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :positioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWirelessDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6182,12 +5915,12 @@ module Aws::IoTWireless
       :net_id_filters,
       :max_eirp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWirelessGatewayResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateWirelessGatewayTaskCreate object.</p>
@@ -6205,7 +5938,7 @@ module Aws::IoTWireless
       :update_data_role,
       :lo_ra_wan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateWirelessGatewayTaskEntry object.</p>
@@ -6223,7 +5956,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input did not meet the specified constraints.</p>
@@ -6232,7 +5965,7 @@ module Aws::IoTWireless
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WCDMA local identification (local ID) information.</p>
@@ -6246,7 +5979,7 @@ module Aws::IoTWireless
       :uarfcndl,
       :psc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network Measurement Reports.</p>
@@ -6273,7 +6006,7 @@ module Aws::IoTWireless
       :rscp,
       :path_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WCDMA.</p>
@@ -6312,7 +6045,7 @@ module Aws::IoTWireless
       :path_loss,
       :wcdma_nmr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Wi-Fi access point.</p>
@@ -6326,16 +6059,7 @@ module Aws::IoTWireless
       :mac_address,
       :rss,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The event for a log message, if the log message is tied to a wireless device.</p>
-    module WirelessDeviceEvent
-      Join = 'Join'
-      Rejoin = 'Rejoin'
-      Uplink_Data = 'Uplink_Data'
-      Downlink_Data = 'Downlink_Data'
-      Registration = 'Registration'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for a wireless device event and can be used to set log levels for a
@@ -6356,23 +6080,7 @@ module Aws::IoTWireless
       :event,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>
-    #             <code>FrameInfo</code> of your wireless device resources for the trace content. Use
-    #             FrameInfo to debug the communication between your LoRaWAN end devices and the network
-    #             server.</p>
-    module WirelessDeviceFrameInfo
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module WirelessDeviceIdType
-      WirelessDeviceId = 'WirelessDeviceId'
-      DevEui = 'DevEui'
-      ThingName = 'ThingName'
-      SidewalkManufacturingSn = 'SidewalkManufacturingSn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an import task for wireless devices.</p>
@@ -6428,7 +6136,7 @@ module Aws::IoTWireless
       :onboarded_imported_device_count,
       :failed_imported_device_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for wireless devices and can be used to set log levels for a specific
@@ -6449,14 +6157,7 @@ module Aws::IoTWireless
       :log_level,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WirelessDeviceSidewalkStatus
-      PROVISIONED = 'PROVISIONED'
-      REGISTERED = 'REGISTERED'
-      ACTIVATED = 'ACTIVATED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a wireless device's operation.</p>
@@ -6509,18 +6210,7 @@ module Aws::IoTWireless
       :multicast_device_status,
       :mc_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WirelessDeviceType
-      Sidewalk = 'Sidewalk'
-      LoRaWAN = 'LoRaWAN'
-    end
-
-    # <p>The event for a log message, if the log message is tied to a wireless gateway.</p>
-    module WirelessGatewayEvent
-      CUPS_Request = 'CUPS_Request'
-      Certificate = 'Certificate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for a wireless gateway event and can be used to set log levels for a
@@ -6539,13 +6229,7 @@ module Aws::IoTWireless
       :event,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WirelessGatewayIdType
-      GatewayEui = 'GatewayEui'
-      WirelessGatewayId = 'WirelessGatewayId'
-      ThingName = 'ThingName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log options for wireless gateways and can be used to set log levels for a specific
@@ -6566,12 +6250,7 @@ module Aws::IoTWireless
       :log_level,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WirelessGatewayServiceType
-      CUPS = 'CUPS'
-      LNS = 'LNS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a wireless gateway's operation.</p>
@@ -6604,25 +6283,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :last_uplink_received_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WirelessGatewayTaskDefinitionType
-      UPDATE = 'UPDATE'
-    end
-
-    module WirelessGatewayTaskStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FIRST_RETRY = 'FIRST_RETRY'
-      SECOND_RETRY = 'SECOND_RETRY'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    # <p>The wireless gateway type.</p>
-    module WirelessGatewayType
-      LoRaWAN = 'LoRaWAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WirelessMetadata object.</p>
@@ -6636,7 +6297,7 @@ module Aws::IoTWireless
       :lo_ra_wan,
       :sidewalk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

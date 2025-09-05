@@ -6,11 +6,6 @@ module Aws::CostExplorer
   # This module contains the types returned by client operations.
   module Types
 
-    module AccountScope
-      PAYER = 'PAYER'
-      LINKED = 'LINKED'
-    end
-
     # <p>Details about the analysis.</p>
     # @!attribute savings_plans_purchase_analysis_details
     #   <p>Details about the Savings Plans purchase analysis.</p>
@@ -18,7 +13,7 @@ module Aws::CostExplorer
     class AnalysisDetails < Struct.new(
       :savings_plans_purchase_analysis_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested analysis can't be found.</p>
@@ -27,13 +22,7 @@ module Aws::CostExplorer
     class AnalysisNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisStatus
-      SUCCEEDED = 'SUCCEEDED'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the analysis.</p>
@@ -67,12 +56,7 @@ module Aws::CostExplorer
       :analysis_id,
       :commitment_purchase_analysis_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisType
-      MAX_SAVINGS = 'MAX_SAVINGS'
-      CUSTOM_COMMITMENT = 'CUSTOM_COMMITMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unusual cost pattern. This consists of the detailed metadata and the current status
@@ -117,7 +101,7 @@ module Aws::CostExplorer
       :monitor_arn,
       :feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time period for an anomaly. </p>
@@ -131,13 +115,7 @@ module Aws::CostExplorer
       :start_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyFeedbackType
-      YES = 'YES'
-      NO = 'NO'
-      PLANNED_ACTIVITY = 'PLANNED_ACTIVITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object continuously inspects your account's cost data for anomalies. It's based
@@ -302,7 +280,7 @@ module Aws::CostExplorer
       :monitor_specification,
       :dimensional_value_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dimensional_value_count] = 0 unless options.key?(:dimensional_value_count)
@@ -321,7 +299,7 @@ module Aws::CostExplorer
       :max_score,
       :current_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_score] = 0 unless options.key?(:max_score)
@@ -435,18 +413,7 @@ module Aws::CostExplorer
       :subscription_name,
       :threshold_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalySubscriptionFrequency
-      DAILY = 'DAILY'
-      IMMEDIATE = 'IMMEDIATE'
-      WEEKLY = 'WEEKLY'
-    end
-
-    module ApproximationDimension
-      SERVICE = 'SERVICE'
-      RESOURCE = 'RESOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -457,7 +424,7 @@ module Aws::CostExplorer
     class BackfillLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested report expired. Update the date interval and try again.</p>
@@ -466,7 +433,7 @@ module Aws::CostExplorer
     class BillExpirationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the commitment purchase analysis.</p>
@@ -476,7 +443,7 @@ module Aws::CostExplorer
     class CommitmentPurchaseAnalysisConfiguration < Struct.new(
       :savings_plans_purchase_analysis_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains cost or usage metric values for comparing two time periods. Each value
@@ -501,13 +468,7 @@ module Aws::CostExplorer
       :difference,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Context
-      COST_AND_USAGE = 'COST_AND_USAGE'
-      RESERVATIONS = 'RESERVATIONS'
-      SAVINGS_PLANS = 'SAVINGS_PLANS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cost allocation tag structure. This includes detailed metadata for the
@@ -538,7 +499,7 @@ module Aws::CostExplorer
       :last_updated_date,
       :last_used_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -575,18 +536,7 @@ module Aws::CostExplorer
       :backfill_status,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostAllocationTagBackfillStatus
-      SUCCEEDED = 'SUCCEEDED'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
-    end
-
-    module CostAllocationTagStatus
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cost allocation tag status. The status of a key can either be active or inactive.
@@ -601,12 +551,7 @@ module Aws::CostExplorer
       :tag_key,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostAllocationTagType
-      AWS_GENERATED = 'AWSGenerated'
-      USER_DEFINED = 'UserDefined'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a comparison of cost and usage metrics between two time periods.</p>
@@ -741,7 +686,7 @@ module Aws::CostExplorer
       :cost_and_usage_selector,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of Cost Categories. This includes detailed metadata and the set of rules
@@ -789,7 +734,7 @@ module Aws::CostExplorer
       :processing_status,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you create or update a cost category, you can define the
@@ -813,12 +758,7 @@ module Aws::CostExplorer
       :dimension_name,
       :dimension_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostCategoryInheritedValueDimensionName
-      LINKED_ACCOUNT_NAME = 'LINKED_ACCOUNT_NAME'
-      TAG = 'TAG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of processing statuses for Cost Management products for a specific cost
@@ -833,7 +773,7 @@ module Aws::CostExplorer
       :component,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference to a Cost Category containing only enough information to identify the Cost
@@ -876,7 +816,7 @@ module Aws::CostExplorer
       :values,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_rules] = 0 unless options.key?(:number_of_rules)
@@ -923,23 +863,7 @@ module Aws::CostExplorer
       :inherited_value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostCategoryRuleType
-      REGULAR = 'REGULAR'
-      INHERITED_VALUE = 'INHERITED_VALUE'
-    end
-
-    # <p>The rule schema version in this particular Cost Category.</p>
-    module CostCategoryRuleVersion
-      CostCategoryExpressionV1 = 'CostCategoryExpression.v1'
-    end
-
-    module CostCategorySplitChargeMethod
-      FIXED = 'FIXED'
-      PROPORTIONAL = 'PROPORTIONAL'
-      EVEN = 'EVEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use the split charge rule to split the cost of one Cost Category value across several
@@ -973,7 +897,7 @@ module Aws::CostExplorer
       :method,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a split charge method. </p>
@@ -987,20 +911,7 @@ module Aws::CostExplorer
       :type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostCategorySplitChargeRuleParameterType
-      ALLOCATION_PERCENTAGES = 'ALLOCATION_PERCENTAGES'
-    end
-
-    module CostCategoryStatus
-      PROCESSING = 'PROCESSING'
-      APPLIED = 'APPLIED'
-    end
-
-    module CostCategoryStatusComponent
-      COST_EXPLORER = 'COST_EXPLORER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Cost Categories values used for filtering the costs.</p>
@@ -1028,7 +939,7 @@ module Aws::CostExplorer
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of cost drivers and their associated metrics for cost
@@ -1171,7 +1082,7 @@ module Aws::CostExplorer
       :metrics,
       :cost_drivers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents factors that contribute to cost variations between the baseline and
@@ -1196,7 +1107,7 @@ module Aws::CostExplorer
       :name,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of instance usage that a reservation covered.</p>
@@ -1214,7 +1125,7 @@ module Aws::CostExplorer
       :coverage_normalized_units,
       :coverage_cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reservation coverage for a specified period, in hours.</p>
@@ -1232,7 +1143,7 @@ module Aws::CostExplorer
       :groups,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How much it costs to run an instance.</p>
@@ -1242,7 +1153,7 @@ module Aws::CostExplorer
     class CoverageCost < Struct.new(
       :on_demand_cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How long a running instance either used a reservation or was On-Demand.</p>
@@ -1264,7 +1175,7 @@ module Aws::CostExplorer
       :total_running_hours,
       :coverage_hours_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of instance usage, in normalized units. You can use normalized units to see
@@ -1297,7 +1208,7 @@ module Aws::CostExplorer
       :total_running_normalized_units,
       :coverage_normalized_units_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_monitor
@@ -1342,7 +1253,7 @@ module Aws::CostExplorer
       :anomaly_monitor,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1351,7 +1262,7 @@ module Aws::CostExplorer
     class CreateAnomalyMonitorResponse < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_subscription
@@ -1396,7 +1307,7 @@ module Aws::CostExplorer
       :anomaly_subscription,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -1405,7 +1316,7 @@ module Aws::CostExplorer
     class CreateAnomalySubscriptionResponse < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1472,7 +1383,7 @@ module Aws::CostExplorer
       :split_charge_rules,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -1485,7 +1396,7 @@ module Aws::CostExplorer
       :cost_category_arn,
       :effective_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Context about the current instance.</p>
@@ -1538,7 +1449,7 @@ module Aws::CostExplorer
       :monthly_cost,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested data is unavailable.</p>
@@ -1547,7 +1458,7 @@ module Aws::CostExplorer
     class DataUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time period of the request. </p>
@@ -1566,7 +1477,7 @@ module Aws::CostExplorer
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1575,12 +1486,12 @@ module Aws::CostExplorer
     class DeleteAnomalyMonitorRequest < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalyMonitorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -1589,12 +1500,12 @@ module Aws::CostExplorer
     class DeleteAnomalySubscriptionRequest < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalySubscriptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -1603,7 +1514,7 @@ module Aws::CostExplorer
     class DeleteCostCategoryDefinitionRequest < Struct.new(
       :cost_category_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -1617,7 +1528,7 @@ module Aws::CostExplorer
       :cost_category_arn,
       :effective_end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -1630,7 +1541,7 @@ module Aws::CostExplorer
       :cost_category_arn,
       :effective_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category
@@ -1640,44 +1551,7 @@ module Aws::CostExplorer
     class DescribeCostCategoryDefinitionResponse < Struct.new(
       :cost_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Dimension
-      AZ = 'AZ'
-      INSTANCE_TYPE = 'INSTANCE_TYPE'
-      LINKED_ACCOUNT = 'LINKED_ACCOUNT'
-      LINKED_ACCOUNT_NAME = 'LINKED_ACCOUNT_NAME'
-      OPERATION = 'OPERATION'
-      PURCHASE_TYPE = 'PURCHASE_TYPE'
-      REGION = 'REGION'
-      SERVICE = 'SERVICE'
-      SERVICE_CODE = 'SERVICE_CODE'
-      USAGE_TYPE = 'USAGE_TYPE'
-      USAGE_TYPE_GROUP = 'USAGE_TYPE_GROUP'
-      RECORD_TYPE = 'RECORD_TYPE'
-      OPERATING_SYSTEM = 'OPERATING_SYSTEM'
-      TENANCY = 'TENANCY'
-      SCOPE = 'SCOPE'
-      PLATFORM = 'PLATFORM'
-      SUBSCRIPTION_ID = 'SUBSCRIPTION_ID'
-      LEGAL_ENTITY_NAME = 'LEGAL_ENTITY_NAME'
-      DEPLOYMENT_OPTION = 'DEPLOYMENT_OPTION'
-      DATABASE_ENGINE = 'DATABASE_ENGINE'
-      CACHE_ENGINE = 'CACHE_ENGINE'
-      INSTANCE_TYPE_FAMILY = 'INSTANCE_TYPE_FAMILY'
-      BILLING_ENTITY = 'BILLING_ENTITY'
-      RESERVATION_ID = 'RESERVATION_ID'
-      RESOURCE_ID = 'RESOURCE_ID'
-      RIGHTSIZING_TYPE = 'RIGHTSIZING_TYPE'
-      SAVINGS_PLANS_TYPE = 'SAVINGS_PLANS_TYPE'
-      SAVINGS_PLAN_ARN = 'SAVINGS_PLAN_ARN'
-      PAYMENT_OPTION = 'PAYMENT_OPTION'
-      AGREEMENT_END_DATE_TIME_AFTER = 'AGREEMENT_END_DATE_TIME_AFTER'
-      AGREEMENT_END_DATE_TIME_BEFORE = 'AGREEMENT_END_DATE_TIME_BEFORE'
-      INVOICING_ENTITY = 'INVOICING_ENTITY'
-      ANOMALY_TOTAL_IMPACT_ABSOLUTE = 'ANOMALY_TOTAL_IMPACT_ABSOLUTE'
-      ANOMALY_TOTAL_IMPACT_PERCENTAGE = 'ANOMALY_TOTAL_IMPACT_PERCENTAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata that you can use to filter and group your results. You can use
@@ -1712,7 +1586,7 @@ module Aws::CostExplorer
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of a specific type that you can use to filter and group your results. You
@@ -1727,7 +1601,7 @@ module Aws::CostExplorer
       :value,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field that contains a list of disk (local storage) metrics that are associated
@@ -1750,7 +1624,7 @@ module Aws::CostExplorer
       :disk_read_bytes_per_second,
       :disk_write_bytes_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DynamoDB reservations that Amazon Web Services recommends that you purchase.</p>
@@ -1764,7 +1638,7 @@ module Aws::CostExplorer
       :capacity_units,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EBS field that contains a list of EBS metrics that are associated with the current
@@ -1787,7 +1661,7 @@ module Aws::CostExplorer
       :ebs_read_bytes_per_second,
       :ebs_write_bytes_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Amazon EC2 reservations that Amazon Web Services recommends that you
@@ -1827,7 +1701,7 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
@@ -1877,7 +1751,7 @@ module Aws::CostExplorer
       :storage,
       :vcpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Utilization metrics for the instance. </p>
@@ -1911,7 +1785,7 @@ module Aws::CostExplorer
       :disk_resource_utilization,
       :network_resource_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EC2 hardware specifications that you want Amazon Web Services to provide
@@ -1923,7 +1797,7 @@ module Aws::CostExplorer
     class EC2Specification < Struct.new(
       :offering_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Amazon OpenSearch Service reservations that Amazon Web Services
@@ -1950,7 +1824,7 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
@@ -1987,21 +1861,13 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
         options[:size_flex_eligible] = false unless options.key?(:size_flex_eligible)
         super
       end
-    end
-
-    module ErrorCode
-      NO_USAGE_FOUND = 'NO_USAGE_FOUND'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      INVALID_SAVINGS_PLANS_TO_ADD = 'INVALID_SAVINGS_PLANS_TO_ADD'
-      INVALID_SAVINGS_PLANS_TO_EXCLUDE = 'INVALID_SAVINGS_PLANS_TO_EXCLUDE'
-      INVALID_ACCOUNT_ID = 'INVALID_ACCOUNT_ID'
     end
 
     # <p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>
@@ -2152,26 +2018,7 @@ module Aws::CostExplorer
       :tags,
       :cost_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FindingReasonCode
-      CPU_OVER_PROVISIONED = 'CPU_OVER_PROVISIONED'
-      CPU_UNDER_PROVISIONED = 'CPU_UNDER_PROVISIONED'
-      MEMORY_OVER_PROVISIONED = 'MEMORY_OVER_PROVISIONED'
-      MEMORY_UNDER_PROVISIONED = 'MEMORY_UNDER_PROVISIONED'
-      EBS_THROUGHPUT_OVER_PROVISIONED = 'EBS_THROUGHPUT_OVER_PROVISIONED'
-      EBS_THROUGHPUT_UNDER_PROVISIONED = 'EBS_THROUGHPUT_UNDER_PROVISIONED'
-      EBS_IOPS_OVER_PROVISIONED = 'EBS_IOPS_OVER_PROVISIONED'
-      EBS_IOPS_UNDER_PROVISIONED = 'EBS_IOPS_UNDER_PROVISIONED'
-      NETWORK_BANDWIDTH_OVER_PROVISIONED = 'NETWORK_BANDWIDTH_OVER_PROVISIONED'
-      NETWORK_BANDWIDTH_UNDER_PROVISIONED = 'NETWORK_BANDWIDTH_UNDER_PROVISIONED'
-      NETWORK_PPS_OVER_PROVISIONED = 'NETWORK_PPS_OVER_PROVISIONED'
-      NETWORK_PPS_UNDER_PROVISIONED = 'NETWORK_PPS_UNDER_PROVISIONED'
-      DISK_IOPS_OVER_PROVISIONED = 'DISK_IOPS_OVER_PROVISIONED'
-      DISK_IOPS_UNDER_PROVISIONED = 'DISK_IOPS_UNDER_PROVISIONED'
-      DISK_THROUGHPUT_OVER_PROVISIONED = 'DISK_THROUGHPUT_OVER_PROVISIONED'
-      DISK_THROUGHPUT_UNDER_PROVISIONED = 'DISK_THROUGHPUT_UNDER_PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The forecast that's created for your query.</p>
@@ -2193,7 +2040,7 @@ module Aws::CostExplorer
       :prediction_interval_lower_bound,
       :prediction_interval_upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to generate a recommendation or analysis is already in progress.</p>
@@ -2202,13 +2049,7 @@ module Aws::CostExplorer
     class GenerationExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GenerationStatus
-      SUCCEEDED = 'SUCCEEDED'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the Savings Plans recommendation generation.</p>
@@ -2236,7 +2077,7 @@ module Aws::CostExplorer
       :generation_completion_time,
       :estimated_completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -2270,7 +2111,7 @@ module Aws::CostExplorer
       :next_page_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomalies
@@ -2284,7 +2125,7 @@ module Aws::CostExplorer
       :anomalies,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn_list
@@ -2302,7 +2143,7 @@ module Aws::CostExplorer
       :next_page_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_monitors
@@ -2317,7 +2158,7 @@ module Aws::CostExplorer
       :anomaly_monitors,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn_list
@@ -2339,7 +2180,7 @@ module Aws::CostExplorer
       :next_page_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_subscriptions
@@ -2354,7 +2195,7 @@ module Aws::CostExplorer
       :anomaly_subscriptions,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute granularity
@@ -2374,7 +2215,7 @@ module Aws::CostExplorer
       :services,
       :approximation_dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -2391,7 +2232,7 @@ module Aws::CostExplorer
       :total_records,
       :lookback_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_records] = 0 unless options.key?(:total_records)
@@ -2405,7 +2246,7 @@ module Aws::CostExplorer
     class GetCommitmentPurchaseAnalysisRequest < Struct.new(
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute estimated_completion_time
@@ -2442,7 +2283,7 @@ module Aws::CostExplorer
       :analysis_details,
       :commitment_purchase_analysis_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_view_arn
@@ -2612,7 +2453,7 @@ module Aws::CostExplorer
       :max_results,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_and_usage_comparisons
@@ -2633,7 +2474,7 @@ module Aws::CostExplorer
       :total_cost_and_usage,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -2711,7 +2552,7 @@ module Aws::CostExplorer
       :billing_view_arn,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_page_token
@@ -2735,7 +2576,7 @@ module Aws::CostExplorer
       :results_by_time,
       :dimension_value_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -2808,7 +2649,7 @@ module Aws::CostExplorer
       :billing_view_arn,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_page_token
@@ -2832,7 +2673,7 @@ module Aws::CostExplorer
       :results_by_time,
       :dimension_value_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_string
@@ -3046,7 +2887,7 @@ module Aws::CostExplorer
       :max_results,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_page_token
@@ -3074,7 +2915,7 @@ module Aws::CostExplorer
       :return_size,
       :total_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_view_arn
@@ -3245,7 +3086,7 @@ module Aws::CostExplorer
       :max_results,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_comparison_drivers
@@ -3259,7 +3100,7 @@ module Aws::CostExplorer
       :cost_comparison_drivers,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -3432,7 +3273,7 @@ module Aws::CostExplorer
       :billing_view_arn,
       :prediction_interval_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total
@@ -3446,7 +3287,7 @@ module Aws::CostExplorer
       :total,
       :forecast_results_by_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_string
@@ -3841,7 +3682,7 @@ module Aws::CostExplorer
       :max_results,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dimension_values
@@ -3992,7 +3833,7 @@ module Aws::CostExplorer
       :total_size,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can use the following request parameters to query for how much of your instance
@@ -4185,7 +4026,7 @@ module Aws::CostExplorer
       :sort_by,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coverages_by_time
@@ -4203,7 +4044,7 @@ module Aws::CostExplorer
       :total,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -4376,7 +4217,7 @@ module Aws::CostExplorer
       :page_size,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -4394,7 +4235,7 @@ module Aws::CostExplorer
       :recommendations,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -4578,7 +4419,7 @@ module Aws::CostExplorer
       :next_page_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute utilizations_by_time
@@ -4596,7 +4437,7 @@ module Aws::CostExplorer
       :total,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4748,7 +4589,7 @@ module Aws::CostExplorer
       :page_size,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -4777,7 +4618,7 @@ module Aws::CostExplorer
       :next_page_token,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_detail_id
@@ -4786,7 +4627,7 @@ module Aws::CostExplorer
     class GetSavingsPlanPurchaseRecommendationDetailsRequest < Struct.new(
       :recommendation_detail_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_detail_id
@@ -4799,7 +4640,7 @@ module Aws::CostExplorer
       :recommendation_detail_id,
       :recommendation_detail_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -4913,7 +4754,7 @@ module Aws::CostExplorer
       :max_results,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plans_coverages
@@ -4927,7 +4768,7 @@ module Aws::CostExplorer
       :savings_plans_coverages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plans_type
@@ -4977,7 +4818,7 @@ module Aws::CostExplorer
       :lookback_period_in_days,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -4996,7 +4837,7 @@ module Aws::CostExplorer
       :savings_plans_purchase_recommendation,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -5100,7 +4941,7 @@ module Aws::CostExplorer
       :max_results,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plans_utilization_details
@@ -5123,7 +4964,7 @@ module Aws::CostExplorer
       :time_period,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -5215,7 +5056,7 @@ module Aws::CostExplorer
       :filter,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plans_utilizations_by_time
@@ -5230,7 +5071,7 @@ module Aws::CostExplorer
       :savings_plans_utilizations_by_time,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_string
@@ -5442,7 +5283,7 @@ module Aws::CostExplorer
       :max_results,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_page_token
@@ -5464,7 +5305,7 @@ module Aws::CostExplorer
       :return_size,
       :total_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_period
@@ -5637,7 +5478,7 @@ module Aws::CostExplorer
       :billing_view_arn,
       :prediction_interval_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total
@@ -5651,13 +5492,7 @@ module Aws::CostExplorer
       :total,
       :forecast_results_by_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Granularity
-      DAILY = 'DAILY'
-      MONTHLY = 'MONTHLY'
-      HOURLY = 'HOURLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One level of grouped data in the results.</p>
@@ -5671,7 +5506,7 @@ module Aws::CostExplorer
       :keys,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a group when you specify a group by criteria or in the response to a query
@@ -5686,13 +5521,7 @@ module Aws::CostExplorer
       :type,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupDefinitionType
-      DIMENSION = 'DIMENSION'
-      TAG = 'TAG'
-      COST_CATEGORY = 'COST_CATEGORY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dollar value of the anomaly. </p>
@@ -5724,7 +5553,7 @@ module Aws::CostExplorer
       :total_expected_spend,
       :total_impact_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_impact] = 0 unless options.key?(:max_impact)
@@ -5766,7 +5595,7 @@ module Aws::CostExplorer
       :es_instance_details,
       :memory_db_instance_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination token is invalid. Try again without a pagination token.</p>
@@ -5775,7 +5604,7 @@ module Aws::CostExplorer
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You made too many calls in a short period of time. Try again later.</p>
@@ -5784,7 +5613,7 @@ module Aws::CostExplorer
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_status
@@ -5805,7 +5634,7 @@ module Aws::CostExplorer
       :page_size,
       :analysis_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_summary_list
@@ -5818,7 +5647,7 @@ module Aws::CostExplorer
       :analysis_summary_list,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5835,7 +5664,7 @@ module Aws::CostExplorer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backfill_requests
@@ -5852,7 +5681,7 @@ module Aws::CostExplorer
       :backfill_requests,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -5883,7 +5712,7 @@ module Aws::CostExplorer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_allocation_tags
@@ -5897,7 +5726,7 @@ module Aws::CostExplorer
       :cost_allocation_tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_on
@@ -5915,7 +5744,7 @@ module Aws::CostExplorer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_references
@@ -5930,7 +5759,7 @@ module Aws::CostExplorer
       :cost_category_references,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_status
@@ -5951,7 +5780,7 @@ module Aws::CostExplorer
       :page_size,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_summary_list
@@ -5964,7 +5793,7 @@ module Aws::CostExplorer
       :generation_summary_list,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5974,7 +5803,7 @@ module Aws::CostExplorer
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -5983,24 +5812,7 @@ module Aws::CostExplorer
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LookbackPeriodInDays
-      SEVEN_DAYS = 'SEVEN_DAYS'
-      THIRTY_DAYS = 'THIRTY_DAYS'
-      SIXTY_DAYS = 'SIXTY_DAYS'
-    end
-
-    module MatchOption
-      EQUALS = 'EQUALS'
-      ABSENT = 'ABSENT'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
-      CASE_SENSITIVE = 'CASE_SENSITIVE'
-      CASE_INSENSITIVE = 'CASE_INSENSITIVE'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the MemoryDB reservations that Amazon Web Services recommends that you
@@ -6027,23 +5839,13 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
         options[:size_flex_eligible] = false unless options.key?(:size_flex_eligible)
         super
       end
-    end
-
-    module Metric
-      BLENDED_COST = 'BLENDED_COST'
-      UNBLENDED_COST = 'UNBLENDED_COST'
-      AMORTIZED_COST = 'AMORTIZED_COST'
-      NET_UNBLENDED_COST = 'NET_UNBLENDED_COST'
-      NET_AMORTIZED_COST = 'NET_AMORTIZED_COST'
-      USAGE_QUANTITY = 'USAGE_QUANTITY'
-      NORMALIZED_USAGE_AMOUNT = 'NORMALIZED_USAGE_AMOUNT'
     end
 
     # <p>The aggregated value for a metric.</p>
@@ -6057,7 +5859,7 @@ module Aws::CostExplorer
       :amount,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for the modification recommendation.</p>
@@ -6068,16 +5870,7 @@ module Aws::CostExplorer
     class ModifyRecommendationDetail < Struct.new(
       :target_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitorDimension
-      SERVICE = 'SERVICE'
-    end
-
-    module MonitorType
-      DIMENSIONAL = 'DIMENSIONAL'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network field that contains a list of network metrics that are associated with the
@@ -6101,38 +5894,7 @@ module Aws::CostExplorer
       :network_packets_in_per_second,
       :network_packets_out_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumericOperator
-      EQUAL = 'EQUAL'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      BETWEEN = 'BETWEEN'
-    end
-
-    module OfferingClass
-      STANDARD = 'STANDARD'
-      CONVERTIBLE = 'CONVERTIBLE'
-    end
-
-    module PaymentOption
-      NO_UPFRONT = 'NO_UPFRONT'
-      PARTIAL_UPFRONT = 'PARTIAL_UPFRONT'
-      ALL_UPFRONT = 'ALL_UPFRONT'
-      LIGHT_UTILIZATION = 'LIGHT_UTILIZATION'
-      MEDIUM_UTILIZATION = 'MEDIUM_UTILIZATION'
-      HEAVY_UTILIZATION = 'HEAVY_UTILIZATION'
-    end
-
-    module PlatformDifference
-      HYPERVISOR = 'HYPERVISOR'
-      NETWORK_INTERFACE = 'NETWORK_INTERFACE'
-      STORAGE_INTERFACE = 'STORAGE_INTERFACE'
-      INSTANCE_STORE_AVAILABILITY = 'INSTANCE_STORE_AVAILABILITY'
-      VIRTUALIZATION_TYPE = 'VIRTUALIZATION_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_id
@@ -6146,7 +5908,7 @@ module Aws::CostExplorer
       :anomaly_id,
       :feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_id
@@ -6155,7 +5917,7 @@ module Aws::CostExplorer
     class ProvideAnomalyFeedbackResponse < Struct.new(
       :anomaly_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Amazon RDS reservations that Amazon Web Services recommends that you
@@ -6199,7 +5961,7 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
@@ -6344,7 +6106,7 @@ module Aws::CostExplorer
       :estimated_average_coverage,
       :metrics_over_lookback_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the hourly metrics for the given recommendation over the lookback period.
@@ -6373,12 +6135,7 @@ module Aws::CostExplorer
       :estimated_coverage,
       :estimated_new_commitment_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationTarget
-      SAME_INSTANCE_FAMILY = 'SAME_INSTANCE_FAMILY'
-      CROSS_INSTANCE_FAMILY = 'CROSS_INSTANCE_FAMILY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Amazon Redshift reservations that Amazon Web Services recommends that
@@ -6405,7 +6162,7 @@ module Aws::CostExplorer
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_generation] = false unless options.key?(:current_generation)
@@ -6421,7 +6178,7 @@ module Aws::CostExplorer
     class RequestChangedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated numbers for your reservation usage.</p>
@@ -6507,7 +6264,7 @@ module Aws::CostExplorer
       :realized_savings,
       :unrealized_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of reservations that share a set of attributes.</p>
@@ -6521,7 +6278,7 @@ module Aws::CostExplorer
       :attributes,
       :coverage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific reservation that Amazon Web Services recommends for purchase.</p>
@@ -6559,7 +6316,7 @@ module Aws::CostExplorer
       :recommendation_details,
       :recommendation_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about your recommended reservation purchase.</p>
@@ -6698,7 +6455,7 @@ module Aws::CostExplorer
       :maximum_number_of_capacity_units_used_per_hour,
       :average_number_of_capacity_units_used_per_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a recommendation, such as the timestamp for when Amazon Web Services
@@ -6717,7 +6474,7 @@ module Aws::CostExplorer
       :generation_timestamp,
       :additional_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary about this recommendation, such as the currency code, the amount that
@@ -6739,7 +6496,7 @@ module Aws::CostExplorer
       :total_estimated_monthly_savings_percentage,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of reservations that share a set of attributes.</p>
@@ -6761,7 +6518,7 @@ module Aws::CostExplorer
       :attributes,
       :utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the reservations that Amazon Web Services recommends that you
@@ -6773,7 +6530,7 @@ module Aws::CostExplorer
     class ReservedCapacityDetails < Struct.new(
       :dynamo_db_capacity_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for the resource.</p>
@@ -6783,7 +6540,7 @@ module Aws::CostExplorer
     class ResourceDetails < Struct.new(
       :ec2_resource_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified ARN in the request doesn't exist. </p>
@@ -6795,7 +6552,7 @@ module Aws::CostExplorer
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value. </p>
@@ -6819,7 +6576,7 @@ module Aws::CostExplorer
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource utilization of current resource. </p>
@@ -6829,7 +6586,7 @@ module Aws::CostExplorer
     class ResourceUtilization < Struct.new(
       :ec2_resource_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result that's associated with a time period.</p>
@@ -6851,7 +6608,7 @@ module Aws::CostExplorer
       :groups,
       :estimated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated] = false unless options.key?(:estimated)
@@ -6888,7 +6645,7 @@ module Aws::CostExplorer
       :terminate_recommendation_detail,
       :finding_reason_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can use <code>RightsizingRecommendationConfiguration</code> to customize
@@ -6910,7 +6667,7 @@ module Aws::CostExplorer
       :recommendation_target,
       :benefits_considered,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:benefits_considered] = false unless options.key?(:benefits_considered)
@@ -6938,7 +6695,7 @@ module Aws::CostExplorer
       :lookback_period_in_days,
       :additional_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of rightsizing recommendations </p>
@@ -6961,12 +6718,7 @@ module Aws::CostExplorer
       :savings_currency_code,
       :savings_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RightsizingType
-      TERMINATE = 'TERMINATE'
-      MODIFY = 'MODIFY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The combination of Amazon Web Services service, linked account, linked account name,
@@ -6999,7 +6751,7 @@ module Aws::CostExplorer
       :usage_type,
       :impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dollar value of the root cause.</p>
@@ -7010,7 +6762,7 @@ module Aws::CostExplorer
     class RootCauseImpact < Struct.new(
       :contribution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:contribution] = 0 unless options.key?(:contribution)
@@ -7050,7 +6802,7 @@ module Aws::CostExplorer
       :savings_plans_commitment,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amortized amount of Savings Plans purchased in a specific account during a
@@ -7072,7 +6824,7 @@ module Aws::CostExplorer
       :amortized_upfront_commitment,
       :total_amortized_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of Savings Plans eligible usage that's covered by Savings Plans. All
@@ -7091,7 +6843,7 @@ module Aws::CostExplorer
       :coverage,
       :time_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific coverage percentage, On-Demand costs, and spend covered by Savings Plans, and
@@ -7116,14 +6868,7 @@ module Aws::CostExplorer
       :total_cost,
       :coverage_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsPlansDataType
-      ATTRIBUTES = 'ATTRIBUTES'
-      UTILIZATION = 'UTILIZATION'
-      AMORTIZED_COMMITMENT = 'AMORTIZED_COMMITMENT'
-      SAVINGS = 'SAVINGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attribute details on a specific Savings Plan.</p>
@@ -7141,7 +6886,7 @@ module Aws::CostExplorer
       :instance_family,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Savings Plans purchase analysis.</p>
@@ -7171,7 +6916,7 @@ module Aws::CostExplorer
       :savings_plans_to_exclude,
       :look_back_time_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Savings Plans purchase analysis.</p>
@@ -7271,7 +7016,7 @@ module Aws::CostExplorer
       :additional_metadata,
       :metrics_over_lookback_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains your request parameters, Savings Plan Recommendations Summary, and
@@ -7311,7 +7056,7 @@ module Aws::CostExplorer
       :savings_plans_purchase_recommendation_details,
       :savings_plans_purchase_recommendation_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for your recommended Savings Plans.</p>
@@ -7398,7 +7143,7 @@ module Aws::CostExplorer
       :current_average_hourly_on_demand_spend,
       :recommendation_detail_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about your Savings Plans Purchase Recommendations.</p>
@@ -7416,7 +7161,7 @@ module Aws::CostExplorer
       :generation_timestamp,
       :additional_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary metrics for your Savings Plans Purchase Recommendations.</p>
@@ -7478,7 +7223,7 @@ module Aws::CostExplorer
       :estimated_monthly_savings_amount,
       :estimated_on_demand_cost_with_current_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of savings that you're accumulating, against the public On-Demand rate of
@@ -7495,7 +7240,7 @@ module Aws::CostExplorer
       :net_savings,
       :on_demand_cost_equivalent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The measurement of how well you're using your existing Savings Plans.</p>
@@ -7521,7 +7266,7 @@ module Aws::CostExplorer
       :unused_commitment,
       :utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated utilization metrics for your Savings Plans usage.</p>
@@ -7543,7 +7288,7 @@ module Aws::CostExplorer
       :savings,
       :amortized_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of Savings Plans utilization (in hours).</p>
@@ -7569,7 +7314,7 @@ module Aws::CostExplorer
       :savings,
       :amortized_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single daily or monthly Savings Plans utilization rate and details for your account.
@@ -7601,7 +7346,7 @@ module Aws::CostExplorer
       :savings,
       :amortized_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You've reached the limit on the number of resources you can create, or exceeded the
@@ -7611,7 +7356,7 @@ module Aws::CostExplorer
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Hardware specifications for the service that you want recommendations for.</p>
@@ -7622,7 +7367,7 @@ module Aws::CostExplorer
     class ServiceSpecification < Struct.new(
       :ec2_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for how to sort the data.</p>
@@ -7636,12 +7381,7 @@ module Aws::CostExplorer
       :key,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commitment_purchase_analysis_configuration
@@ -7650,7 +7390,7 @@ module Aws::CostExplorer
     class StartCommitmentPurchaseAnalysisRequest < Struct.new(
       :commitment_purchase_analysis_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -7667,7 +7407,7 @@ module Aws::CostExplorer
       :analysis_started_time,
       :estimated_completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backfill_from
@@ -7677,7 +7417,7 @@ module Aws::CostExplorer
     class StartCostAllocationTagBackfillRequest < Struct.new(
       :backfill_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backfill_request
@@ -7688,12 +7428,12 @@ module Aws::CostExplorer
     class StartCostAllocationTagBackfillResponse < Struct.new(
       :backfill_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartSavingsPlansPurchaseRecommendationGenerationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_id
@@ -7710,7 +7450,7 @@ module Aws::CostExplorer
       :generation_started_time,
       :estimated_completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recipient of <code>AnomalySubscription</code> notifications. </p>
@@ -7729,23 +7469,7 @@ module Aws::CostExplorer
       :type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriberStatus
-      CONFIRMED = 'CONFIRMED'
-      DECLINED = 'DECLINED'
-    end
-
-    module SubscriberType
-      EMAIL = 'EMAIL'
-      SNS = 'SNS'
-    end
-
-    module SupportedSavingsPlansType
-      COMPUTE_SP = 'COMPUTE_SP'
-      EC2_INSTANCE_SP = 'EC2_INSTANCE_SP'
-      SAGEMAKER_SP = 'SAGEMAKER_SP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7789,12 +7513,12 @@ module Aws::CostExplorer
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values that are available for a tag.</p>
@@ -7822,7 +7546,7 @@ module Aws::CostExplorer
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on recommended instance.</p>
@@ -7859,17 +7583,12 @@ module Aws::CostExplorer
       :expected_resource_utilization,
       :platform_differences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_target_instance] = false unless options.key?(:default_target_instance)
         super
       end
-    end
-
-    module TermInYears
-      ONE_YEAR = 'ONE_YEAR'
-      THREE_YEARS = 'THREE_YEARS'
     end
 
     # <p>Details on termination recommendation. </p>
@@ -7884,7 +7603,7 @@ module Aws::CostExplorer
       :estimated_monthly_savings,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Can occur if you specify a number of tags for a resource greater than the maximum 50
@@ -7897,7 +7616,7 @@ module Aws::CostExplorer
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters cost anomalies based on the total impact. </p>
@@ -7915,7 +7634,7 @@ module Aws::CostExplorer
       :start_value,
       :end_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_value] = 0 unless options.key?(:start_value)
@@ -7930,7 +7649,7 @@ module Aws::CostExplorer
     class UnknownMonitorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cost anomaly subscription does not exist for the account. </p>
@@ -7939,7 +7658,7 @@ module Aws::CostExplorer
     class UnknownSubscriptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cost Explorer was unable to identify the usage unit. Provide
@@ -7950,7 +7669,7 @@ module Aws::CostExplorer
     class UnresolvableUsageUnitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7968,12 +7687,12 @@ module Aws::CostExplorer
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -7986,7 +7705,7 @@ module Aws::CostExplorer
       :monitor_arn,
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -7995,7 +7714,7 @@ module Aws::CostExplorer
     class UpdateAnomalyMonitorResponse < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -8071,7 +7790,7 @@ module Aws::CostExplorer
       :subscription_name,
       :threshold_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -8080,7 +7799,7 @@ module Aws::CostExplorer
     class UpdateAnomalySubscriptionResponse < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gives a detailed description of the result of an action. It's on each cost allocation
@@ -8099,7 +7818,7 @@ module Aws::CostExplorer
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_allocation_tags_status
@@ -8109,7 +7828,7 @@ module Aws::CostExplorer
     class UpdateCostAllocationTagsStatusRequest < Struct.new(
       :cost_allocation_tags_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -8120,7 +7839,7 @@ module Aws::CostExplorer
     class UpdateCostAllocationTagsStatusResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -8153,7 +7872,7 @@ module Aws::CostExplorer
       :default_value,
       :split_charge_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cost_category_arn
@@ -8166,7 +7885,7 @@ module Aws::CostExplorer
       :cost_category_arn,
       :effective_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of utilization, in hours.</p>
@@ -8184,7 +7903,7 @@ module Aws::CostExplorer
       :groups,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

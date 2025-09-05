@@ -13,12 +13,12 @@ module Aws::Polly
     class DeleteLexiconInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLexiconOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -51,7 +51,7 @@ module Aws::Polly
       :include_additional_language_codes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voices
@@ -66,14 +66,7 @@ module Aws::Polly
       :voices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Engine
-      STANDARD = 'standard'
-      NEURAL = 'neural'
-      LONG_FORM = 'long-form'
-      GENERATIVE = 'generative'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This engine is not compatible with the voice that you have designated.
@@ -84,12 +77,7 @@ module Aws::Polly
     class EngineNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Gender
-      Female = 'Female'
-      Male = 'Male'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -98,7 +86,7 @@ module Aws::Polly
     class GetLexiconInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lexicon
@@ -114,7 +102,7 @@ module Aws::Polly
       :lexicon,
       :lexicon_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -123,7 +111,7 @@ module Aws::Polly
     class GetSpeechSynthesisTaskInput < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute synthesis_task
@@ -134,7 +122,7 @@ module Aws::Polly
     class GetSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Polly can't find the specified lexicon. Verify that the lexicon's
@@ -144,7 +132,7 @@ module Aws::Polly
     class InvalidLexiconException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The NextToken is invalid. Verify that it's spelled correctly, and
@@ -154,7 +142,7 @@ module Aws::Polly
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Amazon S3 bucket name is invalid. Please check your input
@@ -164,7 +152,7 @@ module Aws::Polly
     class InvalidS3BucketException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Amazon S3 key prefix is invalid. Please provide a valid
@@ -174,7 +162,7 @@ module Aws::Polly
     class InvalidS3KeyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified sample rate is not valid.</p>
@@ -183,7 +171,7 @@ module Aws::Polly
     class InvalidSampleRateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided SNS topic ARN is invalid. Please provide a valid SNS
@@ -193,7 +181,7 @@ module Aws::Polly
     class InvalidSnsTopicArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SSML you provided is invalid. Verify the SSML syntax, spelling
@@ -203,7 +191,7 @@ module Aws::Polly
     class InvalidSsmlException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Task ID is not valid. Please provide a valid Task ID and
@@ -213,52 +201,7 @@ module Aws::Polly
     class InvalidTaskIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageCode
-      arb = 'arb'
-      cmn_CN = 'cmn-CN'
-      cy_GB = 'cy-GB'
-      da_DK = 'da-DK'
-      de_DE = 'de-DE'
-      en_AU = 'en-AU'
-      en_GB = 'en-GB'
-      en_GB_WLS = 'en-GB-WLS'
-      en_IN = 'en-IN'
-      en_US = 'en-US'
-      es_ES = 'es-ES'
-      es_MX = 'es-MX'
-      es_US = 'es-US'
-      fr_CA = 'fr-CA'
-      fr_FR = 'fr-FR'
-      is_IS = 'is-IS'
-      it_IT = 'it-IT'
-      ja_JP = 'ja-JP'
-      hi_IN = 'hi-IN'
-      ko_KR = 'ko-KR'
-      nb_NO = 'nb-NO'
-      nl_NL = 'nl-NL'
-      pl_PL = 'pl-PL'
-      pt_BR = 'pt-BR'
-      pt_PT = 'pt-PT'
-      ro_RO = 'ro-RO'
-      ru_RU = 'ru-RU'
-      sv_SE = 'sv-SE'
-      tr_TR = 'tr-TR'
-      en_NZ = 'en-NZ'
-      en_ZA = 'en-ZA'
-      ca_ES = 'ca-ES'
-      de_AT = 'de-AT'
-      yue_CN = 'yue-CN'
-      ar_AE = 'ar-AE'
-      fi_FI = 'fi-FI'
-      en_IE = 'en-IE'
-      nl_BE = 'nl-BE'
-      fr_BE = 'fr-BE'
-      cs_CZ = 'cs-CZ'
-      de_CH = 'de-CH'
-      en_SG = 'en-SG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The language specified is not currently supported by Amazon Polly in this
@@ -268,7 +211,7 @@ module Aws::Polly
     class LanguageNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides lexicon name and lexicon content in string format. For
@@ -285,7 +228,7 @@ module Aws::Polly
       :content,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata describing the lexicon such as the number of
@@ -319,7 +262,7 @@ module Aws::Polly
       :lexemes_count,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:lexemes_count] = 0 unless options.key?(:lexemes_count)
@@ -339,7 +282,7 @@ module Aws::Polly
       :name,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Polly can't find the specified lexicon. This could be caused by a
@@ -352,7 +295,7 @@ module Aws::Polly
     class LexiconNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum size of the specified lexicon would be exceeded by this
@@ -362,7 +305,7 @@ module Aws::Polly
     class LexiconSizeExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -373,7 +316,7 @@ module Aws::Polly
     class ListLexiconsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lexicons
@@ -388,7 +331,7 @@ module Aws::Polly
       :lexicons,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -408,7 +351,7 @@ module Aws::Polly
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -425,7 +368,7 @@ module Aws::Polly
       :next_token,
       :synthesis_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Speech marks are not supported for the <code>OutputFormat</code>
@@ -436,7 +379,7 @@ module Aws::Polly
     class MarksNotSupportedForFormatException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum size of the lexeme would be exceeded by this
@@ -446,7 +389,7 @@ module Aws::Polly
     class MaxLexemeLengthExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of lexicons would be exceeded by this
@@ -456,14 +399,7 @@ module Aws::Polly
     class MaxLexiconsNumberExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutputFormat
-      JSON = 'json'
-      MP3 = 'mp3'
-      OGG_VORBIS = 'ogg_vorbis'
-      PCM = 'pcm'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -478,12 +414,12 @@ module Aws::Polly
       :name,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutLexiconOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unknown condition has caused a service failure.</p>
@@ -492,14 +428,7 @@ module Aws::Polly
     class ServiceFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpeechMarkType
-      SENTENCE = 'sentence'
-      SSML = 'ssml'
-      VISEME = 'viseme'
-      WORD = 'word'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SSML speech marks are not supported for plain text-type
@@ -509,7 +438,7 @@ module Aws::Polly
     class SsmlMarksNotSupportedForTextTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -585,7 +514,7 @@ module Aws::Polly
       :text_type,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute synthesis_task
@@ -595,7 +524,7 @@ module Aws::Polly
     class StartSpeechSynthesisTaskOutput < Struct.new(
       :synthesis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SynthesisTask object that provides information about a speech
@@ -685,7 +614,7 @@ module Aws::Polly
       :voice_id,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:request_characters] = 0 unless options.key?(:request_characters)
@@ -700,7 +629,7 @@ module Aws::Polly
     class SynthesisTaskNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -777,7 +706,7 @@ module Aws::Polly
       :text_type,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audio_stream
@@ -819,20 +748,13 @@ module Aws::Polly
       :content_type,
       :request_characters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:audio_stream] = Base64.strict_decode64('') unless options.key?(:audio_stream)
         options[:request_characters] = 0 unless options.key?(:request_characters)
         super
       end
-    end
-
-    module TaskStatus
-      SCHEDULED = 'scheduled'
-      IN_PROGRESS = 'inProgress'
-      COMPLETED = 'completed'
-      FAILED = 'failed'
     end
 
     # <p>The value of the "Text" parameter is longer than the accepted
@@ -847,12 +769,7 @@ module Aws::Polly
     class TextLengthExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TextType
-      SSML = 'ssml'
-      TEXT = 'text'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The alphabet specified by the lexicon is not a supported alphabet.
@@ -862,7 +779,7 @@ module Aws::Polly
     class UnsupportedPlsAlphabetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The language specified in the lexicon is unsupported. For a list of
@@ -872,7 +789,7 @@ module Aws::Polly
     class UnsupportedPlsLanguageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Description of the voice.</p>
@@ -915,110 +832,7 @@ module Aws::Polly
       :additional_language_codes,
       :supported_engines,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoiceId
-      Aditi = 'Aditi'
-      Amy = 'Amy'
-      Astrid = 'Astrid'
-      Bianca = 'Bianca'
-      Brian = 'Brian'
-      Camila = 'Camila'
-      Carla = 'Carla'
-      Carmen = 'Carmen'
-      Celine = 'Celine'
-      Chantal = 'Chantal'
-      Conchita = 'Conchita'
-      Cristiano = 'Cristiano'
-      Dora = 'Dora'
-      Emma = 'Emma'
-      Enrique = 'Enrique'
-      Ewa = 'Ewa'
-      Filiz = 'Filiz'
-      Gabrielle = 'Gabrielle'
-      Geraint = 'Geraint'
-      Giorgio = 'Giorgio'
-      Gwyneth = 'Gwyneth'
-      Hans = 'Hans'
-      Ines = 'Ines'
-      Ivy = 'Ivy'
-      Jacek = 'Jacek'
-      Jan = 'Jan'
-      Joanna = 'Joanna'
-      Joey = 'Joey'
-      Justin = 'Justin'
-      Karl = 'Karl'
-      Kendra = 'Kendra'
-      Kevin = 'Kevin'
-      Kimberly = 'Kimberly'
-      Lea = 'Lea'
-      Liv = 'Liv'
-      Lotte = 'Lotte'
-      Lucia = 'Lucia'
-      Lupe = 'Lupe'
-      Mads = 'Mads'
-      Maja = 'Maja'
-      Marlene = 'Marlene'
-      Mathieu = 'Mathieu'
-      Matthew = 'Matthew'
-      Maxim = 'Maxim'
-      Mia = 'Mia'
-      Miguel = 'Miguel'
-      Mizuki = 'Mizuki'
-      Naja = 'Naja'
-      Nicole = 'Nicole'
-      Olivia = 'Olivia'
-      Penelope = 'Penelope'
-      Raveena = 'Raveena'
-      Ricardo = 'Ricardo'
-      Ruben = 'Ruben'
-      Russell = 'Russell'
-      Salli = 'Salli'
-      Seoyeon = 'Seoyeon'
-      Takumi = 'Takumi'
-      Tatyana = 'Tatyana'
-      Vicki = 'Vicki'
-      Vitoria = 'Vitoria'
-      Zeina = 'Zeina'
-      Zhiyu = 'Zhiyu'
-      Aria = 'Aria'
-      Ayanda = 'Ayanda'
-      Arlet = 'Arlet'
-      Hannah = 'Hannah'
-      Arthur = 'Arthur'
-      Daniel = 'Daniel'
-      Liam = 'Liam'
-      Pedro = 'Pedro'
-      Kajal = 'Kajal'
-      Hiujin = 'Hiujin'
-      Laura = 'Laura'
-      Elin = 'Elin'
-      Ida = 'Ida'
-      Suvi = 'Suvi'
-      Ola = 'Ola'
-      Hala = 'Hala'
-      Andres = 'Andres'
-      Sergio = 'Sergio'
-      Remi = 'Remi'
-      Adriano = 'Adriano'
-      Thiago = 'Thiago'
-      Ruth = 'Ruth'
-      Stephen = 'Stephen'
-      Kazuha = 'Kazuha'
-      Tomoko = 'Tomoko'
-      Niamh = 'Niamh'
-      Sofie = 'Sofie'
-      Lisa = 'Lisa'
-      Isabelle = 'Isabelle'
-      Zayd = 'Zayd'
-      Danielle = 'Danielle'
-      Gregory = 'Gregory'
-      Burcu = 'Burcu'
-      Jitka = 'Jitka'
-      Sabrina = 'Sabrina'
-      Jasmine = 'Jasmine'
-      Jihye = 'Jihye'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -22,7 +22,7 @@ module Aws::QConnect
       :self_service_ai_agent_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ManualSearchAIAgentConfiguration < AIAgentConfiguration; end
       class AnswerRecommendationAIAgentConfiguration < AIAgentConfiguration; end
@@ -37,7 +37,7 @@ module Aws::QConnect
     class AIAgentConfigurationData < Struct.new(
       :ai_agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data for the AI Agent.</p>
@@ -95,7 +95,7 @@ module Aws::QConnect
       :origin,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the AI Agent.</p>
@@ -153,7 +153,7 @@ module Aws::QConnect
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the AI Agent version.</p>
@@ -167,7 +167,7 @@ module Aws::QConnect
       :ai_agent_summary,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about how to handle harmful content.</p>
@@ -177,7 +177,7 @@ module Aws::QConnect
     class AIGuardrailContentPolicyConfig < Struct.new(
       :filters_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy configuration details for the AI Guardrail's contextual grounding policy.</p>
@@ -187,7 +187,7 @@ module Aws::QConnect
     class AIGuardrailContextualGroundingPolicyConfig < Struct.new(
       :filters_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data for the AI Guardrail</p>
@@ -261,7 +261,7 @@ module Aws::QConnect
       :status,
       :modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about PII entities and regular expressions to configure for the AI Guardrail.</p>
@@ -275,7 +275,7 @@ module Aws::QConnect
       :pii_entities_config,
       :regexes_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the AI Guardrail.</p>
@@ -321,7 +321,7 @@ module Aws::QConnect
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about topics that the AI Guardrail should identify and deny.</p>
@@ -331,7 +331,7 @@ module Aws::QConnect
     class AIGuardrailTopicPolicyConfig < Struct.new(
       :topics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the AI Guardrail version.</p>
@@ -345,7 +345,7 @@ module Aws::QConnect
       :ai_guardrail_summary,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the word policy to configured for the AI Guardrail.</p>
@@ -359,7 +359,7 @@ module Aws::QConnect
       :words_config,
       :managed_word_lists_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data for the AI Prompt</p>
@@ -429,7 +429,7 @@ module Aws::QConnect
       :origin,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the AI Prompt.</p>
@@ -495,7 +495,7 @@ module Aws::QConnect
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A typed union that specifies the configuration for a prompt template based on its type.</p>
@@ -506,7 +506,7 @@ module Aws::QConnect
       :text_full_ai_prompt_edit_template_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TextFullAIPromptEditTemplateConfiguration < AIPromptTemplateConfiguration; end
       class Unknown < AIPromptTemplateConfiguration; end
@@ -523,7 +523,7 @@ module Aws::QConnect
       :ai_prompt_summary,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -532,7 +532,7 @@ module Aws::QConnect
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -549,7 +549,7 @@ module Aws::QConnect
       :message_template_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template_arn
@@ -566,7 +566,7 @@ module Aws::QConnect
       :message_template_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an agent.</p>
@@ -580,7 +580,7 @@ module Aws::QConnect
       :first_name,
       :last_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Content association data for a <a href="https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html">step-by-step guide</a>.</p>
@@ -590,7 +590,7 @@ module Aws::QConnect
     class AmazonConnectGuideAssociationData < Struct.new(
       :flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the <code>ANSWER_RECOMMENDATION</code> AI Agent type.</p>
@@ -620,7 +620,7 @@ module Aws::QConnect
       :association_configurations,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for Amazon AppIntegrations to automatically ingest content.</p>
@@ -634,7 +634,7 @@ module Aws::QConnect
       :app_integration_arn,
       :object_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the assistant association.</p>
@@ -668,7 +668,7 @@ module Aws::QConnect
       :association_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data that is input into Amazon Q in Connect as a result of the assistant association.</p>
@@ -679,7 +679,7 @@ module Aws::QConnect
       :knowledge_base_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class KnowledgeBaseId < AssistantAssociationInputData; end
       class Unknown < AssistantAssociationInputData; end
@@ -693,7 +693,7 @@ module Aws::QConnect
       :knowledge_base_association,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class KnowledgeBaseAssociation < AssistantAssociationOutputData; end
       class Unknown < AssistantAssociationOutputData; end
@@ -730,7 +730,7 @@ module Aws::QConnect
       :association_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capability configuration for an Amazon Q in Connect assistant. </p>
@@ -740,7 +740,7 @@ module Aws::QConnect
     class AssistantCapabilityConfiguration < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assistant data.</p>
@@ -790,7 +790,7 @@ module Aws::QConnect
       :capability_configuration,
       :ai_agent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information for the Amazon Q in Connect assistant integration.</p>
@@ -800,7 +800,7 @@ module Aws::QConnect
     class AssistantIntegrationConfiguration < Struct.new(
       :topic_integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the assistant.</p>
@@ -850,7 +850,7 @@ module Aws::QConnect
       :capability_configuration,
       :ai_agent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an Amazon Q in Connect Assistant Association.</p>
@@ -868,7 +868,7 @@ module Aws::QConnect
       :association_type,
       :association_configuration_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A typed union of the data of the configuration for an Amazon Q in Connect Assistant Association.</p>
@@ -879,7 +879,7 @@ module Aws::QConnect
       :knowledge_base_association_configuration_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class KnowledgeBaseAssociationConfigurationData < AssociationConfigurationData; end
       class Unknown < AssociationConfigurationData; end
@@ -896,7 +896,7 @@ module Aws::QConnect
       :model_arn,
       :parsing_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.</p>
@@ -918,7 +918,7 @@ module Aws::QConnect
       :hierarchical_chunking_configuration,
       :semantic_chunking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about where the text with a citation begins and ends in the generated output.</p>
@@ -932,7 +932,7 @@ module Aws::QConnect
       :begin_offset_inclusive,
       :end_offset_exclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:begin_offset_inclusive] = 0 unless options.key?(:begin_offset_inclusive)
@@ -949,7 +949,7 @@ module Aws::QConnect
       :connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ConnectConfiguration < Configuration; end
       class Unknown < Configuration; end
@@ -961,7 +961,7 @@ module Aws::QConnect
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information of the Amazon Connect data source.</p>
@@ -971,7 +971,7 @@ module Aws::QConnect
     class ConnectConfiguration < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contents of a content association.</p>
@@ -982,7 +982,7 @@ module Aws::QConnect
       :amazon_connect_guide_association,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AmazonConnectGuideAssociation < ContentAssociationContents; end
       class Unknown < ContentAssociationContents; end
@@ -1027,7 +1027,7 @@ module Aws::QConnect
       :association_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a content association.</p>
@@ -1069,7 +1069,7 @@ module Aws::QConnect
       :association_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the content.</p>
@@ -1131,7 +1131,7 @@ module Aws::QConnect
       :url,
       :url_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the content data.</p>
@@ -1145,7 +1145,7 @@ module Aws::QConnect
       :text_data,
       :ranking_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the feedback.</p>
@@ -1156,7 +1156,7 @@ module Aws::QConnect
       :generative_content_feedback_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GenerativeContentFeedbackData < ContentFeedbackData; end
       class Unknown < ContentFeedbackData; end
@@ -1189,7 +1189,7 @@ module Aws::QConnect
       :source_url,
       :reference_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the content.</p>
@@ -1239,7 +1239,7 @@ module Aws::QConnect
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conversation context to include in SendMessage.</p>
@@ -1249,7 +1249,7 @@ module Aws::QConnect
     class ConversationContext < Struct.new(
       :self_service_conversation_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conversation state associated to a message.</p>
@@ -1263,7 +1263,7 @@ module Aws::QConnect
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1300,7 +1300,7 @@ module Aws::QConnect
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent
@@ -1309,7 +1309,7 @@ module Aws::QConnect
     class CreateAIAgentResponse < Struct.new(
       :ai_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -1330,7 +1330,7 @@ module Aws::QConnect
       :modified_time,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent
@@ -1343,7 +1343,7 @@ module Aws::QConnect
       :ai_agent,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1400,7 +1400,7 @@ module Aws::QConnect
       :contextual_grounding_policy_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail
@@ -1409,7 +1409,7 @@ module Aws::QConnect
     class CreateAIGuardrailResponse < Struct.new(
       :ai_guardrail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -1430,7 +1430,7 @@ module Aws::QConnect
       :modified_time,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail
@@ -1443,7 +1443,7 @@ module Aws::QConnect
       :ai_guardrail,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1492,7 +1492,7 @@ module Aws::QConnect
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt
@@ -1501,7 +1501,7 @@ module Aws::QConnect
     class CreateAIPromptResponse < Struct.new(
       :ai_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -1522,7 +1522,7 @@ module Aws::QConnect
       :modified_time,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt
@@ -1535,7 +1535,7 @@ module Aws::QConnect
       :ai_prompt,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -1560,7 +1560,7 @@ module Aws::QConnect
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_association
@@ -1569,7 +1569,7 @@ module Aws::QConnect
     class CreateAssistantAssociationOutput < Struct.new(
       :assistant_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1598,7 +1598,7 @@ module Aws::QConnect
       :tags,
       :server_side_encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant
@@ -1607,7 +1607,7 @@ module Aws::QConnect
     class CreateAssistantOutput < Struct.new(
       :assistant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1636,7 +1636,7 @@ module Aws::QConnect
       :association,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_association
@@ -1645,7 +1645,7 @@ module Aws::QConnect
     class CreateContentAssociationResponse < Struct.new(
       :content_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1682,7 +1682,7 @@ module Aws::QConnect
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -1691,7 +1691,7 @@ module Aws::QConnect
     class CreateContentOutput < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1732,7 +1732,7 @@ module Aws::QConnect
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -1741,7 +1741,7 @@ module Aws::QConnect
     class CreateKnowledgeBaseOutput < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1770,7 +1770,7 @@ module Aws::QConnect
       :body,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment
@@ -1779,7 +1779,7 @@ module Aws::QConnect
     class CreateMessageTemplateAttachmentResponse < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1824,7 +1824,7 @@ module Aws::QConnect
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template
@@ -1833,7 +1833,7 @@ module Aws::QConnect
     class CreateMessageTemplateResponse < Struct.new(
       :message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1850,7 +1850,7 @@ module Aws::QConnect
       :message_template_id,
       :message_template_content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template
@@ -1859,7 +1859,7 @@ module Aws::QConnect
     class CreateMessageTemplateVersionResponse < Struct.new(
       :message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -1912,7 +1912,7 @@ module Aws::QConnect
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_response
@@ -1921,7 +1921,7 @@ module Aws::QConnect
     class CreateQuickResponseResponse < Struct.new(
       :quick_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1954,7 +1954,7 @@ module Aws::QConnect
       :tag_filter,
       :ai_agent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session
@@ -1963,7 +1963,7 @@ module Aws::QConnect
     class CreateSessionOutput < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The customer profile attributes that are used with the message template.</p>
@@ -2201,7 +2201,7 @@ module Aws::QConnect
       :billing_state,
       :custom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the data.</p>
@@ -2228,7 +2228,7 @@ module Aws::QConnect
       :generative_chunk_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ContentData < DataDetails; end
       class GenerativeData < DataDetails; end
@@ -2250,7 +2250,7 @@ module Aws::QConnect
       :generative_reference,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ContentReference < DataReference; end
       class GenerativeReference < DataReference; end
@@ -2268,7 +2268,7 @@ module Aws::QConnect
       :reference,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2285,7 +2285,7 @@ module Aws::QConnect
       :message_template_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template_arn
@@ -2302,7 +2302,7 @@ module Aws::QConnect
       :message_template_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2315,12 +2315,12 @@ module Aws::QConnect
       :assistant_id,
       :ai_agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIAgentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2337,12 +2337,12 @@ module Aws::QConnect
       :ai_agent_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIAgentVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2355,12 +2355,12 @@ module Aws::QConnect
       :assistant_id,
       :ai_guardrail_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIGuardrailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2377,12 +2377,12 @@ module Aws::QConnect
       :ai_guardrail_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIGuardrailVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2395,12 +2395,12 @@ module Aws::QConnect
       :assistant_id,
       :ai_prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIPromptResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2417,12 +2417,12 @@ module Aws::QConnect
       :ai_prompt_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAIPromptVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_association_id
@@ -2435,12 +2435,12 @@ module Aws::QConnect
       :assistant_association_id,
       :assistant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssistantAssociationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2449,12 +2449,12 @@ module Aws::QConnect
     class DeleteAssistantInput < Struct.new(
       :assistant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssistantOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2471,12 +2471,12 @@ module Aws::QConnect
       :content_id,
       :content_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContentAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2489,12 +2489,12 @@ module Aws::QConnect
       :knowledge_base_id,
       :content_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2507,12 +2507,12 @@ module Aws::QConnect
       :knowledge_base_id,
       :import_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImportJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2521,12 +2521,12 @@ module Aws::QConnect
     class DeleteKnowledgeBaseInput < Struct.new(
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKnowledgeBaseOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2543,12 +2543,12 @@ module Aws::QConnect
       :message_template_id,
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMessageTemplateAttachmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2561,12 +2561,12 @@ module Aws::QConnect
       :knowledge_base_id,
       :message_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMessageTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2579,12 +2579,12 @@ module Aws::QConnect
       :knowledge_base_id,
       :quick_response_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQuickResponseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document.</p>
@@ -2602,7 +2602,7 @@ module Aws::QConnect
       :title,
       :excerpt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text of the document.</p>
@@ -2616,7 +2616,7 @@ module Aws::QConnect
       :text,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The email header to include in email messages.</p>
@@ -2630,7 +2630,7 @@ module Aws::QConnect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of the message template that applies to the email channel subtype.</p>
@@ -2648,7 +2648,7 @@ module Aws::QConnect
       :body,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The body to use in email messages.</p>
@@ -2662,7 +2662,7 @@ module Aws::QConnect
       :plain_text,
       :html,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The extended data of a message template.</p>
@@ -2748,7 +2748,7 @@ module Aws::QConnect
       :message_template_content_sha256,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information of the external data source.</p>
@@ -2762,7 +2762,7 @@ module Aws::QConnect
       :source,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A search filter.</p>
@@ -2780,7 +2780,7 @@ module Aws::QConnect
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations for when you choose fixed-size chunking. If you set the <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>
@@ -2794,7 +2794,7 @@ module Aws::QConnect
       :max_tokens,
       :overlap_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the generative chunk data.</p>
@@ -2812,7 +2812,7 @@ module Aws::QConnect
       :references,
       :next_chunk_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The feedback information for a generative target type.</p>
@@ -2822,7 +2822,7 @@ module Aws::QConnect
     class GenerativeContentFeedbackData < Struct.new(
       :relevance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about generative data.</p>
@@ -2840,7 +2840,7 @@ module Aws::QConnect
       :references,
       :ranking_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reference information about generative content.</p>
@@ -2854,7 +2854,7 @@ module Aws::QConnect
       :model_id,
       :generation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2867,7 +2867,7 @@ module Aws::QConnect
       :assistant_id,
       :ai_agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent
@@ -2880,7 +2880,7 @@ module Aws::QConnect
       :ai_agent,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2893,7 +2893,7 @@ module Aws::QConnect
       :assistant_id,
       :ai_guardrail_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail
@@ -2906,7 +2906,7 @@ module Aws::QConnect
       :ai_guardrail,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2919,7 +2919,7 @@ module Aws::QConnect
       :assistant_id,
       :ai_prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt
@@ -2932,7 +2932,7 @@ module Aws::QConnect
       :ai_prompt,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_association_id
@@ -2945,7 +2945,7 @@ module Aws::QConnect
       :assistant_association_id,
       :assistant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_association
@@ -2954,7 +2954,7 @@ module Aws::QConnect
     class GetAssistantAssociationOutput < Struct.new(
       :assistant_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -2963,7 +2963,7 @@ module Aws::QConnect
     class GetAssistantInput < Struct.new(
       :assistant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant
@@ -2972,7 +2972,7 @@ module Aws::QConnect
     class GetAssistantOutput < Struct.new(
       :assistant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -2989,7 +2989,7 @@ module Aws::QConnect
       :content_id,
       :content_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_association
@@ -2998,7 +2998,7 @@ module Aws::QConnect
     class GetContentAssociationResponse < Struct.new(
       :content_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_id
@@ -3011,7 +3011,7 @@ module Aws::QConnect
       :content_id,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -3020,7 +3020,7 @@ module Aws::QConnect
     class GetContentOutput < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_id
@@ -3033,7 +3033,7 @@ module Aws::QConnect
       :content_id,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_summary
@@ -3042,7 +3042,7 @@ module Aws::QConnect
     class GetContentSummaryOutput < Struct.new(
       :content_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_id
@@ -3055,7 +3055,7 @@ module Aws::QConnect
       :import_job_id,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job
@@ -3064,7 +3064,7 @@ module Aws::QConnect
     class GetImportJobResponse < Struct.new(
       :import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -3073,7 +3073,7 @@ module Aws::QConnect
     class GetKnowledgeBaseInput < Struct.new(
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -3082,7 +3082,7 @@ module Aws::QConnect
     class GetKnowledgeBaseOutput < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template_id
@@ -3095,7 +3095,7 @@ module Aws::QConnect
       :message_template_id,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template
@@ -3104,7 +3104,7 @@ module Aws::QConnect
     class GetMessageTemplateResponse < Struct.new(
       :message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3121,7 +3121,7 @@ module Aws::QConnect
       :session_id,
       :next_message_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -3150,7 +3150,7 @@ module Aws::QConnect
       :next_message_token,
       :conversation_session_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_response_id
@@ -3163,7 +3163,7 @@ module Aws::QConnect
       :quick_response_id,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_response
@@ -3172,7 +3172,7 @@ module Aws::QConnect
     class GetQuickResponseResponse < Struct.new(
       :quick_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3197,7 +3197,7 @@ module Aws::QConnect
       :wait_time_seconds,
       :next_chunk_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendations
@@ -3210,7 +3210,7 @@ module Aws::QConnect
       :recommendations,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3223,7 +3223,7 @@ module Aws::QConnect
       :assistant_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session
@@ -3232,7 +3232,7 @@ module Aws::QConnect
     class GetSessionOutput < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information of the grouping of Amazon Q in Connect users.</p>
@@ -3246,7 +3246,7 @@ module Aws::QConnect
       :criteria,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filter strengths for harmful content. AI Guardrail's support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p> <ul> <li> <p> <b>Hate</b>: Describes input prompts and model responses that discriminate, criticize, insult, denounce, or dehumanize a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p> </li> <li> <p> <b>Insults</b>: Describes input prompts and model responses that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p> </li> <li> <p> <b>Sexual</b>: Describes input prompts and model responses that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p> </li> <li> <p> <b>Violence</b>: Describes input prompts and model responses that includes glorification of, or threats to inflict physical pain, hurt, or injury toward a person, group, or thing.</p> </li> </ul> <p>Content filtering depends on the confidence classification of user inputs and FM responses across each of the four harmful categories. All input and output statements are classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each harmful category. For example, if a statement is classified as <i>Hate</i> with HIGH confidence, the likelihood of the statement representing hateful content is high. A single statement can be classified across multiple categories with varying confidence levels. For example, a single statement can be classified as <i>Hate</i> with HIGH confidence, <i> Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p>
@@ -3264,7 +3264,7 @@ module Aws::QConnect
       :input_strength,
       :output_strength,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter configuration details for the AI Guardrail's contextual grounding filter.</p>
@@ -3278,7 +3278,7 @@ module Aws::QConnect
       :type,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:threshold] = 0 unless options.key?(:threshold)
@@ -3293,7 +3293,7 @@ module Aws::QConnect
     class GuardrailManagedWordsConfig < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PII entity to configure for the AI Guardrail.</p>
@@ -3307,7 +3307,7 @@ module Aws::QConnect
       :type,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The regular expression to configure for the AI Guardrail.</p>
@@ -3329,7 +3329,7 @@ module Aws::QConnect
       :pattern,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about topics for the AI Guardrail to identify and deny.</p>
@@ -3351,7 +3351,7 @@ module Aws::QConnect
       :examples,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word to configure for the AI Guardrail.</p>
@@ -3361,7 +3361,7 @@ module Aws::QConnect
     class GuardrailWordConfig < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for hierarchical document chunking for a data source. Hierarchical chunking splits documents into layers of chunks where the first layer contains large chunks, and the second layer contains smaller chunks derived from the first layer.</p>
@@ -3375,7 +3375,7 @@ module Aws::QConnect
       :level_configurations,
       :overlap_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Token settings for each layer.</p>
@@ -3385,7 +3385,7 @@ module Aws::QConnect
     class HierarchicalChunkingLevelConfiguration < Struct.new(
       :max_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Offset specification to describe highlighting of document excerpts for rendering search results and recommendations.</p>
@@ -3399,7 +3399,7 @@ module Aws::QConnect
       :begin_offset_inclusive,
       :end_offset_exclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:begin_offset_inclusive] = 0 unless options.key?(:begin_offset_inclusive)
@@ -3463,7 +3463,7 @@ module Aws::QConnect
       :metadata,
       :external_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the import job.</p>
@@ -3509,7 +3509,7 @@ module Aws::QConnect
       :metadata,
       :external_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the detected intent.</p>
@@ -3523,7 +3523,7 @@ module Aws::QConnect
       :intent,
       :intent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Q intent.</p>
@@ -3533,7 +3533,7 @@ module Aws::QConnect
     class IntentInputData < Struct.new(
       :intent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data of the configuration for a <code>KNOWLEDGE_BASE</code> type Amazon Q in Connect Assistant Association.</p>
@@ -3551,7 +3551,7 @@ module Aws::QConnect
       :max_results,
       :override_knowledge_base_search_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Association information about the knowledge base.</p>
@@ -3565,7 +3565,7 @@ module Aws::QConnect
       :knowledge_base_id,
       :knowledge_base_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the knowledge base.</p>
@@ -3627,7 +3627,7 @@ module Aws::QConnect
       :ingestion_status,
       :ingestion_failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the knowledge base.</p>
@@ -3677,7 +3677,7 @@ module Aws::QConnect
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3702,7 +3702,7 @@ module Aws::QConnect
       :max_results,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent_version_summaries
@@ -3715,7 +3715,7 @@ module Aws::QConnect
       :ai_agent_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3736,7 +3736,7 @@ module Aws::QConnect
       :max_results,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent_summaries
@@ -3749,7 +3749,7 @@ module Aws::QConnect
       :ai_agent_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3770,7 +3770,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail_version_summaries
@@ -3783,7 +3783,7 @@ module Aws::QConnect
       :ai_guardrail_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3800,7 +3800,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail_summaries
@@ -3813,7 +3813,7 @@ module Aws::QConnect
       :ai_guardrail_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3838,7 +3838,7 @@ module Aws::QConnect
       :max_results,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt_version_summaries
@@ -3851,7 +3851,7 @@ module Aws::QConnect
       :ai_prompt_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -3872,7 +3872,7 @@ module Aws::QConnect
       :max_results,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt_summaries
@@ -3885,7 +3885,7 @@ module Aws::QConnect
       :ai_prompt_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3902,7 +3902,7 @@ module Aws::QConnect
       :max_results,
       :assistant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_association_summaries
@@ -3915,7 +3915,7 @@ module Aws::QConnect
       :assistant_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3928,7 +3928,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_summaries
@@ -3941,7 +3941,7 @@ module Aws::QConnect
       :assistant_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3962,7 +3962,7 @@ module Aws::QConnect
       :knowledge_base_id,
       :content_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_association_summaries
@@ -3975,7 +3975,7 @@ module Aws::QConnect
       :content_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3992,7 +3992,7 @@ module Aws::QConnect
       :max_results,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_summaries
@@ -4005,7 +4005,7 @@ module Aws::QConnect
       :content_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4022,7 +4022,7 @@ module Aws::QConnect
       :max_results,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_summaries
@@ -4035,7 +4035,7 @@ module Aws::QConnect
       :import_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4048,7 +4048,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_summaries
@@ -4061,7 +4061,7 @@ module Aws::QConnect
       :knowledge_base_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -4082,7 +4082,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template_version_summaries
@@ -4095,7 +4095,7 @@ module Aws::QConnect
       :message_template_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4112,7 +4112,7 @@ module Aws::QConnect
       :max_results,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template_summaries
@@ -4125,7 +4125,7 @@ module Aws::QConnect
       :message_template_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -4146,7 +4146,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute messages
@@ -4159,7 +4159,7 @@ module Aws::QConnect
       :messages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4176,7 +4176,7 @@ module Aws::QConnect
       :max_results,
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_response_summaries
@@ -4189,7 +4189,7 @@ module Aws::QConnect
       :quick_response_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4198,7 +4198,7 @@ module Aws::QConnect
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4207,7 +4207,7 @@ module Aws::QConnect
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source configuration for managed resources.</p>
@@ -4218,7 +4218,7 @@ module Aws::QConnect
       :web_crawler_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class WebCrawlerConfiguration < ManagedSourceConfiguration; end
       class Unknown < ManagedSourceConfiguration; end
@@ -4243,7 +4243,7 @@ module Aws::QConnect
       :association_configurations,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_amazon-q-connect_SendMessage.html">SendMessage</a> request.</p>
@@ -4253,7 +4253,7 @@ module Aws::QConnect
     class MessageConfiguration < Struct.new(
       :generate_filler_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message data.</p>
@@ -4264,7 +4264,7 @@ module Aws::QConnect
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < MessageData; end
       class Unknown < MessageData; end
@@ -4277,7 +4277,7 @@ module Aws::QConnect
     class MessageInput < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message output.</p>
@@ -4299,7 +4299,7 @@ module Aws::QConnect
       :participant,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the message template attachment.</p>
@@ -4329,7 +4329,7 @@ module Aws::QConnect
       :url_expiry,
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes that are used with the message template.</p>
@@ -4351,7 +4351,7 @@ module Aws::QConnect
       :customer_profile_attributes,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container of the message template body.</p>
@@ -4362,7 +4362,7 @@ module Aws::QConnect
       :content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Content < MessageTemplateBodyContentProvider; end
       class Unknown < MessageTemplateBodyContentProvider; end
@@ -4380,7 +4380,7 @@ module Aws::QConnect
       :sms,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Email < MessageTemplateContentProvider; end
       class Sms < MessageTemplateContentProvider; end
@@ -4458,7 +4458,7 @@ module Aws::QConnect
       :message_template_content_sha256,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message template fields to filter the message template query results by. The following is the list of supported field names:</p> <ul> <li> <p>name</p> </li> <li> <p>description</p> </li> <li> <p>channel</p> </li> <li> <p>channelSubtype</p> </li> <li> <p>language</p> </li> <li> <p>qualifier</p> </li> <li> <p>createdTime</p> </li> <li> <p>lastModifiedTime</p> </li> <li> <p>lastModifiedBy</p> </li> <li> <p>groupingConfiguration.criteria</p> </li> <li> <p>groupingConfiguration.values</p> </li> </ul>
@@ -4480,7 +4480,7 @@ module Aws::QConnect
       :operator,
       :include_no_existence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message template fields to order the message template query results by. The following is the list of supported field names:</p> <ul> <li> <p>name</p> </li> <li> <p>description</p> </li> <li> <p>channel</p> </li> <li> <p>channelSubtype</p> </li> <li> <p>language</p> </li> <li> <p>qualifier</p> </li> <li> <p>createdTime</p> </li> <li> <p>lastModifiedTime</p> </li> <li> <p>lastModifiedBy</p> </li> <li> <p>groupingConfiguration.criteria</p> </li> <li> <p>groupingConfiguration.values</p> </li> </ul>
@@ -4494,7 +4494,7 @@ module Aws::QConnect
       :name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message template fields to query message templates by. The following is the list of supported field names:</p> <ul> <li> <p>name</p> </li> <li> <p>description</p> </li> </ul>
@@ -4520,7 +4520,7 @@ module Aws::QConnect
       :allow_fuzziness,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search expression of the message template.</p>
@@ -4538,7 +4538,7 @@ module Aws::QConnect
       :filters,
       :order_on_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of message template search.</p>
@@ -4604,7 +4604,7 @@ module Aws::QConnect
       :language,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the message template.</p>
@@ -4658,7 +4658,7 @@ module Aws::QConnect
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the message template version.</p>
@@ -4696,7 +4696,7 @@ module Aws::QConnect
       :is_active,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred when creating a recommendation.</p>
@@ -4710,7 +4710,7 @@ module Aws::QConnect
       :recommendation_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -4727,7 +4727,7 @@ module Aws::QConnect
       :session_id,
       :recommendation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_ids
@@ -4740,7 +4740,7 @@ module Aws::QConnect
       :recommendation_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>
@@ -4755,7 +4755,7 @@ module Aws::QConnect
       :tag_condition,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AndConditions < OrCondition; end
       class TagCondition < OrCondition; end
@@ -4773,7 +4773,7 @@ module Aws::QConnect
       :parsing_strategy,
       :bedrock_foundation_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Instructions for interpreting the contents of a document.</p>
@@ -4783,7 +4783,7 @@ module Aws::QConnect
     class ParsingPrompt < Struct.new(
       :parsing_prompt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided <code>revisionId</code> does not match, indicating the content has been modified since it was last read.</p>
@@ -4792,7 +4792,7 @@ module Aws::QConnect
     class PreconditionFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -4813,7 +4813,7 @@ module Aws::QConnect
       :target_type,
       :content_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -4838,7 +4838,7 @@ module Aws::QConnect
       :target_type,
       :content_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -4875,7 +4875,7 @@ module Aws::QConnect
       :query_input_data,
       :override_knowledge_base_search_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -4888,7 +4888,7 @@ module Aws::QConnect
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how to query content.</p>
@@ -4899,7 +4899,7 @@ module Aws::QConnect
       :single,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Single < QueryCondition; end
       class Unknown < QueryCondition; end
@@ -4920,7 +4920,7 @@ module Aws::QConnect
       :comparator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input information for the query.</p>
@@ -4935,7 +4935,7 @@ module Aws::QConnect
       :intent_input_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class QueryTextInputData < QueryInputData; end
       class IntentInputData < QueryInputData; end
@@ -4949,7 +4949,7 @@ module Aws::QConnect
     class QueryRecommendationTriggerData < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the text to search for.</p>
@@ -4959,7 +4959,7 @@ module Aws::QConnect
     class QueryTextInputData < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container quick response content.</p>
@@ -4970,7 +4970,7 @@ module Aws::QConnect
       :content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Content < QuickResponseContentProvider; end
       class Unknown < QuickResponseContentProvider; end
@@ -4987,7 +4987,7 @@ module Aws::QConnect
       :plain_text,
       :markdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quick response.</p>
@@ -5065,7 +5065,7 @@ module Aws::QConnect
       :language,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container of quick response data.</p>
@@ -5076,7 +5076,7 @@ module Aws::QConnect
       :content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Content < QuickResponseDataProvider; end
       class Unknown < QuickResponseDataProvider; end
@@ -5101,7 +5101,7 @@ module Aws::QConnect
       :operator,
       :include_no_existence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quick response fields to order the quick response query results by.</p> <p>The following is the list of supported field names.</p> <ul> <li> <p>name</p> </li> <li> <p>description</p> </li> <li> <p>shortcutKey</p> </li> <li> <p>isActive</p> </li> <li> <p>channels</p> </li> <li> <p>language</p> </li> <li> <p>contentType</p> </li> <li> <p>createdTime</p> </li> <li> <p>lastModifiedTime</p> </li> <li> <p>lastModifiedBy</p> </li> <li> <p>groupingConfiguration.criteria</p> </li> <li> <p>groupingConfiguration.values</p> </li> </ul>
@@ -5115,7 +5115,7 @@ module Aws::QConnect
       :name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quick response fields to query quick responses by.</p> <p>The following is the list of supported field names.</p> <ul> <li> <p>content</p> </li> <li> <p>name</p> </li> <li> <p>description</p> </li> <li> <p>shortcutKey</p> </li> </ul>
@@ -5141,7 +5141,7 @@ module Aws::QConnect
       :allow_fuzziness,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the import job.</p>
@@ -5159,7 +5159,7 @@ module Aws::QConnect
       :filters,
       :order_on_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of quick response search.</p>
@@ -5245,7 +5245,7 @@ module Aws::QConnect
       :attributes_interpolated,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information about the quick response.</p>
@@ -5307,7 +5307,7 @@ module Aws::QConnect
       :channels,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the source content ranking data.</p>
@@ -5321,7 +5321,7 @@ module Aws::QConnect
       :relevance_score,
       :relevance_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:relevance_score] = 0 unless options.key?(:relevance_score)
@@ -5356,7 +5356,7 @@ module Aws::QConnect
       :type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:relevance_score] = 0 unless options.key?(:relevance_score)
@@ -5387,7 +5387,7 @@ module Aws::QConnect
       :data,
       :recommendation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union type containing information related to the trigger.</p>
@@ -5398,7 +5398,7 @@ module Aws::QConnect
       :query,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Query < RecommendationTriggerData; end
       class Unknown < RecommendationTriggerData; end
@@ -5414,12 +5414,12 @@ module Aws::QConnect
       :assistant_id,
       :ai_agent_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveAssistantAIAgentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -5428,12 +5428,12 @@ module Aws::QConnect
     class RemoveKnowledgeBaseTemplateUriInput < Struct.new(
       :knowledge_base_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveKnowledgeBaseTemplateUriOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -5450,7 +5450,7 @@ module Aws::QConnect
       :message_template_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -5467,7 +5467,7 @@ module Aws::QConnect
       :attributes_not_interpolated,
       :attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how to render the content.</p>
@@ -5477,7 +5477,7 @@ module Aws::QConnect
     class RenderingConfiguration < Struct.new(
       :template_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request reached the service more than 15 minutes after the date stamp on the request or more than 15 minutes after the request expiration date (such as for pre-signed URLs), or the date stamp on the request is more than 15 minutes in the future.</p>
@@ -5486,7 +5486,7 @@ module Aws::QConnect
     class RequestTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -5499,7 +5499,7 @@ module Aws::QConnect
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the result.</p>
@@ -5525,7 +5525,7 @@ module Aws::QConnect
       :data,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:relevance_score] = 0 unless options.key?(:relevance_score)
@@ -5544,7 +5544,7 @@ module Aws::QConnect
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union type that specifies the data stored on the session.</p>
@@ -5555,7 +5555,7 @@ module Aws::QConnect
       :string_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < RuntimeSessionDataValue; end
       class Unknown < RuntimeSessionDataValue; end
@@ -5568,7 +5568,7 @@ module Aws::QConnect
     class SMSMessageTemplateContent < Struct.new(
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The body to use in SMS messages.</p>
@@ -5578,7 +5578,7 @@ module Aws::QConnect
     class SMSMessageTemplateContentBody < Struct.new(
       :plain_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5599,7 +5599,7 @@ module Aws::QConnect
       :knowledge_base_id,
       :search_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_summaries
@@ -5612,7 +5612,7 @@ module Aws::QConnect
       :content_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search expression.</p>
@@ -5622,7 +5622,7 @@ module Aws::QConnect
     class SearchExpression < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -5643,7 +5643,7 @@ module Aws::QConnect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -5656,7 +5656,7 @@ module Aws::QConnect
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -5681,7 +5681,7 @@ module Aws::QConnect
       :max_results,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -5694,7 +5694,7 @@ module Aws::QConnect
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5715,7 +5715,7 @@ module Aws::QConnect
       :assistant_id,
       :search_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_summaries
@@ -5728,7 +5728,7 @@ module Aws::QConnect
       :session_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A URL for crawling.</p>
@@ -5738,7 +5738,7 @@ module Aws::QConnect
     class SeedUrl < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for AI Agents of type SELF_SERVICE.</p>
@@ -5760,7 +5760,7 @@ module Aws::QConnect
       :self_service_ai_guardrail_id,
       :association_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conversation history data to included in conversation context data before the Amazon Q in Connect session.</p>
@@ -5778,7 +5778,7 @@ module Aws::QConnect
       :input_transcript,
       :bot_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for semantic document chunking for a data source. Semantic chunking splits a document into smaller documents based on groups of similar content derived from the text with natural language processing.</p>
@@ -5796,7 +5796,7 @@ module Aws::QConnect
       :buffer_size,
       :breakpoint_percentile_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -5829,7 +5829,7 @@ module Aws::QConnect
       :configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_message_id
@@ -5846,7 +5846,7 @@ module Aws::QConnect
       :configuration,
       :next_message_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information for the customer managed key used for encryption.</p>
@@ -5856,7 +5856,7 @@ module Aws::QConnect
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded your service quota. To perform the requested action, remove some of the relevant resources, or use service quotas to request a service quota increase.</p>
@@ -5865,7 +5865,7 @@ module Aws::QConnect
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the session.</p>
@@ -5907,7 +5907,7 @@ module Aws::QConnect
       :ai_agent_configuration,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information for the session integration.</p>
@@ -5917,7 +5917,7 @@ module Aws::QConnect
     class SessionIntegrationConfiguration < Struct.new(
       :topic_integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the session.</p>
@@ -5939,7 +5939,7 @@ module Aws::QConnect
       :assistant_id,
       :assistant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the external data source.</p>
@@ -5954,7 +5954,7 @@ module Aws::QConnect
       :managed_source_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AppIntegrations < SourceConfiguration; end
       class ManagedSourceConfiguration < SourceConfiguration; end
@@ -5984,7 +5984,7 @@ module Aws::QConnect
       :ranking_data,
       :citation_span,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6001,7 +6001,7 @@ module Aws::QConnect
       :content_type,
       :presigned_url_time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -6022,7 +6022,7 @@ module Aws::QConnect
       :url_expiry,
       :headers_to_include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6051,7 +6051,7 @@ module Aws::QConnect
       :metadata,
       :external_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job
@@ -6060,7 +6060,7 @@ module Aws::QConnect
     class StartImportJobResponse < Struct.new(
       :import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system attributes that are used with the message template.</p>
@@ -6078,7 +6078,7 @@ module Aws::QConnect
       :customer_endpoint,
       :system_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system endpoint attributes that are used with the message template.</p>
@@ -6088,7 +6088,7 @@ module Aws::QConnect
     class SystemEndpointAttributes < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a tag condition. </p>
@@ -6102,7 +6102,7 @@ module Aws::QConnect
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that can be used to specify Tag conditions.</p>
@@ -6121,7 +6121,7 @@ module Aws::QConnect
       :or_conditions,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TagCondition < TagFilter; end
       class AndConditions < TagFilter; end
@@ -6139,12 +6139,12 @@ module Aws::QConnect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the source content text data.</p>
@@ -6158,7 +6158,7 @@ module Aws::QConnect
       :title,
       :excerpt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a prompt template that supports full textual prompt configuration using a YAML prompt.</p>
@@ -6168,7 +6168,7 @@ module Aws::QConnect
     class TextFullAIPromptEditTemplateConfiguration < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message data in text type.</p>
@@ -6178,7 +6178,7 @@ module Aws::QConnect
     class TextMessage < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The throttling limit has been exceeded.</p>
@@ -6187,7 +6187,7 @@ module Aws::QConnect
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Q in Connect throws this exception if you have too many tags in your tag set.</p>
@@ -6200,7 +6200,7 @@ module Aws::QConnect
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to perform this action.</p>
@@ -6209,7 +6209,7 @@ module Aws::QConnect
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6222,12 +6222,12 @@ module Aws::QConnect
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -6256,7 +6256,7 @@ module Aws::QConnect
       :configuration,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_agent
@@ -6265,7 +6265,7 @@ module Aws::QConnect
     class UpdateAIAgentResponse < Struct.new(
       :ai_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -6318,7 +6318,7 @@ module Aws::QConnect
       :sensitive_information_policy_config,
       :contextual_grounding_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_guardrail
@@ -6327,7 +6327,7 @@ module Aws::QConnect
     class UpdateAIGuardrailResponse < Struct.new(
       :ai_guardrail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -6356,7 +6356,7 @@ module Aws::QConnect
       :template_configuration,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ai_prompt
@@ -6365,7 +6365,7 @@ module Aws::QConnect
     class UpdateAIPromptResponse < Struct.new(
       :ai_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -6382,7 +6382,7 @@ module Aws::QConnect
       :ai_agent_type,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant
@@ -6391,7 +6391,7 @@ module Aws::QConnect
     class UpdateAssistantAIAgentResponse < Struct.new(
       :assistant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6428,7 +6428,7 @@ module Aws::QConnect
       :metadata,
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -6437,7 +6437,7 @@ module Aws::QConnect
     class UpdateContentOutput < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6450,7 +6450,7 @@ module Aws::QConnect
       :knowledge_base_id,
       :template_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base
@@ -6459,7 +6459,7 @@ module Aws::QConnect
     class UpdateKnowledgeBaseTemplateUriOutput < Struct.new(
       :knowledge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6484,7 +6484,7 @@ module Aws::QConnect
       :description,
       :grouping_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template
@@ -6493,7 +6493,7 @@ module Aws::QConnect
     class UpdateMessageTemplateMetadataResponse < Struct.new(
       :message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6518,7 +6518,7 @@ module Aws::QConnect
       :language,
       :default_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_template
@@ -6527,7 +6527,7 @@ module Aws::QConnect
     class UpdateMessageTemplateResponse < Struct.new(
       :message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute knowledge_base_id
@@ -6588,7 +6588,7 @@ module Aws::QConnect
       :channels,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_response
@@ -6597,7 +6597,7 @@ module Aws::QConnect
     class UpdateQuickResponseResponse < Struct.new(
       :quick_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -6618,7 +6618,7 @@ module Aws::QConnect
       :namespace,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -6639,7 +6639,7 @@ module Aws::QConnect
       :namespace,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assistant_id
@@ -6664,7 +6664,7 @@ module Aws::QConnect
       :tag_filter,
       :ai_agent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session
@@ -6673,7 +6673,7 @@ module Aws::QConnect
     class UpdateSessionResponse < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the URL/URLs for the web content that you want to crawl. You should be authorized to crawl the URLs.</p>
@@ -6683,7 +6683,7 @@ module Aws::QConnect
     class UrlConfiguration < Struct.new(
       :seed_urls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by a service.</p>
@@ -6692,7 +6692,7 @@ module Aws::QConnect
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about how to ingest the documents in a data source.</p>
@@ -6706,7 +6706,7 @@ module Aws::QConnect
       :chunking_configuration,
       :parsing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the web data source.</p>
@@ -6732,7 +6732,7 @@ module Aws::QConnect
       :exclusion_filters,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of crawl limits for the web URLs.</p>
@@ -6742,7 +6742,7 @@ module Aws::QConnect
     class WebCrawlerLimits < Struct.new(
       :rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

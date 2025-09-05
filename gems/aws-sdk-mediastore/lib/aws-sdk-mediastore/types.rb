@@ -43,7 +43,7 @@ module Aws::MediaStore
       :status,
       :access_logging_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container that you specified in the request already exists or is being
@@ -53,12 +53,7 @@ module Aws::MediaStore
     class ContainerInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerLevelMetrics
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container that you specified in the request does not exist.</p>
@@ -67,13 +62,7 @@ module Aws::MediaStore
     class ContainerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerStatus
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CORS policy that you specified in the request does not exist.</p>
@@ -82,7 +71,7 @@ module Aws::MediaStore
     class CorsPolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than
@@ -126,7 +115,7 @@ module Aws::MediaStore
       :max_age_seconds,
       :expose_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_age_seconds] = 0 unless options.key?(:max_age_seconds)
@@ -149,7 +138,7 @@ module Aws::MediaStore
       :container_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container
@@ -169,7 +158,7 @@ module Aws::MediaStore
     class CreateContainerOutput < Struct.new(
       :container,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -178,12 +167,12 @@ module Aws::MediaStore
     class DeleteContainerInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -192,12 +181,12 @@ module Aws::MediaStore
     class DeleteContainerPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -206,12 +195,12 @@ module Aws::MediaStore
     class DeleteCorsPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCorsPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -220,12 +209,12 @@ module Aws::MediaStore
     class DeleteLifecyclePolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecyclePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -234,12 +223,12 @@ module Aws::MediaStore
     class DeleteMetricPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMetricPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -248,7 +237,7 @@ module Aws::MediaStore
     class DescribeContainerInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container
@@ -257,7 +246,7 @@ module Aws::MediaStore
     class DescribeContainerOutput < Struct.new(
       :container,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -266,7 +255,7 @@ module Aws::MediaStore
     class GetContainerPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -275,7 +264,7 @@ module Aws::MediaStore
     class GetContainerPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -284,7 +273,7 @@ module Aws::MediaStore
     class GetCorsPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cors_policy
@@ -293,7 +282,7 @@ module Aws::MediaStore
     class GetCorsPolicyOutput < Struct.new(
       :cors_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -302,7 +291,7 @@ module Aws::MediaStore
     class GetLifecyclePolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy
@@ -311,7 +300,7 @@ module Aws::MediaStore
     class GetLifecyclePolicyOutput < Struct.new(
       :lifecycle_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -320,7 +309,7 @@ module Aws::MediaStore
     class GetMetricPolicyInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_policy
@@ -329,7 +318,7 @@ module Aws::MediaStore
     class GetMetricPolicyOutput < Struct.new(
       :metric_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
@@ -338,7 +327,7 @@ module Aws::MediaStore
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service limit has been exceeded.</p>
@@ -347,7 +336,7 @@ module Aws::MediaStore
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -363,7 +352,7 @@ module Aws::MediaStore
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute containers
@@ -379,7 +368,7 @@ module Aws::MediaStore
       :containers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -388,7 +377,7 @@ module Aws::MediaStore
     class ListTagsForResourceInput < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -397,14 +386,7 @@ module Aws::MediaStore
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MethodName
-      PUT = 'PUT'
-      GET = 'GET'
-      DELETE = 'DELETE'
-      HEAD = 'HEAD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p>
@@ -419,7 +401,7 @@ module Aws::MediaStore
       :container_level_metrics,
       :metric_policy_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.</p>
@@ -433,7 +415,7 @@ module Aws::MediaStore
       :object_group,
       :object_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy that you specified in the request does not exist.</p>
@@ -442,7 +424,7 @@ module Aws::MediaStore
     class PolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -464,12 +446,12 @@ module Aws::MediaStore
       :container_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutContainerPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -482,12 +464,12 @@ module Aws::MediaStore
       :container_name,
       :cors_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutCorsPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -500,12 +482,12 @@ module Aws::MediaStore
       :container_name,
       :lifecycle_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutLifecyclePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -526,12 +508,12 @@ module Aws::MediaStore
       :container_name,
       :metric_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutMetricPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -540,12 +522,12 @@ module Aws::MediaStore
     class StartAccessLoggingInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartAccessLoggingOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_name
@@ -554,12 +536,12 @@ module Aws::MediaStore
     class StopAccessLoggingInput < Struct.new(
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAccessLoggingOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of tags associated with a container. Each tag consists of a key:value pair, which can be anything you define. Typically, the tag key
@@ -578,7 +560,7 @@ module Aws::MediaStore
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -594,12 +576,12 @@ module Aws::MediaStore
       :resource,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -614,12 +596,12 @@ module Aws::MediaStore
       :resource,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

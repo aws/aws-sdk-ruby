@@ -22,17 +22,12 @@ module Aws::GameLift
       :player_ids,
       :acceptance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptMatchOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceptanceType
-      ACCEPT = 'ACCEPT'
-      REJECT = 'REJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties that describe an alias resource.</p>
@@ -73,7 +68,7 @@ module Aws::GameLift
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon GameLift Servers configuration options for your Anywhere fleets.</p>
@@ -85,7 +80,7 @@ module Aws::GameLift
     class AnywhereConfiguration < Struct.new(
       :cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Values for use in player attribute key-value pairs. This object lets
@@ -113,7 +108,7 @@ module Aws::GameLift
       :sl,
       :sdm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services account security credentials that allow interactions with Amazon GameLift Servers resources. The
@@ -148,18 +143,7 @@ module Aws::GameLift
       :secret_access_key,
       :session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackfillMode
-      AUTOMATIC = 'AUTOMATIC'
-      MANUAL = 'MANUAL'
-    end
-
-    module BalancingStrategy
-      SPOT_ONLY = 'SPOT_ONLY'
-      SPOT_PREFERRED = 'SPOT_PREFERRED'
-      ON_DEMAND_ONLY = 'ON_DEMAND_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties describing a custom game build.</p>
@@ -239,13 +223,7 @@ module Aws::GameLift
       :creation_time,
       :server_sdk_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuildStatus
-      INITIALIZED = 'INITIALIZED'
-      READY = 'READY'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether a TLS/SSL certificate is generated for a fleet. This feature must
@@ -271,12 +249,7 @@ module Aws::GameLift
     class CertificateConfiguration < Struct.new(
       :certificate_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateType
-      Disabled = 'DISABLED'
-      Generated = 'GENERATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -292,7 +265,7 @@ module Aws::GameLift
     class ClaimFilterOption < Struct.new(
       :instance_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -316,7 +289,7 @@ module Aws::GameLift
       :game_server_data,
       :filter_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server
@@ -325,14 +298,7 @@ module Aws::GameLift
     class ClaimGameServerOutput < Struct.new(
       :game_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperatorType
-      GreaterThanOrEqualToThreshold = 'GreaterThanOrEqualToThreshold'
-      GreaterThanThreshold = 'GreaterThanThreshold'
-      LessThanThreshold = 'LessThanThreshold'
-      LessThanOrEqualToThreshold = 'LessThanOrEqualToThreshold'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon GameLift Servers compute resource for hosting your game servers. Computes in an Amazon GameLift Servers
@@ -433,19 +399,7 @@ module Aws::GameLift
       :container_attributes,
       :game_server_container_group_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      TERMINATING = 'TERMINATING'
-      IMPAIRED = 'IMPAIRED'
-    end
-
-    module ComputeType
-      EC2 = 'EC2'
-      ANYWHERE = 'ANYWHERE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service
@@ -457,7 +411,7 @@ module Aws::GameLift
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of port numbers to open on each instance in a container fleet. Connection
@@ -474,7 +428,7 @@ module Aws::GameLift
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A unique identifier for a container in a container fleet compute. </p>
@@ -493,7 +447,7 @@ module Aws::GameLift
       :container_name,
       :container_runtime_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container's dependency on another container in the same container group. The dependency
@@ -541,14 +495,7 @@ module Aws::GameLift
       :container_name,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerDependencyCondition
-      START = 'START'
-      COMPLETE = 'COMPLETE'
-      SUCCESS = 'SUCCESS'
-      HEALTHY = 'HEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An environment variable to set inside a container, in the form of a key-value pair.
@@ -570,7 +517,7 @@ module Aws::GameLift
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon GameLift Servers managed container fleet. </p>
@@ -746,12 +693,7 @@ module Aws::GameLift
       :log_configuration,
       :location_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerFleetBillingType
-      ON_DEMAND = 'ON_DEMAND'
-      SPOT = 'SPOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a location in a multi-location container fleet. </p>
@@ -796,31 +738,7 @@ module Aws::GameLift
       :location,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerFleetLocationStatus
-      PENDING = 'PENDING'
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-    end
-
-    module ContainerFleetRemoveAttribute
-      PER_INSTANCE_CONTAINER_GROUP_DEFINITION = 'PER_INSTANCE_CONTAINER_GROUP_DEFINITION'
-    end
-
-    module ContainerFleetStatus
-      PENDING = 'PENDING'
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that describe a container group resource. You can update all properties of
@@ -965,18 +883,7 @@ module Aws::GameLift
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerGroupDefinitionStatus
-      READY = 'READY'
-      COPYING = 'COPYING'
-      FAILED = 'FAILED'
-    end
-
-    module ContainerGroupType
-      GAME_SERVER = 'GAME_SERVER'
-      PER_INSTANCE = 'PER_INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Instructions on when and how to check the health of a support container in a container
@@ -1022,7 +929,7 @@ module Aws::GameLift
       :start_period,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A unique identifier for a container in a compute on a managed container fleet instance.
@@ -1048,7 +955,7 @@ module Aws::GameLift
       :container_name,
       :container_runtime_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mount point that binds a container to a file or directory on the host system. </p>
@@ -1071,16 +978,7 @@ module Aws::GameLift
       :container_path,
       :access_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerMountPointAccessLevel
-      READ_ONLY = 'READ_ONLY'
-      READ_AND_WRITE = 'READ_AND_WRITE'
-    end
-
-    module ContainerOperatingSystem
-      AMAZON_LINUX_2023 = 'AMAZON_LINUX_2023'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of port ranges that can be opened on the container. A process that's running in the
@@ -1114,7 +1012,7 @@ module Aws::GameLift
     class ContainerPortConfiguration < Struct.new(
       :container_port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of one or more port numbers that can be opened on the container, and the supported
@@ -1139,7 +1037,7 @@ module Aws::GameLift
       :to_port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1164,7 +1062,7 @@ module Aws::GameLift
       :routing_strategy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -1173,7 +1071,7 @@ module Aws::GameLift
     class CreateAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1231,7 +1129,7 @@ module Aws::GameLift
       :tags,
       :server_sdk_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -1251,7 +1149,7 @@ module Aws::GameLift
       :upload_credentials,
       :storage_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_role_arn
@@ -1450,7 +1348,7 @@ module Aws::GameLift
       :log_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_fleet
@@ -1460,7 +1358,7 @@ module Aws::GameLift
     class CreateContainerFleetOutput < Struct.new(
       :container_fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1529,7 +1427,7 @@ module Aws::GameLift
       :version_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definition
@@ -1539,7 +1437,7 @@ module Aws::GameLift
     class CreateContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1744,7 +1642,7 @@ module Aws::GameLift
       :anywhere_configuration,
       :instance_role_credentials_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -1759,7 +1657,7 @@ module Aws::GameLift
       :fleet_id,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -1780,7 +1678,7 @@ module Aws::GameLift
       :fleet_arn,
       :location_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_attributes
@@ -1798,7 +1696,7 @@ module Aws::GameLift
       :fleet_attributes,
       :location_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -1919,7 +1817,7 @@ module Aws::GameLift
       :vpc_subnets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -1931,7 +1829,7 @@ module Aws::GameLift
     class CreateGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2009,7 +1907,7 @@ module Aws::GameLift
       :game_session_data,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session
@@ -2018,7 +1916,7 @@ module Aws::GameLift
     class CreateGameSessionOutput < Struct.new(
       :game_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2072,7 +1970,7 @@ module Aws::GameLift
       :notification_target,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_queue
@@ -2081,7 +1979,7 @@ module Aws::GameLift
     class CreateGameSessionQueueOutput < Struct.new(
       :game_session_queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_name
@@ -2097,7 +1995,7 @@ module Aws::GameLift
       :location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location
@@ -2106,7 +2004,7 @@ module Aws::GameLift
     class CreateLocationOutput < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2215,7 +2113,7 @@ module Aws::GameLift
       :flex_match_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -2224,7 +2122,7 @@ module Aws::GameLift
     class CreateMatchmakingConfigurationOutput < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2247,7 +2145,7 @@ module Aws::GameLift
       :rule_set_body,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set
@@ -2256,7 +2154,7 @@ module Aws::GameLift
     class CreateMatchmakingRuleSetOutput < Struct.new(
       :rule_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -2273,7 +2171,7 @@ module Aws::GameLift
       :player_id,
       :player_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute player_session
@@ -2282,7 +2180,7 @@ module Aws::GameLift
     class CreatePlayerSessionOutput < Struct.new(
       :player_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -2302,7 +2200,7 @@ module Aws::GameLift
       :player_ids,
       :player_data_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute player_sessions
@@ -2311,7 +2209,7 @@ module Aws::GameLift
     class CreatePlayerSessionsOutput < Struct.new(
       :player_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2356,7 +2254,7 @@ module Aws::GameLift
       :zip_file,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script
@@ -2370,7 +2268,7 @@ module Aws::GameLift
     class CreateScriptOutput < Struct.new(
       :script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_lift_aws_account_id
@@ -2387,7 +2285,7 @@ module Aws::GameLift
       :game_lift_aws_account_id,
       :peer_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_authorization
@@ -2396,7 +2294,7 @@ module Aws::GameLift
     class CreateVpcPeeringAuthorizationOutput < Struct.new(
       :vpc_peering_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2419,12 +2317,12 @@ module Aws::GameLift
       :peer_vpc_aws_account_id,
       :peer_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateVpcPeeringConnectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -2434,7 +2332,7 @@ module Aws::GameLift
     class DeleteAliasInput < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_id
@@ -2443,7 +2341,7 @@ module Aws::GameLift
     class DeleteBuildInput < Struct.new(
       :build_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2453,12 +2351,12 @@ module Aws::GameLift
     class DeleteContainerFleetInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerFleetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2476,12 +2374,12 @@ module Aws::GameLift
       :version_number,
       :version_count_to_retain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerGroupDefinitionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2490,7 +2388,7 @@ module Aws::GameLift
     class DeleteFleetInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2504,7 +2402,7 @@ module Aws::GameLift
       :fleet_id,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2522,7 +2420,7 @@ module Aws::GameLift
       :fleet_arn,
       :location_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -2554,7 +2452,7 @@ module Aws::GameLift
       :game_server_group_name,
       :delete_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -2564,7 +2462,7 @@ module Aws::GameLift
     class DeleteGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2573,12 +2471,12 @@ module Aws::GameLift
     class DeleteGameSessionQueueInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGameSessionQueueOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_name
@@ -2587,12 +2485,12 @@ module Aws::GameLift
     class DeleteLocationInput < Struct.new(
       :location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLocationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2601,12 +2499,12 @@ module Aws::GameLift
     class DeleteMatchmakingConfigurationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMatchmakingConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2616,12 +2514,12 @@ module Aws::GameLift
     class DeleteMatchmakingRuleSetInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMatchmakingRuleSetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2634,7 +2532,7 @@ module Aws::GameLift
       :name,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script_id
@@ -2643,7 +2541,7 @@ module Aws::GameLift
     class DeleteScriptInput < Struct.new(
       :script_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_lift_aws_account_id
@@ -2660,12 +2558,12 @@ module Aws::GameLift
       :game_lift_aws_account_id,
       :peer_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcPeeringAuthorizationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2679,12 +2577,12 @@ module Aws::GameLift
       :fleet_id,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcPeeringConnectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Set of rules for processing a deployment for a container fleet update.</p>
@@ -2710,7 +2608,7 @@ module Aws::GameLift
       :minimum_healthy_percentage,
       :impairment_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the most recent deployment for the container fleet.</p>
@@ -2720,27 +2618,7 @@ module Aws::GameLift
     class DeploymentDetails < Struct.new(
       :latest_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentImpairmentStrategy
-      MAINTAIN = 'MAINTAIN'
-      ROLLBACK = 'ROLLBACK'
-    end
-
-    module DeploymentProtectionStrategy
-      WITH_PROTECTION = 'WITH_PROTECTION'
-      IGNORE_PROTECTION = 'IGNORE_PROTECTION'
-    end
-
-    module DeploymentStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      IMPAIRED = 'IMPAIRED'
-      COMPLETE = 'COMPLETE'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_COMPLETE = 'ROLLBACK_COMPLETE'
-      CANCELLED = 'CANCELLED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2754,12 +2632,12 @@ module Aws::GameLift
       :fleet_id,
       :compute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterComputeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -2772,7 +2650,7 @@ module Aws::GameLift
       :game_server_group_name,
       :game_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -2782,7 +2660,7 @@ module Aws::GameLift
     class DescribeAliasInput < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -2791,7 +2669,7 @@ module Aws::GameLift
     class DescribeAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_id
@@ -2801,7 +2679,7 @@ module Aws::GameLift
     class DescribeBuildInput < Struct.new(
       :build_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -2810,7 +2688,7 @@ module Aws::GameLift
     class DescribeBuildOutput < Struct.new(
       :build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2826,7 +2704,7 @@ module Aws::GameLift
       :fleet_id,
       :compute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute
@@ -2835,7 +2713,7 @@ module Aws::GameLift
     class DescribeComputeOutput < Struct.new(
       :compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2845,7 +2723,7 @@ module Aws::GameLift
     class DescribeContainerFleetInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_fleet
@@ -2854,7 +2732,7 @@ module Aws::GameLift
     class DescribeContainerFleetOutput < Struct.new(
       :container_fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2868,7 +2746,7 @@ module Aws::GameLift
       :name,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definition
@@ -2877,7 +2755,7 @@ module Aws::GameLift
     class DescribeContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ec2_instance_type
@@ -2894,7 +2772,7 @@ module Aws::GameLift
       :ec2_instance_type,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ec2_instance_limits
@@ -2903,7 +2781,7 @@ module Aws::GameLift
     class DescribeEC2InstanceLimitsOutput < Struct.new(
       :ec2_instance_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_ids
@@ -2924,7 +2802,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_attributes
@@ -2938,7 +2816,7 @@ module Aws::GameLift
       :fleet_attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_ids
@@ -2959,7 +2837,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_capacity
@@ -2974,7 +2852,7 @@ module Aws::GameLift
       :fleet_capacity,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2988,7 +2866,7 @@ module Aws::GameLift
       :fleet_id,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_deployment
@@ -3002,7 +2880,7 @@ module Aws::GameLift
       :fleet_deployment,
       :locational_deployments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3031,7 +2909,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -3044,7 +2922,7 @@ module Aws::GameLift
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3067,7 +2945,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3088,7 +2966,7 @@ module Aws::GameLift
       :location_attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3103,7 +2981,7 @@ module Aws::GameLift
       :fleet_id,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_capacity
@@ -3114,7 +2992,7 @@ module Aws::GameLift
     class DescribeFleetLocationCapacityOutput < Struct.new(
       :fleet_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3129,7 +3007,7 @@ module Aws::GameLift
       :fleet_id,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_utilization
@@ -3139,7 +3017,7 @@ module Aws::GameLift
     class DescribeFleetLocationUtilizationOutput < Struct.new(
       :fleet_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3154,7 +3032,7 @@ module Aws::GameLift
       :fleet_id,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3182,7 +3060,7 @@ module Aws::GameLift
       :update_status,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_ids
@@ -3202,7 +3080,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_utilization
@@ -3216,7 +3094,7 @@ module Aws::GameLift
       :fleet_utilization,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -3225,7 +3103,7 @@ module Aws::GameLift
     class DescribeGameServerGroupInput < Struct.new(
       :game_server_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -3235,7 +3113,7 @@ module Aws::GameLift
     class DescribeGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -3248,7 +3126,7 @@ module Aws::GameLift
       :game_server_group_name,
       :game_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -3271,7 +3149,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_instances
@@ -3284,7 +3162,7 @@ module Aws::GameLift
       :game_server_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server
@@ -3293,7 +3171,7 @@ module Aws::GameLift
     class DescribeGameServerOutput < Struct.new(
       :game_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3332,7 +3210,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_details
@@ -3345,7 +3223,7 @@ module Aws::GameLift
       :game_session_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute placement_id
@@ -3354,7 +3232,7 @@ module Aws::GameLift
     class DescribeGameSessionPlacementInput < Struct.new(
       :placement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_placement
@@ -3363,7 +3241,7 @@ module Aws::GameLift
     class DescribeGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3381,7 +3259,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_queues
@@ -3394,7 +3272,7 @@ module Aws::GameLift
       :game_session_queues,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3434,7 +3312,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_sessions
@@ -3447,7 +3325,7 @@ module Aws::GameLift
       :game_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3475,7 +3353,7 @@ module Aws::GameLift
       :next_token,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -3488,7 +3366,7 @@ module Aws::GameLift
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3511,7 +3389,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -3524,7 +3402,7 @@ module Aws::GameLift
       :configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_ids
@@ -3533,7 +3411,7 @@ module Aws::GameLift
     class DescribeMatchmakingInput < Struct.new(
       :ticket_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_list
@@ -3542,7 +3420,7 @@ module Aws::GameLift
     class DescribeMatchmakingOutput < Struct.new(
       :ticket_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3561,7 +3439,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_sets
@@ -3574,7 +3452,7 @@ module Aws::GameLift
       :rule_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -3630,7 +3508,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute player_sessions
@@ -3644,7 +3522,7 @@ module Aws::GameLift
       :player_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3654,7 +3532,7 @@ module Aws::GameLift
     class DescribeRuntimeConfigurationInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime_configuration
@@ -3664,7 +3542,7 @@ module Aws::GameLift
     class DescribeRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3729,7 +3607,7 @@ module Aws::GameLift
       :next_token,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_policies
@@ -3742,7 +3620,7 @@ module Aws::GameLift
       :scaling_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script_id
@@ -3752,7 +3630,7 @@ module Aws::GameLift
     class DescribeScriptInput < Struct.new(
       :script_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script
@@ -3761,12 +3639,12 @@ module Aws::GameLift
     class DescribeScriptOutput < Struct.new(
       :script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeVpcPeeringAuthorizationsInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_authorizations
@@ -3776,7 +3654,7 @@ module Aws::GameLift
     class DescribeVpcPeeringAuthorizationsOutput < Struct.new(
       :vpc_peering_authorizations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -3785,7 +3663,7 @@ module Aws::GameLift
     class DescribeVpcPeeringConnectionsInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_connections
@@ -3794,7 +3672,7 @@ module Aws::GameLift
     class DescribeVpcPeeringConnectionsOutput < Struct.new(
       :vpc_peering_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Player information for use when creating player sessions using a game session
@@ -3809,7 +3687,7 @@ module Aws::GameLift
       :player_id,
       :player_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource capacity settings. Fleet capacity is measured in Amazon EC2 instances. Pending and
@@ -3848,7 +3726,7 @@ module Aws::GameLift
       :idle,
       :terminating,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon GameLift Servers service limits for an Amazon EC2 instance type and current utilization. Amazon GameLift Servers
@@ -3877,515 +3755,7 @@ module Aws::GameLift
       :instance_limit,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EC2InstanceType
-      t2_micro = 't2.micro'
-      t2_small = 't2.small'
-      t2_medium = 't2.medium'
-      t2_large = 't2.large'
-      c3_large = 'c3.large'
-      c3_xlarge = 'c3.xlarge'
-      c3_2xlarge = 'c3.2xlarge'
-      c3_4xlarge = 'c3.4xlarge'
-      c3_8xlarge = 'c3.8xlarge'
-      c4_large = 'c4.large'
-      c4_xlarge = 'c4.xlarge'
-      c4_2xlarge = 'c4.2xlarge'
-      c4_4xlarge = 'c4.4xlarge'
-      c4_8xlarge = 'c4.8xlarge'
-      c5_large = 'c5.large'
-      c5_xlarge = 'c5.xlarge'
-      c5_2xlarge = 'c5.2xlarge'
-      c5_4xlarge = 'c5.4xlarge'
-      c5_9xlarge = 'c5.9xlarge'
-      c5_12xlarge = 'c5.12xlarge'
-      c5_18xlarge = 'c5.18xlarge'
-      c5_24xlarge = 'c5.24xlarge'
-      c5a_large = 'c5a.large'
-      c5a_xlarge = 'c5a.xlarge'
-      c5a_2xlarge = 'c5a.2xlarge'
-      c5a_4xlarge = 'c5a.4xlarge'
-      c5a_8xlarge = 'c5a.8xlarge'
-      c5a_12xlarge = 'c5a.12xlarge'
-      c5a_16xlarge = 'c5a.16xlarge'
-      c5a_24xlarge = 'c5a.24xlarge'
-      r3_large = 'r3.large'
-      r3_xlarge = 'r3.xlarge'
-      r3_2xlarge = 'r3.2xlarge'
-      r3_4xlarge = 'r3.4xlarge'
-      r3_8xlarge = 'r3.8xlarge'
-      r4_large = 'r4.large'
-      r4_xlarge = 'r4.xlarge'
-      r4_2xlarge = 'r4.2xlarge'
-      r4_4xlarge = 'r4.4xlarge'
-      r4_8xlarge = 'r4.8xlarge'
-      r4_16xlarge = 'r4.16xlarge'
-      r5_large = 'r5.large'
-      r5_xlarge = 'r5.xlarge'
-      r5_2xlarge = 'r5.2xlarge'
-      r5_4xlarge = 'r5.4xlarge'
-      r5_8xlarge = 'r5.8xlarge'
-      r5_12xlarge = 'r5.12xlarge'
-      r5_16xlarge = 'r5.16xlarge'
-      r5_24xlarge = 'r5.24xlarge'
-      r5a_large = 'r5a.large'
-      r5a_xlarge = 'r5a.xlarge'
-      r5a_2xlarge = 'r5a.2xlarge'
-      r5a_4xlarge = 'r5a.4xlarge'
-      r5a_8xlarge = 'r5a.8xlarge'
-      r5a_12xlarge = 'r5a.12xlarge'
-      r5a_16xlarge = 'r5a.16xlarge'
-      r5a_24xlarge = 'r5a.24xlarge'
-      m3_medium = 'm3.medium'
-      m3_large = 'm3.large'
-      m3_xlarge = 'm3.xlarge'
-      m3_2xlarge = 'm3.2xlarge'
-      m4_large = 'm4.large'
-      m4_xlarge = 'm4.xlarge'
-      m4_2xlarge = 'm4.2xlarge'
-      m4_4xlarge = 'm4.4xlarge'
-      m4_10xlarge = 'm4.10xlarge'
-      m5_large = 'm5.large'
-      m5_xlarge = 'm5.xlarge'
-      m5_2xlarge = 'm5.2xlarge'
-      m5_4xlarge = 'm5.4xlarge'
-      m5_8xlarge = 'm5.8xlarge'
-      m5_12xlarge = 'm5.12xlarge'
-      m5_16xlarge = 'm5.16xlarge'
-      m5_24xlarge = 'm5.24xlarge'
-      m5a_large = 'm5a.large'
-      m5a_xlarge = 'm5a.xlarge'
-      m5a_2xlarge = 'm5a.2xlarge'
-      m5a_4xlarge = 'm5a.4xlarge'
-      m5a_8xlarge = 'm5a.8xlarge'
-      m5a_12xlarge = 'm5a.12xlarge'
-      m5a_16xlarge = 'm5a.16xlarge'
-      m5a_24xlarge = 'm5a.24xlarge'
-      c5d_large = 'c5d.large'
-      c5d_xlarge = 'c5d.xlarge'
-      c5d_2xlarge = 'c5d.2xlarge'
-      c5d_4xlarge = 'c5d.4xlarge'
-      c5d_9xlarge = 'c5d.9xlarge'
-      c5d_12xlarge = 'c5d.12xlarge'
-      c5d_18xlarge = 'c5d.18xlarge'
-      c5d_24xlarge = 'c5d.24xlarge'
-      c6a_large = 'c6a.large'
-      c6a_xlarge = 'c6a.xlarge'
-      c6a_2xlarge = 'c6a.2xlarge'
-      c6a_4xlarge = 'c6a.4xlarge'
-      c6a_8xlarge = 'c6a.8xlarge'
-      c6a_12xlarge = 'c6a.12xlarge'
-      c6a_16xlarge = 'c6a.16xlarge'
-      c6a_24xlarge = 'c6a.24xlarge'
-      c6i_large = 'c6i.large'
-      c6i_xlarge = 'c6i.xlarge'
-      c6i_2xlarge = 'c6i.2xlarge'
-      c6i_4xlarge = 'c6i.4xlarge'
-      c6i_8xlarge = 'c6i.8xlarge'
-      c6i_12xlarge = 'c6i.12xlarge'
-      c6i_16xlarge = 'c6i.16xlarge'
-      c6i_24xlarge = 'c6i.24xlarge'
-      r5d_large = 'r5d.large'
-      r5d_xlarge = 'r5d.xlarge'
-      r5d_2xlarge = 'r5d.2xlarge'
-      r5d_4xlarge = 'r5d.4xlarge'
-      r5d_8xlarge = 'r5d.8xlarge'
-      r5d_12xlarge = 'r5d.12xlarge'
-      r5d_16xlarge = 'r5d.16xlarge'
-      r5d_24xlarge = 'r5d.24xlarge'
-      m6g_medium = 'm6g.medium'
-      m6g_large = 'm6g.large'
-      m6g_xlarge = 'm6g.xlarge'
-      m6g_2xlarge = 'm6g.2xlarge'
-      m6g_4xlarge = 'm6g.4xlarge'
-      m6g_8xlarge = 'm6g.8xlarge'
-      m6g_12xlarge = 'm6g.12xlarge'
-      m6g_16xlarge = 'm6g.16xlarge'
-      c6g_medium = 'c6g.medium'
-      c6g_large = 'c6g.large'
-      c6g_xlarge = 'c6g.xlarge'
-      c6g_2xlarge = 'c6g.2xlarge'
-      c6g_4xlarge = 'c6g.4xlarge'
-      c6g_8xlarge = 'c6g.8xlarge'
-      c6g_12xlarge = 'c6g.12xlarge'
-      c6g_16xlarge = 'c6g.16xlarge'
-      r6g_medium = 'r6g.medium'
-      r6g_large = 'r6g.large'
-      r6g_xlarge = 'r6g.xlarge'
-      r6g_2xlarge = 'r6g.2xlarge'
-      r6g_4xlarge = 'r6g.4xlarge'
-      r6g_8xlarge = 'r6g.8xlarge'
-      r6g_12xlarge = 'r6g.12xlarge'
-      r6g_16xlarge = 'r6g.16xlarge'
-      c6gn_medium = 'c6gn.medium'
-      c6gn_large = 'c6gn.large'
-      c6gn_xlarge = 'c6gn.xlarge'
-      c6gn_2xlarge = 'c6gn.2xlarge'
-      c6gn_4xlarge = 'c6gn.4xlarge'
-      c6gn_8xlarge = 'c6gn.8xlarge'
-      c6gn_12xlarge = 'c6gn.12xlarge'
-      c6gn_16xlarge = 'c6gn.16xlarge'
-      c7g_medium = 'c7g.medium'
-      c7g_large = 'c7g.large'
-      c7g_xlarge = 'c7g.xlarge'
-      c7g_2xlarge = 'c7g.2xlarge'
-      c7g_4xlarge = 'c7g.4xlarge'
-      c7g_8xlarge = 'c7g.8xlarge'
-      c7g_12xlarge = 'c7g.12xlarge'
-      c7g_16xlarge = 'c7g.16xlarge'
-      r7g_medium = 'r7g.medium'
-      r7g_large = 'r7g.large'
-      r7g_xlarge = 'r7g.xlarge'
-      r7g_2xlarge = 'r7g.2xlarge'
-      r7g_4xlarge = 'r7g.4xlarge'
-      r7g_8xlarge = 'r7g.8xlarge'
-      r7g_12xlarge = 'r7g.12xlarge'
-      r7g_16xlarge = 'r7g.16xlarge'
-      m7g_medium = 'm7g.medium'
-      m7g_large = 'm7g.large'
-      m7g_xlarge = 'm7g.xlarge'
-      m7g_2xlarge = 'm7g.2xlarge'
-      m7g_4xlarge = 'm7g.4xlarge'
-      m7g_8xlarge = 'm7g.8xlarge'
-      m7g_12xlarge = 'm7g.12xlarge'
-      m7g_16xlarge = 'm7g.16xlarge'
-      g5g_xlarge = 'g5g.xlarge'
-      g5g_2xlarge = 'g5g.2xlarge'
-      g5g_4xlarge = 'g5g.4xlarge'
-      g5g_8xlarge = 'g5g.8xlarge'
-      g5g_16xlarge = 'g5g.16xlarge'
-      r6i_large = 'r6i.large'
-      r6i_xlarge = 'r6i.xlarge'
-      r6i_2xlarge = 'r6i.2xlarge'
-      r6i_4xlarge = 'r6i.4xlarge'
-      r6i_8xlarge = 'r6i.8xlarge'
-      r6i_12xlarge = 'r6i.12xlarge'
-      r6i_16xlarge = 'r6i.16xlarge'
-      c6gd_medium = 'c6gd.medium'
-      c6gd_large = 'c6gd.large'
-      c6gd_xlarge = 'c6gd.xlarge'
-      c6gd_2xlarge = 'c6gd.2xlarge'
-      c6gd_4xlarge = 'c6gd.4xlarge'
-      c6gd_8xlarge = 'c6gd.8xlarge'
-      c6gd_12xlarge = 'c6gd.12xlarge'
-      c6gd_16xlarge = 'c6gd.16xlarge'
-      c6in_large = 'c6in.large'
-      c6in_xlarge = 'c6in.xlarge'
-      c6in_2xlarge = 'c6in.2xlarge'
-      c6in_4xlarge = 'c6in.4xlarge'
-      c6in_8xlarge = 'c6in.8xlarge'
-      c6in_12xlarge = 'c6in.12xlarge'
-      c6in_16xlarge = 'c6in.16xlarge'
-      c7a_medium = 'c7a.medium'
-      c7a_large = 'c7a.large'
-      c7a_xlarge = 'c7a.xlarge'
-      c7a_2xlarge = 'c7a.2xlarge'
-      c7a_4xlarge = 'c7a.4xlarge'
-      c7a_8xlarge = 'c7a.8xlarge'
-      c7a_12xlarge = 'c7a.12xlarge'
-      c7a_16xlarge = 'c7a.16xlarge'
-      c7gd_medium = 'c7gd.medium'
-      c7gd_large = 'c7gd.large'
-      c7gd_xlarge = 'c7gd.xlarge'
-      c7gd_2xlarge = 'c7gd.2xlarge'
-      c7gd_4xlarge = 'c7gd.4xlarge'
-      c7gd_8xlarge = 'c7gd.8xlarge'
-      c7gd_12xlarge = 'c7gd.12xlarge'
-      c7gd_16xlarge = 'c7gd.16xlarge'
-      c7gn_medium = 'c7gn.medium'
-      c7gn_large = 'c7gn.large'
-      c7gn_xlarge = 'c7gn.xlarge'
-      c7gn_2xlarge = 'c7gn.2xlarge'
-      c7gn_4xlarge = 'c7gn.4xlarge'
-      c7gn_8xlarge = 'c7gn.8xlarge'
-      c7gn_12xlarge = 'c7gn.12xlarge'
-      c7gn_16xlarge = 'c7gn.16xlarge'
-      c7i_large = 'c7i.large'
-      c7i_xlarge = 'c7i.xlarge'
-      c7i_2xlarge = 'c7i.2xlarge'
-      c7i_4xlarge = 'c7i.4xlarge'
-      c7i_8xlarge = 'c7i.8xlarge'
-      c7i_12xlarge = 'c7i.12xlarge'
-      c7i_16xlarge = 'c7i.16xlarge'
-      m6a_large = 'm6a.large'
-      m6a_xlarge = 'm6a.xlarge'
-      m6a_2xlarge = 'm6a.2xlarge'
-      m6a_4xlarge = 'm6a.4xlarge'
-      m6a_8xlarge = 'm6a.8xlarge'
-      m6a_12xlarge = 'm6a.12xlarge'
-      m6a_16xlarge = 'm6a.16xlarge'
-      m6gd_medium = 'm6gd.medium'
-      m6gd_large = 'm6gd.large'
-      m6gd_xlarge = 'm6gd.xlarge'
-      m6gd_2xlarge = 'm6gd.2xlarge'
-      m6gd_4xlarge = 'm6gd.4xlarge'
-      m6gd_8xlarge = 'm6gd.8xlarge'
-      m6gd_12xlarge = 'm6gd.12xlarge'
-      m6gd_16xlarge = 'm6gd.16xlarge'
-      m6i_large = 'm6i.large'
-      m6i_xlarge = 'm6i.xlarge'
-      m6i_2xlarge = 'm6i.2xlarge'
-      m6i_4xlarge = 'm6i.4xlarge'
-      m6i_8xlarge = 'm6i.8xlarge'
-      m6i_12xlarge = 'm6i.12xlarge'
-      m6i_16xlarge = 'm6i.16xlarge'
-      m7a_medium = 'm7a.medium'
-      m7a_large = 'm7a.large'
-      m7a_xlarge = 'm7a.xlarge'
-      m7a_2xlarge = 'm7a.2xlarge'
-      m7a_4xlarge = 'm7a.4xlarge'
-      m7a_8xlarge = 'm7a.8xlarge'
-      m7a_12xlarge = 'm7a.12xlarge'
-      m7a_16xlarge = 'm7a.16xlarge'
-      m7gd_medium = 'm7gd.medium'
-      m7gd_large = 'm7gd.large'
-      m7gd_xlarge = 'm7gd.xlarge'
-      m7gd_2xlarge = 'm7gd.2xlarge'
-      m7gd_4xlarge = 'm7gd.4xlarge'
-      m7gd_8xlarge = 'm7gd.8xlarge'
-      m7gd_12xlarge = 'm7gd.12xlarge'
-      m7gd_16xlarge = 'm7gd.16xlarge'
-      m7i_large = 'm7i.large'
-      m7i_xlarge = 'm7i.xlarge'
-      m7i_2xlarge = 'm7i.2xlarge'
-      m7i_4xlarge = 'm7i.4xlarge'
-      m7i_8xlarge = 'm7i.8xlarge'
-      m7i_12xlarge = 'm7i.12xlarge'
-      m7i_16xlarge = 'm7i.16xlarge'
-      r6gd_medium = 'r6gd.medium'
-      r6gd_large = 'r6gd.large'
-      r6gd_xlarge = 'r6gd.xlarge'
-      r6gd_2xlarge = 'r6gd.2xlarge'
-      r6gd_4xlarge = 'r6gd.4xlarge'
-      r6gd_8xlarge = 'r6gd.8xlarge'
-      r6gd_12xlarge = 'r6gd.12xlarge'
-      r6gd_16xlarge = 'r6gd.16xlarge'
-      r7a_medium = 'r7a.medium'
-      r7a_large = 'r7a.large'
-      r7a_xlarge = 'r7a.xlarge'
-      r7a_2xlarge = 'r7a.2xlarge'
-      r7a_4xlarge = 'r7a.4xlarge'
-      r7a_8xlarge = 'r7a.8xlarge'
-      r7a_12xlarge = 'r7a.12xlarge'
-      r7a_16xlarge = 'r7a.16xlarge'
-      r7gd_medium = 'r7gd.medium'
-      r7gd_large = 'r7gd.large'
-      r7gd_xlarge = 'r7gd.xlarge'
-      r7gd_2xlarge = 'r7gd.2xlarge'
-      r7gd_4xlarge = 'r7gd.4xlarge'
-      r7gd_8xlarge = 'r7gd.8xlarge'
-      r7gd_12xlarge = 'r7gd.12xlarge'
-      r7gd_16xlarge = 'r7gd.16xlarge'
-      r7i_large = 'r7i.large'
-      r7i_xlarge = 'r7i.xlarge'
-      r7i_2xlarge = 'r7i.2xlarge'
-      r7i_4xlarge = 'r7i.4xlarge'
-      r7i_8xlarge = 'r7i.8xlarge'
-      r7i_12xlarge = 'r7i.12xlarge'
-      r7i_16xlarge = 'r7i.16xlarge'
-      r7i_24xlarge = 'r7i.24xlarge'
-      r7i_48xlarge = 'r7i.48xlarge'
-      c5ad_large = 'c5ad.large'
-      c5ad_xlarge = 'c5ad.xlarge'
-      c5ad_2xlarge = 'c5ad.2xlarge'
-      c5ad_4xlarge = 'c5ad.4xlarge'
-      c5ad_8xlarge = 'c5ad.8xlarge'
-      c5ad_12xlarge = 'c5ad.12xlarge'
-      c5ad_16xlarge = 'c5ad.16xlarge'
-      c5ad_24xlarge = 'c5ad.24xlarge'
-      c5n_large = 'c5n.large'
-      c5n_xlarge = 'c5n.xlarge'
-      c5n_2xlarge = 'c5n.2xlarge'
-      c5n_4xlarge = 'c5n.4xlarge'
-      c5n_9xlarge = 'c5n.9xlarge'
-      c5n_18xlarge = 'c5n.18xlarge'
-      r5ad_large = 'r5ad.large'
-      r5ad_xlarge = 'r5ad.xlarge'
-      r5ad_2xlarge = 'r5ad.2xlarge'
-      r5ad_4xlarge = 'r5ad.4xlarge'
-      r5ad_8xlarge = 'r5ad.8xlarge'
-      r5ad_12xlarge = 'r5ad.12xlarge'
-      r5ad_16xlarge = 'r5ad.16xlarge'
-      r5ad_24xlarge = 'r5ad.24xlarge'
-      c6id_large = 'c6id.large'
-      c6id_xlarge = 'c6id.xlarge'
-      c6id_2xlarge = 'c6id.2xlarge'
-      c6id_4xlarge = 'c6id.4xlarge'
-      c6id_8xlarge = 'c6id.8xlarge'
-      c6id_12xlarge = 'c6id.12xlarge'
-      c6id_16xlarge = 'c6id.16xlarge'
-      c6id_24xlarge = 'c6id.24xlarge'
-      c6id_32xlarge = 'c6id.32xlarge'
-      c8g_medium = 'c8g.medium'
-      c8g_large = 'c8g.large'
-      c8g_xlarge = 'c8g.xlarge'
-      c8g_2xlarge = 'c8g.2xlarge'
-      c8g_4xlarge = 'c8g.4xlarge'
-      c8g_8xlarge = 'c8g.8xlarge'
-      c8g_12xlarge = 'c8g.12xlarge'
-      c8g_16xlarge = 'c8g.16xlarge'
-      c8g_24xlarge = 'c8g.24xlarge'
-      c8g_48xlarge = 'c8g.48xlarge'
-      m5ad_large = 'm5ad.large'
-      m5ad_xlarge = 'm5ad.xlarge'
-      m5ad_2xlarge = 'm5ad.2xlarge'
-      m5ad_4xlarge = 'm5ad.4xlarge'
-      m5ad_8xlarge = 'm5ad.8xlarge'
-      m5ad_12xlarge = 'm5ad.12xlarge'
-      m5ad_16xlarge = 'm5ad.16xlarge'
-      m5ad_24xlarge = 'm5ad.24xlarge'
-      m5d_large = 'm5d.large'
-      m5d_xlarge = 'm5d.xlarge'
-      m5d_2xlarge = 'm5d.2xlarge'
-      m5d_4xlarge = 'm5d.4xlarge'
-      m5d_8xlarge = 'm5d.8xlarge'
-      m5d_12xlarge = 'm5d.12xlarge'
-      m5d_16xlarge = 'm5d.16xlarge'
-      m5d_24xlarge = 'm5d.24xlarge'
-      m5dn_large = 'm5dn.large'
-      m5dn_xlarge = 'm5dn.xlarge'
-      m5dn_2xlarge = 'm5dn.2xlarge'
-      m5dn_4xlarge = 'm5dn.4xlarge'
-      m5dn_8xlarge = 'm5dn.8xlarge'
-      m5dn_12xlarge = 'm5dn.12xlarge'
-      m5dn_16xlarge = 'm5dn.16xlarge'
-      m5dn_24xlarge = 'm5dn.24xlarge'
-      m5n_large = 'm5n.large'
-      m5n_xlarge = 'm5n.xlarge'
-      m5n_2xlarge = 'm5n.2xlarge'
-      m5n_4xlarge = 'm5n.4xlarge'
-      m5n_8xlarge = 'm5n.8xlarge'
-      m5n_12xlarge = 'm5n.12xlarge'
-      m5n_16xlarge = 'm5n.16xlarge'
-      m5n_24xlarge = 'm5n.24xlarge'
-      m6id_large = 'm6id.large'
-      m6id_xlarge = 'm6id.xlarge'
-      m6id_2xlarge = 'm6id.2xlarge'
-      m6id_4xlarge = 'm6id.4xlarge'
-      m6id_8xlarge = 'm6id.8xlarge'
-      m6id_12xlarge = 'm6id.12xlarge'
-      m6id_16xlarge = 'm6id.16xlarge'
-      m6id_24xlarge = 'm6id.24xlarge'
-      m6id_32xlarge = 'm6id.32xlarge'
-      m6idn_large = 'm6idn.large'
-      m6idn_xlarge = 'm6idn.xlarge'
-      m6idn_2xlarge = 'm6idn.2xlarge'
-      m6idn_4xlarge = 'm6idn.4xlarge'
-      m6idn_8xlarge = 'm6idn.8xlarge'
-      m6idn_12xlarge = 'm6idn.12xlarge'
-      m6idn_16xlarge = 'm6idn.16xlarge'
-      m6idn_24xlarge = 'm6idn.24xlarge'
-      m6idn_32xlarge = 'm6idn.32xlarge'
-      m6in_large = 'm6in.large'
-      m6in_xlarge = 'm6in.xlarge'
-      m6in_2xlarge = 'm6in.2xlarge'
-      m6in_4xlarge = 'm6in.4xlarge'
-      m6in_8xlarge = 'm6in.8xlarge'
-      m6in_12xlarge = 'm6in.12xlarge'
-      m6in_16xlarge = 'm6in.16xlarge'
-      m6in_24xlarge = 'm6in.24xlarge'
-      m6in_32xlarge = 'm6in.32xlarge'
-      m8g_medium = 'm8g.medium'
-      m8g_large = 'm8g.large'
-      m8g_xlarge = 'm8g.xlarge'
-      m8g_2xlarge = 'm8g.2xlarge'
-      m8g_4xlarge = 'm8g.4xlarge'
-      m8g_8xlarge = 'm8g.8xlarge'
-      m8g_12xlarge = 'm8g.12xlarge'
-      m8g_16xlarge = 'm8g.16xlarge'
-      m8g_24xlarge = 'm8g.24xlarge'
-      m8g_48xlarge = 'm8g.48xlarge'
-      r5dn_large = 'r5dn.large'
-      r5dn_xlarge = 'r5dn.xlarge'
-      r5dn_2xlarge = 'r5dn.2xlarge'
-      r5dn_4xlarge = 'r5dn.4xlarge'
-      r5dn_8xlarge = 'r5dn.8xlarge'
-      r5dn_12xlarge = 'r5dn.12xlarge'
-      r5dn_16xlarge = 'r5dn.16xlarge'
-      r5dn_24xlarge = 'r5dn.24xlarge'
-      r5n_large = 'r5n.large'
-      r5n_xlarge = 'r5n.xlarge'
-      r5n_2xlarge = 'r5n.2xlarge'
-      r5n_4xlarge = 'r5n.4xlarge'
-      r5n_8xlarge = 'r5n.8xlarge'
-      r5n_12xlarge = 'r5n.12xlarge'
-      r5n_16xlarge = 'r5n.16xlarge'
-      r5n_24xlarge = 'r5n.24xlarge'
-      r6a_large = 'r6a.large'
-      r6a_xlarge = 'r6a.xlarge'
-      r6a_2xlarge = 'r6a.2xlarge'
-      r6a_4xlarge = 'r6a.4xlarge'
-      r6a_8xlarge = 'r6a.8xlarge'
-      r6a_12xlarge = 'r6a.12xlarge'
-      r6a_16xlarge = 'r6a.16xlarge'
-      r6a_24xlarge = 'r6a.24xlarge'
-      r6a_32xlarge = 'r6a.32xlarge'
-      r6a_48xlarge = 'r6a.48xlarge'
-      r6id_large = 'r6id.large'
-      r6id_xlarge = 'r6id.xlarge'
-      r6id_2xlarge = 'r6id.2xlarge'
-      r6id_4xlarge = 'r6id.4xlarge'
-      r6id_8xlarge = 'r6id.8xlarge'
-      r6id_12xlarge = 'r6id.12xlarge'
-      r6id_16xlarge = 'r6id.16xlarge'
-      r6id_24xlarge = 'r6id.24xlarge'
-      r6id_32xlarge = 'r6id.32xlarge'
-      r6idn_large = 'r6idn.large'
-      r6idn_xlarge = 'r6idn.xlarge'
-      r6idn_2xlarge = 'r6idn.2xlarge'
-      r6idn_4xlarge = 'r6idn.4xlarge'
-      r6idn_8xlarge = 'r6idn.8xlarge'
-      r6idn_12xlarge = 'r6idn.12xlarge'
-      r6idn_16xlarge = 'r6idn.16xlarge'
-      r6idn_24xlarge = 'r6idn.24xlarge'
-      r6idn_32xlarge = 'r6idn.32xlarge'
-      r6in_large = 'r6in.large'
-      r6in_xlarge = 'r6in.xlarge'
-      r6in_2xlarge = 'r6in.2xlarge'
-      r6in_4xlarge = 'r6in.4xlarge'
-      r6in_8xlarge = 'r6in.8xlarge'
-      r6in_12xlarge = 'r6in.12xlarge'
-      r6in_16xlarge = 'r6in.16xlarge'
-      r6in_24xlarge = 'r6in.24xlarge'
-      r6in_32xlarge = 'r6in.32xlarge'
-      r8g_medium = 'r8g.medium'
-      r8g_large = 'r8g.large'
-      r8g_xlarge = 'r8g.xlarge'
-      r8g_2xlarge = 'r8g.2xlarge'
-      r8g_4xlarge = 'r8g.4xlarge'
-      r8g_8xlarge = 'r8g.8xlarge'
-      r8g_12xlarge = 'r8g.12xlarge'
-      r8g_16xlarge = 'r8g.16xlarge'
-      r8g_24xlarge = 'r8g.24xlarge'
-      r8g_48xlarge = 'r8g.48xlarge'
-      m4_16xlarge = 'm4.16xlarge'
-      c6a_32xlarge = 'c6a.32xlarge'
-      c6a_48xlarge = 'c6a.48xlarge'
-      c6i_32xlarge = 'c6i.32xlarge'
-      r6i_24xlarge = 'r6i.24xlarge'
-      r6i_32xlarge = 'r6i.32xlarge'
-      c6in_24xlarge = 'c6in.24xlarge'
-      c6in_32xlarge = 'c6in.32xlarge'
-      c7a_24xlarge = 'c7a.24xlarge'
-      c7a_32xlarge = 'c7a.32xlarge'
-      c7a_48xlarge = 'c7a.48xlarge'
-      c7i_24xlarge = 'c7i.24xlarge'
-      c7i_48xlarge = 'c7i.48xlarge'
-      m6a_24xlarge = 'm6a.24xlarge'
-      m6a_32xlarge = 'm6a.32xlarge'
-      m6a_48xlarge = 'm6a.48xlarge'
-      m6i_24xlarge = 'm6i.24xlarge'
-      m6i_32xlarge = 'm6i.32xlarge'
-      m7a_24xlarge = 'm7a.24xlarge'
-      m7a_32xlarge = 'm7a.32xlarge'
-      m7a_48xlarge = 'm7a.48xlarge'
-      m7i_24xlarge = 'm7i.24xlarge'
-      m7i_48xlarge = 'm7i.48xlarge'
-      r7a_24xlarge = 'r7a.24xlarge'
-      r7a_32xlarge = 'r7a.32xlarge'
-      r7a_48xlarge = 'r7a.48xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Log entry describing an event that involves Amazon GameLift Servers resources (such as a fleet). In
@@ -4649,66 +4019,7 @@ module Aws::GameLift
       :pre_signed_log_url,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventCode
-      GENERIC_EVENT = 'GENERIC_EVENT'
-      FLEET_CREATED = 'FLEET_CREATED'
-      FLEET_DELETED = 'FLEET_DELETED'
-      FLEET_SCALING_EVENT = 'FLEET_SCALING_EVENT'
-      FLEET_STATE_DOWNLOADING = 'FLEET_STATE_DOWNLOADING'
-      FLEET_STATE_VALIDATING = 'FLEET_STATE_VALIDATING'
-      FLEET_STATE_BUILDING = 'FLEET_STATE_BUILDING'
-      FLEET_STATE_ACTIVATING = 'FLEET_STATE_ACTIVATING'
-      FLEET_STATE_ACTIVE = 'FLEET_STATE_ACTIVE'
-      FLEET_STATE_ERROR = 'FLEET_STATE_ERROR'
-      FLEET_STATE_PENDING = 'FLEET_STATE_PENDING'
-      FLEET_STATE_CREATING = 'FLEET_STATE_CREATING'
-      FLEET_STATE_CREATED = 'FLEET_STATE_CREATED'
-      FLEET_STATE_UPDATING = 'FLEET_STATE_UPDATING'
-      FLEET_INITIALIZATION_FAILED = 'FLEET_INITIALIZATION_FAILED'
-      FLEET_BINARY_DOWNLOAD_FAILED = 'FLEET_BINARY_DOWNLOAD_FAILED'
-      FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND = 'FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND'
-      FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE = 'FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE'
-      FLEET_VALIDATION_TIMED_OUT = 'FLEET_VALIDATION_TIMED_OUT'
-      FLEET_ACTIVATION_FAILED = 'FLEET_ACTIVATION_FAILED'
-      FLEET_ACTIVATION_FAILED_NO_INSTANCES = 'FLEET_ACTIVATION_FAILED_NO_INSTANCES'
-      FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED = 'FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED'
-      SERVER_PROCESS_INVALID_PATH = 'SERVER_PROCESS_INVALID_PATH'
-      SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT = 'SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT'
-      SERVER_PROCESS_PROCESS_READY_TIMEOUT = 'SERVER_PROCESS_PROCESS_READY_TIMEOUT'
-      SERVER_PROCESS_CRASHED = 'SERVER_PROCESS_CRASHED'
-      SERVER_PROCESS_TERMINATED_UNHEALTHY = 'SERVER_PROCESS_TERMINATED_UNHEALTHY'
-      SERVER_PROCESS_FORCE_TERMINATED = 'SERVER_PROCESS_FORCE_TERMINATED'
-      SERVER_PROCESS_PROCESS_EXIT_TIMEOUT = 'SERVER_PROCESS_PROCESS_EXIT_TIMEOUT'
-      SERVER_PROCESS_SDK_INITIALIZATION_FAILED = 'SERVER_PROCESS_SDK_INITIALIZATION_FAILED'
-      SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT = 'SERVER_PROCESS_MISCONFIGURED_CONTAINER_PORT'
-      GAME_SESSION_ACTIVATION_TIMEOUT = 'GAME_SESSION_ACTIVATION_TIMEOUT'
-      FLEET_CREATION_EXTRACTING_BUILD = 'FLEET_CREATION_EXTRACTING_BUILD'
-      FLEET_CREATION_RUNNING_INSTALLER = 'FLEET_CREATION_RUNNING_INSTALLER'
-      FLEET_CREATION_VALIDATING_RUNTIME_CONFIG = 'FLEET_CREATION_VALIDATING_RUNTIME_CONFIG'
-      FLEET_VPC_PEERING_SUCCEEDED = 'FLEET_VPC_PEERING_SUCCEEDED'
-      FLEET_VPC_PEERING_FAILED = 'FLEET_VPC_PEERING_FAILED'
-      FLEET_VPC_PEERING_DELETED = 'FLEET_VPC_PEERING_DELETED'
-      INSTANCE_INTERRUPTED = 'INSTANCE_INTERRUPTED'
-      INSTANCE_RECYCLED = 'INSTANCE_RECYCLED'
-      INSTANCE_REPLACED_UNHEALTHY = 'INSTANCE_REPLACED_UNHEALTHY'
-      FLEET_CREATION_COMPLETED_INSTALLER = 'FLEET_CREATION_COMPLETED_INSTALLER'
-      FLEET_CREATION_FAILED_INSTALLER = 'FLEET_CREATION_FAILED_INSTALLER'
-      COMPUTE_LOG_UPLOAD_FAILED = 'COMPUTE_LOG_UPLOAD_FAILED'
-      GAME_SERVER_CONTAINER_GROUP_CRASHED = 'GAME_SERVER_CONTAINER_GROUP_CRASHED'
-      PER_INSTANCE_CONTAINER_GROUP_CRASHED = 'PER_INSTANCE_CONTAINER_GROUP_CRASHED'
-      GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY = 'GAME_SERVER_CONTAINER_GROUP_REPLACED_UNHEALTHY'
-      LOCATION_STATE_PENDING = 'LOCATION_STATE_PENDING'
-      LOCATION_STATE_CREATING = 'LOCATION_STATE_CREATING'
-      LOCATION_STATE_CREATED = 'LOCATION_STATE_CREATED'
-      LOCATION_STATE_ACTIVATING = 'LOCATION_STATE_ACTIVATING'
-      LOCATION_STATE_ACTIVE = 'LOCATION_STATE_ACTIVE'
-      LOCATION_STATE_UPDATING = 'LOCATION_STATE_UPDATING'
-      LOCATION_STATE_ERROR = 'LOCATION_STATE_ERROR'
-      LOCATION_STATE_DELETING = 'LOCATION_STATE_DELETING'
-      LOCATION_STATE_DELETED = 'LOCATION_STATE_DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of fleet locations where a game session queue can place new game sessions. You
@@ -4722,16 +4033,7 @@ module Aws::GameLift
     class FilterConfiguration < Struct.new(
       :allowed_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterInstanceStatus
-      ACTIVE = 'ACTIVE'
-      DRAINING = 'DRAINING'
-    end
-
-    module FleetAction
-      AutoScaling = 'AUTO_SCALING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon GameLift Servers fleet of game hosting resources. Attributes differ based on
@@ -4959,7 +4261,7 @@ module Aws::GameLift
       :anywhere_configuration,
       :instance_role_credentials_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Current resource capacity settings for managed EC2 fleets and managed container fleets. For
@@ -5001,7 +4303,7 @@ module Aws::GameLift
       :location,
       :game_server_container_group_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified fleet has no available instances to fulfill a
@@ -5012,7 +4314,7 @@ module Aws::GameLift
     class FleetCapacityExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a container fleet deployment with updates to the fleet. </p>
@@ -5090,25 +4392,7 @@ module Aws::GameLift
       :deployment_configuration,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetStatus
-      NEW = 'NEW'
-      DOWNLOADING = 'DOWNLOADING'
-      VALIDATING = 'VALIDATING'
-      BUILDING = 'BUILDING'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      ERROR = 'ERROR'
-      TERMINATED = 'TERMINATED'
-      NOT_FOUND = 'NOT_FOUND'
-    end
-
-    module FleetType
-      OnDemand = 'ON_DEMAND'
-      Spot = 'SPOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Current resource utilization statistics in a specified fleet or location. The location
@@ -5148,12 +4432,7 @@ module Aws::GameLift
       :maximum_player_session_count,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlexMatchMode
-      STANDALONE = 'STANDALONE'
-      WITH_QUEUE = 'WITH_QUEUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This key-value pair can store custom data about a game session. For example, you might
@@ -5174,7 +4453,7 @@ module Aws::GameLift
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5262,11 +4541,7 @@ module Aws::GameLift
       :last_claim_time,
       :last_health_check_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameServerClaimStatus
-      CLAIMED = 'CLAIMED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the game server container in an existing game server container group. A game
@@ -5332,7 +4607,7 @@ module Aws::GameLift
       :resolved_image_digest,
       :server_sdk_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for a container that runs your game server executable. This
@@ -5417,7 +4692,7 @@ module Aws::GameLift
       :port_configuration,
       :server_sdk_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number and status of game server container groups that are deployed across a container fleet. 
@@ -5451,7 +4726,7 @@ module Aws::GameLift
       :idle,
       :terminating,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5590,11 +4865,7 @@ module Aws::GameLift
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameServerGroupAction
-      REPLACE_INSTANCE_TYPES = 'REPLACE_INSTANCE_TYPES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5623,118 +4894,7 @@ module Aws::GameLift
       :estimated_instance_warmup,
       :target_tracking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameServerGroupDeleteOption
-      SAFE_DELETE = 'SAFE_DELETE'
-      FORCE_DELETE = 'FORCE_DELETE'
-      RETAIN = 'RETAIN'
-    end
-
-    module GameServerGroupInstanceType
-      c4_large = 'c4.large'
-      c4_xlarge = 'c4.xlarge'
-      c4_2xlarge = 'c4.2xlarge'
-      c4_4xlarge = 'c4.4xlarge'
-      c4_8xlarge = 'c4.8xlarge'
-      c5_large = 'c5.large'
-      c5_xlarge = 'c5.xlarge'
-      c5_2xlarge = 'c5.2xlarge'
-      c5_4xlarge = 'c5.4xlarge'
-      c5_9xlarge = 'c5.9xlarge'
-      c5_12xlarge = 'c5.12xlarge'
-      c5_18xlarge = 'c5.18xlarge'
-      c5_24xlarge = 'c5.24xlarge'
-      c5a_large = 'c5a.large'
-      c5a_xlarge = 'c5a.xlarge'
-      c5a_2xlarge = 'c5a.2xlarge'
-      c5a_4xlarge = 'c5a.4xlarge'
-      c5a_8xlarge = 'c5a.8xlarge'
-      c5a_12xlarge = 'c5a.12xlarge'
-      c5a_16xlarge = 'c5a.16xlarge'
-      c5a_24xlarge = 'c5a.24xlarge'
-      c6g_medium = 'c6g.medium'
-      c6g_large = 'c6g.large'
-      c6g_xlarge = 'c6g.xlarge'
-      c6g_2xlarge = 'c6g.2xlarge'
-      c6g_4xlarge = 'c6g.4xlarge'
-      c6g_8xlarge = 'c6g.8xlarge'
-      c6g_12xlarge = 'c6g.12xlarge'
-      c6g_16xlarge = 'c6g.16xlarge'
-      r4_large = 'r4.large'
-      r4_xlarge = 'r4.xlarge'
-      r4_2xlarge = 'r4.2xlarge'
-      r4_4xlarge = 'r4.4xlarge'
-      r4_8xlarge = 'r4.8xlarge'
-      r4_16xlarge = 'r4.16xlarge'
-      r5_large = 'r5.large'
-      r5_xlarge = 'r5.xlarge'
-      r5_2xlarge = 'r5.2xlarge'
-      r5_4xlarge = 'r5.4xlarge'
-      r5_8xlarge = 'r5.8xlarge'
-      r5_12xlarge = 'r5.12xlarge'
-      r5_16xlarge = 'r5.16xlarge'
-      r5_24xlarge = 'r5.24xlarge'
-      r5a_large = 'r5a.large'
-      r5a_xlarge = 'r5a.xlarge'
-      r5a_2xlarge = 'r5a.2xlarge'
-      r5a_4xlarge = 'r5a.4xlarge'
-      r5a_8xlarge = 'r5a.8xlarge'
-      r5a_12xlarge = 'r5a.12xlarge'
-      r5a_16xlarge = 'r5a.16xlarge'
-      r5a_24xlarge = 'r5a.24xlarge'
-      r6g_medium = 'r6g.medium'
-      r6g_large = 'r6g.large'
-      r6g_xlarge = 'r6g.xlarge'
-      r6g_2xlarge = 'r6g.2xlarge'
-      r6g_4xlarge = 'r6g.4xlarge'
-      r6g_8xlarge = 'r6g.8xlarge'
-      r6g_12xlarge = 'r6g.12xlarge'
-      r6g_16xlarge = 'r6g.16xlarge'
-      m4_large = 'm4.large'
-      m4_xlarge = 'm4.xlarge'
-      m4_2xlarge = 'm4.2xlarge'
-      m4_4xlarge = 'm4.4xlarge'
-      m4_10xlarge = 'm4.10xlarge'
-      m5_large = 'm5.large'
-      m5_xlarge = 'm5.xlarge'
-      m5_2xlarge = 'm5.2xlarge'
-      m5_4xlarge = 'm5.4xlarge'
-      m5_8xlarge = 'm5.8xlarge'
-      m5_12xlarge = 'm5.12xlarge'
-      m5_16xlarge = 'm5.16xlarge'
-      m5_24xlarge = 'm5.24xlarge'
-      m5a_large = 'm5a.large'
-      m5a_xlarge = 'm5a.xlarge'
-      m5a_2xlarge = 'm5a.2xlarge'
-      m5a_4xlarge = 'm5a.4xlarge'
-      m5a_8xlarge = 'm5a.8xlarge'
-      m5a_12xlarge = 'm5a.12xlarge'
-      m5a_16xlarge = 'm5a.16xlarge'
-      m5a_24xlarge = 'm5a.24xlarge'
-      m6g_medium = 'm6g.medium'
-      m6g_large = 'm6g.large'
-      m6g_xlarge = 'm6g.xlarge'
-      m6g_2xlarge = 'm6g.2xlarge'
-      m6g_4xlarge = 'm6g.4xlarge'
-      m6g_8xlarge = 'm6g.8xlarge'
-      m6g_12xlarge = 'm6g.12xlarge'
-      m6g_16xlarge = 'm6g.16xlarge'
-    end
-
-    module GameServerGroupStatus
-      NEW = 'NEW'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      DELETE_SCHEDULED = 'DELETE_SCHEDULED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      ERROR = 'ERROR'
-    end
-
-    module GameServerHealthCheck
-      HEALTHY = 'HEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5769,23 +4929,7 @@ module Aws::GameLift
       :instance_id,
       :instance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameServerInstanceStatus
-      ACTIVE = 'ACTIVE'
-      DRAINING = 'DRAINING'
-      SPOT_TERMINATING = 'SPOT_TERMINATING'
-    end
-
-    module GameServerProtectionPolicy
-      NO_PROTECTION = 'NO_PROTECTION'
-      FULL_PROTECTION = 'FULL_PROTECTION'
-    end
-
-    module GameServerUtilizationStatus
-      AVAILABLE = 'AVAILABLE'
-      UTILIZED = 'UTILIZED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties describing a game session.</p>
@@ -5917,7 +5061,7 @@ module Aws::GameLift
       :matchmaker_data,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connection information for a new game session that is created in response to a start
@@ -5959,7 +5103,7 @@ module Aws::GameLift
       :port,
       :matched_player_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that puts limits on the number of game sessions that a player can create
@@ -5985,7 +5129,7 @@ module Aws::GameLift
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A game session's properties plus the protection policy currently in force.</p>
@@ -6012,7 +5156,7 @@ module Aws::GameLift
       :game_session,
       :protection_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The game instance is currently full and cannot allow the requested player(s) to join.
@@ -6022,7 +5166,7 @@ module Aws::GameLift
     class GameSessionFullException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a potential game session placement, including the full details of the
@@ -6174,15 +5318,7 @@ module Aws::GameLift
       :matchmaker_data,
       :priority_configuration_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameSessionPlacementState
-      PENDING = 'PENDING'
-      FULFILLED = 'FULFILLED'
-      CANCELLED = 'CANCELLED'
-      TIMED_OUT = 'TIMED_OUT'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for a game session placement mechanism that processes requests for new
@@ -6237,7 +5373,7 @@ module Aws::GameLift
       :custom_event_data,
       :notification_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A fleet or alias designated in a game session queue. Queues fulfill requests for new
@@ -6250,21 +5386,7 @@ module Aws::GameLift
     class GameSessionQueueDestination < Struct.new(
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GameSessionStatus
-      ACTIVE = 'ACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      TERMINATED = 'TERMINATED'
-      TERMINATING = 'TERMINATING'
-      ERROR = 'ERROR'
-    end
-
-    module GameSessionStatusReason
-      INTERRUPTED = 'INTERRUPTED'
-      TRIGGERED_ON_PROCESS_TERMINATE = 'TRIGGERED_ON_PROCESS_TERMINATE'
-      FORCE_TERMINATED = 'FORCE_TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6280,7 +5402,7 @@ module Aws::GameLift
       :fleet_id,
       :compute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6318,7 +5440,7 @@ module Aws::GameLift
       :target,
       :container_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6333,7 +5455,7 @@ module Aws::GameLift
       :fleet_id,
       :compute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6364,7 +5486,7 @@ module Aws::GameLift
       :auth_token,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -6373,7 +5495,7 @@ module Aws::GameLift
     class GetGameSessionLogUrlInput < Struct.new(
       :game_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pre_signed_url
@@ -6384,7 +5506,7 @@ module Aws::GameLift
     class GetGameSessionLogUrlOutput < Struct.new(
       :pre_signed_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6402,7 +5524,7 @@ module Aws::GameLift
       :fleet_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_access
@@ -6412,7 +5534,7 @@ module Aws::GameLift
     class GetInstanceAccessOutput < Struct.new(
       :instance_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A game session with this custom ID string already exists in this fleet. Resolve this
@@ -6422,7 +5544,7 @@ module Aws::GameLift
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a virtual computing instance that runs game server processes and hosts game
@@ -6512,7 +5634,7 @@ module Aws::GameLift
       :creation_time,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information and credentials that you can use to remotely connect to an instance in an
@@ -6540,7 +5662,7 @@ module Aws::GameLift
       :operating_system,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of credentials that allow remote access to an instance in an EC2 managed fleet.
@@ -6559,7 +5681,7 @@ module Aws::GameLift
       :user_name,
       :secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6584,17 +5706,7 @@ module Aws::GameLift
       :instance_type,
       :weighted_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceRoleCredentialsProvider
-      SHARED_CREDENTIAL_FILE = 'SHARED_CREDENTIAL_FILE'
-    end
-
-    module InstanceStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      TERMINATING = 'TERMINATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unrecoverable internal failure while processing the
@@ -6604,7 +5716,7 @@ module Aws::GameLift
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a resource
@@ -6615,7 +5727,7 @@ module Aws::GameLift
     class InvalidFleetStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a resource
@@ -6626,7 +5738,7 @@ module Aws::GameLift
     class InvalidGameSessionStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter values in the request are invalid. Correct the invalid parameter
@@ -6636,7 +5748,7 @@ module Aws::GameLift
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of IP addresses and port settings that allow inbound traffic to connect to
@@ -6670,12 +5782,7 @@ module Aws::GameLift
       :ip_range,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpProtocol
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6701,7 +5808,7 @@ module Aws::GameLift
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause the resource to exceed the allowed service limit.
@@ -6711,7 +5818,7 @@ module Aws::GameLift
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_strategy_type
@@ -6747,7 +5854,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aliases
@@ -6760,7 +5867,7 @@ module Aws::GameLift
       :aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -6798,7 +5905,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute builds
@@ -6811,7 +5918,7 @@ module Aws::GameLift
       :builds,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6857,12 +5964,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListComputeInputStatus
-      ACTIVE = 'ACTIVE'
-      IMPAIRED = 'IMPAIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_list
@@ -6875,7 +5977,7 @@ module Aws::GameLift
       :compute_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definition_name
@@ -6895,7 +5997,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_fleets
@@ -6909,7 +6011,7 @@ module Aws::GameLift
       :container_fleets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6927,7 +6029,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definitions
@@ -6940,7 +6042,7 @@ module Aws::GameLift
       :container_group_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_type
@@ -6958,7 +6060,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definitions
@@ -6971,7 +6073,7 @@ module Aws::GameLift
       :container_group_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -6989,7 +6091,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_deployments
@@ -7002,7 +6104,7 @@ module Aws::GameLift
       :fleet_deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_id
@@ -7025,7 +6127,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_ids
@@ -7038,7 +6140,7 @@ module Aws::GameLift
       :fleet_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -7052,7 +6154,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_groups
@@ -7066,7 +6168,7 @@ module Aws::GameLift
       :game_server_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -7091,7 +6193,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_servers
@@ -7104,7 +6206,7 @@ module Aws::GameLift
       :game_servers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -7123,7 +6225,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locations
@@ -7138,7 +6240,7 @@ module Aws::GameLift
       :locations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -7151,7 +6253,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scripts
@@ -7164,7 +6266,7 @@ module Aws::GameLift
       :scripts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7176,7 +6278,7 @@ module Aws::GameLift
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -7185,7 +6287,7 @@ module Aws::GameLift
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a location in a multi-location fleet.</p>
@@ -7206,7 +6308,7 @@ module Aws::GameLift
       :stopped_actions,
       :update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A remote location where a multi-location fleet can deploy game servers for game
@@ -7219,12 +6321,7 @@ module Aws::GameLift
     class LocationConfiguration < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationFilter
-      AWS = 'AWS'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of a location, which can include its name, ARN (for custom locations), and
@@ -7245,7 +6342,7 @@ module Aws::GameLift
       :location_arn,
       :ping_beacon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A fleet location and its life-cycle state. A location state object might be used to
@@ -7301,11 +6398,7 @@ module Aws::GameLift
       :location,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationUpdateStatus
-      PENDING_UPDATE = 'PENDING_UPDATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a multi-location container fleet, describes the progress of a deployment across
@@ -7345,7 +6438,7 @@ module Aws::GameLift
     class LocationalDeployment < Struct.new(
       :deployment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A method for collecting container logs for the fleet. Amazon GameLift Servers saves all standard
@@ -7379,13 +6472,7 @@ module Aws::GameLift
       :s3_bucket_name,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDestination
-      NONE = 'NONE'
-      CLOUDWATCH = 'CLOUDWATCH'
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a new player session that is created as a result of a successful FlexMatch
@@ -7403,7 +6490,7 @@ module Aws::GameLift
       :player_id,
       :player_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Guidelines for use with FlexMatch to match players into games. All matchmaking requests
@@ -7517,18 +6604,7 @@ module Aws::GameLift
       :backfill_mode,
       :flex_match_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchmakingConfigurationStatus
-      CANCELLED = 'CANCELLED'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      PLACING = 'PLACING'
-      QUEUED = 'QUEUED'
-      REQUIRES_ACCEPTANCE = 'REQUIRES_ACCEPTANCE'
-      SEARCHING = 'SEARCHING'
-      TIMED_OUT = 'TIMED_OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Set of rule statements, used with FlexMatch, that determine how to build your player
@@ -7588,7 +6664,7 @@ module Aws::GameLift
       :rule_set_body,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ticket generated to track the progress of a matchmaking request. Each ticket is
@@ -7704,22 +6780,7 @@ module Aws::GameLift
       :game_session_connection_info,
       :estimated_wait_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricName
-      ActivatingGameSessions = 'ActivatingGameSessions'
-      ActiveGameSessions = 'ActiveGameSessions'
-      ActiveInstances = 'ActiveInstances'
-      AvailableGameSessions = 'AvailableGameSessions'
-      AvailablePlayerSessions = 'AvailablePlayerSessions'
-      CurrentPlayerSessions = 'CurrentPlayerSessions'
-      IdleInstances = 'IdleInstances'
-      PercentAvailableGameSessions = 'PercentAvailableGameSessions'
-      PercentIdleInstances = 'PercentIdleInstances'
-      QueueDepth = 'QueueDepth'
-      WaitTime = 'WaitTime'
-      ConcurrentActivatableGameSessions = 'ConcurrentActivatableGameSessions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resources was not found. The resource was either not created yet or deleted.</p>
@@ -7728,7 +6789,7 @@ module Aws::GameLift
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The operation failed because Amazon GameLift Servers has not yet finished validating this compute. We
@@ -7739,15 +6800,7 @@ module Aws::GameLift
     class NotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperatingSystem
-      WINDOWS_2012 = 'WINDOWS_2012'
-      AMAZON_LINUX = 'AMAZON_LINUX'
-      AMAZON_LINUX_2 = 'AMAZON_LINUX_2'
-      WINDOWS_2016 = 'WINDOWS_2016'
-      AMAZON_LINUX_2023 = 'AMAZON_LINUX_2023'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified game server group has no available game servers to fulfill a
@@ -7758,7 +6811,7 @@ module Aws::GameLift
     class OutOfCapacityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a UDP ping beacon that can be used to measure network latency
@@ -7769,7 +6822,7 @@ module Aws::GameLift
     class PingBeacon < Struct.new(
       :udp_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a player session. This object contains only the player ID and player
@@ -7784,12 +6837,7 @@ module Aws::GameLift
       :player_id,
       :player_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementFallbackStrategy
-      DEFAULT_AFTER_SINGLE_PASS = 'DEFAULT_AFTER_SINGLE_PASS'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a player in matchmaking. When starting a matchmaking request, a player has
@@ -7822,7 +6870,7 @@ module Aws::GameLift
       :team,
       :latency_in_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Regional latency information for a player, used when requesting a new game session.
@@ -7845,7 +6893,7 @@ module Aws::GameLift
       :region_identifier,
       :latency_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets a latency cap for individual players when placing a game session. With a latency
@@ -7866,7 +6914,7 @@ module Aws::GameLift
       :maximum_individual_player_latency_milliseconds,
       :policy_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a player session. Player sessions are created either for a specific game
@@ -7971,24 +7019,7 @@ module Aws::GameLift
       :port,
       :player_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlayerSessionCreationPolicy
-      ACCEPT_ALL = 'ACCEPT_ALL'
-      DENY_ALL = 'DENY_ALL'
-    end
-
-    module PlayerSessionStatus
-      RESERVED = 'RESERVED'
-      ACTIVE = 'ACTIVE'
-      COMPLETED = 'COMPLETED'
-      TIMEDOUT = 'TIMEDOUT'
-    end
-
-    module PolicyType
-      RuleBased = 'RuleBased'
-      TargetBased = 'TargetBased'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Custom prioritization settings to use with a game session queue. Prioritization
@@ -8053,7 +7084,7 @@ module Aws::GameLift
       :priority_order,
       :location_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An alternate list of prioritized locations for use with a game session queue. When
@@ -8097,19 +7128,7 @@ module Aws::GameLift
       :placement_fallback_strategy,
       :location_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PriorityType
-      LATENCY = 'LATENCY'
-      COST = 'COST'
-      DESTINATION = 'DESTINATION'
-      LOCATION = 'LOCATION'
-    end
-
-    module ProtectionPolicy
-      NoProtection = 'NoProtection'
-      FullProtection = 'FullProtection'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -8249,7 +7268,7 @@ module Aws::GameLift
       :policy_type,
       :target_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -8258,7 +7277,7 @@ module Aws::GameLift
     class PutScalingPolicyOutput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -8291,7 +7310,7 @@ module Aws::GameLift
       :ip_address,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute
@@ -8300,7 +7319,7 @@ module Aws::GameLift
     class RegisterComputeOutput < Struct.new(
       :compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -8330,7 +7349,7 @@ module Aws::GameLift
       :connection_info,
       :game_server_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server
@@ -8339,7 +7358,7 @@ module Aws::GameLift
     class RegisterGameServerOutput < Struct.new(
       :game_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_id
@@ -8348,7 +7367,7 @@ module Aws::GameLift
     class RequestUploadCredentialsInput < Struct.new(
       :build_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_credentials
@@ -8364,7 +7383,7 @@ module Aws::GameLift
       :upload_credentials,
       :storage_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -8374,7 +7393,7 @@ module Aws::GameLift
     class ResolveAliasInput < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -8388,7 +7407,7 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that puts limits on the number of game sessions that a player can create
@@ -8414,7 +7433,7 @@ module Aws::GameLift
       :new_game_sessions_per_creator,
       :policy_period_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -8427,7 +7446,7 @@ module Aws::GameLift
       :game_server_group_name,
       :resume_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -8438,7 +7457,7 @@ module Aws::GameLift
     class ResumeGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The routing configuration for a fleet alias.</p>
@@ -8476,12 +7495,7 @@ module Aws::GameLift
       :fleet_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingStrategyType
-      SIMPLE = 'SIMPLE'
-      TERMINAL = 'TERMINAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of instructions that define the set of server processes to run on computes in a
@@ -8514,7 +7528,7 @@ module Aws::GameLift
       :max_concurrent_game_session_activations,
       :game_session_activation_timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location in Amazon S3 where build or script files are stored for access by
@@ -8545,13 +7559,7 @@ module Aws::GameLift
       :role_arn,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingAdjustmentType
-      ChangeInCapacity = 'ChangeInCapacity'
-      ExactCapacity = 'ExactCapacity'
-      PercentChangeInCapacity = 'PercentChangeInCapacity'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by
@@ -8747,17 +7755,7 @@ module Aws::GameLift
       :update_status,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingStatusType
-      ACTIVE = 'ACTIVE'
-      UPDATE_REQUESTED = 'UPDATE_REQUESTED'
-      UPDATING = 'UPDATING'
-      DELETE_REQUESTED = 'DELETE_REQUESTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties describing a Realtime script.</p>
@@ -8805,7 +7803,7 @@ module Aws::GameLift
       :creation_time,
       :storage_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -8923,7 +7921,7 @@ module Aws::GameLift
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_sessions
@@ -8937,7 +7935,7 @@ module Aws::GameLift
       :game_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of instructions for launching server processes on fleet computes. Server
@@ -8977,12 +7975,7 @@ module Aws::GameLift
       :parameters,
       :concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9000,7 +7993,7 @@ module Aws::GameLift
       :actions,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9013,7 +8006,7 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute placement_id
@@ -9067,7 +8060,7 @@ module Aws::GameLift
       :game_session_data,
       :priority_configuration_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_placement
@@ -9078,7 +8071,7 @@ module Aws::GameLift
     class StartGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_id
@@ -9125,7 +8118,7 @@ module Aws::GameLift
       :game_session_arn,
       :players,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute matchmaking_ticket
@@ -9136,7 +8129,7 @@ module Aws::GameLift
     class StartMatchBackfillOutput < Struct.new(
       :matchmaking_ticket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_id
@@ -9162,7 +8155,7 @@ module Aws::GameLift
       :configuration_name,
       :players,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute matchmaking_ticket
@@ -9173,7 +8166,7 @@ module Aws::GameLift
     class StartMatchmakingOutput < Struct.new(
       :matchmaking_ticket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9191,7 +8184,7 @@ module Aws::GameLift
       :actions,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9204,7 +8197,7 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute placement_id
@@ -9213,7 +8206,7 @@ module Aws::GameLift
     class StopGameSessionPlacementInput < Struct.new(
       :placement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_placement
@@ -9223,7 +8216,7 @@ module Aws::GameLift
     class StopGameSessionPlacementOutput < Struct.new(
       :game_session_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_id
@@ -9232,12 +8225,12 @@ module Aws::GameLift
     class StopMatchmakingInput < Struct.new(
       :ticket_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopMatchmakingOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a support container in a container group. A support container might be in a game
@@ -9326,7 +8319,7 @@ module Aws::GameLift
       :resolved_image_digest,
       :vcpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a support container in a container group. You can define a support container in
@@ -9440,7 +8433,7 @@ module Aws::GameLift
       :port_configuration,
       :vcpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -9453,7 +8446,7 @@ module Aws::GameLift
       :game_server_group_name,
       :suspend_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -9464,7 +8457,7 @@ module Aws::GameLift
     class SuspendGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A label that you can assign to a Amazon GameLift Servers resource. </p>
@@ -9495,7 +8488,7 @@ module Aws::GameLift
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9514,12 +8507,12 @@ module Aws::GameLift
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested tagging operation did not succeed. This may be due to invalid tag format
@@ -9530,7 +8523,7 @@ module Aws::GameLift
     class TaggingFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for a target-based scaling policy. A target-based policy tracks a particular
@@ -9548,7 +8541,7 @@ module Aws::GameLift
     class TargetConfiguration < Struct.new(
       :target_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -9566,7 +8559,7 @@ module Aws::GameLift
     class TargetTrackingConfiguration < Struct.new(
       :target_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unable to resolve the routing for a particular alias because it has a
@@ -9578,7 +8571,7 @@ module Aws::GameLift
     class TerminalRoutingStrategyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -9618,7 +8611,7 @@ module Aws::GameLift
       :game_session_id,
       :termination_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session
@@ -9635,12 +8628,7 @@ module Aws::GameLift
     class TerminateGameSessionOutput < Struct.new(
       :game_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TerminationMode
-      TRIGGER_ON_PROCESS_TERMINATE = 'TRIGGER_ON_PROCESS_TERMINATE'
-      FORCE_TERMINATE = 'FORCE_TERMINATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain name and port information for a UDP endpoint.</p>
@@ -9654,7 +8642,7 @@ module Aws::GameLift
       :domain,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client failed authentication. Clients should not retry such requests.</p>
@@ -9663,7 +8651,7 @@ module Aws::GameLift
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not supported in the Region specified.</p>
@@ -9672,7 +8660,7 @@ module Aws::GameLift
     class UnsupportedRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9688,12 +8676,12 @@ module Aws::GameLift
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -9716,7 +8704,7 @@ module Aws::GameLift
       :description,
       :routing_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -9725,7 +8713,7 @@ module Aws::GameLift
     class UpdateAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build_id
@@ -9742,7 +8730,7 @@ module Aws::GameLift
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute build
@@ -9751,7 +8739,7 @@ module Aws::GameLift
     class UpdateBuildOutput < Struct.new(
       :build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9845,7 +8833,7 @@ module Aws::GameLift
       :log_configuration,
       :remove_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_fleet
@@ -9855,7 +8843,7 @@ module Aws::GameLift
     class UpdateContainerFleetOutput < Struct.new(
       :container_fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9910,7 +8898,7 @@ module Aws::GameLift
       :source_version_number,
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_group_definition
@@ -9919,7 +8907,7 @@ module Aws::GameLift
     class UpdateContainerGroupDefinitionOutput < Struct.new(
       :container_group_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9972,7 +8960,7 @@ module Aws::GameLift
       :metric_groups,
       :anywhere_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -9985,7 +8973,7 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -10017,7 +9005,7 @@ module Aws::GameLift
       :max_size,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -10035,7 +9023,7 @@ module Aws::GameLift
       :fleet_arn,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -10053,7 +9041,7 @@ module Aws::GameLift
       :inbound_permission_authorizations,
       :inbound_permission_revocations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -10066,7 +9054,7 @@ module Aws::GameLift
       :fleet_id,
       :fleet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -10130,7 +9118,7 @@ module Aws::GameLift
       :game_server_protection_policy,
       :balancing_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group
@@ -10140,7 +9128,7 @@ module Aws::GameLift
     class UpdateGameServerGroupOutput < Struct.new(
       :game_server_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server_group_name
@@ -10170,7 +9158,7 @@ module Aws::GameLift
       :utilization_status,
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_server
@@ -10179,7 +9167,7 @@ module Aws::GameLift
     class UpdateGameServerOutput < Struct.new(
       :game_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_id
@@ -10227,7 +9215,7 @@ module Aws::GameLift
       :protection_policy,
       :game_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session
@@ -10236,7 +9224,7 @@ module Aws::GameLift
     class UpdateGameSessionOutput < Struct.new(
       :game_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10283,7 +9271,7 @@ module Aws::GameLift
       :custom_event_data,
       :notification_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute game_session_queue
@@ -10292,7 +9280,7 @@ module Aws::GameLift
     class UpdateGameSessionQueueOutput < Struct.new(
       :game_session_queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10391,7 +9379,7 @@ module Aws::GameLift
       :backfill_mode,
       :flex_match_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -10400,7 +9388,7 @@ module Aws::GameLift
     class UpdateMatchmakingConfigurationOutput < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -10417,7 +9405,7 @@ module Aws::GameLift
       :fleet_id,
       :runtime_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime_configuration
@@ -10427,7 +9415,7 @@ module Aws::GameLift
     class UpdateRuntimeConfigurationOutput < Struct.new(
       :runtime_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script_id
@@ -10463,7 +9451,7 @@ module Aws::GameLift
       :storage_location,
       :zip_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute script
@@ -10477,7 +9465,7 @@ module Aws::GameLift
     class UpdateScriptOutput < Struct.new(
       :script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_body
@@ -10486,7 +9474,7 @@ module Aws::GameLift
     class ValidateMatchmakingRuleSetInput < Struct.new(
       :rule_set_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute valid
@@ -10495,7 +9483,7 @@ module Aws::GameLift
     class ValidateMatchmakingRuleSetOutput < Struct.new(
       :valid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorization for a VPC peering connection between the VPC for an
@@ -10535,7 +9523,7 @@ module Aws::GameLift
       :creation_time,
       :expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a peering connection between a VPC on one of your Amazon Web Services accounts and the
@@ -10586,7 +9574,7 @@ module Aws::GameLift
       :peer_vpc_id,
       :game_lift_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents status information for a VPC peering connection. Status codes and messages
@@ -10602,7 +9590,7 @@ module Aws::GameLift
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

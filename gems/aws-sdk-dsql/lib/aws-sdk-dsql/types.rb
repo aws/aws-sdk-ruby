@@ -12,21 +12,7 @@ module Aws::DSQL
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The current status of a cluster.</p>
-    module ClusterStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      IDLE = 'IDLE'
-      INACTIVE = 'INACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      PENDING_SETUP = 'PENDING_SETUP'
-      PENDING_DELETE = 'PENDING_DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the properties of a cluster.</p>
@@ -40,7 +26,7 @@ module Aws::DSQL
       :identifier,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The submitted action has conflicts.</p>
@@ -57,7 +43,7 @@ module Aws::DSQL
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_protection_enabled
@@ -89,7 +75,7 @@ module Aws::DSQL
       :client_token,
       :multi_region_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of a created cluster.</p>
@@ -123,7 +109,7 @@ module Aws::DSQL
       :encryption_details,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -142,7 +128,7 @@ module Aws::DSQL
       :identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from a deleted cluster.</p>
@@ -164,7 +150,7 @@ module Aws::DSQL
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details about encryption for the cluster including the KMS key ARN, encryption type, and encryption status.</p>
@@ -182,19 +168,7 @@ module Aws::DSQL
       :kms_key_arn,
       :encryption_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionStatus
-      ENABLED = 'ENABLED'
-      UPDATING = 'UPDATING'
-      KMS_KEY_INACCESSIBLE = 'KMS_KEY_INACCESSIBLE'
-      ENABLING = 'ENABLING'
-    end
-
-    module EncryptionType
-      AWS_OWNED_KMS_KEY = 'AWS_OWNED_KMS_KEY'
-      CUSTOMER_MANAGED_KMS_KEY = 'CUSTOMER_MANAGED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -203,7 +177,7 @@ module Aws::DSQL
     class GetClusterInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of a cluster.</p>
@@ -241,7 +215,7 @@ module Aws::DSQL
       :tags,
       :encryption_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -250,7 +224,7 @@ module Aws::DSQL
     class GetVpcEndpointServiceNameInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -259,7 +233,7 @@ module Aws::DSQL
     class GetVpcEndpointServiceNameOutput < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or
@@ -273,7 +247,7 @@ module Aws::DSQL
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -289,7 +263,7 @@ module Aws::DSQL
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -304,7 +278,7 @@ module Aws::DSQL
       :next_token,
       :clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -313,7 +287,7 @@ module Aws::DSQL
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -322,7 +296,7 @@ module Aws::DSQL
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the structure for multi-Region cluster configurations, containing the witness region and linked cluster settings.</p>
@@ -336,7 +310,7 @@ module Aws::DSQL
       :witness_region,
       :clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -353,7 +327,7 @@ module Aws::DSQL
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service limit was exceeded.</p>
@@ -379,7 +353,7 @@ module Aws::DSQL
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -392,7 +366,7 @@ module Aws::DSQL
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -414,7 +388,7 @@ module Aws::DSQL
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -427,7 +401,7 @@ module Aws::DSQL
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -458,7 +432,7 @@ module Aws::DSQL
       :client_token,
       :multi_region_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the cluster after it has been updated.</p>
@@ -480,7 +454,7 @@ module Aws::DSQL
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -497,7 +471,7 @@ module Aws::DSQL
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an validation
@@ -512,16 +486,7 @@ module Aws::DSQL
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The reason for the validation exception.</p>
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      DELETION_PROTECTION_ENABLED = 'deletionProtectionEnabled'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

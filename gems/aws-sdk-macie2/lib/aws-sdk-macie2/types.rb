@@ -20,12 +20,12 @@ module Aws::Macie2
       :invitation_id,
       :master_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptInvitationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the permissions settings of the bucket-level access control list (ACL) for an S3 bucket.</p>
@@ -39,7 +39,7 @@ module Aws::Macie2
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
@@ -49,7 +49,7 @@ module Aws::Macie2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details of an account to associate with an Amazon Macie administrator account.</p>
@@ -63,7 +63,7 @@ module Aws::Macie2
       :account_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the account-level permissions settings that apply to an S3 bucket.</p>
@@ -73,7 +73,7 @@ module Aws::Macie2
     class AccountLevelPermissions < Struct.new(
       :block_public_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the delegated Amazon Macie administrator account for an organization in Organizations.</p>
@@ -87,13 +87,7 @@ module Aws::Macie2
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The current status of an account as the delegated Amazon Macie administrator account for an organization in Organizations. Possible values are:</p>
-    module AdminStatus
-      ENABLED = 'ENABLED'
-      DISABLING_IN_PROGRESS = 'DISABLING_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the criteria for an allow list. The criteria must specify a regular expression (regex) or an S3 object (s3WordsList). It can't specify both.</p>
@@ -107,7 +101,7 @@ module Aws::Macie2
       :regex,
       :s3_words_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the current status of an allow list, which indicates whether Amazon Macie can access and use the list's criteria.</p>
@@ -121,19 +115,7 @@ module Aws::Macie2
       :code,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Indicates the current status of an allow list. Depending on the type of criteria that the list specifies, possible values are:</p>
-    module AllowListStatusCode
-      OK = 'OK'
-      S3_OBJECT_NOT_FOUND = 'S3_OBJECT_NOT_FOUND'
-      S3_USER_ACCESS_DENIED = 'S3_USER_ACCESS_DENIED'
-      S3_OBJECT_ACCESS_DENIED = 'S3_OBJECT_ACCESS_DENIED'
-      S3_THROTTLED = 'S3_THROTTLED'
-      S3_OBJECT_OVERSIZE = 'S3_OBJECT_OVERSIZE'
-      S3_OBJECT_EMPTY = 'S3_OBJECT_EMPTY'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a subset of information about an allow list.</p>
@@ -163,13 +145,7 @@ module Aws::Macie2
       :name,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllowsUnencryptedObjectUploads
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API operation that an entity invoked for an affected resource.</p>
@@ -191,7 +167,7 @@ module Aws::Macie2
       :first_seen,
       :last_seen,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the Security Token Service (STS) API.</p>
@@ -217,14 +193,7 @@ module Aws::Macie2
       :principal_id,
       :session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies whether to automatically enable automated sensitive data discovery for accounts that are part of an organization in Amazon Macie. Valid values are:</p>
-    module AutoEnableMode
-      ALL = 'ALL'
-      NEW = 'NEW'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status of automated sensitive data discovery for an Amazon Macie account.</p>
@@ -238,13 +207,7 @@ module Aws::Macie2
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of automated sensitive data discovery for an Amazon Macie account. Valid values are:</p>
-    module AutomatedDiscoveryAccountStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Changes the status of automated sensitive data discovery for an Amazon Macie account.</p>
@@ -258,7 +221,7 @@ module Aws::Macie2
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a request that failed to change the status of automated sensitive data discovery for an Amazon Macie account.</p>
@@ -272,31 +235,7 @@ module Aws::Macie2
       :account_id,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The error code that indicates why a request failed to change the status of automated sensitive data discovery for an Amazon Macie account. Possible values are:</p>
-    module AutomatedDiscoveryAccountUpdateErrorCode
-      ACCOUNT_PAUSED = 'ACCOUNT_PAUSED'
-      ACCOUNT_NOT_FOUND = 'ACCOUNT_NOT_FOUND'
-    end
-
-    # <p>Specifies whether automated sensitive data discovery is currently configured to analyze objects in an S3 bucket. Possible values are:</p>
-    module AutomatedDiscoveryMonitoringStatus
-      MONITORED = 'MONITORED'
-      NOT_MONITORED = 'NOT_MONITORED'
-    end
-
-    # <p>The status of the automated sensitive data discovery configuration for an organization in Amazon Macie or a standalone Macie account. Valid values are:</p>
-    module AutomatedDiscoveryStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    # <p>Specifies whether occurrences of sensitive data can be retrieved for a finding. Possible values are:</p>
-    module AvailabilityCode
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for an Amazon Web Services account other than your own account.</p>
@@ -310,7 +249,7 @@ module Aws::Macie2
       :account_id,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Web Service that performed an action on an affected resource.</p>
@@ -320,7 +259,7 @@ module Aws::Macie2
     class AwsService < Struct.new(
       :invoked_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a custom data identifier.</p>
@@ -350,7 +289,7 @@ module Aws::Macie2
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -359,7 +298,7 @@ module Aws::Macie2
     class BatchGetCustomDataIdentifiersRequest < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_data_identifiers
@@ -372,7 +311,7 @@ module Aws::Macie2
       :custom_data_identifiers,
       :not_found_identifier_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -381,7 +320,7 @@ module Aws::Macie2
     class BatchUpdateAutomatedDiscoveryAccountsRequest < Struct.new(
       :accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -390,7 +329,7 @@ module Aws::Macie2
     class BatchUpdateAutomatedDiscoveryAccountsResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the block public access settings for an S3 bucket. These settings can apply to a bucket at the account or bucket level. For detailed information about each setting, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">Blocking public access to your Amazon S3 storage</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
@@ -412,7 +351,7 @@ module Aws::Macie2
       :ignore_public_acls,
       :restrict_public_buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of S3 buckets that are publicly accessible due to a combination of permissions settings for each bucket.</p>
@@ -434,7 +373,7 @@ module Aws::Macie2
       :publicly_writable,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of S3 buckets whose settings do or don't specify default server-side encryption behavior for objects that are added to the buckets. For detailed information about these settings, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html">Setting default server-side encryption behavior for Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
@@ -456,7 +395,7 @@ module Aws::Macie2
       :unencrypted,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of S3 buckets that are or aren't shared with other Amazon Web Services accounts, Amazon CloudFront origin access identities (OAIs), or CloudFront origin access controls (OACs). In this data, an <i>Amazon Macie organization</i> is defined as a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.</p>
@@ -478,7 +417,7 @@ module Aws::Macie2
       :not_shared,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of S3 buckets whose bucket policies do or don't require server-side encryption of objects when objects are added to the buckets.</p>
@@ -496,7 +435,7 @@ module Aws::Macie2
       :denies_unencrypted_object_uploads,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the operator to use in a property-based condition that filters the results of a query for information about S3 buckets.</p>
@@ -530,7 +469,7 @@ module Aws::Macie2
       :neq,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the bucket-level permissions settings for an S3 bucket.</p>
@@ -548,7 +487,7 @@ module Aws::Macie2
       :block_public_access,
       :bucket_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes for your account. By default, object count and storage size values include data for object parts that are the result of incomplete multipart uploads. For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html">How Macie monitors Amazon S3 data security</a> in the <i>Amazon Macie User Guide</i>.</p> <p>If an error or issue prevents Macie from retrieving and processing metadata from Amazon S3 for the bucket or the bucket's objects, the value for the versioning property is false and the value for most other properties is null or UNKNOWN. Key exceptions are accountId, bucketArn, bucketCreatedAt, bucketName, lastUpdated, and region. To identify the cause, refer to the errorCode and errorMessage values.</p>
@@ -662,13 +601,7 @@ module Aws::Macie2
       :unclassifiable_object_size_in_bytes,
       :versioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The code for an error or issue that prevented Amazon Macie from retrieving and processing information about an S3 bucket and the bucket's objects.</p>
-    module BucketMetadataErrorCode
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      BUCKET_COUNT_EXCEEDS_QUOTA = 'BUCKET_COUNT_EXCEEDS_QUOTA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the account-level and bucket-level permissions settings for an S3 bucket.</p>
@@ -682,7 +615,7 @@ module Aws::Macie2
       :account_level_permissions,
       :bucket_level_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the permissions settings of the bucket policy for an S3 bucket.</p>
@@ -696,7 +629,7 @@ module Aws::Macie2
       :allows_public_read_access,
       :allows_public_write_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the permissions settings that determine whether an S3 bucket is publicly accessible.</p>
@@ -710,7 +643,7 @@ module Aws::Macie2
       :effective_permission,
       :permission_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the default server-side encryption settings for an S3 bucket. For detailed information about these settings, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html">Setting default server-side encryption behavior for Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
@@ -724,7 +657,7 @@ module Aws::Macie2
       :kms_master_key_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a query for information about S3 buckets.</p>
@@ -738,7 +671,7 @@ module Aws::Macie2
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides aggregated statistical data for sensitive data discovery metrics that apply to S3 buckets, grouped by bucket sensitivity score (sensitivityScore). If automated sensitive data discovery is currently disabled for your account, the value for most of these metrics is 0.</p>
@@ -760,7 +693,7 @@ module Aws::Macie2
       :not_sensitive,
       :sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of an occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.</p>
@@ -782,7 +715,7 @@ module Aws::Macie2
       :column_name,
       :row,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a sensitive data finding and the details of the finding.</p>
@@ -808,7 +741,7 @@ module Aws::Macie2
       :origin_type,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies where to store data classification results, and the encryption settings to use when storing results in that location. The location must be an S3 general purpose bucket.</p>
@@ -818,7 +751,7 @@ module Aws::Macie2
     class ClassificationExportConfiguration < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of a sensitive data finding, including the types, number of occurrences, and locations of the sensitive data that was detected.</p>
@@ -848,7 +781,7 @@ module Aws::Macie2
       :size_classified,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status of a sensitive data finding.</p>
@@ -862,7 +795,7 @@ module Aws::Macie2
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the classification scope for an Amazon Macie account. Macie uses the scope's settings when it performs automated sensitive data discovery for the account.</p>
@@ -876,14 +809,7 @@ module Aws::Macie2
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies how to apply changes to the S3 bucket exclusion list defined by the classification scope for an Amazon Macie account. Valid values are:</p>
-    module ClassificationScopeUpdateOperation
-      ADD = 'ADD'
-      REPLACE = 'REPLACE'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to a versioning conflict for a specified resource.</p>
@@ -893,7 +819,7 @@ module Aws::Macie2
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -918,7 +844,7 @@ module Aws::Macie2
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -931,7 +857,7 @@ module Aws::Macie2
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow_list_ids
@@ -988,7 +914,7 @@ module Aws::Macie2
       :schedule_frequency,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -1001,7 +927,7 @@ module Aws::Macie2
       :job_arn,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1042,7 +968,7 @@ module Aws::Macie2
       :severity_levels,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_data_identifier_id
@@ -1051,7 +977,7 @@ module Aws::Macie2
     class CreateCustomDataIdentifierResponse < Struct.new(
       :custom_data_identifier_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -1084,7 +1010,7 @@ module Aws::Macie2
       :position,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1097,7 +1023,7 @@ module Aws::Macie2
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1114,7 +1040,7 @@ module Aws::Macie2
       :disable_email_notification,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1123,7 +1049,7 @@ module Aws::Macie2
     class CreateInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -1136,7 +1062,7 @@ module Aws::Macie2
       :account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1145,7 +1071,7 @@ module Aws::Macie2
     class CreateMemberResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_types
@@ -1154,12 +1080,12 @@ module Aws::Macie2
     class CreateSampleFindingsRequest < Struct.new(
       :finding_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSampleFindingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 buckets from a classification job.</p>
@@ -1169,7 +1095,7 @@ module Aws::Macie2
     class CriteriaBlockForJob < Struct.new(
       :and,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 buckets from a classification job.</p>
@@ -1183,7 +1109,7 @@ module Aws::Macie2
       :simple_criterion,
       :tag_criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the operator to use in a property-based condition that filters the results of a query for findings. For detailed information and examples of each operator, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html">Fundamentals of filtering findings</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -1217,12 +1143,7 @@ module Aws::Macie2
       :lte,
       :neq,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of currency that the data for an Amazon Macie usage metric is reported in. Possible values are:</p>
-    module Currency
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a custom data identifier.</p>
@@ -1248,7 +1169,7 @@ module Aws::Macie2
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that they detected for the finding.</p>
@@ -1262,7 +1183,7 @@ module Aws::Macie2
       :detections,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a custom data identifier that produced a sensitive data finding, and the sensitive data that it detected for the finding.</p>
@@ -1284,36 +1205,13 @@ module Aws::Macie2
       :name,
       :occurrences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a classification job runs once a day, every day. This is an empty object.</p>
     class DailySchedule < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The severity of a finding, ranging from LOW, for least severe, to HIGH, for most severe. Valid values are:</p>
-    module DataIdentifierSeverity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    # <p>The type of data identifier that detected a specific type of sensitive data in an S3 bucket. Possible values are:</p>
-    module DataIdentifierType
-      CUSTOM = 'CUSTOM'
-      MANAGED = 'MANAGED'
-    end
-
-    module DayOfWeek
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1322,7 +1220,7 @@ module Aws::Macie2
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1331,7 +1229,7 @@ module Aws::Macie2
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a type of sensitive data that was detected by a managed data identifier and produced a sensitive data finding.</p>
@@ -1349,7 +1247,7 @@ module Aws::Macie2
       :occurrences,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1362,12 +1260,12 @@ module Aws::Macie2
       :id,
       :ignore_job_checks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAllowListResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1376,12 +1274,12 @@ module Aws::Macie2
     class DeleteCustomDataIdentifierRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomDataIdentifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1390,12 +1288,12 @@ module Aws::Macie2
     class DeleteFindingsFilterRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFindingsFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1404,7 +1302,7 @@ module Aws::Macie2
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -1413,7 +1311,7 @@ module Aws::Macie2
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1422,12 +1320,12 @@ module Aws::Macie2
     class DeleteMemberRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute criteria
@@ -1448,7 +1346,7 @@ module Aws::Macie2
       :next_token,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute buckets
@@ -1461,7 +1359,7 @@ module Aws::Macie2
       :buckets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1470,7 +1368,7 @@ module Aws::Macie2
     class DescribeClassificationJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow_list_ids
@@ -1559,12 +1457,12 @@ module Aws::Macie2
       :tags,
       :user_paused_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -1577,7 +1475,7 @@ module Aws::Macie2
       :auto_enable,
       :max_account_limit_reached,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies 1-10 occurrences of a specific type of sensitive data reported by a finding.</p>
@@ -1587,7 +1485,7 @@ module Aws::Macie2
     class DetectedDataDetails < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a type of sensitive data that Amazon Macie found in an S3 bucket while performing automated sensitive data discovery for an account. The information also specifies the custom or managed data identifier that detected the data. This information is available only if automated sensitive data discovery has been enabled for the account.</p>
@@ -1617,17 +1515,17 @@ module Aws::Macie2
       :suppressed,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableMacieRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableMacieResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -1636,32 +1534,32 @@ module Aws::Macie2
     class DisableOrganizationAdminAccountRequest < Struct.new(
       :admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1670,12 +1568,12 @@ module Aws::Macie2
     class DisassociateMemberRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the domain name of the device that an entity used to perform an action on an affected resource.</p>
@@ -1685,13 +1583,7 @@ module Aws::Macie2
     class DomainDetails < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EffectivePermission
-      PUBLIC = 'PUBLIC'
-      NOT_PUBLIC = 'NOT_PUBLIC'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1708,12 +1600,12 @@ module Aws::Macie2
       :finding_publishing_frequency,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableMacieResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -1726,27 +1618,12 @@ module Aws::Macie2
       :admin_account_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The server-side encryption algorithm that was used to encrypt an S3 object or is used by default to encrypt objects that are added to an S3 bucket. Possible values are:</p>
-    module EncryptionType
-      NONE = 'NONE'
-      AES256 = 'AES256'
-      aws_kms = 'aws:kms'
-      UNKNOWN = 'UNKNOWN'
-      aws_kms_dsse = 'aws:kms:dsse'
-    end
-
-    # <p>The source of an issue or delay. Possible values are:</p>
-    module ErrorCode
-      ClientError = 'ClientError'
-      InternalError = 'InternalError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the Security Token Service (STS) API.</p>
@@ -1772,7 +1649,7 @@ module Aws::Macie2
       :principal_id,
       :session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of a finding.</p>
@@ -1850,7 +1727,7 @@ module Aws::Macie2
       :type,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an action that occurred for a resource and produced a policy finding.</p>
@@ -1864,12 +1741,7 @@ module Aws::Macie2
       :action_type,
       :api_call_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of action that occurred for the resource and produced the policy finding:</p>
-    module FindingActionType
-      AWS_API_CALL = 'AWS_API_CALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an entity that performed an action that produced a policy finding for a resource.</p>
@@ -1887,13 +1759,7 @@ module Aws::Macie2
       :ip_address_details,
       :user_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The category of the finding. Possible values are:</p>
-    module FindingCategory
-      CLASSIFICATION = 'CLASSIFICATION'
-      POLICY = 'POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.</p>
@@ -1903,20 +1769,7 @@ module Aws::Macie2
     class FindingCriteria < Struct.new(
       :criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events). For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>
-    module FindingPublishingFrequency
-      FIFTEEN_MINUTES = 'FIFTEEN_MINUTES'
-      ONE_HOUR = 'ONE_HOUR'
-      SIX_HOURS = 'SIX_HOURS'
-    end
-
-    # <p>The grouping to sort the results by. Valid values are:</p>
-    module FindingStatisticsSortAttributeName
-      groupKey = 'groupKey'
-      count = 'count'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a query that retrieves aggregated statistical data about findings.</p>
@@ -1930,28 +1783,7 @@ module Aws::Macie2
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of finding. For details about each type, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-types.html">Types of findings</a> in the <i>Amazon Macie User Guide</i>. Possible values are:</p>
-    module FindingType
-      SensitiveData_S3Object_Multiple = 'SensitiveData:S3Object/Multiple'
-      SensitiveData_S3Object_Financial = 'SensitiveData:S3Object/Financial'
-      SensitiveData_S3Object_Personal = 'SensitiveData:S3Object/Personal'
-      SensitiveData_S3Object_Credentials = 'SensitiveData:S3Object/Credentials'
-      SensitiveData_S3Object_CustomIdentifier = 'SensitiveData:S3Object/CustomIdentifier'
-      Policy_IAMUser_S3BucketPublic = 'Policy:IAMUser/S3BucketPublic'
-      Policy_IAMUser_S3BucketSharedExternally = 'Policy:IAMUser/S3BucketSharedExternally'
-      Policy_IAMUser_S3BucketReplicatedExternally = 'Policy:IAMUser/S3BucketReplicatedExternally'
-      Policy_IAMUser_S3BucketEncryptionDisabled = 'Policy:IAMUser/S3BucketEncryptionDisabled'
-      Policy_IAMUser_S3BlockPublicAccessDisabled = 'Policy:IAMUser/S3BlockPublicAccessDisabled'
-      Policy_IAMUser_S3BucketSharedWithCloudFront = 'Policy:IAMUser/S3BucketSharedWithCloudFront'
-    end
-
-    # <p>The action to perform on findings that match the filter criteria. To suppress (automatically archive) findings that match the criteria, set this value to ARCHIVE. Valid values are:</p>
-    module FindingsFilterAction
-      ARCHIVE = 'ARCHIVE'
-      NOOP = 'NOOP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a findings filter.</p>
@@ -1977,12 +1809,12 @@ module Aws::Macie2
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAdministratorAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute administrator
@@ -1991,7 +1823,7 @@ module Aws::Macie2
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2000,7 +1832,7 @@ module Aws::Macie2
     class GetAllowListRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2041,12 +1873,12 @@ module Aws::Macie2
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAutomatedDiscoveryConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_organization_members
@@ -2079,7 +1911,7 @@ module Aws::Macie2
       :sensitivity_inspection_template_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2088,7 +1920,7 @@ module Aws::Macie2
     class GetBucketStatisticsRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_count
@@ -2149,12 +1981,12 @@ module Aws::Macie2
       :unclassifiable_object_count,
       :unclassifiable_object_size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetClassificationExportConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -2163,7 +1995,7 @@ module Aws::Macie2
     class GetClassificationExportConfigurationResponse < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2172,7 +2004,7 @@ module Aws::Macie2
     class GetClassificationScopeRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2189,7 +2021,7 @@ module Aws::Macie2
       :name,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2198,7 +2030,7 @@ module Aws::Macie2
     class GetCustomDataIdentifierRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2251,7 +2083,7 @@ module Aws::Macie2
       :severity_levels,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_criteria
@@ -2272,7 +2104,7 @@ module Aws::Macie2
       :size,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute counts_by_group
@@ -2281,7 +2113,7 @@ module Aws::Macie2
     class GetFindingStatisticsResponse < Struct.new(
       :counts_by_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2290,7 +2122,7 @@ module Aws::Macie2
     class GetFindingsFilterRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -2327,12 +2159,12 @@ module Aws::Macie2
       :position,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetFindingsPublicationConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_hub_configuration
@@ -2341,7 +2173,7 @@ module Aws::Macie2
     class GetFindingsPublicationConfigurationResponse < Struct.new(
       :security_hub_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_ids
@@ -2354,7 +2186,7 @@ module Aws::Macie2
       :finding_ids,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -2363,12 +2195,12 @@ module Aws::Macie2
     class GetFindingsResponse < Struct.new(
       :findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations_count
@@ -2377,12 +2209,12 @@ module Aws::Macie2
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetMacieSessionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_at
@@ -2407,12 +2239,12 @@ module Aws::Macie2
       :status,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetMasterAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute master
@@ -2421,7 +2253,7 @@ module Aws::Macie2
     class GetMasterAccountResponse < Struct.new(
       :master,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2430,7 +2262,7 @@ module Aws::Macie2
     class GetMemberRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2471,7 +2303,7 @@ module Aws::Macie2
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2480,7 +2312,7 @@ module Aws::Macie2
     class GetResourceProfileRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_updated_at
@@ -2501,12 +2333,12 @@ module Aws::Macie2
       :sensitivity_score_overridden,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetRevealConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -2519,7 +2351,7 @@ module Aws::Macie2
       :configuration,
       :retrieval_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_id
@@ -2528,7 +2360,7 @@ module Aws::Macie2
     class GetSensitiveDataOccurrencesAvailabilityRequest < Struct.new(
       :finding_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -2541,7 +2373,7 @@ module Aws::Macie2
       :code,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_id
@@ -2550,7 +2382,7 @@ module Aws::Macie2
     class GetSensitiveDataOccurrencesRequest < Struct.new(
       :finding_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error
@@ -2567,7 +2399,7 @@ module Aws::Macie2
       :sensitive_data_occurrences,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2576,7 +2408,7 @@ module Aws::Macie2
     class GetSensitivityInspectionTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -2601,7 +2433,7 @@ module Aws::Macie2
       :name,
       :sensitivity_inspection_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_by
@@ -2626,7 +2458,7 @@ module Aws::Macie2
       :sort_by,
       :time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2643,7 +2475,7 @@ module Aws::Macie2
       :records,
       :time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_range
@@ -2652,7 +2484,7 @@ module Aws::Macie2
     class GetUsageTotalsRequest < Struct.new(
       :time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_range
@@ -2665,14 +2497,7 @@ module Aws::Macie2
       :time_range,
       :usage_totals,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupBy
-      resourcesAffected_s3Bucket_name = 'resourcesAffected.s3Bucket.name'
-      type = 'type'
-      classificationDetails_jobId = 'classificationDetails.jobId'
-      severity_description = 'severity.description'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a group of results for a query that retrieved aggregated statistical data about findings.</p>
@@ -2686,7 +2511,7 @@ module Aws::Macie2
       :count,
       :group_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Identity and Access Management (IAM) user who performed an action on an affected resource.</p>
@@ -2708,7 +2533,7 @@ module Aws::Macie2
       :principal_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
@@ -2718,7 +2543,7 @@ module Aws::Macie2
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Macie membership invitation.</p>
@@ -2740,7 +2565,7 @@ module Aws::Macie2
       :invited_at,
       :relationship_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the IP address of the device that an entity used to perform an action on an affected resource.</p>
@@ -2766,7 +2591,7 @@ module Aws::Macie2
       :ip_geo_location,
       :ip_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the city that an IP address originated from.</p>
@@ -2776,7 +2601,7 @@ module Aws::Macie2
     class IpCity < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the country that an IP address originated from.</p>
@@ -2790,7 +2615,7 @@ module Aws::Macie2
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides geographic coordinates that indicate where a specified IP address originated from.</p>
@@ -2804,7 +2629,7 @@ module Aws::Macie2
       :lat,
       :lon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the registered owner of an IP address.</p>
@@ -2826,31 +2651,7 @@ module Aws::Macie2
       :isp,
       :org,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IsDefinedInJob
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module IsMonitoredByJob
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    # <p>The operator to use in a condition. Depending on the type of condition, possible values are:</p>
-    module JobComparator
-      EQ = 'EQ'
-      GT = 'GT'
-      GTE = 'GTE'
-      LT = 'LT'
-      LTE = 'LTE'
-      NE = 'NE'
-      CONTAINS = 'CONTAINS'
-      STARTS_WITH = 'STARTS_WITH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether any one-time or recurring classification jobs are configured to analyze objects in an S3 bucket, and, if so, the details of the job that ran most recently.</p>
@@ -2872,7 +2673,7 @@ module Aws::Macie2
       :last_job_id,
       :last_job_run_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the recurrence pattern for running a classification job.</p>
@@ -2890,7 +2691,7 @@ module Aws::Macie2
       :monthly_schedule,
       :weekly_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job. A JobScopeTerm object can contain only one simpleScopeTerm object or one tagScopeTerm object.</p>
@@ -2904,7 +2705,7 @@ module Aws::Macie2
       :simple_scope_term,
       :tag_scope_term,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 objects from a classification job.</p>
@@ -2914,17 +2715,7 @@ module Aws::Macie2
     class JobScopingBlock < Struct.new(
       :and,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a classification job. Possible values are:</p>
-    module JobStatus
-      RUNNING = 'RUNNING'
-      PAUSED = 'PAUSED'
-      CANCELLED = 'CANCELLED'
-      COMPLETE = 'COMPLETE'
-      IDLE = 'IDLE'
-      USER_PAUSED = 'USER_PAUSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a classification job, including the current status of the job.</p>
@@ -2966,13 +2757,7 @@ module Aws::Macie2
       :name,
       :user_paused_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The schedule for running a classification job. Valid values are:</p>
-    module JobType
-      ONE_TIME = 'ONE_TIME'
-      SCHEDULED = 'SCHEDULED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.</p>
@@ -2986,7 +2771,7 @@ module Aws::Macie2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether any account- or bucket-level access errors occurred when a classification job ran. For information about using logging data to investigate these errors, see <a href="https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html">Monitoring sensitive data discovery jobs</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -2996,13 +2781,7 @@ module Aws::Macie2
     class LastRunErrorStatus < Struct.new(
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies whether any account- or bucket-level access errors occurred during the run of a one-time classification job or the most recent run of a recurring classification job. Possible values are:</p>
-    module LastRunErrorStatusCode
-      NONE = 'NONE'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3015,7 +2794,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow_lists
@@ -3028,7 +2807,7 @@ module Aws::Macie2
       :allow_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -3045,7 +2824,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3058,7 +2837,7 @@ module Aws::Macie2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -3079,7 +2858,7 @@ module Aws::Macie2
       :next_token,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3092,7 +2871,7 @@ module Aws::Macie2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3105,7 +2884,7 @@ module Aws::Macie2
       :name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute classification_scopes
@@ -3118,7 +2897,7 @@ module Aws::Macie2
       :classification_scopes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3131,7 +2910,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3144,7 +2923,7 @@ module Aws::Macie2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3157,7 +2936,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings_filter_list_items
@@ -3170,7 +2949,7 @@ module Aws::Macie2
       :findings_filter_list_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_criteria
@@ -3191,7 +2970,7 @@ module Aws::Macie2
       :next_token,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_ids
@@ -3204,7 +2983,7 @@ module Aws::Macie2
       :finding_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3217,7 +2996,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations
@@ -3230,7 +3009,7 @@ module Aws::Macie2
       :invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for filtering the results of a request for information about classification jobs.</p>
@@ -3244,15 +3023,7 @@ module Aws::Macie2
       :excludes,
       :includes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The property to use to filter the results. Valid values are:</p>
-    module ListJobsFilterKey
-      jobType = 'jobType'
-      jobStatus = 'jobStatus'
-      createdAt = 'createdAt'
-      name = 'name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a condition that filters the results of a request for information about classification jobs. Each condition consists of a property, an operator, and one or more values.</p>
@@ -3270,15 +3041,7 @@ module Aws::Macie2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The property to sort the results by. Valid values are:</p>
-    module ListJobsSortAttributeName
-      createdAt = 'createdAt'
-      jobStatus = 'jobStatus'
-      name = 'name'
-      jobType = 'jobType'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a request for information about classification jobs.</p>
@@ -3292,7 +3055,7 @@ module Aws::Macie2
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3301,7 +3064,7 @@ module Aws::Macie2
     class ListManagedDataIdentifiersRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3314,7 +3077,7 @@ module Aws::Macie2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3331,7 +3094,7 @@ module Aws::Macie2
       :next_token,
       :only_associated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -3344,7 +3107,7 @@ module Aws::Macie2
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3357,7 +3120,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_accounts
@@ -3370,7 +3133,7 @@ module Aws::Macie2
       :admin_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3383,7 +3146,7 @@ module Aws::Macie2
       :next_token,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifacts
@@ -3396,7 +3159,7 @@ module Aws::Macie2
       :artifacts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3413,7 +3176,7 @@ module Aws::Macie2
       :next_token,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detections
@@ -3426,7 +3189,7 @@ module Aws::Macie2
       :detections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3439,7 +3202,7 @@ module Aws::Macie2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3452,7 +3215,7 @@ module Aws::Macie2
       :next_token,
       :sensitivity_inspection_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3461,7 +3224,7 @@ module Aws::Macie2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3470,22 +3233,7 @@ module Aws::Macie2
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of an Amazon Macie account. Valid values are:</p>
-    module MacieStatus
-      PAUSED = 'PAUSED'
-      ENABLED = 'ENABLED'
-    end
-
-    # <p>The selection type that determines which managed data identifiers a classification job uses to analyze data. Valid values are:</p>
-    module ManagedDataIdentifierSelector
-      ALL = 'ALL'
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-      NONE = 'NONE'
-      RECOMMENDED = 'RECOMMENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a managed data identifier. For additional information, see <a href="https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -3499,7 +3247,7 @@ module Aws::Macie2
       :category,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes for your account. By default, object count and storage size values include data for object parts that are the result of incomplete multipart uploads. For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/monitoring-s3-how-it-works.html">How Macie monitors Amazon S3 data security</a> in the <i>Amazon Macie User Guide</i>.</p> <p>If an error or issue prevents Macie from retrieving and processing information about the bucket or the bucket's objects, the value for many of these properties is null. Key exceptions are accountId and bucketName. To identify the cause, refer to the errorCode and errorMessage values.</p>
@@ -3569,7 +3317,7 @@ module Aws::Macie2
       :unclassifiable_object_count,
       :unclassifiable_object_size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistical data and other information about an Amazon Web Services resource that Amazon Macie monitors and analyzes for your account.</p>
@@ -3579,7 +3327,7 @@ module Aws::Macie2
     class MatchingResource < Struct.new(
       :matching_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an account that's associated with an Amazon Macie administrator account.</p>
@@ -3621,7 +3369,7 @@ module Aws::Macie2
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a monthly recurrence pattern for running a classification job.</p>
@@ -3631,7 +3379,7 @@ module Aws::Macie2
     class MonthlySchedule < Struct.new(
       :day_of_month,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of objects that are in an S3 bucket and use certain types of server-side encryption, use client-side encryption, or aren't encrypted.</p>
@@ -3657,7 +3405,7 @@ module Aws::Macie2
       :unencrypted,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata or MatchingBucket object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results. If versioning is enabled for a bucket, storage size values are based on the size of the latest version of each applicable object in the bucket.</p>
@@ -3675,7 +3423,7 @@ module Aws::Macie2
       :storage_class,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.</p>
@@ -3701,18 +3449,7 @@ module Aws::Macie2
       :pages,
       :records,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderBy
-      ASC = 'ASC'
-      DESC = 'DESC'
-    end
-
-    # <p>Specifies how Amazon Macie found the sensitive data that produced a finding. Possible values are:</p>
-    module OriginType
-      SENSITIVE_DATA_DISCOVERY_JOB = 'SENSITIVE_DATA_DISCOVERY_JOB'
-      AUTOMATED_SENSITIVE_DATA_DISCOVERY = 'AUTOMATED_SENSITIVE_DATA_DISCOVERY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of an occurrence of sensitive data in an Adobe Portable Document Format file.</p>
@@ -3730,7 +3467,7 @@ module Aws::Macie2
       :offset_range,
       :page_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of a policy finding.</p>
@@ -3744,7 +3481,7 @@ module Aws::Macie2
       :action,
       :actor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -3753,7 +3490,7 @@ module Aws::Macie2
     class PutClassificationExportConfigurationRequest < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -3762,7 +3499,7 @@ module Aws::Macie2
     class PutClassificationExportConfigurationResponse < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -3775,12 +3512,12 @@ module Aws::Macie2
       :client_token,
       :security_hub_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutFindingsPublicationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of an occurrence of sensitive data in an email message or a non-binary text file such as an HTML, TXT, or XML file.</p>
@@ -3798,7 +3535,7 @@ module Aws::Macie2
       :start,
       :start_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file.</p>
@@ -3812,21 +3549,7 @@ module Aws::Macie2
       :json_path,
       :record_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The current status of the relationship between an account and an associated Amazon Macie administrator account. Possible values are:</p>
-    module RelationshipStatus
-      Enabled = 'Enabled'
-      Paused = 'Paused'
-      Invited = 'Invited'
-      Created = 'Created'
-      Removed = 'Removed'
-      Resigned = 'Resigned'
-      EmailVerificationInProgress = 'EmailVerificationInProgress'
-      EmailVerificationFailed = 'EmailVerificationFailed'
-      RegionDisabled = 'RegionDisabled'
-      AccountSuspended = 'AccountSuspended'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other Amazon Web Services accounts and, if so, which accounts.</p>
@@ -3844,7 +3567,7 @@ module Aws::Macie2
       :replicated_externally,
       :replication_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
@@ -3854,7 +3577,7 @@ module Aws::Macie2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an S3 object that Amazon Macie selected for analysis while performing automated sensitive data discovery for an account, and the status and results of the analysis. This information is available only if automated sensitive data discovery has been enabled for the account.</p>
@@ -3872,7 +3595,7 @@ module Aws::Macie2
       :classification_result_status,
       :sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistical data for sensitive data discovery metrics that apply to an S3 bucket that Amazon Macie monitors and analyzes for an account, if automated sensitive data discovery has been enabled for the account. The data captures the results of automated sensitive data discovery activities that Macie has performed for the bucket.</p>
@@ -3914,7 +3637,7 @@ module Aws::Macie2
       :total_items_skipped_invalid_kms,
       :total_items_skipped_permission_denied,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the resources that a finding applies to.</p>
@@ -3928,7 +3651,7 @@ module Aws::Macie2
       :s3_bucket,
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the access method and settings that are used to retrieve occurrences of sensitive data reported by findings.</p>
@@ -3946,13 +3669,7 @@ module Aws::Macie2
       :retrieval_mode,
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The access method to use when retrieving occurrences of sensitive data reported by findings. Valid values are:</p>
-    module RetrievalMode
-      CALLER_CREDENTIALS = 'CALLER_CREDENTIALS'
-      ASSUME_ROLE = 'ASSUME_ROLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status of the Amazon Macie configuration for retrieving occurrences of sensitive data reported by findings, and the Key Management Service (KMS) key to use to encrypt sensitive data that's retrieved. When you enable the configuration for the first time, your request must specify an KMS key. Otherwise, an error occurs.</p>
@@ -3966,20 +3683,7 @@ module Aws::Macie2
       :kms_key_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a request to retrieve occurrences of sensitive data reported by a finding. Possible values are:</p>
-    module RevealRequestStatus
-      SUCCESS = 'SUCCESS'
-      PROCESSING = 'PROCESSING'
-      ERROR = 'ERROR'
-    end
-
-    # <p>The status of the configuration for retrieving occurrences of sensitive data reported by findings. Valid values are:</p>
-    module RevealStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the S3 bucket that a finding applies to. If a quota prevented Amazon Macie from retrieving and processing all the bucket's information prior to generating the finding, the following values are UNKNOWN or null: allowsUnencryptedObjectUploads, defaultServerSideEncryption, publicAccess, and tags.</p>
@@ -4017,7 +3721,7 @@ module Aws::Macie2
       :public_access,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies property- and tag-based conditions that define criteria for including or excluding S3 buckets from a classification job. Exclude conditions take precedence over include conditions.</p>
@@ -4031,7 +3735,7 @@ module Aws::Macie2
       :excludes,
       :includes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon Web Services account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>
@@ -4045,7 +3749,7 @@ module Aws::Macie2
       :account_id,
       :buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the Amazon Web Services account that owns an S3 bucket.</p>
@@ -4059,7 +3763,7 @@ module Aws::Macie2
       :display_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the S3 buckets that are excluded from automated sensitive data discovery for an Amazon Macie account.</p>
@@ -4069,7 +3773,7 @@ module Aws::Macie2
     class S3ClassificationScope < Struct.new(
       :excludes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the names of the S3 buckets that are excluded from automated sensitive data discovery.</p>
@@ -4079,7 +3783,7 @@ module Aws::Macie2
     class S3ClassificationScopeExclusion < Struct.new(
       :bucket_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies S3 buckets to add or remove from the exclusion list defined by the classification scope for an Amazon Macie account.</p>
@@ -4093,7 +3797,7 @@ module Aws::Macie2
       :bucket_names,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies changes to the list of S3 buckets that are excluded from automated sensitive data discovery for an Amazon Macie account.</p>
@@ -4103,7 +3807,7 @@ module Aws::Macie2
     class S3ClassificationScopeUpdate < Struct.new(
       :excludes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>
@@ -4121,7 +3825,7 @@ module Aws::Macie2
       :key_prefix,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis. The bucket specification can be static (bucketDefinitions) or dynamic (bucketCriteria). If it's static, the job analyzes objects in the same predefined set of buckets each time the job runs. If it's dynamic, the job analyzes objects in any buckets that match the specified criteria each time the job starts to run.</p>
@@ -4139,7 +3843,7 @@ module Aws::Macie2
       :bucket_definitions,
       :scoping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the S3 object that a finding applies to.</p>
@@ -4193,7 +3897,7 @@ module Aws::Macie2
       :tags,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an S3 object that lists specific text to ignore.</p>
@@ -4207,15 +3911,7 @@ module Aws::Macie2
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The property to use in a condition that determines whether an S3 object is included or excluded from a classification job. Valid values are:</p>
-    module ScopeFilterKey
-      OBJECT_EXTENSION = 'OBJECT_EXTENSION'
-      OBJECT_LAST_MODIFIED_DATE = 'OBJECT_LAST_MODIFIED_DATE'
-      OBJECT_SIZE = 'OBJECT_SIZE'
-      OBJECT_KEY = 'OBJECT_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 objects from a classification job. Exclude conditions take precedence over include conditions.</p>
@@ -4229,7 +3925,7 @@ module Aws::Macie2
       :excludes,
       :includes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies property- and tag-based conditions that define filter criteria for including or excluding S3 buckets from the query results. Exclude conditions take precedence over include conditions.</p>
@@ -4243,13 +3939,7 @@ module Aws::Macie2
       :excludes,
       :includes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The operator to use in a condition that filters the results of a query. Valid values are:</p>
-    module SearchResourcesComparator
-      EQ = 'EQ'
-      NE = 'NE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property- or tag-based filter condition for including or excluding Amazon Web Services resources from the query results.</p>
@@ -4263,7 +3953,7 @@ module Aws::Macie2
       :simple_criterion,
       :tag_criterion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies property- and tag-based conditions that define filter criteria for including or excluding Amazon Web Services resources from the query results.</p>
@@ -4273,7 +3963,7 @@ module Aws::Macie2
     class SearchResourcesCriteriaBlock < Struct.new(
       :and,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_criteria
@@ -4294,7 +3984,7 @@ module Aws::Macie2
       :next_token,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute matching_resources
@@ -4307,7 +3997,7 @@ module Aws::Macie2
       :matching_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>
@@ -4325,24 +4015,7 @@ module Aws::Macie2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The property to use in a condition that filters the query results. Valid values are:</p>
-    module SearchResourcesSimpleCriterionKey
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      S3_BUCKET_NAME = 'S3_BUCKET_NAME'
-      S3_BUCKET_EFFECTIVE_PERMISSION = 'S3_BUCKET_EFFECTIVE_PERMISSION'
-      S3_BUCKET_SHARED_ACCESS = 'S3_BUCKET_SHARED_ACCESS'
-      AUTOMATED_DISCOVERY_MONITORING_STATUS = 'AUTOMATED_DISCOVERY_MONITORING_STATUS'
-    end
-
-    # <p>The property to sort the query results by. Valid values are:</p>
-    module SearchResourcesSortAttributeName
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      RESOURCE_NAME = 'RESOURCE_NAME'
-      S3_CLASSIFIABLE_OBJECT_COUNT = 'S3_CLASSIFIABLE_OBJECT_COUNT'
-      S3_CLASSIFIABLE_SIZE_IN_BYTES = 'S3_CLASSIFIABLE_SIZE_IN_BYTES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a query for information about Amazon Web Services resources that Amazon Macie monitors and analyzes.</p>
@@ -4356,7 +4029,7 @@ module Aws::Macie2
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>
@@ -4370,7 +4043,7 @@ module Aws::Macie2
       :comparator,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a tag-based filter condition for a query. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based filter conditions.</p>
@@ -4384,7 +4057,7 @@ module Aws::Macie2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration settings that determine which findings are published to Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href="https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html">Evaluating findings with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -4398,7 +4071,7 @@ module Aws::Macie2
       :publish_classification_findings,
       :publish_policy_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the category, types, and occurrences of sensitive data that produced a sensitive data finding.</p>
@@ -4416,15 +4089,7 @@ module Aws::Macie2
       :detections,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>For a finding, the category of sensitive data that was detected and produced the finding. For a managed data identifier, the category of sensitive data that the managed data identifier detects. Possible values are:</p>
-    module SensitiveDataItemCategory
-      FINANCIAL_INFORMATION = 'FINANCIAL_INFORMATION'
-      PERSONAL_INFORMATION = 'PERSONAL_INFORMATION'
-      CREDENTIALS = 'CREDENTIALS'
-      CUSTOM_IDENTIFIER = 'CUSTOM_IDENTIFIER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides aggregated statistical data for sensitive data discovery metrics that apply to S3 buckets. Each field contains aggregated data for all the buckets that have a sensitivity score (sensitivityScore) of a specified value or within a specified range (BucketStatisticsBySensitivity). If automated sensitive data discovery is currently disabled for your account, the value for most fields is 0.</p>
@@ -4446,7 +4111,7 @@ module Aws::Macie2
       :total_count,
       :total_size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies managed data identifiers to exclude (not use) when performing automated sensitive data discovery. For information about the managed data identifiers that Amazon Macie currently provides, see <a href="https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -4456,7 +4121,7 @@ module Aws::Macie2
     class SensitivityInspectionTemplateExcludes < Struct.new(
       :managed_data_identifier_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the allow lists, custom data identifiers, and managed data identifiers to include (use) when performing automated sensitive data discovery. The configuration must specify at least one custom data identifier or managed data identifier. For information about the managed data identifiers that Amazon Macie currently provides, see <a href="https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -4474,7 +4139,7 @@ module Aws::Macie2
       :custom_data_identifier_ids,
       :managed_data_identifier_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the sensitivity inspection template for an Amazon Macie account.</p>
@@ -4488,7 +4153,7 @@ module Aws::Macie2
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the default server-side encryption settings for an S3 bucket or the encryption settings for an S3 object.</p>
@@ -4502,7 +4167,7 @@ module Aws::Macie2
       :encryption_type,
       :kms_master_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a current quota for an Amazon Macie account.</p>
@@ -4520,7 +4185,7 @@ module Aws::Macie2
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
@@ -4530,7 +4195,7 @@ module Aws::Macie2
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a session that was created for an entity that performed an action by using temporary security credentials.</p>
@@ -4544,7 +4209,7 @@ module Aws::Macie2
       :attributes,
       :session_issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the context in which temporary security credentials were issued to an entity.</p>
@@ -4558,7 +4223,7 @@ module Aws::Macie2
       :creation_date,
       :mfa_authenticated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the source and type of temporary security credentials that were issued to an entity.</p>
@@ -4584,7 +4249,7 @@ module Aws::Macie2
       :type,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the numerical and qualitative representations of a finding's severity.</p>
@@ -4598,14 +4263,7 @@ module Aws::Macie2
       :description,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The qualitative representation of the finding's severity. Possible values are:</p>
-    module SeverityDescription
-      Low = 'Low'
-      Medium = 'Medium'
-      High = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a severity level for findings that a custom data identifier produces. A severity level determines which severity is assigned to the findings, based on the number of occurrences of text that match the custom data identifier's detection criteria.</p>
@@ -4619,14 +4277,7 @@ module Aws::Macie2
       :occurrences_threshold,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SharedAccess
-      EXTERNAL = 'EXTERNAL'
-      INTERNAL = 'INTERNAL'
-      NOT_SHARED = 'NOT_SHARED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property-based condition that determines whether an S3 bucket is included or excluded from a classification job.</p>
@@ -4644,15 +4295,7 @@ module Aws::Macie2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The property to use in a condition that determines whether an S3 bucket is included or excluded from a classification job. Valid values are:</p>
-    module SimpleCriterionKeyForJob
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      S3_BUCKET_NAME = 'S3_BUCKET_NAME'
-      S3_BUCKET_EFFECTIVE_PERMISSION = 'S3_BUCKET_EFFECTIVE_PERMISSION'
-      S3_BUCKET_SHARED_ACCESS = 'S3_BUCKET_SHARED_ACCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a property-based condition that determines whether an S3 object is included or excluded from a classification job.</p>
@@ -4670,7 +4313,7 @@ module Aws::Macie2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a request for findings.</p>
@@ -4684,7 +4327,7 @@ module Aws::Macie2
       :attribute_name,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides processing statistics for a classification job.</p>
@@ -4698,20 +4341,7 @@ module Aws::Macie2
       :approximate_number_of_objects_to_process,
       :number_of_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The storage class of the S3 object. Possible values are:</p>
-    module StorageClass
-      STANDARD = 'STANDARD'
-      REDUCED_REDUNDANCY = 'REDUCED_REDUNDANCY'
-      STANDARD_IA = 'STANDARD_IA'
-      INTELLIGENT_TIERING = 'INTELLIGENT_TIERING'
-      DEEP_ARCHIVE = 'DEEP_ARCHIVE'
-      ONEZONE_IA = 'ONEZONE_IA'
-      GLACIER = 'GLACIER'
-      GLACIER_IR = 'GLACIER_IR'
-      OUTPOSTS = 'OUTPOSTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a custom data identifier or managed data identifier that detected a type of sensitive data to exclude from an S3 bucket's sensitivity score.</p>
@@ -4725,7 +4355,7 @@ module Aws::Macie2
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag-based condition that determines whether an S3 bucket is included or excluded from a classification job.</p>
@@ -4739,7 +4369,7 @@ module Aws::Macie2
       :comparator,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a tag-based condition that determines whether an S3 bucket is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>
@@ -4753,7 +4383,7 @@ module Aws::Macie2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4766,12 +4396,12 @@ module Aws::Macie2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job.</p>
@@ -4793,12 +4423,7 @@ module Aws::Macie2
       :tag_values,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of object to apply a tag-based condition to. Valid values are:</p>
-    module TagTarget
-      S3_OBJECT = 'S3_OBJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag key or tag key and value pair to use in a tag-based condition that determines whether an S3 object is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>
@@ -4812,7 +4437,7 @@ module Aws::Macie2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ignore_words
@@ -4837,7 +4462,7 @@ module Aws::Macie2
       :regex,
       :sample_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match_count
@@ -4846,7 +4471,7 @@ module Aws::Macie2
     class TestCustomDataIdentifierResponse < Struct.new(
       :match_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
@@ -4856,39 +4481,7 @@ module Aws::Macie2
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>An inclusive time period that Amazon Macie usage data applies to. Possible values are:</p>
-    module TimeRange
-      MONTH_TO_DATE = 'MONTH_TO_DATE'
-      PAST_30_DAYS = 'PAST_30_DAYS'
-    end
-
-    module Type
-      NONE = 'NONE'
-      AES256 = 'AES256'
-      aws_kms = 'aws:kms'
-      aws_kms_dsse = 'aws:kms:dsse'
-    end
-
-    # <p>Specifies why occurrences of sensitive data can't be retrieved for a finding. Possible values are:</p>
-    module UnavailabilityReasonCode
-      OBJECT_EXCEEDS_SIZE_QUOTA = 'OBJECT_EXCEEDS_SIZE_QUOTA'
-      UNSUPPORTED_OBJECT_TYPE = 'UNSUPPORTED_OBJECT_TYPE'
-      UNSUPPORTED_FINDING_TYPE = 'UNSUPPORTED_FINDING_TYPE'
-      INVALID_CLASSIFICATION_RESULT = 'INVALID_CLASSIFICATION_RESULT'
-      OBJECT_UNAVAILABLE = 'OBJECT_UNAVAILABLE'
-      ACCOUNT_NOT_IN_ORGANIZATION = 'ACCOUNT_NOT_IN_ORGANIZATION'
-      MISSING_GET_MEMBER_PERMISSION = 'MISSING_GET_MEMBER_PERMISSION'
-      ROLE_TOO_PERMISSIVE = 'ROLE_TOO_PERMISSIVE'
-      MEMBER_ROLE_TOO_PERMISSIVE = 'MEMBER_ROLE_TOO_PERMISSIVE'
-      INVALID_RESULT_SIGNATURE = 'INVALID_RESULT_SIGNATURE'
-      RESULT_NOT_SIGNED = 'RESULT_NOT_SIGNED'
-    end
-
-    module Unit
-      TERABYTES = 'TERABYTES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to an unprocessable entity.</p>
@@ -4898,7 +4491,7 @@ module Aws::Macie2
     class UnprocessableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an account-related request that hasn't been processed.</p>
@@ -4916,7 +4509,7 @@ module Aws::Macie2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4929,12 +4522,12 @@ module Aws::Macie2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute criteria
@@ -4955,7 +4548,7 @@ module Aws::Macie2
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4968,7 +4561,7 @@ module Aws::Macie2
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_organization_members
@@ -4981,12 +4574,12 @@ module Aws::Macie2
       :auto_enable_organization_members,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAutomatedDiscoveryConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -4999,12 +4592,12 @@ module Aws::Macie2
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateClassificationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5017,12 +4610,12 @@ module Aws::Macie2
       :id,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateClassificationScopeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -5055,7 +4648,7 @@ module Aws::Macie2
       :name,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5068,7 +4661,7 @@ module Aws::Macie2
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_publishing_frequency
@@ -5081,12 +4674,12 @@ module Aws::Macie2
       :finding_publishing_frequency,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMacieSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5099,12 +4692,12 @@ module Aws::Macie2
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMemberSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -5113,12 +4706,12 @@ module Aws::Macie2
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5131,12 +4724,12 @@ module Aws::Macie2
       :resource_arn,
       :suppress_data_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceProfileDetectionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5149,12 +4742,12 @@ module Aws::Macie2
       :resource_arn,
       :sensitivity_score_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the access method and settings to use when retrieving occurrences of sensitive data reported by findings. If your request specifies an Identity and Access Management (IAM) role to assume, Amazon Macie verifies that the role exists and the attached policies are configured correctly. If there's an issue, Macie returns an error. For information about addressing the issue, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html">Configuration options for retrieving sensitive data samples</a> in the <i>Amazon Macie User Guide</i>.</p>
@@ -5168,7 +4761,7 @@ module Aws::Macie2
       :retrieval_mode,
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -5181,7 +4774,7 @@ module Aws::Macie2
       :configuration,
       :retrieval_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -5194,7 +4787,7 @@ module Aws::Macie2
       :configuration,
       :retrieval_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -5215,12 +4808,12 @@ module Aws::Macie2
       :id,
       :includes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSensitivityInspectionTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides data for a specific usage metric and the corresponding quota for an Amazon Macie account.</p>
@@ -5242,7 +4835,7 @@ module Aws::Macie2
       :service_limit,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides quota and aggregated usage data for an Amazon Macie account.</p>
@@ -5264,7 +4857,7 @@ module Aws::Macie2
       :free_trial_start_date,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a condition for filtering the results of a query for quota and usage data for one or more Amazon Macie accounts.</p>
@@ -5282,26 +4875,7 @@ module Aws::Macie2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The operator to use in a condition that filters the results of a query for Amazon Macie account quotas and usage data. Valid values are:</p>
-    module UsageStatisticsFilterComparator
-      GT = 'GT'
-      GTE = 'GTE'
-      LT = 'LT'
-      LTE = 'LTE'
-      EQ = 'EQ'
-      NE = 'NE'
-      CONTAINS = 'CONTAINS'
-    end
-
-    # <p>The field to use in a condition that filters the results of a query for Amazon Macie account quotas and usage data. Valid values are:</p>
-    module UsageStatisticsFilterKey
-      accountId = 'accountId'
-      serviceLimit = 'serviceLimit'
-      freeTrialStartDate = 'freeTrialStartDate'
-      total = 'total'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for sorting the results of a query for Amazon Macie account quotas and usage data.</p>
@@ -5315,15 +4889,7 @@ module Aws::Macie2
       :key,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The field to use to sort the results of a query for Amazon Macie account quotas and usage data. Valid values are:</p>
-    module UsageStatisticsSortKey
-      accountId = 'accountId'
-      total = 'total'
-      serviceLimitValue = 'serviceLimitValue'
-      freeTrialStartDate = 'freeTrialStartDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides aggregated data for an Amazon Macie usage metric. The value for the metric reports estimated usage data for an account for the preceding 30 days or the current calendar month to date, depending on the time period (timeRange) specified in the request.</p>
@@ -5341,15 +4907,7 @@ module Aws::Macie2
       :estimated_cost,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The name of an Amazon Macie usage metric for an account. Possible values are:</p>
-    module UsageType
-      DATA_INVENTORY_EVALUATION = 'DATA_INVENTORY_EVALUATION'
-      SENSITIVE_DATA_DISCOVERY = 'SENSITIVE_DATA_DISCOVERY'
-      AUTOMATED_SENSITIVE_DATA_DISCOVERY = 'AUTOMATED_SENSITIVE_DATA_DISCOVERY'
-      AUTOMATED_OBJECT_MONITORING = 'AUTOMATED_OBJECT_MONITORING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the type and other characteristics of an entity that performed an action on an affected resource.</p>
@@ -5383,7 +4941,7 @@ module Aws::Macie2
       :root,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for your Amazon Web Services account.</p>
@@ -5401,17 +4959,7 @@ module Aws::Macie2
       :arn,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of entity that performed the action on the affected resource. Possible values are:</p>
-    module UserIdentityType
-      AssumedRole = 'AssumedRole'
-      IAMUser = 'IAMUser'
-      FederatedUser = 'FederatedUser'
-      Root = 'Root'
-      AWSAccount = 'AWSAccount'
-      AWSService = 'AWSService'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about when a classification job was paused. For a one-time job, this object also specifies when the job will expire and be cancelled if it isn't resumed. For a recurring job, this object also specifies when the paused job run will expire and be cancelled if it isn't resumed. This object is present only if a job's current status (jobStatus) is USER_PAUSED. The information in this object applies only to a job that was paused while it had a status of RUNNING.</p>
@@ -5429,7 +4977,7 @@ module Aws::Macie2
       :job_imminent_expiration_health_event_arn,
       :job_paused_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an error that occurred due to a syntax error in a request.</p>
@@ -5439,7 +4987,7 @@ module Aws::Macie2
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a weekly recurrence pattern for running a classification job.</p>
@@ -5449,7 +4997,7 @@ module Aws::Macie2
     class WeeklySchedule < Struct.new(
       :day_of_week,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

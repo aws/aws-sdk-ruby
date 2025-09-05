@@ -6,10 +6,6 @@ module Aws::APIGateway
   # This module contains the types returned by client operations.
   module Types
 
-    module AccessAssociationSourceType
-      VPCE = 'VPCE'
-    end
-
     # <p>Access log settings, including the access log format and access log destination ARN.</p>
     # @!attribute format
     #   <p>A single line format of the access logs of data, as specified by selected $context variables. The format must include at least <code>$context.requestId</code>.</p>
@@ -21,7 +17,7 @@ module Aws::APIGateway
       :format,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that can be distributed to callers for executing Method resources that require an API key. API keys can be mapped to any Stage on any RestApi, which indicates that the callers with the API key can make requests to that stage.</p>
@@ -67,21 +63,12 @@ module Aws::APIGateway
       :stage_keys,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module ApiKeySourceType
-      HEADER = 'HEADER'
-      AUTHORIZER = 'AUTHORIZER'
-    end
-
-    module ApiKeysFormat
-      csv = 'csv'
     end
 
     # <p>API stage name of the associated API stage in a usage plan.</p>
@@ -99,7 +86,7 @@ module Aws::APIGateway
       :stage,
       :throttle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>
@@ -159,14 +146,7 @@ module Aws::APIGateway
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.</p>
-    module AuthorizerType
-      TOKEN = 'TOKEN'
-      REQUEST = 'REQUEST'
-      COGNITO_USER_POOLS = 'COGNITO_USER_POOLS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
@@ -175,7 +155,7 @@ module Aws::APIGateway
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p>
@@ -193,28 +173,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Returns the size of the CacheCluster.</p>
-    module CacheClusterSize
-      SIZE_0_POINT_5_GB = '0.5'
-      SIZE_1_POINT_6_GB = '1.6'
-      SIZE_6_POINT_1_GB = '6.1'
-      SIZE_13_POINT_5_GB = '13.5'
-      SIZE_28_POINT_4_GB = '28.4'
-      SIZE_58_POINT_2_GB = '58.2'
-      SIZE_118_GB = '118'
-      SIZE_237_GB = '237'
-    end
-
-    # <p>Returns the status of the CacheCluster.</p>
-    module CacheClusterStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      AVAILABLE = 'AVAILABLE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
-      FLUSH_IN_PROGRESS = 'FLUSH_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings of a canary deployment.</p>
@@ -236,7 +195,7 @@ module Aws::APIGateway
       :stage_variable_overrides,
       :use_stage_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent_traffic] = 0 unless options.key?(:percent_traffic)
@@ -272,7 +231,7 @@ module Aws::APIGateway
       :expiration_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request configuration has conflicts. For details, see the accompanying error message.</p>
@@ -281,17 +240,7 @@ module Aws::APIGateway
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionType
-      INTERNET = 'INTERNET'
-      VPC_LINK = 'VPC_LINK'
-    end
-
-    module ContentHandlingStrategy
-      CONVERT_TO_BINARY = 'CONVERT_TO_BINARY'
-      CONVERT_TO_TEXT = 'CONVERT_TO_TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that can be distributed to callers for executing Method resources that require an API key. API keys can be mapped to any Stage on any RestApi, which indicates that the callers with the API key can make requests to that stage.</p>
@@ -337,7 +286,7 @@ module Aws::APIGateway
       :stage_keys,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -380,7 +329,7 @@ module Aws::APIGateway
       :customer_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>
@@ -440,7 +389,7 @@ module Aws::APIGateway
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to add a new Authorizer to an existing RestApi resource.</p>
@@ -502,7 +451,7 @@ module Aws::APIGateway
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p>
@@ -520,7 +469,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to create a new BasePathMapping resource.</p>
@@ -546,7 +495,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An immutable representation of a RestApi resource that can be called by users using Stages. A deployment must be associated with a Stage for it to be callable over the Internet.</p>
@@ -568,7 +517,7 @@ module Aws::APIGateway
       :created_date,
       :api_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to create a Deployment resource.</p>
@@ -612,7 +561,7 @@ module Aws::APIGateway
       :canary_settings,
       :tracing_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A documentation part for a targeted API entity.</p>
@@ -630,7 +579,7 @@ module Aws::APIGateway
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new documentation part of a given API.</p>
@@ -648,7 +597,7 @@ module Aws::APIGateway
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of the documentation of an API.</p>
@@ -666,7 +615,7 @@ module Aws::APIGateway
       :created_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new documentation version of a given API.</p>
@@ -688,7 +637,7 @@ module Aws::APIGateway
       :stage_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a domain name access association between an access association source and a private custom domain name. With a domain name access association, an access association source can invoke a private custom domain name while isolated from the public internet.</p>
@@ -722,7 +671,7 @@ module Aws::APIGateway
       :access_association_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_arn
@@ -749,7 +698,7 @@ module Aws::APIGateway
       :access_association_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom domain name as a user-friendly host name of an API (RestApi).</p>
@@ -850,7 +799,7 @@ module Aws::APIGateway
       :policy,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create a new domain name.</p>
@@ -924,7 +873,7 @@ module Aws::APIGateway
       :policy,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data structure of a method's request or response payload.</p>
@@ -950,7 +899,7 @@ module Aws::APIGateway
       :schema,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to add a new Model to an existing RestApi resource.</p>
@@ -976,7 +925,7 @@ module Aws::APIGateway
       :schema,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of validation rules for incoming Method requests.</p>
@@ -998,7 +947,7 @@ module Aws::APIGateway
       :validate_request_body,
       :validate_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validate_request_body] = false unless options.key?(:validate_request_body)
@@ -1026,7 +975,7 @@ module Aws::APIGateway
       :validate_request_body,
       :validate_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API resource.</p>
@@ -1052,7 +1001,7 @@ module Aws::APIGateway
       :path,
       :resource_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to create a Resource resource.</p>
@@ -1070,7 +1019,7 @@ module Aws::APIGateway
       :parent_id,
       :path_part,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -1138,7 +1087,7 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
@@ -1199,7 +1148,7 @@ module Aws::APIGateway
       :tags,
       :disable_execute_api_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique identifier for a version of a deployed RestApi that is callable by users.</p>
@@ -1274,7 +1223,7 @@ module Aws::APIGateway
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_cluster_enabled] = false unless options.key?(:cache_cluster_enabled)
@@ -1332,7 +1281,7 @@ module Aws::APIGateway
       :tracing_enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan key to identify a plan customer.</p>
@@ -1354,7 +1303,7 @@ module Aws::APIGateway
       :value,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The POST request to create a usage plan key for adding an existing API key to a usage plan.</p>
@@ -1372,7 +1321,7 @@ module Aws::APIGateway
       :key_id,
       :key_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
@@ -1413,7 +1362,7 @@ module Aws::APIGateway
       :product_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.</p>
@@ -1443,7 +1392,7 @@ module Aws::APIGateway
       :quota,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual Private Cloud (VPC).</p>
@@ -1477,7 +1426,7 @@ module Aws::APIGateway
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.</p>
@@ -1499,7 +1448,7 @@ module Aws::APIGateway
       :target_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete the ApiKey resource.</p>
@@ -1509,7 +1458,7 @@ module Aws::APIGateway
     class DeleteApiKeyRequest < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete an existing Authorizer resource.</p>
@@ -1523,7 +1472,7 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete the BasePathMapping resource.</p>
@@ -1544,7 +1493,7 @@ module Aws::APIGateway
       :domain_name_id,
       :base_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete the ClientCertificate resource.</p>
@@ -1554,7 +1503,7 @@ module Aws::APIGateway
     class DeleteClientCertificateRequest < Struct.new(
       :client_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to delete a Deployment resource.</p>
@@ -1568,7 +1517,7 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes an existing documentation part of an API.</p>
@@ -1582,7 +1531,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_part_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes an existing documentation version of an API.</p>
@@ -1596,7 +1545,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_access_association_arn
@@ -1606,7 +1555,7 @@ module Aws::APIGateway
     class DeleteDomainNameAccessAssociationRequest < Struct.new(
       :domain_name_access_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete the DomainName resource.</p>
@@ -1622,7 +1571,7 @@ module Aws::APIGateway
       :domain_name,
       :domain_name_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.</p>
@@ -1636,7 +1585,7 @@ module Aws::APIGateway
       :rest_api_id,
       :response_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a delete integration request.</p>
@@ -1654,7 +1603,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a delete integration response request.</p>
@@ -1676,7 +1625,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete an existing Method resource.</p>
@@ -1694,7 +1643,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete an existing MethodResponse resource.</p>
@@ -1716,7 +1665,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete an existing model in an existing RestApi resource.</p>
@@ -1730,7 +1679,7 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes a specified RequestValidator of a given RestApi.</p>
@@ -1744,7 +1693,7 @@ module Aws::APIGateway
       :rest_api_id,
       :request_validator_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete a Resource.</p>
@@ -1758,7 +1707,7 @@ module Aws::APIGateway
       :rest_api_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete the specified API from your collection.</p>
@@ -1768,7 +1717,7 @@ module Aws::APIGateway
     class DeleteRestApiRequest < Struct.new(
       :rest_api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to delete a Stage resource.</p>
@@ -1782,7 +1731,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DELETE request to delete a usage plan key and remove the underlying API key from the associated usage plan.</p>
@@ -1796,7 +1745,7 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DELETE request to delete a usage plan of a given plan Id.</p>
@@ -1806,7 +1755,7 @@ module Aws::APIGateway
     class DeleteUsagePlanRequest < Struct.new(
       :usage_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes an existing VpcLink of a specified identifier.</p>
@@ -1816,7 +1765,7 @@ module Aws::APIGateway
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An immutable representation of a RestApi resource that can be called by users using Stages. A deployment must be associated with a Stage for it to be callable over the Internet.</p>
@@ -1838,7 +1787,7 @@ module Aws::APIGateway
       :created_date,
       :api_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input configuration for a canary deployment.</p>
@@ -1856,7 +1805,7 @@ module Aws::APIGateway
       :stage_variable_overrides,
       :use_stage_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent_traffic] = 0 unless options.key?(:percent_traffic)
@@ -1880,7 +1829,7 @@ module Aws::APIGateway
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the target API entity to which the documentation applies.</p>
@@ -1906,22 +1855,7 @@ module Aws::APIGateway
       :status_code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentationPartType
-      API = 'API'
-      AUTHORIZER = 'AUTHORIZER'
-      MODEL = 'MODEL'
-      RESOURCE = 'RESOURCE'
-      METHOD = 'METHOD'
-      PATH_PARAMETER = 'PATH_PARAMETER'
-      QUERY_PARAMETER = 'QUERY_PARAMETER'
-      REQUEST_HEADER = 'REQUEST_HEADER'
-      REQUEST_BODY = 'REQUEST_BODY'
-      RESPONSE = 'RESPONSE'
-      RESPONSE_HEADER = 'RESPONSE_HEADER'
-      RESPONSE_BODY = 'RESPONSE_BODY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of the documentation of an API.</p>
@@ -1939,7 +1873,7 @@ module Aws::APIGateway
       :created_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom domain name as a user-friendly host name of an API (RestApi).</p>
@@ -2040,7 +1974,7 @@ module Aws::APIGateway
       :policy,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a domain name access association between an access association source and a private custom domain name. With a domain name access association, an access association source can invoke a private custom domain name while isolated from the public internet.</p>
@@ -2074,15 +2008,7 @@ module Aws::APIGateway
       :access_association_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainNameStatus
-      AVAILABLE = 'AVAILABLE'
-      UPDATING = 'UPDATING'
-      PENDING = 'PENDING'
-      PENDING_CERTIFICATE_REIMPORT = 'PENDING_CERTIFICATE_REIMPORT'
-      PENDING_OWNERSHIP_VERIFICATION = 'PENDING_OWNERSHIP_VERIFICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint configuration to indicate the types of endpoints an API (RestApi) or its custom domain name (DomainName) has and the IP address types that can invoke it. </p>
@@ -2102,14 +2028,7 @@ module Aws::APIGateway
       :ip_address_type,
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The endpoint type. The valid values are <code>EDGE</code> for edge-optimized API setup, most suitable for mobile applications; <code>REGIONAL</code> for regional API endpoint setup, most suitable for calling from AWS Region; and <code>PRIVATE</code> for private APIs.</p>
-    module EndpointType
-      REGIONAL = 'REGIONAL'
-      EDGE = 'EDGE'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The binary blob response to GetExport, which contains the generated SDK.</p>
@@ -2127,7 +2046,7 @@ module Aws::APIGateway
       :content_disposition,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to flush authorizer cache entries on a specified stage.</p>
@@ -2141,7 +2060,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to flush a stage's cache.</p>
@@ -2155,7 +2074,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gateway response of a given response type and status code, with optional response parameters and mapping templates.</p>
@@ -2182,36 +2101,12 @@ module Aws::APIGateway
       :response_templates,
       :default_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_response] = false unless options.key?(:default_response)
         super
       end
-    end
-
-    module GatewayResponseType
-      DEFAULT_4XX = 'DEFAULT_4XX'
-      DEFAULT_5XX = 'DEFAULT_5XX'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      UNAUTHORIZED = 'UNAUTHORIZED'
-      INVALID_API_KEY = 'INVALID_API_KEY'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      AUTHORIZER_FAILURE = 'AUTHORIZER_FAILURE'
-      AUTHORIZER_CONFIGURATION_ERROR = 'AUTHORIZER_CONFIGURATION_ERROR'
-      INVALID_SIGNATURE = 'INVALID_SIGNATURE'
-      EXPIRED_TOKEN = 'EXPIRED_TOKEN'
-      MISSING_AUTHENTICATION_TOKEN = 'MISSING_AUTHENTICATION_TOKEN'
-      INTEGRATION_FAILURE = 'INTEGRATION_FAILURE'
-      INTEGRATION_TIMEOUT = 'INTEGRATION_TIMEOUT'
-      API_CONFIGURATION_ERROR = 'API_CONFIGURATION_ERROR'
-      UNSUPPORTED_MEDIA_TYPE = 'UNSUPPORTED_MEDIA_TYPE'
-      BAD_REQUEST_PARAMETERS = 'BAD_REQUEST_PARAMETERS'
-      BAD_REQUEST_BODY = 'BAD_REQUEST_BODY'
-      REQUEST_TOO_LARGE = 'REQUEST_TOO_LARGE'
-      THROTTLED = 'THROTTLED'
-      QUOTA_EXCEEDED = 'QUOTA_EXCEEDED'
-      WAF_FILTERED = 'WAF_FILTERED'
     end
 
     # <p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>
@@ -2241,7 +2136,7 @@ module Aws::APIGateway
       :expiration_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to generate a ClientCertificate resource.</p>
@@ -2255,7 +2150,7 @@ module Aws::APIGateway
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an AWS account that is associated with API Gateway.</p>
@@ -2277,13 +2172,13 @@ module Aws::APIGateway
       :features,
       :api_key_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to get information about the current Account resource.</p>
     class GetAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that can be distributed to callers for executing Method resources that require an API key. API keys can be mapped to any Stage on any RestApi, which indicates that the callers with the API key can make requests to that stage.</p>
@@ -2329,7 +2224,7 @@ module Aws::APIGateway
       :stage_keys,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2348,7 +2243,7 @@ module Aws::APIGateway
       :api_key,
       :include_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of API keys as represented by an ApiKeys resource.</p>
@@ -2366,7 +2261,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get information about the current ApiKeys resource.</p>
@@ -2392,7 +2287,7 @@ module Aws::APIGateway
       :customer_id,
       :include_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>
@@ -2452,7 +2347,7 @@ module Aws::APIGateway
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe an existing Authorizer resource.</p>
@@ -2466,7 +2361,7 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of Authorizer resources.</p>
@@ -2480,7 +2375,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe an existing Authorizers resource.</p>
@@ -2498,7 +2393,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p>
@@ -2516,7 +2411,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe a BasePathMapping resource.</p>
@@ -2535,7 +2430,7 @@ module Aws::APIGateway
       :domain_name_id,
       :base_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of BasePathMapping resources.</p>
@@ -2549,7 +2444,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get information about a collection of BasePathMapping resources.</p>
@@ -2573,7 +2468,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>
@@ -2603,7 +2498,7 @@ module Aws::APIGateway
       :expiration_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get information about the current ClientCertificate resource.</p>
@@ -2613,7 +2508,7 @@ module Aws::APIGateway
     class GetClientCertificateRequest < Struct.new(
       :client_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of ClientCertificate resources.</p>
@@ -2627,7 +2522,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get information about a collection of ClientCertificate resources.</p>
@@ -2641,7 +2536,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An immutable representation of a RestApi resource that can be called by users using Stages. A deployment must be associated with a Stage for it to be callable over the Internet.</p>
@@ -2663,7 +2558,7 @@ module Aws::APIGateway
       :created_date,
       :api_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to get information about a Deployment resource.</p>
@@ -2681,7 +2576,7 @@ module Aws::APIGateway
       :deployment_id,
       :embed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on how to interact with your collection. The collection offers a paginated view of the contained deployments.</p>
@@ -2695,7 +2590,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to get information about a Deployments collection.</p>
@@ -2713,7 +2608,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A documentation part for a targeted API entity.</p>
@@ -2731,7 +2626,7 @@ module Aws::APIGateway
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets a specified documentation part of a given API.</p>
@@ -2745,7 +2640,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_part_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of documentation parts of an API.</p>
@@ -2759,7 +2654,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the documentation parts of an API. The result may be filtered by the type, name, or path of API entities (targets).</p>
@@ -2793,7 +2688,7 @@ module Aws::APIGateway
       :limit,
       :location_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of the documentation of an API.</p>
@@ -2811,7 +2706,7 @@ module Aws::APIGateway
       :created_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets a documentation snapshot of an API.</p>
@@ -2825,7 +2720,7 @@ module Aws::APIGateway
       :rest_api_id,
       :documentation_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of documentation snapshots of an API. </p>
@@ -2839,7 +2734,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the documentation versions of an API.</p>
@@ -2857,7 +2752,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2873,7 +2768,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute position
@@ -2894,7 +2789,7 @@ module Aws::APIGateway
       :limit,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom domain name as a user-friendly host name of an API (RestApi).</p>
@@ -2995,7 +2890,7 @@ module Aws::APIGateway
       :policy,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to get the name of a DomainName resource.</p>
@@ -3011,7 +2906,7 @@ module Aws::APIGateway
       :domain_name,
       :domain_name_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of DomainName resources.</p>
@@ -3025,7 +2920,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe a collection of DomainName resources.</p>
@@ -3044,7 +2939,7 @@ module Aws::APIGateway
       :limit,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request a new export of a RestApi for a particular Stage.</p>
@@ -3071,7 +2966,7 @@ module Aws::APIGateway
       :parameters,
       :accepts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gateway response of a given response type and status code, with optional response parameters and mapping templates.</p>
@@ -3098,7 +2993,7 @@ module Aws::APIGateway
       :response_templates,
       :default_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_response] = false unless options.key?(:default_response)
@@ -3117,7 +3012,7 @@ module Aws::APIGateway
       :rest_api_id,
       :response_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of the GatewayResponse instances of a RestApi as a <code>responseType</code>-to-GatewayResponse object map of key-value pairs. As such, pagination is not supported for querying this collection.</p>
@@ -3131,7 +3026,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.</p>
@@ -3149,7 +3044,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an <code>HTTP</code>, <code>HTTP_PROXY</code>, <code>AWS</code>, <code>AWS_PROXY</code>, or Mock integration.</p>
@@ -3246,7 +3141,7 @@ module Aws::APIGateway
       :integration_responses,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_in_millis] = 0 unless options.key?(:timeout_in_millis)
@@ -3269,7 +3164,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an integration response. The status code must map to an existing MethodResponse, and parameters and templates can be used to transform the back-end response.</p>
@@ -3297,7 +3192,7 @@ module Aws::APIGateway
       :response_templates,
       :content_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a get integration response request.</p>
@@ -3319,7 +3214,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3376,7 +3271,7 @@ module Aws::APIGateway
       :method_integration,
       :authorization_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe an existing Method resource.</p>
@@ -3394,7 +3289,7 @@ module Aws::APIGateway
       :resource_id,
       :http_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template. </p>
@@ -3412,7 +3307,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe a MethodResponse resource.</p>
@@ -3434,7 +3329,7 @@ module Aws::APIGateway
       :http_method,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data structure of a method's request or response payload.</p>
@@ -3460,7 +3355,7 @@ module Aws::APIGateway
       :schema,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list information about a model in an existing RestApi resource.</p>
@@ -3478,7 +3373,7 @@ module Aws::APIGateway
       :model_name,
       :flatten,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a mapping template used to transform a payload.</p>
@@ -3488,7 +3383,7 @@ module Aws::APIGateway
     class GetModelTemplateOutput < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to generate a sample mapping template used to transform the payload.</p>
@@ -3502,7 +3397,7 @@ module Aws::APIGateway
       :rest_api_id,
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of Model resources.</p>
@@ -3516,7 +3411,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list existing Models defined for a RestApi resource.</p>
@@ -3534,7 +3429,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of validation rules for incoming Method requests.</p>
@@ -3556,7 +3451,7 @@ module Aws::APIGateway
       :validate_request_body,
       :validate_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validate_request_body] = false unless options.key?(:validate_request_body)
@@ -3576,7 +3471,7 @@ module Aws::APIGateway
       :rest_api_id,
       :request_validator_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of RequestValidator resources of a given RestApi.</p>
@@ -3590,7 +3485,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the RequestValidators collection of a given RestApi.</p>
@@ -3608,7 +3503,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API resource.</p>
@@ -3634,7 +3529,7 @@ module Aws::APIGateway
       :path,
       :resource_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list information about a resource.</p>
@@ -3652,7 +3547,7 @@ module Aws::APIGateway
       :resource_id,
       :embed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of Resource resources.</p>
@@ -3666,7 +3561,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list information about a collection of resources.</p>
@@ -3688,7 +3583,7 @@ module Aws::APIGateway
       :limit,
       :embed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -3756,7 +3651,7 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
@@ -3771,7 +3666,7 @@ module Aws::APIGateway
     class GetRestApiRequest < Struct.new(
       :rest_api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains references to your APIs and links that guide you in how to interact with your collection. A collection offers a paginated view of your APIs.</p>
@@ -3785,7 +3680,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to list existing RestApis defined for your collection.</p>
@@ -3799,7 +3694,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request a new generated client SDK for a RestApi and Stage.</p>
@@ -3821,7 +3716,7 @@ module Aws::APIGateway
       :sdk_type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of SDK that API Gateway can generate.</p>
@@ -3843,7 +3738,7 @@ module Aws::APIGateway
       :description,
       :configuration_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Get an SdkType instance.</p>
@@ -3853,7 +3748,7 @@ module Aws::APIGateway
     class GetSdkTypeRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of SdkType instances.</p>
@@ -3863,7 +3758,7 @@ module Aws::APIGateway
     class GetSdkTypesOutput < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Get the SdkTypes collection.</p>
@@ -3877,7 +3772,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique identifier for a version of a deployed RestApi that is callable by users.</p>
@@ -3952,7 +3847,7 @@ module Aws::APIGateway
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_cluster_enabled] = false unless options.key?(:cache_cluster_enabled)
@@ -3972,7 +3867,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Stage resources that are associated with the ApiKey resource.</p>
@@ -3982,7 +3877,7 @@ module Aws::APIGateway
     class GetStagesOutput < Struct.new(
       :item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to get information about one or more Stage resources.</p>
@@ -3996,7 +3891,7 @@ module Aws::APIGateway
       :rest_api_id,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of tags. Each tag element is associated with a given resource.</p>
@@ -4006,7 +3901,7 @@ module Aws::APIGateway
     class GetTagsOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the Tags collection for a given resource.</p>
@@ -4024,7 +3919,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the usage data of a usage plan.</p>
@@ -4050,7 +3945,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan key to identify a plan customer.</p>
@@ -4072,7 +3967,7 @@ module Aws::APIGateway
       :value,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to get a usage plan key of a given key identifier.</p>
@@ -4086,7 +3981,7 @@ module Aws::APIGateway
       :usage_plan_id,
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the collection of usage plan keys added to usage plans for the associated API keys and, possibly, other types of keys.</p>
@@ -4100,7 +3995,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to get all the usage plan keys representing the API keys added to a specified usage plan.</p>
@@ -4122,7 +4017,7 @@ module Aws::APIGateway
       :limit,
       :name_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
@@ -4163,7 +4058,7 @@ module Aws::APIGateway
       :product_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to get a usage plan of a given plan identifier.</p>
@@ -4173,7 +4068,7 @@ module Aws::APIGateway
     class GetUsagePlanRequest < Struct.new(
       :usage_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of usage plans for an AWS account.</p>
@@ -4187,7 +4082,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to get all the usage plans of the caller's account.</p>
@@ -4205,7 +4100,7 @@ module Aws::APIGateway
       :key_id,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GET request to get the usage data of a usage plan in a specified time interval.</p>
@@ -4235,7 +4130,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual Private Cloud (VPC).</p>
@@ -4269,7 +4164,7 @@ module Aws::APIGateway
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets a specified VPC link under the caller's account in a region.</p>
@@ -4279,7 +4174,7 @@ module Aws::APIGateway
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of VPC links under the caller's account in a region.</p>
@@ -4293,7 +4188,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the VpcLinks collection under the caller's account in a selected region.</p>
@@ -4307,7 +4202,7 @@ module Aws::APIGateway
       :position,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier of an ApiKey used in a UsagePlan.</p>
@@ -4321,7 +4216,7 @@ module Aws::APIGateway
       :ids,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The POST request to import API keys from an external source, such as a CSV-formatted file.</p>
@@ -4339,7 +4234,7 @@ module Aws::APIGateway
       :format,
       :fail_on_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of the imported  DocumentationPart identifiers.</p>
@@ -4353,7 +4248,7 @@ module Aws::APIGateway
       :ids,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Import documentation parts from an external (e.g., OpenAPI) definition file. </p>
@@ -4375,7 +4270,7 @@ module Aws::APIGateway
       :fail_on_warnings,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -4443,7 +4338,7 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
@@ -4470,7 +4365,7 @@ module Aws::APIGateway
       :parameters,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an <code>HTTP</code>, <code>HTTP_PROXY</code>, <code>AWS</code>, <code>AWS_PROXY</code>, or Mock integration.</p>
@@ -4567,7 +4462,7 @@ module Aws::APIGateway
       :integration_responses,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_in_millis] = 0 unless options.key?(:timeout_in_millis)
@@ -4600,21 +4495,7 @@ module Aws::APIGateway
       :response_templates,
       :content_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any Amazon Web Services service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. </p>
-    module IntegrationType
-      HTTP = 'HTTP'
-      AWS = 'AWS'
-      MOCK = 'MOCK'
-      HTTP_PROXY = 'HTTP_PROXY'
-      AWS_PROXY = 'AWS_PROXY'
-    end
-
-    module IpAddressType
-      ipv4 = 'ipv4'
-      dualstack = 'dualstack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded the rate limit. Retry after the specified time period.</p>
@@ -4626,12 +4507,7 @@ module Aws::APIGateway
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationStatusType
-      DOCUMENTED = 'DOCUMENTED'
-      UNDOCUMENTED = 'UNDOCUMENTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4688,7 +4564,7 @@ module Aws::APIGateway
       :method_integration,
       :authorization_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template. </p>
@@ -4706,7 +4582,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the method setting properties.</p>
@@ -4752,7 +4628,7 @@ module Aws::APIGateway
       :require_authorization_for_cache_control,
       :unauthorized_cache_control_header_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:metrics_enabled] = false unless options.key?(:metrics_enabled)
@@ -4778,7 +4654,7 @@ module Aws::APIGateway
       :authorization_type,
       :api_key_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:api_key_required] = false unless options.key?(:api_key_required)
@@ -4809,7 +4685,7 @@ module Aws::APIGateway
       :schema,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway
@@ -4836,7 +4712,7 @@ module Aws::APIGateway
       :truststore_version,
       :truststore_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway
@@ -4856,7 +4732,7 @@ module Aws::APIGateway
       :truststore_uri,
       :truststore_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource is not found. Make sure that the request URI is correct.</p>
@@ -4865,16 +4741,7 @@ module Aws::APIGateway
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Op
-      add = 'add'
-      remove = 'remove'
-      replace = 'replace'
-      move = 'move'
-      copy = 'copy'
-      test = 'test'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For more information about supported patch operations, see <a href="https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html">Patch Operations</a>.</p>
@@ -4911,7 +4778,7 @@ module Aws::APIGateway
       :value,
       :from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gateway response of a given response type and status code, with optional response parameters and mapping templates.</p>
@@ -4938,7 +4805,7 @@ module Aws::APIGateway
       :response_templates,
       :default_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_response] = false unless options.key?(:default_response)
@@ -4969,7 +4836,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an <code>HTTP</code>, <code>HTTP_PROXY</code>, <code>AWS</code>, <code>AWS_PROXY</code>, or Mock integration.</p>
@@ -5066,7 +4933,7 @@ module Aws::APIGateway
       :integration_responses,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_in_millis] = 0 unless options.key?(:timeout_in_millis)
@@ -5162,7 +5029,7 @@ module Aws::APIGateway
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an integration response. The status code must map to an existing MethodResponse, and parameters and templates can be used to transform the back-end response.</p>
@@ -5190,7 +5057,7 @@ module Aws::APIGateway
       :response_templates,
       :content_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a put integration response request.</p>
@@ -5230,7 +5097,7 @@ module Aws::APIGateway
       :response_templates,
       :content_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5287,7 +5154,7 @@ module Aws::APIGateway
       :method_integration,
       :authorization_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to add a method to an existing Resource resource.</p>
@@ -5337,7 +5204,7 @@ module Aws::APIGateway
       :request_validator_id,
       :authorization_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template. </p>
@@ -5355,7 +5222,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to add a MethodResponse to an existing Method resource.</p>
@@ -5385,12 +5252,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PutMode
-      Merge = 'merge'
-      Overwrite = 'overwrite'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -5458,7 +5320,7 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
@@ -5491,13 +5353,7 @@ module Aws::APIGateway
       :parameters,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuotaPeriodType
-      DAY = 'DAY'
-      WEEK = 'WEEK'
-      MONTH = 'MONTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Quotas configured for a usage plan.</p>
@@ -5515,7 +5371,7 @@ module Aws::APIGateway
       :offset,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -5537,7 +5393,7 @@ module Aws::APIGateway
       :domain_name_access_association_arn,
       :domain_name_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of validation rules for incoming Method requests.</p>
@@ -5559,7 +5415,7 @@ module Aws::APIGateway
       :validate_request_body,
       :validate_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validate_request_body] = false unless options.key?(:validate_request_body)
@@ -5591,12 +5447,7 @@ module Aws::APIGateway
       :path,
       :resource_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceOwner
-      SELF = 'SELF'
-      OTHER_ACCOUNTS = 'OTHER_ACCOUNTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -5664,18 +5515,12 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
         super
       end
-    end
-
-    module RoutingMode
-      BASE_PATH_MAPPING_ONLY = 'BASE_PATH_MAPPING_ONLY'
-      ROUTING_RULE_ONLY = 'ROUTING_RULE_ONLY'
-      ROUTING_RULE_THEN_BASE_PATH_MAPPING = 'ROUTING_RULE_THEN_BASE_PATH_MAPPING'
     end
 
     # <p>A configuration property of an SDK type.</p>
@@ -5701,7 +5546,7 @@ module Aws::APIGateway
       :required,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:required] = false unless options.key?(:required)
@@ -5724,7 +5569,7 @@ module Aws::APIGateway
       :content_disposition,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of SDK that API Gateway can generate.</p>
@@ -5746,12 +5591,7 @@ module Aws::APIGateway
       :description,
       :configuration_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityPolicy
-      TLS_1_0 = 'TLS_1_0'
-      TLS_1_2 = 'TLS_1_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested service is not available. For details see the accompanying error message. Retry after the specified time period.</p>
@@ -5763,7 +5603,7 @@ module Aws::APIGateway
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique identifier for a version of a deployed RestApi that is callable by users.</p>
@@ -5838,7 +5678,7 @@ module Aws::APIGateway
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_cluster_enabled] = false unless options.key?(:cache_cluster_enabled)
@@ -5858,7 +5698,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Adds or updates a tag on a given resource.</p>
@@ -5872,7 +5712,7 @@ module Aws::APIGateway
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Make a request to simulate the invocation of an Authorizer.</p>
@@ -5910,7 +5750,7 @@ module Aws::APIGateway
       :stage_variables,
       :additional_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response of the test invoke request for a custom Authorizer</p>
@@ -5944,7 +5784,7 @@ module Aws::APIGateway
       :authorization,
       :claims,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_status] = 0 unless options.key?(:client_status)
@@ -5992,7 +5832,7 @@ module Aws::APIGateway
       :client_certificate_id,
       :stage_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response of the test invoke request in the HTTP method.</p>
@@ -6022,7 +5862,7 @@ module Aws::APIGateway
       :log,
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -6042,7 +5882,7 @@ module Aws::APIGateway
       :burst_limit,
       :rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:burst_limit] = 0 unless options.key?(:burst_limit)
@@ -6068,7 +5908,7 @@ module Aws::APIGateway
     class TlsConfig < Struct.new(
       :insecure_skip_verification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:insecure_skip_verification] = false unless options.key?(:insecure_skip_verification)
@@ -6085,13 +5925,7 @@ module Aws::APIGateway
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnauthorizedCacheControlHeaderStrategy
-      FAIL_WITH_403 = 'FAIL_WITH_403'
-      SUCCEED_WITH_RESPONSE_HEADER = 'SUCCEED_WITH_RESPONSE_HEADER'
-      SUCCEED_WITHOUT_RESPONSE_HEADER = 'SUCCEED_WITHOUT_RESPONSE_HEADER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is denied because the caller has insufficient permissions.</p>
@@ -6100,7 +5934,7 @@ module Aws::APIGateway
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Removes a tag from a given resource.</p>
@@ -6114,7 +5948,7 @@ module Aws::APIGateway
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an AWS account that is associated with API Gateway.</p>
@@ -6136,7 +5970,7 @@ module Aws::APIGateway
       :features,
       :api_key_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to change information about the current Account resource.</p>
@@ -6146,7 +5980,7 @@ module Aws::APIGateway
     class UpdateAccountRequest < Struct.new(
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that can be distributed to callers for executing Method resources that require an API key. API keys can be mapped to any Stage on any RestApi, which indicates that the callers with the API key can make requests to that stage.</p>
@@ -6192,7 +6026,7 @@ module Aws::APIGateway
       :stage_keys,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -6211,7 +6045,7 @@ module Aws::APIGateway
       :api_key,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p>
@@ -6271,7 +6105,7 @@ module Aws::APIGateway
       :identity_validation_expression,
       :authorizer_result_ttl_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update an existing Authorizer resource.</p>
@@ -6289,7 +6123,7 @@ module Aws::APIGateway
       :authorizer_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the base path that callers of the API must provide as part of the URL after the domain name.</p>
@@ -6307,7 +6141,7 @@ module Aws::APIGateway
       :rest_api_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change information about the BasePathMapping resource.</p>
@@ -6332,7 +6166,7 @@ module Aws::APIGateway
       :base_path,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p>
@@ -6362,7 +6196,7 @@ module Aws::APIGateway
       :expiration_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change information about an ClientCertificate resource.</p>
@@ -6376,7 +6210,7 @@ module Aws::APIGateway
       :client_certificate_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An immutable representation of a RestApi resource that can be called by users using Stages. A deployment must be associated with a Stage for it to be callable over the Internet.</p>
@@ -6398,7 +6232,7 @@ module Aws::APIGateway
       :created_date,
       :api_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests API Gateway to change information about a Deployment resource.</p>
@@ -6416,7 +6250,7 @@ module Aws::APIGateway
       :deployment_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A documentation part for a targeted API entity.</p>
@@ -6434,7 +6268,7 @@ module Aws::APIGateway
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an existing documentation part of a given API.</p>
@@ -6452,7 +6286,7 @@ module Aws::APIGateway
       :documentation_part_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of the documentation of an API.</p>
@@ -6470,7 +6304,7 @@ module Aws::APIGateway
       :created_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an existing documentation version of an API.</p>
@@ -6488,7 +6322,7 @@ module Aws::APIGateway
       :documentation_version,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom domain name as a user-friendly host name of an API (RestApi).</p>
@@ -6589,7 +6423,7 @@ module Aws::APIGateway
       :policy,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change information about the DomainName resource.</p>
@@ -6609,7 +6443,7 @@ module Aws::APIGateway
       :domain_name_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gateway response of a given response type and status code, with optional response parameters and mapping templates.</p>
@@ -6636,7 +6470,7 @@ module Aws::APIGateway
       :response_templates,
       :default_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_response] = false unless options.key?(:default_response)
@@ -6659,7 +6493,7 @@ module Aws::APIGateway
       :response_type,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an <code>HTTP</code>, <code>HTTP_PROXY</code>, <code>AWS</code>, <code>AWS_PROXY</code>, or Mock integration.</p>
@@ -6756,7 +6590,7 @@ module Aws::APIGateway
       :integration_responses,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_in_millis] = 0 unless options.key?(:timeout_in_millis)
@@ -6783,7 +6617,7 @@ module Aws::APIGateway
       :http_method,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an integration response. The status code must map to an existing MethodResponse, and parameters and templates can be used to transform the back-end response.</p>
@@ -6811,7 +6645,7 @@ module Aws::APIGateway
       :response_templates,
       :content_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an update integration response request.</p>
@@ -6837,7 +6671,7 @@ module Aws::APIGateway
       :status_code,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6894,7 +6728,7 @@ module Aws::APIGateway
       :method_integration,
       :authorization_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update an existing Method resource.</p>
@@ -6916,7 +6750,7 @@ module Aws::APIGateway
       :http_method,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template. </p>
@@ -6934,7 +6768,7 @@ module Aws::APIGateway
       :response_parameters,
       :response_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to update an existing MethodResponse resource.</p>
@@ -6960,7 +6794,7 @@ module Aws::APIGateway
       :status_code,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data structure of a method's request or response payload.</p>
@@ -6986,7 +6820,7 @@ module Aws::APIGateway
       :schema,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update an existing model in an existing RestApi resource.</p>
@@ -7004,7 +6838,7 @@ module Aws::APIGateway
       :model_name,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of validation rules for incoming Method requests.</p>
@@ -7026,7 +6860,7 @@ module Aws::APIGateway
       :validate_request_body,
       :validate_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validate_request_body] = false unless options.key?(:validate_request_body)
@@ -7050,7 +6884,7 @@ module Aws::APIGateway
       :request_validator_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API resource.</p>
@@ -7076,7 +6910,7 @@ module Aws::APIGateway
       :path,
       :resource_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to change information about a Resource resource.</p>
@@ -7094,7 +6928,7 @@ module Aws::APIGateway
       :resource_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a REST API.</p>
@@ -7162,7 +6996,7 @@ module Aws::APIGateway
       :disable_execute_api_endpoint,
       :root_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_execute_api_endpoint] = false unless options.key?(:disable_execute_api_endpoint)
@@ -7181,7 +7015,7 @@ module Aws::APIGateway
       :rest_api_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique identifier for a version of a deployed RestApi that is callable by users.</p>
@@ -7256,7 +7090,7 @@ module Aws::APIGateway
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_cluster_enabled] = false unless options.key?(:cache_cluster_enabled)
@@ -7280,7 +7114,7 @@ module Aws::APIGateway
       :stage_name,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the usage data of a usage plan.</p>
@@ -7306,7 +7140,7 @@ module Aws::APIGateway
       :items,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
@@ -7347,7 +7181,7 @@ module Aws::APIGateway
       :product_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PATCH request to update a usage plan of a given plan Id.</p>
@@ -7361,7 +7195,7 @@ module Aws::APIGateway
       :usage_plan_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PATCH request to grant a temporary extension to the remaining quota of a usage plan associated with a specified API key.</p>
@@ -7379,7 +7213,7 @@ module Aws::APIGateway
       :key_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual Private Cloud (VPC).</p>
@@ -7413,7 +7247,7 @@ module Aws::APIGateway
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an existing VpcLink of a specified identifier.</p>
@@ -7427,7 +7261,7 @@ module Aws::APIGateway
       :vpc_link_id,
       :patch_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
@@ -7468,7 +7302,7 @@ module Aws::APIGateway
       :product_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a usage plan key to identify a plan customer.</p>
@@ -7490,7 +7324,7 @@ module Aws::APIGateway
       :value,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual Private Cloud (VPC).</p>
@@ -7524,14 +7358,7 @@ module Aws::APIGateway
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcLinkStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
   end

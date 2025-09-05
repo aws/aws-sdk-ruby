@@ -12,7 +12,7 @@ module Aws::SupplyChain
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The BillOfMaterialsImportJob details.</p>
@@ -38,16 +38,7 @@ module Aws::SupplyChain
       :s3uri,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the job.</p>
-    module ConfigurationJobStatus
-      NEW = 'NEW'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      QUEUED = 'QUEUED'
-      SUCCESS = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -56,7 +47,7 @@ module Aws::SupplyChain
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for CreateBillOfMaterialsImportJob.</p>
@@ -74,7 +65,7 @@ module Aws::SupplyChain
       :s3uri,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of CreateBillOfMaterialsImportJob.</p>
@@ -84,7 +75,7 @@ module Aws::SupplyChain
     class CreateBillOfMaterialsImportJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for CreateDataIntegrationFlow.</p>
@@ -114,7 +105,7 @@ module Aws::SupplyChain
       :target,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for CreateDataIntegrationFlow.</p>
@@ -128,7 +119,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for CreateDataLakeDataset.</p>
@@ -172,7 +163,7 @@ module Aws::SupplyChain
       :partition_spec,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of CreateDataLakeDataset.</p>
@@ -182,7 +173,7 @@ module Aws::SupplyChain
     class CreateDataLakeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for CreateDataLakeNamespace.</p>
@@ -205,7 +196,7 @@ module Aws::SupplyChain
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of CreateDataLakeNamespace.</p>
@@ -215,7 +206,7 @@ module Aws::SupplyChain
     class CreateDataLakeNamespaceResponse < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for CreateInstance.</p>
@@ -245,7 +236,7 @@ module Aws::SupplyChain
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for CreateInstance.</p>
@@ -255,7 +246,7 @@ module Aws::SupplyChain
     class CreateInstanceResponse < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data integration event details.</p>
@@ -285,7 +276,7 @@ module Aws::SupplyChain
       :event_timestamp,
       :dataset_target_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target dataset load execution details.</p>
@@ -299,19 +290,7 @@ module Aws::SupplyChain
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationEventDatasetLoadStatus
-      SUCCEEDED = 'SUCCEEDED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-    end
-
-    module DataIntegrationEventDatasetOperationType
-      APPEND = 'APPEND'
-      UPSERT = 'UPSERT'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target dataset configuration for a DATASET event type.</p>
@@ -325,7 +304,7 @@ module Aws::SupplyChain
       :dataset_identifier,
       :operation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target dataset details for a DATASET event type.</p>
@@ -357,26 +336,7 @@ module Aws::SupplyChain
       :operation_type,
       :dataset_load_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationEventType
-      FORECAST = 'scn.data.forecast'
-      INVENTORY_LEVEL = 'scn.data.inventorylevel'
-      INBOUND_ORDER = 'scn.data.inboundorder'
-      INBOUND_ORDER_LINE = 'scn.data.inboundorderline'
-      INBOUND_ORDER_LINE_SCHEDULE = 'scn.data.inboundorderlineschedule'
-      OUTBOUND_ORDER_LINE = 'scn.data.outboundorderline'
-      OUTBOUND_SHIPMENT = 'scn.data.outboundshipment'
-      PROCESS_HEADER = 'scn.data.processheader'
-      PROCESS_OPERATION = 'scn.data.processoperation'
-      PROCESS_PRODUCT = 'scn.data.processproduct'
-      RESERVATION = 'scn.data.reservation'
-      SHIPMENT = 'scn.data.shipment'
-      SHIPMENT_STOP = 'scn.data.shipmentstop'
-      SHIPMENT_STOP_ORDER = 'scn.data.shipmentstoporder'
-      SUPPLY_PLAN = 'scn.data.supplyplan'
-      DATASET = 'scn.data.dataset'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DataIntegrationFlow details.</p>
@@ -410,7 +370,7 @@ module Aws::SupplyChain
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset options used in dataset source and target configurations.</p>
@@ -439,7 +399,7 @@ module Aws::SupplyChain
       :dedupe_records,
       :dedupe_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a flow execution with dataset source.</p>
@@ -449,7 +409,7 @@ module Aws::SupplyChain
     class DataIntegrationFlowDatasetSource < Struct.new(
       :dataset_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset DataIntegrationFlow source configuration parameters.</p>
@@ -463,7 +423,7 @@ module Aws::SupplyChain
       :dataset_identifier,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset DataIntegrationFlow target configuration parameters.</p>
@@ -477,7 +437,7 @@ module Aws::SupplyChain
       :dataset_identifier,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deduplication strategy details.</p>
@@ -497,11 +457,7 @@ module Aws::SupplyChain
       :type,
       :field_priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowDedupeStrategyType
-      FIELD_PRIORITY = 'FIELD_PRIORITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flow execution details.</p>
@@ -543,7 +499,7 @@ module Aws::SupplyChain
       :end_time,
       :output_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output metadata of the flow execution.</p>
@@ -553,7 +509,7 @@ module Aws::SupplyChain
     class DataIntegrationFlowExecutionOutputMetadata < Struct.new(
       :diagnostic_reports_root_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source information of a flow execution.</p>
@@ -571,13 +527,7 @@ module Aws::SupplyChain
       :s3_source,
       :dataset_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowExecutionStatus
-      SUCCEEDED = 'SUCCEEDED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field used in the field priority deduplication strategy.</p>
@@ -591,12 +541,7 @@ module Aws::SupplyChain
       :name,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowFieldPriorityDedupeSortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field priority deduplication strategy details.</p>
@@ -606,18 +551,7 @@ module Aws::SupplyChain
     class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowFileType
-      CSV = 'CSV'
-      PARQUET = 'PARQUET'
-      JSON = 'JSON'
-    end
-
-    module DataIntegrationFlowLoadType
-      INCREMENTAL = 'INCREMENTAL'
-      REPLACE = 'REPLACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 options used in S3 source and target configurations.</p>
@@ -627,7 +561,7 @@ module Aws::SupplyChain
     class DataIntegrationFlowS3Options < Struct.new(
       :file_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a flow execution with S3 source.</p>
@@ -641,7 +575,7 @@ module Aws::SupplyChain
       :bucket_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 DataIntegrationFlow source configuration parameters.</p>
@@ -659,7 +593,7 @@ module Aws::SupplyChain
       :prefix,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 DataIntegrationFlow target configuration parameters.</p>
@@ -677,7 +611,7 @@ module Aws::SupplyChain
       :prefix,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL DataIntegrationFlow transformation configuration parameters.</p>
@@ -687,7 +621,7 @@ module Aws::SupplyChain
     class DataIntegrationFlowSQLTransformationConfiguration < Struct.new(
       :query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DataIntegrationFlow source parameters.</p>
@@ -709,12 +643,7 @@ module Aws::SupplyChain
       :s3_source,
       :dataset_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowSourceType
-      S3 = 'S3'
-      DATASET = 'DATASET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DataIntegrationFlow target parameters.</p>
@@ -732,12 +661,7 @@ module Aws::SupplyChain
       :s3_target,
       :dataset_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowTargetType
-      S3 = 'S3'
-      DATASET = 'DATASET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DataIntegrationFlow transformation parameters.</p>
@@ -751,12 +675,7 @@ module Aws::SupplyChain
       :transformation_type,
       :sql_transformation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataIntegrationFlowTransformationType
-      SQL = 'SQL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data lake dataset details.</p>
@@ -808,7 +727,7 @@ module Aws::SupplyChain
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detail of the partition field.</p>
@@ -822,7 +741,7 @@ module Aws::SupplyChain
       :name,
       :transform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detail of the partition field transformation.</p>
@@ -854,7 +773,7 @@ module Aws::SupplyChain
     class DataLakeDatasetPartitionFieldTransform < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The partition specification for a dataset.</p>
@@ -864,15 +783,7 @@ module Aws::SupplyChain
     class DataLakeDatasetPartitionSpec < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLakeDatasetPartitionTransformType
-      YEAR = 'YEAR'
-      MONTH = 'MONTH'
-      DAY = 'DAY'
-      HOUR = 'HOUR'
-      IDENTITY = 'IDENTITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detail of the primary key field.</p>
@@ -882,7 +793,7 @@ module Aws::SupplyChain
     class DataLakeDatasetPrimaryKeyField < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schema details of the dataset. Note that for AWS Supply Chain dataset under <b>asc</b> namespace, it may have internal fields like connection_id that will be auto populated by data ingestion methods.</p>
@@ -901,7 +812,7 @@ module Aws::SupplyChain
       :fields,
       :primary_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset field details.</p>
@@ -919,15 +830,7 @@ module Aws::SupplyChain
       :type,
       :is_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLakeDatasetSchemaFieldType
-      INT = 'INT'
-      DOUBLE = 'DOUBLE'
-      STRING = 'STRING'
-      TIMESTAMP = 'TIMESTAMP'
-      LONG = 'LONG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data lake namespace details.</p>
@@ -957,7 +860,7 @@ module Aws::SupplyChain
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for DeleteDataIntegrationFlow.</p>
@@ -971,7 +874,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for DeleteDataIntegrationFlow.</p>
@@ -985,7 +888,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of DeleteDataLakeDataset.</p>
@@ -1013,7 +916,7 @@ module Aws::SupplyChain
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of DeleteDataLakeDataset.</p>
@@ -1031,7 +934,7 @@ module Aws::SupplyChain
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of DeleteDataLakeNamespace.</p>
@@ -1045,7 +948,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of DeleteDataLakeNamespace.</p>
@@ -1059,7 +962,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for DeleteInstance.</p>
@@ -1069,7 +972,7 @@ module Aws::SupplyChain
     class DeleteInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for DeleteInstance.</p>
@@ -1079,7 +982,7 @@ module Aws::SupplyChain
     class DeleteInstanceResponse < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetBillOfMaterialsImportJob.</p>
@@ -1093,7 +996,7 @@ module Aws::SupplyChain
       :instance_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetBillOfMaterialsImportJob.</p>
@@ -1103,7 +1006,7 @@ module Aws::SupplyChain
     class GetBillOfMaterialsImportJobResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetDataIntegrationEvent.</p>
@@ -1117,7 +1020,7 @@ module Aws::SupplyChain
       :instance_id,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetDataIntegrationEvent.</p>
@@ -1127,7 +1030,7 @@ module Aws::SupplyChain
     class GetDataIntegrationEventResponse < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of GetFlowExecution.</p>
@@ -1145,7 +1048,7 @@ module Aws::SupplyChain
       :flow_name,
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of GetFlowExecution.</p>
@@ -1155,7 +1058,7 @@ module Aws::SupplyChain
     class GetDataIntegrationFlowExecutionResponse < Struct.new(
       :flow_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetDataIntegrationFlow.</p>
@@ -1169,7 +1072,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetDataIntegrationFlow.</p>
@@ -1179,7 +1082,7 @@ module Aws::SupplyChain
     class GetDataIntegrationFlowResponse < Struct.new(
       :flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetDataLakeDataset.</p>
@@ -1207,7 +1110,7 @@ module Aws::SupplyChain
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetDataLakeDataset.</p>
@@ -1217,7 +1120,7 @@ module Aws::SupplyChain
     class GetDataLakeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetDataLakeNamespace.</p>
@@ -1241,7 +1144,7 @@ module Aws::SupplyChain
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetDataLakeNamespace.</p>
@@ -1251,7 +1154,7 @@ module Aws::SupplyChain
     class GetDataLakeNamespaceResponse < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for GetInstance.</p>
@@ -1261,7 +1164,7 @@ module Aws::SupplyChain
     class GetInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for GetInstance.</p>
@@ -1271,7 +1174,7 @@ module Aws::SupplyChain
     class GetInstanceResponse < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the instance.</p>
@@ -1321,16 +1224,7 @@ module Aws::SupplyChain
       :kms_key_arn,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceState
-      INITIALIZING = 'Initializing'
-      ACTIVE = 'Active'
-      CREATE_FAILED = 'CreateFailed'
-      DELETE_FAILED = 'DeleteFailed'
-      DELETING = 'Deleting'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -1339,7 +1233,7 @@ module Aws::SupplyChain
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for ListDataIntegrationEvents.</p>
@@ -1361,7 +1255,7 @@ module Aws::SupplyChain
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for ListDataIntegrationEvents.</p>
@@ -1375,7 +1269,7 @@ module Aws::SupplyChain
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of ListFlowExecutions.</p>
@@ -1397,7 +1291,7 @@ module Aws::SupplyChain
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of ListFlowExecutions.</p>
@@ -1411,7 +1305,7 @@ module Aws::SupplyChain
       :flow_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for ListDataIntegrationFlows.</p>
@@ -1429,7 +1323,7 @@ module Aws::SupplyChain
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for ListDataIntegrationFlows.</p>
@@ -1443,7 +1337,7 @@ module Aws::SupplyChain
       :flows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of ListDataLakeDatasets.</p>
@@ -1475,7 +1369,7 @@ module Aws::SupplyChain
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of ListDataLakeDatasets.</p>
@@ -1489,7 +1383,7 @@ module Aws::SupplyChain
       :datasets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of ListDataLakeNamespaces.</p>
@@ -1507,7 +1401,7 @@ module Aws::SupplyChain
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of ListDataLakeNamespaces.</p>
@@ -1521,7 +1415,7 @@ module Aws::SupplyChain
       :namespaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for ListInstances.</p>
@@ -1543,7 +1437,7 @@ module Aws::SupplyChain
       :instance_name_filter,
       :instance_state_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for ListInstances.</p>
@@ -1557,7 +1451,7 @@ module Aws::SupplyChain
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of ListTagsForResource.</p>
@@ -1567,7 +1461,7 @@ module Aws::SupplyChain
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of ListTagsForResource.</p>
@@ -1577,7 +1471,7 @@ module Aws::SupplyChain
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist.</p>
@@ -1586,7 +1480,7 @@ module Aws::SupplyChain
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for SendDataIntegrationEvent.</p>
@@ -1687,7 +1581,7 @@ module Aws::SupplyChain
       :client_token,
       :dataset_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for SendDataIntegrationEvent.</p>
@@ -1697,7 +1591,7 @@ module Aws::SupplyChain
     class SendDataIntegrationEventResponse < Struct.new(
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -1706,7 +1600,7 @@ module Aws::SupplyChain
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of TagResource.</p>
@@ -1720,13 +1614,13 @@ module Aws::SupplyChain
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for TagResource.</p>
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -1735,7 +1629,7 @@ module Aws::SupplyChain
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of UntagResource.</p>
@@ -1749,13 +1643,13 @@ module Aws::SupplyChain
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of UntagResource.</p>
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for UpdateDataIntegrationFlow.</p>
@@ -1781,7 +1675,7 @@ module Aws::SupplyChain
       :transformation,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for UpdateDataIntegrationFlow.</p>
@@ -1791,7 +1685,7 @@ module Aws::SupplyChain
     class UpdateDataIntegrationFlowResponse < Struct.new(
       :flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of UpdateDataLakeDataset.</p>
@@ -1823,7 +1717,7 @@ module Aws::SupplyChain
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of UpdateDataLakeDataset.</p>
@@ -1833,7 +1727,7 @@ module Aws::SupplyChain
     class UpdateDataLakeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters of UpdateDataLakeNamespace.</p>
@@ -1852,7 +1746,7 @@ module Aws::SupplyChain
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters of UpdateDataLakeNamespace.</p>
@@ -1862,7 +1756,7 @@ module Aws::SupplyChain
     class UpdateDataLakeNamespaceResponse < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for UpdateInstance.</p>
@@ -1880,7 +1774,7 @@ module Aws::SupplyChain
       :instance_name,
       :instance_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters for UpdateInstance.</p>
@@ -1890,7 +1784,7 @@ module Aws::SupplyChain
     class UpdateInstanceResponse < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input does not satisfy the constraints specified by an AWS service.</p>
@@ -1899,7 +1793,7 @@ module Aws::SupplyChain
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

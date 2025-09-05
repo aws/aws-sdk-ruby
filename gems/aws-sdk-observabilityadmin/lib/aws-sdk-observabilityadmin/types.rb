@@ -20,7 +20,7 @@ module Aws::ObservabilityAdmin
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -31,7 +31,7 @@ module Aws::ObservabilityAdmin
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -54,7 +54,7 @@ module Aws::ObservabilityAdmin
       :rule,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -65,7 +65,7 @@ module Aws::ObservabilityAdmin
     class CreateTelemetryRuleForOrganizationOutput < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -88,7 +88,7 @@ module Aws::ObservabilityAdmin
       :rule,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -99,7 +99,7 @@ module Aws::ObservabilityAdmin
     class CreateTelemetryRuleOutput < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -110,7 +110,7 @@ module Aws::ObservabilityAdmin
     class DeleteTelemetryRuleForOrganizationInput < Struct.new(
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -121,11 +121,7 @@ module Aws::ObservabilityAdmin
     class DeleteTelemetryRuleInput < Struct.new(
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationType
-      CLOUDWATCH_LOGS = 'cloud-watch-logs'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -142,7 +138,7 @@ module Aws::ObservabilityAdmin
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -159,7 +155,7 @@ module Aws::ObservabilityAdmin
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -170,7 +166,7 @@ module Aws::ObservabilityAdmin
     class GetTelemetryRuleForOrganizationInput < Struct.new(
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -205,7 +201,7 @@ module Aws::ObservabilityAdmin
       :last_update_time_stamp,
       :telemetry_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -216,7 +212,7 @@ module Aws::ObservabilityAdmin
     class GetTelemetryRuleInput < Struct.new(
       :rule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -251,7 +247,7 @@ module Aws::ObservabilityAdmin
       :last_update_time_stamp,
       :telemetry_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -268,7 +264,7 @@ module Aws::ObservabilityAdmin
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_identifiers
@@ -315,7 +311,7 @@ module Aws::ObservabilityAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_configurations
@@ -332,7 +328,7 @@ module Aws::ObservabilityAdmin
       :telemetry_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier_prefix
@@ -373,7 +369,7 @@ module Aws::ObservabilityAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_configurations
@@ -390,7 +386,7 @@ module Aws::ObservabilityAdmin
       :telemetry_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -401,7 +397,7 @@ module Aws::ObservabilityAdmin
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -412,7 +408,7 @@ module Aws::ObservabilityAdmin
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name_prefix
@@ -447,7 +443,7 @@ module Aws::ObservabilityAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_rule_summaries
@@ -464,7 +460,7 @@ module Aws::ObservabilityAdmin
       :telemetry_rule_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name_prefix
@@ -487,7 +483,7 @@ module Aws::ObservabilityAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_rule_summaries
@@ -504,7 +500,7 @@ module Aws::ObservabilityAdmin
       :telemetry_rule_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -515,13 +511,7 @@ module Aws::ObservabilityAdmin
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      AWS_EC2_INSTANCE = 'AWS::EC2::Instance'
-      AWS_EC2_VPC = 'AWS::EC2::VPC'
-      AWS_LAMDBA_FUNCTION = 'AWS::Lambda::Function'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -538,17 +528,7 @@ module Aws::ObservabilityAdmin
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      NOT_STARTED = 'NOT_STARTED'
-      STARTING = 'STARTING'
-      FAILED_START = 'FAILED_START'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      FAILED_STOP = 'FAILED_STOP'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -565,7 +545,7 @@ module Aws::ObservabilityAdmin
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -609,7 +589,7 @@ module Aws::ObservabilityAdmin
       :resource_tags,
       :last_update_time_stamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -641,7 +621,7 @@ module Aws::ObservabilityAdmin
       :retention_in_days,
       :vpc_flow_log_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -679,7 +659,7 @@ module Aws::ObservabilityAdmin
       :scope,
       :selection_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -723,19 +703,7 @@ module Aws::ObservabilityAdmin
       :resource_type,
       :telemetry_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TelemetryState
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-      NOT_APPLICABLE = 'NotApplicable'
-    end
-
-    module TelemetryType
-      LOGS = 'Logs'
-      METRICS = 'Metrics'
-      TRACES = 'Traces'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -746,7 +714,7 @@ module Aws::ObservabilityAdmin
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -763,7 +731,7 @@ module Aws::ObservabilityAdmin
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -780,7 +748,7 @@ module Aws::ObservabilityAdmin
       :rule_identifier,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -791,7 +759,7 @@ module Aws::ObservabilityAdmin
     class UpdateTelemetryRuleForOrganizationOutput < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_identifier
@@ -808,7 +776,7 @@ module Aws::ObservabilityAdmin
       :rule_identifier,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -819,7 +787,7 @@ module Aws::ObservabilityAdmin
     class UpdateTelemetryRuleOutput < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -845,7 +813,7 @@ module Aws::ObservabilityAdmin
       :traffic_type,
       :max_aggregation_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -856,7 +824,7 @@ module Aws::ObservabilityAdmin
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

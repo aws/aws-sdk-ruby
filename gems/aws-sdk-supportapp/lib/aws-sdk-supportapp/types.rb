@@ -12,7 +12,7 @@ module Aws::SupportApp
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has a conflict. For example, you might receive this error if you try the
@@ -47,7 +47,7 @@ module Aws::SupportApp
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -129,22 +129,22 @@ module Aws::SupportApp
       :notify_on_case_severity,
       :channel_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSlackChannelConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAliasOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -158,12 +158,12 @@ module Aws::SupportApp
       :team_id,
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackChannelConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -173,17 +173,17 @@ module Aws::SupportApp
     class DeleteSlackWorkspaceConfigurationInput < Struct.new(
       :team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackWorkspaceConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountAliasInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_alias
@@ -192,7 +192,7 @@ module Aws::SupportApp
     class GetAccountAliasOutput < Struct.new(
       :account_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -201,7 +201,7 @@ module Aws::SupportApp
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -212,7 +212,7 @@ module Aws::SupportApp
     class ListSlackChannelConfigurationsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -226,7 +226,7 @@ module Aws::SupportApp
       :next_token,
       :slack_channel_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -237,7 +237,7 @@ module Aws::SupportApp
     class ListSlackWorkspaceConfigurationsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -251,7 +251,7 @@ module Aws::SupportApp
       :next_token,
       :slack_workspace_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_alias
@@ -260,12 +260,12 @@ module Aws::SupportApp
     class PutAccountAliasInput < Struct.new(
       :account_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAccountAliasOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -275,7 +275,7 @@ module Aws::SupportApp
     class RegisterSlackWorkspaceForOrganizationInput < Struct.new(
       :team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -294,7 +294,7 @@ module Aws::SupportApp
       :team_name,
       :account_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is missing or doesn't exist, such as an account alias, Slack
@@ -304,7 +304,7 @@ module Aws::SupportApp
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your Service Quotas request exceeds the quota for the service. For example, your Service Quotas request to
@@ -315,7 +315,7 @@ module Aws::SupportApp
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a Slack channel that you added for your Amazon Web Services account.</p>
@@ -357,7 +357,7 @@ module Aws::SupportApp
       :notify_on_case_severity,
       :channel_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a Slack workspace that you added to an Amazon Web Services account.</p>
@@ -377,7 +377,7 @@ module Aws::SupportApp
       :team_name,
       :allow_organization_member_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -459,7 +459,7 @@ module Aws::SupportApp
       :notify_on_case_severity,
       :channel_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -499,7 +499,7 @@ module Aws::SupportApp
       :notify_on_case_severity,
       :channel_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>
@@ -508,7 +508,7 @@ module Aws::SupportApp
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

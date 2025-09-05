@@ -16,7 +16,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_template
@@ -41,7 +41,7 @@ module Aws::OAM
       :tags,
       :link_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -78,7 +78,7 @@ module Aws::OAM
       :tags,
       :link_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -91,7 +91,7 @@ module Aws::OAM
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -112,7 +112,7 @@ module Aws::OAM
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -121,12 +121,12 @@ module Aws::OAM
     class DeleteLinkInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLinkOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -135,12 +135,12 @@ module Aws::OAM
     class DeleteSinkInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSinkOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -153,7 +153,7 @@ module Aws::OAM
       :identifier,
       :include_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -190,7 +190,7 @@ module Aws::OAM
       :tags,
       :link_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -203,7 +203,7 @@ module Aws::OAM
       :identifier,
       :include_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -224,7 +224,7 @@ module Aws::OAM
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sink_identifier
@@ -233,7 +233,7 @@ module Aws::OAM
     class GetSinkPolicyInput < Struct.new(
       :sink_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sink_arn
@@ -250,7 +250,7 @@ module Aws::OAM
       :sink_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error while processing the request. Retry the request.</p>
@@ -263,7 +263,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter is specified incorrectly.</p>
@@ -276,7 +276,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from the source account to the monitoring account.</p>
@@ -290,7 +290,7 @@ module Aws::OAM
       :log_group_configuration,
       :metric_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -307,7 +307,7 @@ module Aws::OAM
       :next_token,
       :sink_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one link attached to this monitoring account sink.</p>
@@ -325,7 +325,7 @@ module Aws::OAM
       :link_arn,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -338,7 +338,7 @@ module Aws::OAM
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -351,7 +351,7 @@ module Aws::OAM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one of this source account's links to a monitoring account.</p>
@@ -377,7 +377,7 @@ module Aws::OAM
       :resource_types,
       :sink_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -390,7 +390,7 @@ module Aws::OAM
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -403,7 +403,7 @@ module Aws::OAM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one of this monitoring account's sinks.</p>
@@ -421,7 +421,7 @@ module Aws::OAM
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -434,7 +434,7 @@ module Aws::OAM
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -443,7 +443,7 @@ module Aws::OAM
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -452,7 +452,7 @@ module Aws::OAM
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the <code>Filter</code> parameter which you can use to specify which log groups are to share log events from this source account to the monitoring account.</p>
@@ -462,7 +462,7 @@ module Aws::OAM
     class LogGroupConfiguration < Struct.new(
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the <code>Filter</code> parameter which you can use to specify which metric namespaces are to be shared from this source account to the monitoring account.</p>
@@ -472,7 +472,7 @@ module Aws::OAM
     class MetricConfiguration < Struct.new(
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A required parameter is missing from the request.</p>
@@ -485,7 +485,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sink_identifier
@@ -498,7 +498,7 @@ module Aws::OAM
       :sink_identifier,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sink_arn
@@ -515,7 +515,7 @@ module Aws::OAM
       :sink_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist.</p>
@@ -528,17 +528,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      AWS_CLOUDWATCH_METRIC = 'AWS::CloudWatch::Metric'
-      AWS_LOGS_LOGGROUP = 'AWS::Logs::LogGroup'
-      AWS_XRAY_TRACE = 'AWS::XRay::Trace'
-      AWS_APPLICATIONINSIGHTS_APPLICATION = 'AWS::ApplicationInsights::Application'
-      AWS_INTERNETMONITOR_MONITOR = 'AWS::InternetMonitor::Monitor'
-      AWS_APPLICATION_SIGNALS_SERVICE = 'AWS::ApplicationSignals::Service'
-      AWS_APPLICATION_SIGNALS_SLO = 'AWS::ApplicationSignals::ServiceLevelObjective'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -551,7 +541,7 @@ module Aws::OAM
       :message,
       :amzn_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -564,12 +554,12 @@ module Aws::OAM
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource can have no more than 50 tags.</p>
@@ -578,7 +568,7 @@ module Aws::OAM
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -591,12 +581,12 @@ module Aws::OAM
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -617,7 +607,7 @@ module Aws::OAM
       :link_configuration,
       :include_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -654,7 +644,7 @@ module Aws::OAM
       :tags,
       :link_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a parameter in the request caused an error.</p>
@@ -663,7 +653,7 @@ module Aws::OAM
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

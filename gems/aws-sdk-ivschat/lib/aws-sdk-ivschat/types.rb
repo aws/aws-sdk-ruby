@@ -12,7 +12,7 @@ module Aws::Ivschat
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a CloudWatch Logs location where chat logs will be stored.</p>
@@ -22,7 +22,7 @@ module Aws::Ivschat
     class CloudWatchLogsDestinationConfiguration < Struct.new(
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -39,7 +39,7 @@ module Aws::Ivschat
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_identifier
@@ -70,7 +70,7 @@ module Aws::Ivschat
       :session_duration_in_minutes,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token
@@ -90,7 +90,7 @@ module Aws::Ivschat
       :token_expiration_time,
       :session_expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -112,7 +112,7 @@ module Aws::Ivschat
       :destination_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -157,7 +157,7 @@ module Aws::Ivschat
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -191,7 +191,7 @@ module Aws::Ivschat
       :tags,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -242,7 +242,7 @@ module Aws::Ivschat
       :tags,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -251,7 +251,7 @@ module Aws::Ivschat
     class DeleteLoggingConfigurationInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_identifier
@@ -271,7 +271,7 @@ module Aws::Ivschat
       :id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -280,7 +280,7 @@ module Aws::Ivschat
     class DeleteMessageOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -289,7 +289,7 @@ module Aws::Ivschat
     class DeleteRoomInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes a location where chat logs will be stored. Each member
@@ -312,7 +312,7 @@ module Aws::Ivschat
       :firehose,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < DestinationConfiguration; end
       class CloudWatchLogs < DestinationConfiguration; end
@@ -335,12 +335,12 @@ module Aws::Ivschat
       :user_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisconnectUserOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Kinesis Firehose location where chat logs will be stored.</p>
@@ -351,7 +351,7 @@ module Aws::Ivschat
     class FirehoseDestinationConfiguration < Struct.new(
       :delivery_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -360,7 +360,7 @@ module Aws::Ivschat
     class GetLoggingConfigurationInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -406,7 +406,7 @@ module Aws::Ivschat
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -416,7 +416,7 @@ module Aws::Ivschat
     class GetRoomInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -468,7 +468,7 @@ module Aws::Ivschat
       :tags,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -477,7 +477,7 @@ module Aws::Ivschat
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -491,7 +491,7 @@ module Aws::Ivschat
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configurations
@@ -507,7 +507,7 @@ module Aws::Ivschat
       :logging_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -533,7 +533,7 @@ module Aws::Ivschat
       :message_review_handler_uri,
       :logging_configuration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rooms
@@ -547,7 +547,7 @@ module Aws::Ivschat
       :rooms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -556,7 +556,7 @@ module Aws::Ivschat
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -566,7 +566,7 @@ module Aws::Ivschat
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a logging configuration.</p>
@@ -611,7 +611,7 @@ module Aws::Ivschat
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for optional message review.</p>
@@ -631,7 +631,7 @@ module Aws::Ivschat
       :uri,
       :fallback_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -640,7 +640,7 @@ module Aws::Ivschat
     class PendingVerification < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -657,7 +657,7 @@ module Aws::Ivschat
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a room.</p>
@@ -700,7 +700,7 @@ module Aws::Ivschat
       :tags,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an S3 location where chat logs will be stored.</p>
@@ -710,7 +710,7 @@ module Aws::Ivschat
     class S3DestinationConfiguration < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_identifier
@@ -729,7 +729,7 @@ module Aws::Ivschat
       :event_name,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -739,7 +739,7 @@ module Aws::Ivschat
     class SendEventOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -760,7 +760,7 @@ module Aws::Ivschat
       :resource_type,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -780,12 +780,12 @@ module Aws::Ivschat
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -806,7 +806,7 @@ module Aws::Ivschat
       :resource_type,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -826,12 +826,12 @@ module Aws::Ivschat
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -851,7 +851,7 @@ module Aws::Ivschat
       :name,
       :destination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -897,7 +897,7 @@ module Aws::Ivschat
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -931,7 +931,7 @@ module Aws::Ivschat
       :message_review_handler,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -983,7 +983,7 @@ module Aws::Ivschat
       :tags,
       :logging_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1000,7 +1000,7 @@ module Aws::Ivschat
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object is used in the ValidationException error.</p>
@@ -1014,7 +1014,7 @@ module Aws::Ivschat
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

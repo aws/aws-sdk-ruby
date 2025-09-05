@@ -11,7 +11,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.cloud_front_origin_access_identity_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -20,7 +19,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -36,7 +34,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -45,7 +42,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -61,7 +57,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -70,7 +65,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -86,7 +80,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -95,7 +88,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -111,7 +103,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.distribution_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -120,7 +111,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -136,7 +126,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.distribution_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -145,7 +134,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -161,7 +149,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -170,7 +157,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -186,7 +172,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.invalidation_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -195,7 +180,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -211,7 +195,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.invalidation_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -220,7 +203,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -236,7 +218,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.key_value_store_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -245,7 +226,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -261,7 +241,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.origin_access_control_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -270,7 +249,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -286,7 +264,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.public_key_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -295,7 +272,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens
@@ -311,7 +287,6 @@ module Aws::CloudFront
       def next_tokens(data)
         next_token = data.streaming_distribution_list.next_marker
         return {} if next_token.nil? || next_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = next_token
         tokens
@@ -320,7 +295,6 @@ module Aws::CloudFront
       def prev_tokens(params)
         prev_token = params[:marker]
         return {} if prev_token.nil? || prev_token.empty?
-        
         tokens = Hash.new { |h, k| h[k] = {} }
         tokens[:marker] = prev_token
         tokens

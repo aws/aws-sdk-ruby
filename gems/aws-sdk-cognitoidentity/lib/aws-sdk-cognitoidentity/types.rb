@@ -6,11 +6,6 @@ module Aws::CognitoIdentity
   # This module contains the types returned by client operations.
   module Types
 
-    module AmbiguousRoleResolutionType
-      AUTHENTICATED_ROLE = 'AuthenticatedRole'
-      DENY = 'Deny'
-    end
-
     # <p>A provider representing an Amazon Cognito user pool and its client ID.</p>
     # @!attribute provider_name
     #   <p>The provider name for an Amazon Cognito user pool. For example,
@@ -34,10 +29,10 @@ module Aws::CognitoIdentity
       :client_id,
       :server_side_token_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:server_side_token_check] =  unless options.key?(:server_side_token_check)
+        options[:server_side_token_check] = nil unless options.key?(:server_side_token_check)
         super
       end
     end
@@ -49,7 +44,7 @@ module Aws::CognitoIdentity
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the CreateIdentityPool action.</p>
@@ -102,7 +97,7 @@ module Aws::CognitoIdentity
       :saml_provider_ar_ns,
       :identity_pool_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon Cognito identity pool.</p>
@@ -153,7 +148,7 @@ module Aws::CognitoIdentity
       :saml_provider_ar_ns,
       :identity_pool_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_unauthenticated_identities] = false unless options.key?(:allow_unauthenticated_identities)
@@ -180,7 +175,7 @@ module Aws::CognitoIdentity
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>DeleteIdentities</code> action.</p>
@@ -190,7 +185,7 @@ module Aws::CognitoIdentity
     class DeleteIdentitiesInput < Struct.new(
       :identity_ids_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>DeleteIdentities</code>
@@ -202,7 +197,7 @@ module Aws::CognitoIdentity
     class DeleteIdentitiesResponse < Struct.new(
       :unprocessed_identity_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the DeleteIdentityPool action.</p>
@@ -212,7 +207,7 @@ module Aws::CognitoIdentity
     class DeleteIdentityPoolInput < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>DescribeIdentity</code> action.</p>
@@ -222,7 +217,7 @@ module Aws::CognitoIdentity
     class DescribeIdentityInput < Struct.new(
       :identity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the identity.</p>
@@ -244,7 +239,7 @@ module Aws::CognitoIdentity
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the DescribeIdentityPool action.</p>
@@ -254,7 +249,7 @@ module Aws::CognitoIdentity
     class DescribeIdentityPoolInput < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon Cognito identity pool.</p>
@@ -305,7 +300,7 @@ module Aws::CognitoIdentity
       :saml_provider_ar_ns,
       :identity_pool_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_unauthenticated_identities] = false unless options.key?(:allow_unauthenticated_identities)
@@ -321,12 +316,7 @@ module Aws::CognitoIdentity
     class DeveloperUserAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      ACCESS_DENIED = 'AccessDenied'
-      INTERNAL_SERVER_ERROR = 'InternalServerError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception thrown when a dependent service such as Facebook or Twitter is not
@@ -337,7 +327,7 @@ module Aws::CognitoIdentity
     class ExternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>GetCredentialsForIdentity</code> action.</p>
@@ -366,7 +356,7 @@ module Aws::CognitoIdentity
       :logins,
       :custom_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>GetCredentialsForIdentity</code>
@@ -381,7 +371,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the GetId action.</p>
@@ -428,7 +418,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :logins,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a GetId request.</p>
@@ -438,7 +428,7 @@ module Aws::CognitoIdentity
     class GetIdResponse < Struct.new(
       :identity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>GetIdentityPoolRoles</code> action.</p>
@@ -448,7 +438,7 @@ module Aws::CognitoIdentity
     class GetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>GetIdentityPoolRoles</code>
@@ -471,7 +461,7 @@ module Aws::CognitoIdentity
       :roles,
       :role_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>
@@ -514,7 +504,7 @@ module Aws::CognitoIdentity
       :principal_tags,
       :token_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code>
@@ -529,7 +519,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the GetOpenIdToken action.</p>
@@ -546,7 +536,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :logins,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful GetOpenIdToken request.</p>
@@ -561,7 +551,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_pool_id
@@ -575,7 +565,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :identity_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_pool_id
@@ -599,7 +589,7 @@ module Aws::CognitoIdentity
       :use_defaults,
       :principal_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the identity.</p>
@@ -621,7 +611,7 @@ module Aws::CognitoIdentity
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the identity pool.</p>
@@ -635,7 +625,7 @@ module Aws::CognitoIdentity
       :identity_pool_id,
       :identity_pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when the service encounters an error during processing the request.</p>
@@ -645,7 +635,7 @@ module Aws::CognitoIdentity
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you provided authentication information in the request, the identity pool has no
@@ -662,7 +652,7 @@ module Aws::CognitoIdentity
     class InvalidIdentityPoolConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown for missing or bad input parameter(s).</p>
@@ -672,7 +662,7 @@ module Aws::CognitoIdentity
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when the total number of user pools has exceeded a preset limit.</p>
@@ -682,7 +672,7 @@ module Aws::CognitoIdentity
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the ListIdentities action.</p>
@@ -705,7 +695,7 @@ module Aws::CognitoIdentity
       :next_token,
       :hide_disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a ListIdentities request.</p>
@@ -723,7 +713,7 @@ module Aws::CognitoIdentity
       :identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the ListIdentityPools action.</p>
@@ -737,7 +727,7 @@ module Aws::CognitoIdentity
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a successful ListIdentityPools action.</p>
@@ -751,7 +741,7 @@ module Aws::CognitoIdentity
       :identity_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -761,7 +751,7 @@ module Aws::CognitoIdentity
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -770,7 +760,7 @@ module Aws::CognitoIdentity
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>
@@ -803,7 +793,7 @@ module Aws::CognitoIdentity
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>LookupDeveloperIdentity</code>
@@ -829,7 +819,7 @@ module Aws::CognitoIdentity
       :developer_user_identifier_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule that maps a claim name, a claim value, and a match type to a role
@@ -854,14 +844,7 @@ module Aws::CognitoIdentity
       :value,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MappingRuleMatchType
-      EQUALS = 'Equals'
-      CONTAINS = 'Contains'
-      STARTS_WITH = 'StartsWith'
-      NOT_EQUAL = 'NotEqual'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>MergeDeveloperIdentities</code> action.</p>
@@ -889,7 +872,7 @@ module Aws::CognitoIdentity
       :developer_provider_name,
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned in response to a successful <code>MergeDeveloperIdentities</code>
@@ -900,7 +883,7 @@ module Aws::CognitoIdentity
     class MergeDeveloperIdentitiesResponse < Struct.new(
       :identity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when a user is not authorized to access the requested resource.</p>
@@ -910,7 +893,7 @@ module Aws::CognitoIdentity
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when a user tries to use a login which is already linked to another
@@ -921,7 +904,7 @@ module Aws::CognitoIdentity
     class ResourceConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when the requested resource (for example, a dataset or record) does not
@@ -932,7 +915,7 @@ module Aws::CognitoIdentity
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A role mapping.</p>
@@ -960,12 +943,7 @@ module Aws::CognitoIdentity
       :ambiguous_role_resolution,
       :rules_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoleMappingType
-      TOKEN = 'Token'
-      RULES = 'Rules'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for rules.</p>
@@ -976,7 +954,7 @@ module Aws::CognitoIdentity
     class RulesConfigurationType < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>SetIdentityPoolRoles</code> action.</p>
@@ -999,7 +977,7 @@ module Aws::CognitoIdentity
       :roles,
       :role_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_pool_id
@@ -1021,7 +999,7 @@ module Aws::CognitoIdentity
       :use_defaults,
       :principal_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_pool_id
@@ -1045,7 +1023,7 @@ module Aws::CognitoIdentity
       :use_defaults,
       :principal_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1058,12 +1036,12 @@ module Aws::CognitoIdentity
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when a request is throttled.</p>
@@ -1073,7 +1051,7 @@ module Aws::CognitoIdentity
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the <code>UnlinkDeveloperIdentity</code> action.</p>
@@ -1095,7 +1073,7 @@ module Aws::CognitoIdentity
       :developer_provider_name,
       :developer_user_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to the UnlinkIdentity action.</p>
@@ -1114,7 +1092,7 @@ module Aws::CognitoIdentity
       :logins,
       :logins_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and
@@ -1129,7 +1107,7 @@ module Aws::CognitoIdentity
       :identity_id,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1142,12 +1120,12 @@ module Aws::CognitoIdentity
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon Cognito identity pool.</p>
@@ -1198,7 +1176,7 @@ module Aws::CognitoIdentity
       :saml_provider_ar_ns,
       :identity_pool_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon Cognito identity pool.</p>
@@ -1249,7 +1227,7 @@ module Aws::CognitoIdentity
       :saml_provider_ar_ns,
       :identity_pool_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_unauthenticated_identities] = false unless options.key?(:allow_unauthenticated_identities)

@@ -6,11 +6,6 @@ module Aws::Fis
   # This module contains the types returned by client operations.
   module Types
 
-    module AccountTargeting
-      SINGLE_ACCOUNT = 'single-account'
-      MULTI_ACCOUNT = 'multi-account'
-    end
-
     # <p>Describes an action. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html">FIS actions</a> 
     #          in the <i>Fault Injection Service User Guide</i>.</p>
     # @!attribute id
@@ -39,7 +34,7 @@ module Aws::Fis
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a parameter for an action.</p>
@@ -53,10 +48,10 @@ module Aws::Fis
       :description,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:required] =  unless options.key?(:required)
+        options[:required] = nil unless options.key?(:required)
         super
       end
     end
@@ -84,7 +79,7 @@ module Aws::Fis
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target for an action.</p>
@@ -94,12 +89,7 @@ module Aws::Fis
     class ActionTarget < Struct.new(
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionsMode
-      SKIP_ALL = 'skip-all'
-      RUN_ALL = 'run-all'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of a conflict.</p>
@@ -108,7 +98,7 @@ module Aws::Fis
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an action for an experiment template.</p>
@@ -136,7 +126,7 @@ module Aws::Fis
       :targets,
       :start_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies experiment options for an experiment template.</p>
@@ -150,7 +140,7 @@ module Aws::Fis
       :account_targeting,
       :empty_target_resolution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for experiment logging.</p>
@@ -168,7 +158,7 @@ module Aws::Fis
       :s3_configuration,
       :log_schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for experiment reports.</p>
@@ -190,7 +180,7 @@ module Aws::Fis
       :pre_experiment_duration,
       :post_experiment_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -235,7 +225,7 @@ module Aws::Fis
       :experiment_options,
       :experiment_report_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template
@@ -244,7 +234,7 @@ module Aws::Fis
     class CreateExperimentTemplateResponse < Struct.new(
       :experiment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a stop condition for an experiment template.</p>
@@ -261,7 +251,7 @@ module Aws::Fis
       :source,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or 
@@ -307,7 +297,7 @@ module Aws::Fis
       :selection_mode,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -332,7 +322,7 @@ module Aws::Fis
       :role_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configuration
@@ -341,7 +331,7 @@ module Aws::Fis
     class CreateTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -350,7 +340,7 @@ module Aws::Fis
     class DeleteExperimentTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template
@@ -359,7 +349,7 @@ module Aws::Fis
     class DeleteExperimentTemplateResponse < Struct.new(
       :experiment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template_id
@@ -372,7 +362,7 @@ module Aws::Fis
       :experiment_template_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configuration
@@ -381,12 +371,7 @@ module Aws::Fis
     class DeleteTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EmptyTargetResolutionMode
-      FAIL = 'fail'
-      SKIP = 'skip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an experiment.</p>
@@ -460,7 +445,7 @@ module Aws::Fis
       :experiment_report_configuration,
       :experiment_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the action for an experiment.</p>
@@ -498,7 +483,7 @@ module Aws::Fis
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of an action.</p>
@@ -512,19 +497,7 @@ module Aws::Fis
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExperimentActionStatus
-      pending = 'pending'
-      initiating = 'initiating'
-      running = 'running'
-      completed = 'completed'
-      cancelled = 'cancelled'
-      stopping = 'stopping'
-      stopped = 'stopped'
-      failed = 'failed'
-      skipped = 'skipped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>
@@ -534,7 +507,7 @@ module Aws::Fis
     class ExperimentCloudWatchLogsLogConfiguration < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error when an experiment has <code>failed</code>.</p>
@@ -552,7 +525,7 @@ module Aws::Fis
       :code,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging.</p>
@@ -570,7 +543,7 @@ module Aws::Fis
       :s3_configuration,
       :log_schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for an experiment.</p>
@@ -588,7 +561,7 @@ module Aws::Fis
       :empty_target_resolution_mode,
       :actions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the experiment report.</p>
@@ -602,7 +575,7 @@ module Aws::Fis
       :state,
       :s3_reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the report configuration for the experiment. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration">Experiment report configurations for AWS FIS</a>.</p>
@@ -624,7 +597,7 @@ module Aws::Fis
       :pre_experiment_duration,
       :post_experiment_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudWatch dashboard to include in the experiment report. The dashboard widgets will be captured as  snapshot graphs within the report.</p>
@@ -634,7 +607,7 @@ module Aws::Fis
     class ExperimentReportConfigurationCloudWatchDashboard < Struct.new(
       :dashboard_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data sources for the experiment report.</p>
@@ -644,7 +617,7 @@ module Aws::Fis
     class ExperimentReportConfigurationDataSources < Struct.new(
       :cloud_watch_dashboards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the output destinations of the experiment report.</p>
@@ -654,7 +627,7 @@ module Aws::Fis
     class ExperimentReportConfigurationOutputs < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the S3 destination for the experiment report.</p>
@@ -668,7 +641,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error when experiment report generation has failed.</p>
@@ -678,7 +651,7 @@ module Aws::Fis
     class ExperimentReportError < Struct.new(
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 destination for the report.</p>
@@ -692,7 +665,7 @@ module Aws::Fis
       :arn,
       :report_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of the experiment report generation.</p>
@@ -710,15 +683,7 @@ module Aws::Fis
       :reason,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExperimentReportStatus
-      pending = 'pending'
-      running = 'running'
-      completed = 'completed'
-      cancelled = 'cancelled'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging to Amazon S3.</p>
@@ -732,7 +697,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of an experiment.</p>
@@ -750,18 +715,7 @@ module Aws::Fis
       :reason,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExperimentStatus
-      pending = 'pending'
-      initiating = 'initiating'
-      running = 'running'
-      completed = 'completed'
-      stopping = 'stopping'
-      stopped = 'stopped'
-      failed = 'failed'
-      cancelled = 'cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the stop condition for an experiment.</p>
@@ -775,7 +729,7 @@ module Aws::Fis
       :source,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of an experiment.</p>
@@ -809,7 +763,7 @@ module Aws::Fis
       :tags,
       :experiment_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target for an experiment.</p>
@@ -839,7 +793,7 @@ module Aws::Fis
       :selection_mode,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target account configuration for an experiment.</p>
@@ -857,7 +811,7 @@ module Aws::Fis
       :account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a target account configuration.</p>
@@ -875,7 +829,7 @@ module Aws::Fis
       :account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter used for the target resources in an experiment.</p>
@@ -889,7 +843,7 @@ module Aws::Fis
       :path,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an experiment template.</p>
@@ -951,7 +905,7 @@ module Aws::Fis
       :target_account_configurations_count,
       :experiment_report_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action for an experiment template.</p>
@@ -977,7 +931,7 @@ module Aws::Fis
       :targets,
       :start_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging to Amazon CloudWatch Logs.</p>
@@ -987,7 +941,7 @@ module Aws::Fis
     class ExperimentTemplateCloudWatchLogsLogConfiguration < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for experiment logging to Amazon CloudWatch Logs.</p>
@@ -997,7 +951,7 @@ module Aws::Fis
     class ExperimentTemplateCloudWatchLogsLogConfigurationInput < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the experiment options for an experiment template.</p>
@@ -1011,7 +965,7 @@ module Aws::Fis
       :account_targeting,
       :empty_target_resolution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging.</p>
@@ -1029,7 +983,7 @@ module Aws::Fis
       :s3_configuration,
       :log_schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the experiment report configuration. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/experiment-report-configuration">Experiment report configurations for AWS FIS</a>.</p>
@@ -1051,7 +1005,7 @@ module Aws::Fis
       :pre_experiment_duration,
       :post_experiment_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CloudWatch dashboards to include as data sources in the experiment report.</p>
@@ -1061,7 +1015,7 @@ module Aws::Fis
     class ExperimentTemplateReportConfigurationCloudWatchDashboard < Struct.new(
       :dashboard_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data sources for the experiment report.</p>
@@ -1071,7 +1025,7 @@ module Aws::Fis
     class ExperimentTemplateReportConfigurationDataSources < Struct.new(
       :cloud_watch_dashboards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the data sources for the experiment report.</p>
@@ -1081,7 +1035,7 @@ module Aws::Fis
     class ExperimentTemplateReportConfigurationDataSourcesInput < Struct.new(
       :cloud_watch_dashboards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output destinations of the experiment report.</p>
@@ -1091,7 +1045,7 @@ module Aws::Fis
     class ExperimentTemplateReportConfigurationOutputs < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the outputs for the experiment templates.</p>
@@ -1101,7 +1055,7 @@ module Aws::Fis
     class ExperimentTemplateReportConfigurationOutputsInput < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for experiment logging to Amazon S3.</p>
@@ -1115,7 +1069,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for experiment logging to Amazon S3.</p>
@@ -1129,7 +1083,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stop condition for an experiment template.</p>
@@ -1143,7 +1097,7 @@ module Aws::Fis
       :source,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of an experiment template.</p>
@@ -1173,7 +1127,7 @@ module Aws::Fis
       :last_update_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target for an experiment template.</p>
@@ -1203,7 +1157,7 @@ module Aws::Fis
       :selection_mode,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter used for the target resources in an experiment template.</p>
@@ -1217,7 +1171,7 @@ module Aws::Fis
       :path,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a filter used for the target resource input in an experiment template.</p>
@@ -1233,7 +1187,7 @@ module Aws::Fis
       :path,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1242,7 +1196,7 @@ module Aws::Fis
     class GetActionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -1251,7 +1205,7 @@ module Aws::Fis
     class GetActionResponse < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1260,7 +1214,7 @@ module Aws::Fis
     class GetExperimentRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -1269,7 +1223,7 @@ module Aws::Fis
     class GetExperimentResponse < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_id
@@ -1282,7 +1236,7 @@ module Aws::Fis
       :experiment_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configuration
@@ -1291,7 +1245,7 @@ module Aws::Fis
     class GetExperimentTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1300,7 +1254,7 @@ module Aws::Fis
     class GetExperimentTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template
@@ -1309,7 +1263,7 @@ module Aws::Fis
     class GetExperimentTemplateResponse < Struct.new(
       :experiment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1320,7 +1274,7 @@ module Aws::Fis
     class GetSafetyLeverRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute safety_lever
@@ -1331,7 +1285,7 @@ module Aws::Fis
     class GetSafetyLeverResponse < Struct.new(
       :safety_lever,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template_id
@@ -1344,7 +1298,7 @@ module Aws::Fis
       :experiment_template_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configuration
@@ -1353,7 +1307,7 @@ module Aws::Fis
     class GetTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -1362,7 +1316,7 @@ module Aws::Fis
     class GetTargetResourceTypeRequest < Struct.new(
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_resource_type
@@ -1371,7 +1325,7 @@ module Aws::Fis
     class GetTargetResourceTypeResponse < Struct.new(
       :target_resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1384,7 +1338,7 @@ module Aws::Fis
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -1397,7 +1351,7 @@ module Aws::Fis
       :actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_id
@@ -1419,7 +1373,7 @@ module Aws::Fis
       :next_token,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolved_targets
@@ -1433,7 +1387,7 @@ module Aws::Fis
       :resolved_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_id
@@ -1446,7 +1400,7 @@ module Aws::Fis
       :experiment_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configurations
@@ -1460,7 +1414,7 @@ module Aws::Fis
       :target_account_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1473,7 +1427,7 @@ module Aws::Fis
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_templates
@@ -1486,7 +1440,7 @@ module Aws::Fis
       :experiment_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1503,7 +1457,7 @@ module Aws::Fis
       :next_token,
       :experiment_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiments
@@ -1516,7 +1470,7 @@ module Aws::Fis
       :experiments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1525,7 +1479,7 @@ module Aws::Fis
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1534,7 +1488,7 @@ module Aws::Fis
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template_id
@@ -1552,7 +1506,7 @@ module Aws::Fis
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configurations
@@ -1566,7 +1520,7 @@ module Aws::Fis
       :target_account_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1579,7 +1533,7 @@ module Aws::Fis
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_resource_types
@@ -1592,7 +1546,7 @@ module Aws::Fis
       :target_resource_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudWatch dashboard for the experiment report.</p>
@@ -1602,7 +1556,7 @@ module Aws::Fis
     class ReportConfigurationCloudWatchDashboardInput < Struct.new(
       :dashboard_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 destination for the experiment report.</p>
@@ -1616,7 +1570,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the S3 destination for the experiment report.</p>
@@ -1630,7 +1584,7 @@ module Aws::Fis
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resolved target.</p>
@@ -1648,7 +1602,7 @@ module Aws::Fis
       :target_name,
       :target_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource cannot be found.</p>
@@ -1657,7 +1611,7 @@ module Aws::Fis
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1683,7 +1637,7 @@ module Aws::Fis
       :arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1703,18 +1657,7 @@ module Aws::Fis
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SafetyLeverStatus
-      DISENGAGED = 'disengaged'
-      ENGAGED = 'engaged'
-      ENGAGING = 'engaging'
-    end
-
-    module SafetyLeverStatusInput
-      DISENGAGED = 'disengaged'
-      ENGAGED = 'engaged'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your service quota.</p>
@@ -1723,7 +1666,7 @@ module Aws::Fis
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies experiment options for running an experiment.</p>
@@ -1733,7 +1676,7 @@ module Aws::Fis
     class StartExperimentExperimentOptionsInput < Struct.new(
       :actions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1754,7 +1697,7 @@ module Aws::Fis
       :experiment_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -1763,7 +1706,7 @@ module Aws::Fis
     class StartExperimentResponse < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1772,7 +1715,7 @@ module Aws::Fis
     class StopExperimentRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment
@@ -1781,7 +1724,7 @@ module Aws::Fis
     class StopExperimentResponse < Struct.new(
       :experiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1794,12 +1737,12 @@ module Aws::Fis
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target account configuration.</p>
@@ -1817,7 +1760,7 @@ module Aws::Fis
       :account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a target account configuration.</p>
@@ -1835,7 +1778,7 @@ module Aws::Fis
       :account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource type.</p>
@@ -1853,7 +1796,7 @@ module Aws::Fis
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters for a resource type. Use parameters to determine which tasks are
@@ -1868,10 +1811,10 @@ module Aws::Fis
       :description,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:required] =  unless options.key?(:required)
+        options[:required] = nil unless options.key?(:required)
         super
       end
     end
@@ -1887,7 +1830,7 @@ module Aws::Fis
       :resource_type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1900,12 +1843,12 @@ module Aws::Fis
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an action for an experiment template.</p>
@@ -1931,7 +1874,7 @@ module Aws::Fis
       :targets,
       :start_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an experiment option for an experiment template.</p>
@@ -1941,7 +1884,7 @@ module Aws::Fis
     class UpdateExperimentTemplateExperimentOptionsInput < Struct.new(
       :empty_target_resolution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for experiment logging.</p>
@@ -1959,7 +1902,7 @@ module Aws::Fis
       :s3_configuration,
       :log_schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1982,7 +1925,7 @@ module Aws::Fis
       :pre_experiment_duration,
       :post_experiment_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2023,7 +1966,7 @@ module Aws::Fis
       :experiment_options,
       :experiment_report_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template
@@ -2032,7 +1975,7 @@ module Aws::Fis
     class UpdateExperimentTemplateResponse < Struct.new(
       :experiment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a stop condition for an experiment. You can define a stop condition as a CloudWatch alarm.</p>
@@ -2048,7 +1991,7 @@ module Aws::Fis
       :source,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.</p>
@@ -2078,7 +2021,7 @@ module Aws::Fis
       :selection_mode,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2098,7 +2041,7 @@ module Aws::Fis
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2115,7 +2058,7 @@ module Aws::Fis
       :id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute safety_lever
@@ -2126,7 +2069,7 @@ module Aws::Fis
     class UpdateSafetyLeverStateResponse < Struct.new(
       :safety_lever,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_template_id
@@ -2147,7 +2090,7 @@ module Aws::Fis
       :role_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_configuration
@@ -2156,7 +2099,7 @@ module Aws::Fis
     class UpdateTargetAccountConfigurationResponse < Struct.new(
       :target_account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>
@@ -2165,7 +2108,7 @@ module Aws::Fis
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,7 +13,7 @@ module Aws::Organizations
     class AWSOrganizationsNotInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake_id
@@ -24,7 +24,7 @@ module Aws::Organizations
     class AcceptHandshakeRequest < Struct.new(
       :handshake_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -33,7 +33,7 @@ module Aws::Organizations
     class AcceptHandshakeResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permissions to perform the requested operation. The user or role that
@@ -45,7 +45,7 @@ module Aws::Organizations
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation that you attempted requires you to have the
@@ -60,11 +60,7 @@ module Aws::Organizations
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessDeniedForDependencyExceptionReason
-      ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE = 'ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Web Services account that is a member of an
@@ -108,7 +104,7 @@ module Aws::Organizations
       :joined_method,
       :joined_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to close an account that is already closed.</p>
@@ -117,7 +113,7 @@ module Aws::Organizations
     class AccountAlreadyClosedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account is already a delegated administrator for this Amazon Web Services
@@ -127,12 +123,7 @@ module Aws::Organizations
     class AccountAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountJoinedMethod
-      INVITED = 'INVITED'
-      CREATED = 'CREATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> We can't find an Amazon Web Services account with the <code>AccountId</code> that you specified, or
@@ -143,7 +134,7 @@ module Aws::Organizations
     class AccountNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account is not a delegated administrator for this Amazon Web Services service. </p>
@@ -152,7 +143,7 @@ module Aws::Organizations
     class AccountNotRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't invite an existing account to your organization until you verify that you
@@ -164,20 +155,7 @@ module Aws::Organizations
     class AccountOwnerNotVerifiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountStatus
-      ACTIVE = 'ACTIVE'
-      SUSPENDED = 'SUSPENDED'
-      PENDING_CLOSURE = 'PENDING_CLOSURE'
-    end
-
-    module ActionType
-      INVITE_ACCOUNT_TO_ORGANIZATION = 'INVITE'
-      ENABLE_ALL_FEATURES = 'ENABLE_ALL_FEATURES'
-      APPROVE_ALL_FEATURES = 'APPROVE_ALL_FEATURES'
-      ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE = 'ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This account is already a member of an organization. An account can belong to only one
@@ -187,7 +165,7 @@ module Aws::Organizations
     class AlreadyInOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -225,7 +203,7 @@ module Aws::Organizations
       :policy_id,
       :target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake_id
@@ -237,7 +215,7 @@ module Aws::Organizations
     class CancelHandshakeRequest < Struct.new(
       :handshake_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -246,7 +224,7 @@ module Aws::Organizations
     class CancelHandshakeResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of child entities, either OUs or accounts.</p>
@@ -275,7 +253,7 @@ module Aws::Organizations
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find an organizational unit (OU) or Amazon Web Services account with the
@@ -285,12 +263,7 @@ module Aws::Organizations
     class ChildNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChildType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATIONAL_UNIT = 'ORGANIZATIONAL_UNIT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -300,7 +273,7 @@ module Aws::Organizations
     class CloseAccountRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target of the operation is currently being modified by a different request. Try
@@ -310,7 +283,7 @@ module Aws::Organizations
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it conflicts with the current state of the specified
@@ -320,7 +293,7 @@ module Aws::Organizations
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Performing this operation violates a minimum or maximum value limit. For example,
@@ -546,65 +519,7 @@ module Aws::Organizations
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConstraintViolationExceptionReason
-      ACCOUNT_NUMBER_LIMIT_EXCEEDED = 'ACCOUNT_NUMBER_LIMIT_EXCEEDED'
-      HANDSHAKE_RATE_LIMIT_EXCEEDED = 'HANDSHAKE_RATE_LIMIT_EXCEEDED'
-      OU_NUMBER_LIMIT_EXCEEDED = 'OU_NUMBER_LIMIT_EXCEEDED'
-      OU_DEPTH_LIMIT_EXCEEDED = 'OU_DEPTH_LIMIT_EXCEEDED'
-      POLICY_NUMBER_LIMIT_EXCEEDED = 'POLICY_NUMBER_LIMIT_EXCEEDED'
-      POLICY_CONTENT_LIMIT_EXCEEDED = 'POLICY_CONTENT_LIMIT_EXCEEDED'
-      MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED = 'MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED'
-      MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED = 'MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED'
-      ACCOUNT_CANNOT_LEAVE_ORGANIZATION = 'ACCOUNT_CANNOT_LEAVE_ORGANIZATION'
-      ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA = 'ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA'
-      ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION = 'ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION'
-      MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED = 'MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED'
-      MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED = 'MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED'
-      ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED = 'ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED'
-      MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE = 'MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE'
-      MASTER_ACCOUNT_MISSING_CONTACT_INFO = 'MASTER_ACCOUNT_MISSING_CONTACT_INFO'
-      MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED = 'MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED'
-      ORGANIZATION_NOT_IN_ALL_FEATURES_MODE = 'ORGANIZATION_NOT_IN_ALL_FEATURES_MODE'
-      CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION = 'CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION'
-      EMAIL_VERIFICATION_CODE_EXPIRED = 'EMAIL_VERIFICATION_CODE_EXPIRED'
-      WAIT_PERIOD_ACTIVE = 'WAIT_PERIOD_ACTIVE'
-      MAX_TAG_LIMIT_EXCEEDED = 'MAX_TAG_LIMIT_EXCEEDED'
-      TAG_POLICY_VIOLATION = 'TAG_POLICY_VIOLATION'
-      MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED = 'MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED'
-      CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR = 'CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR'
-      CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG = 'CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG'
-      DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE = 'DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE'
-      POLICY_TYPE_ENABLED_FOR_THIS_SERVICE = 'POLICY_TYPE_ENABLED_FOR_THIS_SERVICE'
-      MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE = 'MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE'
-      CANNOT_CLOSE_MANAGEMENT_ACCOUNT = 'CANNOT_CLOSE_MANAGEMENT_ACCOUNT'
-      CLOSE_ACCOUNT_QUOTA_EXCEEDED = 'CLOSE_ACCOUNT_QUOTA_EXCEEDED'
-      CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED = 'CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED'
-      SERVICE_ACCESS_NOT_ENABLED = 'SERVICE_ACCESS_NOT_ENABLED'
-      INVALID_PAYMENT_INSTRUMENT = 'INVALID_PAYMENT_INSTRUMENT'
-      ACCOUNT_CREATION_NOT_COMPLETE = 'ACCOUNT_CREATION_NOT_COMPLETE'
-      CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR = 'CANNOT_REGISTER_SUSPENDED_ACCOUNT_AS_DELEGATED_ADMINISTRATOR'
-      ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED = 'ALL_FEATURES_MIGRATION_ORGANIZATION_SIZE_LIMIT_EXCEEDED'
-    end
-
-    module CreateAccountFailureReason
-      ACCOUNT_LIMIT_EXCEEDED = 'ACCOUNT_LIMIT_EXCEEDED'
-      EMAIL_ALREADY_EXISTS = 'EMAIL_ALREADY_EXISTS'
-      INVALID_ADDRESS = 'INVALID_ADDRESS'
-      INVALID_EMAIL = 'INVALID_EMAIL'
-      CONCURRENT_ACCOUNT_MODIFICATION = 'CONCURRENT_ACCOUNT_MODIFICATION'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      GOVCLOUD_ACCOUNT_ALREADY_EXISTS = 'GOVCLOUD_ACCOUNT_ALREADY_EXISTS'
-      MISSING_BUSINESS_VALIDATION = 'MISSING_BUSINESS_VALIDATION'
-      FAILED_BUSINESS_VALIDATION = 'FAILED_BUSINESS_VALIDATION'
-      PENDING_BUSINESS_VALIDATIONv = 'PENDING_BUSINESS_VALIDATION'
-      INVALID_IDENTITY_FOR_BUSINESS_VALIDATION = 'INVALID_IDENTITY_FOR_BUSINESS_VALIDATION'
-      UNKNOWN_BUSINESS_VALIDATION = 'UNKNOWN_BUSINESS_VALIDATION'
-      MISSING_PAYMENT_INSTRUMENT = 'MISSING_PAYMENT_INSTRUMENT'
-      INVALID_PAYMENT_INSTRUMENT = 'INVALID_PAYMENT_INSTRUMENT'
-      UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED = 'UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email
@@ -704,7 +619,7 @@ module Aws::Organizations
       :iam_user_access_to_billing,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_account_status
@@ -719,13 +634,7 @@ module Aws::Organizations
     class CreateAccountResponse < Struct.new(
       :create_account_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CreateAccountState
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the status about a <a>CreateAccount</a> or <a>CreateGovCloudAccount</a> request to create an Amazon Web Services account or an Amazon Web Services
@@ -836,7 +745,7 @@ module Aws::Organizations
       :gov_cloud_account_id,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find an create account request with the <code>CreateAccountRequestId</code>
@@ -846,7 +755,7 @@ module Aws::Organizations
     class CreateAccountStatusNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email
@@ -956,7 +865,7 @@ module Aws::Organizations
       :iam_user_access_to_billing,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_account_status
@@ -966,7 +875,7 @@ module Aws::Organizations
     class CreateGovCloudAccountResponse < Struct.new(
       :create_account_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_set
@@ -995,7 +904,7 @@ module Aws::Organizations
     class CreateOrganizationRequest < Struct.new(
       :feature_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization
@@ -1004,7 +913,7 @@ module Aws::Organizations
     class CreateOrganizationResponse < Struct.new(
       :organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parent_id
@@ -1045,7 +954,7 @@ module Aws::Organizations
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit
@@ -1054,7 +963,7 @@ module Aws::Organizations
     class CreateOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -1136,7 +1045,7 @@ module Aws::Organizations
       :type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1145,7 +1054,7 @@ module Aws::Organizations
     class CreatePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake_id
@@ -1157,7 +1066,7 @@ module Aws::Organizations
     class DeclineHandshakeRequest < Struct.new(
       :handshake_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -1167,7 +1076,7 @@ module Aws::Organizations
     class DeclineHandshakeResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the delegated administrator.</p>
@@ -1208,7 +1117,7 @@ module Aws::Organizations
       :joined_timestamp,
       :delegation_enabled_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Web Services service for which the account is a delegated
@@ -1226,7 +1135,7 @@ module Aws::Organizations
       :service_principal,
       :delegation_enabled_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit_id
@@ -1240,7 +1149,7 @@ module Aws::Organizations
     class DeleteOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1253,7 +1162,7 @@ module Aws::Organizations
     class DeletePolicyRequest < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1272,7 +1181,7 @@ module Aws::Organizations
       :account_id,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1284,7 +1193,7 @@ module Aws::Organizations
     class DescribeAccountRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -1293,7 +1202,7 @@ module Aws::Organizations
     class DescribeAccountResponse < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_account_request_id
@@ -1306,7 +1215,7 @@ module Aws::Organizations
     class DescribeCreateAccountStatusRequest < Struct.new(
       :create_account_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_account_status
@@ -1315,7 +1224,7 @@ module Aws::Organizations
     class DescribeCreateAccountStatusResponse < Struct.new(
       :create_account_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_type
@@ -1363,7 +1272,7 @@ module Aws::Organizations
       :policy_type,
       :target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_policy
@@ -1372,7 +1281,7 @@ module Aws::Organizations
     class DescribeEffectivePolicyResponse < Struct.new(
       :effective_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake_id
@@ -1385,7 +1294,7 @@ module Aws::Organizations
     class DescribeHandshakeRequest < Struct.new(
       :handshake_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -1394,7 +1303,7 @@ module Aws::Organizations
     class DescribeHandshakeResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization
@@ -1412,7 +1321,7 @@ module Aws::Organizations
     class DescribeOrganizationResponse < Struct.new(
       :organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit_id
@@ -1427,7 +1336,7 @@ module Aws::Organizations
     class DescribeOrganizationalUnitRequest < Struct.new(
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit
@@ -1436,7 +1345,7 @@ module Aws::Organizations
     class DescribeOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1449,7 +1358,7 @@ module Aws::Organizations
     class DescribePolicyRequest < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1458,7 +1367,7 @@ module Aws::Organizations
     class DescribePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -1467,7 +1376,7 @@ module Aws::Organizations
     class DescribeResourcePolicyResponse < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find the destination container (a root or OU) with the <code>ParentId</code>
@@ -1477,7 +1386,7 @@ module Aws::Organizations
     class DestinationParentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1515,7 +1424,7 @@ module Aws::Organizations
       :policy_id,
       :target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal
@@ -1527,7 +1436,7 @@ module Aws::Organizations
     class DisableAWSServiceAccessRequest < Struct.new(
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute root_id
@@ -1586,7 +1495,7 @@ module Aws::Organizations
       :root_id,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute root
@@ -1595,7 +1504,7 @@ module Aws::Organizations
     class DisablePolicyTypeResponse < Struct.new(
       :root,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>That account is already present in the specified destination.</p>
@@ -1604,7 +1513,7 @@ module Aws::Organizations
     class DuplicateAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A handshake with the same action and target already exists. For example, if you
@@ -1617,7 +1526,7 @@ module Aws::Organizations
     class DuplicateHandshakeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An OU with the same name already exists.</p>
@@ -1626,7 +1535,7 @@ module Aws::Organizations
     class DuplicateOrganizationalUnitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selected policy is already attached to the specified target.</p>
@@ -1635,7 +1544,7 @@ module Aws::Organizations
     class DuplicatePolicyAttachmentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy with the same name already exists.</p>
@@ -1644,7 +1553,7 @@ module Aws::Organizations
     class DuplicatePolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains rules to be applied to the affected accounts. The effective policy is the
@@ -1668,7 +1577,7 @@ module Aws::Organizations
       :target_id,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you ran this action on the management account, this policy type is not enabled. If
@@ -1680,16 +1589,7 @@ module Aws::Organizations
     class EffectivePolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EffectivePolicyType
-      TAG_POLICY = 'TAG_POLICY'
-      BACKUP_POLICY = 'BACKUP_POLICY'
-      AISERVICES_OPT_OUT_POLICY = 'AISERVICES_OPT_OUT_POLICY'
-      CHATBOT_POLICY = 'CHATBOT_POLICY'
-      DECLARATIVE_POLICY_EC2 = 'DECLARATIVE_POLICY_EC2'
-      SECURITYHUB_POLICY = 'SECURITYHUB_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the
@@ -1712,7 +1612,7 @@ module Aws::Organizations
       :path_to_error,
       :contributing_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal
@@ -1724,12 +1624,12 @@ module Aws::Organizations
     class EnableAWSServiceAccessRequest < Struct.new(
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableAllFeaturesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -1739,7 +1639,7 @@ module Aws::Organizations
     class EnableAllFeaturesResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute root_id
@@ -1798,7 +1698,7 @@ module Aws::Organizations
       :root_id,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute root
@@ -1807,7 +1707,7 @@ module Aws::Organizations
     class EnablePolicyTypeResponse < Struct.new(
       :root,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details of a service principal that represents an Amazon Web Services
@@ -1824,7 +1724,7 @@ module Aws::Organizations
       :service_principal,
       :date_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organizations couldn't perform the operation because your organization hasn't finished
@@ -1835,7 +1735,7 @@ module Aws::Organizations
     class FinalizingOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that must be exchanged to securely establish a relationship
@@ -1952,7 +1852,7 @@ module Aws::Organizations
       :action,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified handshake is already in the requested state. For example, you can't
@@ -1962,7 +1862,7 @@ module Aws::Organizations
     class HandshakeAlreadyInStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would violate the constraint identified in the reason
@@ -2029,20 +1929,7 @@ module Aws::Organizations
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HandshakeConstraintViolationExceptionReason
-      ACCOUNT_NUMBER_LIMIT_EXCEEDED = 'ACCOUNT_NUMBER_LIMIT_EXCEEDED'
-      HANDSHAKE_RATE_LIMIT_EXCEEDED = 'HANDSHAKE_RATE_LIMIT_EXCEEDED'
-      ALREADY_IN_AN_ORGANIZATION = 'ALREADY_IN_AN_ORGANIZATION'
-      ORGANIZATION_ALREADY_HAS_ALL_FEATURES = 'ORGANIZATION_ALREADY_HAS_ALL_FEATURES'
-      ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION = 'ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION'
-      INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES = 'INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES'
-      PAYMENT_INSTRUMENT_REQUIRED = 'PAYMENT_INSTRUMENT_REQUIRED'
-      ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD = 'ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD'
-      ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED = 'ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED'
-      MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED = 'MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the criteria that are used to select the handshakes for the
@@ -2064,7 +1951,7 @@ module Aws::Organizations
       :action_type,
       :parent_handshake_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a handshake with the <code>HandshakeId</code> that you specified.</p>
@@ -2073,7 +1960,7 @@ module Aws::Organizations
     class HandshakeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a participant in a handshake.</p>
@@ -2089,13 +1976,7 @@ module Aws::Organizations
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HandshakePartyType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATION = 'ORGANIZATION'
-      EMAIL = 'EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional data that is needed to process a handshake.</p>
@@ -2146,32 +2027,7 @@ module Aws::Organizations
       :type,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HandshakeResourceType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATION = 'ORGANIZATION'
-      ORGANIZATION_FEATURE_SET = 'ORGANIZATION_FEATURE_SET'
-      EMAIL = 'EMAIL'
-      MASTER_EMAIL = 'MASTER_EMAIL'
-      MASTER_NAME = 'MASTER_NAME'
-      NOTES = 'NOTES'
-      PARENT_HANDSHAKE = 'PARENT_HANDSHAKE'
-    end
-
-    module HandshakeState
-      REQUESTED = 'REQUESTED'
-      OPEN = 'OPEN'
-      CANCELED = 'CANCELED'
-      ACCEPTED = 'ACCEPTED'
-      DECLINED = 'DECLINED'
-      EXPIRED = 'EXPIRED'
-    end
-
-    module IAMUserAccessToBilling
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't perform the operation on the handshake in its current state. For example,
@@ -2182,7 +2038,7 @@ module Aws::Organizations
     class InvalidHandshakeTransitionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation failed because you provided invalid values for one or more of
@@ -2302,40 +2158,7 @@ module Aws::Organizations
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvalidInputExceptionReason
-      INVALID_PARTY_TYPE_TARGET = 'INVALID_PARTY_TYPE_TARGET'
-      INVALID_SYNTAX_ORGANIZATION = 'INVALID_SYNTAX_ORGANIZATION_ARN'
-      INVALID_SYNTAX_POLICY = 'INVALID_SYNTAX_POLICY_ID'
-      INVALID_ENUM = 'INVALID_ENUM'
-      INVALID_ENUM_POLICY_TYPE = 'INVALID_ENUM_POLICY_TYPE'
-      INVALID_LIST_MEMBER = 'INVALID_LIST_MEMBER'
-      MAX_LENGTH_EXCEEDED = 'MAX_LENGTH_EXCEEDED'
-      MAX_VALUE_EXCEEDED = 'MAX_VALUE_EXCEEDED'
-      MIN_LENGTH_EXCEEDED = 'MIN_LENGTH_EXCEEDED'
-      MIN_VALUE_EXCEEDED = 'MIN_VALUE_EXCEEDED'
-      IMMUTABLE_POLICY = 'IMMUTABLE_POLICY'
-      INVALID_PATTERN = 'INVALID_PATTERN'
-      INVALID_PATTERN_TARGET_ID = 'INVALID_PATTERN_TARGET_ID'
-      INPUT_REQUIRED = 'INPUT_REQUIRED'
-      INVALID_PAGINATION_TOKEN = 'INVALID_NEXT_TOKEN'
-      MAX_FILTER_LIMIT_EXCEEDED = 'MAX_LIMIT_EXCEEDED_FILTER'
-      MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS = 'MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS'
-      INVALID_FULL_NAME_TARGET = 'INVALID_FULL_NAME_TARGET'
-      UNRECOGNIZED_SERVICE_PRINCIPAL = 'UNRECOGNIZED_SERVICE_PRINCIPAL'
-      INVALID_ROLE_NAME = 'INVALID_ROLE_NAME'
-      INVALID_SYSTEM_TAGS_PARAMETER = 'INVALID_SYSTEM_TAGS_PARAMETER'
-      DUPLICATE_TAG_KEY = 'DUPLICATE_TAG_KEY'
-      TARGET_NOT_SUPPORTED = 'TARGET_NOT_SUPPORTED'
-      INVALID_EMAIL_ADDRESS_TARGET = 'INVALID_EMAIL_ADDRESS_TARGET'
-      INVALID_RESOURCE_POLICY_JSON = 'INVALID_RESOURCE_POLICY_JSON'
-      INVALID_PRINCIPAL = 'INVALID_PRINCIPAL'
-      UNSUPPORTED_ACTION_IN_RESOURCE_POLICY = 'UNSUPPORTED_ACTION_IN_RESOURCE_POLICY'
-      UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY = 'UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY'
-      UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY = 'UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY'
-      NON_DETACHABLE_POLICY = 'NON_DETACHABLE_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -2390,7 +2213,7 @@ module Aws::Organizations
       :notes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshake
@@ -2400,7 +2223,7 @@ module Aws::Organizations
     class InviteAccountToOrganizationResponse < Struct.new(
       :handshake,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2424,7 +2247,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_service_principals
@@ -2442,7 +2265,7 @@ module Aws::Organizations
       :enabled_service_principals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parent_id
@@ -2471,7 +2294,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -2487,7 +2310,7 @@ module Aws::Organizations
       :accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2511,7 +2334,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -2527,7 +2350,7 @@ module Aws::Organizations
       :accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_type
@@ -2588,7 +2411,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -2641,7 +2464,7 @@ module Aws::Organizations
       :policy_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parent_id
@@ -2689,7 +2512,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute children
@@ -2705,7 +2528,7 @@ module Aws::Organizations
       :children,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute states
@@ -2734,7 +2557,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_account_statuses
@@ -2752,7 +2575,7 @@ module Aws::Organizations
       :create_account_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal
@@ -2783,7 +2606,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_administrators
@@ -2799,7 +2622,7 @@ module Aws::Organizations
       :delegated_administrators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2827,7 +2650,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_services
@@ -2843,7 +2666,7 @@ module Aws::Organizations
       :delegated_services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2908,7 +2731,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2974,7 +2797,7 @@ module Aws::Organizations
       :next_token,
       :effective_policy_validation_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -3008,7 +2831,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshakes
@@ -3025,7 +2848,7 @@ module Aws::Organizations
       :handshakes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -3059,7 +2882,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute handshakes
@@ -3076,7 +2899,7 @@ module Aws::Organizations
       :handshakes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parent_id
@@ -3119,7 +2942,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_units
@@ -3135,7 +2958,7 @@ module Aws::Organizations
       :organizational_units,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute child_id
@@ -3179,7 +3002,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parents
@@ -3195,7 +3018,7 @@ module Aws::Organizations
       :parents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_id
@@ -3290,7 +3113,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies
@@ -3306,7 +3129,7 @@ module Aws::Organizations
       :policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -3377,7 +3200,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies
@@ -3394,7 +3217,7 @@ module Aws::Organizations
       :policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3418,7 +3241,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute roots
@@ -3434,7 +3257,7 @@ module Aws::Organizations
       :roots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3475,7 +3298,7 @@ module Aws::Organizations
       :resource_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3491,7 +3314,7 @@ module Aws::Organizations
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -3521,7 +3344,7 @@ module Aws::Organizations
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -3538,7 +3361,7 @@ module Aws::Organizations
       :targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided policy document doesn't meet the requirements of the specified policy
@@ -3550,7 +3373,7 @@ module Aws::Organizations
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't remove a management account from an organization. If you want the management
@@ -3561,7 +3384,7 @@ module Aws::Organizations
     class MasterCannotLeaveOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -3612,7 +3435,7 @@ module Aws::Organizations
       :source_parent_id,
       :destination_parent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an organization. An organization is a collection of accounts
@@ -3667,12 +3490,7 @@ module Aws::Organizations
       :master_account_email,
       :available_policy_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationFeatureSet
-      ALL = 'ALL'
-      CONSOLIDATED_BILLING = 'CONSOLIDATED_BILLING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The organization isn't empty. To delete an organization, you must first remove all
@@ -3682,7 +3500,7 @@ module Aws::Organizations
     class OrganizationNotEmptyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an organizational unit (OU). An OU is a container of Amazon Web Services
@@ -3711,7 +3529,7 @@ module Aws::Organizations
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified OU is not empty. Move all accounts to another root or to other OUs,
@@ -3721,7 +3539,7 @@ module Aws::Organizations
     class OrganizationalUnitNotEmptyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find an OU with the <code>OrganizationalUnitId</code> that you
@@ -3731,7 +3549,7 @@ module Aws::Organizations
     class OrganizationalUnitNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about either a root or an organizational unit (OU) that can
@@ -3761,7 +3579,7 @@ module Aws::Organizations
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a root or OU with the <code>ParentId</code> that you specified.</p>
@@ -3770,12 +3588,7 @@ module Aws::Organizations
     class ParentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParentType
-      ROOT = 'ROOT'
-      ORGANIZATIONAL_UNIT = 'ORGANIZATIONAL_UNIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains rules to be applied to the affected accounts. Policies can be attached
@@ -3791,7 +3604,7 @@ module Aws::Organizations
       :policy_summary,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Changes to the effective policy are in progress, and its contents can't be returned.
@@ -3801,7 +3614,7 @@ module Aws::Organizations
     class PolicyChangesInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy is attached to one or more entities. You must detach it from all roots,
@@ -3811,7 +3624,7 @@ module Aws::Organizations
     class PolicyInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy isn't attached to the specified target in the specified root.</p>
@@ -3820,7 +3633,7 @@ module Aws::Organizations
     class PolicyNotAttachedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a policy with the <code>PolicyId</code> that you specified.</p>
@@ -3829,7 +3642,7 @@ module Aws::Organizations
     class PolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy, but does not include the content. To see the
@@ -3869,7 +3682,7 @@ module Aws::Organizations
       :type,
       :aws_managed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:aws_managed] = false unless options.key?(:aws_managed)
@@ -3920,18 +3733,7 @@ module Aws::Organizations
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyType
-      SERVICE_CONTROL_POLICY = 'SERVICE_CONTROL_POLICY'
-      RESOURCE_CONTROL_POLICY = 'RESOURCE_CONTROL_POLICY'
-      TAG_POLICY = 'TAG_POLICY'
-      BACKUP_POLICY = 'BACKUP_POLICY'
-      AISERVICES_OPT_OUT_POLICY = 'AISERVICES_OPT_OUT_POLICY'
-      CHATBOT_POLICY = 'CHATBOT_POLICY'
-      DECLARATIVE_POLICY_EC2 = 'DECLARATIVE_POLICY_EC2'
-      SECURITYHUB_POLICY = 'SECURITYHUB_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified policy type is already enabled in the specified root.</p>
@@ -3940,7 +3742,7 @@ module Aws::Organizations
     class PolicyTypeAlreadyEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't use the specified policy type with the feature set currently enabled for
@@ -3952,7 +3754,7 @@ module Aws::Organizations
     class PolicyTypeNotAvailableForOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified policy type isn't currently enabled in this root. You can't attach
@@ -3964,13 +3766,7 @@ module Aws::Organizations
     class PolicyTypeNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyTypeStatus
-      ENABLED = 'ENABLED'
-      PENDING_ENABLE = 'PENDING_ENABLE'
-      PENDING_DISABLE = 'PENDING_DISABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy type and its status in the associated root.</p>
@@ -3986,7 +3782,7 @@ module Aws::Organizations
       :type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -4012,7 +3808,7 @@ module Aws::Organizations
       :content,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -4021,7 +3817,7 @@ module Aws::Organizations
     class PutResourcePolicyResponse < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -4036,7 +3832,7 @@ module Aws::Organizations
       :account_id,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -4048,7 +3844,7 @@ module Aws::Organizations
     class RemoveAccountFromOrganizationRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details about a resource policy.</p>
@@ -4062,7 +3858,7 @@ module Aws::Organizations
       :resource_policy_summary,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a resource policy request with the parameter that you specified.</p>
@@ -4071,7 +3867,7 @@ module Aws::Organizations
     class ResourcePolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains resource policy ID and Amazon Resource Name (ARN).</p>
@@ -4085,7 +3881,7 @@ module Aws::Organizations
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a root. A root is a top-level parent node in the hierarchy of
@@ -4123,7 +3919,7 @@ module Aws::Organizations
       :name,
       :policy_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a root with the <code>RootId</code> that you specified.</p>
@@ -4132,7 +3928,7 @@ module Aws::Organizations
     class RootNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organizations can't complete your request because of an internal service error. Try again
@@ -4142,7 +3938,7 @@ module Aws::Organizations
     class ServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a source root or OU with the <code>ParentId</code> that you
@@ -4152,7 +3948,7 @@ module Aws::Organizations
     class SourceParentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom key-value pair associated with a resource within your organization.</p>
@@ -4182,7 +3978,7 @@ module Aws::Organizations
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -4225,7 +4021,7 @@ module Aws::Organizations
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a root, OU, account, or policy with the <code>TargetId</code> that you
@@ -4235,13 +4031,7 @@ module Aws::Organizations
     class TargetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATIONAL_UNIT = 'ORGANIZATIONAL_UNIT'
-      ROOT = 'ROOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have sent too many requests in too short a period of time. The quota helps protect
@@ -4256,7 +4046,7 @@ module Aws::Organizations
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action isn't available in the current Amazon Web Services Region.</p>
@@ -4265,7 +4055,7 @@ module Aws::Organizations
     class UnsupportedAPIEndpointException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -4302,7 +4092,7 @@ module Aws::Organizations
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit_id
@@ -4323,7 +4113,7 @@ module Aws::Organizations
       :organizational_unit_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organizational_unit
@@ -4333,7 +4123,7 @@ module Aws::Organizations
     class UpdateOrganizationalUnitResponse < Struct.new(
       :organizational_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -4364,7 +4154,7 @@ module Aws::Organizations
       :description,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -4374,7 +4164,7 @@ module Aws::Organizations
     class UpdatePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

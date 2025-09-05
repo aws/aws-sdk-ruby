@@ -12,7 +12,7 @@ module Aws::AppTest
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a batch.</p>
@@ -30,7 +30,7 @@ module Aws::AppTest
       :batch_job_parameters,
       :export_data_set_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a batch step input.</p>
@@ -56,7 +56,7 @@ module Aws::AppTest
       :export_data_set_names,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a batch step output.</p>
@@ -74,7 +74,7 @@ module Aws::AppTest
       :dms_output_location,
       :data_set_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes a batch job.</p>
@@ -88,12 +88,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaptureTool
-      PRECISELY = 'Precisely'
-      AWS_DMS = 'AWS DMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudFormation template and its parameters.</p>
@@ -107,7 +102,7 @@ module Aws::AppTest
       :template_location,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudFormation action.</p>
@@ -121,12 +116,7 @@ module Aws::AppTest
       :resource,
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudFormationActionType
-      CREATE = 'Create'
-      DELETE = 'Delete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudFormation step summary.</p>
@@ -141,7 +131,7 @@ module Aws::AppTest
       :delete_cloudformation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CreateCloudformation < CloudFormationStepSummary; end
       class DeleteCloudformation < CloudFormationStepSummary; end
@@ -159,7 +149,7 @@ module Aws::AppTest
       :input,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the compare action summary.</p>
@@ -169,7 +159,7 @@ module Aws::AppTest
     class CompareActionSummary < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the compare data sets step input.</p>
@@ -191,7 +181,7 @@ module Aws::AppTest
       :source_data_sets,
       :target_data_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the compare data sets step output.</p>
@@ -205,7 +195,7 @@ module Aws::AppTest
       :comparison_output_location,
       :comparison_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compares data sets summary.</p>
@@ -219,7 +209,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compares the database Change Data Capture (CDC) step input.</p>
@@ -245,7 +235,7 @@ module Aws::AppTest
       :source_metadata,
       :target_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compares the database CDC step output.</p>
@@ -259,7 +249,7 @@ module Aws::AppTest
       :comparison_output_location,
       :comparison_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compares the database CDC summary.</p>
@@ -273,7 +263,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compares the file type.</p>
@@ -288,17 +278,11 @@ module Aws::AppTest
       :database_cdc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Datasets < CompareFileType; end
       class DatabaseCDC < CompareFileType; end
       class Unknown < CompareFileType; end
-    end
-
-    module ComparisonStatusEnum
-      DIFFERENT = 'Different'
-      EQUIVALENT = 'Equivalent'
-      EQUAL = 'Equal'
     end
 
     # <p>The parameters provided in the request conflict with existing resources.</p>
@@ -315,7 +299,7 @@ module Aws::AppTest
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates the CloudFormation step input.</p>
@@ -329,7 +313,7 @@ module Aws::AppTest
       :template_location,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a CloudFormation step output.</p>
@@ -343,7 +327,7 @@ module Aws::AppTest
       :stack_id,
       :exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a CloudFormation summary.</p>
@@ -357,7 +341,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -382,7 +366,7 @@ module Aws::AppTest
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_id
@@ -395,7 +379,7 @@ module Aws::AppTest
       :test_case_id,
       :test_case_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -428,7 +412,7 @@ module Aws::AppTest
       :tags,
       :service_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -441,7 +425,7 @@ module Aws::AppTest
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -474,7 +458,7 @@ module Aws::AppTest
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -487,7 +471,7 @@ module Aws::AppTest
       :test_suite_id,
       :test_suite_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a data set.</p>
@@ -513,11 +497,7 @@ module Aws::AppTest
       :format,
       :length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSetType
-      PS = 'PS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Change Data Capture (CDC) of the database.</p>
@@ -531,7 +511,7 @@ module Aws::AppTest
       :source_metadata,
       :target_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes the CloudFormation step input.</p>
@@ -541,13 +521,13 @@ module Aws::AppTest
     class DeleteCloudFormationStepInput < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes the CloudFormation summary step output.</p>
     class DeleteCloudFormationStepOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes the CloudFormation summary.</p>
@@ -561,7 +541,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_id
@@ -570,12 +550,12 @@ module Aws::AppTest
     class DeleteTestCaseRequest < Struct.new(
       :test_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTestCaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -584,12 +564,12 @@ module Aws::AppTest
     class DeleteTestConfigurationRequest < Struct.new(
       :test_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTestConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_id
@@ -598,12 +578,12 @@ module Aws::AppTest
     class DeleteTestRunRequest < Struct.new(
       :test_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTestRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -612,12 +592,12 @@ module Aws::AppTest
     class DeleteTestSuiteRequest < Struct.new(
       :test_suite_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTestSuiteResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a file.</p>
@@ -628,7 +608,7 @@ module Aws::AppTest
       :file_type,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FileType < File; end
       class Unknown < File; end
@@ -646,17 +626,11 @@ module Aws::AppTest
       :database_cdc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DataSets < FileMetadata; end
       class DatabaseCDC < FileMetadata; end
       class Unknown < FileMetadata; end
-    end
-
-    module Format
-      FIXED = 'FIXED'
-      VARIABLE = 'VARIABLE'
-      LINE_SEQUENTIAL = 'LINE_SEQUENTIAL'
     end
 
     # @!attribute test_case_id
@@ -669,7 +643,7 @@ module Aws::AppTest
       :test_case_id,
       :test_case_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_id
@@ -722,7 +696,7 @@ module Aws::AppTest
       :steps,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -735,7 +709,7 @@ module Aws::AppTest
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -796,7 +770,7 @@ module Aws::AppTest
       :tags,
       :service_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_id
@@ -817,7 +791,7 @@ module Aws::AppTest
       :test_case_id,
       :test_suite_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_name
@@ -874,7 +848,7 @@ module Aws::AppTest
       :run_end_time,
       :step_run_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -887,7 +861,7 @@ module Aws::AppTest
       :test_suite_id,
       :test_suite_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -948,7 +922,7 @@ module Aws::AppTest
       :test_cases,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the input.</p>
@@ -959,7 +933,7 @@ module Aws::AppTest
       :file,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < Input; end
       class Unknown < Input; end
@@ -980,7 +954,7 @@ module Aws::AppTest
       :target_location,
       :file_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during the processing of the request.</p>
@@ -993,7 +967,7 @@ module Aws::AppTest
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1002,7 +976,7 @@ module Aws::AppTest
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1011,7 +985,7 @@ module Aws::AppTest
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_ids
@@ -1028,7 +1002,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_cases
@@ -1041,7 +1015,7 @@ module Aws::AppTest
       :test_cases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_ids
@@ -1058,7 +1032,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configurations
@@ -1071,7 +1045,7 @@ module Aws::AppTest
       :test_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_id
@@ -1096,7 +1070,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_steps
@@ -1109,7 +1083,7 @@ module Aws::AppTest
       :test_run_steps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_id
@@ -1126,7 +1100,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_test_cases
@@ -1139,7 +1113,7 @@ module Aws::AppTest
       :test_run_test_cases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -1160,7 +1134,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_runs
@@ -1173,7 +1147,7 @@ module Aws::AppTest
       :test_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_ids
@@ -1190,7 +1164,7 @@ module Aws::AppTest
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suites
@@ -1203,7 +1177,7 @@ module Aws::AppTest
       :test_suites,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed action properties.</p>
@@ -1217,12 +1191,7 @@ module Aws::AppTest
       :force_stop,
       :import_data_set_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module M2ManagedActionType
-      CONFIGURE = 'Configure'
-      DECONFIGURE = 'Deconfigure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application.</p>
@@ -1244,7 +1213,7 @@ module Aws::AppTest
       :vpc_endpoint_service_name,
       :listener_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application action.</p>
@@ -1262,7 +1231,7 @@ module Aws::AppTest
       :action_type,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application step input.</p>
@@ -1292,7 +1261,7 @@ module Aws::AppTest
       :action_type,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application step output.</p>
@@ -1302,7 +1271,7 @@ module Aws::AppTest
     class M2ManagedApplicationStepOutput < Struct.new(
       :import_data_set_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application step summary.</p>
@@ -1316,7 +1285,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization managed application summary.</p>
@@ -1334,16 +1303,7 @@ module Aws::AppTest
       :runtime,
       :listener_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module M2ManagedRuntime
-      MICROFOCUS = 'MicroFocus'
-    end
-
-    module M2NonManagedActionType
-      CONFIGURE = 'Configure'
-      DECONFIGURE = 'Deconfigure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application.</p>
@@ -1365,7 +1325,7 @@ module Aws::AppTest
       :runtime,
       :web_app_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application action.</p>
@@ -1379,7 +1339,7 @@ module Aws::AppTest
       :resource,
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application step input.</p>
@@ -1405,13 +1365,13 @@ module Aws::AppTest
       :web_app_name,
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application step output.</p>
     class M2NonManagedApplicationStepOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application step summary.</p>
@@ -1425,7 +1385,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the AWS Mainframe Modernization non-managed application summary.</p>
@@ -1447,11 +1407,7 @@ module Aws::AppTest
       :runtime,
       :web_app_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module M2NonManagedRuntime
-      BLUAGE = 'BluAge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the mainframe action.</p>
@@ -1469,7 +1425,7 @@ module Aws::AppTest
       :action_type,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the mainframe action properties.</p>
@@ -1479,7 +1435,7 @@ module Aws::AppTest
     class MainframeActionProperties < Struct.new(
       :dms_task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the mainframe action summary.</p>
@@ -1494,7 +1450,7 @@ module Aws::AppTest
       :tn3270,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Batch < MainframeActionSummary; end
       class Tn3270 < MainframeActionSummary; end
@@ -1513,7 +1469,7 @@ module Aws::AppTest
       :tn3270,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Batch < MainframeActionType; end
       class Tn3270 < MainframeActionType; end
@@ -1532,7 +1488,7 @@ module Aws::AppTest
       :m2_non_managed_application,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class M2ManagedApplication < MainframeResourceSummary; end
       class M2NonManagedApplication < MainframeResourceSummary; end
@@ -1547,7 +1503,7 @@ module Aws::AppTest
       :file,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < Output; end
       class Unknown < Output; end
@@ -1560,7 +1516,7 @@ module Aws::AppTest
     class OutputFile < Struct.new(
       :file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a resource.</p>
@@ -1574,7 +1530,7 @@ module Aws::AppTest
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a resource action.</p>
@@ -1593,7 +1549,7 @@ module Aws::AppTest
       :cloud_formation_action,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class M2ManagedApplicationAction < ResourceAction; end
       class M2NonManagedApplicationAction < ResourceAction; end
@@ -1617,7 +1573,7 @@ module Aws::AppTest
       :m2_non_managed_application,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CloudFormation < ResourceActionSummary; end
       class M2ManagedApplication < ResourceActionSummary; end
@@ -1639,7 +1595,7 @@ module Aws::AppTest
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the resource type.</p>
@@ -1658,7 +1614,7 @@ module Aws::AppTest
       :m2_non_managed_application,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CloudFormation < ResourceType; end
       class M2ManagedApplication < ResourceType; end
@@ -1677,7 +1633,7 @@ module Aws::AppTest
       :script_location,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the scripts summary.</p>
@@ -1691,11 +1647,7 @@ module Aws::AppTest
       :script_location,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScriptType
-      SELENIUM = 'Selenium'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more quotas for AWS Application Testing exceeds the limit.</p>
@@ -1720,7 +1672,7 @@ module Aws::AppTest
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the service settings.</p>
@@ -1730,11 +1682,7 @@ module Aws::AppTest
     class ServiceSettings < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceDatabase
-      Z_OS_DB2 = 'z/OS-DB2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the source database metadata.</p>
@@ -1748,7 +1696,7 @@ module Aws::AppTest
       :type,
       :capture_tool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -1769,7 +1717,7 @@ module Aws::AppTest
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_run_id
@@ -1782,7 +1730,7 @@ module Aws::AppTest
       :test_run_id,
       :test_run_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a step.</p>
@@ -1800,7 +1748,7 @@ module Aws::AppTest
       :description,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a step action.</p>
@@ -1819,18 +1767,12 @@ module Aws::AppTest
       :compare_action,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ResourceAction < StepAction; end
       class MainframeAction < StepAction; end
       class CompareAction < StepAction; end
       class Unknown < StepAction; end
-    end
-
-    module StepRunStatus
-      SUCCESS = 'Success'
-      FAILED = 'Failed'
-      RUNNING = 'Running'
     end
 
     # <p>Defines the step run summary.</p>
@@ -1849,7 +1791,7 @@ module Aws::AppTest
       :resource_action,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MainframeAction < StepRunSummary; end
       class CompareAction < StepRunSummary; end
@@ -1868,7 +1810,7 @@ module Aws::AppTest
       :script,
       :export_data_set_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a TN3270 step input.</p>
@@ -1890,7 +1832,7 @@ module Aws::AppTest
       :export_data_set_names,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a TN3270 step output.</p>
@@ -1912,7 +1854,7 @@ module Aws::AppTest
       :data_set_details,
       :script_output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a TN3270 summary.</p>
@@ -1926,7 +1868,7 @@ module Aws::AppTest
       :step_input,
       :step_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1939,16 +1881,12 @@ module Aws::AppTest
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetDatabase
-      POSTGRESQL = 'PostgreSQL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target database metadata.</p>
@@ -1962,7 +1900,7 @@ module Aws::AppTest
       :type,
       :capture_tool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the latest version of a test case.</p>
@@ -1980,18 +1918,7 @@ module Aws::AppTest
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestCaseLifecycle
-      ACTIVE = 'Active'
-      DELETING = 'Deleting'
-    end
-
-    module TestCaseRunStatus
-      SUCCESS = 'Success'
-      RUNNING = 'Running'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the test case run summary.</p>
@@ -2025,7 +1952,7 @@ module Aws::AppTest
       :run_start_time,
       :run_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a test case summary.</p>
@@ -2063,7 +1990,7 @@ module Aws::AppTest
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies test cases.</p>
@@ -2074,7 +2001,7 @@ module Aws::AppTest
       :sequential,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Sequential < TestCases; end
       class Unknown < TestCases; end
@@ -2095,12 +2022,7 @@ module Aws::AppTest
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestConfigurationLifecycle
-      ACTIVE = 'Active'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a test configuration summary.</p>
@@ -2138,14 +2060,7 @@ module Aws::AppTest
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestRunStatus
-      SUCCESS = 'Success'
-      RUNNING = 'Running'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a test run step summary.</p>
@@ -2199,7 +2114,7 @@ module Aws::AppTest
       :run_start_time,
       :run_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a test run summary.</p>
@@ -2245,7 +2160,7 @@ module Aws::AppTest
       :run_start_time,
       :run_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the latest version of a test suite.</p>
@@ -2263,15 +2178,7 @@ module Aws::AppTest
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSuiteLifecycle
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      ACTIVE = 'Active'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the test suite summary.</p>
@@ -2309,7 +2216,7 @@ module Aws::AppTest
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests made exceeds the limit.</p>
@@ -2330,7 +2237,7 @@ module Aws::AppTest
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2343,12 +2250,12 @@ module Aws::AppTest
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_id
@@ -2365,7 +2272,7 @@ module Aws::AppTest
       :description,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_case_id
@@ -2378,7 +2285,7 @@ module Aws::AppTest
       :test_case_id,
       :test_case_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -2403,7 +2310,7 @@ module Aws::AppTest
       :properties,
       :service_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_configuration_id
@@ -2416,7 +2323,7 @@ module Aws::AppTest
       :test_configuration_id,
       :test_configuration_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -2441,7 +2348,7 @@ module Aws::AppTest
       :after_steps,
       :test_cases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_suite_id
@@ -2454,7 +2361,7 @@ module Aws::AppTest
       :test_suite_id,
       :test_suite_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter provided in the request is not valid.</p>
@@ -2471,7 +2378,7 @@ module Aws::AppTest
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a validation exception field.</p>
@@ -2485,14 +2392,7 @@ module Aws::AppTest
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

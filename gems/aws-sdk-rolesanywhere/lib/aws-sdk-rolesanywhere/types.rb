@@ -12,7 +12,7 @@ module Aws::RolesAnywhere
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping applied to the authenticating end-entity certificate.</p>
@@ -26,7 +26,7 @@ module Aws::RolesAnywhere
       :certificate_field,
       :mapping_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -69,7 +69,7 @@ module Aws::RolesAnywhere
       :tags,
       :accept_role_session_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -78,7 +78,7 @@ module Aws::RolesAnywhere
     class CreateProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -103,7 +103,7 @@ module Aws::RolesAnywhere
       :tags,
       :notification_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -112,7 +112,7 @@ module Aws::RolesAnywhere
     class CreateTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A record of a presented X509 credential from a temporary credential request. </p>
@@ -142,7 +142,7 @@ module Aws::RolesAnywhere
       :x509_certificate_data,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the certificate revocation list (CRL) after a read or write operation.</p>
@@ -180,7 +180,7 @@ module Aws::RolesAnywhere
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -197,7 +197,7 @@ module Aws::RolesAnywhere
       :certificate_field,
       :specifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -206,7 +206,7 @@ module Aws::RolesAnywhere
     class DeleteAttributeMappingResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl_id
@@ -215,7 +215,7 @@ module Aws::RolesAnywhere
     class DeleteCrlInput < Struct.new(
       :crl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -224,7 +224,7 @@ module Aws::RolesAnywhere
     class DeleteCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -233,7 +233,7 @@ module Aws::RolesAnywhere
     class DeleteProfileInput < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -242,7 +242,7 @@ module Aws::RolesAnywhere
     class DeleteProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -251,7 +251,7 @@ module Aws::RolesAnywhere
     class DeleteTrustAnchorInput < Struct.new(
       :trust_anchor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -260,7 +260,7 @@ module Aws::RolesAnywhere
     class DeleteTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl_id
@@ -269,7 +269,7 @@ module Aws::RolesAnywhere
     class DisableCrlInput < Struct.new(
       :crl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -278,7 +278,7 @@ module Aws::RolesAnywhere
     class DisableCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -287,7 +287,7 @@ module Aws::RolesAnywhere
     class DisableProfileInput < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -296,7 +296,7 @@ module Aws::RolesAnywhere
     class DisableProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -305,7 +305,7 @@ module Aws::RolesAnywhere
     class DisableTrustAnchorInput < Struct.new(
       :trust_anchor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -314,7 +314,7 @@ module Aws::RolesAnywhere
     class DisableTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl_id
@@ -323,7 +323,7 @@ module Aws::RolesAnywhere
     class EnableCrlInput < Struct.new(
       :crl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -332,7 +332,7 @@ module Aws::RolesAnywhere
     class EnableCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -341,7 +341,7 @@ module Aws::RolesAnywhere
     class EnableProfileInput < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -350,7 +350,7 @@ module Aws::RolesAnywhere
     class EnableProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -359,7 +359,7 @@ module Aws::RolesAnywhere
     class EnableTrustAnchorInput < Struct.new(
       :trust_anchor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -368,7 +368,7 @@ module Aws::RolesAnywhere
     class EnableTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl_id
@@ -377,7 +377,7 @@ module Aws::RolesAnywhere
     class GetCrlInput < Struct.new(
       :crl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -386,7 +386,7 @@ module Aws::RolesAnywhere
     class GetCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -395,7 +395,7 @@ module Aws::RolesAnywhere
     class GetProfileInput < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -404,7 +404,7 @@ module Aws::RolesAnywhere
     class GetProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subject_id
@@ -413,7 +413,7 @@ module Aws::RolesAnywhere
     class GetSubjectInput < Struct.new(
       :subject_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subject
@@ -422,7 +422,7 @@ module Aws::RolesAnywhere
     class GetSubjectOutput < Struct.new(
       :subject,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -431,7 +431,7 @@ module Aws::RolesAnywhere
     class GetTrustAnchorInput < Struct.new(
       :trust_anchor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -440,7 +440,7 @@ module Aws::RolesAnywhere
     class GetTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -465,7 +465,7 @@ module Aws::RolesAnywhere
       :tags,
       :trust_anchor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -474,7 +474,7 @@ module Aws::RolesAnywhere
     class ImportCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair you set that identifies a property of the authenticating instance.</p>
@@ -492,7 +492,7 @@ module Aws::RolesAnywhere
       :properties,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -505,7 +505,7 @@ module Aws::RolesAnywhere
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -518,7 +518,7 @@ module Aws::RolesAnywhere
       :next_token,
       :crls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -531,7 +531,7 @@ module Aws::RolesAnywhere
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -544,7 +544,7 @@ module Aws::RolesAnywhere
       :next_token,
       :profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -557,7 +557,7 @@ module Aws::RolesAnywhere
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subjects
@@ -570,7 +570,7 @@ module Aws::RolesAnywhere
       :subjects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -579,7 +579,7 @@ module Aws::RolesAnywhere
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -588,7 +588,7 @@ module Aws::RolesAnywhere
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -601,7 +601,7 @@ module Aws::RolesAnywhere
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -614,7 +614,7 @@ module Aws::RolesAnywhere
       :next_token,
       :trust_anchors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single mapping entry for each supported specifier or sub-field.</p>
@@ -624,7 +624,7 @@ module Aws::RolesAnywhere
     class MappingRule < Struct.new(
       :specifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -653,7 +653,7 @@ module Aws::RolesAnywhere
       :threshold,
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of a notification setting.</p>
@@ -689,7 +689,7 @@ module Aws::RolesAnywhere
       :channel,
       :configured_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification setting key to reset.
@@ -705,7 +705,7 @@ module Aws::RolesAnywhere
       :event,
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the profile after a read or write operation.</p>
@@ -769,7 +769,7 @@ module Aws::RolesAnywhere
       :accept_role_session_name,
       :attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -786,7 +786,7 @@ module Aws::RolesAnywhere
       :certificate_field,
       :mapping_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -795,7 +795,7 @@ module Aws::RolesAnywhere
     class PutAttributeMappingResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -808,7 +808,7 @@ module Aws::RolesAnywhere
       :trust_anchor_id,
       :notification_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -817,7 +817,7 @@ module Aws::RolesAnywhere
     class PutNotificationSettingsResponse < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -832,7 +832,7 @@ module Aws::RolesAnywhere
       :trust_anchor_id,
       :notification_setting_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -841,7 +841,7 @@ module Aws::RolesAnywhere
     class ResetNotificationSettingsResponse < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -850,7 +850,7 @@ module Aws::RolesAnywhere
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trust anchor type and its related certificate data.</p>
@@ -864,7 +864,7 @@ module Aws::RolesAnywhere
       :source_type,
       :source_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data field of the trust anchor depending on its type. </p>
@@ -882,7 +882,7 @@ module Aws::RolesAnywhere
       :acm_pca_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class X509CertificateData < SourceData; end
       class AcmPcaArn < SourceData; end
@@ -928,7 +928,7 @@ module Aws::RolesAnywhere
       :credentials,
       :instance_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary representation of subjects.</p>
@@ -962,7 +962,7 @@ module Aws::RolesAnywhere
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A label that consists of a key and value you define. </p>
@@ -976,7 +976,7 @@ module Aws::RolesAnywhere
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -989,12 +989,12 @@ module Aws::RolesAnywhere
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many tags.</p>
@@ -1003,7 +1003,7 @@ module Aws::RolesAnywhere
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the trust anchor after a read or write operation. </p>
@@ -1041,7 +1041,7 @@ module Aws::RolesAnywhere
       :updated_at,
       :notification_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1054,12 +1054,12 @@ module Aws::RolesAnywhere
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl_id
@@ -1076,7 +1076,7 @@ module Aws::RolesAnywhere
       :name,
       :crl_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crl
@@ -1085,7 +1085,7 @@ module Aws::RolesAnywhere
     class UpdateCrlOutput < Struct.new(
       :crl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -1120,7 +1120,7 @@ module Aws::RolesAnywhere
       :duration_seconds,
       :accept_role_session_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -1129,7 +1129,7 @@ module Aws::RolesAnywhere
     class UpdateProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor_id
@@ -1146,7 +1146,7 @@ module Aws::RolesAnywhere
       :name,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_anchor
@@ -1155,7 +1155,7 @@ module Aws::RolesAnywhere
     class UpdateTrustAnchorOutput < Struct.new(
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validation exception error.</p>
@@ -1164,7 +1164,7 @@ module Aws::RolesAnywhere
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

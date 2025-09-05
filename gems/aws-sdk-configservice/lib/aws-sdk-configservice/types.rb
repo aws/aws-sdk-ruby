@@ -23,7 +23,7 @@ module Aws::ConfigService
       :all_aws_regions,
       :aws_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_aws_regions] = false unless options.key?(:all_aws_regions)
@@ -56,7 +56,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p>
@@ -82,7 +82,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the number of compliant and noncompliant rules for one
@@ -99,7 +99,7 @@ module Aws::ConfigService
       :group_name,
       :compliance_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the number of compliant and noncompliant rules within a conformance pack.
@@ -125,7 +125,7 @@ module Aws::ConfigService
       :non_compliant_rule_count,
       :total_rule_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compliant_rule_count] = 0 unless options.key?(:compliant_rule_count)
@@ -146,7 +146,7 @@ module Aws::ConfigService
       :compliant_conformance_pack_count,
       :non_compliant_conformance_pack_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compliant_conformance_pack_count] = 0 unless options.key?(:compliant_conformance_pack_count)
@@ -174,7 +174,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of compliance based on either account ID or region. </p>
@@ -188,7 +188,7 @@ module Aws::ConfigService
       :compliance_summary,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the results based on account ID and region. </p>
@@ -202,12 +202,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregateConformancePackComplianceSummaryGroupKey
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      AWS_REGION = 'AWS_REGION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Config evaluation for an account ID and
@@ -251,7 +246,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that identify a resource that is collected by Config aggregator, including the resource type, ID, (if available) the custom resource name, the source account, and source region.</p>
@@ -277,7 +272,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current sync status between the source and the aggregator
@@ -328,18 +323,7 @@ module Aws::ConfigService
       :last_error_code,
       :last_error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregatedSourceStatusType
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      OUTDATED = 'OUTDATED'
-    end
-
-    module AggregatedSourceType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATION = 'ORGANIZATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the authorizations granted to
@@ -365,7 +349,7 @@ module Aws::ConfigService
       :authorized_aws_region,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to filter the configuration recorders based on the resource types in scope for recording.</p>
@@ -379,7 +363,7 @@ module Aws::ConfigService
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to filter service-linked configuration recorders in an aggregator based on the linked Amazon Web Services service.</p>
@@ -393,11 +377,7 @@ module Aws::ConfigService
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregatorFilterType
-      INCLUDE = 'INCLUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to filter the data you specify for an aggregator.</p>
@@ -411,7 +391,7 @@ module Aws::ConfigService
       :resource_type,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_recorder_arn
@@ -424,7 +404,7 @@ module Aws::ConfigService
       :configuration_recorder_arn,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_recorder
@@ -437,7 +417,7 @@ module Aws::ConfigService
     class AssociateResourceTypesResponse < Struct.new(
       :configuration_recorder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed configurations of a specified resource.</p>
@@ -540,7 +520,7 @@ module Aws::ConfigService
       :recording_frequency,
       :configuration_item_delivery_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -553,7 +533,7 @@ module Aws::ConfigService
       :configuration_aggregator_name,
       :resource_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute base_configuration_items
@@ -566,7 +546,7 @@ module Aws::ConfigService
       :base_configuration_items,
       :unprocessed_resource_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_keys
@@ -577,7 +557,7 @@ module Aws::ConfigService
     class BatchGetResourceConfigRequest < Struct.new(
       :resource_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute base_configuration_items
@@ -597,12 +577,7 @@ module Aws::ConfigService
       :base_configuration_items,
       :unprocessed_resource_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChronologicalOrder
-      Reverse = 'Reverse'
-      Forward = 'Forward'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether an Amazon Web Services resource or Config rule is
@@ -633,7 +608,7 @@ module Aws::ConfigService
       :compliance_type,
       :compliance_contributor_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether an Config rule is compliant. A rule is
@@ -650,7 +625,7 @@ module Aws::ConfigService
       :config_rule_name,
       :compliance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether an Amazon Web Services resource that is evaluated according
@@ -672,7 +647,7 @@ module Aws::ConfigService
       :resource_id,
       :compliance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of Amazon Web Services resources or Config rules responsible for
@@ -689,7 +664,7 @@ module Aws::ConfigService
       :capped_count,
       :cap_exceeded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:capped_count] = 0 unless options.key?(:capped_count)
@@ -719,7 +694,7 @@ module Aws::ConfigService
       :non_compliant_resource_count,
       :compliance_summary_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of Amazon Web Services resources of a specific type that are
@@ -736,14 +711,7 @@ module Aws::ConfigService
       :resource_type,
       :compliance_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComplianceType
-      Compliant = 'COMPLIANT'
-      Non_Compliant = 'NON_COMPLIANT'
-      Not_Applicable = 'NOT_APPLICABLE'
-      Insufficient_Data = 'INSUFFICIENT_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides status of the delivery of the snapshot or the
@@ -776,7 +744,7 @@ module Aws::ConfigService
       :last_successful_time,
       :next_delivery_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Config rules evaluate the configuration settings of your Amazon Web Services resources. A rule can run when Config detects a configuration change to
@@ -898,7 +866,7 @@ module Aws::ConfigService
       :created_by,
       :evaluation_modes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the compliance results based on account ID, region,
@@ -927,7 +895,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the results based on the account IDs and
@@ -942,12 +910,7 @@ module Aws::ConfigService
       :account_id,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigRuleComplianceSummaryGroupKey
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      AWS_REGION = 'AWS_REGION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information for your Config Managed rules and Config Custom Policy rules. The
@@ -1039,19 +1002,12 @@ module Aws::ConfigService
       :last_debug_log_delivery_status_reason,
       :last_debug_log_delivery_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:first_evaluation_started] = false unless options.key?(:first_evaluation_started)
         super
       end
-    end
-
-    module ConfigRuleState
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETING_RESULTS = 'DELETING_RESULTS'
-      EVALUATING = 'EVALUATING'
     end
 
     # <p>Provides options for how often Config delivers
@@ -1113,7 +1069,7 @@ module Aws::ConfigService
     class ConfigSnapshotDeliveryProperties < Struct.new(
       :delivery_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list that contains the status of the delivery of the
@@ -1140,7 +1096,7 @@ module Aws::ConfigService
       :last_error_message,
       :last_status_change_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the configuration aggregator, including
@@ -1183,7 +1139,7 @@ module Aws::ConfigService
       :created_by,
       :aggregator_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list that contains detailed configurations of a specified
@@ -1317,15 +1273,7 @@ module Aws::ConfigService
       :recording_frequency,
       :configuration_item_delivery_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationItemStatus
-      OK = 'OK'
-      ResourceDiscovered = 'ResourceDiscovered'
-      ResourceNotRecorded = 'ResourceNotRecorded'
-      ResourceDeleted = 'ResourceDeleted'
-      ResourceDeletedNotRecorded = 'ResourceDeletedNotRecorded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Records configuration changes to the resource types in scope.</p>
@@ -1436,7 +1384,7 @@ module Aws::ConfigService
       :recording_scope,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters configuration recorders by recording scope.</p>
@@ -1454,11 +1402,7 @@ module Aws::ConfigService
       :filter_name,
       :filter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationRecorderFilterName
-      RecordingScope = 'recordingScope'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of the configuration recorder.</p>
@@ -1506,7 +1450,7 @@ module Aws::ConfigService
       :last_status_change_time,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:recording] = false unless options.key?(:recording)
@@ -1533,7 +1477,7 @@ module Aws::ConfigService
       :service_principal,
       :recording_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>
@@ -1555,7 +1499,7 @@ module Aws::ConfigService
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the conformance pack by compliance types and Config rule names.</p>
@@ -1570,7 +1514,7 @@ module Aws::ConfigService
       :config_rule_names,
       :compliance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.
@@ -1590,7 +1534,7 @@ module Aws::ConfigService
       :conformance_pack_name,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of filters to apply to the conformance pack compliance score result set. </p>
@@ -1601,7 +1545,7 @@ module Aws::ConfigService
     class ConformancePackComplianceScoresFilters < Struct.new(
       :conformance_pack_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary includes the name and status of the conformance pack.</p>
@@ -1615,13 +1559,7 @@ module Aws::ConfigService
       :conformance_pack_name,
       :conformance_pack_compliance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConformancePackComplianceType
-      COMPLIANT = 'COMPLIANT'
-      NON_COMPLIANT = 'NON_COMPLIANT'
-      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details of a conformance pack. A conformance pack is a collection of Config rules and remediation actions that can be easily deployed in an account and a region.</p>
@@ -1669,7 +1607,7 @@ module Aws::ConfigService
       :created_by,
       :template_ssm_document_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters a conformance pack by Config rule names, compliance types, Amazon Web Services resource types, and resource IDs.</p>
@@ -1695,7 +1633,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a conformance pack evaluation. Provides Config rule and Amazon Web Services resource type that was evaluated, the compliance of the conformance pack, related time stamps, and supplementary information. </p>
@@ -1721,7 +1659,7 @@ module Aws::ConfigService
       :result_recorded_time,
       :annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input parameters in the form of key-value pairs for the conformance pack, both of which you define. 
@@ -1736,7 +1674,7 @@ module Aws::ConfigService
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compliance information of one or more Config rules within a conformance pack. You can filter using Config rule names and compliance types.</p>
@@ -1755,15 +1693,7 @@ module Aws::ConfigService
       :compliance_type,
       :controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConformancePackState
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status details of a conformance pack.</p>
@@ -1819,7 +1749,7 @@ module Aws::ConfigService
       :last_update_requested_time,
       :last_update_completed_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a template that is not valid or supported.</p>
@@ -1829,7 +1759,7 @@ module Aws::ConfigService
     class ConformancePackTemplateValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the runtime system, policy definition, and whether debug logging enabled. You can
@@ -1851,7 +1781,7 @@ module Aws::ConfigService
       :policy_text,
       :enable_debug_log_delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_debug_log_delivery] = false unless options.key?(:enable_debug_log_delivery)
@@ -1870,7 +1800,7 @@ module Aws::ConfigService
       :authorized_account_id,
       :authorized_aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1881,7 +1811,7 @@ module Aws::ConfigService
     class DeleteConfigRuleRequest < Struct.new(
       :config_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -1890,7 +1820,7 @@ module Aws::ConfigService
     class DeleteConfigurationAggregatorRequest < Struct.new(
       :configuration_aggregator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the
@@ -1902,7 +1832,7 @@ module Aws::ConfigService
     class DeleteConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -1911,7 +1841,7 @@ module Aws::ConfigService
     class DeleteConformancePackRequest < Struct.new(
       :conformance_pack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DeleteDeliveryChannel</a>
@@ -1923,7 +1853,7 @@ module Aws::ConfigService
     class DeleteDeliveryChannelRequest < Struct.new(
       :delivery_channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1934,14 +1864,14 @@ module Aws::ConfigService
     class DeleteEvaluationResultsRequest < Struct.new(
       :config_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output when you delete the evaluation results for the
     # 			specified Config rule.</p>
     class DeleteEvaluationResultsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_name
@@ -1950,7 +1880,7 @@ module Aws::ConfigService
     class DeleteOrganizationConfigRuleRequest < Struct.new(
       :organization_config_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_name
@@ -1959,7 +1889,7 @@ module Aws::ConfigService
     class DeleteOrganizationConformancePackRequest < Struct.new(
       :organization_conformance_pack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requester_account_id
@@ -1973,7 +1903,7 @@ module Aws::ConfigService
       :requester_account_id,
       :requester_aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -1986,12 +1916,12 @@ module Aws::ConfigService
       :config_rule_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRemediationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -2004,7 +1934,7 @@ module Aws::ConfigService
       :config_rule_name,
       :resource_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_batches
@@ -2013,7 +1943,7 @@ module Aws::ConfigService
     class DeleteRemediationExceptionsResponse < Struct.new(
       :failed_batches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -2026,7 +1956,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_configuration_name
@@ -2035,7 +1965,7 @@ module Aws::ConfigService
     class DeleteRetentionConfigurationRequest < Struct.new(
       :retention_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal
@@ -2044,7 +1974,7 @@ module Aws::ConfigService
     class DeleteServiceLinkedConfigurationRecorderRequest < Struct.new(
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2057,7 +1987,7 @@ module Aws::ConfigService
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_name
@@ -2066,12 +1996,12 @@ module Aws::ConfigService
     class DeleteStoredQueryRequest < Struct.new(
       :query_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStoredQueryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DeliverConfigSnapshot</a>
@@ -2083,7 +2013,7 @@ module Aws::ConfigService
     class DeliverConfigSnapshotRequest < Struct.new(
       :delivery_channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DeliverConfigSnapshot</a>
@@ -2094,7 +2024,7 @@ module Aws::ConfigService
     class DeliverConfigSnapshotResponse < Struct.new(
       :config_snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The channel through which Config delivers notifications and
@@ -2142,7 +2072,7 @@ module Aws::ConfigService
       :sns_topic_arn,
       :config_snapshot_delivery_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of a specified delivery channel.</p>
@@ -2170,13 +2100,7 @@ module Aws::ConfigService
       :config_history_delivery_info,
       :config_stream_delivery_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryStatus
-      Success = 'Success'
-      Failure = 'Failure'
-      Not_Applicable = 'Not_Applicable'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -2202,7 +2126,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregate_compliance_by_config_rules
@@ -2217,7 +2141,7 @@ module Aws::ConfigService
       :aggregate_compliance_by_config_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -2238,7 +2162,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregate_compliance_by_conformance_packs
@@ -2251,7 +2175,7 @@ module Aws::ConfigService
       :aggregate_compliance_by_conformance_packs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -2267,7 +2191,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregation_authorizations
@@ -2282,7 +2206,7 @@ module Aws::ConfigService
       :aggregation_authorizations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2303,7 +2227,7 @@ module Aws::ConfigService
       :compliance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2319,7 +2243,7 @@ module Aws::ConfigService
       :compliance_by_config_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2354,7 +2278,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2370,7 +2294,7 @@ module Aws::ConfigService
       :compliance_by_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2399,7 +2323,7 @@ module Aws::ConfigService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2414,7 +2338,7 @@ module Aws::ConfigService
       :config_rules_evaluation_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a filtered list of Detective or Proactive Config rules. By default, if the filter is not defined, this API returns an unfiltered list. For more information on Detective or Proactive Config rules,
@@ -2427,7 +2351,7 @@ module Aws::ConfigService
     class DescribeConfigRulesFilters < Struct.new(
       :evaluation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2452,7 +2376,7 @@ module Aws::ConfigService
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2467,7 +2391,7 @@ module Aws::ConfigService
       :config_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -2505,7 +2429,7 @@ module Aws::ConfigService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregated_source_status_list
@@ -2520,7 +2444,7 @@ module Aws::ConfigService
       :aggregated_source_status_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_names
@@ -2540,7 +2464,7 @@ module Aws::ConfigService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregators
@@ -2554,7 +2478,7 @@ module Aws::ConfigService
       :configuration_aggregators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DescribeConfigurationRecorderStatus</a>
@@ -2578,7 +2502,7 @@ module Aws::ConfigService
       :service_principal,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeConfigurationRecorderStatus</a> action, in JSON
@@ -2590,7 +2514,7 @@ module Aws::ConfigService
     class DescribeConfigurationRecorderStatusResponse < Struct.new(
       :configuration_recorders_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DescribeConfigurationRecorders</a> action.</p>
@@ -2611,7 +2535,7 @@ module Aws::ConfigService
       :service_principal,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeConfigurationRecorders</a> action.</p>
@@ -2622,7 +2546,7 @@ module Aws::ConfigService
     class DescribeConfigurationRecordersResponse < Struct.new(
       :configuration_recorders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -2643,7 +2567,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -2660,7 +2584,7 @@ module Aws::ConfigService
       :conformance_pack_rule_compliance_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_names
@@ -2677,7 +2601,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_status_details
@@ -2690,7 +2614,7 @@ module Aws::ConfigService
       :conformance_pack_status_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_names
@@ -2707,7 +2631,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_details
@@ -2720,7 +2644,7 @@ module Aws::ConfigService
       :conformance_pack_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DeliveryChannelStatus</a>
@@ -2731,7 +2655,7 @@ module Aws::ConfigService
     class DescribeDeliveryChannelStatusRequest < Struct.new(
       :delivery_channel_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeDeliveryChannelStatus</a> action.</p>
@@ -2742,7 +2666,7 @@ module Aws::ConfigService
     class DescribeDeliveryChannelStatusResponse < Struct.new(
       :delivery_channels_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DescribeDeliveryChannels</a>
@@ -2753,7 +2677,7 @@ module Aws::ConfigService
     class DescribeDeliveryChannelsRequest < Struct.new(
       :delivery_channel_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeDeliveryChannels</a>
@@ -2765,7 +2689,7 @@ module Aws::ConfigService
     class DescribeDeliveryChannelsResponse < Struct.new(
       :delivery_channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_names
@@ -2782,7 +2706,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_statuses
@@ -2795,7 +2719,7 @@ module Aws::ConfigService
       :organization_config_rule_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_names
@@ -2812,7 +2736,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rules
@@ -2825,7 +2749,7 @@ module Aws::ConfigService
       :organization_config_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_names
@@ -2844,7 +2768,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_statuses
@@ -2857,7 +2781,7 @@ module Aws::ConfigService
       :organization_conformance_pack_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_names
@@ -2876,7 +2800,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_packs
@@ -2890,7 +2814,7 @@ module Aws::ConfigService
       :organization_conformance_packs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -2906,7 +2830,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pending_aggregation_requests
@@ -2920,7 +2844,7 @@ module Aws::ConfigService
       :pending_aggregation_requests,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_names
@@ -2929,7 +2853,7 @@ module Aws::ConfigService
     class DescribeRemediationConfigurationsRequest < Struct.new(
       :config_rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute remediation_configurations
@@ -2938,7 +2862,7 @@ module Aws::ConfigService
     class DescribeRemediationConfigurationsResponse < Struct.new(
       :remediation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -2959,7 +2883,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute remediation_exceptions
@@ -2972,7 +2896,7 @@ module Aws::ConfigService
       :remediation_exceptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -2993,7 +2917,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute remediation_execution_statuses
@@ -3006,7 +2930,7 @@ module Aws::ConfigService
       :remediation_execution_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_configuration_names
@@ -3027,7 +2951,7 @@ module Aws::ConfigService
       :retention_configuration_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_configurations
@@ -3042,7 +2966,7 @@ module Aws::ConfigService
       :retention_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_recorder_arn
@@ -3055,7 +2979,7 @@ module Aws::ConfigService
       :configuration_recorder_arn,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_recorder
@@ -3068,7 +2992,7 @@ module Aws::ConfigService
     class DisassociateResourceTypesResponse < Struct.new(
       :configuration_recorder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies an Amazon Web Services resource and indicates whether it complies
@@ -3111,7 +3035,7 @@ module Aws::ConfigService
       :annotation,
       :ordering_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use EvaluationContext to group independently initiated proactive resource evaluations. For example, CFN Stack. 
@@ -3122,12 +3046,7 @@ module Aws::ConfigService
     class EvaluationContext < Struct.new(
       :evaluation_context_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationMode
-      DETECTIVE = 'DETECTIVE'
-      PROACTIVE = 'PROACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for Config rule evaluation mode. The supported valid values are Detective or Proactive.</p>
@@ -3137,7 +3056,7 @@ module Aws::ConfigService
     class EvaluationModeConfiguration < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Config evaluation. Provides the Amazon Web Services
@@ -3179,7 +3098,7 @@ module Aws::ConfigService
       :annotation,
       :result_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Uniquely identifies an evaluation result.</p>
@@ -3201,7 +3120,7 @@ module Aws::ConfigService
       :ordering_timestamp,
       :resource_evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies an Config rule that evaluated an Amazon Web Services resource,
@@ -3226,7 +3145,7 @@ module Aws::ConfigService
       :resource_id,
       :evaluation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns status details of an evaluation.</p>
@@ -3240,11 +3159,7 @@ module Aws::ConfigService
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSource
-      Aws_Config = 'aws.config'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the configuration recorder excludes certain resource types from being recorded.
@@ -3275,7 +3190,7 @@ module Aws::ConfigService
     class ExclusionByResourceTypes < Struct.new(
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The controls that Config uses for executing remediations.</p>
@@ -3285,7 +3200,7 @@ module Aws::ConfigService
     class ExecutionControls < Struct.new(
       :ssm_controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies an Amazon Web Services resource and indicates whether it complies with the Config rule that it was evaluated against.</p>
@@ -3311,7 +3226,7 @@ module Aws::ConfigService
       :annotation,
       :ordering_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of each of the failed delete remediation exceptions with specific reasons.</p>
@@ -3325,7 +3240,7 @@ module Aws::ConfigService
       :failure_message,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of each of the failed remediations with specific reasons.</p>
@@ -3339,7 +3254,7 @@ module Aws::ConfigService
       :failure_message,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of each of the failed remediation exceptions with specific reasons.</p>
@@ -3353,7 +3268,7 @@ module Aws::ConfigService
       :failure_message,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the fields such as name of the field.</p>
@@ -3363,7 +3278,7 @@ module Aws::ConfigService
     class FieldInfo < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -3408,7 +3323,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregate_evaluation_results
@@ -3422,7 +3337,7 @@ module Aws::ConfigService
       :aggregate_evaluation_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -3451,7 +3366,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_by_key
@@ -3469,7 +3384,7 @@ module Aws::ConfigService
       :aggregate_compliance_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -3494,7 +3409,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregate_conformance_pack_compliance_summaries
@@ -3511,7 +3426,7 @@ module Aws::ConfigService
       :group_by_key,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -3536,7 +3451,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total_discovered_resources
@@ -3557,7 +3472,7 @@ module Aws::ConfigService
       :grouped_resource_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_discovered_resources] = 0 unless options.key?(:total_discovered_resources)
@@ -3575,7 +3490,7 @@ module Aws::ConfigService
       :configuration_aggregator_name,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_item
@@ -3584,7 +3499,7 @@ module Aws::ConfigService
     class GetAggregateResourceConfigResponse < Struct.new(
       :configuration_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3613,7 +3528,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3629,7 +3544,7 @@ module Aws::ConfigService
       :evaluation_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3664,7 +3579,7 @@ module Aws::ConfigService
       :next_token,
       :resource_evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3679,7 +3594,7 @@ module Aws::ConfigService
       :evaluation_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3691,7 +3606,7 @@ module Aws::ConfigService
     class GetComplianceSummaryByConfigRuleResponse < Struct.new(
       :compliance_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3707,7 +3622,7 @@ module Aws::ConfigService
     class GetComplianceSummaryByResourceTypeRequest < Struct.new(
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3720,7 +3635,7 @@ module Aws::ConfigService
     class GetComplianceSummaryByResourceTypeResponse < Struct.new(
       :compliance_summaries_by_resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -3741,7 +3656,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -3758,7 +3673,7 @@ module Aws::ConfigService
       :conformance_pack_rule_evaluation_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_names
@@ -3775,7 +3690,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_compliance_summary_list
@@ -3788,7 +3703,7 @@ module Aws::ConfigService
       :conformance_pack_compliance_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -3797,7 +3712,7 @@ module Aws::ConfigService
     class GetCustomRulePolicyRequest < Struct.new(
       :config_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_text
@@ -3806,7 +3721,7 @@ module Aws::ConfigService
     class GetCustomRulePolicyResponse < Struct.new(
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_types
@@ -3840,7 +3755,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total_discovered_resources
@@ -3884,7 +3799,7 @@ module Aws::ConfigService
       :resource_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_discovered_resources] = 0 unless options.key?(:total_discovered_resources)
@@ -3910,7 +3825,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_detailed_status
@@ -3923,7 +3838,7 @@ module Aws::ConfigService
       :organization_config_rule_detailed_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_name
@@ -3945,7 +3860,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_detailed_statuses
@@ -3958,7 +3873,7 @@ module Aws::ConfigService
       :organization_conformance_pack_detailed_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_name
@@ -3967,7 +3882,7 @@ module Aws::ConfigService
     class GetOrganizationCustomRulePolicyRequest < Struct.new(
       :organization_config_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_text
@@ -3976,7 +3891,7 @@ module Aws::ConfigService
     class GetOrganizationCustomRulePolicyResponse < Struct.new(
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>GetResourceConfigHistory</a>
@@ -4022,7 +3937,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>GetResourceConfigHistory</a>
@@ -4039,7 +3954,7 @@ module Aws::ConfigService
       :configuration_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_evaluation_id
@@ -4048,7 +3963,7 @@ module Aws::ConfigService
     class GetResourceEvaluationSummaryRequest < Struct.new(
       :resource_evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_evaluation_id
@@ -4081,7 +3996,7 @@ module Aws::ConfigService
       :evaluation_context,
       :resource_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_name
@@ -4090,7 +4005,7 @@ module Aws::ConfigService
     class GetStoredQueryRequest < Struct.new(
       :query_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stored_query
@@ -4099,7 +4014,7 @@ module Aws::ConfigService
     class GetStoredQueryResponse < Struct.new(
       :stored_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The count of resources that are grouped by the group name.</p>
@@ -4113,7 +4028,7 @@ module Aws::ConfigService
       :group_name,
       :resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resource_count] = 0 unless options.key?(:resource_count)
@@ -4127,7 +4042,7 @@ module Aws::ConfigService
     class IdempotentParameterMismatch < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your Amazon S3 bucket policy does not allow Config to
@@ -4138,7 +4053,7 @@ module Aws::ConfigService
     class InsufficientDeliveryPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates one of the following errors:</p>
@@ -4173,7 +4088,7 @@ module Aws::ConfigService
     class InsufficientPermissionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration recorder name is not valid. The prefix "<code>AWSConfigurationRecorderFor</code>" is reserved for service-linked configuration recorders.</p>
@@ -4183,7 +4098,7 @@ module Aws::ConfigService
     class InvalidConfigurationRecorderNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified delivery channel name is not valid.</p>
@@ -4193,7 +4108,7 @@ module Aws::ConfigService
     class InvalidDeliveryChannelNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The syntax of the query is incorrect.</p>
@@ -4203,7 +4118,7 @@ module Aws::ConfigService
     class InvalidExpressionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified limit is outside the allowable range.</p>
@@ -4213,7 +4128,7 @@ module Aws::ConfigService
     class InvalidLimitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified next token is not valid. Specify the
@@ -4225,7 +4140,7 @@ module Aws::ConfigService
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified parameters are not valid. Verify
@@ -4236,7 +4151,7 @@ module Aws::ConfigService
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the following errors:</p>
@@ -4269,7 +4184,7 @@ module Aws::ConfigService
     class InvalidRecordingGroupException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <code>ResultToken</code> is not valid.</p>
@@ -4279,7 +4194,7 @@ module Aws::ConfigService
     class InvalidResultTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have provided a null or empty Amazon Resource Name (ARN) for the IAM role assumed by Config and used by the customer managed configuration recorder.</p>
@@ -4289,7 +4204,7 @@ module Aws::ConfigService
     class InvalidRoleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon S3 key prefix is not valid.</p>
@@ -4299,7 +4214,7 @@ module Aws::ConfigService
     class InvalidS3KeyPrefixException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon KMS Key ARN is not valid.</p>
@@ -4309,7 +4224,7 @@ module Aws::ConfigService
     class InvalidS3KmsKeyArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon SNS topic does not exist.</p>
@@ -4319,7 +4234,7 @@ module Aws::ConfigService
     class InvalidSNSTopicARNException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified time range is not valid. The earlier time is not
@@ -4330,7 +4245,7 @@ module Aws::ConfigService
     class InvalidTimeRangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot delete the delivery channel you specified because the customer managed configuration recorder is running.</p>
@@ -4340,7 +4255,7 @@ module Aws::ConfigService
     class LastDeliveryChannelDeleteFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>PutServiceLinkedConfigurationRecorder</code> API, this exception
@@ -4357,7 +4272,7 @@ module Aws::ConfigService
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -4382,7 +4297,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifiers
@@ -4395,7 +4310,7 @@ module Aws::ConfigService
       :resource_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4412,7 +4327,7 @@ module Aws::ConfigService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_recorder_summaries
@@ -4425,7 +4340,7 @@ module Aws::ConfigService
       :configuration_recorder_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4454,7 +4369,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4467,7 +4382,7 @@ module Aws::ConfigService
       :next_token,
       :conformance_pack_compliance_scores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4507,7 +4422,7 @@ module Aws::ConfigService
       :include_deleted_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4523,7 +4438,7 @@ module Aws::ConfigService
       :resource_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4541,7 +4456,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_evaluations
@@ -4554,7 +4469,7 @@ module Aws::ConfigService
       :resource_evaluations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4567,7 +4482,7 @@ module Aws::ConfigService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stored_query_metadata
@@ -4582,7 +4497,7 @@ module Aws::ConfigService
       :stored_query_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4641,7 +4556,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4654,7 +4569,7 @@ module Aws::ConfigService
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of active custom resource types in your account. There is a limit of 100,000.
@@ -4666,7 +4581,7 @@ module Aws::ConfigService
     class MaxActiveResourcesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Failed to add the Config rule because the account already
@@ -4678,7 +4593,7 @@ module Aws::ConfigService
     class MaxNumberOfConfigRulesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of configuration recorders you can
@@ -4689,7 +4604,7 @@ module Aws::ConfigService
     class MaxNumberOfConfigurationRecordersExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of conformance packs you can create in an account. For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
@@ -4701,7 +4616,7 @@ module Aws::ConfigService
     class MaxNumberOfConformancePacksExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of delivery channels
@@ -4712,7 +4627,7 @@ module Aws::ConfigService
     class MaxNumberOfDeliveryChannelsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of organization Config rules you can create. For more information, see see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
@@ -4724,7 +4639,7 @@ module Aws::ConfigService
     class MaxNumberOfOrganizationConfigRulesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of organization conformance packs you can create in an account. For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
@@ -4736,7 +4651,7 @@ module Aws::ConfigService
     class MaxNumberOfOrganizationConformancePacksExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Failed to add the retention configuration because a retention configuration with that name already exists.</p>
@@ -4746,27 +4661,7 @@ module Aws::ConfigService
     class MaxNumberOfRetentionConfigurationsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaximumExecutionFrequency
-      One_Hour = 'One_Hour'
-      Three_Hours = 'Three_Hours'
-      Six_Hours = 'Six_Hours'
-      Twelve_Hours = 'Twelve_Hours'
-      TwentyFour_Hours = 'TwentyFour_Hours'
-    end
-
-    module MemberAccountRuleStatus
-      CREATE_SUCCESSFUL = 'CREATE_SUCCESSFUL'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_SUCCESSFUL = 'DELETE_SUCCESSFUL'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization Config rule creation or deletion status in each member account. This includes the name of the rule, the status, error code and error message when the rule creation or deletion failed.</p>
@@ -4839,14 +4734,7 @@ module Aws::ConfigService
       :error_message,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageType
-      ConfigurationItemChangeNotification = 'ConfigurationItemChangeNotification'
-      ConfigurationSnapshotDeliveryCompleted = 'ConfigurationSnapshotDeliveryCompleted'
-      ScheduledNotification = 'ScheduledNotification'
-      OversizedConfigurationItemChangeNotification = 'OversizedConfigurationItemChangeNotification'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are no customer managed configuration recorders available to record your resources. Use the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConfigurationRecorder.html">PutConfigurationRecorder</a> operation to create the customer managed configuration
@@ -4857,7 +4745,7 @@ module Aws::ConfigService
     class NoAvailableConfigurationRecorderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no delivery channel available to record
@@ -4868,7 +4756,7 @@ module Aws::ConfigService
     class NoAvailableDeliveryChannelException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization is no longer available.</p>
@@ -4878,7 +4766,7 @@ module Aws::ConfigService
     class NoAvailableOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no configuration recorder running.</p>
@@ -4888,7 +4776,7 @@ module Aws::ConfigService
     class NoRunningConfigurationRecorderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon S3 bucket does not exist.</p>
@@ -4898,7 +4786,7 @@ module Aws::ConfigService
     class NoSuchBucketException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Config rule in the request is not valid. Verify that the rule is an Config Process Check rule, that the rule name is correct, and that valid Amazon Resouce Names (ARNs) are used before trying again.</p>
@@ -4908,7 +4796,7 @@ module Aws::ConfigService
     class NoSuchConfigRuleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Config rule that you passed in the filter does not exist.</p>
@@ -4918,7 +4806,7 @@ module Aws::ConfigService
     class NoSuchConfigRuleInConformancePackException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a configuration aggregator that does not exist.</p>
@@ -4928,7 +4816,7 @@ module Aws::ConfigService
     class NoSuchConfigurationAggregatorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a configuration recorder that does not
@@ -4939,7 +4827,7 @@ module Aws::ConfigService
     class NoSuchConfigurationRecorderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified one or more conformance packs that do not exist.</p>
@@ -4949,7 +4837,7 @@ module Aws::ConfigService
     class NoSuchConformancePackException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a delivery channel that does not
@@ -4960,7 +4848,7 @@ module Aws::ConfigService
     class NoSuchDeliveryChannelException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Config rule in the request is not valid. Verify that the rule is an organization Config Process Check rule, that the rule name is correct, and that valid Amazon Resouce Names (ARNs) are used before trying again.</p>
@@ -4970,7 +4858,7 @@ module Aws::ConfigService
     class NoSuchOrganizationConfigRuleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Config organization conformance pack that you passed in the filter does not exist.</p>
@@ -4981,7 +4869,7 @@ module Aws::ConfigService
     class NoSuchOrganizationConformancePackException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified an Config rule without a remediation configuration.</p>
@@ -4991,7 +4879,7 @@ module Aws::ConfigService
     class NoSuchRemediationConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You tried to delete a remediation exception that does not exist.</p>
@@ -5001,7 +4889,7 @@ module Aws::ConfigService
     class NoSuchRemediationExceptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a retention configuration that does not exist.</p>
@@ -5011,7 +4899,7 @@ module Aws::ConfigService
     class NoSuchRetentionConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>PutConfigurationAggregator</code> API, you can see this exception for the following reasons:</p>
@@ -5039,7 +4927,7 @@ module Aws::ConfigService
     class OrganizationAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object contains regions to set up the aggregator and an IAM
@@ -5060,7 +4948,7 @@ module Aws::ConfigService
       :aws_regions,
       :all_aws_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_aws_regions] = false unless options.key?(:all_aws_regions)
@@ -5075,7 +4963,7 @@ module Aws::ConfigService
     class OrganizationAllFeaturesNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An organization Config rule that has information about Config rules that Config creates in member accounts.</p>
@@ -5112,7 +5000,7 @@ module Aws::ConfigService
       :last_update_time,
       :organization_custom_policy_rule_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the status for an organization Config rule in an organization.</p>
@@ -5180,18 +5068,7 @@ module Aws::ConfigService
       :error_message,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationConfigRuleTriggerType
-      CONFIGURATION_ITEM_CHANGE_NOTIFICATION = 'ConfigurationItemChangeNotification'
-      OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION = 'OversizedConfigurationItemChangeNotification'
-      SCHEDULED_NOTIFICATION = 'ScheduledNotification'
-    end
-
-    module OrganizationConfigRuleTriggerTypeNoSN
-      CONFIGURATION_ITEM_CHANGE_NOTIFICATION = 'ConfigurationItemChangeNotification'
-      OVERSIZED_CONFIGURATION_ITEM_CHANGE_NOTIFCATION = 'OversizedConfigurationItemChangeNotification'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An organization conformance pack that has information about conformance packs that Config creates in member accounts. </p>
@@ -5231,7 +5108,7 @@ module Aws::ConfigService
       :excluded_accounts,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization conformance pack creation or deletion status in each member account. 
@@ -5308,7 +5185,7 @@ module Aws::ConfigService
       :error_message,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the status for an organization conformance pack in an organization.</p>
@@ -5382,7 +5259,7 @@ module Aws::ConfigService
       :error_message,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a template that is not valid or supported.</p>
@@ -5392,7 +5269,7 @@ module Aws::ConfigService
     class OrganizationConformancePackTemplateValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An
@@ -5462,7 +5339,7 @@ module Aws::ConfigService
       :policy_text,
       :debug_log_delivery_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> metadata for your organization Config Custom Policy rule including the runtime system in use, which accounts have debug logging enabled, and
@@ -5527,7 +5404,7 @@ module Aws::ConfigService
       :policy_runtime,
       :debug_log_delivery_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies organization custom rule metadata such as resource type, resource ID of Amazon Web Services resource, Lambda function ARN, 
@@ -5593,7 +5470,7 @@ module Aws::ConfigService
       :tag_key_scope,
       :tag_value_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies organization managed rule metadata such as resource type and ID of Amazon Web Services resource along with the rule identifier. 
@@ -5640,19 +5517,7 @@ module Aws::ConfigService
       :tag_key_scope,
       :tag_value_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationResourceDetailedStatus
-      CREATE_SUCCESSFUL = 'CREATE_SUCCESSFUL'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_SUCCESSFUL = 'DELETE_SUCCESSFUL'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status filter object to filter results based on specific member account ID or status type for an organization conformance pack.</p>
@@ -5709,31 +5574,7 @@ module Aws::ConfigService
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationResourceStatus
-      CREATE_SUCCESSFUL = 'CREATE_SUCCESSFUL'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_SUCCESSFUL = 'DELETE_SUCCESSFUL'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-    end
-
-    module OrganizationRuleStatus
-      CREATE_SUCCESSFUL = 'CREATE_SUCCESSFUL'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_SUCCESSFUL = 'DELETE_SUCCESSFUL'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration item size is outside the allowable range.</p>
@@ -5743,13 +5584,7 @@ module Aws::ConfigService
     class OversizedConfigurationItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Owner
-      Custom_Lambda = 'CUSTOM_LAMBDA'
-      Aws = 'AWS'
-      Custom_Policy = 'CUSTOM_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the account ID and region of an
@@ -5766,7 +5601,7 @@ module Aws::ConfigService
       :requester_account_id,
       :requester_aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_account_id
@@ -5783,7 +5618,7 @@ module Aws::ConfigService
       :authorized_aws_region,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregation_authorization
@@ -5794,7 +5629,7 @@ module Aws::ConfigService
     class PutAggregationAuthorizationResponse < Struct.new(
       :aggregation_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule
@@ -5807,7 +5642,7 @@ module Aws::ConfigService
       :config_rule,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator_name
@@ -5834,7 +5669,7 @@ module Aws::ConfigService
       :tags,
       :aggregator_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_aggregator
@@ -5843,7 +5678,7 @@ module Aws::ConfigService
     class PutConfigurationAggregatorResponse < Struct.new(
       :configuration_aggregator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>PutConfigurationRecorder</a>
@@ -5858,7 +5693,7 @@ module Aws::ConfigService
       :configuration_recorder,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_name
@@ -5904,7 +5739,7 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :template_ssm_document_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conformance_pack_arn
@@ -5913,7 +5748,7 @@ module Aws::ConfigService
     class PutConformancePackResponse < Struct.new(
       :conformance_pack_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>PutDeliveryChannel</a>
@@ -5925,7 +5760,7 @@ module Aws::ConfigService
     class PutDeliveryChannelRequest < Struct.new(
       :delivery_channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5956,7 +5791,7 @@ module Aws::ConfigService
       :result_token,
       :test_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5967,7 +5802,7 @@ module Aws::ConfigService
     class PutEvaluationsResponse < Struct.new(
       :failed_evaluations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -5980,12 +5815,12 @@ module Aws::ConfigService
       :config_rule_name,
       :external_evaluation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutExternalEvaluationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_name
@@ -6016,7 +5851,7 @@ module Aws::ConfigService
       :excluded_accounts,
       :organization_custom_policy_rule_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_config_rule_arn
@@ -6025,7 +5860,7 @@ module Aws::ConfigService
     class PutOrganizationConfigRuleResponse < Struct.new(
       :organization_config_rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_name
@@ -6070,7 +5905,7 @@ module Aws::ConfigService
       :conformance_pack_input_parameters,
       :excluded_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_conformance_pack_arn
@@ -6079,7 +5914,7 @@ module Aws::ConfigService
     class PutOrganizationConformancePackResponse < Struct.new(
       :organization_conformance_pack_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute remediation_configurations
@@ -6088,7 +5923,7 @@ module Aws::ConfigService
     class PutRemediationConfigurationsRequest < Struct.new(
       :remediation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_batches
@@ -6097,7 +5932,7 @@ module Aws::ConfigService
     class PutRemediationConfigurationsResponse < Struct.new(
       :failed_batches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -6118,7 +5953,7 @@ module Aws::ConfigService
       :message,
       :expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_batches
@@ -6127,7 +5962,7 @@ module Aws::ConfigService
     class PutRemediationExceptionsResponse < Struct.new(
       :failed_batches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -6166,7 +6001,7 @@ module Aws::ConfigService
       :configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_period_in_days
@@ -6180,7 +6015,7 @@ module Aws::ConfigService
     class PutRetentionConfigurationRequest < Struct.new(
       :retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_configuration
@@ -6189,7 +6024,7 @@ module Aws::ConfigService
     class PutRetentionConfigurationResponse < Struct.new(
       :retention_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_principal
@@ -6202,7 +6037,7 @@ module Aws::ConfigService
       :service_principal,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6216,7 +6051,7 @@ module Aws::ConfigService
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stored_query
@@ -6234,7 +6069,7 @@ module Aws::ConfigService
       :stored_query,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_arn
@@ -6244,7 +6079,7 @@ module Aws::ConfigService
     class PutStoredQueryResponse < Struct.new(
       :query_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the query.</p>
@@ -6254,19 +6089,7 @@ module Aws::ConfigService
     class QueryInfo < Struct.new(
       :select_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecorderStatus
-      Pending = 'Pending'
-      Success = 'Success'
-      Failure = 'Failure'
-      NotApplicable = 'NotApplicable'
-    end
-
-    module RecordingFrequency
-      CONTINUOUS = 'CONTINUOUS'
-      DAILY = 'DAILY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies which resource types Config
@@ -6456,7 +6279,7 @@ module Aws::ConfigService
       :exclusion_by_resource_types,
       :recording_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_supported] = false unless options.key?(:all_supported)
@@ -6514,7 +6337,7 @@ module Aws::ConfigService
       :recording_frequency,
       :recording_mode_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object for you to specify your overrides for the recording mode.</p>
@@ -6566,12 +6389,7 @@ module Aws::ConfigService
       :resource_types,
       :recording_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordingScope
-      INTERNAL = 'INTERNAL'
-      PAID = 'PAID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the recording strategy of the configuration recorder.</p>
@@ -6653,13 +6471,7 @@ module Aws::ConfigService
     class RecordingStrategy < Struct.new(
       :use_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordingStrategyType
-      ALL_SUPPORTED_RESOURCE_TYPES = 'ALL_SUPPORTED_RESOURCE_TYPES'
-      INCLUSION_BY_RESOURCE_TYPES = 'INCLUSION_BY_RESOURCE_TYPES'
-      EXCLUSION_BY_RESOURCE_TYPES = 'EXCLUSION_BY_RESOURCE_TYPES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relationship of the related resource to the main
@@ -6684,7 +6496,7 @@ module Aws::ConfigService
       :resource_name,
       :relationship_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.</p>
@@ -6750,7 +6562,7 @@ module Aws::ConfigService
       :arn,
       :created_by_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:automatic] = false unless options.key?(:automatic)
@@ -6781,7 +6593,7 @@ module Aws::ConfigService
       :message,
       :expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that identify a resource within Config, including the resource type and resource ID. </p>
@@ -6795,14 +6607,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemediationExecutionState
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details of the current status of the invoked remediation action for that resource.</p>
@@ -6829,7 +6634,7 @@ module Aws::ConfigService
       :invocation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Name of the step from the SSM document.</p>
@@ -6855,13 +6660,7 @@ module Aws::ConfigService
       :start_time,
       :stop_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemediationExecutionStepState
-      SUCCEEDED = 'SUCCEEDED'
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Remediation action is in progress. You can either cancel execution in Amazon Web Services Systems Manager or wait and try again later. </p>
@@ -6871,7 +6670,7 @@ module Aws::ConfigService
     class RemediationInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value is either a dynamic (resource) value or a static value. You must select either a dynamic value or a static value.</p>
@@ -6885,11 +6684,7 @@ module Aws::ConfigService
       :resource_value,
       :static_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemediationTargetType
-      SSM_DOCUMENT = 'SSM_DOCUMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two users are trying to modify the same query at the same time. Wait for a moment and try again.</p>
@@ -6898,11 +6693,7 @@ module Aws::ConfigService
     class ResourceConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceConfigurationSchemaType
-      CFN_RESOURCE_SCHEMA = 'CFN_RESOURCE_SCHEMA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the resource type and the number of
@@ -6918,7 +6709,7 @@ module Aws::ConfigService
       :resource_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -6941,13 +6732,7 @@ module Aws::ConfigService
       :account_id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceCountGroupKey
-      RESOURCE_TYPE = 'RESOURCE_TYPE'
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      AWS_REGION = 'AWS_REGION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the resource being evaluated.</p>
@@ -6976,7 +6761,7 @@ module Aws::ConfigService
       :resource_configuration,
       :resource_configuration_schema_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details of a resource evaluation.</p>
@@ -6994,7 +6779,7 @@ module Aws::ConfigService
       :evaluation_mode,
       :evaluation_start_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details of a resource evaluation based on the selected filter.</p>
@@ -7015,13 +6800,7 @@ module Aws::ConfigService
       :time_window,
       :evaluation_context_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceEvaluationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the results by resource account ID, region, resource ID, and resource name.</p>
@@ -7043,7 +6822,7 @@ module Aws::ConfigService
       :resource_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that identify a resource that is discovered by Config, including the resource type, ID, and (if available) the
@@ -7067,7 +6846,7 @@ module Aws::ConfigService
       :resource_name,
       :resource_deletion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You see this exception in the following cases: </p>
@@ -7100,7 +6879,7 @@ module Aws::ConfigService
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that identify a resource within Config, including
@@ -7115,7 +6894,7 @@ module Aws::ConfigService
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a resource that is either unknown or has not
@@ -7126,7 +6905,7 @@ module Aws::ConfigService
     class ResourceNotDiscoveredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a resource that does not exist.</p>
@@ -7136,452 +6915,7 @@ module Aws::ConfigService
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      CustomerGateway = 'AWS::EC2::CustomerGateway'
-      EIP = 'AWS::EC2::EIP'
-      Host = 'AWS::EC2::Host'
-      Instance = 'AWS::EC2::Instance'
-      InternetGateway = 'AWS::EC2::InternetGateway'
-      NetworkAcl = 'AWS::EC2::NetworkAcl'
-      NetworkInterface = 'AWS::EC2::NetworkInterface'
-      RouteTable = 'AWS::EC2::RouteTable'
-      SecurityGroup = 'AWS::EC2::SecurityGroup'
-      Subnet = 'AWS::EC2::Subnet'
-      Trail = 'AWS::CloudTrail::Trail'
-      Volume = 'AWS::EC2::Volume'
-      VPC = 'AWS::EC2::VPC'
-      VPNConnection = 'AWS::EC2::VPNConnection'
-      VPNGateway = 'AWS::EC2::VPNGateway'
-      RegisteredHAInstance = 'AWS::EC2::RegisteredHAInstance'
-      NatGateway = 'AWS::EC2::NatGateway'
-      EgressOnlyInternetGateway = 'AWS::EC2::EgressOnlyInternetGateway'
-      VPCEndpoint = 'AWS::EC2::VPCEndpoint'
-      VPCEndpointService = 'AWS::EC2::VPCEndpointService'
-      FlowLog = 'AWS::EC2::FlowLog'
-      VPCPeeringConnection = 'AWS::EC2::VPCPeeringConnection'
-      Domain = 'AWS::Elasticsearch::Domain'
-      Group = 'AWS::IAM::Group'
-      Policy = 'AWS::IAM::Policy'
-      Role = 'AWS::IAM::Role'
-      User = 'AWS::IAM::User'
-      LoadBalancerV2 = 'AWS::ElasticLoadBalancingV2::LoadBalancer'
-      Certificate = 'AWS::ACM::Certificate'
-      DBInstance = 'AWS::RDS::DBInstance'
-      DBSubnetGroup = 'AWS::RDS::DBSubnetGroup'
-      DBSecurityGroup = 'AWS::RDS::DBSecurityGroup'
-      DBSnapshot = 'AWS::RDS::DBSnapshot'
-      DBCluster = 'AWS::RDS::DBCluster'
-      DBClusterSnapshot = 'AWS::RDS::DBClusterSnapshot'
-      EventSubscription = 'AWS::RDS::EventSubscription'
-      Bucket = 'AWS::S3::Bucket'
-      AccountPublicAccessBlock = 'AWS::S3::AccountPublicAccessBlock'
-      Cluster = 'AWS::Redshift::Cluster'
-      ClusterSnapshot = 'AWS::Redshift::ClusterSnapshot'
-      ClusterParameterGroup = 'AWS::Redshift::ClusterParameterGroup'
-      ClusterSecurityGroup = 'AWS::Redshift::ClusterSecurityGroup'
-      ClusterSubnetGroup = 'AWS::Redshift::ClusterSubnetGroup'
-      RedshiftEventSubscription = 'AWS::Redshift::EventSubscription'
-      ManagedInstanceInventory = 'AWS::SSM::ManagedInstanceInventory'
-      Alarm = 'AWS::CloudWatch::Alarm'
-      Stack = 'AWS::CloudFormation::Stack'
-      LoadBalancer = 'AWS::ElasticLoadBalancing::LoadBalancer'
-      AutoScalingGroup = 'AWS::AutoScaling::AutoScalingGroup'
-      LaunchConfiguration = 'AWS::AutoScaling::LaunchConfiguration'
-      ScalingPolicy = 'AWS::AutoScaling::ScalingPolicy'
-      ScheduledAction = 'AWS::AutoScaling::ScheduledAction'
-      Table = 'AWS::DynamoDB::Table'
-      Project = 'AWS::CodeBuild::Project'
-      RateBasedRule = 'AWS::WAF::RateBasedRule'
-      Rule = 'AWS::WAF::Rule'
-      RuleGroup = 'AWS::WAF::RuleGroup'
-      WebACL = 'AWS::WAF::WebACL'
-      RegionalRateBasedRule = 'AWS::WAFRegional::RateBasedRule'
-      RegionalRule = 'AWS::WAFRegional::Rule'
-      RegionalRuleGroup = 'AWS::WAFRegional::RuleGroup'
-      RegionalWebACL = 'AWS::WAFRegional::WebACL'
-      Distribution = 'AWS::CloudFront::Distribution'
-      StreamingDistribution = 'AWS::CloudFront::StreamingDistribution'
-      Function = 'AWS::Lambda::Function'
-      NetworkFirewallFirewall = 'AWS::NetworkFirewall::Firewall'
-      NetworkFirewallFirewallPolicy = 'AWS::NetworkFirewall::FirewallPolicy'
-      NetworkFirewallRuleGroup = 'AWS::NetworkFirewall::RuleGroup'
-      Application = 'AWS::ElasticBeanstalk::Application'
-      ApplicationVersion = 'AWS::ElasticBeanstalk::ApplicationVersion'
-      Environment = 'AWS::ElasticBeanstalk::Environment'
-      WebACLV2 = 'AWS::WAFv2::WebACL'
-      RuleGroupV2 = 'AWS::WAFv2::RuleGroup'
-      IPSetV2 = 'AWS::WAFv2::IPSet'
-      RegexPatternSetV2 = 'AWS::WAFv2::RegexPatternSet'
-      ManagedRuleSetV2 = 'AWS::WAFv2::ManagedRuleSet'
-      EncryptionConfig = 'AWS::XRay::EncryptionConfig'
-      AssociationCompliance = 'AWS::SSM::AssociationCompliance'
-      PatchCompliance = 'AWS::SSM::PatchCompliance'
-      Protection = 'AWS::Shield::Protection'
-      RegionalProtection = 'AWS::ShieldRegional::Protection'
-      ConformancePackCompliance = 'AWS::Config::ConformancePackCompliance'
-      ResourceCompliance = 'AWS::Config::ResourceCompliance'
-      Stage = 'AWS::ApiGateway::Stage'
-      RestApi = 'AWS::ApiGateway::RestApi'
-      StageV2 = 'AWS::ApiGatewayV2::Stage'
-      Api = 'AWS::ApiGatewayV2::Api'
-      Pipeline = 'AWS::CodePipeline::Pipeline'
-      CloudFormationProvisionedProduct = 'AWS::ServiceCatalog::CloudFormationProvisionedProduct'
-      CloudFormationProduct = 'AWS::ServiceCatalog::CloudFormationProduct'
-      Portfolio = 'AWS::ServiceCatalog::Portfolio'
-      Queue = 'AWS::SQS::Queue'
-      Key = 'AWS::KMS::Key'
-      QLDBLedger = 'AWS::QLDB::Ledger'
-      Secret = 'AWS::SecretsManager::Secret'
-      Topic = 'AWS::SNS::Topic'
-      FileData = 'AWS::SSM::FileData'
-      BackupPlan = 'AWS::Backup::BackupPlan'
-      BackupSelection = 'AWS::Backup::BackupSelection'
-      BackupVault = 'AWS::Backup::BackupVault'
-      BackupRecoveryPoint = 'AWS::Backup::RecoveryPoint'
-      ECRRepository = 'AWS::ECR::Repository'
-      ECSCluster = 'AWS::ECS::Cluster'
-      ECSService = 'AWS::ECS::Service'
-      ECSTaskDefinition = 'AWS::ECS::TaskDefinition'
-      EFSAccessPoint = 'AWS::EFS::AccessPoint'
-      EFSFileSystem = 'AWS::EFS::FileSystem'
-      EKSCluster = 'AWS::EKS::Cluster'
-      OpenSearchDomain = 'AWS::OpenSearch::Domain'
-      TransitGateway = 'AWS::EC2::TransitGateway'
-      KinesisStream = 'AWS::Kinesis::Stream'
-      KinesisStreamConsumer = 'AWS::Kinesis::StreamConsumer'
-      CodeDeployApplication = 'AWS::CodeDeploy::Application'
-      CodeDeployDeploymentConfig = 'AWS::CodeDeploy::DeploymentConfig'
-      CodeDeployDeploymentGroup = 'AWS::CodeDeploy::DeploymentGroup'
-      LaunchTemplate = 'AWS::EC2::LaunchTemplate'
-      ECRPublicRepository = 'AWS::ECR::PublicRepository'
-      GuardDutyDetector = 'AWS::GuardDuty::Detector'
-      EMRSecurityConfiguration = 'AWS::EMR::SecurityConfiguration'
-      SageMakerCodeRepository = 'AWS::SageMaker::CodeRepository'
-      Route53ResolverResolverEndpoint = 'AWS::Route53Resolver::ResolverEndpoint'
-      Route53ResolverResolverRule = 'AWS::Route53Resolver::ResolverRule'
-      Route53ResolverResolverRuleAssociation = 'AWS::Route53Resolver::ResolverRuleAssociation'
-      DMSReplicationSubnetGroup = 'AWS::DMS::ReplicationSubnetGroup'
-      DMSEventSubscription = 'AWS::DMS::EventSubscription'
-      MSKCluster = 'AWS::MSK::Cluster'
-      StepFunctionsActivity = 'AWS::StepFunctions::Activity'
-      WorkSpacesWorkspace = 'AWS::WorkSpaces::Workspace'
-      WorkSpacesConnectionAlias = 'AWS::WorkSpaces::ConnectionAlias'
-      SageMakerModel = 'AWS::SageMaker::Model'
-      ListenerV2 = 'AWS::ElasticLoadBalancingV2::Listener'
-      StepFunctionsStateMachine = 'AWS::StepFunctions::StateMachine'
-      BatchJobQueue = 'AWS::Batch::JobQueue'
-      BatchComputeEnvironment = 'AWS::Batch::ComputeEnvironment'
-      AccessAnalyzerAnalyzer = 'AWS::AccessAnalyzer::Analyzer'
-      AthenaWorkGroup = 'AWS::Athena::WorkGroup'
-      AthenaDataCatalog = 'AWS::Athena::DataCatalog'
-      DetectiveGraph = 'AWS::Detective::Graph'
-      GlobalAcceleratorAccelerator = 'AWS::GlobalAccelerator::Accelerator'
-      GlobalAcceleratorEndpointGroup = 'AWS::GlobalAccelerator::EndpointGroup'
-      GlobalAcceleratorListener = 'AWS::GlobalAccelerator::Listener'
-      TransitGatewayAttachment = 'AWS::EC2::TransitGatewayAttachment'
-      TransitGatewayRouteTable = 'AWS::EC2::TransitGatewayRouteTable'
-      DMSCertificate = 'AWS::DMS::Certificate'
-      AppConfigApplication = 'AWS::AppConfig::Application'
-      AppSyncGraphQLApi = 'AWS::AppSync::GraphQLApi'
-      DataSyncLocationSMB = 'AWS::DataSync::LocationSMB'
-      DataSyncLocationFSxLustre = 'AWS::DataSync::LocationFSxLustre'
-      DataSyncLocationS3 = 'AWS::DataSync::LocationS3'
-      DataSyncLocationEFS = 'AWS::DataSync::LocationEFS'
-      DataSyncTask = 'AWS::DataSync::Task'
-      DataSyncLocationNFS = 'AWS::DataSync::LocationNFS'
-      NetworkInsightsAccessScopeAnalysis = 'AWS::EC2::NetworkInsightsAccessScopeAnalysis'
-      EKSFargateProfile = 'AWS::EKS::FargateProfile'
-      GlueJob = 'AWS::Glue::Job'
-      GuardDutyThreatIntelSet = 'AWS::GuardDuty::ThreatIntelSet'
-      GuardDutyIPSet = 'AWS::GuardDuty::IPSet'
-      SageMakerWorkteam = 'AWS::SageMaker::Workteam'
-      SageMakerNotebookInstanceLifecycleConfig = 'AWS::SageMaker::NotebookInstanceLifecycleConfig'
-      ServiceDiscoveryService = 'AWS::ServiceDiscovery::Service'
-      ServiceDiscoveryPublicDnsNamespace = 'AWS::ServiceDiscovery::PublicDnsNamespace'
-      SESContactList = 'AWS::SES::ContactList'
-      SESConfigurationSet = 'AWS::SES::ConfigurationSet'
-      Route53HostedZone = 'AWS::Route53::HostedZone'
-      IoTEventsInput = 'AWS::IoTEvents::Input'
-      IoTEventsDetectorModel = 'AWS::IoTEvents::DetectorModel'
-      IoTEventsAlarmModel = 'AWS::IoTEvents::AlarmModel'
-      ServiceDiscoveryHttpNamespace = 'AWS::ServiceDiscovery::HttpNamespace'
-      EventsEventBus = 'AWS::Events::EventBus'
-      ImageBuilderContainerRecipe = 'AWS::ImageBuilder::ContainerRecipe'
-      ImageBuilderDistributionConfiguration = 'AWS::ImageBuilder::DistributionConfiguration'
-      ImageBuilderInfrastructureConfiguration = 'AWS::ImageBuilder::InfrastructureConfiguration'
-      DataSyncLocationObjectStorage = 'AWS::DataSync::LocationObjectStorage'
-      DataSyncLocationHDFS = 'AWS::DataSync::LocationHDFS'
-      GlueClassifier = 'AWS::Glue::Classifier'
-      Route53RecoveryReadinessCell = 'AWS::Route53RecoveryReadiness::Cell'
-      Route53RecoveryReadinessReadinessCheck = 'AWS::Route53RecoveryReadiness::ReadinessCheck'
-      ECRRegistryPolicy = 'AWS::ECR::RegistryPolicy'
-      BackupReportPlan = 'AWS::Backup::ReportPlan'
-      LightsailCertificate = 'AWS::Lightsail::Certificate'
-      RUMAppMonitor = 'AWS::RUM::AppMonitor'
-      EventsEndpoint = 'AWS::Events::Endpoint'
-      SESReceiptRuleSet = 'AWS::SES::ReceiptRuleSet'
-      EventsArchive = 'AWS::Events::Archive'
-      EventsApiDestination = 'AWS::Events::ApiDestination'
-      LightsailDisk = 'AWS::Lightsail::Disk'
-      FISExperimentTemplate = 'AWS::FIS::ExperimentTemplate'
-      DataSyncLocationFSxWindows = 'AWS::DataSync::LocationFSxWindows'
-      SESReceiptFilter = 'AWS::SES::ReceiptFilter'
-      GuardDutyFilter = 'AWS::GuardDuty::Filter'
-      SESTemplate = 'AWS::SES::Template'
-      AmazonMQBroker = 'AWS::AmazonMQ::Broker'
-      AppConfigEnvironment = 'AWS::AppConfig::Environment'
-      AppConfigConfigurationProfile = 'AWS::AppConfig::ConfigurationProfile'
-      Cloud9EnvironmentEC2 = 'AWS::Cloud9::EnvironmentEC2'
-      EventSchemasRegistry = 'AWS::EventSchemas::Registry'
-      EventSchemasRegistryPolicy = 'AWS::EventSchemas::RegistryPolicy'
-      EventSchemasDiscoverer = 'AWS::EventSchemas::Discoverer'
-      FraudDetectorLabel = 'AWS::FraudDetector::Label'
-      FraudDetectorEntityType = 'AWS::FraudDetector::EntityType'
-      FraudDetectorVariable = 'AWS::FraudDetector::Variable'
-      FraudDetectorOutcome = 'AWS::FraudDetector::Outcome'
-      IoTAuthorizer = 'AWS::IoT::Authorizer'
-      IoTSecurityProfile = 'AWS::IoT::SecurityProfile'
-      IoTRoleAlias = 'AWS::IoT::RoleAlias'
-      IoTDimension = 'AWS::IoT::Dimension'
-      IoTAnalyticsDatastore = 'AWS::IoTAnalytics::Datastore'
-      LightsailBucket = 'AWS::Lightsail::Bucket'
-      LightsailStaticIp = 'AWS::Lightsail::StaticIp'
-      MediaPackagePackagingGroup = 'AWS::MediaPackage::PackagingGroup'
-      Route53RecoveryReadinessRecoveryGroup = 'AWS::Route53RecoveryReadiness::RecoveryGroup'
-      ResilienceHubResiliencyPolicy = 'AWS::ResilienceHub::ResiliencyPolicy'
-      TransferWorkflow = 'AWS::Transfer::Workflow'
-      EKSIdentityProviderConfig = 'AWS::EKS::IdentityProviderConfig'
-      EKSAddon = 'AWS::EKS::Addon'
-      GlueMLTransform = 'AWS::Glue::MLTransform'
-      IoTPolicy = 'AWS::IoT::Policy'
-      IoTMitigationAction = 'AWS::IoT::MitigationAction'
-      IoTTwinMakerWorkspace = 'AWS::IoTTwinMaker::Workspace'
-      IoTTwinMakerEntity = 'AWS::IoTTwinMaker::Entity'
-      IoTAnalyticsDataset = 'AWS::IoTAnalytics::Dataset'
-      IoTAnalyticsPipeline = 'AWS::IoTAnalytics::Pipeline'
-      IoTAnalyticsChannel = 'AWS::IoTAnalytics::Channel'
-      IoTSiteWiseDashboard = 'AWS::IoTSiteWise::Dashboard'
-      IoTSiteWiseProject = 'AWS::IoTSiteWise::Project'
-      IoTSiteWisePortal = 'AWS::IoTSiteWise::Portal'
-      IoTSiteWiseAssetModel = 'AWS::IoTSiteWise::AssetModel'
-      IVSChannel = 'AWS::IVS::Channel'
-      IVSRecordingConfiguration = 'AWS::IVS::RecordingConfiguration'
-      IVSPlaybackKeyPair = 'AWS::IVS::PlaybackKeyPair'
-      KinesisAnalyticsV2Application = 'AWS::KinesisAnalyticsV2::Application'
-      RDSGlobalCluster = 'AWS::RDS::GlobalCluster'
-      S3MultiRegionAccessPoint = 'AWS::S3::MultiRegionAccessPoint'
-      DeviceFarmTestGridProject = 'AWS::DeviceFarm::TestGridProject'
-      BudgetsBudgetsAction = 'AWS::Budgets::BudgetsAction'
-      LexBot = 'AWS::Lex::Bot'
-      CodeGuruReviewerRepositoryAssociation = 'AWS::CodeGuruReviewer::RepositoryAssociation'
-      IoTCustomMetric = 'AWS::IoT::CustomMetric'
-      Route53ResolverFirewallDomainList = 'AWS::Route53Resolver::FirewallDomainList'
-      RoboMakerRobotApplicationVersion = 'AWS::RoboMaker::RobotApplicationVersion'
-      EC2TrafficMirrorSession = 'AWS::EC2::TrafficMirrorSession'
-      IoTSiteWiseGateway = 'AWS::IoTSiteWise::Gateway'
-      LexBotAlias = 'AWS::Lex::BotAlias'
-      LookoutMetricsAlert = 'AWS::LookoutMetrics::Alert'
-      IoTAccountAuditConfiguration = 'AWS::IoT::AccountAuditConfiguration'
-      EC2TrafficMirrorTarget = 'AWS::EC2::TrafficMirrorTarget'
-      S3StorageLens = 'AWS::S3::StorageLens'
-      IoTScheduledAudit = 'AWS::IoT::ScheduledAudit'
-      EventsConnection = 'AWS::Events::Connection'
-      EventSchemasSchema = 'AWS::EventSchemas::Schema'
-      MediaPackagePackagingConfiguration = 'AWS::MediaPackage::PackagingConfiguration'
-      KinesisVideoSignalingChannel = 'AWS::KinesisVideo::SignalingChannel'
-      AppStreamDirectoryConfig = 'AWS::AppStream::DirectoryConfig'
-      LookoutVisionProject = 'AWS::LookoutVision::Project'
-      Route53RecoveryControlCluster = 'AWS::Route53RecoveryControl::Cluster'
-      Route53RecoveryControlSafetyRule = 'AWS::Route53RecoveryControl::SafetyRule'
-      Route53RecoveryControlControlPanel = 'AWS::Route53RecoveryControl::ControlPanel'
-      Route53RecoveryControlRoutingControl = 'AWS::Route53RecoveryControl::RoutingControl'
-      Route53RecoveryReadinessResourceSet = 'AWS::Route53RecoveryReadiness::ResourceSet'
-      RoboMakerSimulationApplication = 'AWS::RoboMaker::SimulationApplication'
-      RoboMakerRobotApplication = 'AWS::RoboMaker::RobotApplication'
-      HealthLakeFHIRDatastore = 'AWS::HealthLake::FHIRDatastore'
-      PinpointSegment = 'AWS::Pinpoint::Segment'
-      PinpointApplicationSettings = 'AWS::Pinpoint::ApplicationSettings'
-      EventsRule = 'AWS::Events::Rule'
-      EC2DHCPOptions = 'AWS::EC2::DHCPOptions'
-      EC2NetworkInsightsPath = 'AWS::EC2::NetworkInsightsPath'
-      EC2TrafficMirrorFilter = 'AWS::EC2::TrafficMirrorFilter'
-      EC2IPAM = 'AWS::EC2::IPAM'
-      IoTTwinMakerScene = 'AWS::IoTTwinMaker::Scene'
-      NetworkManagerTransitGatewayRegistration = 'AWS::NetworkManager::TransitGatewayRegistration'
-      CustomerProfilesDomain = 'AWS::CustomerProfiles::Domain'
-      AutoScalingWarmPool = 'AWS::AutoScaling::WarmPool'
-      ConnectPhoneNumber = 'AWS::Connect::PhoneNumber'
-      AppConfigDeploymentStrategy = 'AWS::AppConfig::DeploymentStrategy'
-      AppFlowFlow = 'AWS::AppFlow::Flow'
-      AuditManagerAssessment = 'AWS::AuditManager::Assessment'
-      CloudWatchMetricStream = 'AWS::CloudWatch::MetricStream'
-      DeviceFarmInstanceProfile = 'AWS::DeviceFarm::InstanceProfile'
-      DeviceFarmProject = 'AWS::DeviceFarm::Project'
-      EC2EC2Fleet = 'AWS::EC2::EC2Fleet'
-      EC2SubnetRouteTableAssociation = 'AWS::EC2::SubnetRouteTableAssociation'
-      ECRPullThroughCacheRule = 'AWS::ECR::PullThroughCacheRule'
-      GroundStationConfig = 'AWS::GroundStation::Config'
-      ImageBuilderImagePipeline = 'AWS::ImageBuilder::ImagePipeline'
-      IoTFleetMetric = 'AWS::IoT::FleetMetric'
-      IoTWirelessServiceProfile = 'AWS::IoTWireless::ServiceProfile'
-      NetworkManagerDevice = 'AWS::NetworkManager::Device'
-      NetworkManagerGlobalNetwork = 'AWS::NetworkManager::GlobalNetwork'
-      NetworkManagerLink = 'AWS::NetworkManager::Link'
-      NetworkManagerSite = 'AWS::NetworkManager::Site'
-      PanoramaPackage = 'AWS::Panorama::Package'
-      PinpointApp = 'AWS::Pinpoint::App'
-      RedshiftScheduledAction = 'AWS::Redshift::ScheduledAction'
-      Route53ResolverFirewallRuleGroupAssociation = 'AWS::Route53Resolver::FirewallRuleGroupAssociation'
-      SageMakerAppImageConfig = 'AWS::SageMaker::AppImageConfig'
-      SageMakerImage = 'AWS::SageMaker::Image'
-      ECSTaskSet = 'AWS::ECS::TaskSet'
-      CassandraKeyspace = 'AWS::Cassandra::Keyspace'
-      SignerSigningProfile = 'AWS::Signer::SigningProfile'
-      AmplifyApp = 'AWS::Amplify::App'
-      AppMeshVirtualNode = 'AWS::AppMesh::VirtualNode'
-      AppMeshVirtualService = 'AWS::AppMesh::VirtualService'
-      AppRunnerVpcConnector = 'AWS::AppRunner::VpcConnector'
-      AppStreamApplication = 'AWS::AppStream::Application'
-      CodeArtifactRepository = 'AWS::CodeArtifact::Repository'
-      EC2PrefixList = 'AWS::EC2::PrefixList'
-      EC2SpotFleet = 'AWS::EC2::SpotFleet'
-      EvidentlyProject = 'AWS::Evidently::Project'
-      ForecastDataset = 'AWS::Forecast::Dataset'
-      IAMSAMLProvider = 'AWS::IAM::SAMLProvider'
-      IAMServerCertificate = 'AWS::IAM::ServerCertificate'
-      PinpointCampaign = 'AWS::Pinpoint::Campaign'
-      PinpointInAppTemplate = 'AWS::Pinpoint::InAppTemplate'
-      SageMakerDomain = 'AWS::SageMaker::Domain'
-      TransferAgreement = 'AWS::Transfer::Agreement'
-      TransferConnector = 'AWS::Transfer::Connector'
-      KinesisFirehoseDeliveryStream = 'AWS::KinesisFirehose::DeliveryStream'
-      AmplifyBranch = 'AWS::Amplify::Branch'
-      AppIntegrationsEventIntegration = 'AWS::AppIntegrations::EventIntegration'
-      AppMeshRoute = 'AWS::AppMesh::Route'
-      AthenaPreparedStatement = 'AWS::Athena::PreparedStatement'
-      EC2IPAMScope = 'AWS::EC2::IPAMScope'
-      EvidentlyLaunch = 'AWS::Evidently::Launch'
-      ForecastDatasetGroup = 'AWS::Forecast::DatasetGroup'
-      GreengrassV2ComponentVersion = 'AWS::GreengrassV2::ComponentVersion'
-      GroundStationMissionProfile = 'AWS::GroundStation::MissionProfile'
-      MediaConnectFlowEntitlement = 'AWS::MediaConnect::FlowEntitlement'
-      MediaConnectFlowVpcInterface = 'AWS::MediaConnect::FlowVpcInterface'
-      MediaTailorPlaybackConfiguration = 'AWS::MediaTailor::PlaybackConfiguration'
-      MSKConfiguration = 'AWS::MSK::Configuration'
-      PersonalizeDataset = 'AWS::Personalize::Dataset'
-      PersonalizeSchema = 'AWS::Personalize::Schema'
-      PersonalizeSolution = 'AWS::Personalize::Solution'
-      PinpointEmailTemplate = 'AWS::Pinpoint::EmailTemplate'
-      PinpointEventStream = 'AWS::Pinpoint::EventStream'
-      ResilienceHubApp = 'AWS::ResilienceHub::App'
-      ACMPCACertificateAuthority = 'AWS::ACMPCA::CertificateAuthority'
-      AppConfigHostedConfigurationVersion = 'AWS::AppConfig::HostedConfigurationVersion'
-      AppMeshVirtualGateway = 'AWS::AppMesh::VirtualGateway'
-      AppMeshVirtualRouter = 'AWS::AppMesh::VirtualRouter'
-      AppRunnerService = 'AWS::AppRunner::Service'
-      CustomerProfilesObjectType = 'AWS::CustomerProfiles::ObjectType'
-      DMSEndpoint = 'AWS::DMS::Endpoint'
-      EC2CapacityReservation = 'AWS::EC2::CapacityReservation'
-      EC2ClientVpnEndpoint = 'AWS::EC2::ClientVpnEndpoint'
-      KendraIndex = 'AWS::Kendra::Index'
-      KinesisVideoStream = 'AWS::KinesisVideo::Stream'
-      LogsDestination = 'AWS::Logs::Destination'
-      PinpointEmailChannel = 'AWS::Pinpoint::EmailChannel'
-      S3AccessPoint = 'AWS::S3::AccessPoint'
-      NetworkManagerCustomerGatewayAssociation = 'AWS::NetworkManager::CustomerGatewayAssociation'
-      NetworkManagerLinkAssociation = 'AWS::NetworkManager::LinkAssociation'
-      IoTWirelessMulticastGroup = 'AWS::IoTWireless::MulticastGroup'
-      PersonalizeDatasetGroup = 'AWS::Personalize::DatasetGroup'
-      IoTTwinMakerComponentType = 'AWS::IoTTwinMaker::ComponentType'
-      CodeBuildReportGroup = 'AWS::CodeBuild::ReportGroup'
-      SageMakerFeatureGroup = 'AWS::SageMaker::FeatureGroup'
-      MSKBatchScramSecret = 'AWS::MSK::BatchScramSecret'
-      AppStreamStack = 'AWS::AppStream::Stack'
-      IoTJobTemplate = 'AWS::IoT::JobTemplate'
-      IoTWirelessFuotaTask = 'AWS::IoTWireless::FuotaTask'
-      IoTProvisioningTemplate = 'AWS::IoT::ProvisioningTemplate'
-      InspectorV2Filter = 'AWS::InspectorV2::Filter'
-      Route53ResolverResolverQueryLoggingConfigAssociation = 'AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation'
-      ServiceDiscoveryInstance = 'AWS::ServiceDiscovery::Instance'
-      TransferCertificate = 'AWS::Transfer::Certificate'
-      MediaConnectFlowSource = 'AWS::MediaConnect::FlowSource'
-      APSRuleGroupsNamespace = 'AWS::APS::RuleGroupsNamespace'
-      CodeGuruProfilerProfilingGroup = 'AWS::CodeGuruProfiler::ProfilingGroup'
-      Route53ResolverResolverQueryLoggingConfig = 'AWS::Route53Resolver::ResolverQueryLoggingConfig'
-      BatchSchedulingPolicy = 'AWS::Batch::SchedulingPolicy'
-      ACMPCACertificateAuthorityActivation = 'AWS::ACMPCA::CertificateAuthorityActivation'
-      AppMeshGatewayRoute = 'AWS::AppMesh::GatewayRoute'
-      AppMeshMesh = 'AWS::AppMesh::Mesh'
-      ConnectInstance = 'AWS::Connect::Instance'
-      ConnectQuickConnect = 'AWS::Connect::QuickConnect'
-      EC2CarrierGateway = 'AWS::EC2::CarrierGateway'
-      EC2IPAMPool = 'AWS::EC2::IPAMPool'
-      EC2TransitGatewayConnect = 'AWS::EC2::TransitGatewayConnect'
-      EC2TransitGatewayMulticastDomain = 'AWS::EC2::TransitGatewayMulticastDomain'
-      ECSCapacityProvider = 'AWS::ECS::CapacityProvider'
-      IAMInstanceProfile = 'AWS::IAM::InstanceProfile'
-      IoTCACertificate = 'AWS::IoT::CACertificate'
-      IoTTwinMakerSyncJob = 'AWS::IoTTwinMaker::SyncJob'
-      KafkaConnectConnector = 'AWS::KafkaConnect::Connector'
-      LambdaCodeSigningConfig = 'AWS::Lambda::CodeSigningConfig'
-      NetworkManagerConnectPeer = 'AWS::NetworkManager::ConnectPeer'
-      ResourceExplorer2Index = 'AWS::ResourceExplorer2::Index'
-      AppStreamFleet = 'AWS::AppStream::Fleet'
-      CognitoUserPool = 'AWS::Cognito::UserPool'
-      CognitoUserPoolClient = 'AWS::Cognito::UserPoolClient'
-      CognitoUserPoolGroup = 'AWS::Cognito::UserPoolGroup'
-      EC2NetworkInsightsAccessScope = 'AWS::EC2::NetworkInsightsAccessScope'
-      EC2NetworkInsightsAnalysis = 'AWS::EC2::NetworkInsightsAnalysis'
-      GrafanaWorkspace = 'AWS::Grafana::Workspace'
-      GroundStationDataflowEndpointGroup = 'AWS::GroundStation::DataflowEndpointGroup'
-      ImageBuilderImageRecipe = 'AWS::ImageBuilder::ImageRecipe'
-      KMSAlias = 'AWS::KMS::Alias'
-      M2Environment = 'AWS::M2::Environment'
-      QuickSightDataSource = 'AWS::QuickSight::DataSource'
-      QuickSightTemplate = 'AWS::QuickSight::Template'
-      QuickSightTheme = 'AWS::QuickSight::Theme'
-      RDSOptionGroup = 'AWS::RDS::OptionGroup'
-      RedshiftEndpointAccess = 'AWS::Redshift::EndpointAccess'
-      Route53ResolverFirewallRuleGroup = 'AWS::Route53Resolver::FirewallRuleGroup'
-      SSMDocument = 'AWS::SSM::Document'
-      AppConfigExtensionAssociation = 'AWS::AppConfig::ExtensionAssociation'
-      AppIntegrationsApplication = 'AWS::AppIntegrations::Application'
-      AppSyncApiCache = 'AWS::AppSync::ApiCache'
-      BedrockGuardrail = 'AWS::Bedrock::Guardrail'
-      BedrockKnowledgeBase = 'AWS::Bedrock::KnowledgeBase'
-      CognitoIdentityPool = 'AWS::Cognito::IdentityPool'
-      ConnectRule = 'AWS::Connect::Rule'
-      ConnectUser = 'AWS::Connect::User'
-      EC2ClientVpnTargetNetworkAssociation = 'AWS::EC2::ClientVpnTargetNetworkAssociation'
-      EC2EIPAssociation = 'AWS::EC2::EIPAssociation'
-      EC2IPAMResourceDiscovery = 'AWS::EC2::IPAMResourceDiscovery'
-      EC2IPAMResourceDiscoveryAssociation = 'AWS::EC2::IPAMResourceDiscoveryAssociation'
-      EC2InstanceConnectEndpoint = 'AWS::EC2::InstanceConnectEndpoint'
-      EC2SnapshotBlockPublicAccess = 'AWS::EC2::SnapshotBlockPublicAccess'
-      EC2VPCBlockPublicAccessExclusion = 'AWS::EC2::VPCBlockPublicAccessExclusion'
-      EC2VPCBlockPublicAccessOptions = 'AWS::EC2::VPCBlockPublicAccessOptions'
-      EC2VPCEndpointConnectionNotification = 'AWS::EC2::VPCEndpointConnectionNotification'
-      EC2VPNConnectionRoute = 'AWS::EC2::VPNConnectionRoute'
-      EvidentlySegment = 'AWS::Evidently::Segment'
-      IAMOIDCProvider = 'AWS::IAM::OIDCProvider'
-      InspectorV2Activation = 'AWS::InspectorV2::Activation'
-      MSKClusterPolicy = 'AWS::MSK::ClusterPolicy'
-      MSKVpcConnection = 'AWS::MSK::VpcConnection'
-      MediaConnectGateway = 'AWS::MediaConnect::Gateway'
-      MemoryDBSubnetGroup = 'AWS::MemoryDB::SubnetGroup'
-      OpenSearchServerlessCollection = 'AWS::OpenSearchServerless::Collection'
-      OpenSearchServerlessVpcEndpoint = 'AWS::OpenSearchServerless::VpcEndpoint'
-      RedshiftEndpointAuthorization = 'AWS::Redshift::EndpointAuthorization'
-      Route53ProfilesProfile = 'AWS::Route53Profiles::Profile'
-      S3StorageLensGroup = 'AWS::S3::StorageLensGroup'
-      S3ExpressBucketPolicy = 'AWS::S3Express::BucketPolicy'
-      S3ExpressDirectoryBucket = 'AWS::S3Express::DirectoryBucket'
-      SageMakerInferenceExperiment = 'AWS::SageMaker::InferenceExperiment'
-      SecurityHubStandard = 'AWS::SecurityHub::Standard'
-      TransferProfile = 'AWS::Transfer::Profile'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dynamic value of the resource.</p>
@@ -7591,11 +6925,7 @@ module Aws::ConfigService
     class ResourceValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceValueType
-      RESOURCE_ID = 'RESOURCE_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in Config.</p>
@@ -7612,7 +6942,7 @@ module Aws::ConfigService
       :name,
       :retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines which resources trigger an evaluation for an Config
@@ -7650,7 +6980,7 @@ module Aws::ConfigService
       :tag_value,
       :compliance_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute expression
@@ -7675,7 +7005,7 @@ module Aws::ConfigService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -7692,7 +7022,7 @@ module Aws::ConfigService
       :query_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute expression
@@ -7709,7 +7039,7 @@ module Aws::ConfigService
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -7726,16 +7056,7 @@ module Aws::ConfigService
       :query_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortBy
-      SCORE = 'SCORE'
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the CustomPolicyDetails, the rule owner (<code>Amazon Web Services</code> for managed rules, <code>CUSTOM_POLICY</code> for Custom Policy rules, and <code>CUSTOM_LAMBDA</code> for Custom Lambda rules), the rule
@@ -7768,7 +7089,7 @@ module Aws::ConfigService
       :source_details,
       :custom_policy_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the source and the message types that trigger Config to evaluate your Amazon Web Services resources against a rule. It also
@@ -7841,7 +7162,7 @@ module Aws::ConfigService
       :message_type,
       :maximum_execution_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services Systems Manager (SSM) specific remediation controls.</p>
@@ -7857,7 +7178,7 @@ module Aws::ConfigService
       :concurrent_execution_rate_percentage,
       :error_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -7868,13 +7189,13 @@ module Aws::ConfigService
     class StartConfigRulesEvaluationRequest < Struct.new(
       :config_rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output when you start the evaluation for the specified Config rule.</p>
     class StartConfigRulesEvaluationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>StartConfigurationRecorder</a>
@@ -7885,7 +7206,7 @@ module Aws::ConfigService
     class StartConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_rule_name
@@ -7898,7 +7219,7 @@ module Aws::ConfigService
       :config_rule_name,
       :resource_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failure_message
@@ -7911,7 +7232,7 @@ module Aws::ConfigService
       :failure_message,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_details
@@ -7948,7 +7269,7 @@ module Aws::ConfigService
       :evaluation_timeout,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_evaluation_id
@@ -7958,7 +7279,7 @@ module Aws::ConfigService
     class StartResourceEvaluationResponse < Struct.new(
       :resource_evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The static value of the resource.</p>
@@ -7968,7 +7289,7 @@ module Aws::ConfigService
     class StaticValue < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status filter object to filter results based on specific member account ID or status type for an organization Config rule. </p>
@@ -8025,7 +7346,7 @@ module Aws::ConfigService
       :account_id,
       :member_account_rule_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>StopConfigurationRecorder</a> operation.</p>
@@ -8035,7 +7356,7 @@ module Aws::ConfigService
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of a stored query.</p>
@@ -8068,7 +7389,7 @@ module Aws::ConfigService
       :description,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details of a specific query. </p>
@@ -8090,7 +7411,7 @@ module Aws::ConfigService
       :query_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags for the resource. The metadata that you apply to a resource to help you categorize and organize them. 
@@ -8106,7 +7427,7 @@ module Aws::ConfigService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8161,7 +7482,7 @@ module Aws::ConfigService
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This API allows you to create a conformance pack template with an Amazon Web Services Systems Manager document (SSM document). 
@@ -8181,7 +7502,7 @@ module Aws::ConfigService
       :document_name,
       :document_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters evaluation results based on start and end times.</p>
@@ -8195,7 +7516,7 @@ module Aws::ConfigService
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit of the number of tags you can use. 
@@ -8208,7 +7529,7 @@ module Aws::ConfigService
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not valid.</p>
@@ -8226,7 +7547,7 @@ module Aws::ConfigService
     class UnmodifiableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8281,7 +7602,7 @@ module Aws::ConfigService
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not valid. You will see this exception if there are missing required fields or if the input value fails the validation.</p>
@@ -8324,7 +7645,7 @@ module Aws::ConfigService
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -6,13 +6,6 @@ module Aws::SsmSap
   # This module contains the types returned by client operations.
   module Types
 
-    module AllocationType
-      VPC_SUBNET = 'VPC_SUBNET'
-      ELASTIC_IP = 'ELASTIC_IP'
-      OVERLAY = 'OVERLAY'
-      UNKNOWN = 'UNKNOWN'
-    end
-
     # <p>An SAP application registered with AWS Systems Manager for SAP.</p>
     # @!attribute id
     #   <p>The ID of the application.</p>
@@ -57,7 +50,7 @@ module Aws::SsmSap
       :status_message,
       :associated_application_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credentials of your SAP application.</p>
@@ -76,26 +69,7 @@ module Aws::SsmSap
       :credential_type,
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationDiscoveryStatus
-      SUCCESS = 'SUCCESS'
-      REGISTRATION_FAILED = 'REGISTRATION_FAILED'
-      REFRESH_FAILED = 'REFRESH_FAILED'
-      REGISTERING = 'REGISTERING'
-      DELETING = 'DELETING'
-    end
-
-    module ApplicationStatus
-      ACTIVATED = 'ACTIVATED'
-      STARTING = 'STARTING'
-      STOPPED = 'STOPPED'
-      STOPPING = 'STOPPING'
-      FAILED = 'FAILED'
-      REGISTERING = 'REGISTERING'
-      DELETING = 'DELETING'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the SAP application registered with AWS Systems Manager for SAP.
@@ -122,12 +96,7 @@ module Aws::SsmSap
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationType
-      HANA = 'HANA'
-      SAP_ABAP = 'SAP_ABAP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the associated host.</p>
@@ -149,7 +118,7 @@ module Aws::SsmSap
       :ip_addresses,
       :os_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP
@@ -164,19 +133,7 @@ module Aws::SsmSap
       :backint_mode,
       :ensure_no_backup_in_process,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackintMode
-      AWSBackup = 'AWSBackup'
-    end
-
-    module ClusterStatus
-      ONLINE = 'ONLINE'
-      STANDBY = 'STANDBY'
-      MAINTENANCE = 'MAINTENANCE'
-      OFFLINE = 'OFFLINE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SAP component of your application.</p>
@@ -298,7 +255,7 @@ module Aws::SsmSap
       :last_updated,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is information about the component of 
@@ -320,17 +277,7 @@ module Aws::SsmSap
       :sid,
       :ec2_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentStatus
-      ACTIVATED = 'ACTIVATED'
-      STARTING = 'STARTING'
-      STOPPED = 'STOPPED'
-      STOPPING = 'STOPPING'
-      RUNNING = 'RUNNING'
-      RUNNING_WITH_ERROR = 'RUNNING_WITH_ERROR'
-      UNDEFINED = 'UNDEFINED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the component.</p>
@@ -356,18 +303,7 @@ module Aws::SsmSap
       :tags,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentType
-      HANA = 'HANA'
-      HANA_NODE = 'HANA_NODE'
-      ABAP = 'ABAP'
-      ASCS = 'ASCS'
-      DIALOG = 'DIALOG'
-      WEBDISP = 'WEBDISP'
-      WD = 'WD'
-      ERS = 'ERS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict has occurred.</p>
@@ -376,15 +312,7 @@ module Aws::SsmSap
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectedEntityType
-      DBMS = 'DBMS'
-    end
-
-    module CredentialType
-      ADMIN = 'ADMIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SAP HANA database of the application registered with AWS Systems Manager for
@@ -440,7 +368,7 @@ module Aws::SsmSap
       :last_updated,
       :connected_component_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection specifications for the database.</p>
@@ -458,21 +386,7 @@ module Aws::SsmSap
       :database_arn,
       :connection_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseConnectionMethod
-      DIRECT = 'DIRECT'
-      OVERLAY = 'OVERLAY'
-    end
-
-    module DatabaseStatus
-      RUNNING = 'RUNNING'
-      STARTING = 'STARTING'
-      STOPPED = 'STOPPED'
-      WARNING = 'WARNING'
-      UNKNOWN = 'UNKNOWN'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the database.</p>
@@ -502,12 +416,7 @@ module Aws::SsmSap
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseType
-      SYSTEM = 'SYSTEM'
-      TENANT = 'TENANT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -524,7 +433,7 @@ module Aws::SsmSap
       :source_resource_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -533,7 +442,7 @@ module Aws::SsmSap
     class DeleteResourcePermissionOperationOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -542,12 +451,12 @@ module Aws::SsmSap
     class DeregisterApplicationOperationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterApplicationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific result obtained by specifying the name, value, and operator. </p>
@@ -567,13 +476,7 @@ module Aws::SsmSap
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterOperator
-      EQUALS = 'Equals'
-      GREATER_THAN_OR_EQUALS = 'GreaterThanOrEquals'
-      LESS_THAN_OR_EQUALS = 'LessThanOrEquals'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -590,7 +493,7 @@ module Aws::SsmSap
       :application_arn,
       :app_registry_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -604,7 +507,7 @@ module Aws::SsmSap
       :application,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -617,7 +520,7 @@ module Aws::SsmSap
       :application_id,
       :component_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -630,7 +533,7 @@ module Aws::SsmSap
       :component,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -651,7 +554,7 @@ module Aws::SsmSap
       :database_id,
       :database_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -665,7 +568,7 @@ module Aws::SsmSap
       :database,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -674,7 +577,7 @@ module Aws::SsmSap
     class GetOperationOperationInput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -683,7 +586,7 @@ module Aws::SsmSap
     class GetOperationOperationOutput < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -696,7 +599,7 @@ module Aws::SsmSap
       :action_type,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -705,7 +608,7 @@ module Aws::SsmSap
     class GetResourcePermissionOperationOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the Dedicated Host. </p>
@@ -735,14 +638,7 @@ module Aws::SsmSap
       :host_role,
       :os_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostRole
-      LEADER = 'LEADER'
-      WORKER = 'WORKER'
-      STANDBY = 'STANDBY'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred.</p>
@@ -751,7 +647,7 @@ module Aws::SsmSap
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information of the IP address.</p>
@@ -769,7 +665,7 @@ module Aws::SsmSap
       :primary,
       :allocation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -787,7 +683,7 @@ module Aws::SsmSap
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -801,7 +697,7 @@ module Aws::SsmSap
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -821,7 +717,7 @@ module Aws::SsmSap
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute components
@@ -835,7 +731,7 @@ module Aws::SsmSap
       :components,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -858,7 +754,7 @@ module Aws::SsmSap
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute databases
@@ -872,7 +768,7 @@ module Aws::SsmSap
       :databases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -900,7 +796,7 @@ module Aws::SsmSap
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_events
@@ -914,7 +810,7 @@ module Aws::SsmSap
       :operation_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -937,7 +833,7 @@ module Aws::SsmSap
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -951,7 +847,7 @@ module Aws::SsmSap
       :operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -960,7 +856,7 @@ module Aws::SsmSap
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -969,7 +865,7 @@ module Aws::SsmSap
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operations performed by AWS Systems Manager for SAP.</p>
@@ -1019,7 +915,7 @@ module Aws::SsmSap
       :end_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation event returns details for an operation, including key milestones which can
@@ -1068,31 +964,7 @@ module Aws::SsmSap
       :status_message,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationEventStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    module OperationMode
-      PRIMARY = 'PRIMARY'
-      LOGREPLAY = 'LOGREPLAY'
-      DELTA_DATASHIPPING = 'DELTA_DATASHIPPING'
-      LOGREPLAY_READACCESS = 'LOGREPLAY_READACCESS'
-      NONE = 'NONE'
-    end
-
-    module OperationStatus
-      INPROGRESS = 'INPROGRESS'
-      SUCCESS = 'SUCCESS'
-      ERROR = 'ERROR'
-    end
-
-    module PermissionActionType
-      RESTORE = 'RESTORE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -1109,7 +981,7 @@ module Aws::SsmSap
       :source_resource_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1118,7 +990,7 @@ module Aws::SsmSap
     class PutResourcePermissionOperationOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1163,7 +1035,7 @@ module Aws::SsmSap
       :database_arn,
       :components_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -1176,15 +1048,7 @@ module Aws::SsmSap
       :application,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationMode
-      PRIMARY = 'PRIMARY'
-      NONE = 'NONE'
-      SYNC = 'SYNC'
-      SYNCMEM = 'SYNCMEM'
-      ASYNC = 'ASYNC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the SAP HANA system replication for the instance.</p>
@@ -1210,7 +1074,7 @@ module Aws::SsmSap
       :cluster_status,
       :enqueue_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource contains a <code>ResourceArn</code> and the
@@ -1229,7 +1093,7 @@ module Aws::SsmSap
       :resource_arn,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is not available.</p>
@@ -1238,7 +1102,7 @@ module Aws::SsmSap
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1247,7 +1111,7 @@ module Aws::SsmSap
     class StartApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -1256,7 +1120,7 @@ module Aws::SsmSap
     class StartApplicationOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1265,7 +1129,7 @@ module Aws::SsmSap
     class StartApplicationRefreshInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -1274,7 +1138,7 @@ module Aws::SsmSap
     class StartApplicationRefreshOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1294,7 +1158,7 @@ module Aws::SsmSap
       :stop_connected_entity,
       :include_ec2_instance_shutdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -1303,7 +1167,7 @@ module Aws::SsmSap
     class StopApplicationOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1316,12 +1180,12 @@ module Aws::SsmSap
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not authorized.</p>
@@ -1330,7 +1194,7 @@ module Aws::SsmSap
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1344,12 +1208,12 @@ module Aws::SsmSap
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1375,7 +1239,7 @@ module Aws::SsmSap
       :backint,
       :database_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1388,7 +1252,7 @@ module Aws::SsmSap
       :message,
       :operation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service. </p>
@@ -1397,7 +1261,7 @@ module Aws::SsmSap
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

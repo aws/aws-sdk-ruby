@@ -17,7 +17,7 @@ module Aws::SSOAdmin
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value used for mapping a specified attribute to an identity source. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html">Attribute mappings</a> in the <i>IAM Identity Center User Guide</i>.</p>
@@ -27,7 +27,7 @@ module Aws::SSOAdmin
     class AccessControlAttributeValue < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -36,7 +36,7 @@ module Aws::SSOAdmin
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in IAM Identity Center.</p> </note>
@@ -58,7 +58,7 @@ module Aws::SSOAdmin
       :principal_type,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an assignment of an Amazon Web Services account to a principal and the permissions that principal has in the account.</p>
@@ -80,7 +80,7 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the creation or deletion operation of an assignment that a principal needs to access an account.</p>
@@ -122,7 +122,7 @@ module Aws::SSOAdmin
       :principal_id,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the <a>AccountAssignment</a> creation request.</p>
@@ -140,7 +140,7 @@ module Aws::SSOAdmin
       :request_id,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an application that uses IAM Identity Center for access management.</p>
@@ -182,7 +182,7 @@ module Aws::SSOAdmin
       :description,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an assignment of a principal to an application.</p>
@@ -200,7 +200,7 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an application to which a principal is assigned.</p>
@@ -218,7 +218,7 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.</p>
@@ -240,17 +240,7 @@ module Aws::SSOAdmin
       :display_data,
       :resource_server_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module ApplicationVisibility
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -267,12 +257,12 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :customer_managed_policy_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -289,12 +279,12 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :managed_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachManagedPolicyToPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that stores a list of managed policy ARNs that describe the associated Amazon Web Services managed policy.</p>
@@ -308,7 +298,7 @@ module Aws::SSOAdmin
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an authentication method that can be used by an application.</p>
@@ -319,7 +309,7 @@ module Aws::SSOAdmin
       :iam,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Iam < AuthenticationMethod; end
       class Unknown < AuthenticationMethod; end
@@ -336,11 +326,7 @@ module Aws::SSOAdmin
       :authentication_method_type,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationMethodType
-      IAM = 'IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Authorization Code Grant.</p>
@@ -350,7 +336,7 @@ module Aws::SSOAdmin
     class AuthorizationCodeGrant < Struct.new(
       :redirect_uris,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a trusted token issuer and associates it with a set of authorized audiences.</p>
@@ -364,7 +350,7 @@ module Aws::SSOAdmin
       :trusted_token_issuer_arn,
       :authorized_audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a conflict with a previous successful write is detected. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
@@ -373,7 +359,7 @@ module Aws::SSOAdmin
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -402,7 +388,7 @@ module Aws::SSOAdmin
       :principal_type,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignment_creation_status
@@ -411,7 +397,7 @@ module Aws::SSOAdmin
     class CreateAccountAssignmentResponse < Struct.new(
       :account_assignment_creation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -428,12 +414,12 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateApplicationAssignmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -470,7 +456,7 @@ module Aws::SSOAdmin
       :status,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -479,7 +465,7 @@ module Aws::SSOAdmin
     class CreateApplicationResponse < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -492,12 +478,12 @@ module Aws::SSOAdmin
       :instance_arn,
       :instance_access_control_attribute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -514,7 +500,7 @@ module Aws::SSOAdmin
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -523,7 +509,7 @@ module Aws::SSOAdmin
     class CreateInstanceResponse < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -552,7 +538,7 @@ module Aws::SSOAdmin
       :relay_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_set
@@ -561,7 +547,7 @@ module Aws::SSOAdmin
     class CreatePermissionSetResponse < Struct.new(
       :permission_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -590,7 +576,7 @@ module Aws::SSOAdmin
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -599,7 +585,7 @@ module Aws::SSOAdmin
     class CreateTrustedTokenIssuerResponse < Struct.new(
       :trusted_token_issuer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>
@@ -613,7 +599,7 @@ module Aws::SSOAdmin
       :name,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -642,7 +628,7 @@ module Aws::SSOAdmin
       :principal_type,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignment_deletion_status
@@ -651,7 +637,7 @@ module Aws::SSOAdmin
     class DeleteAccountAssignmentResponse < Struct.new(
       :account_assignment_deletion_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -664,7 +650,7 @@ module Aws::SSOAdmin
       :application_arn,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -681,12 +667,12 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationAssignmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -699,7 +685,7 @@ module Aws::SSOAdmin
       :application_arn,
       :authentication_method_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -712,7 +698,7 @@ module Aws::SSOAdmin
       :application_arn,
       :grant_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -721,12 +707,12 @@ module Aws::SSOAdmin
     class DeleteApplicationRequest < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -739,12 +725,12 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInlinePolicyFromPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -753,12 +739,12 @@ module Aws::SSOAdmin
     class DeleteInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceAccessControlAttributeConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -767,12 +753,12 @@ module Aws::SSOAdmin
     class DeleteInstanceRequest < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -785,12 +771,12 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -803,12 +789,12 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionsBoundaryFromPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -817,12 +803,12 @@ module Aws::SSOAdmin
     class DeleteTrustedTokenIssuerRequest < Struct.new(
       :trusted_token_issuer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustedTokenIssuerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -835,7 +821,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :account_assignment_creation_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignment_creation_status
@@ -844,7 +830,7 @@ module Aws::SSOAdmin
     class DescribeAccountAssignmentCreationStatusResponse < Struct.new(
       :account_assignment_creation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -857,7 +843,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :account_assignment_deletion_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignment_deletion_status
@@ -866,7 +852,7 @@ module Aws::SSOAdmin
     class DescribeAccountAssignmentDeletionStatusResponse < Struct.new(
       :account_assignment_deletion_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -883,7 +869,7 @@ module Aws::SSOAdmin
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal_type
@@ -900,7 +886,7 @@ module Aws::SSOAdmin
       :principal_id,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_provider_arn
@@ -909,7 +895,7 @@ module Aws::SSOAdmin
     class DescribeApplicationProviderRequest < Struct.new(
       :application_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_provider_arn
@@ -930,7 +916,7 @@ module Aws::SSOAdmin
       :display_data,
       :resource_server_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -939,7 +925,7 @@ module Aws::SSOAdmin
     class DescribeApplicationRequest < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -980,7 +966,7 @@ module Aws::SSOAdmin
       :description,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -989,7 +975,7 @@ module Aws::SSOAdmin
     class DescribeInstanceAccessControlAttributeConfigurationRequest < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1006,7 +992,7 @@ module Aws::SSOAdmin
       :status_reason,
       :instance_access_control_attribute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1015,7 +1001,7 @@ module Aws::SSOAdmin
     class DescribeInstanceRequest < Struct.new(
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1044,7 +1030,7 @@ module Aws::SSOAdmin
       :created_date,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1057,7 +1043,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :provision_permission_set_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_set_provisioning_status
@@ -1066,7 +1052,7 @@ module Aws::SSOAdmin
     class DescribePermissionSetProvisioningStatusResponse < Struct.new(
       :permission_set_provisioning_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1079,7 +1065,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_set
@@ -1088,7 +1074,7 @@ module Aws::SSOAdmin
     class DescribePermissionSetResponse < Struct.new(
       :permission_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -1097,7 +1083,7 @@ module Aws::SSOAdmin
     class DescribeTrustedTokenIssuerRequest < Struct.new(
       :trusted_token_issuer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -1118,7 +1104,7 @@ module Aws::SSOAdmin
       :trusted_token_issuer_type,
       :trusted_token_issuer_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1135,12 +1121,12 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :customer_managed_policy_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1157,12 +1143,12 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :managed_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachManagedPolicyFromPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes how the portal represents an application provider.</p>
@@ -1180,12 +1166,7 @@ module Aws::SSOAdmin
       :icon_url,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FederationProtocol
-      SAML = 'SAML'
-      OAUTH = 'OAUTH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1198,7 +1179,7 @@ module Aws::SSOAdmin
       :application_arn,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -1211,7 +1192,7 @@ module Aws::SSOAdmin
       :scope,
       :authorized_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1220,7 +1201,7 @@ module Aws::SSOAdmin
     class GetApplicationAssignmentConfigurationRequest < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_required
@@ -1229,7 +1210,7 @@ module Aws::SSOAdmin
     class GetApplicationAssignmentConfigurationResponse < Struct.new(
       :assignment_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:assignment_required] = true unless options.key?(:assignment_required)
@@ -1247,7 +1228,7 @@ module Aws::SSOAdmin
       :application_arn,
       :authentication_method_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_method
@@ -1256,7 +1237,7 @@ module Aws::SSOAdmin
     class GetApplicationAuthenticationMethodResponse < Struct.new(
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1269,7 +1250,7 @@ module Aws::SSOAdmin
       :application_arn,
       :grant_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant
@@ -1278,7 +1259,7 @@ module Aws::SSOAdmin
     class GetApplicationGrantResponse < Struct.new(
       :grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1287,7 +1268,7 @@ module Aws::SSOAdmin
     class GetApplicationSessionConfigurationRequest < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_background_session_application_status
@@ -1296,7 +1277,7 @@ module Aws::SSOAdmin
     class GetApplicationSessionConfigurationResponse < Struct.new(
       :user_background_session_application_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1309,7 +1290,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inline_policy
@@ -1318,7 +1299,7 @@ module Aws::SSOAdmin
     class GetInlinePolicyForPermissionSetResponse < Struct.new(
       :inline_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1331,7 +1312,7 @@ module Aws::SSOAdmin
       :instance_arn,
       :permission_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions_boundary
@@ -1340,7 +1321,7 @@ module Aws::SSOAdmin
     class GetPermissionsBoundaryForPermissionSetResponse < Struct.new(
       :permissions_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Grant union represents the set of possible configuration options for the selected grant type. Exactly one member of the union must be specified, and must match the grant type selected.</p>
@@ -1363,7 +1344,7 @@ module Aws::SSOAdmin
       :token_exchange,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AuthorizationCode < Grant; end
       class JwtBearer < Grant; end
@@ -1383,14 +1364,7 @@ module Aws::SSOAdmin
       :grant_type,
       :grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GrantType
-      AUTHORIZATION_CODE = 'authorization_code'
-      REFRESH_TOKEN = 'refresh_token'
-      JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
-      TOKEN_EXCHANGE = 'urn:ietf:params:oauth:grant-type:token-exchange'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes details for authentication that uses IAM.</p>
@@ -1400,7 +1374,7 @@ module Aws::SSOAdmin
     class IamAuthenticationMethod < Struct.new(
       :actor_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the attributes to add to your attribute-based access control (ABAC) configuration.</p>
@@ -1410,13 +1384,7 @@ module Aws::SSOAdmin
     class InstanceAccessControlAttributeConfiguration < Struct.new(
       :access_control_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceAccessControlAttributeConfigurationStatus
-      ENABLED = 'ENABLED'
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      CREATION_FAILED = 'CREATION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the IAM Identity Center instance.</p>
@@ -1446,13 +1414,7 @@ module Aws::SSOAdmin
       :created_date,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure with an internal server.</p>
@@ -1461,11 +1423,7 @@ module Aws::SSOAdmin
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JwksRetrievalOption
-      OPEN_ID_DISCOVERY = 'OPEN_ID_DISCOVERY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the JWT Bearer Token Authorization Grant. The <code>AuthorizedAudience</code> field is the aud claim. For more information, see <a href="https://datatracker.ietf.org/doc/html/rfc7523">RFC 7523</a>.</p>
@@ -1475,7 +1433,7 @@ module Aws::SSOAdmin
     class JwtBearerGrant < Struct.new(
       :authorized_token_issuers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1496,7 +1454,7 @@ module Aws::SSOAdmin
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignments_creation_status
@@ -1509,7 +1467,7 @@ module Aws::SSOAdmin
       :account_assignments_creation_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1530,7 +1488,7 @@ module Aws::SSOAdmin
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignments_deletion_status
@@ -1543,7 +1501,7 @@ module Aws::SSOAdmin
       :account_assignments_deletion_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a filter for account assignments.</p>
@@ -1553,7 +1511,7 @@ module Aws::SSOAdmin
     class ListAccountAssignmentsFilter < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1582,7 +1540,7 @@ module Aws::SSOAdmin
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignments
@@ -1595,7 +1553,7 @@ module Aws::SSOAdmin
       :account_assignments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1620,7 +1578,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_assignments
@@ -1633,7 +1591,7 @@ module Aws::SSOAdmin
       :account_assignments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1658,7 +1616,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1671,7 +1629,7 @@ module Aws::SSOAdmin
       :account_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1688,7 +1646,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scopes
@@ -1701,7 +1659,7 @@ module Aws::SSOAdmin
       :scopes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a filter for application assignments.</p>
@@ -1711,7 +1669,7 @@ module Aws::SSOAdmin
     class ListApplicationAssignmentsFilter < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1740,7 +1698,7 @@ module Aws::SSOAdmin
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_assignments
@@ -1753,7 +1711,7 @@ module Aws::SSOAdmin
       :application_assignments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1770,7 +1728,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_assignments
@@ -1783,7 +1741,7 @@ module Aws::SSOAdmin
       :application_assignments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1796,7 +1754,7 @@ module Aws::SSOAdmin
       :application_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_methods
@@ -1809,7 +1767,7 @@ module Aws::SSOAdmin
       :authentication_methods,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1822,7 +1780,7 @@ module Aws::SSOAdmin
       :application_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grants
@@ -1835,7 +1793,7 @@ module Aws::SSOAdmin
       :grants,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1848,7 +1806,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_providers
@@ -1861,7 +1819,7 @@ module Aws::SSOAdmin
       :application_providers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a filter for applications.</p>
@@ -1875,7 +1833,7 @@ module Aws::SSOAdmin
       :application_account,
       :application_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1896,7 +1854,7 @@ module Aws::SSOAdmin
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -1909,7 +1867,7 @@ module Aws::SSOAdmin
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1930,7 +1888,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_managed_policy_references
@@ -1943,7 +1901,7 @@ module Aws::SSOAdmin
       :customer_managed_policy_references,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1956,7 +1914,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -1969,7 +1927,7 @@ module Aws::SSOAdmin
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -1990,7 +1948,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attached_managed_policies
@@ -2003,7 +1961,7 @@ module Aws::SSOAdmin
       :attached_managed_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2024,7 +1982,7 @@ module Aws::SSOAdmin
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_sets_provisioning_status
@@ -2037,7 +1995,7 @@ module Aws::SSOAdmin
       :permission_sets_provisioning_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2062,7 +2020,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2075,7 +2033,7 @@ module Aws::SSOAdmin
       :next_token,
       :permission_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2092,7 +2050,7 @@ module Aws::SSOAdmin
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_sets
@@ -2105,7 +2063,7 @@ module Aws::SSOAdmin
       :permission_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2122,7 +2080,7 @@ module Aws::SSOAdmin
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2135,7 +2093,7 @@ module Aws::SSOAdmin
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2152,7 +2110,7 @@ module Aws::SSOAdmin
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuers
@@ -2165,7 +2123,7 @@ module Aws::SSOAdmin
       :trusted_token_issuers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes configuration settings for a trusted token issuer that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).</p>
@@ -2187,7 +2145,7 @@ module Aws::SSOAdmin
       :identity_store_attribute_path,
       :jwks_retrieval_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes updated configuration settings for a trusted token issuer that supports OpenID Connect (OIDC) and JSON Web Tokens (JWTs).</p>
@@ -2205,7 +2163,7 @@ module Aws::SSOAdmin
       :identity_store_attribute_path,
       :jwks_retrieval_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the operation status list based on the passed attribute value.</p>
@@ -2215,7 +2173,7 @@ module Aws::SSOAdmin
     class OperationStatusFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity that contains IAM policies.</p>
@@ -2245,7 +2203,7 @@ module Aws::SSOAdmin
       :session_duration,
       :relay_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that is used to provide the status of the provisioning operation for a specified permission set.</p>
@@ -2275,7 +2233,7 @@ module Aws::SSOAdmin
       :failure_reason,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the permission set provisioning status.</p>
@@ -2293,7 +2251,7 @@ module Aws::SSOAdmin
       :request_id,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of the Amazon Web Services managed or customer managed policy that you want to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code> to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use the ARN of an Amazon Web Services managed policy. A permissions boundary represents the maximum permissions that any policy can grant your role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions boundaries for IAM entities</a> in the <i>IAM User Guide</i>.</p> <important> <p>Policies used as permissions boundaries don't provide permissions. You must also attach an IAM policy to the role. To learn how the effective permissions for a role are evaluated, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html">IAM JSON policy evaluation logic</a> in the <i>IAM User Guide</i>.</p> </important>
@@ -2307,7 +2265,7 @@ module Aws::SSOAdmin
       :customer_managed_policy_reference,
       :managed_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the options for the access portal associated with an application.</p>
@@ -2321,17 +2279,12 @@ module Aws::SSOAdmin
       :sign_in_options,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:visibility] = 'ENABLED' unless options.key?(:visibility)
         super
       end
-    end
-
-    module PrincipalType
-      USER = 'USER'
-      GROUP = 'GROUP'
     end
 
     # @!attribute instance_arn
@@ -2352,7 +2305,7 @@ module Aws::SSOAdmin
       :target_id,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_set_provisioning_status
@@ -2361,17 +2314,7 @@ module Aws::SSOAdmin
     class ProvisionPermissionSetResponse < Struct.new(
       :permission_set_provisioning_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisionTargetType
-      AWS_ACCOUNT = 'AWS_ACCOUNT'
-      ALL_PROVISIONED_ACCOUNTS = 'ALL_PROVISIONED_ACCOUNTS'
-    end
-
-    module ProvisioningStatus
-      LATEST_PERMISSION_SET_PROVISIONED = 'LATEST_PERMISSION_SET_PROVISIONED'
-      LATEST_PERMISSION_SET_NOT_PROVISIONED = 'LATEST_PERMISSION_SET_NOT_PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -2388,7 +2331,7 @@ module Aws::SSOAdmin
       :authorized_targets,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -2401,12 +2344,12 @@ module Aws::SSOAdmin
       :application_arn,
       :assignment_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutApplicationAssignmentConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -2423,7 +2366,7 @@ module Aws::SSOAdmin
       :authentication_method_type,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -2440,7 +2383,7 @@ module Aws::SSOAdmin
       :grant_type,
       :grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -2453,12 +2396,12 @@ module Aws::SSOAdmin
       :application_arn,
       :user_background_session_application_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutApplicationSessionConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2475,12 +2418,12 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :inline_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutInlinePolicyToPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2497,18 +2440,18 @@ module Aws::SSOAdmin
       :permission_set_arn,
       :permissions_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutPermissionsBoundaryToPermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Refresh Token Grant. For more, see <a href="https://datatracker.ietf.org/doc/html/rfc6749#section-1.5">RFC 6749</a>.</p>
     class RefreshTokenGrant < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a requested resource is not found.</p>
@@ -2517,7 +2460,7 @@ module Aws::SSOAdmin
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the configuration of a resource server.</p>
@@ -2527,7 +2470,7 @@ module Aws::SSOAdmin
     class ResourceServerConfig < Struct.new(
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes details for an IAM Identity Center access scope that is associated with a resource server.</p>
@@ -2541,7 +2484,7 @@ module Aws::SSOAdmin
       :long_description,
       :detailed_title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes an IAM Identity Center access scope and its authorized targets.</p>
@@ -2555,7 +2498,7 @@ module Aws::SSOAdmin
       :scope,
       :authorized_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the principal has crossed the permitted number of resources that can be created.</p>
@@ -2564,7 +2507,7 @@ module Aws::SSOAdmin
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the sign-in options for an application portal.</p>
@@ -2578,18 +2521,7 @@ module Aws::SSOAdmin
       :origin,
       :application_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignInOrigin
-      IDENTITY_CENTER = 'IDENTITY_CENTER'
-      APPLICATION = 'APPLICATION'
-    end
-
-    module StatusValues
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in Amazon Web Services accounts.</p>
@@ -2603,7 +2535,7 @@ module Aws::SSOAdmin
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2620,16 +2552,12 @@ module Aws::SSOAdmin
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      AWS_ACCOUNT = 'AWS_ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
@@ -2638,13 +2566,13 @@ module Aws::SSOAdmin
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant. For more information, see <a href="https://datatracker.ietf.org/doc/html/rfc8693">RFC 8693</a>.</p>
     class TokenExchangeGrant < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the configuration of a trusted token issuer. The structure and available settings are determined by the type of the trusted token issuer.</p>
@@ -2655,7 +2583,7 @@ module Aws::SSOAdmin
       :oidc_jwt_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OidcJwtConfiguration < TrustedTokenIssuerConfiguration; end
       class Unknown < TrustedTokenIssuerConfiguration; end
@@ -2676,11 +2604,7 @@ module Aws::SSOAdmin
       :name,
       :trusted_token_issuer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustedTokenIssuerType
-      OIDC_JWT = 'OIDC_JWT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details to be updated for a trusted token issuer configuration. The structure and settings that you can include depend on the type of the trusted token issuer being updated.</p>
@@ -2691,7 +2615,7 @@ module Aws::SSOAdmin
       :oidc_jwt_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OidcJwtConfiguration < TrustedTokenIssuerUpdateConfiguration; end
       class Unknown < TrustedTokenIssuerUpdateConfiguration; end
@@ -2711,12 +2635,12 @@ module Aws::SSOAdmin
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the options for the access portal associated with an application that can be updated.</p>
@@ -2726,7 +2650,7 @@ module Aws::SSOAdmin
     class UpdateApplicationPortalOptions < Struct.new(
       :sign_in_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -2751,12 +2675,12 @@ module Aws::SSOAdmin
       :status,
       :portal_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2769,12 +2693,12 @@ module Aws::SSOAdmin
       :instance_arn,
       :instance_access_control_attribute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateInstanceAccessControlAttributeConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2787,12 +2711,12 @@ module Aws::SSOAdmin
       :name,
       :instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -2817,12 +2741,12 @@ module Aws::SSOAdmin
       :session_duration,
       :relay_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePermissionSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trusted_token_issuer_arn
@@ -2839,17 +2763,12 @@ module Aws::SSOAdmin
       :name,
       :trusted_token_issuer_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTrustedTokenIssuerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserBackgroundSessionApplicationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it contains a syntax error.</p>
@@ -2858,7 +2777,7 @@ module Aws::SSOAdmin
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -6,17 +6,6 @@ module Aws::Inspector
   # This module contains the types returned by client operations.
   module Types
 
-    module AccessDeniedErrorCode
-      ACCESS_DENIED_TO_ASSESSMENT_TARGET = 'ACCESS_DENIED_TO_ASSESSMENT_TARGET'
-      ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE = 'ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE'
-      ACCESS_DENIED_TO_ASSESSMENT_RUN = 'ACCESS_DENIED_TO_ASSESSMENT_RUN'
-      ACCESS_DENIED_TO_FINDING = 'ACCESS_DENIED_TO_FINDING'
-      ACCESS_DENIED_TO_RESOURCE_GROUP = 'ACCESS_DENIED_TO_RESOURCE_GROUP'
-      ACCESS_DENIED_TO_RULES_PACKAGE = 'ACCESS_DENIED_TO_RULES_PACKAGE'
-      ACCESS_DENIED_TO_SNS_TOPIC = 'ACCESS_DENIED_TO_SNS_TOPIC'
-      ACCESS_DENIED_TO_IAM_ROLE = 'ACCESS_DENIED_TO_IAM_ROLE'
-    end
-
     # <p>You do not have required permissions to access the requested resource.</p>
     # @!attribute message
     #   <p>Details of the exception error.</p>
@@ -32,7 +21,7 @@ module Aws::Inspector
       :error_code,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -45,7 +34,7 @@ module Aws::Inspector
       :finding_arns,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_items
@@ -55,7 +44,7 @@ module Aws::Inspector
     class AddAttributesToFindingsResponse < Struct.new(
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used in the exception error that is thrown if you start an assessment run for an
@@ -72,7 +61,7 @@ module Aws::Inspector
       :agent_id,
       :assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector agent. This data type is used as a
@@ -87,22 +76,7 @@ module Aws::Inspector
       :agent_healths,
       :agent_health_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentHealth
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module AgentHealthCode
-      IDLE = 'IDLE'
-      RUNNING = 'RUNNING'
-      SHUTDOWN = 'SHUTDOWN'
-      UNHEALTHY = 'UNHEALTHY'
-      THROTTLED = 'THROTTLED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as a response element in the <a>PreviewAgents</a> action.</p>
@@ -144,7 +118,7 @@ module Aws::Inspector
       :kernel_version,
       :ipv4_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You started an assessment run, but one of the instances is already participating in
@@ -167,7 +141,7 @@ module Aws::Inspector
       :agents_truncated,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of an Amazon Inspector assessment run that contains the findings of the
@@ -240,7 +214,7 @@ module Aws::Inspector
       :notifications,
       :finding_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector agent. This data type is used as a
@@ -277,7 +251,7 @@ module Aws::Inspector
       :auto_scaling_group,
       :telemetry_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as the request parameter in the <a>ListAssessmentRuns</a>
@@ -326,7 +300,7 @@ module Aws::Inspector
       :completion_time_range,
       :state_change_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot perform a specified action if an assessment run is currently in
@@ -350,7 +324,7 @@ module Aws::Inspector
       :assessment_run_arns_truncated,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as one of the elements of the <a>AssessmentRun</a> data
@@ -382,30 +356,7 @@ module Aws::Inspector
       :sns_topic_arn,
       :sns_publish_status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentRunNotificationSnsStatusCode
-      SUCCESS = 'SUCCESS'
-      TOPIC_DOES_NOT_EXIST = 'TOPIC_DOES_NOT_EXIST'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-    end
-
-    module AssessmentRunState
-      CREATED = 'CREATED'
-      START_DATA_COLLECTION_PENDING = 'START_DATA_COLLECTION_PENDING'
-      START_DATA_COLLECTION_IN_PROGRESS = 'START_DATA_COLLECTION_IN_PROGRESS'
-      COLLECTING_DATA = 'COLLECTING_DATA'
-      STOP_DATA_COLLECTION_PENDING = 'STOP_DATA_COLLECTION_PENDING'
-      DATA_COLLECTED = 'DATA_COLLECTED'
-      START_EVALUATING_RULES_PENDING = 'START_EVALUATING_RULES_PENDING'
-      EVALUATING_RULES = 'EVALUATING_RULES'
-      FAILED = 'FAILED'
-      ERROR = 'ERROR'
-      COMPLETED = 'COMPLETED'
-      COMPLETED_WITH_ERRORS = 'COMPLETED_WITH_ERRORS'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as one of the elements of the <a>AssessmentRun</a> data
@@ -420,7 +371,7 @@ module Aws::Inspector
       :state_changed_at,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector application. This data type is used as
@@ -448,7 +399,7 @@ module Aws::Inspector
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as the request parameter in the <a>ListAssessmentTargets</a>
@@ -461,7 +412,7 @@ module Aws::Inspector
     class AssessmentTargetFilter < Struct.new(
       :assessment_target_name_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector assessment template. This data type is
@@ -511,7 +462,7 @@ module Aws::Inspector
       :assessment_run_count,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as the request parameter in the <a>ListAssessmentTemplates</a>
@@ -536,7 +487,7 @@ module Aws::Inspector
       :duration_range,
       :rules_package_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of attributes of the host from which the finding is generated.</p>
@@ -578,16 +529,12 @@ module Aws::Inspector
       :tags,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:schema_version] = 0 unless options.key?(:schema_version)
         super
       end
-    end
-
-    module AssetType
-      EC2_INSTANCE = 'ec2-instance'
     end
 
     # <p>This data type is used as a request parameter in the <a>AddAttributesToFindings</a> and <a>CreateAssessmentTemplate</a>
@@ -602,7 +549,7 @@ module Aws::Inspector
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_name
@@ -618,7 +565,7 @@ module Aws::Inspector
       :assessment_target_name,
       :resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arn
@@ -627,7 +574,7 @@ module Aws::Inspector
     class CreateAssessmentTargetResponse < Struct.new(
       :assessment_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arn
@@ -660,7 +607,7 @@ module Aws::Inspector
       :rules_package_arns,
       :user_attributes_for_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arn
@@ -669,7 +616,7 @@ module Aws::Inspector
     class CreateAssessmentTemplateResponse < Struct.new(
       :assessment_template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arn
@@ -679,7 +626,7 @@ module Aws::Inspector
     class CreateExclusionsPreviewRequest < Struct.new(
       :assessment_template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute preview_token
@@ -690,7 +637,7 @@ module Aws::Inspector
     class CreateExclusionsPreviewResponse < Struct.new(
       :preview_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_tags
@@ -701,7 +648,7 @@ module Aws::Inspector
     class CreateResourceGroupRequest < Struct.new(
       :resource_group_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_arn
@@ -710,7 +657,7 @@ module Aws::Inspector
     class CreateResourceGroupResponse < Struct.new(
       :resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -719,7 +666,7 @@ module Aws::Inspector
     class DeleteAssessmentRunRequest < Struct.new(
       :assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arn
@@ -728,7 +675,7 @@ module Aws::Inspector
     class DeleteAssessmentTargetRequest < Struct.new(
       :assessment_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arn
@@ -737,7 +684,7 @@ module Aws::Inspector
     class DeleteAssessmentTemplateRequest < Struct.new(
       :assessment_template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arns
@@ -746,7 +693,7 @@ module Aws::Inspector
     class DescribeAssessmentRunsRequest < Struct.new(
       :assessment_run_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_runs
@@ -760,7 +707,7 @@ module Aws::Inspector
       :assessment_runs,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arns
@@ -769,7 +716,7 @@ module Aws::Inspector
     class DescribeAssessmentTargetsRequest < Struct.new(
       :assessment_target_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_targets
@@ -783,7 +730,7 @@ module Aws::Inspector
       :assessment_targets,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arns
@@ -791,7 +738,7 @@ module Aws::Inspector
     class DescribeAssessmentTemplatesRequest < Struct.new(
       :assessment_template_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_templates
@@ -805,7 +752,7 @@ module Aws::Inspector
       :assessment_templates,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -824,7 +771,7 @@ module Aws::Inspector
       :valid,
       :registered_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exclusion_arns
@@ -838,7 +785,7 @@ module Aws::Inspector
       :exclusion_arns,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exclusions
@@ -852,7 +799,7 @@ module Aws::Inspector
       :exclusions,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -866,7 +813,7 @@ module Aws::Inspector
       :finding_arns,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -880,7 +827,7 @@ module Aws::Inspector
       :findings,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_arns
@@ -889,7 +836,7 @@ module Aws::Inspector
     class DescribeResourceGroupsRequest < Struct.new(
       :resource_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_groups
@@ -903,7 +850,7 @@ module Aws::Inspector
       :resource_groups,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules_package_arns
@@ -916,7 +863,7 @@ module Aws::Inspector
       :rules_package_arns,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules_packages
@@ -930,7 +877,7 @@ module Aws::Inspector
       :rules_packages,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used in the <a>AssessmentTemplateFilter</a> data
@@ -946,7 +893,7 @@ module Aws::Inspector
       :min_seconds,
       :max_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used in the <a>Subscription</a> data type.</p>
@@ -961,7 +908,7 @@ module Aws::Inspector
       :event,
       :subscribed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about what was excluded from an assessment run.</p>
@@ -991,7 +938,7 @@ module Aws::Inspector
       :scopes,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about what is excluded from an assessment run given the current
@@ -1018,7 +965,7 @@ module Aws::Inspector
       :scopes,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes details about the failed items.</p>
@@ -1033,16 +980,7 @@ module Aws::Inspector
       :failure_code,
       :retryable,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailedItemErrorCode
-      INVALID_ARN = 'INVALID_ARN'
-      DUPLICATE_ARN = 'DUPLICATE_ARN'
-      ITEM_DOES_NOT_EXIST = 'ITEM_DOES_NOT_EXIST'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      LIMIT_EXCEEDED = 'LIMIT_EXCEEDED'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector finding. This data type is used as the
@@ -1122,7 +1060,7 @@ module Aws::Inspector
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:schema_version] = 0 unless options.key?(:schema_version)
@@ -1178,7 +1116,7 @@ module Aws::Inspector
       :user_attributes,
       :creation_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -1199,7 +1137,7 @@ module Aws::Inspector
       :report_file_format,
       :report_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1213,7 +1151,7 @@ module Aws::Inspector
       :status,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arn
@@ -1244,7 +1182,7 @@ module Aws::Inspector
       :max_results,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute preview_status
@@ -1264,7 +1202,7 @@ module Aws::Inspector
       :exclusion_previews,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -1274,7 +1212,7 @@ module Aws::Inspector
     class GetTelemetryMetadataRequest < Struct.new(
       :assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_metadata
@@ -1283,15 +1221,7 @@ module Aws::Inspector
     class GetTelemetryMetadataResponse < Struct.new(
       :telemetry_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InspectorEvent
-      ASSESSMENT_RUN_STARTED = 'ASSESSMENT_RUN_STARTED'
-      ASSESSMENT_RUN_COMPLETED = 'ASSESSMENT_RUN_COMPLETED'
-      ASSESSMENT_RUN_STATE_CHANGED = 'ASSESSMENT_RUN_STATE_CHANGED'
-      FINDING_REPORTED = 'FINDING_REPORTED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used in the <a>Finding</a> data type.</p>
@@ -1309,7 +1239,7 @@ module Aws::Inspector
       :assessment_run_arn,
       :rules_package_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:schema_version] = 0 unless options.key?(:schema_version)
@@ -1328,12 +1258,7 @@ module Aws::Inspector
       :message,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvalidCrossAccountRoleErrorCode
-      ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP = 'ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP'
-      ROLE_DOES_NOT_HAVE_CORRECT_POLICY = 'ROLE_DOES_NOT_HAVE_CORRECT_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Inspector cannot assume the cross-account role that it needs to list your EC2
@@ -1352,64 +1277,7 @@ module Aws::Inspector
       :error_code,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvalidInputErrorCode
-      INVALID_ASSESSMENT_TARGET_ARN = 'INVALID_ASSESSMENT_TARGET_ARN'
-      INVALID_ASSESSMENT_TEMPLATE_ARN = 'INVALID_ASSESSMENT_TEMPLATE_ARN'
-      INVALID_ASSESSMENT_RUN_ARN = 'INVALID_ASSESSMENT_RUN_ARN'
-      INVALID_FINDING_ARN = 'INVALID_FINDING_ARN'
-      INVALID_RESOURCE_GROUP_ARN = 'INVALID_RESOURCE_GROUP_ARN'
-      INVALID_RULES_PACKAGE_ARN = 'INVALID_RULES_PACKAGE_ARN'
-      INVALID_RESOURCE_ARN = 'INVALID_RESOURCE_ARN'
-      INVALID_SNS_TOPIC_ARN = 'INVALID_SNS_TOPIC_ARN'
-      INVALID_IAM_ROLE_ARN = 'INVALID_IAM_ROLE_ARN'
-      INVALID_ASSESSMENT_TARGET_NAME = 'INVALID_ASSESSMENT_TARGET_NAME'
-      INVALID_ASSESSMENT_TARGET_NAME_PATTERN = 'INVALID_ASSESSMENT_TARGET_NAME_PATTERN'
-      INVALID_ASSESSMENT_TEMPLATE_NAME = 'INVALID_ASSESSMENT_TEMPLATE_NAME'
-      INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN = 'INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN'
-      INVALID_ASSESSMENT_TEMPLATE_DURATION = 'INVALID_ASSESSMENT_TEMPLATE_DURATION'
-      INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE = 'INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE'
-      INVALID_ASSESSMENT_RUN_DURATION_RANGE = 'INVALID_ASSESSMENT_RUN_DURATION_RANGE'
-      INVALID_ASSESSMENT_RUN_START_TIME_RANGE = 'INVALID_ASSESSMENT_RUN_START_TIME_RANGE'
-      INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE = 'INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE'
-      INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE = 'INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE'
-      INVALID_ASSESSMENT_RUN_STATE = 'INVALID_ASSESSMENT_RUN_STATE'
-      INVALID_TAG = 'INVALID_TAG'
-      INVALID_TAG_KEY = 'INVALID_TAG_KEY'
-      INVALID_TAG_VALUE = 'INVALID_TAG_VALUE'
-      INVALID_RESOURCE_GROUP_TAG_KEY = 'INVALID_RESOURCE_GROUP_TAG_KEY'
-      INVALID_RESOURCE_GROUP_TAG_VALUE = 'INVALID_RESOURCE_GROUP_TAG_VALUE'
-      INVALID_ATTRIBUTE = 'INVALID_ATTRIBUTE'
-      INVALID_USER_ATTRIBUTE = 'INVALID_USER_ATTRIBUTE'
-      INVALID_USER_ATTRIBUTE_KEY = 'INVALID_USER_ATTRIBUTE_KEY'
-      INVALID_USER_ATTRIBUTE_VALUE = 'INVALID_USER_ATTRIBUTE_VALUE'
-      INVALID_PAGINATION_TOKEN = 'INVALID_PAGINATION_TOKEN'
-      INVALID_MAX_RESULTS = 'INVALID_MAX_RESULTS'
-      INVALID_AGENT_ID = 'INVALID_AGENT_ID'
-      INVALID_AUTO_SCALING_GROUP = 'INVALID_AUTO_SCALING_GROUP'
-      INVALID_RULE_NAME = 'INVALID_RULE_NAME'
-      INVALID_SEVERITY = 'INVALID_SEVERITY'
-      INVALID_LOCALE = 'INVALID_LOCALE'
-      INVALID_EVENT = 'INVALID_EVENT'
-      ASSESSMENT_TARGET_NAME_ALREADY_TAKEN = 'ASSESSMENT_TARGET_NAME_ALREADY_TAKEN'
-      ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN = 'ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN'
-      INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS = 'INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS'
-      INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS = 'INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS'
-      INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS = 'INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS'
-      INVALID_NUMBER_OF_FINDING_ARNS = 'INVALID_NUMBER_OF_FINDING_ARNS'
-      INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS = 'INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS'
-      INVALID_NUMBER_OF_RULES_PACKAGE_ARNS = 'INVALID_NUMBER_OF_RULES_PACKAGE_ARNS'
-      INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES = 'INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES'
-      INVALID_NUMBER_OF_TAGS = 'INVALID_NUMBER_OF_TAGS'
-      INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS = 'INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS'
-      INVALID_NUMBER_OF_ATTRIBUTES = 'INVALID_NUMBER_OF_ATTRIBUTES'
-      INVALID_NUMBER_OF_USER_ATTRIBUTES = 'INVALID_NUMBER_OF_USER_ATTRIBUTES'
-      INVALID_NUMBER_OF_AGENT_IDS = 'INVALID_NUMBER_OF_AGENT_IDS'
-      INVALID_NUMBER_OF_AUTO_SCALING_GROUPS = 'INVALID_NUMBER_OF_AUTO_SCALING_GROUPS'
-      INVALID_NUMBER_OF_RULE_NAMES = 'INVALID_NUMBER_OF_RULE_NAMES'
-      INVALID_NUMBER_OF_SEVERITIES = 'INVALID_NUMBER_OF_SEVERITIES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because an invalid or out-of-range value was supplied for an
@@ -1428,15 +1296,7 @@ module Aws::Inspector
       :error_code,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LimitExceededErrorCode
-      ASSESSMENT_TARGET_LIMIT_EXCEEDED = 'ASSESSMENT_TARGET_LIMIT_EXCEEDED'
-      ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED = 'ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED'
-      ASSESSMENT_RUN_LIMIT_EXCEEDED = 'ASSESSMENT_RUN_LIMIT_EXCEEDED'
-      RESOURCE_GROUP_LIMIT_EXCEEDED = 'RESOURCE_GROUP_LIMIT_EXCEEDED'
-      EVENT_SUBSCRIPTION_LIMIT_EXCEEDED = 'EVENT_SUBSCRIPTION_LIMIT_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create resources beyond the current
@@ -1455,7 +1315,7 @@ module Aws::Inspector
       :error_code,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -1485,7 +1345,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_agents
@@ -1500,7 +1360,7 @@ module Aws::Inspector
       :assessment_run_agents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arns
@@ -1531,7 +1391,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arns
@@ -1547,7 +1407,7 @@ module Aws::Inspector
       :assessment_run_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -1573,7 +1433,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arns
@@ -1589,7 +1449,7 @@ module Aws::Inspector
       :assessment_target_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arns
@@ -1620,7 +1480,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arns
@@ -1636,7 +1496,7 @@ module Aws::Inspector
       :assessment_template_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1659,7 +1519,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriptions
@@ -1674,7 +1534,7 @@ module Aws::Inspector
       :subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -1696,7 +1556,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exclusion_arns
@@ -1712,7 +1572,7 @@ module Aws::Inspector
       :exclusion_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arns
@@ -1743,7 +1603,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -1758,7 +1618,7 @@ module Aws::Inspector
       :finding_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1776,7 +1636,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules_package_arns
@@ -1791,7 +1651,7 @@ module Aws::Inspector
       :rules_package_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1800,7 +1660,7 @@ module Aws::Inspector
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1809,11 +1669,7 @@ module Aws::Inspector
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Locale
-      EN_US = 'EN_US'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the network interfaces interacting with an EC2 instance.
@@ -1863,18 +1719,7 @@ module Aws::Inspector
       :ipv6_addresses,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NoSuchEntityErrorCode
-      ASSESSMENT_TARGET_DOES_NOT_EXIST = 'ASSESSMENT_TARGET_DOES_NOT_EXIST'
-      ASSESSMENT_TEMPLATE_DOES_NOT_EXIST = 'ASSESSMENT_TEMPLATE_DOES_NOT_EXIST'
-      ASSESSMENT_RUN_DOES_NOT_EXIST = 'ASSESSMENT_RUN_DOES_NOT_EXIST'
-      FINDING_DOES_NOT_EXIST = 'FINDING_DOES_NOT_EXIST'
-      RESOURCE_GROUP_DOES_NOT_EXIST = 'RESOURCE_GROUP_DOES_NOT_EXIST'
-      RULES_PACKAGE_DOES_NOT_EXIST = 'RULES_PACKAGE_DOES_NOT_EXIST'
-      SNS_TOPIC_DOES_NOT_EXIST = 'SNS_TOPIC_DOES_NOT_EXIST'
-      IAM_ROLE_DOES_NOT_EXIST = 'IAM_ROLE_DOES_NOT_EXIST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it referenced an entity that does not exist. The
@@ -1893,7 +1738,7 @@ module Aws::Inspector
       :error_code,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute preview_agents_arn
@@ -1915,7 +1760,7 @@ module Aws::Inspector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_previews
@@ -1930,7 +1775,7 @@ module Aws::Inspector
       :agent_previews,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is rejected. The specified assessment template is currently generating an
@@ -1940,12 +1785,7 @@ module Aws::Inspector
     class PreviewGenerationInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreviewStatus
-      WORK_IN_PROGRESS = 'WORK_IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a private IP address associated with a network interface. This
@@ -1961,7 +1801,7 @@ module Aws::Inspector
       :private_dns_name,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -1971,7 +1811,7 @@ module Aws::Inspector
     class RegisterCrossAccountAccessRoleRequest < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -1985,7 +1825,7 @@ module Aws::Inspector
       :finding_arns,
       :attribute_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_items
@@ -1995,23 +1835,7 @@ module Aws::Inspector
     class RemoveAttributesFromFindingsResponse < Struct.new(
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportFileFormat
-      HTML = 'HTML'
-      PDF = 'PDF'
-    end
-
-    module ReportStatus
-      WORK_IN_PROGRESS = 'WORK_IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-    end
-
-    module ReportType
-      FINDING = 'FINDING'
-      FULL = 'FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a resource group. The resource group defines a set of tags
@@ -2033,7 +1857,7 @@ module Aws::Inspector
       :tags,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as one of the elements of the <a>ResourceGroup</a>
@@ -2048,7 +1872,7 @@ module Aws::Inspector
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Inspector rules package. This data type is used
@@ -2075,7 +1899,7 @@ module Aws::Inspector
       :provider,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type contains key-value pairs that identify various Amazon
@@ -2090,12 +1914,7 @@ module Aws::Inspector
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScopeType
-      INSTANCE_ID = 'INSTANCE_ID'
-      RULES_PACKAGE_ARN = 'RULES_PACKAGE_ARN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a security group associated with a network interface. This
@@ -2111,7 +1930,7 @@ module Aws::Inspector
       :group_name,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The serice is temporary unavailable.</p>
@@ -2125,7 +1944,7 @@ module Aws::Inspector
       :message,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2139,15 +1958,7 @@ module Aws::Inspector
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Severity
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
-      INFORMATIONAL = 'Informational'
-      UNDEFINED = 'Undefined'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_template_arn
@@ -2162,7 +1973,7 @@ module Aws::Inspector
       :assessment_template_arn,
       :assessment_run_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -2171,12 +1982,7 @@ module Aws::Inspector
     class StartAssessmentRunResponse < Struct.new(
       :assessment_run_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopAction
-      START_EVALUATION = 'START_EVALUATION'
-      SKIP_EVALUATION = 'SKIP_EVALUATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_run_arn
@@ -2192,7 +1998,7 @@ module Aws::Inspector
       :assessment_run_arn,
       :stop_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2210,7 +2016,7 @@ module Aws::Inspector
       :event,
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <a>ListEventSubscriptions</a> action.</p>
@@ -2230,7 +2036,7 @@ module Aws::Inspector
       :topic_arn,
       :event_subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key and value pair. This data type is used as a request parameter in the <a>SetTagsForResource</a> action and a response element in the <a>ListTagsForResource</a> action.</p>
@@ -2244,7 +2050,7 @@ module Aws::Inspector
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata about the Amazon Inspector application data metrics collected by the
@@ -2264,7 +2070,7 @@ module Aws::Inspector
       :count,
       :data_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used in the <a>AssessmentRunFilter</a> data
@@ -2279,7 +2085,7 @@ module Aws::Inspector
       :begin_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2297,7 +2103,7 @@ module Aws::Inspector
       :event,
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used by the <a>GetAssessmentReport</a> API. The request was rejected
@@ -2313,7 +2119,7 @@ module Aws::Inspector
       :message,
       :can_retry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_target_arn
@@ -2331,7 +2137,7 @@ module Aws::Inspector
       :assessment_target_name,
       :resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -16,7 +16,7 @@ module Aws::PinpointSMSVoiceV2
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displays the attributes associated with a single Amazon Web Services account.</p>
@@ -30,7 +30,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current resource quotas associated with an Amazon Web Services account.</p>
@@ -48,7 +48,7 @@ module Aws::PinpointSMSVoiceV2
       :used,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:used] = 0 unless options.key?(:used)
@@ -75,7 +75,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -100,7 +100,7 @@ module Aws::PinpointSMSVoiceV2
       :origination_identity,
       :iso_country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -113,7 +113,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -134,7 +134,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_arn,
       :protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the destination configuration to use when publishing message sending events. </p>
@@ -148,7 +148,7 @@ module Aws::PinpointSMSVoiceV2
       :iam_role_arn,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for configuration sets that meet a specified criteria.</p>
@@ -162,7 +162,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information related to a given configuration set in your Amazon Web Services account.</p>
@@ -200,7 +200,7 @@ module Aws::PinpointSMSVoiceV2
       :created_timestamp,
       :protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time or it could be that the requested action isn't valid for the current state or configuration of the resource.</p>
@@ -221,7 +221,7 @@ module Aws::PinpointSMSVoiceV2
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -238,7 +238,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -259,7 +259,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -292,7 +292,7 @@ module Aws::PinpointSMSVoiceV2
       :sns_destination,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -309,7 +309,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_name
@@ -326,7 +326,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_arn
@@ -347,7 +347,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity
@@ -376,7 +376,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -433,7 +433,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -458,7 +458,7 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -487,7 +487,7 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:account_default] = false unless options.key?(:account_default)
@@ -506,7 +506,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -543,7 +543,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_body
@@ -564,7 +564,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_attachment_arn
@@ -589,7 +589,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type
@@ -606,7 +606,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -643,7 +643,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -652,7 +652,7 @@ module Aws::PinpointSMSVoiceV2
     class CreateRegistrationVersionRequest < Struct.new(
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -677,7 +677,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_version_status,
       :registration_version_status_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_phone_number
@@ -694,7 +694,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_arn
@@ -723,12 +723,12 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountDefaultProtectConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_protect_configuration_arn
@@ -741,7 +741,7 @@ module Aws::PinpointSMSVoiceV2
       :default_protect_configuration_arn,
       :default_protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -750,7 +750,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -783,7 +783,7 @@ module Aws::PinpointSMSVoiceV2
       :default_message_feedback_enabled,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -792,7 +792,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteDefaultMessageTypeRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -809,7 +809,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :message_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -818,7 +818,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteDefaultSenderIdRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -835,7 +835,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :sender_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -848,7 +848,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -865,7 +865,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity
@@ -878,7 +878,7 @@ module Aws::PinpointSMSVoiceV2
       :origination_identity,
       :keyword,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity_arn
@@ -903,12 +903,12 @@ module Aws::PinpointSMSVoiceV2
       :keyword_message,
       :keyword_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMediaMessageSpendLimitOverrideRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -917,7 +917,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteMediaMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_name
@@ -926,7 +926,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteOptOutListRequest < Struct.new(
       :opt_out_list_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_arn
@@ -943,7 +943,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_name
@@ -956,7 +956,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :opted_out_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_arn
@@ -981,7 +981,7 @@ module Aws::PinpointSMSVoiceV2
       :opted_out_timestamp,
       :end_user_opted_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:end_user_opted_out] = false unless options.key?(:end_user_opted_out)
@@ -995,7 +995,7 @@ module Aws::PinpointSMSVoiceV2
     class DeletePoolRequest < Struct.new(
       :pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -1044,7 +1044,7 @@ module Aws::PinpointSMSVoiceV2
       :shared_routes_enabled,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -1060,7 +1060,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteProtectConfigurationRequest < Struct.new(
       :protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -1085,7 +1085,7 @@ module Aws::PinpointSMSVoiceV2
       :account_default,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:account_default] = false unless options.key?(:account_default)
@@ -1104,7 +1104,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :destination_phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -1137,7 +1137,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_attachment_id
@@ -1146,7 +1146,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteRegistrationAttachmentRequest < Struct.new(
       :registration_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_attachment_arn
@@ -1171,7 +1171,7 @@ module Aws::PinpointSMSVoiceV2
       :attachment_upload_error_reason,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -1184,7 +1184,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_id,
       :field_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -1217,7 +1217,7 @@ module Aws::PinpointSMSVoiceV2
       :text_value,
       :registration_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -1226,7 +1226,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteRegistrationRequest < Struct.new(
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -1267,7 +1267,7 @@ module Aws::PinpointSMSVoiceV2
       :additional_attributes,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1276,7 +1276,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1293,12 +1293,12 @@ module Aws::PinpointSMSVoiceV2
       :policy,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTextMessageSpendLimitOverrideRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -1307,7 +1307,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteTextMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_id
@@ -1316,7 +1316,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteVerifiedDestinationNumberRequest < Struct.new(
       :verified_destination_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_arn
@@ -1337,12 +1337,12 @@ module Aws::PinpointSMSVoiceV2
       :destination_phone_number,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVoiceMessageSpendLimitOverrideRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -1351,7 +1351,7 @@ module Aws::PinpointSMSVoiceV2
     class DeleteVoiceMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1364,7 +1364,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_attributes
@@ -1377,7 +1377,7 @@ module Aws::PinpointSMSVoiceV2
       :account_attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1390,7 +1390,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_limits
@@ -1403,7 +1403,7 @@ module Aws::PinpointSMSVoiceV2
       :account_limits,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_names
@@ -1424,7 +1424,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_sets
@@ -1437,7 +1437,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity
@@ -1462,7 +1462,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity_arn
@@ -1483,7 +1483,7 @@ module Aws::PinpointSMSVoiceV2
       :keywords,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_names
@@ -1504,7 +1504,7 @@ module Aws::PinpointSMSVoiceV2
       :max_results,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_lists
@@ -1517,7 +1517,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_name
@@ -1542,7 +1542,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_arn
@@ -1563,7 +1563,7 @@ module Aws::PinpointSMSVoiceV2
       :opted_out_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_ids
@@ -1588,7 +1588,7 @@ module Aws::PinpointSMSVoiceV2
       :max_results,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_numbers
@@ -1601,7 +1601,7 @@ module Aws::PinpointSMSVoiceV2
       :phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ids
@@ -1626,7 +1626,7 @@ module Aws::PinpointSMSVoiceV2
       :max_results,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pools
@@ -1639,7 +1639,7 @@ module Aws::PinpointSMSVoiceV2
       :pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_ids
@@ -1660,7 +1660,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configurations
@@ -1673,7 +1673,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_attachment_ids
@@ -1694,7 +1694,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_attachments
@@ -1707,7 +1707,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type
@@ -1732,7 +1732,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type
@@ -1749,7 +1749,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_field_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -1778,7 +1778,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -1803,7 +1803,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_field_values,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type
@@ -1824,7 +1824,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type
@@ -1841,7 +1841,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_section_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_types
@@ -1862,7 +1862,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_type_definitions
@@ -1875,7 +1875,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_type_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -1900,7 +1900,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -1921,7 +1921,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_ids
@@ -1942,7 +1942,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registrations
@@ -1955,7 +1955,7 @@ module Aws::PinpointSMSVoiceV2
       :registrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sender_ids
@@ -1980,7 +1980,7 @@ module Aws::PinpointSMSVoiceV2
       :max_results,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sender_ids
@@ -1993,7 +1993,7 @@ module Aws::PinpointSMSVoiceV2
       :sender_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2006,7 +2006,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute spend_limits
@@ -2019,7 +2019,7 @@ module Aws::PinpointSMSVoiceV2
       :spend_limits,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_ids
@@ -2044,7 +2044,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_numbers
@@ -2057,7 +2057,7 @@ module Aws::PinpointSMSVoiceV2
       :verified_destination_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -2078,7 +2078,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -2103,7 +2103,7 @@ module Aws::PinpointSMSVoiceV2
       :origination_identity,
       :iso_country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -2116,7 +2116,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -2137,7 +2137,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_arn,
       :protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -2146,7 +2146,7 @@ module Aws::PinpointSMSVoiceV2
     class DiscardRegistrationVersionRequest < Struct.new(
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -2171,7 +2171,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_version_status,
       :registration_version_status_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an event destination.</p> <p>Event destinations are associated with configuration sets, which enable you to publish message sending events to CloudWatch, Firehose, or Amazon SNS.</p>
@@ -2201,7 +2201,7 @@ module Aws::PinpointSMSVoiceV2
       :kinesis_firehose_destination,
       :sns_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -2214,7 +2214,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :number_capability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -2235,7 +2235,7 @@ module Aws::PinpointSMSVoiceV2
       :number_capability,
       :country_rule_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2244,7 +2244,7 @@ module Aws::PinpointSMSVoiceV2
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2261,7 +2261,7 @@ module Aws::PinpointSMSVoiceV2
       :policy,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.</p>
@@ -2274,7 +2274,7 @@ module Aws::PinpointSMSVoiceV2
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for keywords that meet a specified criteria.</p>
@@ -2288,7 +2288,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for all keywords in a pool.</p>
@@ -2306,7 +2306,7 @@ module Aws::PinpointSMSVoiceV2
       :keyword_message,
       :keyword_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the Identity and Access Management (IAM) role associated with a Firehose event destination.</p> <p>Event destinations, such as Firehose, are associated with configuration sets, which enable you to publish message sending events.</p>
@@ -2320,7 +2320,7 @@ module Aws::PinpointSMSVoiceV2
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -2341,7 +2341,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -2362,7 +2362,7 @@ module Aws::PinpointSMSVoiceV2
       :origination_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -2383,7 +2383,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -2404,7 +2404,7 @@ module Aws::PinpointSMSVoiceV2
       :rule_set_number_overrides,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -2425,7 +2425,7 @@ module Aws::PinpointSMSVoiceV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -2450,7 +2450,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2459,7 +2459,7 @@ module Aws::PinpointSMSVoiceV2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2472,7 +2472,7 @@ module Aws::PinpointSMSVoiceV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for all OptOutList in an Amazon Web Services account.</p>
@@ -2490,7 +2490,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for opted out numbers that meet a specified criteria.</p>
@@ -2504,7 +2504,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for an opted out number in an Amazon Web Services account.</p>
@@ -2522,7 +2522,7 @@ module Aws::PinpointSMSVoiceV2
       :opted_out_timestamp,
       :end_user_opted_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:end_user_opted_out] = false unless options.key?(:end_user_opted_out)
@@ -2553,7 +2553,7 @@ module Aws::PinpointSMSVoiceV2
       :number_capabilities,
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a phone number that meets a specified criteria.</p>
@@ -2567,7 +2567,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a phone number, in E.164 format, in an Amazon Web Services account.</p>
@@ -2645,7 +2645,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_id,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -2666,7 +2666,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a pool in an Amazon Web Services account.</p>
@@ -2720,7 +2720,7 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -2742,7 +2742,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The types of statuses that can be used.</p>
@@ -2752,7 +2752,7 @@ module Aws::PinpointSMSVoiceV2
     class ProtectConfigurationCountryRuleSetInformation < Struct.new(
       :protect_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering protect configurations that meet a specified criteria.</p>
@@ -2766,7 +2766,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on the specified protect configuration.</p>
@@ -2792,7 +2792,7 @@ module Aws::PinpointSMSVoiceV2
       :account_default,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:account_default] = false unless options.key?(:account_default)
@@ -2824,7 +2824,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a protect configuration rule set number override that meets a specified criteria.</p>
@@ -2838,7 +2838,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity
@@ -2859,7 +2859,7 @@ module Aws::PinpointSMSVoiceV2
       :keyword_message,
       :keyword_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination_identity_arn
@@ -2884,7 +2884,7 @@ module Aws::PinpointSMSVoiceV2
       :keyword_message,
       :keyword_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -2897,7 +2897,7 @@ module Aws::PinpointSMSVoiceV2
       :message_id,
       :message_feedback_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -2910,7 +2910,7 @@ module Aws::PinpointSMSVoiceV2
       :message_id,
       :message_feedback_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_name
@@ -2923,7 +2923,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :opted_out_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opt_out_list_arn
@@ -2948,7 +2948,7 @@ module Aws::PinpointSMSVoiceV2
       :opted_out_timestamp,
       :end_user_opted_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:end_user_opted_out] = false unless options.key?(:end_user_opted_out)
@@ -2978,7 +2978,7 @@ module Aws::PinpointSMSVoiceV2
       :action,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -3011,7 +3011,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -3036,7 +3036,7 @@ module Aws::PinpointSMSVoiceV2
       :text_value,
       :registration_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -3069,7 +3069,7 @@ module Aws::PinpointSMSVoiceV2
       :text_value,
       :registration_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3082,7 +3082,7 @@ module Aws::PinpointSMSVoiceV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3099,7 +3099,7 @@ module Aws::PinpointSMSVoiceV2
       :policy,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering registrations that meets a specified criteria.</p>
@@ -3113,7 +3113,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for the origination identity that is associated with the registration.</p>
@@ -3139,7 +3139,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering registration attachments that meets a specified criteria.</p>
@@ -3153,7 +3153,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on the specified registration attachments.</p>
@@ -3179,7 +3179,7 @@ module Aws::PinpointSMSVoiceV2
       :attachment_upload_error_reason,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the reason a registration was rejected.</p>
@@ -3205,7 +3205,7 @@ module Aws::PinpointSMSVoiceV2
       :documentation_title,
       :documentation_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of the specified field.</p>
@@ -3239,7 +3239,7 @@ module Aws::PinpointSMSVoiceV2
       :text_validation,
       :display_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides help information on the registration field.</p>
@@ -3277,7 +3277,7 @@ module Aws::PinpointSMSVoiceV2
       :text_validation_description,
       :example_text_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the values of the specified field.</p>
@@ -3303,7 +3303,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_attachment_id,
       :denied_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering registrations that meets a specified criteria.</p>
@@ -3317,7 +3317,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the requested registration.</p>
@@ -3359,7 +3359,7 @@ module Aws::PinpointSMSVoiceV2
       :additional_attributes,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on the specified section definition.</p>
@@ -3373,7 +3373,7 @@ module Aws::PinpointSMSVoiceV2
       :section_path,
       :display_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides help information on the registration section.</p>
@@ -3399,7 +3399,7 @@ module Aws::PinpointSMSVoiceV2
       :documentation_title,
       :documentation_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on the supported registration type.</p>
@@ -3417,7 +3417,7 @@ module Aws::PinpointSMSVoiceV2
       :supported_associations,
       :display_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides help information on the registration type.</p>
@@ -3443,7 +3443,7 @@ module Aws::PinpointSMSVoiceV2
       :documentation_title,
       :documentation_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering registration types that meets a specified criteria.</p>
@@ -3457,7 +3457,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering registration versions that meets a specified criteria.</p>
@@ -3471,7 +3471,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the specified version of the registration.</p>
@@ -3493,7 +3493,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_version_status_history,
       :denied_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <b>RegistrationVersionStatusHistory</b> object contains the time stamps for when the reservations status changes.</p>
@@ -3535,7 +3535,7 @@ module Aws::PinpointSMSVoiceV2
       :revoked_timestamp,
       :archived_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -3544,7 +3544,7 @@ module Aws::PinpointSMSVoiceV2
     class ReleasePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_arn
@@ -3613,7 +3613,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_id,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -3632,7 +3632,7 @@ module Aws::PinpointSMSVoiceV2
       :sender_id,
       :iso_country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sender_id_arn
@@ -3665,7 +3665,7 @@ module Aws::PinpointSMSVoiceV2
       :registered,
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:registered] = false unless options.key?(:registered)
@@ -3715,7 +3715,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_arn
@@ -3796,7 +3796,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -3832,7 +3832,7 @@ module Aws::PinpointSMSVoiceV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sender_id_arn
@@ -3869,7 +3869,7 @@ module Aws::PinpointSMSVoiceV2
       :registered,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
@@ -3892,7 +3892,7 @@ module Aws::PinpointSMSVoiceV2
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of each select option.</p>
@@ -3910,7 +3910,7 @@ module Aws::PinpointSMSVoiceV2
       :title,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validation rules for a select field.</p>
@@ -3928,7 +3928,7 @@ module Aws::PinpointSMSVoiceV2
       :max_choices,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_id
@@ -3961,7 +3961,7 @@ module Aws::PinpointSMSVoiceV2
       :context,
       :destination_country_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -3970,7 +3970,7 @@ module Aws::PinpointSMSVoiceV2
     class SendDestinationNumberVerificationCodeResult < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_phone_number
@@ -4019,7 +4019,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :message_feedback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -4028,7 +4028,7 @@ module Aws::PinpointSMSVoiceV2
     class SendMediaMessageResult < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_phone_number
@@ -4085,7 +4085,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :message_feedback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -4094,7 +4094,7 @@ module Aws::PinpointSMSVoiceV2
     class SendTextMessageResult < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_phone_number
@@ -4147,7 +4147,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :message_feedback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -4156,7 +4156,7 @@ module Aws::PinpointSMSVoiceV2
     class SendVoiceMessageResult < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The alphanumeric sender ID in a specific country that you want to describe. For more information on sender IDs see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/sender-id-request.html">Requesting sender IDs </a> in the <i>AWS End User Messaging SMS User Guide</i>.</p>
@@ -4170,7 +4170,7 @@ module Aws::PinpointSMSVoiceV2
       :sender_id,
       :iso_country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a sender ID that meets a specified criteria.</p>
@@ -4184,7 +4184,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for all SenderIds in an Amazon Web Services account.</p>
@@ -4222,7 +4222,7 @@ module Aws::PinpointSMSVoiceV2
       :registered,
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
@@ -4241,7 +4241,7 @@ module Aws::PinpointSMSVoiceV2
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -4250,7 +4250,7 @@ module Aws::PinpointSMSVoiceV2
     class SetAccountDefaultProtectConfigurationRequest < Struct.new(
       :protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_protect_configuration_arn
@@ -4263,7 +4263,7 @@ module Aws::PinpointSMSVoiceV2
       :default_protect_configuration_arn,
       :default_protect_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -4276,7 +4276,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :message_feedback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -4293,7 +4293,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :message_feedback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -4306,7 +4306,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :message_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -4323,7 +4323,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :message_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -4336,7 +4336,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :sender_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -4353,7 +4353,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :sender_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4362,7 +4362,7 @@ module Aws::PinpointSMSVoiceV2
     class SetMediaMessageSpendLimitOverrideRequest < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4371,7 +4371,7 @@ module Aws::PinpointSMSVoiceV2
     class SetMediaMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4380,7 +4380,7 @@ module Aws::PinpointSMSVoiceV2
     class SetTextMessageSpendLimitOverrideRequest < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4389,7 +4389,7 @@ module Aws::PinpointSMSVoiceV2
     class SetTextMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4398,7 +4398,7 @@ module Aws::PinpointSMSVoiceV2
     class SetVoiceMessageSpendLimitOverrideRequest < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monthly_limit
@@ -4407,7 +4407,7 @@ module Aws::PinpointSMSVoiceV2
     class SetVoiceMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines an Amazon SNS destination for events. You can use Amazon SNS to send notification when certain events occur.</p>
@@ -4417,7 +4417,7 @@ module Aws::PinpointSMSVoiceV2
     class SnsDestination < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current monthly spend limits for sending voice and text messages. For more information on increasing your monthly spend limit, see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/awssupport-spend-threshold.html"> Requesting a spending quota increase </a> in the <i>AWS End User Messaging SMS User Guide</i>. </p>
@@ -4439,7 +4439,7 @@ module Aws::PinpointSMSVoiceV2
       :max_limit,
       :overridden,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enforced_limit] = 0 unless options.key?(:enforced_limit)
@@ -4455,7 +4455,7 @@ module Aws::PinpointSMSVoiceV2
     class SubmitRegistrationVersionRequest < Struct.new(
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_arn
@@ -4480,7 +4480,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_version_status,
       :registration_version_status_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The processing rules for when a registration can be associated with an origination identity and disassociated from an origination identity.</p>
@@ -4502,7 +4502,7 @@ module Aws::PinpointSMSVoiceV2
       :association_behavior,
       :disassociation_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags to be added to the specified topic.</p>
@@ -4516,7 +4516,7 @@ module Aws::PinpointSMSVoiceV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4529,12 +4529,12 @@ module Aws::PinpointSMSVoiceV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validation rules for a text field.</p>
@@ -4552,7 +4552,7 @@ module Aws::PinpointSMSVoiceV2
       :max_length,
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that occurred because too many requests were sent during a certain amount of time.</p>
@@ -4561,7 +4561,7 @@ module Aws::PinpointSMSVoiceV2
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4574,12 +4574,12 @@ module Aws::PinpointSMSVoiceV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_name
@@ -4612,7 +4612,7 @@ module Aws::PinpointSMSVoiceV2
       :kinesis_firehose_destination,
       :sns_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_set_arn
@@ -4629,7 +4629,7 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -4662,7 +4662,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_arn
@@ -4735,7 +4735,7 @@ module Aws::PinpointSMSVoiceV2
       :registration_id,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -4779,7 +4779,7 @@ module Aws::PinpointSMSVoiceV2
       :shared_routes_enabled,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -4832,7 +4832,7 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
@@ -4857,7 +4857,7 @@ module Aws::PinpointSMSVoiceV2
       :number_capability,
       :country_rule_set_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -4878,7 +4878,7 @@ module Aws::PinpointSMSVoiceV2
       :number_capability,
       :country_rule_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_id
@@ -4891,7 +4891,7 @@ module Aws::PinpointSMSVoiceV2
       :protect_configuration_id,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protect_configuration_arn
@@ -4916,7 +4916,7 @@ module Aws::PinpointSMSVoiceV2
       :account_default,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:account_default] = false unless options.key?(:account_default)
@@ -4939,7 +4939,7 @@ module Aws::PinpointSMSVoiceV2
       :iso_country_code,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sender_id_arn
@@ -4976,7 +4976,7 @@ module Aws::PinpointSMSVoiceV2
       :registered,
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
@@ -4999,7 +4999,7 @@ module Aws::PinpointSMSVoiceV2
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field associated with the validation exception.</p>
@@ -5013,7 +5013,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter definition for filtering verified destination phone numbers that meets a specified criteria.</p>
@@ -5027,7 +5027,7 @@ module Aws::PinpointSMSVoiceV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the requested verified destintion phone number.</p>
@@ -5053,7 +5053,7 @@ module Aws::PinpointSMSVoiceV2
       :status,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_id
@@ -5066,7 +5066,7 @@ module Aws::PinpointSMSVoiceV2
       :verified_destination_number_id,
       :verification_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_destination_number_arn
@@ -5091,7 +5091,7 @@ module Aws::PinpointSMSVoiceV2
       :status,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

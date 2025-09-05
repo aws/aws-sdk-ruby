@@ -12,7 +12,7 @@ module Aws::DataExchange
     class AcceptDataGrantRequest < Struct.new(
       :data_grant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -69,7 +69,7 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access to the resource is denied.</p>
@@ -79,7 +79,7 @@ module Aws::DataExchange
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>What occurs after a certain event.</p>
@@ -89,7 +89,7 @@ module Aws::DataExchange
     class Action < Struct.new(
       :export_revision_to_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API Gateway API that is the asset.</p>
@@ -131,7 +131,7 @@ module Aws::DataExchange
       :protocol_type,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination for the asset.</p>
@@ -149,7 +149,7 @@ module Aws::DataExchange
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the asset.</p>
@@ -175,7 +175,7 @@ module Aws::DataExchange
       :s3_data_access_asset,
       :lake_formation_data_permission_asset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means of
@@ -236,7 +236,7 @@ module Aws::DataExchange
       :source_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the assets.</p>
@@ -250,7 +250,7 @@ module Aws::DataExchange
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A revision destination is the Amazon S3 bucket folder destination to where the export
@@ -266,7 +266,7 @@ module Aws::DataExchange
       :bucket,
       :key_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -281,7 +281,7 @@ module Aws::DataExchange
       :encryption,
       :revision_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -290,7 +290,7 @@ module Aws::DataExchange
     class CancelJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed because it conflicted with the current state of the
@@ -310,7 +310,7 @@ module Aws::DataExchange
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -343,7 +343,7 @@ module Aws::DataExchange
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -408,7 +408,7 @@ module Aws::DataExchange
       :updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_type
@@ -432,7 +432,7 @@ module Aws::DataExchange
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -485,7 +485,7 @@ module Aws::DataExchange
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -502,7 +502,7 @@ module Aws::DataExchange
       :event,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -535,7 +535,7 @@ module Aws::DataExchange
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute details
@@ -548,7 +548,7 @@ module Aws::DataExchange
       :details,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -585,7 +585,7 @@ module Aws::DataExchange
       :type,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -605,7 +605,7 @@ module Aws::DataExchange
       :data_set_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -666,7 +666,7 @@ module Aws::DataExchange
       :revoked,
       :revoked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:finalized] = false unless options.key?(:finalized)
@@ -691,7 +691,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the response of the operation to create an S3 data access from an S3
@@ -710,7 +710,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a data grant.</p>
@@ -764,7 +764,7 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data set is an AWS resource with one or more revisions.</p>
@@ -814,7 +814,7 @@ module Aws::DataExchange
       :source_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to a data update type notification.</p>
@@ -826,7 +826,7 @@ module Aws::DataExchange
     class DataUpdateRequestDetails < Struct.new(
       :data_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LF-tag policy for database resources.</p>
@@ -836,7 +836,7 @@ module Aws::DataExchange
     class DatabaseLFTagPolicy < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LF-tag policy and permissions for database resources.</p>
@@ -850,7 +850,7 @@ module Aws::DataExchange
       :expression,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_id
@@ -867,7 +867,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_grant_id
@@ -876,7 +876,7 @@ module Aws::DataExchange
     class DeleteDataGrantRequest < Struct.new(
       :data_grant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -885,7 +885,7 @@ module Aws::DataExchange
     class DeleteDataSetInput < Struct.new(
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_action_id
@@ -894,7 +894,7 @@ module Aws::DataExchange
     class DeleteEventActionInput < Struct.new(
       :event_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -907,7 +907,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to a deprecation type notification.</p>
@@ -918,7 +918,7 @@ module Aws::DataExchange
     class DeprecationRequestDetails < Struct.new(
       :deprecation_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the job error.</p>
@@ -932,7 +932,7 @@ module Aws::DataExchange
       :import_asset_from_signed_url_job_error_details,
       :import_assets_from_s3_job_error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>What occurs to start an action.</p>
@@ -942,7 +942,7 @@ module Aws::DataExchange
     class Event < Struct.new(
       :revision_published,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An event action is an object that defines the relationship between a specific event and
@@ -973,7 +973,7 @@ module Aws::DataExchange
       :id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -991,7 +991,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the export to signed URL response.</p>
@@ -1017,7 +1017,7 @@ module Aws::DataExchange
       :signed_url,
       :signed_url_expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -1039,7 +1039,7 @@ module Aws::DataExchange
       :encryption,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the export to Amazon S3 response.</p>
@@ -1061,7 +1061,7 @@ module Aws::DataExchange
       :encryption,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -1079,7 +1079,7 @@ module Aws::DataExchange
       :encryption,
       :revision_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the export revisions to Amazon S3 response.</p>
@@ -1101,7 +1101,7 @@ module Aws::DataExchange
       :revision_destinations,
       :event_action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encryption configuration of the export job. Includes the encryption type in addition to
@@ -1117,7 +1117,7 @@ module Aws::DataExchange
       :kms_key_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_id
@@ -1134,7 +1134,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1187,7 +1187,7 @@ module Aws::DataExchange
       :source_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_grant_id
@@ -1196,7 +1196,7 @@ module Aws::DataExchange
     class GetDataGrantRequest < Struct.new(
       :data_grant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1261,7 +1261,7 @@ module Aws::DataExchange
       :updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -1270,7 +1270,7 @@ module Aws::DataExchange
     class GetDataSetInput < Struct.new(
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1323,7 +1323,7 @@ module Aws::DataExchange
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_action_id
@@ -1332,7 +1332,7 @@ module Aws::DataExchange
     class GetEventActionInput < Struct.new(
       :event_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -1365,7 +1365,7 @@ module Aws::DataExchange
       :tags,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1374,7 +1374,7 @@ module Aws::DataExchange
     class GetJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1411,7 +1411,7 @@ module Aws::DataExchange
       :type,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_grant_arn
@@ -1420,7 +1420,7 @@ module Aws::DataExchange
     class GetReceivedDataGrantRequest < Struct.new(
       :data_grant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1477,7 +1477,7 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -1490,7 +1490,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1551,7 +1551,7 @@ module Aws::DataExchange
       :revoked,
       :revoked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:finalized] = false unless options.key?(:finalized)
@@ -1600,7 +1600,7 @@ module Aws::DataExchange
       :revision_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response details.</p>
@@ -1651,7 +1651,7 @@ module Aws::DataExchange
       :revision_id,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the job error.</p>
@@ -1661,7 +1661,7 @@ module Aws::DataExchange
     class ImportAssetFromSignedUrlJobErrorDetails < Struct.new(
       :asset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -1685,7 +1685,7 @@ module Aws::DataExchange
       :md5_hash,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details in the response for an import request, including the signed URL and other
@@ -1717,7 +1717,7 @@ module Aws::DataExchange
       :signed_url,
       :signed_url_expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the assets imported from an AWS Lake Formation tag policy request.</p>
@@ -1748,7 +1748,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details from an import AWS Lake Formation tag policy job response.</p>
@@ -1779,7 +1779,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details from an import from Amazon Redshift datashare request.</p>
@@ -1797,7 +1797,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details from an import from Amazon Redshift datashare response.</p>
@@ -1815,7 +1815,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the operation to be performed by the job.</p>
@@ -1833,7 +1833,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details from an import from Amazon S3 response.</p>
@@ -1851,7 +1851,7 @@ module Aws::DataExchange
       :data_set_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception occurred with the service.</p>
@@ -1861,7 +1861,7 @@ module Aws::DataExchange
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS Data Exchange Jobs are asynchronous import or export operations used to create or
@@ -1903,7 +1903,7 @@ module Aws::DataExchange
       :type,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that occurred with the job request.</p>
@@ -1937,7 +1937,7 @@ module Aws::DataExchange
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit_value] = 0 unless options.key?(:limit_value)
@@ -1956,7 +1956,7 @@ module Aws::DataExchange
     class KmsKeyToGrant < Struct.new(
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the AWS Lake Formation resource (Table or Database) included in the AWS
@@ -1973,7 +1973,7 @@ module Aws::DataExchange
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that allows an LF-admin to grant permissions on certain conditions.</p>
@@ -1987,7 +1987,7 @@ module Aws::DataExchange
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the LF-tag policy.</p>
@@ -2005,7 +2005,7 @@ module Aws::DataExchange
       :resource_type,
       :resource_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AWS Lake Formation data permission asset.</p>
@@ -2028,7 +2028,7 @@ module Aws::DataExchange
       :permissions,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the AWS Lake Formation data permission.</p>
@@ -2038,7 +2038,7 @@ module Aws::DataExchange
     class LakeFormationDataPermissionDetails < Struct.new(
       :lf_tag_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to the affected scope in this LF data set.</p>
@@ -2054,7 +2054,7 @@ module Aws::DataExchange
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2068,7 +2068,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_grant_summaries
@@ -2082,7 +2082,7 @@ module Aws::DataExchange
       :data_grant_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -2100,7 +2100,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2114,7 +2114,7 @@ module Aws::DataExchange
       :next_token,
       :revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2133,7 +2133,7 @@ module Aws::DataExchange
       :next_token,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_sets
@@ -2147,7 +2147,7 @@ module Aws::DataExchange
       :data_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source_id
@@ -2165,7 +2165,7 @@ module Aws::DataExchange
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_actions
@@ -2179,7 +2179,7 @@ module Aws::DataExchange
       :event_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -2201,7 +2201,7 @@ module Aws::DataExchange
       :next_token,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -2215,7 +2215,7 @@ module Aws::DataExchange
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2233,7 +2233,7 @@ module Aws::DataExchange
       :next_token,
       :acceptance_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_grant_summaries
@@ -2247,7 +2247,7 @@ module Aws::DataExchange
       :data_grant_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -2269,7 +2269,7 @@ module Aws::DataExchange
       :next_token,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assets
@@ -2283,7 +2283,7 @@ module Aws::DataExchange
       :assets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2292,7 +2292,7 @@ module Aws::DataExchange
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2301,7 +2301,7 @@ module Aws::DataExchange
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to this notification.</p>
@@ -2322,7 +2322,7 @@ module Aws::DataExchange
       :deprecation,
       :schema_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the origin of the data set.</p>
@@ -2336,7 +2336,7 @@ module Aws::DataExchange
       :product_id,
       :data_grant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a received data grant.</p>
@@ -2386,7 +2386,7 @@ module Aws::DataExchange
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Redshift datashare asset.</p>
@@ -2396,7 +2396,7 @@ module Aws::DataExchange
     class RedshiftDataShareAsset < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the Amazon Redshift datashare asset.</p>
@@ -2406,7 +2406,7 @@ module Aws::DataExchange
     class RedshiftDataShareAssetSourceEntry < Struct.new(
       :data_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to the affected scope in this Redshift data set.</p>
@@ -2444,7 +2444,7 @@ module Aws::DataExchange
       :schema,
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the request.</p>
@@ -2486,7 +2486,7 @@ module Aws::DataExchange
       :create_s3_data_access_from_s3_bucket,
       :import_assets_from_lake_formation_tag_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource couldn't be found.</p>
@@ -2504,7 +2504,7 @@ module Aws::DataExchange
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for the response.</p>
@@ -2546,7 +2546,7 @@ module Aws::DataExchange
       :create_s3_data_access_from_s3_bucket,
       :import_assets_from_lake_formation_tag_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination where the assets in the revision will be exported.</p>
@@ -2565,7 +2565,7 @@ module Aws::DataExchange
       :key_pattern,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A revision is a container for one or more assets.</p>
@@ -2623,7 +2623,7 @@ module Aws::DataExchange
       :revoked,
       :revoked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:finalized] = false unless options.key?(:finalized)
@@ -2639,7 +2639,7 @@ module Aws::DataExchange
     class RevisionPublished < Struct.new(
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -2657,7 +2657,7 @@ module Aws::DataExchange
       :revision_id,
       :revocation_comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2714,7 +2714,7 @@ module Aws::DataExchange
       :revoked,
       :revoked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:finalized] = false unless options.key?(:finalized)
@@ -2754,7 +2754,7 @@ module Aws::DataExchange
       :s3_access_point_arn,
       :kms_keys_to_grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source details for an Amazon S3 data access asset.</p>
@@ -2777,7 +2777,7 @@ module Aws::DataExchange
       :keys,
       :kms_keys_to_grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to the affected scope in this S3 Data Access data set.</p>
@@ -2797,7 +2797,7 @@ module Aws::DataExchange
       :key_prefixes,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 object that is the asset.</p>
@@ -2807,7 +2807,7 @@ module Aws::DataExchange
     class S3SnapshotAsset < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -2838,7 +2838,7 @@ module Aws::DataExchange
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extra details specific to this schema change type notification.</p>
@@ -2856,7 +2856,7 @@ module Aws::DataExchange
       :changes,
       :schema_change_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the scope of the notifications such as the affected resources.</p>
@@ -2877,7 +2877,7 @@ module Aws::DataExchange
       :redshift_data_shares,
       :s3_data_accesses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2920,7 +2920,7 @@ module Aws::DataExchange
       :path,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2933,7 +2933,7 @@ module Aws::DataExchange
       :body,
       :response_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -2971,12 +2971,12 @@ module Aws::DataExchange
       :details,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendDataSetNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has exceeded the quotas imposed by the service.</p>
@@ -2994,7 +2994,7 @@ module Aws::DataExchange
       :limit_value,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit_value] = 0 unless options.key?(:limit_value)
@@ -3008,12 +3008,12 @@ module Aws::DataExchange
     class StartJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LF-tag policy for a table resource.</p>
@@ -3023,7 +3023,7 @@ module Aws::DataExchange
     class TableLFTagPolicy < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LF-tag policy and permissions that apply to table resources.</p>
@@ -3037,7 +3037,7 @@ module Aws::DataExchange
       :expression,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3050,7 +3050,7 @@ module Aws::DataExchange
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -3060,7 +3060,7 @@ module Aws::DataExchange
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3073,7 +3073,7 @@ module Aws::DataExchange
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_id
@@ -3100,7 +3100,7 @@ module Aws::DataExchange
       :name,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3153,7 +3153,7 @@ module Aws::DataExchange
       :source_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -3170,7 +3170,7 @@ module Aws::DataExchange
       :description,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3219,7 +3219,7 @@ module Aws::DataExchange
       :source_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -3232,7 +3232,7 @@ module Aws::DataExchange
       :action,
       :event_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -3261,7 +3261,7 @@ module Aws::DataExchange
       :id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -3284,7 +3284,7 @@ module Aws::DataExchange
       :finalized,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3341,7 +3341,7 @@ module Aws::DataExchange
       :revoked,
       :revoked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:finalized] = false unless options.key?(:finalized)
@@ -3361,7 +3361,7 @@ module Aws::DataExchange
       :message,
       :exception_cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

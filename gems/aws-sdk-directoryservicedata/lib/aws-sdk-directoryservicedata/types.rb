@@ -21,13 +21,7 @@ module Aws::DirectoryServiceData
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessDeniedReason
-      IAM_AUTH = 'IAM_AUTH'
-      DIRECTORY_AUTH = 'DIRECTORY_AUTH'
-      DATA_DISABLED = 'DATA_DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -67,12 +61,12 @@ module Aws::DirectoryServiceData
       :member_realm,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddGroupMemberResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The data type for an attribute. Each attribute value is described as a name-value pair.
@@ -111,7 +105,7 @@ module Aws::DirectoryServiceData
       :ss,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S < AttributeValue; end
       class N < AttributeValue; end
@@ -132,7 +126,7 @@ module Aws::DirectoryServiceData
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -171,7 +165,7 @@ module Aws::DirectoryServiceData
       :other_attributes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -188,7 +182,7 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :sid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -235,7 +229,7 @@ module Aws::DirectoryServiceData
       :other_attributes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -252,7 +246,7 @@ module Aws::DirectoryServiceData
       :sid,
       :sam_account_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -278,12 +272,12 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -309,12 +303,12 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -342,7 +336,7 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :other_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -380,7 +374,7 @@ module Aws::DirectoryServiceData
       :group_scope,
       :other_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -407,7 +401,7 @@ module Aws::DirectoryServiceData
       :other_attributes,
       :realm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -462,7 +456,7 @@ module Aws::DirectoryServiceData
       :enabled,
       :other_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request could not be completed due to a problem in the configuration or current state
@@ -476,15 +470,7 @@ module Aws::DirectoryServiceData
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryUnavailableReason
-      INVALID_DIRECTORY_STATE = 'INVALID_DIRECTORY_STATE'
-      DIRECTORY_TIMEOUT = 'DIRECTORY_TIMEOUT'
-      DIRECTORY_RESOURCES_EXCEEDED = 'DIRECTORY_RESOURCES_EXCEEDED'
-      NO_DISK_SPACE = 'NO_DISK_SPACE'
-      TRUST_AUTH_FAILURE = 'TRUST_AUTH_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -510,12 +496,12 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A group object that contains identifying information and attributes for a specified
@@ -547,14 +533,7 @@ module Aws::DirectoryServiceData
       :group_scope,
       :other_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupScope
-      DOMAIN_LOCAL = 'DomainLocal'
-      GLOBAL = 'Global'
-      UNIVERSAL = 'Universal'
-      BUILTIN_LOCAL = 'BuiltinLocal'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a subset of fields of a group object from a directory.</p>
@@ -576,12 +555,7 @@ module Aws::DirectoryServiceData
       :group_type,
       :group_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupType
-      DISTRIBUTION = 'Distribution'
-      SECURITY = 'Security'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The operation didn't succeed because an internal error occurred. Try again later. </p>
@@ -590,7 +564,7 @@ module Aws::DirectoryServiceData
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -630,7 +604,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -656,7 +630,7 @@ module Aws::DirectoryServiceData
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -698,7 +672,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -724,7 +698,7 @@ module Aws::DirectoryServiceData
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -751,7 +725,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -773,7 +747,7 @@ module Aws::DirectoryServiceData
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -800,7 +774,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -822,7 +796,7 @@ module Aws::DirectoryServiceData
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A member object that contains identifying information for a specified member.</p>
@@ -840,13 +814,7 @@ module Aws::DirectoryServiceData
       :sam_account_name,
       :member_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberType
-      USER = 'USER'
-      GROUP = 'GROUP'
-      COMPUTER = 'COMPUTER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -885,12 +853,12 @@ module Aws::DirectoryServiceData
       :member_realm,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveGroupMemberResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The resource couldn't be found. </p>
@@ -899,7 +867,7 @@ module Aws::DirectoryServiceData
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -941,7 +909,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -963,7 +931,7 @@ module Aws::DirectoryServiceData
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1005,7 +973,7 @@ module Aws::DirectoryServiceData
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1027,7 +995,7 @@ module Aws::DirectoryServiceData
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The limit on the number of requests per second has been exceeded. </p>
@@ -1040,7 +1008,7 @@ module Aws::DirectoryServiceData
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1085,18 +1053,12 @@ module Aws::DirectoryServiceData
       :update_type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateType
-      ADD = 'ADD'
-      REPLACE = 'REPLACE'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1149,12 +1111,12 @@ module Aws::DirectoryServiceData
       :update_type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A user object that contains identifying information and attributes for a specified user.
@@ -1200,7 +1162,7 @@ module Aws::DirectoryServiceData
       :enabled,
       :other_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a subset of the fields of a user object from a directory.</p>
@@ -1226,7 +1188,7 @@ module Aws::DirectoryServiceData
       :surname,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request isn't valid. Review the details in the error message to update the invalid
@@ -1240,25 +1202,7 @@ module Aws::DirectoryServiceData
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      INVALID_REALM = 'INVALID_REALM'
-      INVALID_DIRECTORY_TYPE = 'INVALID_DIRECTORY_TYPE'
-      INVALID_SECONDARY_REGION = 'INVALID_SECONDARY_REGION'
-      INVALID_NEXT_TOKEN = 'INVALID_NEXT_TOKEN'
-      INVALID_ATTRIBUTE_VALUE = 'INVALID_ATTRIBUTE_VALUE'
-      INVALID_ATTRIBUTE_NAME = 'INVALID_ATTRIBUTE_NAME'
-      INVALID_ATTRIBUTE_FOR_USER = 'INVALID_ATTRIBUTE_FOR_USER'
-      INVALID_ATTRIBUTE_FOR_GROUP = 'INVALID_ATTRIBUTE_FOR_GROUP'
-      INVALID_ATTRIBUTE_FOR_SEARCH = 'INVALID_ATTRIBUTE_FOR_SEARCH'
-      INVALID_ATTRIBUTE_FOR_MODIFY = 'INVALID_ATTRIBUTE_FOR_MODIFY'
-      DUPLICATE_ATTRIBUTE = 'DUPLICATE_ATTRIBUTE'
-      MISSING_ATTRIBUTE = 'MISSING_ATTRIBUTE'
-      ATTRIBUTE_EXISTS = 'ATTRIBUTE_EXISTS'
-      LDAP_SIZE_LIMIT_EXCEEDED = 'LDAP_SIZE_LIMIT_EXCEEDED'
-      LDAP_UNSUPPORTED_OPERATION = 'LDAP_UNSUPPORTED_OPERATION'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -15,7 +15,7 @@ module Aws::CloudTrail
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This exception is thrown when you start a new import and a previous import is still in
@@ -26,7 +26,7 @@ module Aws::CloudTrail
     class AccountHasOngoingImportException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified account is not found or not part of an
@@ -37,7 +37,7 @@ module Aws::CloudTrail
     class AccountNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified account is not registered as the CloudTrail delegated administrator.</p>
@@ -47,7 +47,7 @@ module Aws::CloudTrail
     class AccountNotRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the account is already registered as the CloudTrail
@@ -58,7 +58,7 @@ module Aws::CloudTrail
     class AccountRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the tags to add to a trail, event data store, dashboard, or channel.</p>
@@ -84,13 +84,13 @@ module Aws::CloudTrail
       :resource_id,
       :tags_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data if successful. Otherwise, returns an error.</p>
     class AddTagsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Advanced event selectors let you create fine-grained selectors for CloudTrail management, data, and network activity events. They help you control costs by logging only those
@@ -111,7 +111,7 @@ module Aws::CloudTrail
       :name,
       :field_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single selector statement in an advanced event selector.</p>
@@ -162,12 +162,7 @@ module Aws::CloudTrail
       :not_starts_with,
       :not_ends_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BillingMode
-      EXTENDABLE_RETENTION_PRICING = 'EXTENDABLE_RETENTION_PRICING'
-      FIXED_RETENTION_PRICING = 'FIXED_RETENTION_PRICING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -190,7 +185,7 @@ module Aws::CloudTrail
       :query_id,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -210,7 +205,7 @@ module Aws::CloudTrail
       :query_status,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the management account of an organization is registered as
@@ -221,7 +216,7 @@ module Aws::CloudTrail
     class CannotDelegateManagementAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a returned CloudTrail channel.</p>
@@ -239,7 +234,7 @@ module Aws::CloudTrail
       :channel_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified value of <code>ChannelARN</code> is not
@@ -250,7 +245,7 @@ module Aws::CloudTrail
     class ChannelARNInvalidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -262,7 +257,7 @@ module Aws::CloudTrail
     class ChannelAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified event data store cannot yet be deleted because it 
@@ -273,7 +268,7 @@ module Aws::CloudTrail
     class ChannelExistsForEDSException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -285,7 +280,7 @@ module Aws::CloudTrail
     class ChannelMaxLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when CloudTrail cannot find the specified channel.</p>
@@ -295,7 +290,7 @@ module Aws::CloudTrail
     class ChannelNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when an operation is called with an ARN that is not valid.</p>
@@ -315,7 +310,7 @@ module Aws::CloudTrail
     class CloudTrailARNInvalidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when trusted access has not been enabled between CloudTrail and Organizations. For more information, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_how-to-enable-disable-trusted-access">How to enable or disable trusted access</a> in the <i>Organizations User Guide</i> and <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html">Prepare For Creating a Trail For Your Organization</a> in the <i>CloudTrail User Guide</i>.</p>
@@ -325,7 +320,7 @@ module Aws::CloudTrail
     class CloudTrailAccessNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a call results in the <code>InvalidClientTokenId</code>
@@ -337,7 +332,7 @@ module Aws::CloudTrail
     class CloudTrailInvalidClientTokenIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot set a CloudWatch Logs delivery for this Region.</p>
@@ -347,7 +342,7 @@ module Aws::CloudTrail
     class CloudWatchLogsDeliveryUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -359,7 +354,7 @@ module Aws::CloudTrail
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified resource is not ready for an operation. This
@@ -372,7 +367,7 @@ module Aws::CloudTrail
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information types to be included in CloudTrail enriched events.</p>
@@ -386,7 +381,7 @@ module Aws::CloudTrail
       :type,
       :equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -412,7 +407,7 @@ module Aws::CloudTrail
       :destinations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -437,7 +432,7 @@ module Aws::CloudTrail
       :destinations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -474,7 +469,7 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :widgets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_arn
@@ -519,7 +514,7 @@ module Aws::CloudTrail
       :refresh_schedule,
       :termination_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -641,7 +636,7 @@ module Aws::CloudTrail
       :start_ingestion,
       :billing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -707,7 +702,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :billing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for each trail.</p>
@@ -832,7 +827,7 @@ module Aws::CloudTrail
       :is_organization_trail,
       :tags_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -908,7 +903,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :is_organization_trail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -928,20 +923,7 @@ module Aws::CloudTrail
       :dashboard_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashboardStatus
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      UPDATING = 'UPDATING'
-      UPDATED = 'UPDATED'
-      DELETING = 'DELETING'
-    end
-
-    module DashboardType
-      MANAGED = 'MANAGED'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can configure the <code>DataResource</code> in an <code>EventSelector</code> to log data events for the following three resource types:</p>
@@ -1095,7 +1077,7 @@ module Aws::CloudTrail
       :type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the maximum number of CloudTrail delegated
@@ -1106,7 +1088,7 @@ module Aws::CloudTrail
     class DelegatedAdminAccountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -1115,12 +1097,12 @@ module Aws::CloudTrail
     class DeleteChannelRequest < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -1131,12 +1113,12 @@ module Aws::CloudTrail
     class DeleteDashboardRequest < Struct.new(
       :dashboard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDashboardResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1145,12 +1127,12 @@ module Aws::CloudTrail
     class DeleteEventDataStoreRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventDataStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1168,12 +1150,12 @@ module Aws::CloudTrail
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request that specifies the name of a trail to delete.</p>
@@ -1186,26 +1168,14 @@ module Aws::CloudTrail
     class DeleteTrailRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class DeleteTrailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      FAILED_SIGNING_FILE = 'FAILED_SIGNING_FILE'
-      PENDING = 'PENDING'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      ACCESS_DENIED_SIGNING_FILE = 'ACCESS_DENIED_SIGNING_FILE'
-      CANCELLED = 'CANCELLED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Removes CloudTrail delegated administrator permissions from a specified member
@@ -1218,13 +1188,13 @@ module Aws::CloudTrail
     class DeregisterOrganizationDelegatedAdminRequest < Struct.new(
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the following response if successful. Otherwise, returns an error.</p>
     class DeregisterOrganizationDelegatedAdminResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1258,7 +1228,7 @@ module Aws::CloudTrail
       :refresh_id,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -1311,7 +1281,7 @@ module Aws::CloudTrail
       :prompt,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the trail.</p>
@@ -1352,7 +1322,7 @@ module Aws::CloudTrail
       :trail_name_list,
       :include_shadow_trails,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -1368,7 +1338,7 @@ module Aws::CloudTrail
     class DescribeTrailsResponse < Struct.new(
       :trail_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the destination receiving events.</p>
@@ -1384,12 +1354,7 @@ module Aws::CloudTrail
       :type,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationType
-      EVENT_DATA_STORE = 'EVENT_DATA_STORE'
-      AWS_SERVICE = 'AWS_SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1400,7 +1365,7 @@ module Aws::CloudTrail
     class DisableFederationRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -1417,7 +1382,7 @@ module Aws::CloudTrail
       :event_data_store_arn,
       :federation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1433,7 +1398,7 @@ module Aws::CloudTrail
       :event_data_store,
       :federation_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -1456,7 +1421,7 @@ module Aws::CloudTrail
       :federation_status,
       :federation_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an event that was returned by a lookup request. The result
@@ -1502,11 +1467,7 @@ module Aws::CloudTrail
       :resources,
       :cloud_trail_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventCategory
-      Insight = 'insight'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A storage lake of event data against which you can run complex SQL-based queries. An
@@ -1576,7 +1537,7 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified event data store ARN is not valid or does not map to an event data store
@@ -1587,7 +1548,7 @@ module Aws::CloudTrail
     class EventDataStoreARNInvalidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An event data store with that name already exists.</p>
@@ -1597,7 +1558,7 @@ module Aws::CloudTrail
     class EventDataStoreAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1610,7 +1571,7 @@ module Aws::CloudTrail
     class EventDataStoreFederationEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This exception is thrown when you try to update or delete an event data store that
@@ -1621,7 +1582,7 @@ module Aws::CloudTrail
     class EventDataStoreHasOngoingImportException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your account has used the maximum number of event data stores.</p>
@@ -1631,7 +1592,7 @@ module Aws::CloudTrail
     class EventDataStoreMaxLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified event data store was not found.</p>
@@ -1641,16 +1602,7 @@ module Aws::CloudTrail
     class EventDataStoreNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventDataStoreStatus
-      CREATED = 'CREATED'
-      ENABLED = 'ENABLED'
-      PENDING_DELETION = 'PENDING_DELETION'
-      STARTING_INGESTION = 'STARTING_INGESTION'
-      STOPPING_INGESTION = 'STOPPING_INGESTION'
-      STOPPED_INGESTION = 'STOPPED_INGESTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event data store cannot be deleted because termination protection is enabled for
@@ -1661,7 +1613,7 @@ module Aws::CloudTrail
     class EventDataStoreTerminationProtectedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use event selectors to further specify the management and data event settings for your
@@ -1717,14 +1669,7 @@ module Aws::CloudTrail
       :data_resources,
       :exclude_management_event_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FederationStatus
-      ENABLING = 'ENABLING'
-      ENABLED = 'ENABLED'
-      DISABLING = 'DISABLING'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_stores
@@ -1744,7 +1689,7 @@ module Aws::CloudTrail
       :event_data_stores,
       :prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_statement
@@ -1768,7 +1713,7 @@ module Aws::CloudTrail
       :query_alias,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1780,7 +1725,7 @@ module Aws::CloudTrail
     class GenerateResponseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -1789,7 +1734,7 @@ module Aws::CloudTrail
     class GetChannelRequest < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1826,7 +1771,7 @@ module Aws::CloudTrail
       :destinations,
       :ingestion_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -1837,7 +1782,7 @@ module Aws::CloudTrail
     class GetDashboardRequest < Struct.new(
       :dashboard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_arn
@@ -1902,7 +1847,7 @@ module Aws::CloudTrail
       :last_refresh_failure_reason,
       :termination_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1911,7 +1856,7 @@ module Aws::CloudTrail
     class GetEventConfigurationRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -1928,7 +1873,7 @@ module Aws::CloudTrail
       :max_event_size,
       :context_key_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -1938,7 +1883,7 @@ module Aws::CloudTrail
     class GetEventDataStoreRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -2017,7 +1962,7 @@ module Aws::CloudTrail
       :federation_role_arn,
       :partition_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_name
@@ -2050,7 +1995,7 @@ module Aws::CloudTrail
     class GetEventSelectorsRequest < Struct.new(
       :trail_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_arn
@@ -2067,7 +2012,7 @@ module Aws::CloudTrail
       :event_selectors,
       :advanced_event_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -2076,7 +2021,7 @@ module Aws::CloudTrail
     class GetImportRequest < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -2124,7 +2069,7 @@ module Aws::CloudTrail
       :updated_timestamp,
       :import_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_name
@@ -2166,7 +2111,7 @@ module Aws::CloudTrail
       :trail_name,
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_arn
@@ -2193,7 +2138,7 @@ module Aws::CloudTrail
       :event_data_store_arn,
       :insights_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -2223,7 +2168,7 @@ module Aws::CloudTrail
       :max_query_results,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_status
@@ -2250,7 +2195,7 @@ module Aws::CloudTrail
       :next_token,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2268,7 +2213,7 @@ module Aws::CloudTrail
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2301,7 +2246,7 @@ module Aws::CloudTrail
       :resource_policy,
       :delegated_admin_resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2311,7 +2256,7 @@ module Aws::CloudTrail
     class GetTrailRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail
@@ -2320,7 +2265,7 @@ module Aws::CloudTrail
     class GetTrailResponse < Struct.new(
       :trail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of a trail about which you want the current status.</p>
@@ -2339,7 +2284,7 @@ module Aws::CloudTrail
     class GetTrailStatusRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -2441,7 +2386,7 @@ module Aws::CloudTrail
       :time_logging_started,
       :time_logging_stopped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides information about an import failure. </p>
@@ -2467,13 +2412,7 @@ module Aws::CloudTrail
       :error_message,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportFailureStatus
-      FAILED = 'FAILED'
-      RETRY = 'RETRY'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified import was not found. </p>
@@ -2483,7 +2422,7 @@ module Aws::CloudTrail
     class ImportNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The import source. </p>
@@ -2493,7 +2432,7 @@ module Aws::CloudTrail
     class ImportSource < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides statistics for the specified <code>ImportID</code>. CloudTrail does not
@@ -2521,15 +2460,7 @@ module Aws::CloudTrail
       :events_completed,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportStatus
-      INITIALIZING = 'INITIALIZING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about an import that was returned by a lookup request. </p>
@@ -2555,7 +2486,7 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event data store is inactive.</p>
@@ -2565,7 +2496,7 @@ module Aws::CloudTrail
     class InactiveEventDataStoreException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified query cannot be canceled because it is in the <code>FINISHED</code>,
@@ -2576,7 +2507,7 @@ module Aws::CloudTrail
     class InactiveQueryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A table showing information about the most recent successful and failed attempts 
@@ -2603,7 +2534,7 @@ module Aws::CloudTrail
       :latest_ingestion_attempt_time,
       :latest_ingestion_attempt_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you run <code>GetInsightSelectors</code> on a trail or event data store that does not have Insights
@@ -2615,7 +2546,7 @@ module Aws::CloudTrail
     class InsightNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON string that contains a list of Insights types that are logged on a trail or event data store.</p>
@@ -2631,17 +2562,7 @@ module Aws::CloudTrail
     class InsightSelector < Struct.new(
       :insight_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightType
-      ApiCallRateInsight = 'ApiCallRateInsight'
-      ApiErrorRateInsight = 'ApiErrorRateInsight'
-    end
-
-    module InsightsMetricDataType
-      FILL_WITH_ZEROS = 'FillWithZeros'
-      NON_ZERO_DATA = 'NonZeroData'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the IAM identity that is used to create
@@ -2653,7 +2574,7 @@ module Aws::CloudTrail
     class InsufficientDependencyServiceAccessPermissionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For the <code>CreateTrail</code>
@@ -2668,7 +2589,7 @@ module Aws::CloudTrail
     class InsufficientEncryptionPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task can't be completed because you are signed in with an account that lacks permissions to view or create a service-linked role. Sign in with an account that has the required permissions and then try again.</p>
@@ -2678,7 +2599,7 @@ module Aws::CloudTrail
     class InsufficientIAMAccessPermissionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the policy on the S3 bucket is not sufficient.</p>
@@ -2688,7 +2609,7 @@ module Aws::CloudTrail
     class InsufficientS3BucketPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the policy on the Amazon SNS topic is not
@@ -2699,7 +2620,7 @@ module Aws::CloudTrail
     class InsufficientSnsTopicPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided CloudWatch Logs log group is not
@@ -2710,7 +2631,7 @@ module Aws::CloudTrail
     class InvalidCloudWatchLogsLogGroupArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided role is not valid.</p>
@@ -2720,7 +2641,7 @@ module Aws::CloudTrail
     class InvalidCloudWatchLogsRoleArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date range for the query was specified that is not valid. Be sure that the start time
@@ -2732,7 +2653,7 @@ module Aws::CloudTrail
     class InvalidDateRangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs if an event category that is not valid is specified as a value of
@@ -2743,7 +2664,7 @@ module Aws::CloudTrail
     class InvalidEventCategoryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when event categories of specified event data stores are not
@@ -2754,7 +2675,7 @@ module Aws::CloudTrail
     class InvalidEventDataStoreCategoryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event data store is not in a status that supports the operation.</p>
@@ -2764,7 +2685,7 @@ module Aws::CloudTrail
     class InvalidEventDataStoreStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the <code>PutEventSelectors</code> operation is called
@@ -2801,7 +2722,7 @@ module Aws::CloudTrail
     class InvalidEventSelectorsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when an operation is called on a trail from a Region other than
@@ -2812,7 +2733,7 @@ module Aws::CloudTrail
     class InvalidHomeRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This exception is thrown when the provided source S3 bucket is not valid for import.
@@ -2823,7 +2744,7 @@ module Aws::CloudTrail
     class InvalidImportSourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>PutInsightSelectors</code>, this exception is thrown when the formatting or syntax of the <code>InsightSelectors</code> JSON statement is not
@@ -2841,7 +2762,7 @@ module Aws::CloudTrail
     class InvalidInsightSelectorsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the KMS key ARN is not valid.</p>
@@ -2851,7 +2772,7 @@ module Aws::CloudTrail
     class InvalidKmsKeyIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a lookup attribute is specified that is not valid.</p>
@@ -2861,7 +2782,7 @@ module Aws::CloudTrail
     class InvalidLookupAttributesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if the limit specified is not valid.</p>
@@ -2871,7 +2792,7 @@ module Aws::CloudTrail
     class InvalidMaxResultsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A token that is not valid, or a token that was previously used in a request with
@@ -2882,7 +2803,7 @@ module Aws::CloudTrail
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the combination of parameters provided is not
@@ -2893,7 +2814,7 @@ module Aws::CloudTrail
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request includes a parameter that is not valid.</p>
@@ -2903,7 +2824,7 @@ module Aws::CloudTrail
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query that was submitted has validation errors, or uses incorrect syntax or
@@ -2915,7 +2836,7 @@ module Aws::CloudTrail
     class InvalidQueryStatementException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query status is not valid for the operation.</p>
@@ -2925,7 +2846,7 @@ module Aws::CloudTrail
     class InvalidQueryStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided S3 bucket name is not valid.</p>
@@ -2935,7 +2856,7 @@ module Aws::CloudTrail
     class InvalidS3BucketNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided S3 prefix is not valid.</p>
@@ -2945,7 +2866,7 @@ module Aws::CloudTrail
     class InvalidS3PrefixException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided SNS topic name is not valid.</p>
@@ -2955,7 +2876,7 @@ module Aws::CloudTrail
     class InvalidSnsTopicNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified value of <code>Source</code> is not valid.</p>
@@ -2965,7 +2886,7 @@ module Aws::CloudTrail
     class InvalidSourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified tag key or values are not valid. It can also
@@ -2976,7 +2897,7 @@ module Aws::CloudTrail
     class InvalidTagParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs if the timestamp values are not valid. Either the start time occurs after the end
@@ -2987,7 +2908,7 @@ module Aws::CloudTrail
     class InvalidTimeRangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -2997,7 +2918,7 @@ module Aws::CloudTrail
     class InvalidTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provided trail name is not valid. Trail names must
@@ -3027,7 +2948,7 @@ module Aws::CloudTrail
     class InvalidTrailNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when there is an issue with the specified KMS
@@ -3038,7 +2959,7 @@ module Aws::CloudTrail
     class KmsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is no longer in use.</p>
@@ -3049,7 +2970,7 @@ module Aws::CloudTrail
     class KmsKeyDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the KMS key does not exist, when the S3
@@ -3061,7 +2982,7 @@ module Aws::CloudTrail
     class KmsKeyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3077,7 +2998,7 @@ module Aws::CloudTrail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels
@@ -3090,7 +3011,7 @@ module Aws::CloudTrail
       :channels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -3119,7 +3040,7 @@ module Aws::CloudTrail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboards
@@ -3136,7 +3057,7 @@ module Aws::CloudTrail
       :dashboards,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3149,7 +3070,7 @@ module Aws::CloudTrail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_stores
@@ -3163,7 +3084,7 @@ module Aws::CloudTrail
       :event_data_stores,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -3180,7 +3101,7 @@ module Aws::CloudTrail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -3193,7 +3114,7 @@ module Aws::CloudTrail
       :failures,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3214,7 +3135,7 @@ module Aws::CloudTrail
       :import_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute imports
@@ -3227,7 +3148,7 @@ module Aws::CloudTrail
       :imports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source
@@ -3282,7 +3203,7 @@ module Aws::CloudTrail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source
@@ -3319,7 +3240,7 @@ module Aws::CloudTrail
       :values,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests the public keys for a specified time range.</p>
@@ -3340,7 +3261,7 @@ module Aws::CloudTrail
       :end_time,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -3358,7 +3279,7 @@ module Aws::CloudTrail
       :public_key_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -3393,7 +3314,7 @@ module Aws::CloudTrail
       :end_time,
       :query_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queries
@@ -3407,7 +3328,7 @@ module Aws::CloudTrail
       :queries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a list of tags to return.</p>
@@ -3433,7 +3354,7 @@ module Aws::CloudTrail
       :resource_id_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -3448,7 +3369,7 @@ module Aws::CloudTrail
       :resource_tag_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3460,7 +3381,7 @@ module Aws::CloudTrail
     class ListTrailsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trails
@@ -3477,7 +3398,7 @@ module Aws::CloudTrail
       :trails,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an attribute and value that filter the events returned.</p>
@@ -3494,18 +3415,7 @@ module Aws::CloudTrail
       :attribute_key,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LookupAttributeKey
-      EVENT_ID = 'EventId'
-      EVENT_NAME = 'EventName'
-      READ_ONLY = 'ReadOnly'
-      USERNAME = 'Username'
-      RESOURCE_TYPE = 'ResourceType'
-      RESOURCE_NAME = 'ResourceName'
-      EVENT_SOURCE = 'EventSource'
-      ACCESS_KEY_ID = 'AccessKeyId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a request for LookupEvents.</p>
@@ -3545,7 +3455,7 @@ module Aws::CloudTrail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a response to a LookupEvents action.</p>
@@ -3564,7 +3474,7 @@ module Aws::CloudTrail
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are already running the maximum number of concurrent queries. The maximum number of concurrent queries is 10. Wait a minute for some
@@ -3575,12 +3485,7 @@ module Aws::CloudTrail
     class MaxConcurrentQueriesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaxEventSize
-      Standard = 'Standard'
-      Large = 'Large'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the maximum number of trails is reached.</p>
@@ -3590,7 +3495,7 @@ module Aws::CloudTrail
     class MaximumNumberOfTrailsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This exception is thrown when the management account does not have a service-linked
@@ -3601,7 +3506,7 @@ module Aws::CloudTrail
     class NoManagementAccountSLRExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This exception is thrown when the account making the request is not the organization's
@@ -3612,7 +3517,7 @@ module Aws::CloudTrail
     class NotOrganizationManagementAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the Amazon Web Services account making the request to
@@ -3624,7 +3529,7 @@ module Aws::CloudTrail
     class NotOrganizationMasterAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the requested operation is not permitted.</p>
@@ -3634,7 +3539,7 @@ module Aws::CloudTrail
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Organizations is not configured to support all
@@ -3646,7 +3551,7 @@ module Aws::CloudTrail
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the request is made from an Amazon Web Services account
@@ -3658,7 +3563,7 @@ module Aws::CloudTrail
     class OrganizationsNotInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a partition key for an event data store.</p>
@@ -3672,7 +3577,7 @@ module Aws::CloudTrail
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a returned public key.</p>
@@ -3694,7 +3599,7 @@ module Aws::CloudTrail
       :validity_end_time,
       :fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -3711,7 +3616,7 @@ module Aws::CloudTrail
       :max_event_size,
       :context_key_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -3728,7 +3633,7 @@ module Aws::CloudTrail
       :max_event_size,
       :context_key_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_name
@@ -3802,7 +3707,7 @@ module Aws::CloudTrail
       :event_selectors,
       :advanced_event_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_arn
@@ -3823,7 +3728,7 @@ module Aws::CloudTrail
       :event_selectors,
       :advanced_event_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_name
@@ -3860,7 +3765,7 @@ module Aws::CloudTrail
       :event_data_store,
       :insights_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trail_arn
@@ -3887,7 +3792,7 @@ module Aws::CloudTrail
       :event_data_store_arn,
       :insights_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3914,7 +3819,7 @@ module Aws::CloudTrail
       :resource_arn,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3947,7 +3852,7 @@ module Aws::CloudTrail
       :resource_policy,
       :delegated_admin_resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A SQL string of criteria about events that you want to collect in an event data
@@ -3968,7 +3873,7 @@ module Aws::CloudTrail
       :query_status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query ID does not exist or does not map to a query.</p>
@@ -3978,7 +3883,7 @@ module Aws::CloudTrail
     class QueryIdNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about a query, such as the number of results.</p>
@@ -3998,7 +3903,7 @@ module Aws::CloudTrail
       :total_results_count,
       :bytes_scanned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets metadata about a query, including the number of events that were matched, the total
@@ -4028,22 +3933,7 @@ module Aws::CloudTrail
       :execution_time_in_millis,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryStatus
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      FINISHED = 'FINISHED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
-      TIMED_OUT = 'TIMED_OUT'
-    end
-
-    module ReadWriteType
-      ReadOnly = 'ReadOnly'
-      WriteOnly = 'WriteOnly'
-      All = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4069,7 +3959,7 @@ module Aws::CloudTrail
       :status,
       :time_of_day,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4099,17 +3989,7 @@ module Aws::CloudTrail
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RefreshScheduleFrequencyUnit
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-    end
-
-    module RefreshScheduleStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an organization member account ID as a CloudTrail delegated
@@ -4121,13 +4001,13 @@ module Aws::CloudTrail
     class RegisterOrganizationDelegatedAdminRequest < Struct.new(
       :member_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the following response if successful. Otherwise, returns an error.</p>
     class RegisterOrganizationDelegatedAdminResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the tags to remove from a trail, event data store, dashboard, or channel.</p>
@@ -4153,14 +4033,14 @@ module Aws::CloudTrail
       :resource_id,
       :tags_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class RemoveTagsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4191,7 +4071,7 @@ module Aws::CloudTrail
       :query_parameters,
       :view_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the type and name of a resource referenced by an event.</p>
@@ -4210,7 +4090,7 @@ module Aws::CloudTrail
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4230,7 +4110,7 @@ module Aws::CloudTrail
     class ResourceARNNotValidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified resource is not found.</p>
@@ -4240,7 +4120,7 @@ module Aws::CloudTrail
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4252,7 +4132,7 @@ module Aws::CloudTrail
     class ResourcePolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4264,7 +4144,7 @@ module Aws::CloudTrail
     class ResourcePolicyNotValidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource tag.</p>
@@ -4278,7 +4158,7 @@ module Aws::CloudTrail
       :resource_id,
       :tags_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>
@@ -4288,7 +4168,7 @@ module Aws::CloudTrail
     class ResourceTypeNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -4298,7 +4178,7 @@ module Aws::CloudTrail
     class RestoreEventDataStoreRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -4360,7 +4240,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :billing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified S3 bucket does not exist.</p>
@@ -4370,7 +4250,7 @@ module Aws::CloudTrail
     class S3BucketDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for the source S3 bucket. </p>
@@ -4388,7 +4268,7 @@ module Aws::CloudTrail
       :s3_bucket_region,
       :s3_bucket_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_phrase
@@ -4410,7 +4290,7 @@ module Aws::CloudTrail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_results
@@ -4426,7 +4306,7 @@ module Aws::CloudTrail
       :search_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4458,7 +4338,7 @@ module Aws::CloudTrail
       :sql,
       :relevance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:relevance] = 0 unless options.key?(:relevance)
@@ -4476,7 +4356,7 @@ module Aws::CloudTrail
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains configuration information about the channel. </p>
@@ -4490,7 +4370,7 @@ module Aws::CloudTrail
       :apply_to_all_regions,
       :advanced_event_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -4511,7 +4391,7 @@ module Aws::CloudTrail
       :dashboard_id,
       :query_parameter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute refresh_id
@@ -4522,7 +4402,7 @@ module Aws::CloudTrail
     class StartDashboardRefreshResponse < Struct.new(
       :refresh_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -4531,12 +4411,12 @@ module Aws::CloudTrail
     class StartEventDataStoreIngestionRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartEventDataStoreIngestionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destinations
@@ -4570,7 +4450,7 @@ module Aws::CloudTrail
       :end_event_time,
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4613,7 +4493,7 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to CloudTrail to start logging Amazon Web Services API calls for an
@@ -4628,14 +4508,14 @@ module Aws::CloudTrail
     class StartLoggingRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class StartLoggingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_statement
@@ -4666,7 +4546,7 @@ module Aws::CloudTrail
       :query_parameters,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -4681,7 +4561,7 @@ module Aws::CloudTrail
       :query_id,
       :event_data_store_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -4690,12 +4570,12 @@ module Aws::CloudTrail
     class StopEventDataStoreIngestionRequest < Struct.new(
       :event_data_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopEventDataStoreIngestionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4704,7 +4584,7 @@ module Aws::CloudTrail
     class StopImportRequest < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4749,7 +4629,7 @@ module Aws::CloudTrail
       :end_event_time,
       :import_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Passes the request to CloudTrail to stop logging Amazon Web Services API calls for
@@ -4765,14 +4645,14 @@ module Aws::CloudTrail
     class StopLoggingRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
     #          error.</p>
     class StopLoggingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom key-value pair associated with a resource such as a CloudTrail
@@ -4789,7 +4669,7 @@ module Aws::CloudTrail
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of tags per trail, event data store, dashboard, or channel has exceeded the permitted amount. Currently, the limit is
@@ -4800,7 +4680,7 @@ module Aws::CloudTrail
     class TagsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4812,7 +4692,7 @@ module Aws::CloudTrail
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for a trail.</p>
@@ -4904,7 +4784,7 @@ module Aws::CloudTrail
       :has_insight_selectors,
       :is_organization_trail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified trail already exists.</p>
@@ -4914,7 +4794,7 @@ module Aws::CloudTrail
     class TrailAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a CloudTrail trail, including the trail's name, home Region,
@@ -4933,7 +4813,7 @@ module Aws::CloudTrail
       :name,
       :home_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the trail with the given name is not found.</p>
@@ -4943,7 +4823,7 @@ module Aws::CloudTrail
     class TrailNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is no longer in use.</p>
@@ -4953,12 +4833,7 @@ module Aws::CloudTrail
     class TrailNotProvidedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      TagContext = 'TagContext'
-      RequestContext = 'RequestContext'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the requested operation is not supported.</p>
@@ -4968,7 +4843,7 @@ module Aws::CloudTrail
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -4987,7 +4862,7 @@ module Aws::CloudTrail
       :destinations,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -5008,7 +4883,7 @@ module Aws::CloudTrail
       :source,
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -5039,7 +4914,7 @@ module Aws::CloudTrail
       :refresh_schedule,
       :termination_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_arn
@@ -5092,7 +4967,7 @@ module Aws::CloudTrail
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store
@@ -5209,7 +5084,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :billing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_data_store_arn
@@ -5283,7 +5158,7 @@ module Aws::CloudTrail
       :federation_status,
       :federation_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies settings to update for the trail.</p>
@@ -5409,7 +5284,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :is_organization_trail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the objects or data listed below if successful. Otherwise, returns an
@@ -5486,7 +5361,7 @@ module Aws::CloudTrail
       :kms_key_id,
       :is_organization_trail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5519,7 +5394,7 @@ module Aws::CloudTrail
       :query_parameters,
       :view_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

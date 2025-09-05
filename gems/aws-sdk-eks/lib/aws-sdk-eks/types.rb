@@ -6,28 +6,6 @@ module Aws::EKS
   # This module contains the types returned by client operations.
   module Types
 
-    module AMITypes
-      AL2_x86_64 = 'AL2_x86_64'
-      AL2_x86_64_GPU = 'AL2_x86_64_GPU'
-      AL2_ARM_64 = 'AL2_ARM_64'
-      CUSTOM = 'CUSTOM'
-      BOTTLEROCKET_ARM_64 = 'BOTTLEROCKET_ARM_64'
-      BOTTLEROCKET_x86_64 = 'BOTTLEROCKET_x86_64'
-      BOTTLEROCKET_ARM_64_FIPS = 'BOTTLEROCKET_ARM_64_FIPS'
-      BOTTLEROCKET_x86_64_FIPS = 'BOTTLEROCKET_x86_64_FIPS'
-      BOTTLEROCKET_ARM_64_NVIDIA = 'BOTTLEROCKET_ARM_64_NVIDIA'
-      BOTTLEROCKET_x86_64_NVIDIA = 'BOTTLEROCKET_x86_64_NVIDIA'
-      WINDOWS_CORE_2019_x86_64 = 'WINDOWS_CORE_2019_x86_64'
-      WINDOWS_FULL_2019_x86_64 = 'WINDOWS_FULL_2019_x86_64'
-      WINDOWS_CORE_2022_x86_64 = 'WINDOWS_CORE_2022_x86_64'
-      WINDOWS_FULL_2022_x86_64 = 'WINDOWS_FULL_2022_x86_64'
-      AL2023_x86_64_STANDARD = 'AL2023_x86_64_STANDARD'
-      AL2023_ARM_64_STANDARD = 'AL2023_ARM_64_STANDARD'
-      AL2023_x86_64_NEURON = 'AL2023_x86_64_NEURON'
-      AL2023_x86_64_NVIDIA = 'AL2023_x86_64_NVIDIA'
-      AL2023_ARM_64_NVIDIA = 'AL2023_ARM_64_NVIDIA'
-    end
-
     # <p>The access configuration for the cluster.</p>
     # @!attribute bootstrap_cluster_creator_admin_permissions
     #   <p>Specifies whether or not the cluster creator IAM principal was set as a cluster
@@ -40,7 +18,7 @@ module Aws::EKS
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permissions to perform the requested operation. The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html">IAM principal</a>
@@ -53,7 +31,7 @@ module Aws::EKS
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An access entry allows an IAM principal (user or role) to access your cluster.
@@ -113,7 +91,7 @@ module Aws::EKS
       :username,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An access policy includes permissions that allow Amazon EKS to authorize an
@@ -135,7 +113,7 @@ module Aws::EKS
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scope of an <code>AccessPolicy</code> that's associated to an
@@ -151,12 +129,7 @@ module Aws::EKS
       :type,
       :namespaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessScopeType
-      cluster = 'cluster'
-      namespace = 'namespace'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon EKS add-on. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html">Amazon EKS add-ons</a> in the
@@ -229,7 +202,7 @@ module Aws::EKS
       :configuration_values,
       :pod_identity_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information about the Amazon EKS add-on compatibility for the next Kubernetes
@@ -244,7 +217,7 @@ module Aws::EKS
       :name,
       :compatible_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The health of the add-on.</p>
@@ -254,7 +227,7 @@ module Aws::EKS
     class AddonHealth < Struct.new(
       :issues,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an add-on.</p>
@@ -285,7 +258,7 @@ module Aws::EKS
       :owner,
       :marketplace_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An issue related to an add-on.</p>
@@ -303,20 +276,7 @@ module Aws::EKS
       :message,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddonIssueCode
-      ACCESS_DENIED = 'AccessDenied'
-      INTERNAL_FAILURE = 'InternalFailure'
-      CLUSTER_UNREACHABLE = 'ClusterUnreachable'
-      INSUFFICIENT_NUMBER_OF_REPLICAS = 'InsufficientNumberOfReplicas'
-      CONFIGURATION_CONFLICT = 'ConfigurationConflict'
-      ADMISSION_REQUEST_DENIED = 'AdmissionRequestDenied'
-      UNSUPPORTED_ADDON_MODIFICATION = 'UnsupportedAddonModification'
-      K8S_RESOURCE_NOT_FOUND = 'K8sResourceNotFound'
-      ADDON_SUBSCRIPTION_NEEDED = 'AddonSubscriptionNeeded'
-      ADDON_PERMISSION_FAILURE = 'AddonPermissionFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of EKS Pod Identity association owned by an Amazon EKS add-on.</p>
@@ -334,7 +294,7 @@ module Aws::EKS
       :service_account,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how to configure IAM for an add-on.</p>
@@ -348,18 +308,7 @@ module Aws::EKS
       :service_account,
       :recommended_managed_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddonStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DEGRADED = 'DEGRADED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an add-on version.</p>
@@ -390,7 +339,7 @@ module Aws::EKS
       :requires_configuration,
       :requires_iam_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:requires_configuration] = false unless options.key?(:requires_configuration)
@@ -420,7 +369,7 @@ module Aws::EKS
       :policy_arn,
       :access_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -438,7 +387,7 @@ module Aws::EKS
       :principal_arn,
       :associated_access_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -456,7 +405,7 @@ module Aws::EKS
       :encryption_config,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -465,7 +414,7 @@ module Aws::EKS
     class AssociateEncryptionConfigResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -489,7 +438,7 @@ module Aws::EKS
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -502,7 +451,7 @@ module Aws::EKS
       :update,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An access policy association.</p>
@@ -525,13 +474,7 @@ module Aws::EKS
       :associated_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationMode
-      API = 'API'
-      API_AND_CONFIG_MAP = 'API_AND_CONFIG_MAP'
-      CONFIG_MAP = 'CONFIG_MAP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Auto Scaling group that is associated with an Amazon EKS managed node group.</p>
@@ -541,7 +484,7 @@ module Aws::EKS
     class AutoScalingGroup < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if the request contains a semantic error. The precise meaning
@@ -553,7 +496,7 @@ module Aws::EKS
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the current configuration of the block storage capability on your EKS Auto
@@ -569,18 +512,7 @@ module Aws::EKS
     class BlockStorage < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityTypes
-      ON_DEMAND = 'ON_DEMAND'
-      SPOT = 'SPOT'
-      CAPACITY_BLOCK = 'CAPACITY_BLOCK'
-    end
-
-    module Category
-      UPGRADE_READINESS = 'UPGRADE_READINESS'
-      MISCONFIGURATION = 'MISCONFIGURATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the <code>certificate-authority-data</code> for your
@@ -593,7 +525,7 @@ module Aws::EKS
     class Certificate < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a client action. Actions can include using an
@@ -623,7 +555,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about clients using the deprecated resources.</p>
@@ -641,7 +573,7 @@ module Aws::EKS
       :number_of_requests_last30_days,
       :last_request_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_requests_last30_days] = 0 unless options.key?(:number_of_requests_last30_days)
@@ -793,7 +725,7 @@ module Aws::EKS
       :storage_config,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the health of your Amazon EKS cluster.</p>
@@ -803,7 +735,7 @@ module Aws::EKS
     class ClusterHealth < Struct.new(
       :issues,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An issue with your Amazon EKS cluster.</p>
@@ -821,38 +753,7 @@ module Aws::EKS
       :message,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterIssueCode
-      ACCESS_DENIED = 'AccessDenied'
-      CLUSTER_UNREACHABLE = 'ClusterUnreachable'
-      CONFIGURATION_CONFLICT = 'ConfigurationConflict'
-      INTERNAL_FAILURE = 'InternalFailure'
-      RESOURCE_LIMIT_EXCEEDED = 'ResourceLimitExceeded'
-      RESOURCE_NOT_FOUND = 'ResourceNotFound'
-      IAM_ROLE_NOT_FOUND = 'IamRoleNotFound'
-      VPC_NOT_FOUND = 'VpcNotFound'
-      INSUFFICIENT_FREE_ADDRESSES = 'InsufficientFreeAddresses'
-      EC2_SERVICE_NOT_SUBSCRIBED = 'Ec2ServiceNotSubscribed'
-      EC2_SUBNET_NOT_FOUND = 'Ec2SubnetNotFound'
-      EC2_SECURITY_GROUP_NOT_FOUND = 'Ec2SecurityGroupNotFound'
-      KMS_GRANT_REVOKED = 'KmsGrantRevoked'
-      KMS_KEY_NOT_FOUND = 'KmsKeyNotFound'
-      KMS_KEY_MARKED_FOR_DELETION = 'KmsKeyMarkedForDeletion'
-      KMS_KEY_DISABLED = 'KmsKeyDisabled'
-      STS_REGIONAL_ENDPOINT_DISABLED = 'StsRegionalEndpointDisabled'
-      UNSUPPORTED_VERSION = 'UnsupportedVersion'
-      OTHER = 'Other'
-    end
-
-    module ClusterStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a specific EKS cluster version.</p>
@@ -902,18 +803,12 @@ module Aws::EKS
       :version_status,
       :kubernetes_patch_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_version] = false unless options.key?(:default_version)
         super
       end
-    end
-
-    module ClusterVersionStatus
-      unsupported = 'unsupported'
-      standard_support = 'standard-support'
-      extended_support = 'extended-support'
     end
 
     # <p>Compatibility information.</p>
@@ -931,7 +826,7 @@ module Aws::EKS
       :platform_versions,
       :default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_version] = false unless options.key?(:default_version)
@@ -963,7 +858,7 @@ module Aws::EKS
       :node_pools,
       :node_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the status of the request to update the compute capability of your EKS Auto
@@ -986,19 +881,7 @@ module Aws::EKS
       :node_pools,
       :node_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorConfigProvider
-      EKS_ANYWHERE = 'EKS_ANYWHERE'
-      ANTHOS = 'ANTHOS'
-      GKE = 'GKE'
-      AKS = 'AKS'
-      OPENSHIFT = 'OPENSHIFT'
-      TANZU = 'TANZU'
-      RANCHER = 'RANCHER'
-      EC2 = 'EC2'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration sent to a cluster for configuration.</p>
@@ -1013,7 +896,7 @@ module Aws::EKS
       :role_arn,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The full description of your connected cluster.</p>
@@ -1041,7 +924,7 @@ module Aws::EKS
       :provider,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The placement configuration for all the control plane instances of your local Amazon EKS
@@ -1054,7 +937,7 @@ module Aws::EKS
     class ControlPlanePlacementRequest < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The placement configuration for all the control plane instances of your local Amazon EKS
@@ -1065,7 +948,7 @@ module Aws::EKS
     class ControlPlanePlacementResponse < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access configuration information for the cluster.</p>
@@ -1084,7 +967,7 @@ module Aws::EKS
       :bootstrap_cluster_creator_admin_permissions,
       :authentication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1172,7 +1055,7 @@ module Aws::EKS
       :username,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_entry
@@ -1185,7 +1068,7 @@ module Aws::EKS
     class CreateAccessEntryResponse < Struct.new(
       :access_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1273,7 +1156,7 @@ module Aws::EKS
       :configuration_values,
       :pod_identity_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon
@@ -1283,7 +1166,7 @@ module Aws::EKS
     class CreateAddonResponse < Struct.new(
       :addon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1420,7 +1303,7 @@ module Aws::EKS
       :storage_config,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1429,7 +1312,7 @@ module Aws::EKS
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1475,7 +1358,7 @@ module Aws::EKS
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription
@@ -1484,7 +1367,7 @@ module Aws::EKS
     class CreateEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fargate_profile_name
@@ -1529,7 +1412,7 @@ module Aws::EKS
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fargate_profile
@@ -1538,7 +1421,7 @@ module Aws::EKS
     class CreateFargateProfileResponse < Struct.new(
       :fargate_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1681,7 +1564,7 @@ module Aws::EKS
       :version,
       :release_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodegroup
@@ -1690,7 +1573,7 @@ module Aws::EKS
     class CreateNodegroupResponse < Struct.new(
       :nodegroup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1790,7 +1673,7 @@ module Aws::EKS
       :disable_session_tags,
       :target_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -1801,7 +1684,7 @@ module Aws::EKS
     class CreatePodIdentityAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1814,12 +1697,12 @@ module Aws::EKS
       :cluster_name,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessEntryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1840,7 +1723,7 @@ module Aws::EKS
       :addon_name,
       :preserve,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon
@@ -1850,7 +1733,7 @@ module Aws::EKS
     class DeleteAddonResponse < Struct.new(
       :addon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1859,7 +1742,7 @@ module Aws::EKS
     class DeleteClusterRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1868,7 +1751,7 @@ module Aws::EKS
     class DeleteClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1877,7 +1760,7 @@ module Aws::EKS
     class DeleteEksAnywhereSubscriptionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription
@@ -1886,7 +1769,7 @@ module Aws::EKS
     class DeleteEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1899,7 +1782,7 @@ module Aws::EKS
       :cluster_name,
       :fargate_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fargate_profile
@@ -1908,7 +1791,7 @@ module Aws::EKS
     class DeleteFargateProfileResponse < Struct.new(
       :fargate_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1921,7 +1804,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodegroup
@@ -1930,7 +1813,7 @@ module Aws::EKS
     class DeleteNodegroupResponse < Struct.new(
       :nodegroup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1943,7 +1826,7 @@ module Aws::EKS
       :cluster_name,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -1952,7 +1835,7 @@ module Aws::EKS
     class DeletePodIdentityAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information about deprecated resource usage for an insight check in the
@@ -1981,7 +1864,7 @@ module Aws::EKS
       :start_serving_replacement_version,
       :client_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1990,7 +1873,7 @@ module Aws::EKS
     class DeregisterClusterRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1999,7 +1882,7 @@ module Aws::EKS
     class DeregisterClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2012,7 +1895,7 @@ module Aws::EKS
       :cluster_name,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_entry
@@ -2021,7 +1904,7 @@ module Aws::EKS
     class DescribeAccessEntryResponse < Struct.new(
       :access_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_name
@@ -2037,7 +1920,7 @@ module Aws::EKS
       :addon_name,
       :addon_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_name
@@ -2062,7 +1945,7 @@ module Aws::EKS
       :configuration_schema,
       :pod_identity_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2077,7 +1960,7 @@ module Aws::EKS
       :cluster_name,
       :addon_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon
@@ -2087,7 +1970,7 @@ module Aws::EKS
     class DescribeAddonResponse < Struct.new(
       :addon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kubernetes_version
@@ -2137,7 +2020,7 @@ module Aws::EKS
       :publishers,
       :owners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addons
@@ -2159,7 +2042,7 @@ module Aws::EKS
       :addons,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2168,7 +2051,7 @@ module Aws::EKS
     class DescribeClusterRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2177,7 +2060,7 @@ module Aws::EKS
     class DescribeClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_type
@@ -2221,7 +2104,7 @@ module Aws::EKS
       :status,
       :version_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2234,7 +2117,7 @@ module Aws::EKS
       :next_token,
       :cluster_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2243,7 +2126,7 @@ module Aws::EKS
     class DescribeEksAnywhereSubscriptionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription
@@ -2252,7 +2135,7 @@ module Aws::EKS
     class DescribeEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2265,7 +2148,7 @@ module Aws::EKS
       :cluster_name,
       :fargate_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fargate_profile
@@ -2274,7 +2157,7 @@ module Aws::EKS
     class DescribeFargateProfileResponse < Struct.new(
       :fargate_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2287,7 +2170,7 @@ module Aws::EKS
       :cluster_name,
       :identity_provider_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_config
@@ -2297,7 +2180,7 @@ module Aws::EKS
     class DescribeIdentityProviderConfigResponse < Struct.new(
       :identity_provider_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2310,7 +2193,7 @@ module Aws::EKS
       :cluster_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight
@@ -2319,7 +2202,7 @@ module Aws::EKS
     class DescribeInsightResponse < Struct.new(
       :insight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2332,7 +2215,7 @@ module Aws::EKS
       :cluster_name,
       :nodegroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodegroup
@@ -2341,7 +2224,7 @@ module Aws::EKS
     class DescribeNodegroupResponse < Struct.new(
       :nodegroup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2354,7 +2237,7 @@ module Aws::EKS
       :cluster_name,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -2363,7 +2246,7 @@ module Aws::EKS
     class DescribePodIdentityAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update request.</p>
@@ -2388,7 +2271,7 @@ module Aws::EKS
       :nodegroup_name,
       :addon_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -2397,7 +2280,7 @@ module Aws::EKS
     class DescribeUpdateResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2415,12 +2298,12 @@ module Aws::EKS
       :principal_arn,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAccessPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2438,7 +2321,7 @@ module Aws::EKS
       :identity_provider_config,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -2447,7 +2330,7 @@ module Aws::EKS
     class DisassociateIdentityProviderConfigResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An EKS Anywhere subscription authorizing the customer to support for licensed clusters
@@ -2514,26 +2397,13 @@ module Aws::EKS
       :licenses,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:license_quantity] = 0 unless options.key?(:license_quantity)
         options[:auto_renew] = false unless options.key?(:auto_renew)
         super
       end
-    end
-
-    module EksAnywhereSubscriptionLicenseType
-      Cluster = 'Cluster'
-    end
-
-    module EksAnywhereSubscriptionStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      EXPIRING = 'EXPIRING'
-      EXPIRED = 'EXPIRED'
-      DELETING = 'DELETING'
     end
 
     # <p>An object representing the term duration and term unit type of your subscription. This
@@ -2550,16 +2420,12 @@ module Aws::EKS
       :duration,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
         super
       end
-    end
-
-    module EksAnywhereSubscriptionTermUnit
-      MONTHS = 'MONTHS'
     end
 
     # <p>Indicates the current configuration of the load balancing capability on your EKS Auto
@@ -2573,7 +2439,7 @@ module Aws::EKS
     class ElasticLoadBalancing < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption configuration for the cluster.</p>
@@ -2588,27 +2454,7 @@ module Aws::EKS
       :resources,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      SUBNET_NOT_FOUND = 'SubnetNotFound'
-      SECURITY_GROUP_NOT_FOUND = 'SecurityGroupNotFound'
-      ENI_LIMIT_REACHED = 'EniLimitReached'
-      IP_NOT_AVAILABLE = 'IpNotAvailable'
-      ACCESS_DENIED = 'AccessDenied'
-      OPERATION_NOT_PERMITTED = 'OperationNotPermitted'
-      VPC_ID_NOT_FOUND = 'VpcIdNotFound'
-      UNKNOWN = 'Unknown'
-      NODE_CREATION_FAILURE = 'NodeCreationFailure'
-      POD_EVICTION_FAILURE = 'PodEvictionFailure'
-      INSUFFICIENT_FREE_ADDRESSES = 'InsufficientFreeAddresses'
-      CLUSTER_UNREACHABLE = 'ClusterUnreachable'
-      INSUFFICIENT_NUMBER_OF_REPLICAS = 'InsufficientNumberOfReplicas'
-      CONFIGURATION_CONFLICT = 'ConfigurationConflict'
-      ADMISSION_REQUEST_DENIED = 'AdmissionRequestDenied'
-      UNSUPPORTED_ADDON_MODIFICATION = 'UnsupportedAddonModification'
-      K8S_RESOURCE_NOT_FOUND = 'K8sResourceNotFound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an error when an asynchronous operation fails.</p>
@@ -2664,7 +2510,7 @@ module Aws::EKS
       :error_message,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Fargate profile.</p>
@@ -2715,7 +2561,7 @@ module Aws::EKS
       :tags,
       :health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The health status of the Fargate profile. If there are issues with your Fargate
@@ -2726,7 +2572,7 @@ module Aws::EKS
     class FargateProfileHealth < Struct.new(
       :issues,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An issue that is associated with the Fargate profile.</p>
@@ -2744,14 +2590,7 @@ module Aws::EKS
       :message,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FargateProfileIssueCode
-      POD_EXECUTION_ROLE_ALREADY_IN_USE = 'PodExecutionRoleAlreadyInUse'
-      ACCESS_DENIED = 'AccessDenied'
-      CLUSTER_UNREACHABLE = 'ClusterUnreachable'
-      INTERNAL_FAILURE = 'InternalFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Fargate profile selector.</p>
@@ -2766,15 +2605,7 @@ module Aws::EKS
       :namespace,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FargateProfileStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an identity provider.</p>
@@ -2785,7 +2616,7 @@ module Aws::EKS
     class Identity < Struct.new(
       :oidc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an identity provider configuration.</p>
@@ -2800,7 +2631,7 @@ module Aws::EKS
       :type,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The full description of your identity configuration.</p>
@@ -2810,7 +2641,7 @@ module Aws::EKS
     class IdentityProviderConfigResponse < Struct.new(
       :oidc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A check that provides recommendations to remedy potential upgrade-impacting
@@ -2868,7 +2699,7 @@ module Aws::EKS
       :resources,
       :category_specific_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information that relates to the category of the insight. Currently only
@@ -2884,7 +2715,7 @@ module Aws::EKS
       :deprecation_details,
       :addon_compatibility_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the resource being evaluated.</p>
@@ -2902,7 +2733,7 @@ module Aws::EKS
       :kubernetes_resource_uri,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the insight.</p>
@@ -2916,14 +2747,7 @@ module Aws::EKS
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightStatusValue
-      PASSING = 'PASSING'
-      WARNING = 'WARNING'
-      ERROR = 'ERROR'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summarized description of the insight.</p>
@@ -2963,7 +2787,7 @@ module Aws::EKS
       :description,
       :insight_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria to use for the insights.</p>
@@ -2994,7 +2818,7 @@ module Aws::EKS
       :kubernetes_versions,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter is invalid. Review the available parameters for the API
@@ -3027,7 +2851,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid given the state of the cluster. Check the state of the cluster
@@ -3055,7 +2879,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon EKS detected upgrade readiness issues. Call the <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_ListInsights.html">
@@ -3074,12 +2898,7 @@ module Aws::EKS
       :cluster_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpFamily
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an issue with an Amazon EKS resource.</p>
@@ -3201,7 +3020,7 @@ module Aws::EKS
       :message,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Kubernetes network configuration for the cluster.</p>
@@ -3257,7 +3076,7 @@ module Aws::EKS
       :ip_family,
       :elastic_load_balancing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Kubernetes network configuration for the cluster. The response contains a value for
@@ -3296,7 +3115,7 @@ module Aws::EKS
       :ip_family,
       :elastic_load_balancing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a node group launch template specification. The launch template
@@ -3338,7 +3157,7 @@ module Aws::EKS
       :version,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An EKS Anywhere license associated with a subscription.</p>
@@ -3352,7 +3171,7 @@ module Aws::EKS
       :id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3387,7 +3206,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_entries
@@ -3406,7 +3225,7 @@ module Aws::EKS
       :access_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3431,7 +3250,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_policies
@@ -3452,7 +3271,7 @@ module Aws::EKS
       :access_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3481,7 +3300,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addons
@@ -3502,7 +3321,7 @@ module Aws::EKS
       :addons,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3535,7 +3354,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3562,7 +3381,7 @@ module Aws::EKS
       :next_token,
       :associated_access_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3594,7 +3413,7 @@ module Aws::EKS
       :next_token,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -3613,7 +3432,7 @@ module Aws::EKS
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3639,7 +3458,7 @@ module Aws::EKS
       :next_token,
       :include_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriptions
@@ -3656,7 +3475,7 @@ module Aws::EKS
       :subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3685,7 +3504,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fargate_profile_names
@@ -3704,7 +3523,7 @@ module Aws::EKS
       :fargate_profile_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3733,7 +3552,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_configs
@@ -3755,7 +3574,7 @@ module Aws::EKS
       :identity_provider_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3789,7 +3608,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insights
@@ -3806,7 +3625,7 @@ module Aws::EKS
       :insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3835,7 +3654,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodegroups
@@ -3854,7 +3673,7 @@ module Aws::EKS
       :nodegroups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -3895,7 +3714,7 @@ module Aws::EKS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -3938,7 +3757,7 @@ module Aws::EKS
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3947,7 +3766,7 @@ module Aws::EKS
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3956,7 +3775,7 @@ module Aws::EKS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3993,7 +3812,7 @@ module Aws::EKS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_ids
@@ -4012,7 +3831,7 @@ module Aws::EKS
       :update_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the enabled or disabled Kubernetes control plane logs for your
@@ -4029,15 +3848,7 @@ module Aws::EKS
       :types,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogType
-      API = 'api'
-      AUDIT = 'audit'
-      AUTHENTICATOR = 'authenticator'
-      CONTROLLER_MANAGER = 'controllerManager'
-      SCHEDULER = 'scheduler'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the logging configuration for resources in your cluster.</p>
@@ -4047,7 +3858,7 @@ module Aws::EKS
     class Logging < Struct.new(
       :cluster_logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.</p>
@@ -4061,7 +3872,7 @@ module Aws::EKS
       :product_id,
       :product_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The node auto repair configuration for the node group.</p>
@@ -4072,7 +3883,7 @@ module Aws::EKS
     class NodeRepairConfig < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon EKS managed node group.</p>
@@ -4201,7 +4012,7 @@ module Aws::EKS
       :launch_template,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the health status of the node group.</p>
@@ -4211,46 +4022,7 @@ module Aws::EKS
     class NodegroupHealth < Struct.new(
       :issues,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodegroupIssueCode
-      AUTO_SCALING_GROUP_NOT_FOUND = 'AutoScalingGroupNotFound'
-      AUTO_SCALING_GROUP_INVALID_CONFIGURATION = 'AutoScalingGroupInvalidConfiguration'
-      EC2_SECURITY_GROUP_NOT_FOUND = 'Ec2SecurityGroupNotFound'
-      EC2_SECURITY_GROUP_DELETION_FAILURE = 'Ec2SecurityGroupDeletionFailure'
-      EC2_LAUNCH_TEMPLATE_NOT_FOUND = 'Ec2LaunchTemplateNotFound'
-      EC2_LAUNCH_TEMPLATE_VERSION_MISMATCH = 'Ec2LaunchTemplateVersionMismatch'
-      EC2_SUBNET_NOT_FOUND = 'Ec2SubnetNotFound'
-      EC2_SUBNET_INVALID_CONFIGURATION = 'Ec2SubnetInvalidConfiguration'
-      IAM_INSTANCE_PROFILE_NOT_FOUND = 'IamInstanceProfileNotFound'
-      EC2_SUBNET_MISSING_IPV6_ASSIGNMENT = 'Ec2SubnetMissingIpv6Assignment'
-      IAM_LIMIT_EXCEEDED = 'IamLimitExceeded'
-      IAM_NODE_ROLE_NOT_FOUND = 'IamNodeRoleNotFound'
-      NODE_CREATION_FAILURE = 'NodeCreationFailure'
-      ASG_INSTANCE_LAUNCH_FAILURES = 'AsgInstanceLaunchFailures'
-      INSTANCE_LIMIT_EXCEEDED = 'InstanceLimitExceeded'
-      INSUFFICIENT_FREE_ADDRESSES = 'InsufficientFreeAddresses'
-      ACCESS_DENIED = 'AccessDenied'
-      INTERNAL_FAILURE = 'InternalFailure'
-      CLUSTER_UNREACHABLE = 'ClusterUnreachable'
-      AMI_ID_NOT_FOUND = 'AmiIdNotFound'
-      AUTO_SCALING_GROUP_OPT_IN_REQUIRED = 'AutoScalingGroupOptInRequired'
-      AUTO_SCALING_GROUP_RATE_LIMIT_EXCEEDED = 'AutoScalingGroupRateLimitExceeded'
-      EC2_LAUNCH_TEMPLATE_DELETION_FAILURE = 'Ec2LaunchTemplateDeletionFailure'
-      EC2_LAUNCH_TEMPLATE_INVALID_CONFIGURATION = 'Ec2LaunchTemplateInvalidConfiguration'
-      EC2_LAUNCH_TEMPLATE_MAX_LIMIT_EXCEEDED = 'Ec2LaunchTemplateMaxLimitExceeded'
-      EC2_SUBNET_LIST_TOO_LONG = 'Ec2SubnetListTooLong'
-      IAM_THROTTLING = 'IamThrottling'
-      NODE_TERMINATION_FAILURE = 'NodeTerminationFailure'
-      POD_EVICTION_FAILURE = 'PodEvictionFailure'
-      SOURCE_EC2_LAUNCH_TEMPLATE_NOT_FOUND = 'SourceEc2LaunchTemplateNotFound'
-      LIMIT_EXCEEDED = 'LimitExceeded'
-      UNKNOWN = 'Unknown'
-      AUTO_SCALING_GROUP_INSTANCE_REFRESH_ACTIVE = 'AutoScalingGroupInstanceRefreshActive'
-      KUBERNETES_LABEL_INVALID = 'KubernetesLabelInvalid'
-      EC2_LAUNCH_TEMPLATE_VERSION_MAX_LIMIT_EXCEEDED = 'Ec2LaunchTemplateVersionMaxLimitExceeded'
-      EC2_INSTANCE_TYPE_DOES_NOT_EXIST = 'Ec2InstanceTypeDoesNotExist'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the resources associated with the node group, such as Auto
@@ -4266,7 +4038,7 @@ module Aws::EKS
       :auto_scaling_groups,
       :remote_access_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the scaling configuration details for the Auto Scaling group that is
@@ -4309,17 +4081,7 @@ module Aws::EKS
       :max_size,
       :desired_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodegroupStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DEGRADED = 'DEGRADED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The node group update configuration. An Amazon EKS managed node group updates by replacing
@@ -4356,12 +4118,7 @@ module Aws::EKS
       :max_unavailable_percentage,
       :update_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodegroupUpdateStrategies
-      DEFAULT = 'DEFAULT'
-      MINIMAL = 'MINIMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service resource associated with the request could not be found. Clients should not
@@ -4373,7 +4130,7 @@ module Aws::EKS
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the <a href="https://openid.net/connect/">OpenID Connect</a>
@@ -4384,7 +4141,7 @@ module Aws::EKS
     class OIDC < Struct.new(
       :issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the configuration for an OpenID Connect (OIDC) identity provider.
@@ -4450,7 +4207,7 @@ module Aws::EKS
       :tags,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an OpenID Connect (OIDC) configuration. Before associating an
@@ -4512,7 +4269,7 @@ module Aws::EKS
       :groups_prefix,
       :required_claims,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of your local Amazon EKS cluster on an Amazon Web Services Outpost. Before creating a
@@ -4542,7 +4299,7 @@ module Aws::EKS
       :control_plane_instance_type,
       :control_plane_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the configuration of your local Amazon EKS cluster on an Amazon Web Services
@@ -4565,7 +4322,7 @@ module Aws::EKS
       :control_plane_instance_type,
       :control_plane_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances.</p>
@@ -4678,7 +4435,7 @@ module Aws::EKS
       :target_role_arn,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summarized description of the association.</p>
@@ -4732,7 +4489,7 @@ module Aws::EKS
       :association_id,
       :owner_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the Key Management Service (KMS) key used to encrypt the secrets.</p>
@@ -4747,7 +4504,7 @@ module Aws::EKS
     class Provider < Struct.new(
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4772,7 +4529,7 @@ module Aws::EKS
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -4781,7 +4538,7 @@ module Aws::EKS
     class RegisterClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the remote access configuration for the managed node
@@ -4804,7 +4561,7 @@ module Aws::EKS
       :ec2_ssh_key,
       :source_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or remove this
@@ -4871,7 +4628,7 @@ module Aws::EKS
       :remote_node_networks,
       :remote_pod_networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration in the cluster for EKS Hybrid Nodes. You can add, change, or remove this
@@ -4887,7 +4644,7 @@ module Aws::EKS
       :remote_node_networks,
       :remote_pod_networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A network CIDR that can contain hybrid nodes.</p>
@@ -4965,7 +4722,7 @@ module Aws::EKS
     class RemoteNodeNetwork < Struct.new(
       :cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A network CIDR that can contain pods that run Kubernetes webhooks on hybrid nodes.</p>
@@ -5009,13 +4766,7 @@ module Aws::EKS
     class RemotePodNetwork < Struct.new(
       :cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolveConflicts
-      OVERWRITE = 'OVERWRITE'
-      NONE = 'NONE'
-      PRESERVE = 'PRESERVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -5037,7 +4788,7 @@ module Aws::EKS
       :addon_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have encountered a service limit on the specified resource.</p>
@@ -5059,7 +4810,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be found. You can view your available clusters with
@@ -5092,7 +4843,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Required resources (such as service-linked roles) were created and are still
@@ -5104,7 +4855,7 @@ module Aws::EKS
     class ResourcePropagationDelayException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server-side issue.</p>
@@ -5130,7 +4881,7 @@ module Aws::EKS
       :subscription_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unavailable. Back off and retry the operation.</p>
@@ -5140,7 +4891,7 @@ module Aws::EKS
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update the configuration of the storage capability of your EKS Auto Mode
@@ -5152,7 +4903,7 @@ module Aws::EKS
     class StorageConfigRequest < Struct.new(
       :block_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the status of the request to update the block storage capability of your EKS
@@ -5164,12 +4915,7 @@ module Aws::EKS
     class StorageConfigResponse < Struct.new(
       :block_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SupportType
-      STANDARD = 'STANDARD'
-      EXTENDED = 'EXTENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5184,12 +4930,12 @@ module Aws::EKS
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A property that allows a node to repel a <code>Pod</code>. For more information, see
@@ -5209,13 +4955,7 @@ module Aws::EKS
       :value,
       :effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaintEffect
-      NO_SCHEDULE = 'NO_SCHEDULE'
-      NO_EXECUTE = 'NO_EXECUTE'
-      PREFER_NO_SCHEDULE = 'PREFER_NO_SCHEDULE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request or operation couldn't be performed because a service is throttling
@@ -5229,7 +4969,7 @@ module Aws::EKS
       :cluster_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one of your specified cluster subnets is in an Availability Zone that does not support
@@ -5256,7 +4996,7 @@ module Aws::EKS
       :nodegroup_name,
       :valid_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5269,12 +5009,12 @@ module Aws::EKS
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an asynchronous update.</p>
@@ -5304,7 +5044,7 @@ module Aws::EKS
       :created_at,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access configuration information for the cluster.</p>
@@ -5314,7 +5054,7 @@ module Aws::EKS
     class UpdateAccessConfigRequest < Struct.new(
       :authentication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -5361,7 +5101,7 @@ module Aws::EKS
       :client_request_token,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_entry
@@ -5370,7 +5110,7 @@ module Aws::EKS
     class UpdateAccessEntryResponse < Struct.new(
       :access_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -5447,7 +5187,7 @@ module Aws::EKS
       :configuration_values,
       :pod_identity_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -5456,7 +5196,7 @@ module Aws::EKS
     class UpdateAddonResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5543,7 +5283,7 @@ module Aws::EKS
       :remote_network_config,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -5552,7 +5292,7 @@ module Aws::EKS
     class UpdateClusterConfigResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5575,7 +5315,7 @@ module Aws::EKS
       :client_request_token,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -5584,7 +5324,7 @@ module Aws::EKS
     class UpdateClusterVersionResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5601,7 +5341,7 @@ module Aws::EKS
       :auto_renew,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription
@@ -5610,7 +5350,7 @@ module Aws::EKS
     class UpdateEksAnywhereSubscriptionResponse < Struct.new(
       :subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a Kubernetes <code>label</code> change for a managed node
@@ -5625,7 +5365,7 @@ module Aws::EKS
       :add_or_update_labels,
       :remove_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -5666,7 +5406,7 @@ module Aws::EKS
       :node_repair_config,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -5675,7 +5415,7 @@ module Aws::EKS
     class UpdateNodegroupConfigResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -5727,7 +5467,7 @@ module Aws::EKS
       :force,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update
@@ -5736,7 +5476,7 @@ module Aws::EKS
     class UpdateNodegroupVersionResponse < Struct.new(
       :update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the details of an update request.</p>
@@ -5750,47 +5490,7 @@ module Aws::EKS
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateParamType
-      VERSION = 'Version'
-      PLATFORM_VERSION = 'PlatformVersion'
-      ENDPOINT_PRIVATE_ACCESS = 'EndpointPrivateAccess'
-      ENDPOINT_PUBLIC_ACCESS = 'EndpointPublicAccess'
-      CLUSTER_LOGGING = 'ClusterLogging'
-      DESIRED_SIZE = 'DesiredSize'
-      LABELS_TO_ADD = 'LabelsToAdd'
-      LABELS_TO_REMOVE = 'LabelsToRemove'
-      TAINTS_TO_ADD = 'TaintsToAdd'
-      TAINTS_TO_REMOVE = 'TaintsToRemove'
-      MAX_SIZE = 'MaxSize'
-      MIN_SIZE = 'MinSize'
-      RELEASE_VERSION = 'ReleaseVersion'
-      PUBLIC_ACCESS_CIDRS = 'PublicAccessCidrs'
-      LAUNCH_TEMPLATE_NAME = 'LaunchTemplateName'
-      LAUNCH_TEMPLATE_VERSION = 'LaunchTemplateVersion'
-      IDENTITY_PROVIDER_CONFIG = 'IdentityProviderConfig'
-      ENCRYPTION_CONFIG = 'EncryptionConfig'
-      ADDON_VERSION = 'AddonVersion'
-      SERVICE_ACCOUNT_ROLE_ARN = 'ServiceAccountRoleArn'
-      RESOLVE_CONFLICTS = 'ResolveConflicts'
-      MAX_UNAVAILABLE = 'MaxUnavailable'
-      MAX_UNAVAILABLE_PERCENTAGE = 'MaxUnavailablePercentage'
-      NODE_REPAIR_ENABLED = 'NodeRepairEnabled'
-      UPDATE_STRATEGY = 'UpdateStrategy'
-      CONFIGURATION_VALUES = 'ConfigurationValues'
-      SECURITY_GROUPS = 'SecurityGroups'
-      SUBNETS = 'Subnets'
-      AUTHENTICATION_MODE = 'AuthenticationMode'
-      POD_IDENTITY_ASSOCIATIONS = 'PodIdentityAssociations'
-      UPGRADE_POLICY = 'UpgradePolicy'
-      ZONAL_SHIFT_CONFIG = 'ZonalShiftConfig'
-      COMPUTE_CONFIG = 'ComputeConfig'
-      STORAGE_CONFIG = 'StorageConfig'
-      KUBERNETES_NETWORK_CONFIG = 'KubernetesNetworkConfig'
-      REMOTE_NETWORK_CONFIG = 'RemoteNetworkConfig'
-      DELETION_PROTECTION = 'DeletionProtection'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -5842,7 +5542,7 @@ module Aws::EKS
       :disable_session_tags,
       :target_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -5851,14 +5551,7 @@ module Aws::EKS
     class UpdatePodIdentityAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStatus
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      CANCELLED = 'Cancelled'
-      SUCCESSFUL = 'Successful'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the details of an update to a taints payload. For more
@@ -5874,25 +5567,7 @@ module Aws::EKS
       :add_or_update_taints,
       :remove_taints,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateType
-      VERSION_UPDATE = 'VersionUpdate'
-      ENDPOINT_ACCESS_UPDATE = 'EndpointAccessUpdate'
-      LOGGING_UPDATE = 'LoggingUpdate'
-      CONFIG_UPDATE = 'ConfigUpdate'
-      ASSOCIATE_IDENTITY_PROVIDER_CONFIG = 'AssociateIdentityProviderConfig'
-      DISASSOCIATE_IDENTITY_PROVIDER_CONFIG = 'DisassociateIdentityProviderConfig'
-      ASSOCIATE_ENCRYPTION_CONFIG = 'AssociateEncryptionConfig'
-      ADDON_UPDATE = 'AddonUpdate'
-      VPC_CONFIG_UPDATE = 'VpcConfigUpdate'
-      ACCESS_CONFIG_UPDATE = 'AccessConfigUpdate'
-      UPGRADE_POLICY_UPDATE = 'UpgradePolicyUpdate'
-      ZONAL_SHIFT_CONFIG_UPDATE = 'ZonalShiftConfigUpdate'
-      AUTO_MODE_UPDATE = 'AutoModeUpdate'
-      REMOTE_NETWORK_CONFIG_UPDATE = 'RemoteNetworkConfigUpdate'
-      DELETION_PROTECTION_UPDATE = 'DeletionProtectionUpdate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The support policy to use for the cluster. Extended support allows you to remain on
@@ -5913,7 +5588,7 @@ module Aws::EKS
     class UpgradePolicyRequest < Struct.new(
       :support_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This value indicates if extended support is enabled or disabled for the
@@ -5932,13 +5607,7 @@ module Aws::EKS
     class UpgradePolicyResponse < Struct.new(
       :support_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VersionStatus
-      UNSUPPORTED = 'UNSUPPORTED'
-      STANDARD_SUPPORT = 'STANDARD_SUPPORT'
-      EXTENDED_SUPPORT = 'EXTENDED_SUPPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>
@@ -6002,7 +5671,7 @@ module Aws::EKS
       :endpoint_private_access,
       :public_access_cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon EKS cluster VPC configuration response.</p>
@@ -6059,7 +5728,7 @@ module Aws::EKS
       :endpoint_private_access,
       :public_access_cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:endpoint_public_access] = false unless options.key?(:endpoint_public_access)
@@ -6075,7 +5744,7 @@ module Aws::EKS
     class ZonalShiftConfigRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of zonal shift configuration for the cluster</p>
@@ -6085,13 +5754,7 @@ module Aws::EKS
     class ZonalShiftConfigResponse < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigStatus
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
   end

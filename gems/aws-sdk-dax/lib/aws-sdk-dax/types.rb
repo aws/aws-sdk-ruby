@@ -6,11 +6,6 @@ module Aws::DAX
   # This module contains the types returned by client operations.
   module Types
 
-    module ChangeType
-      IMMEDIATE = 'IMMEDIATE'
-      REQUIRES_REBOOT = 'REQUIRES_REBOOT'
-    end
-
     # <p>Contains all of the attributes of a specific DAX cluster.</p>
     # @!attribute cluster_name
     #   <p>The name of the DAX cluster.</p>
@@ -105,7 +100,7 @@ module Aws::DAX
       :sse_description,
       :cluster_endpoint_encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a DAX cluster with the given identifier.</p>
@@ -114,12 +109,7 @@ module Aws::DAX
     class ClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterEndpointEncryptionType
-      NONE = 'NONE'
-      TLS = 'TLS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cluster ID does not refer to an existing DAX cluster.</p>
@@ -128,7 +118,7 @@ module Aws::DAX
     class ClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have attempted to exceed the maximum number of DAX clusters for your AWS
@@ -138,7 +128,7 @@ module Aws::DAX
     class ClusterQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -295,7 +285,7 @@ module Aws::DAX
       :sse_specification,
       :cluster_endpoint_encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -304,7 +294,7 @@ module Aws::DAX
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -318,7 +308,7 @@ module Aws::DAX
       :parameter_group_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -328,7 +318,7 @@ module Aws::DAX
     class CreateParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -345,7 +335,7 @@ module Aws::DAX
       :description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group
@@ -355,7 +345,7 @@ module Aws::DAX
     class CreateSubnetGroupResponse < Struct.new(
       :subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -376,7 +366,7 @@ module Aws::DAX
       :availability_zones,
       :node_ids_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -386,7 +376,7 @@ module Aws::DAX
     class DecreaseReplicationFactorResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -395,7 +385,7 @@ module Aws::DAX
     class DeleteClusterRequest < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -404,7 +394,7 @@ module Aws::DAX
     class DeleteClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -413,7 +403,7 @@ module Aws::DAX
     class DeleteParameterGroupRequest < Struct.new(
       :parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_message
@@ -423,7 +413,7 @@ module Aws::DAX
     class DeleteParameterGroupResponse < Struct.new(
       :deletion_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -432,7 +422,7 @@ module Aws::DAX
     class DeleteSubnetGroupRequest < Struct.new(
       :subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_message
@@ -442,7 +432,7 @@ module Aws::DAX
     class DeleteSubnetGroupResponse < Struct.new(
       :deletion_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_names
@@ -465,7 +455,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -479,7 +469,7 @@ module Aws::DAX
       :next_token,
       :clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -498,7 +488,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -511,7 +501,7 @@ module Aws::DAX
       :next_token,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_name
@@ -554,7 +544,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -567,7 +557,7 @@ module Aws::DAX
       :next_token,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_names
@@ -590,7 +580,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -603,7 +593,7 @@ module Aws::DAX
       :next_token,
       :parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -631,7 +621,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -644,7 +634,7 @@ module Aws::DAX
       :next_token,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_names
@@ -667,7 +657,7 @@ module Aws::DAX
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -680,7 +670,7 @@ module Aws::DAX
       :next_token,
       :subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the information required for client programs to connect to the
@@ -700,7 +690,7 @@ module Aws::DAX
       :port,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 0 unless options.key?(:port)
@@ -731,7 +721,7 @@ module Aws::DAX
       :message,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -750,7 +740,7 @@ module Aws::DAX
       :new_replication_factor,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -759,7 +749,7 @@ module Aws::DAX
     class IncreaseReplicationFactorResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are not enough system resources to create the cluster you requested (or to
@@ -769,7 +759,7 @@ module Aws::DAX
     class InsufficientClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) supplied in the request is not valid.</p>
@@ -778,7 +768,7 @@ module Aws::DAX
     class InvalidARNFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested DAX cluster is not in the <i>available</i>
@@ -788,7 +778,7 @@ module Aws::DAX
     class InvalidClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more incompatible parameters were specified.</p>
@@ -797,7 +787,7 @@ module Aws::DAX
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters in a parameter group are in an invalid state.</p>
@@ -806,7 +796,7 @@ module Aws::DAX
     class InvalidParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for a parameter is invalid.</p>
@@ -815,7 +805,7 @@ module Aws::DAX
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid subnet identifier was specified.</p>
@@ -824,7 +814,7 @@ module Aws::DAX
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC network is in an invalid state.</p>
@@ -833,13 +823,7 @@ module Aws::DAX
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IsModifiable
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
-      CONDITIONAL = 'CONDITIONAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -854,7 +838,7 @@ module Aws::DAX
       :resource_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -868,7 +852,7 @@ module Aws::DAX
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an individual node within a DAX cluster.</p>
@@ -902,7 +886,7 @@ module Aws::DAX
       :node_status,
       :parameter_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>None of the nodes in the cluster have the given node ID.</p>
@@ -911,7 +895,7 @@ module Aws::DAX
     class NodeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have attempted to exceed the maximum number of nodes for a DAX
@@ -921,7 +905,7 @@ module Aws::DAX
     class NodeQuotaForClusterExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have attempted to exceed the maximum number of nodes for your AWS
@@ -931,7 +915,7 @@ module Aws::DAX
     class NodeQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a parameter value that is applicable to a particular node
@@ -946,7 +930,7 @@ module Aws::DAX
       :node_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a notification topic and its status. Notification topics are used for
@@ -964,7 +948,7 @@ module Aws::DAX
       :topic_arn,
       :topic_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an individual setting that controls some aspect of DAX
@@ -1015,7 +999,7 @@ module Aws::DAX
       :is_modifiable,
       :change_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A named set of parameters that are applied to all of the nodes in a DAX
@@ -1030,7 +1014,7 @@ module Aws::DAX
       :parameter_group_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter group already exists.</p>
@@ -1039,7 +1023,7 @@ module Aws::DAX
     class ParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter group does not exist.</p>
@@ -1048,7 +1032,7 @@ module Aws::DAX
     class ParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have attempted to exceed the maximum number of parameter groups.</p>
@@ -1057,7 +1041,7 @@ module Aws::DAX
     class ParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of a parameter group.</p>
@@ -1075,7 +1059,7 @@ module Aws::DAX
       :parameter_apply_status,
       :node_ids_to_reboot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual DAX parameter.</p>
@@ -1089,12 +1073,7 @@ module Aws::DAX
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterType
-      DEFAULT = 'DEFAULT'
-      NODE_TYPE_SPECIFIC = 'NODE_TYPE_SPECIFIC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1107,7 +1086,7 @@ module Aws::DAX
       :cluster_name,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1116,7 +1095,7 @@ module Aws::DAX
     class RebootNodeResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the server-side encryption status on the specified DAX cluster.</p>
@@ -1144,7 +1123,7 @@ module Aws::DAX
     class SSEDescription < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the settings used to enable server-side encryption.</p>
@@ -1154,14 +1133,7 @@ module Aws::DAX
     class SSESpecification < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SSEStatus
-      ENABLING = 'ENABLING'
-      ENABLED = 'ENABLED'
-      DISABLING = 'DISABLING'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual VPC security group and its status.</p>
@@ -1175,7 +1147,7 @@ module Aws::DAX
       :security_group_identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service linked role (SLR) was not found.</p>
@@ -1184,7 +1156,7 @@ module Aws::DAX
     class ServiceLinkedRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of x509 certificates that can be created for
@@ -1192,13 +1164,7 @@ module Aws::DAX
     #             for continuing to create encrypted clusters.</p>
     class ServiceQuotaExceededException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      CLUSTER = 'CLUSTER'
-      PARAMETER_GROUP = 'PARAMETER_GROUP'
-      SUBNET_GROUP = 'SUBNET_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the subnet associated with a DAX cluster. This parameter refers to
@@ -1214,7 +1180,7 @@ module Aws::DAX
       :subnet_identifier,
       :subnet_availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following actions:</p>
@@ -1248,7 +1214,7 @@ module Aws::DAX
       :vpc_id,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subnet group already exists.</p>
@@ -1257,7 +1223,7 @@ module Aws::DAX
     class SubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subnet group is currently in use.</p>
@@ -1266,7 +1232,7 @@ module Aws::DAX
     class SubnetGroupInUseFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet group name does not refer to an existing subnet
@@ -1276,7 +1242,7 @@ module Aws::DAX
     class SubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of
@@ -1286,7 +1252,7 @@ module Aws::DAX
     class SubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is being used by another subnet group.</p>
@@ -1295,7 +1261,7 @@ module Aws::DAX
     class SubnetInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of
@@ -1305,7 +1271,7 @@ module Aws::DAX
     class SubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a tag.  Every tag is a key-value pair. You can add up to 50 tags to a single
@@ -1326,7 +1292,7 @@ module Aws::DAX
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag does not exist.</p>
@@ -1335,7 +1301,7 @@ module Aws::DAX
     class TagNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of tags for this DAX cluster.</p>
@@ -1344,7 +1310,7 @@ module Aws::DAX
     class TagQuotaPerResourceExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -1357,7 +1323,7 @@ module Aws::DAX
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1366,7 +1332,7 @@ module Aws::DAX
     class TagResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -1379,7 +1345,7 @@ module Aws::DAX
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1388,7 +1354,7 @@ module Aws::DAX
     class UntagResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1426,7 +1392,7 @@ module Aws::DAX
       :parameter_group_name,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1435,7 +1401,7 @@ module Aws::DAX
     class UpdateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -1453,7 +1419,7 @@ module Aws::DAX
       :parameter_group_name,
       :parameter_name_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -1462,7 +1428,7 @@ module Aws::DAX
     class UpdateParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -1479,7 +1445,7 @@ module Aws::DAX
       :description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group
@@ -1488,7 +1454,7 @@ module Aws::DAX
     class UpdateSubnetGroupResponse < Struct.new(
       :subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

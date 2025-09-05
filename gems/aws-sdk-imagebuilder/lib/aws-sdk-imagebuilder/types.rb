@@ -21,7 +21,7 @@ module Aws::Imagebuilder
       :account_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In addition to your infrastructure configuration, these settings provide an extra
@@ -57,7 +57,7 @@ module Aws::Imagebuilder
       :systems_manager_agent,
       :user_data_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an Amazon EC2 AMI.</p>
@@ -87,7 +87,7 @@ module Aws::Imagebuilder
       :state,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Define and configure the output AMIs of the pipeline.</p>
@@ -119,14 +119,7 @@ module Aws::Imagebuilder
       :kms_key_id,
       :launch_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuildType
-      USER_INITIATED = 'USER_INITIATED'
-      SCHEDULED = 'SCHEDULED'
-      IMPORT = 'IMPORT'
-      IMPORT_ISO = 'IMPORT_ISO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the permitted request rate for the specific operation.</p>
@@ -135,7 +128,7 @@ module Aws::Imagebuilder
     class CallRateLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_build_version_arn
@@ -151,7 +144,7 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -168,7 +161,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -183,7 +176,7 @@ module Aws::Imagebuilder
       :lifecycle_execution_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -192,7 +185,7 @@ module Aws::Imagebuilder
     class CancelLifecycleExecutionResponse < Struct.new(
       :lifecycle_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a client action, such as using an action or
@@ -203,7 +196,7 @@ module Aws::Imagebuilder
     class ClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A detailed view of a component.</p>
@@ -292,7 +285,7 @@ module Aws::Imagebuilder
       :obfuscate,
       :product_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:obfuscate] = false unless options.key?(:obfuscate)
@@ -312,11 +305,7 @@ module Aws::Imagebuilder
       :component_arn,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentFormat
-      SHELL = 'SHELL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a key/value pair that sets the named component parameter.</p>
@@ -330,7 +319,7 @@ module Aws::Imagebuilder
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a parameter that is used to provide configuration details for the
@@ -354,7 +343,7 @@ module Aws::Imagebuilder
       :default_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of fields that describe the current status of components.</p>
@@ -368,13 +357,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentStatus
-      DEPRECATED = 'DEPRECATED'
-      DISABLED = 'DISABLED'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A high-level summary of a component.</p>
@@ -441,17 +424,12 @@ module Aws::Imagebuilder
       :publisher,
       :obfuscate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:obfuscate] = false unless options.key?(:obfuscate)
         super
       end
-    end
-
-    module ComponentType
-      BUILD = 'BUILD'
-      TEST = 'TEST'
     end
 
     # <p>The defining characteristics of a specific version of an Amazon Web Services TOE component.</p>
@@ -537,7 +515,7 @@ module Aws::Imagebuilder
       :status,
       :product_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container encapsulates the runtime environment for an application.</p>
@@ -552,7 +530,7 @@ module Aws::Imagebuilder
       :region,
       :image_uris,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container distribution settings for encryption, licensing, and sharing in a specific
@@ -571,7 +549,7 @@ module Aws::Imagebuilder
       :container_tags,
       :target_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container recipe.</p>
@@ -687,7 +665,7 @@ module Aws::Imagebuilder
       :working_directory,
       :target_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a container recipe</p>
@@ -725,15 +703,7 @@ module Aws::Imagebuilder
       :date_created,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerRepositoryService
-      ECR = 'ECR'
-    end
-
-    module ContainerType
-      DOCKER = 'DOCKER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -808,7 +778,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -825,7 +795,7 @@ module Aws::Imagebuilder
       :client_token,
       :component_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_type
@@ -913,7 +883,7 @@ module Aws::Imagebuilder
       :kms_key_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -931,7 +901,7 @@ module Aws::Imagebuilder
       :client_token,
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -958,7 +928,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -976,7 +946,7 @@ module Aws::Imagebuilder
       :client_token,
       :distribution_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1050,7 +1020,7 @@ module Aws::Imagebuilder
       :workflows,
       :execution_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1068,7 +1038,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1146,7 +1116,7 @@ module Aws::Imagebuilder
       :additional_instance_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1164,7 +1134,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_recipe_arn
@@ -1222,7 +1192,7 @@ module Aws::Imagebuilder
       :workflows,
       :execution_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1239,7 +1209,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1323,7 +1293,7 @@ module Aws::Imagebuilder
       :placement,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1341,7 +1311,7 @@ module Aws::Imagebuilder
       :client_token,
       :infrastructure_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1385,7 +1355,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1398,7 +1368,7 @@ module Aws::Imagebuilder
       :client_token,
       :lifecycle_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1467,7 +1437,7 @@ module Aws::Imagebuilder
       :client_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1480,7 +1450,7 @@ module Aws::Imagebuilder
       :client_token,
       :workflow_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Inspector generates a risk score for each finding. This score helps you to prioritize
@@ -1507,7 +1477,7 @@ module Aws::Imagebuilder
       :version,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an adjustment that Amazon Inspector made to the CVSS score for a finding.</p>
@@ -1521,7 +1491,7 @@ module Aws::Imagebuilder
       :metric,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the source of the score, and the factors that determined the adjustments
@@ -1553,7 +1523,7 @@ module Aws::Imagebuilder
       :scoring_vector,
       :adjustments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_build_version_arn
@@ -1562,7 +1532,7 @@ module Aws::Imagebuilder
     class DeleteComponentRequest < Struct.new(
       :component_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1575,7 +1545,7 @@ module Aws::Imagebuilder
       :request_id,
       :component_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_recipe_arn
@@ -1584,7 +1554,7 @@ module Aws::Imagebuilder
     class DeleteContainerRecipeRequest < Struct.new(
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1597,7 +1567,7 @@ module Aws::Imagebuilder
       :request_id,
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_configuration_arn
@@ -1606,7 +1576,7 @@ module Aws::Imagebuilder
     class DeleteDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1620,7 +1590,7 @@ module Aws::Imagebuilder
       :request_id,
       :distribution_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_pipeline_arn
@@ -1629,7 +1599,7 @@ module Aws::Imagebuilder
     class DeleteImagePipelineRequest < Struct.new(
       :image_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1642,7 +1612,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_recipe_arn
@@ -1651,7 +1621,7 @@ module Aws::Imagebuilder
     class DeleteImageRecipeRequest < Struct.new(
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1664,7 +1634,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_build_version_arn
@@ -1673,7 +1643,7 @@ module Aws::Imagebuilder
     class DeleteImageRequest < Struct.new(
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1686,7 +1656,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute infrastructure_configuration_arn
@@ -1695,7 +1665,7 @@ module Aws::Imagebuilder
     class DeleteInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1709,7 +1679,7 @@ module Aws::Imagebuilder
       :request_id,
       :infrastructure_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_arn
@@ -1718,7 +1688,7 @@ module Aws::Imagebuilder
     class DeleteLifecyclePolicyRequest < Struct.new(
       :lifecycle_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_arn
@@ -1727,7 +1697,7 @@ module Aws::Imagebuilder
     class DeleteLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_build_version_arn
@@ -1736,7 +1706,7 @@ module Aws::Imagebuilder
     class DeleteWorkflowRequest < Struct.new(
       :workflow_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_build_version_arn
@@ -1745,13 +1715,7 @@ module Aws::Imagebuilder
     class DeleteWorkflowResponse < Struct.new(
       :workflow_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskImageFormat
-      VMDK = 'VMDK'
-      RAW = 'RAW'
-      VHD = 'VHD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the settings for a specific Region.</p>
@@ -1794,7 +1758,7 @@ module Aws::Imagebuilder
       :fast_launch_configurations,
       :ssm_parameter_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A distribution configuration.</p>
@@ -1833,7 +1797,7 @@ module Aws::Imagebuilder
       :date_updated,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A high-level overview of a distribution configuration.</p>
@@ -1867,7 +1831,7 @@ module Aws::Imagebuilder
       :tags,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon EBS-specific block device mapping specifications.</p>
@@ -1907,17 +1871,7 @@ module Aws::Imagebuilder
       :volume_type,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EbsVolumeType
-      STANDARD = 'standard'
-      IO1 = 'io1'
-      IO2 = 'io2'
-      GP2 = 'gp2'
-      GP3 = 'gp3'
-      SC1 = 'sc1'
-      ST1 = 'st1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that Image Builder uses to configure the ECR repository and the output container
@@ -1937,7 +1891,7 @@ module Aws::Imagebuilder
       :repository_name,
       :container_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Define and configure faster launching for output Windows AMIs.</p>
@@ -1968,7 +1922,7 @@ module Aws::Imagebuilder
       :launch_template,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1997,7 +1951,7 @@ module Aws::Imagebuilder
       :launch_template_name,
       :launch_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for creating and managing pre-provisioned snapshots for a
@@ -2009,7 +1963,7 @@ module Aws::Imagebuilder
     class FastLaunchSnapshotConfiguration < Struct.new(
       :target_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return a more specific list of results
@@ -2025,7 +1979,7 @@ module Aws::Imagebuilder
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are not authorized to perform the requested operation.</p>
@@ -2034,7 +1988,7 @@ module Aws::Imagebuilder
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_arn
@@ -2044,7 +1998,7 @@ module Aws::Imagebuilder
     class GetComponentPolicyRequest < Struct.new(
       :component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2057,7 +2011,7 @@ module Aws::Imagebuilder
       :request_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_build_version_arn
@@ -2067,7 +2021,7 @@ module Aws::Imagebuilder
     class GetComponentRequest < Struct.new(
       :component_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2080,7 +2034,7 @@ module Aws::Imagebuilder
       :request_id,
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_recipe_arn
@@ -2090,7 +2044,7 @@ module Aws::Imagebuilder
     class GetContainerRecipePolicyRequest < Struct.new(
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2103,7 +2057,7 @@ module Aws::Imagebuilder
       :request_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_recipe_arn
@@ -2112,7 +2066,7 @@ module Aws::Imagebuilder
     class GetContainerRecipeRequest < Struct.new(
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2125,7 +2079,7 @@ module Aws::Imagebuilder
       :request_id,
       :container_recipe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_configuration_arn
@@ -2135,7 +2089,7 @@ module Aws::Imagebuilder
     class GetDistributionConfigurationRequest < Struct.new(
       :distribution_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2148,7 +2102,7 @@ module Aws::Imagebuilder
       :request_id,
       :distribution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_pipeline_arn
@@ -2157,7 +2111,7 @@ module Aws::Imagebuilder
     class GetImagePipelineRequest < Struct.new(
       :image_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2170,7 +2124,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_arn
@@ -2179,7 +2133,7 @@ module Aws::Imagebuilder
     class GetImagePolicyRequest < Struct.new(
       :image_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2192,7 +2146,7 @@ module Aws::Imagebuilder
       :request_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_recipe_arn
@@ -2202,7 +2156,7 @@ module Aws::Imagebuilder
     class GetImageRecipePolicyRequest < Struct.new(
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2215,7 +2169,7 @@ module Aws::Imagebuilder
       :request_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_recipe_arn
@@ -2224,7 +2178,7 @@ module Aws::Imagebuilder
     class GetImageRecipeRequest < Struct.new(
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2237,7 +2191,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_recipe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_build_version_arn
@@ -2246,7 +2200,7 @@ module Aws::Imagebuilder
     class GetImageRequest < Struct.new(
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2259,7 +2213,7 @@ module Aws::Imagebuilder
       :request_id,
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>GetInfrastructureConfiguration request object.</p>
@@ -2270,7 +2224,7 @@ module Aws::Imagebuilder
     class GetInfrastructureConfigurationRequest < Struct.new(
       :infrastructure_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>GetInfrastructureConfiguration response object.</p>
@@ -2284,7 +2238,7 @@ module Aws::Imagebuilder
       :request_id,
       :infrastructure_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -2293,7 +2247,7 @@ module Aws::Imagebuilder
     class GetLifecycleExecutionRequest < Struct.new(
       :lifecycle_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution
@@ -2302,7 +2256,7 @@ module Aws::Imagebuilder
     class GetLifecycleExecutionResponse < Struct.new(
       :lifecycle_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_arn
@@ -2311,7 +2265,7 @@ module Aws::Imagebuilder
     class GetLifecyclePolicyRequest < Struct.new(
       :lifecycle_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy
@@ -2320,7 +2274,7 @@ module Aws::Imagebuilder
     class GetLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -2337,7 +2291,7 @@ module Aws::Imagebuilder
       :resource_arn,
       :resource_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2354,7 +2308,7 @@ module Aws::Imagebuilder
       :url,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_execution_id
@@ -2364,7 +2318,7 @@ module Aws::Imagebuilder
     class GetWorkflowExecutionRequest < Struct.new(
       :workflow_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2434,7 +2388,7 @@ module Aws::Imagebuilder
       :end_time,
       :parallel_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_step_count] = 0 unless options.key?(:total_step_count)
@@ -2451,7 +2405,7 @@ module Aws::Imagebuilder
     class GetWorkflowRequest < Struct.new(
       :workflow_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow
@@ -2460,7 +2414,7 @@ module Aws::Imagebuilder
     class GetWorkflowResponse < Struct.new(
       :workflow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_execution_id
@@ -2470,7 +2424,7 @@ module Aws::Imagebuilder
     class GetWorkflowStepExecutionRequest < Struct.new(
       :step_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2549,7 +2503,7 @@ module Aws::Imagebuilder
       :on_failure,
       :timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified a client token for an operation using parameter values that differ
@@ -2559,7 +2513,7 @@ module Aws::Imagebuilder
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Image Builder image. You must specify exactly one recipe for the image – either a
@@ -2732,7 +2686,7 @@ module Aws::Imagebuilder
       :execution_role,
       :workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains vulnerability counts for a specific image.</p>
@@ -2747,7 +2701,7 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A software package that's installed on top of the base image to create a 
@@ -2764,7 +2718,7 @@ module Aws::Imagebuilder
       :package_name,
       :package_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an image pipeline.</p>
@@ -2857,7 +2811,7 @@ module Aws::Imagebuilder
       :execution_role,
       :workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains vulnerability counts for a specific image pipeline.</p>
@@ -2873,7 +2827,7 @@ module Aws::Imagebuilder
       :image_pipeline_arn,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An image recipe.</p>
@@ -2956,7 +2910,7 @@ module Aws::Imagebuilder
       :working_directory,
       :additional_instance_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an image recipe.</p>
@@ -2990,7 +2944,7 @@ module Aws::Imagebuilder
       :date_created,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a vulnerability scan finding.</p>
@@ -3057,7 +3011,7 @@ module Aws::Imagebuilder
       :package_vulnerability_details,
       :fix_available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This returns exactly one type of aggregation, based on the filter that Image Builder applies in
@@ -3081,7 +3035,7 @@ module Aws::Imagebuilder
       :image_pipeline_aggregation,
       :vulnerability_id_aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A name value pair that Image Builder applies to streamline results from the
@@ -3096,7 +3050,7 @@ module Aws::Imagebuilder
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the vulnerability scan status for a specific image, and the reason for that
@@ -3111,17 +3065,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageScanStatus
-      PENDING = 'PENDING'
-      SCANNING = 'SCANNING'
-      COLLECTING = 'COLLECTING'
-      COMPLETED = 'COMPLETED'
-      ABANDONED = 'ABANDONED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings for Image Builder image resource and container image scans.</p>
@@ -3136,14 +3080,7 @@ module Aws::Imagebuilder
       :image_scanning_enabled,
       :ecr_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageSource
-      AMAZON_MANAGED = 'AMAZON_MANAGED'
-      AWS_MARKETPLACE = 'AWS_MARKETPLACE'
-      IMPORTED = 'IMPORTED'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Image status and the reason for that status.</p>
@@ -3157,22 +3094,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageStatus
-      PENDING = 'PENDING'
-      CREATING = 'CREATING'
-      BUILDING = 'BUILDING'
-      TESTING = 'TESTING'
-      DISTRIBUTING = 'DISTRIBUTING'
-      INTEGRATING = 'INTEGRATING'
-      AVAILABLE = 'AVAILABLE'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
-      DEPRECATED = 'DEPRECATED'
-      DELETED = 'DELETED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An image summary.</p>
@@ -3262,7 +3184,7 @@ module Aws::Imagebuilder
       :deprecation_time,
       :lifecycle_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure image tests for your pipeline build. Tests run after building the image, to
@@ -3282,12 +3204,7 @@ module Aws::Imagebuilder
       :image_tests_enabled,
       :timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageType
-      AMI = 'AMI'
-      DOCKER = 'DOCKER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The defining characteristics of a specific version of an Image Builder image.</p>
@@ -3392,7 +3309,7 @@ module Aws::Imagebuilder
       :build_type,
       :image_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3464,7 +3381,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -3481,7 +3398,7 @@ module Aws::Imagebuilder
       :client_token,
       :component_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3533,7 +3450,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -3546,7 +3463,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3600,7 +3517,7 @@ module Aws::Imagebuilder
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -3618,7 +3535,7 @@ module Aws::Imagebuilder
       :image_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the infrastructure configuration.</p>
@@ -3700,7 +3617,7 @@ module Aws::Imagebuilder
       :tags,
       :placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The infrastructure used when building Amazon EC2 AMIs.</p>
@@ -3747,7 +3664,7 @@ module Aws::Imagebuilder
       :instance_profile_name,
       :placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the factors that influenced the score that Amazon Inspector assigned for a
@@ -3759,7 +3676,7 @@ module Aws::Imagebuilder
     class InspectorScoreDetails < Struct.new(
       :adjusted_cvss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines block device mappings for the instance used to configure your image.</p>
@@ -3781,7 +3698,7 @@ module Aws::Imagebuilder
       :virtual_name,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a custom base AMI and block device mapping configurations of an instance used
@@ -3800,7 +3717,7 @@ module Aws::Imagebuilder
       :image,
       :block_device_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance metadata options that apply to the HTTP requests that pipeline builds use
@@ -3840,7 +3757,7 @@ module Aws::Imagebuilder
       :http_tokens,
       :http_put_response_hop_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have provided an invalid pagination token in your request.</p>
@@ -3849,7 +3766,7 @@ module Aws::Imagebuilder
     class InvalidPaginationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have specified two or more mutually exclusive parameters. Review the error message
@@ -3859,7 +3776,7 @@ module Aws::Imagebuilder
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter is invalid. Review the available parameters for the API
@@ -3869,7 +3786,7 @@ module Aws::Imagebuilder
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value that you provided for the specified parameter is invalid.</p>
@@ -3878,7 +3795,7 @@ module Aws::Imagebuilder
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have requested an action that that the service doesn't support.</p>
@@ -3887,7 +3804,7 @@ module Aws::Imagebuilder
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your version number is out of bounds or does not follow the required syntax.</p>
@@ -3896,7 +3813,7 @@ module Aws::Imagebuilder
     class InvalidVersionNumberException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for a launch permission. The launch permission
@@ -3928,7 +3845,7 @@ module Aws::Imagebuilder
       :organization_arns,
       :organizational_unit_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies an Amazon EC2 launch template to use for a specific account.</p>
@@ -3947,7 +3864,7 @@ module Aws::Imagebuilder
       :account_id,
       :set_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:set_default_version] = false unless options.key?(:set_default_version)
@@ -3984,7 +3901,7 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for a resource that the runtime instance of the 
@@ -4041,7 +3958,7 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lifecycle policy action that was identified for the impacted resource.</p>
@@ -4055,14 +3972,7 @@ module Aws::Imagebuilder
       :name,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleExecutionResourceActionName
-      AVAILABLE = 'AVAILABLE'
-      DELETE = 'DELETE'
-      DEPRECATE = 'DEPRECATE'
-      DISABLE = 'DISABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the state of an impacted resource that the runtime instance 
@@ -4078,14 +3988,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleExecutionResourceStatus
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SKIPPED = 'SKIPPED'
-      SUCCESS = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an image resource that was identified for a lifecycle action.</p>
@@ -4096,7 +3999,7 @@ module Aws::Imagebuilder
     class LifecycleExecutionResourcesImpactedSummary < Struct.new(
       :has_impacted_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_impacted_resources] = false unless options.key?(:has_impacted_resources)
@@ -4116,7 +4019,7 @@ module Aws::Imagebuilder
       :snapshot_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current state of the runtime instance of the lifecycle policy.</p>
@@ -4130,16 +4033,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCELLED = 'CANCELLED'
-      CANCELLING = 'CANCELLING'
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for a lifecycle policy resource.</p>
@@ -4196,7 +4090,7 @@ module Aws::Imagebuilder
       :date_last_run,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for a lifecycle policy resource.</p>
@@ -4214,7 +4108,7 @@ module Aws::Imagebuilder
       :filter,
       :exclusion_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains selection criteria for the lifecycle policy.</p>
@@ -4228,7 +4122,7 @@ module Aws::Imagebuilder
       :type,
       :include_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how the lifecycle policy should apply actions to selected resources.</p>
@@ -4246,7 +4140,7 @@ module Aws::Imagebuilder
       :snapshots,
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:amis] = false unless options.key?(:amis)
@@ -4254,12 +4148,6 @@ module Aws::Imagebuilder
         options[:containers] = false unless options.key?(:containers)
         super
       end
-    end
-
-    module LifecyclePolicyDetailActionType
-      DELETE = 'DELETE'
-      DEPRECATE = 'DEPRECATE'
-      DISABLE = 'DISABLE'
     end
 
     # <p>Specifies resources that lifecycle policy actions should not apply to.</p>
@@ -4275,7 +4163,7 @@ module Aws::Imagebuilder
       :tag_map,
       :amis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines criteria for AMIs that are excluded from lifecycle actions.</p>
@@ -4302,7 +4190,7 @@ module Aws::Imagebuilder
       :last_launched,
       :tag_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_public] = false unless options.key?(:is_public)
@@ -4323,7 +4211,7 @@ module Aws::Imagebuilder
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines filters that the lifecycle policy uses to determine impacted resource.</p>
@@ -4355,12 +4243,7 @@ module Aws::Imagebuilder
       :unit,
       :retain_at_least,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecyclePolicyDetailFilterType
-      AGE = 'AGE'
-      COUNT = 'COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource selection criteria for the lifecycle policy.</p>
@@ -4376,7 +4259,7 @@ module Aws::Imagebuilder
       :recipes,
       :tag_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Image Builder recipe that the lifecycle policy uses for resource selection.</p>
@@ -4390,17 +4273,7 @@ module Aws::Imagebuilder
       :name,
       :semantic_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecyclePolicyResourceType
-      AMI_IMAGE = 'AMI_IMAGE'
-      CONTAINER_IMAGE = 'CONTAINER_IMAGE'
-    end
-
-    module LifecyclePolicyStatus
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of lifecycle policy resources.</p>
@@ -4448,14 +4321,7 @@ module Aws::Imagebuilder
       :date_last_run,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecyclePolicyTimeUnit
-      DAYS = 'DAYS'
-      WEEKS = 'WEEKS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_version_arn
@@ -4474,7 +4340,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4493,7 +4359,7 @@ module Aws::Imagebuilder
       :component_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner
@@ -4554,7 +4420,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4577,7 +4443,7 @@ module Aws::Imagebuilder
       :component_version_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner
@@ -4623,7 +4489,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4642,7 +4508,7 @@ module Aws::Imagebuilder
       :container_recipe_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4660,7 +4526,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4679,7 +4545,7 @@ module Aws::Imagebuilder
       :distribution_configuration_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_version_arn
@@ -4729,7 +4595,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4748,7 +4614,7 @@ module Aws::Imagebuilder
       :image_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_build_version_arn
@@ -4766,7 +4632,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4785,7 +4651,7 @@ module Aws::Imagebuilder
       :image_package_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_pipeline_arn
@@ -4820,7 +4686,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4839,7 +4705,7 @@ module Aws::Imagebuilder
       :image_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4889,7 +4755,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4908,7 +4774,7 @@ module Aws::Imagebuilder
       :image_pipeline_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner
@@ -4950,7 +4816,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4969,7 +4835,7 @@ module Aws::Imagebuilder
       :image_recipe_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4985,7 +4851,7 @@ module Aws::Imagebuilder
       :filter,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5029,7 +4895,7 @@ module Aws::Imagebuilder
       :responses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5071,7 +4937,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5091,7 +4957,7 @@ module Aws::Imagebuilder
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner
@@ -5151,7 +5017,7 @@ module Aws::Imagebuilder
       :next_token,
       :include_deprecated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5179,7 +5045,7 @@ module Aws::Imagebuilder
       :image_version_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5197,7 +5063,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5216,7 +5082,7 @@ module Aws::Imagebuilder
       :infrastructure_configuration_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -5241,7 +5107,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -5264,7 +5130,7 @@ module Aws::Imagebuilder
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5282,7 +5148,7 @@ module Aws::Imagebuilder
       :next_token,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_executions
@@ -5297,7 +5163,7 @@ module Aws::Imagebuilder
       :lifecycle_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5316,7 +5182,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_summary_list
@@ -5332,7 +5198,7 @@ module Aws::Imagebuilder
       :lifecycle_policy_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5341,7 +5207,7 @@ module Aws::Imagebuilder
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5350,7 +5216,7 @@ module Aws::Imagebuilder
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5364,7 +5230,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute steps
@@ -5380,7 +5246,7 @@ module Aws::Imagebuilder
       :steps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_version_arn
@@ -5398,7 +5264,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_summary_list
@@ -5414,7 +5280,7 @@ module Aws::Imagebuilder
       :workflow_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5433,7 +5299,7 @@ module Aws::Imagebuilder
       :next_token,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5462,7 +5328,7 @@ module Aws::Imagebuilder
       :message,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5481,7 +5347,7 @@ module Aws::Imagebuilder
       :next_token,
       :workflow_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5520,7 +5386,7 @@ module Aws::Imagebuilder
       :message,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner
@@ -5546,7 +5412,7 @@ module Aws::Imagebuilder
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_version_list
@@ -5561,7 +5427,7 @@ module Aws::Imagebuilder
       :workflow_version_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Logging configuration defines where Image Builder uploads your logs.</p>
@@ -5571,17 +5437,7 @@ module Aws::Imagebuilder
     class Logging < Struct.new(
       :s3_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketplaceResourceType
-      COMPONENT_DATA = 'COMPONENT_DATA'
-      COMPONENT_ARTIFACT = 'COMPONENT_ARTIFACT'
-    end
-
-    module OnWorkflowFailure
-      CONTINUE = 'CONTINUE'
-      ABORT = 'ABORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resources produced by this image.</p>
@@ -5596,15 +5452,7 @@ module Aws::Imagebuilder
       :amis,
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Ownership
-      SELF = 'Self'
-      SHARED = 'Shared'
-      AMAZON = 'Amazon'
-      THIRDPARTY = 'ThirdParty'
-      AWS_MARKETPLACE = 'AWSMarketplace'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about package vulnerability findings.</p>
@@ -5654,17 +5502,7 @@ module Aws::Imagebuilder
       :vendor_updated_at,
       :reference_urls,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineExecutionStartCondition
-      EXPRESSION_MATCH_ONLY = 'EXPRESSION_MATCH_ONLY'
-      EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE = 'EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE'
-    end
-
-    module PipelineStatus
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>By default, EC2 instances run on shared tenancy hardware. This means that multiple 
@@ -5700,13 +5538,7 @@ module Aws::Imagebuilder
       :host_id,
       :host_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Platform
-      WINDOWS = 'Windows'
-      LINUX = 'Linux'
-      MACOS = 'macOS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a single product code.</p>
@@ -5723,11 +5555,7 @@ module Aws::Imagebuilder
       :product_code_id,
       :product_code_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProductCodeType
-      MARKETPLACE = 'marketplace'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_arn
@@ -5741,7 +5569,7 @@ module Aws::Imagebuilder
       :component_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5755,7 +5583,7 @@ module Aws::Imagebuilder
       :request_id,
       :component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_recipe_arn
@@ -5769,7 +5597,7 @@ module Aws::Imagebuilder
       :container_recipe_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5783,7 +5611,7 @@ module Aws::Imagebuilder
       :request_id,
       :container_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_arn
@@ -5797,7 +5625,7 @@ module Aws::Imagebuilder
       :image_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5810,7 +5638,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_recipe_arn
@@ -5824,7 +5652,7 @@ module Aws::Imagebuilder
       :image_recipe_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5838,7 +5666,7 @@ module Aws::Imagebuilder
       :request_id,
       :image_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how to remediate a finding.</p>
@@ -5849,7 +5677,7 @@ module Aws::Imagebuilder
     class Remediation < Struct.new(
       :recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the recommended course of action to remediate the finding.</p>
@@ -5864,7 +5692,7 @@ module Aws::Imagebuilder
       :text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you are trying to create already exists.</p>
@@ -5873,7 +5701,7 @@ module Aws::Imagebuilder
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have attempted to mutate or delete a resource with a dependency that prohibits
@@ -5883,7 +5711,7 @@ module Aws::Imagebuilder
     class ResourceDependencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you are trying to operate on is currently in use. Review the message
@@ -5893,7 +5721,7 @@ module Aws::Imagebuilder
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one of the resources referenced by your request does not exist.</p>
@@ -5902,7 +5730,7 @@ module Aws::Imagebuilder
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current state of an impacted resource.</p>
@@ -5912,7 +5740,7 @@ module Aws::Imagebuilder
     class ResourceState < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional rules to specify resources that should be exempt from ad-hoc lifecycle actions.</p>
@@ -5922,7 +5750,7 @@ module Aws::Imagebuilder
     class ResourceStateUpdateExclusionRules < Struct.new(
       :amis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies if the lifecycle policy should apply actions to selected resources.</p>
@@ -5940,7 +5768,7 @@ module Aws::Imagebuilder
       :snapshots,
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:amis] = false unless options.key?(:amis)
@@ -5948,13 +5776,6 @@ module Aws::Imagebuilder
         options[:containers] = false unless options.key?(:containers)
         super
       end
-    end
-
-    module ResourceStatus
-      AVAILABLE = 'AVAILABLE'
-      DELETED = 'DELETED'
-      DEPRECATED = 'DEPRECATED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>Properties that configure export from your build instance to a compatible file format
@@ -5996,7 +5817,7 @@ module Aws::Imagebuilder
       :s3_bucket,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 logging configuration.</p>
@@ -6010,7 +5831,7 @@ module Aws::Imagebuilder
       :s3_bucket_name,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A schedule configures when and how often a pipeline will automatically create a new
@@ -6052,7 +5873,7 @@ module Aws::Imagebuilder
       :timezone,
       :pipeline_execution_start_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_execution_id
@@ -6080,7 +5901,7 @@ module Aws::Imagebuilder
       :reason,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_execution_id
@@ -6098,7 +5919,7 @@ module Aws::Imagebuilder
       :image_build_version_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the service encounters an unrecoverable
@@ -6108,7 +5929,7 @@ module Aws::Imagebuilder
     class ServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the number of permitted resources or operations for this service.
@@ -6119,7 +5940,7 @@ module Aws::Imagebuilder
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unable to process your request at this time.</p>
@@ -6128,7 +5949,7 @@ module Aws::Imagebuilder
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes counts by severity level for medium severity and higher level findings, plus a total
@@ -6151,7 +5972,7 @@ module Aws::Imagebuilder
       :high,
       :medium,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for a single Parameter in the Amazon Web Services Systems Manager (SSM) Parameter Store in 
@@ -6175,12 +5996,7 @@ module Aws::Imagebuilder
       :parameter_name,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SsmParameterDataType
-      TEXT = 'text'
-      AWS_EC2_IMAGE = 'aws:ec2:image'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_pipeline_arn
@@ -6196,7 +6012,7 @@ module Aws::Imagebuilder
       :image_pipeline_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -6213,7 +6029,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_build_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6250,7 +6066,7 @@ module Aws::Imagebuilder
       :update_at,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_execution_id
@@ -6264,7 +6080,7 @@ module Aws::Imagebuilder
       :lifecycle_execution_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings for the Systems Manager agent on your build instance.</p>
@@ -6277,7 +6093,7 @@ module Aws::Imagebuilder
     class SystemsManagerAgent < Struct.new(
       :uninstall_after_build,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6290,12 +6106,12 @@ module Aws::Imagebuilder
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container repository where the output container image is stored.</p>
@@ -6311,13 +6127,7 @@ module Aws::Imagebuilder
       :service,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TenancyType
-      DEFAULT = 'default'
-      DEDICATED = 'dedicated'
-      HOST = 'host'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6330,12 +6140,12 @@ module Aws::Imagebuilder
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_configuration_arn
@@ -6359,7 +6169,7 @@ module Aws::Imagebuilder
       :distributions,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -6377,7 +6187,7 @@ module Aws::Imagebuilder
       :client_token,
       :distribution_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_pipeline_arn
@@ -6446,7 +6256,7 @@ module Aws::Imagebuilder
       :workflows,
       :execution_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -6464,7 +6274,7 @@ module Aws::Imagebuilder
       :client_token,
       :image_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute infrastructure_configuration_arn
@@ -6560,7 +6370,7 @@ module Aws::Imagebuilder
       :placement,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -6578,7 +6388,7 @@ module Aws::Imagebuilder
       :client_token,
       :infrastructure_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_arn
@@ -6618,7 +6428,7 @@ module Aws::Imagebuilder
       :resource_selection,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policy_arn
@@ -6627,7 +6437,7 @@ module Aws::Imagebuilder
     class UpdateLifecyclePolicyResponse < Struct.new(
       :lifecycle_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes counts of image and pipeline resource findings by vulnerability.</p>
@@ -6642,7 +6452,7 @@ module Aws::Imagebuilder
       :vulnerability_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a vulnerable package that Amazon Inspector identifies in a finding.</p>
@@ -6688,7 +6498,7 @@ module Aws::Imagebuilder
       :fixed_in_version,
       :remediation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a process that Image Builder uses to build and test images during 
@@ -6752,7 +6562,7 @@ module Aws::Imagebuilder
       :tags,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains control settings and configurable inputs for a workflow 
@@ -6781,7 +6591,7 @@ module Aws::Imagebuilder
       :parallel_group,
       :on_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that includes details and status from this runtime instance of the workflow.</p>
@@ -6837,7 +6647,7 @@ module Aws::Imagebuilder
       :end_time,
       :parallel_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_step_count] = 0 unless options.key?(:total_step_count)
@@ -6846,17 +6656,6 @@ module Aws::Imagebuilder
         options[:total_steps_skipped] = 0 unless options.key?(:total_steps_skipped)
         super
       end
-    end
-
-    module WorkflowExecutionStatus
-      PENDING = 'PENDING'
-      SKIPPED = 'SKIPPED'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_COMPLETED = 'ROLLBACK_COMPLETED'
-      CANCELLED = 'CANCELLED'
     end
 
     # <p>Contains a key/value pair that sets the named workflow parameter.</p>
@@ -6870,7 +6669,7 @@ module Aws::Imagebuilder
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a parameter that's used to provide configuration details for the 
@@ -6894,7 +6693,7 @@ module Aws::Imagebuilder
       :default_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of fields that describe the current status of workflow.</p>
@@ -6908,16 +6707,7 @@ module Aws::Imagebuilder
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowStatus
-      DEPRECATED = 'DEPRECATED'
-    end
-
-    module WorkflowStepActionType
-      RESUME = 'RESUME'
-      STOP = 'STOP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains runtime details for an instance of a workflow that ran for the 
@@ -6954,23 +6744,7 @@ module Aws::Imagebuilder
       :action,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowStepExecutionRollbackStatus
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      SKIPPED = 'SKIPPED'
-      FAILED = 'FAILED'
-    end
-
-    module WorkflowStepExecutionStatus
-      PENDING = 'PENDING'
-      SKIPPED = 'SKIPPED'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Runtime details and status for the workflow step.</p>
@@ -7020,7 +6794,7 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about the workflow resource.</p>
@@ -7067,13 +6841,7 @@ module Aws::Imagebuilder
       :date_created,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowType
-      BUILD = 'BUILD'
-      TEST = 'TEST'
-      DISTRIBUTION = 'DISTRIBUTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about this version of the workflow.</p>
@@ -7108,7 +6876,7 @@ module Aws::Imagebuilder
       :owner,
       :date_created,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,7 +13,7 @@ module Aws::IoTDataPlane
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_id
@@ -30,7 +30,7 @@ module Aws::IoTDataPlane
       :clean_session,
       :prevent_will_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteThingShadow operation.</p>
@@ -44,7 +44,7 @@ module Aws::IoTDataPlane
       :thing_name,
       :shadow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DeleteThingShadow operation.</p>
@@ -54,7 +54,7 @@ module Aws::IoTDataPlane
     class DeleteThingShadowResponse < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller isn't authorized to make the request.</p>
@@ -63,7 +63,7 @@ module Aws::IoTDataPlane
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetRetainedMessage operation.</p>
@@ -73,7 +73,7 @@ module Aws::IoTDataPlane
     class GetRetainedMessageRequest < Struct.new(
       :topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetRetainedMessage operation.</p>
@@ -105,7 +105,7 @@ module Aws::IoTDataPlane
       :last_modified_time,
       :user_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:qos] = 0 unless options.key?(:qos)
@@ -125,7 +125,7 @@ module Aws::IoTDataPlane
       :thing_name,
       :shadow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetThingShadow operation.</p>
@@ -135,7 +135,7 @@ module Aws::IoTDataPlane
     class GetThingShadowResponse < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error has occurred.</p>
@@ -145,7 +145,7 @@ module Aws::IoTDataPlane
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -155,7 +155,7 @@ module Aws::IoTDataPlane
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -172,7 +172,7 @@ module Aws::IoTDataPlane
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -189,7 +189,7 @@ module Aws::IoTDataPlane
       :next_token,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
@@ -209,7 +209,7 @@ module Aws::IoTDataPlane
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retained_topics
@@ -223,7 +223,7 @@ module Aws::IoTDataPlane
       :retained_topics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified combination of HTTP verb and URI is not supported.</p>
@@ -233,12 +233,7 @@ module Aws::IoTDataPlane
     class MethodNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PayloadFormatIndicator
-      UNSPECIFIED_BYTES = 'UNSPECIFIED_BYTES'
-      UTF8_DATA = 'UTF8_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the Publish operation.</p>
@@ -306,7 +301,7 @@ module Aws::IoTDataPlane
       :correlation_data,
       :message_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The payload exceeds the maximum size allowed.</p>
@@ -316,7 +311,7 @@ module Aws::IoTDataPlane
     class RequestEntityTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -326,7 +321,7 @@ module Aws::IoTDataPlane
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a single retained message.</p>
@@ -348,7 +343,7 @@ module Aws::IoTDataPlane
       :qos,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload_size] = 0 unless options.key?(:payload_size)
@@ -365,7 +360,7 @@ module Aws::IoTDataPlane
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate exceeds the limit.</p>
@@ -375,7 +370,7 @@ module Aws::IoTDataPlane
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are not authorized to perform this operation.</p>
@@ -385,7 +380,7 @@ module Aws::IoTDataPlane
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document encoding is not supported.</p>
@@ -395,7 +390,7 @@ module Aws::IoTDataPlane
     class UnsupportedDocumentEncodingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the UpdateThingShadow operation.</p>
@@ -413,7 +408,7 @@ module Aws::IoTDataPlane
       :shadow_name,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the UpdateThingShadow operation.</p>
@@ -423,7 +418,7 @@ module Aws::IoTDataPlane
     class UpdateThingShadowResponse < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

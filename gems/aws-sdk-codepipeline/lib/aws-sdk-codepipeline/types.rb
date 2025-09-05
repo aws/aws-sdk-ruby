@@ -25,7 +25,7 @@ module Aws::CodePipeline
       :secret_access_key,
       :session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an AcknowledgeJob action.</p>
@@ -42,7 +42,7 @@ module Aws::CodePipeline
       :job_id,
       :nonce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an AcknowledgeJob action.</p>
@@ -52,7 +52,7 @@ module Aws::CodePipeline
     class AcknowledgeJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an AcknowledgeThirdPartyJob action.</p>
@@ -73,7 +73,7 @@ module Aws::CodePipeline
       :nonce,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an AcknowledgeThirdPartyJob action.</p>
@@ -83,17 +83,7 @@ module Aws::CodePipeline
     class AcknowledgeThirdPartyJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionCategory
-      Source = 'Source'
-      Build = 'Build'
-      Deploy = 'Deploy'
-      Test = 'Test'
-      Invoke = 'Invoke'
-      Approval = 'Approval'
-      Compute = 'Compute'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an action configuration.</p>
@@ -103,7 +93,7 @@ module Aws::CodePipeline
     class ActionConfiguration < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an action configuration property.</p>
@@ -148,7 +138,7 @@ module Aws::CodePipeline
       :description,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:required] = false unless options.key?(:required)
@@ -157,12 +147,6 @@ module Aws::CodePipeline
         options[:queryable] = false unless options.key?(:queryable)
         super
       end
-    end
-
-    module ActionConfigurationPropertyType
-      String = 'String'
-      Number = 'Number'
-      Boolean = 'Boolean'
     end
 
     # <p>Represents the context of an action in the stage of a pipeline to a job
@@ -177,7 +161,7 @@ module Aws::CodePipeline
       :name,
       :action_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an action declaration.</p>
@@ -259,7 +243,7 @@ module Aws::CodePipeline
       :timeout_in_minutes,
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the run of an action.</p>
@@ -319,7 +303,7 @@ module Aws::CodePipeline
       :error_details,
       :log_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an execution of an action, including the action execution
@@ -372,7 +356,7 @@ module Aws::CodePipeline
       :input,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter values for the action execution.</p>
@@ -390,7 +374,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input information used for an action execution.</p>
@@ -428,7 +412,7 @@ module Aws::CodePipeline
       :input_artifacts,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action execution was not found.</p>
@@ -437,7 +421,7 @@ module Aws::CodePipeline
     class ActionExecutionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output details listed for an action execution, such as the action execution
@@ -459,7 +443,7 @@ module Aws::CodePipeline
       :execution_result,
       :output_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Execution result information, such as the external execution ID.</p>
@@ -486,14 +470,7 @@ module Aws::CodePipeline
       :error_details,
       :log_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionExecutionStatus
-      InProgress = 'InProgress'
-      Abandoned = 'Abandoned'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified action cannot be found.</p>
@@ -503,13 +480,7 @@ module Aws::CodePipeline
     class ActionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionOwner
-      AWS = 'AWS'
-      ThirdParty = 'ThirdParty'
-      Custom = 'Custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the version (or revision) of an action.</p>
@@ -530,7 +501,7 @@ module Aws::CodePipeline
       :revision_change_id,
       :created,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the state of an action.</p>
@@ -558,7 +529,7 @@ module Aws::CodePipeline
       :entity_url,
       :revision_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the details of an action type.</p>
@@ -584,7 +555,7 @@ module Aws::CodePipeline
       :input_artifact_details,
       :output_artifact_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about parameters for artifacts associated with the action type, such as
@@ -603,7 +574,7 @@ module Aws::CodePipeline
       :minimum_count,
       :maximum_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_count] = 0 unless options.key?(:minimum_count)
@@ -653,7 +624,7 @@ module Aws::CodePipeline
       :properties,
       :urls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action engine, or executor, for an action type created for a provider, where the
@@ -688,7 +659,7 @@ module Aws::CodePipeline
       :policy_statements_template,
       :job_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an action type.</p>
@@ -741,7 +712,7 @@ module Aws::CodePipeline
       :provider,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the category, owner, provider, and version of the action type.</p>
@@ -797,7 +768,7 @@ module Aws::CodePipeline
       :provider,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified action type cannot be found.</p>
@@ -807,7 +778,7 @@ module Aws::CodePipeline
     class ActionTypeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details identifying the users with permissions to use the action type.</p>
@@ -818,7 +789,7 @@ module Aws::CodePipeline
     class ActionTypePermissions < Struct.new(
       :allowed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about each property specified in the action configuration, such
@@ -854,7 +825,7 @@ module Aws::CodePipeline
       :queryable,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:optional] = false unless options.key?(:optional)
@@ -892,7 +863,7 @@ module Aws::CodePipeline
       :execution_url_template,
       :revision_url_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about URLs for web pages that display to customers as links on the
@@ -920,7 +891,7 @@ module Aws::CodePipeline
       :execution_url_template,
       :revision_url_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval action has already been approved or rejected.</p>
@@ -930,7 +901,7 @@ module Aws::CodePipeline
     class ApprovalAlreadyCompletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the result of an approval request.</p>
@@ -945,12 +916,7 @@ module Aws::CodePipeline
       :summary,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApprovalStatus
-      Approved = 'Approved'
-      Rejected = 'Rejected'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Artifacts are the files that are worked on by actions in the pipeline. See the
@@ -972,7 +938,7 @@ module Aws::CodePipeline
       :revision,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Artifact details for the action execution, such as the artifact location.</p>
@@ -986,7 +952,7 @@ module Aws::CodePipeline
       :name,
       :s3location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the details of an artifact.</p>
@@ -1000,7 +966,7 @@ module Aws::CodePipeline
       :minimum_count,
       :maximum_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_count] = 0 unless options.key?(:minimum_count)
@@ -1020,11 +986,7 @@ module Aws::CodePipeline
       :type,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactLocationType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents revision details of an artifact. </p>
@@ -1061,7 +1023,7 @@ module Aws::CodePipeline
       :created,
       :revision_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket where artifacts for the pipeline are stored.</p>
@@ -1091,11 +1053,7 @@ module Aws::CodePipeline
       :location,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactStoreType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditions for making checks for entry to a stage. For more information about
@@ -1108,7 +1066,7 @@ module Aws::CodePipeline
     class BeforeEntryConditions < Struct.new(
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -1122,11 +1080,7 @@ module Aws::CodePipeline
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlockerType
-      Schedule = 'Schedule'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to modify the tag due to a simultaneous update request.</p>
@@ -1135,7 +1089,7 @@ module Aws::CodePipeline
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline has reached the limit for concurrent pipeline executions.</p>
@@ -1144,7 +1098,7 @@ module Aws::CodePipeline
     class ConcurrentPipelineExecutionsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The condition for the stage. A condition is made up of the rules and the result for
@@ -1162,7 +1116,7 @@ module Aws::CodePipeline
       :result,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The run of a condition.</p>
@@ -1180,17 +1134,7 @@ module Aws::CodePipeline
       :summary,
       :last_status_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionExecutionStatus
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Errored = 'Errored'
-      Succeeded = 'Succeeded'
-      Cancelled = 'Cancelled'
-      Abandoned = 'Abandoned'
-      Overridden = 'Overridden'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to override because the condition does not allow overrides.</p>
@@ -1199,7 +1143,7 @@ module Aws::CodePipeline
     class ConditionNotOverridableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state of the condition.</p>
@@ -1213,12 +1157,7 @@ module Aws::CodePipeline
       :latest_execution,
       :rule_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionType
-      BEFORE_ENTRY = 'BEFORE_ENTRY'
-      ON_SUCCESS = 'ON_SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request cannot be handled because the pipeline is busy handling ongoing
@@ -1228,7 +1167,7 @@ module Aws::CodePipeline
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a CreateCustomActionType operation.</p>
@@ -1275,7 +1214,7 @@ module Aws::CodePipeline
       :output_artifact_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateCustomActionType</code> operation.</p>
@@ -1289,7 +1228,7 @@ module Aws::CodePipeline
       :action_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreatePipeline</code> action.</p>
@@ -1304,7 +1243,7 @@ module Aws::CodePipeline
       :pipeline,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreatePipeline</code> action.</p>
@@ -1319,7 +1258,7 @@ module Aws::CodePipeline
       :pipeline,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a current revision.</p>
@@ -1342,7 +1281,7 @@ module Aws::CodePipeline
       :created,
       :revision_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteCustomActionType</code> operation. The custom
@@ -1363,7 +1302,7 @@ module Aws::CodePipeline
       :provider,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeletePipeline</code> action.</p>
@@ -1373,7 +1312,7 @@ module Aws::CodePipeline
     class DeletePipelineInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1382,12 +1321,12 @@ module Aws::CodePipeline
     class DeleteWebhookInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWebhookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target for the deploy action.</p>
@@ -1417,7 +1356,7 @@ module Aws::CodePipeline
       :end_time,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lifecycle event for the deploy action.</p>
@@ -1443,7 +1382,7 @@ module Aws::CodePipeline
       :end_time,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The context for the event for the deploy action.</p>
@@ -1457,7 +1396,7 @@ module Aws::CodePipeline
       :ssm_command_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook_name
@@ -1466,12 +1405,12 @@ module Aws::CodePipeline
     class DeregisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterWebhookWithThirdPartyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DisableStageTransition</code> action.</p>
@@ -1500,7 +1439,7 @@ module Aws::CodePipeline
       :transition_type,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline execution is already in a <code>Stopping</code> state. If you already
@@ -1513,7 +1452,7 @@ module Aws::CodePipeline
     class DuplicatedStopRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>EnableStageTransition</code> action.</p>
@@ -1535,7 +1474,7 @@ module Aws::CodePipeline
       :stage_name,
       :transition_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the key used to encrypt data in the artifact store,
@@ -1560,11 +1499,7 @@ module Aws::CodePipeline
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionKeyType
-      KMS = 'KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment variables for the action.</p>
@@ -1584,12 +1519,7 @@ module Aws::CodePipeline
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentVariableType
-      PLAINTEXT = 'PLAINTEXT'
-      SECRETS_MANAGER = 'SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an error in CodePipeline.</p>
@@ -1603,7 +1533,7 @@ module Aws::CodePipeline
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the actions taken and results produced on an artifact as it passes
@@ -1624,13 +1554,7 @@ module Aws::CodePipeline
       :external_execution_id,
       :percent_complete,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionMode
-      QUEUED = 'QUEUED'
-      SUPERSEDED = 'SUPERSEDED'
-      PARALLEL = 'PARALLEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The interaction or event that started a pipeline execution.</p>
@@ -1647,12 +1571,7 @@ module Aws::CodePipeline
       :trigger_type,
       :trigger_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionType
-      STANDARD = 'STANDARD'
-      ROLLBACK = 'ROLLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action engine, or executor, related to the supported integration model used to
@@ -1668,12 +1587,7 @@ module Aws::CodePipeline
       :lambda_executor_configuration,
       :job_worker_executor_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutorType
-      JobWorker = 'JobWorker'
-      Lambda = 'Lambda'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that specifies the result, such as rollback, to occur upon stage
@@ -1699,7 +1613,7 @@ module Aws::CodePipeline
       :retry_configuration,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about failure details.</p>
@@ -1717,16 +1631,7 @@ module Aws::CodePipeline
       :message,
       :external_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureType
-      JobFailed = 'JobFailed'
-      ConfigurationError = 'ConfigurationError'
-      PermissionError = 'PermissionError'
-      RevisionOutOfSync = 'RevisionOutOfSync'
-      RevisionUnavailable = 'RevisionUnavailable'
-      SystemUnavailable = 'SystemUnavailable'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute category
@@ -1787,7 +1692,7 @@ module Aws::CodePipeline
       :provider,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -1797,7 +1702,7 @@ module Aws::CodePipeline
     class GetActionTypeOutput < Struct.new(
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetJobDetails</code> action.</p>
@@ -1807,7 +1712,7 @@ module Aws::CodePipeline
     class GetJobDetailsInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetJobDetails</code> action.</p>
@@ -1821,7 +1726,7 @@ module Aws::CodePipeline
     class GetJobDetailsOutput < Struct.new(
       :job_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetPipelineExecution</code> action.</p>
@@ -1836,7 +1741,7 @@ module Aws::CodePipeline
       :pipeline_name,
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetPipelineExecution</code> action.</p>
@@ -1846,7 +1751,7 @@ module Aws::CodePipeline
     class GetPipelineExecutionOutput < Struct.new(
       :pipeline_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetPipeline</code> action.</p>
@@ -1862,7 +1767,7 @@ module Aws::CodePipeline
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetPipeline</code> action.</p>
@@ -1878,7 +1783,7 @@ module Aws::CodePipeline
       :pipeline,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetPipelineState</code> action.</p>
@@ -1888,7 +1793,7 @@ module Aws::CodePipeline
     class GetPipelineStateInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetPipelineState</code> action.</p>
@@ -1919,7 +1824,7 @@ module Aws::CodePipeline
       :created,
       :updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetThirdPartyJobDetails</code> action.</p>
@@ -1934,7 +1839,7 @@ module Aws::CodePipeline
       :job_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetThirdPartyJobDetails</code> action.</p>
@@ -1945,7 +1850,7 @@ module Aws::CodePipeline
     class GetThirdPartyJobDetailsOutput < Struct.new(
       :job_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Git repository branches specified as filter criteria to start the
@@ -1962,7 +1867,7 @@ module Aws::CodePipeline
       :includes,
       :excludes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of trigger configuration for Git-based source actions.</p>
@@ -1992,7 +1897,7 @@ module Aws::CodePipeline
       :push,
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Git repository file paths specified as filter criteria to start the
@@ -2009,13 +1914,7 @@ module Aws::CodePipeline
       :includes,
       :excludes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GitPullRequestEventType
-      OPEN = 'OPEN'
-      UPDATED = 'UPDATED'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event criteria for the pull request trigger configuration, such as the lists of
@@ -2049,7 +1948,7 @@ module Aws::CodePipeline
       :branches,
       :file_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event criteria that specify when a specified repository event will start the
@@ -2072,7 +1971,7 @@ module Aws::CodePipeline
       :branches,
       :file_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Git tags specified as filter criteria for whether a Git tag repository event
@@ -2089,7 +1988,7 @@ module Aws::CodePipeline
       :includes,
       :excludes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an artifact to be worked on, such as a test or build
@@ -2109,7 +2008,7 @@ module Aws::CodePipeline
     class InputArtifact < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action declaration was specified in an invalid format.</p>
@@ -2119,7 +2018,7 @@ module Aws::CodePipeline
     class InvalidActionDeclarationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval request already received a response or has expired.</p>
@@ -2129,7 +2028,7 @@ module Aws::CodePipeline
     class InvalidApprovalTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ARN is invalid.</p>
@@ -2138,7 +2037,7 @@ module Aws::CodePipeline
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -2148,7 +2047,7 @@ module Aws::CodePipeline
     class InvalidBlockerDeclarationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client token was specified in an invalid format</p>
@@ -2158,7 +2057,7 @@ module Aws::CodePipeline
     class InvalidClientTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job was specified in an invalid format or cannot be found.</p>
@@ -2168,7 +2067,7 @@ module Aws::CodePipeline
     class InvalidJobException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job state was specified in an invalid format.</p>
@@ -2178,7 +2077,7 @@ module Aws::CodePipeline
     class InvalidJobStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The next token was specified in an invalid format. Make sure that the next token
@@ -2189,7 +2088,7 @@ module Aws::CodePipeline
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The nonce was specified in an invalid format.</p>
@@ -2199,7 +2098,7 @@ module Aws::CodePipeline
     class InvalidNonceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stage declaration was specified in an invalid format.</p>
@@ -2209,7 +2108,7 @@ module Aws::CodePipeline
     class InvalidStageDeclarationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure was specified in an invalid format.</p>
@@ -2219,7 +2118,7 @@ module Aws::CodePipeline
     class InvalidStructureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource tags are invalid.</p>
@@ -2228,7 +2127,7 @@ module Aws::CodePipeline
     class InvalidTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified authentication type is in an invalid format.</p>
@@ -2238,7 +2137,7 @@ module Aws::CodePipeline
     class InvalidWebhookAuthenticationParametersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified event filter rule is in an invalid format.</p>
@@ -2248,7 +2147,7 @@ module Aws::CodePipeline
     class InvalidWebhookFilterPatternException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a job.</p>
@@ -2271,7 +2170,7 @@ module Aws::CodePipeline
       :nonce,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents other information about a job required for a job worker to complete the
@@ -2319,7 +2218,7 @@ module Aws::CodePipeline
       :continuation_token,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the details of a job.</p>
@@ -2338,7 +2237,7 @@ module Aws::CodePipeline
       :data,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job was specified in an invalid format or cannot be found.</p>
@@ -2348,17 +2247,7 @@ module Aws::CodePipeline
     class JobNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      Created = 'Created'
-      Queued = 'Queued'
-      Dispatched = 'Dispatched'
-      InProgress = 'InProgress'
-      TimedOut = 'TimedOut'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the polling configuration for the <code>JobWorker</code> action engine,
@@ -2375,7 +2264,7 @@ module Aws::CodePipeline
       :polling_accounts,
       :polling_service_principals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the configuration for the <code>Lambda</code> action engine, or
@@ -2386,7 +2275,7 @@ module Aws::CodePipeline
     class LambdaExecutorConfiguration < Struct.new(
       :lambda_function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field that specifies to filter on the latest execution in the
@@ -2414,7 +2303,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :start_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of pipelines associated with the Amazon Web Services account has exceeded
@@ -2425,7 +2314,7 @@ module Aws::CodePipeline
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2450,7 +2339,7 @@ module Aws::CodePipeline
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_execution_details
@@ -2465,7 +2354,7 @@ module Aws::CodePipeline
       :action_execution_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListActionTypes</code> action.</p>
@@ -2484,7 +2373,7 @@ module Aws::CodePipeline
       :next_token,
       :region_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListActionTypes</code> action.</p>
@@ -2500,7 +2389,7 @@ module Aws::CodePipeline
       :action_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2527,7 +2416,7 @@ module Aws::CodePipeline
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -2541,7 +2430,7 @@ module Aws::CodePipeline
       :targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListPipelineExecutions</code> action.</p>
@@ -2569,7 +2458,7 @@ module Aws::CodePipeline
       :filter,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListPipelineExecutions</code> action.</p>
@@ -2585,7 +2474,7 @@ module Aws::CodePipeline
       :pipeline_execution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListPipelines</code> action.</p>
@@ -2602,7 +2491,7 @@ module Aws::CodePipeline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListPipelines</code> action.</p>
@@ -2618,7 +2507,7 @@ module Aws::CodePipeline
       :pipelines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2644,7 +2533,7 @@ module Aws::CodePipeline
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_execution_details
@@ -2659,7 +2548,7 @@ module Aws::CodePipeline
       :rule_execution_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_owner_filter
@@ -2672,7 +2561,7 @@ module Aws::CodePipeline
       :rule_owner_filter,
       :region_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_types
@@ -2681,7 +2570,7 @@ module Aws::CodePipeline
     class ListRuleTypesOutput < Struct.new(
       :rule_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2700,7 +2589,7 @@ module Aws::CodePipeline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2716,7 +2605,7 @@ module Aws::CodePipeline
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detail returned for each webhook after listing webhooks, such as the webhook
@@ -2756,7 +2645,7 @@ module Aws::CodePipeline
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2771,7 +2660,7 @@ module Aws::CodePipeline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhooks
@@ -2787,7 +2676,7 @@ module Aws::CodePipeline
       :webhooks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stage has failed in a later run of the pipeline and the
@@ -2799,7 +2688,7 @@ module Aws::CodePipeline
     class NotLatestPipelineExecutionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the output of an action.</p>
@@ -2820,7 +2709,7 @@ module Aws::CodePipeline
       :name,
       :files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded the total size limit for all variables in the pipeline.</p>
@@ -2829,7 +2718,7 @@ module Aws::CodePipeline
     class OutputVariablesSizeExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2851,7 +2740,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :condition_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a pipeline to a job worker.</p>
@@ -2884,7 +2773,7 @@ module Aws::CodePipeline
       :pipeline_arn,
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the structure of actions and stages to be performed in the
@@ -2976,7 +2865,7 @@ module Aws::CodePipeline
       :variables,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about an execution of a pipeline.</p>
@@ -3057,7 +2946,7 @@ module Aws::CodePipeline
       :execution_type,
       :rollback_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline execution to filter on.</p>
@@ -3068,7 +2957,7 @@ module Aws::CodePipeline
     class PipelineExecutionFilter < Struct.new(
       :succeeded_in_stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline execution was specified in an invalid format or cannot be found, or an
@@ -3079,7 +2968,7 @@ module Aws::CodePipeline
     class PipelineExecutionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to stop the pipeline execution. The execution might already be in a
@@ -3089,7 +2978,7 @@ module Aws::CodePipeline
     class PipelineExecutionNotStoppableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified pipeline execution is outdated and cannot be used as a target pipeline
@@ -3099,17 +2988,7 @@ module Aws::CodePipeline
     class PipelineExecutionOutdatedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineExecutionStatus
-      Cancelled = 'Cancelled'
-      InProgress = 'InProgress'
-      Stopped = 'Stopped'
-      Stopping = 'Stopping'
-      Succeeded = 'Succeeded'
-      Superseded = 'Superseded'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a pipeline execution.</p>
@@ -3188,7 +3067,7 @@ module Aws::CodePipeline
       :execution_type,
       :rollback_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a pipeline.</p>
@@ -3221,7 +3100,7 @@ module Aws::CodePipeline
       :updated,
       :polling_disabled_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified pipeline name is already in use.</p>
@@ -3231,7 +3110,7 @@ module Aws::CodePipeline
     class PipelineNameInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline was specified in an invalid format or cannot be found.</p>
@@ -3241,7 +3120,7 @@ module Aws::CodePipeline
     class PipelineNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for the stage execution to be rolled back.</p>
@@ -3251,7 +3130,7 @@ module Aws::CodePipeline
     class PipelineRollbackMetadata < Struct.new(
       :rollback_target_pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of a pipeline.</p>
@@ -3303,7 +3182,7 @@ module Aws::CodePipeline
       :created,
       :updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the specified trigger configuration, such as the
@@ -3328,16 +3207,7 @@ module Aws::CodePipeline
       :provider_type,
       :git_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineTriggerProviderType
-      CodeStarSourceConnection = 'CodeStarSourceConnection'
-    end
-
-    module PipelineType
-      V1 = 'V1'
-      V2 = 'V2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pipeline-level variable used for a pipeline execution.</p>
@@ -3351,7 +3221,7 @@ module Aws::CodePipeline
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A variable declared at the pipeline level.</p>
@@ -3370,7 +3240,7 @@ module Aws::CodePipeline
       :default_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline version was specified in an invalid format or cannot be
@@ -3381,7 +3251,7 @@ module Aws::CodePipeline
     class PipelineVersionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PollForJobs</code> action.</p>
@@ -3402,7 +3272,7 @@ module Aws::CodePipeline
       :max_batch_size,
       :query_param,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PollForJobs</code> action.</p>
@@ -3412,7 +3282,7 @@ module Aws::CodePipeline
     class PollForJobsOutput < Struct.new(
       :jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PollForThirdPartyJobs</code> action.</p>
@@ -3426,7 +3296,7 @@ module Aws::CodePipeline
       :action_type_id,
       :max_batch_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PollForThirdPartyJobs</code> action.</p>
@@ -3436,7 +3306,7 @@ module Aws::CodePipeline
     class PollForThirdPartyJobsOutput < Struct.new(
       :jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutActionRevision</code> action.</p>
@@ -3459,7 +3329,7 @@ module Aws::CodePipeline
       :action_name,
       :action_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PutActionRevision</code> action.</p>
@@ -3474,7 +3344,7 @@ module Aws::CodePipeline
       :new_revision,
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:new_revision] = false unless options.key?(:new_revision)
@@ -3513,7 +3383,7 @@ module Aws::CodePipeline
       :result,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PutApprovalResult</code> action.</p>
@@ -3523,7 +3393,7 @@ module Aws::CodePipeline
     class PutApprovalResultOutput < Struct.new(
       :approved_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutJobFailureResult</code> action.</p>
@@ -3538,7 +3408,7 @@ module Aws::CodePipeline
       :job_id,
       :failure_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutJobSuccessResult</code> action.</p>
@@ -3573,7 +3443,7 @@ module Aws::CodePipeline
       :execution_details,
       :output_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutThirdPartyJobFailureResult</code>
@@ -3594,7 +3464,7 @@ module Aws::CodePipeline
       :client_token,
       :failure_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutThirdPartyJobSuccessResult</code>
@@ -3628,7 +3498,7 @@ module Aws::CodePipeline
       :continuation_token,
       :execution_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook
@@ -3644,7 +3514,7 @@ module Aws::CodePipeline
       :webhook,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook
@@ -3654,7 +3524,7 @@ module Aws::CodePipeline
     class PutWebhookOutput < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook_name
@@ -3664,12 +3534,12 @@ module Aws::CodePipeline
     class RegisterWebhookWithThirdPartyInput < Struct.new(
       :webhook_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterWebhookWithThirdPartyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because of an unknown error, exception, or failure.</p>
@@ -3678,7 +3548,7 @@ module Aws::CodePipeline
     class RequestFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pipeline-level variable used for a pipeline execution.</p>
@@ -3692,7 +3562,7 @@ module Aws::CodePipeline
       :name,
       :resolved_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was specified in an invalid format.</p>
@@ -3702,14 +3572,7 @@ module Aws::CodePipeline
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Result
-      ROLLBACK = 'ROLLBACK'
-      FAIL = 'FAIL'
-      RETRY = 'RETRY'
-      SKIP = 'SKIP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry configuration specifies automatic retry for a failed stage, along with the
@@ -3721,7 +3584,7 @@ module Aws::CodePipeline
     class RetryConfiguration < Struct.new(
       :retry_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>RetryStageExecution</code> action.</p>
@@ -3744,7 +3607,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :retry_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>RetryStageExecution</code> action.</p>
@@ -3754,7 +3617,7 @@ module Aws::CodePipeline
     class RetryStageExecutionOutput < Struct.new(
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a specific automatic retry on stage failure, including the attempt
@@ -3776,12 +3639,7 @@ module Aws::CodePipeline
       :manual_stage_retry_attempt,
       :latest_retry_trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetryTrigger
-      AutomatedStageRetry = 'AutomatedStageRetry'
-      ManualStageRetry = 'ManualStageRetry'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -3798,7 +3656,7 @@ module Aws::CodePipeline
       :stage_name,
       :target_pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_id
@@ -3808,11 +3666,7 @@ module Aws::CodePipeline
     class RollbackStageOutput < Struct.new(
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleCategory
-      Rule = 'Rule'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a rule configuration property.</p>
@@ -3853,7 +3707,7 @@ module Aws::CodePipeline
       :description,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:required] = false unless options.key?(:required)
@@ -3862,12 +3716,6 @@ module Aws::CodePipeline
         options[:queryable] = false unless options.key?(:queryable)
         super
       end
-    end
-
-    module RuleConfigurationPropertyType
-      String = 'String'
-      Number = 'Number'
-      Boolean = 'Boolean'
     end
 
     # <p>Represents information about the rule to be created for an associated condition. An
@@ -3918,7 +3766,7 @@ module Aws::CodePipeline
       :region,
       :timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about each time a rule is run as part of the pipeline execution
@@ -3962,7 +3810,7 @@ module Aws::CodePipeline
       :external_execution_url,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the runs for a rule and the results produced on an artifact as it
@@ -4017,7 +3865,7 @@ module Aws::CodePipeline
       :input,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter values for the rule execution.</p>
@@ -4036,7 +3884,7 @@ module Aws::CodePipeline
       :pipeline_execution_id,
       :latest_in_pipeline_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input information used for a rule execution.</p>
@@ -4071,7 +3919,7 @@ module Aws::CodePipeline
       :region,
       :input_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output details listed for a rule execution, such as the rule execution result.</p>
@@ -4081,7 +3929,7 @@ module Aws::CodePipeline
     class RuleExecutionOutput < Struct.new(
       :execution_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Execution result information, such as the external execution ID.</p>
@@ -4104,18 +3952,7 @@ module Aws::CodePipeline
       :external_execution_url,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleExecutionStatus
-      InProgress = 'InProgress'
-      Abandoned = 'Abandoned'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
-    end
-
-    module RuleOwner
-      AWS = 'AWS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The change to a rule that creates a revision of the rule.</p>
@@ -4135,7 +3972,7 @@ module Aws::CodePipeline
       :revision_change_id,
       :created,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the state of a rule.</p>
@@ -4168,7 +4005,7 @@ module Aws::CodePipeline
       :entity_url,
       :revision_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rule type, which is made up of the combined values for category, owner, provider,
@@ -4191,7 +4028,7 @@ module Aws::CodePipeline
       :rule_configuration_properties,
       :input_artifact_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID for the rule type, which is made up of the combined values for category, owner,
@@ -4219,7 +4056,7 @@ module Aws::CodePipeline
       :provider,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the settings for a rule type.</p>
@@ -4249,7 +4086,7 @@ module Aws::CodePipeline
       :execution_url_template,
       :revision_url_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the S3 bucket that contains a revision.</p>
@@ -4264,7 +4101,7 @@ module Aws::CodePipeline
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 artifact location for an action's artifacts.</p>
@@ -4278,7 +4115,7 @@ module Aws::CodePipeline
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the version (or revision) of a source artifact that initiated a
@@ -4307,7 +4144,7 @@ module Aws::CodePipeline
       :revision_summary,
       :revision_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list that allows you to specify, or override, the source revision for a pipeline
@@ -4334,14 +4171,7 @@ module Aws::CodePipeline
       :revision_type,
       :revision_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceRevisionType
-      COMMIT_ID = 'COMMIT_ID'
-      IMAGE_DIGEST = 'IMAGE_DIGEST'
-      S3_OBJECT_VERSION_ID = 'S3_OBJECT_VERSION_ID'
-      S3_OBJECT_KEY = 'S3_OBJECT_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of a run of a condition for a stage.</p>
@@ -4355,7 +4185,7 @@ module Aws::CodePipeline
       :latest_execution,
       :condition_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the run of a condition for a stage.</p>
@@ -4369,7 +4199,7 @@ module Aws::CodePipeline
       :status,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a stage to a job worker.</p>
@@ -4379,7 +4209,7 @@ module Aws::CodePipeline
     class StageContext < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a stage and its definition.</p>
@@ -4413,7 +4243,7 @@ module Aws::CodePipeline
       :on_success,
       :before_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the run of a stage.</p>
@@ -4437,17 +4267,7 @@ module Aws::CodePipeline
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StageExecutionStatus
-      Cancelled = 'Cancelled'
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Stopped = 'Stopped'
-      Stopping = 'Stopping'
-      Succeeded = 'Succeeded'
-      Skipped = 'Skipped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stage was specified in an invalid format or cannot be found.</p>
@@ -4457,7 +4277,7 @@ module Aws::CodePipeline
     class StageNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to retry. The pipeline structure or stage state might have changed while
@@ -4469,12 +4289,7 @@ module Aws::CodePipeline
     class StageNotRetryableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StageRetryMode
-      FAILED_ACTIONS = 'FAILED_ACTIONS'
-      ALL_ACTIONS = 'ALL_ACTIONS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the state of the stage.</p>
@@ -4522,12 +4337,7 @@ module Aws::CodePipeline
       :on_failure_condition_state,
       :retry_stage_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StageTransitionType
-      Inbound = 'Inbound'
-      Outbound = 'Outbound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>StartPipelineExecution</code> action.</p>
@@ -4554,7 +4364,7 @@ module Aws::CodePipeline
       :client_request_token,
       :source_revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>StartPipelineExecution</code> action.</p>
@@ -4565,12 +4375,7 @@ module Aws::CodePipeline
     class StartPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartTimeRange
-      Latest = 'Latest'
-      All = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The interaction that stopped a pipeline execution.</p>
@@ -4580,7 +4385,7 @@ module Aws::CodePipeline
     class StopExecutionTrigger < Struct.new(
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -4607,7 +4412,7 @@ module Aws::CodePipeline
       :abandon,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_id
@@ -4616,7 +4421,7 @@ module Aws::CodePipeline
     class StopPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter for pipeline executions that have successfully completed the stage in the
@@ -4628,7 +4433,7 @@ module Aws::CodePipeline
     class SucceededInStageFilter < Struct.new(
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditions for making checks that, if met, succeed a stage. For more information
@@ -4641,7 +4446,7 @@ module Aws::CodePipeline
     class SuccessConditions < Struct.new(
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a key-value pair that is used to manage the resource.</p>
@@ -4655,7 +4460,7 @@ module Aws::CodePipeline
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4668,12 +4473,12 @@ module Aws::CodePipeline
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the list of targets.</p>
@@ -4687,11 +4492,7 @@ module Aws::CodePipeline
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetFilterName
-      TARGET_STATUS = 'TARGET_STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response to a <code>PollForThirdPartyJobs</code> request returned by CodePipeline when there is a job to be worked on by a partner action.</p>
@@ -4707,7 +4508,7 @@ module Aws::CodePipeline
       :client_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the job data for a partner action.</p>
@@ -4760,7 +4561,7 @@ module Aws::CodePipeline
       :continuation_token,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a job sent in response to a <code>GetThirdPartyJobDetails</code>
@@ -4780,7 +4581,7 @@ module Aws::CodePipeline
       :data,
       :nonce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags limit for a resource has been exceeded.</p>
@@ -4789,7 +4590,7 @@ module Aws::CodePipeline
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about the state of transitions between one stage and another
@@ -4814,24 +4615,12 @@ module Aws::CodePipeline
       :last_changed_at,
       :disabled_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module TriggerType
-      CreatePipeline = 'CreatePipeline'
-      StartPipelineExecution = 'StartPipelineExecution'
-      PollForSourceChanges = 'PollForSourceChanges'
-      Webhook = 'Webhook'
-      CloudWatchEvent = 'CloudWatchEvent'
-      PutActionRevision = 'PutActionRevision'
-      WebhookV2 = 'WebhookV2'
-      ManualRollback = 'ManualRollback'
-      AutomatedRollback = 'AutomatedRollback'
     end
 
     # <p>Unable to roll back the stage. The cause might be if the pipeline version has changed
@@ -4842,7 +4631,7 @@ module Aws::CodePipeline
     class UnableToRollbackStageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4855,12 +4644,12 @@ module Aws::CodePipeline
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -4869,7 +4658,7 @@ module Aws::CodePipeline
     class UpdateActionTypeInput < Struct.new(
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>UpdatePipeline</code> action.</p>
@@ -4879,7 +4668,7 @@ module Aws::CodePipeline
     class UpdatePipelineInput < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdatePipeline</code> action.</p>
@@ -4889,7 +4678,7 @@ module Aws::CodePipeline
     class UpdatePipelineOutput < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The validation was specified in an invalid format.</p>
@@ -4899,7 +4688,7 @@ module Aws::CodePipeline
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication applied to incoming webhook trigger requests.</p>
@@ -4928,13 +4717,7 @@ module Aws::CodePipeline
       :allowed_ip_range,
       :secret_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebhookAuthenticationType
-      GITHUB_HMAC = 'GITHUB_HMAC'
-      IP = 'IP'
-      UNAUTHENTICATED = 'UNAUTHENTICATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a webhook and its definition.</p>
@@ -4999,7 +4782,7 @@ module Aws::CodePipeline
       :authentication,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event criteria that specify when a webhook notification is sent to your
@@ -5025,14 +4808,14 @@ module Aws::CodePipeline
       :json_path,
       :match_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified webhook was entered in an invalid format or cannot be
     #             found.</p>
     class WebhookNotFoundException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

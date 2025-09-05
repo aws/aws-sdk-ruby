@@ -17,13 +17,7 @@ module Aws::Mq
       :action_required_code,
       :action_required_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Optional. The authentication strategy used to secure the broker. The default is SIMPLE.</p>
-    module AuthenticationStrategy
-      SIMPLE = 'SIMPLE'
-      LDAP = 'LDAP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Name of the availability zone.</p>
@@ -33,7 +27,7 @@ module Aws::Mq
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -47,7 +41,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Types of broker engines.</p>
@@ -61,7 +55,7 @@ module Aws::Mq
       :engine_type,
       :engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about all brokers.</p>
@@ -79,7 +73,7 @@ module Aws::Mq
       :endpoints,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Option for host instance type.</p>
@@ -109,24 +103,7 @@ module Aws::Mq
       :supported_deployment_modes,
       :supported_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The broker's status.</p>
-    module BrokerState
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      CREATION_FAILED = 'CREATION_FAILED'
-      DELETION_IN_PROGRESS = 'DELETION_IN_PROGRESS'
-      RUNNING = 'RUNNING'
-      REBOOT_IN_PROGRESS = 'REBOOT_IN_PROGRESS'
-      CRITICAL_ACTION_REQUIRED = 'CRITICAL_ACTION_REQUIRED'
-      REPLICA = 'REPLICA'
-    end
-
-    # <p>The broker's storage type.</p> <important><p>EFS is not supported for RabbitMQ engine type.</p></important>
-    module BrokerStorageType
-      EBS = 'EBS'
-      EFS = 'EFS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about all brokers.</p>
@@ -164,14 +141,7 @@ module Aws::Mq
       :engine_type,
       :host_instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of change pending for the ActiveMQ user.</p>
-    module ChangeType
-      CREATE = 'CREATE'
-      UPDATE = 'UPDATE'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about all configurations.</p>
@@ -217,7 +187,7 @@ module Aws::Mq
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of information about the configuration.</p>
@@ -231,7 +201,7 @@ module Aws::Mq
       :id,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the specified configuration revision.</p>
@@ -249,7 +219,7 @@ module Aws::Mq
       :description,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Broker configuration information</p>
@@ -267,7 +237,7 @@ module Aws::Mq
       :history,
       :pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -281,7 +251,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a broker using the specified properties.</p>
@@ -371,7 +341,7 @@ module Aws::Mq
       :data_replication_mode,
       :data_replication_primary_broker_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_arn
@@ -384,7 +354,7 @@ module Aws::Mq
       :broker_arn,
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).</p>
@@ -410,7 +380,7 @@ module Aws::Mq
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -439,7 +409,7 @@ module Aws::Mq
       :latest_revision,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of the key-value pairs for the resource tag.</p>
@@ -453,7 +423,7 @@ module Aws::Mq
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new ActiveMQ user.</p>
@@ -483,12 +453,12 @@ module Aws::Mq
       :username,
       :replication_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a broker in a data replication pair.</p>
@@ -502,7 +472,7 @@ module Aws::Mq
       :broker_id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The replication details of the data replication-enabled broker. Only returned if dataReplicationMode or pendingDataReplicationMode is set to CRDR.</p>
@@ -516,23 +486,7 @@ module Aws::Mq
       :data_replication_counterpart,
       :data_replication_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies whether a broker is a part of a data replication pair.</p>
-    module DataReplicationMode
-      NONE = 'NONE'
-      CRDR = 'CRDR'
-    end
-
-    module DayOfWeek
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -541,7 +495,7 @@ module Aws::Mq
     class DeleteBrokerRequest < Struct.new(
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -550,7 +504,7 @@ module Aws::Mq
     class DeleteBrokerResponse < Struct.new(
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -559,7 +513,7 @@ module Aws::Mq
     class DeleteConfigurationRequest < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -568,7 +522,7 @@ module Aws::Mq
     class DeleteConfigurationResponse < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -581,7 +535,7 @@ module Aws::Mq
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -594,19 +548,12 @@ module Aws::Mq
       :broker_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The broker's deployment mode.</p>
-    module DeploymentMode
-      SINGLE_INSTANCE = 'SINGLE_INSTANCE'
-      ACTIVE_STANDBY_MULTI_AZ = 'ACTIVE_STANDBY_MULTI_AZ'
-      CLUSTER_MULTI_AZ = 'CLUSTER_MULTI_AZ'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_type
@@ -623,7 +570,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_engine_types
@@ -640,7 +587,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_type
@@ -665,7 +612,7 @@ module Aws::Mq
       :next_token,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_instance_options
@@ -682,7 +629,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -691,7 +638,7 @@ module Aws::Mq
     class DescribeBrokerRequest < Struct.new(
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions_required
@@ -828,7 +775,7 @@ module Aws::Mq
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -837,7 +784,7 @@ module Aws::Mq
     class DescribeConfigurationRequest < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -882,7 +829,7 @@ module Aws::Mq
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -895,7 +842,7 @@ module Aws::Mq
       :configuration_id,
       :configuration_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -916,7 +863,7 @@ module Aws::Mq
       :data,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -929,7 +876,7 @@ module Aws::Mq
       :broker_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -958,7 +905,7 @@ module Aws::Mq
       :username,
       :replication_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encryption options for the broker.</p>
@@ -972,13 +919,7 @@ module Aws::Mq
       :kms_key_id,
       :use_aws_owned_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.</p>
-    module EngineType
-      ACTIVEMQ = 'ACTIVEMQ'
-      RABBITMQ = 'RABBITMQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Id of the engine version.</p>
@@ -988,7 +929,7 @@ module Aws::Mq
     class EngineVersion < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1002,7 +943,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1016,7 +957,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
@@ -1071,7 +1012,7 @@ module Aws::Mq
       :user_search_matching,
       :user_search_subtree,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker.</p>
@@ -1121,7 +1062,7 @@ module Aws::Mq
       :user_search_matching,
       :user_search_subtree,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1134,7 +1075,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_summaries
@@ -1147,7 +1088,7 @@ module Aws::Mq
       :broker_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -1164,7 +1105,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -1185,7 +1126,7 @@ module Aws::Mq
       :next_token,
       :revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1198,7 +1139,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -1215,7 +1156,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1224,7 +1165,7 @@ module Aws::Mq
     class ListTagsRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1233,7 +1174,7 @@ module Aws::Mq
     class ListTagsResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -1250,7 +1191,7 @@ module Aws::Mq
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -1271,7 +1212,7 @@ module Aws::Mq
       :next_token,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of information about logs to be enabled for the specified broker.</p>
@@ -1285,7 +1226,7 @@ module Aws::Mq
       :audit,
       :general,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of information about logs currently enabled and pending to be deployed for the specified broker.</p>
@@ -1311,7 +1252,7 @@ module Aws::Mq
       :general_log_group,
       :pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1325,7 +1266,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of information about logs to be enabled for the specified broker.</p>
@@ -1339,13 +1280,7 @@ module Aws::Mq
       :audit,
       :general,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Promote mode requested.</p>
-    module PromoteMode
-      SWITCHOVER = 'SWITCHOVER'
-      FAILOVER = 'FAILOVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Promotes a data replication replica broker to the primary broker role.</p>
@@ -1359,7 +1294,7 @@ module Aws::Mq
       :broker_id,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -1368,7 +1303,7 @@ module Aws::Mq
     class PromoteResponse < Struct.new(
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_id
@@ -1377,12 +1312,12 @@ module Aws::Mq
     class RebootBrokerRequest < Struct.new(
       :broker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RebootBrokerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the configuration element or attribute that was sanitized in the configuration.</p>
@@ -1400,14 +1335,7 @@ module Aws::Mq
       :element_name,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The reason for which the configuration elements or attributes were sanitized.</p>
-    module SanitizationWarningReason
-      DISALLOWED_ELEMENT_REMOVED = 'DISALLOWED_ELEMENT_REMOVED'
-      DISALLOWED_ATTRIBUTE_REMOVED = 'DISALLOWED_ATTRIBUTE_REMOVED'
-      INVALID_ATTRIBUTE_VALUE_REMOVED = 'INVALID_ATTRIBUTE_VALUE_REMOVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1421,7 +1349,7 @@ module Aws::Mq
       :error_attribute,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the broker using the specified properties.</p>
@@ -1471,7 +1399,7 @@ module Aws::Mq
       :security_groups,
       :data_replication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_strategy
@@ -1532,7 +1460,7 @@ module Aws::Mq
       :pending_data_replication_metadata,
       :pending_data_replication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the specified configuration.</p>
@@ -1550,7 +1478,7 @@ module Aws::Mq
       :data,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1579,7 +1507,7 @@ module Aws::Mq
       :name,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the information for an ActiveMQ user.</p>
@@ -1609,12 +1537,12 @@ module Aws::Mq
       :username,
       :replication_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user associated with the broker. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p>
@@ -1640,7 +1568,7 @@ module Aws::Mq
       :username,
       :replication_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the status of the changes pending for the ActiveMQ user.</p>
@@ -1658,7 +1586,7 @@ module Aws::Mq
       :groups,
       :pending_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a list of all broker users. Does not apply to RabbitMQ brokers.</p>
@@ -1672,7 +1600,7 @@ module Aws::Mq
       :pending_change,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.</p>
@@ -1690,7 +1618,7 @@ module Aws::Mq
       :time_of_day,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -15,7 +15,7 @@ module Aws::Mgn
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -60,7 +60,7 @@ module Aws::Mgn
       :tags,
       :wave_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application aggregated status.</p>
@@ -82,7 +82,7 @@ module Aws::Mgn
       :progress_status,
       :total_source_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_source_servers] = 0 unless options.key?(:total_source_servers)
@@ -100,7 +100,7 @@ module Aws::Mgn
       :application_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -145,7 +145,7 @@ module Aws::Mgn
       :tags,
       :wave_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -158,7 +158,7 @@ module Aws::Mgn
       :wave_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -199,7 +199,7 @@ module Aws::Mgn
       :last_modified_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -216,12 +216,12 @@ module Aws::Mgn
       :application_i_ds,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateApplicationsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -238,12 +238,12 @@ module Aws::Mgn
       :source_server_i_ds,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateSourceServersOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source server CPU information.</p>
@@ -257,7 +257,7 @@ module Aws::Mgn
       :cores,
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cores] = 0 unless options.key?(:cores)
@@ -279,7 +279,7 @@ module Aws::Mgn
       :life_cycle,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -340,7 +340,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to change the source server migration lifecycle state.</p>
@@ -350,7 +350,7 @@ module Aws::Mgn
     class ChangeServerLifeCycleStateSourceServerLifecycle < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
@@ -374,7 +374,7 @@ module Aws::Mgn
       :resource_type,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -403,7 +403,7 @@ module Aws::Mgn
       :tags,
       :ssm_command_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connector SSM command config.</p>
@@ -425,7 +425,7 @@ module Aws::Mgn
       :cloud_watch_output_enabled,
       :cloud_watch_log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -446,7 +446,7 @@ module Aws::Mgn
       :tags,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -491,7 +491,7 @@ module Aws::Mgn
       :tags,
       :wave_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -520,7 +520,7 @@ module Aws::Mgn
       :tags,
       :ssm_command_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -541,7 +541,7 @@ module Aws::Mgn
       :tags,
       :ssm_command_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute post_launch_actions
@@ -602,7 +602,7 @@ module Aws::Mgn
       :small_volume_conf,
       :large_volume_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -675,7 +675,7 @@ module Aws::Mgn
       :small_volume_conf,
       :large_volume_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:small_volume_max_size] = 0 unless options.key?(:small_volume_max_size)
@@ -741,7 +741,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -810,7 +810,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -836,7 +836,7 @@ module Aws::Mgn
       :tags,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -877,7 +877,7 @@ module Aws::Mgn
       :last_modified_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error in data replication.</p>
@@ -891,7 +891,7 @@ module Aws::Mgn
       :error,
       :raw_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request data replication info.</p>
@@ -925,7 +925,7 @@ module Aws::Mgn
       :data_replication_error,
       :last_snapshot_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to query disks replicated.</p>
@@ -951,7 +951,7 @@ module Aws::Mgn
       :rescanned_storage_bytes,
       :backlogged_storage_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_storage_bytes] = 0 unless options.key?(:total_storage_bytes)
@@ -977,7 +977,7 @@ module Aws::Mgn
       :next_attempt_date_time,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data replication initiation step.</p>
@@ -991,7 +991,7 @@ module Aws::Mgn
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1004,12 +1004,12 @@ module Aws::Mgn
       :application_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -1018,7 +1018,7 @@ module Aws::Mgn
     class DeleteConnectorRequest < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1031,12 +1031,12 @@ module Aws::Mgn
       :job_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -1045,12 +1045,12 @@ module Aws::Mgn
     class DeleteLaunchConfigurationTemplateInput < Struct.new(
       :launch_configuration_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -1059,12 +1059,12 @@ module Aws::Mgn
     class DeleteReplicationConfigurationTemplateInput < Struct.new(
       :replication_configuration_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationConfigurationTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1077,12 +1077,12 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceServerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vcenter_client_id
@@ -1091,7 +1091,7 @@ module Aws::Mgn
     class DeleteVcenterClientInput < Struct.new(
       :vcenter_client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -1104,12 +1104,12 @@ module Aws::Mgn
       :wave_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWaveOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1130,7 +1130,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1143,7 +1143,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1164,7 +1164,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1177,7 +1177,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe Job log filters.</p>
@@ -1195,7 +1195,7 @@ module Aws::Mgn
       :from_date,
       :to_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_i_ds
@@ -1212,7 +1212,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1225,7 +1225,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_i_ds
@@ -1242,7 +1242,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1255,7 +1255,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1276,7 +1276,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1289,7 +1289,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to filter Source Servers list.</p>
@@ -1315,7 +1315,7 @@ module Aws::Mgn
       :life_cycle_states,
       :application_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1328,7 +1328,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1341,7 +1341,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -1358,12 +1358,12 @@ module Aws::Mgn
       :application_i_ds,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateApplicationsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1380,12 +1380,12 @@ module Aws::Mgn
       :source_server_i_ds,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateSourceServersOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1398,7 +1398,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1459,7 +1459,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The disk identifier.</p>
@@ -1473,7 +1473,7 @@ module Aws::Mgn
       :device_name,
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bytes] = 0 unless options.key?(:bytes)
@@ -1500,7 +1500,7 @@ module Aws::Mgn
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Export errors data.</p>
@@ -1510,7 +1510,7 @@ module Aws::Mgn
     class ExportErrorData < Struct.new(
       :raw_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Export task.</p>
@@ -1552,7 +1552,7 @@ module Aws::Mgn
       :progress_percentage,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Export task error.</p>
@@ -1566,7 +1566,7 @@ module Aws::Mgn
       :error_date_time,
       :error_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Export task summary.</p>
@@ -1584,7 +1584,7 @@ module Aws::Mgn
       :applications_count,
       :waves_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:servers_count] = 0 unless options.key?(:servers_count)
@@ -1604,7 +1604,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1665,7 +1665,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1678,7 +1678,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1731,7 +1731,7 @@ module Aws::Mgn
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1744,7 +1744,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1813,7 +1813,7 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -1844,7 +1844,7 @@ module Aws::Mgn
       :aws_instance_id,
       :vm_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Import error data.</p>
@@ -1878,7 +1878,7 @@ module Aws::Mgn
       :raw_error,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:row_number] = 0 unless options.key?(:row_number)
@@ -1917,7 +1917,7 @@ module Aws::Mgn
       :progress_percentage,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Import task error.</p>
@@ -1935,7 +1935,7 @@ module Aws::Mgn
       :error_type,
       :error_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Import task summary.</p>
@@ -1953,7 +1953,7 @@ module Aws::Mgn
       :applications,
       :servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Import task summary applications.</p>
@@ -1967,7 +1967,7 @@ module Aws::Mgn
       :created_count,
       :modified_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:created_count] = 0 unless options.key?(:created_count)
@@ -1987,7 +1987,7 @@ module Aws::Mgn
       :created_count,
       :modified_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:created_count] = 0 unless options.key?(:created_count)
@@ -2007,7 +2007,7 @@ module Aws::Mgn
       :created_count,
       :modified_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:created_count] = 0 unless options.key?(:created_count)
@@ -2018,12 +2018,12 @@ module Aws::Mgn
 
     class InitializeServiceInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an unexpected condition that prevented it from fulfilling the request.</p>
@@ -2036,7 +2036,7 @@ module Aws::Mgn
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -2083,7 +2083,7 @@ module Aws::Mgn
       :participating_servers,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Job log.</p>
@@ -2101,7 +2101,7 @@ module Aws::Mgn
       :event,
       :event_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Job log data</p>
@@ -2123,7 +2123,7 @@ module Aws::Mgn
       :target_instance_id,
       :raw_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch Status of the Job Post Launch Actions.</p>
@@ -2149,7 +2149,7 @@ module Aws::Mgn
       :execution_status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -2222,7 +2222,7 @@ module Aws::Mgn
       :small_volume_conf,
       :large_volume_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:small_volume_max_size] = 0 unless options.key?(:small_volume_max_size)
@@ -2245,7 +2245,7 @@ module Aws::Mgn
       :iops,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launched instance.</p>
@@ -2263,7 +2263,7 @@ module Aws::Mgn
       :job_id,
       :first_boot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure Licensing.</p>
@@ -2273,7 +2273,7 @@ module Aws::Mgn
     class Licensing < Struct.new(
       :os_byol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle.</p>
@@ -2307,7 +2307,7 @@ module Aws::Mgn
       :last_cutover,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Cutover .</p>
@@ -2325,7 +2325,7 @@ module Aws::Mgn
       :reverted,
       :finalized,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle Cutover finalized</p>
@@ -2335,7 +2335,7 @@ module Aws::Mgn
     class LifeCycleLastCutoverFinalized < Struct.new(
       :api_call_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Cutover initiated.</p>
@@ -2349,7 +2349,7 @@ module Aws::Mgn
       :api_call_date_time,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Cutover reverted.</p>
@@ -2359,7 +2359,7 @@ module Aws::Mgn
     class LifeCycleLastCutoverReverted < Struct.new(
       :api_call_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Test.</p>
@@ -2377,7 +2377,7 @@ module Aws::Mgn
       :reverted,
       :finalized,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Test finalized.</p>
@@ -2387,7 +2387,7 @@ module Aws::Mgn
     class LifeCycleLastTestFinalized < Struct.new(
       :api_call_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Test initiated.</p>
@@ -2401,7 +2401,7 @@ module Aws::Mgn
       :api_call_date_time,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle last Test reverted.</p>
@@ -2411,7 +2411,7 @@ module Aws::Mgn
     class LifeCycleLastTestReverted < Struct.new(
       :api_call_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2432,7 +2432,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2445,7 +2445,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Applications list filters.</p>
@@ -2463,7 +2463,7 @@ module Aws::Mgn
       :is_archived,
       :wave_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2480,7 +2480,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List Connectors Request Filters.</p>
@@ -2490,7 +2490,7 @@ module Aws::Mgn
     class ListConnectorsRequestFilters < Struct.new(
       :connector_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2503,7 +2503,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List export errors request.</p>
@@ -2521,7 +2521,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List export errors response.</p>
@@ -2535,7 +2535,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List export request.</p>
@@ -2553,7 +2553,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List export response.</p>
@@ -2567,7 +2567,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List exports request filters.</p>
@@ -2577,7 +2577,7 @@ module Aws::Mgn
     class ListExportsRequestFilters < Struct.new(
       :export_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List import errors request.</p>
@@ -2595,7 +2595,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List imports errors response.</p>
@@ -2609,7 +2609,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List imports request.</p>
@@ -2627,7 +2627,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List import response.</p>
@@ -2641,7 +2641,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List imports request filters.</p>
@@ -2651,7 +2651,7 @@ module Aws::Mgn
     class ListImportsRequestFilters < Struct.new(
       :import_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List managed accounts request.</p>
@@ -2665,7 +2665,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List managed accounts response.</p>
@@ -2679,7 +2679,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2704,7 +2704,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2717,7 +2717,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2726,7 +2726,7 @@ module Aws::Mgn
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2735,7 +2735,7 @@ module Aws::Mgn
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -2756,7 +2756,7 @@ module Aws::Mgn
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2769,7 +2769,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2790,7 +2790,7 @@ module Aws::Mgn
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2803,7 +2803,7 @@ module Aws::Mgn
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Waves list filters.</p>
@@ -2817,7 +2817,7 @@ module Aws::Mgn
       :wave_i_ds,
       :is_archived,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Managed account.</p>
@@ -2827,7 +2827,7 @@ module Aws::Mgn
     class ManagedAccount < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2840,7 +2840,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2901,7 +2901,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network interface.</p>
@@ -2919,7 +2919,7 @@ module Aws::Mgn
       :ips,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operating System.</p>
@@ -2929,7 +2929,7 @@ module Aws::Mgn
     class OS < Struct.new(
       :full_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Server participating in Job.</p>
@@ -2951,7 +2951,7 @@ module Aws::Mgn
       :launched_ec2_instance_id,
       :post_launch_actions_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3012,7 +3012,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3025,7 +3025,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Post Launch Actions to executed on the Test or Cutover instance.</p>
@@ -3051,7 +3051,7 @@ module Aws::Mgn
       :cloud_watch_log_group_name,
       :ssm_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the Post Launch Actions running on the Test or Cutover instance.</p>
@@ -3065,7 +3065,7 @@ module Aws::Mgn
       :ssm_agent_discovery_datetime,
       :post_launch_actions_launch_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3126,7 +3126,7 @@ module Aws::Mgn
       :category,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_id
@@ -3179,7 +3179,7 @@ module Aws::Mgn
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -3240,7 +3240,7 @@ module Aws::Mgn
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_id
@@ -3297,7 +3297,7 @@ module Aws::Mgn
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3314,12 +3314,12 @@ module Aws::Mgn
       :action_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveSourceServerActionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -3332,12 +3332,12 @@ module Aws::Mgn
       :launch_configuration_template_id,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveTemplateActionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Replication Configuration replicated disk.</p>
@@ -3363,7 +3363,7 @@ module Aws::Mgn
       :iops,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:iops] = 0 unless options.key?(:iops)
@@ -3438,7 +3438,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -3463,7 +3463,7 @@ module Aws::Mgn
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3524,7 +3524,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3537,7 +3537,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3550,7 +3550,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3611,7 +3611,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3 bucket source.</p>
@@ -3629,7 +3629,7 @@ module Aws::Mgn
       :s3_key,
       :s3_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be completed because its exceeded the service quota.</p>
@@ -3661,7 +3661,7 @@ module Aws::Mgn
       :quota_code,
       :quota_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source server properties.</p>
@@ -3699,7 +3699,7 @@ module Aws::Mgn
       :ram_bytes,
       :os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ram_bytes] = 0 unless options.key?(:ram_bytes)
@@ -3765,7 +3765,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_id
@@ -3818,7 +3818,7 @@ module Aws::Mgn
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source server post migration custom action filters.</p>
@@ -3828,7 +3828,7 @@ module Aws::Mgn
     class SourceServerActionsRequestFilters < Struct.new(
       :action_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source Server connector action.</p>
@@ -3842,7 +3842,7 @@ module Aws::Mgn
       :credentials_secret_arn,
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS Systems Manager Document.</p>
@@ -3872,7 +3872,7 @@ module Aws::Mgn
       :parameters,
       :external_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS Systems Manager Document external parameter.</p>
@@ -3883,7 +3883,7 @@ module Aws::Mgn
       :dynamic_path,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DynamicPath < SsmExternalParameter; end
       class Unknown < SsmExternalParameter; end
@@ -3900,7 +3900,7 @@ module Aws::Mgn
       :parameter_type,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_i_ds
@@ -3917,7 +3917,7 @@ module Aws::Mgn
       :tags,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -3926,7 +3926,7 @@ module Aws::Mgn
     class StartCutoverOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Start export request.</p>
@@ -3944,7 +3944,7 @@ module Aws::Mgn
       :s3_key,
       :s3_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Start export response.</p>
@@ -3954,7 +3954,7 @@ module Aws::Mgn
     class StartExportOutput < Struct.new(
       :export_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Start import request.</p>
@@ -3968,7 +3968,7 @@ module Aws::Mgn
       :client_token,
       :s3_bucket_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Start import response.</p>
@@ -3978,7 +3978,7 @@ module Aws::Mgn
     class StartImportOutput < Struct.new(
       :import_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3991,7 +3991,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4052,7 +4052,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_i_ds
@@ -4069,7 +4069,7 @@ module Aws::Mgn
       :tags,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -4078,7 +4078,7 @@ module Aws::Mgn
     class StartTestOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4139,7 +4139,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4152,7 +4152,7 @@ module Aws::Mgn
       :source_server_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4165,7 +4165,7 @@ module Aws::Mgn
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_id
@@ -4222,7 +4222,7 @@ module Aws::Mgn
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template post migration custom action filters.</p>
@@ -4232,7 +4232,7 @@ module Aws::Mgn
     class TemplateActionsRequestFilters < Struct.new(
       :action_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_i_ds
@@ -4249,7 +4249,7 @@ module Aws::Mgn
       :tags,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -4258,7 +4258,7 @@ module Aws::Mgn
     class TerminateTargetInstancesOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reached throttling quota exception.</p>
@@ -4279,7 +4279,7 @@ module Aws::Mgn
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4292,7 +4292,7 @@ module Aws::Mgn
       :application_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4337,7 +4337,7 @@ module Aws::Mgn
       :tags,
       :wave_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -4350,7 +4350,7 @@ module Aws::Mgn
       :wave_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -4391,7 +4391,7 @@ module Aws::Mgn
       :last_modified_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Uninitialized account exception.</p>
@@ -4403,7 +4403,7 @@ module Aws::Mgn
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4416,7 +4416,7 @@ module Aws::Mgn
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4437,7 +4437,7 @@ module Aws::Mgn
       :description,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4482,7 +4482,7 @@ module Aws::Mgn
       :tags,
       :wave_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -4511,7 +4511,7 @@ module Aws::Mgn
       :tags,
       :ssm_command_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -4528,7 +4528,7 @@ module Aws::Mgn
       :name,
       :ssm_command_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4581,7 +4581,7 @@ module Aws::Mgn
       :map_auto_tagging_mpe_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4634,7 +4634,7 @@ module Aws::Mgn
       :enable_map_auto_tagging,
       :map_auto_tagging_mpe_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -4695,7 +4695,7 @@ module Aws::Mgn
       :small_volume_conf,
       :large_volume_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -4768,7 +4768,7 @@ module Aws::Mgn
       :small_volume_conf,
       :large_volume_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:small_volume_max_size] = 0 unless options.key?(:small_volume_max_size)
@@ -4846,7 +4846,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -4915,7 +4915,7 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -4985,7 +4985,7 @@ module Aws::Mgn
       :staging_area_tags,
       :use_fips_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -5054,7 +5054,7 @@ module Aws::Mgn
       :use_fips_endpoint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -5120,7 +5120,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -5137,7 +5137,7 @@ module Aws::Mgn
       :replication_type,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -5198,7 +5198,7 @@ module Aws::Mgn
       :fqdn_for_action_framework,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -5215,7 +5215,7 @@ module Aws::Mgn
       :source_server_id,
       :connector_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -5236,7 +5236,7 @@ module Aws::Mgn
       :description,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -5277,7 +5277,7 @@ module Aws::Mgn
       :last_modified_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validate exception.</p>
@@ -5297,7 +5297,7 @@ module Aws::Mgn
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validate exception field.</p>
@@ -5311,7 +5311,7 @@ module Aws::Mgn
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>vCenter client.</p>
@@ -5349,7 +5349,7 @@ module Aws::Mgn
       :source_server_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wave_id
@@ -5390,7 +5390,7 @@ module Aws::Mgn
       :last_modified_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Wave aggregated status.</p>
@@ -5416,7 +5416,7 @@ module Aws::Mgn
       :progress_status,
       :total_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_applications] = 0 unless options.key?(:total_applications)

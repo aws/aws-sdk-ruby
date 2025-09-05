@@ -6,10 +6,6 @@ module Aws::IoT
   # This module contains the types returned by client operations.
   module Types
 
-    module AbortAction
-      CANCEL = 'CANCEL'
-    end
-
     # <p>The criteria that determine when and how a job abort takes place.</p>
     # @!attribute criteria_list
     #   <p>The list of criteria that determine when and how to abort the job.</p>
@@ -17,7 +13,7 @@ module Aws::IoT
     class AbortConfig < Struct.new(
       :criteria_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria that determine when and how a job abort takes place.</p>
@@ -43,7 +39,7 @@ module Aws::IoT
       :threshold_percentage,
       :min_number_of_executed_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the AcceptCertificateTransfer operation.</p>
@@ -58,7 +54,7 @@ module Aws::IoT
       :certificate_id,
       :set_as_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the actions associated with a rule.</p>
@@ -168,14 +164,7 @@ module Aws::IoT
       :open_search,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionType
-      PUBLISH = 'PUBLISH'
-      SUBSCRIBE = 'SUBSCRIBE'
-      RECEIVE = 'RECEIVE'
-      CONNECT = 'CONNECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an active Device Defender security profile behavior violation.</p>
@@ -223,7 +212,7 @@ module Aws::IoT
       :last_violation_time,
       :violation_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -247,12 +236,12 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddThingToBillingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -280,12 +269,12 @@ module Aws::IoT
       :thing_arn,
       :override_dynamic_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddThingToThingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters used when defining a mitigation action that move a set of things to a thing group.</p>
@@ -299,7 +288,7 @@ module Aws::IoT
       :thing_group_names,
       :override_dynamic_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of aggregation queries.</p>
@@ -313,13 +302,7 @@ module Aws::IoT
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregationTypeName
-      STATISTICS = 'Statistics'
-      PERCENTILES = 'Percentiles'
-      CARDINALITY = 'Cardinality'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the alert target ARN and the role ARN.</p>
@@ -334,12 +317,7 @@ module Aws::IoT
       :alert_target_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of alert target: one of "SNS".</p>
-    module AlertTargetType
-      SNS = 'SNS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that allowed the authorization.</p>
@@ -349,14 +327,7 @@ module Aws::IoT
     class Allowed < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationProtocol
-      SECURE_MQTT = 'SECURE_MQTT'
-      MQTT_WSS = 'MQTT_WSS'
-      HTTPS = 'HTTPS'
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset property timestamp entry containing the following information.</p>
@@ -372,7 +343,7 @@ module Aws::IoT
       :time_in_seconds,
       :offset_in_nanos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset property value entry containing the following information.</p>
@@ -391,7 +362,7 @@ module Aws::IoT
       :timestamp,
       :quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an asset property value (of a single type).</p>
@@ -417,7 +388,7 @@ module Aws::IoT
       :boolean_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < AssetPropertyVariant; end
       class IntegerValue < AssetPropertyVariant; end
@@ -445,7 +416,7 @@ module Aws::IoT
       :sbom,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -467,7 +438,7 @@ module Aws::IoT
       :sbom,
       :sbom_validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -499,7 +470,7 @@ module Aws::IoT
       :comment,
       :namespace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -516,7 +487,7 @@ module Aws::IoT
       :job_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -529,7 +500,7 @@ module Aws::IoT
       :policy_name,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the AttachPrincipalPolicy operation.</p>
@@ -544,7 +515,7 @@ module Aws::IoT
       :policy_name,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -557,12 +528,12 @@ module Aws::IoT
       :security_profile_name,
       :security_profile_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachSecurityProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the AttachThingPrincipal operation.</p>
@@ -595,13 +566,13 @@ module Aws::IoT
       :principal,
       :thing_principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the AttachThingPrincipal operation.</p>
     class AttachThingPrincipalResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attribute payload.</p>
@@ -623,7 +594,7 @@ module Aws::IoT
       :attributes,
       :merge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:merge] = false unless options.key?(:merge)
@@ -642,7 +613,7 @@ module Aws::IoT
       :enabled,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -685,16 +656,7 @@ module Aws::IoT
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditCheckRunStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      WAITING_FOR_DATA_COLLECTION = 'WAITING_FOR_DATA_COLLECTION'
-      CANCELED = 'CANCELED'
-      COMPLETED_COMPLIANT = 'COMPLETED_COMPLIANT'
-      COMPLETED_NON_COMPLIANT = 'COMPLETED_NON_COMPLIANT'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The findings (results) of the audit.</p>
@@ -748,21 +710,7 @@ module Aws::IoT
       :reason_for_non_compliance_code,
       :is_suppressed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditFindingSeverity
-      CRITICAL = 'CRITICAL'
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
-    end
-
-    module AuditFrequency
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      BIWEEKLY = 'BIWEEKLY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned by ListAuditMitigationActionsTask, this object contains information that describes a mitigation action that has been started.</p>
@@ -804,16 +752,7 @@ module Aws::IoT
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditMitigationActionsExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
-      SKIPPED = 'SKIPPED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an audit mitigation actions task that is returned by <code>ListAuditMitigationActionsTasks</code>.</p>
@@ -831,14 +770,7 @@ module Aws::IoT
       :start_time,
       :task_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditMitigationActionsTaskStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.</p>
@@ -856,7 +788,7 @@ module Aws::IoT
       :finding_ids,
       :audit_check_to_reason_code_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the targets to which audit notifications are sent.</p>
@@ -874,16 +806,12 @@ module Aws::IoT
       :role_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module AuditNotificationType
-      SNS = 'SNS'
     end
 
     # <p> Filters out specific findings of a Device Defender audit. </p>
@@ -918,7 +846,7 @@ module Aws::IoT
       :suppress_indefinitely,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The audits that were performed.</p>
@@ -937,25 +865,7 @@ module Aws::IoT
       :task_status,
       :task_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditTaskStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
-    end
-
-    module AuditTaskType
-      ON_DEMAND_AUDIT_TASK = 'ON_DEMAND_AUDIT_TASK'
-      SCHEDULED_AUDIT_TASK = 'SCHEDULED_AUDIT_TASK'
-    end
-
-    module AuthDecision
-      ALLOWED = 'ALLOWED'
-      EXPLICIT_DENY = 'EXPLICIT_DENY'
-      IMPLICIT_DENY = 'IMPLICIT_DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of authorization information.</p>
@@ -970,7 +880,7 @@ module Aws::IoT
       :action_type,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorizer result.</p>
@@ -998,15 +908,7 @@ module Aws::IoT
       :auth_decision,
       :missing_context_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      CUSTOM_AUTH_X509 = 'CUSTOM_AUTH_X509'
-      CUSTOM_AUTH = 'CUSTOM_AUTH'
-      AWS_X509 = 'AWS_X509'
-      AWS_SIGV4 = 'AWS_SIGV4'
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies the authorization service for a domain.</p>
@@ -1020,10 +922,10 @@ module Aws::IoT
       :default_authorizer_name,
       :allow_authorizer_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:allow_authorizer_override] =  unless options.key?(:allow_authorizer_override)
+        options[:allow_authorizer_override] = nil unless options.key?(:allow_authorizer_override)
         super
       end
     end
@@ -1074,12 +976,7 @@ module Aws::IoT
       :signing_disabled,
       :enable_caching_for_http,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthorizerStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorizer summary.</p>
@@ -1093,12 +990,7 @@ module Aws::IoT
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoRegistrationStatus
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria that determine when and how a job abort takes place.</p>
@@ -1108,7 +1000,7 @@ module Aws::IoT
     class AwsJobAbortConfig < Struct.new(
       :abort_criteria_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria that determine when and how a job abort takes place.</p>
@@ -1132,18 +1024,7 @@ module Aws::IoT
       :threshold_percentage,
       :min_number_of_executed_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsJobAbortCriteriaAbortAction
-      CANCEL = 'CANCEL'
-    end
-
-    module AwsJobAbortCriteriaFailureType
-      FAILED = 'FAILED'
-      REJECTED = 'REJECTED'
-      TIMED_OUT = 'TIMED_OUT'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the rollout of OTA updates.</p>
@@ -1158,7 +1039,7 @@ module Aws::IoT
       :maximum_per_minute,
       :exponential_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate 
@@ -1180,7 +1061,7 @@ module Aws::IoT
       :increment_factor,
       :rate_increase_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:increment_factor] = 0 unless options.key?(:increment_factor)
@@ -1197,7 +1078,7 @@ module Aws::IoT
     class AwsJobPresignedUrlConfig < Struct.new(
       :expires_in_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria to initiate the increase in rate of rollout for a job.</p>
@@ -1213,7 +1094,7 @@ module Aws::IoT
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the amount of time each device has to finish its execution of the job.  A timer is 
@@ -1230,7 +1111,7 @@ module Aws::IoT
     class AwsJobTimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Device Defender security profile behavior.</p>
@@ -1267,7 +1148,7 @@ module Aws::IoT
       :suppress_alerts,
       :export_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria by which the behavior is determined to be normal.</p>
@@ -1336,13 +1217,7 @@ module Aws::IoT
       :statistical_threshold,
       :ml_detection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BehaviorCriteriaType
-      STATIC = 'STATIC'
-      STATISTICAL = 'STATISTICAL'
-      MACHINE_LEARNING = 'MACHINE_LEARNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1386,7 +1261,7 @@ module Aws::IoT
       :datapoints_collection_percentage,
       :last_model_refresh_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional information about the billing group.</p>
@@ -1396,7 +1271,7 @@ module Aws::IoT
     class BillingGroupMetadata < Struct.new(
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a billing group.</p>
@@ -1406,7 +1281,7 @@ module Aws::IoT
     class BillingGroupProperties < Struct.new(
       :billing_group_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A count of documents that meets a specific aggregation criteria.</p>
@@ -1420,7 +1295,7 @@ module Aws::IoT
       :key_value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1435,7 +1310,7 @@ module Aws::IoT
     class BucketsAggregationType < Struct.new(
       :terms_aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CA certificate.</p>
@@ -1458,7 +1333,7 @@ module Aws::IoT
       :status,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a CA certificate.</p>
@@ -1515,16 +1390,7 @@ module Aws::IoT
       :validity,
       :certificate_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CACertificateStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module CACertificateUpdateAction
-      DEACTIVATE = 'DEACTIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1533,12 +1399,12 @@ module Aws::IoT
     class CancelAuditMitigationActionsTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelAuditMitigationActionsTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1548,12 +1414,12 @@ module Aws::IoT
     class CancelAuditTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelAuditTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CancelCertificateTransfer operation.</p>
@@ -1564,7 +1430,7 @@ module Aws::IoT
     class CancelCertificateTransferRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1575,12 +1441,12 @@ module Aws::IoT
     class CancelDetectMitigationActionsTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelDetectMitigationActionsTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1620,7 +1486,7 @@ module Aws::IoT
       :expected_version,
       :status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1646,7 +1512,7 @@ module Aws::IoT
       :comment,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -1663,18 +1529,7 @@ module Aws::IoT
       :job_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CannedAccessControlList
-      Private = 'private'
-      PublicRead = 'public-read'
-      PublicReadWrite = 'public-read-write'
-      AwsExecRead = 'aws-exec-read'
-      AuthenticatedRead = 'authenticated-read'
-      BucketOwnerRead = 'bucket-owner-read'
-      BucketOwnerFullControl = 'bucket-owner-full-control'
-      LogDeliveryWrite = 'log-delivery-write'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a certificate.</p>
@@ -1712,7 +1567,7 @@ module Aws::IoT
       :certificate_mode,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to verify the CA certificate used to sign the device certificate you are
@@ -1724,7 +1579,7 @@ module Aws::IoT
     class CertificateConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a certificate.</p>
@@ -1797,16 +1652,7 @@ module Aws::IoT
       :validity,
       :certificate_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateMode
-      DEFAULT = 'DEFAULT'
-      SNI_ONLY = 'SNI_ONLY'
-    end
-
-    module CertificateProviderOperation
-      CreateCertificateFromCsr = 'CreateCertificateFromCsr'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate provider summary.</p>
@@ -1820,7 +1666,7 @@ module Aws::IoT
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate operation is not allowed.</p>
@@ -1830,16 +1676,7 @@ module Aws::IoT
     class CertificateStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      REVOKED = 'REVOKED'
-      PENDING_TRANSFER = 'PENDING_TRANSFER'
-      REGISTER_INACTIVE = 'REGISTER_INACTIVE'
-      PENDING_ACTIVATION = 'PENDING_ACTIVATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate is invalid.</p>
@@ -1849,7 +1686,7 @@ module Aws::IoT
     class CertificateValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When the certificate is valid.</p>
@@ -1863,17 +1700,17 @@ module Aws::IoT
       :not_before,
       :not_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ClearDefaultAuthorizerRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ClearDefaultAuthorizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>
@@ -1883,7 +1720,7 @@ module Aws::IoT
     class ClientCertificateConfig < Struct.new(
       :client_certificate_callback_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that updates a CloudWatch alarm.</p>
@@ -1906,7 +1743,7 @@ module Aws::IoT
       :state_reason,
       :state_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that sends data to CloudWatch Logs.</p>
@@ -1925,7 +1762,7 @@ module Aws::IoT
       :log_group_name,
       :batch_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that captures a CloudWatch metric.</p>
@@ -1956,7 +1793,7 @@ module Aws::IoT
       :metric_unit,
       :metric_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the method to use when code signing a file.</p>
@@ -1974,7 +1811,7 @@ module Aws::IoT
       :start_signing_job_parameter,
       :custom_code_signing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the certificate chain being used when code signing a file.</p>
@@ -1988,7 +1825,7 @@ module Aws::IoT
       :certificate_name,
       :inline_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the signature for a file.</p>
@@ -1998,7 +1835,7 @@ module Aws::IoT
     class CodeSigningSignature < Struct.new(
       :inline_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result value of the command execution. The device can use the result field to
@@ -2028,16 +1865,7 @@ module Aws::IoT
       :b,
       :bin,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommandExecutionStatus
-      CREATED = 'CREATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      REJECTED = 'REJECTED'
-      TIMED_OUT = 'TIMED_OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a particular command execution.</p>
@@ -2073,12 +1901,7 @@ module Aws::IoT
       :started_at,
       :completed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommandNamespace
-      AWSIoT = 'AWS-IoT'
-      AWSIoTFleetWise = 'AWS-IoT-FleetWise'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of key-value pairs that describe the command.</p>
@@ -2102,7 +1925,7 @@ module Aws::IoT
       :default_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of possible values that's used to describe a specific command
@@ -2150,7 +1973,7 @@ module Aws::IoT
       :bin,
       :ul,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The command payload object that contains the instructions for the device
@@ -2167,7 +1990,7 @@ module Aws::IoT
       :content,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a particular command resource.</p>
@@ -2201,31 +2024,7 @@ module Aws::IoT
       :last_updated_at,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      LESS_THAN = 'less-than'
-      LESS_THAN_EQUALS = 'less-than-equals'
-      GREATER_THAN = 'greater-than'
-      GREATER_THAN_EQUALS = 'greater-than-equals'
-      IN_CIDR_SET = 'in-cidr-set'
-      NOT_IN_CIDR_SET = 'not-in-cidr-set'
-      IN_PORT_SET = 'in-port-set'
-      NOT_IN_PORT_SET = 'not-in-port-set'
-      IN_SET = 'in-set'
-      NOT_IN_SET = 'not-in-set'
-    end
-
-    module ConfidenceLevel
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module ConfigName
-      CERT_AGE_THRESHOLD_IN_DAYS = 'CERT_AGE_THRESHOLD_IN_DAYS'
-      CERT_EXPIRATION_THRESHOLD_IN_DAYS = 'CERT_EXPIRATION_THRESHOLD_IN_DAYS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration.</p>
@@ -2235,7 +2034,7 @@ module Aws::IoT
     class Configuration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2263,12 +2062,7 @@ module Aws::IoT
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute confirmation_token
@@ -2277,12 +2071,12 @@ module Aws::IoT
     class ConfirmTopicRuleDestinationRequest < Struct.new(
       :confirmation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ConfirmTopicRuleDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request conflicts with the current state of the resource.</p>
@@ -2295,7 +2089,7 @@ module Aws::IoT
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflicting resource update exception. This exception is thrown when two pending
@@ -2306,7 +2100,7 @@ module Aws::IoT
     class ConflictingResourceUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -2347,12 +2141,12 @@ module Aws::IoT
       :description,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateAuditSuppressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -2401,7 +2195,7 @@ module Aws::IoT
       :signing_disabled,
       :enable_caching_for_http,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -2414,7 +2208,7 @@ module Aws::IoT
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -2431,7 +2225,7 @@ module Aws::IoT
       :billing_group_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -2448,7 +2242,7 @@ module Aws::IoT
       :billing_group_arn,
       :billing_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreateCertificateFromCsr operation.</p>
@@ -2462,7 +2256,7 @@ module Aws::IoT
       :certificate_signing_request,
       :set_as_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the CreateCertificateFromCsr operation.</p>
@@ -2482,7 +2276,7 @@ module Aws::IoT
       :certificate_id,
       :certificate_pem,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -2509,7 +2303,7 @@ module Aws::IoT
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -2522,7 +2316,7 @@ module Aws::IoT
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -2573,7 +2367,7 @@ module Aws::IoT
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -2588,7 +2382,7 @@ module Aws::IoT
       :command_id,
       :command_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -2628,7 +2422,7 @@ module Aws::IoT
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -2646,7 +2440,7 @@ module Aws::IoT
       :metric_name,
       :metric_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2673,7 +2467,7 @@ module Aws::IoT
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2689,7 +2483,7 @@ module Aws::IoT
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -2812,7 +2606,7 @@ module Aws::IoT
       :application_protocol,
       :client_certificate_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -2825,7 +2619,7 @@ module Aws::IoT
       :domain_configuration_name,
       :domain_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -2862,7 +2656,7 @@ module Aws::IoT
       :query_version,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -2891,7 +2685,7 @@ module Aws::IoT
       :query_string,
       :query_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -2937,7 +2731,7 @@ module Aws::IoT
       :unit,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -2950,7 +2744,7 @@ module Aws::IoT
       :metric_name,
       :metric_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3066,7 +2860,7 @@ module Aws::IoT
       :scheduling_config,
       :destination_package_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -3083,7 +2877,7 @@ module Aws::IoT
       :job_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template_id
@@ -3157,7 +2951,7 @@ module Aws::IoT
       :maintenance_windows,
       :destination_package_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template_arn
@@ -3170,7 +2964,7 @@ module Aws::IoT
       :job_template_arn,
       :job_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreateKeysAndCertificate operation.</p>
@@ -3181,7 +2975,7 @@ module Aws::IoT
     class CreateKeysAndCertificateRequest < Struct.new(
       :set_as_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the CreateKeysAndCertificate operation.</p>
@@ -3204,7 +2998,7 @@ module Aws::IoT
       :certificate_pem,
       :key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -3225,7 +3019,7 @@ module Aws::IoT
       :action_params,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_arn
@@ -3238,7 +3032,7 @@ module Aws::IoT
       :action_arn,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_update_id
@@ -3305,7 +3099,7 @@ module Aws::IoT
       :additional_parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_update_id
@@ -3330,7 +3124,7 @@ module Aws::IoT
       :aws_iot_job_arn,
       :ota_update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -3352,7 +3146,7 @@ module Aws::IoT
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -3369,7 +3163,7 @@ module Aws::IoT
       :package_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -3410,7 +3204,7 @@ module Aws::IoT
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_version_arn
@@ -3443,7 +3237,7 @@ module Aws::IoT
       :status,
       :error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreatePolicy operation.</p>
@@ -3469,7 +3263,7 @@ module Aws::IoT
       :policy_document,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the CreatePolicy operation.</p>
@@ -3491,7 +3285,7 @@ module Aws::IoT
       :policy_document,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreatePolicyVersion operation.</p>
@@ -3512,7 +3306,7 @@ module Aws::IoT
       :policy_document,
       :set_as_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the CreatePolicyVersion operation.</p>
@@ -3534,7 +3328,7 @@ module Aws::IoT
       :policy_version_id,
       :is_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -3548,7 +3342,7 @@ module Aws::IoT
     class CreateProvisioningClaimRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -3569,7 +3363,7 @@ module Aws::IoT
       :key_pair,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -3619,7 +3413,7 @@ module Aws::IoT
       :tags,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3636,7 +3430,7 @@ module Aws::IoT
       :template_name,
       :default_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -3653,7 +3447,7 @@ module Aws::IoT
       :template_body,
       :set_as_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3675,7 +3469,7 @@ module Aws::IoT
       :version_id,
       :is_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -3711,7 +3505,7 @@ module Aws::IoT
       :credential_duration_seconds,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_alias
@@ -3724,7 +3518,7 @@ module Aws::IoT
       :role_alias,
       :role_alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute frequency
@@ -3772,7 +3566,7 @@ module Aws::IoT
       :scheduled_audit_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_audit_arn
@@ -3781,7 +3575,7 @@ module Aws::IoT
     class CreateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -3826,7 +3620,7 @@ module Aws::IoT
       :tags,
       :metrics_export_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -3839,7 +3633,7 @@ module Aws::IoT
       :security_profile_name,
       :security_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -3864,7 +3658,7 @@ module Aws::IoT
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -3885,7 +3679,7 @@ module Aws::IoT
       :description,
       :stream_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -3906,7 +3700,7 @@ module Aws::IoT
       :thing_group_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -3923,7 +3717,7 @@ module Aws::IoT
       :thing_group_arn,
       :thing_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreateThing operation.</p>
@@ -3951,7 +3745,7 @@ module Aws::IoT
       :attribute_payload,
       :billing_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the CreateThing operation.</p>
@@ -3969,7 +3763,7 @@ module Aws::IoT
       :thing_arn,
       :thing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreateThingType operation.</p>
@@ -3989,7 +3783,7 @@ module Aws::IoT
       :thing_type_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the CreateThingType operation.</p>
@@ -4007,7 +3801,7 @@ module Aws::IoT
       :thing_type_arn,
       :thing_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_configuration
@@ -4016,7 +3810,7 @@ module Aws::IoT
     class CreateTopicRuleDestinationRequest < Struct.new(
       :destination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_rule_destination
@@ -4025,7 +3819,7 @@ module Aws::IoT
     class CreateTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the CreateTopicRule operation.</p>
@@ -4050,7 +3844,7 @@ module Aws::IoT
       :topic_rule_payload,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom method used to code sign a file.</p>
@@ -4072,24 +3866,7 @@ module Aws::IoT
       :hash_algorithm,
       :signature_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomMetricType
-      STRING_LIST = 'string-list'
-      IP_ADDRESS_LIST = 'ip-address-list'
-      NUMBER_LIST = 'number-list'
-      NUMBER = 'number'
-    end
-
-    module DayOfWeek
-      SUN = 'SUN'
-      MON = 'MON'
-      TUE = 'TUE'
-      WED = 'WED'
-      THU = 'THU'
-      FRI = 'FRI'
-      SAT = 'SAT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delete_scheduled_audits
@@ -4098,12 +3875,12 @@ module Aws::IoT
     class DeleteAccountAuditConfigurationRequest < Struct.new(
       :delete_scheduled_audits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountAuditConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -4119,12 +3896,12 @@ module Aws::IoT
       :check_name,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAuditSuppressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -4133,12 +3910,12 @@ module Aws::IoT
     class DeleteAuthorizerRequest < Struct.new(
       :authorizer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAuthorizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -4154,12 +3931,12 @@ module Aws::IoT
       :billing_group_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBillingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for the DeleteCACertificate operation.</p>
@@ -4170,13 +3947,13 @@ module Aws::IoT
     class DeleteCACertificateRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteCACertificate operation.</p>
     class DeleteCACertificateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -4185,12 +3962,12 @@ module Aws::IoT
     class DeleteCertificateProviderRequest < Struct.new(
       :certificate_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCertificateProviderResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteCertificate operation.</p>
@@ -4206,7 +3983,7 @@ module Aws::IoT
       :certificate_id,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -4221,12 +3998,12 @@ module Aws::IoT
       :execution_id,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCommandExecutionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -4235,7 +4012,7 @@ module Aws::IoT
     class DeleteCommandRequest < Struct.new(
       :command_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -4260,7 +4037,7 @@ module Aws::IoT
     class DeleteCommandResponse < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -4276,7 +4053,7 @@ module Aws::IoT
     class DeleteConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -4287,12 +4064,12 @@ module Aws::IoT
     class DeleteCustomMetricRequest < Struct.new(
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomMetricResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4301,12 +4078,12 @@ module Aws::IoT
     class DeleteDimensionRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDimensionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -4315,12 +4092,12 @@ module Aws::IoT
     class DeleteDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -4333,12 +4110,12 @@ module Aws::IoT
       :thing_group_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDynamicThingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -4351,7 +4128,7 @@ module Aws::IoT
       :metric_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -4397,7 +4174,7 @@ module Aws::IoT
       :force,
       :namespace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -4435,7 +4212,7 @@ module Aws::IoT
       :force,
       :namespace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template_id
@@ -4444,7 +4221,7 @@ module Aws::IoT
     class DeleteJobTemplateRequest < Struct.new(
       :job_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -4453,12 +4230,12 @@ module Aws::IoT
     class DeleteMitigationActionRequest < Struct.new(
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMitigationActionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_update_id
@@ -4477,12 +4254,12 @@ module Aws::IoT
       :delete_stream,
       :force_delete_aws_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOTAUpdateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -4496,12 +4273,12 @@ module Aws::IoT
       :package_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePackageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -4519,12 +4296,12 @@ module Aws::IoT
       :version_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePackageVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeletePolicy operation.</p>
@@ -4534,7 +4311,7 @@ module Aws::IoT
     class DeletePolicyRequest < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeletePolicyVersion operation.</p>
@@ -4548,7 +4325,7 @@ module Aws::IoT
       :policy_name,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4557,12 +4334,12 @@ module Aws::IoT
     class DeleteProvisioningTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisioningTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4575,24 +4352,24 @@ module Aws::IoT
       :template_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisioningTemplateVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteRegistrationCode operation.</p>
     class DeleteRegistrationCodeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_alias
@@ -4601,12 +4378,12 @@ module Aws::IoT
     class DeleteRoleAliasRequest < Struct.new(
       :role_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRoleAliasResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_audit_name
@@ -4615,12 +4392,12 @@ module Aws::IoT
     class DeleteScheduledAuditRequest < Struct.new(
       :scheduled_audit_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduledAuditResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -4635,12 +4412,12 @@ module Aws::IoT
       :security_profile_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -4649,12 +4426,12 @@ module Aws::IoT
     class DeleteStreamRequest < Struct.new(
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -4667,12 +4444,12 @@ module Aws::IoT
       :thing_group_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteThingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteThing operation.</p>
@@ -4689,13 +4466,13 @@ module Aws::IoT
       :thing_name,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the DeleteThing operation.</p>
     class DeleteThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteThingType operation.</p>
@@ -4705,13 +4482,13 @@ module Aws::IoT
     class DeleteThingTypeRequest < Struct.new(
       :thing_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeleteThingType operation.</p>
     class DeleteThingTypeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4720,12 +4497,12 @@ module Aws::IoT
     class DeleteTopicRuleDestinationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTopicRuleDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeleteTopicRule operation.</p>
@@ -4735,7 +4512,7 @@ module Aws::IoT
     class DeleteTopicRuleRequest < Struct.new(
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_type
@@ -4749,7 +4526,7 @@ module Aws::IoT
       :target_type,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that denied the authorization.</p>
@@ -4765,7 +4542,7 @@ module Aws::IoT
       :implicit_deny,
       :explicit_deny,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DeprecateThingType operation.</p>
@@ -4780,18 +4557,18 @@ module Aws::IoT
       :thing_type_name,
       :undo_deprecate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DeprecateThingType operation.</p>
     class DeprecateThingTypeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountAuditConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -4813,7 +4590,7 @@ module Aws::IoT
       :audit_notification_target_configurations,
       :audit_check_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_id
@@ -4822,7 +4599,7 @@ module Aws::IoT
     class DescribeAuditFindingRequest < Struct.new(
       :finding_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding
@@ -4831,7 +4608,7 @@ module Aws::IoT
     class DescribeAuditFindingResponse < Struct.new(
       :finding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -4840,7 +4617,7 @@ module Aws::IoT
     class DescribeAuditMitigationActionsTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_status
@@ -4873,7 +4650,7 @@ module Aws::IoT
       :audit_check_to_actions_mapping,
       :actions_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -4889,7 +4666,7 @@ module Aws::IoT
       :check_name,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -4923,7 +4700,7 @@ module Aws::IoT
       :suppress_indefinitely,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -4932,7 +4709,7 @@ module Aws::IoT
     class DescribeAuditTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_status
@@ -4962,7 +4739,7 @@ module Aws::IoT
       :scheduled_audit_name,
       :audit_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -4971,7 +4748,7 @@ module Aws::IoT
     class DescribeAuthorizerRequest < Struct.new(
       :authorizer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_description
@@ -4980,7 +4757,7 @@ module Aws::IoT
     class DescribeAuthorizerResponse < Struct.new(
       :authorizer_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -4989,7 +4766,7 @@ module Aws::IoT
     class DescribeBillingGroupRequest < Struct.new(
       :billing_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -5018,7 +4795,7 @@ module Aws::IoT
       :billing_group_properties,
       :billing_group_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -5033,7 +4810,7 @@ module Aws::IoT
     class DescribeCACertificateRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DescribeCACertificate operation.</p>
@@ -5047,7 +4824,7 @@ module Aws::IoT
       :certificate_description,
       :registration_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -5056,7 +4833,7 @@ module Aws::IoT
     class DescribeCertificateProviderRequest < Struct.new(
       :certificate_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -5086,7 +4863,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DescribeCertificate operation.</p>
@@ -5097,7 +4874,7 @@ module Aws::IoT
     class DescribeCertificateRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the DescribeCertificate operation.</p>
@@ -5107,7 +4884,7 @@ module Aws::IoT
     class DescribeCertificateResponse < Struct.new(
       :certificate_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5118,7 +4895,7 @@ module Aws::IoT
     class DescribeCustomMetricRequest < Struct.new(
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5160,12 +4937,12 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeDefaultAuthorizerRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_description
@@ -5174,7 +4951,7 @@ module Aws::IoT
     class DescribeDefaultAuthorizerResponse < Struct.new(
       :authorizer_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -5185,7 +4962,7 @@ module Aws::IoT
     class DescribeDetectMitigationActionsTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_summary
@@ -5196,7 +4973,7 @@ module Aws::IoT
     class DescribeDetectMitigationActionsTaskResponse < Struct.new(
       :task_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5205,7 +4982,7 @@ module Aws::IoT
     class DescribeDimensionRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5237,7 +5014,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -5246,7 +5023,7 @@ module Aws::IoT
     class DescribeDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -5365,12 +5142,12 @@ module Aws::IoT
       :application_protocol,
       :client_certificate_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeEncryptionConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_type
@@ -5397,7 +5174,7 @@ module Aws::IoT
       :configuration_details,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DescribeEndpoint operation.</p>
@@ -5436,7 +5213,7 @@ module Aws::IoT
     class DescribeEndpointRequest < Struct.new(
       :endpoint_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DescribeEndpoint operation.</p>
@@ -5447,12 +5224,12 @@ module Aws::IoT
     class DescribeEndpointResponse < Struct.new(
       :endpoint_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeEventConfigurationsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_configurations
@@ -5469,7 +5246,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5478,7 +5255,7 @@ module Aws::IoT
     class DescribeFleetMetricRequest < Struct.new(
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5536,7 +5313,7 @@ module Aws::IoT
       :version,
       :metric_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -5550,7 +5327,7 @@ module Aws::IoT
     class DescribeIndexRequest < Struct.new(
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -5588,7 +5365,7 @@ module Aws::IoT
       :index_status,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5606,7 +5383,7 @@ module Aws::IoT
       :thing_name,
       :execution_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution
@@ -5615,7 +5392,7 @@ module Aws::IoT
     class DescribeJobExecutionResponse < Struct.new(
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5628,7 +5405,7 @@ module Aws::IoT
       :job_id,
       :before_substitution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_source
@@ -5641,7 +5418,7 @@ module Aws::IoT
       :document_source,
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template_id
@@ -5650,7 +5427,7 @@ module Aws::IoT
     class DescribeJobTemplateRequest < Struct.new(
       :job_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template_arn
@@ -5717,7 +5494,7 @@ module Aws::IoT
       :maintenance_windows,
       :destination_package_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -5731,7 +5508,7 @@ module Aws::IoT
       :template_name,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -5771,7 +5548,7 @@ module Aws::IoT
       :document_parameters,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -5780,7 +5557,7 @@ module Aws::IoT
     class DescribeMitigationActionRequest < Struct.new(
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -5817,7 +5594,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -5826,7 +5603,7 @@ module Aws::IoT
     class DescribeProvisioningTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -5879,7 +5656,7 @@ module Aws::IoT
       :pre_provisioning_hook,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -5892,7 +5669,7 @@ module Aws::IoT
       :template_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_id
@@ -5913,7 +5690,7 @@ module Aws::IoT
       :template_body,
       :is_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -5927,7 +5704,7 @@ module Aws::IoT
     class DescribeRoleAliasRequest < Struct.new(
       :role_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_alias_description
@@ -5936,7 +5713,7 @@ module Aws::IoT
     class DescribeRoleAliasResponse < Struct.new(
       :role_alias_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_audit_name
@@ -5945,7 +5722,7 @@ module Aws::IoT
     class DescribeScheduledAuditRequest < Struct.new(
       :scheduled_audit_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute frequency
@@ -5990,7 +5767,7 @@ module Aws::IoT
       :scheduled_audit_name,
       :scheduled_audit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -6000,7 +5777,7 @@ module Aws::IoT
     class DescribeSecurityProfileRequest < Struct.new(
       :security_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -6065,7 +5842,7 @@ module Aws::IoT
       :last_modified_date,
       :metrics_export_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -6079,7 +5856,7 @@ module Aws::IoT
     class DescribeStreamRequest < Struct.new(
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_info
@@ -6088,7 +5865,7 @@ module Aws::IoT
     class DescribeStreamResponse < Struct.new(
       :stream_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -6097,7 +5874,7 @@ module Aws::IoT
     class DescribeThingGroupRequest < Struct.new(
       :thing_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -6142,7 +5919,7 @@ module Aws::IoT
       :query_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -6156,7 +5933,7 @@ module Aws::IoT
     class DescribeThingRegistrationTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -6209,7 +5986,7 @@ module Aws::IoT
       :failure_count,
       :percentage_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:success_count] = 0 unless options.key?(:success_count)
@@ -6226,7 +6003,7 @@ module Aws::IoT
     class DescribeThingRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DescribeThing operation.</p>
@@ -6272,7 +6049,7 @@ module Aws::IoT
       :version,
       :billing_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -6287,7 +6064,7 @@ module Aws::IoT
     class DescribeThingTypeRequest < Struct.new(
       :thing_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the DescribeThingType operation.</p>
@@ -6316,7 +6093,7 @@ module Aws::IoT
       :thing_type_properties,
       :thing_type_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of the updated firmware.</p>
@@ -6326,7 +6103,7 @@ module Aws::IoT
     class Destination < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -6339,7 +6116,7 @@ module Aws::IoT
       :policy_name,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DetachPrincipalPolicy operation.</p>
@@ -6354,7 +6131,7 @@ module Aws::IoT
       :policy_name,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -6367,12 +6144,12 @@ module Aws::IoT
       :security_profile_name,
       :security_profile_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachSecurityProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DetachThingPrincipal operation.</p>
@@ -6388,13 +6165,13 @@ module Aws::IoT
       :thing_name,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the DetachThingPrincipal operation.</p>
     class DetachThingPrincipalResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6456,14 +6233,7 @@ module Aws::IoT
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectMitigationActionExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6489,14 +6259,7 @@ module Aws::IoT
       :actions_skipped,
       :actions_failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectMitigationActionsTaskStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6564,7 +6327,7 @@ module Aws::IoT
       :actions_definition,
       :task_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:only_active_violations_included] = false unless options.key?(:only_active_violations_included)
@@ -6596,25 +6359,7 @@ module Aws::IoT
       :security_profile_name,
       :behavior_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceCertificateUpdateAction
-      DEACTIVATE = 'DEACTIVATE'
-    end
-
-    module DeviceDefenderIndexingMode
-      OFF = 'OFF'
-      VIOLATIONS = 'VIOLATIONS'
-    end
-
-    module DimensionType
-      TOPIC_FILTER = 'TOPIC_FILTER'
-    end
-
-    module DimensionValueOperator
-      IN = 'IN'
-      NOT_IN = 'NOT_IN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DisableTopicRuleRequest operation.</p>
@@ -6624,7 +6369,7 @@ module Aws::IoT
     class DisableTopicRuleRequest < Struct.new(
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -6641,29 +6386,12 @@ module Aws::IoT
       :version_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateSbomFromPackageVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DisconnectReasonValue
-      AUTH_ERROR = 'AUTH_ERROR'
-      CLIENT_INITIATED_DISCONNECT = 'CLIENT_INITIATED_DISCONNECT'
-      CLIENT_ERROR = 'CLIENT_ERROR'
-      CONNECTION_LOST = 'CONNECTION_LOST'
-      DUPLICATE_CLIENTID = 'DUPLICATE_CLIENTID'
-      FORBIDDEN_ACCESS = 'FORBIDDEN_ACCESS'
-      MQTT_KEEP_ALIVE_TIMEOUT = 'MQTT_KEEP_ALIVE_TIMEOUT'
-      SERVER_ERROR = 'SERVER_ERROR'
-      SERVER_INITIATED_DISCONNECT = 'SERVER_INITIATED_DISCONNECT'
-      THROTTLED = 'THROTTLED'
-      WEBSOCKET_TTL_EXPIRATION = 'WEBSOCKET_TTL_EXPIRATION'
-      CUSTOMAUTH_TTL_EXPIRATION = 'CUSTOMAUTH_TTL_EXPIRATION'
-      UNKNOWN = 'UNKNOWN'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of key-value pairs containing the patterns that need to be replaced in a managed
@@ -6702,17 +6430,12 @@ module Aws::IoT
       :example,
       :optional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:optional] = false unless options.key?(:optional)
         super
       end
-    end
-
-    module DomainConfigurationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. 
@@ -6743,19 +6466,7 @@ module Aws::IoT
       :domain_configuration_arn,
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainType
-      ENDPOINT = 'ENDPOINT'
-      AWS_MANAGED = 'AWS_MANAGED'
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
-    end
-
-    module DynamicGroupStatus
-      ACTIVE = 'ACTIVE'
-      BUILDING = 'BUILDING'
-      REBUILDING = 'REBUILDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to write to a DynamoDB table.</p>
@@ -6818,7 +6529,7 @@ module Aws::IoT
       :range_key_type,
       :payload_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to write to a DynamoDB table.</p>
@@ -6841,12 +6552,7 @@ module Aws::IoT
       :role_arn,
       :put_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DynamoKeyType
-      STRING = 'STRING'
-      NUMBER = 'NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy that has the effect on the authorization results.</p>
@@ -6864,7 +6570,7 @@ module Aws::IoT
       :policy_arn,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that writes data to an Amazon OpenSearch Service
@@ -6896,7 +6602,7 @@ module Aws::IoT
       :type,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters used when defining a mitigation action that enable Amazon Web Services IoT Core logging.</p>
@@ -6910,7 +6616,7 @@ module Aws::IoT
       :role_arn_for_logging,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the EnableTopicRuleRequest operation.</p>
@@ -6920,12 +6626,7 @@ module Aws::IoT
     class EnableTopicRuleRequest < Struct.new(
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      CUSTOMER_MANAGED_KMS_KEY = 'CUSTOMER_MANAGED_KMS_KEY'
-      AWS_OWNED_KMS_KEY = 'AWS_OWNED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information.</p>
@@ -6939,21 +6640,7 @@ module Aws::IoT
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      THING = 'THING'
-      THING_GROUP = 'THING_GROUP'
-      THING_TYPE = 'THING_TYPE'
-      THING_GROUP_MEMBERSHIP = 'THING_GROUP_MEMBERSHIP'
-      THING_GROUP_HIERARCHY = 'THING_GROUP_HIERARCHY'
-      THING_TYPE_ASSOCIATION = 'THING_TYPE_ASSOCIATION'
-      JOB = 'JOB'
-      JOB_EXECUTION = 'JOB_EXECUTION'
-      POLICY = 'POLICY'
-      CERTIFICATE = 'CERTIFICATE'
-      CA_CERTIFICATE = 'CA_CERTIFICATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that explicitly denies authorization.</p>
@@ -6963,7 +6650,7 @@ module Aws::IoT
     class ExplicitDeny < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to create an exponential rate of rollout for a job.</p>
@@ -6985,7 +6672,7 @@ module Aws::IoT
       :increment_factor,
       :rate_increase_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the name and data type at a field.</p>
@@ -6999,13 +6686,7 @@ module Aws::IoT
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldType
-      NUMBER = 'Number'
-      STRING = 'String'
-      BOOLEAN = 'Boolean'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the OTA update.</p>
@@ -7019,7 +6700,7 @@ module Aws::IoT
       :stream,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>
@@ -7051,7 +6732,7 @@ module Aws::IoT
       :separator,
       :batch_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and ARN of a fleet metric.</p>
@@ -7065,37 +6746,7 @@ module Aws::IoT
       :metric_name,
       :metric_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetMetricUnit
-      Seconds = 'Seconds'
-      Microseconds = 'Microseconds'
-      Milliseconds = 'Milliseconds'
-      Bytes = 'Bytes'
-      Kilobytes = 'Kilobytes'
-      Megabytes = 'Megabytes'
-      Gigabytes = 'Gigabytes'
-      Terabytes = 'Terabytes'
-      Bits = 'Bits'
-      Kilobits = 'Kilobits'
-      Megabits = 'Megabits'
-      Gigabits = 'Gigabits'
-      Terabits = 'Terabits'
-      Percent = 'Percent'
-      Count = 'Count'
-      BytesSecond = 'Bytes/Second'
-      KilobytesSecond = 'Kilobytes/Second'
-      MegabytesSecond = 'Megabytes/Second'
-      GigabytesSecond = 'Gigabytes/Second'
-      TerabytesSecond = 'Terabytes/Second'
-      BitsSecond = 'Bits/Second'
-      KilobitsSecond = 'Kilobits/Second'
-      MegabitsSecond = 'Megabits/Second'
-      GigabitsSecond = 'Gigabits/Second'
-      TerabitsSecond = 'Terabits/Second'
-      CountSecond = 'Count/Second'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A geolocation target that you select to index. Each geolocation target contains a
@@ -7113,7 +6764,7 @@ module Aws::IoT
       :name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -7136,7 +6787,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -7153,7 +6804,7 @@ module Aws::IoT
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -7178,7 +6829,7 @@ module Aws::IoT
       :query_version,
       :buckets_aggregation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total_count
@@ -7195,7 +6846,7 @@ module Aws::IoT
       :total_count,
       :buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_count] = 0 unless options.key?(:total_count)
@@ -7221,7 +6872,7 @@ module Aws::IoT
       :aggregation_field,
       :query_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cardinality
@@ -7230,7 +6881,7 @@ module Aws::IoT
     class GetCardinalityResponse < Struct.new(
       :cardinality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cardinality] = 0 unless options.key?(:cardinality)
@@ -7257,7 +6908,7 @@ module Aws::IoT
       :target_arn,
       :include_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -7332,7 +6983,7 @@ module Aws::IoT
       :completed_at,
       :time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -7342,7 +6993,7 @@ module Aws::IoT
     class GetCommandRequest < Struct.new(
       :command_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -7398,7 +7049,7 @@ module Aws::IoT
       :deprecated,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -7415,7 +7066,7 @@ module Aws::IoT
       :cognito_identity_pool_id,
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_policies
@@ -7424,12 +7075,12 @@ module Aws::IoT
     class GetEffectivePoliciesResponse < Struct.new(
       :effective_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetIndexingConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_indexing_configuration
@@ -7442,7 +7093,7 @@ module Aws::IoT
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -7455,7 +7106,7 @@ module Aws::IoT
       :job_id,
       :before_substitution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -7464,13 +7115,13 @@ module Aws::IoT
     class GetJobDocumentResponse < Struct.new(
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetLoggingOptions operation.</p>
     class GetLoggingOptionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetLoggingOptions operation.</p>
@@ -7484,7 +7135,7 @@ module Aws::IoT
       :role_arn,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_update_id
@@ -7493,7 +7144,7 @@ module Aws::IoT
     class GetOTAUpdateRequest < Struct.new(
       :ota_update_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_update_info
@@ -7502,12 +7153,12 @@ module Aws::IoT
     class GetOTAUpdateResponse < Struct.new(
       :ota_update_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPackageConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_update_by_jobs_config
@@ -7516,7 +7167,7 @@ module Aws::IoT
     class GetPackageConfigurationResponse < Struct.new(
       :version_update_by_jobs_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -7525,7 +7176,7 @@ module Aws::IoT
     class GetPackageRequest < Struct.new(
       :package_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -7554,7 +7205,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -7567,7 +7218,7 @@ module Aws::IoT
       :package_name,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_version_arn
@@ -7626,7 +7277,7 @@ module Aws::IoT
       :sbom_validation_status,
       :recipe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -7651,7 +7302,7 @@ module Aws::IoT
       :query_version,
       :percents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute percentiles
@@ -7660,7 +7311,7 @@ module Aws::IoT
     class GetPercentilesResponse < Struct.new(
       :percentiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetPolicy operation.</p>
@@ -7670,7 +7321,7 @@ module Aws::IoT
     class GetPolicyRequest < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetPolicy operation.</p>
@@ -7704,7 +7355,7 @@ module Aws::IoT
       :last_modified_date,
       :generation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetPolicyVersion operation.</p>
@@ -7718,7 +7369,7 @@ module Aws::IoT
       :policy_name,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetPolicyVersion operation.</p>
@@ -7756,7 +7407,7 @@ module Aws::IoT
       :last_modified_date,
       :generation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -7767,7 +7418,7 @@ module Aws::IoT
     # <p>The input to the GetRegistrationCode operation.</p>
     class GetRegistrationCodeRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetRegistrationCode operation.</p>
@@ -7777,7 +7428,7 @@ module Aws::IoT
     class GetRegistrationCodeResponse < Struct.new(
       :registration_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -7799,7 +7450,7 @@ module Aws::IoT
       :aggregation_field,
       :query_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistics
@@ -7809,7 +7460,7 @@ module Aws::IoT
     class GetStatisticsResponse < Struct.new(
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -7818,7 +7469,7 @@ module Aws::IoT
     class GetThingConnectivityDataRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -7839,7 +7490,7 @@ module Aws::IoT
       :timestamp,
       :disconnect_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -7848,7 +7499,7 @@ module Aws::IoT
     class GetTopicRuleDestinationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_rule_destination
@@ -7857,7 +7508,7 @@ module Aws::IoT
     class GetTopicRuleDestinationResponse < Struct.new(
       :topic_rule_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetTopicRule operation.</p>
@@ -7867,7 +7518,7 @@ module Aws::IoT
     class GetTopicRuleRequest < Struct.new(
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the GetTopicRule operation.</p>
@@ -7881,12 +7532,12 @@ module Aws::IoT
       :rule_arn,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetV2LoggingOptionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -7903,7 +7554,7 @@ module Aws::IoT
       :default_log_level,
       :disable_all_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_all_logs] = false unless options.key?(:disable_all_logs)
@@ -7922,7 +7573,7 @@ module Aws::IoT
       :group_name,
       :group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Send data to an HTTPS endpoint.</p>
@@ -7951,7 +7602,7 @@ module Aws::IoT
       :headers,
       :auth,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP action header.</p>
@@ -7965,7 +7616,7 @@ module Aws::IoT
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization method used to send messages.</p>
@@ -7976,7 +7627,7 @@ module Aws::IoT
     class HttpAuthorization < Struct.new(
       :sigv4,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the HTTP context to use for the test authorizer request.</p>
@@ -7990,7 +7641,7 @@ module Aws::IoT
       :headers,
       :query_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP URL destination configuration used by the topic rule's HTTP action.</p>
@@ -8001,7 +7652,7 @@ module Aws::IoT
     class HttpUrlDestinationConfiguration < Struct.new(
       :confirmation_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP URL destination properties.</p>
@@ -8011,7 +7662,7 @@ module Aws::IoT
     class HttpUrlDestinationProperties < Struct.new(
       :confirmation_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an HTTP URL destination.</p>
@@ -8022,7 +7673,7 @@ module Aws::IoT
     class HttpUrlDestinationSummary < Struct.new(
       :confirmation_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that implicitly denies authorization. When policy doesn't explicitly deny
@@ -8034,7 +7685,7 @@ module Aws::IoT
     class ImplicitDeny < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The index is not ready.</p>
@@ -8044,13 +7695,7 @@ module Aws::IoT
     class IndexNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndexStatus
-      ACTIVE = 'ACTIVE'
-      BUILDING = 'BUILDING'
-      REBUILDING = 'REBUILDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional selections for named shadows and geolocation data. </p>
@@ -8086,7 +7731,7 @@ module Aws::IoT
       :named_shadow_names,
       :geo_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error has occurred.</p>
@@ -8096,7 +7741,7 @@ module Aws::IoT
     class InternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error has occurred.</p>
@@ -8106,7 +7751,7 @@ module Aws::IoT
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internal error from the service that indicates an unexpected error or that the service
@@ -8116,7 +7761,7 @@ module Aws::IoT
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregation is invalid.</p>
@@ -8125,7 +7770,7 @@ module Aws::IoT
     class InvalidAggregationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query is invalid.</p>
@@ -8135,7 +7780,7 @@ module Aws::IoT
     class InvalidQueryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -8145,7 +7790,7 @@ module Aws::IoT
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response is invalid.</p>
@@ -8155,7 +7800,7 @@ module Aws::IoT
     class InvalidResponseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attempt was made to change to an invalid state, for example by deleting a job or a
@@ -8167,7 +7812,7 @@ module Aws::IoT
     class InvalidStateTransitionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends message data to an IoT Analytics channel.</p>
@@ -8197,7 +7842,7 @@ module Aws::IoT
       :batch_mode,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends an input to an IoT Events detector.</p>
@@ -8233,7 +7878,7 @@ module Aws::IoT
       :batch_mode,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to send data from an MQTT message that triggered the rule to IoT
@@ -8249,7 +7894,7 @@ module Aws::IoT
       :put_asset_property_value_entries,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate issuer indentifier.</p>
@@ -8267,7 +7912,7 @@ module Aws::IoT
       :issuer_id,
       :issuer_certificate_serial_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Job</code> object contains details about a job.</p>
@@ -8415,13 +8060,7 @@ module Aws::IoT
       :scheduled_job_rollouts,
       :destination_package_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobEndBehavior
-      STOP_ROLLOUT = 'STOP_ROLLOUT'
-      CANCEL = 'CANCEL'
-      FORCE_CANCEL = 'FORCE_CANCEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job execution object represents the execution of a job on a particular
@@ -8483,30 +8122,12 @@ module Aws::IoT
       :version_number,
       :approximate_seconds_before_timed_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
         super
       end
-    end
-
-    module JobExecutionFailureType
-      FAILED = 'FAILED'
-      REJECTED = 'REJECTED'
-      TIMED_OUT = 'TIMED_OUT'
-      ALL = 'ALL'
-    end
-
-    module JobExecutionStatus
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
-      REJECTED = 'REJECTED'
-      REMOVED = 'REMOVED'
-      CANCELED = 'CANCELED'
     end
 
     # <p>Details of the job execution status.</p>
@@ -8516,7 +8137,7 @@ module Aws::IoT
     class JobExecutionStatusDetails < Struct.new(
       :details_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job execution summary.</p>
@@ -8550,7 +8171,7 @@ module Aws::IoT
       :execution_number,
       :retry_attempt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of information about job executions for a specific
@@ -8565,7 +8186,7 @@ module Aws::IoT
       :thing_arn,
       :job_execution_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job execution summary for a thing.</p>
@@ -8579,7 +8200,7 @@ module Aws::IoT
       :job_id,
       :job_execution_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that determines how many retries are allowed for each failure type
@@ -8591,7 +8212,7 @@ module Aws::IoT
     class JobExecutionsRetryConfig < Struct.new(
       :criteria_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to create a staged rollout of a job.</p>
@@ -8607,7 +8228,7 @@ module Aws::IoT
       :maximum_per_minute,
       :exponential_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job process details.</p>
@@ -8653,15 +8274,7 @@ module Aws::IoT
       :number_of_removed_things,
       :number_of_timed_out_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCELED = 'CANCELED'
-      COMPLETED = 'COMPLETED'
-      DELETION_IN_PROGRESS = 'DELETION_IN_PROGRESS'
-      SCHEDULED = 'SCHEDULED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job summary.</p>
@@ -8713,7 +8326,7 @@ module Aws::IoT
       :completed_at,
       :is_concurrent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the job template.</p>
@@ -8735,7 +8348,7 @@ module Aws::IoT
       :description,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>
@@ -8765,7 +8378,7 @@ module Aws::IoT
       :client_properties,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Kafka header using key-value pairs when you create a Rule’s Kafka Action.
@@ -8783,7 +8396,7 @@ module Aws::IoT
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a key pair.</p>
@@ -8797,7 +8410,7 @@ module Aws::IoT
       :public_key,
       :private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to write data to an Amazon Kinesis stream.</p>
@@ -8815,7 +8428,7 @@ module Aws::IoT
       :stream_name,
       :partition_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to invoke a Lambda function.</p>
@@ -8825,7 +8438,7 @@ module Aws::IoT
     class LambdaAction < Struct.new(
       :function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit has been exceeded.</p>
@@ -8835,7 +8448,7 @@ module Aws::IoT
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -8872,7 +8485,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_violations
@@ -8886,7 +8499,7 @@ module Aws::IoT
       :active_violations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -8907,7 +8520,7 @@ module Aws::IoT
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies
@@ -8921,7 +8534,7 @@ module Aws::IoT
       :policies,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -8963,7 +8576,7 @@ module Aws::IoT
       :end_time,
       :list_suppressed_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -8977,7 +8590,7 @@ module Aws::IoT
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -9002,7 +8615,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions_executions
@@ -9015,7 +8628,7 @@ module Aws::IoT
       :actions_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audit_task_id
@@ -9048,7 +8661,7 @@ module Aws::IoT
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -9061,7 +8674,7 @@ module Aws::IoT
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -9095,7 +8708,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suppressions
@@ -9112,7 +8725,7 @@ module Aws::IoT
       :suppressions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -9145,7 +8758,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -9159,7 +8772,7 @@ module Aws::IoT
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -9180,7 +8793,7 @@ module Aws::IoT
       :ascending_order,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizers
@@ -9193,7 +8806,7 @@ module Aws::IoT
       :authorizers,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9212,7 +8825,7 @@ module Aws::IoT
       :max_results,
       :name_prefix_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_groups
@@ -9225,7 +8838,7 @@ module Aws::IoT
       :billing_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for the ListCACertificates operation.</p>
@@ -9247,7 +8860,7 @@ module Aws::IoT
       :ascending_order,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListCACertificates operation.</p>
@@ -9261,7 +8874,7 @@ module Aws::IoT
       :certificates,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9274,7 +8887,7 @@ module Aws::IoT
       :next_token,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_providers
@@ -9287,7 +8900,7 @@ module Aws::IoT
       :certificate_providers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the ListCertificatesByCA operation.</p>
@@ -9311,7 +8924,7 @@ module Aws::IoT
       :marker,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the ListCertificatesByCA operation.</p>
@@ -9326,7 +8939,7 @@ module Aws::IoT
       :certificates,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListCertificates operation.</p>
@@ -9345,7 +8958,7 @@ module Aws::IoT
       :marker,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of the ListCertificates operation.</p>
@@ -9360,7 +8973,7 @@ module Aws::IoT
       :certificates,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9414,7 +9027,7 @@ module Aws::IoT
       :target_arn,
       :command_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_executions
@@ -9428,7 +9041,7 @@ module Aws::IoT
       :command_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9462,7 +9075,7 @@ module Aws::IoT
       :command_parameter_name,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commands
@@ -9476,7 +9089,7 @@ module Aws::IoT
       :commands,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9493,7 +9106,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_names
@@ -9511,7 +9124,7 @@ module Aws::IoT
       :metric_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -9559,7 +9172,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions_executions
@@ -9576,7 +9189,7 @@ module Aws::IoT
       :actions_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9604,7 +9217,7 @@ module Aws::IoT
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -9621,7 +9234,7 @@ module Aws::IoT
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9634,7 +9247,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dimension_names
@@ -9647,7 +9260,7 @@ module Aws::IoT
       :dimension_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -9664,7 +9277,7 @@ module Aws::IoT
       :page_size,
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configurations
@@ -9677,7 +9290,7 @@ module Aws::IoT
       :domain_configurations,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9691,7 +9304,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_metrics
@@ -9705,7 +9318,7 @@ module Aws::IoT
       :fleet_metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9719,7 +9332,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_names
@@ -9733,7 +9346,7 @@ module Aws::IoT
       :index_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -9754,7 +9367,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_summaries
@@ -9768,7 +9381,7 @@ module Aws::IoT
       :execution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -9808,7 +9421,7 @@ module Aws::IoT
       :next_token,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_summaries
@@ -9822,7 +9435,7 @@ module Aws::IoT
       :execution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9835,7 +9448,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_templates
@@ -9849,7 +9462,7 @@ module Aws::IoT
       :job_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9902,7 +9515,7 @@ module Aws::IoT
       :thing_group_id,
       :namespace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -9916,7 +9529,7 @@ module Aws::IoT
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -9934,7 +9547,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_job_templates
@@ -9947,7 +9560,7 @@ module Aws::IoT
       :managed_job_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -9984,7 +9597,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_datum_list
@@ -9998,7 +9611,7 @@ module Aws::IoT
       :metric_datum_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -10015,7 +9628,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_identifiers
@@ -10028,7 +9641,7 @@ module Aws::IoT
       :action_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -10045,7 +9658,7 @@ module Aws::IoT
       :next_token,
       :ota_update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ota_updates
@@ -10058,7 +9671,7 @@ module Aws::IoT
       :ota_updates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the ListOutgoingCertificates operation.</p>
@@ -10077,7 +9690,7 @@ module Aws::IoT
       :marker,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListOutgoingCertificates operation.</p>
@@ -10091,7 +9704,7 @@ module Aws::IoT
       :outgoing_certificates,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -10112,7 +9725,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_version_summaries
@@ -10125,7 +9738,7 @@ module Aws::IoT
       :package_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -10138,7 +9751,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_summaries
@@ -10151,7 +9764,7 @@ module Aws::IoT
       :package_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListPolicies operation.</p>
@@ -10170,7 +9783,7 @@ module Aws::IoT
       :page_size,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListPolicies operation.</p>
@@ -10185,7 +9798,7 @@ module Aws::IoT
       :policies,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListPolicyPrincipals operation.</p>
@@ -10208,7 +9821,7 @@ module Aws::IoT
       :page_size,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListPolicyPrincipals operation.</p>
@@ -10223,7 +9836,7 @@ module Aws::IoT
       :principals,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListPolicyVersions operation.</p>
@@ -10233,7 +9846,7 @@ module Aws::IoT
     class ListPolicyVersionsRequest < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListPolicyVersions operation.</p>
@@ -10243,7 +9856,7 @@ module Aws::IoT
     class ListPolicyVersionsResponse < Struct.new(
       :policy_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListPrincipalPolicies operation.</p>
@@ -10266,7 +9879,7 @@ module Aws::IoT
       :page_size,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListPrincipalPolicies operation.</p>
@@ -10281,7 +9894,7 @@ module Aws::IoT
       :policies,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListPrincipalThings operation.</p>
@@ -10301,7 +9914,7 @@ module Aws::IoT
       :max_results,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListPrincipalThings operation.</p>
@@ -10315,7 +9928,7 @@ module Aws::IoT
       :things,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10355,7 +9968,7 @@ module Aws::IoT
       :principal,
       :thing_principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal_thing_objects
@@ -10368,7 +9981,7 @@ module Aws::IoT
       :principal_thing_objects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -10385,7 +9998,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute versions
@@ -10398,7 +10011,7 @@ module Aws::IoT
       :versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -10411,7 +10024,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates
@@ -10424,7 +10037,7 @@ module Aws::IoT
       :templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_id
@@ -10442,7 +10055,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute related_resources
@@ -10456,7 +10069,7 @@ module Aws::IoT
       :related_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -10473,7 +10086,7 @@ module Aws::IoT
       :marker,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_aliases
@@ -10486,7 +10099,7 @@ module Aws::IoT
       :role_aliases,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -10511,7 +10124,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute validation_result_summaries
@@ -10524,7 +10137,7 @@ module Aws::IoT
       :validation_result_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10537,7 +10150,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_audits
@@ -10551,7 +10164,7 @@ module Aws::IoT
       :scheduled_audits,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10572,7 +10185,7 @@ module Aws::IoT
       :recursive,
       :security_profile_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_target_mappings
@@ -10586,7 +10199,7 @@ module Aws::IoT
       :security_profile_target_mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10610,7 +10223,7 @@ module Aws::IoT
       :dimension_name,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_identifiers
@@ -10624,7 +10237,7 @@ module Aws::IoT
       :security_profile_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -10641,7 +10254,7 @@ module Aws::IoT
       :next_token,
       :ascending_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streams
@@ -10654,7 +10267,7 @@ module Aws::IoT
       :streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -10669,7 +10282,7 @@ module Aws::IoT
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -10682,7 +10295,7 @@ module Aws::IoT
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -10699,7 +10312,7 @@ module Aws::IoT
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -10712,7 +10325,7 @@ module Aws::IoT
       :targets,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -10729,7 +10342,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_targets
@@ -10743,7 +10356,7 @@ module Aws::IoT
       :security_profile_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -10762,7 +10375,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_groups
@@ -10775,7 +10388,7 @@ module Aws::IoT
       :thing_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10802,7 +10415,7 @@ module Aws::IoT
       :name_prefix_filter,
       :recursive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_groups
@@ -10815,7 +10428,7 @@ module Aws::IoT
       :thing_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListThingPrincipal operation.</p>
@@ -10835,7 +10448,7 @@ module Aws::IoT
       :max_results,
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListThingPrincipals operation.</p>
@@ -10849,7 +10462,7 @@ module Aws::IoT
       :principals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10889,7 +10502,7 @@ module Aws::IoT
       :thing_name,
       :thing_principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_principal_objects
@@ -10903,7 +10516,7 @@ module Aws::IoT
       :thing_principal_objects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -10926,7 +10539,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_links
@@ -10943,7 +10556,7 @@ module Aws::IoT
       :report_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10962,7 +10575,7 @@ module Aws::IoT
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_ids
@@ -10975,7 +10588,7 @@ module Aws::IoT
       :task_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListThingTypes operation.</p>
@@ -10995,7 +10608,7 @@ module Aws::IoT
       :max_results,
       :thing_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the ListThingTypes operation.</p>
@@ -11009,7 +10622,7 @@ module Aws::IoT
       :thing_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -11028,7 +10641,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute things
@@ -11041,7 +10654,7 @@ module Aws::IoT
       :things,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -11065,7 +10678,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute things
@@ -11078,7 +10691,7 @@ module Aws::IoT
       :things,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListThings operation.</p>
@@ -11114,7 +10727,7 @@ module Aws::IoT
       :thing_type_name,
       :use_prefix_attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListThings operation.</p>
@@ -11128,7 +10741,7 @@ module Aws::IoT
       :things,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -11143,7 +10756,7 @@ module Aws::IoT
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_summaries
@@ -11156,7 +10769,7 @@ module Aws::IoT
       :destination_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ListTopicRules operation.</p>
@@ -11180,7 +10793,7 @@ module Aws::IoT
       :next_token,
       :rule_disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the ListTopicRules operation.</p>
@@ -11194,7 +10807,7 @@ module Aws::IoT
       :rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_type
@@ -11214,7 +10827,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_target_configurations
@@ -11227,7 +10840,7 @@ module Aws::IoT
       :log_target_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -11272,7 +10885,7 @@ module Aws::IoT
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute violation_events
@@ -11287,7 +10900,7 @@ module Aws::IoT
       :violation_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Location rule action sends device location updates from
@@ -11321,7 +10934,7 @@ module Aws::IoT
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how to interpret an application-defined timestamp value from an MQTT message
@@ -11340,15 +10953,7 @@ module Aws::IoT
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      DEBUG = 'DEBUG'
-      INFO = 'INFO'
-      ERROR = 'ERROR'
-      WARN = 'WARN'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A log target.</p>
@@ -11362,7 +10967,7 @@ module Aws::IoT
       :target_type,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target configuration.</p>
@@ -11376,15 +10981,7 @@ module Aws::IoT
       :log_target,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogTargetType
-      DEFAULT = 'DEFAULT'
-      THING_GROUP = 'THING_GROUP'
-      CLIENT_ID = 'CLIENT_ID'
-      SOURCE_IP = 'SOURCE_IP'
-      PRINCIPAL_ID = 'PRINCIPAL_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the logging options payload.</p>
@@ -11398,7 +10995,7 @@ module Aws::IoT
       :role_arn,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11412,7 +11009,7 @@ module Aws::IoT
     class MachineLearningDetectionConfig < Struct.new(
       :confidence_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional configuration within the <code>SchedulingConfig</code> to setup a
@@ -11428,7 +11025,7 @@ module Aws::IoT
       :start_time,
       :duration_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy documentation is not valid.</p>
@@ -11438,7 +11035,7 @@ module Aws::IoT
     class MalformedPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the managed template.</p>
@@ -11464,12 +11061,7 @@ module Aws::IoT
       :environments,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageFormat
-      RAW = 'RAW'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metric.</p>
@@ -11483,7 +11075,7 @@ module Aws::IoT
       :timestamp,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension of a metric.</p>
@@ -11497,7 +11089,7 @@ module Aws::IoT
       :dimension_name,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric you want to retain. Dimensions are optional.</p>
@@ -11515,7 +11107,7 @@ module Aws::IoT
       :metric_dimension,
       :export_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value to be compared with the <code>metric</code>.</p>
@@ -11554,7 +11146,7 @@ module Aws::IoT
       :numbers,
       :strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Set configurations for metrics export.</p>
@@ -11570,7 +11162,7 @@ module Aws::IoT
       :mqtt_topic,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes which changes should be applied as part of a mitigation action.</p>
@@ -11592,7 +11184,7 @@ module Aws::IoT
       :role_arn,
       :action_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that identifies a mitigation action. This information is returned by ListMitigationActions.</p>
@@ -11610,7 +11202,7 @@ module Aws::IoT
       :action_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).</p>
@@ -11640,22 +11232,7 @@ module Aws::IoT
       :enable_io_t_logging_params,
       :publish_finding_to_sns_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MitigationActionType
-      UPDATE_DEVICE_CERTIFICATE = 'UPDATE_DEVICE_CERTIFICATE'
-      UPDATE_CA_CERTIFICATE = 'UPDATE_CA_CERTIFICATE'
-      ADD_THINGS_TO_THING_GROUP = 'ADD_THINGS_TO_THING_GROUP'
-      REPLACE_DEFAULT_POLICY_VERSION = 'REPLACE_DEFAULT_POLICY_VERSION'
-      ENABLE_IOT_LOGGING = 'ENABLE_IOT_LOGGING'
-      PUBLISH_FINDING_TO_SNS = 'PUBLISH_FINDING_TO_SNS'
-    end
-
-    module ModelStatus
-      PENDING_BUILD = 'PENDING_BUILD'
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to add user-defined properties to enrich MQTT 5 messages.</p>
@@ -11665,7 +11242,7 @@ module Aws::IoT
     class Mqtt5Configuration < Struct.new(
       :propagating_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the MQTT context to use for the test authorizer request</p>
@@ -11683,7 +11260,7 @@ module Aws::IoT
       :password,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies MQTT Version 5.0 headers information. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html"> MQTT</a> from
@@ -11746,12 +11323,7 @@ module Aws::IoT
       :message_expiry,
       :user_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamedShadowIndexingMode
-      OFF = 'OFF'
-      ON = 'ON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resource that was noncompliant with the audit check.</p>
@@ -11769,7 +11341,7 @@ module Aws::IoT
       :resource_identifier,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is not configured.</p>
@@ -11779,7 +11351,7 @@ module Aws::IoT
     class NotConfiguredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a file to be associated with an OTA update.</p>
@@ -11810,7 +11382,7 @@ module Aws::IoT
       :code_signing,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an OTA update.</p>
@@ -11886,16 +11458,7 @@ module Aws::IoT
       :error_info,
       :additional_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OTAUpdateStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An OTA update summary.</p>
@@ -11913,7 +11476,7 @@ module Aws::IoT
       :ota_update_arn,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action that writes data to an Amazon OpenSearch Service
@@ -11940,7 +11503,7 @@ module Aws::IoT
       :type,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A certificate that has been transferred but not yet accepted.</p>
@@ -11970,7 +11533,7 @@ module Aws::IoT
       :transfer_message,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a software package.</p>
@@ -11992,12 +11555,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageVersionAction
-      PUBLISH = 'PUBLISH'
-      DEPRECATE = 'DEPRECATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific package version artifact associated with a software package version.</p>
@@ -12007,13 +11565,7 @@ module Aws::IoT
     class PackageVersionArtifact < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageVersionStatus
-      DRAFT = 'DRAFT'
-      PUBLISHED = 'PUBLISHED'
-      DEPRECATED = 'DEPRECATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a package version.</p>
@@ -12039,7 +11591,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the percentile and percentile value.</p>
@@ -12053,7 +11605,7 @@ module Aws::IoT
       :percent,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent] = 0 unless options.key?(:percent)
@@ -12073,11 +11625,7 @@ module Aws::IoT
       :policy_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyTemplateName
-      BLANK_POLICY = 'BLANK_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a policy version.</p>
@@ -12095,7 +11643,7 @@ module Aws::IoT
       :is_default_version,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -12114,7 +11662,7 @@ module Aws::IoT
       :policy_name,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for pre-signed S3 URLs.</p>
@@ -12136,7 +11684,7 @@ module Aws::IoT
       :role_arn,
       :expires_in_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the thing and the type of relation it has with the principal.</p>
@@ -12165,7 +11713,7 @@ module Aws::IoT
       :thing_name,
       :thing_principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the connection attribute, thing attribute, and the user property key.</p>
@@ -12183,12 +11731,7 @@ module Aws::IoT
       :thing_attribute,
       :connection_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      MQTT = 'MQTT'
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains <code>payloadVersion</code> and
@@ -12207,7 +11750,7 @@ module Aws::IoT
       :payload_version,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a provisioning template.</p>
@@ -12244,7 +11787,7 @@ module Aws::IoT
       :enabled,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a fleet provision template version.</p>
@@ -12263,7 +11806,7 @@ module Aws::IoT
       :creation_date,
       :is_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -12278,7 +11821,7 @@ module Aws::IoT
     class PublishFindingToSnsParams < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset property value entry containing the following information.</p>
@@ -12313,7 +11856,7 @@ module Aws::IoT
       :property_alias,
       :property_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the DynamoActionVS action that specifies the DynamoDB table to which
@@ -12324,7 +11867,7 @@ module Aws::IoT
     class PutItemInput < Struct.new(
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute violation_id
@@ -12341,12 +11884,12 @@ module Aws::IoT
       :verification_state,
       :verification_state_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutVerificationStateOnViolationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to define a criteria to initiate the increase in rate of rollout for a
@@ -12363,7 +11906,7 @@ module Aws::IoT
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the RegisterCACertificate operation.</p>
@@ -12418,7 +11961,7 @@ module Aws::IoT
       :tags,
       :certificate_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the RegisterCACertificateResponse operation.</p>
@@ -12432,7 +11975,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the RegisterCertificate operation.</p>
@@ -12458,7 +12001,7 @@ module Aws::IoT
       :set_as_active,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the RegisterCertificate operation.</p>
@@ -12472,7 +12015,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_pem
@@ -12485,7 +12028,7 @@ module Aws::IoT
       :certificate_pem,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -12499,7 +12042,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_body
@@ -12512,7 +12055,7 @@ module Aws::IoT
       :template_body,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_pem
@@ -12525,7 +12068,7 @@ module Aws::IoT
       :certificate_pem,
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration code is invalid.</p>
@@ -12535,7 +12078,7 @@ module Aws::IoT
     class RegistrationCodeValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration configuration.</p>
@@ -12553,7 +12096,7 @@ module Aws::IoT
       :role_arn,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the RejectCertificateTransfer operation.</p>
@@ -12568,7 +12111,7 @@ module Aws::IoT
       :certificate_id,
       :reject_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a related resource.</p>
@@ -12586,7 +12129,7 @@ module Aws::IoT
       :resource_identifier,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -12607,12 +12150,12 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveThingFromBillingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -12633,12 +12176,12 @@ module Aws::IoT
       :thing_name,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveThingFromThingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to define a mitigation action that adds a blank policy to restrict permissions.</p>
@@ -12648,7 +12191,7 @@ module Aws::IoT
     class ReplaceDefaultPolicyVersionParams < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the ReplaceTopicRule operation.</p>
@@ -12662,12 +12205,7 @@ module Aws::IoT
       :rule_name,
       :topic_rule_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportType
-      ERRORS = 'ERRORS'
-      RESULTS = 'RESULTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to republish to another topic.</p>
@@ -12691,7 +12229,7 @@ module Aws::IoT
       :qos,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource already exists.</p>
@@ -12709,7 +12247,7 @@ module Aws::IoT
       :resource_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that identifies the noncompliant resource.</p>
@@ -12755,7 +12293,7 @@ module Aws::IoT
       :issuer_certificate_identifier,
       :device_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -12765,7 +12303,7 @@ module Aws::IoT
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource registration failed.</p>
@@ -12775,19 +12313,7 @@ module Aws::IoT
     class ResourceRegistrationFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      DEVICE_CERTIFICATE = 'DEVICE_CERTIFICATE'
-      CA_CERTIFICATE = 'CA_CERTIFICATE'
-      IOT_POLICY = 'IOT_POLICY'
-      COGNITO_IDENTITY_POOL = 'COGNITO_IDENTITY_POOL'
-      CLIENT_ID = 'CLIENT_ID'
-      ACCOUNT_SETTINGS = 'ACCOUNT_SETTINGS'
-      ROLE_ALIAS = 'ROLE_ALIAS'
-      IAM_ROLE = 'IAM_ROLE'
-      ISSUER_CERTIFICATE = 'ISSUER_CERTIFICATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria that determines how many retries are allowed for each failure type for a
@@ -12802,13 +12328,7 @@ module Aws::IoT
       :failure_type,
       :number_of_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetryableFailureType
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Role alias description.</p>
@@ -12842,7 +12362,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to write data to an Amazon S3 bucket.</p>
@@ -12865,7 +12385,7 @@ module Aws::IoT
       :key,
       :canned_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of updated firmware in S3.</p>
@@ -12879,7 +12399,7 @@ module Aws::IoT
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location.</p>
@@ -12897,7 +12417,7 @@ module Aws::IoT
       :key,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to write a message to a Salesforce IoT Cloud Input
@@ -12915,7 +12435,7 @@ module Aws::IoT
       :token,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific software bill of matrerials associated with a software
@@ -12926,17 +12446,7 @@ module Aws::IoT
     class Sbom < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SbomValidationErrorCode
-      INCOMPATIBLE_FORMAT = 'INCOMPATIBLE_FORMAT'
-      FILE_SIZE_LIMIT_EXCEEDED = 'FILE_SIZE_LIMIT_EXCEEDED'
-    end
-
-    module SbomValidationResult
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the validation results for a specific software bill of materials (SBOM) attached to a software package version.</p>
@@ -12960,13 +12470,7 @@ module Aws::IoT
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SbomValidationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the scheduled audit.</p>
@@ -12996,7 +12500,7 @@ module Aws::IoT
       :day_of_month,
       :day_of_week,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displays the next seven maintenance window occurrences and their start times.</p>
@@ -13006,7 +12510,7 @@ module Aws::IoT
     class ScheduledJobRollout < Struct.new(
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the date and time that a job will begin the rollout of the job document to
@@ -13048,7 +12552,7 @@ module Aws::IoT
       :end_behavior,
       :maintenance_windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_name
@@ -13080,7 +12584,7 @@ module Aws::IoT
       :max_results,
       :query_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -13098,7 +12602,7 @@ module Aws::IoT
       :things,
       :thing_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifying information for a Device Defender security profile.</p>
@@ -13112,7 +12616,7 @@ module Aws::IoT
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target to which an alert is sent when a security profile behavior is 
@@ -13123,7 +12627,7 @@ module Aws::IoT
     class SecurityProfileTarget < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a security profile and the target associated with it.</p>
@@ -13137,7 +12641,7 @@ module Aws::IoT
       :security_profile_identifier,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server certificate configuration.</p>
@@ -13170,12 +12674,7 @@ module Aws::IoT
       :ocsp_lambda_arn,
       :ocsp_authorized_responder_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerCertificateStatus
-      INVALID = 'INVALID'
-      VALID = 'VALID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a server certificate.</p>
@@ -13193,7 +12692,7 @@ module Aws::IoT
       :server_certificate_status,
       :server_certificate_status_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Service quota has been exceeded.</p>
@@ -13202,13 +12701,7 @@ module Aws::IoT
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceType
-      DATA = 'DATA'
-      CREDENTIAL_PROVIDER = 'CREDENTIAL_PROVIDER'
-      JOBS = 'JOBS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
@@ -13218,7 +12711,7 @@ module Aws::IoT
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -13227,7 +12720,7 @@ module Aws::IoT
     class SetDefaultAuthorizerRequest < Struct.new(
       :authorizer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -13240,7 +12733,7 @@ module Aws::IoT
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the SetDefaultPolicyVersion operation.</p>
@@ -13254,7 +12747,7 @@ module Aws::IoT
       :policy_name,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the SetLoggingOptions operation.</p>
@@ -13264,7 +12757,7 @@ module Aws::IoT
     class SetLoggingOptionsRequest < Struct.new(
       :logging_options_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_target
@@ -13277,7 +12770,7 @@ module Aws::IoT
       :log_target,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -13294,7 +12787,7 @@ module Aws::IoT
       :default_log_level,
       :disable_all_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 signing process</a>.</p>
@@ -13312,7 +12805,7 @@ module Aws::IoT
       :service_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the code-signing profile.</p>
@@ -13330,7 +12823,7 @@ module Aws::IoT
       :platform,
       :certificate_path_on_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to publish to an Amazon SNS topic.</p>
@@ -13351,12 +12844,7 @@ module Aws::IoT
       :role_arn,
       :message_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      Ascending = 'ASCENDING'
-      Descending = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Rule-SQL expression can't be parsed correctly.</p>
@@ -13366,7 +12854,7 @@ module Aws::IoT
     class SqlParseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action to publish data to an Amazon SQS queue.</p>
@@ -13384,7 +12872,7 @@ module Aws::IoT
       :queue_url,
       :use_base64,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13408,7 +12896,7 @@ module Aws::IoT
       :audit_check_to_actions_mapping,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13417,7 +12905,7 @@ module Aws::IoT
     class StartAuditMitigationActionsTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13464,7 +12952,7 @@ module Aws::IoT
       :include_suppressed_alerts,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13475,7 +12963,7 @@ module Aws::IoT
     class StartDetectMitigationActionsTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_check_names
@@ -13487,7 +12975,7 @@ module Aws::IoT
     class StartOnDemandAuditTaskRequest < Struct.new(
       :target_check_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13496,7 +12984,7 @@ module Aws::IoT
     class StartOnDemandAuditTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to start a signing job.</p>
@@ -13514,7 +13002,7 @@ module Aws::IoT
       :signing_profile_name,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_body
@@ -13537,7 +13025,7 @@ module Aws::IoT
       :input_file_key,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13546,7 +13034,7 @@ module Aws::IoT
     class StartThingRegistrationTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A statistical ranking (percentile) that
@@ -13565,7 +13053,7 @@ module Aws::IoT
     class StatisticalThreshold < Struct.new(
       :statistic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of key-value pairs for all supported statistics. For issues with missing or unexpected values for this API, 
@@ -13605,27 +13093,19 @@ module Aws::IoT
       :variance,
       :std_deviation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
-        options[:average] =  unless options.key?(:average)
-        options[:sum] =  unless options.key?(:sum)
-        options[:minimum] =  unless options.key?(:minimum)
-        options[:maximum] =  unless options.key?(:maximum)
-        options[:sum_of_squares] =  unless options.key?(:sum_of_squares)
-        options[:variance] =  unless options.key?(:variance)
-        options[:std_deviation] =  unless options.key?(:std_deviation)
+        options[:average] = nil unless options.key?(:average)
+        options[:sum] = nil unless options.key?(:sum)
+        options[:minimum] = nil unless options.key?(:minimum)
+        options[:maximum] = nil unless options.key?(:maximum)
+        options[:sum_of_squares] = nil unless options.key?(:sum_of_squares)
+        options[:variance] = nil unless options.key?(:variance)
+        options[:std_deviation] = nil unless options.key?(:std_deviation)
         super
       end
-    end
-
-    module Status
-      InProgress = 'InProgress'
-      Completed = 'Completed'
-      Failed = 'Failed'
-      Cancelled = 'Cancelled'
-      Cancelling = 'Cancelling'
     end
 
     # <p>Provide additional context about the status of a command execution using a reason code
@@ -13641,7 +13121,7 @@ module Aws::IoT
       :reason_code,
       :reason_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Starts execution of a Step Functions state machine.</p>
@@ -13662,7 +13142,7 @@ module Aws::IoT
       :state_machine_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -13671,12 +13151,12 @@ module Aws::IoT
     class StopThingRegistrationTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopThingRegistrationTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a group of files that can be streamed.</p>
@@ -13690,7 +13170,7 @@ module Aws::IoT
       :stream_id,
       :file_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a file to stream.</p>
@@ -13704,7 +13184,7 @@ module Aws::IoT
       :file_id,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a stream.</p>
@@ -13742,7 +13222,7 @@ module Aws::IoT
       :last_updated_at,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a stream.</p>
@@ -13764,7 +13244,7 @@ module Aws::IoT
       :stream_version,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of key/value pairs that are used to manage the resource.</p>
@@ -13778,7 +13258,7 @@ module Aws::IoT
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -13791,22 +13271,12 @@ module Aws::IoT
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetFieldOrder
-      LatLon = 'LatLon'
-      LonLat = 'LonLat'
-    end
-
-    module TargetSelection
-      CONTINUOUS = 'CONTINUOUS'
-      SNAPSHOT = 'SNAPSHOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -13817,7 +13287,7 @@ module Aws::IoT
     class TaskAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics for the checks performed during the audit.</p>
@@ -13851,7 +13321,7 @@ module Aws::IoT
       :failed_checks,
       :canceled_checks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary counts of how many tasks for findings are in a particular state. This information is included in the response from DescribeAuditMitigationActionsTask.</p>
@@ -13877,12 +13347,7 @@ module Aws::IoT
       :skipped_findings_count,
       :canceled_findings_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateType
-      FLEET_PROVISIONING = 'FLEET_PROVISIONING'
-      JITP = 'JITP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Performs an aggregation that will return a list of buckets. The list of buckets is a ranked list of the number of occurrences of an aggregation field value.</p>
@@ -13892,7 +13357,7 @@ module Aws::IoT
     class TermsAggregation < Struct.new(
       :max_buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -13924,7 +13389,7 @@ module Aws::IoT
       :policy_names_to_add,
       :policy_names_to_skip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auth_results
@@ -13933,7 +13398,7 @@ module Aws::IoT
     class TestAuthorizationResponse < Struct.new(
       :auth_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -13963,7 +13428,7 @@ module Aws::IoT
       :mqtt_context,
       :tls_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute is_authenticated
@@ -13988,7 +13453,7 @@ module Aws::IoT
       :refresh_after_in_seconds,
       :disconnect_after_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the thing, including thing name, thing type name, and a list of thing
@@ -14015,7 +13480,7 @@ module Aws::IoT
       :attributes,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -14040,12 +13505,7 @@ module Aws::IoT
       :timestamp,
       :disconnect_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThingConnectivityIndexingMode
-      OFF = 'OFF'
-      STATUS = 'STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The thing search index document.</p>
@@ -14086,7 +13546,7 @@ module Aws::IoT
       :device_defender,
       :connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The thing group search index document.</p>
@@ -14112,7 +13572,7 @@ module Aws::IoT
       :attributes,
       :parent_group_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thing group indexing configuration.</p>
@@ -14136,12 +13596,7 @@ module Aws::IoT
       :managed_fields,
       :custom_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThingGroupIndexingMode
-      OFF = 'OFF'
-      ON = 'ON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thing group metadata.</p>
@@ -14159,7 +13614,7 @@ module Aws::IoT
       :root_to_parent_thing_groups,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thing group properties.</p>
@@ -14173,7 +13628,7 @@ module Aws::IoT
       :thing_group_description,
       :attribute_payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The thing indexing configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html">Managing
@@ -14273,13 +13728,7 @@ module Aws::IoT
       :custom_fields,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThingIndexingMode
-      OFF = 'OFF'
-      REGISTRY = 'REGISTRY'
-      REGISTRY_AND_SHADOW = 'REGISTRY_AND_SHADOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the principal and the type of relation it has with the thing.</p>
@@ -14308,12 +13757,7 @@ module Aws::IoT
       :principal,
       :thing_principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThingPrincipalType
-      EXCLUSIVE_THING = 'EXCLUSIVE_THING'
-      NON_EXCLUSIVE_THING = 'NON_EXCLUSIVE_THING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the thing type, including thing type name and description.</p>
@@ -14337,7 +13781,7 @@ module Aws::IoT
       :thing_type_properties,
       :thing_type_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ThingTypeMetadata contains additional information about the thing type including: creation date and
@@ -14358,7 +13802,7 @@ module Aws::IoT
       :deprecation_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deprecated] = false unless options.key?(:deprecated)
@@ -14382,7 +13826,7 @@ module Aws::IoT
       :searchable_attributes,
       :mqtt5_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate exceeds the limit.</p>
@@ -14392,7 +13836,7 @@ module Aws::IoT
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that can be used to list command executions for a device that started or
@@ -14409,7 +13853,7 @@ module Aws::IoT
       :after,
       :before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the amount of time each device has to finish its execution of the job. A
@@ -14427,7 +13871,7 @@ module Aws::IoT
     class TimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Timestream rule action writes attributes (measures) from an MQTT message
@@ -14462,7 +13906,7 @@ module Aws::IoT
       :dimensions,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata attributes of the time series that are written in each measure record.</p>
@@ -14483,7 +13927,7 @@ module Aws::IoT
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how to interpret an application-defined timestamp value from an MQTT message
@@ -14502,7 +13946,7 @@ module Aws::IoT
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies the TLS configuration for a domain.</p>
@@ -14514,7 +13958,7 @@ module Aws::IoT
     class TlsConfig < Struct.new(
       :security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the TLS context to use for the test authorizer request.</p>
@@ -14524,7 +13968,7 @@ module Aws::IoT
     class TlsContext < Struct.new(
       :server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule.</p>
@@ -14563,7 +14007,7 @@ module Aws::IoT
       :aws_iot_sql_version,
       :error_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A topic rule destination.</p>
@@ -14629,7 +14073,7 @@ module Aws::IoT
       :http_url_properties,
       :vpc_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the topic rule destination.</p>
@@ -14643,15 +14087,7 @@ module Aws::IoT
       :http_url_configuration,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicRuleDestinationStatus
-      ENABLED = 'ENABLED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      DISABLED = 'DISABLED'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the topic rule destination.</p>
@@ -14716,7 +14152,7 @@ module Aws::IoT
       :http_url_summary,
       :vpc_destination_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule.</p>
@@ -14742,7 +14178,7 @@ module Aws::IoT
       :created_at,
       :rule_disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule.</p>
@@ -14773,7 +14209,7 @@ module Aws::IoT
       :aws_iot_sql_version,
       :error_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't revert the certificate transfer because the transfer is already
@@ -14784,7 +14220,7 @@ module Aws::IoT
     class TransferAlreadyCompletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the TransferCertificate operation.</p>
@@ -14803,7 +14239,7 @@ module Aws::IoT
       :target_aws_account,
       :transfer_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the TransferCertificate operation.</p>
@@ -14813,7 +14249,7 @@ module Aws::IoT
     class TransferCertificateResponse < Struct.new(
       :transferred_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't transfer the certificate because authorization policies are still
@@ -14824,7 +14260,7 @@ module Aws::IoT
     class TransferConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data used to transfer a certificate to an Amazon Web Services account.</p>
@@ -14850,7 +14286,7 @@ module Aws::IoT
       :accept_date,
       :reject_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are not authorized to perform this operation.</p>
@@ -14860,7 +14296,7 @@ module Aws::IoT
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14873,12 +14309,12 @@ module Aws::IoT
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -14914,12 +14350,12 @@ module Aws::IoT
       :audit_notification_target_configurations,
       :audit_check_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAccountAuditConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_name
@@ -14953,12 +14389,12 @@ module Aws::IoT
       :suppress_indefinitely,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAuditSuppressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -14989,7 +14425,7 @@ module Aws::IoT
       :status,
       :enable_caching_for_http,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_name
@@ -15002,7 +14438,7 @@ module Aws::IoT
       :authorizer_name,
       :authorizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_name
@@ -15022,7 +14458,7 @@ module Aws::IoT
       :billing_group_properties,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -15031,7 +14467,7 @@ module Aws::IoT
     class UpdateBillingGroupResponse < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -15046,7 +14482,7 @@ module Aws::IoT
     class UpdateCACertificateParams < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the UpdateCACertificate operation.</p>
@@ -15076,7 +14512,7 @@ module Aws::IoT
       :registration_config,
       :remove_auto_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -15094,7 +14530,7 @@ module Aws::IoT
       :lambda_function_arn,
       :account_default_for_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_provider_name
@@ -15107,7 +14543,7 @@ module Aws::IoT
       :certificate_provider_name,
       :certificate_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the UpdateCertificate operation.</p>
@@ -15129,7 +14565,7 @@ module Aws::IoT
       :certificate_id,
       :new_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -15150,7 +14586,7 @@ module Aws::IoT
       :description,
       :deprecated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -15176,7 +14612,7 @@ module Aws::IoT
       :deprecated,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -15197,7 +14633,7 @@ module Aws::IoT
       :metric_name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -15239,7 +14675,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to define a mitigation action that changes the state of the device certificate to inactive.</p>
@@ -15249,7 +14685,7 @@ module Aws::IoT
     class UpdateDeviceCertificateParams < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -15262,7 +14698,7 @@ module Aws::IoT
       :name,
       :string_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -15293,7 +14729,7 @@ module Aws::IoT
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -15392,7 +14828,7 @@ module Aws::IoT
       :application_protocol,
       :client_certificate_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_configuration_name
@@ -15405,7 +14841,7 @@ module Aws::IoT
       :domain_configuration_name,
       :domain_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -15441,7 +14877,7 @@ module Aws::IoT
       :query_string,
       :query_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -15450,7 +14886,7 @@ module Aws::IoT
     class UpdateDynamicThingGroupResponse < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -15473,12 +14909,12 @@ module Aws::IoT
       :kms_key_arn,
       :kms_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEncryptionConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_configurations
@@ -15487,12 +14923,12 @@ module Aws::IoT
     class UpdateEventConfigurationsRequest < Struct.new(
       :event_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEventConfigurationsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -15538,7 +14974,7 @@ module Aws::IoT
       :unit,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_indexing_configuration
@@ -15551,12 +14987,12 @@ module Aws::IoT
       :thing_indexing_configuration,
       :thing_group_indexing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIndexingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -15606,7 +15042,7 @@ module Aws::IoT
       :namespace_id,
       :job_executions_retry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -15626,7 +15062,7 @@ module Aws::IoT
       :role_arn,
       :action_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_arn
@@ -15639,7 +15075,7 @@ module Aws::IoT
       :action_arn,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_update_by_jobs_config
@@ -15653,12 +15089,12 @@ module Aws::IoT
       :version_update_by_jobs_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -15691,12 +15127,12 @@ module Aws::IoT
       :unset_default_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -15739,12 +15175,12 @@ module Aws::IoT
       :recipe,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePackageVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -15780,12 +15216,12 @@ module Aws::IoT
       :pre_provisioning_hook,
       :remove_pre_provisioning_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateProvisioningTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_alias
@@ -15804,7 +15240,7 @@ module Aws::IoT
       :role_arn,
       :credential_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_alias
@@ -15817,7 +15253,7 @@ module Aws::IoT
       :role_alias,
       :role_alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute frequency
@@ -15858,7 +15294,7 @@ module Aws::IoT
       :target_check_names,
       :scheduled_audit_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_audit_arn
@@ -15867,7 +15303,7 @@ module Aws::IoT
     class UpdateScheduledAuditResponse < Struct.new(
       :scheduled_audit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -15937,7 +15373,7 @@ module Aws::IoT
       :metrics_export_config,
       :delete_metrics_export_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -15997,7 +15433,7 @@ module Aws::IoT
       :last_modified_date,
       :metrics_export_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -16023,7 +15459,7 @@ module Aws::IoT
       :files,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -16044,7 +15480,7 @@ module Aws::IoT
       :description,
       :stream_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_name
@@ -16062,7 +15498,7 @@ module Aws::IoT
       :thing_group_properties,
       :expected_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -16071,7 +15507,7 @@ module Aws::IoT
     class UpdateThingGroupResponse < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -16100,12 +15536,12 @@ module Aws::IoT
       :thing_groups_to_remove,
       :override_dynamic_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateThingGroupsForThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the UpdateThing operation.</p>
@@ -16142,13 +15578,13 @@ module Aws::IoT
       :expected_version,
       :remove_thing_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from the UpdateThing operation.</p>
     class UpdateThingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_type_name
@@ -16162,12 +15598,12 @@ module Aws::IoT
       :thing_type_name,
       :thing_type_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateThingTypeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -16211,12 +15647,12 @@ module Aws::IoT
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTopicRuleDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that you define in the header. Both the key and the value are either
@@ -16232,7 +15668,7 @@ module Aws::IoT
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute behaviors
@@ -16241,7 +15677,7 @@ module Aws::IoT
     class ValidateSecurityProfileBehaviorsRequest < Struct.new(
       :behaviors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute valid
@@ -16254,7 +15690,7 @@ module Aws::IoT
       :valid,
       :validation_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:valid] = false unless options.key?(:valid)
@@ -16269,7 +15705,7 @@ module Aws::IoT
     class ValidationError < Struct.new(
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -16278,14 +15714,7 @@ module Aws::IoT
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerificationState
-      FALSE_POSITIVE = 'FALSE_POSITIVE'
-      BENIGN_POSITIVE = 'BENIGN_POSITIVE'
-      TRUE_POSITIVE = 'TRUE_POSITIVE'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception thrown when the version of an entity specified with the
@@ -16297,7 +15726,7 @@ module Aws::IoT
     class VersionConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration to manage IoT Job's package version reporting. If configured, Jobs updates the thing's reserved named shadow with the package version information up on successful job completion.</p>
@@ -16315,7 +15744,7 @@ module Aws::IoT
       :enabled,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of policy versions exceeds the limit.</p>
@@ -16325,7 +15754,7 @@ module Aws::IoT
     class VersionsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Device Defender security profile behavior violation.</p>
@@ -16373,7 +15802,7 @@ module Aws::IoT
       :verification_state_description,
       :violation_event_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16387,7 +15816,7 @@ module Aws::IoT
     class ViolationEventAdditionalInfo < Struct.new(
       :confidence_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16407,13 +15836,7 @@ module Aws::IoT
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViolationEventType
-      IN_ALARM = 'in-alarm'
-      ALARM_CLEARED = 'alarm-cleared'
-      ALARM_INVALIDATED = 'alarm-invalidated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information for a virtual private cloud (VPC) destination.</p>
@@ -16435,7 +15858,7 @@ module Aws::IoT
       :vpc_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a virtual private cloud (VPC) destination.</p>
@@ -16457,7 +15880,7 @@ module Aws::IoT
       :vpc_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a virtual private cloud (VPC) destination.</p>
@@ -16479,7 +15902,7 @@ module Aws::IoT
       :vpc_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

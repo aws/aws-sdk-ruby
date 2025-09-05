@@ -18,7 +18,7 @@ module Aws::KafkaConnect
       :bootstrap_servers,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the Apache Kafka cluster to which the connector is connected.</p>
@@ -33,7 +33,7 @@ module Aws::KafkaConnect
       :bootstrap_servers,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how the connector scales.</p>
@@ -60,7 +60,7 @@ module Aws::KafkaConnect
       :scale_in_policy,
       :scale_out_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
@@ -94,7 +94,7 @@ module Aws::KafkaConnect
       :scale_in_policy,
       :scale_out_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
@@ -128,7 +128,7 @@ module Aws::KafkaConnect
       :scale_in_policy,
       :scale_out_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_worker_count] = 0 unless options.key?(:max_worker_count)
@@ -145,7 +145,7 @@ module Aws::KafkaConnect
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the capacity of the connector, whether it is auto scaled or
@@ -160,7 +160,7 @@ module Aws::KafkaConnect
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the connector's capacity.</p>
@@ -174,7 +174,7 @@ module Aws::KafkaConnect
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target capacity for the connector. The capacity can be auto scaled or
@@ -189,7 +189,7 @@ module Aws::KafkaConnect
       :auto_scaling,
       :provisioned_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for delivering connector logs to Amazon CloudWatch Logs.</p>
@@ -203,7 +203,7 @@ module Aws::KafkaConnect
       :enabled,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -222,7 +222,7 @@ module Aws::KafkaConnect
       :enabled,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -237,7 +237,7 @@ module Aws::KafkaConnect
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a step that is involved in a connector's operation.</p>
@@ -251,7 +251,7 @@ module Aws::KafkaConnect
       :step_type,
       :step_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a connector operation.</p>
@@ -277,7 +277,7 @@ module Aws::KafkaConnect
       :creation_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a connector.</p>
@@ -346,7 +346,7 @@ module Aws::KafkaConnect
       :service_execution_role_arn,
       :worker_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -363,7 +363,7 @@ module Aws::KafkaConnect
       :connector_name,
       :connector_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity
@@ -428,7 +428,7 @@ module Aws::KafkaConnect
       :worker_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_plugin_arn
@@ -449,7 +449,7 @@ module Aws::KafkaConnect
       :name,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -479,7 +479,7 @@ module Aws::KafkaConnect
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -504,7 +504,7 @@ module Aws::KafkaConnect
       :worker_configuration_arn,
       :worker_configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -525,7 +525,7 @@ module Aws::KafkaConnect
       :properties_file_content,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A plugin is an Amazon Web Services resource that contains the code that defines a connector's logic.</p>
@@ -539,7 +539,7 @@ module Aws::KafkaConnect
       :custom_plugin_arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -558,7 +558,7 @@ module Aws::KafkaConnect
       :custom_plugin_arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -578,7 +578,7 @@ module Aws::KafkaConnect
       :file_md5,
       :file_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:file_size] = 0 unless options.key?(:file_size)
@@ -594,7 +594,7 @@ module Aws::KafkaConnect
     class CustomPluginLocation < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of a custom plugin.</p>
@@ -605,7 +605,7 @@ module Aws::KafkaConnect
     class CustomPluginLocationDescription < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the revision of a custom plugin.</p>
@@ -635,7 +635,7 @@ module Aws::KafkaConnect
       :location,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -670,7 +670,7 @@ module Aws::KafkaConnect
       :latest_revision,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -683,7 +683,7 @@ module Aws::KafkaConnect
       :connector_arn,
       :connector_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -696,7 +696,7 @@ module Aws::KafkaConnect
       :connector_arn,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_plugin_arn
@@ -709,7 +709,7 @@ module Aws::KafkaConnect
       :custom_plugin_arn,
       :custom_plugin_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_plugin_arn
@@ -718,7 +718,7 @@ module Aws::KafkaConnect
     class DeleteCustomPluginRequest < Struct.new(
       :custom_plugin_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_configuration_arn
@@ -731,7 +731,7 @@ module Aws::KafkaConnect
       :worker_configuration_arn,
       :worker_configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_configuration_arn
@@ -740,7 +740,7 @@ module Aws::KafkaConnect
     class DeleteWorkerConfigurationRequest < Struct.new(
       :worker_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_operation_arn
@@ -749,7 +749,7 @@ module Aws::KafkaConnect
     class DescribeConnectorOperationRequest < Struct.new(
       :connector_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -802,7 +802,7 @@ module Aws::KafkaConnect
       :creation_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity
@@ -879,7 +879,7 @@ module Aws::KafkaConnect
       :worker_configuration,
       :state_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -888,7 +888,7 @@ module Aws::KafkaConnect
     class DescribeConnectorRequest < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -922,7 +922,7 @@ module Aws::KafkaConnect
       :name,
       :state_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_plugin_arn
@@ -931,7 +931,7 @@ module Aws::KafkaConnect
     class DescribeCustomPluginRequest < Struct.new(
       :custom_plugin_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -960,7 +960,7 @@ module Aws::KafkaConnect
       :worker_configuration_arn,
       :worker_configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_configuration_arn
@@ -970,7 +970,7 @@ module Aws::KafkaConnect
     class DescribeWorkerConfigurationRequest < Struct.new(
       :worker_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for delivering logs to Amazon Kinesis Data Firehose.</p>
@@ -985,7 +985,7 @@ module Aws::KafkaConnect
       :delivery_stream,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1006,7 +1006,7 @@ module Aws::KafkaConnect
       :delivery_stream,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1021,7 +1021,7 @@ module Aws::KafkaConnect
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might
@@ -1031,7 +1031,7 @@ module Aws::KafkaConnect
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Apache Kafka cluster to which the connector is connected.</p>
@@ -1041,7 +1041,7 @@ module Aws::KafkaConnect
     class KafkaCluster < Struct.new(
       :apache_kafka_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client authentication information used in order to authenticate with the Apache
@@ -1053,7 +1053,7 @@ module Aws::KafkaConnect
     class KafkaClusterClientAuthentication < Struct.new(
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client authentication information used in order to authenticate with the Apache
@@ -1065,7 +1065,7 @@ module Aws::KafkaConnect
     class KafkaClusterClientAuthenticationDescription < Struct.new(
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of how to connect to the Apache Kafka cluster.</p>
@@ -1075,7 +1075,7 @@ module Aws::KafkaConnect
     class KafkaClusterDescription < Struct.new(
       :apache_kafka_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of encryption in transit to the Apache Kafka cluster.</p>
@@ -1085,7 +1085,7 @@ module Aws::KafkaConnect
     class KafkaClusterEncryptionInTransit < Struct.new(
       :encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the encryption in transit to the Apache Kafka cluster.</p>
@@ -1095,7 +1095,7 @@ module Aws::KafkaConnect
     class KafkaClusterEncryptionInTransitDescription < Struct.new(
       :encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -1112,7 +1112,7 @@ module Aws::KafkaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_operations
@@ -1125,7 +1125,7 @@ module Aws::KafkaConnect
       :connector_operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectors
@@ -1140,7 +1140,7 @@ module Aws::KafkaConnect
       :connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_name_prefix
@@ -1159,7 +1159,7 @@ module Aws::KafkaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_plugins
@@ -1174,7 +1174,7 @@ module Aws::KafkaConnect
       :custom_plugins,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1193,7 +1193,7 @@ module Aws::KafkaConnect
       :next_token,
       :name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1202,7 +1202,7 @@ module Aws::KafkaConnect
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1211,7 +1211,7 @@ module Aws::KafkaConnect
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1226,7 +1226,7 @@ module Aws::KafkaConnect
       :next_token,
       :worker_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1245,7 +1245,7 @@ module Aws::KafkaConnect
       :next_token,
       :name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about log delivery.</p>
@@ -1256,7 +1256,7 @@ module Aws::KafkaConnect
     class LogDelivery < Struct.new(
       :worker_log_delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the log delivery settings.</p>
@@ -1267,7 +1267,7 @@ module Aws::KafkaConnect
     class LogDeliveryDescription < Struct.new(
       :worker_log_delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request
@@ -1277,7 +1277,7 @@ module Aws::KafkaConnect
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A plugin is an Amazon Web Services resource that contains the code that defines your connector logic. </p>
@@ -1287,7 +1287,7 @@ module Aws::KafkaConnect
     class Plugin < Struct.new(
       :custom_plugin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the plugin.</p>
@@ -1297,7 +1297,7 @@ module Aws::KafkaConnect
     class PluginDescription < Struct.new(
       :custom_plugin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a connector's provisioned capacity.</p>
@@ -1312,7 +1312,7 @@ module Aws::KafkaConnect
       :mcu_count,
       :worker_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
@@ -1333,7 +1333,7 @@ module Aws::KafkaConnect
       :mcu_count,
       :worker_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
@@ -1354,7 +1354,7 @@ module Aws::KafkaConnect
       :mcu_count,
       :worker_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mcu_count] = 0 unless options.key?(:mcu_count)
@@ -1378,7 +1378,7 @@ module Aws::KafkaConnect
       :file_key,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the location of an object in Amazon S3.</p>
@@ -1396,7 +1396,7 @@ module Aws::KafkaConnect
       :file_key,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about delivering logs to Amazon S3.</p>
@@ -1414,7 +1414,7 @@ module Aws::KafkaConnect
       :enabled,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1437,7 +1437,7 @@ module Aws::KafkaConnect
       :enabled,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1453,7 +1453,7 @@ module Aws::KafkaConnect
     class ScaleInPolicy < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1469,7 +1469,7 @@ module Aws::KafkaConnect
     class ScaleInPolicyDescription < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1485,7 +1485,7 @@ module Aws::KafkaConnect
     class ScaleInPolicyUpdate < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1501,7 +1501,7 @@ module Aws::KafkaConnect
     class ScaleOutPolicy < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1517,7 +1517,7 @@ module Aws::KafkaConnect
     class ScaleOutPolicyDescription < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1533,7 +1533,7 @@ module Aws::KafkaConnect
     class ScaleOutPolicyUpdate < Struct.new(
       :cpu_utilization_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu_utilization_percentage] = 0 unless options.key?(:cpu_utilization_percentage)
@@ -1548,7 +1548,7 @@ module Aws::KafkaConnect
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the state of a resource.</p>
@@ -1562,12 +1562,12 @@ module Aws::KafkaConnect
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1580,7 +1580,7 @@ module Aws::KafkaConnect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP Status Code 429: Limit exceeded. Resource limit reached.</p>
@@ -1589,7 +1589,7 @@ module Aws::KafkaConnect
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be
@@ -1599,12 +1599,12 @@ module Aws::KafkaConnect
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1617,7 +1617,7 @@ module Aws::KafkaConnect
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -1634,7 +1634,7 @@ module Aws::KafkaConnect
       :connector_state,
       :connector_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity
@@ -1655,7 +1655,7 @@ module Aws::KafkaConnect
       :connector_arn,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the VPC in which the connector resides.</p>
@@ -1669,7 +1669,7 @@ module Aws::KafkaConnect
       :security_groups,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the VPC in which the connector resides.</p>
@@ -1683,7 +1683,7 @@ module Aws::KafkaConnect
       :security_groups,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the workers, which are the processes that run the connector
@@ -1698,7 +1698,7 @@ module Aws::KafkaConnect
       :revision,
       :worker_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -1717,7 +1717,7 @@ module Aws::KafkaConnect
       :revision,
       :worker_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -1744,7 +1744,7 @@ module Aws::KafkaConnect
       :properties_file_content,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -1767,7 +1767,7 @@ module Aws::KafkaConnect
       :description,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -1802,7 +1802,7 @@ module Aws::KafkaConnect
       :worker_configuration_arn,
       :worker_configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workers can send worker logs to different destination types. This configuration
@@ -1821,7 +1821,7 @@ module Aws::KafkaConnect
       :firehose,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workers can send worker logs to different destination types. This configuration
@@ -1840,7 +1840,7 @@ module Aws::KafkaConnect
       :firehose,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about worker setting of a connector</p>
@@ -1850,7 +1850,7 @@ module Aws::KafkaConnect
     class WorkerSetting < Struct.new(
       :capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

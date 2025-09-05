@@ -69,7 +69,7 @@ module Aws::ACMPCA
       :generation_qualifier,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides access information used by the <code>authorityInfoAccess</code> and <code>subjectInfoAccess</code> extensions described in <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a>.</p>
@@ -83,7 +83,7 @@ module Aws::ACMPCA
       :access_method,
       :access_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the type and format of extension access. Only one of <code>CustomObjectIdentifier</code> or <code>AccessMethodType</code> may be provided. Providing both results in <code>InvalidArgsException</code>.</p>
@@ -97,19 +97,7 @@ module Aws::ACMPCA
       :custom_object_identifier,
       :access_method_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessMethodType
-      CA_REPOSITORY = 'CA_REPOSITORY'
-      RESOURCE_PKI_MANIFEST = 'RESOURCE_PKI_MANIFEST'
-      RESOURCE_PKI_NOTIFY = 'RESOURCE_PKI_NOTIFY'
-    end
-
-    module ActionType
-      IssueCertificate = 'IssueCertificate'
-      GetCertificate = 'GetCertificate'
-      ListPermissions = 'ListPermissions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains X.509 certificate information to be placed in an issued certificate. An <code>APIPassthrough</code> or <code>APICSRPassthrough</code> template variant must be selected, or else this parameter is ignored. </p> <p>If conflicting or duplicate certificate information is supplied from other sources, Amazon Web Services Private CA applies <a href="https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations">order of operation rules</a> to determine what information is used.</p>
@@ -123,18 +111,7 @@ module Aws::ACMPCA
       :extensions,
       :subject,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditReportResponseFormat
-      JSON = 'JSON'
-      CSV = 'CSV'
-    end
-
-    module AuditReportStatus
-      CREATING = 'CREATING'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about your private certificate authority (CA). Your private CA can issue and revoke X.509 digital certificates. Digital certificates verify that the entity named in the certificate <b>Subject</b> field owns or controls the public key contained in the <b>Subject Public Key Info</b> field. Call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action to create your private CA. You must then call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetCertificateAuthorityCertificate.html">GetCertificateAuthorityCertificate</a> action to retrieve a private CA certificate signing request (CSR). Sign the CSR with your Amazon Web Services Private CA-hosted or on-premises root or subordinate CA certificate. Call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html">ImportCertificateAuthorityCertificate</a> action to import the signed certificate into Certificate Manager (ACM). </p>
@@ -200,7 +177,7 @@ module Aws::ACMPCA
       :key_storage_security_standard,
       :usage_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate. It also includes the signature algorithm that it uses when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. </p>
@@ -222,27 +199,7 @@ module Aws::ACMPCA
       :subject,
       :csr_extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateAuthorityStatus
-      CREATING = 'CREATING'
-      PENDING_CERTIFICATE = 'PENDING_CERTIFICATE'
-      ACTIVE = 'ACTIVE'
-      DELETED = 'DELETED'
-      DISABLED = 'DISABLED'
-      EXPIRED = 'EXPIRED'
-      FAILED = 'FAILED'
-    end
-
-    module CertificateAuthorityType
-      ROOT = 'ROOT'
-      SUBORDINATE = 'SUBORDINATE'
-    end
-
-    module CertificateAuthorityUsageMode
-      GENERAL_PURPOSE = 'GENERAL_PURPOSE'
-      SHORT_LIVED_CERTIFICATE = 'SHORT_LIVED_CERTIFICATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate authority certificate you are importing does not comply with conditions specified in the certificate that signed it.</p>
@@ -251,7 +208,7 @@ module Aws::ACMPCA
     class CertificateMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A previous update to your private CA is still ongoing.</p>
@@ -260,7 +217,7 @@ module Aws::ACMPCA
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -277,7 +234,7 @@ module Aws::ACMPCA
       :s3_bucket_name,
       :audit_report_response_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audit_report_id
@@ -290,7 +247,7 @@ module Aws::ACMPCA
       :audit_report_id,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_configuration
@@ -323,7 +280,7 @@ module Aws::ACMPCA
       :tags,
       :usage_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -332,7 +289,7 @@ module Aws::ACMPCA
     class CreateCertificateAuthorityResponse < Struct.new(
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -353,7 +310,7 @@ module Aws::ACMPCA
       :source_account,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information for a certificate revocation list (CRL). Your private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You can enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA writes CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by specifying a value for the <b>CustomCname</b> parameter. Your private CA by default copies the CNAME or the S3 bucket name to the <b>CRL Distribution Points</b> extension of each certificate it issues. If you want to configure this default behavior to be something different, you can set the <b>CrlDistributionPointExtensionConfiguration</b> parameter. Your S3 bucket policy must give write permission to Amazon Web Services Private CA. </p> <p>Amazon Web Services Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption">Encrypting Your CRLs</a>.</p> <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed prior to a certificate's expiration date or when a certificate is revoked. When a certificate is revoked, it appears in the CRL until the certificate expires, and then in one additional CRL after expiration, and it always appears in the audit report.</p> <p>A CRL is typically updated approximately 30 minutes after a certificate is revoked. If for any reason a CRL update fails, Amazon Web Services Private CA makes further attempts every 15 minutes.</p> <p>CRLs contain the following fields:</p> <ul> <li> <p> <b>Version</b>: The current version number defined in RFC 5280 is V2. The integer value is 0x1. </p> </li> <li> <p> <b>Signature Algorithm</b>: The name of the algorithm used to sign the CRL.</p> </li> <li> <p> <b>Issuer</b>: The X.500 distinguished name of your private CA that issued the CRL.</p> </li> <li> <p> <b>Last Update</b>: The issue date and time of this CRL.</p> </li> <li> <p> <b>Next Update</b>: The day and time by which the next CRL will be issued.</p> </li> <li> <p> <b>Revoked Certificates</b>: List of revoked certificates. Each list item contains the following information.</p> <ul> <li> <p> <b>Serial Number</b>: The serial number, in hexadecimal format, of the revoked certificate.</p> </li> <li> <p> <b>Revocation Date</b>: Date and time the certificate was revoked.</p> </li> <li> <p> <b>CRL Entry Extensions</b>: Optional extensions for the CRL entry.</p> <ul> <li> <p> <b>X509v3 CRL Reason Code</b>: Reason the certificate was revoked.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>CRL Extensions</b>: Optional extensions for the CRL.</p> <ul> <li> <p> <b>X509v3 Authority Key Identifier</b>: Identifies the public key associated with the private key used to sign the certificate.</p> </li> <li> <p> <b>X509v3 CRL Number:</b>: Decimal sequence number for the CRL.</p> </li> </ul> </li> <li> <p> <b>Signature Algorithm</b>: Algorithm used by your private CA to sign the CRL.</p> </li> <li> <p> <b>Signature Value</b>: Signature computed over the CRL.</p> </li> </ul> <p>Certificate revocation lists created by Amazon Web Services Private CA are DER-encoded. You can use the following OpenSSL command to list a CRL.</p> <p> <code>openssl crl -inform DER -text -in <i>crl_path</i> -noout</code> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html">Planning a certificate revocation list (CRL)</a> in the <i>Amazon Web Services Private Certificate Authority User Guide</i> </p>
@@ -391,10 +348,10 @@ module Aws::ACMPCA
       :crl_type,
       :custom_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enabled] =  unless options.key?(:enabled)
+        options[:enabled] = nil unless options.key?(:enabled)
         super
       end
     end
@@ -406,17 +363,12 @@ module Aws::ACMPCA
     class CrlDistributionPointExtensionConfiguration < Struct.new(
       :omit_extension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:omit_extension] =  unless options.key?(:omit_extension)
+        options[:omit_extension] = nil unless options.key?(:omit_extension)
         super
       end
-    end
-
-    module CrlType
-      COMPLETE = 'COMPLETE'
-      PARTITIONED = 'PARTITIONED'
     end
 
     # <p>Describes the certificate extensions to be added to the certificate signing request (CSR).</p>
@@ -430,7 +382,7 @@ module Aws::ACMPCA
       :key_usage,
       :subject_information_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the X.500 relative distinguished name (RDN).</p>
@@ -444,7 +396,7 @@ module Aws::ACMPCA
       :object_identifier,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/> <p>Specifies the X.509 extension information for a certificate.</p> <p>Extensions present in <code>CustomExtensions</code> follow the <code>ApiPassthrough</code> <a href="https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations">template rules</a>. </p>
@@ -462,10 +414,10 @@ module Aws::ACMPCA
       :value,
       :critical,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:critical] =  unless options.key?(:critical)
+        options[:critical] = nil unless options.key?(:critical)
         super
       end
     end
@@ -480,7 +432,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :permanent_deletion_time_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -497,7 +449,7 @@ module Aws::ACMPCA
       :principal,
       :source_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -506,7 +458,7 @@ module Aws::ACMPCA
     class DeletePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -519,7 +471,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :audit_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audit_report_status
@@ -540,7 +492,7 @@ module Aws::ACMPCA
       :s3_key,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -549,7 +501,7 @@ module Aws::ACMPCA
     class DescribeCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority
@@ -558,7 +510,7 @@ module Aws::ACMPCA
     class DescribeCertificateAuthorityResponse < Struct.new(
       :certificate_authority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Electronic Data Interchange (EDI) entity as described in as defined in <a href="https://datatracker.ietf.org/doc/html/rfc5280">Subject Alternative Name</a> in RFC 5280.</p>
@@ -572,7 +524,7 @@ module Aws::ACMPCA
       :party_name,
       :name_assigner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the <code>KeyUsage</code> extension.</p>
@@ -586,19 +538,7 @@ module Aws::ACMPCA
       :extended_key_usage_type,
       :extended_key_usage_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExtendedKeyUsageType
-      SERVER_AUTH = 'SERVER_AUTH'
-      CLIENT_AUTH = 'CLIENT_AUTH'
-      CODE_SIGNING = 'CODE_SIGNING'
-      EMAIL_PROTECTION = 'EMAIL_PROTECTION'
-      TIME_STAMPING = 'TIME_STAMPING'
-      OCSP_SIGNING = 'OCSP_SIGNING'
-      SMART_CARD_LOGIN = 'SMART_CARD_LOGIN'
-      DOCUMENT_SIGNING = 'DOCUMENT_SIGNING'
-      CERTIFICATE_TRANSPARENCY = 'CERTIFICATE_TRANSPARENCY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains X.509 extension information for a certificate.</p>
@@ -624,13 +564,7 @@ module Aws::ACMPCA
       :subject_alternative_names,
       :custom_extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureReason
-      REQUEST_TIMED_OUT = 'REQUEST_TIMED_OUT'
-      UNSUPPORTED_ALGORITHM = 'UNSUPPORTED_ALGORITHM'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an ASN.1 X.400 <code>GeneralName</code> as defined in <a href="https://datatracker.ietf.org/doc/html/rfc5280">RFC 5280</a>. Only one of the following naming options should be provided. Providing more than one option results in an <code>InvalidArgsException</code> error.</p>
@@ -668,7 +602,7 @@ module Aws::ACMPCA
       :ip_address,
       :registered_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -677,7 +611,7 @@ module Aws::ACMPCA
     class GetCertificateAuthorityCertificateRequest < Struct.new(
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -690,7 +624,7 @@ module Aws::ACMPCA
       :certificate,
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -699,7 +633,7 @@ module Aws::ACMPCA
     class GetCertificateAuthorityCsrRequest < Struct.new(
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute csr
@@ -708,7 +642,7 @@ module Aws::ACMPCA
     class GetCertificateAuthorityCsrResponse < Struct.new(
       :csr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -721,7 +655,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -734,7 +668,7 @@ module Aws::ACMPCA
       :certificate,
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -743,7 +677,7 @@ module Aws::ACMPCA
     class GetPolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -752,7 +686,7 @@ module Aws::ACMPCA
     class GetPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -769,7 +703,7 @@ module Aws::ACMPCA
       :certificate,
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified arguments was not valid.</p>
@@ -778,7 +712,7 @@ module Aws::ACMPCA
     class InvalidArgsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
@@ -787,7 +721,7 @@ module Aws::ACMPCA
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The token specified in the <code>NextToken</code> argument is not valid. Use the token returned from your previous call to <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a>.</p>
@@ -796,7 +730,7 @@ module Aws::ACMPCA
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource policy is invalid or is missing a required statement. For general information about IAM policy and statement structure, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json">Overview of JSON Policies</a>.</p>
@@ -805,7 +739,7 @@ module Aws::ACMPCA
     class InvalidPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request action cannot be performed or is prohibited.</p>
@@ -814,7 +748,7 @@ module Aws::ACMPCA
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the private CA does not allow this action to occur.</p>
@@ -823,7 +757,7 @@ module Aws::ACMPCA
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag associated with the CA is not valid. The invalid argument is contained in the message field.</p>
@@ -832,7 +766,7 @@ module Aws::ACMPCA
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_passthrough
@@ -869,7 +803,7 @@ module Aws::ACMPCA
       :validity_not_before,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -878,23 +812,7 @@ module Aws::ACMPCA
     class IssueCertificateResponse < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyAlgorithm
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      EC_prime256v1 = 'EC_prime256v1'
-      EC_secp384r1 = 'EC_secp384r1'
-      EC_secp521r1 = 'EC_secp521r1'
-      SM2 = 'SM2'
-    end
-
-    module KeyStorageSecurityStandard
-      FIPS_140_2_LEVEL_2_OR_HIGHER = 'FIPS_140_2_LEVEL_2_OR_HIGHER'
-      FIPS_140_2_LEVEL_3_OR_HIGHER = 'FIPS_140_2_LEVEL_3_OR_HIGHER'
-      CCPC_LEVEL_1_OR_HIGHER = 'CCPC_LEVEL_1_OR_HIGHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.</p>
@@ -936,7 +854,7 @@ module Aws::ACMPCA
       :encipher_only,
       :decipher_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:digital_signature] = false unless options.key?(:digital_signature)
@@ -958,7 +876,7 @@ module Aws::ACMPCA
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -975,7 +893,7 @@ module Aws::ACMPCA
       :next_token,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -988,7 +906,7 @@ module Aws::ACMPCA
       :next_token,
       :certificate_authorities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1005,7 +923,7 @@ module Aws::ACMPCA
       :next_token,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1018,7 +936,7 @@ module Aws::ACMPCA
       :next_token,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1035,7 +953,7 @@ module Aws::ACMPCA
       :next_token,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1048,7 +966,7 @@ module Aws::ACMPCA
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current action was prevented because it would lock the caller out from performing subsequent actions. Verify that the specified parameters would not result in the caller being denied access to the resource. </p>
@@ -1057,7 +975,7 @@ module Aws::ACMPCA
     class LockoutPreventedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate signing request is invalid.</p>
@@ -1066,7 +984,7 @@ module Aws::ACMPCA
     class MalformedCSRException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more fields in the certificate are invalid.</p>
@@ -1075,7 +993,7 @@ module Aws::ACMPCA
     class MalformedCertificateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information to enable and configure Online Certificate Status Protocol (OCSP) for validating certificate revocation status.</p> <p>When you revoke a certificate, OCSP responses may take up to 60 minutes to reflect the new status.</p>
@@ -1089,10 +1007,10 @@ module Aws::ACMPCA
       :enabled,
       :ocsp_custom_cname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enabled] =  unless options.key?(:enabled)
+        options[:enabled] = nil unless options.key?(:enabled)
         super
       end
     end
@@ -1108,7 +1026,7 @@ module Aws::ACMPCA
       :type_id,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Permissions designate which private CA actions can be performed by an Amazon Web Services service or entity. In order for ACM to automatically renew private certificates, you must give the ACM service principal all available permissions (<code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be assigned with the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html">CreatePermission</a> action, removed with the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePermission.html">DeletePermission</a> action, and listed with the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html">ListPermissions</a> action.</p>
@@ -1138,7 +1056,7 @@ module Aws::ACMPCA
       :actions,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The designated permission has already been given to the user.</p>
@@ -1147,7 +1065,7 @@ module Aws::ACMPCA
     class PermissionAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the X.509 <code>CertificatePolicies</code> extension.</p>
@@ -1161,11 +1079,7 @@ module Aws::ACMPCA
       :cert_policy_id,
       :policy_qualifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyQualifierId
-      CPS = 'CPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Modifies the <code>CertPolicyId</code> of a <code>PolicyInformation</code> object with a qualifier. Amazon Web Services Private CA supports the certification practice statement (CPS) qualifier.</p>
@@ -1179,7 +1093,7 @@ module Aws::ACMPCA
       :policy_qualifier_id,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1192,7 +1106,7 @@ module Aws::ACMPCA
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a <code>PolicyInformation</code> qualifier. Amazon Web Services Private CA supports the <a href="https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4">certification practice statement (CPS) qualifier</a> defined in RFC 5280. </p>
@@ -1202,7 +1116,7 @@ module Aws::ACMPCA
     class Qualifier < Struct.new(
       :cps_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has already been completed.</p>
@@ -1211,7 +1125,7 @@ module Aws::ACMPCA
     class RequestAlreadyProcessedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed for an unspecified reason.</p>
@@ -1220,7 +1134,7 @@ module Aws::ACMPCA
     class RequestFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request is already in progress.</p>
@@ -1229,7 +1143,7 @@ module Aws::ACMPCA
     class RequestInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource such as a private CA, S3 bucket, certificate, audit report, or policy cannot be found.</p>
@@ -1238,12 +1152,7 @@ module Aws::ACMPCA
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceOwner
-      SELF = 'SELF'
-      OTHER_ACCOUNTS = 'OTHER_ACCOUNTS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -1252,7 +1161,7 @@ module Aws::ACMPCA
     class RestoreCertificateAuthorityRequest < Struct.new(
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Certificate revocation information used by the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> and <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA) can configure Online Certificate Status Protocol (OCSP) support and/or maintain a certificate revocation list (CRL). OCSP returns validation information about certificates as requested by clients, and a CRL contains an updated list of certificates revoked by your CA. For more information, see <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html">RevokeCertificate</a> and <a href="https://docs.aws.amazon.com/privateca/latest/userguide/revocation-setup.html">Setting up a certificate revocation method</a> in the <i>Amazon Web Services Private Certificate Authority User Guide</i>.</p>
@@ -1266,18 +1175,7 @@ module Aws::ACMPCA
       :crl_configuration,
       :ocsp_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RevocationReason
-      UNSPECIFIED = 'UNSPECIFIED'
-      KEY_COMPROMISE = 'KEY_COMPROMISE'
-      CERTIFICATE_AUTHORITY_COMPROMISE = 'CERTIFICATE_AUTHORITY_COMPROMISE'
-      AFFILIATION_CHANGED = 'AFFILIATION_CHANGED'
-      SUPERSEDED = 'SUPERSEDED'
-      CESSATION_OF_OPERATION = 'CESSATION_OF_OPERATION'
-      PRIVILEGE_WITHDRAWN = 'PRIVILEGE_WITHDRAWN'
-      A_A_COMPROMISE = 'A_A_COMPROMISE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -1294,22 +1192,7 @@ module Aws::ACMPCA
       :certificate_serial,
       :revocation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3ObjectAcl
-      PUBLIC_READ = 'PUBLIC_READ'
-      BUCKET_OWNER_FULL_CONTROL = 'BUCKET_OWNER_FULL_CONTROL'
-    end
-
-    module SigningAlgorithm
-      SHA256WITHECDSA = 'SHA256WITHECDSA'
-      SHA384WITHECDSA = 'SHA384WITHECDSA'
-      SHA512WITHECDSA = 'SHA512WITHECDSA'
-      SHA256WITHRSA = 'SHA256WITHRSA'
-      SHA384WITHRSA = 'SHA384WITHRSA'
-      SHA512WITHRSA = 'SHA512WITHRSA'
-      SM3WITHSM2 = 'SM3WITHSM2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags are labels that you can use to identify and organize your private CAs. Each tag consists of a key and an optional value. You can associate up to 50 tags with a private CA. To add one or more tags to a private CA, call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html">TagCertificateAuthority</a> action. To remove a tag, call the <a href="https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html">UntagCertificateAuthority</a> action. </p>
@@ -1323,7 +1206,7 @@ module Aws::ACMPCA
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -1336,7 +1219,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can associate up to 50 tags with a private CA. Exception information is contained in the exception message field.</p>
@@ -1345,7 +1228,7 @@ module Aws::ACMPCA
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -1358,7 +1241,7 @@ module Aws::ACMPCA
       :certificate_authority_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -1375,7 +1258,7 @@ module Aws::ACMPCA
       :revocation_configuration,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validity specifies the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the validity of a certificate starts or expires, or as a span of time after issuance, stated in days, months, or years. For more information, see <a href="https://tools.ietf.org/html/rfc5280#section-4.1.2.5">Validity</a> in RFC 5280.</p> <p>Amazon Web Services Private CA API consumes the <code>Validity</code> data type differently in two distinct parameters of the <code>IssueCertificate</code> action. The required parameter <code>IssueCertificate</code>:<code>Validity</code> specifies the end of a certificate's validity period. The optional parameter <code>IssueCertificate</code>:<code>ValidityNotBefore</code> specifies a customized starting time for the validity period.</p>
@@ -1389,15 +1272,7 @@ module Aws::ACMPCA
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidityPeriodType
-      END_DATE = 'END_DATE'
-      ABSOLUTE = 'ABSOLUTE'
-      DAYS = 'DAYS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
+      include ::Smithy::Schema::Structure
     end
 
   end

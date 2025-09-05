@@ -13,14 +13,7 @@ module Aws::ChimeSDKMediaPipelines
     class ActiveSpeakerOnlyConfiguration < Struct.new(
       :active_speaker_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActiveSpeakerPosition
-      TopLeft = 'TopLeft'
-      TopRight = 'TopRight'
-      BottomLeft = 'BottomLeft'
-      BottomRight = 'BottomRight'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for an Amazon Transcribe call
@@ -115,7 +108,7 @@ module Aws::ChimeSDKMediaPipelines
       :post_call_analytics_settings,
       :call_analytics_stream_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_partial_results_stabilization] = false unless options.key?(:enable_partial_results_stabilization)
@@ -244,7 +237,7 @@ module Aws::ChimeSDKMediaPipelines
       :vocabulary_names,
       :vocabulary_filter_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:show_speaker_label] = false unless options.key?(:show_speaker_label)
@@ -287,12 +280,7 @@ module Aws::ChimeSDKMediaPipelines
       :meeting_events,
       :composited_video,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactsConcatenationState
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the artifacts.</p>
@@ -314,16 +302,7 @@ module Aws::ChimeSDKMediaPipelines
       :content,
       :composited_video,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactsState
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-    end
-
-    module AudioArtifactsConcatenationState
-      Enabled = 'Enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The audio artifact configuration object.</p>
@@ -333,12 +312,7 @@ module Aws::ChimeSDKMediaPipelines
     class AudioArtifactsConfiguration < Struct.new(
       :mux_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudioChannelsOption
-      Stereo = 'Stereo'
-      Mono = 'Mono'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The audio artifact concatenation configuration object.</p>
@@ -348,13 +322,7 @@ module Aws::ChimeSDKMediaPipelines
     class AudioConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudioMuxType
-      AudioOnly = 'AudioOnly'
-      AudioWithActiveSpeakerVideo = 'AudioWithActiveSpeakerVideo'
-      AudioWithCompositedVideo = 'AudioWithCompositedVideo'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters don't match the service's restrictions.</p>
@@ -370,33 +338,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BorderColor
-      Black = 'Black'
-      Blue = 'Blue'
-      Red = 'Red'
-      Green = 'Green'
-      White = 'White'
-      Yellow = 'Yellow'
-    end
-
-    module CallAnalyticsLanguageCode
-      EN_US = 'en-US'
-      EN_GB = 'en-GB'
-      ES_US = 'es-US'
-      FR_CA = 'fr-CA'
-      FR_FR = 'fr-FR'
-      EN_AU = 'en-AU'
-      IT_IT = 'it-IT'
-      DE_DE = 'de-DE'
-      PT_BR = 'pt-BR'
-    end
-
-    module CanvasOrientation
-      Landscape = 'Landscape'
-      Portrait = 'Portrait'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an audio channel in a Kinesis video stream.</p>
@@ -410,7 +352,7 @@ module Aws::ChimeSDKMediaPipelines
       :channel_id,
       :participant_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:channel_id] = 0 unless options.key?(:channel_id)
@@ -426,7 +368,7 @@ module Aws::ChimeSDKMediaPipelines
     class ChimeSdkMeetingConcatenationConfiguration < Struct.new(
       :artifacts_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object of the Amazon Chime SDK meeting for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>
@@ -440,7 +382,7 @@ module Aws::ChimeSDKMediaPipelines
       :source_configuration,
       :artifacts_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media pipeline's configuration object.</p>
@@ -462,7 +404,7 @@ module Aws::ChimeSDKMediaPipelines
       :composited_video,
       :source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for compositing video artifacts.</p>
@@ -480,7 +422,7 @@ module Aws::ChimeSDKMediaPipelines
       :resolution,
       :grid_view_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The composited video configuration object for a specified
@@ -492,7 +434,7 @@ module Aws::ChimeSDKMediaPipelines
     class CompositedVideoConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data sink of the configuration object.</p>
@@ -506,11 +448,7 @@ module Aws::ChimeSDKMediaPipelines
       :type,
       :s3_bucket_sink_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConcatenationSinkType
-      S3Bucket = 'S3Bucket'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source type and media pipeline configuration settings in a configuration object.</p>
@@ -524,11 +462,7 @@ module Aws::ChimeSDKMediaPipelines
       :type,
       :media_capture_pipeline_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConcatenationSourceType
-      MediaCapturePipeline = 'MediaCapturePipeline'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the
@@ -545,7 +479,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content artifact object.</p>
@@ -559,7 +493,7 @@ module Aws::ChimeSDKMediaPipelines
       :state,
       :mux_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The composited content configuration object for a specified
@@ -570,27 +504,7 @@ module Aws::ChimeSDKMediaPipelines
     class ContentConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentMuxType
-      ContentOnly = 'ContentOnly'
-    end
-
-    module ContentRedactionOutput
-      REDACTED = 'redacted'
-      REDACTED_AND_UNREDACTED = 'redacted_and_unredacted'
-    end
-
-    module ContentShareLayoutOption
-      PresenterOnly = 'PresenterOnly'
-      Horizontal = 'Horizontal'
-      Vertical = 'Vertical'
-      ActiveSpeakerOnly = 'ActiveSpeakerOnly'
-    end
-
-    module ContentType
-      PII = 'PII'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_type
@@ -643,7 +557,7 @@ module Aws::ChimeSDKMediaPipelines
       :sink_iam_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_capture_pipeline
@@ -653,7 +567,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaCapturePipelineResponse < Struct.new(
       :media_capture_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -675,7 +589,7 @@ module Aws::ChimeSDKMediaPipelines
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_concatenation_pipeline
@@ -685,7 +599,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaConcatenationPipelineResponse < Struct.new(
       :media_concatenation_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configuration_name
@@ -716,7 +630,7 @@ module Aws::ChimeSDKMediaPipelines
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configuration
@@ -725,7 +639,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaInsightsPipelineConfigurationResponse < Struct.new(
       :media_insights_pipeline_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configuration_arn
@@ -759,7 +673,7 @@ module Aws::ChimeSDKMediaPipelines
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline
@@ -768,7 +682,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaInsightsPipelineResponse < Struct.new(
       :media_insights_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -789,7 +703,7 @@ module Aws::ChimeSDKMediaPipelines
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_live_connector_pipeline
@@ -798,7 +712,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaLiveConnectorPipelineResponse < Struct.new(
       :media_live_connector_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_configuration
@@ -819,7 +733,7 @@ module Aws::ChimeSDKMediaPipelines
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kinesis_video_stream_pool_configuration
@@ -831,7 +745,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
       :kinesis_video_stream_pool_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -852,7 +766,7 @@ module Aws::ChimeSDKMediaPipelines
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_stream_pipeline
@@ -861,7 +775,7 @@ module Aws::ChimeSDKMediaPipelines
     class CreateMediaStreamPipelineResponse < Struct.new(
       :media_stream_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content configuration object's data channel.</p>
@@ -871,7 +785,7 @@ module Aws::ChimeSDKMediaPipelines
     class DataChannelConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipeline_id
@@ -880,7 +794,7 @@ module Aws::ChimeSDKMediaPipelines
     class DeleteMediaCapturePipelineRequest < Struct.new(
       :media_pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -889,7 +803,7 @@ module Aws::ChimeSDKMediaPipelines
     class DeleteMediaInsightsPipelineConfigurationRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -898,7 +812,7 @@ module Aws::ChimeSDKMediaPipelines
     class DeleteMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipeline_id
@@ -907,17 +821,7 @@ module Aws::ChimeSDKMediaPipelines
     class DeleteMediaPipelineRequest < Struct.new(
       :media_pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      BadRequest = 'BadRequest'
-      Forbidden = 'Forbidden'
-      NotFound = 'NotFound'
-      ResourceLimitExceeded = 'ResourceLimitExceeded'
-      ServiceFailure = 'ServiceFailure'
-      ServiceUnavailable = 'ServiceUnavailable'
-      Throttling = 'Throttling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is permanently forbidden from making the request.</p>
@@ -933,7 +837,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the timestamp range and timestamp origin of a range of fragments.</p>
@@ -965,12 +869,7 @@ module Aws::ChimeSDKMediaPipelines
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FragmentSelectorType
-      ProducerTimestamp = 'ProducerTimestamp'
-      ServerTimestamp = 'ServerTimestamp'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipeline_id
@@ -979,7 +878,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaCapturePipelineRequest < Struct.new(
       :media_pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_capture_pipeline
@@ -988,7 +887,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaCapturePipelineResponse < Struct.new(
       :media_capture_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -997,7 +896,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaInsightsPipelineConfigurationRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configuration
@@ -1006,7 +905,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaInsightsPipelineConfigurationResponse < Struct.new(
       :media_insights_pipeline_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1015,7 +914,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaPipelineKinesisVideoStreamPoolRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kinesis_video_stream_pool_configuration
@@ -1024,7 +923,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
       :kinesis_video_stream_pool_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipeline_id
@@ -1033,7 +932,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaPipelineRequest < Struct.new(
       :media_pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipeline
@@ -1042,7 +941,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetMediaPipelineResponse < Struct.new(
       :media_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1055,7 +954,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_search_task
@@ -1064,7 +963,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1077,7 +976,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :voice_tone_analysis_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_tone_analysis_task
@@ -1086,7 +985,7 @@ module Aws::ChimeSDKMediaPipelines
     class GetVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the type of grid layout.</p>
@@ -1120,16 +1019,7 @@ module Aws::ChimeSDKMediaPipelines
       :video_attribute,
       :canvas_orientation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HighlightColor
-      Black = 'Black'
-      Blue = 'Blue'
-      Red = 'Red'
-      Green = 'Green'
-      White = 'White'
-      Yellow = 'Yellow'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration settings for the horizontal layout.</p>
@@ -1151,12 +1041,7 @@ module Aws::ChimeSDKMediaPipelines
       :tile_count,
       :tile_aspect_ratio,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HorizontalTilePosition
-      Top = 'Top'
-      Bottom = 'Bottom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for an issue detection task.</p>
@@ -1166,7 +1051,7 @@ module Aws::ChimeSDKMediaPipelines
     class IssueDetectionConfiguration < Struct.new(
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the settings for a keyword match task.</p>
@@ -1185,7 +1070,7 @@ module Aws::ChimeSDKMediaPipelines
       :keywords,
       :negate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:negate] = false unless options.key?(:negate)
@@ -1200,7 +1085,7 @@ module Aws::ChimeSDKMediaPipelines
     class KinesisDataStreamSinkConfiguration < Struct.new(
       :insights_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an Kinesis video stream.</p>
@@ -1228,7 +1113,7 @@ module Aws::ChimeSDKMediaPipelines
       :region,
       :data_retention_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The updated Kinesis video stream configuration object.</p>
@@ -1238,7 +1123,7 @@ module Aws::ChimeSDKMediaPipelines
     class KinesisVideoStreamConfigurationUpdate < Struct.new(
       :data_retention_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The video stream pool configuration object.</p>
@@ -1276,15 +1161,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KinesisVideoStreamPoolStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the Kinesis video stream pool.</p>
@@ -1302,7 +1179,7 @@ module Aws::ChimeSDKMediaPipelines
       :pool_id,
       :pool_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the runtime settings for recording a Kinesis video stream.</p>
@@ -1316,7 +1193,7 @@ module Aws::ChimeSDKMediaPipelines
       :streams,
       :fragment_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The runtime configuration settings for the Kinesis video stream source.</p>
@@ -1338,7 +1215,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_encoding,
       :media_sample_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task configuration settings for the Kinesis video stream source.</p>
@@ -1356,7 +1233,7 @@ module Aws::ChimeSDKMediaPipelines
       :channel_id,
       :fragment_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:channel_id] = 0 unless options.key?(:channel_id)
@@ -1371,11 +1248,7 @@ module Aws::ChimeSDKMediaPipelines
     class LambdaFunctionSinkConfiguration < Struct.new(
       :insights_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayoutOption
-      GridView = 'GridView'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1388,7 +1261,7 @@ module Aws::ChimeSDKMediaPipelines
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_capture_pipelines
@@ -1401,7 +1274,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_capture_pipelines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1414,7 +1287,7 @@ module Aws::ChimeSDKMediaPipelines
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configurations
@@ -1427,7 +1300,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_insights_pipeline_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1440,7 +1313,7 @@ module Aws::ChimeSDKMediaPipelines
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kinesis_video_stream_pools
@@ -1453,7 +1326,7 @@ module Aws::ChimeSDKMediaPipelines
       :kinesis_video_stream_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1466,7 +1339,7 @@ module Aws::ChimeSDKMediaPipelines
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_pipelines
@@ -1479,7 +1352,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_pipelines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1488,7 +1361,7 @@ module Aws::ChimeSDKMediaPipelines
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1497,12 +1370,7 @@ module Aws::ChimeSDKMediaPipelines
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LiveConnectorMuxType
-      AudioWithCompositedVideo = 'AudioWithCompositedVideo'
-      AudioWithActiveSpeakerVideo = 'AudioWithActiveSpeakerVideo'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media pipeline's RTMP configuration object.</p>
@@ -1520,7 +1388,7 @@ module Aws::ChimeSDKMediaPipelines
       :audio_channels,
       :audio_sample_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media pipeline's sink configuration settings.</p>
@@ -1534,11 +1402,7 @@ module Aws::ChimeSDKMediaPipelines
       :sink_type,
       :rtmp_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LiveConnectorSinkType
-      RTMP = 'RTMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data source configuration object of a streaming media pipeline.</p>
@@ -1552,11 +1416,7 @@ module Aws::ChimeSDKMediaPipelines
       :source_type,
       :chime_sdk_meeting_live_connector_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LiveConnectorSourceType
-      ChimeSdkMeeting = 'ChimeSdkMeeting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A media pipeline object consisting of an ID, source type, source ARN, a sink
@@ -1617,7 +1477,7 @@ module Aws::ChimeSDKMediaPipelines
       :sse_aws_key_management_params,
       :sink_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source configuration object of a media capture pipeline.</p>
@@ -1631,7 +1491,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_pipeline_arn,
       :chime_sdk_meeting_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary data of a media capture pipeline.</p>
@@ -1645,7 +1505,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_pipeline_id,
       :media_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Concatenates audio and video data from one or more data streams.</p>
@@ -1679,11 +1539,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaEncoding
-      PCM = 'pcm'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A media pipeline that streams call analytics data.</p>
@@ -1729,7 +1585,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :element_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for a media insights pipeline.</p>
@@ -1767,7 +1623,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An element in a media insights pipeline configuration.</p>
@@ -1814,19 +1670,7 @@ module Aws::ChimeSDKMediaPipelines
       :sns_topic_sink_configuration,
       :voice_enhancement_sink_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaInsightsPipelineConfigurationElementType
-      AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR = 'AmazonTranscribeCallAnalyticsProcessor'
-      VOICE_ANALYTICS_PROCESSOR = 'VoiceAnalyticsProcessor'
-      AMAZON_TRANSCRIBE_PROCESSOR = 'AmazonTranscribeProcessor'
-      KINESIS_DATA_STREAM_SINK = 'KinesisDataStreamSink'
-      LAMBDA_FUNCTION_SINK = 'LambdaFunctionSink'
-      SQS_QUEUE_SINK = 'SqsQueueSink'
-      SNS_TOPIC_SINK = 'SnsTopicSink'
-      S3_RECORDING_SINK = 'S3RecordingSink'
-      VOICE_ENHANCEMENT_SINK = 'VoiceEnhancementSink'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the media insights pipeline configuration.</p>
@@ -1844,7 +1688,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_insights_pipeline_configuration_id,
       :media_insights_pipeline_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the pipeline element.</p>
@@ -1858,7 +1702,7 @@ module Aws::ChimeSDKMediaPipelines
       :type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector pipeline.</p>
@@ -1892,7 +1736,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pipeline consisting of a media capture, media concatenation, or live-streaming pipeline.</p>
@@ -1918,41 +1762,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_insights_pipeline,
       :media_stream_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaPipelineElementStatus
-      NotStarted = 'NotStarted'
-      NotSupported = 'NotSupported'
-      Initializing = 'Initializing'
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
-      Paused = 'Paused'
-    end
-
-    module MediaPipelineSinkType
-      S3Bucket = 'S3Bucket'
-    end
-
-    module MediaPipelineSourceType
-      ChimeSdkMeeting = 'ChimeSdkMeeting'
-    end
-
-    module MediaPipelineStatus
-      Initializing = 'Initializing'
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
-      Paused = 'Paused'
-      NotStarted = 'NotStarted'
-    end
-
-    module MediaPipelineStatusUpdate
-      Pause = 'Pause'
-      Resume = 'Resume'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the media pipeline.</p>
@@ -1966,16 +1776,7 @@ module Aws::ChimeSDKMediaPipelines
       :media_pipeline_id,
       :media_pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaPipelineTaskStatus
-      NotStarted = 'NotStarted'
-      Initializing = 'Initializing'
-      InProgress = 'InProgress'
-      Failed = 'Failed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains the settings for a media stream pipeline.</p>
@@ -2009,11 +1810,7 @@ module Aws::ChimeSDKMediaPipelines
       :sources,
       :sinks,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaStreamPipelineSinkType
-      KinesisVideoStreamPool = 'KinesisVideoStreamPool'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains the settings for a media stream sink.</p>
@@ -2035,7 +1832,7 @@ module Aws::ChimeSDKMediaPipelines
       :reserved_stream_capacity,
       :media_stream_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains the settings for media stream sources.</p>
@@ -2049,12 +1846,7 @@ module Aws::ChimeSDKMediaPipelines
       :source_type,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaStreamType
-      MixedAudio = 'MixedAudio'
-      IndividualAudio = 'IndividualAudio'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for an event concatenation pipeline.</p>
@@ -2064,7 +1856,7 @@ module Aws::ChimeSDKMediaPipelines
     class MeetingEventsConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the resources in the request does not exist in the system.</p>
@@ -2080,18 +1872,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartialResultsStability
-      HIGH = 'high'
-      MEDIUM = 'medium'
-      LOW = 'low'
-    end
-
-    module ParticipantRole
-      AGENT = 'AGENT'
-      CUSTOMER = 'CUSTOMER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to specify additional settings for your Call Analytics post-call request, including output locations for your redacted transcript, which IAM role to use, and which encryption key to use.</p>
@@ -2119,7 +1900,7 @@ module Aws::ChimeSDKMediaPipelines
       :content_redaction_output,
       :output_encryption_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration for a presenter-only video tile.</p>
@@ -2129,14 +1910,7 @@ module Aws::ChimeSDKMediaPipelines
     class PresenterOnlyConfiguration < Struct.new(
       :presenter_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PresenterPosition
-      TopLeft = 'TopLeft'
-      TopRight = 'TopRight'
-      BottomLeft = 'BottomLeft'
-      BottomRight = 'BottomRight'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for real-time alerts.</p>
@@ -2150,7 +1924,7 @@ module Aws::ChimeSDKMediaPipelines
       :disabled,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disabled] = false unless options.key?(:disabled)
@@ -2177,18 +1951,7 @@ module Aws::ChimeSDKMediaPipelines
       :sentiment_configuration,
       :issue_detection_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RealTimeAlertRuleType
-      KeywordMatch = 'KeywordMatch'
-      Sentiment = 'Sentiment'
-      IssueDetection = 'IssueDetection'
-    end
-
-    module RecordingFileFormat
-      Wav = 'Wav'
-      Opus = 'Opus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that holds the settings for recording media.</p>
@@ -2198,12 +1961,7 @@ module Aws::ChimeSDKMediaPipelines
     class RecordingStreamConfiguration < Struct.new(
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolutionOption
-      HD = 'HD'
-      FHD = 'FHD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the resource limit.</p>
@@ -2219,7 +1977,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the S3 bucket.</p>
@@ -2229,7 +1987,7 @@ module Aws::ChimeSDKMediaPipelines
     class S3BucketSinkConfiguration < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that holds the settings for transmitting media to the Amazon S3 bucket. These values are used as defaults if <code>S3RecordingSinkRuntimeConfiguration</code> is not specified.</p>
@@ -2243,7 +2001,7 @@ module Aws::ChimeSDKMediaPipelines
       :destination,
       :recording_file_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that holds the settings for transmitting media files to the Amazon S3 bucket. If specified, the settings in this structure override any settings in <code>S3RecordingSinkConfiguration</code>.</p>
@@ -2257,7 +2015,7 @@ module Aws::ChimeSDKMediaPipelines
       :destination,
       :recording_file_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The video streams for a specified media pipeline. The total number of
@@ -2272,7 +2030,7 @@ module Aws::ChimeSDKMediaPipelines
       :attendee_ids,
       :external_user_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for a sentiment analysis task.</p>
@@ -2290,11 +2048,7 @@ module Aws::ChimeSDKMediaPipelines
       :sentiment_type,
       :time_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SentimentType
-      NEGATIVE = 'NEGATIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unexpected error.</p>
@@ -2310,7 +2064,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -2326,7 +2080,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the SNS topic sink.</p>
@@ -2336,7 +2090,7 @@ module Aws::ChimeSDKMediaPipelines
     class SnsTopicSinkConfiguration < Struct.new(
       :insights_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source configuration for a specified media pipeline.</p>
@@ -2347,7 +2101,7 @@ module Aws::ChimeSDKMediaPipelines
     class SourceConfiguration < Struct.new(
       :selected_video_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of an asynchronous request to perform speaker search analysis on a
@@ -2370,7 +2124,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the SQS sink.</p>
@@ -2380,7 +2134,7 @@ module Aws::ChimeSDKMediaPipelines
     class SqsQueueSinkConfiguration < Struct.new(
       :insights_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains server side encryption parameters to be used by media capture pipeline. The
@@ -2438,7 +2192,7 @@ module Aws::ChimeSDKMediaPipelines
       :aws_kms_key_id,
       :aws_kms_encryption_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2460,7 +2214,7 @@ module Aws::ChimeSDKMediaPipelines
       :kinesis_video_stream_source_task_configuration,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_search_task
@@ -2469,7 +2223,7 @@ module Aws::ChimeSDKMediaPipelines
     class StartSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2491,7 +2245,7 @@ module Aws::ChimeSDKMediaPipelines
       :kinesis_video_stream_source_task_configuration,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_tone_analysis_task
@@ -2500,7 +2254,7 @@ module Aws::ChimeSDKMediaPipelines
     class StartVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2513,7 +2267,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2526,7 +2280,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :voice_tone_analysis_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a streaming channel.</p>
@@ -2540,7 +2294,7 @@ module Aws::ChimeSDKMediaPipelines
       :number_of_channels,
       :channel_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for a stream.</p>
@@ -2558,7 +2312,7 @@ module Aws::ChimeSDKMediaPipelines
       :fragment_number,
       :stream_channel_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key/value pair that grants users access to meeting resources.</p>
@@ -2572,7 +2326,7 @@ module Aws::ChimeSDKMediaPipelines
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2585,12 +2339,12 @@ module Aws::ChimeSDKMediaPipelines
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client exceeded its request rate limit.</p>
@@ -2606,12 +2360,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TileOrder
-      JoinSequence = 'JoinSequence'
-      SpeakerSequence = 'SpeakerSequence'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of timestamps to return.</p>
@@ -2625,7 +2374,7 @@ module Aws::ChimeSDKMediaPipelines
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for concatenating transcription messages.</p>
@@ -2635,7 +2384,7 @@ module Aws::ChimeSDKMediaPipelines
     class TranscriptionMessagesConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is not currently authorized to make the request.</p>
@@ -2651,7 +2400,7 @@ module Aws::ChimeSDKMediaPipelines
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2664,12 +2413,12 @@ module Aws::ChimeSDKMediaPipelines
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2690,7 +2439,7 @@ module Aws::ChimeSDKMediaPipelines
       :real_time_alert_configuration,
       :elements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_insights_pipeline_configuration
@@ -2699,7 +2448,7 @@ module Aws::ChimeSDKMediaPipelines
     class UpdateMediaInsightsPipelineConfigurationResponse < Struct.new(
       :media_insights_pipeline_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2712,7 +2461,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2725,7 +2474,7 @@ module Aws::ChimeSDKMediaPipelines
       :identifier,
       :stream_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kinesis_video_stream_pool_configuration
@@ -2734,7 +2483,7 @@ module Aws::ChimeSDKMediaPipelines
     class UpdateMediaPipelineKinesisVideoStreamPoolResponse < Struct.new(
       :kinesis_video_stream_pool_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration settings for a vertical layout.</p>
@@ -2756,12 +2505,7 @@ module Aws::ChimeSDKMediaPipelines
       :tile_count,
       :tile_aspect_ratio,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerticalTilePosition
-      Left = 'Left'
-      Right = 'Right'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The video artifact configuration object.</p>
@@ -2775,7 +2519,7 @@ module Aws::ChimeSDKMediaPipelines
       :state,
       :mux_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the settings for a video tile.</p>
@@ -2797,7 +2541,7 @@ module Aws::ChimeSDKMediaPipelines
       :highlight_color,
       :border_thickness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object of a video concatenation pipeline.</p>
@@ -2807,26 +2551,7 @@ module Aws::ChimeSDKMediaPipelines
     class VideoConcatenationConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoMuxType
-      VideoOnly = 'VideoOnly'
-    end
-
-    module VocabularyFilterMethod
-      REMOVE = 'remove'
-      MASK = 'mask'
-      TAG = 'tag'
-    end
-
-    module VoiceAnalyticsConfigurationStatus
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-    end
-
-    module VoiceAnalyticsLanguageCode
-      EN_US = 'en-US'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for a voice analytics processor.</p>
@@ -2840,7 +2565,7 @@ module Aws::ChimeSDKMediaPipelines
       :speaker_search_status,
       :voice_tone_analysis_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A static structure that contains the configuration data for a <code>VoiceEnhancementSinkConfiguration</code> element.</p>
@@ -2850,7 +2575,7 @@ module Aws::ChimeSDKMediaPipelines
     class VoiceEnhancementSinkConfiguration < Struct.new(
       :disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disabled] = false unless options.key?(:disabled)
@@ -2877,7 +2602,7 @@ module Aws::ChimeSDKMediaPipelines
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

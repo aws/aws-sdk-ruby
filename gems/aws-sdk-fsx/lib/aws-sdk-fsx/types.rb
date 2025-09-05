@@ -17,7 +17,7 @@ module Aws::FSx
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Microsoft Active Directory attributes of the Amazon FSx for Windows File
@@ -39,7 +39,7 @@ module Aws::FSx
       :active_directory_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory error.</p>
@@ -57,19 +57,7 @@ module Aws::FSx
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of error relating to Microsoft Active Directory. NOT_FOUND means that no
-    #             directory was found by specifying the given directory. INCOMPATIBLE_MODE means that the
-    #             directory specified is not a Microsoft AD directory. WRONG_VPC means that the specified
-    #             directory isn't accessible from the specified VPC. WRONG_STAGE means that the
-    #             specified directory isn't currently in the ACTIVE state.</p>
-    module ActiveDirectoryErrorType
-      DOMAIN_NOT_FOUND = 'DOMAIN_NOT_FOUND'
-      INCOMPATIBLE_DOMAIN_MODE = 'INCOMPATIBLE_DOMAIN_MODE'
-      WRONG_VPC = 'WRONG_VPC'
-      INVALID_DOMAIN_STAGE = 'INVALID_DOMAIN_STAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a specific Amazon FSx administrative action for the current Windows,
@@ -294,7 +282,7 @@ module Aws::FSx
       :total_transfer_bytes,
       :remaining_transfer_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a failed administrative action.</p>
@@ -304,157 +292,7 @@ module Aws::FSx
     class AdministrativeActionFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Describes the type of administrative action, as follows:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action
-    #                     initiated from the Amazon FSx console, API
-    #                         (<code>UpdateFileSystem</code>), or CLI
-    #                     (<code>update-file-system</code>).</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>THROUGHPUT_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>
-    #                     task to increase a file system's throughput capacity has been completed
-    #                     successfully, a <code>THROUGHPUT_OPTIMIZATION</code> task starts.</p>
-    #                <p>You can track the storage-optimization progress using the
-    #                     <code>ProgressPercent</code> property. When
-    #                     <code>THROUGHPUT_OPTIMIZATION</code> has been completed successfully, the
-    #                     parent <code>FILE_SYSTEM_UPDATE</code> action status changes to
-    #                     <code>COMPLETED</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html">Managing
-    #                         throughput capacity</a> in the <i>Amazon FSx for Windows
-    #                             File Server User Guide</i>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>STORAGE_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>
-    #                     task to increase a file system's storage capacity has completed
-    #                     successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. </p>
-    #                <ul>
-    #                   <li>
-    #                      <p>For Windows and ONTAP, storage optimization is the process of migrating the file system data
-    #                         to newer larger disks.</p>
-    #                   </li>
-    #                   <li>
-    #                      <p>For Lustre, storage optimization consists of rebalancing the data across the existing and
-    #                             newly added file servers.</p>
-    #                   </li>
-    #                </ul>
-    #                <p>You can track the storage-optimization progress using the
-    #                         <code>ProgressPercent</code> property. When
-    #                         <code>STORAGE_OPTIMIZATION</code> has been completed successfully, the
-    #                     parent <code>FILE_SYSTEM_UPDATE</code> action status changes to
-    #                         <code>COMPLETED</code>. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html">Managing
-    #                         storage capacity</a> in the <i>Amazon FSx for Windows
-    #                         File Server User Guide</i>, <a href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html">Managing storage
-    #                         capacity</a> in the <i>Amazon FSx for
-    #                             Lustre User Guide</i>, and
-    #                     <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html">Managing storage capacity and provisioned IOPS</a> in the <i>Amazon FSx for NetApp ONTAP User
-    #                             Guide</i>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>FILE_SYSTEM_ALIAS_ASSOCIATION</code> - A file system update to associate a new Domain
-    #                     Name System (DNS) alias with the file system. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html">
-    #                         AssociateFileSystemAliases</a>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>FILE_SYSTEM_ALIAS_DISASSOCIATION</code> - A file system update to disassociate a DNS alias from the file system.
-    #                 For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html">DisassociateFileSystemAliases</a>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>IOPS_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>
-    #                     task to increase a file system's throughput capacity has been completed
-    #                     successfully, a <code>IOPS_OPTIMIZATION</code> task starts.</p>
-    #                <p>You can track the storage-optimization progress using the
-    #                         <code>ProgressPercent</code> property. When <code>IOPS_OPTIMIZATION</code>
-    #                     has been completed successfully, the parent <code>FILE_SYSTEM_UPDATE</code>
-    #                     action status changes to <code>COMPLETED</code>. For more information, see
-    #                         <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-provisioned-ssd-iops.html">Managing
-    #                         provisioned SSD IOPS</a> in the Amazon FSx for Windows File
-    #                     Server User Guide.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>STORAGE_TYPE_OPTIMIZATION</code> - After the <code>FILE_SYSTEM_UPDATE</code>
-    #                     task to increase a file system's throughput capacity has been completed
-    #                     successfully, a <code>STORAGE_TYPE_OPTIMIZATION</code> task starts.</p>
-    #                <p>You can track the storage-optimization progress using the
-    #                     <code>ProgressPercent</code> property. When
-    #                     <code>STORAGE_TYPE_OPTIMIZATION</code> has been completed successfully, the
-    #                     parent <code>FILE_SYSTEM_UPDATE</code> action status changes to
-    #                     <code>COMPLETED</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>VOLUME_UPDATE</code> - A volume update to an Amazon FSx for OpenZFS volume
-    #                     initiated from the Amazon FSx console, API (<code>UpdateVolume</code>),
-    #                     or CLI (<code>update-volume</code>).</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>VOLUME_RESTORE</code> - An Amazon FSx for OpenZFS volume
-    #                 is returned to the state saved by the specified snapshot, initiated from an
-    #                 API (<code>RestoreVolumeFromSnapshot</code>) or CLI
-    #                 (<code>restore-volume-from-snapshot</code>).</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>SNAPSHOT_UPDATE</code> - A snapshot update to an Amazon FSx for
-    #                     OpenZFS volume initiated from the Amazon FSx console, API
-    #                         (<code>UpdateSnapshot</code>), or CLI (<code>update-snapshot</code>).</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>RELEASE_NFS_V3_LOCKS</code> - Tracks the release of Network File System
-    #                     (NFS) V3 locks on an Amazon FSx for OpenZFS file system.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DOWNLOAD_DATA_FROM_BACKUP</code> - An FSx for ONTAP backup is
-    #                     being restored to a new volume on a second-generation file system. Once the all the file 
-    #                     metadata is loaded onto the volume, you can mount the volume with read-only access.
-    #                     during this process.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>VOLUME_INITIALIZE_WITH_SNAPSHOT</code> - A volume is being created from
-    #                     a snapshot on a different FSx for OpenZFS file system. You can
-    #                     initiate this from the Amazon FSx console, API
-    #                     (<code>CreateVolume</code>), or CLI (<code>create-volume</code>) when using
-    #                     the using the <code>FULL_COPY</code> strategy.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>VOLUME_UPDATE_WITH_SNAPSHOT</code> - A volume is being updated from a
-    #                     snapshot on a different FSx for OpenZFS file system. You can initiate
-    #                     this from the Amazon FSx console, API
-    #                         (<code>CopySnapshotAndUpdateVolume</code>), or CLI
-    #                         (<code>copy-snapshot-and-update-volume</code>).</p>
-    #             </li>
-    #          </ul>
-    module AdministrativeActionType
-      FILE_SYSTEM_UPDATE = 'FILE_SYSTEM_UPDATE'
-      STORAGE_OPTIMIZATION = 'STORAGE_OPTIMIZATION'
-      FILE_SYSTEM_ALIAS_ASSOCIATION = 'FILE_SYSTEM_ALIAS_ASSOCIATION'
-      FILE_SYSTEM_ALIAS_DISASSOCIATION = 'FILE_SYSTEM_ALIAS_DISASSOCIATION'
-      VOLUME_UPDATE = 'VOLUME_UPDATE'
-      SNAPSHOT_UPDATE = 'SNAPSHOT_UPDATE'
-      RELEASE_NFS_V3_LOCKS = 'RELEASE_NFS_V3_LOCKS'
-      VOLUME_RESTORE = 'VOLUME_RESTORE'
-      THROUGHPUT_OPTIMIZATION = 'THROUGHPUT_OPTIMIZATION'
-      IOPS_OPTIMIZATION = 'IOPS_OPTIMIZATION'
-      STORAGE_TYPE_OPTIMIZATION = 'STORAGE_TYPE_OPTIMIZATION'
-      MISCONFIGURED_STATE_RECOVERY = 'MISCONFIGURED_STATE_RECOVERY'
-      VOLUME_UPDATE_WITH_SNAPSHOT = 'VOLUME_UPDATE_WITH_SNAPSHOT'
-      VOLUME_INITIALIZE_WITH_SNAPSHOT = 'VOLUME_INITIALIZE_WITH_SNAPSHOT'
-      DOWNLOAD_DATA_FROM_BACKUP = 'DOWNLOAD_DATA_FROM_BACKUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify configuration options for a volume’s storage aggregate or aggregates.</p>
@@ -480,7 +318,7 @@ module Aws::FSx
       :aggregates,
       :total_constituents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DNS alias that is associated with the file system. You can use a DNS alias to access a file system using 
@@ -531,15 +369,7 @@ module Aws::FSx
       :name,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AliasLifecycle
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object specifying one or more DNS alias names to associate with an Amazon FSx for Windows File Server file system.</p>
@@ -579,7 +409,7 @@ module Aws::FSx
       :file_system_id,
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system generated response showing the DNS aliases that 
@@ -594,7 +424,7 @@ module Aws::FSx
     class AssociateFileSystemAliasesResponse < Struct.new(
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data repository association's automatic export policy. The
@@ -629,7 +459,7 @@ module Aws::FSx
     class AutoExportPolicy < Struct.new(
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data repository association's automatic import policy.
@@ -664,14 +494,7 @@ module Aws::FSx
     class AutoImportPolicy < Struct.new(
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoImportPolicyType
-      NONE = 'NONE'
-      NEW = 'NEW'
-      NEW_CHANGED = 'NEW_CHANGED'
-      NEW_CHANGED_DELETED = 'NEW_CHANGED_DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the autocommit period of files in an FSx for ONTAP SnapLock volume, which determines 
@@ -714,16 +537,7 @@ module Aws::FSx
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutocommitPeriodType
-      MINUTES = 'MINUTES'
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A backup of an Amazon FSx for Windows File Server, Amazon FSx for
@@ -837,7 +651,7 @@ module Aws::FSx
       :volume,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete a backup while it's being copied.</p>
@@ -851,7 +665,7 @@ module Aws::FSx
       :message,
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If backup creation fails, this structure contains the details of that
@@ -862,7 +676,7 @@ module Aws::FSx
     class BackupFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another backup is already under way. Wait for completion before initiating
@@ -873,50 +687,7 @@ module Aws::FSx
     class BackupInProgress < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The lifecycle status of the backup.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>AVAILABLE</code> - The backup is fully available.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx hasn't started creating the backup.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>CREATING</code> - Amazon FSx is creating the new user-initiated backup.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file
-    #                     system.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>COPYING</code> - Amazon FSx is copying the backup.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DELETED</code> - Amazon FSx deleted the backup and it's no longer
-    #                     available.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>FAILED</code> - Amazon FSx couldn't finish the backup.</p>
-    #             </li>
-    #          </ul>
-    module BackupLifecycle
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      TRANSFERRING = 'TRANSFERRING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
-      COPYING = 'COPYING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No Amazon FSx backups were found based upon the supplied parameters.</p>
@@ -926,7 +697,7 @@ module Aws::FSx
     class BackupNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete a backup while it's being used to restore a file
@@ -941,14 +712,7 @@ module Aws::FSx
       :message,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of the backup.</p>
-    module BackupType
-      AUTOMATIC = 'AUTOMATIC'
-      USER_INITIATED = 'USER_INITIATED'
-      AWS_BACKUP = 'AWS_BACKUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A generic error indicating a failure with a client request.</p>
@@ -958,7 +722,7 @@ module Aws::FSx
     class BadRequest < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cancels a data repository task.</p>
@@ -968,7 +732,7 @@ module Aws::FSx
     class CancelDataRepositoryTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle
@@ -1008,7 +772,7 @@ module Aws::FSx
       :lifecycle,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. 
@@ -1044,7 +808,7 @@ module Aws::FSx
       :format,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -1106,7 +870,7 @@ module Aws::FSx
       :copy_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup
@@ -1117,7 +881,7 @@ module Aws::FSx
     class CopyBackupResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -1187,7 +951,7 @@ module Aws::FSx
       :copy_strategy,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -1206,7 +970,7 @@ module Aws::FSx
       :lifecycle,
       :administrative_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify the configuration options for an FSx for ONTAP volume's storage aggregate or aggregates.</p>
@@ -1220,7 +984,7 @@ module Aws::FSx
       :aggregates,
       :constituents_per_aggregate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the FSx for OpenZFS volume that the S3 access point will be attached to, and the file system user identity.</p>
@@ -1234,7 +998,7 @@ module Aws::FSx
       :volume_id,
       :file_system_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -1262,7 +1026,7 @@ module Aws::FSx
       :open_zfs_configuration,
       :s3_access_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_attachment
@@ -1271,7 +1035,7 @@ module Aws::FSx
     class CreateAndAttachS3AccessPointResponse < Struct.new(
       :s3_access_point_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to create an S3 access point that accepts requests only from a virtual private cloud (VPC) to restrict data access to a private network.</p>
@@ -1287,7 +1051,7 @@ module Aws::FSx
       :vpc_configuration,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>CreateBackup</code> operation.</p>
@@ -1315,7 +1079,7 @@ module Aws::FSx
       :tags,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>CreateBackup</code> operation.</p>
@@ -1325,7 +1089,7 @@ module Aws::FSx
     class CreateBackupResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -1395,7 +1159,7 @@ module Aws::FSx
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -1404,7 +1168,7 @@ module Aws::FSx
     class CreateDataRepositoryAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -1503,7 +1267,7 @@ module Aws::FSx
       :capacity_to_release,
       :release_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_repository_task
@@ -1512,7 +1276,7 @@ module Aws::FSx
     class CreateDataRepositoryTaskResponse < Struct.new(
       :data_repository_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon File Cache configuration for the cache that you are creating.</p>
@@ -1538,7 +1302,7 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :metadata_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -1621,7 +1385,7 @@ module Aws::FSx
       :lustre_configuration,
       :data_repository_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache
@@ -1630,7 +1394,7 @@ module Aws::FSx
     class CreateFileCacheResponse < Struct.new(
       :file_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>CreateFileSystemFromBackup</code>
@@ -1786,7 +1550,7 @@ module Aws::FSx
       :storage_capacity,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>CreateFileSystemFromBackup</code>
@@ -1797,7 +1561,7 @@ module Aws::FSx
     class CreateFileSystemFromBackupResponse < Struct.new(
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lustre configuration for the file system being created.</p>
@@ -2065,7 +1829,7 @@ module Aws::FSx
       :throughput_capacity,
       :data_read_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lustre metadata performance configuration for the creation of an
@@ -2120,7 +1884,7 @@ module Aws::FSx
       :iops,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ONTAP configuration properties of the FSx for ONTAP file system that you
@@ -2275,7 +2039,7 @@ module Aws::FSx
       :ha_pairs,
       :throughput_capacity_per_ha_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon FSx for OpenZFS configuration properties for the file system that you are creating.</p>
@@ -2408,7 +2172,7 @@ module Aws::FSx
       :route_table_ids,
       :read_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object used to create a new Amazon FSx file system.</p>
@@ -2636,7 +2400,7 @@ module Aws::FSx
       :open_zfs_configuration,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object returned after the file system is created.</p>
@@ -2646,7 +2410,7 @@ module Aws::FSx
     class CreateFileSystemResponse < Struct.new(
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for the Microsoft Windows file system used in
@@ -2771,7 +2535,7 @@ module Aws::FSx
       :audit_log_configuration,
       :disk_iops_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of the ONTAP volume that you are creating.</p>
@@ -2928,7 +2692,7 @@ module Aws::FSx
       :aggregate_configuration,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot configuration to use when creating an Amazon FSx for OpenZFS
@@ -2966,7 +2730,7 @@ module Aws::FSx
       :snapshot_arn,
       :copy_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of the Amazon FSx for OpenZFS volume that you are creating.</p>
@@ -3059,7 +2823,7 @@ module Aws::FSx
       :nfs_exports,
       :user_and_group_quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the SnapLock configuration when creating an FSx for ONTAP SnapLock volume. </p>
@@ -3121,7 +2885,7 @@ module Aws::FSx
       :snaplock_type,
       :volume_append_mode_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -3144,7 +2908,7 @@ module Aws::FSx
       :volume_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -3153,7 +2917,7 @@ module Aws::FSx
     class CreateSnapshotResponse < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_directory_configuration
@@ -3213,7 +2977,7 @@ module Aws::FSx
       :tags,
       :root_volume_security_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_virtual_machine
@@ -3222,7 +2986,7 @@ module Aws::FSx
     class CreateStorageVirtualMachineResponse < Struct.new(
       :storage_virtual_machine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that Amazon FSx uses to join the ONTAP storage virtual machine
@@ -3242,7 +3006,7 @@ module Aws::FSx
       :net_bios_name,
       :self_managed_active_directory_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -3269,7 +3033,7 @@ module Aws::FSx
       :ontap_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume
@@ -3279,7 +3043,7 @@ module Aws::FSx
     class CreateVolumeFromBackupResponse < Struct.new(
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -3311,7 +3075,7 @@ module Aws::FSx
       :tags,
       :open_zfs_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume
@@ -3320,12 +3084,7 @@ module Aws::FSx
     class CreateVolumeResponse < Struct.new(
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataCompressionType
-      NONE = 'NONE'
-      LZ4 = 'LZ4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a data repository association that links
@@ -3543,7 +3302,7 @@ module Aws::FSx
       :data_repository_subdirectories,
       :nfs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No data repository associations were found based upon the supplied parameters.</p>
@@ -3553,7 +3312,7 @@ module Aws::FSx
     class DataRepositoryAssociationNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data repository configuration object for Lustre file systems returned in the response of
@@ -3658,7 +3417,7 @@ module Aws::FSx
       :auto_import_policy,
       :failure_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides detailed information about the data repository if its <code>Lifecycle</code> is 
@@ -3669,16 +3428,7 @@ module Aws::FSx
     class DataRepositoryFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataRepositoryLifecycle
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      MISCONFIGURED = 'MISCONFIGURED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the data repository task.</p>
@@ -3834,7 +3584,7 @@ module Aws::FSx
       :file_cache_id,
       :release_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data repository task could not be canceled because the task has already ended.</p>
@@ -3844,7 +3594,7 @@ module Aws::FSx
     class DataRepositoryTaskEnded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An existing data repository task is currently executing on the file system.  
@@ -3855,7 +3605,7 @@ module Aws::FSx
     class DataRepositoryTaskExecuting < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about why a data repository task failed. Only populated when the task <code>Lifecycle</code> is set to <code>FAILED</code>.</p>
@@ -3865,7 +3615,7 @@ module Aws::FSx
     class DataRepositoryTaskFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>(Optional) An array of filter objects you can use to filter the response of data repository tasks you will see in the response. 
@@ -3891,23 +3641,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataRepositoryTaskFilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-      TASK_LIFECYCLE = 'task-lifecycle'
-      DATA_REPO_ASSOCIATION_ID = 'data-repository-association-id'
-      FILE_CACHE_ID = 'file-cache-id'
-    end
-
-    module DataRepositoryTaskLifecycle
-      PENDING = 'PENDING'
-      EXECUTING = 'EXECUTING'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELED = 'CANCELED'
-      CANCELING = 'CANCELING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data repository task or tasks you specified could not be found.</p>
@@ -3917,7 +3651,7 @@ module Aws::FSx
     class DataRepositoryTaskNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the task status showing a running total of the total number of files to be processed, 
@@ -3947,14 +3681,7 @@ module Aws::FSx
       :last_updated_time,
       :released_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataRepositoryTaskType
-      EXPORT = 'EXPORT_TO_REPOSITORY'
-      IMPORT = 'IMPORT_METADATA_FROM_REPOSITORY'
-      EVICTION = 'RELEASE_DATA_FROM_FILESYSTEM'
-      AUTO_TRIGGERED_EVICTION = 'AUTO_RELEASE_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>DeleteBackup</code> operation.</p>
@@ -3970,7 +3697,7 @@ module Aws::FSx
       :backup_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>DeleteBackup</code> operation.</p>
@@ -3985,7 +3712,7 @@ module Aws::FSx
       :backup_id,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -4005,7 +3732,7 @@ module Aws::FSx
       :client_request_token,
       :delete_data_in_file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -4023,7 +3750,7 @@ module Aws::FSx
       :lifecycle,
       :delete_data_in_file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache_id
@@ -4038,7 +3765,7 @@ module Aws::FSx
       :file_cache_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache_id
@@ -4053,7 +3780,7 @@ module Aws::FSx
       :file_cache_id,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for the Amazon FSx for Lustre file system being deleted in the
@@ -4076,7 +3803,7 @@ module Aws::FSx
       :skip_final_backup,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the Amazon FSx for Lustre file system being deleted in the
@@ -4091,7 +3818,7 @@ module Aws::FSx
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for the Amazon FSx for OpenZFS file system used in the
@@ -4115,11 +3842,7 @@ module Aws::FSx
       :final_backup_tags,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteFileSystemOpenZFSOption
-      DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = 'DELETE_CHILD_VOLUMES_AND_SNAPSHOTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the Amazon FSx for OpenZFS file system that's being
@@ -4134,7 +3857,7 @@ module Aws::FSx
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for <code>DeleteFileSystem</code> operation.</p>
@@ -4165,7 +3888,7 @@ module Aws::FSx
       :lustre_configuration,
       :open_zfs_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>DeleteFileSystem</code> operation.</p>
@@ -4196,7 +3919,7 @@ module Aws::FSx
       :lustre_response,
       :open_zfs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for the Microsoft Windows file system used in the
@@ -4214,7 +3937,7 @@ module Aws::FSx
       :skip_final_backup,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the Microsoft Windows file system used in the
@@ -4229,11 +3952,7 @@ module Aws::FSx
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteOpenZFSVolumeOption
-      DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = 'DELETE_CHILD_VOLUMES_AND_SNAPSHOTS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -4248,7 +3967,7 @@ module Aws::FSx
       :client_request_token,
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -4262,7 +3981,7 @@ module Aws::FSx
       :snapshot_id,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -4277,7 +3996,7 @@ module Aws::FSx
       :client_request_token,
       :storage_virtual_machine_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_virtual_machine_id
@@ -4290,7 +4009,7 @@ module Aws::FSx
       :storage_virtual_machine_id,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use to specify skipping a final backup, adding tags to a final backup, or bypassing the 
@@ -4316,7 +4035,7 @@ module Aws::FSx
       :final_backup_tags,
       :bypass_snaplock_enterprise_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the Amazon FSx for NetApp ONTAP volume being deleted
@@ -4331,7 +4050,7 @@ module Aws::FSx
       :final_backup_id,
       :final_backup_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that specifies whether to delete all child volumes and snapshots. </p>
@@ -4342,7 +4061,7 @@ module Aws::FSx
     class DeleteVolumeOpenZFSConfiguration < Struct.new(
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -4368,7 +4087,7 @@ module Aws::FSx
       :ontap_configuration,
       :open_zfs_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -4387,7 +4106,7 @@ module Aws::FSx
       :lifecycle,
       :ontap_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>DescribeBackups</code> operation.</p>
@@ -4417,7 +4136,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response object for the <code>DescribeBackups</code> operation.</p>
@@ -4433,7 +4152,7 @@ module Aws::FSx
       :backups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_ids
@@ -4458,7 +4177,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -4473,7 +4192,7 @@ module Aws::FSx
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_ids
@@ -4499,7 +4218,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_repository_tasks
@@ -4514,7 +4233,7 @@ module Aws::FSx
       :data_repository_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache_ids
@@ -4534,7 +4253,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_caches
@@ -4549,7 +4268,7 @@ module Aws::FSx
       :file_caches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for <code>DescribeFileSystemAliases</code> operation.</p>
@@ -4579,7 +4298,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for <code>DescribeFileSystemAliases</code> operation.</p>
@@ -4595,7 +4314,7 @@ module Aws::FSx
       :aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for <code>DescribeFileSystems</code> operation.</p>
@@ -4619,7 +4338,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for <code>DescribeFileSystems</code> operation.</p>
@@ -4635,7 +4354,7 @@ module Aws::FSx
       :file_systems,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -4659,7 +4378,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_attachments
@@ -4674,12 +4393,12 @@ module Aws::FSx
       :s3_access_point_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeSharedVpcConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_fsx_route_table_updates_from_participant_accounts
@@ -4688,7 +4407,7 @@ module Aws::FSx
     class DescribeSharedVpcConfigurationResponse < Struct.new(
       :enable_fsx_route_table_updates_from_participant_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_ids
@@ -4720,7 +4439,7 @@ module Aws::FSx
       :next_token,
       :include_shared,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshots
@@ -4735,7 +4454,7 @@ module Aws::FSx
       :snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_virtual_machine_ids
@@ -4759,7 +4478,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_virtual_machines
@@ -4774,7 +4493,7 @@ module Aws::FSx
       :storage_virtual_machines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_ids
@@ -4799,7 +4518,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volumes
@@ -4814,7 +4533,7 @@ module Aws::FSx
       :volumes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -4829,7 +4548,7 @@ module Aws::FSx
       :client_request_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle
@@ -4842,7 +4561,7 @@ module Aws::FSx
       :lifecycle,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object of DNS aliases to disassociate from an Amazon FSx for Windows File Server file system.</p>
@@ -4862,7 +4581,7 @@ module Aws::FSx
       :file_system_id,
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. 
@@ -4873,7 +4592,7 @@ module Aws::FSx
     class DisassociateFileSystemAliasesResponse < Struct.new(
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for NetApp ONTAP, Amazon FSx for Windows File Server, or FSx for OpenZFS file system. By default, Amazon FSx 
@@ -4894,17 +4613,7 @@ module Aws::FSx
       :mode,
       :iops,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskIopsConfigurationMode
-      AUTOMATIC = 'AUTOMATIC'
-      USER_PROVISIONED = 'USER_PROVISIONED'
-    end
-
-    module DriveCacheType
-      NONE = 'NONE'
-      READ = 'READ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the minimum amount of time since last access for a 
@@ -4936,13 +4645,7 @@ module Aws::FSx
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      NEW = 'NEW'
-      CHANGED = 'CHANGED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a specific Amazon File Cache resource, which is
@@ -5048,7 +4751,7 @@ module Aws::FSx
       :lustre_configuration,
       :data_repository_association_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the Amazon File Cache resource being created in the
@@ -5163,7 +4866,7 @@ module Aws::FSx
       :lustre_configuration,
       :data_repository_association_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a data repository association (DRA) to
@@ -5240,7 +4943,7 @@ module Aws::FSx
       :data_repository_subdirectories,
       :nfs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure providing details of any failures that occurred.</p>
@@ -5250,15 +4953,7 @@ module Aws::FSx
     class FileCacheFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileCacheLifecycle
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Amazon File Cache resource.</p>
@@ -5297,11 +4992,7 @@ module Aws::FSx
       :metadata_configuration,
       :log_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileCacheLustreDeploymentType
-      CACHE_1 = 'CACHE_1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a Lustre MDT (Metadata Target) storage volume.
@@ -5314,7 +5005,7 @@ module Aws::FSx
     class FileCacheLustreMetadataConfiguration < Struct.new(
       :storage_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an NFS data repository association (DRA)
@@ -5335,7 +5026,7 @@ module Aws::FSx
       :version,
       :dns_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No caches were found based upon supplied parameters.</p>
@@ -5345,11 +5036,7 @@ module Aws::FSx
     class FileCacheNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileCacheType
-      LUSTRE = 'LUSTRE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a specific Amazon FSx file system.</p>
@@ -5531,7 +5218,7 @@ module Aws::FSx
       :open_zfs_configuration,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon FSx for NetApp ONTAP file system has two endpoints
@@ -5549,7 +5236,7 @@ module Aws::FSx
       :dns_name,
       :ip_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon FSx for NetApp ONTAP file system has the following endpoints
@@ -5567,7 +5254,7 @@ module Aws::FSx
       :intercluster,
       :management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure providing details of any failures that occurred.</p>
@@ -5577,18 +5264,7 @@ module Aws::FSx
     class FileSystemFailureDetails < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The lifecycle status of the file system.</p>
-    module FileSystemLifecycle
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-      MISCONFIGURED = 'MISCONFIGURED'
-      UPDATING = 'UPDATING'
-      MISCONFIGURED_UNAVAILABLE = 'MISCONFIGURED_UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lustre metadata performance configuration of an Amazon FSx for Lustre
@@ -5628,13 +5304,7 @@ module Aws::FSx
       :iops,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>An enumeration specifying the currently ongoing maintenance operation.</p>
-    module FileSystemMaintenanceOperation
-      PATCHING = 'PATCHING'
-      BACKING_UP = 'BACKING_UP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No Amazon FSx file systems were found based upon supplied parameters.</p>
@@ -5644,15 +5314,7 @@ module Aws::FSx
     class FileSystemNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of Amazon FSx file system.</p>
-    module FileSystemType
-      WINDOWS = 'WINDOWS'
-      LUSTRE = 'LUSTRE'
-      ONTAP = 'ONTAP'
-      OPENZFS = 'OPENZFS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to restrict the results of describe calls. You can use multiple
@@ -5668,24 +5330,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The name for a filter.</p>
-    module FilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-      BACKUP_TYPE = 'backup-type'
-      FILE_SYSTEM_TYPE = 'file-system-type'
-      VOLUME_ID = 'volume-id'
-      DATA_REPOSITORY_TYPE = 'data-repository-type'
-      FILE_CACHE_ID = 'file-cache-id'
-      FILE_CACHE_TYPE = 'file-cache-type'
-    end
-
-    module FlexCacheEndpointType
-      NONE = 'NONE'
-      ORIGIN = 'ORIGIN'
-      CACHE = 'CACHE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error returned when a second request is received with the same client request
@@ -5701,7 +5346,7 @@ module Aws::FSx
       :parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon FSx doesn't support Multi-AZ Windows File Server copy backup in the
@@ -5712,12 +5357,7 @@ module Aws::FSx
     class IncompatibleRegionForMultiAZ < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputOntapVolumeType
-      RW = 'RW'
-      DP = 'DP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A generic error indicating a server-side failure.</p>
@@ -5727,7 +5367,7 @@ module Aws::FSx
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access point specified doesn't exist.</p>
@@ -5741,7 +5381,7 @@ module Aws::FSx
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have filtered the response to a data repository type that is not supported.</p>
@@ -5751,7 +5391,7 @@ module Aws::FSx
     class InvalidDataRepositoryType < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Key Management Service (KMS) key of the destination backup is not
@@ -5762,7 +5402,7 @@ module Aws::FSx
     class InvalidDestinationKmsKey < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The path provided for data repository export isn't valid.</p>
@@ -5772,7 +5412,7 @@ module Aws::FSx
     class InvalidExportPath < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The path provided for data repository import isn't valid.</p>
@@ -5782,7 +5422,7 @@ module Aws::FSx
     class InvalidImportPath < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more network settings specified in the request are invalid.</p>
@@ -5804,7 +5444,7 @@ module Aws::FSx
       :invalid_security_group_id,
       :invalid_route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid value for <code>PerUnitStorageThroughput</code> was provided. Please create your file system again, using a valid value.</p>
@@ -5814,7 +5454,7 @@ module Aws::FSx
     class InvalidPerUnitStorageThroughput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Region provided for <code>SourceRegion</code> is not valid or is in a different
@@ -5825,7 +5465,7 @@ module Aws::FSx
     class InvalidRegion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
@@ -5839,7 +5479,7 @@ module Aws::FSx
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Key Management Service (KMS) key of the source backup is not
@@ -5850,7 +5490,7 @@ module Aws::FSx
     class InvalidSourceKmsKey < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes why a resource lifecycle state changed.</p>
@@ -5860,7 +5500,7 @@ module Aws::FSx
     class LifecycleTransitionReason < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for <code>ListTagsForResource</code> operation.</p>
@@ -5883,7 +5523,7 @@ module Aws::FSx
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for <code>ListTagsForResource</code> operation.</p>
@@ -5899,21 +5539,7 @@ module Aws::FSx
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LustreAccessAuditLogLevel
-      DISABLED = 'DISABLED'
-      WARN_ONLY = 'WARN_ONLY'
-      ERROR_ONLY = 'ERROR_ONLY'
-      WARN_ERROR = 'WARN_ERROR'
-    end
-
-    module LustreDeploymentType
-      SCRATCH_1 = 'SCRATCH_1'
-      SCRATCH_2 = 'SCRATCH_2'
-      PERSISTENT_1 = 'PERSISTENT_1'
-      PERSISTENT_2 = 'PERSISTENT_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Amazon FSx for Lustre file system.</p>
@@ -6058,7 +5684,7 @@ module Aws::FSx
       :throughput_capacity,
       :data_read_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for Lustre logging used to write the enabled
@@ -6099,7 +5725,7 @@ module Aws::FSx
       :level,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lustre logging configuration used when creating or updating an
@@ -6164,7 +5790,7 @@ module Aws::FSx
       :level,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6201,13 +5827,7 @@ module Aws::FSx
       :sizing_mode,
       :size_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LustreReadCacheSizingMode
-      NO_CACHE = 'NO_CACHE'
-      USER_PROVISIONED = 'USER_PROVISIONED'
-      PROPORTIONAL_TO_THROUGHPUT_CAPACITY = 'PROPORTIONAL_TO_THROUGHPUT_CAPACITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for Lustre root squash used to restrict root-level access
@@ -6256,12 +5876,7 @@ module Aws::FSx
       :root_squash,
       :no_squash_nids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataConfigurationMode
-      AUTOMATIC = 'AUTOMATIC'
-      USER_PROVISIONED = 'USER_PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache configuration is required for this operation.</p>
@@ -6271,7 +5886,7 @@ module Aws::FSx
     class MissingFileCacheConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file system configuration is required for this operation.</p>
@@ -6281,7 +5896,7 @@ module Aws::FSx
     class MissingFileSystemConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A volume configuration is required for this operation.</p>
@@ -6291,7 +5906,7 @@ module Aws::FSx
     class MissingVolumeConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a data repository association that
@@ -6317,16 +5932,7 @@ module Aws::FSx
       :dns_ips,
       :auto_export_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkType
-      IPV4 = 'IPV4'
-      DUAL = 'DUAL'
-    end
-
-    module NfsVersion
-      NFS3 = 'NFS3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified for the tagging operation is not a resource type owned by
@@ -6341,14 +5947,7 @@ module Aws::FSx
       :resource_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OntapDeploymentType
-      MULTI_AZ_1 = 'MULTI_AZ_1'
-      SINGLE_AZ_1 = 'SINGLE_AZ_1'
-      SINGLE_AZ_2 = 'SINGLE_AZ_2'
-      MULTI_AZ_2 = 'MULTI_AZ_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the FSx for NetApp ONTAP file system.</p>
@@ -6488,7 +6087,7 @@ module Aws::FSx
       :ha_pairs,
       :throughput_capacity_per_ha_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an Amazon FSx for NetApp ONTAP volume.</p>
@@ -6630,13 +6229,7 @@ module Aws::FSx
       :aggregate_configuration,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OntapVolumeType
-      RW = 'RW'
-      DP = 'DP'
-      LS = 'LS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies who can mount an OpenZFS file system and the options available while
@@ -6671,13 +6264,7 @@ module Aws::FSx
       :clients,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenZFSCopyStrategy
-      CLONE = 'CLONE'
-      FULL_COPY = 'FULL_COPY'
-      INCREMENTAL_COPY = 'INCREMENTAL_COPY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an Amazon FSx for OpenZFS root volume.</p>
@@ -6740,21 +6327,7 @@ module Aws::FSx
       :copy_tags_to_snapshots,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenZFSDataCompressionType
-      NONE = 'NONE'
-      ZSTD = 'ZSTD'
-      LZ4 = 'LZ4'
-    end
-
-    module OpenZFSDeploymentType
-      SINGLE_AZ_1 = 'SINGLE_AZ_1'
-      SINGLE_AZ_2 = 'SINGLE_AZ_2'
-      SINGLE_AZ_HA_1 = 'SINGLE_AZ_HA_1'
-      SINGLE_AZ_HA_2 = 'SINGLE_AZ_HA_2'
-      MULTI_AZ_1 = 'MULTI_AZ_1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Amazon FSx for OpenZFS file system. </p>
@@ -6857,7 +6430,7 @@ module Aws::FSx
       :endpoint_ipv6_address,
       :read_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the file system user identity that will be used for authorizing all file access requests that are made using the S3 access point.</p>
@@ -6871,11 +6444,7 @@ module Aws::FSx
       :type,
       :posix_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenZFSFileSystemUserType
-      POSIX = 'POSIX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Network File System (NFS) configurations for mounting an Amazon FSx for
@@ -6887,7 +6456,7 @@ module Aws::FSx
     class OpenZFSNfsExport < Struct.new(
       :client_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot configuration used when creating an Amazon FSx for OpenZFS volume
@@ -6924,7 +6493,7 @@ module Aws::FSx
       :snapshot_arn,
       :copy_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The FSx for OpenZFS file system user that is used for authorizing all file access requests that are made using the S3 access point.</p>
@@ -6942,12 +6511,7 @@ module Aws::FSx
       :gid,
       :secondary_gids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenZFSQuotaType
-      USER = 'USER'
-      GROUP = 'GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6978,13 +6542,7 @@ module Aws::FSx
       :sizing_mode,
       :size_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenZFSReadCacheSizingMode
-      NO_CACHE = 'NO_CACHE'
-      USER_PROVISIONED = 'USER_PROVISIONED'
-      PROPORTIONAL_TO_THROUGHPUT_CAPACITY = 'PROPORTIONAL_TO_THROUGHPUT_CAPACITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to configure quotas that define how much storage a user or group can use on an 
@@ -7006,7 +6564,7 @@ module Aws::FSx
       :id,
       :storage_capacity_quota_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an Amazon FSx for OpenZFS volume.</p>
@@ -7146,13 +6704,7 @@ module Aws::FSx
       :destination_snapshot,
       :copy_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrivilegedDelete
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      PERMANENTLY_DISABLED = 'PERMANENTLY_DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that specifies a minimum amount of time since
@@ -7184,7 +6736,7 @@ module Aws::FSx
     class ReleaseConfiguration < Struct.new(
       :duration_since_last_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -7199,7 +6751,7 @@ module Aws::FSx
       :file_system_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system
@@ -7208,15 +6760,7 @@ module Aws::FSx
     class ReleaseFileSystemNfsV3LocksResponse < Struct.new(
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportFormat
-      REPORT_CSV_20191124 = 'REPORT_CSV_20191124'
-    end
-
-    module ReportScope
-      FAILED_FILES_ONLY = 'FAILED_FILES_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified does not support tagging. </p>
@@ -7231,7 +6775,7 @@ module Aws::FSx
       :resource_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified by the Amazon Resource Name (ARN) can't be found.</p>
@@ -7245,17 +6789,7 @@ module Aws::FSx
       :resource_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      FILE_SYSTEM = 'FILE_SYSTEM'
-      VOLUME = 'VOLUME'
-    end
-
-    module RestoreOpenZFSVolumeOption
-      DELETE_INTERMEDIATE_SNAPSHOTS = 'DELETE_INTERMEDIATE_SNAPSHOTS'
-      DELETE_CLONED_VOLUMES = 'DELETE_CLONED_VOLUMES'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -7293,7 +6827,7 @@ module Aws::FSx
       :snapshot_id,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -7312,7 +6846,7 @@ module Aws::FSx
       :lifecycle,
       :administrative_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the retention period of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. 
@@ -7362,18 +6896,7 @@ module Aws::FSx
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionPeriodType
-      SECONDS = 'SECONDS'
-      MINUTES = 'MINUTES'
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
-      INFINITE = 'INFINITE'
-      UNSPECIFIED = 'UNSPECIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 access point configuration of the S3 access point attachment.</p>
@@ -7391,7 +6914,7 @@ module Aws::FSx
       :alias,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An S3 access point attached to an Amazon FSx volume.</p>
@@ -7444,15 +6967,7 @@ module Aws::FSx
       :open_zfs_configuration,
       :s3_access_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3AccessPointAttachmentLifecycle
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access point specified was not found.</p>
@@ -7462,11 +6977,7 @@ module Aws::FSx
     class S3AccessPointAttachmentNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3AccessPointAttachmentType
-      OPENZFS = 'OPENZFS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of Name and Values pairs used to view a select set of S3 access point attachments.</p>
@@ -7480,13 +6991,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3AccessPointAttachmentsFilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-      VOLUME_ID = 'volume-id'
-      TYPE = 'type'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the FSx for OpenZFS attachment configuration of an S3 access point attachment.</p>
@@ -7500,7 +7005,7 @@ module Aws::FSx
       :volume_id,
       :file_system_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If included, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p>
@@ -7510,7 +7015,7 @@ module Aws::FSx
     class S3AccessPointVpcConfiguration < Struct.new(
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an Amazon S3 data repository linked to an
@@ -7540,13 +7045,7 @@ module Aws::FSx
       :auto_import_policy,
       :auto_export_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityStyle
-      UNIX = 'UNIX'
-      NTFS = 'NTFS'
-      MIXED = 'MIXED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the self-managed Microsoft Active Directory (AD) directory to
@@ -7577,7 +7076,7 @@ module Aws::FSx
       :user_name,
       :dns_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that Amazon FSx uses to join a FSx for Windows File Server file system or an FSx for ONTAP storage virtual machine (SVM) to
@@ -7632,7 +7131,7 @@ module Aws::FSx
       :password,
       :dns_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies changes you are making to the self-managed Microsoft Active Directory configuration to which  
@@ -7670,24 +7169,7 @@ module Aws::FSx
       :organizational_unit_distinguished_name,
       :file_system_administrators_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The types of limits on your service utilization. Limits include file system count,
-    #             total throughput capacity, total storage, and total user-initiated backups. These limits
-    #             apply for a specific account in a specific Amazon Web Services Region. You can increase some of them by
-    #             contacting Amazon Web ServicesSupport.</p>
-    module ServiceLimit
-      FILE_SYSTEM_COUNT = 'FILE_SYSTEM_COUNT'
-      TOTAL_THROUGHPUT_CAPACITY = 'TOTAL_THROUGHPUT_CAPACITY'
-      TOTAL_STORAGE = 'TOTAL_STORAGE'
-      TOTAL_USER_INITIATED_BACKUPS = 'TOTAL_USER_INITIATED_BACKUPS'
-      TOTAL_USER_TAGS = 'TOTAL_USER_TAGS'
-      TOTAL_IN_PROGRESS_COPY_BACKUPS = 'TOTAL_IN_PROGRESS_COPY_BACKUPS'
-      STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM = 'STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM'
-      VOLUMES_PER_FILE_SYSTEM = 'VOLUMES_PER_FILE_SYSTEM'
-      TOTAL_SSD_IOPS = 'TOTAL_SSD_IOPS'
-      FILE_CACHE_COUNT = 'FILE_CACHE_COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error indicating that a particular service limit was exceeded. You can increase
@@ -7702,7 +7184,7 @@ module Aws::FSx
       :limit,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the SnapLock configuration for an FSx for ONTAP SnapLock volume. </p>
@@ -7764,7 +7246,7 @@ module Aws::FSx
       :snaplock_type,
       :volume_append_mode_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to set the retention period of an FSx for ONTAP SnapLock volume. The retention 
@@ -7788,12 +7270,7 @@ module Aws::FSx
       :minimum_retention,
       :maximum_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnaplockType
-      COMPLIANCE = 'COMPLIANCE'
-      ENTERPRISE = 'ENTERPRISE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of an Amazon FSx for OpenZFS volume.</p>
@@ -7860,7 +7337,7 @@ module Aws::FSx
       :tags,
       :administrative_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to restrict the results of <code>DescribeSnapshots</code> calls. You can
@@ -7877,19 +7354,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotFilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-      VOLUME_ID = 'volume-id'
-    end
-
-    module SnapshotLifecycle
-      PENDING = 'PENDING'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      AVAILABLE = 'AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No Amazon FSx snapshots were found based on the supplied parameters.</p>
@@ -7899,7 +7364,7 @@ module Aws::FSx
     class SnapshotNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the lifecycle status of the source backup isn't
@@ -7914,7 +7379,7 @@ module Aws::FSx
       :message,
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -7929,7 +7394,7 @@ module Aws::FSx
       :client_request_token,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system
@@ -7938,23 +7403,7 @@ module Aws::FSx
     class StartMisconfiguredStateRecoveryResponse < Struct.new(
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      PENDING = 'PENDING'
-      COMPLETED = 'COMPLETED'
-      UPDATED_OPTIMIZING = 'UPDATED_OPTIMIZING'
-      OPTIMIZING = 'OPTIMIZING'
-    end
-
-    # <p>Specifies the file system's storage type.</p>
-    module StorageType
-      SSD = 'SSD'
-      HDD = 'HDD'
-      INTELLIGENT_TIERING = 'INTELLIGENT_TIERING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM) configuration.</p>
@@ -8045,7 +7494,7 @@ module Aws::FSx
       :lifecycle_transition_reason,
       :root_volume_security_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to restrict the results of describe calls for
@@ -8062,20 +7511,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageVirtualMachineFilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-    end
-
-    module StorageVirtualMachineLifecycle
-      CREATED = 'CREATED'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      MISCONFIGURED = 'MISCONFIGURED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No FSx for ONTAP SVMs were found based upon the supplied parameters.</p>
@@ -8085,20 +7521,7 @@ module Aws::FSx
     class StorageVirtualMachineNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageVirtualMachineRootVolumeSecurityStyle
-      UNIX = 'UNIX'
-      NTFS = 'NTFS'
-      MIXED = 'MIXED'
-    end
-
-    module StorageVirtualMachineSubtype
-      DEFAULT = 'DEFAULT'
-      DP_DESTINATION = 'DP_DESTINATION'
-      SYNC_DESTINATION = 'SYNC_DESTINATION'
-      SYNC_SOURCE = 'SYNC_SOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Microsoft Active Directory (AD) directory configuration to which the FSx for ONTAP storage virtual machine (SVM) is joined.
@@ -8114,7 +7537,7 @@ module Aws::FSx
       :net_bios_name,
       :self_managed_active_directory_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has
@@ -8133,7 +7556,7 @@ module Aws::FSx
       :dns_name,
       :ip_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has
@@ -8157,7 +7580,7 @@ module Aws::FSx
       :nfs,
       :smb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a key-value pair for a resource tag.</p>
@@ -8175,7 +7598,7 @@ module Aws::FSx
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>TagResource</code> operation.</p>
@@ -8191,13 +7614,13 @@ module Aws::FSx
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>TagResource</code> operation.</p>
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx for ONTAP's intelligent
@@ -8262,14 +7685,7 @@ module Aws::FSx
       :cooling_period,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TieringPolicyName
-      SNAPSHOT_ONLY = 'SNAPSHOT_ONLY'
-      AUTO = 'AUTO'
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of S3 access points attachments allowed for your account in this Amazon Web Services Region, or for the file system. For more information, or to request an increase, 
@@ -8284,11 +7700,7 @@ module Aws::FSx
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Unit
-      DAYS = 'DAYS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not supported for this resource or API.</p>
@@ -8298,7 +7710,7 @@ module Aws::FSx
     class UnsupportedOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for <code>UntagResource</code> action.</p>
@@ -8313,13 +7725,13 @@ module Aws::FSx
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for <code>UntagResource</code> action.</p>
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -8352,7 +7764,7 @@ module Aws::FSx
       :imported_file_chunk_size,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -8361,7 +7773,7 @@ module Aws::FSx
     class UpdateDataRepositoryAssociationResponse < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration update for an Amazon File Cache resource.</p>
@@ -8373,7 +7785,7 @@ module Aws::FSx
     class UpdateFileCacheLustreConfiguration < Struct.new(
       :weekly_maintenance_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache_id
@@ -8392,7 +7804,7 @@ module Aws::FSx
       :client_request_token,
       :lustre_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_cache
@@ -8401,7 +7813,7 @@ module Aws::FSx
     class UpdateFileCacheResponse < Struct.new(
       :file_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object for Amazon FSx for Lustre file systems used in the
@@ -8530,7 +7942,7 @@ module Aws::FSx
       :throughput_capacity,
       :data_read_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lustre metadata performance configuration update for an Amazon FSx for Lustre
@@ -8592,7 +8004,7 @@ module Aws::FSx
       :iops,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration updates for an Amazon FSx for NetApp ONTAP file system.</p>
@@ -8697,7 +8109,7 @@ module Aws::FSx
       :throughput_capacity_per_ha_pair,
       :ha_pairs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration updates for an Amazon FSx for OpenZFS file system.</p>
@@ -8785,7 +8197,7 @@ module Aws::FSx
       :read_cache_configuration,
       :endpoint_ipv6_address_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for the <code>UpdateFileSystem</code> operation.</p>
@@ -8873,7 +8285,7 @@ module Aws::FSx
       :file_system_type_version,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for the <code>UpdateFileSystem</code> operation.</p>
@@ -8883,7 +8295,7 @@ module Aws::FSx
     class UpdateFileSystemResponse < Struct.new(
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the configuration for an existing Amazon FSx for Windows
@@ -8931,7 +8343,7 @@ module Aws::FSx
       :audit_log_configuration,
       :disk_iops_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify changes to the ONTAP configuration for the volume you are updating.</p>
@@ -9001,7 +8413,7 @@ module Aws::FSx
       :snaplock_configuration,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify changes to the OpenZFS configuration for the volume
@@ -9066,13 +8478,7 @@ module Aws::FSx
       :user_and_group_quotas,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateOpenZFSVolumeOption
-      DELETE_INTERMEDIATE_SNAPSHOTS = 'DELETE_INTERMEDIATE_SNAPSHOTS'
-      DELETE_CLONED_VOLUMES = 'DELETE_CLONED_VOLUMES'
-      DELETE_INTERMEDIATE_DATA = 'DELETE_INTERMEDIATE_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_fsx_route_table_updates_from_participant_accounts
@@ -9089,7 +8495,7 @@ module Aws::FSx
       :enable_fsx_route_table_updates_from_participant_accounts,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_fsx_route_table_updates_from_participant_accounts
@@ -9098,7 +8504,7 @@ module Aws::FSx
     class UpdateSharedVpcConfigurationResponse < Struct.new(
       :enable_fsx_route_table_updates_from_participant_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the SnapLock configuration for an existing FSx for ONTAP volume. </p>
@@ -9139,7 +8545,7 @@ module Aws::FSx
       :retention_period,
       :volume_append_mode_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -9159,7 +8565,7 @@ module Aws::FSx
       :name,
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -9169,7 +8575,7 @@ module Aws::FSx
     class UpdateSnapshotResponse < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_directory_configuration
@@ -9192,7 +8598,7 @@ module Aws::FSx
       :storage_virtual_machine_id,
       :svm_admin_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_virtual_machine
@@ -9201,7 +8607,7 @@ module Aws::FSx
     class UpdateStorageVirtualMachineResponse < Struct.new(
       :storage_virtual_machine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies updates to an FSx for ONTAP storage virtual machine's (SVM) Microsoft Active Directory (AD) configuration. 
@@ -9217,7 +8623,7 @@ module Aws::FSx
       :self_managed_active_directory_configuration,
       :net_bios_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -9247,7 +8653,7 @@ module Aws::FSx
       :name,
       :open_zfs_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume
@@ -9257,7 +8663,7 @@ module Aws::FSx
     class UpdateVolumeResponse < Struct.new(
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon FSx volume.</p>
@@ -9352,7 +8758,7 @@ module Aws::FSx
       :administrative_actions,
       :open_zfs_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to restrict the results of describe calls for Amazon FSx for
@@ -9369,22 +8775,7 @@ module Aws::FSx
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeFilterName
-      FILE_SYSTEM_ID = 'file-system-id'
-      STORAGE_VIRTUAL_MACHINE_ID = 'storage-virtual-machine-id'
-    end
-
-    module VolumeLifecycle
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      MISCONFIGURED = 'MISCONFIGURED'
-      PENDING = 'PENDING'
-      AVAILABLE = 'AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No Amazon FSx volumes were found based upon the supplied parameters.</p>
@@ -9394,24 +8785,7 @@ module Aws::FSx
     class VolumeNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeStyle
-      FLEXVOL = 'FLEXVOL'
-      FLEXGROUP = 'FLEXGROUP'
-    end
-
-    module VolumeType
-      ONTAP = 'ONTAP'
-      OPENZFS = 'OPENZFS'
-    end
-
-    module WindowsAccessAuditLogLevel
-      DISABLED = 'DISABLED'
-      SUCCESS_ONLY = 'SUCCESS_ONLY'
-      FAILURE_ONLY = 'FAILURE_ONLY'
-      SUCCESS_AND_FAILURE = 'SUCCESS_AND_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -9483,7 +8857,7 @@ module Aws::FSx
       :file_share_access_audit_log_level,
       :audit_log_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Windows file access auditing configuration used when creating
@@ -9572,13 +8946,7 @@ module Aws::FSx
       :file_share_access_audit_log_level,
       :audit_log_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WindowsDeploymentType
-      MULTI_AZ_1 = 'MULTI_AZ_1'
-      SINGLE_AZ_1 = 'SINGLE_AZ_1'
-      SINGLE_AZ_2 = 'SINGLE_AZ_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for this Microsoft Windows file system.</p>
@@ -9699,7 +9067,7 @@ module Aws::FSx
       :audit_log_configuration,
       :disk_iops_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

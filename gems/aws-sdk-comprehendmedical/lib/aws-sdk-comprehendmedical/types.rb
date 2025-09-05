@@ -59,19 +59,7 @@ module Aws::ComprehendMedical
       :category,
       :traits,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeName
-      SIGN = 'SIGN'
-      SYMPTOM = 'SYMPTOM'
-      DIAGNOSIS = 'DIAGNOSIS'
-      NEGATION = 'NEGATION'
-      PERTAINS_TO_FAMILY = 'PERTAINS_TO_FAMILY'
-      HYPOTHETICAL = 'HYPOTHETICAL'
-      LOW_CONFIDENCE = 'LOW_CONFIDENCE'
-      PAST_HISTORY = 'PAST_HISTORY'
-      FUTURE = 'FUTURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -85,7 +73,7 @@ module Aws::ComprehendMedical
     class Characters < Struct.new(
       :original_text_characters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of detection jobs.</p>
@@ -112,7 +100,7 @@ module Aws::ComprehendMedical
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a detection job.</p>
@@ -180,7 +168,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -191,7 +179,7 @@ module Aws::ComprehendMedical
     class DescribeEntitiesDetectionV2JobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties
@@ -200,7 +188,7 @@ module Aws::ComprehendMedical
     class DescribeEntitiesDetectionV2JobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -210,7 +198,7 @@ module Aws::ComprehendMedical
     class DescribeICD10CMInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties
@@ -219,7 +207,7 @@ module Aws::ComprehendMedical
     class DescribeICD10CMInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -229,7 +217,7 @@ module Aws::ComprehendMedical
     class DescribePHIDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties
@@ -238,7 +226,7 @@ module Aws::ComprehendMedical
     class DescribePHIDetectionJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -248,7 +236,7 @@ module Aws::ComprehendMedical
     class DescribeRxNormInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties
@@ -257,7 +245,7 @@ module Aws::ComprehendMedical
     class DescribeRxNormInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -268,7 +256,7 @@ module Aws::ComprehendMedical
     class DescribeSNOMEDCTInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties
@@ -277,7 +265,7 @@ module Aws::ComprehendMedical
     class DescribeSNOMEDCTInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -286,7 +274,7 @@ module Aws::ComprehendMedical
     class DetectEntitiesRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -314,7 +302,7 @@ module Aws::ComprehendMedical
       :pagination_token,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -323,7 +311,7 @@ module Aws::ComprehendMedical
     class DetectEntitiesV2Request < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -350,7 +338,7 @@ module Aws::ComprehendMedical
       :pagination_token,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -359,7 +347,7 @@ module Aws::ComprehendMedical
     class DetectPHIRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -382,7 +370,7 @@ module Aws::ComprehendMedical
       :pagination_token,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides information about an extracted medical entity.</p>
@@ -427,65 +415,7 @@ module Aws::ComprehendMedical
       :traits,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntitySubType
-      NAME = 'NAME'
-      DX_NAME = 'DX_NAME'
-      DOSAGE = 'DOSAGE'
-      ROUTE_OR_MODE = 'ROUTE_OR_MODE'
-      FORM = 'FORM'
-      FREQUENCY = 'FREQUENCY'
-      DURATION = 'DURATION'
-      GENERIC_NAME = 'GENERIC_NAME'
-      BRAND_NAME = 'BRAND_NAME'
-      STRENGTH = 'STRENGTH'
-      RATE = 'RATE'
-      ACUITY = 'ACUITY'
-      TEST_NAME = 'TEST_NAME'
-      TEST_VALUE = 'TEST_VALUE'
-      TEST_UNITS = 'TEST_UNITS'
-      TEST_UNIT = 'TEST_UNIT'
-      PROCEDURE_NAME = 'PROCEDURE_NAME'
-      TREATMENT_NAME = 'TREATMENT_NAME'
-      DATE = 'DATE'
-      AGE = 'AGE'
-      CONTACT_POINT = 'CONTACT_POINT'
-      PHONE_OR_FAX = 'PHONE_OR_FAX'
-      EMAIL = 'EMAIL'
-      IDENTIFIER = 'IDENTIFIER'
-      ID = 'ID'
-      URL = 'URL'
-      ADDRESS = 'ADDRESS'
-      PROFESSION = 'PROFESSION'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      DIRECTION = 'DIRECTION'
-      QUALITY = 'QUALITY'
-      QUANTITY = 'QUANTITY'
-      TIME_EXPRESSION = 'TIME_EXPRESSION'
-      TIME_TO_MEDICATION_NAME = 'TIME_TO_MEDICATION_NAME'
-      TIME_TO_DX_NAME = 'TIME_TO_DX_NAME'
-      TIME_TO_TEST_NAME = 'TIME_TO_TEST_NAME'
-      TIME_TO_PROCEDURE_NAME = 'TIME_TO_PROCEDURE_NAME'
-      TIME_TO_TREATMENT_NAME = 'TIME_TO_TREATMENT_NAME'
-      AMOUNT = 'AMOUNT'
-      GENDER = 'GENDER'
-      RACE_ETHNICITY = 'RACE_ETHNICITY'
-      ALLERGIES = 'ALLERGIES'
-      TOBACCO_USE = 'TOBACCO_USE'
-      ALCOHOL_CONSUMPTION = 'ALCOHOL_CONSUMPTION'
-      REC_DRUG_USE = 'REC_DRUG_USE'
-    end
-
-    module EntityType
-      MEDICATION = 'MEDICATION'
-      MEDICAL_CONDITION = 'MEDICAL_CONDITION'
-      PROTECTED_HEALTH_INFORMATION = 'PROTECTED_HEALTH_INFORMATION'
-      TEST_TREATMENT_PROCEDURE = 'TEST_TREATMENT_PROCEDURE'
-      ANATOMY = 'ANATOMY'
-      TIME_EXPRESSION = 'TIME_EXPRESSION'
-      BEHAVIORAL_ENVIRONMENTAL_SOCIAL = 'BEHAVIORAL_ENVIRONMENTAL_SOCIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detected attributes that relate to an entity. This includes an extracted segment of
@@ -543,17 +473,7 @@ module Aws::ComprehendMedical
       :category,
       :relationship_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ICD10CMAttributeType
-      ACUITY = 'ACUITY'
-      DIRECTION = 'DIRECTION'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      QUALITY = 'QUALITY'
-      QUANTITY = 'QUANTITY'
-      TIME_TO_DX_NAME = 'TIME_TO_DX_NAME'
-      TIME_EXPRESSION = 'TIME_EXPRESSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The ICD-10-CM concepts that the entity could refer to, along with a score indicating the
@@ -574,7 +494,7 @@ module Aws::ComprehendMedical
       :code,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of medical entities extracted from the input text and their associated
@@ -636,22 +556,7 @@ module Aws::ComprehendMedical
       :traits,
       :icd10_cm_concepts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ICD10CMEntityCategory
-      MEDICAL_CONDITION = 'MEDICAL_CONDITION'
-    end
-
-    module ICD10CMEntityType
-      DX_NAME = 'DX_NAME'
-      TIME_EXPRESSION = 'TIME_EXPRESSION'
-    end
-
-    module ICD10CMRelationshipType
-      OVERLAP = 'OVERLAP'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      QUALITY = 'QUALITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contextual information for the entity. The traits recognized by InferICD10CM are
@@ -668,17 +573,7 @@ module Aws::ComprehendMedical
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ICD10CMTraitName
-      NEGATION = 'NEGATION'
-      DIAGNOSIS = 'DIAGNOSIS'
-      SIGN = 'SIGN'
-      SYMPTOM = 'SYMPTOM'
-      PERTAINS_TO_FAMILY = 'PERTAINS_TO_FAMILY'
-      HYPOTHETICAL = 'HYPOTHETICAL'
-      LOW_CONFIDENCE = 'LOW_CONFIDENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -687,7 +582,7 @@ module Aws::ComprehendMedical
     class InferICD10CMRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -709,7 +604,7 @@ module Aws::ComprehendMedical
       :pagination_token,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -718,7 +613,7 @@ module Aws::ComprehendMedical
     class InferRxNormRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -740,7 +635,7 @@ module Aws::ComprehendMedical
       :pagination_token,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -749,7 +644,7 @@ module Aws::ComprehendMedical
     class InferSNOMEDCTRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -784,7 +679,7 @@ module Aws::ComprehendMedical
       :snomedct_details,
       :characters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input properties for an entities detection job. This includes the name of the S3
@@ -800,7 +695,7 @@ module Aws::ComprehendMedical
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An internal server error occurred. Retry your request. </p>
@@ -809,7 +704,7 @@ module Aws::ComprehendMedical
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input text was not in valid UTF-8 character encoding. Check your text then retry your
@@ -819,7 +714,7 @@ module Aws::ComprehendMedical
     class InvalidEncodingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request that you made is invalid. Check your request to determine why it's invalid
@@ -829,21 +724,7 @@ module Aws::ComprehendMedical
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      PARTIAL_SUCCESS = 'PARTIAL_SUCCESS'
-      FAILED = 'FAILED'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      STOPPED = 'STOPPED'
-    end
-
-    module LanguageCode
-      EN = 'en'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -861,7 +742,7 @@ module Aws::ComprehendMedical
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties_list
@@ -874,7 +755,7 @@ module Aws::ComprehendMedical
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -892,7 +773,7 @@ module Aws::ComprehendMedical
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties_list
@@ -905,7 +786,7 @@ module Aws::ComprehendMedical
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -923,7 +804,7 @@ module Aws::ComprehendMedical
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties_list
@@ -936,7 +817,7 @@ module Aws::ComprehendMedical
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -954,7 +835,7 @@ module Aws::ComprehendMedical
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties_list
@@ -967,7 +848,7 @@ module Aws::ComprehendMedical
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -988,7 +869,7 @@ module Aws::ComprehendMedical
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comprehend_medical_async_job_properties_list
@@ -1005,7 +886,7 @@ module Aws::ComprehendMedical
       :comprehend_medical_async_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output properties for a detection job.</p>
@@ -1024,32 +905,7 @@ module Aws::ComprehendMedical
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationshipType
-      EVERY = 'EVERY'
-      WITH_DOSAGE = 'WITH_DOSAGE'
-      ADMINISTERED_VIA = 'ADMINISTERED_VIA'
-      FOR = 'FOR'
-      NEGATIVE = 'NEGATIVE'
-      OVERLAP = 'OVERLAP'
-      DOSAGE = 'DOSAGE'
-      ROUTE_OR_MODE = 'ROUTE_OR_MODE'
-      FORM = 'FORM'
-      FREQUENCY = 'FREQUENCY'
-      DURATION = 'DURATION'
-      STRENGTH = 'STRENGTH'
-      RATE = 'RATE'
-      ACUITY = 'ACUITY'
-      TEST_VALUE = 'TEST_VALUE'
-      TEST_UNITS = 'TEST_UNITS'
-      TEST_UNIT = 'TEST_UNIT'
-      DIRECTION = 'DIRECTION'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      AMOUNT = 'AMOUNT'
-      USAGE = 'USAGE'
-      QUALITY = 'QUALITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource identified by the specified Amazon Resource Name (ARN) was not found. Check
@@ -1059,7 +915,7 @@ module Aws::ComprehendMedical
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The extracted attributes that relate to this entity. The attributes recognized by
@@ -1107,17 +963,7 @@ module Aws::ComprehendMedical
       :text,
       :traits,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RxNormAttributeType
-      DOSAGE = 'DOSAGE'
-      DURATION = 'DURATION'
-      FORM = 'FORM'
-      FREQUENCY = 'FREQUENCY'
-      RATE = 'RATE'
-      ROUTE_OR_MODE = 'ROUTE_OR_MODE'
-      STRENGTH = 'STRENGTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RxNorm concept that the entity could refer to, along with a score indicating the
@@ -1137,7 +983,7 @@ module Aws::ComprehendMedical
       :code,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of medical entities extracted from the input text and their associated
@@ -1197,16 +1043,7 @@ module Aws::ComprehendMedical
       :traits,
       :rx_norm_concepts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RxNormEntityCategory
-      MEDICATION = 'MEDICATION'
-    end
-
-    module RxNormEntityType
-      BRAND_NAME = 'BRAND_NAME'
-      GENERIC_NAME = 'GENERIC_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contextual information for the entity. InferRxNorm recognizes the trait
@@ -1223,12 +1060,7 @@ module Aws::ComprehendMedical
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RxNormTraitName
-      NEGATION = 'NEGATION'
-      PAST_HISTORY = 'PAST_HISTORY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1302,16 +1134,7 @@ module Aws::ComprehendMedical
       :traits,
       :snomedct_concepts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SNOMEDCTAttributeType
-      ACUITY = 'ACUITY'
-      QUALITY = 'QUALITY'
-      DIRECTION = 'DIRECTION'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      TEST_VALUE = 'TEST_VALUE'
-      TEST_UNIT = 'TEST_UNIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1337,7 +1160,7 @@ module Aws::ComprehendMedical
       :code,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1363,7 +1186,7 @@ module Aws::ComprehendMedical
       :language,
       :version_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1431,30 +1254,7 @@ module Aws::ComprehendMedical
       :traits,
       :snomedct_concepts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SNOMEDCTEntityCategory
-      MEDICAL_CONDITION = 'MEDICAL_CONDITION'
-      ANATOMY = 'ANATOMY'
-      TEST_TREATMENT_PROCEDURE = 'TEST_TREATMENT_PROCEDURE'
-    end
-
-    module SNOMEDCTEntityType
-      DX_NAME = 'DX_NAME'
-      TEST_NAME = 'TEST_NAME'
-      PROCEDURE_NAME = 'PROCEDURE_NAME'
-      TREATMENT_NAME = 'TREATMENT_NAME'
-    end
-
-    module SNOMEDCTRelationshipType
-      ACUITY = 'ACUITY'
-      QUALITY = 'QUALITY'
-      TEST_VALUE = 'TEST_VALUE'
-      TEST_UNITS = 'TEST_UNITS'
-      DIRECTION = 'DIRECTION'
-      SYSTEM_ORGAN_SITE = 'SYSTEM_ORGAN_SITE'
-      TEST_UNIT = 'TEST_UNIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1474,19 +1274,7 @@ module Aws::ComprehendMedical
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SNOMEDCTTraitName
-      NEGATION = 'NEGATION'
-      DIAGNOSIS = 'DIAGNOSIS'
-      SIGN = 'SIGN'
-      SYMPTOM = 'SYMPTOM'
-      PERTAINS_TO_FAMILY = 'PERTAINS_TO_FAMILY'
-      HYPOTHETICAL = 'HYPOTHETICAL'
-      LOW_CONFIDENCE = 'LOW_CONFIDENCE'
-      PAST_HISTORY = 'PAST_HISTORY'
-      FUTURE = 'FUTURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Amazon Comprehend Medical service is temporarily unavailable. Please wait and then retry your request.
@@ -1496,7 +1284,7 @@ module Aws::ComprehendMedical
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -1532,7 +1320,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1542,7 +1330,7 @@ module Aws::ComprehendMedical
     class StartEntitiesDetectionV2JobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -1577,7 +1365,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1587,7 +1375,7 @@ module Aws::ComprehendMedical
     class StartICD10CMInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -1623,7 +1411,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1633,7 +1421,7 @@ module Aws::ComprehendMedical
     class StartPHIDetectionJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -1669,7 +1457,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1678,7 +1466,7 @@ module Aws::ComprehendMedical
     class StartRxNormInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -1722,7 +1510,7 @@ module Aws::ComprehendMedical
       :kms_key,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1733,7 +1521,7 @@ module Aws::ComprehendMedical
     class StartSNOMEDCTInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1742,7 +1530,7 @@ module Aws::ComprehendMedical
     class StopEntitiesDetectionV2JobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1751,7 +1539,7 @@ module Aws::ComprehendMedical
     class StopEntitiesDetectionV2JobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1760,7 +1548,7 @@ module Aws::ComprehendMedical
     class StopICD10CMInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1770,7 +1558,7 @@ module Aws::ComprehendMedical
     class StopICD10CMInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1779,7 +1567,7 @@ module Aws::ComprehendMedical
     class StopPHIDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1788,7 +1576,7 @@ module Aws::ComprehendMedical
     class StopPHIDetectionJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1797,7 +1585,7 @@ module Aws::ComprehendMedical
     class StopRxNormInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1807,7 +1595,7 @@ module Aws::ComprehendMedical
     class StopRxNormInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1818,7 +1606,7 @@ module Aws::ComprehendMedical
     class StopSNOMEDCTInferenceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1829,7 +1617,7 @@ module Aws::ComprehendMedical
     class StopSNOMEDCTInferenceJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The size of the text you submitted exceeds the size limit. Reduce the size of the text or
@@ -1839,7 +1627,7 @@ module Aws::ComprehendMedical
     class TextSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You have made too many requests within a short period of time. Wait for a short time and
@@ -1850,7 +1638,7 @@ module Aws::ComprehendMedical
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides contextual information about the extracted entity. </p>
@@ -1864,7 +1652,7 @@ module Aws::ComprehendMedical
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute that was extracted, but Amazon Comprehend Medical was unable to relate to an entity. </p>
@@ -1880,7 +1668,7 @@ module Aws::ComprehendMedical
       :type,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter that you specified for the operation is invalid. Check the filter values that
@@ -1890,7 +1678,7 @@ module Aws::ComprehendMedical
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

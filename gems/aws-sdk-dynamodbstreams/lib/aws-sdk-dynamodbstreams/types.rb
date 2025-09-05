@@ -85,7 +85,7 @@ module Aws::DynamoDBStreams
       :bool,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S < AttributeValue; end
       class N < AttributeValue; end
@@ -121,7 +121,7 @@ module Aws::DynamoDBStreams
       :exclusive_start_shard_id,
       :shard_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeStream</code> operation.</p>
@@ -131,7 +131,7 @@ module Aws::DynamoDBStreams
     class DescribeStreamOutput < Struct.new(
       :stream_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shard iterator has expired and can no longer be used to retrieve stream records. A shard
@@ -143,7 +143,7 @@ module Aws::DynamoDBStreams
     class ExpiredIteratorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetRecords</code> operation.</p>
@@ -157,7 +157,7 @@ module Aws::DynamoDBStreams
       :shard_iterator,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetRecords</code> operation.</p>
@@ -173,7 +173,7 @@ module Aws::DynamoDBStreams
       :records,
       :next_shard_iterator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetShardIterator</code> operation.</p>
@@ -219,7 +219,7 @@ module Aws::DynamoDBStreams
       :shard_iterator_type,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetShardIterator</code> operation.</p>
@@ -229,7 +229,7 @@ module Aws::DynamoDBStreams
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the type of identity that made the request.</p>
@@ -244,7 +244,7 @@ module Aws::DynamoDBStreams
       :principal_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred on the server side.</p>
@@ -254,7 +254,7 @@ module Aws::DynamoDBStreams
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents <i>a single element</i> of a key schema. A key schema specifies
@@ -298,12 +298,7 @@ module Aws::DynamoDBStreams
       :attribute_name,
       :key_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyType
-      HASH = 'HASH'
-      RANGE = 'RANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no limit to the number of daily on-demand backups that can be taken. </p>
@@ -326,7 +321,7 @@ module Aws::DynamoDBStreams
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListStreams</code> operation.</p>
@@ -346,7 +341,7 @@ module Aws::DynamoDBStreams
       :limit,
       :exclusive_start_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListStreams</code> operation.</p>
@@ -365,13 +360,7 @@ module Aws::DynamoDBStreams
       :streams,
       :last_evaluated_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationType
-      INSERT = 'INSERT'
-      MODIFY = 'MODIFY'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a unique event within a stream.</p>
@@ -432,7 +421,7 @@ module Aws::DynamoDBStreams
       :dynamodb,
       :user_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access a nonexistent table or index. The resource
@@ -444,7 +433,7 @@ module Aws::DynamoDBStreams
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The beginning and ending sequence numbers for the stream records contained within a shard.</p>
@@ -458,7 +447,7 @@ module Aws::DynamoDBStreams
       :starting_sequence_number,
       :ending_sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A uniquely identified group of stream records within a stream.</p>
@@ -476,7 +465,7 @@ module Aws::DynamoDBStreams
       :sequence_number_range,
       :parent_shard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This optional field contains the filter 
@@ -495,18 +484,7 @@ module Aws::DynamoDBStreams
       :type,
       :shard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShardFilterType
-      CHILD_SHARDS = 'CHILD_SHARDS'
-    end
-
-    module ShardIteratorType
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LATEST = 'LATEST'
-      AT_SEQUENCE_NUMBER = 'AT_SEQUENCE_NUMBER'
-      AFTER_SEQUENCE_NUMBER = 'AFTER_SEQUENCE_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the data describing a particular stream.</p>
@@ -539,7 +517,7 @@ module Aws::DynamoDBStreams
       :table_name,
       :stream_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the data describing a particular stream.</p>
@@ -637,7 +615,7 @@ module Aws::DynamoDBStreams
       :shards,
       :last_evaluated_shard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a single data modification that was performed on an item in a DynamoDB table.</p>
@@ -689,21 +667,7 @@ module Aws::DynamoDBStreams
       :size_bytes,
       :stream_view_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamStatus
-      ENABLING = 'ENABLING'
-      ENABLED = 'ENABLED'
-      DISABLING = 'DISABLING'
-      DISABLED = 'DISABLED'
-    end
-
-    module StreamViewType
-      NEW_IMAGE = 'NEW_IMAGE'
-      OLD_IMAGE = 'OLD_IMAGE'
-      NEW_AND_OLD_IMAGES = 'NEW_AND_OLD_IMAGES'
-      KEYS_ONLY = 'KEYS_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation attempted to read past the oldest stream record in a shard.</p>
@@ -724,7 +688,7 @@ module Aws::DynamoDBStreams
     class TrimmedDataAccessException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

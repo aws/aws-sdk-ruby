@@ -13,45 +13,7 @@ module Aws::SecurityIR
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsRegion
-      AF_SOUTH_1 = 'af-south-1'
-      AP_EAST_1 = 'ap-east-1'
-      AP_EAST_2 = 'ap-east-2'
-      AP_NORTHEAST_1 = 'ap-northeast-1'
-      AP_NORTHEAST_2 = 'ap-northeast-2'
-      AP_NORTHEAST_3 = 'ap-northeast-3'
-      AP_SOUTH_1 = 'ap-south-1'
-      AP_SOUTH_2 = 'ap-south-2'
-      AP_SOUTHEAST_1 = 'ap-southeast-1'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
-      AP_SOUTHEAST_3 = 'ap-southeast-3'
-      AP_SOUTHEAST_4 = 'ap-southeast-4'
-      AP_SOUTHEAST_5 = 'ap-southeast-5'
-      AP_SOUTHEAST_7 = 'ap-southeast-7'
-      CA_CENTRAL_1 = 'ca-central-1'
-      CA_WEST_1 = 'ca-west-1'
-      CN_NORTH_1 = 'cn-north-1'
-      CN_NORTHWEST_1 = 'cn-northwest-1'
-      EU_CENTRAL_1 = 'eu-central-1'
-      EU_CENTRAL_2 = 'eu-central-2'
-      EU_NORTH_1 = 'eu-north-1'
-      EU_SOUTH_1 = 'eu-south-1'
-      EU_SOUTH_2 = 'eu-south-2'
-      EU_WEST_1 = 'eu-west-1'
-      EU_WEST_2 = 'eu-west-2'
-      EU_WEST_3 = 'eu-west-3'
-      IL_CENTRAL_1 = 'il-central-1'
-      ME_CENTRAL_1 = 'me-central-1'
-      ME_SOUTH_1 = 'me-south-1'
-      MX_CENTRAL_1 = 'mx-central-1'
-      SA_EAST_1 = 'sa-east-1'
-      US_EAST_1 = 'us-east-1'
-      US_EAST_2 = 'us-east-2'
-      US_WEST_1 = 'us-west-1'
-      US_WEST_2 = 'us-west-2'
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#API_BatchGetMemberAccountDetails_RequestSyntax API Reference
@@ -67,7 +29,7 @@ module Aws::SecurityIR
       :membership_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_BatchGetMemberAccountDetails.html#API_BatchGetMemberAccountDetails_ResponseSyntax API Reference
@@ -83,7 +45,7 @@ module Aws::SecurityIR
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CancelMembership.html#API_CancelMembership_RequestSyntax API Reference
@@ -94,7 +56,7 @@ module Aws::SecurityIR
     class CancelMembershipRequest < Struct.new(
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CancelMembership.html#API_CancelMembership_ResponseSyntax API Reference
@@ -105,7 +67,7 @@ module Aws::SecurityIR
     class CancelMembershipResponse < Struct.new(
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -137,13 +99,7 @@ module Aws::SecurityIR
       :creator,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaseAttachmentStatus
-      VERIFIED = 'Verified'
-      FAILED = 'Failed'
-      PENDING = 'Pending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -170,17 +126,7 @@ module Aws::SecurityIR
       :action,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaseStatus
-      SUBMITTED = 'Submitted'
-      ACKNOWLEDGED = 'Acknowledged'
-      DETECTION_AND_ANALYSIS = 'Detection and Analysis'
-      CONTAINMENT_ERADICATION_AND_RECOVERY = 'Containment, Eradication and Recovery'
-      POST_INCIDENT_ACTIVITIES = 'Post-incident Activities'
-      READY_TO_CLOSE = 'Ready to Close'
-      CLOSED = 'Closed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -190,7 +136,7 @@ module Aws::SecurityIR
     class CloseCaseRequest < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_status
@@ -205,14 +151,7 @@ module Aws::SecurityIR
       :case_status,
       :closed_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClosureCode
-      INVESTIGATION_COMPLETED = 'Investigation Completed'
-      NOT_RESOLVED = 'Not Resolved'
-      FALSE_POSITIVE = 'False Positive'
-      DUPLICATE = 'Duplicate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -230,7 +169,7 @@ module Aws::SecurityIR
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -250,7 +189,7 @@ module Aws::SecurityIR
       :client_token,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -260,7 +199,7 @@ module Aws::SecurityIR
     class CreateCaseCommentResponse < Struct.new(
       :comment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -325,7 +264,7 @@ module Aws::SecurityIR
       :impacted_aws_regions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_CreateCase.html#API_CreateCase_ResponseSyntax API Reference
@@ -336,7 +275,7 @@ module Aws::SecurityIR
     class CreateCaseResponse < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -371,7 +310,7 @@ module Aws::SecurityIR
       :tags,
       :cover_entire_organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -381,17 +320,7 @@ module Aws::SecurityIR
     class CreateMembershipResponse < Struct.new(
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomerType
-      STANDALONE = 'Standalone'
-      ORGANIZATION = 'Organization'
-    end
-
-    module EngagementType
-      SECURITY_INCIDENT = 'Security Incident'
-      INVESTIGATION = 'Investigation'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -406,7 +335,7 @@ module Aws::SecurityIR
       :case_id,
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_presigned_url
@@ -416,7 +345,7 @@ module Aws::SecurityIR
     class GetCaseAttachmentDownloadUrlResponse < Struct.new(
       :attachment_presigned_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -441,7 +370,7 @@ module Aws::SecurityIR
       :content_length,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_presigned_url
@@ -451,7 +380,7 @@ module Aws::SecurityIR
     class GetCaseAttachmentUploadUrlResponse < Struct.new(
       :attachment_presigned_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -461,7 +390,7 @@ module Aws::SecurityIR
     class GetCaseRequest < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute title
@@ -561,7 +490,7 @@ module Aws::SecurityIR
       :case_attachments,
       :closed_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -583,7 +512,7 @@ module Aws::SecurityIR
       :error,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -605,7 +534,7 @@ module Aws::SecurityIR
       :relationship_status,
       :relationship_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -615,7 +544,7 @@ module Aws::SecurityIR
     class GetMembershipRequest < Struct.new(
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -684,7 +613,7 @@ module Aws::SecurityIR
       :opt_in_features,
       :membership_accounts_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -694,7 +623,7 @@ module Aws::SecurityIR
     class ImpactedAwsRegion < Struct.new(
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -712,7 +641,7 @@ module Aws::SecurityIR
       :job_title,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -726,7 +655,7 @@ module Aws::SecurityIR
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -736,7 +665,7 @@ module Aws::SecurityIR
     class InvalidTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -756,7 +685,7 @@ module Aws::SecurityIR
       :max_results,
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -776,7 +705,7 @@ module Aws::SecurityIR
       :items,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -831,7 +760,7 @@ module Aws::SecurityIR
       :resolver_type,
       :pending_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -846,7 +775,7 @@ module Aws::SecurityIR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -866,7 +795,7 @@ module Aws::SecurityIR
       :items,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -899,7 +828,7 @@ module Aws::SecurityIR
       :last_updated_by,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -919,7 +848,7 @@ module Aws::SecurityIR
       :max_results,
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -939,7 +868,7 @@ module Aws::SecurityIR
       :items,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -971,7 +900,7 @@ module Aws::SecurityIR
       :membership_arn,
       :membership_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -986,7 +915,7 @@ module Aws::SecurityIR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1001,7 +930,7 @@ module Aws::SecurityIR
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1011,7 +940,7 @@ module Aws::SecurityIR
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1021,18 +950,7 @@ module Aws::SecurityIR
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipAccountRelationshipStatus
-      ASSOCIATED = 'Associated'
-      DISASSOCIATED = 'Disassociated'
-      UNASSOCIATED = 'Unassociated'
-    end
-
-    module MembershipAccountRelationshipType
-      ORGANIZATION = 'Organization'
-      UNRELATED = 'Unrelated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>MembershipAccountsConfigurations</code> structure defines the configuration settings for managing membership accounts withinAmazon Web Services. </p> <p>This structure contains settings that determine how member accounts are configured and managed within your organization, including: </p> <ul> <li> <p>Account configuration preferences</p> </li> <li> <p>Membership validation rules</p> </li> <li> <p>Account access settings</p> </li> </ul> <p>You can use this structure to define and maintain standardized configurations across multiple member accounts in your organization. </p>
@@ -1046,7 +964,7 @@ module Aws::SecurityIR
       :cover_entire_organization,
       :organizational_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>MembershipAccountsConfigurationsUpdate</code>structure represents the configuration updates for member accounts within an Amazon Web Services organization. </p> <p>This structure is used to modify existing account configurations and settings for members in the organization. When applying updates, ensure all required fields are properly specified to maintain account consistency. </p> <p>Key considerations when using this structure:</p> <ul> <li> <p>All configuration changes are validated before being applied</p> </li> <li> <p>Updates are processed asynchronously in the background</p> </li> <li> <p>Configuration changes may take several minutes to propagate across all affected accounts</p> </li> </ul>
@@ -1064,13 +982,7 @@ module Aws::SecurityIR
       :organizational_units_to_add,
       :organizational_units_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipStatus
-      ACTIVE = 'Active'
-      CANCELLED = 'Cancelled'
-      TERMINATED = 'Terminated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1084,21 +996,7 @@ module Aws::SecurityIR
       :feature_name,
       :is_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OptInFeatureName
-      TRIAGE = 'Triage'
-    end
-
-    module PendingAction
-      CUSTOMER = 'Customer'
-      NONE = 'None'
-    end
-
-    module ResolverType
-      AWS = 'AWS'
-      SELF = 'Self'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1108,7 +1006,7 @@ module Aws::SecurityIR
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1119,14 +1017,7 @@ module Aws::SecurityIR
     class SecurityIncidentResponseNotActiveException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SelfManagedCaseStatus
-      SUBMITTED = 'Submitted'
-      DETECTION_AND_ANALYSIS = 'Detection and Analysis'
-      CONTAINMENT_ERADICATION_AND_RECOVERY = 'Containment, Eradication and Recovery'
-      POST_INCIDENT_ACTIVITIES = 'Post-incident Activities'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1152,7 +1043,7 @@ module Aws::SecurityIR
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1167,13 +1058,13 @@ module Aws::SecurityIR
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_TagResource.html#API_TagResource_ResponseSyntax API Reference
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1187,7 +1078,7 @@ module Aws::SecurityIR
       :ip_address,
       :user_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1209,7 +1100,7 @@ module Aws::SecurityIR
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1224,13 +1115,13 @@ module Aws::SecurityIR
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @see https://docs.aws.amazon.com/security-ir/latest/APIReference/API_UntagResource.html#API_UntagResource_ResponseSyntax API Reference
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1250,7 +1141,7 @@ module Aws::SecurityIR
       :comment_id,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -1265,7 +1156,7 @@ module Aws::SecurityIR
       :comment_id,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1350,12 +1241,12 @@ module Aws::SecurityIR
       :impacted_accounts_to_add,
       :impacted_accounts_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1370,7 +1261,7 @@ module Aws::SecurityIR
       :case_id,
       :case_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_status
@@ -1380,7 +1271,7 @@ module Aws::SecurityIR
     class UpdateCaseStatusResponse < Struct.new(
       :case_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -1415,12 +1306,12 @@ module Aws::SecurityIR
       :membership_accounts_configurations_update,
       :undo_membership_cancellation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMembershipResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1435,7 +1326,7 @@ module Aws::SecurityIR
       :case_id,
       :resolver_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1455,7 +1346,7 @@ module Aws::SecurityIR
       :case_status,
       :resolver_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1473,7 +1364,7 @@ module Aws::SecurityIR
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1487,14 +1378,7 @@ module Aws::SecurityIR
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1516,7 +1400,7 @@ module Aws::SecurityIR
       :name,
       :job_title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

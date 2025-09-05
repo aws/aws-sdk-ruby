@@ -12,13 +12,13 @@ module Aws::BedrockRuntime
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model must request at least one tool (no text is generated). For example, <code>{"any" : {}}</code>.</p>
     class AnyToolChoice < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -43,7 +43,7 @@ module Aws::BedrockRuntime
       :content,
       :output_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage
@@ -72,7 +72,7 @@ module Aws::BedrockRuntime
       :assessments,
       :guardrail_coverage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Asynchronous invocation output data settings.</p>
@@ -83,7 +83,7 @@ module Aws::BedrockRuntime
       :s3_output_data_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3OutputDataConfig < AsyncInvokeOutputDataConfig; end
       class Unknown < AsyncInvokeOutputDataConfig; end
@@ -104,13 +104,7 @@ module Aws::BedrockRuntime
       :kms_key_id,
       :bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AsyncInvokeStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an asynchronous invocation.</p>
@@ -152,13 +146,13 @@ module Aws::BedrockRuntime
       :end_time,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Model automatically decides if a tool should be called or whether to generate text instead. For example, <code>{"auto" : {}}</code>.</p>
     class AutoToolChoice < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload content for the bidirectional input. The input is an audio stream.</p>
@@ -169,7 +163,7 @@ module Aws::BedrockRuntime
     class BidirectionalInputPayloadPart < Struct.new(
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output from the bidirectional stream. The output is speech and a text transcription.</p>
@@ -180,7 +174,7 @@ module Aws::BedrockRuntime
     class BidirectionalOutputPayloadPart < Struct.new(
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a section of content to be cached for reuse in subsequent API calls.</p>
@@ -190,11 +184,7 @@ module Aws::BedrockRuntime
     class CachePointBlock < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePointType
-      DEFAULT = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a citation that references a specific source document. Citations provide traceability between the model's generated response and the source documents that informed that response.</p>
@@ -212,7 +202,7 @@ module Aws::BedrockRuntime
       :source_content,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the generated text content that corresponds to or is supported by a citation from a source document.</p>
@@ -223,7 +213,7 @@ module Aws::BedrockRuntime
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < CitationGeneratedContent; end
       class Unknown < CitationGeneratedContent; end
@@ -245,7 +235,7 @@ module Aws::BedrockRuntime
       :document_chunk,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DocumentChar < CitationLocation; end
       class DocumentPage < CitationLocation; end
@@ -261,7 +251,7 @@ module Aws::BedrockRuntime
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < CitationSourceContent; end
       class Unknown < CitationSourceContent; end
@@ -274,7 +264,7 @@ module Aws::BedrockRuntime
     class CitationSourceContentDelta < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for enabling and controlling document citations in Converse API responses. When enabled, the model can include citation information that links generated content back to specific source documents.</p>
@@ -284,7 +274,7 @@ module Aws::BedrockRuntime
     class CitationsConfig < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A content block that contains both generated text and associated citation information. This block type is returned when document citations are enabled, providing traceability between the generated content and the source documents that informed the response.</p>
@@ -298,7 +288,7 @@ module Aws::BedrockRuntime
       :content,
       :citations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains incremental updates to citation information during streaming responses. This allows clients to build up citation data progressively as the response is generated.</p>
@@ -316,7 +306,7 @@ module Aws::BedrockRuntime
       :source_content,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error occurred because of a conflict while performing an operation.</p>
@@ -325,7 +315,7 @@ module Aws::BedrockRuntime
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block of content for a message that you pass to, or receive from, a model with the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> or <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a> API operations.</p>
@@ -372,7 +362,7 @@ module Aws::BedrockRuntime
       :citations_content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < ContentBlock; end
       class Image < ContentBlock; end
@@ -407,7 +397,7 @@ module Aws::BedrockRuntime
       :citation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < ContentBlockDelta; end
       class ToolUse < ContentBlockDelta; end
@@ -427,7 +417,7 @@ module Aws::BedrockRuntime
       :delta,
       :content_block_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Content block start information.</p>
@@ -438,7 +428,7 @@ module Aws::BedrockRuntime
       :tool_use,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ToolUse < ContentBlockStart; end
       class Unknown < ContentBlockStart; end
@@ -455,7 +445,7 @@ module Aws::BedrockRuntime
       :start,
       :content_block_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A content block stop event.</p>
@@ -465,12 +455,7 @@ module Aws::BedrockRuntime
     class ContentBlockStopEvent < Struct.new(
       :content_block_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConversationRole
-      USER = 'user'
-      ASSISTANT = 'assistant'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics for a call to <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>.</p>
@@ -480,7 +465,7 @@ module Aws::BedrockRuntime
     class ConverseMetrics < Struct.new(
       :latency_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from a call to <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>.</p>
@@ -491,7 +476,7 @@ module Aws::BedrockRuntime
       :message,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Message < ConverseOutput; end
       class Unknown < ConverseOutput; end
@@ -543,7 +528,7 @@ module Aws::BedrockRuntime
       :request_metadata,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -576,7 +561,7 @@ module Aws::BedrockRuntime
       :trace,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conversation stream metadata event.</p>
@@ -598,7 +583,7 @@ module Aws::BedrockRuntime
       :trace,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics for the stream.</p>
@@ -608,7 +593,7 @@ module Aws::BedrockRuntime
     class ConverseStreamMetrics < Struct.new(
       :latency_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The messages output stream</p>
@@ -659,7 +644,7 @@ module Aws::BedrockRuntime
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MessageStart < ConverseStreamOutput; end
       class ContentBlockStart < ConverseStreamOutput; end
@@ -721,7 +706,7 @@ module Aws::BedrockRuntime
       :request_metadata,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream
@@ -730,7 +715,7 @@ module Aws::BedrockRuntime
     class ConverseStreamResponse < Struct.new(
       :stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>. Currently, you can only trace guardrails.</p>
@@ -744,7 +729,7 @@ module Aws::BedrockRuntime
       :guardrail,
       :prompt_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trace object in a response from <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a>. Currently, you can only trace guardrails.</p>
@@ -758,7 +743,7 @@ module Aws::BedrockRuntime
       :guardrail,
       :prompt_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document to include in a message.</p>
@@ -784,7 +769,7 @@ module Aws::BedrockRuntime
       :context,
       :citations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:format] = 'txt' unless options.key?(:format)
@@ -807,7 +792,7 @@ module Aws::BedrockRuntime
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a chunk-level location within a document, providing positioning information for cited content using logical document segments or chunks.</p>
@@ -825,7 +810,7 @@ module Aws::BedrockRuntime
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the actual content of a document that can be processed by the model and potentially cited in the response.</p>
@@ -836,22 +821,10 @@ module Aws::BedrockRuntime
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < DocumentContentBlock; end
       class Unknown < DocumentContentBlock; end
-    end
-
-    module DocumentFormat
-      PDF = 'pdf'
-      CSV = 'csv'
-      DOC = 'doc'
-      DOCX = 'docx'
-      XLS = 'xls'
-      XLSX = 'xlsx'
-      HTML = 'html'
-      TXT = 'txt'
-      MD = 'md'
     end
 
     # <p>Specifies a page-level location within a document, providing positioning information for cited content using page numbers.</p>
@@ -869,7 +842,7 @@ module Aws::BedrockRuntime
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the content of a document.</p>
@@ -892,7 +865,7 @@ module Aws::BedrockRuntime
       :content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Bytes < DocumentSource; end
       class S3Location < DocumentSource; end
@@ -907,7 +880,7 @@ module Aws::BedrockRuntime
     class GetAsyncInvokeRequest < Struct.new(
       :invocation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invocation_arn
@@ -948,12 +921,7 @@ module Aws::BedrockRuntime
       :end_time,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailAction
-      NONE = 'NONE'
-      GUARDRAIL_INTERVENED = 'GUARDRAIL_INTERVENED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A behavior assessment of the guardrail policies used in a call to the Converse API. </p>
@@ -987,7 +955,7 @@ module Aws::BedrockRuntime
       :automated_reasoning_policy,
       :invocation_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a logical validation result from automated reasoning policy evaluation. The finding indicates whether claims in the input are logically valid, invalid, satisfiable, impossible, or have other logical issues.</p>
@@ -1022,7 +990,7 @@ module Aws::BedrockRuntime
       :no_translations,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Valid < GuardrailAutomatedReasoningFinding; end
       class Invalid < GuardrailAutomatedReasoningFinding; end
@@ -1049,7 +1017,7 @@ module Aws::BedrockRuntime
       :contradicting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>References a portion of the original input text that corresponds to logical elements.</p>
@@ -1059,7 +1027,7 @@ module Aws::BedrockRuntime
     class GuardrailAutomatedReasoningInputTextReference < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims are logically false and contradictory to the established rules or premises.</p>
@@ -1077,7 +1045,7 @@ module Aws::BedrockRuntime
       :contradicting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies logical issues in the translated statements that exist independent of any policy rules, such as statements that are always true or always false.</p>
@@ -1095,18 +1063,13 @@ module Aws::BedrockRuntime
       :premises,
       :claims,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailAutomatedReasoningLogicWarningType
-      ALWAYS_FALSE = 'ALWAYS_FALSE'
-      ALWAYS_TRUE = 'ALWAYS_TRUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
     class GuardrailAutomatedReasoningNoTranslationsFinding < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of automated reasoning policy evaluation, including logical findings about the validity of claims made in the input content.</p>
@@ -1116,7 +1079,7 @@ module Aws::BedrockRuntime
     class GuardrailAutomatedReasoningPolicyAssessment < Struct.new(
       :findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>References a specific automated reasoning policy rule that was applied during evaluation.</p>
@@ -1130,7 +1093,7 @@ module Aws::BedrockRuntime
       :identifier,
       :policy_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims could be either true or false depending on additional assumptions not provided in the input.</p>
@@ -1152,7 +1115,7 @@ module Aws::BedrockRuntime
       :claims_false_scenario,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a logical scenario where claims can be evaluated as true or false, containing specific logical assignments.</p>
@@ -1162,7 +1125,7 @@ module Aws::BedrockRuntime
     class GuardrailAutomatedReasoningScenario < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical statement that includes both formal logic representation and natural language explanation.</p>
@@ -1176,13 +1139,13 @@ module Aws::BedrockRuntime
       :logic,
       :natural_language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
     class GuardrailAutomatedReasoningTooComplexFinding < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the logical translation of natural language input into formal logical statements, including premises, claims, and confidence scores.</p>
@@ -1208,7 +1171,7 @@ module Aws::BedrockRuntime
       :untranslated_claims,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the input has multiple valid logical interpretations, requiring additional context or clarification.</p>
@@ -1222,7 +1185,7 @@ module Aws::BedrockRuntime
       :options,
       :difference_scenarios,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents one possible logical interpretation of ambiguous input content.</p>
@@ -1232,7 +1195,7 @@ module Aws::BedrockRuntime
     class GuardrailAutomatedReasoningTranslationOption < Struct.new(
       :translations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims are definitively true and logically implied by the premises, with no possible alternative interpretations.</p>
@@ -1254,7 +1217,7 @@ module Aws::BedrockRuntime
       :supporting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for a guardrail that you use with the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> operation.</p>
@@ -1272,7 +1235,7 @@ module Aws::BedrockRuntime
       :guardrail_version,
       :trace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:trace] = 'disabled' unless options.key?(:trace)
@@ -1292,7 +1255,7 @@ module Aws::BedrockRuntime
       :image,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < GuardrailContentBlock; end
       class Image < GuardrailContentBlock; end
@@ -1322,35 +1285,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailContentFilterConfidence
-      NONE = 'NONE'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module GuardrailContentFilterStrength
-      NONE = 'NONE'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module GuardrailContentFilterType
-      INSULTS = 'INSULTS'
-      HATE = 'HATE'
-      SEXUAL = 'SEXUAL'
-      VIOLENCE = 'VIOLENCE'
-      MISCONDUCT = 'MISCONDUCT'
-      PROMPT_ATTACK = 'PROMPT_ATTACK'
-    end
-
-    module GuardrailContentPolicyAction
-      BLOCKED = 'BLOCKED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An assessment of a content policy for a guardrail.</p>
@@ -1360,18 +1295,7 @@ module Aws::BedrockRuntime
     class GuardrailContentPolicyAssessment < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailContentQualifier
-      GROUNDING_SOURCE = 'grounding_source'
-      QUERY = 'query'
-      GUARD_CONTENT = 'guard_content'
-    end
-
-    module GuardrailContentSource
-      INPUT = 'INPUT'
-      OUTPUT = 'OUTPUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the guardrails contextual grounding filter.</p>
@@ -1397,17 +1321,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailContextualGroundingFilterType
-      GROUNDING = 'GROUNDING'
-      RELEVANCE = 'RELEVANCE'
-    end
-
-    module GuardrailContextualGroundingPolicyAction
-      BLOCKED = 'BLOCKED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy assessment details for the guardrails contextual grounding filter.</p>
@@ -1417,7 +1331,7 @@ module Aws::BedrockRuntime
     class GuardrailContextualGroundingPolicyAssessment < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/> <p>A content block for selective guarding with the <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> or <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a> API operations. </p>
@@ -1432,17 +1346,11 @@ module Aws::BedrockRuntime
       :image,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < GuardrailConverseContentBlock; end
       class Image < GuardrailConverseContentBlock; end
       class Unknown < GuardrailConverseContentBlock; end
-    end
-
-    module GuardrailConverseContentQualifier
-      GROUNDING_SOURCE = 'grounding_source'
-      QUERY = 'query'
-      GUARD_CONTENT = 'guard_content'
     end
 
     # <p>An image block that contains images that you want to assess with a guardrail.</p>
@@ -1457,12 +1365,7 @@ module Aws::BedrockRuntime
       :format,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailConverseImageFormat
-      PNG = 'png'
-      JPEG = 'jpeg'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image source (image bytes) of the guardrail converse image source.</p>
@@ -1474,7 +1377,7 @@ module Aws::BedrockRuntime
       :bytes,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Bytes < GuardrailConverseImageSource; end
       class Unknown < GuardrailConverseImageSource; end
@@ -1491,7 +1394,7 @@ module Aws::BedrockRuntime
       :text,
       :qualifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action of the guardrail coverage details.</p>
@@ -1505,7 +1408,7 @@ module Aws::BedrockRuntime
       :text_characters,
       :images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom word configured in a guardrail.</p>
@@ -1523,7 +1426,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contain an image which user wants guarded. This block is accepted by the guardrails independent API.</p>
@@ -1538,7 +1441,7 @@ module Aws::BedrockRuntime
       :format,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the guardrail image coverage.</p>
@@ -1552,12 +1455,7 @@ module Aws::BedrockRuntime
       :guarded,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailImageFormat
-      PNG = 'png'
-      JPEG = 'jpeg'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image source (image bytes) of the guardrail image source. Object used in independent api.</p>
@@ -1569,7 +1467,7 @@ module Aws::BedrockRuntime
       :bytes,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Bytes < GuardrailImageSource; end
       class Unknown < GuardrailImageSource; end
@@ -1590,7 +1488,7 @@ module Aws::BedrockRuntime
       :usage,
       :guardrail_coverage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A managed word configured in a guardrail.</p>
@@ -1612,11 +1510,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailManagedWordType
-      PROFANITY = 'PROFANITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output content produced by the guardrail.</p>
@@ -1626,12 +1520,7 @@ module Aws::BedrockRuntime
     class GuardrailOutputContent < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailOutputScope
-      INTERVENTIONS = 'INTERVENTIONS'
-      FULL = 'FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Personally Identifiable Information (PII) entity configured in a guardrail.</p>
@@ -1653,41 +1542,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailPiiEntityType
-      ADDRESS = 'ADDRESS'
-      AGE = 'AGE'
-      AWS_ACCESS_KEY = 'AWS_ACCESS_KEY'
-      AWS_SECRET_KEY = 'AWS_SECRET_KEY'
-      CA_HEALTH_NUMBER = 'CA_HEALTH_NUMBER'
-      CA_SOCIAL_INSURANCE_NUMBER = 'CA_SOCIAL_INSURANCE_NUMBER'
-      CREDIT_DEBIT_CARD_CVV = 'CREDIT_DEBIT_CARD_CVV'
-      CREDIT_DEBIT_CARD_EXPIRY = 'CREDIT_DEBIT_CARD_EXPIRY'
-      CREDIT_DEBIT_CARD_NUMBER = 'CREDIT_DEBIT_CARD_NUMBER'
-      DRIVER_ID = 'DRIVER_ID'
-      EMAIL = 'EMAIL'
-      INTERNATIONAL_BANK_ACCOUNT_NUMBER = 'INTERNATIONAL_BANK_ACCOUNT_NUMBER'
-      IP_ADDRESS = 'IP_ADDRESS'
-      LICENSE_PLATE = 'LICENSE_PLATE'
-      MAC_ADDRESS = 'MAC_ADDRESS'
-      NAME = 'NAME'
-      PASSWORD = 'PASSWORD'
-      PHONE = 'PHONE'
-      PIN = 'PIN'
-      SWIFT_CODE = 'SWIFT_CODE'
-      UK_NATIONAL_HEALTH_SERVICE_NUMBER = 'UK_NATIONAL_HEALTH_SERVICE_NUMBER'
-      UK_NATIONAL_INSURANCE_NUMBER = 'UK_NATIONAL_INSURANCE_NUMBER'
-      UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = 'UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER'
-      URL = 'URL'
-      USERNAME = 'USERNAME'
-      US_BANK_ACCOUNT_NUMBER = 'US_BANK_ACCOUNT_NUMBER'
-      US_BANK_ROUTING_NUMBER = 'US_BANK_ROUTING_NUMBER'
-      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = 'US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER'
-      US_PASSPORT_NUMBER = 'US_PASSPORT_NUMBER'
-      US_SOCIAL_SECURITY_NUMBER = 'US_SOCIAL_SECURITY_NUMBER'
-      VEHICLE_IDENTIFICATION_NUMBER = 'VEHICLE_IDENTIFICATION_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Regex filter configured in a guardrail.</p>
@@ -1713,13 +1568,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailSensitiveInformationPolicyAction
-      ANONYMIZED = 'ANONYMIZED'
-      BLOCKED = 'BLOCKED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assessment for aPersonally Identifiable Information (PII) policy. </p>
@@ -1733,7 +1582,7 @@ module Aws::BedrockRuntime
       :pii_entities,
       :regexes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for a guardrail that you use with the <a>ConverseStream</a> action. </p>
@@ -1755,18 +1604,13 @@ module Aws::BedrockRuntime
       :trace,
       :stream_processing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:trace] = 'disabled' unless options.key?(:trace)
         options[:stream_processing_mode] = 'sync' unless options.key?(:stream_processing_mode)
         super
       end
-    end
-
-    module GuardrailStreamProcessingMode
-      SYNC = 'sync'
-      ASYNC = 'async'
     end
 
     # <p>The text block to be evaluated by the guardrail.</p>
@@ -1780,7 +1624,7 @@ module Aws::BedrockRuntime
       :text,
       :qualifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The guardrail coverage for the text characters.</p>
@@ -1794,7 +1638,7 @@ module Aws::BedrockRuntime
       :guarded,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a topic guardrail.</p>
@@ -1816,12 +1660,7 @@ module Aws::BedrockRuntime
       :action,
       :detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailTopicPolicyAction
-      BLOCKED = 'BLOCKED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A behavior assessment of a topic policy.</p>
@@ -1831,17 +1670,7 @@ module Aws::BedrockRuntime
     class GuardrailTopicPolicyAssessment < Struct.new(
       :topics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailTopicType
-      DENY = 'DENY'
-    end
-
-    module GuardrailTrace
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      ENABLED_FULL = 'enabled_full'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Top level guardrail trace object. For more information, see <a>ConverseTrace</a>.</p>
@@ -1863,7 +1692,7 @@ module Aws::BedrockRuntime
       :output_assessments,
       :action_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details on the use of the guardrail.</p>
@@ -1905,12 +1734,7 @@ module Aws::BedrockRuntime
       :automated_reasoning_policy_units,
       :automated_reasoning_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailWordPolicyAction
-      BLOCKED = 'BLOCKED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The word policy assessment.</p>
@@ -1924,7 +1748,7 @@ module Aws::BedrockRuntime
       :custom_words,
       :managed_word_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Image content for a message.</p>
@@ -1938,14 +1762,7 @@ module Aws::BedrockRuntime
       :format,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageFormat
-      PNG = 'png'
-      JPEG = 'jpeg'
-      GIF = 'gif'
-      WEBP = 'webp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source for an image.</p>
@@ -1960,7 +1777,7 @@ module Aws::BedrockRuntime
       :s3_location,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Bytes < ImageSource; end
       class S3Location < ImageSource; end
@@ -1986,7 +1803,7 @@ module Aws::BedrockRuntime
       :top_p,
       :stop_sequences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-internal-failure">InternalFailure</a> in the Amazon Bedrock User Guide</p>
@@ -1995,7 +1812,7 @@ module Aws::BedrockRuntime
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2032,7 +1849,7 @@ module Aws::BedrockRuntime
       :guardrail_version,
       :performance_config_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2049,7 +1866,7 @@ module Aws::BedrockRuntime
       :content_type,
       :performance_config_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload content, the speech chunk, for the bidirectional input of the invocation step.</p>
@@ -2060,7 +1877,7 @@ module Aws::BedrockRuntime
       :chunk,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Chunk < InvokeModelWithBidirectionalStreamInput; end
       class Unknown < InvokeModelWithBidirectionalStreamInput; end
@@ -2098,7 +1915,7 @@ module Aws::BedrockRuntime
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Chunk < InvokeModelWithBidirectionalStreamOutput; end
       class InternalServerException < InvokeModelWithBidirectionalStreamOutput; end
@@ -2120,7 +1937,7 @@ module Aws::BedrockRuntime
       :model_id,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2129,7 +1946,7 @@ module Aws::BedrockRuntime
     class InvokeModelWithBidirectionalStreamResponse < Struct.new(
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2166,7 +1983,7 @@ module Aws::BedrockRuntime
       :guardrail_version,
       :performance_config_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -2183,7 +2000,7 @@ module Aws::BedrockRuntime
       :content_type,
       :performance_config_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute submit_time_after
@@ -2216,7 +2033,7 @@ module Aws::BedrockRuntime
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2229,7 +2046,7 @@ module Aws::BedrockRuntime
       :next_token,
       :async_invoke_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A message input, or returned from, a call to <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html">Converse</a> or <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html">ConverseStream</a>.</p>
@@ -2243,7 +2060,7 @@ module Aws::BedrockRuntime
       :role,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start of a message.</p>
@@ -2253,7 +2070,7 @@ module Aws::BedrockRuntime
     class MessageStartEvent < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stop event for a message.</p>
@@ -2267,7 +2084,7 @@ module Aws::BedrockRuntime
       :stop_reason,
       :additional_model_response_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to an error while processing the model.</p>
@@ -2284,7 +2101,7 @@ module Aws::BedrockRuntime
       :original_status_code,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model specified in the request is not ready to serve inference requests. The AWS SDK will automatically retry the operation up to 5 times. For information about configuring automatic retries, see <a href="https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html">Retry behavior</a> in the <i>AWS SDKs and Tools</i> reference guide.</p>
@@ -2293,7 +2110,7 @@ module Aws::BedrockRuntime
     class ModelNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred while streaming the response. Retry your request.</p>
@@ -2310,7 +2127,7 @@ module Aws::BedrockRuntime
       :original_status_code,
       :original_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request took too long to process. Processing time exceeded the model timeout length.</p>
@@ -2319,7 +2136,7 @@ module Aws::BedrockRuntime
     class ModelTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload content included in the response.</p>
@@ -2330,12 +2147,7 @@ module Aws::BedrockRuntime
     class PayloadPart < Struct.new(
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PerformanceConfigLatency
-      STANDARD = 'standard'
-      OPTIMIZED = 'optimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Performance settings for a model.</p>
@@ -2345,7 +2157,7 @@ module Aws::BedrockRuntime
     class PerformanceConfiguration < Struct.new(
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latency] = 'standard' unless options.key?(:latency)
@@ -2360,7 +2172,7 @@ module Aws::BedrockRuntime
     class PromptRouterTrace < Struct.new(
       :invoked_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a map of variables in a prompt from Prompt management to an object containing the values to fill in for them when running model invocation. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-how.html">How Prompt management works</a>.</p>
@@ -2371,7 +2183,7 @@ module Aws::BedrockRuntime
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < PromptVariableValues; end
       class Unknown < PromptVariableValues; end
@@ -2390,7 +2202,7 @@ module Aws::BedrockRuntime
       :redacted_content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ReasoningText < ReasoningContentBlock; end
       class RedactedContent < ReasoningContentBlock; end
@@ -2414,7 +2226,7 @@ module Aws::BedrockRuntime
       :signature,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < ReasoningContentBlockDelta; end
       class RedactedContent < ReasoningContentBlockDelta; end
@@ -2434,7 +2246,7 @@ module Aws::BedrockRuntime
       :text,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ARN was not found. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-resource-not-found">ResourceNotFound</a> in the Amazon Bedrock User Guide</p>
@@ -2443,7 +2255,7 @@ module Aws::BedrockRuntime
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Definition of content in the response stream.</p>
@@ -2478,7 +2290,7 @@ module Aws::BedrockRuntime
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Chunk < ResponseStream; end
       class InternalServerException < ResponseStream; end
@@ -2501,7 +2313,7 @@ module Aws::BedrockRuntime
       :uri,
       :bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds the service quota for your account. You can view your quotas at <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/gs-request-quota.html">Viewing service quotas</a>. You can resubmit your request later.</p>
@@ -2510,7 +2322,7 @@ module Aws::BedrockRuntime
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service isn't currently available. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-service-unavailable">ServiceUnavailable</a> in the Amazon Bedrock User Guide</p>
@@ -2519,16 +2331,7 @@ module Aws::BedrockRuntime
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortAsyncInvocationBy
-      SUBMISSION_TIME = 'SubmissionTime'
-    end
-
-    module SortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model must request a specific tool. For example, <code>{"tool" : {"name" : "Your tool name"}}</code>.</p> <note> <p>This field is only supported by Anthropic Claude 3 models.</p> </note>
@@ -2538,7 +2341,7 @@ module Aws::BedrockRuntime
     class SpecificToolChoice < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -2563,7 +2366,7 @@ module Aws::BedrockRuntime
       :output_data_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invocation_arn
@@ -2572,16 +2375,7 @@ module Aws::BedrockRuntime
     class StartAsyncInvokeResponse < Struct.new(
       :invocation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopReason
-      END_TURN = 'end_turn'
-      TOOL_USE = 'tool_use'
-      MAX_TOKENS = 'max_tokens'
-      STOP_SEQUENCE = 'stop_sequence'
-      GUARDRAIL_INTERVENED = 'guardrail_intervened'
-      CONTENT_FILTERED = 'content_filtered'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A system content block.</p>
@@ -2600,7 +2394,7 @@ module Aws::BedrockRuntime
       :cache_point,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < SystemContentBlock; end
       class GuardContent < SystemContentBlock; end
@@ -2619,7 +2413,7 @@ module Aws::BedrockRuntime
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request was denied due to exceeding the account quotas for <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-throttling-exception">ThrottlingException</a> in the Amazon Bedrock User Guide</p>
@@ -2628,7 +2422,7 @@ module Aws::BedrockRuntime
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tokens used in a message API inference call. </p>
@@ -2654,7 +2448,7 @@ module Aws::BedrockRuntime
       :cache_read_input_tokens,
       :cache_write_input_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tool that you can use with the Converse API. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tool-use.html">Tool use (function calling)</a> in the Amazon Bedrock User Guide.</p>
@@ -2669,7 +2463,7 @@ module Aws::BedrockRuntime
       :cache_point,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ToolSpec < Tool; end
       class CachePoint < Tool; end
@@ -2692,7 +2486,7 @@ module Aws::BedrockRuntime
       :tool,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Auto < ToolChoice; end
       class Any < ToolChoice; end
@@ -2711,7 +2505,7 @@ module Aws::BedrockRuntime
       :tools,
       :tool_choice,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schema for the tool. The top level schema type must be <code>object</code>. </p>
@@ -2722,7 +2516,7 @@ module Aws::BedrockRuntime
       :json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Json < ToolInputSchema; end
       class Unknown < ToolInputSchema; end
@@ -2743,7 +2537,7 @@ module Aws::BedrockRuntime
       :content,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tool result content block.</p>
@@ -2770,7 +2564,7 @@ module Aws::BedrockRuntime
       :video,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Json < ToolResultContentBlock; end
       class Text < ToolResultContentBlock; end
@@ -2778,11 +2572,6 @@ module Aws::BedrockRuntime
       class Document < ToolResultContentBlock; end
       class Video < ToolResultContentBlock; end
       class Unknown < ToolResultContentBlock; end
-    end
-
-    module ToolResultStatus
-      SUCCESS = 'success'
-      ERROR = 'error'
     end
 
     # <p>The specification for the tool.</p>
@@ -2800,7 +2589,7 @@ module Aws::BedrockRuntime
       :description,
       :input_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tool use content block. Contains information about a tool that the model is requesting be run., The model uses the result from the tool to generate a response. </p>
@@ -2818,7 +2607,7 @@ module Aws::BedrockRuntime
       :name,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The delta for a tool use block.</p>
@@ -2828,7 +2617,7 @@ module Aws::BedrockRuntime
     class ToolUseBlockDelta < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start of a tool use block.</p>
@@ -2842,13 +2631,7 @@ module Aws::BedrockRuntime
       :tool_use_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Trace
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ENABLED_FULL = 'ENABLED_FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by <i>Amazon Bedrock</i>. For troubleshooting this error, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/troubleshooting-api-error-codes.html#ts-validation-error">ValidationError</a> in the Amazon Bedrock User Guide</p>
@@ -2857,7 +2640,7 @@ module Aws::BedrockRuntime
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A video block.</p>
@@ -2871,19 +2654,7 @@ module Aws::BedrockRuntime
       :format,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoFormat
-      MKV = 'mkv'
-      MOV = 'mov'
-      MP4 = 'mp4'
-      WEBM = 'webm'
-      FLV = 'flv'
-      MPEG = 'mpeg'
-      MPG = 'mpg'
-      WMV = 'wmv'
-      THREE_GP = 'three_gp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A video source. You can upload a smaller video as a base64-encoded string as long as the encoded file is less than 25MB. You can also transfer videos up to 1GB in size from an S3 bucket.</p>
@@ -2898,7 +2669,7 @@ module Aws::BedrockRuntime
       :s3_location,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Bytes < VideoSource; end
       class S3Location < VideoSource; end

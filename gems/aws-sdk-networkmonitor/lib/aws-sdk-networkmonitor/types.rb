@@ -12,12 +12,7 @@ module Aws::NetworkMonitor
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressFamily
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation attempted to create a resource that already exists.</p>
@@ -26,7 +21,7 @@ module Aws::NetworkMonitor
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -53,7 +48,7 @@ module Aws::NetworkMonitor
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -79,7 +74,7 @@ module Aws::NetworkMonitor
       :aggregation_period,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a monitor probe.</p>
@@ -109,7 +104,7 @@ module Aws::NetworkMonitor
       :packet_size,
       :probe_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -130,7 +125,7 @@ module Aws::NetworkMonitor
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute probe_id
@@ -187,7 +182,7 @@ module Aws::NetworkMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -196,12 +191,12 @@ module Aws::NetworkMonitor
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -214,12 +209,12 @@ module Aws::NetworkMonitor
       :monitor_name,
       :probe_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProbeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -228,7 +223,7 @@ module Aws::NetworkMonitor
     class GetMonitorInput < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -265,7 +260,7 @@ module Aws::NetworkMonitor
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -278,7 +273,7 @@ module Aws::NetworkMonitor
       :monitor_name,
       :probe_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute probe_id
@@ -335,7 +330,7 @@ module Aws::NetworkMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -344,7 +339,7 @@ module Aws::NetworkMonitor
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -364,7 +359,7 @@ module Aws::NetworkMonitor
       :max_results,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitors
@@ -377,7 +372,7 @@ module Aws::NetworkMonitor
       :monitors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -386,7 +381,7 @@ module Aws::NetworkMonitor
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -395,15 +390,7 @@ module Aws::NetworkMonitor
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitorState
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displays summary information about a monitor.</p>
@@ -429,7 +416,7 @@ module Aws::NetworkMonitor
       :aggregation_period,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about a network monitor probe.</p>
@@ -487,7 +474,7 @@ module Aws::NetworkMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a probe when creating a probe or monitor.</p>
@@ -517,21 +504,7 @@ module Aws::NetworkMonitor
       :packet_size,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProbeState
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module Protocol
-      TCP = 'TCP'
-      ICMP = 'ICMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -540,7 +513,7 @@ module Aws::NetworkMonitor
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request exceeds a service quota.</p>
@@ -549,7 +522,7 @@ module Aws::NetworkMonitor
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -562,12 +535,12 @@ module Aws::NetworkMonitor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling</p>
@@ -576,7 +549,7 @@ module Aws::NetworkMonitor
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -589,12 +562,12 @@ module Aws::NetworkMonitor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -607,7 +580,7 @@ module Aws::NetworkMonitor
       :monitor_name,
       :aggregation_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -632,7 +605,7 @@ module Aws::NetworkMonitor
       :aggregation_period,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -665,7 +638,7 @@ module Aws::NetworkMonitor
       :protocol,
       :packet_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute probe_id
@@ -722,7 +695,7 @@ module Aws::NetworkMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the parameters for the request is not valid.</p>
@@ -731,7 +704,7 @@ module Aws::NetworkMonitor
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

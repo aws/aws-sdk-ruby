@@ -16,7 +16,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Agentless Dialer config
@@ -26,7 +26,7 @@ module Aws::ConnectCampaigns
     class AgentlessDialerConfig < Struct.new(
       :dialing_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Answering Machine Detection config
@@ -40,10 +40,10 @@ module Aws::ConnectCampaigns
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:await_answer_machine_prompt] =  unless options.key?(:await_answer_machine_prompt)
+        options[:await_answer_machine_prompt] = nil unless options.key?(:await_answer_machine_prompt)
         super
       end
     end
@@ -79,7 +79,7 @@ module Aws::ConnectCampaigns
       :outbound_call_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Filter model by type
@@ -89,7 +89,7 @@ module Aws::ConnectCampaigns
     class CampaignFilters < Struct.new(
       :instance_id_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An Amazon Connect campaign summary.
@@ -111,7 +111,7 @@ module Aws::ConnectCampaigns
       :name,
       :connect_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request could not be processed because of conflict in the current state of the resource.
@@ -124,7 +124,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for Create Campaign API.
@@ -150,7 +150,7 @@ module Aws::ConnectCampaigns
       :outbound_call_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response for Create Campaign API
@@ -168,7 +168,7 @@ module Aws::ConnectCampaigns
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # DeleteCampaignRequest
@@ -178,7 +178,7 @@ module Aws::ConnectCampaigns
     class DeleteCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # DeleteCampaignRequest
@@ -188,7 +188,7 @@ module Aws::ConnectCampaigns
     class DeleteConnectInstanceConfigInput < Struct.new(
       :connect_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for DeleteInstanceOnboardingJob API.
@@ -198,7 +198,7 @@ module Aws::ConnectCampaigns
     class DeleteInstanceOnboardingJobInput < Struct.new(
       :connect_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # DescribeCampaignRequests
@@ -208,7 +208,7 @@ module Aws::ConnectCampaigns
     class DescribeCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # DescribeCampaignResponse
@@ -218,7 +218,7 @@ module Aws::ConnectCampaigns
     class DescribeCampaignOutput < Struct.new(
       :campaign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A dial request for a campaign.
@@ -240,7 +240,7 @@ module Aws::ConnectCampaigns
       :expiration_time,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The possible types of dialer config parameters
@@ -259,7 +259,7 @@ module Aws::ConnectCampaigns
       :agentless_dialer_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ProgressiveDialerConfig < DialerConfig; end
       class PredictiveDialerConfig < DialerConfig; end
@@ -285,7 +285,7 @@ module Aws::ConnectCampaigns
       :encryption_type,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -304,7 +304,7 @@ module Aws::ConnectCampaigns
       :campaign_id,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A failed request identified by the unique client token.
@@ -322,7 +322,7 @@ module Aws::ConnectCampaigns
       :id,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetCampaignStateBatchRequest
@@ -332,7 +332,7 @@ module Aws::ConnectCampaigns
     class GetCampaignStateBatchInput < Struct.new(
       :campaign_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetCampaignStateBatchResponse
@@ -346,7 +346,7 @@ module Aws::ConnectCampaigns
       :successful_requests,
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetCampaignStateRequest
@@ -356,7 +356,7 @@ module Aws::ConnectCampaigns
     class GetCampaignStateInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetCampaignStateResponse
@@ -366,7 +366,7 @@ module Aws::ConnectCampaigns
     class GetCampaignStateOutput < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetConnectInstanceConfigRequest
@@ -376,7 +376,7 @@ module Aws::ConnectCampaigns
     class GetConnectInstanceConfigInput < Struct.new(
       :connect_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetConnectInstanceConfigResponse
@@ -386,7 +386,7 @@ module Aws::ConnectCampaigns
     class GetConnectInstanceConfigOutput < Struct.new(
       :connect_instance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetInstanceOnboardingJobStatusRequest
@@ -396,7 +396,7 @@ module Aws::ConnectCampaigns
     class GetInstanceOnboardingJobStatusInput < Struct.new(
       :connect_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # GetInstanceOnboardingJobStatusResponse
@@ -406,7 +406,7 @@ module Aws::ConnectCampaigns
     class GetInstanceOnboardingJobStatusOutput < Struct.new(
       :connect_instance_onboarding_job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Instance config object
@@ -427,7 +427,7 @@ module Aws::ConnectCampaigns
       :service_linked_role_arn,
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Connect instance identifier filter
@@ -441,7 +441,7 @@ module Aws::ConnectCampaigns
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Instance onboarding job status object
@@ -459,7 +459,7 @@ module Aws::ConnectCampaigns
       :status,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request processing failed because of an error or failure with the service.
@@ -472,7 +472,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request could not be processed because of conflict in the current state of the campaign.
@@ -489,7 +489,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request could not be processed because of conflict in the current state.
@@ -502,7 +502,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # ListCampaignsRequest
@@ -520,7 +520,7 @@ module Aws::ConnectCampaigns
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # ListCampaignsResponse
@@ -534,7 +534,7 @@ module Aws::ConnectCampaigns
       :next_token,
       :campaign_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # ListTagsForResource
@@ -544,7 +544,7 @@ module Aws::ConnectCampaigns
     class ListTagsForResourceInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # ListTagsForResponse
@@ -554,7 +554,7 @@ module Aws::ConnectCampaigns
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The configuration used for outbound calls.
@@ -576,7 +576,7 @@ module Aws::ConnectCampaigns
       :connect_queue_id,
       :answer_machine_detection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # PauseCampaignRequest
@@ -586,7 +586,7 @@ module Aws::ConnectCampaigns
     class PauseCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Predictive Dialer config
@@ -600,7 +600,7 @@ module Aws::ConnectCampaigns
       :bandwidth_allocation,
       :dialing_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Progressive Dialer config
@@ -614,7 +614,7 @@ module Aws::ConnectCampaigns
       :bandwidth_allocation,
       :dialing_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # PutDialRequestBatchRequest
@@ -628,7 +628,7 @@ module Aws::ConnectCampaigns
       :id,
       :dial_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # PutDialRequestBatchResponse
@@ -642,7 +642,7 @@ module Aws::ConnectCampaigns
       :successful_requests,
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The specified resource was not found.
@@ -655,7 +655,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # ResumeCampaignRequest
@@ -665,7 +665,7 @@ module Aws::ConnectCampaigns
     class ResumeCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request would cause a service quota to be exceeded.
@@ -678,7 +678,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # StartCampaignRequest
@@ -688,7 +688,7 @@ module Aws::ConnectCampaigns
     class StartCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for StartInstanceOnboardingJob API.
@@ -705,7 +705,7 @@ module Aws::ConnectCampaigns
       :connect_instance_id,
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response for StartInstanceOnboardingJob API.
@@ -715,7 +715,7 @@ module Aws::ConnectCampaigns
     class StartInstanceOnboardingJobOutput < Struct.new(
       :connect_instance_onboarding_job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # StopCampaignRequest
@@ -725,7 +725,7 @@ module Aws::ConnectCampaigns
     class StopCampaignInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Successful response of campaign state
@@ -739,7 +739,7 @@ module Aws::ConnectCampaigns
       :campaign_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A successful request identified by the unique client token.
@@ -753,7 +753,7 @@ module Aws::ConnectCampaigns
       :client_token,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # TagResourceRequest
@@ -767,7 +767,7 @@ module Aws::ConnectCampaigns
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request was denied due to request throttling.
@@ -780,7 +780,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # UntagResourceRequest
@@ -794,7 +794,7 @@ module Aws::ConnectCampaigns
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # UpdateCampaignDialerConfigRequest
@@ -808,7 +808,7 @@ module Aws::ConnectCampaigns
       :id,
       :dialer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # UpdateCampaignNameRequest
@@ -822,7 +822,7 @@ module Aws::ConnectCampaigns
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # UpdateCampaignOutboundCallConfigRequest
@@ -844,7 +844,7 @@ module Aws::ConnectCampaigns
       :connect_source_phone_number,
       :answer_machine_detection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The input fails to satisfy the constraints specified by an AWS service.
@@ -857,7 +857,7 @@ module Aws::ConnectCampaigns
       :message,
       :x_amz_error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

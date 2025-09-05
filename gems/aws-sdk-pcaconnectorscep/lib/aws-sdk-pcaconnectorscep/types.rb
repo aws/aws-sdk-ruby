@@ -16,7 +16,7 @@ module Aws::PcaConnectorScep
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is malformed or contains an error such as an invalid parameter value or a missing required parameter.</p>
@@ -25,7 +25,7 @@ module Aws::PcaConnectorScep
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For Connector for SCEP for general-purpose. An object containing information about the specified connector's SCEP challenge passwords.</p>
@@ -51,7 +51,7 @@ module Aws::PcaConnectorScep
       :updated_at,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the connector's challenge.</p>
@@ -73,7 +73,7 @@ module Aws::PcaConnectorScep
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the specified challenge, returned by the <a href="https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_GetChallengeMetadata.html">GetChallengeMetadata</a> action.</p>
@@ -95,7 +95,7 @@ module Aws::PcaConnectorScep
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request can't be completed for one of the following reasons because the requested
@@ -113,7 +113,7 @@ module Aws::PcaConnectorScep
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connector for SCEP is a service that links Amazon Web Services Private Certificate Authority to your SCEP-enabled devices. The connector brokers the exchange of certificates from Amazon Web Services Private CA to your SCEP-enabled devices and mobile device management systems. The connector is a complex type that contains the connector's configuration settings.</p>
@@ -159,21 +159,7 @@ module Aws::PcaConnectorScep
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-    end
-
-    module ConnectorStatusReason
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      PRIVATECA_ACCESS_DENIED = 'PRIVATECA_ACCESS_DENIED'
-      PRIVATECA_INVALID_STATE = 'PRIVATECA_INVALID_STATE'
-      PRIVATECA_RESOURCE_NOT_FOUND = 'PRIVATECA_RESOURCE_NOT_FOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the Amazon Web Services Private CA SCEP connectors belonging to your Amazon Web Services account.</p>
@@ -219,12 +205,7 @@ module Aws::PcaConnectorScep
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorType
-      GENERAL_PURPOSE = 'GENERAL_PURPOSE'
-      INTUNE = 'INTUNE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -241,7 +222,7 @@ module Aws::PcaConnectorScep
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenge
@@ -250,7 +231,7 @@ module Aws::PcaConnectorScep
     class CreateChallengeResponse < Struct.new(
       :challenge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_arn
@@ -273,7 +254,7 @@ module Aws::PcaConnectorScep
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -282,7 +263,7 @@ module Aws::PcaConnectorScep
     class CreateConnectorResponse < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenge_arn
@@ -291,7 +272,7 @@ module Aws::PcaConnectorScep
     class DeleteChallengeRequest < Struct.new(
       :challenge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -300,7 +281,7 @@ module Aws::PcaConnectorScep
     class DeleteConnectorRequest < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenge_arn
@@ -309,7 +290,7 @@ module Aws::PcaConnectorScep
     class GetChallengeMetadataRequest < Struct.new(
       :challenge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenge_metadata
@@ -318,7 +299,7 @@ module Aws::PcaConnectorScep
     class GetChallengeMetadataResponse < Struct.new(
       :challenge_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenge_arn
@@ -327,7 +308,7 @@ module Aws::PcaConnectorScep
     class GetChallengePasswordRequest < Struct.new(
       :challenge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute password
@@ -336,7 +317,7 @@ module Aws::PcaConnectorScep
     class GetChallengePasswordResponse < Struct.new(
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -345,7 +326,7 @@ module Aws::PcaConnectorScep
     class GetConnectorRequest < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector
@@ -354,7 +335,7 @@ module Aws::PcaConnectorScep
     class GetConnectorResponse < Struct.new(
       :connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure with
@@ -364,7 +345,7 @@ module Aws::PcaConnectorScep
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details for use with Microsoft Intune. For information about using Connector for SCEP for Microsoft Intune, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep-intune.html">Using Connector for SCEP for Microsoft Intune</a>.</p>
@@ -379,7 +360,7 @@ module Aws::PcaConnectorScep
       :azure_application_id,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -400,7 +381,7 @@ module Aws::PcaConnectorScep
       :next_token,
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute challenges
@@ -415,7 +396,7 @@ module Aws::PcaConnectorScep
       :challenges,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -432,7 +413,7 @@ module Aws::PcaConnectorScep
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectors
@@ -447,7 +428,7 @@ module Aws::PcaConnectorScep
       :connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -456,7 +437,7 @@ module Aws::PcaConnectorScep
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -465,7 +446,7 @@ module Aws::PcaConnectorScep
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you don't supply a value, by default Connector for SCEP creates a connector for general-purpose use. A general-purpose connector is designed to work with clients or endpoints that support the SCEP protocol, except Connector for SCEP for Microsoft Intune. For information about considerations and limitations with using Connector for SCEP, see <a href="https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlc4scep-considerations-limitations.html">Considerations and Limitations</a>.</p>
@@ -477,7 +458,7 @@ module Aws::PcaConnectorScep
       :intune,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Intune < MobileDeviceManagement; end
       class Unknown < MobileDeviceManagement; end
@@ -498,7 +479,7 @@ module Aws::PcaConnectorScep
       :subject,
       :audience,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access a nonexistent resource. The resource might be incorrectly specified, or it might have a status other than <code>ACTIVE</code>.</p>
@@ -515,7 +496,7 @@ module Aws::PcaConnectorScep
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -536,7 +517,7 @@ module Aws::PcaConnectorScep
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -549,7 +530,7 @@ module Aws::PcaConnectorScep
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -558,7 +539,7 @@ module Aws::PcaConnectorScep
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -571,7 +552,7 @@ module Aws::PcaConnectorScep
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input validation error occurred. For example, invalid characters in a name tag, or an invalid pagination token.</p>
@@ -584,17 +565,7 @@ module Aws::PcaConnectorScep
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      CA_CERT_VALIDITY_TOO_SHORT = 'CA_CERT_VALIDITY_TOO_SHORT'
-      INVALID_CA_USAGE_MODE = 'INVALID_CA_USAGE_MODE'
-      INVALID_CONNECTOR_TYPE = 'INVALID_CONNECTOR_TYPE'
-      INVALID_STATE = 'INVALID_STATE'
-      NO_CLIENT_TOKEN = 'NO_CLIENT_TOKEN'
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
   end

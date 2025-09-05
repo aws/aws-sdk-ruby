@@ -6,12 +6,6 @@ module Aws::MediaPackageVod
   # This module contains the types returned by client operations.
   module Types
 
-    module AdMarkers
-      NONE = 'NONE'
-      SCTE35_ENHANCED = 'SCTE35_ENHANCED'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
     # A MediaPackage VOD Asset resource.
     # @!attribute arn
     #   The ARN of the Asset.
@@ -47,7 +41,7 @@ module Aws::MediaPackageVod
       :source_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # CDN Authorization credentials
@@ -61,7 +55,7 @@ module Aws::MediaPackageVod
       :cdn_identifier_secret,
       :secrets_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A CMAF encryption configuration.
@@ -75,7 +69,7 @@ module Aws::MediaPackageVod
       :constant_initialization_vector,
       :speke_key_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A CMAF packaging configuration.
@@ -98,7 +92,7 @@ module Aws::MediaPackageVod
       :include_encoder_configuration_in_segments,
       :segment_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The option to configure log subscription.
@@ -112,7 +106,7 @@ module Aws::MediaPackageVod
       :egress_access_logs,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -145,7 +139,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A new MediaPackage VOD Asset configuration.
@@ -175,7 +169,7 @@ module Aws::MediaPackageVod
       :source_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -216,7 +210,7 @@ module Aws::MediaPackageVod
       :source_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A new MediaPackage VOD PackagingConfiguration resource configuration.
@@ -250,7 +244,7 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -291,7 +285,7 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A new MediaPackage VOD PackagingGroup resource configuration.
@@ -313,7 +307,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -346,7 +340,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
@@ -356,7 +350,7 @@ module Aws::MediaPackageVod
     class DashEncryption < Struct.new(
       :speke_key_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A DASH manifest configuration.
@@ -386,7 +380,7 @@ module Aws::MediaPackageVod
       :scte_markers_source,
       :stream_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
@@ -424,7 +418,7 @@ module Aws::MediaPackageVod
       :segment_duration_seconds,
       :segment_template_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -433,12 +427,12 @@ module Aws::MediaPackageVod
     class DeleteAssetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -447,12 +441,12 @@ module Aws::MediaPackageVod
     class DeletePackagingConfigurationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePackagingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -461,12 +455,12 @@ module Aws::MediaPackageVod
     class DeletePackagingGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePackagingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -475,7 +469,7 @@ module Aws::MediaPackageVod
     class DescribeAssetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -516,7 +510,7 @@ module Aws::MediaPackageVod
       :source_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -525,7 +519,7 @@ module Aws::MediaPackageVod
     class DescribePackagingConfigurationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -566,7 +560,7 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -575,7 +569,7 @@ module Aws::MediaPackageVod
     class DescribePackagingGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approximate_asset_count
@@ -612,7 +606,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configure egress access logging.
@@ -622,7 +616,7 @@ module Aws::MediaPackageVod
     class EgressAccessLogs < Struct.new(
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The endpoint URL used to access an Asset using one PackagingConfiguration.
@@ -640,7 +634,7 @@ module Aws::MediaPackageVod
       :status,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. 
@@ -659,12 +653,7 @@ module Aws::MediaPackageVod
       :preset_speke20_audio,
       :preset_speke20_video,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionMethod
-      AES_128 = 'AES_128'
-      SAMPLE_AES = 'SAMPLE_AES'
+      include ::Smithy::Schema::Structure
     end
 
     # The client is not authorized to access the requested resource.
@@ -673,7 +662,7 @@ module Aws::MediaPackageVod
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An HTTP Live Streaming (HLS) encryption configuration.
@@ -692,7 +681,7 @@ module Aws::MediaPackageVod
       :encryption_method,
       :speke_key_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An HTTP Live Streaming (HLS) manifest configuration.
@@ -735,7 +724,7 @@ module Aws::MediaPackageVod
       :repeat_ext_x_key,
       :stream_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An HTTP Live Streaming (HLS) packaging configuration.
@@ -762,7 +751,7 @@ module Aws::MediaPackageVod
       :segment_duration_seconds,
       :use_audio_rendition_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An unexpected error occurred.
@@ -771,7 +760,7 @@ module Aws::MediaPackageVod
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -788,7 +777,7 @@ module Aws::MediaPackageVod
       :next_token,
       :packaging_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assets
@@ -801,7 +790,7 @@ module Aws::MediaPackageVod
       :assets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -818,7 +807,7 @@ module Aws::MediaPackageVod
       :next_token,
       :packaging_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -831,7 +820,7 @@ module Aws::MediaPackageVod
       :next_token,
       :packaging_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -844,7 +833,7 @@ module Aws::MediaPackageVod
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -857,7 +846,7 @@ module Aws::MediaPackageVod
       :next_token,
       :packaging_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -866,7 +855,7 @@ module Aws::MediaPackageVod
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -875,12 +864,7 @@ module Aws::MediaPackageVod
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManifestLayout
-      FULL = 'FULL'
-      COMPACT = 'COMPACT'
+      include ::Smithy::Schema::Structure
     end
 
     # A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -890,7 +874,7 @@ module Aws::MediaPackageVod
     class MssEncryption < Struct.new(
       :speke_key_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A Microsoft Smooth Streaming (MSS) manifest configuration.
@@ -904,7 +888,7 @@ module Aws::MediaPackageVod
       :manifest_name,
       :stream_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
@@ -922,7 +906,7 @@ module Aws::MediaPackageVod
       :mss_manifests,
       :segment_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The requested resource does not exist.
@@ -931,7 +915,7 @@ module Aws::MediaPackageVod
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A MediaPackage VOD PackagingConfiguration resource.
@@ -973,7 +957,7 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A MediaPackage VOD PackagingGroup resource.
@@ -1011,44 +995,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PresetSpeke20Audio
-      PRESET_AUDIO_1 = 'PRESET-AUDIO-1'
-      PRESET_AUDIO_2 = 'PRESET-AUDIO-2'
-      PRESET_AUDIO_3 = 'PRESET-AUDIO-3'
-      SHARED = 'SHARED'
-      UNENCRYPTED = 'UNENCRYPTED'
-    end
-
-    module PresetSpeke20Video
-      PRESET_VIDEO_1 = 'PRESET-VIDEO-1'
-      PRESET_VIDEO_2 = 'PRESET-VIDEO-2'
-      PRESET_VIDEO_3 = 'PRESET-VIDEO-3'
-      PRESET_VIDEO_4 = 'PRESET-VIDEO-4'
-      PRESET_VIDEO_5 = 'PRESET-VIDEO-5'
-      PRESET_VIDEO_6 = 'PRESET-VIDEO-6'
-      PRESET_VIDEO_7 = 'PRESET-VIDEO-7'
-      PRESET_VIDEO_8 = 'PRESET-VIDEO-8'
-      SHARED = 'SHARED'
-      UNENCRYPTED = 'UNENCRYPTED'
-    end
-
-    module Profile
-      NONE = 'NONE'
-      HBBTV_1_5 = 'HBBTV_1_5'
-    end
-
-    module ScteMarkersSource
-      SEGMENTS = 'SEGMENTS'
-      MANIFEST = 'MANIFEST'
-    end
-
-    module SegmentTemplateFormat
-      NUMBER_WITH_TIMELINE = 'NUMBER_WITH_TIMELINE'
-      TIME_WITH_TIMELINE = 'TIME_WITH_TIMELINE'
-      NUMBER_WITH_DURATION = 'NUMBER_WITH_DURATION'
+      include ::Smithy::Schema::Structure
     end
 
     # An unexpected error occurred.
@@ -1057,7 +1004,7 @@ module Aws::MediaPackageVod
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
@@ -1085,13 +1032,7 @@ module Aws::MediaPackageVod
       :system_ids,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamOrder
-      ORIGINAL = 'ORIGINAL'
-      VIDEO_BITRATE_ASCENDING = 'VIDEO_BITRATE_ASCENDING'
-      VIDEO_BITRATE_DESCENDING = 'VIDEO_BITRATE_DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # A StreamSelection configuration.
@@ -1109,7 +1050,7 @@ module Aws::MediaPackageVod
       :min_video_bits_per_second,
       :stream_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1122,7 +1063,7 @@ module Aws::MediaPackageVod
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The client has exceeded their resource or throttling limits.
@@ -1131,7 +1072,7 @@ module Aws::MediaPackageVod
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The parameters sent in the request are not valid.
@@ -1140,7 +1081,7 @@ module Aws::MediaPackageVod
     class UnprocessableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1153,7 +1094,7 @@ module Aws::MediaPackageVod
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A MediaPackage VOD PackagingGroup resource configuration.
@@ -1167,7 +1108,7 @@ module Aws::MediaPackageVod
       :authorization,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approximate_asset_count
@@ -1204,11 +1145,7 @@ module Aws::MediaPackageVod
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Periodtriggerselement
-      ADS = 'ADS'
+      include ::Smithy::Schema::Structure
     end
 
   end

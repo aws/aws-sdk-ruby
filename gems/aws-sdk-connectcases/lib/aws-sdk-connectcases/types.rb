@@ -12,7 +12,7 @@ module Aws::ConnectCases
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of a particular audit event.</p>
@@ -42,7 +42,7 @@ module Aws::ConnectCases
       :fields,
       :performed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Fields for audit event.</p>
@@ -60,7 +60,7 @@ module Aws::ConnectCases
       :old_value,
       :new_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store union of Field values.</p>
@@ -87,7 +87,7 @@ module Aws::ConnectCases
       :user_arn_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < AuditEventFieldValueUnion; end
       class DoubleValue < AuditEventFieldValueUnion; end
@@ -108,7 +108,7 @@ module Aws::ConnectCases
       :user,
       :iam_principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of agent application. </p>
@@ -122,7 +122,7 @@ module Aws::ConnectCases
       :top_panel,
       :more_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -135,7 +135,7 @@ module Aws::ConnectCases
       :domain_id,
       :case_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_rules
@@ -148,7 +148,7 @@ module Aws::ConnectCases
       :case_rules,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -161,7 +161,7 @@ module Aws::ConnectCases
       :domain_id,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fields
@@ -174,7 +174,7 @@ module Aws::ConnectCases
       :fields,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -191,7 +191,7 @@ module Aws::ConnectCases
       :field_id,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -200,7 +200,7 @@ module Aws::ConnectCases
     class BatchPutFieldOptionsOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Boolean condition for a rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -215,7 +215,7 @@ module Aws::ConnectCases
       :not_equal_to,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EqualTo < BooleanCondition; end
       class NotEqualTo < BooleanCondition; end
@@ -237,7 +237,7 @@ module Aws::ConnectCases
       :operand_two,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of what case data is published through the case event stream.</p>
@@ -247,7 +247,7 @@ module Aws::ConnectCases
     class CaseEventIncludedData < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for cases. Only one value can be provided.</p>
@@ -270,7 +270,7 @@ module Aws::ConnectCases
       :or_all,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Field < CaseFilter; end
       class Not < CaseFilter; end
@@ -287,7 +287,7 @@ module Aws::ConnectCases
       :required,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Required < CaseRuleDetails; end
       class Unknown < CaseRuleDetails; end
@@ -308,7 +308,7 @@ module Aws::ConnectCases
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing case rule identifier information.</p>
@@ -318,7 +318,7 @@ module Aws::ConnectCases
     class CaseRuleIdentifier < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information of this case rule. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -344,7 +344,7 @@ module Aws::ConnectCases
       :rule_type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Case summary information.</p>
@@ -358,7 +358,7 @@ module Aws::ConnectCases
       :case_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of a <code>Comment</code> to be returned to agents.</p>
@@ -372,13 +372,13 @@ module Aws::ConnectCases
       :body,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for related items of type <code>Comment</code>.</p>
     class CommentFilter < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
@@ -387,7 +387,7 @@ module Aws::ConnectCases
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon Connect contact object. </p>
@@ -397,7 +397,7 @@ module Aws::ConnectCases
     class Contact < Struct.new(
       :contact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a content of an Amazon Connect contact object.</p>
@@ -415,7 +415,7 @@ module Aws::ConnectCases
       :channel,
       :connected_to_system_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for related items of type <code>Contact</code>.</p>
@@ -429,7 +429,7 @@ module Aws::ConnectCases
       :channel,
       :contact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -454,7 +454,7 @@ module Aws::ConnectCases
       :client_token,
       :performed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -467,7 +467,7 @@ module Aws::ConnectCases
       :case_id,
       :case_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -488,7 +488,7 @@ module Aws::ConnectCases
       :description,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_rule_id
@@ -501,7 +501,7 @@ module Aws::ConnectCases
       :case_rule_id,
       :case_rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -510,7 +510,7 @@ module Aws::ConnectCases
     class CreateDomainInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -527,7 +527,7 @@ module Aws::ConnectCases
       :domain_arn,
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -548,7 +548,7 @@ module Aws::ConnectCases
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_id
@@ -561,7 +561,7 @@ module Aws::ConnectCases
       :field_id,
       :field_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -578,7 +578,7 @@ module Aws::ConnectCases
       :name,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layout_id
@@ -591,7 +591,7 @@ module Aws::ConnectCases
       :layout_id,
       :layout_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -616,7 +616,7 @@ module Aws::ConnectCases
       :content,
       :performed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute related_item_id
@@ -629,7 +629,7 @@ module Aws::ConnectCases
       :related_item_id,
       :related_item_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -662,7 +662,7 @@ module Aws::ConnectCases
       :status,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -675,7 +675,7 @@ module Aws::ConnectCases
       :template_id,
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -688,12 +688,12 @@ module Aws::ConnectCases
       :domain_id,
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -706,12 +706,12 @@ module Aws::ConnectCases
       :domain_id,
       :case_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCaseRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -720,12 +720,12 @@ module Aws::ConnectCases
     class DeleteDomainInput < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -738,12 +738,12 @@ module Aws::ConnectCases
       :domain_id,
       :field_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFieldResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -756,12 +756,12 @@ module Aws::ConnectCases
       :domain_id,
       :layout_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLayoutResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -778,12 +778,12 @@ module Aws::ConnectCases
       :case_id,
       :related_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRelatedItemResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -796,12 +796,12 @@ module Aws::ConnectCases
       :domain_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for the summarized details of the domain.</p>
@@ -819,19 +819,19 @@ module Aws::ConnectCases
       :domain_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty value. You cannot set <code>EmptyFieldValue</code> on a field that is required on a case template.</p> <p>This structure will never have any data members. It signifies an empty value on a case field.</p>
     class EmptyFieldValue < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an empty operand value. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
     class EmptyOperandValue < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration to enable EventBridge case event delivery and determine what data is delivered.</p>
@@ -845,7 +845,7 @@ module Aws::ConnectCases
       :enabled,
       :included_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of what case and related item data is published through the case event stream.</p>
@@ -859,7 +859,7 @@ module Aws::ConnectCases
       :case_data,
       :related_item_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for errors on fields.</p>
@@ -877,7 +877,7 @@ module Aws::ConnectCases
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for fields. Only one value can be provided.</p>
@@ -908,7 +908,7 @@ module Aws::ConnectCases
       :less_than_or_equal_to,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EqualTo < FieldFilter; end
       class Contains < FieldFilter; end
@@ -930,7 +930,7 @@ module Aws::ConnectCases
       :name,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for unique identifier of a field.</p>
@@ -940,7 +940,7 @@ module Aws::ConnectCases
     class FieldIdentifier < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for field related information.</p>
@@ -950,7 +950,7 @@ module Aws::ConnectCases
     class FieldItem < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for field Options information.</p>
@@ -968,7 +968,7 @@ module Aws::ConnectCases
       :value,
       :active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for field Options errors.</p>
@@ -986,7 +986,7 @@ module Aws::ConnectCases
       :error_code,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for the summarized details of the field.</p>
@@ -1012,7 +1012,7 @@ module Aws::ConnectCases
       :type,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for case field values.</p>
@@ -1026,7 +1026,7 @@ module Aws::ConnectCases
       :id,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store union of Field values.</p> <note> <p>The <code>Summary</code> system field accepts 3000 characters while all other fields accept 500 characters.</p> </note>
@@ -1053,7 +1053,7 @@ module Aws::ConnectCases
       :user_arn_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < FieldValueUnion; end
       class DoubleValue < FieldValueUnion; end
@@ -1070,7 +1070,7 @@ module Aws::ConnectCases
     class FileContent < Struct.new(
       :file_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for related items of type <code>File</code>.</p>
@@ -1080,7 +1080,7 @@ module Aws::ConnectCases
     class FileFilter < Struct.new(
       :file_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1101,7 +1101,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1114,7 +1114,7 @@ module Aws::ConnectCases
       :next_token,
       :audit_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1123,7 +1123,7 @@ module Aws::ConnectCases
     class GetCaseEventConfigurationInput < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_bridge
@@ -1132,7 +1132,7 @@ module Aws::ConnectCases
     class GetCaseEventConfigurationOutput < Struct.new(
       :event_bridge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1153,7 +1153,7 @@ module Aws::ConnectCases
       :fields,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fields
@@ -1174,7 +1174,7 @@ module Aws::ConnectCases
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed case rule information. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -1216,7 +1216,7 @@ module Aws::ConnectCases
       :last_modified_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deleted] = false unless options.key?(:deleted)
@@ -1230,7 +1230,7 @@ module Aws::ConnectCases
     class GetDomainInput < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1259,7 +1259,7 @@ module Aws::ConnectCases
       :domain_status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store detailed field information.</p>
@@ -1305,7 +1305,7 @@ module Aws::ConnectCases
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deleted] = false unless options.key?(:deleted)
@@ -1323,7 +1323,7 @@ module Aws::ConnectCases
       :domain_id,
       :layout_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layout_id
@@ -1360,7 +1360,7 @@ module Aws::ConnectCases
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deleted] = false unless options.key?(:deleted)
@@ -1378,7 +1378,7 @@ module Aws::ConnectCases
       :domain_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -1431,7 +1431,7 @@ module Aws::ConnectCases
       :last_modified_time,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deleted] = false unless options.key?(:deleted)
@@ -1449,7 +1449,7 @@ module Aws::ConnectCases
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store configuration of layouts associated to the template.</p>
@@ -1459,7 +1459,7 @@ module Aws::ConnectCases
     class LayoutConfiguration < Struct.new(
       :default_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store union of different versions of layout content.</p>
@@ -1470,7 +1470,7 @@ module Aws::ConnectCases
       :basic,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Basic < LayoutContent; end
       class Unknown < LayoutContent; end
@@ -1483,7 +1483,7 @@ module Aws::ConnectCases
     class LayoutSections < Struct.new(
       :sections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for the summarized details of the layout.</p>
@@ -1501,7 +1501,7 @@ module Aws::ConnectCases
       :layout_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1518,7 +1518,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_rules
@@ -1531,7 +1531,7 @@ module Aws::ConnectCases
       :case_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1552,7 +1552,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cases
@@ -1565,7 +1565,7 @@ module Aws::ConnectCases
       :cases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1578,7 +1578,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domains
@@ -1591,7 +1591,7 @@ module Aws::ConnectCases
       :domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1616,7 +1616,7 @@ module Aws::ConnectCases
       :next_token,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute options
@@ -1629,7 +1629,7 @@ module Aws::ConnectCases
       :options,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1646,7 +1646,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fields
@@ -1659,7 +1659,7 @@ module Aws::ConnectCases
       :fields,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1676,7 +1676,7 @@ module Aws::ConnectCases
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layouts
@@ -1689,7 +1689,7 @@ module Aws::ConnectCases
       :layouts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1698,7 +1698,7 @@ module Aws::ConnectCases
     class ListTagsForResourceInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1707,7 +1707,7 @@ module Aws::ConnectCases
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1728,7 +1728,7 @@ module Aws::ConnectCases
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates
@@ -1741,7 +1741,7 @@ module Aws::ConnectCases
       :templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the left hand operand in the condition. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -1752,7 +1752,7 @@ module Aws::ConnectCases
       :field_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FieldId < OperandOne; end
       class Unknown < OperandOne; end
@@ -1778,7 +1778,7 @@ module Aws::ConnectCases
       :empty_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < OperandTwo; end
       class BooleanValue < OperandTwo; end
@@ -1797,12 +1797,12 @@ module Aws::ConnectCases
       :domain_id,
       :event_bridge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutCaseEventConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of a particular type of related item.</p>
@@ -1825,7 +1825,7 @@ module Aws::ConnectCases
       :sla,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Contact < RelatedItemContent; end
       class Comment < RelatedItemContent; end
@@ -1841,7 +1841,7 @@ module Aws::ConnectCases
     class RelatedItemEventIncludedData < Struct.new(
       :include_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of a related item to be created.</p>
@@ -1864,7 +1864,7 @@ module Aws::ConnectCases
       :sla,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Contact < RelatedItemInputContent; end
       class Comment < RelatedItemInputContent; end
@@ -1893,7 +1893,7 @@ module Aws::ConnectCases
       :sla,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Contact < RelatedItemTypeFilter; end
       class Comment < RelatedItemTypeFilter; end
@@ -1913,7 +1913,7 @@ module Aws::ConnectCases
       :default_value,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of fields that must have a value provided to create a case.</p>
@@ -1923,7 +1923,7 @@ module Aws::ConnectCases
     class RequiredField < Struct.new(
       :field_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We couldn't find the requested resource. Check that your resources exists and were created in the same Amazon Web Services Region as your request, and try your request again.</p>
@@ -1940,7 +1940,7 @@ module Aws::ConnectCases
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1973,7 +1973,7 @@ module Aws::ConnectCases
       :sorts,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1986,7 +1986,7 @@ module Aws::ConnectCases
       :next_token,
       :cases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of items that represent cases.</p>
@@ -2008,7 +2008,7 @@ module Aws::ConnectCases
       :fields,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2033,7 +2033,7 @@ module Aws::ConnectCases
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2046,7 +2046,7 @@ module Aws::ConnectCases
       :next_token,
       :related_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of items that represent RelatedItems.</p>
@@ -2076,7 +2076,7 @@ module Aws::ConnectCases
       :tags,
       :performed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This represents a sections within a panel or tab of the page layout.</p>
@@ -2087,7 +2087,7 @@ module Aws::ConnectCases
       :field_group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FieldGroup < Section; end
       class Unknown < Section; end
@@ -2099,7 +2099,7 @@ module Aws::ConnectCases
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an SLA configuration.</p>
@@ -2133,7 +2133,7 @@ module Aws::ConnectCases
       :target_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of an SLA to be returned to agents.</p>
@@ -2143,7 +2143,7 @@ module Aws::ConnectCases
     class SlaContent < Struct.new(
       :sla_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for related items of type <code>SLA</code>.</p>
@@ -2157,7 +2157,7 @@ module Aws::ConnectCases
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input configuration of an SLA being created.</p>
@@ -2183,7 +2183,7 @@ module Aws::ConnectCases
       :target_field_values,
       :target_sla_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the content of an SLA.</p>
@@ -2194,7 +2194,7 @@ module Aws::ConnectCases
       :sla_input_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SlaInputConfiguration < SlaInputContent; end
       class Unknown < SlaInputContent; end
@@ -2211,7 +2211,7 @@ module Aws::ConnectCases
       :field_id,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2224,7 +2224,7 @@ module Aws::ConnectCases
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An association representing a case rule acting upon a field. In the Amazon Connect admin website, case rules are known as <i>case field conditions</i>. For more information about case field conditions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/case-field-conditions.html">Add case field conditions to a case template</a>.</p>
@@ -2238,7 +2238,7 @@ module Aws::ConnectCases
       :case_rule_id,
       :field_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template summary information.</p>
@@ -2260,7 +2260,7 @@ module Aws::ConnectCases
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate has been exceeded for this API. Please try again after a few minutes.</p>
@@ -2269,7 +2269,7 @@ module Aws::ConnectCases
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2282,7 +2282,7 @@ module Aws::ConnectCases
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2303,12 +2303,12 @@ module Aws::ConnectCases
       :fields,
       :performed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2333,12 +2333,12 @@ module Aws::ConnectCases
       :description,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCaseRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2359,12 +2359,12 @@ module Aws::ConnectCases
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFieldOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2385,12 +2385,12 @@ module Aws::ConnectCases
       :name,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLayoutOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2427,12 +2427,12 @@ module Aws::ConnectCases
       :status,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the entity that performed the action.</p>
@@ -2447,7 +2447,7 @@ module Aws::ConnectCases
       :custom_entity,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UserArn < UserUnion; end
       class CustomEntity < UserUnion; end
@@ -2460,7 +2460,7 @@ module Aws::ConnectCases
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

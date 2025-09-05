@@ -21,7 +21,7 @@ module Aws::SecretsManager
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id_list
@@ -47,7 +47,7 @@ module Aws::SecretsManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_values
@@ -68,7 +68,7 @@ module Aws::SecretsManager
       :next_token,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -79,7 +79,7 @@ module Aws::SecretsManager
     class CancelRotateSecretRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -100,7 +100,7 @@ module Aws::SecretsManager
       :name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -212,7 +212,7 @@ module Aws::SecretsManager
       :add_replica_regions,
       :force_overwrite_replica_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -250,7 +250,7 @@ module Aws::SecretsManager
       :version_id,
       :replication_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Secrets Manager can't decrypt the protected secret text using the provided KMS key. </p>
@@ -259,7 +259,7 @@ module Aws::SecretsManager
     class DecryptionFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -270,7 +270,7 @@ module Aws::SecretsManager
     class DeleteResourcePolicyRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -283,7 +283,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -317,7 +317,7 @@ module Aws::SecretsManager
       :recovery_window_in_days,
       :force_delete_without_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -336,7 +336,7 @@ module Aws::SecretsManager
       :name,
       :deletion_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -347,7 +347,7 @@ module Aws::SecretsManager
     class DescribeSecretRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -477,10 +477,10 @@ module Aws::SecretsManager
       :primary_region,
       :replication_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:rotation_enabled] =  unless options.key?(:rotation_enabled)
+        options[:rotation_enabled] = nil unless options.key?(:rotation_enabled)
         super
       end
     end
@@ -493,7 +493,7 @@ module Aws::SecretsManager
     class EncryptionFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to add filters when you use the search function in Secrets Manager. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html">Find secrets in Secrets Manager</a>.</p>
@@ -538,17 +538,7 @@ module Aws::SecretsManager
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterNameStringType
-      description = 'description'
-      name = 'name'
-      tag_key = 'tag-key'
-      tag_value = 'tag-value'
-      primary_region = 'primary-region'
-      owning_service = 'owning-service'
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute password_length
@@ -593,7 +583,7 @@ module Aws::SecretsManager
       :include_space,
       :require_each_included_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute random_password
@@ -602,7 +592,7 @@ module Aws::SecretsManager
     class GetRandomPasswordResponse < Struct.new(
       :random_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -613,7 +603,7 @@ module Aws::SecretsManager
     class GetResourcePolicyRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -632,7 +622,7 @@ module Aws::SecretsManager
       :name,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -660,7 +650,7 @@ module Aws::SecretsManager
       :version_id,
       :version_stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -705,7 +695,7 @@ module Aws::SecretsManager
       :version_stages,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred on the server side.</p>
@@ -714,7 +704,7 @@ module Aws::SecretsManager
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> value is invalid.</p>
@@ -723,7 +713,7 @@ module Aws::SecretsManager
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter name or value is invalid.</p>
@@ -732,7 +722,7 @@ module Aws::SecretsManager
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter value is not valid for the current state of the
@@ -756,7 +746,7 @@ module Aws::SecretsManager
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it would exceed one of the Secrets Manager quotas.</p>
@@ -765,7 +755,7 @@ module Aws::SecretsManager
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -794,7 +784,7 @@ module Aws::SecretsManager
       :next_token,
       :include_deprecated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute versions
@@ -818,7 +808,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_planned_deletion
@@ -848,7 +838,7 @@ module Aws::SecretsManager
       :filters,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_list
@@ -865,7 +855,7 @@ module Aws::SecretsManager
       :secret_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource policy has syntax errors.</p>
@@ -874,7 +864,7 @@ module Aws::SecretsManager
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because you did not complete all the prerequisite steps.</p>
@@ -883,7 +873,7 @@ module Aws::SecretsManager
     class PreconditionNotMetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>BlockPublicPolicy</code> parameter is set to true, and the resource policy did not prevent broad access to the secret.</p>
@@ -892,7 +882,7 @@ module Aws::SecretsManager
     class PublicPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -925,7 +915,7 @@ module Aws::SecretsManager
       :resource_policy,
       :block_public_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -938,7 +928,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1012,7 +1002,7 @@ module Aws::SecretsManager
       :version_stages,
       :rotation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1035,7 +1025,7 @@ module Aws::SecretsManager
       :version_id,
       :version_stages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1048,7 +1038,7 @@ module Aws::SecretsManager
       :secret_id,
       :remove_replica_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1061,7 +1051,7 @@ module Aws::SecretsManager
       :arn,
       :replication_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom type that specifies a <code>Region</code> and the <code>KmsKeyId</code> for a replica secret.</p>
@@ -1075,7 +1065,7 @@ module Aws::SecretsManager
       :region,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1092,7 +1082,7 @@ module Aws::SecretsManager
       :add_replica_regions,
       :force_overwrite_replica_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1105,7 +1095,7 @@ module Aws::SecretsManager
       :arn,
       :replication_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A replication object consisting of a <code>RegionReplicationStatus</code> object and includes a Region, KMSKeyId, status, and status message.</p>
@@ -1132,7 +1122,7 @@ module Aws::SecretsManager
       :status_message,
       :last_accessed_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the ID you requested already exists.</p>
@@ -1141,7 +1131,7 @@ module Aws::SecretsManager
     class ResourceExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Secrets Manager can't find the resource that you asked for.</p>
@@ -1150,7 +1140,7 @@ module Aws::SecretsManager
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1161,7 +1151,7 @@ module Aws::SecretsManager
     class RestoreSecretRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1174,7 +1164,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1214,7 +1204,7 @@ module Aws::SecretsManager
       :rotation_rules,
       :rotate_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1231,7 +1221,7 @@ module Aws::SecretsManager
       :name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines the rotation configuration for the secret.</p>
@@ -1282,7 +1272,7 @@ module Aws::SecretsManager
       :duration,
       :schedule_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the details about a secret. It does not include the encrypted
@@ -1379,10 +1369,10 @@ module Aws::SecretsManager
       :created_date,
       :primary_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:rotation_enabled] =  unless options.key?(:rotation_enabled)
+        options[:rotation_enabled] = nil unless options.key?(:rotation_enabled)
         super
       end
     end
@@ -1423,7 +1413,7 @@ module Aws::SecretsManager
       :version_stages,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one version of a secret.</p>
@@ -1451,18 +1441,7 @@ module Aws::SecretsManager
       :created_date,
       :kms_key_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrderType
-      asc = 'asc'
-      desc = 'desc'
-    end
-
-    module StatusType
-      InSync = 'InSync'
-      Failed = 'Failed'
-      InProgress = 'InProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1471,7 +1450,7 @@ module Aws::SecretsManager
     class StopReplicationToReplicaRequest < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1480,7 +1459,7 @@ module Aws::SecretsManager
     class StopReplicationToReplicaResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a tag.</p>
@@ -1494,7 +1473,7 @@ module Aws::SecretsManager
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1514,7 +1493,7 @@ module Aws::SecretsManager
       :secret_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1534,7 +1513,7 @@ module Aws::SecretsManager
       :secret_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1599,7 +1578,7 @@ module Aws::SecretsManager
       :secret_binary,
       :secret_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1617,7 +1596,7 @@ module Aws::SecretsManager
       :name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1647,7 +1626,7 @@ module Aws::SecretsManager
       :remove_from_version_id,
       :move_to_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1660,7 +1639,7 @@ module Aws::SecretsManager
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_id
@@ -1675,7 +1654,7 @@ module Aws::SecretsManager
       :secret_id,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_validation_passed
@@ -1688,7 +1667,7 @@ module Aws::SecretsManager
       :policy_validation_passed,
       :validation_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:policy_validation_passed] = false unless options.key?(:policy_validation_passed)
@@ -1707,7 +1686,7 @@ module Aws::SecretsManager
       :check_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

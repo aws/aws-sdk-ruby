@@ -18,7 +18,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -38,7 +38,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -58,17 +58,12 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
         super
       end
-    end
-
-    module ConnectionType
-      CONNECT_SSH = 'CONNECT_SSH'
-      CONNECT_SSM = 'CONNECT_SSM'
     end
 
     # @!attribute name
@@ -188,7 +183,7 @@ module Aws::Cloud9
       :connection_type,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -197,7 +192,7 @@ module Aws::Cloud9
     class CreateEnvironmentEC2Result < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -225,7 +220,7 @@ module Aws::Cloud9
       :user_arn,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership
@@ -234,7 +229,7 @@ module Aws::Cloud9
     class CreateEnvironmentMembershipResult < Struct.new(
       :membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -248,12 +243,12 @@ module Aws::Cloud9
       :environment_id,
       :user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentMembershipResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -262,12 +257,12 @@ module Aws::Cloud9
     class DeleteEnvironmentRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_arn
@@ -314,7 +309,7 @@ module Aws::Cloud9
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memberships
@@ -329,7 +324,7 @@ module Aws::Cloud9
       :memberships,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -338,7 +333,7 @@ module Aws::Cloud9
     class DescribeEnvironmentStatusRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -381,7 +376,7 @@ module Aws::Cloud9
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_ids
@@ -390,7 +385,7 @@ module Aws::Cloud9
     class DescribeEnvironmentsRequest < Struct.new(
       :environment_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -399,7 +394,7 @@ module Aws::Cloud9
     class DescribeEnvironmentsResult < Struct.new(
       :environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Cloud9 development environment.</p>
@@ -505,7 +500,7 @@ module Aws::Cloud9
       :lifecycle,
       :managed_credentials_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the current creation or deletion lifecycle state of an Cloud9 development
@@ -547,15 +542,7 @@ module Aws::Cloud9
       :reason,
       :failure_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentLifecycleStatus
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an environment member for an Cloud9 development environment.</p>
@@ -597,22 +584,7 @@ module Aws::Cloud9
       :environment_id,
       :last_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentStatus
-      ERROR = 'error'
-      CREATING = 'creating'
-      CONNECTING = 'connecting'
-      READY = 'ready'
-      STOPPING = 'stopping'
-      STOPPED = 'stopped'
-      DELETING = 'deleting'
-    end
-
-    module EnvironmentType
-      SSH = 'ssh'
-      EC2 = 'ec2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An access permissions issue occurred.</p>
@@ -627,7 +599,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -647,7 +619,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -667,7 +639,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -689,7 +661,7 @@ module Aws::Cloud9
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -704,7 +676,7 @@ module Aws::Cloud9
       :next_token,
       :environment_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -714,7 +686,7 @@ module Aws::Cloud9
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -723,31 +695,7 @@ module Aws::Cloud9
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedCredentialsAction
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
-    end
-
-    module ManagedCredentialsStatus
-      ENABLED_ON_CREATE = 'ENABLED_ON_CREATE'
-      ENABLED_BY_OWNER = 'ENABLED_BY_OWNER'
-      DISABLED_BY_DEFAULT = 'DISABLED_BY_DEFAULT'
-      DISABLED_BY_OWNER = 'DISABLED_BY_OWNER'
-      DISABLED_BY_COLLABORATOR = 'DISABLED_BY_COLLABORATOR'
-      PENDING_REMOVAL_BY_COLLABORATOR = 'PENDING_REMOVAL_BY_COLLABORATOR'
-      PENDING_START_REMOVAL_BY_COLLABORATOR = 'PENDING_START_REMOVAL_BY_COLLABORATOR'
-      PENDING_REMOVAL_BY_OWNER = 'PENDING_REMOVAL_BY_OWNER'
-      PENDING_START_REMOVAL_BY_OWNER = 'PENDING_START_REMOVAL_BY_OWNER'
-      FAILED_REMOVAL_BY_COLLABORATOR = 'FAILED_REMOVAL_BY_COLLABORATOR'
-      FAILED_REMOVAL_BY_OWNER = 'FAILED_REMOVAL_BY_OWNER'
-    end
-
-    module MemberPermissions
-      READ_WRITE = 'read-write'
-      READ_ONLY = 'read-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target resource cannot be found.</p>
@@ -762,18 +710,12 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
         super
       end
-    end
-
-    module Permissions
-      OWNER = 'owner'
-      READ_WRITE = 'read-write'
-      READ_ONLY = 'read-only'
     end
 
     # <p>Metadata that is associated with Amazon Web Services resources. In particular, a name-value pair that
@@ -792,7 +734,7 @@ module Aws::Cloud9
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -806,12 +748,12 @@ module Aws::Cloud9
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many service requests were made over the given time period.</p>
@@ -826,7 +768,7 @@ module Aws::Cloud9
       :class_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -846,12 +788,12 @@ module Aws::Cloud9
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -881,7 +823,7 @@ module Aws::Cloud9
       :user_arn,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership
@@ -890,7 +832,7 @@ module Aws::Cloud9
     class UpdateEnvironmentMembershipResult < Struct.new(
       :membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -928,12 +870,12 @@ module Aws::Cloud9
       :description,
       :managed_credentials_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEnvironmentResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

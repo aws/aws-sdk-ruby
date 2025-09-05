@@ -12,7 +12,7 @@ module Aws::GeoRoutes
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow
@@ -133,7 +133,7 @@ module Aws::GeoRoutes
       :travel_mode,
       :travel_mode_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arrival_time
@@ -187,7 +187,7 @@ module Aws::GeoRoutes
       :snapped_destination,
       :snapped_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow
@@ -277,7 +277,7 @@ module Aws::GeoRoutes
       :travel_mode,
       :travel_mode_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_count
@@ -307,7 +307,7 @@ module Aws::GeoRoutes
       :route_matrix,
       :routing_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allow
@@ -502,7 +502,7 @@ module Aws::GeoRoutes
       :travel_step_type,
       :waypoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute leg_geometry_format
@@ -524,7 +524,7 @@ module Aws::GeoRoutes
       :pricing_bucket,
       :routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry defined as a circle. When request routing boundary was set as
@@ -546,7 +546,7 @@ module Aws::GeoRoutes
       :center,
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry defined as a corridor - a LineString with a radius that defines the width of
@@ -565,7 +565,7 @@ module Aws::GeoRoutes
       :line_string,
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or
@@ -575,7 +575,7 @@ module Aws::GeoRoutes
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Calculated isolines and associated properties.</p>
@@ -599,7 +599,7 @@ module Aws::GeoRoutes
       :geometries,
       :time_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance_threshold] = 0 unless options.key?(:distance_threshold)
@@ -623,7 +623,7 @@ module Aws::GeoRoutes
       :hot,
       :hov,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The area to be avoided.</p>
@@ -638,7 +638,7 @@ module Aws::GeoRoutes
       :except,
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The avoidance geometry, to be included while calculating an isoline.</p>
@@ -670,7 +670,7 @@ module Aws::GeoRoutes
       :polyline_corridor,
       :polyline_polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Features that are avoided while calculating isolines. Avoidance is on a best-case basis.
@@ -730,7 +730,7 @@ module Aws::GeoRoutes
       :u_turns,
       :zone_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Zone category to be avoided.</p>
@@ -740,7 +740,7 @@ module Aws::GeoRoutes
     class IsolineAvoidanceZoneCategory < Struct.new(
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is <code>Car</code>.</p>
@@ -767,11 +767,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -795,7 +795,7 @@ module Aws::GeoRoutes
       :geometry,
       :to_polygon_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry of the connection between different isoline components.</p>
@@ -816,7 +816,7 @@ module Aws::GeoRoutes
       :line_string,
       :polyline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Destination related options.</p>
@@ -840,7 +840,7 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -863,10 +863,10 @@ module Aws::GeoRoutes
       :max_points,
       :max_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_points] =  unless options.key?(:max_points)
+        options[:max_points] = nil unless options.key?(:max_points)
         options[:max_resolution] = 0 unless options.key?(:max_resolution)
         super
       end
@@ -901,7 +901,7 @@ module Aws::GeoRoutes
       :radius,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:on_road_threshold] = 0 unless options.key?(:on_road_threshold)
@@ -931,7 +931,7 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -965,11 +965,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -988,7 +988,7 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to configure matching the provided position to a side of the street.</p>
@@ -1005,7 +1005,7 @@ module Aws::GeoRoutes
       :position,
       :use_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Threshold to be used for the isoline calculation. Up to 5 thresholds per provided type
@@ -1020,7 +1020,7 @@ module Aws::GeoRoutes
       :distance,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to traffic.</p>
@@ -1042,7 +1042,7 @@ module Aws::GeoRoutes
       :flow_event_threshold_override,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:flow_event_threshold_override] = 0 unless options.key?(:flow_event_threshold_override)
@@ -1063,11 +1063,11 @@ module Aws::GeoRoutes
       :axle_count,
       :trailer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:axle_count] =  unless options.key?(:axle_count)
-        options[:trailer_count] =  unless options.key?(:trailer_count)
+        options[:axle_count] = nil unless options.key?(:axle_count)
+        options[:trailer_count] = nil unless options.key?(:trailer_count)
         super
       end
     end
@@ -1092,7 +1092,7 @@ module Aws::GeoRoutes
       :scooter,
       :truck,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -1274,19 +1274,19 @@ module Aws::GeoRoutes
       :weight_per_axle_group,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:axle_count] =  unless options.key?(:axle_count)
+        options[:axle_count] = nil unless options.key?(:axle_count)
         options[:gross_weight] = 0 unless options.key?(:gross_weight)
         options[:height] = 0 unless options.key?(:height)
         options[:height_above_first_axle] = 0 unless options.key?(:height_above_first_axle)
         options[:kpra_length] = 0 unless options.key?(:kpra_length)
         options[:length] = 0 unless options.key?(:length)
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         options[:payload_capacity] = 0 unless options.key?(:payload_capacity)
-        options[:tire_count] =  unless options.key?(:tire_count)
+        options[:tire_count] = nil unless options.key?(:tire_count)
         options[:weight_per_axle] = 0 unless options.key?(:weight_per_axle)
         options[:width] = 0 unless options.key?(:width)
         super
@@ -1300,7 +1300,7 @@ module Aws::GeoRoutes
     class IsolineVehicleLicensePlate < Struct.new(
       :last_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The localized string.</p>
@@ -1316,7 +1316,7 @@ module Aws::GeoRoutes
       :language,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute avoid
@@ -1398,7 +1398,7 @@ module Aws::GeoRoutes
       :travel_mode_options,
       :waypoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -1436,7 +1436,7 @@ module Aws::GeoRoutes
       :pricing_bucket,
       :time_breakdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -1466,7 +1466,7 @@ module Aws::GeoRoutes
       :polyline,
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notices provide information around factors that may have influenced snapping in a manner
@@ -1485,7 +1485,7 @@ module Aws::GeoRoutes
       :title,
       :trace_point_indexes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Interpolated geometry for the snapped route that is overlay-able onto a map.</p>
@@ -1506,7 +1506,7 @@ module Aws::GeoRoutes
       :line_string,
       :polyline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TracePoints snapped onto the road network.</p>
@@ -1525,7 +1525,7 @@ module Aws::GeoRoutes
       :original_position,
       :snapped_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TracePoint indices for which the provided notice code corresponds to.</p>
@@ -1550,7 +1550,7 @@ module Aws::GeoRoutes
       :speed,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:heading] = 0 unless options.key?(:heading)
@@ -1568,7 +1568,7 @@ module Aws::GeoRoutes
     class RoadSnapTrailerOptions < Struct.new(
       :trailer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode related options for the provided travel mode.</p>
@@ -1578,7 +1578,7 @@ module Aws::GeoRoutes
     class RoadSnapTravelModeOptions < Struct.new(
       :truck,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is "Truck".</p>
@@ -1686,7 +1686,7 @@ module Aws::GeoRoutes
       :tunnel_restriction_code,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:gross_weight] = 0 unless options.key?(:gross_weight)
@@ -1717,7 +1717,7 @@ module Aws::GeoRoutes
       :major_road_labels,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Features that are allowed while calculating a route.</p>
@@ -1735,7 +1735,7 @@ module Aws::GeoRoutes
       :hot,
       :hov,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Areas to be avoided.</p>
@@ -1750,7 +1750,7 @@ module Aws::GeoRoutes
       :except,
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry of the area to be avoided.</p>
@@ -1782,7 +1782,7 @@ module Aws::GeoRoutes
       :polyline_corridor,
       :polyline_polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort
@@ -1844,7 +1844,7 @@ module Aws::GeoRoutes
       :u_turns,
       :zone_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Zone categories to be avoided.</p>
@@ -1854,7 +1854,7 @@ module Aws::GeoRoutes
     class RouteAvoidanceZoneCategory < Struct.new(
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is <code>Car</code>.</p>
@@ -1881,11 +1881,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -1909,7 +1909,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -1924,7 +1924,7 @@ module Aws::GeoRoutes
     class RouteContinueStepDetails < Struct.new(
       :intersection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to the destination.</p>
@@ -1959,7 +1959,7 @@ module Aws::GeoRoutes
       :side_of_street,
       :stop_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -1976,7 +1976,7 @@ module Aws::GeoRoutes
     class RouteDriverOptions < Struct.new(
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Interval of the driver work-rest schedule. Stops are added to fulfil the provided rest
@@ -1997,7 +1997,7 @@ module Aws::GeoRoutes
       :drive_duration,
       :rest_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:drive_duration] = 0 unless options.key?(:drive_duration)
@@ -2025,7 +2025,7 @@ module Aws::GeoRoutes
       :co2_emission_class,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details related to the enter highway step.</p>
@@ -2047,7 +2047,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -2065,7 +2065,7 @@ module Aws::GeoRoutes
     class RouteExclusionOptions < Struct.new(
       :countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details related to the exit step.</p>
@@ -2091,10 +2091,10 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:relative_exit] =  unless options.key?(:relative_exit)
+        options[:relative_exit] = nil unless options.key?(:relative_exit)
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
         super
       end
@@ -2121,7 +2121,7 @@ module Aws::GeoRoutes
       :instruction,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -2140,7 +2140,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Steps of a leg that must be performed before the travel portion of the leg.</p>
@@ -2164,7 +2164,7 @@ module Aws::GeoRoutes
       :instruction,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -2183,7 +2183,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>FerryLegDetails is populated when the Leg type is Ferry, and provides additional
@@ -2232,7 +2232,7 @@ module Aws::GeoRoutes
       :summary,
       :travel_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notices are additional information returned that indicate issues that occurred during
@@ -2248,7 +2248,7 @@ module Aws::GeoRoutes
       :code,
       :impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized details of the leg.</p>
@@ -2265,7 +2265,7 @@ module Aws::GeoRoutes
       :distance,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -2293,7 +2293,7 @@ module Aws::GeoRoutes
       :position,
       :waypoint_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Span computed for the requested SpanAdditionalFeatures.</p>
@@ -2332,7 +2332,7 @@ module Aws::GeoRoutes
       :names,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -2355,7 +2355,7 @@ module Aws::GeoRoutes
       :overview,
       :travel_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized details for the leg including travel steps only. The Distance for the travel
@@ -2370,7 +2370,7 @@ module Aws::GeoRoutes
     class RouteFerryTravelOnlySummary < Struct.new(
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -2407,7 +2407,7 @@ module Aws::GeoRoutes
       :instruction,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -2435,7 +2435,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -2482,7 +2482,7 @@ module Aws::GeoRoutes
       :type,
       :vehicle_leg_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned Route leg geometry.</p>
@@ -2503,7 +2503,7 @@ module Aws::GeoRoutes
       :line_string,
       :polyline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Important labels including names and route numbers that differentiate the current route
@@ -2518,7 +2518,7 @@ module Aws::GeoRoutes
       :road_name,
       :route_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to route matching.</p>
@@ -2550,7 +2550,7 @@ module Aws::GeoRoutes
       :radius,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:on_road_threshold] = 0 unless options.key?(:on_road_threshold)
@@ -2574,7 +2574,7 @@ module Aws::GeoRoutes
       :hot,
       :hov,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the circle that was used while calculating the route.</p>
@@ -2588,7 +2588,7 @@ module Aws::GeoRoutes
       :margin,
       :max_radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:margin] = 0 unless options.key?(:margin)
@@ -2604,7 +2604,7 @@ module Aws::GeoRoutes
     class RouteMatrixAvoidanceArea < Struct.new(
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry of the area to be avoided.</p>
@@ -2626,7 +2626,7 @@ module Aws::GeoRoutes
       :polygon,
       :polyline_polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies options for areas to avoid when calculating the route. This is a best-effort
@@ -2684,7 +2684,7 @@ module Aws::GeoRoutes
       :u_turns,
       :zone_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Zone categories to be avoided.</p>
@@ -2694,7 +2694,7 @@ module Aws::GeoRoutes
     class RouteMatrixAvoidanceZoneCategory < Struct.new(
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Boundary within which the matrix is to be calculated. All data, origins and destinations
@@ -2710,7 +2710,7 @@ module Aws::GeoRoutes
       :geometry,
       :unbounded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry of the routing boundary.</p>
@@ -2736,7 +2736,7 @@ module Aws::GeoRoutes
       :bounding_box,
       :polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is <code>Car</code>.</p>
@@ -2759,11 +2759,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -2779,7 +2779,7 @@ module Aws::GeoRoutes
       :options,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to the destination.</p>
@@ -2803,7 +2803,7 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -2833,7 +2833,7 @@ module Aws::GeoRoutes
       :duration,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -2852,7 +2852,7 @@ module Aws::GeoRoutes
     class RouteMatrixExclusionOptions < Struct.new(
       :countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Matching options.</p>
@@ -2884,7 +2884,7 @@ module Aws::GeoRoutes
       :radius,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:on_road_threshold] = 0 unless options.key?(:on_road_threshold)
@@ -2904,7 +2904,7 @@ module Aws::GeoRoutes
       :options,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origin related options.</p>
@@ -2928,7 +2928,7 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -2958,11 +2958,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -2981,7 +2981,7 @@ module Aws::GeoRoutes
       :position,
       :use_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Traffic related options.</p>
@@ -3000,7 +3000,7 @@ module Aws::GeoRoutes
       :flow_event_threshold_override,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:flow_event_threshold_override] = 0 unless options.key?(:flow_event_threshold_override)
@@ -3017,7 +3017,7 @@ module Aws::GeoRoutes
     class RouteMatrixTrailerOptions < Struct.new(
       :trailer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode related options for the provided travel mode.</p>
@@ -3040,7 +3040,7 @@ module Aws::GeoRoutes
       :scooter,
       :truck,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -3204,16 +3204,16 @@ module Aws::GeoRoutes
       :weight_per_axle_group,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:axle_count] =  unless options.key?(:axle_count)
+        options[:axle_count] = nil unless options.key?(:axle_count)
         options[:gross_weight] = 0 unless options.key?(:gross_weight)
         options[:height] = 0 unless options.key?(:height)
         options[:kpra_length] = 0 unless options.key?(:kpra_length)
         options[:length] = 0 unless options.key?(:length)
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         options[:payload_capacity] = 0 unless options.key?(:payload_capacity)
         options[:weight_per_axle] = 0 unless options.key?(:weight_per_axle)
         options[:width] = 0 unless options.key?(:width)
@@ -3228,7 +3228,7 @@ module Aws::GeoRoutes
     class RouteMatrixVehicleLicensePlate < Struct.new(
       :last_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notice Detail that is a range.</p>
@@ -3242,7 +3242,7 @@ module Aws::GeoRoutes
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The route number.</p>
@@ -3260,7 +3260,7 @@ module Aws::GeoRoutes
       :language,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origin related options.</p>
@@ -3288,7 +3288,7 @@ module Aws::GeoRoutes
       :matching,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -3312,7 +3312,7 @@ module Aws::GeoRoutes
       :position,
       :waypoint_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the waypoint should be treated as a stop. If yes, the route is split up into
@@ -3327,7 +3327,7 @@ module Aws::GeoRoutes
       :geometry_offset,
       :place,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details corresponding to the arrival for a leg.</p>
@@ -3350,7 +3350,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details corresponding to the departure for a leg.</p>
@@ -3373,7 +3373,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details that are specific to a pedestrian leg.</p>
@@ -3409,7 +3409,7 @@ module Aws::GeoRoutes
       :summary,
       :travel_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notices are additional information returned that indicate issues that occurred during
@@ -3425,7 +3425,7 @@ module Aws::GeoRoutes
       :code,
       :impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to the pedestrian.</p>
@@ -3435,10 +3435,10 @@ module Aws::GeoRoutes
     class RoutePedestrianOptions < Struct.new(
       :speed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:speed] =  unless options.key?(:speed)
+        options[:speed] = nil unless options.key?(:speed)
         super
       end
     end
@@ -3454,7 +3454,7 @@ module Aws::GeoRoutes
       :distance,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -3486,7 +3486,7 @@ module Aws::GeoRoutes
       :side_of_street,
       :waypoint_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Span computed for the requested SpanAdditionalFeatures.</p>
@@ -3571,7 +3571,7 @@ module Aws::GeoRoutes
       :speed_limit,
       :typical_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:best_case_duration] = 0 unless options.key?(:best_case_duration)
@@ -3596,7 +3596,7 @@ module Aws::GeoRoutes
       :overview,
       :travel_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized details for the leg including travel steps.</p>
@@ -3609,7 +3609,7 @@ module Aws::GeoRoutes
     class RoutePedestrianTravelOnlySummary < Struct.new(
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -3687,7 +3687,7 @@ module Aws::GeoRoutes
       :turn_step_details,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -3715,7 +3715,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -3736,7 +3736,7 @@ module Aws::GeoRoutes
       :code,
       :impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The road on the route.</p>
@@ -3758,7 +3758,7 @@ module Aws::GeoRoutes
       :towards,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the roundabout leg.</p>
@@ -3780,7 +3780,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -3807,10 +3807,10 @@ module Aws::GeoRoutes
       :roundabout_angle,
       :steering_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:relative_exit] =  unless options.key?(:relative_exit)
+        options[:relative_exit] = nil unless options.key?(:relative_exit)
         options[:roundabout_angle] = 0 unless options.key?(:roundabout_angle)
         super
       end
@@ -3835,7 +3835,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -3868,11 +3868,11 @@ module Aws::GeoRoutes
       :max_speed,
       :occupancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         super
       end
     end
@@ -3890,7 +3890,7 @@ module Aws::GeoRoutes
       :position,
       :use_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sign post information of the action, applicable only for TurnByTurn steps. See
@@ -3901,7 +3901,7 @@ module Aws::GeoRoutes
     class RouteSignpost < Struct.new(
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Labels presented on the sign post.</p>
@@ -3915,7 +3915,7 @@ module Aws::GeoRoutes
       :route_number,
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the dynamic speed.</p>
@@ -3945,7 +3945,7 @@ module Aws::GeoRoutes
       :turn_duration,
       :typical_speed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:best_case_speed] = 0 unless options.key?(:best_case_speed)
@@ -3972,7 +3972,7 @@ module Aws::GeoRoutes
       :max_speed,
       :unlimited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_speed] = 0 unless options.key?(:max_speed)
@@ -3999,7 +3999,7 @@ module Aws::GeoRoutes
       :duration,
       :tolls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -4029,7 +4029,7 @@ module Aws::GeoRoutes
       :rates,
       :systems,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to Tolls on a route.</p>
@@ -4063,7 +4063,7 @@ module Aws::GeoRoutes
       :emission_type,
       :vehicle_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details if the toll rate can be a pass that supports multiple trips.</p>
@@ -4089,7 +4089,7 @@ module Aws::GeoRoutes
       :trip_count,
       :validity_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Period for which the pass is valid.</p>
@@ -4103,7 +4103,7 @@ module Aws::GeoRoutes
       :period,
       :period_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Locations or sites where the toll fare is collected.</p>
@@ -4117,7 +4117,7 @@ module Aws::GeoRoutes
       :name,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The toll price.</p>
@@ -4152,7 +4152,7 @@ module Aws::GeoRoutes
       :range_value,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:per_duration] = 0 unless options.key?(:per_duration)
@@ -4185,7 +4185,7 @@ module Aws::GeoRoutes
       :range_value,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Price range with a minimum and maximum value, if a range.</p>
@@ -4199,7 +4199,7 @@ module Aws::GeoRoutes
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The toll rate.</p>
@@ -4237,7 +4237,7 @@ module Aws::GeoRoutes
       :payment_methods,
       :transponders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The toll summary for the complete route.</p>
@@ -4248,7 +4248,7 @@ module Aws::GeoRoutes
     class RouteTollSummary < Struct.new(
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Toll systems are authorities that collect payments for the toll.</p>
@@ -4258,7 +4258,7 @@ module Aws::GeoRoutes
     class RouteTollSystem < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Traffic options for the route.</p>
@@ -4277,7 +4277,7 @@ module Aws::GeoRoutes
       :flow_event_threshold_override,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:flow_event_threshold_override] = 0 unless options.key?(:flow_event_threshold_override)
@@ -4298,11 +4298,11 @@ module Aws::GeoRoutes
       :axle_count,
       :trailer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:axle_count] =  unless options.key?(:axle_count)
-        options[:trailer_count] =  unless options.key?(:trailer_count)
+        options[:axle_count] = nil unless options.key?(:axle_count)
+        options[:trailer_count] = nil unless options.key?(:trailer_count)
         super
       end
     end
@@ -4314,7 +4314,7 @@ module Aws::GeoRoutes
     class RouteTransponder < Struct.new(
       :system_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode related options for the provided travel mode.</p>
@@ -4341,7 +4341,7 @@ module Aws::GeoRoutes
       :scooter,
       :truck,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -4523,19 +4523,19 @@ module Aws::GeoRoutes
       :weight_per_axle_group,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:axle_count] =  unless options.key?(:axle_count)
+        options[:axle_count] = nil unless options.key?(:axle_count)
         options[:gross_weight] = 0 unless options.key?(:gross_weight)
         options[:height] = 0 unless options.key?(:height)
         options[:height_above_first_axle] = 0 unless options.key?(:height_above_first_axle)
         options[:kpra_length] = 0 unless options.key?(:kpra_length)
         options[:length] = 0 unless options.key?(:length)
-        options[:max_speed] =  unless options.key?(:max_speed)
-        options[:occupancy] =  unless options.key?(:occupancy)
+        options[:max_speed] = nil unless options.key?(:max_speed)
+        options[:occupancy] = nil unless options.key?(:occupancy)
         options[:payload_capacity] = 0 unless options.key?(:payload_capacity)
-        options[:tire_count] =  unless options.key?(:tire_count)
+        options[:tire_count] = nil unless options.key?(:tire_count)
         options[:weight_per_axle] = 0 unless options.key?(:weight_per_axle)
         options[:width] = 0 unless options.key?(:width)
         super
@@ -4561,7 +4561,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -4588,7 +4588,7 @@ module Aws::GeoRoutes
       :turn_angle,
       :turn_intensity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:turn_angle] = 0 unless options.key?(:turn_angle)
@@ -4607,7 +4607,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details corresponding to the departure for the leg.</p>
@@ -4621,7 +4621,7 @@ module Aws::GeoRoutes
       :place,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Incidents corresponding to this leg of the route.</p>
@@ -4650,7 +4650,7 @@ module Aws::GeoRoutes
       :start_time,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Steps of a leg that correspond to the travel portion of the leg.</p>
@@ -4710,7 +4710,7 @@ module Aws::GeoRoutes
       :truck_road_types,
       :zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>License plate information of the vehicle. Currently, only the last character is used
@@ -4721,7 +4721,7 @@ module Aws::GeoRoutes
     class RouteVehicleLicensePlate < Struct.new(
       :last_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notices are additional information returned that indicate issues that occurred during
@@ -4741,7 +4741,7 @@ module Aws::GeoRoutes
       :details,
       :impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional details of the notice.</p>
@@ -4755,7 +4755,7 @@ module Aws::GeoRoutes
       :title,
       :violated_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized details of the leg.</p>
@@ -4787,7 +4787,7 @@ module Aws::GeoRoutes
       :duration,
       :typical_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:best_case_duration] = 0 unless options.key?(:best_case_duration)
@@ -4821,7 +4821,7 @@ module Aws::GeoRoutes
       :side_of_street,
       :waypoint_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Span computed for the requested SpanAdditionalFeatures.</p>
@@ -4945,7 +4945,7 @@ module Aws::GeoRoutes
       :typical_duration,
       :zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:best_case_duration] = 0 unless options.key?(:best_case_duration)
@@ -4969,7 +4969,7 @@ module Aws::GeoRoutes
       :overview,
       :travel_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized details of the route.</p>
@@ -4997,7 +4997,7 @@ module Aws::GeoRoutes
       :duration,
       :typical_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:best_case_duration] = 0 unless options.key?(:best_case_duration)
@@ -5097,7 +5097,7 @@ module Aws::GeoRoutes
       :type,
       :u_turn_step_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -5274,7 +5274,7 @@ module Aws::GeoRoutes
       :truck_type,
       :tunnel_restriction_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_height] = 0 unless options.key?(:max_height)
@@ -5328,7 +5328,7 @@ module Aws::GeoRoutes
       :side_of_street,
       :stop_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:avoid_actions_for_distance] = 0 unless options.key?(:avoid_actions_for_distance)
@@ -5355,7 +5355,7 @@ module Aws::GeoRoutes
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -5374,7 +5374,7 @@ module Aws::GeoRoutes
       :category,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -5414,7 +5414,7 @@ module Aws::GeoRoutes
       :travel_mode,
       :travel_mode_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notices
@@ -5440,7 +5440,7 @@ module Aws::GeoRoutes
       :snapped_geometry_format,
       :snapped_trace_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -5449,7 +5449,7 @@ module Aws::GeoRoutes
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -5466,7 +5466,7 @@ module Aws::GeoRoutes
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the Amazon Location
@@ -5481,7 +5481,7 @@ module Aws::GeoRoutes
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access hours corresponding to when a destination can be visited.</p>
@@ -5495,7 +5495,7 @@ module Aws::GeoRoutes
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Hours of entry.</p>
@@ -5509,7 +5509,7 @@ module Aws::GeoRoutes
       :day_of_week,
       :time_of_day,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The area to be avoided.</p>
@@ -5519,7 +5519,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationAvoidanceArea < Struct.new(
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Geometry of the area to be avoided.</p>
@@ -5531,7 +5531,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationAvoidanceAreaGeometry < Struct.new(
       :bounding_box,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies options for areas to avoid. This is a best-effort avoidance setting, meaning
@@ -5572,7 +5572,7 @@ module Aws::GeoRoutes
       :tunnels,
       :u_turns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for WaypointOptimizationClustering.</p>
@@ -5591,7 +5591,7 @@ module Aws::GeoRoutes
       :algorithm,
       :driving_distance_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains information such as distance and duration from one waypoint to the next
@@ -5628,7 +5628,7 @@ module Aws::GeoRoutes
       :travel_duration,
       :wait_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:distance] = 0 unless options.key?(:distance)
@@ -5670,7 +5670,7 @@ module Aws::GeoRoutes
       :service_duration,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:heading] = 0 unless options.key?(:heading)
@@ -5698,7 +5698,7 @@ module Aws::GeoRoutes
       :rest_profile,
       :treat_service_time_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Driving distance related options.</p>
@@ -5709,7 +5709,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationDrivingDistanceOptions < Struct.new(
       :driving_distance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:driving_distance] = 0 unless options.key?(:driving_distance)
@@ -5727,7 +5727,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationExclusionOptions < Struct.new(
       :countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failed constraint.</p>
@@ -5741,7 +5741,7 @@ module Aws::GeoRoutes
       :constraint,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The impeding waypoint.</p>
@@ -5759,7 +5759,7 @@ module Aws::GeoRoutes
       :id,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optimized waypoint.</p>
@@ -5803,7 +5803,7 @@ module Aws::GeoRoutes
       :id,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origin related options.</p>
@@ -5813,7 +5813,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationOriginOptions < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options related to a pedestrian.</p>
@@ -5826,10 +5826,10 @@ module Aws::GeoRoutes
     class WaypointOptimizationPedestrianOptions < Struct.new(
       :speed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:speed] =  unless options.key?(:speed)
+        options[:speed] = nil unless options.key?(:speed)
         super
       end
     end
@@ -5856,7 +5856,7 @@ module Aws::GeoRoutes
       :rest_duration,
       :work_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rest_duration] = 0 unless options.key?(:rest_duration)
@@ -5876,7 +5876,7 @@ module Aws::GeoRoutes
       :long_cycle,
       :short_cycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Pre defined rest profiles for a driver schedule. The only currently supported profile is
@@ -5888,7 +5888,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationRestProfile < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to configure matching the provided position to a side of the street.</p>
@@ -5905,7 +5905,7 @@ module Aws::GeoRoutes
       :position,
       :use_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Time breakdown for the sequence.</p>
@@ -5940,7 +5940,7 @@ module Aws::GeoRoutes
       :travel_duration,
       :wait_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rest_duration] = 0 unless options.key?(:rest_duration)
@@ -5960,7 +5960,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationTrafficOptions < Struct.new(
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Trailer options corresponding to the vehicle.</p>
@@ -5972,7 +5972,7 @@ module Aws::GeoRoutes
     class WaypointOptimizationTrailerOptions < Struct.new(
       :trailer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode related options for the provided travel mode.</p>
@@ -5986,7 +5986,7 @@ module Aws::GeoRoutes
       :pedestrian,
       :truck,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Travel mode options when the provided travel mode is "Truck"</p>
@@ -6110,7 +6110,7 @@ module Aws::GeoRoutes
       :weight_per_axle,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:gross_weight] = 0 unless options.key?(:gross_weight)
@@ -6161,7 +6161,7 @@ module Aws::GeoRoutes
       :service_duration,
       :side_of_street,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:heading] = 0 unless options.key?(:heading)
@@ -6212,7 +6212,7 @@ module Aws::GeoRoutes
       :quad,
       :quint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:single] = 0 unless options.key?(:single)

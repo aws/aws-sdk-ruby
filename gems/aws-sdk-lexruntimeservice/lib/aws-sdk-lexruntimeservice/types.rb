@@ -27,7 +27,7 @@ module Aws::LexRuntimeService
       :time_to_live,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of time or number of turns that a context remains
@@ -47,7 +47,7 @@ module Aws::LexRuntimeService
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Either the Amazon Lex bot is still building, or one of the dependent
@@ -58,7 +58,7 @@ module Aws::LexRuntimeService
     class BadGatewayException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request validation failed, there is no usable message in the context,
@@ -69,7 +69,7 @@ module Aws::LexRuntimeService
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an option to be shown on the client platform (Facebook,
@@ -86,13 +86,7 @@ module Aws::LexRuntimeService
       :text,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfirmationStatus
-      NONE = 'None'
-      CONFIRMED = 'Confirmed'
-      DENIED = 'Denied'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Two clients are using the same AWS account, Amazon Lex bot, and user
@@ -102,11 +96,7 @@ module Aws::LexRuntimeService
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentType
-      GENERIC = 'application/vnd.amazonaws.card.generic'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -123,7 +113,7 @@ module Aws::LexRuntimeService
       :bot_alias,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -144,7 +134,7 @@ module Aws::LexRuntimeService
       :user_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
@@ -168,7 +158,7 @@ module Aws::LexRuntimeService
     class DependencyFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the next action that the bot should take in its interaction
@@ -277,30 +267,7 @@ module Aws::LexRuntimeService
       :message,
       :message_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DialogActionType
-      ELICIT_INTENT = 'ElicitIntent'
-      CONFIRM_INTENT = 'ConfirmIntent'
-      ELICIT_SLOT = 'ElicitSlot'
-      CLOSE = 'Close'
-      DELEGATE = 'Delegate'
-    end
-
-    module DialogState
-      ELICIT_INTENT = 'ElicitIntent'
-      CONFIRM_INTENT = 'ConfirmIntent'
-      ELICIT_SLOT = 'ElicitSlot'
-      FULFILLED = 'Fulfilled'
-      READY_FOR_FULFILLMENT = 'ReadyForFulfillment'
-      FAILED = 'Failed'
-    end
-
-    module FulfillmentState
-      FULFILLED = 'Fulfilled'
-      FAILED = 'Failed'
-      READY_FOR_FULFILLMENT = 'ReadyForFulfillment'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an option rendered to the user when a prompt is shown. It
@@ -327,7 +294,7 @@ module Aws::LexRuntimeService
       :image_url,
       :buttons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -353,7 +320,7 @@ module Aws::LexRuntimeService
       :user_id,
       :checkpoint_label_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recent_intent_summary_view
@@ -390,7 +357,7 @@ module Aws::LexRuntimeService
       :dialog_action,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a score that indicates the confidence that Amazon Lex has that an
@@ -403,7 +370,7 @@ module Aws::LexRuntimeService
     class IntentConfidence < Struct.new(
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -515,7 +482,7 @@ module Aws::LexRuntimeService
       :fulfillment_state,
       :slot_to_elicit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internal service error. Retry the call.</p>
@@ -524,7 +491,7 @@ module Aws::LexRuntimeService
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded a limit.</p>
@@ -536,7 +503,7 @@ module Aws::LexRuntimeService
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is not used.</p>
@@ -545,14 +512,7 @@ module Aws::LexRuntimeService
     class LoopDetectedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageFormatType
-      PLAIN_TEXT = 'PlainText'
-      CUSTOM_PAYLOAD = 'CustomPayload'
-      SSML = 'SSML'
-      COMPOSITE = 'Composite'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accept header in the request does not have a valid value.</p>
@@ -561,7 +521,7 @@ module Aws::LexRuntimeService
     class NotAcceptableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource (such as the Amazon Lex bot or an alias) that is referred
@@ -571,7 +531,7 @@ module Aws::LexRuntimeService
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -743,7 +703,7 @@ module Aws::LexRuntimeService
       :input_stream,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -993,7 +953,7 @@ module Aws::LexRuntimeService
       :session_id,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:audio_stream] = Base64.strict_decode64('') unless options.key?(:audio_stream)
@@ -1071,7 +1031,7 @@ module Aws::LexRuntimeService
       :input_text,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_name
@@ -1259,7 +1219,7 @@ module Aws::LexRuntimeService
       :bot_version,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An intent that Amazon Lex suggests satisfies the user's intent. Includes
@@ -1281,7 +1241,7 @@ module Aws::LexRuntimeService
       :nlu_intent_confidence,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -1401,7 +1361,7 @@ module Aws::LexRuntimeService
       :accept,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -1535,7 +1495,7 @@ module Aws::LexRuntimeService
       :session_id,
       :active_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:audio_stream] = Base64.strict_decode64('') unless options.key?(:audio_stream)
@@ -1549,7 +1509,7 @@ module Aws::LexRuntimeService
     class RequestTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you configure a response card when creating your bots, Amazon Lex
@@ -1571,7 +1531,7 @@ module Aws::LexRuntimeService
       :content_type,
       :generic_attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sentiment expressed in an utterance.</p>
@@ -1589,7 +1549,7 @@ module Aws::LexRuntimeService
       :sentiment_label,
       :sentiment_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Content-Type header (<code>PostContent</code> API) has an invalid
@@ -1599,7 +1559,7 @@ module Aws::LexRuntimeService
     class UnsupportedMediaTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -19,26 +19,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionHistoryStatus
-      Completed = 'Completed'
-      Failed = 'Failed'
-      Unknown = 'Unknown'
-    end
-
-    module ActionStatus
-      Scheduled = 'Scheduled'
-      Pending = 'Pending'
-      Running = 'Running'
-      Unknown = 'Unknown'
-    end
-
-    module ActionType
-      InstanceRefresh = 'InstanceRefresh'
-      PlatformUpdate = 'PlatformUpdate'
-      Unknown = 'Unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an application.</p>
@@ -76,7 +57,7 @@ module Aws::ElasticBeanstalk
       :configuration_templates,
       :resource_lifecycle_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a list of application descriptions.</p>
@@ -86,7 +67,7 @@ module Aws::ElasticBeanstalk
     class ApplicationDescriptionsMessage < Struct.new(
       :applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application request metrics for an AWS Elastic Beanstalk environment.</p>
@@ -113,7 +94,7 @@ module Aws::ElasticBeanstalk
       :status_codes,
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:request_count] = 0 unless options.key?(:request_count)
@@ -143,7 +124,7 @@ module Aws::ElasticBeanstalk
       :service_role,
       :version_lifecycle_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -156,7 +137,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :resource_lifecycle_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an application version.</p>
@@ -232,7 +213,7 @@ module Aws::ElasticBeanstalk
       :date_updated,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message wrapping a list of application version descriptions.</p>
@@ -248,7 +229,7 @@ module Aws::ElasticBeanstalk
       :application_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application version lifecycle settings for an application. Defines the rules that
@@ -269,15 +250,7 @@ module Aws::ElasticBeanstalk
       :max_count_rule,
       :max_age_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationVersionStatus
-      Processed = 'Processed'
-      Unprocessed = 'Unprocessed'
-      Failed = 'Failed'
-      Processing = 'Processing'
-      Building = 'Building'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to execute a scheduled managed action immediately.</p>
@@ -295,7 +268,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result message containing information about the managed action.</p>
@@ -317,7 +290,7 @@ module Aws::ElasticBeanstalk
       :action_type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to add or change the operations role used by an environment.</p>
@@ -332,7 +305,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Auto Scaling launch configuration.</p>
@@ -342,7 +315,7 @@ module Aws::ElasticBeanstalk
     class AutoScalingGroup < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for an AWS CodeBuild build.</p>
@@ -390,7 +363,7 @@ module Aws::ElasticBeanstalk
       :image,
       :timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The builder used to build the custom platform.</p>
@@ -400,7 +373,7 @@ module Aws::ElasticBeanstalk
     class Builder < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CPU utilization metrics for an instance.</p>
@@ -452,7 +425,7 @@ module Aws::ElasticBeanstalk
       :soft_irq,
       :privileged,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Results message indicating whether a CNAME is available.</p>
@@ -462,7 +435,7 @@ module Aws::ElasticBeanstalk
     class CheckDNSAvailabilityMessage < Struct.new(
       :cname_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates if the specified CNAME is available.</p>
@@ -487,7 +460,7 @@ module Aws::ElasticBeanstalk
       :available,
       :fully_qualified_cname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS CodeBuild is not available in the specified region.</p>
@@ -497,7 +470,7 @@ module Aws::ElasticBeanstalk
     class CodeBuildNotInServiceRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create or update a group of environments.</p>
@@ -521,7 +494,7 @@ module Aws::ElasticBeanstalk
       :group_name,
       :version_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a list of environment descriptions.</p>
@@ -536,19 +509,7 @@ module Aws::ElasticBeanstalk
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeType
-      BUILD_GENERAL1_SMALL = 'BUILD_GENERAL1_SMALL'
-      BUILD_GENERAL1_MEDIUM = 'BUILD_GENERAL1_MEDIUM'
-      BUILD_GENERAL1_LARGE = 'BUILD_GENERAL1_LARGE'
-    end
-
-    module ConfigurationDeploymentStatus
-      deployed = 'deployed'
-      pending = 'pending'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the possible values for a configuration option.</p>
@@ -662,7 +623,7 @@ module Aws::ElasticBeanstalk
       :max_length,
       :regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specification identifying an individual configuration option along with its current
@@ -686,12 +647,7 @@ module Aws::ElasticBeanstalk
       :option_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationOptionValueType
-      Scalar = 'Scalar'
-      List = 'List'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings for a configuration set.</p>
@@ -764,7 +720,7 @@ module Aws::ElasticBeanstalk
       :date_updated,
       :option_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create an application.</p>
@@ -789,7 +745,7 @@ module Aws::ElasticBeanstalk
       :resource_lifecycle_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a single description of an application.</p>
@@ -799,7 +755,7 @@ module Aws::ElasticBeanstalk
     class CreateApplicationOutput < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -870,7 +826,7 @@ module Aws::ElasticBeanstalk
       :process,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message wrapping a single description of an application version.</p>
@@ -881,7 +837,7 @@ module Aws::ElasticBeanstalk
     class CreateApplicationVersionOutput < Struct.new(
       :application_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create a configuration template.</p>
@@ -957,7 +913,7 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings for a configuration set.</p>
@@ -1030,7 +986,7 @@ module Aws::ElasticBeanstalk
       :date_updated,
       :option_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1131,7 +1087,7 @@ module Aws::ElasticBeanstalk
       :options_to_remove,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an environment.</p>
@@ -1280,7 +1236,7 @@ module Aws::ElasticBeanstalk
       :environment_arn,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create a new platform version.</p>
@@ -1312,7 +1268,7 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_summary
@@ -1325,7 +1281,7 @@ module Aws::ElasticBeanstalk
       :platform_summary,
       :builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Results of a <a>CreateStorageLocationResult</a> call.</p>
@@ -1335,7 +1291,7 @@ module Aws::ElasticBeanstalk
     class CreateStorageLocationResultMessage < Struct.new(
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom AMI available to platforms.</p>
@@ -1349,7 +1305,7 @@ module Aws::ElasticBeanstalk
       :virtualization_type,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete an application.</p>
@@ -1364,7 +1320,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :terminate_env_by_force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete an application version.</p>
@@ -1384,7 +1340,7 @@ module Aws::ElasticBeanstalk
       :version_label,
       :delete_source_bundle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete a configuration template.</p>
@@ -1398,7 +1354,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to delete a draft environment configuration.</p>
@@ -1412,7 +1368,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_arn
@@ -1421,7 +1377,7 @@ module Aws::ElasticBeanstalk
     class DeletePlatformVersionRequest < Struct.new(
       :platform_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_summary
@@ -1430,7 +1386,7 @@ module Aws::ElasticBeanstalk
     class DeletePlatformVersionResult < Struct.new(
       :platform_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application version deployment.</p>
@@ -1468,7 +1424,7 @@ module Aws::ElasticBeanstalk
       :status,
       :deployment_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_quotas
@@ -1477,7 +1433,7 @@ module Aws::ElasticBeanstalk
     class DescribeAccountAttributesResult < Struct.new(
       :resource_quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe application versions.</p>
@@ -1505,7 +1461,7 @@ module Aws::ElasticBeanstalk
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe one or more applications.</p>
@@ -1516,7 +1472,7 @@ module Aws::ElasticBeanstalk
     class DescribeApplicationsMessage < Struct.new(
       :application_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a list of application version descriptions.</p>
@@ -1550,7 +1506,7 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings for a specified configuration set.</p>
@@ -1568,7 +1524,7 @@ module Aws::ElasticBeanstalk
       :platform_arn,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing all of the configuration settings for a specified solution
@@ -1595,7 +1551,7 @@ module Aws::ElasticBeanstalk
       :template_name,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results from a request to change the configuration settings of an
@@ -1606,7 +1562,7 @@ module Aws::ElasticBeanstalk
     class DescribeConfigurationSettingsOutput < Struct.new(
       :configuration_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>See the example below to learn how to create a request body.</p>
@@ -1628,7 +1584,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Health details for an AWS Elastic Beanstalk environment.</p>
@@ -1670,7 +1626,7 @@ module Aws::ElasticBeanstalk
       :instances_health,
       :refreshed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list completed and failed managed actions.</p>
@@ -1692,7 +1648,7 @@ module Aws::ElasticBeanstalk
       :next_token,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A result message containing a list of completed and failed managed actions.</p>
@@ -1707,7 +1663,7 @@ module Aws::ElasticBeanstalk
       :managed_action_history_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to list an environment's upcoming and in-progress managed actions.</p>
@@ -1725,7 +1681,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result message containing a list of managed actions.</p>
@@ -1735,7 +1691,7 @@ module Aws::ElasticBeanstalk
     class DescribeEnvironmentManagedActionsResult < Struct.new(
       :managed_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe the resources in an environment.</p>
@@ -1755,7 +1711,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to describe one or more environments.</p>
@@ -1808,7 +1764,7 @@ module Aws::ElasticBeanstalk
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a list of environment descriptions.</p>
@@ -1823,7 +1779,7 @@ module Aws::ElasticBeanstalk
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to retrieve a list of events for an environment.</p>
@@ -1888,7 +1844,7 @@ module Aws::ElasticBeanstalk
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for a call to <code>DescribeInstancesHealth</code>.</p>
@@ -1912,7 +1868,7 @@ module Aws::ElasticBeanstalk
       :attribute_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk
@@ -1933,7 +1889,7 @@ module Aws::ElasticBeanstalk
       :refreshed_at,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_arn
@@ -1942,7 +1898,7 @@ module Aws::ElasticBeanstalk
     class DescribePlatformVersionRequest < Struct.new(
       :platform_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_description
@@ -1951,7 +1907,7 @@ module Aws::ElasticBeanstalk
     class DescribePlatformVersionResult < Struct.new(
       :platform_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to disassociate the operations role from an environment.</p>
@@ -1961,7 +1917,7 @@ module Aws::ElasticBeanstalk
     class DisassociateEnvironmentOperationsRoleMessage < Struct.new(
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A generic service exception has occurred.</p>
@@ -1971,7 +1927,7 @@ module Aws::ElasticBeanstalk
     class ElasticBeanstalkServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an environment.</p>
@@ -2120,37 +2076,7 @@ module Aws::ElasticBeanstalk
       :environment_arn,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentHealth
-      Green = 'Green'
-      Yellow = 'Yellow'
-      Red = 'Red'
-      Grey = 'Grey'
-    end
-
-    module EnvironmentHealthAttribute
-      Status = 'Status'
-      Color = 'Color'
-      Causes = 'Causes'
-      ApplicationMetrics = 'ApplicationMetrics'
-      InstancesHealth = 'InstancesHealth'
-      All = 'All'
-      HealthStatus = 'HealthStatus'
-      RefreshedAt = 'RefreshedAt'
-    end
-
-    module EnvironmentHealthStatus
-      NoData = 'NoData'
-      Unknown = 'Unknown'
-      Pending = 'Pending'
-      Ok = 'Ok'
-      Info = 'Info'
-      Warning = 'Warning'
-      Degraded = 'Degraded'
-      Severe = 'Severe'
-      Suspended = 'Suspended'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information retrieved from the Amazon EC2 instances.</p>
@@ -2175,12 +2101,7 @@ module Aws::ElasticBeanstalk
       :sample_timestamp,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentInfoType
-      tail = 'tail'
-      bundle = 'bundle'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A link to another environment, defined in the environment's manifest. Links provide
@@ -2197,7 +2118,7 @@ module Aws::ElasticBeanstalk
       :link_name,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the AWS resources in use by this environment. This data is live.</p>
@@ -2235,7 +2156,7 @@ module Aws::ElasticBeanstalk
       :triggers,
       :queues,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a list of environment resource descriptions.</p>
@@ -2245,7 +2166,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentResourceDescriptionsMessage < Struct.new(
       :environment_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the AWS resources in use by this environment. This data is not live
@@ -2256,18 +2177,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentResourcesDescription < Struct.new(
       :load_balancer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentStatus
-      Aborting = 'Aborting'
-      Launching = 'Launching'
-      Updating = 'Updating'
-      LinkingFrom = 'LinkingFrom'
-      LinkingTo = 'LinkingTo'
-      Ready = 'Ready'
-      Terminating = 'Terminating'
-      Terminated = 'Terminated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an environment tier</p>
@@ -2312,7 +2222,7 @@ module Aws::ElasticBeanstalk
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event.</p>
@@ -2354,7 +2264,7 @@ module Aws::ElasticBeanstalk
       :request_id,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message wrapping a list of event descriptions.</p>
@@ -2369,26 +2279,7 @@ module Aws::ElasticBeanstalk
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSeverity
-      TRACE = 'TRACE'
-      DEBUG = 'DEBUG'
-      INFO = 'INFO'
-      WARN = 'WARN'
-      ERROR = 'ERROR'
-      FATAL = 'FATAL'
-    end
-
-    module FailureType
-      UpdateCancelled = 'UpdateCancelled'
-      CancellationFailed = 'CancellationFailed'
-      RollbackFailed = 'RollbackFailed'
-      RollbackSuccessful = 'RollbackSuccessful'
-      InternalFailure = 'InternalFailure'
-      InvalidEnvironmentState = 'InvalidEnvironmentState'
-      PermissionsError = 'PermissionsError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of an Amazon EC2 instance.</p>
@@ -2398,7 +2289,7 @@ module Aws::ElasticBeanstalk
     class Instance < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents summary information about the health of an instance. For more information,
@@ -2452,21 +2343,7 @@ module Aws::ElasticBeanstalk
       :degraded,
       :severe,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstancesHealthAttribute
-      HealthStatus = 'HealthStatus'
-      Color = 'Color'
-      Causes = 'Causes'
-      ApplicationMetrics = 'ApplicationMetrics'
-      RefreshedAt = 'RefreshedAt'
-      LaunchedAt = 'LaunchedAt'
-      System = 'System'
-      Deployment = 'Deployment'
-      AvailabilityZone = 'AvailabilityZone'
-      InstanceType = 'InstanceType'
-      All = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account does not have sufficient privileges for one or more AWS
@@ -2477,7 +2354,7 @@ module Aws::ElasticBeanstalk
     class InsufficientPrivilegesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more input parameters is not valid. Please correct the input parameters and try
@@ -2488,7 +2365,7 @@ module Aws::ElasticBeanstalk
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the average latency for the slowest X percent of requests over the last 10
@@ -2535,7 +2412,7 @@ module Aws::ElasticBeanstalk
       :p50,
       :p10,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Auto Scaling launch configuration.</p>
@@ -2545,7 +2422,7 @@ module Aws::ElasticBeanstalk
     class LaunchConfiguration < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon EC2 launch template.</p>
@@ -2555,7 +2432,7 @@ module Aws::ElasticBeanstalk
     class LaunchTemplate < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of available AWS Elastic Beanstalk solution stacks.</p>
@@ -2569,7 +2446,7 @@ module Aws::ElasticBeanstalk
       :solution_stacks,
       :solution_stack_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2658,7 +2535,7 @@ module Aws::ElasticBeanstalk
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_branch_summary_list
@@ -2672,7 +2549,7 @@ module Aws::ElasticBeanstalk
       :platform_branch_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2694,7 +2571,7 @@ module Aws::ElasticBeanstalk
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform_summary_list
@@ -2708,7 +2585,7 @@ module Aws::ElasticBeanstalk
       :platform_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2718,7 +2595,7 @@ module Aws::ElasticBeanstalk
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a Listener for the LoadBalancer.</p>
@@ -2732,7 +2609,7 @@ module Aws::ElasticBeanstalk
       :protocol,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 0 unless options.key?(:port)
@@ -2747,7 +2624,7 @@ module Aws::ElasticBeanstalk
     class LoadBalancer < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the details of a LoadBalancer.</p>
@@ -2765,7 +2642,7 @@ module Aws::ElasticBeanstalk
       :domain,
       :listeners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The record of an upcoming or in-progress managed action.</p>
@@ -2793,7 +2670,7 @@ module Aws::ElasticBeanstalk
       :status,
       :window_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The record of a completed or failed managed action.</p>
@@ -2831,7 +2708,7 @@ module Aws::ElasticBeanstalk
       :executed_time,
       :finished_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot modify the managed action in its current state.</p>
@@ -2841,7 +2718,7 @@ module Aws::ElasticBeanstalk
     class ManagedActionInvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lifecycle rule that deletes application versions after the specified number of
@@ -2862,7 +2739,7 @@ module Aws::ElasticBeanstalk
       :max_age_in_days,
       :delete_source_from_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lifecycle rule that deletes the oldest application version when the maximum count is
@@ -2883,7 +2760,7 @@ module Aws::ElasticBeanstalk
       :max_count,
       :delete_source_from_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to perform the specified operation because another operation that effects an
@@ -2894,7 +2771,7 @@ module Aws::ElasticBeanstalk
     class OperationInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A regular expression representing a restriction on a string configuration option
@@ -2910,7 +2787,7 @@ module Aws::ElasticBeanstalk
       :pattern,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specification identifying an individual configuration option.</p>
@@ -2928,7 +2805,7 @@ module Aws::ElasticBeanstalk
       :namespace,
       :option_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a platform branch.</p>
@@ -2964,7 +2841,7 @@ module Aws::ElasticBeanstalk
       :branch_order,
       :supported_tier_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:branch_order] = 0 unless options.key?(:branch_order)
@@ -3067,7 +2944,7 @@ module Aws::ElasticBeanstalk
       :platform_branch_name,
       :platform_branch_lifecycle_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes criteria to restrict the results when listing platform versions.</p>
@@ -3126,7 +3003,7 @@ module Aws::ElasticBeanstalk
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A framework supported by the platform.</p>
@@ -3140,7 +3017,7 @@ module Aws::ElasticBeanstalk
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A programming language supported by the platform.</p>
@@ -3154,15 +3031,7 @@ module Aws::ElasticBeanstalk
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlatformStatus
-      Creating = 'Creating'
-      Failed = 'Failed'
-      Ready = 'Ready'
-      Deleting = 'Deleting'
-      Deleted = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a platform version.</p>
@@ -3223,7 +3092,7 @@ module Aws::ElasticBeanstalk
       :platform_branch_name,
       :platform_branch_lifecycle_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot delete the platform version because there are still environments running on it.</p>
@@ -3233,7 +3102,7 @@ module Aws::ElasticBeanstalk
     class PlatformVersionStillReferencedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a queue.</p>
@@ -3247,7 +3116,7 @@ module Aws::ElasticBeanstalk
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3267,7 +3136,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to retrieve logs from an environment and store them in your Elastic Beanstalk
@@ -3296,7 +3165,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :info_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource doesn't exist for the specified Amazon Resource Name (ARN).</p>
@@ -3306,7 +3175,7 @@ module Aws::ElasticBeanstalk
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AWS Elastic Beanstalk quota information for a single resource type in an AWS account. It
@@ -3318,7 +3187,7 @@ module Aws::ElasticBeanstalk
     class ResourceQuota < Struct.new(
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS account. They reflect
@@ -3345,7 +3214,7 @@ module Aws::ElasticBeanstalk
       :configuration_template_quota,
       :custom_platform_quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3358,7 +3227,7 @@ module Aws::ElasticBeanstalk
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of the specified Amazon Resource Name (ARN) isn't supported for this operation.</p>
@@ -3368,7 +3237,7 @@ module Aws::ElasticBeanstalk
     class ResourceTypeNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3388,7 +3257,7 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.</p>
@@ -3415,7 +3284,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :info_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a description of the requested environment info.</p>
@@ -3425,7 +3294,7 @@ module Aws::ElasticBeanstalk
     class RetrieveEnvironmentInfoResultMessage < Struct.new(
       :environment_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bucket and key of an item stored in Amazon S3.</p>
@@ -3439,7 +3308,7 @@ module Aws::ElasticBeanstalk
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified S3 bucket does not belong to the S3 region in which the service is
@@ -3461,7 +3330,7 @@ module Aws::ElasticBeanstalk
     class S3LocationNotInServiceRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account does not have a subscription to Amazon S3.</p>
@@ -3471,7 +3340,7 @@ module Aws::ElasticBeanstalk
     class S3SubscriptionRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes criteria to restrict a list of results.</p>
@@ -3503,7 +3372,7 @@ module Aws::ElasticBeanstalk
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk
@@ -3554,7 +3423,7 @@ module Aws::ElasticBeanstalk
       :availability_zone,
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the solution stack.</p>
@@ -3568,7 +3437,7 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :permitted_file_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Location of the source code for an application version.</p>
@@ -3625,7 +3494,7 @@ module Aws::ElasticBeanstalk
       :source_repository,
       :source_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to delete the Amazon S3 source bundle associated with the application version.
@@ -3636,7 +3505,7 @@ module Aws::ElasticBeanstalk
     class SourceBundleDeletionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specification for an environment configuration.</p>
@@ -3650,17 +3519,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceRepository
-      CodeCommit = 'CodeCommit'
-      S3 = 'S3'
-    end
-
-    module SourceType
-      Git = 'Git'
-      Zip = 'Zip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the percentage of requests over the last 10 seconds that resulted in each
@@ -3688,7 +3547,7 @@ module Aws::ElasticBeanstalk
       :status4xx,
       :status5xx,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Swaps the CNAMEs of two environments.</p>
@@ -3725,7 +3584,7 @@ module Aws::ElasticBeanstalk
       :destination_environment_id,
       :destination_environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CPU utilization and load average metrics for an Amazon EC2 instance.</p>
@@ -3741,7 +3600,7 @@ module Aws::ElasticBeanstalk
       :cpu_utilization,
       :load_average,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag applied to a resource in an environment.</p>
@@ -3755,7 +3614,7 @@ module Aws::ElasticBeanstalk
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to terminate an environment.</p>
@@ -3803,7 +3662,7 @@ module Aws::ElasticBeanstalk
       :terminate_resources,
       :force_terminate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an environment.</p>
@@ -3952,7 +3811,7 @@ module Aws::ElasticBeanstalk
       :environment_arn,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account has reached its limit of application versions.</p>
@@ -3962,7 +3821,7 @@ module Aws::ElasticBeanstalk
     class TooManyApplicationVersionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account has reached its limit of applications.</p>
@@ -3972,7 +3831,7 @@ module Aws::ElasticBeanstalk
     class TooManyApplicationsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account has reached its limit of Amazon S3 buckets.</p>
@@ -3982,7 +3841,7 @@ module Aws::ElasticBeanstalk
     class TooManyBucketsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account has reached its limit of configuration templates.</p>
@@ -3992,7 +3851,7 @@ module Aws::ElasticBeanstalk
     class TooManyConfigurationTemplatesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified account has reached its limit of environments.</p>
@@ -4002,7 +3861,7 @@ module Aws::ElasticBeanstalk
     class TooManyEnvironmentsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of allowed platforms associated with the account.</p>
@@ -4012,7 +3871,7 @@ module Aws::ElasticBeanstalk
     class TooManyPlatformsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of tags in the resource would exceed the number of tags that each resource
@@ -4025,7 +3884,7 @@ module Aws::ElasticBeanstalk
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a trigger.</p>
@@ -4035,7 +3894,7 @@ module Aws::ElasticBeanstalk
     class Trigger < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update an application.</p>
@@ -4053,7 +3912,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message containing a single description of an application.</p>
@@ -4063,7 +3922,7 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationOutput < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -4076,7 +3935,7 @@ module Aws::ElasticBeanstalk
       :application_name,
       :resource_lifecycle_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4098,7 +3957,7 @@ module Aws::ElasticBeanstalk
       :version_label,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result message wrapping a single description of an application version.</p>
@@ -4109,7 +3968,7 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationVersionOutput < Struct.new(
       :application_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result message containing the options for the specified solution stack.</p>
@@ -4144,7 +4003,7 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :options_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings for a configuration set.</p>
@@ -4217,7 +4076,7 @@ module Aws::ElasticBeanstalk
       :date_updated,
       :option_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to update an environment.</p>
@@ -4294,7 +4153,7 @@ module Aws::ElasticBeanstalk
       :option_settings,
       :options_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an environment.</p>
@@ -4443,7 +4302,7 @@ module Aws::ElasticBeanstalk
       :environment_arn,
       :operations_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4466,7 +4325,7 @@ module Aws::ElasticBeanstalk
       :tags_to_add,
       :tags_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of validation messages for a specified configuration template.</p>
@@ -4491,7 +4350,7 @@ module Aws::ElasticBeanstalk
       :environment_name,
       :option_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of validation messages.</p>
@@ -4501,7 +4360,7 @@ module Aws::ElasticBeanstalk
     class ValidateConfigurationSettingsOutput < Struct.new(
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error or warning for a desired configuration option value.</p>
@@ -4535,12 +4394,7 @@ module Aws::ElasticBeanstalk
       :namespace,
       :option_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationSeverity
-      error = 'error'
-      warning = 'warning'
+      include ::Smithy::Schema::Structure
     end
 
   end

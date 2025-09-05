@@ -12,7 +12,7 @@ module Aws::SSMQuickSetup
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a Quick Setup configuration.</p>
@@ -45,7 +45,7 @@ module Aws::SSMQuickSetup
       :local_deployment_administration_role_arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the preferences and options for a configuration definition.</p>
@@ -1453,7 +1453,7 @@ module Aws::SSMQuickSetup
       :local_deployment_execution_role_name,
       :local_deployment_administration_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summarized definition of a Quick Setup configuration definition.</p>
@@ -1476,7 +1476,7 @@ module Aws::SSMQuickSetup
       :type_version,
       :first_class_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a Quick Setup configuration manager.</p>
@@ -1505,7 +1505,7 @@ module Aws::SSMQuickSetup
       :status_summaries,
       :configuration_definition_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a Quick Setup configuration.</p>
@@ -1552,7 +1552,7 @@ module Aws::SSMQuickSetup
       :first_class_parameters,
       :status_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another request is being processed. Wait a few minutes and try again.</p>
@@ -1561,7 +1561,7 @@ module Aws::SSMQuickSetup
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1583,7 +1583,7 @@ module Aws::SSMQuickSetup
       :configuration_definitions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -1592,7 +1592,7 @@ module Aws::SSMQuickSetup
     class CreateConfigurationManagerOutput < Struct.new(
       :manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -1601,7 +1601,7 @@ module Aws::SSMQuickSetup
     class DeleteConfigurationManagerInput < Struct.new(
       :manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair to filter results.</p>
@@ -1615,7 +1615,7 @@ module Aws::SSMQuickSetup
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -1624,7 +1624,7 @@ module Aws::SSMQuickSetup
     class GetConfigurationInput < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -1633,7 +1633,7 @@ module Aws::SSMQuickSetup
     class GetConfigurationManagerInput < Struct.new(
       :manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -1671,7 +1671,7 @@ module Aws::SSMQuickSetup
       :configuration_definitions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1721,7 +1721,7 @@ module Aws::SSMQuickSetup
       :status_summaries,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_settings
@@ -1730,7 +1730,7 @@ module Aws::SSMQuickSetup
     class GetServiceSettingsOutput < Struct.new(
       :service_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred on the server side.</p>
@@ -1739,7 +1739,7 @@ module Aws::SSMQuickSetup
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute starting_token
@@ -1757,7 +1757,7 @@ module Aws::SSMQuickSetup
       :max_items,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_managers_list
@@ -1771,7 +1771,7 @@ module Aws::SSMQuickSetup
       :configuration_managers_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute starting_token
@@ -1797,7 +1797,7 @@ module Aws::SSMQuickSetup
       :manager_arn,
       :configuration_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations_list
@@ -1811,7 +1811,7 @@ module Aws::SSMQuickSetup
       :configurations_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_setup_type_list
@@ -1820,7 +1820,7 @@ module Aws::SSMQuickSetup
     class ListQuickSetupTypesOutput < Struct.new(
       :quick_setup_type_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1829,7 +1829,7 @@ module Aws::SSMQuickSetup
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1838,7 +1838,7 @@ module Aws::SSMQuickSetup
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Quick Setup type.</p>
@@ -1852,7 +1852,7 @@ module Aws::SSMQuickSetup
       :type,
       :latest_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource couldn't be found. Check the ID or name and try again.</p>
@@ -1861,7 +1861,7 @@ module Aws::SSMQuickSetup
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings configured for Quick Setup.</p>
@@ -1871,20 +1871,7 @@ module Aws::SSMQuickSetup
     class ServiceSettings < Struct.new(
       :explorer_enabling_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      INITIALIZING = 'INITIALIZING'
-      DEPLOYING = 'DEPLOYING'
-      SUCCEEDED = 'SUCCEEDED'
-      DELETING = 'DELETING'
-      STOPPING = 'STOPPING'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      STOP_FAILED = 'STOP_FAILED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summarized description of the status.</p>
@@ -1913,12 +1900,7 @@ module Aws::SSMQuickSetup
       :last_updated_at,
       :status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusType
-      DEPLOYMENT = 'Deployment'
-      ASYNC_EXECUTIONS = 'AsyncExecutions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Key-value pairs of metadata.</p>
@@ -1933,7 +1915,7 @@ module Aws::SSMQuickSetup
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1946,7 +1928,7 @@ module Aws::SSMQuickSetup
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request or operation exceeds the maximum allowed request rate per Amazon Web Services account and Amazon Web Services Region.</p>
@@ -1955,7 +1937,7 @@ module Aws::SSMQuickSetup
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1968,7 +1950,7 @@ module Aws::SSMQuickSetup
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -2000,7 +1982,7 @@ module Aws::SSMQuickSetup
       :local_deployment_execution_role_name,
       :local_deployment_administration_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manager_arn
@@ -2017,7 +1999,7 @@ module Aws::SSMQuickSetup
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explorer_enabling_role_arn
@@ -2026,7 +2008,7 @@ module Aws::SSMQuickSetup
     class UpdateServiceSettingsInput < Struct.new(
       :explorer_enabling_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid. Verify the values provided for the request parameters are
@@ -2036,7 +2018,7 @@ module Aws::SSMQuickSetup
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

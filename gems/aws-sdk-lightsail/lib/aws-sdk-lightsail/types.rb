@@ -22,12 +22,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessDirection
-      inbound = 'inbound'
-      outbound = 'outbound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an access key for an Amazon Lightsail bucket.</p>
@@ -72,7 +67,7 @@ module Aws::Lightsail
       :created_at,
       :last_used,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the last time an access key was used.</p>
@@ -97,7 +92,7 @@ module Aws::Lightsail
       :region,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the anonymous access permissions for an Amazon Lightsail bucket and its
@@ -141,12 +136,7 @@ module Aws::Lightsail
       :get_object,
       :allow_public_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessType
-      Public = 'public'
-      Private = 'private'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the synchronization status of the Amazon Simple Storage Service (Amazon S3)
@@ -244,14 +234,7 @@ module Aws::Lightsail
       :message,
       :bpa_impacts_lightsail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountLevelBpaSyncStatus
-      InSync = 'InSync'
-      Failed = 'Failed'
-      NeverSynced = 'NeverSynced'
-      Defaulted = 'Defaulted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when an account is still in the setup in progress
@@ -270,7 +253,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an add-on that is enabled for an Amazon Lightsail resource.</p>
@@ -315,7 +298,7 @@ module Aws::Lightsail
       :threshold,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to enable, modify, or disable an add-on for an Amazon Lightsail
@@ -344,12 +327,7 @@ module Aws::Lightsail
       :auto_snapshot_add_on_request,
       :stop_instance_on_idle_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddOnType
-      AutoSnapshot = 'AutoSnapshot'
-      StopInstanceOnIdle = 'StopInstanceOnIdle'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an alarm.</p>
@@ -511,13 +489,7 @@ module Aws::Lightsail
       :notification_triggers,
       :notification_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlarmState
-      OK = 'OK'
-      ALARM = 'ALARM'
-      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip_name
@@ -526,7 +498,7 @@ module Aws::Lightsail
     class AllocateStaticIpRequest < Struct.new(
       :static_ip_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -536,11 +508,7 @@ module Aws::Lightsail
     class AllocateStaticIpResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppCategory
-      LfR = 'LfR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -566,7 +534,7 @@ module Aws::Lightsail
       :distribution_name,
       :certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -576,7 +544,7 @@ module Aws::Lightsail
     class AttachCertificateToDistributionResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -601,7 +569,7 @@ module Aws::Lightsail
       :disk_path,
       :auto_mounting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -611,7 +579,7 @@ module Aws::Lightsail
     class AttachDiskResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -630,7 +598,7 @@ module Aws::Lightsail
       :load_balancer_name,
       :instance_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -640,7 +608,7 @@ module Aws::Lightsail
     class AttachInstancesToLoadBalancerResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -654,7 +622,7 @@ module Aws::Lightsail
       :load_balancer_name,
       :certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -666,7 +634,7 @@ module Aws::Lightsail
     class AttachLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip_name
@@ -679,7 +647,7 @@ module Aws::Lightsail
       :static_ip_name,
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -689,7 +657,7 @@ module Aws::Lightsail
     class AttachStaticIpResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block storage disk that is attached to an instance, and is included in an
@@ -704,14 +672,7 @@ module Aws::Lightsail
       :path,
       :size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMountStatus
-      Failed = 'Failed'
-      Pending = 'Pending'
-      Mounted = 'Mounted'
-      NotMounted = 'NotMounted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to enable or modify the automatic snapshot add-on for an
@@ -766,7 +727,7 @@ module Aws::Lightsail
     class AutoSnapshotAddOnRequest < Struct.new(
       :snapshot_time_of_day,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an automatic snapshot.</p>
@@ -789,14 +750,7 @@ module Aws::Lightsail
       :status,
       :from_attached_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoSnapshotStatus
-      SUCCESS = 'Success'
-      FAILED = 'Failed'
-      IN_PROGRESS = 'InProgress'
-      NOT_FOUND = 'NotFound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Availability Zone. This is returned only as part of a <code>GetRegions</code>
@@ -812,19 +766,7 @@ module Aws::Lightsail
       :zone_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BPAStatusMessage
-      DEFAULTED_FOR_SLR_MISSING = 'DEFAULTED_FOR_SLR_MISSING'
-      SYNC_ON_HOLD = 'SYNC_ON_HOLD'
-      DEFAULTED_FOR_SLR_MISSING_ON_HOLD = 'DEFAULTED_FOR_SLR_MISSING_ON_HOLD'
-      Unknown = 'Unknown'
-    end
-
-    module BehaviorEnum
-      DontCacheSetting = 'dont-cache'
-      CacheSetting = 'cache'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a blueprint (a virtual private server image).</p>
@@ -894,12 +836,7 @@ module Aws::Lightsail
       :platform,
       :app_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlueprintType
-      os = 'os'
-      app = 'app'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lightsail bucket.</p>
@@ -1002,7 +939,7 @@ module Aws::Lightsail
       :state,
       :access_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the access log configuration for a bucket in the Amazon Lightsail object storage
@@ -1038,7 +975,7 @@ module Aws::Lightsail
       :destination,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the specifications of a bundle that can be applied to an Amazon Lightsail
@@ -1071,12 +1008,7 @@ module Aws::Lightsail
       :transfer_per_month_in_gb,
       :is_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BucketMetricName
-      BucketSizeBytes = 'BucketSizeBytes'
-      NumberOfObjects = 'NumberOfObjects'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of an Amazon Lightsail bucket.</p>
@@ -1102,7 +1034,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a bundle, which is a set of specs describing your virtual private server (or
@@ -1172,7 +1104,7 @@ module Aws::Lightsail
       :supported_app_categories,
       :public_ipv4_address_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the default cache behavior of an Amazon Lightsail content delivery network (CDN)
@@ -1207,7 +1139,7 @@ module Aws::Lightsail
     class CacheBehavior < Struct.new(
       :behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the per-path cache behavior of an Amazon Lightsail content delivery network (CDN)
@@ -1289,7 +1221,7 @@ module Aws::Lightsail
       :path,
       :behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the cache settings of an Amazon Lightsail content delivery network (CDN)
@@ -1385,7 +1317,7 @@ module Aws::Lightsail
       :forwarded_headers,
       :forwarded_query_strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p>
@@ -1550,32 +1482,12 @@ module Aws::Lightsail
       :tags,
       :support_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:in_use_resource_count] = 0 unless options.key?(:in_use_resource_count)
         super
       end
-    end
-
-    module CertificateDomainValidationStatus
-      PendingValidation = 'PENDING_VALIDATION'
-      Failed = 'FAILED'
-      Success = 'SUCCESS'
-    end
-
-    module CertificateProvider
-      LetsEncrypt = 'LetsEncrypt'
-    end
-
-    module CertificateStatus
-      PendingValidation = 'PENDING_VALIDATION'
-      Issued = 'ISSUED'
-      Inactive = 'INACTIVE'
-      Expired = 'EXPIRED'
-      ValidationTimedOut = 'VALIDATION_TIMED_OUT'
-      Revoked = 'REVOKED'
-      Failed = 'FAILED'
     end
 
     # <p>Describes an Amazon Lightsail SSL/TLS certificate.</p>
@@ -1602,7 +1514,7 @@ module Aws::Lightsail
       :certificate_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute port_info
@@ -1615,7 +1527,7 @@ module Aws::Lightsail
       :port_info,
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -1625,7 +1537,7 @@ module Aws::Lightsail
     class CloseInstancePublicPortsResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a CloudFormation stack record created as a result of the <code>create cloud
@@ -1669,7 +1581,7 @@ module Aws::Lightsail
       :source_info,
       :destination_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the source of a CloudFormation stack record (i.e., the export snapshot
@@ -1688,18 +1600,7 @@ module Aws::Lightsail
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudFormationStackRecordSourceType
-      ExportSnapshotRecord = 'ExportSnapshotRecord'
-    end
-
-    module ComparisonOperator
-      GreaterThanOrEqualToThreshold = 'GreaterThanOrEqualToThreshold'
-      GreaterThanThreshold = 'GreaterThanThreshold'
-      LessThanThreshold = 'LessThanThreshold'
-      LessThanOrEqualToThreshold = 'LessThanOrEqualToThreshold'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a contact method.</p>
@@ -1762,22 +1663,7 @@ module Aws::Lightsail
       :resource_type,
       :support_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactMethodStatus
-      PendingVerification = 'PendingVerification'
-      Valid = 'Valid'
-      Invalid = 'Invalid'
-    end
-
-    module ContactMethodVerificationProtocol
-      Email = 'Email'
-    end
-
-    module ContactProtocol
-      Email = 'Email'
-      SMS = 'SMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings of a container that will be launched, or that is launched, to an
@@ -1811,7 +1697,7 @@ module Aws::Lightsail
       :environment,
       :ports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a container image that is registered to an Amazon Lightsail container
@@ -1830,7 +1716,7 @@ module Aws::Lightsail
       :digest,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lightsail container service.</p>
@@ -1981,7 +1867,7 @@ module Aws::Lightsail
       :url,
       :private_registry_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a container deployment configuration of an Amazon Lightsail container
@@ -2034,7 +1920,7 @@ module Aws::Lightsail
       :public_endpoint,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a container deployment configuration of an Amazon Lightsail container
@@ -2051,14 +1937,7 @@ module Aws::Lightsail
       :containers,
       :public_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerServiceDeploymentState
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the activation status of the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR)
@@ -2078,7 +1957,7 @@ module Aws::Lightsail
       :is_active,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to activate or deactivate the role that you can use to grant an
@@ -2094,7 +1973,7 @@ module Aws::Lightsail
     class ContainerServiceECRImagePullerRoleRequest < Struct.new(
       :is_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the public endpoint configuration of a deployment of an Amazon Lightsail
@@ -2114,7 +1993,7 @@ module Aws::Lightsail
       :container_port,
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the health check configuration of an Amazon Lightsail container service.</p>
@@ -2152,7 +2031,7 @@ module Aws::Lightsail
       :path,
       :success_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the log events of a container of an Amazon Lightsail container service.</p>
@@ -2166,12 +2045,7 @@ module Aws::Lightsail
       :created_at,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerServiceMetricName
-      CPUUtilization = 'CPUUtilization'
-      MemoryUtilization = 'MemoryUtilization'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the powers that can be specified for an Amazon Lightsail container
@@ -2205,23 +2079,7 @@ module Aws::Lightsail
       :name,
       :is_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerServicePowerName
-      nano = 'nano'
-      micro = 'micro'
-      small = 'small'
-      medium = 'medium'
-      large = 'large'
-      xlarge = 'xlarge'
-    end
-
-    module ContainerServiceProtocol
-      HTTP = 'HTTP'
-      HTTPS = 'HTTPS'
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the sign-in credentials for the container image registry of an Amazon Lightsail
@@ -2250,17 +2108,7 @@ module Aws::Lightsail
       :expires_at,
       :registry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerServiceState
-      PENDING = 'PENDING'
-      READY = 'READY'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DISABLED = 'DISABLED'
-      DEPLOYING = 'DEPLOYING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current state of a container service.</p>
@@ -2338,19 +2186,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerServiceStateDetailCode
-      CREATING_SYSTEM_RESOURCES = 'CREATING_SYSTEM_RESOURCES'
-      CREATING_NETWORK_INFRASTRUCTURE = 'CREATING_NETWORK_INFRASTRUCTURE'
-      PROVISIONING_CERTIFICATE = 'PROVISIONING_CERTIFICATE'
-      PROVISIONING_SERVICE = 'PROVISIONING_SERVICE'
-      CREATING_DEPLOYMENT = 'CREATING_DEPLOYMENT'
-      EVALUATING_HEALTH_CHECK = 'EVALUATING_HEALTH_CHECK'
-      ACTIVATING_DEPLOYMENT = 'ACTIVATING_DEPLOYMENT'
-      CERTIFICATE_LIMIT_EXCEEDED = 'CERTIFICATE_LIMIT_EXCEEDED'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_services
@@ -2359,7 +2195,7 @@ module Aws::Lightsail
     class ContainerServicesListResult < Struct.new(
       :container_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether an Amazon Lightsail content delivery network (CDN) distribution forwards
@@ -2379,7 +2215,7 @@ module Aws::Lightsail
       :option,
       :cookies_allow_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_snapshot_name
@@ -2453,7 +2289,7 @@ module Aws::Lightsail
       :target_snapshot_name,
       :source_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -2463,7 +2299,7 @@ module Aws::Lightsail
     class CopySnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the estimated cost for resources in your Lightsail for Research account.</p>
@@ -2478,7 +2314,7 @@ module Aws::Lightsail
       :usage_type,
       :results_by_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -2487,7 +2323,7 @@ module Aws::Lightsail
     class CreateBucketAccessKeyRequest < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_key
@@ -2501,7 +2337,7 @@ module Aws::Lightsail
       :access_key,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -2535,7 +2371,7 @@ module Aws::Lightsail
       :tags,
       :enable_object_versioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket
@@ -2549,7 +2385,7 @@ module Aws::Lightsail
       :bucket,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_name
@@ -2575,7 +2411,7 @@ module Aws::Lightsail
       :subject_alternative_names,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -2589,7 +2425,7 @@ module Aws::Lightsail
       :certificate,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -2600,7 +2436,7 @@ module Aws::Lightsail
     class CreateCloudFormationStackRequest < Struct.new(
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -2610,7 +2446,7 @@ module Aws::Lightsail
     class CreateCloudFormationStackResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocol
@@ -2656,7 +2492,7 @@ module Aws::Lightsail
       :protocol,
       :contact_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -2666,7 +2502,7 @@ module Aws::Lightsail
     class CreateContactMethodResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2685,7 +2521,7 @@ module Aws::Lightsail
       :containers,
       :public_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_service
@@ -2694,12 +2530,12 @@ module Aws::Lightsail
     class CreateContainerServiceDeploymentResult < Struct.new(
       :container_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateContainerServiceRegistryLoginRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_login
@@ -2709,7 +2545,7 @@ module Aws::Lightsail
     class CreateContainerServiceRegistryLoginResult < Struct.new(
       :registry_login,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2801,7 +2637,7 @@ module Aws::Lightsail
       :deployment,
       :private_registry_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_service
@@ -2810,7 +2646,7 @@ module Aws::Lightsail
     class CreateContainerServiceResult < Struct.new(
       :container_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -2906,7 +2742,7 @@ module Aws::Lightsail
       :restore_date,
       :use_latest_restorable_auto_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -2916,7 +2752,7 @@ module Aws::Lightsail
     class CreateDiskFromSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -2946,7 +2782,7 @@ module Aws::Lightsail
       :tags,
       :add_ons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -2956,7 +2792,7 @@ module Aws::Lightsail
     class CreateDiskResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -2990,7 +2826,7 @@ module Aws::Lightsail
       :instance_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3000,7 +2836,7 @@ module Aws::Lightsail
     class CreateDiskSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -3057,7 +2893,7 @@ module Aws::Lightsail
       :certificate_name,
       :viewer_minimum_tls_protocol_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution
@@ -3071,7 +2907,7 @@ module Aws::Lightsail
       :distribution,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3085,7 +2921,7 @@ module Aws::Lightsail
       :domain_name,
       :domain_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -3095,7 +2931,7 @@ module Aws::Lightsail
     class CreateDomainEntryResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3109,7 +2945,7 @@ module Aws::Lightsail
       :domain_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -3119,7 +2955,7 @@ module Aws::Lightsail
     class CreateDomainResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -3128,7 +2964,7 @@ module Aws::Lightsail
     class CreateGUISessionAccessDetailsRequest < Struct.new(
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -3153,7 +2989,7 @@ module Aws::Lightsail
       :failure_reason,
       :sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_snapshot_name
@@ -3171,7 +3007,7 @@ module Aws::Lightsail
       :instance_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3181,7 +3017,7 @@ module Aws::Lightsail
     class CreateInstanceSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_names
@@ -3305,7 +3141,7 @@ module Aws::Lightsail
       :restore_date,
       :use_latest_restorable_auto_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3315,7 +3151,7 @@ module Aws::Lightsail
     class CreateInstancesFromSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_names
@@ -3392,7 +3228,7 @@ module Aws::Lightsail
       :add_ons,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3402,7 +3238,7 @@ module Aws::Lightsail
     class CreateInstancesResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair_name
@@ -3416,7 +3252,7 @@ module Aws::Lightsail
       :key_pair_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair
@@ -3439,7 +3275,7 @@ module Aws::Lightsail
       :private_key_base64,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -3498,7 +3334,7 @@ module Aws::Lightsail
       :ip_address_type,
       :tls_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3508,7 +3344,7 @@ module Aws::Lightsail
     class CreateLoadBalancerResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -3541,7 +3377,7 @@ module Aws::Lightsail
       :certificate_alternative_names,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3551,7 +3387,7 @@ module Aws::Lightsail
     class CreateLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -3637,7 +3473,7 @@ module Aws::Lightsail
       :use_latest_restorable_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3647,7 +3483,7 @@ module Aws::Lightsail
     class CreateRelationalDatabaseFromSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -3857,7 +3693,7 @@ module Aws::Lightsail
       :publicly_accessible,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3867,7 +3703,7 @@ module Aws::Lightsail
     class CreateRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -3894,7 +3730,7 @@ module Aws::Lightsail
       :relational_database_snapshot_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3904,11 +3740,7 @@ module Aws::Lightsail
     class CreateRelationalDatabaseSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Currency
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -3917,7 +3749,7 @@ module Aws::Lightsail
     class DeleteAlarmRequest < Struct.new(
       :alarm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3927,7 +3759,7 @@ module Aws::Lightsail
     class DeleteAlarmResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -3943,7 +3775,7 @@ module Aws::Lightsail
       :resource_name,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3953,7 +3785,7 @@ module Aws::Lightsail
     class DeleteAutoSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -3968,7 +3800,7 @@ module Aws::Lightsail
       :bucket_name,
       :access_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -3978,7 +3810,7 @@ module Aws::Lightsail
     class DeleteBucketAccessKeyResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -4012,7 +3844,7 @@ module Aws::Lightsail
       :bucket_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4022,7 +3854,7 @@ module Aws::Lightsail
     class DeleteBucketResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_name
@@ -4033,7 +3865,7 @@ module Aws::Lightsail
     class DeleteCertificateRequest < Struct.new(
       :certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4043,7 +3875,7 @@ module Aws::Lightsail
     class DeleteCertificateResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocol
@@ -4058,7 +3890,7 @@ module Aws::Lightsail
     class DeleteContactMethodRequest < Struct.new(
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4068,7 +3900,7 @@ module Aws::Lightsail
     class DeleteContactMethodResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -4090,12 +3922,12 @@ module Aws::Lightsail
       :service_name,
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerImageResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -4104,12 +3936,12 @@ module Aws::Lightsail
     class DeleteContainerServiceRequest < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContainerServiceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -4122,7 +3954,7 @@ module Aws::Lightsail
       :disk_name,
       :force_delete_add_ons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4132,7 +3964,7 @@ module Aws::Lightsail
     class DeleteDiskResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_snapshot_name
@@ -4141,7 +3973,7 @@ module Aws::Lightsail
     class DeleteDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4151,7 +3983,7 @@ module Aws::Lightsail
     class DeleteDiskSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -4162,7 +3994,7 @@ module Aws::Lightsail
     class DeleteDistributionRequest < Struct.new(
       :distribution_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -4172,7 +4004,7 @@ module Aws::Lightsail
     class DeleteDistributionResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4185,7 +4017,7 @@ module Aws::Lightsail
       :domain_name,
       :domain_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -4195,7 +4027,7 @@ module Aws::Lightsail
     class DeleteDomainEntryResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4204,7 +4036,7 @@ module Aws::Lightsail
     class DeleteDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -4214,7 +4046,7 @@ module Aws::Lightsail
     class DeleteDomainResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -4227,7 +4059,7 @@ module Aws::Lightsail
       :instance_name,
       :force_delete_add_ons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4237,7 +4069,7 @@ module Aws::Lightsail
     class DeleteInstanceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_snapshot_name
@@ -4246,7 +4078,7 @@ module Aws::Lightsail
     class DeleteInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4256,7 +4088,7 @@ module Aws::Lightsail
     class DeleteInstanceSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair_name
@@ -4273,7 +4105,7 @@ module Aws::Lightsail
       :key_pair_name,
       :expected_fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -4283,7 +4115,7 @@ module Aws::Lightsail
     class DeleteKeyPairResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -4292,7 +4124,7 @@ module Aws::Lightsail
     class DeleteKnownHostKeysRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4302,7 +4134,7 @@ module Aws::Lightsail
     class DeleteKnownHostKeysResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -4311,7 +4143,7 @@ module Aws::Lightsail
     class DeleteLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4321,7 +4153,7 @@ module Aws::Lightsail
     class DeleteLoadBalancerResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -4341,7 +4173,7 @@ module Aws::Lightsail
       :certificate_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4351,7 +4183,7 @@ module Aws::Lightsail
     class DeleteLoadBalancerTlsCertificateResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -4388,7 +4220,7 @@ module Aws::Lightsail
       :skip_final_snapshot,
       :final_relational_database_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4398,7 +4230,7 @@ module Aws::Lightsail
     class DeleteRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_snapshot_name
@@ -4407,7 +4239,7 @@ module Aws::Lightsail
     class DeleteRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4417,7 +4249,7 @@ module Aws::Lightsail
     class DeleteRelationalDatabaseSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination of a record.</p>
@@ -4431,7 +4263,7 @@ module Aws::Lightsail
       :id,
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -4442,7 +4274,7 @@ module Aws::Lightsail
     class DetachCertificateFromDistributionRequest < Struct.new(
       :distribution_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -4452,7 +4284,7 @@ module Aws::Lightsail
     class DetachCertificateFromDistributionResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -4462,7 +4294,7 @@ module Aws::Lightsail
     class DetachDiskRequest < Struct.new(
       :disk_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4472,7 +4304,7 @@ module Aws::Lightsail
     class DetachDiskResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -4486,7 +4318,7 @@ module Aws::Lightsail
       :load_balancer_name,
       :instance_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4496,7 +4328,7 @@ module Aws::Lightsail
     class DetachInstancesFromLoadBalancerResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip_name
@@ -4505,7 +4337,7 @@ module Aws::Lightsail
     class DetachStaticIpRequest < Struct.new(
       :static_ip_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4515,7 +4347,7 @@ module Aws::Lightsail
     class DetachStaticIpResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_on_type
@@ -4528,7 +4360,7 @@ module Aws::Lightsail
       :add_on_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -4538,7 +4370,7 @@ module Aws::Lightsail
     class DisableAddOnResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block storage disk.</p>
@@ -4634,7 +4466,7 @@ module Aws::Lightsail
       :gb_in_use,
       :auto_mount_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk.</p>
@@ -4657,7 +4489,7 @@ module Aws::Lightsail
       :size_in_gb,
       :is_system_disk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block storage disk mapping.</p>
@@ -4672,7 +4504,7 @@ module Aws::Lightsail
       :original_disk_path,
       :new_disk_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block storage disk snapshot.</p>
@@ -4745,7 +4577,7 @@ module Aws::Lightsail
       :from_instance_arn,
       :is_from_auto_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk snapshot.</p>
@@ -4755,22 +4587,7 @@ module Aws::Lightsail
     class DiskSnapshotInfo < Struct.new(
       :size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskSnapshotState
-      Pending = 'pending'
-      Completed = 'completed'
-      Error = 'error'
-      Unknown = 'unknown'
-    end
-
-    module DiskState
-      Pending = 'pending'
-      Error = 'error'
-      Available = 'available'
-      InUse = 'in-use'
-      Unknown = 'unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the specifications of a distribution bundle.</p>
@@ -4797,16 +4614,7 @@ module Aws::Lightsail
       :transfer_per_month_in_gb,
       :is_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DistributionMetricName
-      Requests = 'Requests'
-      BytesDownloaded = 'BytesDownloaded'
-      BytesUploaded = 'BytesUploaded'
-      TotalErrorRate = 'TotalErrorRate'
-      Http4xxErrorRate = 'Http4xxErrorRate'
-      Http5xxErrorRate = 'Http5xxErrorRate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the creation state of the canonical name (CNAME) records that are automatically
@@ -4846,13 +4654,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsRecordCreationStateCode
-      Succeeded = 'SUCCEEDED'
-      Started = 'STARTED'
-      Failed = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a domain where you are storing recordsets.</p>
@@ -4899,7 +4701,7 @@ module Aws::Lightsail
       :domain_entries,
       :registered_domain_delegation_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a domain recordset entry.</p>
@@ -4990,7 +4792,7 @@ module Aws::Lightsail
       :type,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the domain name system (DNS) records that you must add to the DNS of your
@@ -5017,12 +4819,12 @@ module Aws::Lightsail
       :dns_record_creation_state,
       :validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DownloadDefaultKeyPairRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_base64
@@ -5039,7 +4841,7 @@ module Aws::Lightsail
       :private_key_base64,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -5052,7 +4854,7 @@ module Aws::Lightsail
       :resource_name,
       :add_on_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -5062,7 +4864,7 @@ module Aws::Lightsail
     class EnableAddOnResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings of a public endpoint for an Amazon Lightsail container
@@ -5081,7 +4883,7 @@ module Aws::Lightsail
       :container_port,
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An estimate that's associated with a time period. </p>
@@ -5109,7 +4911,7 @@ module Aws::Lightsail
       :currency,
       :time_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an export snapshot record.</p>
@@ -5147,7 +4949,7 @@ module Aws::Lightsail
       :source_info,
       :destination_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the source of an export snapshot record.</p>
@@ -5186,12 +4988,7 @@ module Aws::Lightsail
       :instance_snapshot_info,
       :disk_snapshot_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportSnapshotRecordSourceType
-      InstanceSnapshot = 'InstanceSnapshot'
-      DiskSnapshot = 'DiskSnapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_snapshot_name
@@ -5200,7 +4997,7 @@ module Aws::Lightsail
     class ExportSnapshotRequest < Struct.new(
       :source_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -5210,13 +5007,7 @@ module Aws::Lightsail
     class ExportSnapshotResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ForwardValues
-      none = 'none'
-      allowList = 'allow-list'
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -5228,7 +5019,7 @@ module Aws::Lightsail
     class GetActiveNamesRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_names
@@ -5244,7 +5035,7 @@ module Aws::Lightsail
       :active_names,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -5267,7 +5058,7 @@ module Aws::Lightsail
       :page_token,
       :monitored_resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarms
@@ -5283,7 +5074,7 @@ module Aws::Lightsail
       :alarms,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -5293,7 +5084,7 @@ module Aws::Lightsail
     class GetAutoSnapshotsRequest < Struct.new(
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -5312,7 +5103,7 @@ module Aws::Lightsail
       :resource_type,
       :auto_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_inactive
@@ -5336,7 +5127,7 @@ module Aws::Lightsail
       :page_token,
       :app_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprints
@@ -5353,7 +5144,7 @@ module Aws::Lightsail
       :blueprints,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -5362,7 +5153,7 @@ module Aws::Lightsail
     class GetBucketAccessKeysRequest < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_keys
@@ -5371,7 +5162,7 @@ module Aws::Lightsail
     class GetBucketAccessKeysResult < Struct.new(
       :access_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_inactive
@@ -5381,7 +5172,7 @@ module Aws::Lightsail
     class GetBucketBundlesRequest < Struct.new(
       :include_inactive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundles
@@ -5390,7 +5181,7 @@ module Aws::Lightsail
     class GetBucketBundlesResult < Struct.new(
       :bundles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -5489,7 +5280,7 @@ module Aws::Lightsail
       :statistics,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5502,7 +5293,7 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -5526,7 +5317,7 @@ module Aws::Lightsail
       :page_token,
       :include_connected_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute buckets
@@ -5548,7 +5339,7 @@ module Aws::Lightsail
       :next_page_token,
       :account_level_bpa_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_inactive
@@ -5572,7 +5363,7 @@ module Aws::Lightsail
       :page_token,
       :app_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundles
@@ -5588,7 +5379,7 @@ module Aws::Lightsail
       :bundles,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_statuses
@@ -5621,7 +5412,7 @@ module Aws::Lightsail
       :certificate_name,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificates
@@ -5636,7 +5427,7 @@ module Aws::Lightsail
       :certificates,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -5648,7 +5439,7 @@ module Aws::Lightsail
     class GetCloudFormationStackRecordsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_formation_stack_records
@@ -5665,7 +5456,7 @@ module Aws::Lightsail
       :cloud_formation_stack_records,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocols
@@ -5677,7 +5468,7 @@ module Aws::Lightsail
     class GetContactMethodsRequest < Struct.new(
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_methods
@@ -5686,12 +5477,12 @@ module Aws::Lightsail
     class GetContactMethodsResult < Struct.new(
       :contact_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetContainerAPIMetadataRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -5701,7 +5492,7 @@ module Aws::Lightsail
     class GetContainerAPIMetadataResult < Struct.new(
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -5710,7 +5501,7 @@ module Aws::Lightsail
     class GetContainerImagesRequest < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_images
@@ -5720,7 +5511,7 @@ module Aws::Lightsail
     class GetContainerImagesResult < Struct.new(
       :container_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -5801,7 +5592,7 @@ module Aws::Lightsail
       :filter_pattern,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_events
@@ -5817,7 +5608,7 @@ module Aws::Lightsail
       :log_events,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -5826,7 +5617,7 @@ module Aws::Lightsail
     class GetContainerServiceDeploymentsRequest < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -5835,7 +5626,7 @@ module Aws::Lightsail
     class GetContainerServiceDeploymentsResult < Struct.new(
       :deployments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -5919,7 +5710,7 @@ module Aws::Lightsail
       :period,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -5932,12 +5723,12 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetContainerServicePowersRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute powers
@@ -5947,7 +5738,7 @@ module Aws::Lightsail
     class GetContainerServicePowersResult < Struct.new(
       :powers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -5957,7 +5748,7 @@ module Aws::Lightsail
     class GetContainerServicesRequest < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -5998,7 +5789,7 @@ module Aws::Lightsail
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources_budget_estimate
@@ -6007,7 +5798,7 @@ module Aws::Lightsail
     class GetCostEstimateResult < Struct.new(
       :resources_budget_estimate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_name
@@ -6016,7 +5807,7 @@ module Aws::Lightsail
     class GetDiskRequest < Struct.new(
       :disk_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk
@@ -6025,7 +5816,7 @@ module Aws::Lightsail
     class GetDiskResult < Struct.new(
       :disk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_snapshot_name
@@ -6034,7 +5825,7 @@ module Aws::Lightsail
     class GetDiskSnapshotRequest < Struct.new(
       :disk_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_snapshot
@@ -6043,7 +5834,7 @@ module Aws::Lightsail
     class GetDiskSnapshotResult < Struct.new(
       :disk_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6055,7 +5846,7 @@ module Aws::Lightsail
     class GetDiskSnapshotsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disk_snapshots
@@ -6071,7 +5862,7 @@ module Aws::Lightsail
       :disk_snapshots,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6083,7 +5874,7 @@ module Aws::Lightsail
     class GetDisksRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disks
@@ -6099,12 +5890,12 @@ module Aws::Lightsail
       :disks,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDistributionBundlesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundles
@@ -6113,7 +5904,7 @@ module Aws::Lightsail
     class GetDistributionBundlesResult < Struct.new(
       :bundles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -6127,7 +5918,7 @@ module Aws::Lightsail
     class GetDistributionLatestCacheResetRequest < Struct.new(
       :distribution_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -6141,7 +5932,7 @@ module Aws::Lightsail
       :status,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -6309,7 +6100,7 @@ module Aws::Lightsail
       :unit,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -6322,7 +6113,7 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -6340,7 +6131,7 @@ module Aws::Lightsail
       :distribution_name,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distributions
@@ -6356,7 +6147,7 @@ module Aws::Lightsail
       :distributions,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6365,7 +6156,7 @@ module Aws::Lightsail
     class GetDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -6374,7 +6165,7 @@ module Aws::Lightsail
     class GetDomainResult < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6386,7 +6177,7 @@ module Aws::Lightsail
     class GetDomainsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domains
@@ -6403,7 +6194,7 @@ module Aws::Lightsail
       :domains,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6415,7 +6206,7 @@ module Aws::Lightsail
     class GetExportSnapshotRecordsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_snapshot_records
@@ -6431,7 +6222,7 @@ module Aws::Lightsail
       :export_snapshot_records,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -6444,7 +6235,7 @@ module Aws::Lightsail
       :instance_name,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_details
@@ -6454,7 +6245,7 @@ module Aws::Lightsail
     class GetInstanceAccessDetailsResult < Struct.new(
       :access_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -6658,7 +6449,7 @@ module Aws::Lightsail
       :unit,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -6671,7 +6462,7 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -6680,7 +6471,7 @@ module Aws::Lightsail
     class GetInstancePortStatesRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute port_states
@@ -6690,7 +6481,7 @@ module Aws::Lightsail
     class GetInstancePortStatesResult < Struct.new(
       :port_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -6699,7 +6490,7 @@ module Aws::Lightsail
     class GetInstanceRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance
@@ -6708,7 +6499,7 @@ module Aws::Lightsail
     class GetInstanceResult < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_snapshot_name
@@ -6717,7 +6508,7 @@ module Aws::Lightsail
     class GetInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_snapshot
@@ -6727,7 +6518,7 @@ module Aws::Lightsail
     class GetInstanceSnapshotResult < Struct.new(
       :instance_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6739,7 +6530,7 @@ module Aws::Lightsail
     class GetInstanceSnapshotsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_snapshots
@@ -6756,7 +6547,7 @@ module Aws::Lightsail
       :instance_snapshots,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -6765,7 +6556,7 @@ module Aws::Lightsail
     class GetInstanceStateRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -6774,7 +6565,7 @@ module Aws::Lightsail
     class GetInstanceStateResult < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6786,7 +6577,7 @@ module Aws::Lightsail
     class GetInstancesRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -6802,7 +6593,7 @@ module Aws::Lightsail
       :instances,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair_name
@@ -6811,7 +6602,7 @@ module Aws::Lightsail
     class GetKeyPairRequest < Struct.new(
       :key_pair_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair
@@ -6820,7 +6611,7 @@ module Aws::Lightsail
     class GetKeyPairResult < Struct.new(
       :key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -6837,7 +6628,7 @@ module Aws::Lightsail
       :page_token,
       :include_default_key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pairs
@@ -6853,7 +6644,7 @@ module Aws::Lightsail
       :key_pairs,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -7086,7 +6877,7 @@ module Aws::Lightsail
       :unit,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -7099,7 +6890,7 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -7108,7 +6899,7 @@ module Aws::Lightsail
     class GetLoadBalancerRequest < Struct.new(
       :load_balancer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer
@@ -7117,7 +6908,7 @@ module Aws::Lightsail
     class GetLoadBalancerResult < Struct.new(
       :load_balancer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -7126,7 +6917,7 @@ module Aws::Lightsail
     class GetLoadBalancerTlsCertificatesRequest < Struct.new(
       :load_balancer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_certificates
@@ -7136,7 +6927,7 @@ module Aws::Lightsail
     class GetLoadBalancerTlsCertificatesResult < Struct.new(
       :tls_certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7148,7 +6939,7 @@ module Aws::Lightsail
     class GetLoadBalancerTlsPoliciesRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_policies
@@ -7164,7 +6955,7 @@ module Aws::Lightsail
       :tls_policies,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7176,7 +6967,7 @@ module Aws::Lightsail
     class GetLoadBalancersRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancers
@@ -7192,7 +6983,7 @@ module Aws::Lightsail
       :load_balancers,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -7201,7 +6992,7 @@ module Aws::Lightsail
     class GetOperationRequest < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -7211,7 +7002,7 @@ module Aws::Lightsail
     class GetOperationResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -7227,7 +7018,7 @@ module Aws::Lightsail
       :resource_name,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -7254,7 +7045,7 @@ module Aws::Lightsail
       :next_page_count,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7266,7 +7057,7 @@ module Aws::Lightsail
     class GetOperationsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -7283,7 +7074,7 @@ module Aws::Lightsail
       :operations,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_availability_zones
@@ -7299,7 +7090,7 @@ module Aws::Lightsail
       :include_availability_zones,
       :include_relational_database_availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -7308,7 +7099,7 @@ module Aws::Lightsail
     class GetRegionsResult < Struct.new(
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7320,7 +7111,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseBlueprintsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprints
@@ -7337,7 +7128,7 @@ module Aws::Lightsail
       :blueprints,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7354,7 +7145,7 @@ module Aws::Lightsail
       :page_token,
       :include_inactive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundles
@@ -7370,7 +7161,7 @@ module Aws::Lightsail
       :bundles,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7394,7 +7185,7 @@ module Aws::Lightsail
       :duration_in_minutes,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_events
@@ -7410,7 +7201,7 @@ module Aws::Lightsail
       :relational_database_events,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7472,7 +7263,7 @@ module Aws::Lightsail
       :start_from_head,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_log_events
@@ -7491,7 +7282,7 @@ module Aws::Lightsail
       :next_backward_token,
       :next_forward_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7500,7 +7291,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseLogStreamsRequest < Struct.new(
       :relational_database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_streams
@@ -7510,7 +7301,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseLogStreamsResult < Struct.new(
       :log_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7530,7 +7321,7 @@ module Aws::Lightsail
       :relational_database_name,
       :password_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute master_user_password
@@ -7543,7 +7334,7 @@ module Aws::Lightsail
       :master_user_password,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7708,7 +7499,7 @@ module Aws::Lightsail
       :unit,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_name
@@ -7721,7 +7512,7 @@ module Aws::Lightsail
       :metric_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7737,7 +7528,7 @@ module Aws::Lightsail
       :relational_database_name,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -7754,7 +7545,7 @@ module Aws::Lightsail
       :parameters,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -7763,7 +7554,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database
@@ -7772,7 +7563,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseResult < Struct.new(
       :relational_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_snapshot_name
@@ -7781,7 +7572,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseSnapshotRequest < Struct.new(
       :relational_database_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_snapshot
@@ -7790,7 +7581,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseSnapshotResult < Struct.new(
       :relational_database_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7802,7 +7593,7 @@ module Aws::Lightsail
     class GetRelationalDatabaseSnapshotsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_snapshots
@@ -7819,7 +7610,7 @@ module Aws::Lightsail
       :relational_database_snapshots,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7831,7 +7622,7 @@ module Aws::Lightsail
     class GetRelationalDatabasesRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_databases
@@ -7847,7 +7638,7 @@ module Aws::Lightsail
       :relational_databases,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -7863,7 +7654,7 @@ module Aws::Lightsail
       :resource_name,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute setup_history
@@ -7879,7 +7670,7 @@ module Aws::Lightsail
       :setup_history,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip_name
@@ -7888,7 +7679,7 @@ module Aws::Lightsail
     class GetStaticIpRequest < Struct.new(
       :static_ip_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip
@@ -7897,7 +7688,7 @@ module Aws::Lightsail
     class GetStaticIpResult < Struct.new(
       :static_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_token
@@ -7909,7 +7700,7 @@ module Aws::Lightsail
     class GetStaticIpsRequest < Struct.new(
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ips
@@ -7926,25 +7717,7 @@ module Aws::Lightsail
       :static_ips,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HeaderEnum
-      accept = 'Accept'
-      acceptCharset = 'Accept-Charset'
-      acceptDatetime = 'Accept-Datetime'
-      acceptEncoding = 'Accept-Encoding'
-      acceptLanguage = 'Accept-Language'
-      authorization = 'Authorization'
-      cloudFrontForwardedProto = 'CloudFront-Forwarded-Proto'
-      cloudFrontIsDesktopViewer = 'CloudFront-Is-Desktop-Viewer'
-      cloudFrontIsMobileViewer = 'CloudFront-Is-Mobile-Viewer'
-      cloudFrontIsSmartTVViewer = 'CloudFront-Is-SmartTV-Viewer'
-      cloudFrontIsTabletViewer = 'CloudFront-Is-Tablet-Viewer'
-      cloudFrontViewerCountry = 'CloudFront-Viewer-Country'
-      host = 'Host'
-      origin = 'Origin'
-      referer = 'Referer'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the request headers that a Lightsail distribution bases caching on.</p>
@@ -7991,7 +7764,7 @@ module Aws::Lightsail
       :option,
       :headers_allow_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the public SSH host keys or the RDP certificate.</p>
@@ -8058,22 +7831,7 @@ module Aws::Lightsail
       :not_valid_before,
       :not_valid_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HttpEndpoint
-      disabled = 'disabled'
-      enabled = 'enabled'
-    end
-
-    module HttpProtocolIpv6
-      disabled = 'disabled'
-      enabled = 'enabled'
-    end
-
-    module HttpTokens
-      optional = 'optional'
-      required = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair_name
@@ -8086,7 +7844,7 @@ module Aws::Lightsail
       :key_pair_name,
       :public_key_base64,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -8096,7 +7854,7 @@ module Aws::Lightsail
     class ImportKeyPairResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)
@@ -8125,7 +7883,7 @@ module Aws::Lightsail
       :protocol_policy,
       :response_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance (a virtual private server).</p>
@@ -8228,7 +7986,7 @@ module Aws::Lightsail
       :ssh_key_name,
       :metadata_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for gaining temporary access to one of your Amazon Lightsail
@@ -8294,12 +8052,7 @@ module Aws::Lightsail
       :username,
       :host_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceAccessProtocol
-      ssh = 'ssh'
-      rdp = 'rdp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the
@@ -8370,7 +8123,7 @@ module Aws::Lightsail
       :user_data,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the hardware for the instance.</p>
@@ -8388,30 +8141,7 @@ module Aws::Lightsail
       :disks,
       :ram_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceHealthReason
-      LbRegistrationInProgress = 'Lb.RegistrationInProgress'
-      LbInitialHealthChecking = 'Lb.InitialHealthChecking'
-      LbInternalError = 'Lb.InternalError'
-      InstanceResponseCodeMismatch = 'Instance.ResponseCodeMismatch'
-      InstanceTimeout = 'Instance.Timeout'
-      InstanceFailedHealthChecks = 'Instance.FailedHealthChecks'
-      InstanceNotRegistered = 'Instance.NotRegistered'
-      InstanceNotInUse = 'Instance.NotInUse'
-      InstanceDeregistrationInProgress = 'Instance.DeregistrationInProgress'
-      InstanceInvalidState = 'Instance.InvalidState'
-      InstanceIpUnusable = 'Instance.IpUnusable'
-    end
-
-    module InstanceHealthState
-      Initial = 'initial'
-      Healthy = 'healthy'
-      Unhealthy = 'unhealthy'
-      Unused = 'unused'
-      Draining = 'draining'
-      Unavailable = 'unavailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about the health of the instance.</p>
@@ -8550,7 +8280,7 @@ module Aws::Lightsail
       :instance_health,
       :instance_health_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instance.</p>
@@ -8607,24 +8337,7 @@ module Aws::Lightsail
       :http_put_response_hop_limit,
       :http_protocol_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMetadataState
-      pending = 'pending'
-      applied = 'applied'
-    end
-
-    module InstanceMetricName
-      CPUUtilization = 'CPUUtilization'
-      NetworkIn = 'NetworkIn'
-      NetworkOut = 'NetworkOut'
-      StatusCheckFailed = 'StatusCheckFailed'
-      StatusCheckFailed_Instance = 'StatusCheckFailed_Instance'
-      StatusCheckFailed_System = 'StatusCheckFailed_System'
-      BurstCapacityTime = 'BurstCapacityTime'
-      BurstCapacityPercentage = 'BurstCapacityPercentage'
-      MetadataNoToken = 'MetadataNoToken'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes monthly data transfer rates and port information for an instance.</p>
@@ -8638,12 +8351,7 @@ module Aws::Lightsail
       :monthly_transfer,
       :ports,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstancePlatform
-      LinuxUnix = 'LINUX_UNIX'
-      Windows = 'WINDOWS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about ports for an Amazon Lightsail instance.</p>
@@ -8788,7 +8496,7 @@ module Aws::Lightsail
       :ipv6_cidrs,
       :cidr_list_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:from_port] = 0 unless options.key?(:from_port)
@@ -8927,7 +8635,7 @@ module Aws::Lightsail
       :ipv6_cidrs,
       :cidr_list_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:from_port] = 0 unless options.key?(:from_port)
@@ -9015,7 +8723,7 @@ module Aws::Lightsail
       :is_from_auto_snapshot,
       :size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance snapshot.</p>
@@ -9033,13 +8741,7 @@ module Aws::Lightsail
       :from_blueprint_id,
       :from_disk_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceSnapshotState
-      Pending = 'pending'
-      Error = 'error'
-      Available = 'available'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the virtual private server (or <i>instance</i>) status.</p>
@@ -9053,7 +8755,7 @@ module Aws::Lightsail
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when user input does not conform to the validation rules
@@ -9078,18 +8780,12 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      DUALSTACK = 'dualstack'
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     class IsVpcPeeredRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute is_peered
@@ -9099,7 +8795,7 @@ module Aws::Lightsail
     class IsVpcPeeredResult < Struct.new(
       :is_peered,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an SSH key pair.</p>
@@ -9141,7 +8837,7 @@ module Aws::Lightsail
       :tags,
       :fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lightsail content delivery network (CDN) distribution.</p>
@@ -9248,7 +8944,7 @@ module Aws::Lightsail
       :tags,
       :viewer_minimum_tls_protocol_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer.</p>
@@ -9346,43 +9042,7 @@ module Aws::Lightsail
       :https_redirection_enabled,
       :tls_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerAttributeName
-      HealthCheckPath = 'HealthCheckPath'
-      SessionStickinessEnabled = 'SessionStickinessEnabled'
-      SessionStickiness_LB_CookieDurationSeconds = 'SessionStickiness_LB_CookieDurationSeconds'
-      HttpsRedirectionEnabled = 'HttpsRedirectionEnabled'
-      TlsPolicyName = 'TlsPolicyName'
-    end
-
-    module LoadBalancerMetricName
-      ClientTLSNegotiationErrorCount = 'ClientTLSNegotiationErrorCount'
-      HealthyHostCount = 'HealthyHostCount'
-      UnhealthyHostCount = 'UnhealthyHostCount'
-      HTTPCode_LB_4XX_Count = 'HTTPCode_LB_4XX_Count'
-      HTTPCode_LB_5XX_Count = 'HTTPCode_LB_5XX_Count'
-      HTTPCode_Instance_2XX_Count = 'HTTPCode_Instance_2XX_Count'
-      HTTPCode_Instance_3XX_Count = 'HTTPCode_Instance_3XX_Count'
-      HTTPCode_Instance_4XX_Count = 'HTTPCode_Instance_4XX_Count'
-      HTTPCode_Instance_5XX_Count = 'HTTPCode_Instance_5XX_Count'
-      InstanceResponseTime = 'InstanceResponseTime'
-      RejectedConnectionCount = 'RejectedConnectionCount'
-      RequestCount = 'RequestCount'
-    end
-
-    module LoadBalancerProtocol
-      HTTP_HTTPS = 'HTTP_HTTPS'
-      HTTP = 'HTTP'
-    end
-
-    module LoadBalancerState
-      Active = 'active'
-      Provisioning = 'provisioning'
-      ActiveImpaired = 'active_impaired'
-      Failed = 'failed'
-      Unknown = 'unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer SSL/TLS certificate.</p>
@@ -9631,7 +9291,7 @@ module Aws::Lightsail
       :subject,
       :subject_alternative_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the state of the canonical name (CNAME) records that are
@@ -9662,19 +9322,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerTlsCertificateDnsRecordCreationStateCode
-      Succeeded = 'SUCCEEDED'
-      Started = 'STARTED'
-      Failed = 'FAILED'
-    end
-
-    module LoadBalancerTlsCertificateDomainStatus
-      PendingValidation = 'PENDING_VALIDATION'
-      Failed = 'FAILED'
-      Success = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the domain names on an SSL/TLS certificate that you will use to
@@ -9689,7 +9337,7 @@ module Aws::Lightsail
       :domain_name,
       :validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the validation record of each domain name in the SSL/TLS certificate.</p>
@@ -9723,22 +9371,7 @@ module Aws::Lightsail
       :domain_name,
       :dns_record_creation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerTlsCertificateFailureReason
-      NoAvailableContacts = 'NO_AVAILABLE_CONTACTS'
-      AdditionalVerificationRequired = 'ADDITIONAL_VERIFICATION_REQUIRED'
-      DomainNotAllowed = 'DOMAIN_NOT_ALLOWED'
-      InvalidPublicDomain = 'INVALID_PUBLIC_DOMAIN'
-      Other = 'OTHER'
-    end
-
-    module LoadBalancerTlsCertificateRenewalStatus
-      PendingAutoRenewal = 'PENDING_AUTO_RENEWAL'
-      PendingValidation = 'PENDING_VALIDATION'
-      Success = 'SUCCESS'
-      Failed = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the status of Lightsail's managed renewal for the
@@ -9832,31 +9465,7 @@ module Aws::Lightsail
       :renewal_status,
       :domain_validation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerTlsCertificateRevocationReason
-      Unspecified = 'UNSPECIFIED'
-      KeyCompromise = 'KEY_COMPROMISE'
-      CaCompromise = 'CA_COMPROMISE'
-      AffiliationChanged = 'AFFILIATION_CHANGED'
-      Superceded = 'SUPERCEDED'
-      CessationOfOperation = 'CESSATION_OF_OPERATION'
-      CertificateHold = 'CERTIFICATE_HOLD'
-      RemoveFromCrl = 'REMOVE_FROM_CRL'
-      PrivilegeWithdrawn = 'PRIVILEGE_WITHDRAWN'
-      AACompromise = 'A_A_COMPROMISE'
-    end
-
-    module LoadBalancerTlsCertificateStatus
-      PendingValidation = 'PENDING_VALIDATION'
-      Issued = 'ISSUED'
-      Inactive = 'INACTIVE'
-      Expired = 'EXPIRED'
-      ValidationTimedOut = 'VALIDATION_TIMED_OUT'
-      Revoked = 'REVOKED'
-      Failed = 'FAILED'
-      Unknown = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of SSL/TLS certificate metadata.</p>
@@ -9871,7 +9480,7 @@ module Aws::Lightsail
       :name,
       :is_attached,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the TLS security policies that are available for Lightsail load
@@ -9902,7 +9511,7 @@ module Aws::Lightsail
       :protocols,
       :ciphers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database log event.</p>
@@ -9916,7 +9525,7 @@ module Aws::Lightsail
       :created_at,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metric data point.</p>
@@ -9950,73 +9559,7 @@ module Aws::Lightsail
       :timestamp,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricName
-      CPUUtilization = 'CPUUtilization'
-      NetworkIn = 'NetworkIn'
-      NetworkOut = 'NetworkOut'
-      StatusCheckFailed = 'StatusCheckFailed'
-      StatusCheckFailed_Instance = 'StatusCheckFailed_Instance'
-      StatusCheckFailed_System = 'StatusCheckFailed_System'
-      ClientTLSNegotiationErrorCount = 'ClientTLSNegotiationErrorCount'
-      HealthyHostCount = 'HealthyHostCount'
-      UnhealthyHostCount = 'UnhealthyHostCount'
-      HTTPCode_LB_4XX_Count = 'HTTPCode_LB_4XX_Count'
-      HTTPCode_LB_5XX_Count = 'HTTPCode_LB_5XX_Count'
-      HTTPCode_Instance_2XX_Count = 'HTTPCode_Instance_2XX_Count'
-      HTTPCode_Instance_3XX_Count = 'HTTPCode_Instance_3XX_Count'
-      HTTPCode_Instance_4XX_Count = 'HTTPCode_Instance_4XX_Count'
-      HTTPCode_Instance_5XX_Count = 'HTTPCode_Instance_5XX_Count'
-      InstanceResponseTime = 'InstanceResponseTime'
-      RejectedConnectionCount = 'RejectedConnectionCount'
-      RequestCount = 'RequestCount'
-      DatabaseConnections = 'DatabaseConnections'
-      DiskQueueDepth = 'DiskQueueDepth'
-      FreeStorageSpace = 'FreeStorageSpace'
-      NetworkReceiveThroughput = 'NetworkReceiveThroughput'
-      NetworkTransmitThroughput = 'NetworkTransmitThroughput'
-      BurstCapacityTime = 'BurstCapacityTime'
-      BurstCapacityPercentage = 'BurstCapacityPercentage'
-    end
-
-    module MetricStatistic
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
-      Sum = 'Sum'
-      Average = 'Average'
-      SampleCount = 'SampleCount'
-    end
-
-    module MetricUnit
-      Seconds = 'Seconds'
-      Microseconds = 'Microseconds'
-      Milliseconds = 'Milliseconds'
-      Bytes = 'Bytes'
-      Kilobytes = 'Kilobytes'
-      Megabytes = 'Megabytes'
-      Gigabytes = 'Gigabytes'
-      Terabytes = 'Terabytes'
-      Bits = 'Bits'
-      Kilobits = 'Kilobits'
-      Megabits = 'Megabits'
-      Gigabits = 'Gigabits'
-      Terabits = 'Terabits'
-      Percent = 'Percent'
-      Count = 'Count'
-      BytesSecond = 'Bytes/Second'
-      KilobytesSecond = 'Kilobytes/Second'
-      MegabytesSecond = 'Megabytes/Second'
-      GigabytesSecond = 'Gigabytes/Second'
-      TerabytesSecond = 'Terabytes/Second'
-      BitsSecond = 'Bits/Second'
-      KilobitsSecond = 'Kilobits/Second'
-      MegabitsSecond = 'Megabits/Second'
-      GigabitsSecond = 'Gigabits/Second'
-      TerabitsSecond = 'Terabits/Second'
-      CountSecond = 'Count/Second'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes resource being monitored by an alarm.</p>
@@ -10039,7 +9582,7 @@ module Aws::Lightsail
       :name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monthly data transfer in and out of your virtual private server (or
@@ -10050,7 +9593,7 @@ module Aws::Lightsail
     class MonthlyTransfer < Struct.new(
       :gb_per_month_allocated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of the name server records update made by Amazon Lightsail
@@ -10086,22 +9629,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NameServersUpdateStateCode
-      Succeeded = 'SUCCEEDED'
-      Pending = 'PENDING'
-      Failed = 'FAILED'
-      Started = 'STARTED'
-    end
-
-    module NetworkProtocol
-      TCP = 'tcp'
-      ALL = 'all'
-      UDP = 'udp'
-      ICMP = 'icmp'
-      ICMPV6 = 'icmpv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when it cannot find a resource.</p>
@@ -10119,7 +9647,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute port_info
@@ -10132,7 +9660,7 @@ module Aws::Lightsail
       :port_info,
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -10142,7 +9670,7 @@ module Aws::Lightsail
     class OpenInstancePublicPortsResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the API operation.</p>
@@ -10196,7 +9724,7 @@ module Aws::Lightsail
       :error_code,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when an operation fails to execute.</p>
@@ -10214,101 +9742,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationStatus
-      NotStarted = 'NotStarted'
-      Started = 'Started'
-      Failed = 'Failed'
-      Completed = 'Completed'
-      Succeeded = 'Succeeded'
-    end
-
-    module OperationType
-      DeleteKnownHostKeys = 'DeleteKnownHostKeys'
-      DeleteInstance = 'DeleteInstance'
-      CreateInstance = 'CreateInstance'
-      StopInstance = 'StopInstance'
-      StartInstance = 'StartInstance'
-      RebootInstance = 'RebootInstance'
-      OpenInstancePublicPorts = 'OpenInstancePublicPorts'
-      PutInstancePublicPorts = 'PutInstancePublicPorts'
-      CloseInstancePublicPorts = 'CloseInstancePublicPorts'
-      AllocateStaticIp = 'AllocateStaticIp'
-      ReleaseStaticIp = 'ReleaseStaticIp'
-      AttachStaticIp = 'AttachStaticIp'
-      DetachStaticIp = 'DetachStaticIp'
-      UpdateDomainEntry = 'UpdateDomainEntry'
-      DeleteDomainEntry = 'DeleteDomainEntry'
-      CreateDomain = 'CreateDomain'
-      DeleteDomain = 'DeleteDomain'
-      CreateInstanceSnapshot = 'CreateInstanceSnapshot'
-      DeleteInstanceSnapshot = 'DeleteInstanceSnapshot'
-      CreateInstancesFromSnapshot = 'CreateInstancesFromSnapshot'
-      CreateLoadBalancer = 'CreateLoadBalancer'
-      DeleteLoadBalancer = 'DeleteLoadBalancer'
-      AttachInstancesToLoadBalancer = 'AttachInstancesToLoadBalancer'
-      DetachInstancesFromLoadBalancer = 'DetachInstancesFromLoadBalancer'
-      UpdateLoadBalancerAttribute = 'UpdateLoadBalancerAttribute'
-      CreateLoadBalancerTlsCertificate = 'CreateLoadBalancerTlsCertificate'
-      DeleteLoadBalancerTlsCertificate = 'DeleteLoadBalancerTlsCertificate'
-      AttachLoadBalancerTlsCertificate = 'AttachLoadBalancerTlsCertificate'
-      CreateDisk = 'CreateDisk'
-      DeleteDisk = 'DeleteDisk'
-      AttachDisk = 'AttachDisk'
-      DetachDisk = 'DetachDisk'
-      CreateDiskSnapshot = 'CreateDiskSnapshot'
-      DeleteDiskSnapshot = 'DeleteDiskSnapshot'
-      CreateDiskFromSnapshot = 'CreateDiskFromSnapshot'
-      CreateRelationalDatabase = 'CreateRelationalDatabase'
-      UpdateRelationalDatabase = 'UpdateRelationalDatabase'
-      DeleteRelationalDatabase = 'DeleteRelationalDatabase'
-      CreateRelationalDatabaseFromSnapshot = 'CreateRelationalDatabaseFromSnapshot'
-      CreateRelationalDatabaseSnapshot = 'CreateRelationalDatabaseSnapshot'
-      DeleteRelationalDatabaseSnapshot = 'DeleteRelationalDatabaseSnapshot'
-      UpdateRelationalDatabaseParameters = 'UpdateRelationalDatabaseParameters'
-      StartRelationalDatabase = 'StartRelationalDatabase'
-      RebootRelationalDatabase = 'RebootRelationalDatabase'
-      StopRelationalDatabase = 'StopRelationalDatabase'
-      EnableAddOn = 'EnableAddOn'
-      DisableAddOn = 'DisableAddOn'
-      PutAlarm = 'PutAlarm'
-      GetAlarms = 'GetAlarms'
-      DeleteAlarm = 'DeleteAlarm'
-      TestAlarm = 'TestAlarm'
-      CreateContactMethod = 'CreateContactMethod'
-      GetContactMethods = 'GetContactMethods'
-      SendContactMethodVerification = 'SendContactMethodVerification'
-      DeleteContactMethod = 'DeleteContactMethod'
-      CreateDistribution = 'CreateDistribution'
-      UpdateDistribution = 'UpdateDistribution'
-      DeleteDistribution = 'DeleteDistribution'
-      ResetDistributionCache = 'ResetDistributionCache'
-      AttachCertificateToDistribution = 'AttachCertificateToDistribution'
-      DetachCertificateFromDistribution = 'DetachCertificateFromDistribution'
-      UpdateDistributionBundle = 'UpdateDistributionBundle'
-      SetIpAddressType = 'SetIpAddressType'
-      CreateCertificate = 'CreateCertificate'
-      DeleteCertificate = 'DeleteCertificate'
-      CreateContainerService = 'CreateContainerService'
-      UpdateContainerService = 'UpdateContainerService'
-      DeleteContainerService = 'DeleteContainerService'
-      CreateContainerServiceDeployment = 'CreateContainerServiceDeployment'
-      CreateContainerServiceRegistryLogin = 'CreateContainerServiceRegistryLogin'
-      RegisterContainerImage = 'RegisterContainerImage'
-      DeleteContainerImage = 'DeleteContainerImage'
-      CreateBucket = 'CreateBucket'
-      DeleteBucket = 'DeleteBucket'
-      CreateBucketAccessKey = 'CreateBucketAccessKey'
-      DeleteBucketAccessKey = 'DeleteBucketAccessKey'
-      UpdateBucketBundle = 'UpdateBucketBundle'
-      UpdateBucket = 'UpdateBucket'
-      SetResourceAccessForBucket = 'SetResourceAccessForBucket'
-      UpdateInstanceMetadataOptions = 'UpdateInstanceMetadataOptions'
-      StartGUISession = 'StartGUISession'
-      StopGUISession = 'StopGUISession'
-      SetupInstanceHttps = 'SetupInstanceHttps'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)
@@ -10341,12 +9775,7 @@ module Aws::Lightsail
       :protocol_policy,
       :response_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginProtocolPolicyEnum
-      HTTPOnly = 'http-only'
-      HTTPSOnly = 'https-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The password data for the Windows Server-based instance, including the ciphertext and the
@@ -10376,12 +9805,12 @@ module Aws::Lightsail
       :ciphertext,
       :key_pair_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PeerVpcRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -10391,7 +9820,7 @@ module Aws::Lightsail
     class PeerVpcResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pending database maintenance action.</p>
@@ -10409,7 +9838,7 @@ module Aws::Lightsail
       :description,
       :current_apply_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pending database value modification.</p>
@@ -10427,12 +9856,7 @@ module Aws::Lightsail
       :engine_version,
       :backup_retention_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PortAccessType
-      Public = 'Public'
-      Private = 'Private'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes ports to open on an instance, the IP addresses allowed to connect to the
@@ -10569,33 +9993,13 @@ module Aws::Lightsail
       :ipv6_cidrs,
       :cidr_list_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:from_port] = 0 unless options.key?(:from_port)
         options[:to_port] = 0 unless options.key?(:to_port)
         super
       end
-    end
-
-    module PortInfoSourceType
-      Default = 'DEFAULT'
-      Instance = 'INSTANCE'
-      None = 'NONE'
-      Closed = 'CLOSED'
-    end
-
-    module PortState
-      Open = 'open'
-      Closed = 'closed'
-    end
-
-    module PricingUnit
-      GB = 'GB'
-      Hrs = 'Hrs'
-      GBMo = 'GB-Mo'
-      Bundles = 'Bundles'
-      Queries = 'Queries'
     end
 
     # <p>Describes the configuration for an Amazon Lightsail container service to
@@ -10610,7 +10014,7 @@ module Aws::Lightsail
     class PrivateRegistryAccess < Struct.new(
       :ecr_image_puller_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to configure an Amazon Lightsail container service to
@@ -10624,7 +10028,7 @@ module Aws::Lightsail
     class PrivateRegistryAccessRequest < Struct.new(
       :ecr_image_puller_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -10787,7 +10191,7 @@ module Aws::Lightsail
       :notification_triggers,
       :notification_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -10797,7 +10201,7 @@ module Aws::Lightsail
     class PutAlarmResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute port_infos
@@ -10810,7 +10214,7 @@ module Aws::Lightsail
       :port_infos,
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -10820,7 +10224,7 @@ module Aws::Lightsail
     class PutInstancePublicPortsResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the query string parameters that an Amazon Lightsail content delivery network
@@ -10842,7 +10246,7 @@ module Aws::Lightsail
       :option,
       :query_strings_allow_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the deletion state of an Amazon Route 53 hosted zone for a domain that is
@@ -10876,14 +10280,7 @@ module Aws::Lightsail
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module R53HostedZoneDeletionStateCode
-      Succeeded = 'SUCCEEDED'
-      Pending = 'PENDING'
-      Failed = 'FAILED'
-      Started = 'STARTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -10892,7 +10289,7 @@ module Aws::Lightsail
     class RebootInstanceRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -10902,7 +10299,7 @@ module Aws::Lightsail
     class RebootInstanceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -10911,7 +10308,7 @@ module Aws::Lightsail
     class RebootRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -10921,13 +10318,7 @@ module Aws::Lightsail
     class RebootRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordState
-      Started = 'Started'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Web Services Region.</p>
@@ -10960,26 +10351,7 @@ module Aws::Lightsail
       :availability_zones,
       :relational_database_availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegionName
-      US_EAST_1 = 'us-east-1'
-      US_EAST_2 = 'us-east-2'
-      US_WEST_1 = 'us-west-1'
-      US_WEST_2 = 'us-west-2'
-      EU_WEST_1 = 'eu-west-1'
-      EU_WEST_2 = 'eu-west-2'
-      EU_WEST_3 = 'eu-west-3'
-      EU_CENTRAL_1 = 'eu-central-1'
-      CA_CENTRAL_1 = 'ca-central-1'
-      AP_SOUTH_1 = 'ap-south-1'
-      AP_SOUTHEAST_1 = 'ap-southeast-1'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
-      AP_NORTHEAST_1 = 'ap-northeast-1'
-      AP_NORTHEAST_2 = 'ap-northeast-2'
-      EU_NORTH_1 = 'eu-north-1'
-      AP_SOUTHEAST_3 = 'ap-southeast-3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when an operation is performed on resources in an opt-in
@@ -11003,7 +10375,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -11040,7 +10412,7 @@ module Aws::Lightsail
       :label,
       :digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_image
@@ -11050,7 +10422,7 @@ module Aws::Lightsail
     class RegisterContainerImageResult < Struct.new(
       :container_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the delegation state of an Amazon Route 53 registered domain to Amazon Lightsail.</p>
@@ -11090,7 +10462,7 @@ module Aws::Lightsail
       :name_servers_update_state,
       :r53_hosted_zone_deletion_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database.</p>
@@ -11214,7 +10586,7 @@ module Aws::Lightsail
       :pending_maintenance_actions,
       :ca_certificate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database image, or blueprint. A blueprint describes the major engine version
@@ -11247,7 +10619,7 @@ module Aws::Lightsail
       :engine_version_description,
       :is_engine_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database bundle. A bundle describes the performance specifications of the
@@ -11290,7 +10662,7 @@ module Aws::Lightsail
       :is_encrypted,
       :is_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an endpoint for a database.</p>
@@ -11304,11 +10676,7 @@ module Aws::Lightsail
       :port,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationalDatabaseEngine
-      MYSQL = 'mysql'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event for a database.</p>
@@ -11330,7 +10698,7 @@ module Aws::Lightsail
       :message,
       :event_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the hardware of a database.</p>
@@ -11348,16 +10716,7 @@ module Aws::Lightsail
       :disk_size_in_gb,
       :ram_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationalDatabaseMetricName
-      CPUUtilization = 'CPUUtilization'
-      DatabaseConnections = 'DatabaseConnections'
-      DiskQueueDepth = 'DiskQueueDepth'
-      FreeStorageSpace = 'FreeStorageSpace'
-      NetworkReceiveThroughput = 'NetworkReceiveThroughput'
-      NetworkTransmitThroughput = 'NetworkTransmitThroughput'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters of a database.</p>
@@ -11396,13 +10755,7 @@ module Aws::Lightsail
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationalDatabasePasswordVersion
-      CURRENT = 'CURRENT'
-      PREVIOUS = 'PREVIOUS'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a database snapshot.</p>
@@ -11475,7 +10828,7 @@ module Aws::Lightsail
       :from_relational_database_bundle_id,
       :from_relational_database_blueprint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute static_ip_name
@@ -11484,7 +10837,7 @@ module Aws::Lightsail
     class ReleaseStaticIpRequest < Struct.new(
       :static_ip_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -11494,14 +10847,7 @@ module Aws::Lightsail
     class ReleaseStaticIpResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RenewalStatus
-      PendingAutoRenewal = 'PendingAutoRenewal'
-      PendingValidation = 'PendingValidation'
-      Success = 'Success'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a SSL/TLS certificate renewal managed by Amazon Lightsail.</p>
@@ -11561,7 +10907,7 @@ module Aws::Lightsail
       :renewal_status_reason,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -11572,7 +10918,7 @@ module Aws::Lightsail
     class ResetDistributionCacheRequest < Struct.new(
       :distribution_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -11591,12 +10937,7 @@ module Aws::Lightsail
       :create_time,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceBucketAccess
-      Allow = 'allow'
-      Deny = 'deny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the estimated cost or usage that a budget tracks.</p>
@@ -11622,7 +10963,7 @@ module Aws::Lightsail
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource location.</p>
@@ -11636,7 +10977,7 @@ module Aws::Lightsail
       :availability_zone,
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lightsail instance that has access to a Lightsail bucket.</p>
@@ -11650,7 +10991,7 @@ module Aws::Lightsail
       :name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the domain name system (DNS) records to add to your domain's DNS to validate it
@@ -11669,30 +11010,7 @@ module Aws::Lightsail
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      ContainerService = 'ContainerService'
-      Instance = 'Instance'
-      StaticIp = 'StaticIp'
-      KeyPair = 'KeyPair'
-      InstanceSnapshot = 'InstanceSnapshot'
-      Domain = 'Domain'
-      PeeredVpc = 'PeeredVpc'
-      LoadBalancer = 'LoadBalancer'
-      LoadBalancerTlsCertificate = 'LoadBalancerTlsCertificate'
-      Disk = 'Disk'
-      DiskSnapshot = 'DiskSnapshot'
-      RelationalDatabase = 'RelationalDatabase'
-      RelationalDatabaseSnapshot = 'RelationalDatabaseSnapshot'
-      ExportSnapshotRecord = 'ExportSnapshotRecord'
-      CloudFormationStackRecord = 'CloudFormationStackRecord'
-      Alarm = 'Alarm'
-      ContactMethod = 'ContactMethod'
-      Distribution = 'Distribution'
-      Certificate = 'Certificate'
-      Bucket = 'Bucket'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocol
@@ -11702,7 +11020,7 @@ module Aws::Lightsail
     class SendContactMethodVerificationRequest < Struct.new(
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -11712,7 +11030,7 @@ module Aws::Lightsail
     class SendContactMethodVerificationResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A general service exception.</p>
@@ -11730,7 +11048,7 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a web-based, remote graphical user interface (GUI), Amazon DCV session. The
@@ -11750,7 +11068,7 @@ module Aws::Lightsail
       :url,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -11789,7 +11107,7 @@ module Aws::Lightsail
       :ip_address_type,
       :accept_bundle_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -11799,7 +11117,7 @@ module Aws::Lightsail
     class SetIpAddressTypeResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -11829,7 +11147,7 @@ module Aws::Lightsail
       :bucket_name,
       :access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -11839,7 +11157,7 @@ module Aws::Lightsail
     class SetResourceAccessForBucketResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details about the commands that were run.</p>
@@ -11873,7 +11191,7 @@ module Aws::Lightsail
       :standard_output,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a list of the commands that were ran on the target resource.</p>
@@ -11900,7 +11218,7 @@ module Aws::Lightsail
       :execution_details,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lightsail resource that <code>SetupHistory</code> was ran on. </p>
@@ -11926,7 +11244,7 @@ module Aws::Lightsail
       :location,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -11949,7 +11267,7 @@ module Aws::Lightsail
       :domain_names,
       :certificate_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -11958,7 +11276,7 @@ module Aws::Lightsail
     class SetupInstanceHttpsResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information that was submitted during the <code>SetupInstanceHttps</code> request.
@@ -11977,13 +11295,7 @@ module Aws::Lightsail
       :domain_names,
       :certificate_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SetupStatus
-      Succeeded = 'succeeded'
-      Failed = 'failed'
-      InProgress = 'inProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -11992,7 +11304,7 @@ module Aws::Lightsail
     class StartGUISessionRequest < Struct.new(
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12001,7 +11313,7 @@ module Aws::Lightsail
     class StartGUISessionResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -12010,7 +11322,7 @@ module Aws::Lightsail
     class StartInstanceRequest < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12020,7 +11332,7 @@ module Aws::Lightsail
     class StartInstanceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -12029,7 +11341,7 @@ module Aws::Lightsail
     class StartRelationalDatabaseRequest < Struct.new(
       :relational_database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12039,7 +11351,7 @@ module Aws::Lightsail
     class StartRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a static IP.</p>
@@ -12085,25 +11397,7 @@ module Aws::Lightsail
       :attached_to,
       :is_attached,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      StartExpired = 'startExpired'
-      NotStarted = 'notStarted'
-      Started = 'started'
-      Starting = 'starting'
-      Stopped = 'stopped'
-      Stopping = 'stopping'
-      SettingUpInstance = 'settingUpInstance'
-      FailedInstanceCreation = 'failedInstanceCreation'
-      FailedStartingGUISession = 'failedStartingGUISession'
-      FailedStoppingGUISession = 'failedStoppingGUISession'
-    end
-
-    module StatusType
-      Active = 'Active'
-      Inactive = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -12112,7 +11406,7 @@ module Aws::Lightsail
     class StopGUISessionRequest < Struct.new(
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12121,7 +11415,7 @@ module Aws::Lightsail
     class StopGUISessionResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to create or edit the <code>StopInstanceOnIdle</code> add-on.</p>
@@ -12139,7 +11433,7 @@ module Aws::Lightsail
       :threshold,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -12158,7 +11452,7 @@ module Aws::Lightsail
       :instance_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12168,7 +11462,7 @@ module Aws::Lightsail
     class StopInstanceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -12181,7 +11475,7 @@ module Aws::Lightsail
       :relational_database_name,
       :relational_database_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12191,7 +11485,7 @@ module Aws::Lightsail
     class StopRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p>
@@ -12210,7 +11504,7 @@ module Aws::Lightsail
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -12227,7 +11521,7 @@ module Aws::Lightsail
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12237,7 +11531,7 @@ module Aws::Lightsail
     class TagResourceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_name
@@ -12267,7 +11561,7 @@ module Aws::Lightsail
       :alarm_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12277,7 +11571,7 @@ module Aws::Lightsail
     class TestAlarmResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the start date and end date for retrieving a cost estimate. The start date is
@@ -12300,14 +11594,7 @@ module Aws::Lightsail
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TreatMissingData
-      Breaching = 'breaching'
-      NotBreaching = 'notBreaching'
-      Ignore = 'ignore'
-      Missing = 'missing'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lightsail throws this exception when the user has not been authenticated.</p>
@@ -12325,12 +11612,12 @@ module Aws::Lightsail
       :message,
       :tip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UnpeerVpcRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -12340,7 +11627,7 @@ module Aws::Lightsail
     class UnpeerVpcResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -12357,7 +11644,7 @@ module Aws::Lightsail
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12367,7 +11654,7 @@ module Aws::Lightsail
     class UntagResourceResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -12382,7 +11669,7 @@ module Aws::Lightsail
       :bucket_name,
       :bundle_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12392,7 +11679,7 @@ module Aws::Lightsail
     class UpdateBucketBundleResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -12431,7 +11718,7 @@ module Aws::Lightsail
       :readonly_access_accounts,
       :access_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket
@@ -12445,7 +11732,7 @@ module Aws::Lightsail
       :bucket,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -12502,7 +11789,7 @@ module Aws::Lightsail
       :public_domain_names,
       :private_registry_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_service
@@ -12511,7 +11798,7 @@ module Aws::Lightsail
     class UpdateContainerServiceResult < Struct.new(
       :container_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -12528,7 +11815,7 @@ module Aws::Lightsail
       :distribution_name,
       :bundle_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -12538,7 +11825,7 @@ module Aws::Lightsail
     class UpdateDistributionBundleResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_name
@@ -12597,7 +11884,7 @@ module Aws::Lightsail
       :certificate_name,
       :use_default_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -12607,7 +11894,7 @@ module Aws::Lightsail
     class UpdateDistributionResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -12620,7 +11907,7 @@ module Aws::Lightsail
       :domain_name,
       :domain_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12630,7 +11917,7 @@ module Aws::Lightsail
     class UpdateDomainEntryResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_name
@@ -12673,7 +11960,7 @@ module Aws::Lightsail
       :http_put_response_hop_limit,
       :http_protocol_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -12683,7 +11970,7 @@ module Aws::Lightsail
     class UpdateInstanceMetadataOptionsResult < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_name
@@ -12735,7 +12022,7 @@ module Aws::Lightsail
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12745,7 +12032,7 @@ module Aws::Lightsail
     class UpdateLoadBalancerAttributeResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -12758,7 +12045,7 @@ module Aws::Lightsail
       :relational_database_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12768,7 +12055,7 @@ module Aws::Lightsail
     class UpdateRelationalDatabaseParametersResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relational_database_name
@@ -12883,7 +12170,7 @@ module Aws::Lightsail
       :ca_certificate_identifier,
       :relational_database_blueprint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -12893,14 +12180,7 @@ module Aws::Lightsail
     class UpdateRelationalDatabaseResult < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewerMinimumTlsProtocolVersionEnum
-      TLSv11_2016 = 'TLSv1.1_2016'
-      TLSv12_2018 = 'TLSv1.2_2018'
-      TLSv12_2019 = 'TLSv1.2_2019'
-      TLSv12_2021 = 'TLSv1.2_2021'
+      include ::Smithy::Schema::Structure
     end
 
   end

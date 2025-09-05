@@ -21,7 +21,7 @@ module Aws::XRay
       :names,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Value of a segment annotation. Has one of three value types: Number, Boolean, or String.</p>
@@ -40,7 +40,7 @@ module Aws::XRay
       :string_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class NumberValue < AnnotationValue; end
       class BooleanValue < AnnotationValue; end
@@ -55,7 +55,7 @@ module Aws::XRay
     class AnomalousService < Struct.new(
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Availability Zones corresponding to the segments in a trace.</p>
@@ -65,7 +65,7 @@ module Aws::XRay
     class AvailabilityZoneDetail < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -95,7 +95,7 @@ module Aws::XRay
       :unknown_host_count,
       :other_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trace_ids
@@ -108,7 +108,7 @@ module Aws::XRay
       :trace_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traces
@@ -125,7 +125,7 @@ module Aws::XRay
       :unprocessed_trace_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_token
@@ -136,12 +136,12 @@ module Aws::XRay
     class CancelTraceRetrievalRequest < Struct.new(
       :retrieval_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelTraceRetrievalResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -199,7 +199,7 @@ module Aws::XRay
       :insights_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -210,7 +210,7 @@ module Aws::XRay
     class CreateGroupResult < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule
@@ -248,7 +248,7 @@ module Aws::XRay
       :sampling_rule,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule_record
@@ -257,7 +257,7 @@ module Aws::XRay
     class CreateSamplingRuleResult < Struct.new(
       :sampling_rule_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -270,12 +270,12 @@ module Aws::XRay
       :group_name,
       :group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -290,12 +290,12 @@ module Aws::XRay
       :policy_name,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -308,7 +308,7 @@ module Aws::XRay
       :rule_name,
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule_record
@@ -317,7 +317,7 @@ module Aws::XRay
     class DeleteSamplingRuleResult < Struct.new(
       :sampling_rule_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a connection between two services. An edge can be a synchronous connection, such as typical
@@ -360,7 +360,7 @@ module Aws::XRay
       :edge_type,
       :received_event_age_histogram,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response statistics for an edge.</p>
@@ -386,7 +386,7 @@ module Aws::XRay
       :total_count,
       :total_response_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration document that specifies encryption configuration settings.</p>
@@ -405,17 +405,7 @@ module Aws::XRay
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionStatus
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module EncryptionType
-      NONE = 'NONE'
-      KMS = 'KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The root cause of a trace summary error.</p>
@@ -430,7 +420,7 @@ module Aws::XRay
       :services,
       :client_impacting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of segments and corresponding subsegments associated to a trace summary
@@ -449,7 +439,7 @@ module Aws::XRay
       :exceptions,
       :remote,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of fields identifying the services in a trace summary error.</p>
@@ -479,7 +469,7 @@ module Aws::XRay
       :entity_path,
       :inferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about requests that failed with a 4xx Client Error status code.</p>
@@ -498,7 +488,7 @@ module Aws::XRay
       :other_count,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The root cause information for a trace summary fault.</p>
@@ -513,7 +503,7 @@ module Aws::XRay
       :services,
       :client_impacting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of segments and corresponding subsegments associated to a trace summary
@@ -532,7 +522,7 @@ module Aws::XRay
       :exceptions,
       :remote,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of fields identifying the services in a trace summary fault.</p>
@@ -562,7 +552,7 @@ module Aws::XRay
       :entity_path,
       :inferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about requests that failed with a 5xx Server Error status code.</p>
@@ -577,7 +567,7 @@ module Aws::XRay
       :other_count,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The predicted high and low fault count. This is used to determine if a service has
@@ -592,12 +582,12 @@ module Aws::XRay
       :fault_count_high,
       :fault_count_low,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetEncryptionConfigRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_config
@@ -606,7 +596,7 @@ module Aws::XRay
     class GetEncryptionConfigResult < Struct.new(
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -619,7 +609,7 @@ module Aws::XRay
       :group_name,
       :group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -629,7 +619,7 @@ module Aws::XRay
     class GetGroupResult < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -638,7 +628,7 @@ module Aws::XRay
     class GetGroupsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -651,7 +641,7 @@ module Aws::XRay
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -664,7 +654,7 @@ module Aws::XRay
     class GetIndexingRulesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute indexing_rules
@@ -680,7 +670,7 @@ module Aws::XRay
       :indexing_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -697,7 +687,7 @@ module Aws::XRay
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_events
@@ -712,7 +702,7 @@ module Aws::XRay
       :insight_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -735,7 +725,7 @@ module Aws::XRay
       :end_time,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -768,7 +758,7 @@ module Aws::XRay
       :services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -777,7 +767,7 @@ module Aws::XRay
     class GetInsightRequest < Struct.new(
       :insight_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight
@@ -786,7 +776,7 @@ module Aws::XRay
     class GetInsightResult < Struct.new(
       :insight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute states
@@ -820,7 +810,7 @@ module Aws::XRay
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_summaries
@@ -835,7 +825,7 @@ module Aws::XRay
       :insight_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_token
@@ -854,7 +844,7 @@ module Aws::XRay
       :retrieval_token,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_status
@@ -879,7 +869,7 @@ module Aws::XRay
       :services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -888,7 +878,7 @@ module Aws::XRay
     class GetSamplingRulesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule_records
@@ -901,7 +891,7 @@ module Aws::XRay
       :sampling_rule_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -910,7 +900,7 @@ module Aws::XRay
     class GetSamplingStatisticSummariesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_statistic_summaries
@@ -924,7 +914,7 @@ module Aws::XRay
       :sampling_statistic_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_statistics_documents
@@ -933,7 +923,7 @@ module Aws::XRay
     class GetSamplingTargetsRequest < Struct.new(
       :sampling_statistics_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_target_documents
@@ -953,7 +943,7 @@ module Aws::XRay
       :last_rule_modification,
       :unprocessed_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -978,7 +968,7 @@ module Aws::XRay
       :group_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -1006,7 +996,7 @@ module Aws::XRay
       :contains_old_group_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:contains_old_group_versions] = false unless options.key?(:contains_old_group_versions)
@@ -1051,7 +1041,7 @@ module Aws::XRay
       :forecast_statistics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute time_series_service_statistics
@@ -1069,7 +1059,7 @@ module Aws::XRay
       :contains_old_group_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:contains_old_group_versions] = false unless options.key?(:contains_old_group_versions)
@@ -1087,7 +1077,7 @@ module Aws::XRay
       :trace_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -1100,12 +1090,12 @@ module Aws::XRay
       :services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetTraceSegmentDestinationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination
@@ -1122,7 +1112,7 @@ module Aws::XRay
       :destination,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -1159,7 +1149,7 @@ module Aws::XRay
       :filter_expression,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trace_summaries
@@ -1183,7 +1173,7 @@ module Aws::XRay
       :traces_processed_count,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1209,7 +1199,7 @@ module Aws::XRay
       :source_trace_id,
       :destination_trace_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details and metadata for a group.</p>
@@ -1241,7 +1231,7 @@ module Aws::XRay
       :filter_expression,
       :insights_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a group without metadata.</p>
@@ -1273,7 +1263,7 @@ module Aws::XRay
       :filter_expression,
       :insights_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entry in a histogram for a statistic. A histogram maps the range of observed values
@@ -1288,7 +1278,7 @@ module Aws::XRay
       :value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1320,7 +1310,7 @@ module Aws::XRay
       :user_agent,
       :client_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1346,7 +1336,7 @@ module Aws::XRay
       :modified_at,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1361,7 +1351,7 @@ module Aws::XRay
       :probabilistic,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Probabilistic < IndexingRuleValue; end
       class Unknown < IndexingRuleValue; end
@@ -1379,7 +1369,7 @@ module Aws::XRay
       :probabilistic,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Probabilistic < IndexingRuleValueUpdate; end
       class Unknown < IndexingRuleValueUpdate; end
@@ -1439,11 +1429,7 @@ module Aws::XRay
       :root_cause_service_request_impact_statistics,
       :top_anomalous_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightCategory
-      FAULT = 'FAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>X-Ray reevaluates insights periodically until they are resolved, and records each intermediate state in an
@@ -1472,7 +1458,7 @@ module Aws::XRay
       :root_cause_service_request_impact_statistics,
       :top_anomalous_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection between two service in an insight impact graph.</p>
@@ -1482,7 +1468,7 @@ module Aws::XRay
     class InsightImpactGraphEdge < Struct.new(
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application that processed requests, users that made requests, or downstream services,
@@ -1530,12 +1516,7 @@ module Aws::XRay
       :account_id,
       :edges,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightState
-      ACTIVE = 'ACTIVE'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that describes an insight.</p>
@@ -1595,7 +1576,7 @@ module Aws::XRay
       :top_anomalous_services,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure containing configurations related to insights.</p>
@@ -1611,7 +1592,7 @@ module Aws::XRay
       :insights_enabled,
       :notifications_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of EC2 instance IDs corresponding to the segments in a trace. </p>
@@ -1621,7 +1602,7 @@ module Aws::XRay
     class InstanceIdDetail < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy revision id was provided which does not match the latest policy revision. This exception is also 
@@ -1631,7 +1612,7 @@ module Aws::XRay
     class InvalidPolicyRevisionIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is missing required parameters or has invalid parameters.</p>
@@ -1640,7 +1621,7 @@ module Aws::XRay
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1649,7 +1630,7 @@ module Aws::XRay
     class ListResourcePoliciesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policies
@@ -1662,7 +1643,7 @@ module Aws::XRay
       :resource_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_token
@@ -1687,7 +1668,7 @@ module Aws::XRay
       :trace_format,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_status
@@ -1718,7 +1699,7 @@ module Aws::XRay
       :traces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1732,7 +1713,7 @@ module Aws::XRay
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1746,7 +1727,7 @@ module Aws::XRay
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided resource policy would prevent the caller of this request from calling PutResourcePolicy in the future.</p>
@@ -1755,7 +1736,7 @@ module Aws::XRay
     class LockoutPreventionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalid policy document provided in request.</p>
@@ -1764,7 +1745,7 @@ module Aws::XRay
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded the maximum number of resource policies for a target Amazon Web Services account.</p>
@@ -1773,7 +1754,7 @@ module Aws::XRay
     class PolicyCountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded the maximum size for a resource policy.</p>
@@ -1782,7 +1763,7 @@ module Aws::XRay
     class PolicySizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1802,7 +1783,7 @@ module Aws::XRay
       :desired_sampling_percentage,
       :actual_sampling_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1816,7 +1797,7 @@ module Aws::XRay
     class ProbabilisticRuleValueUpdate < Struct.new(
       :desired_sampling_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_id
@@ -1850,7 +1831,7 @@ module Aws::XRay
       :key_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_config
@@ -1859,7 +1840,7 @@ module Aws::XRay
     class PutEncryptionConfigResult < Struct.new(
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -1889,7 +1870,7 @@ module Aws::XRay
       :policy_revision_id,
       :bypass_policy_lockout_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -1898,7 +1879,7 @@ module Aws::XRay
     class PutResourcePolicyResult < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_records
@@ -1919,12 +1900,12 @@ module Aws::XRay
       :hostname,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutTelemetryRecordsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trace_segment_documents
@@ -1934,7 +1915,7 @@ module Aws::XRay
     class PutTraceSegmentsRequest < Struct.new(
       :trace_segment_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_trace_segments
@@ -1943,7 +1924,7 @@ module Aws::XRay
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics that describe how the incident has impacted a service.</p>
@@ -1961,7 +1942,7 @@ module Aws::XRay
       :ok_count,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of resources ARNs corresponding to the segments in a trace.</p>
@@ -1971,7 +1952,7 @@ module Aws::XRay
     class ResourceARNDetail < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was not found. Verify that the name or Amazon Resource Name (ARN) of the resource is
@@ -1984,7 +1965,7 @@ module Aws::XRay
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource policy grants one or more Amazon Web Services services and accounts permissions 
@@ -2008,7 +1989,7 @@ module Aws::XRay
       :policy_revision_id,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The root cause information for a response time warning.</p>
@@ -2023,7 +2004,7 @@ module Aws::XRay
       :services,
       :client_impacting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of segments and corresponding subsegments associated to a response time
@@ -2042,7 +2023,7 @@ module Aws::XRay
       :coverage,
       :remote,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of fields identifying the service in a response time warning.</p>
@@ -2072,16 +2053,7 @@ module Aws::XRay
       :entity_path,
       :inferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetrievalStatus
-      SCHEDULED = 'SCHEDULED'
-      RUNNING = 'RUNNING'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
-      TIMEOUT = 'TIMEOUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2100,7 +2072,7 @@ module Aws::XRay
       :service,
       :links,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2126,7 +2098,7 @@ module Aws::XRay
       :duration,
       :spans,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception associated with a root cause.</p>
@@ -2140,7 +2112,7 @@ module Aws::XRay
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of sampling rules.</p>
@@ -2149,7 +2121,7 @@ module Aws::XRay
     class RuleLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A sampling rule that services use to decide whether to instrument a request. Rule
@@ -2211,7 +2183,7 @@ module Aws::XRay
       :version,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fixed_rate] = 0 unless options.key?(:fixed_rate)
@@ -2235,7 +2207,7 @@ module Aws::XRay
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document specifying changes to a sampling rule's configuration.</p>
@@ -2291,7 +2263,7 @@ module Aws::XRay
       :url_path,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated request sampling data for a sampling rule across all services for a 10-second window.</p>
@@ -2317,7 +2289,7 @@ module Aws::XRay
       :borrow_count,
       :sampled_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:request_count] = 0 unless options.key?(:request_count)
@@ -2356,7 +2328,7 @@ module Aws::XRay
       :sampled_count,
       :borrow_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:request_count] = 0 unless options.key?(:request_count)
@@ -2377,12 +2349,7 @@ module Aws::XRay
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SamplingStrategyName
-      PartialScan = 'PartialScan'
-      FixedRate = 'FixedRate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray
@@ -2412,7 +2379,7 @@ module Aws::XRay
       :reservoir_quota_ttl,
       :interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fixed_rate] = 0 unless options.key?(:fixed_rate)
@@ -2436,7 +2403,7 @@ module Aws::XRay
       :id,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application that processed requests, users that made requests, or downstream services,
@@ -2515,7 +2482,7 @@ module Aws::XRay
       :duration_histogram,
       :response_time_histogram,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2537,7 +2504,7 @@ module Aws::XRay
       :account_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response statistics for a service.</p>
@@ -2563,7 +2530,7 @@ module Aws::XRay
       :total_count,
       :total_response_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2580,7 +2547,7 @@ module Aws::XRay
       :id,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trace_ids
@@ -2604,7 +2571,7 @@ module Aws::XRay
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrieval_token
@@ -2615,7 +2582,7 @@ module Aws::XRay
     class StartTraceRetrievalResult < Struct.new(
       :retrieval_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map that contains tag keys and tag values to attach to an Amazon Web Services X-Ray group or sampling
@@ -2650,7 +2617,7 @@ module Aws::XRay
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2688,12 +2655,12 @@ module Aws::XRay
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2723,7 +2690,7 @@ module Aws::XRay
       :segments_rejected_count,
       :backend_connection_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the maximum number of requests per second.</p>
@@ -2732,13 +2699,7 @@ module Aws::XRay
     class ThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeRangeType
-      TraceId = 'TraceId'
-      Event = 'Event'
-      Service = 'Service'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of TimeSeriesStatistic structures.</p>
@@ -2764,7 +2725,7 @@ module Aws::XRay
       :service_forecast_statistics,
       :response_time_histogram,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of tags you can apply to this resource.</p>
@@ -2776,7 +2737,7 @@ module Aws::XRay
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of segment documents with matching trace IDs.</p>
@@ -2801,22 +2762,7 @@ module Aws::XRay
       :limit_exceeded,
       :segments,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TraceFormatType
-      XRAY = 'XRAY'
-      OTEL = 'OTEL'
-    end
-
-    module TraceSegmentDestination
-      XRay = 'XRay'
-      CloudWatchLogs = 'CloudWatchLogs'
-    end
-
-    module TraceSegmentDestinationStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata generated from the segment documents in a trace.</p>
@@ -2914,7 +2860,7 @@ module Aws::XRay
       :revision,
       :matched_event_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
@@ -2933,7 +2879,7 @@ module Aws::XRay
       :user_name,
       :service_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sampling statistics from a call to <a href="https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html">GetSamplingTargets</a> that X-Ray
@@ -2952,7 +2898,7 @@ module Aws::XRay
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a segment that failed processing.</p>
@@ -2970,7 +2916,7 @@ module Aws::XRay
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2983,12 +2929,12 @@ module Aws::XRay
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -3019,7 +2965,7 @@ module Aws::XRay
       :filter_expression,
       :insights_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -3030,7 +2976,7 @@ module Aws::XRay
     class UpdateGroupResult < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3047,7 +2993,7 @@ module Aws::XRay
       :name,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute indexing_rule
@@ -3058,7 +3004,7 @@ module Aws::XRay
     class UpdateIndexingRuleResult < Struct.new(
       :indexing_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule_update
@@ -3067,7 +3013,7 @@ module Aws::XRay
     class UpdateSamplingRuleRequest < Struct.new(
       :sampling_rule_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampling_rule_record
@@ -3076,7 +3022,7 @@ module Aws::XRay
     class UpdateSamplingRuleResult < Struct.new(
       :sampling_rule_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination
@@ -3087,7 +3033,7 @@ module Aws::XRay
     class UpdateTraceSegmentDestinationRequest < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination
@@ -3104,7 +3050,7 @@ module Aws::XRay
       :destination,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a segment annotation.</p>
@@ -3118,7 +3064,7 @@ module Aws::XRay
       :annotation_value,
       :service_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::TimestreamQuery
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for notifications related to account settings.</p>
@@ -26,7 +26,7 @@ module Aws::TimestreamQuery
       :sns_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -36,7 +36,7 @@ module Aws::TimestreamQuery
     class CancelQueryRequest < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cancellation_message
@@ -46,7 +46,7 @@ module Aws::TimestreamQuery
     class CancelQueryResponse < Struct.new(
       :cancellation_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the metadata for query results such as the column names, data types, and
@@ -64,12 +64,7 @@ module Aws::TimestreamQuery
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeMode
-      ON_DEMAND = 'ON_DEMAND'
-      PROVISIONED = 'PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Unable to poll results for a cancelled query. </p>
@@ -78,7 +73,7 @@ module Aws::TimestreamQuery
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -154,7 +149,7 @@ module Aws::TimestreamQuery
       :kms_key_id,
       :error_report_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -163,7 +158,7 @@ module Aws::TimestreamQuery
     class CreateScheduledQueryResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Datum represents a single data point in a query result. </p>
@@ -190,7 +185,7 @@ module Aws::TimestreamQuery
       :row_value,
       :null_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_query_arn
@@ -199,12 +194,12 @@ module Aws::TimestreamQuery
     class DeleteScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountSettingsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_query_tcu
@@ -227,12 +222,12 @@ module Aws::TimestreamQuery
       :query_pricing_model,
       :query_compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeEndpointsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -242,7 +237,7 @@ module Aws::TimestreamQuery
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_query_arn
@@ -251,7 +246,7 @@ module Aws::TimestreamQuery
     class DescribeScheduledQueryRequest < Struct.new(
       :scheduled_query_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_query
@@ -260,7 +255,7 @@ module Aws::TimestreamQuery
     class DescribeScheduledQueryResponse < Struct.new(
       :scheduled_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This type is used to map column(s) from the query result to a dimension in the
@@ -275,11 +270,7 @@ module Aws::TimestreamQuery
       :name,
       :dimension_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DimensionValueType
-      VARCHAR = 'VARCHAR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an available endpoint against which to make API calls against, as well as
@@ -294,7 +285,7 @@ module Aws::TimestreamQuery
       :address,
       :cache_period_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_period_in_minutes] = 0 unless options.key?(:cache_period_in_minutes)
@@ -309,7 +300,7 @@ module Aws::TimestreamQuery
     class ErrorReportConfiguration < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains the location of the error report for a single scheduled query call.
@@ -320,7 +311,7 @@ module Aws::TimestreamQuery
     class ErrorReportLocation < Struct.new(
       :s3_report_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_query_arn
@@ -343,7 +334,7 @@ module Aws::TimestreamQuery
       :client_token,
       :query_insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics for a single scheduled query run.</p>
@@ -375,7 +366,7 @@ module Aws::TimestreamQuery
       :records_ingested,
       :query_result_rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_time_in_millis] = 0 unless options.key?(:execution_time_in_millis)
@@ -394,7 +385,7 @@ module Aws::TimestreamQuery
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested endpoint is invalid.</p>
@@ -403,7 +394,7 @@ module Aws::TimestreamQuery
     class InvalidEndpointException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration object that contains the most recent account settings update, visible only if settings have been updated previously.</p>
@@ -421,13 +412,7 @@ module Aws::TimestreamQuery
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LastUpdateStatus
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -443,7 +428,7 @@ module Aws::TimestreamQuery
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_queries
@@ -457,7 +442,7 @@ module Aws::TimestreamQuery
       :scheduled_queries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -475,7 +460,7 @@ module Aws::TimestreamQuery
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -489,15 +474,7 @@ module Aws::TimestreamQuery
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MeasureValueType
-      BIGINT = 'BIGINT'
-      BOOLEAN = 'BOOLEAN'
-      DOUBLE = 'DOUBLE'
-      VARCHAR = 'VARCHAR'
-      MULTI = 'MULTI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>MixedMeasureMappings are mappings that can be used to ingest data into a mixture of
@@ -529,7 +506,7 @@ module Aws::TimestreamQuery
       :measure_value_type,
       :multi_measure_attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attribute mapping for MULTI value measures.</p>
@@ -548,7 +525,7 @@ module Aws::TimestreamQuery
       :target_multi_measure_attribute_name,
       :measure_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided.
@@ -567,7 +544,7 @@ module Aws::TimestreamQuery
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notification configuration for a scheduled query. A notification is sent by Timestream
@@ -578,7 +555,7 @@ module Aws::TimestreamQuery
     class NotificationConfiguration < Struct.new(
       :sns_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Mapping for named parameters.</p>
@@ -595,7 +572,7 @@ module Aws::TimestreamQuery
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_string
@@ -612,7 +589,7 @@ module Aws::TimestreamQuery
       :query_string,
       :validate_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_string
@@ -629,7 +606,7 @@ module Aws::TimestreamQuery
       :columns,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to update the provisioned capacity settings for querying data.</p>
@@ -643,7 +620,7 @@ module Aws::TimestreamQuery
       :target_query_tcu,
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a request to update the provisioned capacity settings for querying data.</p>
@@ -661,7 +638,7 @@ module Aws::TimestreamQuery
       :notification_configuration,
       :last_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to retrieve or update the compute capacity settings for querying data.</p>
@@ -675,7 +652,7 @@ module Aws::TimestreamQuery
       :compute_mode,
       :provisioned_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a request to retrieve or update the compute capacity settings for querying data.</p>
@@ -689,7 +666,7 @@ module Aws::TimestreamQuery
       :compute_mode,
       :provisioned_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -699,7 +676,7 @@ module Aws::TimestreamQuery
     class QueryExecutionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -742,12 +719,7 @@ module Aws::TimestreamQuery
     class QueryInsights < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryInsightsMode
-      ENABLED_WITH_RATE_CONTROL = 'ENABLED_WITH_RATE_CONTROL'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides various insights and metrics related to the query that you executed.</p>
@@ -796,22 +768,17 @@ module Aws::TimestreamQuery
       :unload_written_rows,
       :unload_written_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:query_table_count] =  unless options.key?(:query_table_count)
-        options[:output_rows] =  unless options.key?(:output_rows)
-        options[:output_bytes] =  unless options.key?(:output_bytes)
-        options[:unload_partition_count] =  unless options.key?(:unload_partition_count)
-        options[:unload_written_rows] =  unless options.key?(:unload_written_rows)
-        options[:unload_written_bytes] =  unless options.key?(:unload_written_bytes)
+        options[:query_table_count] = nil unless options.key?(:query_table_count)
+        options[:output_rows] = nil unless options.key?(:output_rows)
+        options[:output_bytes] = nil unless options.key?(:output_bytes)
+        options[:unload_partition_count] = nil unless options.key?(:unload_partition_count)
+        options[:unload_written_rows] = nil unless options.key?(:unload_written_rows)
+        options[:unload_written_bytes] = nil unless options.key?(:unload_written_bytes)
         super
       end
-    end
-
-    module QueryPricingModel
-      BYTES_SCANNED = 'BYTES_SCANNED'
-      COMPUTE_UNITS = 'COMPUTE_UNITS'
     end
 
     # @!attribute query_string
@@ -920,7 +887,7 @@ module Aws::TimestreamQuery
       :max_rows,
       :query_insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -951,7 +918,7 @@ module Aws::TimestreamQuery
       :query_status,
       :query_insights_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides insights into the spatial coverage of the query, including the table with sub-optimal (max) spatial pruning. This information can help you identify areas for improvement in your partitioning strategy to enhance spatial pruning</p>
@@ -984,7 +951,7 @@ module Aws::TimestreamQuery
     class QuerySpatialCoverage < Struct.new(
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides insights into the table with the most sub-optimal spatial range scanned by your query.</p>
@@ -1002,7 +969,7 @@ module Aws::TimestreamQuery
       :table_arn,
       :partition_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1030,7 +997,7 @@ module Aws::TimestreamQuery
       :cumulative_bytes_scanned,
       :cumulative_bytes_metered,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:progress_percentage] = 0 unless options.key?(:progress_percentage)
@@ -1057,7 +1024,7 @@ module Aws::TimestreamQuery
     class QueryTemporalRange < Struct.new(
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides insights into the table with the most sub-optimal temporal pruning scanned by your query.</p>
@@ -1071,7 +1038,7 @@ module Aws::TimestreamQuery
       :value,
       :table_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1089,7 +1056,7 @@ module Aws::TimestreamQuery
       :message,
       :scheduled_query_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single row in the query results.</p>
@@ -1099,7 +1066,7 @@ module Aws::TimestreamQuery
     class Row < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on S3 location for error reports that result from running a query. </p>
@@ -1119,12 +1086,7 @@ module Aws::TimestreamQuery
       :object_key_prefix,
       :encryption_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3EncryptionOption
-      SSE_S3 = 'SSE_S3'
-      SSE_KMS = 'SSE_KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> S3 report location for the scheduled query run.</p>
@@ -1138,29 +1100,7 @@ module Aws::TimestreamQuery
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalarMeasureValueType
-      BIGINT = 'BIGINT'
-      BOOLEAN = 'BOOLEAN'
-      DOUBLE = 'DOUBLE'
-      VARCHAR = 'VARCHAR'
-      TIMESTAMP = 'TIMESTAMP'
-    end
-
-    module ScalarType
-      VARCHAR = 'VARCHAR'
-      BOOLEAN = 'BOOLEAN'
-      BIGINT = 'BIGINT'
-      DOUBLE = 'DOUBLE'
-      TIMESTAMP = 'TIMESTAMP'
-      DATE = 'DATE'
-      TIME = 'TIME'
-      INTERVAL_DAY_TO_SECOND = 'INTERVAL_DAY_TO_SECOND'
-      INTERVAL_YEAR_TO_MONTH = 'INTERVAL_YEAR_TO_MONTH'
-      UNKNOWN = 'UNKNOWN'
-      INTEGER = 'INTEGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the schedule of the query.</p>
@@ -1171,7 +1111,7 @@ module Aws::TimestreamQuery
     class ScheduleConfiguration < Struct.new(
       :schedule_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Scheduled Query</p>
@@ -1213,7 +1153,7 @@ module Aws::TimestreamQuery
       :target_destination,
       :last_run_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that describes scheduled query.</p>
@@ -1279,7 +1219,7 @@ module Aws::TimestreamQuery
       :last_run_summary,
       :recently_failed_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encapsulates settings for enabling <code>QueryInsights</code> on an <code>ExecuteScheduledQueryRequest</code>.</p>
@@ -1299,12 +1239,7 @@ module Aws::TimestreamQuery
     class ScheduledQueryInsights < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduledQueryInsightsMode
-      ENABLED_WITH_RATE_CONTROL = 'ENABLED_WITH_RATE_CONTROL'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides various insights and metrics related to the <code>ExecuteScheduledQueryRequest</code> that was executed.</p>
@@ -1341,21 +1276,14 @@ module Aws::TimestreamQuery
       :output_rows,
       :output_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:query_table_count] =  unless options.key?(:query_table_count)
-        options[:output_rows] =  unless options.key?(:output_rows)
-        options[:output_bytes] =  unless options.key?(:output_bytes)
+        options[:query_table_count] = nil unless options.key?(:query_table_count)
+        options[:output_rows] = nil unless options.key?(:output_rows)
+        options[:output_bytes] = nil unless options.key?(:output_bytes)
         super
       end
-    end
-
-    module ScheduledQueryRunStatus
-      AUTO_TRIGGER_SUCCESS = 'AUTO_TRIGGER_SUCCESS'
-      AUTO_TRIGGER_FAILURE = 'AUTO_TRIGGER_FAILURE'
-      MANUAL_TRIGGER_SUCCESS = 'MANUAL_TRIGGER_SUCCESS'
-      MANUAL_TRIGGER_FAILURE = 'MANUAL_TRIGGER_FAILURE'
     end
 
     # <p>Run summary for the scheduled query</p>
@@ -1392,12 +1320,7 @@ module Aws::TimestreamQuery
       :error_report_location,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduledQueryState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the column that is returned by the query. </p>
@@ -1426,7 +1349,7 @@ module Aws::TimestreamQuery
       :table_name,
       :aliased,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the service quota.</p>
@@ -1435,7 +1358,7 @@ module Aws::TimestreamQuery
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on SNS that are required to send the notification.</p>
@@ -1445,7 +1368,7 @@ module Aws::TimestreamQuery
     class SnsConfiguration < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a label that you assign to a Timestream database and/or table. Each tag
@@ -1462,7 +1385,7 @@ module Aws::TimestreamQuery
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1476,12 +1399,12 @@ module Aws::TimestreamQuery
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration used for writing the output of a query.</p>
@@ -1491,7 +1414,7 @@ module Aws::TimestreamQuery
     class TargetConfiguration < Struct.new(
       :timestream_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Destination details to write data for a target data source. Current supported data
@@ -1502,7 +1425,7 @@ module Aws::TimestreamQuery
     class TargetDestination < Struct.new(
       :timestream_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled due to excessive requests.</p>
@@ -1511,7 +1434,7 @@ module Aws::TimestreamQuery
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The timeseries data type represents the values of a measure over time. A time series
@@ -1528,7 +1451,7 @@ module Aws::TimestreamQuery
       :time,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configuration to write data into Timestream database and table. This configuration
@@ -1567,7 +1490,7 @@ module Aws::TimestreamQuery
       :mixed_measure_mappings,
       :measure_name_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Destination for scheduled query.</p>
@@ -1581,7 +1504,7 @@ module Aws::TimestreamQuery
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the data type of a column in a query result set. The data type can be scalar
@@ -1608,7 +1531,7 @@ module Aws::TimestreamQuery
       :time_series_measure_value_column_info,
       :row_column_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1623,12 +1546,12 @@ module Aws::TimestreamQuery
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_query_tcu
@@ -1652,7 +1575,7 @@ module Aws::TimestreamQuery
       :query_pricing_model,
       :query_compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_query_tcu
@@ -1669,7 +1592,7 @@ module Aws::TimestreamQuery
       :query_pricing_model,
       :query_compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_query_arn
@@ -1682,7 +1605,7 @@ module Aws::TimestreamQuery
       :scheduled_query_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Invalid or malformed request. </p>
@@ -1691,7 +1614,7 @@ module Aws::TimestreamQuery
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

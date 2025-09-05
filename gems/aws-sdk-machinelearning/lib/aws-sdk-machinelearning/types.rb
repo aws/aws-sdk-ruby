@@ -20,7 +20,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon ML returns the following elements.</p>
@@ -34,22 +34,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The function used to train an <code>MLModel</code>. Training choices supported by Amazon ML include the following:</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>SGD</code> - Stochastic Gradient Descent.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>RandomForest</code> - Random forest of decision trees.</p>
-    #             </li>
-    #          </ul>
-    module Algorithm
-      SGD = 'sgd'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>GetBatchPrediction</code> operation.</p>
@@ -145,51 +130,7 @@ module Aws::MachineLearning
       :total_record_count,
       :invalid_record_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>A list of the variables to use in searching or filtering <code>BatchPrediction</code>.</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>CreatedAt</code> - Sets the search criteria to <code>BatchPrediction</code> creation date.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Status</code> - Sets the search criteria to <code>BatchPrediction</code> status.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Name</code> - Sets the search criteria to the contents of <code>BatchPrediction</code> 
-    #                   <code>Name</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>BatchPrediction</code> creation.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>MLModelId</code> - Sets the search criteria to the <code>MLModel</code> used in the <code>BatchPrediction</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in the <code>BatchPrediction</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DataURI</code> - Sets the search criteria to the data file(s) used in the <code>BatchPrediction</code>. The URL can 
-    #                 identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>
-    #             </li>
-    #          </ul>
-    module BatchPredictionFilterVariable
-      CREATED_AT = 'CreatedAt'
-      LAST_UPDATED_AT = 'LastUpdatedAt'
-      STATUS = 'Status'
-      NAME = 'Name'
-      IAM_USER = 'IAMUser'
-      ML_MODEL_ID = 'MLModelId'
-      DATASOURCE_ID = 'DataSourceId'
-      DATA_URI = 'DataURI'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_prediction_id
@@ -216,7 +157,7 @@ module Aws::MachineLearning
       :batch_prediction_data_source_id,
       :output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateBatchPrediction</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -230,7 +171,7 @@ module Aws::MachineLearning
     class CreateBatchPredictionOutput < Struct.new(
       :batch_prediction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -308,7 +249,7 @@ module Aws::MachineLearning
       :role_arn,
       :compute_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateDataSourceFromRDS</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -325,7 +266,7 @@ module Aws::MachineLearning
     class CreateDataSourceFromRDSOutput < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -402,7 +343,7 @@ module Aws::MachineLearning
       :role_arn,
       :compute_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateDataSourceFromRedshift</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -416,7 +357,7 @@ module Aws::MachineLearning
     class CreateDataSourceFromRedshiftOutput < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -456,7 +397,7 @@ module Aws::MachineLearning
       :data_spec,
       :compute_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateDataSourceFromS3</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -470,7 +411,7 @@ module Aws::MachineLearning
     class CreateDataSourceFromS3Output < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -493,7 +434,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :evaluation_data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateEvaluation</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -509,7 +450,7 @@ module Aws::MachineLearning
     class CreateEvaluationOutput < Struct.new(
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -599,7 +540,7 @@ module Aws::MachineLearning
       :recipe,
       :recipe_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateMLModel</code> operation, and is an acknowledgement that Amazon ML received the request.</p>
@@ -614,7 +555,7 @@ module Aws::MachineLearning
     class CreateMLModelOutput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -623,7 +564,7 @@ module Aws::MachineLearning
     class CreateRealtimeEndpointInput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>CreateRealtimeEndpoint</code> operation.</p>
@@ -642,7 +583,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :realtime_endpoint_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of the <code>GetDataSource</code> operation. </p>
@@ -742,49 +683,12 @@ module Aws::MachineLearning
       :finished_at,
       :started_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compute_statistics] = false unless options.key?(:compute_statistics)
         super
       end
-    end
-
-    # <p>A list of the variables to use in searching or filtering <code>DataSource</code>.</p>    
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>CreatedAt</code> - Sets the search criteria to <code>DataSource</code> creation date.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Status</code> - Sets the search criteria to <code>DataSource</code> status.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Name</code> - Sets the search criteria to the contents of <code>DataSource</code> 
-    #                   <code>Name</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DataUri</code> - Sets the search criteria to the URI of data files used to create the <code>DataSource</code>. The URI can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>DataSource</code> creation.</p>
-    #             </li>
-    #          </ul>
-    #         
-    #         <p>
-    #             <b>Note:</b> 
-    #             The variable names should match the variable names in the <code>DataSource</code>.</p>
-    module DataSourceFilterVariable
-      CREATED_AT = 'CreatedAt'
-      LAST_UPDATED_AT = 'LastUpdatedAt'
-      STATUS = 'Status'
-      NAME = 'Name'
-      DATA_URI = 'DataLocationS3'
-      IAM_USER = 'IAMUser'
     end
 
     # @!attribute batch_prediction_id
@@ -793,7 +697,7 @@ module Aws::MachineLearning
     class DeleteBatchPredictionInput < Struct.new(
       :batch_prediction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>DeleteBatchPrediction</code> operation.</p>        
@@ -805,7 +709,7 @@ module Aws::MachineLearning
     class DeleteBatchPredictionOutput < Struct.new(
       :batch_prediction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -814,7 +718,7 @@ module Aws::MachineLearning
     class DeleteDataSourceInput < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>DeleteDataSource</code> operation.</p>
@@ -824,7 +728,7 @@ module Aws::MachineLearning
     class DeleteDataSourceOutput < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -833,7 +737,7 @@ module Aws::MachineLearning
     class DeleteEvaluationInput < Struct.new(
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>DeleteEvaluation</code> operation. The output indicates that Amazon Machine Learning (Amazon ML) received the request.</p>
@@ -845,7 +749,7 @@ module Aws::MachineLearning
     class DeleteEvaluationOutput < Struct.new(
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -854,7 +758,7 @@ module Aws::MachineLearning
     class DeleteMLModelInput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteMLModel</code> operation.</p>
@@ -866,7 +770,7 @@ module Aws::MachineLearning
     class DeleteMLModelOutput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -875,7 +779,7 @@ module Aws::MachineLearning
     class DeleteRealtimeEndpointInput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>DeleteRealtimeEndpoint</code> operation.</p>
@@ -892,7 +796,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :realtime_endpoint_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_keys
@@ -909,7 +813,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon ML returns the following elements.</p>
@@ -923,7 +827,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_variable
@@ -1036,7 +940,7 @@ module Aws::MachineLearning
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeBatchPredictions</code> operation. The content is essentially a list of <code>BatchPrediction</code>s.</p>
@@ -1051,7 +955,7 @@ module Aws::MachineLearning
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_variable
@@ -1155,7 +1059,7 @@ module Aws::MachineLearning
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the query results from a <a>DescribeDataSources</a> operation. The content is essentially a list of <code>DataSource</code>.</p>
@@ -1170,7 +1074,7 @@ module Aws::MachineLearning
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_variable
@@ -1283,7 +1187,7 @@ module Aws::MachineLearning
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the query results from a <code>DescribeEvaluations</code> operation. The content is essentially a list of <code>Evaluation</code>.</p>
@@ -1298,7 +1202,7 @@ module Aws::MachineLearning
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_variable
@@ -1419,7 +1323,7 @@ module Aws::MachineLearning
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeMLModels</code> operation. The content is essentially a list of <code>MLModel</code>.</p>
@@ -1433,7 +1337,7 @@ module Aws::MachineLearning
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1446,7 +1350,7 @@ module Aws::MachineLearning
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon ML returns the following elements.</p>
@@ -1464,59 +1368,7 @@ module Aws::MachineLearning
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Contains the key values of <code>DetailsMap</code>:</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>PredictiveModelType</code> - Indicates the type of the <code>MLModel</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Algorithm</code> - Indicates the algorithm that was used for the <code>MLModel</code>.</p>
-    #             </li>
-    #          </ul>
-    module DetailsAttributes
-      PREDICTIVE_MODEL_TYPE = 'PredictiveModelType'
-      ALGORITHM = 'Algorithm'
-    end
-
-    # <p>Object status with the following possible values:</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>PENDING</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>INPROGRESS</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>FAILED</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>COMPLETED</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DELETED</code>
-    #                </p>
-    #             </li>
-    #          </ul>
-    module EntityStatus
-      PENDING = 'PENDING'
-      INPROGRESS = 'INPROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of <code>GetEvaluation</code> operation. </p>
@@ -1618,51 +1470,7 @@ module Aws::MachineLearning
       :finished_at,
       :started_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> 
-    #                   <b> </b> 
-    #                   <code>Name</code>.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</p>
-    #             </li>
-    #          </ul>
-    module EvaluationFilterVariable
-      CREATED_AT = 'CreatedAt'
-      LAST_UPDATED_AT = 'LastUpdatedAt'
-      STATUS = 'Status'
-      NAME = 'Name'
-      IAM_USER = 'IAMUser'
-      ML_MODEL_ID = 'MLModelId'
-      DATASOURCE_ID = 'DataSourceId'
-      DATA_URI = 'DataURI'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_prediction_id
@@ -1671,7 +1479,7 @@ module Aws::MachineLearning
     class GetBatchPredictionInput < Struct.new(
       :batch_prediction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.</p>
@@ -1769,7 +1577,7 @@ module Aws::MachineLearning
       :total_record_count,
       :invalid_record_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -1784,7 +1592,7 @@ module Aws::MachineLearning
       :data_source_id,
       :verbose,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetDataSource</code> operation and describes a <code>DataSource</code>.</p>
@@ -1897,7 +1705,7 @@ module Aws::MachineLearning
       :started_at,
       :data_source_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compute_statistics] = false unless options.key?(:compute_statistics)
@@ -1911,7 +1719,7 @@ module Aws::MachineLearning
     class GetEvaluationInput < Struct.new(
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.</p>
@@ -2014,7 +1822,7 @@ module Aws::MachineLearning
       :finished_at,
       :started_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -2029,7 +1837,7 @@ module Aws::MachineLearning
       :ml_model_id,
       :verbose,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetMLModel</code> operation, and provides detailed information about a <code>MLModel</code>.</p>
@@ -2211,7 +2019,7 @@ module Aws::MachineLearning
       :recipe,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A second request to use or change an object was not allowed. This can result from retrying a request using a parameter that was not present in the original request.</p>
@@ -2223,7 +2031,7 @@ module Aws::MachineLearning
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -2240,7 +2048,7 @@ module Aws::MachineLearning
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -2257,7 +2065,7 @@ module Aws::MachineLearning
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -2270,7 +2078,7 @@ module Aws::MachineLearning
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subscriber exceeded the maximum number of operations. This exception can occur when listing objects such as <code>DataSource</code>.</p>
@@ -2282,7 +2090,7 @@ module Aws::MachineLearning
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -2460,26 +2268,7 @@ module Aws::MachineLearning
       :finished_at,
       :started_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MLModelFilterVariable
-      CREATED_AT = 'CreatedAt'
-      LAST_UPDATED_AT = 'LastUpdatedAt'
-      STATUS = 'Status'
-      NAME = 'Name'
-      IAM_USER = 'IAMUser'
-      TRAINING_DATASOURCE_ID = 'TrainingDataSourceId'
-      REAL_TIME_ENDPOINT_STATUS = 'RealtimeEndpointStatus'
-      ML_MODEL_TYPE = 'MLModelType'
-      ALGORITHM = 'Algorithm'
-      TRAINING_DATA_URI = 'TrainingDataURI'
-    end
-
-    module MLModelType
-      REGRESSION = 'REGRESSION'
-      BINARY = 'BINARY'
-      MULTICLASS = 'MULTICLASS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Measurements of how well the <code>MLModel</code> performed on known observations. One of the following metrics is returned, based on the type of the <code>MLModel</code>: 
@@ -2503,7 +2292,7 @@ module Aws::MachineLearning
     class PerformanceMetrics < Struct.new(
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -2519,7 +2308,7 @@ module Aws::MachineLearning
       :record,
       :predict_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prediction
@@ -2555,7 +2344,7 @@ module Aws::MachineLearning
     class PredictOutput < Struct.new(
       :prediction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output from a <code>Predict</code> operation: </p>
@@ -2606,7 +2395,7 @@ module Aws::MachineLearning
       :predicted_scores,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception is thrown when a predict request is made to an unmounted <code>MLModel</code>.</p>
@@ -2615,7 +2404,7 @@ module Aws::MachineLearning
     class PredictorNotMountedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data specification of an Amazon Relational Database Service (Amazon RDS) <code>DataSource</code>.</p>
@@ -2768,7 +2557,7 @@ module Aws::MachineLearning
       :subnet_id,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The database details of an Amazon RDS database.</p>
@@ -2782,7 +2571,7 @@ module Aws::MachineLearning
       :instance_identifier,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The database credentials to connect to a database on an RDS DB instance.</p>
@@ -2798,7 +2587,7 @@ module Aws::MachineLearning
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The datasource details that are specific to Amazon RDS.</p>
@@ -2829,7 +2618,7 @@ module Aws::MachineLearning
       :service_role,
       :data_pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the real-time endpoint information for an <code>MLModel</code>.</p>
@@ -2867,19 +2656,12 @@ module Aws::MachineLearning
       :endpoint_url,
       :endpoint_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:peak_requests_per_second] = 0 unless options.key?(:peak_requests_per_second)
         super
       end
-    end
-
-    module RealtimeEndpointStatus
-      NONE = 'NONE'
-      READY = 'READY'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
     end
 
     # <p>Describes the data specification of an Amazon Redshift <code>DataSource</code>.</p>
@@ -3015,7 +2797,7 @@ module Aws::MachineLearning
       :data_schema,
       :data_schema_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the database details required to connect to an Amazon Redshift database.</p>
@@ -3029,7 +2811,7 @@ module Aws::MachineLearning
       :database_name,
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the database credentials for connecting to a database on an Amazon Redshift cluster.</p>
@@ -3045,7 +2827,7 @@ module Aws::MachineLearning
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the <code>DataSource</code> details specific to Amazon Redshift.</p>
@@ -3064,7 +2846,7 @@ module Aws::MachineLearning
       :database_user_name,
       :select_sql_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified resource cannot be located.</p>
@@ -3076,7 +2858,7 @@ module Aws::MachineLearning
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -3206,23 +2988,7 @@ module Aws::MachineLearning
       :data_schema,
       :data_schema_location_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The sort order specified in a listing condition. Possible values include the following:</p>
-    #         <ul>
-    #             <li>
-    #                <p>
-    #                   <code>asc</code> - Present the information in ascending order (from A-Z).</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>dsc</code> - Present the information in descending order (from Z-A).</p>
-    #             </li>
-    #          </ul>
-    module SortOrder
-      ASC = 'asc'
-      DSC = 'dsc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom key-value pair associated with an ML object, such as an ML model.</p>
@@ -3236,7 +3002,7 @@ module Aws::MachineLearning
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -3244,14 +3010,7 @@ module Aws::MachineLearning
     class TagLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaggableResourceType
-      BATCH_PREDICTION = 'BatchPrediction'
-      DATASOURCE = 'DataSource'
-      EVALUATION = 'Evaluation'
-      ML_MODEL = 'MLModel'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_prediction_id
@@ -3264,7 +3023,7 @@ module Aws::MachineLearning
       :batch_prediction_id,
       :batch_prediction_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateBatchPrediction</code> operation.</p>
@@ -3276,7 +3035,7 @@ module Aws::MachineLearning
     class UpdateBatchPredictionOutput < Struct.new(
       :batch_prediction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -3289,7 +3048,7 @@ module Aws::MachineLearning
       :data_source_id,
       :data_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateDataSource</code> operation.</p>
@@ -3301,7 +3060,7 @@ module Aws::MachineLearning
     class UpdateDataSourceOutput < Struct.new(
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -3314,7 +3073,7 @@ module Aws::MachineLearning
       :evaluation_id,
       :evaluation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateEvaluation</code> operation.</p>
@@ -3326,7 +3085,7 @@ module Aws::MachineLearning
     class UpdateEvaluationOutput < Struct.new(
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_model_id
@@ -3344,7 +3103,7 @@ module Aws::MachineLearning
       :ml_model_name,
       :score_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateMLModel</code> operation.</p>
@@ -3356,7 +3115,7 @@ module Aws::MachineLearning
     class UpdateMLModelOutput < Struct.new(
       :ml_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

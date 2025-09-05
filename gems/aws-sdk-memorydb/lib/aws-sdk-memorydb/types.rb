@@ -39,7 +39,7 @@ module Aws::MemoryDB
       :clusters,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -48,7 +48,7 @@ module Aws::MemoryDB
     class ACLAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -57,7 +57,7 @@ module Aws::MemoryDB
     class ACLNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the updates being applied to the ACL.</p>
@@ -71,7 +71,7 @@ module Aws::MemoryDB
       :user_names_to_remove,
       :user_names_to_add,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -80,7 +80,7 @@ module Aws::MemoryDB
     class ACLQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the ACL update</p>
@@ -90,7 +90,7 @@ module Aws::MemoryDB
     class ACLsUpdateStatus < Struct.new(
       :acl_to_apply,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -99,12 +99,7 @@ module Aws::MemoryDB
     class APICallRateForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AZStatus
-      SingleAZ = 'singleaz'
-      MultiAZ = 'multiaz'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.</p>
@@ -118,7 +113,7 @@ module Aws::MemoryDB
       :type,
       :password_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.</p>
@@ -132,13 +127,7 @@ module Aws::MemoryDB
       :type,
       :passwords,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      PASSWORD = 'password'
-      NO_PASSWORD = 'no-password'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates if the cluster has a Multi-AZ configuration (multiaz) or not (singleaz).</p>
@@ -148,7 +137,7 @@ module Aws::MemoryDB
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_names
@@ -161,7 +150,7 @@ module Aws::MemoryDB
       :cluster_names,
       :service_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_clusters
@@ -174,7 +163,7 @@ module Aws::MemoryDB
       :processed_clusters,
       :unprocessed_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all of the attributes of a specific cluster.</p>
@@ -305,7 +294,7 @@ module Aws::MemoryDB
       :network_type,
       :ip_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -314,7 +303,7 @@ module Aws::MemoryDB
     class ClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of cluster configuration options. </p>
@@ -388,7 +377,7 @@ module Aws::MemoryDB
       :multi_region_parameter_group_name,
       :multi_region_cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -397,7 +386,7 @@ module Aws::MemoryDB
     class ClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of updates being applied to the cluster</p>
@@ -415,7 +404,7 @@ module Aws::MemoryDB
       :ac_ls,
       :service_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -424,7 +413,7 @@ module Aws::MemoryDB
     class ClusterQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_snapshot_name
@@ -455,7 +444,7 @@ module Aws::MemoryDB
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -464,7 +453,7 @@ module Aws::MemoryDB
     class CopySnapshotResponse < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl_name
@@ -481,7 +470,7 @@ module Aws::MemoryDB
       :user_names,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl
@@ -490,7 +479,7 @@ module Aws::MemoryDB
     class CreateACLResponse < Struct.new(
       :acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -645,7 +634,7 @@ module Aws::MemoryDB
       :network_type,
       :ip_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -654,7 +643,7 @@ module Aws::MemoryDB
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster_name_suffix
@@ -695,7 +684,7 @@ module Aws::MemoryDB
       :tls_enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster
@@ -704,7 +693,7 @@ module Aws::MemoryDB
     class CreateMultiRegionClusterResponse < Struct.new(
       :multi_region_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -725,7 +714,7 @@ module Aws::MemoryDB
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -734,7 +723,7 @@ module Aws::MemoryDB
     class CreateParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -755,7 +744,7 @@ module Aws::MemoryDB
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -764,7 +753,7 @@ module Aws::MemoryDB
     class CreateSnapshotResponse < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -785,7 +774,7 @@ module Aws::MemoryDB
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group
@@ -794,7 +783,7 @@ module Aws::MemoryDB
     class CreateSubnetGroupResponse < Struct.new(
       :subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -815,7 +804,7 @@ module Aws::MemoryDB
       :access_string,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -824,12 +813,7 @@ module Aws::MemoryDB
     class CreateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataTieringStatus
-      TRUE = 'true'
-      FALSE = 'false'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -838,7 +822,7 @@ module Aws::MemoryDB
     class DefaultUserRequired < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl_name
@@ -847,7 +831,7 @@ module Aws::MemoryDB
     class DeleteACLRequest < Struct.new(
       :acl_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl
@@ -856,7 +840,7 @@ module Aws::MemoryDB
     class DeleteACLResponse < Struct.new(
       :acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -873,7 +857,7 @@ module Aws::MemoryDB
       :multi_region_cluster_name,
       :final_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -882,7 +866,7 @@ module Aws::MemoryDB
     class DeleteClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster_name
@@ -891,7 +875,7 @@ module Aws::MemoryDB
     class DeleteMultiRegionClusterRequest < Struct.new(
       :multi_region_cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster
@@ -900,7 +884,7 @@ module Aws::MemoryDB
     class DeleteMultiRegionClusterResponse < Struct.new(
       :multi_region_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -909,7 +893,7 @@ module Aws::MemoryDB
     class DeleteParameterGroupRequest < Struct.new(
       :parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -918,7 +902,7 @@ module Aws::MemoryDB
     class DeleteParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_name
@@ -927,7 +911,7 @@ module Aws::MemoryDB
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -936,7 +920,7 @@ module Aws::MemoryDB
     class DeleteSnapshotResponse < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -945,7 +929,7 @@ module Aws::MemoryDB
     class DeleteSubnetGroupRequest < Struct.new(
       :subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group
@@ -954,7 +938,7 @@ module Aws::MemoryDB
     class DeleteSubnetGroupResponse < Struct.new(
       :subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -963,7 +947,7 @@ module Aws::MemoryDB
     class DeleteUserRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -972,7 +956,7 @@ module Aws::MemoryDB
     class DeleteUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl_name
@@ -989,7 +973,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ac_ls
@@ -1002,7 +986,7 @@ module Aws::MemoryDB
       :ac_ls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1023,7 +1007,7 @@ module Aws::MemoryDB
       :next_token,
       :show_shard_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1036,7 +1020,7 @@ module Aws::MemoryDB
       :next_token,
       :clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -1065,7 +1049,7 @@ module Aws::MemoryDB
       :next_token,
       :default_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1078,7 +1062,7 @@ module Aws::MemoryDB
       :next_token,
       :engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_name
@@ -1115,7 +1099,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1128,7 +1112,7 @@ module Aws::MemoryDB
       :next_token,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster_name
@@ -1149,7 +1133,7 @@ module Aws::MemoryDB
       :next_token,
       :show_cluster_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1162,7 +1146,7 @@ module Aws::MemoryDB
       :next_token,
       :multi_region_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -1179,7 +1163,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1192,7 +1176,7 @@ module Aws::MemoryDB
       :next_token,
       :parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -1209,7 +1193,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1222,7 +1206,7 @@ module Aws::MemoryDB
       :next_token,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_nodes_offering_id
@@ -1252,7 +1236,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1265,7 +1249,7 @@ module Aws::MemoryDB
       :next_token,
       :reserved_nodes_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reservation_id
@@ -1299,7 +1283,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1312,7 +1296,7 @@ module Aws::MemoryDB
       :next_token,
       :reserved_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_update_name
@@ -1337,7 +1321,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1350,7 +1334,7 @@ module Aws::MemoryDB
       :next_token,
       :service_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1379,7 +1363,7 @@ module Aws::MemoryDB
       :max_results,
       :show_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1392,7 +1376,7 @@ module Aws::MemoryDB
       :next_token,
       :snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -1409,7 +1393,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1422,7 +1406,7 @@ module Aws::MemoryDB
       :next_token,
       :subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1443,7 +1427,7 @@ module Aws::MemoryDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -1456,7 +1440,7 @@ module Aws::MemoryDB
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1465,7 +1449,7 @@ module Aws::MemoryDB
     class DuplicateUserNameFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the information required for client programs to connect to the cluster and its nodes.</p>
@@ -1479,7 +1463,7 @@ module Aws::MemoryDB
       :address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 0 unless options.key?(:port)
@@ -1506,7 +1490,7 @@ module Aws::MemoryDB
       :engine_patch_version,
       :parameter_group_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a 
@@ -1529,7 +1513,7 @@ module Aws::MemoryDB
       :message,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1542,7 +1526,7 @@ module Aws::MemoryDB
       :cluster_name,
       :shard_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1551,7 +1535,7 @@ module Aws::MemoryDB
     class FailoverShardResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to streamline results of a search based on the property being filtered.</p>
@@ -1565,12 +1549,7 @@ module Aws::MemoryDB
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputAuthenticationType
-      PASSWORD = 'password'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1579,7 +1558,7 @@ module Aws::MemoryDB
     class InsufficientClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1588,7 +1567,7 @@ module Aws::MemoryDB
     class InvalidACLStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1597,7 +1576,7 @@ module Aws::MemoryDB
     class InvalidARNFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1606,7 +1585,7 @@ module Aws::MemoryDB
     class InvalidClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1615,7 +1594,7 @@ module Aws::MemoryDB
     class InvalidCredentialsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1624,7 +1603,7 @@ module Aws::MemoryDB
     class InvalidKMSKeyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation cannot be performed on the multi-Region cluster in its current state.</p>
@@ -1633,7 +1612,7 @@ module Aws::MemoryDB
     class InvalidMultiRegionClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1642,7 +1621,7 @@ module Aws::MemoryDB
     class InvalidNodeStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1651,7 +1630,7 @@ module Aws::MemoryDB
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1660,7 +1639,7 @@ module Aws::MemoryDB
     class InvalidParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1669,7 +1648,7 @@ module Aws::MemoryDB
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1678,7 +1657,7 @@ module Aws::MemoryDB
     class InvalidSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1687,7 +1666,7 @@ module Aws::MemoryDB
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1696,7 +1675,7 @@ module Aws::MemoryDB
     class InvalidUserStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1705,12 +1684,7 @@ module Aws::MemoryDB
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpDiscovery
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster_name
@@ -1719,7 +1693,7 @@ module Aws::MemoryDB
     class ListAllowedMultiRegionClusterUpdatesRequest < Struct.new(
       :multi_region_cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scale_up_node_types
@@ -1732,7 +1706,7 @@ module Aws::MemoryDB
       :scale_up_node_types,
       :scale_down_node_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1742,7 +1716,7 @@ module Aws::MemoryDB
     class ListAllowedNodeTypeUpdatesRequest < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scale_up_node_types
@@ -1755,7 +1729,7 @@ module Aws::MemoryDB
       :scale_up_node_types,
       :scale_down_node_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1764,7 +1738,7 @@ module Aws::MemoryDB
     class ListTagsRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -1773,7 +1747,7 @@ module Aws::MemoryDB
     class ListTagsResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a multi-Region cluster.</p>
@@ -1823,7 +1797,7 @@ module Aws::MemoryDB
       :tls_enabled,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A multi-Region cluster with the specified name already exists.</p>
@@ -1832,7 +1806,7 @@ module Aws::MemoryDB
     class MultiRegionClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified multi-Region cluster does not exist.</p>
@@ -1841,7 +1815,7 @@ module Aws::MemoryDB
     class MultiRegionClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified multi-Region parameter group does not exist.</p>
@@ -1850,13 +1824,7 @@ module Aws::MemoryDB
     class MultiRegionParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkType
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
-      DUAL_STACK = 'dual_stack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1865,7 +1833,7 @@ module Aws::MemoryDB
     class NoOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an individual node within a cluster. Each node runs its own instance of the cluster's protocol-compliant caching software.</p>
@@ -1891,7 +1859,7 @@ module Aws::MemoryDB
       :create_time,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1900,7 +1868,7 @@ module Aws::MemoryDB
     class NodeQuotaForClusterExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1909,7 +1877,7 @@ module Aws::MemoryDB
     class NodeQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an individual setting that controls some aspect of MemoryDB behavior.</p>
@@ -1939,7 +1907,7 @@ module Aws::MemoryDB
       :allowed_values,
       :minimum_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a CreateParameterGroup operation. A parameter group represents a combination of specific values for the parameters that are passed to the engine software during startup.</p>
@@ -1961,7 +1929,7 @@ module Aws::MemoryDB
       :description,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1970,7 +1938,7 @@ module Aws::MemoryDB
     class ParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1979,7 +1947,7 @@ module Aws::MemoryDB
     class ParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1988,7 +1956,7 @@ module Aws::MemoryDB
     class ParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a name-value pair that is used to update the value of a parameter.</p>
@@ -2002,7 +1970,7 @@ module Aws::MemoryDB
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update action that has yet to be processed for the corresponding apply/stop request</p>
@@ -2016,7 +1984,7 @@ module Aws::MemoryDB
       :service_update_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_nodes_offering_id
@@ -2037,7 +2005,7 @@ module Aws::MemoryDB
       :node_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_node
@@ -2046,7 +2014,7 @@ module Aws::MemoryDB
     class PurchaseReservedNodesOfferingResponse < Struct.new(
       :reserved_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recurring charge to run this reserved node.</p>
@@ -2060,7 +2028,7 @@ module Aws::MemoryDB
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:recurring_charge_amount] = 0 unless options.key?(:recurring_charge_amount)
@@ -2087,7 +2055,7 @@ module Aws::MemoryDB
       :status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to configure the number of replicas in a shard</p>
@@ -2097,7 +2065,7 @@ module Aws::MemoryDB
     class ReplicaConfigurationRequest < Struct.new(
       :replica_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:replica_count] = 0 unless options.key?(:replica_count)
@@ -2152,7 +2120,7 @@ module Aws::MemoryDB
       :recurring_charges,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -2168,7 +2136,7 @@ module Aws::MemoryDB
     class ReservedNodeAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested node does not exist.</p>
@@ -2177,7 +2145,7 @@ module Aws::MemoryDB
     class ReservedNodeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the user's node quota.</p>
@@ -2186,7 +2154,7 @@ module Aws::MemoryDB
     class ReservedNodeQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The offering type of this node.</p>
@@ -2216,7 +2184,7 @@ module Aws::MemoryDB
       :offering_type,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -2233,7 +2201,7 @@ module Aws::MemoryDB
     class ReservedNodesOfferingNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -2250,7 +2218,7 @@ module Aws::MemoryDB
       :all_parameters,
       :parameter_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -2259,7 +2227,7 @@ module Aws::MemoryDB
     class ResetParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the online resharding</p>
@@ -2269,7 +2237,7 @@ module Aws::MemoryDB
     class ReshardingStatus < Struct.new(
       :slot_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single security group and its status.</p>
@@ -2283,7 +2251,7 @@ module Aws::MemoryDB
       :security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2292,7 +2260,7 @@ module Aws::MemoryDB
     class ServiceLinkedRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An update that you can apply to your MemoryDB clusters.</p>
@@ -2334,7 +2302,7 @@ module Aws::MemoryDB
       :nodes_updated,
       :auto_update_start_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2343,7 +2311,7 @@ module Aws::MemoryDB
     class ServiceUpdateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to apply a service update</p>
@@ -2353,18 +2321,7 @@ module Aws::MemoryDB
     class ServiceUpdateRequest < Struct.new(
       :service_update_name_to_apply,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceUpdateStatus
-      NOT_APPLIED = 'available'
-      IN_PROGRESS = 'in-progress'
-      COMPLETE = 'complete'
-      SCHEDULED = 'scheduled'
-    end
-
-    module ServiceUpdateType
-      SECURITY_UPDATE = 'security-update'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of nodes in a cluster. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.</p>
@@ -2390,7 +2347,7 @@ module Aws::MemoryDB
       :nodes,
       :number_of_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shard configuration options. Each shard configuration has the following: Slots and ReplicaCount.</p>
@@ -2404,7 +2361,7 @@ module Aws::MemoryDB
       :slots,
       :replica_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to configure the sharding properties of a cluster</p>
@@ -2414,7 +2371,7 @@ module Aws::MemoryDB
     class ShardConfigurationRequest < Struct.new(
       :shard_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:shard_count] = 0 unless options.key?(:shard_count)
@@ -2441,7 +2398,7 @@ module Aws::MemoryDB
       :size,
       :snapshot_creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2450,7 +2407,7 @@ module Aws::MemoryDB
     class ShardNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2459,7 +2416,7 @@ module Aws::MemoryDB
     class ShardsPerClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the progress of an online resharding operation.</p>
@@ -2469,7 +2426,7 @@ module Aws::MemoryDB
     class SlotMigration < Struct.new(
       :progress_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:progress_percentage] = 0 unless options.key?(:progress_percentage)
@@ -2509,7 +2466,7 @@ module Aws::MemoryDB
       :cluster_configuration,
       :data_tiering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2518,7 +2475,7 @@ module Aws::MemoryDB
     class SnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2527,7 +2484,7 @@ module Aws::MemoryDB
     class SnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2536,16 +2493,7 @@ module Aws::MemoryDB
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      node = 'node'
-      parameter_group = 'parameter-group'
-      subnet_group = 'subnet-group'
-      cluster = 'cluster'
-      user = 'user'
-      acl = 'acl'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with MemoryDB.</p>
@@ -2563,7 +2511,7 @@ module Aws::MemoryDB
       :availability_zone,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following operations:</p>
@@ -2602,7 +2550,7 @@ module Aws::MemoryDB
       :arn,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2611,7 +2559,7 @@ module Aws::MemoryDB
     class SubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2620,7 +2568,7 @@ module Aws::MemoryDB
     class SubnetGroupInUseFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2629,7 +2577,7 @@ module Aws::MemoryDB
     class SubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2638,7 +2586,7 @@ module Aws::MemoryDB
     class SubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2647,7 +2595,7 @@ module Aws::MemoryDB
     class SubnetInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2656,7 +2604,7 @@ module Aws::MemoryDB
     class SubnetNotAllowedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2665,7 +2613,7 @@ module Aws::MemoryDB
     class SubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. 
@@ -2682,7 +2630,7 @@ module Aws::MemoryDB
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2691,7 +2639,7 @@ module Aws::MemoryDB
     class TagNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2700,7 +2648,7 @@ module Aws::MemoryDB
     class TagQuotaPerResourceExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2713,7 +2661,7 @@ module Aws::MemoryDB
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -2722,7 +2670,7 @@ module Aws::MemoryDB
     class TagResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2731,7 +2679,7 @@ module Aws::MemoryDB
     class TestFailoverNotAvailableFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster whose updates have failed</p>
@@ -2749,7 +2697,7 @@ module Aws::MemoryDB
       :error_type,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2762,7 +2710,7 @@ module Aws::MemoryDB
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -2771,7 +2719,7 @@ module Aws::MemoryDB
     class UntagResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl_name
@@ -2788,7 +2736,7 @@ module Aws::MemoryDB
       :user_names_to_add,
       :user_names_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acl
@@ -2797,7 +2745,7 @@ module Aws::MemoryDB
     class UpdateACLResponse < Struct.new(
       :acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2909,7 +2857,7 @@ module Aws::MemoryDB
       :acl_name,
       :ip_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2918,7 +2866,7 @@ module Aws::MemoryDB
     class UpdateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster_name
@@ -2951,7 +2899,7 @@ module Aws::MemoryDB
       :multi_region_parameter_group_name,
       :update_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multi_region_cluster
@@ -2960,7 +2908,7 @@ module Aws::MemoryDB
     class UpdateMultiRegionClusterResponse < Struct.new(
       :multi_region_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group_name
@@ -2973,7 +2921,7 @@ module Aws::MemoryDB
       :parameter_group_name,
       :parameter_name_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter_group
@@ -2982,12 +2930,7 @@ module Aws::MemoryDB
     class UpdateParameterGroupResponse < Struct.new(
       :parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStrategy
-      COORDINATED = 'coordinated'
-      UNCOORDINATED = 'uncoordinated'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group_name
@@ -3004,7 +2947,7 @@ module Aws::MemoryDB
       :description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_group
@@ -3013,7 +2956,7 @@ module Aws::MemoryDB
     class UpdateSubnetGroupResponse < Struct.new(
       :subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -3030,7 +2973,7 @@ module Aws::MemoryDB
       :authentication_mode,
       :access_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -3039,7 +2982,7 @@ module Aws::MemoryDB
     class UpdateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You create users and assign them specific permissions by using an access string. You assign the users to Access Control Lists aligned with a specific role (administrators, human resources) that are then deployed to one or more MemoryDB clusters.</p>
@@ -3075,7 +3018,7 @@ module Aws::MemoryDB
       :authentication,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3084,7 +3027,7 @@ module Aws::MemoryDB
     class UserAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3093,7 +3036,7 @@ module Aws::MemoryDB
     class UserNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3102,7 +3045,7 @@ module Aws::MemoryDB
     class UserQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

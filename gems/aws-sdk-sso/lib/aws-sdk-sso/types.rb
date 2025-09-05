@@ -21,7 +21,7 @@ module Aws::SSO
       :account_name,
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -39,7 +39,7 @@ module Aws::SSO
       :account_id,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_credentials
@@ -48,7 +48,7 @@ module Aws::SSO
     class GetRoleCredentialsResponse < Struct.new(
       :role_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a problem occurred with the input to the request. For example, a required
@@ -58,7 +58,7 @@ module Aws::SSO
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -80,7 +80,7 @@ module Aws::SSO
       :access_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -94,7 +94,7 @@ module Aws::SSO
       :next_token,
       :role_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -113,7 +113,7 @@ module Aws::SSO
       :max_results,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -127,7 +127,7 @@ module Aws::SSO
       :next_token,
       :account_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -137,7 +137,7 @@ module Aws::SSO
     class LogoutRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -146,7 +146,7 @@ module Aws::SSO
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the role credentials that are assigned to the user.</p>
@@ -172,7 +172,7 @@ module Aws::SSO
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expiration] = 0 unless options.key?(:expiration)
@@ -191,7 +191,7 @@ module Aws::SSO
       :role_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the request is being made too frequently and is more than what the server
@@ -201,7 +201,7 @@ module Aws::SSO
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the request is not authorized. This can happen due to an invalid access
@@ -211,7 +211,7 @@ module Aws::SSO
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

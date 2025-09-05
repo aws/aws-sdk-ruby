@@ -12,7 +12,7 @@ module Aws::BedrockAgentCore
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about an actor in an AgentCore Memory resource.</p>
@@ -22,7 +22,7 @@ module Aws::BedrockAgentCore
     class ActorSummary < Struct.new(
       :actor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a stream that enables programmatic control of a browser session in Amazon Bedrock. This stream provides a bidirectional communication channel for sending commands to the browser and receiving responses, allowing agents to automate web interactions such as navigation, form filling, and element clicking.</p>
@@ -36,12 +36,7 @@ module Aws::BedrockAgentCore
       :stream_endpoint,
       :stream_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationStreamStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an update to an automation stream.</p>
@@ -51,7 +46,7 @@ module Aws::BedrockAgentCore
     class AutomationStreamUpdate < Struct.new(
       :stream_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a branch in an AgentCore Memory resource. Branches allow for organizing events into different conversation threads or paths.</p>
@@ -65,7 +60,7 @@ module Aws::BedrockAgentCore
       :root_event_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filter criteria for branches when listing events.</p>
@@ -79,17 +74,12 @@ module Aws::BedrockAgentCore
       :name,
       :include_parent_branches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_parent_branches] = true unless options.key?(:include_parent_branches)
         super
       end
-    end
-
-    module BrowserSessionStatus
-      READY = 'READY'
-      TERMINATED = 'TERMINATED'
     end
 
     # <p>The collection of streams associated with a browser session in Amazon Bedrock. These streams provide different ways to interact with and observe the browser session, including programmatic control and visual representation of the browser content.</p>
@@ -103,7 +93,7 @@ module Aws::BedrockAgentCore
       :automation_stream,
       :live_view_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A condensed representation of a browser session in Amazon Bedrock. This structure contains key information about a browser session, including identifiers, status, and timestamps, without the full details of the session configuration and streams.</p>
@@ -133,7 +123,7 @@ module Aws::BedrockAgentCore
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output produced by executing code in a code interpreter session in Amazon Bedrock. This structure contains the results of code execution, including textual output, structured data, and error information. Agents use these results to generate responses that incorporate computation, data analysis, and visualization.</p>
@@ -151,12 +141,7 @@ module Aws::BedrockAgentCore
       :structured_content,
       :is_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeInterpreterSessionStatus
-      READY = 'READY'
-      TERMINATED = 'TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A condensed representation of a code interpreter session in Amazon Bedrock. This structure contains key information about a code interpreter session, including identifiers, status, and timestamps, without the full details of the session configuration.</p>
@@ -186,7 +171,7 @@ module Aws::BedrockAgentCore
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains output from a code interpreter stream.</p>
@@ -225,7 +210,7 @@ module Aws::BedrockAgentCore
       :validation_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Result < CodeInterpreterStreamOutput; end
       class AccessDeniedException < CodeInterpreterStreamOutput; end
@@ -244,7 +229,7 @@ module Aws::BedrockAgentCore
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the content of a memory item.</p>
@@ -255,7 +240,7 @@ module Aws::BedrockAgentCore
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < Content; end
       class Unknown < Content; end
@@ -300,14 +285,7 @@ module Aws::BedrockAgentCore
       :size,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentBlockType
-      TEXT = 'text'
-      IMAGE = 'image'
-      EMBEDDED_RESOURCE = 'resource'
-      RESOURCE_LINK = 'resource_link'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains conversational content for an event payload.</p>
@@ -321,7 +299,7 @@ module Aws::BedrockAgentCore
       :content,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -354,7 +332,7 @@ module Aws::BedrockAgentCore
       :branch,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event
@@ -363,7 +341,7 @@ module Aws::BedrockAgentCore
     class CreateEventOutput < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -384,7 +362,7 @@ module Aws::BedrockAgentCore
       :event_id,
       :actor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -393,7 +371,7 @@ module Aws::BedrockAgentCore
     class DeleteEventOutput < Struct.new(
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -406,7 +384,7 @@ module Aws::BedrockAgentCore
       :memory_id,
       :memory_record_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_record_id
@@ -415,7 +393,7 @@ module Aws::BedrockAgentCore
     class DeleteMemoryRecordOutput < Struct.new(
       :memory_record_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an event in an AgentCore Memory resource.</p>
@@ -449,7 +427,7 @@ module Aws::BedrockAgentCore
       :payload,
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filter criteria for listing events.</p>
@@ -459,7 +437,7 @@ module Aws::BedrockAgentCore
     class FilterInput < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -472,7 +450,7 @@ module Aws::BedrockAgentCore
       :browser_identifier,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -517,7 +495,7 @@ module Aws::BedrockAgentCore
       :session_replay_artifact,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -530,7 +508,7 @@ module Aws::BedrockAgentCore
       :code_interpreter_identifier,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -559,7 +537,7 @@ module Aws::BedrockAgentCore
       :session_timeout_seconds,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -580,7 +558,7 @@ module Aws::BedrockAgentCore
       :actor_id,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event
@@ -589,7 +567,7 @@ module Aws::BedrockAgentCore
     class GetEventOutput < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -602,7 +580,7 @@ module Aws::BedrockAgentCore
       :memory_id,
       :memory_record_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_record
@@ -611,7 +589,7 @@ module Aws::BedrockAgentCore
     class GetMemoryRecordOutput < Struct.new(
       :memory_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_identity_token
@@ -624,7 +602,7 @@ module Aws::BedrockAgentCore
       :workload_identity_token,
       :resource_credential_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_key
@@ -633,7 +611,7 @@ module Aws::BedrockAgentCore
     class GetResourceApiKeyResponse < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_identity_token
@@ -666,7 +644,7 @@ module Aws::BedrockAgentCore
       :force_authentication,
       :custom_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorization_url
@@ -679,7 +657,7 @@ module Aws::BedrockAgentCore
       :authorization_url,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -692,7 +670,7 @@ module Aws::BedrockAgentCore
       :workload_name,
       :user_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_access_token
@@ -701,7 +679,7 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenForJWTResponse < Struct.new(
       :workload_access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -714,7 +692,7 @@ module Aws::BedrockAgentCore
       :workload_name,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_access_token
@@ -723,7 +701,7 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenForUserIdResponse < Struct.new(
       :workload_access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -732,7 +710,7 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenRequest < Struct.new(
       :workload_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_access_token
@@ -741,7 +719,7 @@ module Aws::BedrockAgentCore
     class GetWorkloadAccessTokenResponse < Struct.new(
       :workload_access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block of input content.</p>
@@ -759,7 +737,7 @@ module Aws::BedrockAgentCore
       :text,
       :blob,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when the service encounters an unexpected internal error. This is a temporary condition that will resolve itself with retries. We recommend implementing exponential backoff retry logic in your application.</p>
@@ -768,7 +746,7 @@ module Aws::BedrockAgentCore
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by AgentCore. Check your input values and try again.</p>
@@ -777,7 +755,7 @@ module Aws::BedrockAgentCore
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -834,7 +812,7 @@ module Aws::BedrockAgentCore
       :qualifier,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime_session_id
@@ -879,7 +857,7 @@ module Aws::BedrockAgentCore
       :response,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:response] = Base64.strict_decode64('') unless options.key?(:response)
@@ -905,7 +883,7 @@ module Aws::BedrockAgentCore
       :name,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -918,7 +896,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -935,7 +913,7 @@ module Aws::BedrockAgentCore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actor_summaries
@@ -948,7 +926,7 @@ module Aws::BedrockAgentCore
       :actor_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -969,7 +947,7 @@ module Aws::BedrockAgentCore
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -982,7 +960,7 @@ module Aws::BedrockAgentCore
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -1003,7 +981,7 @@ module Aws::BedrockAgentCore
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1016,7 +994,7 @@ module Aws::BedrockAgentCore
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -1049,7 +1027,7 @@ module Aws::BedrockAgentCore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -1062,7 +1040,7 @@ module Aws::BedrockAgentCore
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -1087,7 +1065,7 @@ module Aws::BedrockAgentCore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_record_summaries
@@ -1100,7 +1078,7 @@ module Aws::BedrockAgentCore
       :memory_record_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -1121,7 +1099,7 @@ module Aws::BedrockAgentCore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_summaries
@@ -1134,7 +1112,7 @@ module Aws::BedrockAgentCore
       :session_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a stream that provides a visual representation of a browser session in Amazon Bedrock. This stream enables agents to observe the current state of the browser, including rendered web pages, visual elements, and the results of interactions.</p>
@@ -1144,7 +1122,7 @@ module Aws::BedrockAgentCore
     class LiveViewStream < Struct.new(
       :stream_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the content of a memory record.</p>
@@ -1155,7 +1133,7 @@ module Aws::BedrockAgentCore
       :text,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < MemoryContent; end
       class Unknown < MemoryContent; end
@@ -1184,7 +1162,7 @@ module Aws::BedrockAgentCore
       :namespaces,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a memory record.</p>
@@ -1214,12 +1192,7 @@ module Aws::BedrockAgentCore
       :created_at,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Oauth2FlowType
-      USER_FEDERATION = 'USER_FEDERATION'
-      M2M = 'M2M'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the payload content for an event.</p>
@@ -1234,17 +1207,11 @@ module Aws::BedrockAgentCore
       :blob,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Conversational < PayloadType; end
       class Blob < PayloadType; end
       class Unknown < PayloadType; end
-    end
-
-    module ProgrammingLanguage
-      PYTHON = 'python'
-      JAVASCRIPT = 'javascript'
-      TYPESCRIPT = 'typescript'
     end
 
     # <p>Contains information about resource content.</p>
@@ -1270,12 +1237,7 @@ module Aws::BedrockAgentCore
       :text,
       :blob,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceContentType
-      TEXT = 'text'
-      BLOB = 'blob'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when the specified resource does not exist. This can happen when using an invalid identifier or when trying to access a resource that has been deleted.</p>
@@ -1284,7 +1246,7 @@ module Aws::BedrockAgentCore
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_id
@@ -1309,7 +1271,7 @@ module Aws::BedrockAgentCore
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute memory_record_summaries
@@ -1322,14 +1284,7 @@ module Aws::BedrockAgentCore
       :memory_record_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Role
-      ASSISTANT = 'ASSISTANT'
-      USER = 'USER'
-      TOOL = 'TOOL'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when there is an error in the runtime client. This can happen due to network issues, invalid configuration, or other client-side problems. Check the error message for specific details about the error.</p>
@@ -1338,7 +1293,7 @@ module Aws::BedrockAgentCore
     class RuntimeClientError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains search criteria for retrieving memory records.</p>
@@ -1356,7 +1311,7 @@ module Aws::BedrockAgentCore
       :memory_strategy_id,
       :top_k,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:top_k] = 10 unless options.key?(:top_k)
@@ -1370,7 +1325,7 @@ module Aws::BedrockAgentCore
     class ServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when the request would cause a service quota to be exceeded. Review your service quotas and either reduce your request rate or request a quota increase.</p>
@@ -1379,7 +1334,7 @@ module Aws::BedrockAgentCore
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a session in an AgentCore Memory resource.</p>
@@ -1397,7 +1352,7 @@ module Aws::BedrockAgentCore
       :actor_id,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1422,7 +1377,7 @@ module Aws::BedrockAgentCore
       :view_port,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1443,7 +1398,7 @@ module Aws::BedrockAgentCore
       :created_at,
       :streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -1464,7 +1419,7 @@ module Aws::BedrockAgentCore
       :session_timeout_seconds,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -1481,7 +1436,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1498,7 +1453,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1515,7 +1470,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -1532,7 +1487,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_interpreter_identifier
@@ -1549,7 +1504,7 @@ module Aws::BedrockAgentCore
       :session_id,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an update to a stream.</p>
@@ -1560,18 +1515,10 @@ module Aws::BedrockAgentCore
       :automation_stream_update,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AutomationStreamUpdate < StreamUpdate; end
       class Unknown < StreamUpdate; end
-    end
-
-    module TaskStatus
-      SUBMITTED = 'submitted'
-      WORKING = 'working'
-      COMPLETED = 'completed'
-      CANCELED = 'canceled'
-      FAILED = 'failed'
     end
 
     # <p>The request was denied due to request throttling. Reduce the frequency of requests and try again.</p>
@@ -1580,7 +1527,7 @@ module Aws::BedrockAgentCore
     class ThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when the request was denied due to request throttling. This happens when you exceed the allowed request rate for an operation. Reduce the frequency of requests or implement exponential backoff retry logic in your application.</p>
@@ -1589,7 +1536,7 @@ module Aws::BedrockAgentCore
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of arguments that specify the operation to perform and its parameters when invoking a tool in Amazon Bedrock. Different tools require different arguments, and this structure provides a flexible way to pass the appropriate arguments to each tool type.</p>
@@ -1631,19 +1578,7 @@ module Aws::BedrockAgentCore
       :directory_path,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ToolName
-      EXECUTE_CODE = 'executeCode'
-      EXECUTE_COMMAND = 'executeCommand'
-      READ_FILES = 'readFiles'
-      LIST_FILES = 'listFiles'
-      REMOVE_FILES = 'removeFiles'
-      WRITE_FILES = 'writeFiles'
-      START_COMMAND_EXECUTION = 'startCommandExecution'
-      GET_TASK = 'getTask'
-      STOP_TASK = 'stopTask'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains structured content from a tool result.</p>
@@ -1673,7 +1608,7 @@ module Aws::BedrockAgentCore
       :exit_code,
       :execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the JWT bearer token is invalid or not found for OAuth bearer token based access</p>
@@ -1682,7 +1617,7 @@ module Aws::BedrockAgentCore
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1703,7 +1638,7 @@ module Aws::BedrockAgentCore
       :stream_update,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute browser_identifier
@@ -1724,7 +1659,7 @@ module Aws::BedrockAgentCore
       :streams,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception that occurs when the input fails to satisfy the constraints specified by the service. Check the error message for details about which input parameter is invalid and correct your request.</p>
@@ -1739,7 +1674,7 @@ module Aws::BedrockAgentCore
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an exception.</p>
@@ -1753,15 +1688,7 @@ module Aws::BedrockAgentCore
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      CANNOT_PARSE = 'CannotParse'
-      FIELD_VALIDATION_FAILED = 'FieldValidationFailed'
-      IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = 'IdempotentParameterMismatchException'
-      ROOT_EVENT_IN_OTHER_SESSION = 'EventInOtherSession'
-      RESOURCE_CONFLICT = 'ResourceConflict'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines the dimensions of a browser viewport in a browser session. The viewport determines the visible area of web content and affects how web pages are rendered and displayed. Proper viewport configuration ensures that web content is displayed correctly for the agent's browsing tasks.</p>
@@ -1775,7 +1702,7 @@ module Aws::BedrockAgentCore
       :width,
       :height,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

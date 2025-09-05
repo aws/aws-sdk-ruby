@@ -23,7 +23,7 @@ module Aws::Firehose
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in the Serverless offering for Amazon
@@ -82,7 +82,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination description in the Serverless offering for Amazon OpenSearch
@@ -130,7 +130,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :vpc_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in the Serverless offering for Amazon OpenSearch
@@ -175,7 +175,7 @@ module Aws::Firehose
       :processing_configuration,
       :cloud_watch_logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures retry behavior in case Firehose is unable to deliver documents
@@ -190,12 +190,7 @@ module Aws::Firehose
     class AmazonOpenSearchServerlessRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmazonOpenSearchServerlessS3BackupMode
-      FailedDocumentsOnly = 'FailedDocumentsOnly'
-      AllDocuments = 'AllDocuments'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the buffering to perform before delivering data to the Amazon OpenSearch
@@ -215,7 +210,7 @@ module Aws::Firehose
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Amazon OpenSearch Service</p>
@@ -293,7 +288,7 @@ module Aws::Firehose
       :vpc_configuration,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination description in Amazon OpenSearch Service.</p>
@@ -358,7 +353,7 @@ module Aws::Firehose
       :vpc_configuration_description,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Amazon OpenSearch Service.</p>
@@ -426,15 +421,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmazonopensearchserviceIndexRotationPeriod
-      NoRotation = 'NoRotation'
-      OneHour = 'OneHour'
-      OneDay = 'OneDay'
-      OneWeek = 'OneWeek'
-      OneMonth = 'OneMonth'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures retry behavior in case Firehose is unable to deliver documents
@@ -448,12 +435,7 @@ module Aws::Firehose
     class AmazonopensearchserviceRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmazonopensearchserviceS3BackupMode
-      FailedDocumentsOnly = 'FailedDocumentsOnly'
-      AllDocuments = 'AllDocuments'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration of the Amazon MSK cluster.</p>
@@ -467,7 +449,7 @@ module Aws::Firehose
       :role_arn,
       :connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes hints for the buffering to perform before delivering data to the
@@ -494,7 +476,7 @@ module Aws::Firehose
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -514,7 +496,7 @@ module Aws::Firehose
       :catalog_arn,
       :warehouse_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon CloudWatch logging options for your Firehose stream.</p>
@@ -534,15 +516,7 @@ module Aws::Firehose
       :log_group_name,
       :log_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompressionFormat
-      UNCOMPRESSED = 'UNCOMPRESSED'
-      GZIP = 'GZIP'
-      ZIP = 'ZIP'
-      SNAPPY = 'Snappy'
-      HADOOP_SNAPPY = 'HADOOP_SNAPPY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another modification has already happened. Fetch <code>VersionId</code> again and use
@@ -553,17 +527,7 @@ module Aws::Firehose
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Connectivity
-      PUBLIC = 'PUBLIC'
-      PRIVATE = 'PRIVATE'
-    end
-
-    module ContentEncoding
-      NONE = 'NONE'
-      GZIP = 'GZIP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a <code>COPY</code> command for Amazon Redshift.</p>
@@ -600,7 +564,7 @@ module Aws::Firehose
       :data_table_columns,
       :copy_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -725,7 +689,7 @@ module Aws::Firehose
       :iceberg_destination_configuration,
       :database_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_arn
@@ -734,7 +698,7 @@ module Aws::Firehose
     class CreateDeliveryStreamOutput < Struct.new(
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that you want Firehose to convert data from the JSON format to
@@ -766,7 +730,7 @@ module Aws::Firehose
       :output_format_configuration,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure used to configure the list of column patterns in source database
@@ -788,7 +752,7 @@ module Aws::Firehose
       :include,
       :exclude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure used to configure the list of database patterns in source database
@@ -808,7 +772,7 @@ module Aws::Firehose
       :include,
       :exclude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -858,7 +822,7 @@ module Aws::Firehose
       :status,
       :failure_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -871,7 +835,7 @@ module Aws::Firehose
     class DatabaseSourceAuthenticationConfiguration < Struct.new(
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -969,7 +933,7 @@ module Aws::Firehose
       :database_source_authentication_configuration,
       :database_source_vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1074,7 +1038,7 @@ module Aws::Firehose
       :database_source_authentication_configuration,
       :database_source_vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1090,7 +1054,7 @@ module Aws::Firehose
     class DatabaseSourceVPCConfiguration < Struct.new(
       :vpc_endpoint_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure used to configure the list of table patterns in source database endpoint
@@ -1110,17 +1074,7 @@ module Aws::Firehose
       :include,
       :exclude,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseType
-      MySQL = 'MySQL'
-      PostgreSQL = 'PostgreSQL'
-    end
-
-    module DefaultDocumentIdFormat
-      FIREHOSE_DEFAULT = 'FIREHOSE_DEFAULT'
-      NO_DOCUMENT_ID = 'NO_DOCUMENT_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -1140,12 +1094,12 @@ module Aws::Firehose
       :delivery_stream_name,
       :allow_force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDeliveryStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a Firehose stream.</p>
@@ -1222,7 +1176,7 @@ module Aws::Firehose
       :destinations,
       :has_more_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the server-side encryption (SSE) status for the delivery
@@ -1255,7 +1209,7 @@ module Aws::Firehose
       :status,
       :failure_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side
@@ -1290,51 +1244,7 @@ module Aws::Firehose
       :key_arn,
       :key_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryStreamEncryptionStatus
-      ENABLED = 'ENABLED'
-      ENABLING = 'ENABLING'
-      ENABLING_FAILED = 'ENABLING_FAILED'
-      DISABLED = 'DISABLED'
-      DISABLING = 'DISABLING'
-      DISABLING_FAILED = 'DISABLING_FAILED'
-    end
-
-    module DeliveryStreamFailureType
-      VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND = 'VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND'
-      VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED = 'VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED'
-      RETIRE_KMS_GRANT_FAILED = 'RETIRE_KMS_GRANT_FAILED'
-      CREATE_KMS_GRANT_FAILED = 'CREATE_KMS_GRANT_FAILED'
-      KMS_ACCESS_DENIED = 'KMS_ACCESS_DENIED'
-      DISABLED_KMS_KEY = 'DISABLED_KMS_KEY'
-      INVALID_KMS_KEY = 'INVALID_KMS_KEY'
-      KMS_KEY_NOT_FOUND = 'KMS_KEY_NOT_FOUND'
-      KMS_OPT_IN_REQUIRED = 'KMS_OPT_IN_REQUIRED'
-      CREATE_ENI_FAILED = 'CREATE_ENI_FAILED'
-      DELETE_ENI_FAILED = 'DELETE_ENI_FAILED'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      SECURITY_GROUP_NOT_FOUND = 'SECURITY_GROUP_NOT_FOUND'
-      ENI_ACCESS_DENIED = 'ENI_ACCESS_DENIED'
-      SUBNET_ACCESS_DENIED = 'SUBNET_ACCESS_DENIED'
-      SECURITY_GROUP_ACCESS_DENIED = 'SECURITY_GROUP_ACCESS_DENIED'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
-    end
-
-    module DeliveryStreamStatus
-      CREATING = 'CREATING'
-      CREATING_FAILED = 'CREATING_FAILED'
-      DELETING = 'DELETING'
-      DELETING_FAILED = 'DELETING_FAILED'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module DeliveryStreamType
-      DirectPut = 'DirectPut'
-      KinesisStreamAsSource = 'KinesisStreamAsSource'
-      MSKAsSource = 'MSKAsSource'
-      DatabaseAsSource = 'DatabaseAsSource'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -1352,7 +1262,7 @@ module Aws::Firehose
       :limit,
       :exclusive_start_destination_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_description
@@ -1361,7 +1271,7 @@ module Aws::Firehose
     class DescribeDeliveryStreamOutput < Struct.new(
       :delivery_stream_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deserializer you want Firehose to use for converting the input data
@@ -1384,7 +1294,7 @@ module Aws::Firehose
       :open_x_json_ser_de,
       :hive_json_ser_de,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination for a Firehose stream.</p>
@@ -1436,7 +1346,7 @@ module Aws::Firehose
       :amazon_open_search_serverless_destination_description,
       :iceberg_destination_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1475,7 +1385,7 @@ module Aws::Firehose
       :partition_spec,
       :s3_error_output_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that configures parameters such as <code>ThroughputHintInMBs</code> for a stream configured with
@@ -1487,7 +1397,7 @@ module Aws::Firehose
     class DirectPutSourceConfiguration < Struct.new(
       :throughput_hint_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that configures parameters such as <code>ThroughputHintInMBs</code> for a stream configured with
@@ -1499,7 +1409,7 @@ module Aws::Firehose
     class DirectPutSourceDescription < Struct.new(
       :throughput_hint_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the method for setting up document ID. The supported methods are Firehose generated document ID and OpenSearch Service generated document ID.</p>
@@ -1520,7 +1430,7 @@ module Aws::Firehose
     class DocumentIdOptions < Struct.new(
       :default_document_id_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the dynamic partitioning mechanism that creates smaller data sets
@@ -1538,7 +1448,7 @@ module Aws::Firehose
       :retry_options,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the buffering to perform before delivering data to the Amazon OpenSearch Service
@@ -1558,7 +1468,7 @@ module Aws::Firehose
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Amazon OpenSearch Service.</p>
@@ -1645,7 +1555,7 @@ module Aws::Firehose
       :vpc_configuration,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination description in Amazon OpenSearch Service.</p>
@@ -1717,7 +1627,7 @@ module Aws::Firehose
       :vpc_configuration_description,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Amazon OpenSearch Service.</p>
@@ -1791,15 +1701,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :document_id_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ElasticsearchIndexRotationPeriod
-      NoRotation = 'NoRotation'
-      OneHour = 'OneHour'
-      OneDay = 'OneDay'
-      OneWeek = 'OneWeek'
-      OneMonth = 'OneMonth'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures retry behavior in case Firehose is unable to deliver
@@ -1813,12 +1715,7 @@ module Aws::Firehose
     class ElasticsearchRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ElasticsearchS3BackupMode
-      FailedDocumentsOnly = 'FailedDocumentsOnly'
-      AllDocuments = 'AllDocuments'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the encryption for a destination in Amazon S3.</p>
@@ -1833,7 +1730,7 @@ module Aws::Firehose
       :no_encryption_config,
       :kms_encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Amazon S3.</p>
@@ -1915,7 +1812,7 @@ module Aws::Firehose
       :file_extension,
       :custom_time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a destination in Amazon S3.</p>
@@ -1995,7 +1892,7 @@ module Aws::Firehose
       :file_extension,
       :custom_time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Amazon S3.</p>
@@ -2076,7 +1973,7 @@ module Aws::Firehose
       :file_extension,
       :custom_time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details in case one of the following operations fails due to an error related
@@ -2092,12 +1989,7 @@ module Aws::Firehose
       :type,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HECEndpointType
-      Raw = 'Raw'
-      Event = 'Event'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The native Hive / HCatalog JsonSerDe. Used by Firehose for deserializing
@@ -2113,7 +2005,7 @@ module Aws::Firehose
     class HiveJsonSerDe < Struct.new(
       :timestamp_formats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the buffering options that can be applied before data is delivered to the HTTP
@@ -2136,7 +2028,7 @@ module Aws::Firehose
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata that's delivered to the specified HTTP endpoint
@@ -2151,7 +2043,7 @@ module Aws::Firehose
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of the HTTP endpoint to which Kinesis Firehose delivers
@@ -2176,7 +2068,7 @@ module Aws::Firehose
       :name,
       :access_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the HTTP endpoint selected as the destination. </p>
@@ -2190,7 +2082,7 @@ module Aws::Firehose
       :url,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of the HTTP endpoint destination.</p>
@@ -2249,7 +2141,7 @@ module Aws::Firehose
       :s3_configuration,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the HTTP endpoint destination.</p>
@@ -2308,7 +2200,7 @@ module Aws::Firehose
       :s3_destination_description,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the specified HTTP endpoint destination.</p>
@@ -2367,7 +2259,7 @@ module Aws::Firehose
       :s3_update,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the HTTP endpoint request.</p>
@@ -2382,7 +2274,7 @@ module Aws::Firehose
       :content_encoding,
       :common_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the retry behavior in case Firehose is unable to deliver data to
@@ -2397,12 +2289,7 @@ module Aws::Firehose
     class HttpEndpointRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HttpEndpointS3BackupMode
-      FailedDataOnly = 'FailedDataOnly'
-      AllData = 'AllData'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2476,7 +2363,7 @@ module Aws::Firehose
       :catalog_configuration,
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2553,7 +2440,7 @@ module Aws::Firehose
       :catalog_configuration,
       :s3_destination_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2631,12 +2518,7 @@ module Aws::Firehose
       :catalog_configuration,
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IcebergS3BackupMode
-      FailedDataOnly = 'FailedDataOnly'
-      AllData = 'AllData'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the deserializer you want to use to convert the format of the input data.
@@ -2648,7 +2530,7 @@ module Aws::Firehose
     class InputFormatConfiguration < Struct.new(
       :deserializer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified input parameter has a value that is not valid.</p>
@@ -2658,7 +2540,7 @@ module Aws::Firehose
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Firehose throws this exception when an attempt to put records or to start
@@ -2674,7 +2556,7 @@ module Aws::Firehose
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Only requests from CloudWatch Logs are supported when CloudWatch Logs decompression is enabled.</p>
@@ -2686,7 +2568,7 @@ module Aws::Firehose
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an encryption key for a destination in Amazon S3.</p>
@@ -2697,12 +2579,7 @@ module Aws::Firehose
     class KMSEncryptionConfig < Struct.new(
       :awskms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyType
-      AWS_OWNED_CMK = 'AWS_OWNED_CMK'
-      CUSTOMER_MANAGED_CMK = 'CUSTOMER_MANAGED_CMK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as
@@ -2720,7 +2597,7 @@ module Aws::Firehose
       :kinesis_stream_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a Kinesis data stream used as the source for a Firehose
@@ -2744,7 +2621,7 @@ module Aws::Firehose
       :role_arn,
       :delivery_start_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have already reached the limit for a requested resource.</p>
@@ -2754,7 +2631,7 @@ module Aws::Firehose
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -2788,7 +2665,7 @@ module Aws::Firehose
       :delivery_stream_type,
       :exclusive_start_delivery_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_names
@@ -2801,7 +2678,7 @@ module Aws::Firehose
       :delivery_stream_names,
       :has_more_delivery_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -2823,7 +2700,7 @@ module Aws::Firehose
       :exclusive_start_tag_key,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2840,7 +2717,7 @@ module Aws::Firehose
       :tags,
       :has_more_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Amazon MSK cluster to be used as the source for a delivery
@@ -2867,7 +2744,7 @@ module Aws::Firehose
       :authentication_configuration,
       :read_from_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Amazon MSK cluster used as the source for a Firehose stream.</p>
@@ -2898,11 +2775,7 @@ module Aws::Firehose
       :delivery_start_timestamp,
       :read_from_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NoEncryptionConfig
-      NoEncryption = 'NoEncryption'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpenX SerDe. Used by Firehose for deserializing data, which means
@@ -2933,18 +2806,7 @@ module Aws::Firehose
       :case_insensitive,
       :column_to_json_key_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrcCompression
-      NONE = 'NONE'
-      ZLIB = 'ZLIB'
-      SNAPPY = 'SNAPPY'
-    end
-
-    module OrcFormatVersion
-      V0_11 = 'V0_11'
-      V0_12 = 'V0_12'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A serializer to use for converting data to the ORC format before storing it in Amazon
@@ -3011,7 +2873,7 @@ module Aws::Firehose
       :dictionary_key_threshold,
       :format_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the serializer that you want Firehose to use to convert the
@@ -3024,13 +2886,7 @@ module Aws::Firehose
     class OutputFormatConfiguration < Struct.new(
       :serializer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParquetCompression
-      UNCOMPRESSED = 'UNCOMPRESSED'
-      GZIP = 'GZIP'
-      SNAPPY = 'SNAPPY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A serializer to use for converting data to the Parquet format before storing it in
@@ -3070,12 +2926,7 @@ module Aws::Firehose
       :max_padding_bytes,
       :writer_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParquetWriterVersion
-      V1 = 'V1'
-      V2 = 'V2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single field in a <code>PartitionSpec</code>. </p>
@@ -3089,7 +2940,7 @@ module Aws::Firehose
     class PartitionField < Struct.new(
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents how to produce partition data for a table. Partition data is produced by
@@ -3109,7 +2960,7 @@ module Aws::Firehose
     class PartitionSpec < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data processing configuration.</p>
@@ -3123,7 +2974,7 @@ module Aws::Firehose
       :enabled,
       :processors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data processor.</p>
@@ -3140,7 +2991,7 @@ module Aws::Firehose
       :type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the processor parameter. </p>
@@ -3158,30 +3009,7 @@ module Aws::Firehose
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessorParameterName
-      LAMBDA_ARN = 'LambdaArn'
-      LAMBDA_NUMBER_OF_RETRIES = 'NumberOfRetries'
-      METADATA_EXTRACTION_QUERY = 'MetadataExtractionQuery'
-      JSON_PARSING_ENGINE = 'JsonParsingEngine'
-      ROLE_ARN = 'RoleArn'
-      BUFFER_SIZE_IN_MB = 'BufferSizeInMBs'
-      BUFFER_INTERVAL_IN_SECONDS = 'BufferIntervalInSeconds'
-      SUB_RECORD_TYPE = 'SubRecordType'
-      Delimiter = 'Delimiter'
-      COMPRESSION_FORMAT = 'CompressionFormat'
-      DATA_MESSAGE_EXTRACTION = 'DataMessageExtraction'
-    end
-
-    module ProcessorType
-      RecordDeAggregation = 'RecordDeAggregation'
-      Decompression = 'Decompression'
-      CloudWatchLogProcessing = 'CloudWatchLogProcessing'
-      Lambda = 'Lambda'
-      MetadataExtraction = 'MetadataExtraction'
-      AppendDelimiterToRecord = 'AppendDelimiterToRecord'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -3194,7 +3022,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_put_count
@@ -3215,7 +3043,7 @@ module Aws::Firehose
       :encrypted,
       :request_responses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result for an individual record from a <a>PutRecordBatch</a>
@@ -3236,7 +3064,7 @@ module Aws::Firehose
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -3249,7 +3077,7 @@ module Aws::Firehose
       :delivery_stream_name,
       :record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute record_id
@@ -3262,7 +3090,7 @@ module Aws::Firehose
       :record_id,
       :encrypted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unit of data in a Firehose stream.</p>
@@ -3273,7 +3101,7 @@ module Aws::Firehose
     class Record < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Amazon Redshift.</p>
@@ -3339,7 +3167,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a destination in Amazon Redshift.</p>
@@ -3394,7 +3222,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Amazon Redshift.</p>
@@ -3458,7 +3286,7 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures retry behavior in case Firehose is unable to deliver
@@ -3473,12 +3301,7 @@ module Aws::Firehose
     class RedshiftRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedshiftS3BackupMode
-      Disabled = 'Disabled'
-      Enabled = 'Enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is already in use and not available for this operation.</p>
@@ -3488,7 +3311,7 @@ module Aws::Firehose
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be found.</p>
@@ -3498,7 +3321,7 @@ module Aws::Firehose
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The retry behavior in case Firehose is unable to deliver data to a destination.</p>
@@ -3509,12 +3332,7 @@ module Aws::Firehose
     class RetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3BackupMode
-      Disabled = 'Disabled'
-      Enabled = 'Enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Amazon S3.</p>
@@ -3566,7 +3384,7 @@ module Aws::Firehose
       :encryption_configuration,
       :cloud_watch_logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a destination in Amazon S3.</p>
@@ -3615,7 +3433,7 @@ module Aws::Firehose
       :encryption_configuration,
       :cloud_watch_logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Amazon S3.</p>
@@ -3667,12 +3485,7 @@ module Aws::Firehose
       :encryption_configuration,
       :cloud_watch_logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SSLMode
-      Disabled = 'Disabled'
-      Enabled = 'Enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the schema to which you want Firehose to configure your data
@@ -3728,7 +3541,7 @@ module Aws::Firehose
       :region,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to enable schema evolution.</p>
@@ -3742,7 +3555,7 @@ module Aws::Firehose
     class SchemaEvolutionConfiguration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that defines how Firehose accesses the secret.</p>
@@ -3766,7 +3579,7 @@ module Aws::Firehose
       :role_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The serializer that you want Firehose to use to convert data to the target
@@ -3785,7 +3598,7 @@ module Aws::Firehose
       :parquet_ser_de,
       :orc_ser_de,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unavailable. Back off and retry the operation. If you continue to see
@@ -3798,18 +3611,7 @@ module Aws::Firehose
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotRequestedBy
-      USER = 'USER'
-      FIREHOSE = 'FIREHOSE'
-    end
-
-    module SnapshotStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3828,13 +3630,7 @@ module Aws::Firehose
       :size_in_m_bs,
       :interval_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnowflakeDataLoadingOption
-      JSON_MAPPING = 'JSON_MAPPING'
-      VARIANT_CONTENT_MAPPING = 'VARIANT_CONTENT_MAPPING'
-      VARIANT_CONTENT_AND_METADATA_MAPPING = 'VARIANT_CONTENT_AND_METADATA_MAPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure Snowflake destination</p>
@@ -3940,7 +3736,7 @@ module Aws::Firehose
       :secrets_manager_configuration,
       :buffering_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional Snowflake destination description</p>
@@ -4025,7 +3821,7 @@ module Aws::Firehose
       :secrets_manager_configuration,
       :buffering_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update to configuration settings</p>
@@ -4121,7 +3917,7 @@ module Aws::Firehose
       :secrets_manager_configuration,
       :buffering_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify how long Firehose retries sending data to the New Relic HTTP endpoint.
@@ -4139,7 +3935,7 @@ module Aws::Firehose
     class SnowflakeRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optionally configure a Snowflake role. Otherwise the default user role will be used.</p>
@@ -4153,12 +3949,7 @@ module Aws::Firehose
       :enabled,
       :snowflake_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnowflakeS3BackupMode
-      FailedDataOnly = 'FailedDataOnly'
-      AllData = 'AllData'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure a Snowflake VPC</p>
@@ -4170,7 +3961,7 @@ module Aws::Firehose
     class SnowflakeVpcConfiguration < Struct.new(
       :private_link_vpce_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a Kinesis data stream used as the source for a Firehose
@@ -4197,7 +3988,7 @@ module Aws::Firehose
       :msk_source_description,
       :database_source_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The buffering options. If no value is specified, the default values for Splunk are used.</p>
@@ -4213,7 +4004,7 @@ module Aws::Firehose
       :interval_in_seconds,
       :size_in_m_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a destination in Splunk.</p>
@@ -4278,7 +4069,7 @@ module Aws::Firehose
       :buffering_hints,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a destination in Splunk.</p>
@@ -4340,7 +4131,7 @@ module Aws::Firehose
       :buffering_hints,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for a destination in Splunk.</p>
@@ -4405,7 +4196,7 @@ module Aws::Firehose
       :buffering_hints,
       :secrets_manager_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures retry behavior in case Firehose is unable to deliver
@@ -4419,12 +4210,7 @@ module Aws::Firehose
     class SplunkRetryOptions < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SplunkS3BackupMode
-      FailedEventsOnly = 'FailedEventsOnly'
-      AllEvents = 'AllEvents'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -4439,12 +4225,12 @@ module Aws::Firehose
       :delivery_stream_name,
       :delivery_stream_encryption_configuration_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartDeliveryStreamEncryptionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -4454,12 +4240,12 @@ module Aws::Firehose
     class StopDeliveryStreamEncryptionInput < Struct.new(
       :delivery_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopDeliveryStreamEncryptionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to enable automatic table creation.</p>
@@ -4473,7 +4259,7 @@ module Aws::Firehose
     class TableCreationConfiguration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that you can assign to a Firehose stream, consisting of a key-value
@@ -4491,7 +4277,7 @@ module Aws::Firehose
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -4504,12 +4290,12 @@ module Aws::Firehose
       :delivery_stream_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagDeliveryStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -4523,12 +4309,12 @@ module Aws::Firehose
       :delivery_stream_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagDeliveryStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream_name
@@ -4593,12 +4379,12 @@ module Aws::Firehose
       :snowflake_destination_update,
       :iceberg_destination_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDestinationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the VPC of the Amazon OpenSearch or Amazon OpenSearch Serverless
@@ -4684,7 +4470,7 @@ module Aws::Firehose
       :role_arn,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the VPC of the Amazon OpenSearch Service destination.</p>
@@ -4771,7 +4557,7 @@ module Aws::Firehose
       :security_group_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

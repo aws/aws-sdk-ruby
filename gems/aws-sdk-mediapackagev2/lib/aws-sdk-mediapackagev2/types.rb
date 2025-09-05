@@ -14,16 +14,7 @@ module Aws::MediaPackageV2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdMarkerDash
-      BINARY = 'BINARY'
-      XML = 'XML'
-    end
-
-    module AdMarkerHls
-      DATERANGE = 'DATERANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -48,12 +39,12 @@ module Aws::MediaPackageV2
       :harvest_job_name,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelHarvestJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings to enable CDN authorization headers in MediaPackage.</p>
@@ -67,7 +58,7 @@ module Aws::MediaPackageV2
       :cdn_identifier_secret_arns,
       :secrets_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the channel group.</p>
@@ -93,7 +84,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the channel.</p>
@@ -138,12 +129,7 @@ module Aws::MediaPackageV2
       :description,
       :input_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CmafEncryptionMethod
-      CENC = 'CENC'
-      CBCS = 'CBCS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting this resource can cause an inconsistent state.</p>
@@ -156,20 +142,7 @@ module Aws::MediaPackageV2
       :message,
       :conflict_exception_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictExceptionType
-      RESOURCE_IN_USE = 'RESOURCE_IN_USE'
-      RESOURCE_ALREADY_EXISTS = 'RESOURCE_ALREADY_EXISTS'
-      IDEMPOTENT_PARAMETER_MISMATCH = 'IDEMPOTENT_PARAMETER_MISMATCH'
-      CONFLICTING_OPERATION = 'CONFLICTING_OPERATION'
-    end
-
-    module ContainerType
-      TS = 'TS'
-      CMAF = 'CMAF'
-      ISM = 'ISM'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -196,7 +169,7 @@ module Aws::MediaPackageV2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -233,7 +206,7 @@ module Aws::MediaPackageV2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -287,7 +260,7 @@ module Aws::MediaPackageV2
       :output_header_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -351,7 +324,7 @@ module Aws::MediaPackageV2
       :input_switch_configuration,
       :output_header_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Create a DASH manifest configuration.</p>
@@ -434,7 +407,7 @@ module Aws::MediaPackageV2
       :compactness,
       :subtitle_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for creating a new harvest job.</p>
@@ -480,7 +453,7 @@ module Aws::MediaPackageV2
       :harvest_job_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object returned after creating a harvest job.</p>
@@ -546,7 +519,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Create an HTTP live streaming (HLS) manifest configuration.</p>
@@ -588,7 +561,7 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :url_encode_child_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Create a low-latency HTTP live streaming (HLS) manifest configuration.</p>
@@ -630,7 +603,7 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :url_encode_child_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration parameters for creating a Microsoft Smooth Streaming (MSS) manifest. MSS is a streaming media format developed by Microsoft that delivers adaptive bitrate streaming content to compatible players and devices.</p>
@@ -652,7 +625,7 @@ module Aws::MediaPackageV2
       :filter_configuration,
       :manifest_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -719,7 +692,7 @@ module Aws::MediaPackageV2
       :force_endpoint_error_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -792,7 +765,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>
@@ -814,17 +787,7 @@ module Aws::MediaPackageV2
       :dvb_priority,
       :dvb_weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashCompactness
-      STANDARD = 'STANDARD'
-      NONE = 'NONE'
-    end
-
-    module DashDrmSignaling
-      INDIVIDUAL = 'INDIVIDUAL'
-      REFERENCED = 'REFERENCED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p>
@@ -843,7 +806,7 @@ module Aws::MediaPackageV2
       :mime_type,
       :font_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For use with DVB-DASH profiles only. The settings for error reporting from the playback device that you want Elemental MediaPackage to pass through to the manifest.</p>
@@ -857,7 +820,7 @@ module Aws::MediaPackageV2
       :reporting_url,
       :probability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p>
@@ -871,19 +834,7 @@ module Aws::MediaPackageV2
       :font_download,
       :error_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashPeriodTrigger
-      AVAILS = 'AVAILS'
-      DRM_KEY_ROTATION = 'DRM_KEY_ROTATION'
-      SOURCE_CHANGES = 'SOURCE_CHANGES'
-      SOURCE_DISRUPTIONS = 'SOURCE_DISRUPTIONS'
-      NONE = 'NONE'
-    end
-
-    module DashProfile
-      DVB_DASH = 'DVB_DASH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p>
@@ -909,11 +860,7 @@ module Aws::MediaPackageV2
       :language_code,
       :more_information_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashSegmentTemplateFormat
-      NUMBER_WITH_TIMELINE = 'NUMBER_WITH_TIMELINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for DASH subtitles.</p>
@@ -923,7 +870,7 @@ module Aws::MediaPackageV2
     class DashSubtitleConfiguration < Struct.new(
       :ttml_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for TTML subtitles.</p>
@@ -935,12 +882,7 @@ module Aws::MediaPackageV2
     class DashTtmlConfiguration < Struct.new(
       :ttml_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashTtmlProfile
-      IMSC_1 = 'IMSC_1'
-      EBU_TT_D_101 = 'EBU_TT_D_101'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>
@@ -954,14 +896,7 @@ module Aws::MediaPackageV2
       :timing_mode,
       :timing_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashUtcTimingMode
-      HTTP_HEAD = 'HTTP_HEAD'
-      HTTP_ISO = 'HTTP_ISO'
-      HTTP_XSDATE = 'HTTP_XSDATE'
-      UTC_DIRECT = 'UTC_DIRECT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -970,12 +905,12 @@ module Aws::MediaPackageV2
     class DeleteChannelGroupRequest < Struct.new(
       :channel_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -988,12 +923,12 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1006,12 +941,12 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1028,12 +963,12 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOriginEndpointPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1050,12 +985,12 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOriginEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the destination where the harvested content will be exported.</p>
@@ -1065,15 +1000,7 @@ module Aws::MediaPackageV2
     class Destination < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DrmSystem
-      CLEAR_KEY_AES_128 = 'CLEAR_KEY_AES_128'
-      FAIRPLAY = 'FAIRPLAY'
-      PLAYREADY = 'PLAYREADY'
-      WIDEVINE = 'WIDEVINE'
-      IRDETO = 'IRDETO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for encrypting content.</p>
@@ -1121,7 +1048,7 @@ module Aws::MediaPackageV2
       :cmaf_exclude_segment_drm_metadata,
       :speke_key_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p>
@@ -1211,7 +1138,7 @@ module Aws::MediaPackageV2
       :preset_speke20_audio,
       :preset_speke20_video,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption type.</p>
@@ -1229,14 +1156,7 @@ module Aws::MediaPackageV2
       :cmaf_encryption_method,
       :ism_encryption_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointErrorCondition
-      STALE_MANIFEST = 'STALE_MANIFEST'
-      INCOMPLETE_MANIFEST = 'INCOMPLETE_MANIFEST'
-      MISSING_DRM_KEY = 'MISSING_DRM_KEY'
-      SLATE_INPUT = 'SLATE_INPUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>
@@ -1262,7 +1182,7 @@ module Aws::MediaPackageV2
       :time_delay_seconds,
       :clip_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failover settings for the endpoint.</p>
@@ -1290,7 +1210,7 @@ module Aws::MediaPackageV2
     class ForceEndpointErrorConfiguration < Struct.new(
       :endpoint_error_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1299,7 +1219,7 @@ module Aws::MediaPackageV2
     class GetChannelGroupRequest < Struct.new(
       :channel_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1336,7 +1256,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1349,7 +1269,7 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1366,7 +1286,7 @@ module Aws::MediaPackageV2
       :channel_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1379,7 +1299,7 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1447,7 +1367,7 @@ module Aws::MediaPackageV2
       :input_switch_configuration,
       :output_header_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve the DASH manifest configuration.</p>
@@ -1533,7 +1453,7 @@ module Aws::MediaPackageV2
       :compactness,
       :subtitle_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for retrieving a specific harvest job.</p>
@@ -1555,7 +1475,7 @@ module Aws::MediaPackageV2
       :origin_endpoint_name,
       :harvest_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object containing the details of the requested harvest job.</p>
@@ -1621,7 +1541,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve the HTTP live streaming (HLS) manifest configuration.</p>
@@ -1667,7 +1587,7 @@ module Aws::MediaPackageV2
       :start_tag,
       :url_encode_child_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve the low-latency HTTP live streaming (HLS) manifest configuration.</p>
@@ -1713,7 +1633,7 @@ module Aws::MediaPackageV2
       :start_tag,
       :url_encode_child_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details for a Microsoft Smooth Streaming (MSS) manifest associated with an origin endpoint. This includes all the settings and properties that define how the MSS content is packaged and delivered.</p>
@@ -1739,7 +1659,7 @@ module Aws::MediaPackageV2
       :manifest_window_seconds,
       :manifest_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1756,7 +1676,7 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1783,7 +1703,7 @@ module Aws::MediaPackageV2
       :policy,
       :cdn_auth_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -1800,7 +1720,7 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1877,7 +1797,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a harvest job resource in MediaPackage v2, which is used to export content from an origin endpoint to an S3 bucket.</p>
@@ -1939,15 +1859,7 @@ module Aws::MediaPackageV2
       :error_message,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HarvestJobStatus
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCELLED = 'CANCELLED'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a harvested DASH manifest.</p>
@@ -1957,7 +1869,7 @@ module Aws::MediaPackageV2
     class HarvestedDashManifest < Struct.new(
       :manifest_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a harvested HLS manifest.</p>
@@ -1967,7 +1879,7 @@ module Aws::MediaPackageV2
     class HarvestedHlsManifest < Struct.new(
       :manifest_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a harvested Low-Latency HLS manifest.</p>
@@ -1977,7 +1889,7 @@ module Aws::MediaPackageV2
     class HarvestedLowLatencyHlsManifest < Struct.new(
       :manifest_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of harvested manifests of different types.</p>
@@ -1995,7 +1907,7 @@ module Aws::MediaPackageV2
       :dash_manifests,
       :low_latency_hls_manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the schedule configuration for a harvest job.</p>
@@ -2009,7 +1921,7 @@ module Aws::MediaPackageV2
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ingest domain URL where the source stream should be sent.</p>
@@ -2023,7 +1935,7 @@ module Aws::MediaPackageV2
       :id,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>
@@ -2037,12 +1949,7 @@ module Aws::MediaPackageV2
       :mqcs_input_switching,
       :preferred_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputType
-      HLS = 'HLS'
-      CMAF = 'CMAF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error from the service occurred while trying to process a request.</p>
@@ -2051,11 +1958,7 @@ module Aws::MediaPackageV2
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IsmEncryptionMethod
-      CENC = 'CENC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2068,7 +1971,7 @@ module Aws::MediaPackageV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2081,7 +1984,7 @@ module Aws::MediaPackageV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2098,7 +2001,7 @@ module Aws::MediaPackageV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2111,7 +2014,7 @@ module Aws::MediaPackageV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List the DASH manifest configuration.</p>
@@ -2125,7 +2028,7 @@ module Aws::MediaPackageV2
       :manifest_name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for listing harvest jobs.</p>
@@ -2155,7 +2058,7 @@ module Aws::MediaPackageV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object containing the list of harvest jobs that match the specified criteria.</p>
@@ -2169,7 +2072,7 @@ module Aws::MediaPackageV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List the HTTP live streaming (HLS) manifest configuration.</p>
@@ -2187,7 +2090,7 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List the low-latency HTTP live streaming (HLS) manifest configuration.</p>
@@ -2205,7 +2108,7 @@ module Aws::MediaPackageV2
       :child_manifest_name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a Microsoft Smooth Streaming (MSS) manifest configuration. This provides key details about the MSS manifest without including all configuration parameters.</p>
@@ -2219,7 +2122,7 @@ module Aws::MediaPackageV2
       :manifest_name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2240,7 +2143,7 @@ module Aws::MediaPackageV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2253,7 +2156,7 @@ module Aws::MediaPackageV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2262,7 +2165,7 @@ module Aws::MediaPackageV2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2271,12 +2174,7 @@ module Aws::MediaPackageV2
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MssManifestLayout
-      FULL = 'FULL'
-      COMPACT = 'COMPACT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the origin endpoint.</p>
@@ -2334,7 +2232,7 @@ module Aws::MediaPackageV2
       :mss_manifests,
       :force_endpoint_error_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>
@@ -2344,28 +2242,7 @@ module Aws::MediaPackageV2
     class OutputHeaderConfiguration < Struct.new(
       :publish_mqcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PresetSpeke20Audio
-      PRESET_AUDIO_1 = 'PRESET_AUDIO_1'
-      PRESET_AUDIO_2 = 'PRESET_AUDIO_2'
-      PRESET_AUDIO_3 = 'PRESET_AUDIO_3'
-      SHARED = 'SHARED'
-      UNENCRYPTED = 'UNENCRYPTED'
-    end
-
-    module PresetSpeke20Video
-      PRESET_VIDEO_1 = 'PRESET_VIDEO_1'
-      PRESET_VIDEO_2 = 'PRESET_VIDEO_2'
-      PRESET_VIDEO_3 = 'PRESET_VIDEO_3'
-      PRESET_VIDEO_4 = 'PRESET_VIDEO_4'
-      PRESET_VIDEO_5 = 'PRESET_VIDEO_5'
-      PRESET_VIDEO_6 = 'PRESET_VIDEO_6'
-      PRESET_VIDEO_7 = 'PRESET_VIDEO_7'
-      PRESET_VIDEO_8 = 'PRESET_VIDEO_8'
-      SHARED = 'SHARED'
-      UNENCRYPTED = 'UNENCRYPTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2382,12 +2259,12 @@ module Aws::MediaPackageV2
       :channel_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutChannelPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2414,12 +2291,12 @@ module Aws::MediaPackageV2
       :policy,
       :cdn_auth_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutOriginEndpointPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2432,7 +2309,7 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2453,7 +2330,7 @@ module Aws::MediaPackageV2
       :arn,
       :reset_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2470,7 +2347,7 @@ module Aws::MediaPackageV2
       :channel_name,
       :origin_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2495,7 +2372,7 @@ module Aws::MediaPackageV2
       :arn,
       :reset_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -2508,14 +2385,7 @@ module Aws::MediaPackageV2
       :message,
       :resource_type_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceTypeNotFound
-      CHANNEL_GROUP = 'CHANNEL_GROUP'
-      CHANNEL = 'CHANNEL'
-      ORIGIN_ENDPOINT = 'ORIGIN_ENDPOINT'
-      HARVEST_JOB = 'HARVEST_JOB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration parameters for where in an S3 bucket to place the harvested content.</p>
@@ -2529,7 +2399,7 @@ module Aws::MediaPackageV2
       :bucket_name,
       :destination_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SCTE configuration.</p>
@@ -2539,7 +2409,7 @@ module Aws::MediaPackageV2
     class Scte < Struct.new(
       :scte_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SCTE configuration.</p>
@@ -2560,19 +2430,7 @@ module Aws::MediaPackageV2
     class ScteDash < Struct.new(
       :ad_marker_dash,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScteFilter
-      SPLICE_INSERT = 'SPLICE_INSERT'
-      BREAK = 'BREAK'
-      PROVIDER_ADVERTISEMENT = 'PROVIDER_ADVERTISEMENT'
-      DISTRIBUTOR_ADVERTISEMENT = 'DISTRIBUTOR_ADVERTISEMENT'
-      PROVIDER_PLACEMENT_OPPORTUNITY = 'PROVIDER_PLACEMENT_OPPORTUNITY'
-      DISTRIBUTOR_PLACEMENT_OPPORTUNITY = 'DISTRIBUTOR_PLACEMENT_OPPORTUNITY'
-      PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = 'PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY'
-      DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = 'DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY'
-      PROGRAM = 'PROGRAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SCTE configuration.</p>
@@ -2588,7 +2446,7 @@ module Aws::MediaPackageV2
     class ScteHls < Struct.new(
       :ad_marker_hls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The segment configuration, including the segment name, duration, and other configuration values.</p>
@@ -2622,7 +2480,7 @@ module Aws::MediaPackageV2
       :scte,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -2631,7 +2489,7 @@ module Aws::MediaPackageV2
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for the SPEKE key provider.</p>
@@ -2663,7 +2521,7 @@ module Aws::MediaPackageV2
       :role_arn,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>
@@ -2677,7 +2535,7 @@ module Aws::MediaPackageV2
       :time_offset,
       :precise,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2690,7 +2548,7 @@ module Aws::MediaPackageV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request throughput limit was exceeded.</p>
@@ -2699,12 +2557,7 @@ module Aws::MediaPackageV2
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TsEncryptionMethod
-      AES_128 = 'AES_128'
-      SAMPLE_AES = 'SAMPLE_AES'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2717,7 +2570,7 @@ module Aws::MediaPackageV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2734,7 +2587,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2771,7 +2624,7 @@ module Aws::MediaPackageV2
       :e_tag,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2800,7 +2653,7 @@ module Aws::MediaPackageV2
       :input_switch_configuration,
       :output_header_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2864,7 +2717,7 @@ module Aws::MediaPackageV2
       :input_switch_configuration,
       :output_header_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_group_name
@@ -2921,7 +2774,7 @@ module Aws::MediaPackageV2
       :force_endpoint_error_configuration,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2994,7 +2847,7 @@ module Aws::MediaPackageV2
       :tags,
       :dash_manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the AWS service.</p>
@@ -3007,98 +2860,7 @@ module Aws::MediaPackageV2
       :message,
       :validation_exception_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionType
-      CONTAINER_TYPE_IMMUTABLE = 'CONTAINER_TYPE_IMMUTABLE'
-      INVALID_PAGINATION_TOKEN = 'INVALID_PAGINATION_TOKEN'
-      INVALID_PAGINATION_MAX_RESULTS = 'INVALID_PAGINATION_MAX_RESULTS'
-      INVALID_POLICY = 'INVALID_POLICY'
-      INVALID_ROLE_ARN = 'INVALID_ROLE_ARN'
-      MANIFEST_NAME_COLLISION = 'MANIFEST_NAME_COLLISION'
-      ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH = 'ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH'
-      CENC_IV_INCOMPATIBLE = 'CENC_IV_INCOMPATIBLE'
-      ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE = 'ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE'
-      ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE = 'ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE'
-      ENCRYPTION_CONTRACT_UNENCRYPTED = 'ENCRYPTION_CONTRACT_UNENCRYPTED'
-      ENCRYPTION_CONTRACT_SHARED = 'ENCRYPTION_CONTRACT_SHARED'
-      NUM_MANIFESTS_LOW = 'NUM_MANIFESTS_LOW'
-      NUM_MANIFESTS_HIGH = 'NUM_MANIFESTS_HIGH'
-      MANIFEST_DRM_SYSTEMS_INCOMPATIBLE = 'MANIFEST_DRM_SYSTEMS_INCOMPATIBLE'
-      DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE = 'DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE'
-      ROLE_ARN_NOT_ASSUMABLE = 'ROLE_ARN_NOT_ASSUMABLE'
-      ROLE_ARN_LENGTH_OUT_OF_RANGE = 'ROLE_ARN_LENGTH_OUT_OF_RANGE'
-      ROLE_ARN_INVALID_FORMAT = 'ROLE_ARN_INVALID_FORMAT'
-      URL_INVALID = 'URL_INVALID'
-      URL_SCHEME = 'URL_SCHEME'
-      URL_USER_INFO = 'URL_USER_INFO'
-      URL_PORT = 'URL_PORT'
-      URL_UNKNOWN_HOST = 'URL_UNKNOWN_HOST'
-      URL_LOCAL_ADDRESS = 'URL_LOCAL_ADDRESS'
-      URL_LOOPBACK_ADDRESS = 'URL_LOOPBACK_ADDRESS'
-      URL_LINK_LOCAL_ADDRESS = 'URL_LINK_LOCAL_ADDRESS'
-      URL_MULTICAST_ADDRESS = 'URL_MULTICAST_ADDRESS'
-      MEMBER_INVALID = 'MEMBER_INVALID'
-      MEMBER_MISSING = 'MEMBER_MISSING'
-      MEMBER_MIN_VALUE = 'MEMBER_MIN_VALUE'
-      MEMBER_MAX_VALUE = 'MEMBER_MAX_VALUE'
-      MEMBER_MIN_LENGTH = 'MEMBER_MIN_LENGTH'
-      MEMBER_MAX_LENGTH = 'MEMBER_MAX_LENGTH'
-      MEMBER_INVALID_ENUM_VALUE = 'MEMBER_INVALID_ENUM_VALUE'
-      MEMBER_DOES_NOT_MATCH_PATTERN = 'MEMBER_DOES_NOT_MATCH_PATTERN'
-      INVALID_MANIFEST_FILTER = 'INVALID_MANIFEST_FILTER'
-      INVALID_TIME_DELAY_SECONDS = 'INVALID_TIME_DELAY_SECONDS'
-      END_TIME_EARLIER_THAN_START_TIME = 'END_TIME_EARLIER_THAN_START_TIME'
-      TS_CONTAINER_TYPE_WITH_DASH_MANIFEST = 'TS_CONTAINER_TYPE_WITH_DASH_MANIFEST'
-      DIRECT_MODE_WITH_TIMING_SOURCE = 'DIRECT_MODE_WITH_TIMING_SOURCE'
-      NONE_MODE_WITH_TIMING_SOURCE = 'NONE_MODE_WITH_TIMING_SOURCE'
-      TIMING_SOURCE_MISSING = 'TIMING_SOURCE_MISSING'
-      UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION = 'UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION'
-      PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES = 'PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES'
-      DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS = 'DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS'
-      ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION = 'ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION'
-      SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY = 'SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY'
-      HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION = 'HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION'
-      HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT = 'HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT'
-      TOO_MANY_IN_PROGRESS_HARVEST_JOBS = 'TOO_MANY_IN_PROGRESS_HARVEST_JOBS'
-      HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION = 'HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION'
-      INVALID_HARVEST_JOB_DURATION = 'INVALID_HARVEST_JOB_DURATION'
-      HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE = 'HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE'
-      HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION = 'HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION'
-      HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED = 'HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED'
-      CLIP_START_TIME_WITH_START_OR_END = 'CLIP_START_TIME_WITH_START_OR_END'
-      START_TAG_TIME_OFFSET_INVALID = 'START_TAG_TIME_OFFSET_INVALID'
-      INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION = 'INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION'
-      DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE = 'DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE'
-      INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION = 'INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION'
-      INCOMPATIBLE_XML_ENCODING = 'INCOMPATIBLE_XML_ENCODING'
-      CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE = 'CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE'
-      ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING = 'ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING'
-      ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION = 'ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION'
-      ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION = 'ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION'
-      TS_CONTAINER_TYPE_WITH_MSS_MANIFEST = 'TS_CONTAINER_TYPE_WITH_MSS_MANIFEST'
-      CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST = 'CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST'
-      ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST = 'ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST'
-      ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST = 'ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST'
-      ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST = 'ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST'
-      ISM_CONTAINER_TYPE_WITH_SCTE = 'ISM_CONTAINER_TYPE_WITH_SCTE'
-      ISM_CONTAINER_WITH_KEY_ROTATION = 'ISM_CONTAINER_WITH_KEY_ROTATION'
-      BATCH_GET_SECRET_VALUE_DENIED = 'BATCH_GET_SECRET_VALUE_DENIED'
-      GET_SECRET_VALUE_DENIED = 'GET_SECRET_VALUE_DENIED'
-      DESCRIBE_SECRET_DENIED = 'DESCRIBE_SECRET_DENIED'
-      INVALID_SECRET_FORMAT = 'INVALID_SECRET_FORMAT'
-      SECRET_IS_NOT_ONE_KEY_VALUE_PAIR = 'SECRET_IS_NOT_ONE_KEY_VALUE_PAIR'
-      INVALID_SECRET_KEY = 'INVALID_SECRET_KEY'
-      INVALID_SECRET_VALUE = 'INVALID_SECRET_VALUE'
-      SECRET_ARN_RESOURCE_NOT_FOUND = 'SECRET_ARN_RESOURCE_NOT_FOUND'
-      DECRYPT_SECRET_FAILED = 'DECRYPT_SECRET_FAILED'
-      TOO_MANY_SECRETS = 'TOO_MANY_SECRETS'
-      DUPLICATED_SECRET = 'DUPLICATED_SECRET'
-      MALFORMED_SECRET_ARN = 'MALFORMED_SECRET_ARN'
-      SECRET_FROM_DIFFERENT_ACCOUNT = 'SECRET_FROM_DIFFERENT_ACCOUNT'
-      SECRET_FROM_DIFFERENT_REGION = 'SECRET_FROM_DIFFERENT_REGION'
-      INVALID_SECRET = 'INVALID_SECRET'
+      include ::Smithy::Schema::Structure
     end
 
   end

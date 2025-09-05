@@ -12,7 +12,7 @@ module Aws::ComputeOptimizer
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the enrollment status of an organization's member accounts in Compute Optimizer.</p>
@@ -37,22 +37,7 @@ module Aws::ComputeOptimizer
       :status_reason,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllocationStrategy
-      PRIORITIZED = 'Prioritized'
-      LOWEST_PRICE = 'LowestPrice'
-    end
-
-    module AsgType
-      SINGLE_INSTANCE_TYPE = 'SingleInstanceType'
-      MIXED_INSTANCE_TYPE = 'MixedInstanceTypes'
-    end
-
-    module AutoScalingConfiguration
-      TARGET_TRACKING_SCALING_CPU = 'TargetTrackingScalingCpu'
-      TARGET_TRACKING_SCALING_MEMORY = 'TargetTrackingScalingMemory'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of an EC2 Auto Scaling group.</p>
@@ -100,7 +85,7 @@ module Aws::ComputeOptimizer
       :type,
       :mixed_instance_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:desired_capacity] = 0 unless options.key?(:desired_capacity)
@@ -128,7 +113,7 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -269,7 +254,7 @@ module Aws::ComputeOptimizer
       :effective_recommendation_preferences,
       :inferred_workload_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:look_back_period_in_days] = 0 unless options.key?(:look_back_period_in_days)
@@ -348,7 +333,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_after_discounts,
       :migration_effort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:performance_risk] = 0 unless options.key?(:performance_risk)
@@ -377,7 +362,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -408,7 +393,7 @@ module Aws::ComputeOptimizer
       :memory_size_configuration,
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -434,24 +419,7 @@ module Aws::ComputeOptimizer
       :memory_size_configuration,
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CpuVendorArchitecture
-      AWS_ARM64 = 'AWS_ARM64'
-      CURRENT = 'CURRENT'
-    end
-
-    module Currency
-      USD = 'USD'
-      CNY = 'CNY'
-    end
-
-    module CurrentPerformanceRisk
-      VERY_LOW = 'VeryLow'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the performance risk ratings for a given resource type.</p>
@@ -477,7 +445,7 @@ module Aws::ComputeOptimizer
       :low,
       :very_low,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:high] = 0 unless options.key?(:high)
@@ -486,18 +454,6 @@ module Aws::ComputeOptimizer
         options[:very_low] = 0 unless options.key?(:very_low)
         super
       end
-    end
-
-    module CustomizableMetricHeadroom
-      PERCENT_30 = 'PERCENT_30'
-      PERCENT_20 = 'PERCENT_20'
-      PERCENT_10 = 'PERCENT_10'
-      PERCENT_0 = 'PERCENT_0'
-    end
-
-    module CustomizableMetricName
-      CPU_UTILIZATION = 'CpuUtilization'
-      MEMORY_UTILIZATION = 'MemoryUtilization'
     end
 
     # <p>
@@ -531,13 +487,7 @@ module Aws::ComputeOptimizer
       :threshold,
       :headroom,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomizableMetricThreshold
-      P90 = 'P90'
-      P95 = 'P95'
-      P99_5 = 'P99_5'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -575,7 +525,7 @@ module Aws::ComputeOptimizer
       :max_allocated_storage,
       :storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allocated_storage] = 0 unless options.key?(:allocated_storage)
@@ -605,12 +555,12 @@ module Aws::ComputeOptimizer
       :scope,
       :recommendation_preference_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRecommendationPreferencesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_ids
@@ -637,7 +587,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_export_jobs
@@ -651,12 +601,7 @@ module Aws::ComputeOptimizer
       :recommendation_export_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Dimension
-      SAVINGS_VALUE = 'SavingsValue'
-      SAVINGS_VALUE_AFTER_DISCOUNT = 'SavingsValueAfterDiscount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -670,7 +615,7 @@ module Aws::ComputeOptimizer
     class EBSEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -691,7 +636,7 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -729,23 +674,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EBSFilterName
-      FINDING = 'Finding'
-    end
-
-    module EBSFinding
-      OPTIMIZED = 'Optimized'
-      NOT_OPTIMIZED = 'NotOptimized'
-    end
-
-    module EBSMetricName
-      VOLUME_READ_OPS_PER_SECOND = 'VolumeReadOpsPerSecond'
-      VOLUME_WRITE_OPS_PER_SECOND = 'VolumeWriteOpsPerSecond'
-      VOLUME_READ_BYTES_PER_SECOND = 'VolumeReadBytesPerSecond'
-      VOLUME_WRITE_BYTES_PER_SECOND = 'VolumeWriteBytesPerSecond'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -759,13 +688,7 @@ module Aws::ComputeOptimizer
     class EBSSavingsEstimationMode < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EBSSavingsEstimationModeSource
-      PUBLIC_PRICING = 'PublicPricing'
-      COST_EXPLORER_RIGHTSIZING = 'CostExplorerRightsizing'
-      COST_OPTIMIZATION_HUB = 'CostOptimizationHub'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -787,7 +710,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -852,7 +775,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -871,7 +794,7 @@ module Aws::ComputeOptimizer
     class ECSEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -892,7 +815,7 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -911,13 +834,7 @@ module Aws::ComputeOptimizer
     class ECSSavingsEstimationMode < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ECSSavingsEstimationModeSource
-      PUBLIC_PRICING = 'PublicPricing'
-      COST_EXPLORER_RIGHTSIZING = 'CostExplorerRightsizing'
-      COST_OPTIMIZATION_HUB = 'CostOptimizationHub'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -941,27 +858,12 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
         super
       end
-    end
-
-    module ECSServiceLaunchType
-      EC2 = 'EC2'
-      FARGATE = 'Fargate'
-    end
-
-    module ECSServiceMetricName
-      CPU = 'Cpu'
-      MEMORY = 'Memory'
-    end
-
-    module ECSServiceMetricStatistic
-      MAXIMUM = 'Maximum'
-      AVERAGE = 'Average'
     end
 
     # <p>
@@ -1008,7 +910,7 @@ module Aws::ComputeOptimizer
       :upper_bound_values,
       :lower_bound_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1064,7 +966,7 @@ module Aws::ComputeOptimizer
       :lower_bound_value,
       :upper_bound_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:lower_bound_value] = 0 unless options.key?(:lower_bound_value)
@@ -1235,7 +1137,7 @@ module Aws::ComputeOptimizer
       :effective_recommendation_preferences,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:lookback_period_in_days] = 0 unless options.key?(:lookback_period_in_days)
@@ -1291,25 +1193,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ECSServiceRecommendationFilterName
-      FINDING = 'Finding'
-      FINDING_REASON_CODE = 'FindingReasonCode'
-    end
-
-    module ECSServiceRecommendationFinding
-      OPTIMIZED = 'Optimized'
-      UNDER_PROVISIONED = 'Underprovisioned'
-      OVER_PROVISIONED = 'Overprovisioned'
-    end
-
-    module ECSServiceRecommendationFindingReasonCode
-      MEMORY_OVER_PROVISIONED = 'MemoryOverprovisioned'
-      MEMORY_UNDER_PROVISIONED = 'MemoryUnderprovisioned'
-      CPU_OVER_PROVISIONED = 'CPUOverprovisioned'
-      CPU_UNDER_PROVISIONED = 'CPUUnderprovisioned'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1368,7 +1252,7 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :container_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1396,7 +1280,7 @@ module Aws::ComputeOptimizer
       :recommended_memory_size,
       :projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:recommended_cpu_units] = 0 unless options.key?(:recommended_cpu_units)
@@ -1450,7 +1334,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1490,7 +1374,7 @@ module Aws::ComputeOptimizer
       :effective_include_list,
       :exclude_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the effective recommendation preferences for a resource.</p>
@@ -1569,12 +1453,7 @@ module Aws::ComputeOptimizer
       :preferred_resources,
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnhancedInfrastructureMetrics
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that returns a more specific list of account enrollment statuses.
@@ -1594,11 +1473,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnrollmentFilterName
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the estimated monthly savings amount possible, based on On-Demand instance
@@ -1616,7 +1491,7 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1685,7 +1560,7 @@ module Aws::ComputeOptimizer
       :include_member_accounts,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1701,7 +1576,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination of the recommendations export and metadata files.</p>
@@ -1713,7 +1588,7 @@ module Aws::ComputeOptimizer
     class ExportDestination < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1772,7 +1647,7 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1788,7 +1663,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1852,7 +1727,7 @@ module Aws::ComputeOptimizer
       :include_member_accounts,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1868,7 +1743,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1933,7 +1808,7 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1952,7 +1827,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2011,7 +1886,7 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2030,7 +1905,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2089,7 +1964,7 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2105,7 +1980,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2164,7 +2039,7 @@ module Aws::ComputeOptimizer
       :file_format,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2182,7 +2057,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2251,7 +2126,7 @@ module Aws::ComputeOptimizer
       :include_member_accounts,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2270,392 +2145,7 @@ module Aws::ComputeOptimizer
       :job_id,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportableAutoScalingGroupField
-      ACCOUNT_ID = 'AccountId'
-      AUTO_SCALING_GROUP_ARN = 'AutoScalingGroupArn'
-      AUTO_SCALING_GROUP_NAME = 'AutoScalingGroupName'
-      FINDING = 'Finding'
-      UTILIZATION_METRICS_CPU_MAXIMUM = 'UtilizationMetricsCpuMaximum'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsWriteOpsPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsReadBytesPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsWriteBytesPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskWriteOpsPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskReadBytesPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskWriteBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkInBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkOutBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkPacketsInPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkPacketsOutPerSecondMaximum'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      CURRENT_CONFIGURATION_INSTANCE_TYPE = 'CurrentConfigurationInstanceType'
-      CURRENT_CONFIGURATION_DESIRED_CAPACITY = 'CurrentConfigurationDesiredCapacity'
-      CURRENT_CONFIGURATION_MIN_SIZE = 'CurrentConfigurationMinSize'
-      CURRENT_CONFIGURATION_MAX_SIZE = 'CurrentConfigurationMaxSize'
-      CURRENT_CONFIGURATION_ALLOCATION_STRATEGY = 'CurrentConfigurationAllocationStrategy'
-      CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES = 'CurrentConfigurationMixedInstanceTypes'
-      CURRENT_CONFIGURATION_TYPE = 'CurrentConfigurationType'
-      CURRENT_ON_DEMAND_PRICE = 'CurrentOnDemandPrice'
-      CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'CurrentStandardOneYearNoUpfrontReservedPrice'
-      CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'CurrentStandardThreeYearNoUpfrontReservedPrice'
-      CURRENT_VCPUS = 'CurrentVCpus'
-      CURRENT_MEMORY = 'CurrentMemory'
-      CURRENT_STORAGE = 'CurrentStorage'
-      CURRENT_NETWORK = 'CurrentNetwork'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE = 'RecommendationOptionsConfigurationInstanceType'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY = 'RecommendationOptionsConfigurationDesiredCapacity'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE = 'RecommendationOptionsConfigurationMinSize'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE = 'RecommendationOptionsConfigurationMaxSize'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE = 'RecommendationOptionsConfigurationEstimatedInstanceHourReductionPercentage'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY = 'RecommendationOptionsConfigurationAllocationStrategy'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES = 'RecommendationOptionsConfigurationMixedInstanceTypes'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE = 'RecommendationOptionsConfigurationType'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsCpuMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum'
-      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = 'RecommendationOptionsPerformanceRisk'
-      RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = 'RecommendationOptionsOnDemandPrice'
-      RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'RecommendationOptionsStandardOneYearNoUpfrontReservedPrice'
-      RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice'
-      RECOMMENDATION_OPTIONS_VCPUS = 'RecommendationOptionsVcpus'
-      RECOMMENDATION_OPTIONS_MEMORY = 'RecommendationOptionsMemory'
-      RECOMMENDATION_OPTIONS_STORAGE = 'RecommendationOptionsStorage'
-      RECOMMENDATION_OPTIONS_NETWORK = 'RecommendationOptionsNetwork'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      CURRENT_PERFORMANCE_RISK = 'CurrentPerformanceRisk'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = 'EffectiveRecommendationPreferencesCpuVendorArchitectures'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = 'EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = 'EffectiveRecommendationPreferencesInferredWorkloadTypes'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = 'EffectiveRecommendationPreferencesPreferredResources'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = 'EffectiveRecommendationPreferencesLookBackPeriod'
-      INFERRED_WORKLOAD_TYPES = 'InferredWorkloadTypes'
-      RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = 'RecommendationOptionsMigrationEffort'
-      CURRENT_INSTANCE_GPU_INFO = 'CurrentInstanceGpuInfo'
-      RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = 'RecommendationOptionsInstanceGpuInfo'
-      UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = 'UtilizationMetricsGpuPercentageMaximum'
-      UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = 'UtilizationMetricsGpuMemoryPercentageMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-    end
-
-    module ExportableECSServiceField
-      ACCOUNT_ID = 'AccountId'
-      SERVICE_ARN = 'ServiceArn'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      LAUNCH_TYPE = 'LaunchType'
-      CURRENT_PERFORMANCE_RISK = 'CurrentPerformanceRisk'
-      CURRENT_SERVICE_CONFIGURATION_MEMORY = 'CurrentServiceConfigurationMemory'
-      CURRENT_SERVICE_CONFIGURATION_CPU = 'CurrentServiceConfigurationCpu'
-      CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN = 'CurrentServiceConfigurationTaskDefinitionArn'
-      CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION = 'CurrentServiceConfigurationAutoScalingConfiguration'
-      CURRENT_SERVICE_CONTAINER_CONFIGURATIONS = 'CurrentServiceContainerConfigurations'
-      UTILIZATION_METRICS_CPU_MAXIMUM = 'UtilizationMetricsCpuMaximum'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      FINDING = 'Finding'
-      FINDING_REASON_CODES = 'FindingReasonCodes'
-      RECOMMENDATION_OPTIONS_MEMORY = 'RecommendationOptionsMemory'
-      RECOMMENDATION_OPTIONS_CPU = 'RecommendationOptionsCpu'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS = 'RecommendationOptionsContainerRecommendations'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsCpuMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum'
-      TAGS = 'Tags'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-    end
-
-    module ExportableIdleField
-      ACCOUNT_ID = 'AccountId'
-      RESOURCE_ARN = 'ResourceArn'
-      RESOURCE_ID = 'ResourceId'
-      RESOURCE_TYPE = 'ResourceType'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      SAVINGS_OPPORTUNITY = 'SavingsOpportunity'
-      SAVINGS_OPPORTUNITY_AFTER_DISCOUNT = 'SavingsOpportunityAfterDiscount'
-      UTILIZATION_METRICS_CPU_MAXIMUM = 'UtilizationMetricsCpuMaximum'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkOutBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkInBytesPerSecondMaximum'
-      UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = 'UtilizationMetricsDatabaseConnectionsMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = 'UtilizationMetricsEBSVolumeReadIOPSMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = 'UtilizationMetricsEBSVolumeWriteIOPSMaximum'
-      UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeWriteOpsPerSecondMaximum'
-      FINDING = 'Finding'
-      FINDING_DESCRIPTION = 'FindingDescription'
-      TAGS = 'Tags'
-    end
-
-    module ExportableInstanceField
-      ACCOUNT_ID = 'AccountId'
-      INSTANCE_ARN = 'InstanceArn'
-      INSTANCE_NAME = 'InstanceName'
-      FINDING = 'Finding'
-      Finding_Reason_Codes = 'FindingReasonCodes'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      CURRENT_INSTANCE_TYPE = 'CurrentInstanceType'
-      UTILIZATION_METRICS_CPU_MAXIMUM = 'UtilizationMetricsCpuMaximum'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsWriteOpsPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsReadBytesPerSecondMaximum'
-      UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsEbsWriteBytesPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskWriteOpsPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskReadBytesPerSecondMaximum'
-      UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsDiskWriteBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkInBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkOutBytesPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkPacketsInPerSecondMaximum'
-      UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = 'UtilizationMetricsNetworkPacketsOutPerSecondMaximum'
-      CURRENT_ON_DEMAND_PRICE = 'CurrentOnDemandPrice'
-      CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'CurrentStandardOneYearNoUpfrontReservedPrice'
-      CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'CurrentStandardThreeYearNoUpfrontReservedPrice'
-      CURRENT_VCPUS = 'CurrentVCpus'
-      CURRENT_MEMORY = 'CurrentMemory'
-      CURRENT_STORAGE = 'CurrentStorage'
-      CURRENT_NETWORK = 'CurrentNetwork'
-      RECOMMENDATION_OPTIONS_INSTANCE_TYPE = 'RecommendationOptionsInstanceType'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsCpuMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum'
-      RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES = 'RecommendationOptionsPlatformDifferences'
-      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = 'RecommendationOptionsPerformanceRisk'
-      RECOMMENDATION_OPTIONS_VCPUS = 'RecommendationOptionsVcpus'
-      RECOMMENDATION_OPTIONS_MEMORY = 'RecommendationOptionsMemory'
-      RECOMMENDATION_OPTIONS_STORAGE = 'RecommendationOptionsStorage'
-      RECOMMENDATION_OPTIONS_NETWORK = 'RecommendationOptionsNetwork'
-      RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = 'RecommendationOptionsOnDemandPrice'
-      RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'RecommendationOptionsStandardOneYearNoUpfrontReservedPrice'
-      RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = 'RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice'
-      RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN = 'RecommendationsSourcesRecommendationSourceArn'
-      RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE = 'RecommendationsSourcesRecommendationSourceType'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      CURRENT_PERFORMANCE_RISK = 'CurrentPerformanceRisk'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = 'EffectiveRecommendationPreferencesCpuVendorArchitectures'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = 'EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = 'EffectiveRecommendationPreferencesInferredWorkloadTypes'
-      INFERRED_WORKLOAD_TYPES = 'InferredWorkloadTypes'
-      RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = 'RecommendationOptionsMigrationEffort'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE = 'EffectiveRecommendationPreferencesExternalMetricsSource'
-      TAGS = 'Tags'
-      INSTANCE_STATE = 'InstanceState'
-      EXTERNAL_METRIC_STATUS_CODE = 'ExternalMetricStatusCode'
-      EXTERNAL_METRIC_STATUS_REASON = 'ExternalMetricStatusReason'
-      CURRENT_INSTANCE_GPU_INFO = 'CurrentInstanceGpuInfo'
-      RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = 'RecommendationOptionsInstanceGpuInfo'
-      UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = 'UtilizationMetricsGpuPercentageMaximum'
-      UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = 'UtilizationMetricsGpuMemoryPercentageMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = 'RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum'
-      IDLE = 'Idle'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = 'EffectiveRecommendationPreferencesPreferredResources'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = 'EffectiveRecommendationPreferencesLookBackPeriod'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES = 'EffectiveRecommendationPreferencesUtilizationPreferences'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-    end
-
-    module ExportableLambdaFunctionField
-      ACCOUNT_ID = 'AccountId'
-      FUNCTION_ARN = 'FunctionArn'
-      FUNCTION_VERSION = 'FunctionVersion'
-      FINDING = 'Finding'
-      FINDING_REASON_CODES = 'FindingReasonCodes'
-      NUMBER_OF_INVOCATIONS = 'NumberOfInvocations'
-      UTILIZATION_METRICS_DURATION_MAXIMUM = 'UtilizationMetricsDurationMaximum'
-      UTILIZATION_METRICS_DURATION_AVERAGE = 'UtilizationMetricsDurationAverage'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      UTILIZATION_METRICS_MEMORY_AVERAGE = 'UtilizationMetricsMemoryAverage'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      CURRENT_CONFIGURATION_MEMORY_SIZE = 'CurrentConfigurationMemorySize'
-      CURRENT_CONFIGURATION_TIMEOUT = 'CurrentConfigurationTimeout'
-      CURRENT_COST_TOTAL = 'CurrentCostTotal'
-      CURRENT_COST_AVERAGE = 'CurrentCostAverage'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE = 'RecommendationOptionsConfigurationMemorySize'
-      RECOMMENDATION_OPTIONS_COST_LOW = 'RecommendationOptionsCostLow'
-      RECOMMENDATION_OPTIONS_COST_HIGH = 'RecommendationOptionsCostHigh'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND = 'RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND = 'RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound'
-      RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED = 'RecommendationOptionsProjectedUtilizationMetricsDurationExpected'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      CURRENT_PERFORMANCE_RISK = 'CurrentPerformanceRisk'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      TAGS = 'Tags'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-    end
-
-    module ExportableLicenseField
-      ACCOUNT_ID = 'AccountId'
-      RESOURCE_ARN = 'ResourceArn'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      LICENSE_FINDING = 'Finding'
-      LICENSE_FINDING_REASON_CODES = 'FindingReasonCodes'
-      CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES = 'CurrentLicenseConfigurationNumberOfCores'
-      CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE = 'CurrentLicenseConfigurationInstanceType'
-      CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM = 'CurrentLicenseConfigurationOperatingSystem'
-      CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME = 'CurrentLicenseConfigurationLicenseName'
-      CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION = 'CurrentLicenseConfigurationLicenseEdition'
-      CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL = 'CurrentLicenseConfigurationLicenseModel'
-      CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION = 'CurrentLicenseConfigurationLicenseVersion'
-      CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE = 'CurrentLicenseConfigurationMetricsSource'
-      RECOMMENDATION_OPTIONS_OPERATING_SYSTEM = 'RecommendationOptionsOperatingSystem'
-      RECOMMENDATION_OPTIONS_LICENSE_EDITION = 'RecommendationOptionsLicenseEdition'
-      RECOMMENDATION_OPTIONS_LICENSE_MODEL = 'RecommendationOptionsLicenseModel'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      TAGS = 'Tags'
-    end
-
-    module ExportableRDSDBField
-      RESOURCE_ARN = 'ResourceArn'
-      ACCOUNT_ID = 'AccountId'
-      ENGINE = 'Engine'
-      ENGINE_VERSION = 'EngineVersion'
-      IDLE = 'Idle'
-      MULTI_AZ_DB_INSTANCE = 'MultiAZDBInstance'
-      CLUSTER_WRITER = 'ClusterWriter'
-      CURRENT_DB_INSTANCE_CLASS = 'CurrentDBInstanceClass'
-      CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE = 'CurrentStorageConfigurationStorageType'
-      CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE = 'CurrentStorageConfigurationAllocatedStorage'
-      CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE = 'CurrentStorageConfigurationMaxAllocatedStorage'
-      CURRENT_STORAGE_CONFIGURATION_IOPS = 'CurrentStorageConfigurationIOPS'
-      CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT = 'CurrentStorageConfigurationStorageThroughput'
-      CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = 'CurrentStorageEstimatedMonthlyVolumeIOPsCostVariation'
-      CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE = 'CurrentInstanceOnDemandHourlyPrice'
-      CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE = 'CurrentStorageOnDemandMonthlyPrice'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = 'CurrentStorageEstimatedClusterInstanceOnDemandMonthlyCost'
-      CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = 'CurrentStorageEstimatedClusterStorageOnDemandMonthlyCost'
-      CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = 'CurrentStorageEstimatedClusterStorageIOOnDemandMonthlyCost'
-      CURRENT_INSTANCE_PERFORMANCE_RISK = 'CurrentInstancePerformanceRisk'
-      UTILIZATION_METRICS_CPU_MAXIMUM = 'UtilizationMetricsCpuMaximum'
-      UTILIZATION_METRICS_MEMORY_MAXIMUM = 'UtilizationMetricsMemoryMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM = 'UtilizationMetricsEBSVolumeStorageSpaceUtilizationMaximum'
-      UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = 'UtilizationMetricsNetworkReceiveThroughputMaximum'
-      UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = 'UtilizationMetricsNetworkTransmitThroughputMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = 'UtilizationMetricsEBSVolumeReadIOPSMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = 'UtilizationMetricsEBSVolumeWriteIOPSMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM = 'UtilizationMetricsEBSVolumeReadThroughputMaximum'
-      UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM = 'UtilizationMetricsEBSVolumeWriteThroughputMaximum'
-      UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = 'UtilizationMetricsDatabaseConnectionsMaximum'
-      UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = 'UtilizationMetricsStorageNetworkReceiveThroughputMaximum'
-      UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = 'UtilizationMetricsStorageNetworkTransmitThroughputMaximum'
-      UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM = 'UtilizationMetricsAuroraMemoryHealthStateMaximum'
-      UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM = 'UtilizationMetricsAuroraMemoryNumDeclinedSqlTotalMaximum'
-      UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM = 'UtilizationMetricsAuroraMemoryNumKillConnTotalMaximum'
-      UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM = 'UtilizationMetricsAuroraMemoryNumKillQueryTotalMaximum'
-      UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM = 'UtilizationMetricsReadIOPSEphemeralStorageMaximum'
-      UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM = 'UtilizationMetricsWriteIOPSEphemeralStorageMaximum'
-      UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE = 'UtilizationMetricsVolumeBytesUsedAverage'
-      UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE = 'UtilizationMetricsVolumeReadIOPsAverage'
-      UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE = 'UtilizationMetricsVolumeWriteIOPsAverage'
-      INSTANCE_FINDING = 'InstanceFinding'
-      INSTANCE_FINDING_REASON_CODES = 'InstanceFindingReasonCodes'
-      STORAGE_FINDING = 'StorageFinding'
-      STORAGE_FINDING_REASON_CODES = 'StorageFindingReasonCodes'
-      INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS = 'InstanceRecommendationOptionsDBInstanceClass'
-      INSTANCE_RECOMMENDATION_OPTIONS_RANK = 'InstanceRecommendationOptionsRank'
-      INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = 'InstanceRecommendationOptionsPerformanceRisk'
-      INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = 'InstanceRecommendationOptionsProjectedUtilizationMetricsCpuMaximum'
-      STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE = 'StorageRecommendationOptionsStorageType'
-      STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE = 'StorageRecommendationOptionsAllocatedStorage'
-      STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE = 'StorageRecommendationOptionsMaxAllocatedStorage'
-      STORAGE_RECOMMENDATION_OPTIONS_IOPS = 'StorageRecommendationOptionsIOPS'
-      STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT = 'StorageRecommendationOptionsStorageThroughput'
-      STORAGE_RECOMMENDATION_OPTIONS_RANK = 'StorageRecommendationOptionsRank'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = 'StorageRecommendationOptionsEstimatedMonthlyVolumeIOPsCostVariation'
-      INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE = 'InstanceRecommendationOptionsInstanceOnDemandHourlyPrice'
-      INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'InstanceRecommendationOptionsSavingsOpportunityPercentage'
-      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'InstanceRecommendationOptionsEstimatedMonthlySavingsCurrency'
-      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'InstanceRecommendationOptionsEstimatedMonthlySavingsValue'
-      INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'InstanceRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'InstanceRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'InstanceRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-      STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE = 'StorageRecommendationOptionsOnDemandMonthlyPrice'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = 'StorageRecommendationOptionsEstimatedClusterInstanceOnDemandMonthlyCost'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = 'StorageRecommendationOptionsEstimatedClusterStorageOnDemandMonthlyCost'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = 'StorageRecommendationOptionsEstimatedClusterStorageIOOnDemandMonthlyCost'
-      STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'StorageRecommendationOptionsSavingsOpportunityPercentage'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'StorageRecommendationOptionsEstimatedMonthlySavingsCurrency'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'StorageRecommendationOptionsEstimatedMonthlySavingsValue'
-      STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'StorageRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'StorageRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'StorageRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = 'EffectiveRecommendationPreferencesCpuVendorArchitectures'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = 'EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = 'EffectiveRecommendationPreferencesLookBackPeriod'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      TAGS = 'Tags'
-      DB_CLUSTER_IDENTIFIER = 'DBClusterIdentifier'
-      PROMOTION_TIER = 'PromotionTier'
-    end
-
-    module ExportableVolumeField
-      ACCOUNT_ID = 'AccountId'
-      VOLUME_ARN = 'VolumeArn'
-      FINDING = 'Finding'
-      UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeReadOpsPerSecondMaximum'
-      UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeWriteOpsPerSecondMaximum'
-      UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeReadBytesPerSecondMaximum'
-      UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM = 'UtilizationMetricsVolumeWriteBytesPerSecondMaximum'
-      LOOKBACK_PERIOD_IN_DAYS = 'LookbackPeriodInDays'
-      CURRENT_CONFIGURATION_VOLUME_TYPE = 'CurrentConfigurationVolumeType'
-      CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS = 'CurrentConfigurationVolumeBaselineIOPS'
-      CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = 'CurrentConfigurationVolumeBaselineThroughput'
-      CURRENT_CONFIGURATION_VOLUME_BURST_IOPS = 'CurrentConfigurationVolumeBurstIOPS'
-      CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT = 'CurrentConfigurationVolumeBurstThroughput'
-      CURRENT_CONFIGURATION_VOLUME_SIZE = 'CurrentConfigurationVolumeSize'
-      CURRENT_MONTHLY_PRICE = 'CurrentMonthlyPrice'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE = 'RecommendationOptionsConfigurationVolumeType'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS = 'RecommendationOptionsConfigurationVolumeBaselineIOPS'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = 'RecommendationOptionsConfigurationVolumeBaselineThroughput'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS = 'RecommendationOptionsConfigurationVolumeBurstIOPS'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT = 'RecommendationOptionsConfigurationVolumeBurstThroughput'
-      RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE = 'RecommendationOptionsConfigurationVolumeSize'
-      RECOMMENDATION_OPTIONS_MONTHLY_PRICE = 'RecommendationOptionsMonthlyPrice'
-      RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = 'RecommendationOptionsPerformanceRisk'
-      LAST_REFRESH_TIMESTAMP = 'LastRefreshTimestamp'
-      CURRENT_PERFORMANCE_RISK = 'CurrentPerformanceRisk'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = 'RecommendationOptionsEstimatedMonthlySavingsCurrency'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = 'RecommendationOptionsEstimatedMonthlySavingsValue'
-      TAGS = 'Tags'
-      ROOT_VOLUME = 'RootVolume'
-      CURRENT_CONFIGURATION_ROOT_VOLUME = 'CurrentConfigurationRootVolume'
-      EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = 'EffectiveRecommendationPreferencesSavingsEstimationMode'
-      RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = 'RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts'
-      RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = 'RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2675,20 +2165,7 @@ module Aws::ComputeOptimizer
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExternalMetricStatusCode
-      NO_EXTERNAL_METRIC_SET = 'NO_EXTERNAL_METRIC_SET'
-      INTEGRATION_SUCCESS = 'INTEGRATION_SUCCESS'
-      DATADOG_INTEGRATION_ERROR = 'DATADOG_INTEGRATION_ERROR'
-      DYNATRACE_INTEGRATION_ERROR = 'DYNATRACE_INTEGRATION_ERROR'
-      NEWRELIC_INTEGRATION_ERROR = 'NEWRELIC_INTEGRATION_ERROR'
-      INSTANA_INTEGRATION_ERROR = 'INSTANA_INTEGRATION_ERROR'
-      INSUFFICIENT_DATADOG_METRICS = 'INSUFFICIENT_DATADOG_METRICS'
-      INSUFFICIENT_DYNATRACE_METRICS = 'INSUFFICIENT_DYNATRACE_METRICS'
-      INSUFFICIENT_NEWRELIC_METRICS = 'INSUFFICIENT_NEWRELIC_METRICS'
-      INSUFFICIENT_INSTANA_METRICS = 'INSUFFICIENT_INSTANA_METRICS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the external metrics preferences for EC2 rightsizing recommendations.
@@ -2699,18 +2176,7 @@ module Aws::ComputeOptimizer
     class ExternalMetricsPreference < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExternalMetricsSource
-      DATADOG = 'Datadog'
-      DYNATRACE = 'Dynatrace'
-      NEWRELIC = 'NewRelic'
-      INSTANA = 'Instana'
-    end
-
-    module FileFormat
-      CSV = 'Csv'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that returns a more specific list of recommendations. Use this
@@ -2912,26 +2378,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterName
-      FINDING = 'Finding'
-      FINDING_REASON_CODES = 'FindingReasonCodes'
-      RECOMMENDATION_SOURCE_TYPE = 'RecommendationSourceType'
-      INFERRED_WORKLOAD_TYPES = 'InferredWorkloadTypes'
-    end
-
-    module Finding
-      UNDER_PROVISIONED = 'Underprovisioned'
-      OVER_PROVISIONED = 'Overprovisioned'
-      OPTIMIZED = 'Optimized'
-      NOT_OPTIMIZED = 'NotOptimized'
-    end
-
-    module FindingReasonCode
-      MEMORY_OVER_PROVISIONED = 'MemoryOverprovisioned'
-      MEMORY_UNDER_PROVISIONED = 'MemoryUnderprovisioned'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2971,7 +2418,7 @@ module Aws::ComputeOptimizer
       :filters,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2993,7 +2440,7 @@ module Aws::ComputeOptimizer
       :auto_scaling_group_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arns
@@ -3026,7 +2473,7 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3047,7 +2494,7 @@ module Aws::ComputeOptimizer
       :volume_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arns
@@ -3085,7 +2532,7 @@ module Aws::ComputeOptimizer
       :account_ids,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3106,7 +2553,7 @@ module Aws::ComputeOptimizer
       :instance_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_arn
@@ -3137,7 +2584,7 @@ module Aws::ComputeOptimizer
       :end_time,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommended_option_projected_metrics
@@ -3146,7 +2593,7 @@ module Aws::ComputeOptimizer
     class GetEC2RecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -3187,7 +2634,7 @@ module Aws::ComputeOptimizer
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommended_option_projected_metrics
@@ -3198,7 +2645,7 @@ module Aws::ComputeOptimizer
     class GetECSServiceRecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arns
@@ -3245,7 +2692,7 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3268,7 +2715,7 @@ module Aws::ComputeOptimizer
       :ecs_service_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3279,7 +2726,7 @@ module Aws::ComputeOptimizer
     class GetEffectiveRecommendationPreferencesRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enhanced_infrastructure_metrics
@@ -3346,12 +2793,12 @@ module Aws::ComputeOptimizer
       :utilization_preferences,
       :preferred_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetEnrollmentStatusRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3381,7 +2828,7 @@ module Aws::ComputeOptimizer
       :last_updated_timestamp,
       :number_of_member_accounts_opted_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:member_accounts_enrolled] = false unless options.key?(:member_accounts_enrolled)
@@ -3407,7 +2854,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_enrollment_statuses
@@ -3423,7 +2870,7 @@ module Aws::ComputeOptimizer
       :account_enrollment_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -3458,7 +2905,7 @@ module Aws::ComputeOptimizer
       :account_ids,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3475,7 +2922,7 @@ module Aws::ComputeOptimizer
       :idle_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_arns
@@ -3515,7 +2962,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3530,7 +2977,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :lambda_function_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -3576,7 +3023,7 @@ module Aws::ComputeOptimizer
       :filters,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3599,7 +3046,7 @@ module Aws::ComputeOptimizer
       :license_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3644,7 +3091,7 @@ module Aws::ComputeOptimizer
       :end_time,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommended_option_projected_metrics
@@ -3655,7 +3102,7 @@ module Aws::ComputeOptimizer
     class GetRDSDatabaseRecommendationProjectedMetricsResponse < Struct.new(
       :recommended_option_projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -3709,7 +3156,7 @@ module Aws::ComputeOptimizer
       :account_ids,
       :recommendation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3732,7 +3179,7 @@ module Aws::ComputeOptimizer
       :rds_db_recommendations,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error experienced when getting recommendations.</p>
@@ -3753,7 +3200,7 @@ module Aws::ComputeOptimizer
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -3786,7 +3233,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3801,7 +3248,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :recommendation_preferences_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -3824,7 +3271,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3839,7 +3286,7 @@ module Aws::ComputeOptimizer
       :next_token,
       :recommendation_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3859,7 +3306,7 @@ module Aws::ComputeOptimizer
       :gpu_count,
       :gpu_memory_size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:gpu_count] = 0 unless options.key?(:gpu_count)
@@ -3879,12 +3326,7 @@ module Aws::ComputeOptimizer
     class GpuInfo < Struct.new(
       :gpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Idle
-      TRUE = 'True'
-      FALSE = 'False'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the estimated monthly savings possible for idle resources by adopting Compute Optimizer recommendations.</p>
@@ -3898,29 +3340,12 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module IdleFinding
-      IDLE = 'Idle'
-      UNATTACHED = 'Unattached'
-    end
-
-    module IdleMetricName
-      CPU = 'CPU'
-      MEMORY = 'Memory'
-      NETWORK_OUT_BYTES_PER_SECOND = 'NetworkOutBytesPerSecond'
-      NETWORK_IN_BYTES_PER_SECOND = 'NetworkInBytesPerSecond'
-      DATABASE_CONNECTIONS = 'DatabaseConnections'
-      EBS_VOLUME_READ_IOPS = 'EBSVolumeReadIOPS'
-      EBS_VOLUME_WRITE_IOPS = 'EBSVolumeWriteIOPS'
-      VOLUME_READ_OPS_PER_SECOND = 'VolumeReadOpsPerSecond'
-      VOLUME_WRITE_OPS_PER_SECOND = 'VolumeWriteOpsPerSecond'
     end
 
     # <p>Describes an Idle resource recommendation.</p>
@@ -3974,7 +3399,7 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:look_back_period_in_days] = 0 unless options.key?(:look_back_period_in_days)
@@ -4001,7 +3426,7 @@ module Aws::ComputeOptimizer
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that returns a more specific list of idle resource recommendations.</p>
@@ -4032,20 +3457,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdleRecommendationFilterName
-      FINDING = 'Finding'
-      RESOURCE_TYPE = 'ResourceType'
-    end
-
-    module IdleRecommendationResourceType
-      EC2_INSTANCE = 'EC2Instance'
-      AUTO_SCALING_GROUP = 'AutoScalingGroup'
-      EBS_VOLUME = 'EBSVolume'
-      ECS_SERVICE = 'ECSService'
-      RDS_DB_INSTANCE = 'RDSDBInstance'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the savings opportunity for idle resource recommendations.</p>
@@ -4059,7 +3471,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -4079,7 +3491,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -4098,7 +3510,7 @@ module Aws::ComputeOptimizer
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -4134,7 +3546,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -4208,24 +3620,7 @@ module Aws::ComputeOptimizer
       :inferred_workload_types,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferredWorkloadType
-      AMAZON_EMR = 'AmazonEmr'
-      APACHE_CASSANDRA = 'ApacheCassandra'
-      APACHE_HADOOP = 'ApacheHadoop'
-      MEMCACHED = 'Memcached'
-      NGINX = 'Nginx'
-      POSTGRE_SQL = 'PostgreSql'
-      REDIS = 'Redis'
-      KAFKA = 'Kafka'
-      SQLSERVER = 'SQLServer'
-    end
-
-    module InferredWorkloadTypesPreference
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4246,17 +3641,12 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module InstanceIdle
-      TRUE = 'True'
-      FALSE = 'False'
     end
 
     # <p>Describes an Amazon EC2 instance recommendation.</p>
@@ -4632,35 +4022,12 @@ module Aws::ComputeOptimizer
       :current_instance_gpu_info,
       :idle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:look_back_period_in_days] = 0 unless options.key?(:look_back_period_in_days)
         super
       end
-    end
-
-    module InstanceRecommendationFindingReasonCode
-      CPU_OVER_PROVISIONED = 'CPUOverprovisioned'
-      CPU_UNDER_PROVISIONED = 'CPUUnderprovisioned'
-      MEMORY_OVER_PROVISIONED = 'MemoryOverprovisioned'
-      MEMORY_UNDER_PROVISIONED = 'MemoryUnderprovisioned'
-      EBS_THROUGHPUT_OVER_PROVISIONED = 'EBSThroughputOverprovisioned'
-      EBS_THROUGHPUT_UNDER_PROVISIONED = 'EBSThroughputUnderprovisioned'
-      EBS_IOPS_OVER_PROVISIONED = 'EBSIOPSOverprovisioned'
-      EBS_IOPS_UNDER_PROVISIONED = 'EBSIOPSUnderprovisioned'
-      NETWORK_BANDWIDTH_OVER_PROVISIONED = 'NetworkBandwidthOverprovisioned'
-      NETWORK_BANDWIDTH_UNDER_PROVISIONED = 'NetworkBandwidthUnderprovisioned'
-      NETWORK_PPS_OVER_PROVISIONED = 'NetworkPPSOverprovisioned'
-      NETWORK_PPS_UNDER_PROVISIONED = 'NetworkPPSUnderprovisioned'
-      DISK_IOPS_OVER_PROVISIONED = 'DiskIOPSOverprovisioned'
-      DISK_IOPS_UNDER_PROVISIONED = 'DiskIOPSUnderprovisioned'
-      DISK_THROUGHPUT_OVER_PROVISIONED = 'DiskThroughputOverprovisioned'
-      DISK_THROUGHPUT_UNDER_PROVISIONED = 'DiskThroughputUnderprovisioned'
-      GPU_UNDER_PROVISIONED = 'GPUUnderprovisioned'
-      GPU_OVER_PROVISIONED = 'GPUOverprovisioned'
-      GPU_MEMORY_UNDER_PROVISIONED = 'GPUMemoryUnderprovisioned'
-      GPU_MEMORY_OVER_PROVISIONED = 'GPUMemoryOverprovisioned'
     end
 
     # <p>Describes a recommendation option for an Amazon EC2 instance.</p>
@@ -4833,7 +4200,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_after_discounts,
       :migration_effort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:performance_risk] = 0 unless options.key?(:performance_risk)
@@ -4853,13 +4220,7 @@ module Aws::ComputeOptimizer
     class InstanceSavingsEstimationMode < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceSavingsEstimationModeSource
-      PUBLIC_PRICING = 'PublicPricing'
-      COST_EXPLORER_RIGHTSIZING = 'CostExplorerRightsizing'
-      COST_OPTIMIZATION_HUB = 'CostOptimizationHub'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4883,21 +4244,12 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
         super
       end
-    end
-
-    module InstanceState
-      PENDING = 'pending'
-      RUNNING = 'running'
-      SHUTTING_DOWN = 'shutting-down'
-      TERMINATED = 'terminated'
-      STOPPING = 'stopping'
-      STOPPED = 'stopped'
     end
 
     # <p>An internal error has occurred. Try your call again.</p>
@@ -4906,7 +4258,7 @@ module Aws::ComputeOptimizer
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value supplied for the input parameter is out of range or not valid.</p>
@@ -4915,7 +4267,7 @@ module Aws::ComputeOptimizer
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that returns a more specific list of recommendation export jobs.
@@ -4953,19 +4305,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobFilterName
-      RESOURCE_TYPE = 'ResourceType'
-      JOB_STATUS = 'JobStatus'
-    end
-
-    module JobStatus
-      QUEUED = 'Queued'
-      IN_PROGRESS = 'InProgress'
-      COMPLETE = 'Complete'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4979,7 +4319,7 @@ module Aws::ComputeOptimizer
     class LambdaEffectiveRecommendationPreferences < Struct.new(
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5000,22 +4340,12 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module LambdaFunctionMemoryMetricName
-      DURATION = 'Duration'
-    end
-
-    module LambdaFunctionMemoryMetricStatistic
-      LOWER_BOUND = 'LowerBound'
-      UPPER_BOUND = 'UpperBound'
-      EXPECTED = 'Expected'
     end
 
     # <p>Describes a projected utilization metric of an Lambda function
@@ -5034,7 +4364,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -5072,23 +4402,13 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
         options[:memory_size] = 0 unless options.key?(:memory_size)
         super
       end
-    end
-
-    module LambdaFunctionMetricName
-      DURATION = 'Duration'
-      MEMORY = 'Memory'
-    end
-
-    module LambdaFunctionMetricStatistic
-      MAXIMUM = 'Maximum'
-      AVERAGE = 'Average'
     end
 
     # <p>Describes an Lambda function recommendation.</p>
@@ -5248,7 +4568,7 @@ module Aws::ComputeOptimizer
       :effective_recommendation_preferences,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:current_memory_size] = 0 unless options.key?(:current_memory_size)
@@ -5304,25 +4624,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LambdaFunctionRecommendationFilterName
-      FINDING = 'Finding'
-      FINDING_REASON_CODE = 'FindingReasonCode'
-    end
-
-    module LambdaFunctionRecommendationFinding
-      OPTIMIZED = 'Optimized'
-      NOT_OPTIMIZED = 'NotOptimized'
-      UNAVAILABLE = 'Unavailable'
-    end
-
-    module LambdaFunctionRecommendationFindingReasonCode
-      MEMORY_OVER_PROVISIONED = 'MemoryOverprovisioned'
-      MEMORY_UNDER_PROVISIONED = 'MemoryUnderprovisioned'
-      INSUFFICIENT_DATA = 'InsufficientData'
-      INCONCLUSIVE = 'Inconclusive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a utilization metric of an Lambda function.</p>
@@ -5363,7 +4665,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -5382,13 +4684,7 @@ module Aws::ComputeOptimizer
     class LambdaSavingsEstimationMode < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LambdaSavingsEstimationModeSource
-      PUBLIC_PRICING = 'PublicPricing'
-      COST_EXPLORER_RIGHTSIZING = 'CostExplorerRightsizing'
-      COST_OPTIMIZATION_HUB = 'CostOptimizationHub'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5412,7 +4708,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -5473,41 +4769,12 @@ module Aws::ComputeOptimizer
       :license_version,
       :metrics_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_cores] = 0 unless options.key?(:number_of_cores)
         super
       end
-    end
-
-    module LicenseEdition
-      ENTERPRISE = 'Enterprise'
-      STANDARD = 'Standard'
-      FREE = 'Free'
-      NO_LICENSE_EDITION_FOUND = 'NoLicenseEditionFound'
-    end
-
-    module LicenseFinding
-      INSUFFICIENT_METRICS = 'InsufficientMetrics'
-      OPTIMIZED = 'Optimized'
-      NOT_OPTIMIZED = 'NotOptimized'
-    end
-
-    module LicenseFindingReasonCode
-      CW_APP_INSIGHTS_DISABLED = 'InvalidCloudWatchApplicationInsightsSetup'
-      CW_APP_INSIGHTS_ERROR = 'CloudWatchApplicationInsightsError'
-      LICENSE_OVER_PROVISIONED = 'LicenseOverprovisioned'
-      OPTIMIZED = 'Optimized'
-    end
-
-    module LicenseModel
-      LICENSE_INCLUDED = 'LicenseIncluded'
-      BRING_YOUR_OWN_LICENSE = 'BringYourOwnLicense'
-    end
-
-    module LicenseName
-      SQLSERVER = 'SQLServer'
     end
 
     # <p>
@@ -5611,7 +4878,7 @@ module Aws::ComputeOptimizer
       :license_recommendation_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:lookback_period_in_days] = 0 unless options.key?(:lookback_period_in_days)
@@ -5664,13 +4931,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LicenseRecommendationFilterName
-      LICENSE_FINDING = 'Finding'
-      LICENSE_FINDING_REASON_CODE = 'FindingReasonCode'
-      LICENSE_NAME = 'LicenseName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5724,7 +4985,7 @@ module Aws::ComputeOptimizer
       :license_model,
       :savings_opportunity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
@@ -5738,13 +4999,7 @@ module Aws::ComputeOptimizer
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LookBackPeriodPreference
-      DAYS_14 = 'DAYS_14'
-      DAYS_32 = 'DAYS_32'
-      DAYS_93 = 'DAYS_93'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5764,26 +5019,7 @@ module Aws::ComputeOptimizer
       :memory,
       :memory_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricName
-      CPU = 'Cpu'
-      MEMORY = 'Memory'
-      EBS_READ_OPS_PER_SECOND = 'EBS_READ_OPS_PER_SECOND'
-      EBS_WRITE_OPS_PER_SECOND = 'EBS_WRITE_OPS_PER_SECOND'
-      EBS_READ_BYTES_PER_SECOND = 'EBS_READ_BYTES_PER_SECOND'
-      EBS_WRITE_BYTES_PER_SECOND = 'EBS_WRITE_BYTES_PER_SECOND'
-      DISK_READ_OPS_PER_SECOND = 'DISK_READ_OPS_PER_SECOND'
-      DISK_WRITE_OPS_PER_SECOND = 'DISK_WRITE_OPS_PER_SECOND'
-      DISK_READ_BYTES_PER_SECOND = 'DISK_READ_BYTES_PER_SECOND'
-      DISK_WRITE_BYTES_PER_SECOND = 'DISK_WRITE_BYTES_PER_SECOND'
-      NETWORK_IN_BYTES_PER_SECOND = 'NETWORK_IN_BYTES_PER_SECOND'
-      NETWORK_OUT_BYTES_PER_SECOND = 'NETWORK_OUT_BYTES_PER_SECOND'
-      NETWORK_PACKETS_IN_PER_SECOND = 'NETWORK_PACKETS_IN_PER_SECOND'
-      NETWORK_PACKETS_OUT_PER_SECOND = 'NETWORK_PACKETS_OUT_PER_SECOND'
-      GPU_PERCENTAGE = 'GPU_PERCENTAGE'
-      GPU_MEMORY_PERCENTAGE = 'GPU_MEMORY_PERCENTAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5803,23 +5039,7 @@ module Aws::ComputeOptimizer
       :provider,
       :provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricSourceProvider
-      CloudWatchAppInsights = 'CloudWatchApplicationInsights'
-    end
-
-    module MetricStatistic
-      MAXIMUM = 'Maximum'
-      AVERAGE = 'Average'
-    end
-
-    module MigrationEffort
-      VERY_LOW = 'VeryLow'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request must contain either a valid (registered) Amazon Web Services access key ID
@@ -5829,7 +5049,7 @@ module Aws::ComputeOptimizer
     class MissingAuthenticationToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account is not opted in to Compute Optimizer.</p>
@@ -5838,12 +5058,7 @@ module Aws::ComputeOptimizer
     class OptInRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Order
-      ASC = 'Asc'
-      DESC = 'Desc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the recommendations are ordered.</p>
@@ -5857,16 +5072,7 @@ module Aws::ComputeOptimizer
       :dimension,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlatformDifference
-      HYPERVISOR = 'Hypervisor'
-      NETWORK_INTERFACE = 'NetworkInterface'
-      STORAGE_INTERFACE = 'StorageInterface'
-      INSTANCE_STORE_AVAILABILITY = 'InstanceStoreAvailability'
-      VIRTUALIZATION_TYPE = 'VirtualizationType'
-      ARCHITECTURE = 'Architecture'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5913,11 +5119,7 @@ module Aws::ComputeOptimizer
       :include_list,
       :exclude_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreferredResourceName
-      EC2_INSTANCE_TYPES = 'Ec2InstanceTypes'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a projected utilization metric of a recommendation option, such as an
@@ -5991,7 +5193,7 @@ module Aws::ComputeOptimizer
       :timestamps,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -6133,19 +5335,12 @@ module Aws::ComputeOptimizer
       :preferred_resources,
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRecommendationPreferencesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RDSCurrentInstancePerformanceRisk
-      VERY_LOW = 'VeryLow'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6204,43 +5399,13 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:performance_risk] = 0 unless options.key?(:performance_risk)
         options[:rank] = 0 unless options.key?(:rank)
         super
       end
-    end
-
-    module RDSDBMetricName
-      CPU = 'CPU'
-      MEMORY = 'Memory'
-      EBS_VOLUME_STORAGE_SPACE_UTILIZATION = 'EBSVolumeStorageSpaceUtilization'
-      NETWORK_RECEIVE_THROUGHPUT = 'NetworkReceiveThroughput'
-      NETWORK_TRANSMIT_THROUGHPUT = 'NetworkTransmitThroughput'
-      EBS_VOLUME_READ_IOPS = 'EBSVolumeReadIOPS'
-      EBS_VOLUME_WRITE_IOPS = 'EBSVolumeWriteIOPS'
-      EBS_VOLUME_READ_THROUGHPUT = 'EBSVolumeReadThroughput'
-      EBS_VOLUME_WRITE_THROUGHPUT = 'EBSVolumeWriteThroughput'
-      DATABASE_CONNECTIONS = 'DatabaseConnections'
-      STORAGE_NETWORK_RECEIVE_THROUGHPUT = 'StorageNetworkReceiveThroughput'
-      STORAGE_NETWORK_TRANSMIT_THROUGHPUT = 'StorageNetworkTransmitThroughput'
-      AURORA_MEMORY_HEALTH_STATE = 'AuroraMemoryHealthState'
-      AURORA_MEMORY_NUM_DECLINED_SQL = 'AuroraMemoryNumDeclinedSql'
-      AURORA_MEMORY_NUM_KILL_CONN_TOTAL = 'AuroraMemoryNumKillConnTotal'
-      AURORA_MEMORY_NUM_KILL_QUERY_TOTAL = 'AuroraMemoryNumKillQueryTotal'
-      READ_IOPS_EPHEMERAL_STORAGE = 'ReadIOPSEphemeralStorage'
-      WRITE_IOPS_EPHEMERAL_STORAGE = 'WriteIOPSEphemeralStorage'
-      VOLUME_READ_IOPS = 'VolumeReadIOPs'
-      VOLUME_BYTES_USED = 'VolumeBytesUsed'
-      VOLUME_WRITE_IOPS = 'VolumeWriteIOPs'
-    end
-
-    module RDSDBMetricStatistic
-      MAXIMUM = 'Maximum'
-      MINIMUM = 'Minimum'
-      AVERAGE = 'Average'
     end
 
     # <p>
@@ -6386,7 +5551,7 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:lookback_period_in_days] = 0 unless options.key?(:lookback_period_in_days)
@@ -6427,15 +5592,7 @@ module Aws::ComputeOptimizer
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RDSDBRecommendationFilterName
-      INSTANCE_FINDING = 'InstanceFinding'
-      INSTANCE_FINDING_REASON_CODE = 'InstanceFindingReasonCode'
-      STORAGE_FINDING = 'StorageFinding'
-      STORAGE_FINDING_REASON_CODE = 'StorageFindingReasonCode'
-      IDLE = 'Idle'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6490,7 +5647,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_after_discounts,
       :estimated_monthly_volume_io_ps_cost_variation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
@@ -6536,7 +5693,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -6572,7 +5729,7 @@ module Aws::ComputeOptimizer
       :timestamps,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6602,7 +5759,7 @@ module Aws::ComputeOptimizer
       :rank,
       :projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
@@ -6647,14 +5804,7 @@ module Aws::ComputeOptimizer
       :look_back_period,
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RDSEstimatedMonthlyVolumeIOPsCostVariation
-      NONE = 'None'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6676,35 +5826,12 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module RDSInstanceFinding
-      OPTIMIZED = 'Optimized'
-      UNDER_PROVISIONED = 'Underprovisioned'
-      OVER_PROVISIONED = 'Overprovisioned'
-    end
-
-    module RDSInstanceFindingReasonCode
-      CPU_OVER_PROVISIONED = 'CPUOverprovisioned'
-      NETWORK_BANDWIDTH_OVER_PROVISIONED = 'NetworkBandwidthOverprovisioned'
-      EBS_IOPS_OVER_PROVISIONED = 'EBSIOPSOverprovisioned'
-      EBS_IOPS_UNDER_PROVISIONED = 'EBSIOPSUnderprovisioned'
-      EBS_THROUGHPUT_OVER_PROVISIONED = 'EBSThroughputOverprovisioned'
-      CPU_UNDER_PROVISIONED = 'CPUUnderprovisioned'
-      NETWORK_BANDWIDTH_UNDER_PROVISIONED = 'NetworkBandwidthUnderprovisioned'
-      EBS_THROUGHPUT_UNDER_PROVISIONED = 'EBSThroughputUnderprovisioned'
-      NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE = 'NewGenerationDBInstanceClassAvailable'
-      NEW_ENGINE_VERSION_AVAILABLE = 'NewEngineVersionAvailable'
-      DB_CLUSTER_WRITER_UNDER_PROVISIONED = 'DBClusterWriterUnderprovisioned'
-      MEMORY_UNDER_PROVISIONED = 'MemoryUnderprovisioned'
-      INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED = 'InstanceStorageReadIOPSUnderprovisioned'
-      INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED = 'InstanceStorageWriteIOPSUnderprovisioned'
     end
 
     # <p>
@@ -6730,7 +5857,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -6749,13 +5876,7 @@ module Aws::ComputeOptimizer
     class RDSSavingsEstimationMode < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RDSSavingsEstimationModeSource
-      PUBLIC_PRICING = 'PublicPricing'
-      COST_EXPLORER_RIGHTSIZING = 'CostExplorerRightsizing'
-      COST_OPTIMIZATION_HUB = 'CostOptimizationHub'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6776,29 +5897,12 @@ module Aws::ComputeOptimizer
       :currency,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module RDSStorageFinding
-      OPTIMIZED = 'Optimized'
-      UNDER_PROVISIONED = 'Underprovisioned'
-      OVER_PROVISIONED = 'Overprovisioned'
-      NOT_OPTIMIZED = 'NotOptimized'
-    end
-
-    module RDSStorageFindingReasonCode
-      EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED = 'EBSVolumeAllocatedStorageUnderprovisioned'
-      EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED = 'EBSVolumeThroughputUnderprovisioned'
-      EBS_VOLUME_IOPS_OVER_PROVISIONED = 'EBSVolumeIOPSOverprovisioned'
-      EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED = 'EBSVolumeThroughputOverprovisioned'
-      NEW_GENERATION_STORAGE_TYPE_AVAILABLE = 'NewGenerationStorageTypeAvailable'
-      DB_CLUSTER_STORAGE_OPTION_AVAILABLE = 'DBClusterStorageOptionAvailable'
-      DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE = 'DBClusterStorageSavingsAvailable'
     end
 
     # <p>
@@ -6823,7 +5927,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -6842,7 +5946,7 @@ module Aws::ComputeOptimizer
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -6885,16 +5989,7 @@ module Aws::ComputeOptimizer
       :last_updated_timestamp,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationPreferenceName
-      ENHANCED_INFRASTRUCTURE_METRICS = 'EnhancedInfrastructureMetrics'
-      INFERRED_WORKLOAD_TYPES = 'InferredWorkloadTypes'
-      EXTERNAL_METRICS_PREFERENCE = 'ExternalMetricsPreference'
-      LOOKBACK_PERIOD_PREFERENCE = 'LookBackPeriodPreference'
-      PREFERRED_RESOURCES = 'PreferredResources'
-      UTILIZATION_PREFERENCES = 'UtilizationPreferences'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
@@ -6919,7 +6014,7 @@ module Aws::ComputeOptimizer
     class RecommendationPreferences < Struct.new(
       :cpu_vendor_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recommendation preference.</p>
@@ -6999,7 +6094,7 @@ module Aws::ComputeOptimizer
       :preferred_resources,
       :savings_estimation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the source of a recommendation, such as an Amazon EC2 instance or
@@ -7014,19 +6109,7 @@ module Aws::ComputeOptimizer
       :recommendation_source_arn,
       :recommendation_source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationSourceType
-      EC2_INSTANCE = 'Ec2Instance'
-      AUTO_SCALING_GROUP = 'AutoScalingGroup'
-      EBS_VOLUME = 'EbsVolume'
-      LAMBDA_FUNCTION = 'LambdaFunction'
-      ECS_SERVICE = 'EcsService'
-      LICENSE = 'License'
-      RDS_DB_INSTANCE = 'RdsDBInstance'
-      RDS_DB_INSTANCE_STORAGE = 'RdsDBInstanceStorage'
-      AURORA_DB_CLUSTER_STORAGE = 'AuroraDBClusterStorage'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a recommendation.</p>
@@ -7106,7 +6189,7 @@ module Aws::ComputeOptimizer
       :current_performance_risk_ratings,
       :inferred_workload_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a projected utilization metric of a recommendation option.</p>
@@ -7134,7 +6217,7 @@ module Aws::ComputeOptimizer
       :rank,
       :projected_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
@@ -7148,20 +6231,7 @@ module Aws::ComputeOptimizer
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      EC2_INSTANCE = 'Ec2Instance'
-      AUTO_SCALING_GROUP = 'AutoScalingGroup'
-      EBS_VOLUME = 'EbsVolume'
-      LAMBDA_FUNCTION = 'LambdaFunction'
-      NOT_APPLICABLE = 'NotApplicable'
-      ECS_SERVICE = 'EcsService'
-      LICENSE = 'License'
-      RDS_DB_INSTANCE = 'RdsDBInstance'
-      AURORA_DB_CLUSTER_STORAGE = 'AuroraDBClusterStorage'
-      IDLE = 'Idle'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and
@@ -7183,7 +6253,7 @@ module Aws::ComputeOptimizer
       :key,
       :metadata_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and
@@ -7206,12 +6276,7 @@ module Aws::ComputeOptimizer
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsEstimationMode
-      AFTER_DISCOUNTS = 'AfterDiscounts'
-      BEFORE_DISCOUNTS = 'BeforeDiscounts'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the savings opportunity for recommendations of a given resource type or for
@@ -7242,7 +6307,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity_percentage,
       :estimated_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:savings_opportunity_percentage] = 0 unless options.key?(:savings_opportunity_percentage)
@@ -7314,13 +6379,7 @@ module Aws::ComputeOptimizer
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScopeName
-      ORGANIZATION = 'Organization'
-      ACCOUNT_ID = 'AccountId'
-      RESOURCE_ARN = 'ResourceArn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7379,7 +6438,7 @@ module Aws::ComputeOptimizer
       :auto_scaling_configuration,
       :task_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed due to a temporary failure of the server.</p>
@@ -7388,14 +6447,7 @@ module Aws::ComputeOptimizer
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
-      PENDING = 'Pending'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a recommendation.</p>
@@ -7413,7 +6465,7 @@ module Aws::ComputeOptimizer
       :value,
       :reason_code_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -7440,7 +6492,7 @@ module Aws::ComputeOptimizer
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -7449,7 +6501,7 @@ module Aws::ComputeOptimizer
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -7484,7 +6536,7 @@ module Aws::ComputeOptimizer
       :status,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -7499,7 +6551,7 @@ module Aws::ComputeOptimizer
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a utilization metric of a resource, such as an Amazon EC2
@@ -7656,7 +6708,7 @@ module Aws::ComputeOptimizer
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -7684,7 +6736,7 @@ module Aws::ComputeOptimizer
       :metric_name,
       :metric_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
@@ -7744,7 +6796,7 @@ module Aws::ComputeOptimizer
       :volume_burst_throughput,
       :root_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size] = 0 unless options.key?(:volume_size)
@@ -7830,7 +6882,7 @@ module Aws::ComputeOptimizer
       :effective_recommendation_preferences,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:look_back_period_in_days] = 0 unless options.key?(:look_back_period_in_days)
@@ -7875,7 +6927,7 @@ module Aws::ComputeOptimizer
       :savings_opportunity,
       :savings_opportunity_after_discounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:performance_risk] = 0 unless options.key?(:performance_risk)

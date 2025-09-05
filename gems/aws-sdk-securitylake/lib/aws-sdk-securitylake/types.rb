@@ -19,12 +19,7 @@ module Aws::SecurityLake
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessType
-      LAKEFORMATION = 'LAKEFORMATION'
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services identity.</p>
@@ -38,7 +33,7 @@ module Aws::SecurityLake
       :principal,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>To add a natively-supported Amazon Web Services service as a log source, use these
@@ -61,23 +56,12 @@ module Aws::SecurityLake
       :source_name,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:source_version] = 'latest' unless options.key?(:source_version)
         super
       end
-    end
-
-    module AwsLogSourceName
-      ROUTE53 = 'ROUTE53'
-      VPC_FLOW = 'VPC_FLOW'
-      SH_FINDINGS = 'SH_FINDINGS'
-      CLOUD_TRAIL_MGMT = 'CLOUD_TRAIL_MGMT'
-      LAMBDA_EXECUTION = 'LAMBDA_EXECUTION'
-      S3_DATA = 'S3_DATA'
-      EKS_AUDIT = 'EKS_AUDIT'
-      WAF = 'WAF'
     end
 
     # <p>Amazon Security Lake can collect logs and events from natively-supported Amazon Web Services
@@ -92,7 +76,7 @@ module Aws::SecurityLake
       :source_name,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is malformed or contains an error such as an invalid parameter value or a missing required parameter.</p>
@@ -101,7 +85,7 @@ module Aws::SecurityLake
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a conflict with a previous successful write is detected. This generally
@@ -121,7 +105,7 @@ module Aws::SecurityLake
       :resource_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -130,7 +114,7 @@ module Aws::SecurityLake
     class CreateAwsLogSourceRequest < Struct.new(
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed
@@ -141,7 +125,7 @@ module Aws::SecurityLake
     class CreateAwsLogSourceResponse < Struct.new(
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_name
@@ -170,7 +154,7 @@ module Aws::SecurityLake
       :event_classes,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -179,7 +163,7 @@ module Aws::SecurityLake
     class CreateCustomLogSourceResponse < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_protocol
@@ -196,12 +180,12 @@ module Aws::SecurityLake
       :notification_endpoint,
       :exception_time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateDataLakeExceptionSubscriptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_new_account
@@ -211,12 +195,12 @@ module Aws::SecurityLake
     class CreateDataLakeOrganizationConfigurationRequest < Struct.new(
       :auto_enable_new_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateDataLakeOrganizationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -236,7 +220,7 @@ module Aws::SecurityLake
       :meta_store_manager_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_lakes
@@ -245,7 +229,7 @@ module Aws::SecurityLake
     class CreateDataLakeResponse < Struct.new(
       :data_lakes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -259,7 +243,7 @@ module Aws::SecurityLake
       :subscriber_id,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_endpoint
@@ -268,7 +252,7 @@ module Aws::SecurityLake
     class CreateSubscriberNotificationResponse < Struct.new(
       :subscriber_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_identity
@@ -299,7 +283,7 @@ module Aws::SecurityLake
       :access_types,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber
@@ -309,7 +293,7 @@ module Aws::SecurityLake
     class CreateSubscriberResponse < Struct.new(
       :subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes of a third-party custom source.</p>
@@ -328,7 +312,7 @@ module Aws::SecurityLake
       :database_arn,
       :table_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration used for the third-party custom source.</p>
@@ -342,7 +326,7 @@ module Aws::SecurityLake
       :crawler_configuration,
       :provider_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration used for the Glue Crawler for a third-party custom source.</p>
@@ -363,7 +347,7 @@ module Aws::SecurityLake
     class CustomLogSourceCrawlerConfiguration < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the log provider for a third-party custom source.</p>
@@ -381,7 +365,7 @@ module Aws::SecurityLake
       :role_arn,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Security Lake can collect logs and events from third-party custom sources.</p>
@@ -403,7 +387,7 @@ module Aws::SecurityLake
       :provider,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Automatically enable new organization accounts as member accounts from an Amazon Security Lake
@@ -418,7 +402,7 @@ module Aws::SecurityLake
       :region,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details of Amazon Security Lake object.</p>
@@ -440,7 +424,7 @@ module Aws::SecurityLake
       :lifecycle_configuration,
       :replication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides encryption details of Amazon Security Lake object.</p>
@@ -451,7 +435,7 @@ module Aws::SecurityLake
     class DataLakeEncryptionConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for an Amazon Security Lake exception.</p>
@@ -473,7 +457,7 @@ module Aws::SecurityLake
       :remediation,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides lifecycle details of Amazon Security Lake object.</p>
@@ -487,7 +471,7 @@ module Aws::SecurityLake
       :expiration,
       :transitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provide expiration lifecycle details of Amazon Security Lake object.</p>
@@ -497,7 +481,7 @@ module Aws::SecurityLake
     class DataLakeLifecycleExpiration < Struct.new(
       :days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provide transition lifecycle details of Amazon Security Lake object.</p>
@@ -512,7 +496,7 @@ module Aws::SecurityLake
       :storage_class,
       :days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides replication details for objects stored in the Amazon Security Lake data lake.</p>
@@ -539,7 +523,7 @@ module Aws::SecurityLake
       :regions,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details of Amazon Security Lake object.</p>
@@ -578,7 +562,7 @@ module Aws::SecurityLake
       :create_status,
       :update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Security Lake collects logs and events from supported Amazon Web Services services and
@@ -603,7 +587,7 @@ module Aws::SecurityLake
       :event_classes,
       :source_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the Logs status for the Amazon Security Lake account.</p>
@@ -618,14 +602,7 @@ module Aws::SecurityLake
       :resource,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLakeStatus
-      INITIALIZED = 'INITIALIZED'
-      PENDING = 'PENDING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the last <code>UpdateDataLake</code> or <code>DeleteDataLake</code>
@@ -642,7 +619,7 @@ module Aws::SecurityLake
       :reason,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the last <code>UpdateDataLake</code> or <code>DeleteDataLake</code> API
@@ -665,7 +642,7 @@ module Aws::SecurityLake
       :status,
       :exception,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -675,7 +652,7 @@ module Aws::SecurityLake
     class DeleteAwsLogSourceRequest < Struct.new(
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed
@@ -684,7 +661,7 @@ module Aws::SecurityLake
     class DeleteAwsLogSourceResponse < Struct.new(
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_name
@@ -698,22 +675,22 @@ module Aws::SecurityLake
       :source_name,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomLogSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeExceptionSubscriptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_new_account
@@ -722,12 +699,12 @@ module Aws::SecurityLake
     class DeleteDataLakeOrganizationConfigurationRequest < Struct.new(
       :auto_enable_new_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeOrganizationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -736,12 +713,12 @@ module Aws::SecurityLake
     class DeleteDataLakeRequest < Struct.new(
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataLakeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -750,12 +727,12 @@ module Aws::SecurityLake
     class DeleteSubscriberNotificationRequest < Struct.new(
       :subscriber_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSubscriberNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -764,27 +741,27 @@ module Aws::SecurityLake
     class DeleteSubscriberRequest < Struct.new(
       :subscriber_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSubscriberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterDataLakeDelegatedAdministratorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDataLakeExceptionSubscriptionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_protocol
@@ -801,12 +778,12 @@ module Aws::SecurityLake
       :notification_endpoint,
       :exception_time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDataLakeOrganizationConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_new_account
@@ -815,7 +792,7 @@ module Aws::SecurityLake
     class GetDataLakeOrganizationConfigurationResponse < Struct.new(
       :auto_enable_new_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -837,7 +814,7 @@ module Aws::SecurityLake
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_lake_arn
@@ -858,7 +835,7 @@ module Aws::SecurityLake
       :data_lake_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -868,7 +845,7 @@ module Aws::SecurityLake
     class GetSubscriberRequest < Struct.new(
       :subscriber_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber
@@ -877,12 +854,7 @@ module Aws::SecurityLake
     class GetSubscriberResponse < Struct.new(
       :subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HttpMethod
-      POST = 'POST'
-      PUT = 'PUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations used for HTTPS subscriber notification.</p>
@@ -911,7 +883,7 @@ module Aws::SecurityLake
       :http_method,
       :target_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internal service exceptions are sometimes caused by transient issues. Before you start
@@ -921,7 +893,7 @@ module Aws::SecurityLake
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -942,7 +914,7 @@ module Aws::SecurityLake
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exceptions
@@ -959,7 +931,7 @@ module Aws::SecurityLake
       :exceptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -968,7 +940,7 @@ module Aws::SecurityLake
     class ListDataLakesRequest < Struct.new(
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_lakes
@@ -977,7 +949,7 @@ module Aws::SecurityLake
     class ListDataLakesResponse < Struct.new(
       :data_lakes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -1003,7 +975,7 @@ module Aws::SecurityLake
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sources
@@ -1017,7 +989,7 @@ module Aws::SecurityLake
       :sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1031,7 +1003,7 @@ module Aws::SecurityLake
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscribers
@@ -1045,7 +1017,7 @@ module Aws::SecurityLake
       :subscribers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1054,7 +1026,7 @@ module Aws::SecurityLake
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1063,7 +1035,7 @@ module Aws::SecurityLake
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Security Lake can collect logs and events from natively-supported Amazon Web Services services and custom sources. </p>
@@ -1081,7 +1053,7 @@ module Aws::SecurityLake
       :region,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supported source types from which logs and events are collected in Amazon Security Lake.
@@ -1097,7 +1069,7 @@ module Aws::SecurityLake
       :custom_log_source,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AwsLogSource < LogSourceResource; end
       class CustomLogSource < LogSourceResource; end
@@ -1118,7 +1090,7 @@ module Aws::SecurityLake
       :https_notification_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SqsNotificationConfiguration < NotificationConfiguration; end
       class HttpsNotificationConfiguration < NotificationConfiguration; end
@@ -1131,12 +1103,12 @@ module Aws::SecurityLake
     class RegisterDataLakeDelegatedAdministratorRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterDataLakeDelegatedAdministratorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -1153,19 +1125,13 @@ module Aws::SecurityLake
       :resource_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceCollectionStatus
-      COLLECTING = 'COLLECTING'
-      MISCONFIGURED = 'MISCONFIGURED'
-      NOT_COLLECTING = 'NOT_COLLECTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations used for EventBridge subscriber notification.</p>
     class SqsNotificationConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the Amazon Security Lake account subscription. Subscribers are notified
@@ -1243,14 +1209,7 @@ module Aws::SecurityLake
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriberStatus
-      ACTIVE = 'ACTIVE'
-      DEACTIVATED = 'DEACTIVATED'
-      PENDING = 'PENDING'
-      READY = 'READY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <i>tag</i> is a label that you can define and associate with Amazon Web Services resources, including certain types of Amazon Security Lake resources. 
@@ -1273,7 +1232,7 @@ module Aws::SecurityLake
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1287,12 +1246,12 @@ module Aws::SecurityLake
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -1313,7 +1272,7 @@ module Aws::SecurityLake
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1326,12 +1285,12 @@ module Aws::SecurityLake
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_protocol
@@ -1348,12 +1307,12 @@ module Aws::SecurityLake
       :notification_endpoint,
       :exception_time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataLakeExceptionSubscriptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -1368,7 +1327,7 @@ module Aws::SecurityLake
       :configurations,
       :meta_store_manager_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_lakes
@@ -1377,7 +1336,7 @@ module Aws::SecurityLake
     class UpdateDataLakeResponse < Struct.new(
       :data_lakes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -1390,7 +1349,7 @@ module Aws::SecurityLake
       :subscriber_id,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_endpoint
@@ -1399,7 +1358,7 @@ module Aws::SecurityLake
     class UpdateSubscriberNotificationResponse < Struct.new(
       :subscriber_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber_id
@@ -1425,7 +1384,7 @@ module Aws::SecurityLake
       :subscriber_description,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriber
@@ -1434,7 +1393,7 @@ module Aws::SecurityLake
     class UpdateSubscriberResponse < Struct.new(
       :subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

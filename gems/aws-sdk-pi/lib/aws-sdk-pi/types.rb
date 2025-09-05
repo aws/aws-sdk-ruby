@@ -6,10 +6,6 @@ module Aws::PI
   # This module contains the types returned by client operations.
   module Types
 
-    module AcceptLanguage
-      EN_US = 'EN_US'
-    end
-
     # <p>Retrieves the summary of the performance analysis report created for a time period.</p>
     # @!attribute analysis_report_id
     #   <p>The name of the analysis report.</p>
@@ -57,7 +53,7 @@ module Aws::PI
       :status,
       :insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the details of the performance analysis report.</p>
@@ -87,18 +83,7 @@ module Aws::PI
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-    end
-
-    module ContextType
-      CAUSAL = 'CAUSAL'
-      CONTEXTUAL = 'CONTEXTUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -126,7 +111,7 @@ module Aws::PI
       :end_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_report_id
@@ -135,7 +120,7 @@ module Aws::PI
     class CreatePerformanceAnalysisReportResponse < Struct.new(
       :analysis_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of data objects which provide details about source metrics. 
@@ -151,7 +136,7 @@ module Aws::PI
     class Data < Struct.new(
       :performance_insights_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A timestamp, and a single numerical value, which together represent a measurement at a particular point in time.</p>
@@ -165,7 +150,7 @@ module Aws::PI
       :timestamp,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -186,12 +171,12 @@ module Aws::PI
       :identifier,
       :analysis_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePerformanceAnalysisReportResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -334,7 +319,7 @@ module Aws::PI
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aligned_start_time
@@ -363,13 +348,7 @@ module Aws::PI
       :keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetailStatus
-      AVAILABLE = 'AVAILABLE'
-      PROCESSING = 'PROCESSING'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about a dimension.</p>
@@ -379,7 +358,7 @@ module Aws::PI
     class DimensionDetail < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical grouping of Performance Insights metrics for a related subject area. For example, the
@@ -690,7 +669,7 @@ module Aws::PI
       :dimensions,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about dimensions within a dimension group.</p>
@@ -704,7 +683,7 @@ module Aws::PI
       :group,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that includes the requested dimension key values and aggregated metric values 
@@ -727,7 +706,7 @@ module Aws::PI
       :additional_metrics,
       :partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the details for a specified dimension.</p>
@@ -781,7 +760,7 @@ module Aws::PI
       :dimension,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for a feature. For example, the metadata might indicate that a feature is
@@ -818,22 +797,7 @@ module Aws::PI
     class FeatureMetadata < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      UNSUPPORTED = 'UNSUPPORTED'
-      ENABLED_PENDING_REBOOT = 'ENABLED_PENDING_REBOOT'
-      DISABLED_PENDING_REBOOT = 'DISABLED_PENDING_REBOOT'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module FineGrainedAction
-      DESCRIBE_DIMENSION_KEYS = 'DescribeDimensionKeys'
-      GET_DIMENSION_KEY_DETAILS = 'GetDimensionKeyDetails'
-      GET_RESOURCE_METRICS = 'GetResourceMetrics'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -920,7 +884,7 @@ module Aws::PI
       :group_identifier,
       :requested_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dimensions
@@ -929,7 +893,7 @@ module Aws::PI
     class GetDimensionKeyDetailsResponse < Struct.new(
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -964,7 +928,7 @@ module Aws::PI
       :text_format,
       :accept_language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_report
@@ -973,7 +937,7 @@ module Aws::PI
     class GetPerformanceAnalysisReportResponse < Struct.new(
       :analysis_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -989,7 +953,7 @@ module Aws::PI
       :service_type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1007,7 +971,7 @@ module Aws::PI
       :identifier,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1101,7 +1065,7 @@ module Aws::PI
       :next_token,
       :period_alignment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aligned_start_time
@@ -1133,7 +1097,7 @@ module Aws::PI
       :metric_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the list of performance issues which are identified.</p>
@@ -1190,7 +1154,7 @@ module Aws::PI
       :insight_data,
       :baseline_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to an unknown error.</p>
@@ -1199,7 +1163,7 @@ module Aws::PI
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the arguments provided is invalid for this request.</p>
@@ -1208,7 +1172,7 @@ module Aws::PI
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1246,7 +1210,7 @@ module Aws::PI
       :next_token,
       :authorized_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_dimensions
@@ -1260,7 +1224,7 @@ module Aws::PI
       :metric_dimensions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1308,7 +1272,7 @@ module Aws::PI
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics
@@ -1324,7 +1288,7 @@ module Aws::PI
       :metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1357,7 +1321,7 @@ module Aws::PI
       :max_results,
       :list_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_reports
@@ -1373,7 +1337,7 @@ module Aws::PI
       :analysis_reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1389,7 +1353,7 @@ module Aws::PI
       :service_type,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1398,7 +1362,7 @@ module Aws::PI
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The available dimension information for a metric type.</p>
@@ -1412,7 +1376,7 @@ module Aws::PI
       :metric,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time-ordered series of data points, corresponding to a dimension of a Performance Insights
@@ -1427,7 +1391,7 @@ module Aws::PI
       :key,
       :data_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single query to be processed. You must provide the metric to query and append an aggregate function to the metric.
@@ -1489,7 +1453,7 @@ module Aws::PI
       :group_by,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user is not authorized to perform this request.</p>
@@ -1498,7 +1462,7 @@ module Aws::PI
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type helps to determine Performance Insights metric to render for the insight.</p>
@@ -1524,12 +1488,7 @@ module Aws::PI
       :filter,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PeriodAlignment
-      END_TIME = 'END_TIME'
-      START_TIME = 'START_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of recommendations for the insight.</p>
@@ -1545,7 +1504,7 @@ module Aws::PI
       :recommendation_id,
       :recommendation_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If <code>PartitionBy</code> was specified in a <code>DescribeDimensionKeys</code>
@@ -1557,7 +1516,7 @@ module Aws::PI
     class ResponsePartitionKey < Struct.new(
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the full name, description, and unit of a metric.
@@ -1576,7 +1535,7 @@ module Aws::PI
       :description,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object describing a Performance Insights metric and one or more dimensions for that metric.</p>
@@ -1615,18 +1574,7 @@ module Aws::PI
       :metric,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceType
-      RDS = 'RDS'
-      DOCDB = 'DOCDB'
-    end
-
-    module Severity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>
@@ -1646,7 +1594,7 @@ module Aws::PI
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1665,17 +1613,12 @@ module Aws::PI
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TextFormat
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      MARKDOWN = 'MARKDOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_type
@@ -1694,12 +1637,12 @@ module Aws::PI
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

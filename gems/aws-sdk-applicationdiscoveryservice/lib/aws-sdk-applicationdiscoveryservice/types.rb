@@ -26,7 +26,7 @@ module Aws::ApplicationDiscoveryService
       :operation_succeeded,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:operation_succeeded] = false unless options.key?(:operation_succeeded)
@@ -81,7 +81,7 @@ module Aws::ApplicationDiscoveryService
       :agent_type,
       :registered_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network details about the host where the agent/collector resides.</p>
@@ -96,16 +96,7 @@ module Aws::ApplicationDiscoveryService
       :ip_address,
       :mac_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-      RUNNING = 'RUNNING'
-      UNKNOWN = 'UNKNOWN'
-      BLACKLISTED = 'BLACKLISTED'
-      SHUTDOWN = 'SHUTDOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_configuration_id
@@ -118,12 +109,12 @@ module Aws::ApplicationDiscoveryService
       :application_configuration_id,
       :configuration_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateConfigurationItemsToApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user does not have permission to perform the action. Check the IAM
@@ -133,7 +124,7 @@ module Aws::ApplicationDiscoveryService
     class AuthorizationErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -161,7 +152,7 @@ module Aws::ApplicationDiscoveryService
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delete_agents
@@ -172,7 +163,7 @@ module Aws::ApplicationDiscoveryService
     class BatchDeleteAgentsRequest < Struct.new(
       :delete_agents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -183,7 +174,7 @@ module Aws::ApplicationDiscoveryService
     class BatchDeleteAgentsResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -248,15 +239,7 @@ module Aws::ApplicationDiscoveryService
       :failed_configurations,
       :deletion_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchDeleteConfigurationTaskStatus
-      INITIALIZING = 'INITIALIZING'
-      VALIDATING = 'VALIDATING'
-      DELETING = 'DELETING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error messages returned for each import task that you deleted as a response for this
@@ -275,13 +258,7 @@ module Aws::ApplicationDiscoveryService
       :error_code,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchDeleteImportDataErrorCode
-      NOT_FOUND = 'NOT_FOUND'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-      OVER_LIMIT = 'OVER_LIMIT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_task_ids
@@ -297,7 +274,7 @@ module Aws::ApplicationDiscoveryService
       :import_task_ids,
       :delete_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -307,14 +284,7 @@ module Aws::ApplicationDiscoveryService
     class BatchDeleteImportDataResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationItemType
-      SERVER = 'SERVER'
-      PROCESS = 'PROCESS'
-      CONNECTIONS = 'CONNECTION'
-      APPLICATION = 'APPLICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags for a configuration item. Tags are metadata that help you categorize IT
@@ -345,7 +315,7 @@ module Aws::ApplicationDiscoveryService
       :value,
       :time_of_creation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Conflict error.</p>
@@ -354,7 +324,7 @@ module Aws::ApplicationDiscoveryService
     class ConflictErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of continuous export descriptions.</p>
@@ -502,17 +472,7 @@ module Aws::ApplicationDiscoveryService
       :data_source,
       :schema_storage_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContinuousExportStatus
-      START_IN_PROGRESS = 'START_IN_PROGRESS'
-      START_FAILED = 'START_FAILED'
-      ACTIVE = 'ACTIVE'
-      ERROR = 'ERROR'
-      STOP_IN_PROGRESS = 'STOP_IN_PROGRESS'
-      STOP_FAILED = 'STOP_FAILED'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -529,7 +489,7 @@ module Aws::ApplicationDiscoveryService
       :description,
       :wave,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -538,7 +498,7 @@ module Aws::ApplicationDiscoveryService
     class CreateApplicationResponse < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_ids
@@ -556,12 +516,12 @@ module Aws::ApplicationDiscoveryService
       :configuration_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTagsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inventory data for installed discovery agents.</p>
@@ -595,7 +555,7 @@ module Aws::ApplicationDiscoveryService
       :total_agents,
       :unknown_agents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:active_agents] = 0 unless options.key?(:active_agents)
@@ -641,7 +601,7 @@ module Aws::ApplicationDiscoveryService
       :total_agentless_collectors,
       :unknown_agentless_collectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:active_agentless_collectors] = 0 unless options.key?(:active_agentless_collectors)
@@ -686,7 +646,7 @@ module Aws::ApplicationDiscoveryService
       :total_connectors,
       :unknown_connectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:active_connectors] = 0 unless options.key?(:active_connectors)
@@ -731,7 +691,7 @@ module Aws::ApplicationDiscoveryService
       :total_me_collectors,
       :unknown_me_collectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:active_me_collectors] = 0 unless options.key?(:active_me_collectors)
@@ -743,10 +703,6 @@ module Aws::ApplicationDiscoveryService
         options[:unknown_me_collectors] = 0 unless options.key?(:unknown_me_collectors)
         super
       end
-    end
-
-    module DataSource
-      AGENT = 'AGENT'
     end
 
     # <p>
@@ -769,18 +725,12 @@ module Aws::ApplicationDiscoveryService
       :agent_id,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:force] = false unless options.key?(:force)
         super
       end
-    end
-
-    module DeleteAgentErrorCode
-      NOT_FOUND = 'NOT_FOUND'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-      AGENT_IN_USE = 'AGENT_IN_USE'
     end
 
     # @!attribute configuration_ids
@@ -789,12 +739,12 @@ module Aws::ApplicationDiscoveryService
     class DeleteApplicationsRequest < Struct.new(
       :configuration_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_ids
@@ -812,16 +762,12 @@ module Aws::ApplicationDiscoveryService
       :configuration_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionConfigurationItemType
-      SERVER = 'SERVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -847,7 +793,7 @@ module Aws::ApplicationDiscoveryService
       :warning_code,
       :warning_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:warning_code] = 0 unless options.key?(:warning_code)
@@ -882,7 +828,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agents_info
@@ -901,7 +847,7 @@ module Aws::ApplicationDiscoveryService
       :agents_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -912,7 +858,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeBatchDeleteConfigurationTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task
@@ -923,7 +869,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeBatchDeleteConfigurationTaskResponse < Struct.new(
       :task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_ids
@@ -932,7 +878,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeConfigurationsRequest < Struct.new(
       :configuration_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -941,7 +887,7 @@ module Aws::ApplicationDiscoveryService
     class DescribeConfigurationsResponse < Struct.new(
       :configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_ids
@@ -959,7 +905,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute descriptions
@@ -972,7 +918,7 @@ module Aws::ApplicationDiscoveryService
       :descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_ids
@@ -990,7 +936,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exports_info
@@ -1003,7 +949,7 @@ module Aws::ApplicationDiscoveryService
       :exports_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_ids
@@ -1038,7 +984,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exports_info
@@ -1057,7 +1003,7 @@ module Aws::ApplicationDiscoveryService
       :exports_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1076,7 +1022,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1090,7 +1036,7 @@ module Aws::ApplicationDiscoveryService
       :next_token,
       :tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1110,7 +1056,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1124,7 +1070,7 @@ module Aws::ApplicationDiscoveryService
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_configuration_id
@@ -1137,12 +1083,12 @@ module Aws::ApplicationDiscoveryService
       :application_configuration_id,
       :configuration_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateConfigurationItemsFromApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1198,7 +1144,7 @@ module Aws::ApplicationDiscoveryService
       :preferred_region,
       :reserved_instance_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1212,11 +1158,7 @@ module Aws::ApplicationDiscoveryService
     class ExportConfigurationsResponse < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportDataFormat
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to select which agent's data is to be exported. A single agent ID may be selected
@@ -1238,7 +1180,7 @@ module Aws::ApplicationDiscoveryService
       :values,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information regarding the export status of discovered data. The value is an array of
@@ -1285,7 +1227,7 @@ module Aws::ApplicationDiscoveryService
       :requested_start_time,
       :requested_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -1308,16 +1250,10 @@ module Aws::ApplicationDiscoveryService
       :ec2_recommendations_preferences,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Ec2RecommendationsPreferences < ExportPreferences; end
       class Unknown < ExportPreferences; end
-    end
-
-    module ExportStatus
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      IN_PROGRESS = 'IN_PROGRESS'
     end
 
     # <p>
@@ -1343,19 +1279,12 @@ module Aws::ApplicationDiscoveryService
       :error_status_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:error_status_code] = 0 unless options.key?(:error_status_code)
         super
       end
-    end
-
-    module FileClassification
-      MODELIZEIT_EXPORT = 'MODELIZEIT_EXPORT'
-      RVTOOLS_EXPORT = 'RVTOOLS_EXPORT'
-      VMWARE_NSX_EXPORT = 'VMWARE_NSX_EXPORT'
-      IMPORT_TEMPLATE = 'IMPORT_TEMPLATE'
     end
 
     # <p>A filter that can use conditional operators.</p>
@@ -1383,12 +1312,12 @@ module Aws::ApplicationDiscoveryService
       :values,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDiscoverySummaryRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute servers
@@ -1425,7 +1354,7 @@ module Aws::ApplicationDiscoveryService
       :me_collector_summary,
       :agentless_collector_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:servers] = 0 unless options.key?(:servers)
@@ -1442,22 +1371,7 @@ module Aws::ApplicationDiscoveryService
     class HomeRegionNotSetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportStatus
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
-      IMPORT_COMPLETE = 'IMPORT_COMPLETE'
-      IMPORT_COMPLETE_WITH_ERRORS = 'IMPORT_COMPLETE_WITH_ERRORS'
-      IMPORT_FAILED = 'IMPORT_FAILED'
-      IMPORT_FAILED_SERVER_LIMIT_EXCEEDED = 'IMPORT_FAILED_SERVER_LIMIT_EXCEEDED'
-      IMPORT_FAILED_RECORD_LIMIT_EXCEEDED = 'IMPORT_FAILED_RECORD_LIMIT_EXCEEDED'
-      IMPORT_FAILED_UNSUPPORTED_FILE_TYPE = 'IMPORT_FAILED_UNSUPPORTED_FILE_TYPE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_FAILED_LIMIT_EXCEEDED = 'DELETE_FAILED_LIMIT_EXCEEDED'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of information related to the import task request that includes status
@@ -1543,7 +1457,7 @@ module Aws::ApplicationDiscoveryService
       :application_import_failure,
       :errors_and_failed_entries_zip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:server_import_success] = 0 unless options.key?(:server_import_success)
@@ -1570,14 +1484,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportTaskFilterName
-      IMPORT_TASK_ID = 'IMPORT_TASK_ID'
-      STATUS = 'STATUS'
-      NAME = 'NAME'
-      FILE_CLASSIFICATION = 'FILE_CLASSIFICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters are not valid. Verify the parameters and try again.</p>
@@ -1586,7 +1493,7 @@ module Aws::ApplicationDiscoveryService
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of one or more parameters are either invalid or out of range. Verify the
@@ -1596,7 +1503,7 @@ module Aws::ApplicationDiscoveryService
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1607,7 +1514,7 @@ module Aws::ApplicationDiscoveryService
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_type
@@ -1644,7 +1551,7 @@ module Aws::ApplicationDiscoveryService
       :next_token,
       :order_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -1662,7 +1569,7 @@ module Aws::ApplicationDiscoveryService
       :configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -1691,7 +1598,7 @@ module Aws::ApplicationDiscoveryService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute neighbors
@@ -1712,7 +1619,7 @@ module Aws::ApplicationDiscoveryService
       :next_token,
       :known_dependency_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:known_dependency_count] = 0 unless options.key?(:known_dependency_count)
@@ -1743,17 +1650,12 @@ module Aws::ApplicationDiscoveryService
       :transport_protocol,
       :connections_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:connections_count] = 0 unless options.key?(:connections_count)
         super
       end
-    end
-
-    module OfferingClass
-      STANDARD = 'STANDARD'
-      CONVERTIBLE = 'CONVERTIBLE'
     end
 
     # <p>This operation is not permitted.</p>
@@ -1762,7 +1664,7 @@ module Aws::ApplicationDiscoveryService
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A field and direction for ordered output.</p>
@@ -1776,13 +1678,7 @@ module Aws::ApplicationDiscoveryService
       :field_name,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PurchasingOption
-      ALL_UPFRONT = 'ALL_UPFRONT'
-      PARTIAL_UPFRONT = 'PARTIAL_UPFRONT'
-      NO_UPFRONT = 'NO_UPFRONT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1808,7 +1704,7 @@ module Aws::ApplicationDiscoveryService
       :offering_class,
       :term_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This issue occurs when the same <code>clientRequestToken</code> is used with the
@@ -1821,7 +1717,7 @@ module Aws::ApplicationDiscoveryService
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration ID was not located. Verify the configuration ID and try
@@ -1831,7 +1727,7 @@ module Aws::ApplicationDiscoveryService
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server experienced an internal error. Try again.</p>
@@ -1840,7 +1736,7 @@ module Aws::ApplicationDiscoveryService
     class ServerInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_type
@@ -1857,7 +1753,7 @@ module Aws::ApplicationDiscoveryService
       :configuration_type,
       :configuration_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1868,12 +1764,12 @@ module Aws::ApplicationDiscoveryService
     class StartBatchDeleteConfigurationTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartContinuousExportRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -1906,7 +1802,7 @@ module Aws::ApplicationDiscoveryService
       :data_source,
       :schema_storage_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_ids
@@ -1921,7 +1817,7 @@ module Aws::ApplicationDiscoveryService
     class StartDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agents_configuration_status
@@ -1932,7 +1828,7 @@ module Aws::ApplicationDiscoveryService
     class StartDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_data_format
@@ -1974,7 +1870,7 @@ module Aws::ApplicationDiscoveryService
       :end_time,
       :preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -1983,7 +1879,7 @@ module Aws::ApplicationDiscoveryService
     class StartExportTaskResponse < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -2012,7 +1908,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :import_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task
@@ -2022,7 +1918,7 @@ module Aws::ApplicationDiscoveryService
     class StartImportTaskResponse < Struct.new(
       :task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -2031,7 +1927,7 @@ module Aws::ApplicationDiscoveryService
     class StopContinuousExportRequest < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -2045,7 +1941,7 @@ module Aws::ApplicationDiscoveryService
       :start_time,
       :stop_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_ids
@@ -2054,7 +1950,7 @@ module Aws::ApplicationDiscoveryService
     class StopDataCollectionByAgentIdsRequest < Struct.new(
       :agent_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agents_configuration_status
@@ -2065,7 +1961,7 @@ module Aws::ApplicationDiscoveryService
     class StopDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that help you categorize IT assets.</p>
@@ -2082,7 +1978,7 @@ module Aws::ApplicationDiscoveryService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag filter. Valid names are: <code>tagKey</code>, <code>tagValue</code>,
@@ -2097,17 +1993,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Tenancy
-      DEDICATED = 'DEDICATED'
-      SHARED = 'SHARED'
-    end
-
-    module TermLength
-      ONE_YEAR = 'ONE_YEAR'
-      THREE_YEAR = 'THREE_YEAR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_id
@@ -2128,12 +2014,12 @@ module Aws::ApplicationDiscoveryService
       :description,
       :wave,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2153,12 +2039,7 @@ module Aws::ApplicationDiscoveryService
       :name,
       :percentage_adjust,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderString
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
   end

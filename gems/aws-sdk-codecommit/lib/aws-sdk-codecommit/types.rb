@@ -13,7 +13,7 @@ module Aws::CodeCommit
     class ActorDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific approval on a pull request.</p>
@@ -27,7 +27,7 @@ module Aws::CodeCommit
       :user_arn,
       :approval_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an approval rule.</p>
@@ -65,7 +65,7 @@ module Aws::CodeCommit
       :last_modified_user,
       :origin_approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content for the approval rule is empty. You must provide some content for an approval rule. The content cannot be null.</p>
@@ -75,7 +75,7 @@ module Aws::CodeCommit
     class ApprovalRuleContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified approval rule does not exist.</p>
@@ -85,7 +85,7 @@ module Aws::CodeCommit
     class ApprovalRuleDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an event for an approval rule.</p>
@@ -103,7 +103,7 @@ module Aws::CodeCommit
       :approval_rule_id,
       :approval_rule_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An approval rule with that name already exists. Approval rule names must be unique
@@ -114,7 +114,7 @@ module Aws::CodeCommit
     class ApprovalRuleNameAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An approval rule name is required, but was not specified.</p>
@@ -124,7 +124,7 @@ module Aws::CodeCommit
     class ApprovalRuleNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an override event for approval rules for a pull request.</p>
@@ -138,7 +138,7 @@ module Aws::CodeCommit
       :revision_id,
       :override_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an approval rule template.</p>
@@ -176,7 +176,7 @@ module Aws::CodeCommit
       :creation_date,
       :last_modified_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content for the approval rule template is empty. You must provide some content for an approval rule template. The content cannot be null.</p>
@@ -186,7 +186,7 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified approval rule template does not exist. Verify that the name is correct and that you are signed in to the Amazon Web Services Region where the template
@@ -197,7 +197,7 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval rule template is associated with one or more repositories. You cannot delete a template that is associated with a repository. Remove
@@ -208,7 +208,7 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot create an approval rule template with that name because a template with
@@ -220,7 +220,7 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateNameAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An approval rule template name is required, but was not specified.</p>
@@ -230,12 +230,7 @@ module Aws::CodeCommit
     class ApprovalRuleTemplateNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApprovalState
-      APPROVE = 'APPROVE'
-      REVOKE = 'REVOKE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a change in the approval state for a pull request.</p>
@@ -249,7 +244,7 @@ module Aws::CodeCommit
       :revision_id,
       :approval_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An approval state is required, but was not specified.</p>
@@ -259,7 +254,7 @@ module Aws::CodeCommit
     class ApprovalStateRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -272,7 +267,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Resource Name (ARN) does not exist in the Amazon Web Services account.</p>
@@ -282,7 +277,7 @@ module Aws::CodeCommit
     class AuthorDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about errors in a BatchAssociateApprovalRuleTemplateWithRepositories operation.</p>
@@ -300,7 +295,7 @@ module Aws::CodeCommit
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -316,7 +311,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :repository_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_repository_names
@@ -329,7 +324,7 @@ module Aws::CodeCommit
       :associated_repository_names,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about errors in a BatchDescribeMergeConflicts operation.</p>
@@ -347,7 +342,7 @@ module Aws::CodeCommit
       :exception_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -400,7 +395,7 @@ module Aws::CodeCommit
       :conflict_resolution_strategy,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conflicts
@@ -429,7 +424,7 @@ module Aws::CodeCommit
       :source_commit_id,
       :base_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about errors in a BatchDisassociateApprovalRuleTemplateFromRepositories operation.</p>
@@ -448,7 +443,7 @@ module Aws::CodeCommit
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -465,7 +460,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :repository_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociated_repository_names
@@ -479,7 +474,7 @@ module Aws::CodeCommit
       :disassociated_repository_names,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about errors in a BatchGetCommits operation.</p>
@@ -497,7 +492,7 @@ module Aws::CodeCommit
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_ids
@@ -514,7 +509,7 @@ module Aws::CodeCommit
       :commit_ids,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commits
@@ -529,7 +524,7 @@ module Aws::CodeCommit
       :commits,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about errors in a BatchGetRepositories operation.</p>
@@ -551,16 +546,7 @@ module Aws::CodeCommit
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchGetRepositoriesErrorCodeEnum
-      ENCRYPTION_INTEGRITY_CHECKS_FAILED_EXCEPTION = 'EncryptionIntegrityChecksFailedException'
-      ENCRYPTION_KEY_ACCESS_DENIED_EXCEPTION = 'EncryptionKeyAccessDeniedException'
-      ENCRYPTION_KEY_DISABLED_EXCEPTION = 'EncryptionKeyDisabledException'
-      ENCRYPTION_KEY_NOT_FOUND_EXCEPTION = 'EncryptionKeyNotFoundException'
-      ENCRYPTION_KEY_UNAVAILABLE_EXCEPTION = 'EncryptionKeyUnavailableException'
-      REPOSITORY_DOES_NOT_EXIST_EXCEPTION = 'RepositoryDoesNotExistException'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a batch get repositories operation.</p>
@@ -573,7 +559,7 @@ module Aws::CodeCommit
     class BatchGetRepositoriesInput < Struct.new(
       :repository_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a batch get repositories operation.</p>
@@ -591,7 +577,7 @@ module Aws::CodeCommit
       :repositories_not_found,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The before commit ID and the after commit ID are the same, which is not valid. The before commit ID and the after commit ID must be different commit IDs.</p>
@@ -601,7 +587,7 @@ module Aws::CodeCommit
     class BeforeCommitIdAndAfterCommitIdAreSameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified blob does not exist.</p>
@@ -611,7 +597,7 @@ module Aws::CodeCommit
     class BlobIdDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A blob ID is required, but was not specified.</p>
@@ -621,7 +607,7 @@ module Aws::CodeCommit
     class BlobIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific Git blob object.</p>
@@ -657,7 +643,7 @@ module Aws::CodeCommit
       :path,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified branch does not exist.</p>
@@ -667,7 +653,7 @@ module Aws::CodeCommit
     class BranchDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a branch.</p>
@@ -681,7 +667,7 @@ module Aws::CodeCommit
       :branch_name,
       :commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot create the branch with the specified name because the commit conflicts with an existing branch with the same name. 
@@ -693,7 +679,7 @@ module Aws::CodeCommit
     class BranchNameExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified branch name is not valid because it is a tag name. Enter the name of a
@@ -704,7 +690,7 @@ module Aws::CodeCommit
     class BranchNameIsTagNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A branch name is required, but was not specified.</p>
@@ -714,7 +700,7 @@ module Aws::CodeCommit
     class BranchNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval rule cannot be deleted from the pull request because it was created by an
@@ -725,7 +711,7 @@ module Aws::CodeCommit
     class CannotDeleteApprovalRuleFromTemplateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval rule cannot be modified for the pull request because it was created by an
@@ -736,13 +722,7 @@ module Aws::CodeCommit
     class CannotModifyApprovalRuleFromTemplateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeTypeEnum
-      ADDED = 'A'
-      MODIFIED = 'M'
-      DELETED = 'D'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A client request token is required. A client request token is an unique,
@@ -756,7 +736,7 @@ module Aws::CodeCommit
     class ClientRequestTokenRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific comment.</p>
@@ -805,7 +785,7 @@ module Aws::CodeCommit
       :caller_reactions,
       :reaction_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deleted] = false unless options.key?(:deleted)
@@ -820,7 +800,7 @@ module Aws::CodeCommit
     class CommentContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The comment is too large. Comments are limited to 10,240 characters.</p>
@@ -830,7 +810,7 @@ module Aws::CodeCommit
     class CommentContentSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This comment has already been deleted. You cannot edit or delete a deleted comment.</p>
@@ -840,7 +820,7 @@ module Aws::CodeCommit
     class CommentDeletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No comment exists with the provided ID. Verify that you have used the correct ID, and
@@ -851,7 +831,7 @@ module Aws::CodeCommit
     class CommentDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The comment ID is missing or null. A comment ID is required.</p>
@@ -861,7 +841,7 @@ module Aws::CodeCommit
     class CommentIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot modify or delete this comment. Only comment authors can modify or delete their comments.</p>
@@ -871,7 +851,7 @@ module Aws::CodeCommit
     class CommentNotCreatedByCallerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about comments on the comparison between two commits.</p>
@@ -909,7 +889,7 @@ module Aws::CodeCommit
       :location,
       :comments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about comments on a pull request.</p>
@@ -952,7 +932,7 @@ module Aws::CodeCommit
       :location,
       :comments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific commit.</p>
@@ -993,7 +973,7 @@ module Aws::CodeCommit
       :committer,
       :additional_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified commit does not exist or no commit was specified, and the specified repository has no default branch.</p>
@@ -1003,7 +983,7 @@ module Aws::CodeCommit
     class CommitDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified commit ID does not exist.</p>
@@ -1013,7 +993,7 @@ module Aws::CodeCommit
     class CommitIdDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A commit ID was not specified.</p>
@@ -1023,7 +1003,7 @@ module Aws::CodeCommit
     class CommitIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of allowed commit IDs in a batch request is 100. Verify that your batch requests contains no more than 100 commit IDs, and then try again.</p>
@@ -1033,7 +1013,7 @@ module Aws::CodeCommit
     class CommitIdsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of commit IDs is required, but was either not specified or the list was empty.</p>
@@ -1043,7 +1023,7 @@ module Aws::CodeCommit
     class CommitIdsListRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit message is too long. Provide a shorter string. </p>
@@ -1053,7 +1033,7 @@ module Aws::CodeCommit
     class CommitMessageLengthExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A commit was not specified.</p>
@@ -1063,7 +1043,7 @@ module Aws::CodeCommit
     class CommitRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The merge cannot be completed because the target branch has been modified. Another user might have modified the target branch while the merge was in progress. Wait a few minutes, and then try again.</p>
@@ -1073,7 +1053,7 @@ module Aws::CodeCommit
     class ConcurrentReferenceUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about conflicts in a merge operation.</p>
@@ -1087,12 +1067,7 @@ module Aws::CodeCommit
       :conflict_metadata,
       :merge_hunks,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictDetailLevelTypeEnum
-      FILE_LEVEL = 'FILE_LEVEL'
-      LINE_LEVEL = 'LINE_LEVEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the metadata for a conflict in a merge operation.</p>
@@ -1138,7 +1113,7 @@ module Aws::CodeCommit
       :object_type_conflict,
       :merge_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_conflicts] = 0 unless options.key?(:number_of_conflicts)
@@ -1165,14 +1140,7 @@ module Aws::CodeCommit
       :delete_files,
       :set_file_modes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictResolutionStrategyTypeEnum
-      NONE = 'NONE'
-      ACCEPT_SOURCE = 'ACCEPT_SOURCE'
-      ACCEPT_DESTINATION = 'ACCEPT_DESTINATION'
-      AUTOMERGE = 'AUTOMERGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -1235,7 +1203,7 @@ module Aws::CodeCommit
       :approval_rule_template_content,
       :approval_rule_template_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template
@@ -1244,7 +1212,7 @@ module Aws::CodeCommit
     class CreateApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a create branch operation.</p>
@@ -1262,7 +1230,7 @@ module Aws::CodeCommit
       :branch_name,
       :commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -1312,7 +1280,7 @@ module Aws::CodeCommit
       :delete_files,
       :set_file_modes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -1337,7 +1305,7 @@ module Aws::CodeCommit
       :files_updated,
       :files_deleted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -1395,7 +1363,7 @@ module Aws::CodeCommit
       :approval_rule_name,
       :approval_rule_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule
@@ -1404,7 +1372,7 @@ module Aws::CodeCommit
     class CreatePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute title
@@ -1435,7 +1403,7 @@ module Aws::CodeCommit
       :targets,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -1444,7 +1412,7 @@ module Aws::CodeCommit
     class CreatePullRequestOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a create repository operation.</p>
@@ -1484,7 +1452,7 @@ module Aws::CodeCommit
       :tags,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a create repository operation.</p>
@@ -1494,7 +1462,7 @@ module Aws::CodeCommit
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -1554,7 +1522,7 @@ module Aws::CodeCommit
       :keep_empty_folders,
       :conflict_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -1567,7 +1535,7 @@ module Aws::CodeCommit
       :commit_id,
       :tree_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified branch is the default branch for the repository, and cannot be deleted. To delete this branch, you must first set another branch as the default branch.</p>
@@ -1577,7 +1545,7 @@ module Aws::CodeCommit
     class DefaultBranchCannotBeDeletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -1586,7 +1554,7 @@ module Aws::CodeCommit
     class DeleteApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_id
@@ -1596,7 +1564,7 @@ module Aws::CodeCommit
     class DeleteApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a delete branch operation.</p>
@@ -1610,7 +1578,7 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a delete branch operation.</p>
@@ -1620,7 +1588,7 @@ module Aws::CodeCommit
     class DeleteBranchOutput < Struct.new(
       :deleted_branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -1630,7 +1598,7 @@ module Aws::CodeCommit
     class DeleteCommentContentInput < Struct.new(
       :comment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -1639,7 +1607,7 @@ module Aws::CodeCommit
     class DeleteCommentContentOutput < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file that is deleted as part of a commit.</p>
@@ -1649,7 +1617,7 @@ module Aws::CodeCommit
     class DeleteFileEntry < Struct.new(
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -1697,7 +1665,7 @@ module Aws::CodeCommit
       :name,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -1719,7 +1687,7 @@ module Aws::CodeCommit
       :tree_id,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -1732,7 +1700,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :approval_rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_id
@@ -1745,7 +1713,7 @@ module Aws::CodeCommit
     class DeletePullRequestApprovalRuleOutput < Struct.new(
       :approval_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a delete repository operation.</p>
@@ -1755,7 +1723,7 @@ module Aws::CodeCommit
     class DeleteRepositoryInput < Struct.new(
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a delete repository operation.</p>
@@ -1765,7 +1733,7 @@ module Aws::CodeCommit
     class DeleteRepositoryOutput < Struct.new(
       :repository_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -1814,7 +1782,7 @@ module Aws::CodeCommit
       :conflict_resolution_strategy,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conflict_metadata
@@ -1843,7 +1811,7 @@ module Aws::CodeCommit
       :source_commit_id,
       :base_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -1872,7 +1840,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_events
@@ -1885,7 +1853,7 @@ module Aws::CodeCommit
       :pull_request_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a set of differences for a commit specifier.</p>
@@ -1905,7 +1873,7 @@ module Aws::CodeCommit
       :after_blob,
       :change_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file cannot be added to the repository because the specified path name has the same name as a file that already exists in this repository. 
@@ -1916,7 +1884,7 @@ module Aws::CodeCommit
     class DirectoryNameConflictsWithFileNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -1929,7 +1897,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encryption integrity check failed.</p>
@@ -1939,7 +1907,7 @@ module Aws::CodeCommit
     class EncryptionIntegrityChecksFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encryption key could not be accessed.</p>
@@ -1949,7 +1917,7 @@ module Aws::CodeCommit
     class EncryptionKeyAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption key is disabled.</p>
@@ -1959,7 +1927,7 @@ module Aws::CodeCommit
     class EncryptionKeyDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Key Management Service encryption key is not valid.</p>
@@ -1969,7 +1937,7 @@ module Aws::CodeCommit
     class EncryptionKeyInvalidIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A KMS encryption key was used to try and encrypt or decrypt a repository, but either the repository or the key was not
@@ -1980,7 +1948,7 @@ module Aws::CodeCommit
     class EncryptionKeyInvalidUsageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No encryption key was found.</p>
@@ -1990,7 +1958,7 @@ module Aws::CodeCommit
     class EncryptionKeyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A KMS encryption key ID is required but was not specified.</p>
@@ -2000,7 +1968,7 @@ module Aws::CodeCommit
     class EncryptionKeyRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption key is not available.</p>
@@ -2010,7 +1978,7 @@ module Aws::CodeCommit
     class EncryptionKeyUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -2025,7 +1993,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation
@@ -2035,7 +2003,7 @@ module Aws::CodeCommit
     class EvaluatePullRequestApprovalRulesOutput < Struct.new(
       :evaluation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the approval rules applied to a pull request and whether conditions have been met.</p>
@@ -2057,7 +2025,7 @@ module Aws::CodeCommit
       :approval_rules_satisfied,
       :approval_rules_not_satisfied,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:approved] = false unless options.key?(:approved)
@@ -2085,7 +2053,7 @@ module Aws::CodeCommit
       :relative_path,
       :file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because both a source file and file content have been
@@ -2097,7 +2065,7 @@ module Aws::CodeCommit
     class FileContentAndSourceFileSpecifiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file cannot be added because it is empty. Empty files cannot be added to the repository with this API.</p>
@@ -2107,7 +2075,7 @@ module Aws::CodeCommit
     class FileContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file cannot be added because it is too large. The maximum file size is 6 MB, and
@@ -2119,7 +2087,7 @@ module Aws::CodeCommit
     class FileContentSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified file does not exist. Verify that you have used the correct file name,
@@ -2130,7 +2098,7 @@ module Aws::CodeCommit
     class FileDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because no files have been specified as added, updated, or changed (PutFile or DeleteFile) for the commit.</p>
@@ -2140,7 +2108,7 @@ module Aws::CodeCommit
     class FileEntryRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file to be added, updated, or deleted as part of a commit.</p>
@@ -2159,7 +2127,7 @@ module Aws::CodeCommit
       :blob_id,
       :file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because no file mode has been specified. A file mode is
@@ -2170,13 +2138,7 @@ module Aws::CodeCommit
     class FileModeRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileModeTypeEnum
-      EXECUTABLE = 'EXECUTABLE'
-      NORMAL = 'NORMAL'
-      SYMLINK = 'SYMLINK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about file modes in a merge or pull request.</p>
@@ -2194,7 +2156,7 @@ module Aws::CodeCommit
       :destination,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file cannot be added to the repository because the specified file name has the same name as a directory in this repository. Either provide
@@ -2205,7 +2167,7 @@ module Aws::CodeCommit
     class FileNameConflictsWithDirectoryNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because a specified file path points to a submodule. Verify that the destination files
@@ -2216,7 +2178,7 @@ module Aws::CodeCommit
     class FilePathConflictsWithSubmodulePathException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the size of files in a merge or pull request.</p>
@@ -2234,7 +2196,7 @@ module Aws::CodeCommit
       :destination,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:source] = 0 unless options.key?(:source)
@@ -2252,7 +2214,7 @@ module Aws::CodeCommit
     class FileTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a version of a file.</p>
@@ -2275,7 +2237,7 @@ module Aws::CodeCommit
       :path,
       :revision_children,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a folder in a repository.</p>
@@ -2293,7 +2255,7 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because at least one of the overall changes in the commit results in a 
@@ -2305,7 +2267,7 @@ module Aws::CodeCommit
     class FolderContentSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified folder does not exist. Either the folder name is not correct, or you did
@@ -2316,7 +2278,7 @@ module Aws::CodeCommit
     class FolderDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -2325,7 +2287,7 @@ module Aws::CodeCommit
     class GetApprovalRuleTemplateInput < Struct.new(
       :approval_rule_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template
@@ -2334,7 +2296,7 @@ module Aws::CodeCommit
     class GetApprovalRuleTemplateOutput < Struct.new(
       :approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a get blob operation.</p>
@@ -2348,7 +2310,7 @@ module Aws::CodeCommit
       :repository_name,
       :blob_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a get blob operation.</p>
@@ -2358,7 +2320,7 @@ module Aws::CodeCommit
     class GetBlobOutput < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a get branch operation.</p>
@@ -2372,7 +2334,7 @@ module Aws::CodeCommit
       :repository_name,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a get branch operation.</p>
@@ -2382,7 +2344,7 @@ module Aws::CodeCommit
     class GetBranchOutput < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -2392,7 +2354,7 @@ module Aws::CodeCommit
     class GetCommentInput < Struct.new(
       :comment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -2401,7 +2363,7 @@ module Aws::CodeCommit
     class GetCommentOutput < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -2422,7 +2384,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reactions_for_comment
@@ -2435,7 +2397,7 @@ module Aws::CodeCommit
       :reactions_for_comment,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2463,7 +2425,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comments_for_compared_commit_data
@@ -2476,7 +2438,7 @@ module Aws::CodeCommit
       :comments_for_compared_commit_data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -2510,7 +2472,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comments_for_pull_request_data
@@ -2523,7 +2485,7 @@ module Aws::CodeCommit
       :comments_for_pull_request_data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a get commit operation.</p>
@@ -2537,7 +2499,7 @@ module Aws::CodeCommit
       :repository_name,
       :commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a get commit operation.</p>
@@ -2547,7 +2509,7 @@ module Aws::CodeCommit
     class GetCommitOutput < Struct.new(
       :commit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2590,7 +2552,7 @@ module Aws::CodeCommit
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute differences
@@ -2604,7 +2566,7 @@ module Aws::CodeCommit
       :differences,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2625,7 +2587,7 @@ module Aws::CodeCommit
       :commit_specifier,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -2660,7 +2622,7 @@ module Aws::CodeCommit
       :file_size,
       :file_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:file_size] = 0 unless options.key?(:file_size)
@@ -2687,7 +2649,7 @@ module Aws::CodeCommit
       :commit_specifier,
       :folder_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -2722,7 +2684,7 @@ module Aws::CodeCommit
       :symbolic_links,
       :sub_modules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2754,7 +2716,7 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_commit_id
@@ -2777,7 +2739,7 @@ module Aws::CodeCommit
       :base_commit_id,
       :merged_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2822,7 +2784,7 @@ module Aws::CodeCommit
       :conflict_resolution_strategy,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mergeable
@@ -2852,7 +2814,7 @@ module Aws::CodeCommit
       :conflict_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mergeable] = false unless options.key?(:mergeable)
@@ -2889,7 +2851,7 @@ module Aws::CodeCommit
       :conflict_detail_level,
       :conflict_resolution_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute merge_options
@@ -2910,7 +2872,7 @@ module Aws::CodeCommit
       :destination_commit_id,
       :base_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -2923,7 +2885,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approvals
@@ -2932,7 +2894,7 @@ module Aws::CodeCommit
     class GetPullRequestApprovalStatesOutput < Struct.new(
       :approvals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -2941,7 +2903,7 @@ module Aws::CodeCommit
     class GetPullRequestInput < Struct.new(
       :pull_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -2950,7 +2912,7 @@ module Aws::CodeCommit
     class GetPullRequestOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -2965,7 +2927,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute overridden
@@ -2978,7 +2940,7 @@ module Aws::CodeCommit
       :overridden,
       :overrider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overridden] = false unless options.key?(:overridden)
@@ -2993,7 +2955,7 @@ module Aws::CodeCommit
     class GetRepositoryInput < Struct.new(
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a get repository operation.</p>
@@ -3003,7 +2965,7 @@ module Aws::CodeCommit
     class GetRepositoryOutput < Struct.new(
       :repository_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a get repository triggers operation.</p>
@@ -3013,7 +2975,7 @@ module Aws::CodeCommit
     class GetRepositoryTriggersInput < Struct.new(
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a get repository triggers operation.</p>
@@ -3027,7 +2989,7 @@ module Aws::CodeCommit
       :configuration_id,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client request token is not valid. Either the token is not in a valid format, or
@@ -3038,7 +3000,7 @@ module Aws::CodeCommit
     class IdempotencyParameterMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) is not valid. Make sure that you have provided the full ARN for the user who initiated the change for the pull request,
@@ -3049,7 +3011,7 @@ module Aws::CodeCommit
     class InvalidActorArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content for the approval rule is not valid.</p>
@@ -3059,7 +3021,7 @@ module Aws::CodeCommit
     class InvalidApprovalRuleContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name for the approval rule is not valid.</p>
@@ -3069,7 +3031,7 @@ module Aws::CodeCommit
     class InvalidApprovalRuleNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of the approval rule template is not valid.</p>
@@ -3079,7 +3041,7 @@ module Aws::CodeCommit
     class InvalidApprovalRuleTemplateContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description for the approval rule template is not valid because it exceeds the
@@ -3091,7 +3053,7 @@ module Aws::CodeCommit
     class InvalidApprovalRuleTemplateDescriptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the approval rule template is not valid. Template names must be between 1
@@ -3103,7 +3065,7 @@ module Aws::CodeCommit
     class InvalidApprovalRuleTemplateNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state for the approval is not valid. Valid values include APPROVE and REVOKE. </p>
@@ -3113,7 +3075,7 @@ module Aws::CodeCommit
     class InvalidApprovalStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) is not valid. Make sure that you have provided the full ARN for the author of the pull request, and then try again.</p>
@@ -3123,7 +3085,7 @@ module Aws::CodeCommit
     class InvalidAuthorArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified blob is not valid.</p>
@@ -3133,7 +3095,7 @@ module Aws::CodeCommit
     class InvalidBlobIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reference name is not valid.</p>
@@ -3143,7 +3105,7 @@ module Aws::CodeCommit
     class InvalidBranchNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client request token is not valid.</p>
@@ -3153,7 +3115,7 @@ module Aws::CodeCommit
     class InvalidClientRequestTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The comment ID is not in a valid format. Make sure that you have provided the full comment ID.</p>
@@ -3163,7 +3125,7 @@ module Aws::CodeCommit
     class InvalidCommentIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified commit is not valid.</p>
@@ -3173,7 +3135,7 @@ module Aws::CodeCommit
     class InvalidCommitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified commit ID is not valid.</p>
@@ -3183,7 +3145,7 @@ module Aws::CodeCommit
     class InvalidCommitIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified conflict detail level is not valid.</p>
@@ -3193,7 +3155,7 @@ module Aws::CodeCommit
     class InvalidConflictDetailLevelException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified conflict resolution list is not valid.</p>
@@ -3203,7 +3165,7 @@ module Aws::CodeCommit
     class InvalidConflictResolutionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified conflict resolution strategy is not valid.</p>
@@ -3213,7 +3175,7 @@ module Aws::CodeCommit
     class InvalidConflictResolutionStrategyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified continuation token is not valid.</p>
@@ -3223,7 +3185,7 @@ module Aws::CodeCommit
     class InvalidContinuationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified deletion parameter is not valid.</p>
@@ -3233,7 +3195,7 @@ module Aws::CodeCommit
     class InvalidDeletionParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request description is not valid. Descriptions cannot be more than 1,000
@@ -3244,7 +3206,7 @@ module Aws::CodeCommit
     class InvalidDescriptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination commit specifier is not valid. You must provide a valid branch name, tag, or full commit ID. </p>
@@ -3254,7 +3216,7 @@ module Aws::CodeCommit
     class InvalidDestinationCommitSpecifierException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified email address either contains one or more characters that are not allowed, or it exceeds the maximum number of characters
@@ -3265,7 +3227,7 @@ module Aws::CodeCommit
     class InvalidEmailException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the file is not valid. Make sure that you include the file name and
@@ -3276,7 +3238,7 @@ module Aws::CodeCommit
     class InvalidFileLocationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified file mode permission is not valid. For a list of valid file mode permissions, see <a>PutFile</a>. </p>
@@ -3286,7 +3248,7 @@ module Aws::CodeCommit
     class InvalidFileModeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The position is not valid. Make sure that the line number exists in the version of the file you want to comment on.</p>
@@ -3296,7 +3258,7 @@ module Aws::CodeCommit
     class InvalidFilePositionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified value for the number of conflict files to return is not valid.</p>
@@ -3306,7 +3268,7 @@ module Aws::CodeCommit
     class InvalidMaxConflictFilesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified value for the number of merge hunks to return is not valid.</p>
@@ -3316,7 +3278,7 @@ module Aws::CodeCommit
     class InvalidMaxMergeHunksException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified number of maximum results is not valid.</p>
@@ -3326,7 +3288,7 @@ module Aws::CodeCommit
     class InvalidMaxResultsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified merge option is not valid for this operation. Not all merge strategies are supported for all operations.</p>
@@ -3336,7 +3298,7 @@ module Aws::CodeCommit
     class InvalidMergeOptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified sort order is not valid.</p>
@@ -3346,7 +3308,7 @@ module Aws::CodeCommit
     class InvalidOrderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override status is not valid. Valid statuses are OVERRIDE and REVOKE.</p>
@@ -3356,7 +3318,7 @@ module Aws::CodeCommit
     class InvalidOverrideStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parent commit ID is not valid. The commit ID cannot be empty, and must match the head commit ID for the branch of the repository where you 
@@ -3367,7 +3329,7 @@ module Aws::CodeCommit
     class InvalidParentCommitIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified path is not valid.</p>
@@ -3377,7 +3339,7 @@ module Aws::CodeCommit
     class InvalidPathException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request event type is not valid. </p>
@@ -3387,7 +3349,7 @@ module Aws::CodeCommit
     class InvalidPullRequestEventTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request ID is not valid. Make sure that you have provided the full ID and that the pull request is in the specified repository, and then try again.</p>
@@ -3397,7 +3359,7 @@ module Aws::CodeCommit
     class InvalidPullRequestIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request status is not valid. The only valid values are <code>OPEN</code> and <code>CLOSED</code>.</p>
@@ -3407,7 +3369,7 @@ module Aws::CodeCommit
     class InvalidPullRequestStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request status update is not valid. The only valid update is from <code>OPEN</code> to <code>CLOSED</code>.</p>
@@ -3417,7 +3379,7 @@ module Aws::CodeCommit
     class InvalidPullRequestStatusUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) of the user or identity is not valid.</p>
@@ -3427,7 +3389,7 @@ module Aws::CodeCommit
     class InvalidReactionUserArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of the reaction is not valid. For more information, see the <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">CodeCommit User Guide</a>.</p>
@@ -3437,7 +3399,7 @@ module Aws::CodeCommit
     class InvalidReactionValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reference name format is not valid. Reference names must conform to the
@@ -3449,7 +3411,7 @@ module Aws::CodeCommit
     class InvalidReferenceNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Either the enum is not in a valid format, or the specified file version enum is not valid in respect to the current file version.</p>
@@ -3459,7 +3421,7 @@ module Aws::CodeCommit
     class InvalidRelativeFileVersionEnumException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Automerge was specified for resolving the conflict, but the replacement type is not valid or content is missing. </p>
@@ -3469,7 +3431,7 @@ module Aws::CodeCommit
     class InvalidReplacementContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Automerge was specified for resolving the conflict, but the specified replacement type is not valid.</p>
@@ -3479,7 +3441,7 @@ module Aws::CodeCommit
     class InvalidReplacementTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository description is not valid.</p>
@@ -3489,7 +3451,7 @@ module Aws::CodeCommit
     class InvalidRepositoryDescriptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified repository name is not valid.</p>
@@ -3504,7 +3466,7 @@ module Aws::CodeCommit
     class InvalidRepositoryNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more branch names specified for the trigger is not valid.</p>
@@ -3514,7 +3476,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerBranchNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom data provided for the trigger is not valid.</p>
@@ -3524,7 +3486,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerCustomDataException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) for the trigger is not valid for the specified destination. The most common reason for this error is that the ARN does not meet the requirements for the service type.</p>
@@ -3534,7 +3496,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerDestinationArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more events specified for the trigger is not valid. Check to make sure that all events specified match the requirements for allowed events.</p>
@@ -3544,7 +3506,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerEventsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the trigger is not valid.</p>
@@ -3554,7 +3516,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Region for the trigger target does not match the Amazon Web Services Region for the
@@ -3566,7 +3528,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for the resource ARN is not valid. For more information about resources in CodeCommit, see 
@@ -3578,7 +3540,7 @@ module Aws::CodeCommit
     class InvalidResourceArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The revision ID is not valid. Use GetPullRequest to determine the value.</p>
@@ -3588,7 +3550,7 @@ module Aws::CodeCommit
     class InvalidRevisionIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SHA-256 hash signature for the rule content is not valid.</p>
@@ -3598,7 +3560,7 @@ module Aws::CodeCommit
     class InvalidRuleContentSha256Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified sort by value is not valid.</p>
@@ -3608,7 +3570,7 @@ module Aws::CodeCommit
     class InvalidSortByException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source commit specifier is not valid. You must provide a valid branch name, tag, or full commit ID.</p>
@@ -3618,7 +3580,7 @@ module Aws::CodeCommit
     class InvalidSourceCommitSpecifierException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified tag is not valid. Key names cannot be prefixed with aws:.</p>
@@ -3628,7 +3590,7 @@ module Aws::CodeCommit
     class InvalidSystemTagUsageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags is not valid.</p>
@@ -3638,7 +3600,7 @@ module Aws::CodeCommit
     class InvalidTagKeysListException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The map of tags is not valid.</p>
@@ -3648,7 +3610,7 @@ module Aws::CodeCommit
     class InvalidTagsMapException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target branch is not valid.</p>
@@ -3658,7 +3620,7 @@ module Aws::CodeCommit
     class InvalidTargetBranchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target for the pull request is not valid. A target must contain the full values for the repository name, source branch, and destination branch for the pull request.</p>
@@ -3668,7 +3630,7 @@ module Aws::CodeCommit
     class InvalidTargetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The targets for the pull request is not valid or not in a valid format. Targets are a list of target objects. Each target object must contain the full values for 
@@ -3679,7 +3641,7 @@ module Aws::CodeCommit
     class InvalidTargetsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The title of the pull request is not valid. Pull request titles cannot exceed 100 characters in length.</p>
@@ -3689,7 +3651,7 @@ module Aws::CodeCommit
     class InvalidTitleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about whether a file is binary or textual in a merge or pull request operation.</p>
@@ -3707,7 +3669,7 @@ module Aws::CodeCommit
       :destination,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3721,7 +3683,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_names
@@ -3734,7 +3696,7 @@ module Aws::CodeCommit
       :approval_rule_template_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -3752,7 +3714,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_names
@@ -3765,7 +3727,7 @@ module Aws::CodeCommit
       :approval_rule_template_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a list branches operation.</p>
@@ -3779,7 +3741,7 @@ module Aws::CodeCommit
       :repository_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a list branches operation.</p>
@@ -3793,7 +3755,7 @@ module Aws::CodeCommit
       :branches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -3820,7 +3782,7 @@ module Aws::CodeCommit
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute revision_dag
@@ -3833,7 +3795,7 @@ module Aws::CodeCommit
       :revision_dag,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -3860,7 +3822,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_ids
@@ -3873,7 +3835,7 @@ module Aws::CodeCommit
       :pull_request_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -3891,7 +3853,7 @@ module Aws::CodeCommit
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_names
@@ -3904,7 +3866,7 @@ module Aws::CodeCommit
       :repository_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a list repositories operation.</p>
@@ -3924,7 +3886,7 @@ module Aws::CodeCommit
       :sort_by,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a list repositories operation.</p>
@@ -3940,7 +3902,7 @@ module Aws::CodeCommit
       :repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3955,7 +3917,7 @@ module Aws::CodeCommit
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3968,7 +3930,7 @@ module Aws::CodeCommit
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the location of a change or comment in the comparison between two commits or a pull request.</p>
@@ -3987,7 +3949,7 @@ module Aws::CodeCommit
       :file_position,
       :relative_file_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request cannot be merged automatically into the destination branch. You must manually merge the branches and resolve any conflicts.</p>
@@ -3997,7 +3959,7 @@ module Aws::CodeCommit
     class ManualMergeRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of branches for the trigger was exceeded.</p>
@@ -4007,7 +3969,7 @@ module Aws::CodeCommit
     class MaximumBranchesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of allowed conflict resolution entries was exceeded.</p>
@@ -4017,7 +3979,7 @@ module Aws::CodeCommit
     class MaximumConflictResolutionEntriesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of files to load exceeds the allowed limit.</p>
@@ -4027,7 +3989,7 @@ module Aws::CodeCommit
     class MaximumFileContentToLoadExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of specified files to change as part of this commit exceeds the maximum number of files 
@@ -4038,7 +4000,7 @@ module Aws::CodeCommit
     class MaximumFileEntriesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of items to compare between the source or destination branches and the merge base has exceeded the maximum allowed.</p>
@@ -4048,7 +4010,7 @@ module Aws::CodeCommit
     class MaximumItemsToCompareExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of approvals required for the approval rule exceeds the maximum number allowed.</p>
@@ -4058,7 +4020,7 @@ module Aws::CodeCommit
     class MaximumNumberOfApprovalsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot create the pull request because the repository has too many open pull requests. 
@@ -4069,7 +4031,7 @@ module Aws::CodeCommit
     class MaximumOpenPullRequestsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of allowed repository names was exceeded. Currently, this number is 100.</p>
@@ -4079,7 +4041,7 @@ module Aws::CodeCommit
     class MaximumRepositoryNamesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of triggers allowed for the repository was exceeded.</p>
@@ -4089,7 +4051,7 @@ module Aws::CodeCommit
     class MaximumRepositoryTriggersExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of approval rule templates for a repository has been exceeded. You cannot associate more than 25 
@@ -4100,7 +4062,7 @@ module Aws::CodeCommit
     class MaximumRuleTemplatesAssociatedWithRepositoryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4123,7 +4085,7 @@ module Aws::CodeCommit
       :destination_commit_specifier,
       :target_branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -4136,7 +4098,7 @@ module Aws::CodeCommit
       :commit_id,
       :tree_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4197,7 +4159,7 @@ module Aws::CodeCommit
       :keep_empty_folders,
       :conflict_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -4210,7 +4172,7 @@ module Aws::CodeCommit
       :commit_id,
       :tree_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4271,7 +4233,7 @@ module Aws::CodeCommit
       :keep_empty_folders,
       :conflict_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -4284,7 +4246,7 @@ module Aws::CodeCommit
       :commit_id,
       :tree_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about merge hunks in a merge or pull request operation.</p>
@@ -4310,7 +4272,7 @@ module Aws::CodeCommit
       :destination,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_conflict] = false unless options.key?(:is_conflict)
@@ -4334,7 +4296,7 @@ module Aws::CodeCommit
       :end_line,
       :hunk_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.</p>
@@ -4356,7 +4318,7 @@ module Aws::CodeCommit
       :merge_commit_id,
       :merge_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_merged] = false unless options.key?(:is_merged)
@@ -4376,7 +4338,7 @@ module Aws::CodeCommit
       :source,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A merge option or stategy is required, and none was provided.</p>
@@ -4386,13 +4348,7 @@ module Aws::CodeCommit
     class MergeOptionRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MergeOptionTypeEnum
-      FAST_FORWARD_MERGE = 'FAST_FORWARD_MERGE'
-      SQUASH_MERGE = 'SQUASH_MERGE'
-      THREE_WAY_MERGE = 'THREE_WAY_MERGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -4410,7 +4366,7 @@ module Aws::CodeCommit
       :repository_name,
       :source_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -4419,7 +4375,7 @@ module Aws::CodeCommit
     class MergePullRequestByFastForwardOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -4475,7 +4431,7 @@ module Aws::CodeCommit
       :keep_empty_folders,
       :conflict_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -4484,7 +4440,7 @@ module Aws::CodeCommit
     class MergePullRequestBySquashOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -4540,7 +4496,7 @@ module Aws::CodeCommit
       :keep_empty_folders,
       :conflict_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -4549,7 +4505,7 @@ module Aws::CodeCommit
     class MergePullRequestByThreeWayOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>More than one conflict resolution entries exists for the conflict. A conflict can have only one conflict resolution entry.</p>
@@ -4559,7 +4515,7 @@ module Aws::CodeCommit
     class MultipleConflictResolutionEntriesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot include more than one repository in a pull request. Make sure you have specified only one repository name in your request, and then try again.</p>
@@ -4569,7 +4525,7 @@ module Aws::CodeCommit
     class MultipleRepositoriesInPullRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user name is not valid because it has exceeded the character limit for author names. </p>
@@ -4579,7 +4535,7 @@ module Aws::CodeCommit
     class NameLengthExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because no changes will be made to the repository as a result of this commit. A commit must contain at least one change.</p>
@@ -4589,7 +4545,7 @@ module Aws::CodeCommit
     class NoChangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of approval rule templates has been exceeded for this Amazon Web Services Region. </p>
@@ -4599,7 +4555,7 @@ module Aws::CodeCommit
     class NumberOfRuleTemplatesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval rule cannot be added. The pull request has the maximum number of approval rules associated with it.</p>
@@ -4609,14 +4565,7 @@ module Aws::CodeCommit
     class NumberOfRulesExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObjectTypeEnum
-      FILE = 'FILE'
-      DIRECTORY = 'DIRECTORY'
-      GIT_LINK = 'GIT_LINK'
-      SYMBOLIC_LINK = 'SYMBOLIC_LINK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the type of an object in a merge operation.</p>
@@ -4634,7 +4583,7 @@ module Aws::CodeCommit
       :destination,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested action is not allowed.</p>
@@ -4644,12 +4593,7 @@ module Aws::CodeCommit
     class OperationNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderEnum
-      ASCENDING = 'ascending'
-      DESCENDING = 'descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the template that created the approval rule for a pull request.</p>
@@ -4663,7 +4607,7 @@ module Aws::CodeCommit
       :approval_rule_template_id,
       :approval_rule_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request has already had its approval rules set to override.</p>
@@ -4673,7 +4617,7 @@ module Aws::CodeCommit
     class OverrideAlreadySetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -4694,12 +4638,7 @@ module Aws::CodeCommit
       :revision_id,
       :override_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OverrideStatus
-      OVERRIDE = 'OVERRIDE'
-      REVOKE = 'REVOKE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An override status is required, but no value was provided. Valid values include OVERRIDE and REVOKE.</p>
@@ -4709,7 +4648,7 @@ module Aws::CodeCommit
     class OverrideStatusRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parent commit ID is not valid because it does not exist. The specified parent commit ID does not exist in the specified branch of the repository.</p>
@@ -4719,7 +4658,7 @@ module Aws::CodeCommit
     class ParentCommitDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file could not be added because the provided parent commit ID is not the current tip of the specified branch. To view the full commit ID of the current head
@@ -4730,7 +4669,7 @@ module Aws::CodeCommit
     class ParentCommitIdOutdatedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parent commit ID is required. To view the full commit ID of a branch in a repository, use <a>GetBranch</a> or a Git command 
@@ -4741,7 +4680,7 @@ module Aws::CodeCommit
     class ParentCommitIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified path does not exist.</p>
@@ -4751,7 +4690,7 @@ module Aws::CodeCommit
     class PathDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The folderPath for a location cannot be null.</p>
@@ -4761,7 +4700,7 @@ module Aws::CodeCommit
     class PathRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4796,7 +4735,7 @@ module Aws::CodeCommit
       :content,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4829,7 +4768,7 @@ module Aws::CodeCommit
       :location,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -4867,7 +4806,7 @@ module Aws::CodeCommit
       :content,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -4906,7 +4845,7 @@ module Aws::CodeCommit
       :location,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute in_reply_to
@@ -4927,7 +4866,7 @@ module Aws::CodeCommit
       :client_request_token,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -4936,7 +4875,7 @@ module Aws::CodeCommit
     class PostCommentReplyOutput < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a pull request.</p>
@@ -4990,7 +4929,7 @@ module Aws::CodeCommit
       :revision_id,
       :approval_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request status cannot be updated because it is already closed.</p>
@@ -5000,7 +4939,7 @@ module Aws::CodeCommit
     class PullRequestAlreadyClosedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request cannot be merged because one or more approval rules applied to the pull request have conditions that have not been met.</p>
@@ -5010,7 +4949,7 @@ module Aws::CodeCommit
     class PullRequestApprovalRulesNotSatisfiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The approval cannot be applied because the user approving the pull request matches the user who created the pull request. You cannot approve a pull 
@@ -5021,7 +4960,7 @@ module Aws::CodeCommit
     class PullRequestCannotBeApprovedByAuthorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about the pull request that is used when comparing the pull request source with its destination.</p>
@@ -5043,7 +4982,7 @@ module Aws::CodeCommit
       :destination_commit_id,
       :merge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull request ID could not be found. Make sure that you have specified the correct repository name and pull request ID, and then try again.</p>
@@ -5053,7 +4992,7 @@ module Aws::CodeCommit
     class PullRequestDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a pull request event.</p>
@@ -5107,19 +5046,7 @@ module Aws::CodeCommit
       :approval_state_changed_event_metadata,
       :approval_rule_overridden_event_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PullRequestEventType
-      PULL_REQUEST_CREATED = 'PULL_REQUEST_CREATED'
-      PULL_REQUEST_STATUS_CHANGED = 'PULL_REQUEST_STATUS_CHANGED'
-      PULL_REQUEST_SOURCE_REFERENCE_UPDATED = 'PULL_REQUEST_SOURCE_REFERENCE_UPDATED'
-      PULL_REQUEST_MERGE_STATE_CHANGED = 'PULL_REQUEST_MERGE_STATE_CHANGED'
-      PULL_REQUEST_APPROVAL_RULE_CREATED = 'PULL_REQUEST_APPROVAL_RULE_CREATED'
-      PULL_REQUEST_APPROVAL_RULE_UPDATED = 'PULL_REQUEST_APPROVAL_RULE_UPDATED'
-      PULL_REQUEST_APPROVAL_RULE_DELETED = 'PULL_REQUEST_APPROVAL_RULE_DELETED'
-      PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN = 'PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN'
-      PULL_REQUEST_APPROVAL_STATE_CHANGED = 'PULL_REQUEST_APPROVAL_STATE_CHANGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pull request ID is required, but none was provided.</p>
@@ -5129,7 +5056,7 @@ module Aws::CodeCommit
     class PullRequestIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the change in the merge state for a pull request event. </p>
@@ -5147,7 +5074,7 @@ module Aws::CodeCommit
       :destination_reference,
       :merge_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an update to the source branch of a pull request.</p>
@@ -5169,7 +5096,7 @@ module Aws::CodeCommit
       :after_commit_id,
       :merge_base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a change to the status of a pull request.</p>
@@ -5179,12 +5106,7 @@ module Aws::CodeCommit
     class PullRequestStatusChangedEventMetadata < Struct.new(
       :pull_request_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PullRequestStatusEnum
-      OPEN = 'OPEN'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pull request status is required, but none was provided.</p>
@@ -5194,7 +5116,7 @@ module Aws::CodeCommit
     class PullRequestStatusRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a pull request target.</p>
@@ -5231,7 +5153,7 @@ module Aws::CodeCommit
       :merge_base,
       :merge_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -5245,7 +5167,7 @@ module Aws::CodeCommit
       :comment_id,
       :reaction_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a file added or updated as part of a commit.</p>
@@ -5268,7 +5190,7 @@ module Aws::CodeCommit
       :file_content,
       :source_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because one or more files specified in the commit reference both a file and a folder.</p>
@@ -5278,7 +5200,7 @@ module Aws::CodeCommit
     class PutFileEntryConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -5330,7 +5252,7 @@ module Aws::CodeCommit
       :name,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commit_id
@@ -5347,7 +5269,7 @@ module Aws::CodeCommit
       :blob_id,
       :tree_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a put repository triggers operation.</p>
@@ -5361,7 +5283,7 @@ module Aws::CodeCommit
       :repository_name,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a put repository triggers operation.</p>
@@ -5371,7 +5293,7 @@ module Aws::CodeCommit
     class PutRepositoryTriggersOutput < Struct.new(
       :configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the reaction values provided by users on a comment.</p>
@@ -5390,7 +5312,7 @@ module Aws::CodeCommit
       :reaction_users,
       :reactions_from_deleted_users_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of reactions has been exceeded. Reactions are limited to one reaction per user for each individual comment ID.</p>
@@ -5400,7 +5322,7 @@ module Aws::CodeCommit
     class ReactionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the values for reactions to a comment. CodeCommit supports a limited set of reactions.</p>
@@ -5418,7 +5340,7 @@ module Aws::CodeCommit
       :short_code,
       :unicode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reaction value is required. </p>
@@ -5428,7 +5350,7 @@ module Aws::CodeCommit
     class ReactionValueRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reference does not exist. You must provide a full commit ID.</p>
@@ -5438,7 +5360,7 @@ module Aws::CodeCommit
     class ReferenceDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference name is required, but none was provided.</p>
@@ -5448,7 +5370,7 @@ module Aws::CodeCommit
     class ReferenceNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reference is not a supported type. </p>
@@ -5458,12 +5380,7 @@ module Aws::CodeCommit
     class ReferenceTypeNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelativeFileVersionEnum
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a replacement content entry in the conflict of a merge or pull request operation.</p>
@@ -5485,7 +5402,7 @@ module Aws::CodeCommit
       :content,
       :file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>USE_NEW_CONTENT was specified, but no replacement content has been provided.</p>
@@ -5495,14 +5412,7 @@ module Aws::CodeCommit
     class ReplacementContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplacementTypeEnum
-      KEEP_BASE = 'KEEP_BASE'
-      KEEP_SOURCE = 'KEEP_SOURCE'
-      KEEP_DESTINATION = 'KEEP_DESTINATION'
-      USE_NEW_CONTENT = 'USE_NEW_CONTENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A replacement type is required.</p>
@@ -5512,7 +5422,7 @@ module Aws::CodeCommit
     class ReplacementTypeRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository does not exist.</p>
@@ -5522,7 +5432,7 @@ module Aws::CodeCommit
     class RepositoryDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A repository resource limit was exceeded.</p>
@@ -5532,7 +5442,7 @@ module Aws::CodeCommit
     class RepositoryLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository.</p>
@@ -5582,7 +5492,7 @@ module Aws::CodeCommit
       :arn,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository name already exists.</p>
@@ -5592,7 +5502,7 @@ module Aws::CodeCommit
     class RepositoryNameExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository name and ID.</p>
@@ -5606,7 +5516,7 @@ module Aws::CodeCommit
       :repository_name,
       :repository_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A repository name is required, but was not specified.</p>
@@ -5616,7 +5526,7 @@ module Aws::CodeCommit
     class RepositoryNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one repository name object is required, but was not specified.</p>
@@ -5626,7 +5536,7 @@ module Aws::CodeCommit
     class RepositoryNamesRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The repository does not contain any pull requests with that pull request ID. Use GetPullRequest to verify the correct repository name for the pull request ID.</p>
@@ -5636,7 +5546,7 @@ module Aws::CodeCommit
     class RepositoryNotAssociatedWithPullRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a trigger for a repository. </p>
@@ -5679,7 +5589,7 @@ module Aws::CodeCommit
       :branches,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one branch name is required, but was not specified in the trigger
@@ -5690,7 +5600,7 @@ module Aws::CodeCommit
     class RepositoryTriggerBranchNameListRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A destination ARN for the target service for the trigger is required, but was not
@@ -5701,14 +5611,7 @@ module Aws::CodeCommit
     class RepositoryTriggerDestinationArnRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositoryTriggerEventEnum
-      ALL = 'all'
-      UPDATE_REFERENCE = 'updateReference'
-      CREATE_REFERENCE = 'createReference'
-      DELETE_REFERENCE = 'deleteReference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one event for the trigger is required, but was not specified.</p>
@@ -5718,7 +5621,7 @@ module Aws::CodeCommit
     class RepositoryTriggerEventsListRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A trigger failed to run.</p>
@@ -5732,7 +5635,7 @@ module Aws::CodeCommit
       :trigger,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A name for the trigger is required, but was not specified.</p>
@@ -5742,7 +5645,7 @@ module Aws::CodeCommit
     class RepositoryTriggerNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of triggers for the repository is required, but was not specified.</p>
@@ -5752,7 +5655,7 @@ module Aws::CodeCommit
     class RepositoryTriggersListRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For a list of valid resources in CodeCommit, see 
@@ -5764,7 +5667,7 @@ module Aws::CodeCommit
     class ResourceArnRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because one of the changes specifies copying or moving a .gitkeep file.</p>
@@ -5774,7 +5677,7 @@ module Aws::CodeCommit
     class RestrictedSourceFileException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A revision ID is required, but was not provided.</p>
@@ -5784,7 +5687,7 @@ module Aws::CodeCommit
     class RevisionIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The revision ID provided in the request does not match the current revision ID. Use GetPullRequest to retrieve the current revision ID.</p>
@@ -5794,7 +5697,7 @@ module Aws::CodeCommit
     class RevisionNotCurrentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file was not added or updated because the content of the file is exactly the same as the content of that file in the repository and branch
@@ -5805,7 +5708,7 @@ module Aws::CodeCommit
     class SameFileContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because one or more changes in this commit duplicate actions in the same file path. For example,
@@ -5817,7 +5720,7 @@ module Aws::CodeCommit
     class SamePathRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the file mode changes.</p>
@@ -5831,12 +5734,7 @@ module Aws::CodeCommit
       :file_path,
       :file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortByEnum
-      REPOSITORY_NAME = 'repositoryName'
-      MODIFIED_DATE = 'lastModifiedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source branch and destination branch for the pull request are the same. You must
@@ -5847,7 +5745,7 @@ module Aws::CodeCommit
     class SourceAndDestinationAreSameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The commit cannot be created because no source files or file content have been specified for the commit.</p>
@@ -5857,7 +5755,7 @@ module Aws::CodeCommit
     class SourceFileOrContentRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a source file that is part of changes made in a commit.</p>
@@ -5871,7 +5769,7 @@ module Aws::CodeCommit
       :file_path,
       :is_move,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_move] = false unless options.key?(:is_move)
@@ -5894,7 +5792,7 @@ module Aws::CodeCommit
       :absolute_path,
       :relative_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a symbolic link in a repository folder.</p>
@@ -5916,7 +5814,7 @@ module Aws::CodeCommit
       :relative_path,
       :file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of tag keys is required. The list cannot be empty or null.</p>
@@ -5926,7 +5824,7 @@ module Aws::CodeCommit
     class TagKeysListRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag policy is not valid.</p>
@@ -5936,7 +5834,7 @@ module Aws::CodeCommit
     class TagPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5949,7 +5847,7 @@ module Aws::CodeCommit
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of tags is required.</p>
@@ -5959,7 +5857,7 @@ module Aws::CodeCommit
     class TagsMapRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a target for a pull request.</p>
@@ -5978,7 +5876,7 @@ module Aws::CodeCommit
       :source_reference,
       :destination_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pull request target is required. It cannot be empty or null. A pull request target must contain the full values for the repository name, source branch, and destination branch for the pull request.</p>
@@ -5988,7 +5886,7 @@ module Aws::CodeCommit
     class TargetRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of target objects is required. It cannot be empty or null.</p>
@@ -5998,7 +5896,7 @@ module Aws::CodeCommit
     class TargetsRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a test repository triggers operation.</p>
@@ -6012,7 +5910,7 @@ module Aws::CodeCommit
       :repository_name,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a test repository triggers operation.</p>
@@ -6027,7 +5925,7 @@ module Aws::CodeCommit
       :successful_executions,
       :failed_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tip of the source branch in the destination repository does not match the tip of the source branch specified in your request. 
@@ -6038,7 +5936,7 @@ module Aws::CodeCommit
     class TipOfSourceReferenceIsDifferentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The divergence between the tips of the provided commit specifiers is too great to determine whether there might be 
@@ -6049,7 +5947,7 @@ module Aws::CodeCommit
     class TipsDivergenceExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pull request title is required. It cannot be empty or null.</p>
@@ -6059,7 +5957,7 @@ module Aws::CodeCommit
     class TitleRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of tags for an CodeCommit resource has been exceeded.</p>
@@ -6069,7 +5967,7 @@ module Aws::CodeCommit
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6082,7 +5980,7 @@ module Aws::CodeCommit
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -6102,7 +6000,7 @@ module Aws::CodeCommit
       :new_rule_content,
       :existing_rule_content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template
@@ -6111,7 +6009,7 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateContentOutput < Struct.new(
       :approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template_name
@@ -6124,7 +6022,7 @@ module Aws::CodeCommit
       :approval_rule_template_name,
       :approval_rule_template_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template
@@ -6133,7 +6031,7 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateDescriptionOutput < Struct.new(
       :approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute old_approval_rule_template_name
@@ -6146,7 +6044,7 @@ module Aws::CodeCommit
       :old_approval_rule_template_name,
       :new_approval_rule_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule_template
@@ -6155,7 +6053,7 @@ module Aws::CodeCommit
     class UpdateApprovalRuleTemplateNameOutput < Struct.new(
       :approval_rule_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment_id
@@ -6169,7 +6067,7 @@ module Aws::CodeCommit
       :comment_id,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -6178,7 +6076,7 @@ module Aws::CodeCommit
     class UpdateCommentOutput < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an update default branch operation.</p>
@@ -6192,7 +6090,7 @@ module Aws::CodeCommit
       :repository_name,
       :default_branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -6254,7 +6152,7 @@ module Aws::CodeCommit
       :existing_rule_content_sha256,
       :new_rule_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_rule
@@ -6263,7 +6161,7 @@ module Aws::CodeCommit
     class UpdatePullRequestApprovalRuleContentOutput < Struct.new(
       :approval_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -6280,7 +6178,7 @@ module Aws::CodeCommit
       :revision_id,
       :approval_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -6294,7 +6192,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -6303,7 +6201,7 @@ module Aws::CodeCommit
     class UpdatePullRequestDescriptionOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -6318,7 +6216,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :pull_request_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -6327,7 +6225,7 @@ module Aws::CodeCommit
     class UpdatePullRequestStatusOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request_id
@@ -6340,7 +6238,7 @@ module Aws::CodeCommit
       :pull_request_id,
       :title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_request
@@ -6349,7 +6247,7 @@ module Aws::CodeCommit
     class UpdatePullRequestTitleOutput < Struct.new(
       :pull_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an update repository description operation.</p>
@@ -6363,7 +6261,7 @@ module Aws::CodeCommit
       :repository_name,
       :repository_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -6379,7 +6277,7 @@ module Aws::CodeCommit
       :repository_name,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_id
@@ -6396,7 +6294,7 @@ module Aws::CodeCommit
       :kms_key_id,
       :original_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an update repository description operation.</p>
@@ -6410,7 +6308,7 @@ module Aws::CodeCommit
       :old_name,
       :new_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user who made a specified commit.</p>
@@ -6428,7 +6326,7 @@ module Aws::CodeCommit
       :email,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

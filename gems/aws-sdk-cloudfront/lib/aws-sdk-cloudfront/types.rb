@@ -12,7 +12,7 @@ module Aws::CloudFront
     class AccessDenied < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of key groups, and the public keys in each key group, that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -30,7 +30,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Amazon Web Services accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -48,7 +48,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP recordal status for CNAMEs associated with distributions. The status is returned in the CloudFront response; you can't configure it yourself.</p> <p>For more information about ICP recordals, see <a href="https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html"> Signup, Accounts, and Credentials</a> in <i>Getting Started with Amazon Web Services services in China</i>.</p>
@@ -62,7 +62,7 @@ module Aws::CloudFront
       :cname,
       :icp_recordal_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution.</p>
@@ -76,7 +76,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:</p> <ul> <li> <p>CloudFront forwards only <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront forwards only <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> <li> <p>CloudFront forwards <code>GET, HEAD, OPTIONS, PUT, PATCH, POST</code>, and <code>DELETE</code> requests.</p> </li> </ul> <p>If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you might not want users to have permissions to delete objects from your origin.</p>
@@ -94,7 +94,7 @@ module Aws::CloudFront
       :items,
       :cached_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Anycast static IP list. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html">Request Anycast static IPs to use for allowlisting</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -128,7 +128,7 @@ module Aws::CloudFront
       :ip_count,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Anycast static IP list collection.</p>
@@ -158,7 +158,7 @@ module Aws::CloudFront
       :is_truncated,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An abbreviated version of the <a>AnycastIpList</a> structure. Omits the allocated static IP addresses (<a>AnycastIpList$AnycastIps</a>).</p>
@@ -188,7 +188,7 @@ module Aws::CloudFront
       :ip_count,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_distribution_id
@@ -201,7 +201,7 @@ module Aws::CloudFront
       :target_distribution_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -218,7 +218,7 @@ module Aws::CloudFront
       :web_acl_arn,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -235,7 +235,7 @@ module Aws::CloudFront
       :web_acl_arn,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -252,7 +252,7 @@ module Aws::CloudFront
       :web_acl_arn,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -269,7 +269,7 @@ module Aws::CloudFront
       :web_acl_arn,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalidation batch specified is too large.</p>
@@ -278,7 +278,7 @@ module Aws::CloudFront
     class BatchTooLarge < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CNAME specified is already defined for CloudFront.</p>
@@ -287,7 +287,7 @@ module Aws::CloudFront
     class CNAMEAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes how CloudFront processes requests.</p> <p>You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to serve objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.</p> <p>For the current quota (formerly known as limit) on the number of cache behaviors that you can add to a distribution, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you don't want to specify any cache behaviors, include only an empty <code>CacheBehaviors</code> element. Don't specify an empty individual <code>CacheBehavior</code> element, because this is invalid. For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html">CacheBehaviors</a>. </p> <p>To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty <code>CacheBehaviors</code> element.</p> <p>To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.</p> <important> <p>If your minimum TTL is greater than 0, CloudFront will cache content for at least the duration specified in the cache policy's minimum TTL, even if the <code>Cache-Control: no-cache</code>, <code>no-store</code>, or <code>private</code> directives are present in the origin headers.</p> </important> <p>For more information about cache behaviors, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior">Cache Behavior Settings</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -377,7 +377,7 @@ module Aws::CloudFront
       :default_ttl,
       :max_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains zero or more <code>CacheBehavior</code> elements.</p>
@@ -391,7 +391,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache policy.</p> <p>When it's attached to a cache behavior, the cache policy determines the following:</p> <ul> <li> <p>The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.</p> </li> <li> <p>The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.</p> </li> </ul> <p>The headers, cookies, and query strings that are included in the cache key are also included in requests that CloudFront sends to the origin. CloudFront sends a request when it can't find a valid object in its cache that matches the request's cache key. If you want to send values to the origin but <i>not</i> include them in the cache key, use <code>OriginRequestPolicy</code>.</p>
@@ -409,7 +409,7 @@ module Aws::CloudFront
       :last_modified_time,
       :cache_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache policy with this name already exists. You must provide a unique name. To modify an existing cache policy, use <code>UpdateCachePolicy</code>.</p>
@@ -418,7 +418,7 @@ module Aws::CloudFront
     class CachePolicyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache policy configuration.</p> <p>This configuration determines the following:</p> <ul> <li> <p>The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.</p> </li> <li> <p>The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.</p> <important> <p>If your minimum TTL is greater than 0, CloudFront will cache content for at least the duration specified in the cache policy's minimum TTL, even if the <code>Cache-Control: no-cache</code>, <code>no-store</code>, or <code>private</code> directives are present in the origin headers.</p> </important> </li> </ul> <p>The headers, cookies, and query strings that are included in the cache key are also included in requests that CloudFront sends to the origin. CloudFront sends a request when it can't find a valid object in its cache that matches the request's cache key. If you want to send values to the origin but <i>not</i> include them in the cache key, use <code>OriginRequestPolicy</code>.</p>
@@ -448,14 +448,7 @@ module Aws::CloudFront
       :min_ttl,
       :parameters_in_cache_key_and_forwarded_to_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePolicyCookieBehavior
-      none = 'none'
-      whitelist = 'whitelist'
-      allExcept = 'allExcept'
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the cache key and in requests that CloudFront sends to the origin.</p>
@@ -469,12 +462,7 @@ module Aws::CloudFront
       :cookie_behavior,
       :cookies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePolicyHeaderBehavior
-      none = 'none'
-      whitelist = 'whitelist'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any HTTP headers (and if so, which headers) are included in the cache key and in requests that CloudFront sends to the origin.</p>
@@ -488,7 +476,7 @@ module Aws::CloudFront
       :header_behavior,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the cache policy because it is attached to one or more cache behaviors.</p>
@@ -497,7 +485,7 @@ module Aws::CloudFront
     class CachePolicyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of cache policies.</p>
@@ -519,14 +507,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePolicyQueryStringBehavior
-      none = 'none'
-      whitelist = 'whitelist'
-      allExcept = 'allExcept'
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the cache key and in requests that CloudFront sends to the origin.</p>
@@ -540,7 +521,7 @@ module Aws::CloudFront
       :query_string_behavior,
       :query_strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a cache policy.</p>
@@ -554,12 +535,7 @@ module Aws::CloudFront
       :type,
       :cache_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CachePolicyType
-      managed = 'managed'
-      custom = 'custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.</p>
@@ -573,7 +549,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't change the value of a public key.</p>
@@ -582,7 +558,7 @@ module Aws::CloudFront
     class CannotChangeImmutablePublicKeyFields < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity cannot be deleted while it is in use.</p>
@@ -591,7 +567,7 @@ module Aws::CloudFront
     class CannotDeleteEntityWhileInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity cannot be updated while it is in use.</p>
@@ -600,7 +576,7 @@ module Aws::CloudFront
     class CannotUpdateEntityWhileInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Certificate Manager (ACM) certificate associated with your distribution.</p>
@@ -610,18 +586,7 @@ module Aws::CloudFront
     class Certificate < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateSource
-      cloudfront = 'cloudfront'
-      iam = 'iam'
-      acm = 'acm'
-    end
-
-    module CertificateTransparencyLoggingPreference
-      Enabled = 'enabled'
-      Disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CloudFront origin access identity.</p>
@@ -639,7 +604,7 @@ module Aws::CloudFront
       :s3_canonical_user_id,
       :cloud_front_origin_access_identity_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the <code>CallerReference</code> is a value you already sent in a previous request to create an identity but the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is different from the original request, CloudFront returns a <code>CloudFrontOriginAccessIdentityAlreadyExists</code> error. </p>
@@ -648,7 +613,7 @@ module Aws::CloudFront
     class CloudFrontOriginAccessIdentityAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource.</p>
@@ -662,7 +627,7 @@ module Aws::CloudFront
       :caller_reference,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Origin Access Identity specified is already in use.</p>
@@ -671,7 +636,7 @@ module Aws::CloudFront
     class CloudFrontOriginAccessIdentityInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the origin access identities for CloudFront.Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/origin-access-identity/cloudfront</code> resource. The response includes a <code>CloudFrontOriginAccessIdentityList</code> element with zero or more <code>CloudFrontOriginAccessIdentitySummary</code> child elements. By default, your entire list of origin access identities is returned in one single page. If the list is long, you can paginate it using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>
@@ -701,7 +666,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the information about a CloudFront origin access identity.</p>
@@ -719,7 +684,7 @@ module Aws::CloudFront
       :s3_canonical_user_id,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An alias (also called a CNAME) and the CloudFront standard distribution and Amazon Web Services account ID that it's associated with. The standard distribution and account IDs are partially hidden, which allows you to identify the standard distributions and accounts that you own, and helps to protect the information of ones that you don't own.</p>
@@ -737,7 +702,7 @@ module Aws::CloudFront
       :distribution_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of aliases (also called CNAMEs) and the CloudFront standard distributions and Amazon Web Services accounts that they are associated with. In the list, the standard distribution and account IDs are partially hidden, which allows you to identify the standard distributions and accounts that you own, but helps to protect the information of ones that you don't own.</p>
@@ -759,7 +724,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection group for your distribution tenants. When you first create a distribution tenant and you don't specify a connection group, CloudFront will automatically create a default connection group for you. When you create a new distribution tenant and don't specify a connection group, the default one will be associated with your distribution tenant.</p>
@@ -813,7 +778,7 @@ module Aws::CloudFront
       :enabled,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about what CloudFront resources your connection groups are associated with.</p>
@@ -823,7 +788,7 @@ module Aws::CloudFront
     class ConnectionGroupAssociationFilter < Struct.new(
       :anycast_ip_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary that contains details about your connection groups.</p>
@@ -873,12 +838,7 @@ module Aws::CloudFront
       :status,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionMode
-      Direct = 'direct'
-      TenantOnly = 'tenant-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A field-level encryption content type profile.</p>
@@ -896,7 +856,7 @@ module Aws::CloudFront
       :profile_id,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a field-level encryption content type-profile mapping.</p>
@@ -910,7 +870,7 @@ module Aws::CloudFront
       :forward_when_content_type_is_unknown,
       :content_type_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Field-level encryption content type-profile.</p>
@@ -924,7 +884,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A continuous deployment policy.</p>
@@ -942,7 +902,7 @@ module Aws::CloudFront
       :last_modified_time,
       :continuous_deployment_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A continuous deployment policy with this configuration already exists.</p>
@@ -951,7 +911,7 @@ module Aws::CloudFront
     class ContinuousDeploymentPolicyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration for a continuous deployment policy.</p>
@@ -969,7 +929,7 @@ module Aws::CloudFront
       :enabled,
       :traffic_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot delete a continuous deployment policy that is associated with a primary distribution.</p>
@@ -978,7 +938,7 @@ module Aws::CloudFront
     class ContinuousDeploymentPolicyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of continuous deployment policies.</p>
@@ -1000,7 +960,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the information about your continuous deployment policies.</p>
@@ -1010,12 +970,7 @@ module Aws::CloudFront
     class ContinuousDeploymentPolicySummary < Struct.new(
       :continuous_deployment_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContinuousDeploymentPolicyType
-      SingleWeight = 'SingleWeight'
-      SingleHeader = 'SingleHeader'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution.</p>
@@ -1029,7 +984,7 @@ module Aws::CloudFront
       :header,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the percentage of traffic to send to a staging distribution.</p>
@@ -1043,7 +998,7 @@ module Aws::CloudFront
       :weight,
       :session_stickiness_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of cookie names.</p>
@@ -1057,7 +1012,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include cookies in the cache key, use <code>CookiesConfig</code> in a cache policy. See <code>CachePolicy</code>.</p> <p>If you want to send cookies to the origin but not include them in the cache key, use <code>CookiesConfig</code> in an origin request policy. See <code>OriginRequestPolicy</code>.</p> <p>A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">Caching Content Based on Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -1071,7 +1026,7 @@ module Aws::CloudFront
       :forward,
       :whitelisted_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute primary_distribution_id
@@ -1096,7 +1051,7 @@ module Aws::CloudFront
       :caller_reference,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution
@@ -1113,7 +1068,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1130,7 +1085,7 @@ module Aws::CloudFront
       :ip_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anycast_ip_list
@@ -1143,7 +1098,7 @@ module Aws::CloudFront
       :anycast_ip_list,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy_config
@@ -1152,7 +1107,7 @@ module Aws::CloudFront
     class CreateCachePolicyRequest < Struct.new(
       :cache_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy
@@ -1169,7 +1124,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new origin access identity (OAI). An origin access identity is a special CloudFront user that you can associate with Amazon S3 origins, so that you can secure all or just some of your Amazon S3 content. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html"> Restricting Access to Amazon S3 Content by Using an Origin Access Identity</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -1179,7 +1134,7 @@ module Aws::CloudFront
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1197,7 +1152,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1222,7 +1177,7 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_group
@@ -1235,7 +1190,7 @@ module Aws::CloudFront
       :connection_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy_config
@@ -1244,7 +1199,7 @@ module Aws::CloudFront
     class CreateContinuousDeploymentPolicyRequest < Struct.new(
       :continuous_deployment_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy
@@ -1261,7 +1216,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new distribution.</p>
@@ -1271,7 +1226,7 @@ module Aws::CloudFront
     class CreateDistributionRequest < Struct.new(
       :distribution_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1289,7 +1244,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id
@@ -1330,7 +1285,7 @@ module Aws::CloudFront
       :managed_certificate_request,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_tenant
@@ -1343,7 +1298,7 @@ module Aws::CloudFront
       :distribution_tenant,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new distribution with tags.</p>
@@ -1353,7 +1308,7 @@ module Aws::CloudFront
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1371,7 +1326,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_config
@@ -1380,7 +1335,7 @@ module Aws::CloudFront
     class CreateFieldLevelEncryptionConfigRequest < Struct.new(
       :field_level_encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption
@@ -1397,7 +1352,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile_config
@@ -1406,7 +1361,7 @@ module Aws::CloudFront
     class CreateFieldLevelEncryptionProfileRequest < Struct.new(
       :field_level_encryption_profile_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile
@@ -1423,7 +1378,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1440,7 +1395,7 @@ module Aws::CloudFront
       :function_config,
       :function_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_summary
@@ -1457,7 +1412,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1470,7 +1425,7 @@ module Aws::CloudFront
       :id,
       :invalidation_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location
@@ -1483,7 +1438,7 @@ module Aws::CloudFront
       :location,
       :invalidation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create an invalidation.</p>
@@ -1497,7 +1452,7 @@ module Aws::CloudFront
       :distribution_id,
       :invalidation_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1511,7 +1466,7 @@ module Aws::CloudFront
       :location,
       :invalidation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group_config
@@ -1520,7 +1475,7 @@ module Aws::CloudFront
     class CreateKeyGroupRequest < Struct.new(
       :key_group_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group
@@ -1537,7 +1492,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1554,7 +1509,7 @@ module Aws::CloudFront
       :comment,
       :import_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_value_store
@@ -1571,7 +1526,7 @@ module Aws::CloudFront
       :e_tag,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id
@@ -1584,7 +1539,7 @@ module Aws::CloudFront
       :distribution_id,
       :monitoring_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_subscription
@@ -1593,7 +1548,7 @@ module Aws::CloudFront
     class CreateMonitoringSubscriptionResult < Struct.new(
       :monitoring_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control_config
@@ -1602,7 +1557,7 @@ module Aws::CloudFront
     class CreateOriginAccessControlRequest < Struct.new(
       :origin_access_control_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control
@@ -1619,7 +1574,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy_config
@@ -1628,7 +1583,7 @@ module Aws::CloudFront
     class CreateOriginRequestPolicyRequest < Struct.new(
       :origin_request_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy
@@ -1645,7 +1600,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_config
@@ -1654,7 +1609,7 @@ module Aws::CloudFront
     class CreatePublicKeyRequest < Struct.new(
       :public_key_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key
@@ -1671,7 +1626,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute end_points
@@ -1692,7 +1647,7 @@ module Aws::CloudFront
       :name,
       :sampling_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute realtime_log_config
@@ -1701,7 +1656,7 @@ module Aws::CloudFront
     class CreateRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy_config
@@ -1710,7 +1665,7 @@ module Aws::CloudFront
     class CreateResponseHeadersPolicyRequest < Struct.new(
       :response_headers_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy
@@ -1727,7 +1682,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new streaming distribution.</p>
@@ -1737,7 +1692,7 @@ module Aws::CloudFront
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1755,7 +1710,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new streaming distribution with tags.</p>
@@ -1765,7 +1720,7 @@ module Aws::CloudFront
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -1783,7 +1738,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin_endpoint_config
@@ -1796,7 +1751,7 @@ module Aws::CloudFront
       :vpc_origin_endpoint_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin
@@ -1813,7 +1768,7 @@ module Aws::CloudFront
       :location,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -1835,7 +1790,7 @@ module Aws::CloudFront
       :response_code,
       :error_caching_min_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -1849,7 +1804,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the list of Custom Headers for each origin.</p>
@@ -1863,7 +1818,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom origin. A custom origin is any origin that is <i>not</i> an Amazon S3 bucket, with one exception. An Amazon S3 bucket that is <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">configured with static website hosting</a> <i>is</i> a custom origin.</p>
@@ -1893,12 +1848,7 @@ module Aws::CloudFront
       :origin_read_timeout,
       :origin_keepalive_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomizationActionType
-      override = 'override'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.</p>
@@ -1916,7 +1866,7 @@ module Aws::CloudFront
       :certificate,
       :geo_restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes the default cache behavior if you don't specify a <code>CacheBehavior</code> element or if request URLs don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.</p> <important> <p>If your minimum TTL is greater than 0, CloudFront will cache content for at least the duration specified in the cache policy's minimum TTL, even if the <code>Cache-Control: no-cache</code>, <code>no-store</code>, or <code>private</code> directives are present in the origin headers.</p> </important>
@@ -2002,7 +1952,7 @@ module Aws::CloudFront
       :default_ttl,
       :max_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2015,7 +1965,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2028,7 +1978,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes a origin access identity.</p>
@@ -2042,7 +1992,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2055,7 +2005,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2068,7 +2018,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action deletes a web distribution. To delete a web distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete a web distribution using the CloudFront API:</b> </p> <ol> <li> <p>Disable the web distribution</p> </li> <li> <p>Submit a <code>GET Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution.</p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Distribution</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 6.</p> </li> <li> <p>Review the response to your <code>DELETE Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -2082,7 +2032,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2095,7 +2045,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2108,7 +2058,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2121,7 +2071,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2134,7 +2084,7 @@ module Aws::CloudFront
       :name,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2147,7 +2097,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2160,7 +2110,7 @@ module Aws::CloudFront
       :name,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id
@@ -2169,12 +2119,12 @@ module Aws::CloudFront
     class DeleteMonitoringSubscriptionRequest < Struct.new(
       :distribution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitoringSubscriptionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2187,7 +2137,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2200,7 +2150,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2213,7 +2163,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2226,7 +2176,7 @@ module Aws::CloudFront
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2239,7 +2189,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to delete a streaming distribution.</p>
@@ -2253,7 +2203,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2266,7 +2216,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin
@@ -2279,7 +2229,7 @@ module Aws::CloudFront
       :vpc_origin,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2292,7 +2242,7 @@ module Aws::CloudFront
       :name,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_summary
@@ -2305,7 +2255,7 @@ module Aws::CloudFront
       :function_summary,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2314,7 +2264,7 @@ module Aws::CloudFront
     class DescribeKeyValueStoreRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_value_store
@@ -2327,7 +2277,7 @@ module Aws::CloudFront
       :key_value_store,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2340,7 +2290,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2353,7 +2303,7 @@ module Aws::CloudFront
       :id,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2366,7 +2316,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2379,7 +2329,7 @@ module Aws::CloudFront
       :id,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A distribution tells CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery.</p>
@@ -2425,7 +2375,7 @@ module Aws::CloudFront
       :distribution_config,
       :alias_icp_recordals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller reference you attempted to create the distribution with is associated with another distribution.</p>
@@ -2434,7 +2384,7 @@ module Aws::CloudFront
     class DistributionAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A distribution configuration.</p>
@@ -2528,7 +2478,7 @@ module Aws::CloudFront
       :tenant_config,
       :connection_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A distribution Configuration and a list of tags to be associated with the distribution.</p>
@@ -2542,7 +2492,7 @@ module Aws::CloudFront
       :distribution_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of distribution IDs.</p>
@@ -2572,7 +2522,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A distribution list.</p>
@@ -2602,7 +2552,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CloudFront distribution is not disabled. You must disable the distribution before you can delete it.</p>
@@ -2611,7 +2561,7 @@ module Aws::CloudFront
     class DistributionNotDisabled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IDs for the distribution resources.</p>
@@ -2625,12 +2575,7 @@ module Aws::CloudFront
       :distribution_id,
       :distribution_tenant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DistributionResourceType
-      Distribution = 'distribution'
-      DistributionTenant = 'distribution-tenant'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the information about a CloudFront distribution.</p>
@@ -2732,7 +2677,7 @@ module Aws::CloudFront
       :connection_mode,
       :anycast_ip_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The distribution tenant.</p>
@@ -2790,7 +2735,7 @@ module Aws::CloudFront
       :enabled,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter by the associated distribution ID or connection group ID.</p>
@@ -2804,7 +2749,7 @@ module Aws::CloudFront
       :distribution_id,
       :connection_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the information about a distribution tenant.</p>
@@ -2858,7 +2803,7 @@ module Aws::CloudFront
       :enabled,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DNS configuration for your domain names.</p>
@@ -2876,13 +2821,7 @@ module Aws::CloudFront
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsConfigurationStatus
-      Valid = 'valid-configuration'
-      Invalid = 'invalid-configuration'
-      Unknown = 'unknown-configuration'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the domain conflict. Use this information to determine the affected domain, the related resource, and the affected Amazon Web Services account.</p>
@@ -2904,7 +2843,7 @@ module Aws::CloudFront
       :resource_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain for the specified distribution tenant.</p>
@@ -2914,7 +2853,7 @@ module Aws::CloudFront
     class DomainItem < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the domain result.</p>
@@ -2928,12 +2867,7 @@ module Aws::CloudFront
       :domain,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      Active = 'active'
-      Inactive = 'inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Complex data type for field-level encryption profiles that includes all of the encryption entities.</p>
@@ -2947,7 +2881,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Complex data type for field-level encryption profiles that includes the encryption key and field pattern specifications.</p>
@@ -2965,7 +2899,7 @@ module Aws::CloudFront
       :provider_id,
       :field_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Kinesis data stream where you're sending real-time log data in a real-time log configuration.</p>
@@ -2979,7 +2913,7 @@ module Aws::CloudFront
       :stream_type,
       :kinesis_stream_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity already exists. You must provide a unique entity.</p>
@@ -2988,7 +2922,7 @@ module Aws::CloudFront
     class EntityAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity limit has been exceeded.</p>
@@ -2997,7 +2931,7 @@ module Aws::CloudFront
     class EntityLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity was not found.</p>
@@ -3006,7 +2940,7 @@ module Aws::CloudFront
     class EntityNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity size limit was exceeded.</p>
@@ -3015,14 +2949,7 @@ module Aws::CloudFront
     class EntitySizeLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      viewer_request = 'viewer-request'
-      viewer_response = 'viewer-response'
-      origin_request = 'origin-request'
-      origin_response = 'origin-response'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type that includes the profile configurations and other options specified for field-level encryption.</p>
@@ -3040,7 +2967,7 @@ module Aws::CloudFront
       :last_modified_time,
       :field_level_encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type that includes the profile configurations specified for field-level encryption.</p>
@@ -3062,7 +2989,7 @@ module Aws::CloudFront
       :query_arg_profile_config,
       :content_type_profile_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration for field-level encryption already exists.</p>
@@ -3071,7 +2998,7 @@ module Aws::CloudFront
     class FieldLevelEncryptionConfigAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration for field-level encryption is in use.</p>
@@ -3080,7 +3007,7 @@ module Aws::CloudFront
     class FieldLevelEncryptionConfigInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of field-level encryption configurations.</p>
@@ -3102,7 +3029,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type for field-level encryption profiles.</p>
@@ -3120,7 +3047,7 @@ module Aws::CloudFront
       :last_modified_time,
       :field_level_encryption_profile_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified profile for field-level encryption already exists.</p>
@@ -3129,7 +3056,7 @@ module Aws::CloudFront
     class FieldLevelEncryptionProfileAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type of profiles for the field-level encryption.</p>
@@ -3151,7 +3078,7 @@ module Aws::CloudFront
       :comment,
       :encryption_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified profile for field-level encryption is in use.</p>
@@ -3160,7 +3087,7 @@ module Aws::CloudFront
     class FieldLevelEncryptionProfileInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of field-level encryption profiles.</p>
@@ -3182,7 +3109,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum size of a profile for field-level encryption was exceeded.</p>
@@ -3191,7 +3118,7 @@ module Aws::CloudFront
     class FieldLevelEncryptionProfileSizeExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field-level encryption profile summary.</p>
@@ -3217,7 +3144,7 @@ module Aws::CloudFront
       :encryption_entities,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a field-level encryption item.</p>
@@ -3243,7 +3170,7 @@ module Aws::CloudFront
       :query_arg_profile_config,
       :content_type_profile_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type that includes the field patterns to match for field-level encryption.</p>
@@ -3257,11 +3184,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      URLEncoded = 'URLEncoded'
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>This field only supports standard distributions. You can't specify this field for multi-tenant distributions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas">Unsupported features for SaaS Manager for Amazon CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </note> <p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include values in the cache key, use a cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy">Creating origin request policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>
@@ -3283,12 +3206,7 @@ module Aws::CloudFront
       :headers,
       :query_string_cache_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FrameOptionsList
-      DENY = 'DENY'
-      SAMEORIGIN = 'SAMEORIGIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A function with the same name already exists in this Amazon Web Services account. To create a function, you must provide a unique name. To update an existing function, use <code>UpdateFunction</code>.</p>
@@ -3297,7 +3215,7 @@ module Aws::CloudFront
     class FunctionAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront function that is associated with a cache behavior in a CloudFront distribution.</p>
@@ -3311,7 +3229,7 @@ module Aws::CloudFront
       :function_arn,
       :event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CloudFront functions that are associated with a cache behavior in a CloudFront distribution. Your functions must be published to the <code>LIVE</code> stage to associate them with a cache behavior.</p>
@@ -3325,7 +3243,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information about a CloudFront function.</p>
@@ -3343,7 +3261,7 @@ module Aws::CloudFront
       :runtime,
       :key_value_store_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the function because it's attached to one or more cache behaviors.</p>
@@ -3352,7 +3270,7 @@ module Aws::CloudFront
     class FunctionInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CloudFront functions.</p>
@@ -3374,7 +3292,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a CloudFront function.</p>
@@ -3396,12 +3314,7 @@ module Aws::CloudFront
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FunctionRuntime
-      cloudfront_js_1_0 = 'cloudfront-js-1.0'
-      cloudfront_js_2_0 = 'cloudfront-js-2.0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function is too large. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -3410,12 +3323,7 @@ module Aws::CloudFront
     class FunctionSizeLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FunctionStage
-      DEVELOPMENT = 'DEVELOPMENT'
-      LIVE = 'LIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information and metadata about a CloudFront function.</p>
@@ -3437,7 +3345,7 @@ module Aws::CloudFront
       :function_config,
       :function_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls the countries in which your content is distributed. CloudFront determines the location of your users using <code>MaxMind</code> GeoIP databases. </p>
@@ -3455,7 +3363,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The customizations that you specified for the distribution tenant for geographic restrictions.</p>
@@ -3469,13 +3377,7 @@ module Aws::CloudFront
       :restriction_type,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeoRestrictionType
-      blacklist = 'blacklist'
-      whitelist = 'whitelist'
-      none = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3484,7 +3386,7 @@ module Aws::CloudFront
     class GetAnycastIpListRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anycast_ip_list
@@ -3497,7 +3399,7 @@ module Aws::CloudFront
       :anycast_ip_list,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3506,7 +3408,7 @@ module Aws::CloudFront
     class GetCachePolicyConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy_config
@@ -3519,7 +3421,7 @@ module Aws::CloudFront
       :cache_policy_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3528,7 +3430,7 @@ module Aws::CloudFront
     class GetCachePolicyRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy
@@ -3541,7 +3443,7 @@ module Aws::CloudFront
       :cache_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The origin access identity's configuration information. For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CloudFrontOriginAccessIdentityConfig.html">CloudFrontOriginAccessIdentityConfig</a>.</p>
@@ -3551,7 +3453,7 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -3565,7 +3467,7 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get an origin access identity's information.</p>
@@ -3575,7 +3477,7 @@ module Aws::CloudFront
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -3589,7 +3491,7 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_endpoint
@@ -3598,7 +3500,7 @@ module Aws::CloudFront
     class GetConnectionGroupByRoutingEndpointRequest < Struct.new(
       :routing_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_group
@@ -3611,7 +3513,7 @@ module Aws::CloudFront
       :connection_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -3620,7 +3522,7 @@ module Aws::CloudFront
     class GetConnectionGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_group
@@ -3633,7 +3535,7 @@ module Aws::CloudFront
       :connection_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3642,7 +3544,7 @@ module Aws::CloudFront
     class GetContinuousDeploymentPolicyConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy_config
@@ -3655,7 +3557,7 @@ module Aws::CloudFront
       :continuous_deployment_policy_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3664,7 +3566,7 @@ module Aws::CloudFront
     class GetContinuousDeploymentPolicyRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy
@@ -3677,7 +3579,7 @@ module Aws::CloudFront
       :continuous_deployment_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get a distribution configuration.</p>
@@ -3687,7 +3589,7 @@ module Aws::CloudFront
     class GetDistributionConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -3701,7 +3603,7 @@ module Aws::CloudFront
       :distribution_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get a distribution's information.</p>
@@ -3711,7 +3613,7 @@ module Aws::CloudFront
     class GetDistributionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -3725,7 +3627,7 @@ module Aws::CloudFront
       :distribution,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3734,7 +3636,7 @@ module Aws::CloudFront
     class GetDistributionTenantByDomainRequest < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_tenant
@@ -3747,7 +3649,7 @@ module Aws::CloudFront
       :distribution_tenant,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -3756,7 +3658,7 @@ module Aws::CloudFront
     class GetDistributionTenantRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_tenant
@@ -3769,7 +3671,7 @@ module Aws::CloudFront
       :distribution_tenant,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3778,7 +3680,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_config
@@ -3791,7 +3693,7 @@ module Aws::CloudFront
       :field_level_encryption_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3800,7 +3702,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile_config
@@ -3813,7 +3715,7 @@ module Aws::CloudFront
       :field_level_encryption_profile_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3822,7 +3724,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionProfileRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile
@@ -3835,7 +3737,7 @@ module Aws::CloudFront
       :field_level_encryption_profile,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3844,7 +3746,7 @@ module Aws::CloudFront
     class GetFieldLevelEncryptionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption
@@ -3857,7 +3759,7 @@ module Aws::CloudFront
       :field_level_encryption,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3870,7 +3772,7 @@ module Aws::CloudFront
       :name,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_code
@@ -3887,7 +3789,7 @@ module Aws::CloudFront
       :e_tag,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_tenant_id
@@ -3900,7 +3802,7 @@ module Aws::CloudFront
       :distribution_tenant_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invalidation
@@ -3909,7 +3811,7 @@ module Aws::CloudFront
     class GetInvalidationForDistributionTenantResult < Struct.new(
       :invalidation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get an invalidation's information.</p>
@@ -3923,7 +3825,7 @@ module Aws::CloudFront
       :distribution_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -3933,7 +3835,7 @@ module Aws::CloudFront
     class GetInvalidationResult < Struct.new(
       :invalidation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3942,7 +3844,7 @@ module Aws::CloudFront
     class GetKeyGroupConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group_config
@@ -3955,7 +3857,7 @@ module Aws::CloudFront
       :key_group_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3964,7 +3866,7 @@ module Aws::CloudFront
     class GetKeyGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group
@@ -3977,7 +3879,7 @@ module Aws::CloudFront
       :key_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -3986,7 +3888,7 @@ module Aws::CloudFront
     class GetManagedCertificateDetailsRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_certificate_details
@@ -3995,7 +3897,7 @@ module Aws::CloudFront
     class GetManagedCertificateDetailsResult < Struct.new(
       :managed_certificate_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id
@@ -4004,7 +3906,7 @@ module Aws::CloudFront
     class GetMonitoringSubscriptionRequest < Struct.new(
       :distribution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_subscription
@@ -4013,7 +3915,7 @@ module Aws::CloudFront
     class GetMonitoringSubscriptionResult < Struct.new(
       :monitoring_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4022,7 +3924,7 @@ module Aws::CloudFront
     class GetOriginAccessControlConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control_config
@@ -4035,7 +3937,7 @@ module Aws::CloudFront
       :origin_access_control_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4044,7 +3946,7 @@ module Aws::CloudFront
     class GetOriginAccessControlRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control
@@ -4057,7 +3959,7 @@ module Aws::CloudFront
       :origin_access_control,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4066,7 +3968,7 @@ module Aws::CloudFront
     class GetOriginRequestPolicyConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy_config
@@ -4079,7 +3981,7 @@ module Aws::CloudFront
       :origin_request_policy_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4088,7 +3990,7 @@ module Aws::CloudFront
     class GetOriginRequestPolicyRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy
@@ -4101,7 +4003,7 @@ module Aws::CloudFront
       :origin_request_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4110,7 +4012,7 @@ module Aws::CloudFront
     class GetPublicKeyConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_config
@@ -4123,7 +4025,7 @@ module Aws::CloudFront
       :public_key_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4132,7 +4034,7 @@ module Aws::CloudFront
     class GetPublicKeyRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key
@@ -4145,7 +4047,7 @@ module Aws::CloudFront
       :public_key,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4158,7 +4060,7 @@ module Aws::CloudFront
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute realtime_log_config
@@ -4167,7 +4069,7 @@ module Aws::CloudFront
     class GetRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4176,7 +4078,7 @@ module Aws::CloudFront
     class GetResponseHeadersPolicyConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy_config
@@ -4189,7 +4091,7 @@ module Aws::CloudFront
       :response_headers_policy_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4198,7 +4100,7 @@ module Aws::CloudFront
     class GetResponseHeadersPolicyRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy
@@ -4211,7 +4113,7 @@ module Aws::CloudFront
       :response_headers_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>To request to get a streaming distribution configuration.</p>
@@ -4221,7 +4123,7 @@ module Aws::CloudFront
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -4235,7 +4137,7 @@ module Aws::CloudFront
       :streaming_distribution_config,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get a streaming distribution's information.</p>
@@ -4245,7 +4147,7 @@ module Aws::CloudFront
     class GetStreamingDistributionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -4259,7 +4161,7 @@ module Aws::CloudFront
       :streaming_distribution,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4268,7 +4170,7 @@ module Aws::CloudFront
     class GetVpcOriginRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin
@@ -4281,7 +4183,7 @@ module Aws::CloudFront
       :vpc_origin,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon CloudFront supports gRPC, an open-source remote procedure call (RPC) framework built on HTTP/2. gRPC offers bi-directional streaming and binary protocol that buffers payloads, making it suitable for applications that require low latency communications.</p> <p>To enable your distribution to handle gRPC requests, you must include HTTP/2 as one of the supported <code>HTTP</code> versions and allow <code>HTTP</code> methods, including <code>POST</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-using-grpc.html">Using gRPC with CloudFront distributions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -4291,7 +4193,7 @@ module Aws::CloudFront
     class GrpcConfig < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of HTTP header names.</p>
@@ -4305,20 +4207,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HttpVersion
-      http1_1 = 'http1.1'
-      http2 = 'http2'
-      http3 = 'http3'
-      http2and3 = 'http2and3'
-    end
-
-    module ICPRecordalStatus
-      APPROVED = 'APPROVED'
-      SUSPENDED = 'SUSPENDED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletion is not allowed for this entity.</p>
@@ -4327,7 +4216,7 @@ module Aws::CloudFront
     class IllegalDelete < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration for field-level encryption can't be associated with the specified cache behavior.</p>
@@ -4336,7 +4225,7 @@ module Aws::CloudFront
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin cannot contain both an origin access control (OAC) and an origin access identity (OAI).</p>
@@ -4345,7 +4234,7 @@ module Aws::CloudFront
     class IllegalOriginAccessConfiguration < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The update contains modifications that are not allowed.</p>
@@ -4354,7 +4243,7 @@ module Aws::CloudFront
     class IllegalUpdate < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The import source for the key value store.</p>
@@ -4368,11 +4257,7 @@ module Aws::CloudFront
       :source_type,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportSourceType
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of <code>Quantity</code> and the size of <code>Items</code> don't match.</p>
@@ -4381,7 +4266,7 @@ module Aws::CloudFront
     class InconsistentQuantities < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An argument is invalid.</p>
@@ -4390,7 +4275,7 @@ module Aws::CloudFront
     class InvalidArgument < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CloudFront resource can't be associated.</p>
@@ -4399,7 +4284,7 @@ module Aws::CloudFront
     class InvalidAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default root object file name is too big or contains an invalid character.</p>
@@ -4408,7 +4293,7 @@ module Aws::CloudFront
     class InvalidDefaultRootObject < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin access control is associated with an origin whose domain name is not supported.</p>
@@ -4417,7 +4302,7 @@ module Aws::CloudFront
     class InvalidDomainNameForOriginAccessControl < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid error code was specified.</p>
@@ -4426,7 +4311,7 @@ module Aws::CloudFront
     class InvalidErrorCode < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains forward cookies option which doesn't match with the expectation for the <code>whitelisted</code> list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected.</p>
@@ -4435,7 +4320,7 @@ module Aws::CloudFront
     class InvalidForwardCookies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront function association is invalid.</p>
@@ -4444,7 +4329,7 @@ module Aws::CloudFront
     class InvalidFunctionAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified geo restriction parameter is not valid.</p>
@@ -4453,7 +4338,7 @@ module Aws::CloudFront
     class InvalidGeoRestrictionParameter < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The headers specified are not valid for an Amazon S3 origin.</p>
@@ -4462,7 +4347,7 @@ module Aws::CloudFront
     class InvalidHeadersForS3Origin < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>If-Match</code> version is missing or not valid.</p>
@@ -4471,7 +4356,7 @@ module Aws::CloudFront
     class InvalidIfMatchVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Lambda@Edge function association is invalid.</p>
@@ -4480,7 +4365,7 @@ module Aws::CloudFront
     class InvalidLambdaFunctionAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location code specified is not valid.</p>
@@ -4489,7 +4374,7 @@ module Aws::CloudFront
     class InvalidLocationCode < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum protocol version specified is not valid.</p>
@@ -4498,7 +4383,7 @@ module Aws::CloudFront
     class InvalidMinimumProtocolVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.</p>
@@ -4507,7 +4392,7 @@ module Aws::CloudFront
     class InvalidOrigin < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The origin access control is not valid.</p>
@@ -4516,7 +4401,7 @@ module Aws::CloudFront
     class InvalidOriginAccessControl < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The origin access identity is not valid or doesn't exist.</p>
@@ -4525,7 +4410,7 @@ module Aws::CloudFront
     class InvalidOriginAccessIdentity < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The keep alive timeout specified for the origin is not valid.</p>
@@ -4534,7 +4419,7 @@ module Aws::CloudFront
     class InvalidOriginKeepaliveTimeout < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The read timeout specified for the origin is not valid.</p>
@@ -4543,7 +4428,7 @@ module Aws::CloudFront
     class InvalidOriginReadTimeout < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that support Server Name Indication (SNI).</p>
@@ -4552,7 +4437,7 @@ module Aws::CloudFront
     class InvalidProtocolSettings < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query string parameters specified are not valid.</p>
@@ -4561,7 +4446,7 @@ module Aws::CloudFront
     class InvalidQueryStringParameters < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relative path is too big, is not URL-encoded, or does not begin with a slash (/).</p>
@@ -4570,7 +4455,7 @@ module Aws::CloudFront
     class InvalidRelativePath < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the <code>RequiredProtocols</code> element from your distribution configuration.</p>
@@ -4579,7 +4464,7 @@ module Aws::CloudFront
     class InvalidRequiredProtocol < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response code is not valid.</p>
@@ -4588,7 +4473,7 @@ module Aws::CloudFront
     class InvalidResponseCode < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TTL order specified is not valid.</p>
@@ -4597,7 +4482,7 @@ module Aws::CloudFront
     class InvalidTTLOrder < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tagging specified is not valid.</p>
@@ -4606,7 +4491,7 @@ module Aws::CloudFront
     class InvalidTagging < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A viewer certificate specified is not valid.</p>
@@ -4615,7 +4500,7 @@ module Aws::CloudFront
     class InvalidViewerCertificate < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A web ACL ID specified is not valid. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example <code>arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a</code>. To specify a web ACL created using WAF Classic, use the ACL ID, for example <code>473e64fd-f30b-4765-81a0-62ad96dd167a</code>.</p>
@@ -4624,7 +4509,7 @@ module Aws::CloudFront
     class InvalidWebACLId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalidation.</p>
@@ -4646,7 +4531,7 @@ module Aws::CloudFront
       :create_time,
       :invalidation_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalidation batch.</p>
@@ -4660,7 +4545,7 @@ module Aws::CloudFront
       :paths,
       :caller_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>InvalidationList</code> complex type describes the list of invalidation objects. For more information about invalidation, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html">Invalidating Objects (Web Distributions Only)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -4690,7 +4575,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an invalidation request.</p>
@@ -4708,13 +4593,7 @@ module Aws::CloudFront
       :create_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ItemSelection
-      none = 'none'
-      whitelist = 'whitelist'
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of identifiers for the public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -4728,7 +4607,7 @@ module Aws::CloudFront
       :key_group_id,
       :key_pair_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key group.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>
@@ -4746,7 +4625,7 @@ module Aws::CloudFront
       :last_modified_time,
       :key_group_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key group with this name already exists. You must provide a unique name. To modify an existing key group, use <code>UpdateKeyGroup</code>.</p>
@@ -4755,7 +4634,7 @@ module Aws::CloudFront
     class KeyGroupAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>
@@ -4773,7 +4652,7 @@ module Aws::CloudFront
       :items,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of key groups.</p>
@@ -4795,7 +4674,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a key group.</p>
@@ -4805,7 +4684,7 @@ module Aws::CloudFront
     class KeyGroupSummary < Struct.new(
       :key_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CloudFront key pair identifiers.</p>
@@ -4819,7 +4698,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key value store. Use this to separate data from function code, allowing you to update data without having to publish a new version of a function. The key value store holds keys and their corresponding values.</p>
@@ -4849,7 +4728,7 @@ module Aws::CloudFront
       :status,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key value store association.</p>
@@ -4859,7 +4738,7 @@ module Aws::CloudFront
     class KeyValueStoreAssociation < Struct.new(
       :key_value_store_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key value store associations.</p>
@@ -4873,7 +4752,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key value store list.</p>
@@ -4895,7 +4774,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data.</p>
@@ -4909,7 +4788,7 @@ module Aws::CloudFront
       :role_arn,
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains a Lambda@Edge function association.</p>
@@ -4927,7 +4806,7 @@ module Aws::CloudFront
       :event_type,
       :include_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that specifies a list of Lambda@Edge functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda@Edge functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with only one function.</p> <p>If you don't want to invoke any Lambda@Edge functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>.</p>
@@ -4941,7 +4820,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4954,7 +4833,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anycast_ip_lists
@@ -4963,7 +4842,7 @@ module Aws::CloudFront
     class ListAnycastIpListsResult < Struct.new(
       :anycast_ip_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -4980,7 +4859,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy_list
@@ -4989,7 +4868,7 @@ module Aws::CloudFront
     class ListCachePoliciesResult < Struct.new(
       :cache_policy_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list origin access identities.</p>
@@ -5003,7 +4882,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -5013,7 +4892,7 @@ module Aws::CloudFront
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id
@@ -5034,7 +4913,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conflicting_aliases_list
@@ -5043,7 +4922,7 @@ module Aws::CloudFront
     class ListConflictingAliasesResult < Struct.new(
       :conflicting_aliases_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_filter
@@ -5060,7 +4939,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -5073,7 +4952,7 @@ module Aws::CloudFront
       :next_marker,
       :connection_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5086,7 +4965,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy_list
@@ -5095,7 +4974,7 @@ module Aws::CloudFront
     class ListContinuousDeploymentPoliciesResult < Struct.new(
       :continuous_deployment_policy_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_arn
@@ -5116,7 +4995,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -5129,7 +5008,7 @@ module Aws::CloudFront
       :next_marker,
       :distribution_tenant_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_filter
@@ -5146,7 +5025,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -5159,7 +5038,7 @@ module Aws::CloudFront
       :next_marker,
       :distribution_tenant_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5176,7 +5055,7 @@ module Aws::CloudFront
       :max_items,
       :anycast_ip_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_list
@@ -5185,7 +5064,7 @@ module Aws::CloudFront
     class ListDistributionsByAnycastIpListIdResult < Struct.new(
       :distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5202,7 +5081,7 @@ module Aws::CloudFront
       :max_items,
       :cache_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id_list
@@ -5211,7 +5090,7 @@ module Aws::CloudFront
     class ListDistributionsByCachePolicyIdResult < Struct.new(
       :distribution_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5228,7 +5107,7 @@ module Aws::CloudFront
       :max_items,
       :connection_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_list
@@ -5237,7 +5116,7 @@ module Aws::CloudFront
     class ListDistributionsByConnectionModeResult < Struct.new(
       :distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5254,7 +5133,7 @@ module Aws::CloudFront
       :max_items,
       :key_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id_list
@@ -5263,7 +5142,7 @@ module Aws::CloudFront
     class ListDistributionsByKeyGroupResult < Struct.new(
       :distribution_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5280,7 +5159,7 @@ module Aws::CloudFront
       :max_items,
       :origin_request_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id_list
@@ -5289,7 +5168,7 @@ module Aws::CloudFront
     class ListDistributionsByOriginRequestPolicyIdResult < Struct.new(
       :distribution_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5310,7 +5189,7 @@ module Aws::CloudFront
       :realtime_log_config_name,
       :realtime_log_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_list
@@ -5319,7 +5198,7 @@ module Aws::CloudFront
     class ListDistributionsByRealtimeLogConfigResult < Struct.new(
       :distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5336,7 +5215,7 @@ module Aws::CloudFront
       :max_items,
       :response_headers_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id_list
@@ -5345,7 +5224,7 @@ module Aws::CloudFront
     class ListDistributionsByResponseHeadersPolicyIdResult < Struct.new(
       :distribution_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5362,7 +5241,7 @@ module Aws::CloudFront
       :max_items,
       :vpc_origin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_id_list
@@ -5371,7 +5250,7 @@ module Aws::CloudFront
     class ListDistributionsByVpcOriginIdResult < Struct.new(
       :distribution_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list distributions that are associated with a specified WAF web ACL.</p>
@@ -5389,7 +5268,7 @@ module Aws::CloudFront
       :max_items,
       :web_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a request to list the distributions that are associated with a specified WAF web ACL.</p>
@@ -5399,7 +5278,7 @@ module Aws::CloudFront
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list your distributions.</p>
@@ -5413,7 +5292,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -5423,7 +5302,7 @@ module Aws::CloudFront
     class ListDistributionsResult < Struct.new(
       :distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -5444,7 +5323,7 @@ module Aws::CloudFront
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_conflicts
@@ -5457,7 +5336,7 @@ module Aws::CloudFront
       :domain_conflicts,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5470,7 +5349,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_list
@@ -5479,7 +5358,7 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionConfigsResult < Struct.new(
       :field_level_encryption_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5492,7 +5371,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile_list
@@ -5501,7 +5380,7 @@ module Aws::CloudFront
     class ListFieldLevelEncryptionProfilesResult < Struct.new(
       :field_level_encryption_profile_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5518,7 +5397,7 @@ module Aws::CloudFront
       :max_items,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_list
@@ -5527,7 +5406,7 @@ module Aws::CloudFront
     class ListFunctionsResult < Struct.new(
       :function_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5544,7 +5423,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invalidation_list
@@ -5553,7 +5432,7 @@ module Aws::CloudFront
     class ListInvalidationsForDistributionTenantResult < Struct.new(
       :invalidation_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list invalidations.</p>
@@ -5571,7 +5450,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -5581,7 +5460,7 @@ module Aws::CloudFront
     class ListInvalidationsResult < Struct.new(
       :invalidation_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5594,7 +5473,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group_list
@@ -5603,7 +5482,7 @@ module Aws::CloudFront
     class ListKeyGroupsResult < Struct.new(
       :key_group_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5620,7 +5499,7 @@ module Aws::CloudFront
       :max_items,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_value_store_list
@@ -5629,7 +5508,7 @@ module Aws::CloudFront
     class ListKeyValueStoresResult < Struct.new(
       :key_value_store_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5642,7 +5521,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control_list
@@ -5651,7 +5530,7 @@ module Aws::CloudFront
     class ListOriginAccessControlsResult < Struct.new(
       :origin_access_control_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5668,7 +5547,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy_list
@@ -5677,7 +5556,7 @@ module Aws::CloudFront
     class ListOriginRequestPoliciesResult < Struct.new(
       :origin_request_policy_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5690,7 +5569,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_list
@@ -5699,7 +5578,7 @@ module Aws::CloudFront
     class ListPublicKeysResult < Struct.new(
       :public_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -5712,7 +5591,7 @@ module Aws::CloudFront
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute realtime_log_configs
@@ -5721,7 +5600,7 @@ module Aws::CloudFront
     class ListRealtimeLogConfigsResult < Struct.new(
       :realtime_log_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5738,7 +5617,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy_list
@@ -5747,7 +5626,7 @@ module Aws::CloudFront
     class ListResponseHeadersPoliciesResult < Struct.new(
       :response_headers_policy_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list your streaming distributions.</p>
@@ -5761,7 +5640,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -5771,7 +5650,7 @@ module Aws::CloudFront
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list tags for a CloudFront resource.</p>
@@ -5781,7 +5660,7 @@ module Aws::CloudFront
     class ListTagsForResourceRequest < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -5791,7 +5670,7 @@ module Aws::CloudFront
     class ListTagsForResourceResult < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -5804,7 +5683,7 @@ module Aws::CloudFront
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin_list
@@ -5813,7 +5692,7 @@ module Aws::CloudFront
     class ListVpcOriginsResult < Struct.new(
       :vpc_origin_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that specifies whether access logs are written for the distribution.</p> <note> <p>If you already enabled standard logging (legacy) and you want to enable standard logging (v2) to send your access logs to Amazon S3, we recommend that you specify a <i>different</i> Amazon S3 bucket or use a <i>separate path</i> in the same bucket (for example, use a log prefix or partitioning). This helps you keep track of which log files are associated with which logging subscription and prevents log files from overwriting each other. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html">Standard logging (access logs)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </note>
@@ -5835,7 +5714,7 @@ module Aws::CloudFront
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -5865,7 +5744,7 @@ module Aws::CloudFront
       :validation_token_host,
       :validation_token_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the request for the Amazon CloudFront managed ACM certificate.</p>
@@ -5883,38 +5762,7 @@ module Aws::CloudFront
       :primary_domain_name,
       :certificate_transparency_logging_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedCertificateStatus
-      PendingValidation = 'pending-validation'
-      Issued = 'issued'
-      Inactive = 'inactive'
-      Expired = 'expired'
-      ValidationTimedOut = 'validation-timed-out'
-      Revoked = 'revoked'
-      Failed = 'failed'
-    end
-
-    module Method
-      GET = 'GET'
-      HEAD = 'HEAD'
-      POST = 'POST'
-      PUT = 'PUT'
-      PATCH = 'PATCH'
-      OPTIONS = 'OPTIONS'
-      DELETE = 'DELETE'
-    end
-
-    module MinimumProtocolVersion
-      SSLv3 = 'SSLv3'
-      TLSv1 = 'TLSv1'
-      TLSv1_2016 = 'TLSv1_2016'
-      TLSv1_1_2016 = 'TLSv1.1_2016'
-      TLSv1_2_2018 = 'TLSv1.2_2018'
-      TLSv1_2_2019 = 'TLSv1.2_2019'
-      TLSv1_2_2021 = 'TLSv1.2_2021'
-      TLSv1_3_2025 = 'TLSv1.3_2025'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation requires a body. Ensure that the body is present and the <code>Content-Type</code> header is set.</p>
@@ -5923,7 +5771,7 @@ module Aws::CloudFront
     class MissingBody < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>
@@ -5933,7 +5781,7 @@ module Aws::CloudFront
     class MonitoringSubscription < Struct.new(
       :realtime_metrics_subscription_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A monitoring subscription already exists for the specified distribution.</p>
@@ -5942,7 +5790,7 @@ module Aws::CloudFront
     class MonitoringSubscriptionAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cache policy does not exist.</p>
@@ -5951,7 +5799,7 @@ module Aws::CloudFront
     class NoSuchCachePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified origin access identity does not exist.</p>
@@ -5960,7 +5808,7 @@ module Aws::CloudFront
     class NoSuchCloudFrontOriginAccessIdentity < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The continuous deployment policy doesn't exist.</p>
@@ -5969,7 +5817,7 @@ module Aws::CloudFront
     class NoSuchContinuousDeploymentPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified distribution does not exist.</p>
@@ -5978,7 +5826,7 @@ module Aws::CloudFront
     class NoSuchDistribution < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration for field-level encryption doesn't exist.</p>
@@ -5987,7 +5835,7 @@ module Aws::CloudFront
     class NoSuchFieldLevelEncryptionConfig < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified profile for field-level encryption doesn't exist.</p>
@@ -5996,7 +5844,7 @@ module Aws::CloudFront
     class NoSuchFieldLevelEncryptionProfile < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function does not exist.</p>
@@ -6005,7 +5853,7 @@ module Aws::CloudFront
     class NoSuchFunctionExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified invalidation does not exist.</p>
@@ -6014,7 +5862,7 @@ module Aws::CloudFront
     class NoSuchInvalidation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A monitoring subscription does not exist for the specified distribution.</p>
@@ -6023,7 +5871,7 @@ module Aws::CloudFront
     class NoSuchMonitoringSubscription < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No origin exists with the specified <code>Origin Id</code>.</p>
@@ -6032,7 +5880,7 @@ module Aws::CloudFront
     class NoSuchOrigin < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The origin access control does not exist.</p>
@@ -6041,7 +5889,7 @@ module Aws::CloudFront
     class NoSuchOriginAccessControl < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The origin request policy does not exist.</p>
@@ -6050,7 +5898,7 @@ module Aws::CloudFront
     class NoSuchOriginRequestPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified public key doesn't exist.</p>
@@ -6059,7 +5907,7 @@ module Aws::CloudFront
     class NoSuchPublicKey < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The real-time log configuration does not exist.</p>
@@ -6068,7 +5916,7 @@ module Aws::CloudFront
     class NoSuchRealtimeLogConfig < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that was specified is not valid.</p>
@@ -6077,7 +5925,7 @@ module Aws::CloudFront
     class NoSuchResource < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response headers policy does not exist.</p>
@@ -6086,7 +5934,7 @@ module Aws::CloudFront
     class NoSuchResponseHeadersPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified streaming distribution does not exist.</p>
@@ -6095,7 +5943,7 @@ module Aws::CloudFront
     class NoSuchStreamingDistribution < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin.</p> <p>An origin is the location where content is stored, and from which CloudFront gets content to serve to viewers. To specify an origin:</p> <ul> <li> <p>Use <code>S3OriginConfig</code> to specify an Amazon S3 bucket that is not configured with static website hosting.</p> </li> <li> <p>Use <code>VpcOriginConfig</code> to specify a VPC origin.</p> </li> <li> <p>Use <code>CustomOriginConfig</code> to specify all other kinds of origins, including:</p> <ul> <li> <p>An Amazon S3 bucket that is configured with static website hosting</p> </li> <li> <p>An Elastic Load Balancing load balancer</p> </li> <li> <p>An Elemental MediaPackage endpoint</p> </li> <li> <p>An Elemental MediaStore container</p> </li> <li> <p>Any other HTTP server, running on an Amazon EC2 instance or any other kind of host</p> </li> </ul> </li> </ul> <p>For the current maximum number of origins that you can specify per distribution, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions">General Quotas on Web Distributions</a> in the <i>Amazon CloudFront Developer Guide</i> (quotas were formerly referred to as limits).</p>
@@ -6149,7 +5997,7 @@ module Aws::CloudFront
       :origin_shield,
       :origin_access_control_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront origin access control, including its unique identifier.</p>
@@ -6163,7 +6011,7 @@ module Aws::CloudFront
       :id,
       :origin_access_control_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin access control with the specified parameters already exists.</p>
@@ -6172,7 +6020,7 @@ module Aws::CloudFront
     class OriginAccessControlAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront origin access control configuration.</p>
@@ -6198,7 +6046,7 @@ module Aws::CloudFront
       :signing_behavior,
       :origin_access_control_origin_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the origin access control because it's in use by one or more distributions.</p>
@@ -6207,7 +6055,7 @@ module Aws::CloudFront
     class OriginAccessControlInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CloudFront origin access controls.</p>
@@ -6237,24 +6085,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginAccessControlOriginTypes
-      s3 = 's3'
-      mediastore = 'mediastore'
-      mediapackagev2 = 'mediapackagev2'
-      lambda = 'lambda'
-    end
-
-    module OriginAccessControlSigningBehaviors
-      never = 'never'
-      always = 'always'
-      no_override = 'no-override'
-    end
-
-    module OriginAccessControlSigningProtocols
-      sigv4 = 'sigv4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront origin access control.</p>
@@ -6284,7 +6115,7 @@ module Aws::CloudFront
       :signing_behavior,
       :origin_access_control_origin_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains <code>HeaderName</code> and <code>HeaderValue</code> elements, if any, for this distribution.</p>
@@ -6298,7 +6129,7 @@ module Aws::CloudFront
       :header_name,
       :header_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin group includes two origins (a primary origin and a secondary origin to failover to) and a failover criteria that you specify. You create an origin group to support origin failover in CloudFront. When you create or update a distribution, you can specify the origin group instead of a single origin, and CloudFront will failover from the primary origin to the secondary origin under the failover conditions that you've chosen.</p> <p>Optionally, you can choose selection criteria for your origin group to specify how your origins are selected when your distribution routes viewer requests.</p>
@@ -6320,7 +6151,7 @@ module Aws::CloudFront
       :members,
       :selection_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type that includes information about the failover criteria for an origin group, including the status codes for which CloudFront will failover from the primary origin to the second origin.</p>
@@ -6330,7 +6161,7 @@ module Aws::CloudFront
     class OriginGroupFailoverCriteria < Struct.new(
       :status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin in an origin group.</p>
@@ -6340,7 +6171,7 @@ module Aws::CloudFront
     class OriginGroupMember < Struct.new(
       :origin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type for the origins included in an origin group.</p>
@@ -6354,12 +6185,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginGroupSelectionCriteria
-      Default = 'default'
-      MediaQualityBased = 'media-quality-based'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type for the origin groups specified for a distribution.</p>
@@ -6373,13 +6199,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginProtocolPolicy
-      http_only = 'http-only'
-      match_viewer = 'match-viewer'
-      https_only = 'https-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin request policy.</p> <p>When it's attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:</p> <ul> <li> <p>The request body and the URL path (without the domain name) from the viewer request.</p> </li> <li> <p>The headers that CloudFront automatically includes in every origin request, including <code>Host</code>, <code>User-Agent</code>, and <code>X-Amz-Cf-Id</code>.</p> </li> <li> <p>All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.</p> </li> </ul> <p>CloudFront sends a request when it can't find an object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use <code>CachePolicy</code>.</p>
@@ -6397,7 +6217,7 @@ module Aws::CloudFront
       :last_modified_time,
       :origin_request_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin request policy with this name already exists. You must provide a unique name. To modify an existing origin request policy, use <code>UpdateOriginRequestPolicy</code>.</p>
@@ -6406,7 +6226,7 @@ module Aws::CloudFront
     class OriginRequestPolicyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An origin request policy configuration.</p> <p>This configuration determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:</p> <ul> <li> <p>The request body and the URL path (without the domain name) from the viewer request.</p> </li> <li> <p>The headers that CloudFront automatically includes in every origin request, including <code>Host</code>, <code>User-Agent</code>, and <code>X-Amz-Cf-Id</code>.</p> </li> <li> <p>All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.</p> </li> </ul> <p>CloudFront sends a request when it can't find an object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use <code>CachePolicy</code>.</p>
@@ -6432,14 +6252,7 @@ module Aws::CloudFront
       :cookies_config,
       :query_strings_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginRequestPolicyCookieBehavior
-      none = 'none'
-      whitelist = 'whitelist'
-      all = 'all'
-      allExcept = 'allExcept'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any cookies in viewer requests (and if so, which cookies) are included in requests that CloudFront sends to the origin.</p>
@@ -6453,15 +6266,7 @@ module Aws::CloudFront
       :cookie_behavior,
       :cookies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginRequestPolicyHeaderBehavior
-      none = 'none'
-      whitelist = 'whitelist'
-      allViewer = 'allViewer'
-      allViewerAndWhitelistCloudFront = 'allViewerAndWhitelistCloudFront'
-      allExcept = 'allExcept'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any HTTP headers (and if so, which headers) are included in requests that CloudFront sends to the origin.</p>
@@ -6475,7 +6280,7 @@ module Aws::CloudFront
       :header_behavior,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the origin request policy because it is attached to one or more cache behaviors.</p>
@@ -6484,7 +6289,7 @@ module Aws::CloudFront
     class OriginRequestPolicyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of origin request policies.</p>
@@ -6506,14 +6311,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginRequestPolicyQueryStringBehavior
-      none = 'none'
-      whitelist = 'whitelist'
-      all = 'all'
-      allExcept = 'allExcept'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in requests that CloudFront sends to the origin.</p>
@@ -6527,7 +6325,7 @@ module Aws::CloudFront
       :query_string_behavior,
       :query_strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an origin request policy.</p>
@@ -6541,12 +6339,7 @@ module Aws::CloudFront
       :type,
       :origin_request_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginRequestPolicyType
-      managed = 'managed'
-      custom = 'custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CloudFront Origin Shield.</p> <p>Using Origin Shield can help reduce the load on your origin. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html">Using Origin Shield</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -6560,7 +6353,7 @@ module Aws::CloudFront
       :enabled,
       :origin_shield_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin.</p>
@@ -6574,7 +6367,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the origins for this distribution.</p>
@@ -6588,7 +6381,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>
@@ -6602,7 +6395,7 @@ module Aws::CloudFront
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.</p>
@@ -6616,7 +6409,7 @@ module Aws::CloudFront
       :name,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the parameter definition.</p>
@@ -6626,7 +6419,7 @@ module Aws::CloudFront
     class ParameterDefinitionSchema < Struct.new(
       :string_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object determines the values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.</p> <p>The headers, cookies, and query strings that are included in the cache key are also included in requests that CloudFront sends to the origin. CloudFront sends a request when it can't find an object in its cache that matches the request's cache key. If you want to send values to the origin but <i>not</i> include them in the cache key, use <code>OriginRequestPolicy</code>.</p>
@@ -6652,7 +6445,7 @@ module Aws::CloudFront
       :cookies_config,
       :query_strings_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -6666,7 +6459,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The precondition in one or more of the request fields evaluated to <code>false</code>.</p>
@@ -6675,14 +6468,7 @@ module Aws::CloudFront
     class PreconditionFailed < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PriceClass
-      PriceClass_100 = 'PriceClass_100'
-      PriceClass_200 = 'PriceClass_200'
-      PriceClass_All = 'PriceClass_All'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
@@ -6700,7 +6486,7 @@ module Aws::CloudFront
       :created_time,
       :public_key_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified public key already exists.</p>
@@ -6709,7 +6495,7 @@ module Aws::CloudFront
     class PublicKeyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
@@ -6731,7 +6517,7 @@ module Aws::CloudFront
       :encoded_key,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified public key is in use.</p>
@@ -6740,7 +6526,7 @@ module Aws::CloudFront
     class PublicKeyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.</p>
@@ -6762,7 +6548,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a public key.</p>
@@ -6788,7 +6574,7 @@ module Aws::CloudFront
       :encoded_key,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6801,7 +6587,7 @@ module Aws::CloudFront
       :name,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_summary
@@ -6810,7 +6596,7 @@ module Aws::CloudFront
     class PublishFunctionResult < Struct.new(
       :function_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Query argument-profile mapping for field-level encryption.</p>
@@ -6824,7 +6610,7 @@ module Aws::CloudFront
       :query_arg,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for query argument-profile mapping for field-level encryption.</p>
@@ -6838,7 +6624,7 @@ module Aws::CloudFront
       :forward_when_query_arg_profile_is_unknown,
       :query_arg_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No profile specified for the field-level encryption query argument.</p>
@@ -6847,7 +6633,7 @@ module Aws::CloudFront
     class QueryArgProfileEmpty < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Query argument-profile mapping for field-level encryption.</p>
@@ -6861,7 +6647,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.</p> <p>If you want to include query strings in the cache key, use <code>QueryStringsConfig</code> in a cache policy. See <code>CachePolicy</code>.</p> <p>If you want to send query strings to the origin but not include them in the cache key, use <code>QueryStringsConfig</code> in an origin request policy. See <code>OriginRequestPolicy</code>.</p> <p>A complex type that contains information about the query string parameters that you want CloudFront to use for caching for a cache behavior.</p>
@@ -6875,7 +6661,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of query string names.</p>
@@ -6889,7 +6675,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A real-time log configuration.</p>
@@ -6915,7 +6701,7 @@ module Aws::CloudFront
       :end_points,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A real-time log configuration with this name already exists. You must provide a unique name. To modify an existing real-time log configuration, use <code>UpdateRealtimeLogConfig</code>.</p>
@@ -6924,7 +6710,7 @@ module Aws::CloudFront
     class RealtimeLogConfigAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the real-time log configuration because it is attached to one or more cache behaviors.</p>
@@ -6933,7 +6719,7 @@ module Aws::CloudFront
     class RealtimeLogConfigInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified real-time log configuration belongs to a different Amazon Web Services account.</p>
@@ -6942,7 +6728,7 @@ module Aws::CloudFront
     class RealtimeLogConfigOwnerMismatch < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of real-time log configurations.</p>
@@ -6968,7 +6754,7 @@ module Aws::CloudFront
       :marker,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subscription configuration for additional CloudWatch metrics.</p>
@@ -6978,23 +6764,7 @@ module Aws::CloudFront
     class RealtimeMetricsSubscriptionConfig < Struct.new(
       :realtime_metrics_subscription_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RealtimeMetricsSubscriptionStatus
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-    end
-
-    module ReferrerPolicyList
-      no_referrer = 'no-referrer'
-      no_referrer_when_downgrade = 'no-referrer-when-downgrade'
-      origin = 'origin'
-      origin_when_cross_origin = 'origin-when-cross-origin'
-      same_origin = 'same-origin'
-      strict_origin = 'strict-origin'
-      strict_origin_when_cross_origin = 'strict-origin-when-cross-origin'
-      unsafe_url = 'unsafe-url'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete this resource because it is in use.</p>
@@ -7003,7 +6773,7 @@ module Aws::CloudFront
     class ResourceInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CloudFront resource hasn't been disabled yet.</p>
@@ -7012,7 +6782,7 @@ module Aws::CloudFront
     class ResourceNotDisabled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response headers policy.</p> <p>A response headers policy contains information about a set of HTTP response headers.</p> <p>After you create a response headers policy, you can use its ID to attach it to one or more cache behaviors in a CloudFront distribution. When it's attached to a cache behavior, the response headers policy affects the HTTP headers that CloudFront includes in HTTP responses to requests that match the cache behavior. CloudFront adds or removes response headers according to the configuration of the response headers policy.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html">Adding or removing HTTP headers in CloudFront responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7030,7 +6800,7 @@ module Aws::CloudFront
       :last_modified_time,
       :response_headers_policy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of HTTP header names that CloudFront includes as values for the <code>Access-Control-Allow-Headers</code> HTTP response header.</p> <p>For more information about the <code>Access-Control-Allow-Headers</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">Access-Control-Allow-Headers</a> in the MDN Web Docs.</p>
@@ -7044,7 +6814,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of HTTP methods that CloudFront includes as values for the <code>Access-Control-Allow-Methods</code> HTTP response header.</p> <p>For more information about the <code>Access-Control-Allow-Methods</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">Access-Control-Allow-Methods</a> in the MDN Web Docs.</p>
@@ -7058,18 +6828,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResponseHeadersPolicyAccessControlAllowMethodsValues
-      GET = 'GET'
-      POST = 'POST'
-      OPTIONS = 'OPTIONS'
-      PUT = 'PUT'
-      DELETE = 'DELETE'
-      PATCH = 'PATCH'
-      HEAD = 'HEAD'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of origins (domain names) that CloudFront can use as the value for the <code>Access-Control-Allow-Origin</code> HTTP response header.</p> <p>For more information about the <code>Access-Control-Allow-Origin</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>
@@ -7083,7 +6842,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of HTTP headers that CloudFront includes as values for the <code>Access-Control-Expose-Headers</code> HTTP response header.</p> <p>For more information about the <code>Access-Control-Expose-Headers</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>
@@ -7097,7 +6856,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response headers policy with this name already exists. You must provide a unique name. To modify an existing response headers policy, use <code>UpdateResponseHeadersPolicy</code>.</p>
@@ -7106,7 +6865,7 @@ module Aws::CloudFront
     class ResponseHeadersPolicyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response headers policy configuration.</p> <p>A response headers policy configuration contains metadata about the response headers policy, and configurations for sets of HTTP response headers.</p>
@@ -7140,7 +6899,7 @@ module Aws::CloudFront
       :custom_headers_config,
       :remove_headers_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy directives and their values that CloudFront includes as values for the <code>Content-Security-Policy</code> HTTP response header.</p> <p>For more information about the <code>Content-Security-Policy</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">Content-Security-Policy</a> in the MDN Web Docs.</p>
@@ -7154,7 +6913,7 @@ module Aws::CloudFront
       :override,
       :content_security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether CloudFront includes the <code>X-Content-Type-Options</code> HTTP response header with its value set to <code>nosniff</code>.</p> <p>For more information about the <code>X-Content-Type-Options</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">X-Content-Type-Options</a> in the MDN Web Docs.</p>
@@ -7164,7 +6923,7 @@ module Aws::CloudFront
     class ResponseHeadersPolicyContentTypeOptions < Struct.new(
       :override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS). CloudFront adds these headers to HTTP responses that it sends for CORS requests that match a cache behavior associated with this response headers policy.</p> <p>For more information about CORS, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">Cross-Origin Resource Sharing (CORS)</a> in the MDN Web Docs.</p>
@@ -7198,7 +6957,7 @@ module Aws::CloudFront
       :access_control_max_age_sec,
       :origin_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP response header name and its value. CloudFront includes this header in HTTP responses that it sends for requests that match a cache behavior that's associated with this response headers policy.</p>
@@ -7216,7 +6975,7 @@ module Aws::CloudFront
       :value,
       :override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of HTTP response header names and their values. CloudFront includes these headers in HTTP responses that it sends for requests that match a cache behavior that's associated with this response headers policy.</p>
@@ -7230,7 +6989,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether CloudFront includes the <code>X-Frame-Options</code> HTTP response header and the header's value.</p> <p>For more information about the <code>X-Frame-Options</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">X-Frame-Options</a> in the MDN Web Docs.</p>
@@ -7244,7 +7003,7 @@ module Aws::CloudFront
       :override,
       :frame_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot delete the response headers policy because it is attached to one or more cache behaviors in a CloudFront distribution.</p>
@@ -7253,7 +7012,7 @@ module Aws::CloudFront
     class ResponseHeadersPolicyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of response headers policies.</p>
@@ -7275,7 +7034,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether CloudFront includes the <code>Referrer-Policy</code> HTTP response header and the header's value.</p> <p>For more information about the <code>Referrer-Policy</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy">Referrer-Policy</a> in the MDN Web Docs.</p>
@@ -7289,7 +7048,7 @@ module Aws::CloudFront
       :override,
       :referrer_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of an HTTP header that CloudFront removes from HTTP responses to requests that match the cache behavior that this response headers policy is attached to.</p>
@@ -7299,7 +7058,7 @@ module Aws::CloudFront
     class ResponseHeadersPolicyRemoveHeader < Struct.new(
       :header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of HTTP header names that CloudFront removes from HTTP responses to requests that match the cache behavior that this response headers policy is attached to.</p>
@@ -7313,7 +7072,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for a set of security-related HTTP response headers. CloudFront adds these headers to HTTP responses that it sends for requests that match a cache behavior associated with this response headers policy.</p>
@@ -7343,7 +7102,7 @@ module Aws::CloudFront
       :content_type_options,
       :strict_transport_security,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for enabling the <code>Server-Timing</code> header in HTTP responses sent from CloudFront. CloudFront adds this header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.</p> <p>You can use the <code>Server-Timing</code> header to view metrics that can help you gain insights about the behavior and performance of CloudFront. For example, you can see which cache layer served a cache hit, or the first byte latency from the origin when there was a cache miss. You can use the metrics in the <code>Server-Timing</code> header to troubleshoot issues or test the efficiency of your CloudFront configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#server-timing-header">Server-Timing header</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7357,7 +7116,7 @@ module Aws::CloudFront
       :enabled,
       :sampling_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether CloudFront includes the <code>Strict-Transport-Security</code> HTTP response header and the header's value.</p> <p>For more information about the <code>Strict-Transport-Security</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security</a> in the MDN Web Docs.</p>
@@ -7379,7 +7138,7 @@ module Aws::CloudFront
       :preload,
       :access_control_max_age_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a response headers policy.</p>
@@ -7393,12 +7152,7 @@ module Aws::CloudFront
       :type,
       :response_headers_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResponseHeadersPolicyType
-      managed = 'managed'
-      custom = 'custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether CloudFront includes the <code>X-XSS-Protection</code> HTTP response header and the header's value.</p> <p>For more information about the <code>X-XSS-Protection</code> HTTP response header, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">X-XSS-Protection</a> in the MDN Web Docs.</p>
@@ -7420,7 +7174,7 @@ module Aws::CloudFront
       :mode_block,
       :report_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that identifies ways in which you want to restrict distribution of your content.</p>
@@ -7430,7 +7184,7 @@ module Aws::CloudFront
     class Restrictions < Struct.new(
       :geo_restriction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution.</p>
@@ -7444,7 +7198,7 @@ module Aws::CloudFront
       :domain_name,
       :origin_access_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin or an S3 bucket that is configured as a website endpoint, use the <code>CustomOriginConfig</code> element instead.</p>
@@ -7458,18 +7212,12 @@ module Aws::CloudFront
       :origin_access_identity,
       :origin_read_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:origin_access_identity] = '' unless options.key?(:origin_access_identity)
         super
       end
-    end
-
-    module SSLSupportMethod
-      sni_only = 'sni-only'
-      vip = 'vip'
-      static_ip = 'static-ip'
     end
 
     # <p>Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.</p>
@@ -7483,7 +7231,7 @@ module Aws::CloudFront
       :idle_ttl,
       :maximum_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Amazon Web Services accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -7497,14 +7245,7 @@ module Aws::CloudFront
       :aws_account_number,
       :key_pair_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SslProtocol
-      SSLv3 = 'SSLv3'
-      TLSv1 = 'TLSv1'
-      TLSv1_1 = 'TLSv1.1'
-      TLSv1_2 = 'TLSv1.2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CloudFront domain name of the staging distribution.</p>
@@ -7518,7 +7259,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A continuous deployment policy for this staging distribution already exists.</p>
@@ -7527,7 +7268,7 @@ module Aws::CloudFront
     class StagingDistributionInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type for the status codes that you specify that, when returned by a primary origin, trigger CloudFront to failover to a second origin.</p>
@@ -7541,7 +7282,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A streaming distribution tells CloudFront where you want RTMP content to be delivered from, and the details about how to track and manage content delivery.</p>
@@ -7575,7 +7316,7 @@ module Aws::CloudFront
       :active_trusted_signers,
       :streaming_distribution_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller reference you attempted to create the streaming distribution with is associated with another distribution</p>
@@ -7584,7 +7325,7 @@ module Aws::CloudFront
     class StreamingDistributionAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RTMP distribution's configuration information.</p>
@@ -7622,7 +7363,7 @@ module Aws::CloudFront
       :price_class,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A streaming distribution Configuration and a list of tags to be associated with the streaming distribution.</p>
@@ -7636,7 +7377,7 @@ module Aws::CloudFront
       :streaming_distribution_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A streaming distribution list.</p>
@@ -7666,7 +7407,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CloudFront distribution is not disabled. You must disable the distribution before you can delete it.</p>
@@ -7675,7 +7416,7 @@ module Aws::CloudFront
     class StreamingDistributionNotDisabled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the information for a CloudFront streaming distribution.</p>
@@ -7725,7 +7466,7 @@ module Aws::CloudFront
       :price_class,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls whether access logs are written for this streaming distribution.</p>
@@ -7743,7 +7484,7 @@ module Aws::CloudFront
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a string schema.</p>
@@ -7761,7 +7502,7 @@ module Aws::CloudFront
       :default_value,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains <code>Tag</code> key and <code>Tag</code> value.</p>
@@ -7775,7 +7516,7 @@ module Aws::CloudFront
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
@@ -7785,7 +7526,7 @@ module Aws::CloudFront
     class TagKeys < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to add tags to a CloudFront resource.</p>
@@ -7799,7 +7540,7 @@ module Aws::CloudFront
       :resource,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains zero or more <code>Tag</code> elements.</p>
@@ -7809,7 +7550,7 @@ module Aws::CloudFront
     class Tags < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>This field only supports multi-tenant distributions. You can't specify this field for standard distributions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-config-options.html#unsupported-saas">Unsupported features for SaaS Manager for Amazon CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </note> <p>The configuration for a distribution tenant.</p>
@@ -7819,7 +7560,7 @@ module Aws::CloudFront
     class TenantConfig < Struct.new(
       :parameter_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CloudFront function failed.</p>
@@ -7828,7 +7569,7 @@ module Aws::CloudFront
     class TestFunctionFailed < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7849,7 +7590,7 @@ module Aws::CloudFront
       :stage,
       :event_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_result
@@ -7858,7 +7599,7 @@ module Aws::CloudFront
     class TestFunctionResult < Struct.new(
       :test_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of testing a CloudFront function with <code>TestFunction</code>.</p>
@@ -7884,7 +7625,7 @@ module Aws::CloudFront
       :function_error_message,
       :function_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of the <code>Content-Security-Policy</code> header value in the response headers policy exceeds the maximum.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7893,7 +7634,7 @@ module Aws::CloudFront
     class TooLongCSPInResponseHeadersPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot create more cache behaviors for the distribution.</p>
@@ -7902,7 +7643,7 @@ module Aws::CloudFront
     class TooManyCacheBehaviors < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of cache policies for this Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7911,7 +7652,7 @@ module Aws::CloudFront
     class TooManyCachePolicies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot create anymore custom SSL/TLS certificates.</p>
@@ -7920,7 +7661,7 @@ module Aws::CloudFront
     class TooManyCertificates < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause you to exceed the maximum number of origin access identities allowed.</p>
@@ -7929,7 +7670,7 @@ module Aws::CloudFront
     class TooManyCloudFrontOriginAccessIdentities < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of continuous deployment policies for this Amazon Web Services account.</p>
@@ -7938,7 +7679,7 @@ module Aws::CloudFront
     class TooManyContinuousDeploymentPolicies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains more cookie names in the whitelist than are allowed per cache behavior.</p>
@@ -7947,7 +7688,7 @@ module Aws::CloudFront
     class TooManyCookieNamesInWhiteList < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of cookies in the cache policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7956,7 +7697,7 @@ module Aws::CloudFront
     class TooManyCookiesInCachePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of cookies in the origin request policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7965,7 +7706,7 @@ module Aws::CloudFront
     class TooManyCookiesInOriginRequestPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of custom headers in the response headers policy exceeds the maximum.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -7974,7 +7715,7 @@ module Aws::CloudFront
     class TooManyCustomHeadersInResponseHeadersPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains more CNAMEs than are allowed per distribution.</p>
@@ -7983,7 +7724,7 @@ module Aws::CloudFront
     class TooManyDistributionCNAMEs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause you to exceed the maximum number of distributions allowed.</p>
@@ -7992,7 +7733,7 @@ module Aws::CloudFront
     class TooManyDistributions < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified cache policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8001,7 +7742,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToCachePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified configuration for field-level encryption.</p>
@@ -8010,7 +7751,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of distributions that reference this key group is more than the maximum allowed. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8019,7 +7760,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToKeyGroup < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified origin access control.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8028,7 +7769,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToOriginAccessControl < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified origin request policy. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8037,7 +7778,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToOriginRequestPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified response headers policy.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8046,7 +7787,7 @@ module Aws::CloudFront
     class TooManyDistributionsAssociatedToResponseHeadersPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of distributions that are associated with a CloudFront function. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8055,7 +7796,7 @@ module Aws::CloudFront
     class TooManyDistributionsWithFunctionAssociations < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause the maximum number of distributions with Lambda@Edge function associations per owner to be exceeded.</p>
@@ -8064,7 +7805,7 @@ module Aws::CloudFront
     class TooManyDistributionsWithLambdaAssociations < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of distributions have been associated with the specified Lambda@Edge function.</p>
@@ -8073,7 +7814,7 @@ module Aws::CloudFront
     class TooManyDistributionsWithSingleFunctionARN < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of configurations for field-level encryption have been created.</p>
@@ -8082,7 +7823,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionConfigs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of content type profiles for field-level encryption have been created.</p>
@@ -8091,7 +7832,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionContentTypeProfiles < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of encryption entities for field-level encryption have been created.</p>
@@ -8100,7 +7841,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionEncryptionEntities < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of field patterns for field-level encryption have been created.</p>
@@ -8109,7 +7850,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionFieldPatterns < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of profiles for field-level encryption have been created.</p>
@@ -8118,7 +7859,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionProfiles < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of query arg profiles for field-level encryption have been created.</p>
@@ -8127,7 +7868,7 @@ module Aws::CloudFront
     class TooManyFieldLevelEncryptionQueryArgProfiles < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of CloudFront function associations for this distribution. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8136,7 +7877,7 @@ module Aws::CloudFront
     class TooManyFunctionAssociations < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of CloudFront functions for this Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8145,7 +7886,7 @@ module Aws::CloudFront
     class TooManyFunctions < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of headers in the cache policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8154,7 +7895,7 @@ module Aws::CloudFront
     class TooManyHeadersInCachePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains too many headers in forwarded values.</p>
@@ -8163,7 +7904,7 @@ module Aws::CloudFront
     class TooManyHeadersInForwardedValues < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of headers in the origin request policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8172,7 +7913,7 @@ module Aws::CloudFront
     class TooManyHeadersInOriginRequestPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.</p>
@@ -8181,7 +7922,7 @@ module Aws::CloudFront
     class TooManyInvalidationsInProgress < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of key groups for this Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8190,7 +7931,7 @@ module Aws::CloudFront
     class TooManyKeyGroups < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of key groups referenced by this distribution is more than the maximum allowed. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8199,7 +7940,7 @@ module Aws::CloudFront
     class TooManyKeyGroupsAssociatedToDistribution < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains more Lambda@Edge function associations than are allowed per distribution.</p>
@@ -8208,7 +7949,7 @@ module Aws::CloudFront
     class TooManyLambdaFunctionAssociations < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of origin access controls in your Amazon Web Services account exceeds the maximum allowed.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8217,7 +7958,7 @@ module Aws::CloudFront
     class TooManyOriginAccessControls < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains too many origin custom headers.</p>
@@ -8226,7 +7967,7 @@ module Aws::CloudFront
     class TooManyOriginCustomHeaders < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause you to exceed the maximum number of origin groups allowed.</p>
@@ -8235,7 +7976,7 @@ module Aws::CloudFront
     class TooManyOriginGroupsPerDistribution < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of origin request policies for this Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8244,7 +7985,7 @@ module Aws::CloudFront
     class TooManyOriginRequestPolicies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot create more origins for the distribution.</p>
@@ -8253,7 +7994,7 @@ module Aws::CloudFront
     class TooManyOrigins < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of public keys for field-level encryption have been created. To create a new public key, delete one of the existing keys.</p>
@@ -8262,7 +8003,7 @@ module Aws::CloudFront
     class TooManyPublicKeys < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of public keys in this key group is more than the maximum allowed. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8271,7 +8012,7 @@ module Aws::CloudFront
     class TooManyPublicKeysInKeyGroup < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains too many query string parameters.</p>
@@ -8280,7 +8021,7 @@ module Aws::CloudFront
     class TooManyQueryStringParameters < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of query strings in the cache policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8289,7 +8030,7 @@ module Aws::CloudFront
     class TooManyQueryStringsInCachePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of query strings in the origin request policy exceeds the maximum. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8298,7 +8039,7 @@ module Aws::CloudFront
     class TooManyQueryStringsInOriginRequestPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of real-time log configurations for this Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8307,7 +8048,7 @@ module Aws::CloudFront
     class TooManyRealtimeLogConfigs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of headers in <code>RemoveHeadersConfig</code> in the response headers policy exceeds the maximum.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8316,7 +8057,7 @@ module Aws::CloudFront
     class TooManyRemoveHeadersInResponseHeadersPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of response headers policies for this Amazon Web Services account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html">Quotas</a> (formerly known as limits) in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -8325,7 +8066,7 @@ module Aws::CloudFront
     class TooManyResponseHeadersPolicies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains more CNAMEs than are allowed per distribution.</p>
@@ -8334,7 +8075,7 @@ module Aws::CloudFront
     class TooManyStreamingDistributionCNAMEs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause you to exceed the maximum number of streaming distributions allowed.</p>
@@ -8343,7 +8084,7 @@ module Aws::CloudFront
     class TooManyStreamingDistributions < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request contains more trusted signers than are allowed per distribution.</p>
@@ -8352,7 +8093,7 @@ module Aws::CloudFront
     class TooManyTrustedSigners < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The traffic configuration of your continuous deployment.</p>
@@ -8370,7 +8111,7 @@ module Aws::CloudFront
       :single_header_config,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified key group does not exist.</p>
@@ -8379,7 +8120,7 @@ module Aws::CloudFront
     class TrustedKeyGroupDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of key groups whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -8397,7 +8138,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of your trusted signers don't exist.</p>
@@ -8406,7 +8147,7 @@ module Aws::CloudFront
     class TrustedSignerDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Amazon Web Services accounts whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>
@@ -8424,7 +8165,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not supported in this Amazon Web Services Region.</p>
@@ -8433,7 +8174,7 @@ module Aws::CloudFront
     class UnsupportedOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to remove tags from a CloudFront resource.</p>
@@ -8447,7 +8188,7 @@ module Aws::CloudFront
       :resource,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy_config
@@ -8464,7 +8205,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_policy
@@ -8477,7 +8218,7 @@ module Aws::CloudFront
       :cache_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to update an origin access identity.</p>
@@ -8495,7 +8236,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -8509,7 +8250,7 @@ module Aws::CloudFront
       :cloud_front_origin_access_identity,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8534,7 +8275,7 @@ module Aws::CloudFront
       :anycast_ip_list_id,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_group
@@ -8547,7 +8288,7 @@ module Aws::CloudFront
       :connection_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy_config
@@ -8564,7 +8305,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continuous_deployment_policy
@@ -8577,7 +8318,7 @@ module Aws::CloudFront
       :continuous_deployment_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to update a distribution.</p>
@@ -8595,7 +8336,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -8609,7 +8350,7 @@ module Aws::CloudFront
       :distribution,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8650,7 +8391,7 @@ module Aws::CloudFront
       :managed_certificate_request,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution_tenant
@@ -8663,7 +8404,7 @@ module Aws::CloudFront
       :distribution_tenant,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8680,7 +8421,7 @@ module Aws::CloudFront
       :staging_distribution_id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute distribution
@@ -8693,7 +8434,7 @@ module Aws::CloudFront
       :distribution,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -8710,7 +8451,7 @@ module Aws::CloudFront
       :target_resource,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -8727,7 +8468,7 @@ module Aws::CloudFront
       :resource_id,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_config
@@ -8744,7 +8485,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption
@@ -8757,7 +8498,7 @@ module Aws::CloudFront
       :field_level_encryption,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile_config
@@ -8774,7 +8515,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_level_encryption_profile
@@ -8787,7 +8528,7 @@ module Aws::CloudFront
       :field_level_encryption_profile,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -8808,7 +8549,7 @@ module Aws::CloudFront
       :function_config,
       :function_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_summary
@@ -8821,7 +8562,7 @@ module Aws::CloudFront
       :function_summary,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group_config
@@ -8838,7 +8579,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_group
@@ -8851,7 +8592,7 @@ module Aws::CloudFront
       :key_group,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -8868,7 +8609,7 @@ module Aws::CloudFront
       :comment,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_value_store
@@ -8881,7 +8622,7 @@ module Aws::CloudFront
       :key_value_store,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control_config
@@ -8898,7 +8639,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_access_control
@@ -8911,7 +8652,7 @@ module Aws::CloudFront
       :origin_access_control,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy_config
@@ -8928,7 +8669,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_request_policy
@@ -8941,7 +8682,7 @@ module Aws::CloudFront
       :origin_request_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_config
@@ -8958,7 +8699,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key
@@ -8971,7 +8712,7 @@ module Aws::CloudFront
       :public_key,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute end_points
@@ -8996,7 +8737,7 @@ module Aws::CloudFront
       :arn,
       :sampling_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute realtime_log_config
@@ -9005,7 +8746,7 @@ module Aws::CloudFront
     class UpdateRealtimeLogConfigResult < Struct.new(
       :realtime_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy_config
@@ -9022,7 +8763,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_headers_policy
@@ -9035,7 +8776,7 @@ module Aws::CloudFront
       :response_headers_policy,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to update a streaming distribution.</p>
@@ -9053,7 +8794,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned result of the corresponding request.</p>
@@ -9067,7 +8808,7 @@ module Aws::CloudFront
       :streaming_distribution,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin_endpoint_config
@@ -9084,7 +8825,7 @@ module Aws::CloudFront
       :id,
       :if_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_origin
@@ -9097,7 +8838,7 @@ module Aws::CloudFront
       :vpc_origin,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the validation token.</p>
@@ -9115,12 +8856,7 @@ module Aws::CloudFront
       :redirect_to,
       :redirect_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationTokenHost
-      CloudFront = 'cloudfront'
-      SelfHosted = 'self-hosted'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -9133,7 +8869,7 @@ module Aws::CloudFront
       :domain,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dns_configuration_list
@@ -9142,7 +8878,7 @@ module Aws::CloudFront
     class VerifyDnsConfigurationResult < Struct.new(
       :dns_configuration_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that determines the distribution's SSL/TLS configuration for communicating with viewers.</p> <p>If the distribution doesn't use <code>Aliases</code> (also known as alternate domain names or CNAMEs)—that is, if the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>—set <code>CloudFrontDefaultCertificate</code> to <code>true</code> and leave all other fields empty.</p> <p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), use the fields in this type to specify the following settings:</p> <ul> <li> <p>Which viewers the distribution accepts HTTPS connections from: only viewers that support <a href="https://en.wikipedia.org/wiki/Server_Name_Indication">server name indication (SNI)</a> (recommended), or all viewers including those that don't support SNI.</p> <ul> <li> <p>To accept HTTPS connections from only viewers that support SNI, set <code>SSLSupportMethod</code> to <code>sni-only</code>. This is recommended. Most browsers and clients support SNI. </p> </li> <li> <p>To accept HTTPS connections from all viewers, including those that don't support SNI, set <code>SSLSupportMethod</code> to <code>vip</code>. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> </ul> </li> <li> <p>The minimum SSL/TLS protocol version that the distribution can use to communicate with viewers. To specify a minimum version, choose a value for <code>MinimumProtocolVersion</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValues-security-policy">Security Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </li> <li> <p>The location of the SSL/TLS certificate, <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">Certificate Manager (ACM)</a> (recommended) or <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Identity and Access Management (IAM)</a>. You specify the location by setting a value in one of the following fields (not both):</p> <ul> <li> <p> <code>ACMCertificateArn</code> </p> </li> <li> <p> <code>IAMCertificateId</code> </p> </li> </ul> </li> </ul> <p>All distributions support HTTPS connections from viewers. To require viewers to use HTTPS only, or to redirect them from HTTP to HTTPS, use <code>ViewerProtocolPolicy</code> in the <code>CacheBehavior</code> or <code>DefaultCacheBehavior</code>. To specify how CloudFront should use SSL/TLS to communicate with your custom origin, use <code>CustomOriginConfig</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html">Using HTTPS with CloudFront</a> and <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-alternate-domain-names.html"> Using Alternate Domain Names and HTTPS</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
@@ -9178,13 +8914,7 @@ module Aws::CloudFront
       :certificate,
       :certificate_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewerProtocolPolicy
-      allow_all = 'allow-all'
-      https_only = 'https-only'
-      redirect_to_https = 'redirect-to-https'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon CloudFront VPC origin.</p>
@@ -9214,7 +8944,7 @@ module Aws::CloudFront
       :last_modified_time,
       :vpc_origin_endpoint_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon CloudFront VPC origin configuration.</p>
@@ -9232,7 +8962,7 @@ module Aws::CloudFront
       :origin_read_timeout,
       :origin_keepalive_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon CloudFront VPC origin endpoint configuration.</p>
@@ -9262,7 +8992,7 @@ module Aws::CloudFront
       :origin_protocol_policy,
       :origin_ssl_protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CloudFront VPC origins.</p>
@@ -9292,7 +9022,7 @@ module Aws::CloudFront
       :quantity,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the CloudFront VPC origin.</p>
@@ -9326,7 +9056,7 @@ module Aws::CloudFront
       :arn,
       :origin_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The WAF web ACL customization specified for the distribution tenant.</p>
@@ -9340,7 +9070,7 @@ module Aws::CloudFront
       :action,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

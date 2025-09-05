@@ -6,14 +6,6 @@ module Aws::IoTFleetHub
   # This module contains the types returned by client operations.
   module Types
 
-    module ApplicationState
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      ACTIVE = 'ACTIVE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
     # <p>A summary of information about a Fleet Hub for IoT Device Management web application.</p>
     # @!attribute application_id
     #   <p>The unique Id of the web application.</p>
@@ -45,7 +37,7 @@ module Aws::IoTFleetHub
       :application_last_update_date,
       :application_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:application_creation_date] = 0 unless options.key?(:application_creation_date)
@@ -60,7 +52,7 @@ module Aws::IoTFleetHub
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -90,7 +82,7 @@ module Aws::IoTFleetHub
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -103,7 +95,7 @@ module Aws::IoTFleetHub
       :application_id,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -117,12 +109,12 @@ module Aws::IoTFleetHub
       :application_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -131,7 +123,7 @@ module Aws::IoTFleetHub
     class DescribeApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -185,7 +177,7 @@ module Aws::IoTFleetHub
       :error_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:application_creation_date] = 0 unless options.key?(:application_creation_date)
@@ -200,7 +192,7 @@ module Aws::IoTFleetHub
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -209,7 +201,7 @@ module Aws::IoTFleetHub
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit has been exceeded.</p>
@@ -218,7 +210,7 @@ module Aws::IoTFleetHub
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -227,7 +219,7 @@ module Aws::IoTFleetHub
     class ListApplicationsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_summaries
@@ -240,7 +232,7 @@ module Aws::IoTFleetHub
       :application_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -249,7 +241,7 @@ module Aws::IoTFleetHub
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -258,7 +250,7 @@ module Aws::IoTFleetHub
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -267,7 +259,7 @@ module Aws::IoTFleetHub
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -280,12 +272,12 @@ module Aws::IoTFleetHub
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate exceeds the limit.</p>
@@ -294,7 +286,7 @@ module Aws::IoTFleetHub
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -307,12 +299,12 @@ module Aws::IoTFleetHub
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -334,12 +326,12 @@ module Aws::IoTFleetHub
       :application_description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

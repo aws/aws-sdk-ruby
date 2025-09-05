@@ -27,7 +27,7 @@ module Aws::CloudTrailData
       :event_data,
       :event_data_checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that includes successful and failed event results.</p>
@@ -41,7 +41,7 @@ module Aws::CloudTrailData
       :id,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller's account ID must be the same as the channel owner's account ID.</p>
@@ -50,7 +50,7 @@ module Aws::CloudTrailData
     class ChannelInsufficientPermission < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The channel could not be found.</p>
@@ -59,7 +59,7 @@ module Aws::CloudTrailData
     class ChannelNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schema type of the event is not supported.</p>
@@ -68,7 +68,7 @@ module Aws::CloudTrailData
     class ChannelUnsupportedSchema < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more entries in the request have the same event ID.</p>
@@ -77,7 +77,7 @@ module Aws::CloudTrailData
     class DuplicatedAuditEventId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified channel ARN is not a valid 
@@ -87,7 +87,7 @@ module Aws::CloudTrailData
     class InvalidChannelARN < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audit_events
@@ -107,7 +107,7 @@ module Aws::CloudTrailData
       :channel_arn,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -123,7 +123,7 @@ module Aws::CloudTrailData
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes the error code and error message for events that could not be ingested by CloudTrail.</p>
@@ -143,7 +143,7 @@ module Aws::CloudTrailData
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation requested is not supported in this region or account.</p>
@@ -152,7 +152,7 @@ module Aws::CloudTrailData
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

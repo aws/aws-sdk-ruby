@@ -12,7 +12,7 @@ module Aws::NotificationsContacts
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -26,12 +26,12 @@ module Aws::NotificationsContacts
       :arn,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ActivateEmailContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -48,7 +48,7 @@ module Aws::NotificationsContacts
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -68,7 +68,7 @@ module Aws::NotificationsContacts
       :email_address,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -77,7 +77,7 @@ module Aws::NotificationsContacts
     class CreateEmailContactResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -86,12 +86,12 @@ module Aws::NotificationsContacts
     class DeleteEmailContactRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEmailContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An email contact.</p>
@@ -121,7 +121,7 @@ module Aws::NotificationsContacts
       :creation_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -130,7 +130,7 @@ module Aws::NotificationsContacts
     class GetEmailContactRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_contact
@@ -139,7 +139,7 @@ module Aws::NotificationsContacts
     class GetEmailContactResponse < Struct.new(
       :email_contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -148,7 +148,7 @@ module Aws::NotificationsContacts
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -161,7 +161,7 @@ module Aws::NotificationsContacts
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -174,7 +174,7 @@ module Aws::NotificationsContacts
       :next_token,
       :email_contacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -183,7 +183,7 @@ module Aws::NotificationsContacts
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -192,7 +192,7 @@ module Aws::NotificationsContacts
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request references a resource which does not exist. </p>
@@ -209,7 +209,7 @@ module Aws::NotificationsContacts
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -218,12 +218,12 @@ module Aws::NotificationsContacts
     class SendActivationCodeRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendActivationCodeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request would cause a service quota to be exceeded.</p>
@@ -248,7 +248,7 @@ module Aws::NotificationsContacts
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -261,12 +261,12 @@ module Aws::NotificationsContacts
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -287,7 +287,7 @@ module Aws::NotificationsContacts
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -300,12 +300,12 @@ module Aws::NotificationsContacts
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -322,7 +322,7 @@ module Aws::NotificationsContacts
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an exception.</p>
@@ -336,12 +336,7 @@ module Aws::NotificationsContacts
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

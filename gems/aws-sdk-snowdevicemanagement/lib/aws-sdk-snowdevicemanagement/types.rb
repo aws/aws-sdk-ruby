@@ -12,7 +12,7 @@ module Aws::SnowDeviceManagement
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -22,7 +22,7 @@ module Aws::SnowDeviceManagement
     class CancelTaskOperationInput < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -31,7 +31,7 @@ module Aws::SnowDeviceManagement
     class CancelTaskOperationOutput < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The physical capacity of the Amazon Web Services Snow Family device. </p>
@@ -57,7 +57,7 @@ module Aws::SnowDeviceManagement
       :used,
       :available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The command given to the device to execute.</p>
@@ -72,7 +72,7 @@ module Aws::SnowDeviceManagement
       :reboot,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Unlock < Command; end
       class Reboot < Command; end
@@ -90,7 +90,7 @@ module Aws::SnowDeviceManagement
       :core_count,
       :threads_per_core,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -116,7 +116,7 @@ module Aws::SnowDeviceManagement
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -129,7 +129,7 @@ module Aws::SnowDeviceManagement
       :task_id,
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_device_id
@@ -142,7 +142,7 @@ module Aws::SnowDeviceManagement
       :managed_device_id,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -151,7 +151,7 @@ module Aws::SnowDeviceManagement
     class DescribeDeviceEc2InstancesOutput < Struct.new(
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_device_id
@@ -160,7 +160,7 @@ module Aws::SnowDeviceManagement
     class DescribeDeviceOperationInput < Struct.new(
       :managed_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_reached_out_at
@@ -212,7 +212,7 @@ module Aws::SnowDeviceManagement
       :device_capacities,
       :software,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -225,7 +225,7 @@ module Aws::SnowDeviceManagement
       :task_id,
       :managed_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -254,7 +254,7 @@ module Aws::SnowDeviceManagement
       :started_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -263,7 +263,7 @@ module Aws::SnowDeviceManagement
     class DescribeTaskOperationInput < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -305,7 +305,7 @@ module Aws::SnowDeviceManagement
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifying information about the device.</p>
@@ -328,7 +328,7 @@ module Aws::SnowDeviceManagement
       :associated_with_job,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a parameter used to set up an Amazon Elastic Block Store (Amazon EBS) volume
@@ -351,7 +351,7 @@ module Aws::SnowDeviceManagement
       :status,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a task execution on a specified device.</p>
@@ -373,7 +373,7 @@ module Aws::SnowDeviceManagement
       :managed_device_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of an
@@ -434,7 +434,7 @@ module Aws::SnowDeviceManagement
       :cpu_options,
       :root_device_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of a block device mapping.</p>
@@ -449,7 +449,7 @@ module Aws::SnowDeviceManagement
       :device_name,
       :ebs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the current state of an instance.</p>
@@ -506,7 +506,7 @@ module Aws::SnowDeviceManagement
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the instance.</p>
@@ -520,7 +520,7 @@ module Aws::SnowDeviceManagement
       :instance,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred while processing the request.</p>
@@ -529,7 +529,7 @@ module Aws::SnowDeviceManagement
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_device_id
@@ -550,7 +550,7 @@ module Aws::SnowDeviceManagement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -563,7 +563,7 @@ module Aws::SnowDeviceManagement
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -580,7 +580,7 @@ module Aws::SnowDeviceManagement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute devices
@@ -593,7 +593,7 @@ module Aws::SnowDeviceManagement
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -614,7 +614,7 @@ module Aws::SnowDeviceManagement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute executions
@@ -628,7 +628,7 @@ module Aws::SnowDeviceManagement
       :executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -637,7 +637,7 @@ module Aws::SnowDeviceManagement
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -646,7 +646,7 @@ module Aws::SnowDeviceManagement
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -663,7 +663,7 @@ module Aws::SnowDeviceManagement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -676,7 +676,7 @@ module Aws::SnowDeviceManagement
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the physical network interface for the device.</p>
@@ -712,13 +712,13 @@ module Aws::SnowDeviceManagement
       :default_gateway,
       :mac_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to reboot the device.</p>
     class Reboot < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that doesn't exist.</p>
@@ -727,7 +727,7 @@ module Aws::SnowDeviceManagement
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a resource available on the device.</p>
@@ -745,7 +745,7 @@ module Aws::SnowDeviceManagement
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the device's security group.</p>
@@ -759,7 +759,7 @@ module Aws::SnowDeviceManagement
       :group_id,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -768,7 +768,7 @@ module Aws::SnowDeviceManagement
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the software on the device.</p>
@@ -787,7 +787,7 @@ module Aws::SnowDeviceManagement
       :installing_version,
       :install_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -801,7 +801,7 @@ module Aws::SnowDeviceManagement
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the task assigned to one or many devices.</p>
@@ -824,7 +824,7 @@ module Aws::SnowDeviceManagement
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -833,13 +833,13 @@ module Aws::SnowDeviceManagement
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to unlock a device.</p>
     class Unlock < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -853,7 +853,7 @@ module Aws::SnowDeviceManagement
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -862,7 +862,7 @@ module Aws::SnowDeviceManagement
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

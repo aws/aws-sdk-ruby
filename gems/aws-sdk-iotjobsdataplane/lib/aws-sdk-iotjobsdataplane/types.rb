@@ -13,7 +13,7 @@ module Aws::IoTJobsDataPlane
     class CertificateValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of values used to describe a specific command parameter.</p>
@@ -53,7 +53,7 @@ module Aws::IoTJobsDataPlane
       :bin,
       :ul,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict has occurred when performing the API request.</p>
@@ -66,7 +66,7 @@ module Aws::IoTJobsDataPlane
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -89,7 +89,7 @@ module Aws::IoTJobsDataPlane
       :include_job_document,
       :execution_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution
@@ -98,7 +98,7 @@ module Aws::IoTJobsDataPlane
     class DescribeJobExecutionResponse < Struct.new(
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -107,7 +107,7 @@ module Aws::IoTJobsDataPlane
     class GetPendingJobExecutionsRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute in_progress_jobs
@@ -120,7 +120,7 @@ module Aws::IoTJobsDataPlane
       :in_progress_jobs,
       :queued_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred when performing the API request.</p>
@@ -129,7 +129,7 @@ module Aws::IoTJobsDataPlane
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contents of the request were invalid.</p>
@@ -139,7 +139,7 @@ module Aws::IoTJobsDataPlane
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An update attempted to change the job execution to a state that is invalid because of
@@ -151,7 +151,7 @@ module Aws::IoTJobsDataPlane
     class InvalidStateTransitionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains data about a job execution.</p>
@@ -209,7 +209,7 @@ module Aws::IoTJobsDataPlane
       :execution_number,
       :job_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:queued_at] = 0 unless options.key?(:queued_at)
@@ -238,23 +238,12 @@ module Aws::IoTJobsDataPlane
       :status_details,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
         super
       end
-    end
-
-    module JobExecutionStatus
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
-      REJECTED = 'REJECTED'
-      REMOVED = 'REMOVED'
-      CANCELED = 'CANCELED'
     end
 
     # <p>Contains a subset of information about a job execution.</p>
@@ -286,7 +275,7 @@ module Aws::IoTJobsDataPlane
       :version_number,
       :execution_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:queued_at] = 0 unless options.key?(:queued_at)
@@ -303,7 +292,7 @@ module Aws::IoTJobsDataPlane
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service quota has been exceeded for this request.</p>
@@ -312,7 +301,7 @@ module Aws::IoTJobsDataPlane
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
@@ -322,7 +311,7 @@ module Aws::IoTJobsDataPlane
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -358,7 +347,7 @@ module Aws::IoTJobsDataPlane
       :execution_timeout_seconds,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -367,7 +356,7 @@ module Aws::IoTJobsDataPlane
     class StartCommandExecutionResponse < Struct.new(
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -394,7 +383,7 @@ module Aws::IoTJobsDataPlane
       :status_details,
       :step_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution
@@ -403,7 +392,7 @@ module Aws::IoTJobsDataPlane
     class StartNextPendingJobExecutionResponse < Struct.new(
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job is in a terminal state.</p>
@@ -412,7 +401,7 @@ module Aws::IoTJobsDataPlane
     class TerminalStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate exceeds the limit.</p>
@@ -426,7 +415,7 @@ module Aws::IoTJobsDataPlane
       :message,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -488,7 +477,7 @@ module Aws::IoTJobsDataPlane
       :include_job_document,
       :execution_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_state
@@ -501,7 +490,7 @@ module Aws::IoTJobsDataPlane
       :execution_state,
       :job_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation error occurred when performing the API request.</p>
@@ -510,7 +499,7 @@ module Aws::IoTJobsDataPlane
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

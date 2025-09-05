@@ -15,7 +15,7 @@ module Aws::AppConfigData
       :invalid_parameters,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class InvalidParameters < BadRequestDetails; end
       class Unknown < BadRequestDetails; end
@@ -35,7 +35,7 @@ module Aws::AppConfigData
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_token
@@ -54,7 +54,7 @@ module Aws::AppConfigData
     class GetLatestConfigurationInput < Struct.new(
       :configuration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_poll_configuration_token
@@ -91,7 +91,7 @@ module Aws::AppConfigData
       :configuration,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:next_poll_interval_in_seconds] = 0 unless options.key?(:next_poll_interval_in_seconds)
@@ -105,7 +105,7 @@ module Aws::AppConfigData
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an invalid parameter.</p>
@@ -115,7 +115,7 @@ module Aws::AppConfigData
     class InvalidParameterDetail < Struct.new(
       :problem,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource could not be found.</p>
@@ -133,7 +133,7 @@ module Aws::AppConfigData
       :resource_type,
       :referenced_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_identifier
@@ -156,7 +156,7 @@ module Aws::AppConfigData
       :configuration_profile_identifier,
       :required_minimum_poll_interval_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute initial_configuration_token
@@ -178,7 +178,7 @@ module Aws::AppConfigData
     class StartConfigurationSessionOutput < Struct.new(
       :initial_configuration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -187,7 +187,7 @@ module Aws::AppConfigData
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

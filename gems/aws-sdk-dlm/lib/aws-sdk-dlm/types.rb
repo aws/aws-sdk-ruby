@@ -18,7 +18,7 @@ module Aws::DLM
       :name,
       :cross_region_copy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -31,7 +31,7 @@ module Aws::DLM
     class ArchiveRetainRule < Struct.new(
       :retention_archive_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -42,7 +42,7 @@ module Aws::DLM
     class ArchiveRule < Struct.new(
       :retain_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_role_arn
@@ -153,7 +153,7 @@ module Aws::DLM
       :cross_region_copy_targets,
       :exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -162,7 +162,7 @@ module Aws::DLM
     class CreateLifecyclePolicyResponse < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -249,7 +249,7 @@ module Aws::DLM
       :cron_expression,
       :scripts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -274,7 +274,7 @@ module Aws::DLM
       :encryption_configuration,
       :retain_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -293,7 +293,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a retention rule for cross-Region snapshot copies created by snapshot or 
@@ -311,7 +311,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -372,7 +372,7 @@ module Aws::DLM
       :retain_rule,
       :deprecate_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -383,18 +383,7 @@ module Aws::DLM
     class CrossRegionCopyTarget < Struct.new(
       :target_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DefaultPoliciesTypeValues
-      VOLUME = 'VOLUME'
-      INSTANCE = 'INSTANCE'
-      ALL = 'ALL'
-    end
-
-    module DefaultPolicyTypeValues
-      VOLUME = 'VOLUME'
-      INSTANCE = 'INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -403,12 +392,12 @@ module Aws::DLM
     class DeleteLifecyclePolicyRequest < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecyclePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -435,7 +424,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -454,7 +443,7 @@ module Aws::DLM
       :encrypted,
       :cmk_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -479,7 +468,7 @@ module Aws::DLM
       :snapshot_owner,
       :description_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -494,15 +483,7 @@ module Aws::DLM
       :type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceValues
-      MANAGED_CWE = 'MANAGED_CWE'
-    end
-
-    module EventTypeValues
-      SHARE_SNAPSHOT = 'shareSnapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -530,11 +511,7 @@ module Aws::DLM
       :exclude_volume_types,
       :exclude_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionHandlerServiceValues
-      AWS_SYSTEMS_MANAGER = 'AWS_SYSTEMS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -560,7 +537,7 @@ module Aws::DLM
       :interval_unit,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_ids
@@ -607,7 +584,7 @@ module Aws::DLM
       :tags_to_add,
       :default_policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies
@@ -616,7 +593,7 @@ module Aws::DLM
     class GetLifecyclePoliciesResponse < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -625,7 +602,7 @@ module Aws::DLM
     class GetLifecyclePolicyRequest < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -634,13 +611,7 @@ module Aws::DLM
     class GetLifecyclePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GettablePolicyStateValues
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service failed in an unexpected way.</p>
@@ -652,11 +623,7 @@ module Aws::DLM
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntervalUnitValues
-      HOURS = 'HOURS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Bad request. The request is missing required parameters or has invalid
@@ -677,7 +644,7 @@ module Aws::DLM
       :required_parameters,
       :mutually_exclusive_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a lifecycle policy.</p>
@@ -739,7 +706,7 @@ module Aws::DLM
       :policy_arn,
       :default_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a lifecycle policy.</p>
@@ -784,7 +751,7 @@ module Aws::DLM
       :policy_type,
       :default_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because a limit was exceeded.</p>
@@ -800,7 +767,7 @@ module Aws::DLM
       :code,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -809,7 +776,7 @@ module Aws::DLM
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -818,13 +785,7 @@ module Aws::DLM
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationValues
-      CLOUD = 'CLOUD'
-      OUTPOST_LOCAL = 'OUTPOST_LOCAL'
-      LOCAL_ZONE = 'LOCAL_ZONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -863,7 +824,7 @@ module Aws::DLM
       :no_reboot,
       :exclude_data_volume_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of a lifecycle policy.</p>
@@ -1035,24 +996,7 @@ module Aws::DLM
       :extend_deletion,
       :exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyLanguageValues
-      SIMPLIFIED = 'SIMPLIFIED'
-      STANDARD = 'STANDARD'
-    end
-
-    module PolicyTypeValues
-      EBS_SNAPSHOT_MANAGEMENT = 'EBS_SNAPSHOT_MANAGEMENT'
-      IMAGE_MANAGEMENT = 'IMAGE_MANAGEMENT'
-      EVENT_BASED_POLICY = 'EVENT_BASED_POLICY'
-    end
-
-    module ResourceLocationValues
-      CLOUD = 'CLOUD'
-      OUTPOST = 'OUTPOST'
-      LOCAL_ZONE = 'LOCAL_ZONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A requested resource was not found.</p>
@@ -1072,12 +1016,7 @@ module Aws::DLM
       :resource_type,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceTypeValues
-      VOLUME = 'VOLUME'
-      INSTANCE = 'INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1137,7 +1076,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1172,14 +1111,7 @@ module Aws::DLM
       :interval,
       :interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionIntervalUnitValues
-      DAYS = 'DAYS'
-      WEEKS = 'WEEKS'
-      MONTHS = 'MONTHS'
-      YEARS = 'YEARS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1251,7 +1183,7 @@ module Aws::DLM
       :deprecate_rule,
       :archive_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1367,12 +1299,7 @@ module Aws::DLM
       :execution_timeout,
       :maximum_retry_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SettablePolicyStateValues
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1391,12 +1318,7 @@ module Aws::DLM
       :unshare_interval,
       :unshare_interval_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StageValues
-      PRE = 'PRE'
-      POST = 'POST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a tag for a resource.</p>
@@ -1410,7 +1332,7 @@ module Aws::DLM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1423,12 +1345,12 @@ module Aws::DLM
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1441,12 +1363,12 @@ module Aws::DLM
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1532,12 +1454,12 @@ module Aws::DLM
       :cross_region_copy_targets,
       :exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLifecyclePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

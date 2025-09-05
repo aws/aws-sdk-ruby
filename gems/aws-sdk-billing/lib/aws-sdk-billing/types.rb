@@ -12,7 +12,7 @@ module Aws::Billing
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time range with a start and end time.</p>
@@ -28,7 +28,7 @@ module Aws::Billing
       :active_after_inclusive,
       :active_before_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata associated to the billing view.
@@ -80,7 +80,7 @@ module Aws::Billing
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a billing view.</p>
@@ -113,13 +113,7 @@ module Aws::Billing
       :owner_account_id,
       :billing_view_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BillingViewType
-      PRIMARY = 'PRIMARY'
-      BILLING_GROUP = 'BILLING_GROUP'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -142,7 +136,7 @@ module Aws::Billing
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -179,7 +173,7 @@ module Aws::Billing
       :client_token,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -196,7 +190,7 @@ module Aws::Billing
       :arn,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -207,7 +201,7 @@ module Aws::Billing
     class DeleteBillingViewRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -218,11 +212,7 @@ module Aws::Billing
     class DeleteBillingViewResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Dimension
-      LINKED_ACCOUNT = 'LINKED_ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -242,7 +232,7 @@ module Aws::Billing
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -262,7 +252,7 @@ module Aws::Billing
       :dimensions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -273,7 +263,7 @@ module Aws::Billing
     class GetBillingViewRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_view
@@ -283,7 +273,7 @@ module Aws::Billing
     class GetBillingViewResponse < Struct.new(
       :billing_view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -293,7 +283,7 @@ module Aws::Billing
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -308,7 +298,7 @@ module Aws::Billing
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing failed because of an unknown error, exception, or failure.
@@ -318,7 +308,7 @@ module Aws::Billing
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_time_range
@@ -353,7 +343,7 @@ module Aws::Billing
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_views
@@ -367,7 +357,7 @@ module Aws::Billing
       :billing_views,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -390,7 +380,7 @@ module Aws::Billing
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_views
@@ -406,7 +396,7 @@ module Aws::Billing
       :source_views,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -417,7 +407,7 @@ module Aws::Billing
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -428,7 +418,7 @@ module Aws::Billing
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -451,7 +441,7 @@ module Aws::Billing
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -471,7 +461,7 @@ module Aws::Billing
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -506,7 +496,7 @@ module Aws::Billing
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -523,12 +513,12 @@ module Aws::Billing
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -548,7 +538,7 @@ module Aws::Billing
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.
@@ -558,7 +548,7 @@ module Aws::Billing
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -575,12 +565,12 @@ module Aws::Billing
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -608,7 +598,7 @@ module Aws::Billing
       :description,
       :data_filter_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -625,7 +615,7 @@ module Aws::Billing
       :arn,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.
@@ -643,7 +633,7 @@ module Aws::Billing
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field's information of a request that resulted in an exception.
@@ -658,14 +648,7 @@ module Aws::Billing
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

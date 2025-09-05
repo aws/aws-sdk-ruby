@@ -117,7 +117,7 @@ module Aws::WAFRegional
       :type,
       :excluded_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -143,12 +143,12 @@ module Aws::WAFRegional
       :web_acl_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWebACLResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -184,7 +184,7 @@ module Aws::WAFRegional
       :name,
       :byte_match_tuples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -210,7 +210,7 @@ module Aws::WAFRegional
       :byte_match_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -235,7 +235,7 @@ module Aws::WAFRegional
       :action,
       :byte_match_tuple,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -464,27 +464,7 @@ module Aws::WAFRegional
       :text_transformation,
       :positional_constraint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeAction
-      INSERT = 'INSERT'
-      DELETE = 'DELETE'
-    end
-
-    module ChangeTokenStatus
-      PROVISIONED = 'PROVISIONED'
-      PENDING = 'PENDING'
-      INSYNC = 'INSYNC'
-    end
-
-    module ComparisonOperator
-      EQ = 'EQ'
-      NE = 'NE'
-      LE = 'LE'
-      LT = 'LT'
-      GE = 'GE'
-      GT = 'GT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -498,7 +478,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byte_match_set
@@ -512,7 +492,7 @@ module Aws::WAFRegional
       :byte_match_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -525,7 +505,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_match_set
@@ -539,7 +519,7 @@ module Aws::WAFRegional
       :geo_match_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -552,7 +532,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set
@@ -566,7 +546,7 @@ module Aws::WAFRegional
       :ip_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -608,7 +588,7 @@ module Aws::WAFRegional
       :change_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -624,7 +604,7 @@ module Aws::WAFRegional
       :rule,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -638,7 +618,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_match_set
@@ -652,7 +632,7 @@ module Aws::WAFRegional
       :regex_match_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -666,7 +646,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set
@@ -680,7 +660,7 @@ module Aws::WAFRegional
       :regex_pattern_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -703,7 +683,7 @@ module Aws::WAFRegional
       :change_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group
@@ -717,7 +697,7 @@ module Aws::WAFRegional
       :rule_group,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -740,7 +720,7 @@ module Aws::WAFRegional
       :change_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -754,7 +734,7 @@ module Aws::WAFRegional
       :rule,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -768,7 +748,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute size_constraint_set
@@ -782,7 +762,7 @@ module Aws::WAFRegional
       :size_constraint_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create a <a>SqlInjectionMatchSet</a>.</p>
@@ -797,7 +777,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>CreateSqlInjectionMatchSet</code> request.</p>
@@ -812,7 +792,7 @@ module Aws::WAFRegional
       :sql_injection_match_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -844,7 +824,7 @@ module Aws::WAFRegional
       :s3_bucket_name,
       :ignore_unsupported_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_object_url
@@ -853,7 +833,7 @@ module Aws::WAFRegional
     class CreateWebACLMigrationStackResponse < Struct.new(
       :s3_object_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -881,7 +861,7 @@ module Aws::WAFRegional
       :change_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl
@@ -895,7 +875,7 @@ module Aws::WAFRegional
       :web_acl,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create an <a>XssMatchSet</a>.</p>
@@ -910,7 +890,7 @@ module Aws::WAFRegional
       :name,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>CreateXssMatchSet</code> request.</p>
@@ -925,7 +905,7 @@ module Aws::WAFRegional
       :xss_match_set,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byte_match_set_id
@@ -939,7 +919,7 @@ module Aws::WAFRegional
       :byte_match_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -949,7 +929,7 @@ module Aws::WAFRegional
     class DeleteByteMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_match_set_id
@@ -963,7 +943,7 @@ module Aws::WAFRegional
       :geo_match_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -973,7 +953,7 @@ module Aws::WAFRegional
     class DeleteGeoMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set_id
@@ -987,7 +967,7 @@ module Aws::WAFRegional
       :ip_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -997,7 +977,7 @@ module Aws::WAFRegional
     class DeleteIPSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1006,12 +986,12 @@ module Aws::WAFRegional
     class DeleteLoggingConfigurationRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1021,12 +1001,12 @@ module Aws::WAFRegional
     class DeletePermissionPolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -1041,7 +1021,7 @@ module Aws::WAFRegional
       :rule_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1052,7 +1032,7 @@ module Aws::WAFRegional
     class DeleteRateBasedRuleResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_match_set_id
@@ -1066,7 +1046,7 @@ module Aws::WAFRegional
       :regex_match_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1076,7 +1056,7 @@ module Aws::WAFRegional
     class DeleteRegexMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set_id
@@ -1090,7 +1070,7 @@ module Aws::WAFRegional
       :regex_pattern_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1100,7 +1080,7 @@ module Aws::WAFRegional
     class DeleteRegexPatternSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_id
@@ -1114,7 +1094,7 @@ module Aws::WAFRegional
       :rule_group_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1124,7 +1104,7 @@ module Aws::WAFRegional
     class DeleteRuleGroupResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -1138,7 +1118,7 @@ module Aws::WAFRegional
       :rule_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1148,7 +1128,7 @@ module Aws::WAFRegional
     class DeleteRuleResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute size_constraint_set_id
@@ -1162,7 +1142,7 @@ module Aws::WAFRegional
       :size_constraint_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1172,7 +1152,7 @@ module Aws::WAFRegional
     class DeleteSizeConstraintSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.</p>
@@ -1187,7 +1167,7 @@ module Aws::WAFRegional
       :sql_injection_match_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.</p>
@@ -1198,7 +1178,7 @@ module Aws::WAFRegional
     class DeleteSqlInjectionMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -1212,7 +1192,7 @@ module Aws::WAFRegional
       :web_acl_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1222,7 +1202,7 @@ module Aws::WAFRegional
     class DeleteWebACLResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete an <a>XssMatchSet</a> from AWS WAF.</p>
@@ -1237,7 +1217,7 @@ module Aws::WAFRegional
       :xss_match_set_id,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a request to delete an <a>XssMatchSet</a> from AWS WAF.</p>
@@ -1248,7 +1228,7 @@ module Aws::WAFRegional
     class DeleteXssMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1270,12 +1250,12 @@ module Aws::WAFRegional
     class DisassociateWebACLRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWebACLResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1295,7 +1275,7 @@ module Aws::WAFRegional
     class ExcludedRule < Struct.new(
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1359,7 +1339,7 @@ module Aws::WAFRegional
       :type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1381,263 +1361,7 @@ module Aws::WAFRegional
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeoMatchConstraintType
-      Country = 'Country'
-    end
-
-    module GeoMatchConstraintValue
-      AF = 'AF'
-      AX = 'AX'
-      AL = 'AL'
-      DZ = 'DZ'
-      AS = 'AS'
-      AD = 'AD'
-      AO = 'AO'
-      AI = 'AI'
-      AQ = 'AQ'
-      AG = 'AG'
-      AR = 'AR'
-      AM = 'AM'
-      AW = 'AW'
-      AU = 'AU'
-      AT = 'AT'
-      AZ = 'AZ'
-      BS = 'BS'
-      BH = 'BH'
-      BD = 'BD'
-      BB = 'BB'
-      BY = 'BY'
-      BE = 'BE'
-      BZ = 'BZ'
-      BJ = 'BJ'
-      BM = 'BM'
-      BT = 'BT'
-      BO = 'BO'
-      BQ = 'BQ'
-      BA = 'BA'
-      BW = 'BW'
-      BV = 'BV'
-      BR = 'BR'
-      IO = 'IO'
-      BN = 'BN'
-      BG = 'BG'
-      BF = 'BF'
-      BI = 'BI'
-      KH = 'KH'
-      CM = 'CM'
-      CA = 'CA'
-      CV = 'CV'
-      KY = 'KY'
-      CF = 'CF'
-      TD = 'TD'
-      CL = 'CL'
-      CN = 'CN'
-      CX = 'CX'
-      CC = 'CC'
-      CO = 'CO'
-      KM = 'KM'
-      CG = 'CG'
-      CD = 'CD'
-      CK = 'CK'
-      CR = 'CR'
-      CI = 'CI'
-      HR = 'HR'
-      CU = 'CU'
-      CW = 'CW'
-      CY = 'CY'
-      CZ = 'CZ'
-      DK = 'DK'
-      DJ = 'DJ'
-      DM = 'DM'
-      DO = 'DO'
-      EC = 'EC'
-      EG = 'EG'
-      SV = 'SV'
-      GQ = 'GQ'
-      ER = 'ER'
-      EE = 'EE'
-      ET = 'ET'
-      FK = 'FK'
-      FO = 'FO'
-      FJ = 'FJ'
-      FI = 'FI'
-      FR = 'FR'
-      GF = 'GF'
-      PF = 'PF'
-      TF = 'TF'
-      GA = 'GA'
-      GM = 'GM'
-      GE = 'GE'
-      DE = 'DE'
-      GH = 'GH'
-      GI = 'GI'
-      GR = 'GR'
-      GL = 'GL'
-      GD = 'GD'
-      GP = 'GP'
-      GU = 'GU'
-      GT = 'GT'
-      GG = 'GG'
-      GN = 'GN'
-      GW = 'GW'
-      GY = 'GY'
-      HT = 'HT'
-      HM = 'HM'
-      VA = 'VA'
-      HN = 'HN'
-      HK = 'HK'
-      HU = 'HU'
-      IS = 'IS'
-      IN = 'IN'
-      ID = 'ID'
-      IR = 'IR'
-      IQ = 'IQ'
-      IE = 'IE'
-      IM = 'IM'
-      IL = 'IL'
-      IT = 'IT'
-      JM = 'JM'
-      JP = 'JP'
-      JE = 'JE'
-      JO = 'JO'
-      KZ = 'KZ'
-      KE = 'KE'
-      KI = 'KI'
-      KP = 'KP'
-      KR = 'KR'
-      KW = 'KW'
-      KG = 'KG'
-      LA = 'LA'
-      LV = 'LV'
-      LB = 'LB'
-      LS = 'LS'
-      LR = 'LR'
-      LY = 'LY'
-      LI = 'LI'
-      LT = 'LT'
-      LU = 'LU'
-      MO = 'MO'
-      MK = 'MK'
-      MG = 'MG'
-      MW = 'MW'
-      MY = 'MY'
-      MV = 'MV'
-      ML = 'ML'
-      MT = 'MT'
-      MH = 'MH'
-      MQ = 'MQ'
-      MR = 'MR'
-      MU = 'MU'
-      YT = 'YT'
-      MX = 'MX'
-      FM = 'FM'
-      MD = 'MD'
-      MC = 'MC'
-      MN = 'MN'
-      ME = 'ME'
-      MS = 'MS'
-      MA = 'MA'
-      MZ = 'MZ'
-      MM = 'MM'
-      NA = 'NA'
-      NR = 'NR'
-      NP = 'NP'
-      NL = 'NL'
-      NC = 'NC'
-      NZ = 'NZ'
-      NI = 'NI'
-      NE = 'NE'
-      NG = 'NG'
-      NU = 'NU'
-      NF = 'NF'
-      MP = 'MP'
-      NO = 'NO'
-      OM = 'OM'
-      PK = 'PK'
-      PW = 'PW'
-      PS = 'PS'
-      PA = 'PA'
-      PG = 'PG'
-      PY = 'PY'
-      PE = 'PE'
-      PH = 'PH'
-      PN = 'PN'
-      PL = 'PL'
-      PT = 'PT'
-      PR = 'PR'
-      QA = 'QA'
-      RE = 'RE'
-      RO = 'RO'
-      RU = 'RU'
-      RW = 'RW'
-      BL = 'BL'
-      SH = 'SH'
-      KN = 'KN'
-      LC = 'LC'
-      MF = 'MF'
-      PM = 'PM'
-      VC = 'VC'
-      WS = 'WS'
-      SM = 'SM'
-      ST = 'ST'
-      SA = 'SA'
-      SN = 'SN'
-      RS = 'RS'
-      SC = 'SC'
-      SL = 'SL'
-      SG = 'SG'
-      SX = 'SX'
-      SK = 'SK'
-      SI = 'SI'
-      SB = 'SB'
-      SO = 'SO'
-      ZA = 'ZA'
-      GS = 'GS'
-      SS = 'SS'
-      ES = 'ES'
-      LK = 'LK'
-      SD = 'SD'
-      SR = 'SR'
-      SJ = 'SJ'
-      SZ = 'SZ'
-      SE = 'SE'
-      CH = 'CH'
-      SY = 'SY'
-      TW = 'TW'
-      TJ = 'TJ'
-      TZ = 'TZ'
-      TH = 'TH'
-      TL = 'TL'
-      TG = 'TG'
-      TK = 'TK'
-      TO = 'TO'
-      TT = 'TT'
-      TN = 'TN'
-      TR = 'TR'
-      TM = 'TM'
-      TC = 'TC'
-      TV = 'TV'
-      UG = 'UG'
-      UA = 'UA'
-      AE = 'AE'
-      GB = 'GB'
-      US = 'US'
-      UM = 'UM'
-      UY = 'UY'
-      UZ = 'UZ'
-      VU = 'VU'
-      VE = 'VE'
-      VN = 'VN'
-      VG = 'VG'
-      VI = 'VI'
-      WF = 'WF'
-      EH = 'EH'
-      YE = 'YE'
-      ZM = 'ZM'
-      ZW = 'ZW'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1666,7 +1390,7 @@ module Aws::WAFRegional
       :name,
       :geo_match_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1688,7 +1412,7 @@ module Aws::WAFRegional
       :geo_match_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -1710,7 +1434,7 @@ module Aws::WAFRegional
       :action,
       :geo_match_constraint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byte_match_set_id
@@ -1720,7 +1444,7 @@ module Aws::WAFRegional
     class GetByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byte_match_set
@@ -1749,12 +1473,12 @@ module Aws::WAFRegional
     class GetByteMatchSetResponse < Struct.new(
       :byte_match_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetChangeTokenRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1764,7 +1488,7 @@ module Aws::WAFRegional
     class GetChangeTokenResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -1773,7 +1497,7 @@ module Aws::WAFRegional
     class GetChangeTokenStatusRequest < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token_status
@@ -1782,7 +1506,7 @@ module Aws::WAFRegional
     class GetChangeTokenStatusResponse < Struct.new(
       :change_token_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_match_set_id
@@ -1792,7 +1516,7 @@ module Aws::WAFRegional
     class GetGeoMatchSetRequest < Struct.new(
       :geo_match_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_match_set
@@ -1801,7 +1525,7 @@ module Aws::WAFRegional
     class GetGeoMatchSetResponse < Struct.new(
       :geo_match_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set_id
@@ -1811,7 +1535,7 @@ module Aws::WAFRegional
     class GetIPSetRequest < Struct.new(
       :ip_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set
@@ -1834,7 +1558,7 @@ module Aws::WAFRegional
     class GetIPSetResponse < Struct.new(
       :ip_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1843,7 +1567,7 @@ module Aws::WAFRegional
     class GetLoggingConfigurationRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -1852,7 +1576,7 @@ module Aws::WAFRegional
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1861,7 +1585,7 @@ module Aws::WAFRegional
     class GetPermissionPolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1870,7 +1594,7 @@ module Aws::WAFRegional
     class GetPermissionPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -1884,7 +1608,7 @@ module Aws::WAFRegional
       :rule_id,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_keys
@@ -1897,7 +1621,7 @@ module Aws::WAFRegional
       :managed_keys,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -1907,7 +1631,7 @@ module Aws::WAFRegional
     class GetRateBasedRuleRequest < Struct.new(
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -1917,7 +1641,7 @@ module Aws::WAFRegional
     class GetRateBasedRuleResponse < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_match_set_id
@@ -1927,7 +1651,7 @@ module Aws::WAFRegional
     class GetRegexMatchSetRequest < Struct.new(
       :regex_match_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_match_set
@@ -1936,7 +1660,7 @@ module Aws::WAFRegional
     class GetRegexMatchSetResponse < Struct.new(
       :regex_match_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set_id
@@ -1946,7 +1670,7 @@ module Aws::WAFRegional
     class GetRegexPatternSetRequest < Struct.new(
       :regex_pattern_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set
@@ -1955,7 +1679,7 @@ module Aws::WAFRegional
     class GetRegexPatternSetResponse < Struct.new(
       :regex_pattern_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_id
@@ -1965,7 +1689,7 @@ module Aws::WAFRegional
     class GetRuleGroupRequest < Struct.new(
       :rule_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group
@@ -1974,7 +1698,7 @@ module Aws::WAFRegional
     class GetRuleGroupResponse < Struct.new(
       :rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -1984,7 +1708,7 @@ module Aws::WAFRegional
     class GetRuleRequest < Struct.new(
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -2008,7 +1732,7 @@ module Aws::WAFRegional
     class GetRuleResponse < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -2044,7 +1768,7 @@ module Aws::WAFRegional
       :time_window,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampled_requests
@@ -2065,7 +1789,7 @@ module Aws::WAFRegional
       :population_size,
       :time_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:population_size] = 0 unless options.key?(:population_size)
@@ -2080,7 +1804,7 @@ module Aws::WAFRegional
     class GetSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute size_constraint_set
@@ -2109,7 +1833,7 @@ module Aws::WAFRegional
     class GetSizeConstraintSetResponse < Struct.new(
       :size_constraint_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get a <a>SqlInjectionMatchSet</a>.</p>
@@ -2120,7 +1844,7 @@ module Aws::WAFRegional
     class GetSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <a>GetSqlInjectionMatchSet</a> request.</p>
@@ -2149,7 +1873,7 @@ module Aws::WAFRegional
     class GetSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2171,7 +1895,7 @@ module Aws::WAFRegional
     class GetWebACLForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_summary
@@ -2180,7 +1904,7 @@ module Aws::WAFRegional
     class GetWebACLForResourceResponse < Struct.new(
       :web_acl_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -2190,7 +1914,7 @@ module Aws::WAFRegional
     class GetWebACLRequest < Struct.new(
       :web_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl
@@ -2224,7 +1948,7 @@ module Aws::WAFRegional
     class GetWebACLResponse < Struct.new(
       :web_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get an <a>XssMatchSet</a>.</p>
@@ -2235,7 +1959,7 @@ module Aws::WAFRegional
     class GetXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <a>GetXssMatchSet</a> request.</p>
@@ -2264,7 +1988,7 @@ module Aws::WAFRegional
     class GetXssMatchSetResponse < Struct.new(
       :xss_match_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2288,7 +2012,7 @@ module Aws::WAFRegional
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2341,7 +2065,7 @@ module Aws::WAFRegional
       :http_version,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2378,7 +2102,7 @@ module Aws::WAFRegional
       :name,
       :ip_set_descriptors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2421,12 +2145,7 @@ module Aws::WAFRegional
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IPSetDescriptorType
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2449,7 +2168,7 @@ module Aws::WAFRegional
       :ip_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -2471,7 +2190,7 @@ module Aws::WAFRegional
       :action,
       :ip_set_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_id
@@ -2492,7 +2211,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2505,7 +2224,7 @@ module Aws::WAFRegional
       :next_marker,
       :activated_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2523,7 +2242,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2539,7 +2258,7 @@ module Aws::WAFRegional
       :next_marker,
       :byte_match_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2557,7 +2276,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2573,7 +2292,7 @@ module Aws::WAFRegional
       :next_marker,
       :geo_match_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2591,7 +2310,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2606,7 +2325,7 @@ module Aws::WAFRegional
       :next_marker,
       :ip_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2622,7 +2341,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configurations
@@ -2635,7 +2354,7 @@ module Aws::WAFRegional
       :logging_configurations,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2656,7 +2375,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2673,7 +2392,7 @@ module Aws::WAFRegional
       :next_marker,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2691,7 +2410,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2707,7 +2426,7 @@ module Aws::WAFRegional
       :next_marker,
       :regex_match_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2725,7 +2444,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2741,7 +2460,7 @@ module Aws::WAFRegional
       :next_marker,
       :regex_pattern_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -2754,7 +2473,7 @@ module Aws::WAFRegional
       :web_acl_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -2763,7 +2482,7 @@ module Aws::WAFRegional
     class ListResourcesForWebACLResponse < Struct.new(
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2779,7 +2498,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2792,7 +2511,7 @@ module Aws::WAFRegional
       :next_marker,
       :rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2809,7 +2528,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2824,7 +2543,7 @@ module Aws::WAFRegional
       :next_marker,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2841,7 +2560,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2857,7 +2576,7 @@ module Aws::WAFRegional
       :next_marker,
       :size_constraint_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to list the <a>SqlInjectionMatchSet</a> objects created by the current AWS account.</p>
@@ -2876,7 +2595,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <a>ListSqlInjectionMatchSets</a> request.</p>
@@ -2893,7 +2612,7 @@ module Aws::WAFRegional
       :next_marker,
       :sql_injection_match_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2911,7 +2630,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2927,7 +2646,7 @@ module Aws::WAFRegional
       :next_marker,
       :rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2944,7 +2663,7 @@ module Aws::WAFRegional
       :limit,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2957,7 +2676,7 @@ module Aws::WAFRegional
       :next_marker,
       :tag_info_for_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2975,7 +2694,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -2991,7 +2710,7 @@ module Aws::WAFRegional
       :next_marker,
       :web_ac_ls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to list the <a>XssMatchSet</a> objects created by the current AWS account.</p>
@@ -3010,7 +2729,7 @@ module Aws::WAFRegional
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <a>ListXssMatchSets</a> request.</p>
@@ -3027,7 +2746,7 @@ module Aws::WAFRegional
       :next_marker,
       :xss_match_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3058,63 +2777,7 @@ module Aws::WAFRegional
       :log_destination_configs,
       :redacted_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchFieldType
-      URI = 'URI'
-      QUERY_STRING = 'QUERY_STRING'
-      HEADER = 'HEADER'
-      METHOD = 'METHOD'
-      BODY = 'BODY'
-      SINGLE_QUERY_ARG = 'SINGLE_QUERY_ARG'
-      ALL_QUERY_ARGS = 'ALL_QUERY_ARGS'
-    end
-
-    module MigrationErrorType
-      ENTITY_NOT_SUPPORTED = 'ENTITY_NOT_SUPPORTED'
-      ENTITY_NOT_FOUND = 'ENTITY_NOT_FOUND'
-      S3_BUCKET_NO_PERMISSION = 'S3_BUCKET_NO_PERMISSION'
-      S3_BUCKET_NOT_ACCESSIBLE = 'S3_BUCKET_NOT_ACCESSIBLE'
-      S3_BUCKET_NOT_FOUND = 'S3_BUCKET_NOT_FOUND'
-      S3_BUCKET_INVALID_REGION = 'S3_BUCKET_INVALID_REGION'
-      S3_INTERNAL_ERROR = 'S3_INTERNAL_ERROR'
-    end
-
-    module ParameterExceptionField
-      CHANGE_ACTION = 'CHANGE_ACTION'
-      WAF_ACTION = 'WAF_ACTION'
-      WAF_OVERRIDE_ACTION = 'WAF_OVERRIDE_ACTION'
-      PREDICATE_TYPE = 'PREDICATE_TYPE'
-      IPSET_TYPE = 'IPSET_TYPE'
-      BYTE_MATCH_FIELD_TYPE = 'BYTE_MATCH_FIELD_TYPE'
-      SQL_INJECTION_MATCH_FIELD_TYPE = 'SQL_INJECTION_MATCH_FIELD_TYPE'
-      BYTE_MATCH_TEXT_TRANSFORMATION = 'BYTE_MATCH_TEXT_TRANSFORMATION'
-      BYTE_MATCH_POSITIONAL_CONSTRAINT = 'BYTE_MATCH_POSITIONAL_CONSTRAINT'
-      SIZE_CONSTRAINT_COMPARISON_OPERATOR = 'SIZE_CONSTRAINT_COMPARISON_OPERATOR'
-      GEO_MATCH_LOCATION_TYPE = 'GEO_MATCH_LOCATION_TYPE'
-      GEO_MATCH_LOCATION_VALUE = 'GEO_MATCH_LOCATION_VALUE'
-      RATE_KEY = 'RATE_KEY'
-      RULE_TYPE = 'RULE_TYPE'
-      NEXT_MARKER = 'NEXT_MARKER'
-      RESOURCE_ARN = 'RESOURCE_ARN'
-      TAGS = 'TAGS'
-      TAG_KEYS = 'TAG_KEYS'
-    end
-
-    module ParameterExceptionReason
-      INVALID_OPTION = 'INVALID_OPTION'
-      ILLEGAL_COMBINATION = 'ILLEGAL_COMBINATION'
-      ILLEGAL_ARGUMENT = 'ILLEGAL_ARGUMENT'
-      INVALID_TAG_KEY = 'INVALID_TAG_KEY'
-    end
-
-    module PositionalConstraint
-      EXACTLY = 'EXACTLY'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
-      CONTAINS_WORD = 'CONTAINS_WORD'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3150,17 +2813,7 @@ module Aws::WAFRegional
       :type,
       :data_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredicateType
-      IP_MATCH = 'IPMatch'
-      BYTE_MATCH = 'ByteMatch'
-      SQL_INJECTION_MATCH = 'SqlInjectionMatch'
-      GEO_MATCH = 'GeoMatch'
-      SIZE_CONSTRAINT = 'SizeConstraint'
-      XSS_MATCH = 'XssMatch'
-      REGEX_MATCH = 'RegexMatch'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -3176,7 +2829,7 @@ module Aws::WAFRegional
     class PutLoggingConfigurationRequest < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -3185,7 +2838,7 @@ module Aws::WAFRegional
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3198,12 +2851,12 @@ module Aws::WAFRegional
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutPermissionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3272,11 +2925,7 @@ module Aws::WAFRegional
       :rate_key,
       :rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RateKey
-      IP = 'IP'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3324,7 +2973,7 @@ module Aws::WAFRegional
       :name,
       :regex_match_tuples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3350,7 +2999,7 @@ module Aws::WAFRegional
       :regex_match_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3375,7 +3024,7 @@ module Aws::WAFRegional
       :action,
       :regex_match_tuple,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3508,7 +3157,7 @@ module Aws::WAFRegional
       :text_transformation,
       :regex_pattern_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3537,7 +3186,7 @@ module Aws::WAFRegional
       :name,
       :regex_pattern_strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3563,7 +3212,7 @@ module Aws::WAFRegional
       :regex_pattern_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3586,12 +3235,7 @@ module Aws::WAFRegional
       :action,
       :regex_pattern_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      APPLICATION_LOAD_BALANCER = 'APPLICATION_LOAD_BALANCER'
-      API_GATEWAY = 'API_GATEWAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3640,7 +3284,7 @@ module Aws::WAFRegional
       :metric_name,
       :predicates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3683,7 +3327,7 @@ module Aws::WAFRegional
       :name,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3709,7 +3353,7 @@ module Aws::WAFRegional
       :rule_group_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3735,7 +3379,7 @@ module Aws::WAFRegional
       :action,
       :activated_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3761,7 +3405,7 @@ module Aws::WAFRegional
       :rule_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3785,7 +3429,7 @@ module Aws::WAFRegional
       :action,
       :predicate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3823,7 +3467,7 @@ module Aws::WAFRegional
       :action,
       :rule_within_rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -3980,7 +3624,7 @@ module Aws::WAFRegional
       :comparison_operator,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -4019,7 +3663,7 @@ module Aws::WAFRegional
       :name,
       :size_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4047,7 +3691,7 @@ module Aws::WAFRegional
       :size_constraint_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4074,7 +3718,7 @@ module Aws::WAFRegional
       :action,
       :size_constraint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4109,7 +3753,7 @@ module Aws::WAFRegional
       :name,
       :sql_injection_match_tuples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4137,7 +3781,7 @@ module Aws::WAFRegional
       :sql_injection_match_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4161,7 +3805,7 @@ module Aws::WAFRegional
       :action,
       :sql_injection_match_tuple,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4275,7 +3919,7 @@ module Aws::WAFRegional
       :field_to_match,
       :text_transformation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4302,7 +3946,7 @@ module Aws::WAFRegional
       :name,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4325,7 +3969,7 @@ module Aws::WAFRegional
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4348,7 +3992,7 @@ module Aws::WAFRegional
       :resource_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4361,21 +4005,12 @@ module Aws::WAFRegional
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TextTransformation
-      NONE = 'NONE'
-      COMPRESS_WHITE_SPACE = 'COMPRESS_WHITE_SPACE'
-      HTML_ENTITY_DECODE = 'HTML_ENTITY_DECODE'
-      LOWERCASE = 'LOWERCASE'
-      CMD_LINE = 'CMD_LINE'
-      URL_DECODE = 'URL_DECODE'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4411,7 +4046,7 @@ module Aws::WAFRegional
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4424,12 +4059,12 @@ module Aws::WAFRegional
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byte_match_set_id
@@ -4466,7 +4101,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4476,7 +4111,7 @@ module Aws::WAFRegional
     class UpdateByteMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute geo_match_set_id
@@ -4508,7 +4143,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4518,7 +4153,7 @@ module Aws::WAFRegional
     class UpdateGeoMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set_id
@@ -4550,7 +4185,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4560,7 +4195,7 @@ module Aws::WAFRegional
     class UpdateIPSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -4586,7 +4221,7 @@ module Aws::WAFRegional
       :updates,
       :rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4597,7 +4232,7 @@ module Aws::WAFRegional
     class UpdateRateBasedRuleResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_match_set_id
@@ -4616,7 +4251,7 @@ module Aws::WAFRegional
       :updates,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4626,7 +4261,7 @@ module Aws::WAFRegional
     class UpdateRegexMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set_id
@@ -4644,7 +4279,7 @@ module Aws::WAFRegional
       :updates,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4654,7 +4289,7 @@ module Aws::WAFRegional
     class UpdateRegexPatternSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_id
@@ -4676,7 +4311,7 @@ module Aws::WAFRegional
       :updates,
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4686,7 +4321,7 @@ module Aws::WAFRegional
     class UpdateRuleGroupResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -4722,7 +4357,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4732,7 +4367,7 @@ module Aws::WAFRegional
     class UpdateRuleResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute size_constraint_set_id
@@ -4769,7 +4404,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4779,7 +4414,7 @@ module Aws::WAFRegional
     class UpdateSizeConstraintSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to update a <a>SqlInjectionMatchSet</a>.</p>
@@ -4816,7 +4451,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to an <a>UpdateSqlInjectionMatchSets</a> request.</p>
@@ -4827,7 +4462,7 @@ module Aws::WAFRegional
     class UpdateSqlInjectionMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_id
@@ -4875,7 +4510,7 @@ module Aws::WAFRegional
       :updates,
       :default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_token
@@ -4885,7 +4520,7 @@ module Aws::WAFRegional
     class UpdateWebACLResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to update an <a>XssMatchSet</a>.</p>
@@ -4924,7 +4559,7 @@ module Aws::WAFRegional
       :change_token,
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to an <a>UpdateXssMatchSets</a> request.</p>
@@ -4935,7 +4570,7 @@ module Aws::WAFRegional
     class UpdateXssMatchSetResponse < Struct.new(
       :change_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4944,7 +4579,7 @@ module Aws::WAFRegional
     class WAFBadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name specified is invalid.</p>
@@ -4953,7 +4588,7 @@ module Aws::WAFRegional
     class WAFDisallowedNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed due to a problem with the migration. The failure cause is provided in the exception, in the <code>MigrationErrorType</code>: </p>
@@ -4998,7 +4633,7 @@ module Aws::WAFRegional
       :migration_error_type,
       :migration_error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
@@ -5007,13 +4642,13 @@ module Aws::WAFRegional
     class WAFInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to create, update, or delete an object by using an invalid account identifier.</p>
     class WAFInvalidAccountException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because there was nothing to do. For example:</p>
@@ -5042,7 +4677,7 @@ module Aws::WAFRegional
     class WAFInvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p>
@@ -5094,7 +4729,7 @@ module Aws::WAFRegional
       :parameter,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified policy is not in the proper format. </p>
@@ -5132,7 +4767,7 @@ module Aws::WAFRegional
     class WAFInvalidPermissionPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The regular expression (regex) you specified in <code>RegexPatternString</code> is invalid.</p>
@@ -5141,7 +4776,7 @@ module Aws::WAFRegional
     class WAFInvalidRegexPatternException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create 
@@ -5152,7 +4787,7 @@ module Aws::WAFRegional
     class WAFLimitsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to delete an object that isn't empty. For example:</p>
@@ -5176,7 +4811,7 @@ module Aws::WAFRegional
     class WAFNonEmptyEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to add an object to or delete an object from another object that doesn't exist. For example:</p>
@@ -5200,7 +4835,7 @@ module Aws::WAFRegional
     class WAFNonexistentContainerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the referenced object doesn't exist.</p>
@@ -5209,7 +4844,7 @@ module Aws::WAFRegional
     class WAFNonexistentItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to delete an object that is still in use. For example:</p>
@@ -5226,7 +4861,7 @@ module Aws::WAFRegional
     class WAFReferencedItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS WAF is not able to access the service linked role. This can be caused by a previous <code>PutLoggingConfiguration</code> request, which can lock the service linked role for about 20 seconds. Please try your request again. The service linked role can also be locked by a previous <code>DeleteServiceLinkedRole</code> request, which can lock the role for 15 minutes or more. If you recently made a <code>DeleteServiceLinkedRole</code>, wait at least 15 minutes and try the request again. If you receive this same exception again, you will have to wait additional time until the role is unlocked.</p>
@@ -5235,7 +4870,7 @@ module Aws::WAFRegional
     class WAFServiceLinkedRoleErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
@@ -5244,7 +4879,7 @@ module Aws::WAFRegional
     class WAFStaleDataException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subscription does not exist.</p>
@@ -5253,7 +4888,7 @@ module Aws::WAFRegional
     class WAFSubscriptionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5262,7 +4897,7 @@ module Aws::WAFRegional
     class WAFTagOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5271,7 +4906,7 @@ module Aws::WAFRegional
     class WAFTagOperationInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the entity
@@ -5281,7 +4916,7 @@ module Aws::WAFRegional
     class WAFUnavailableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5317,13 +4952,7 @@ module Aws::WAFRegional
     class WafAction < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WafActionType
-      BLOCK = 'BLOCK'
-      ALLOW = 'ALLOW'
-      COUNT = 'COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5342,18 +4971,7 @@ module Aws::WAFRegional
     class WafOverrideAction < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WafOverrideActionType
-      NONE = 'NONE'
-      COUNT = 'COUNT'
-    end
-
-    module WafRuleType
-      REGULAR = 'REGULAR'
-      RATE_BASED = 'RATE_BASED'
-      GROUP = 'GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5403,7 +5021,7 @@ module Aws::WAFRegional
       :rules,
       :web_acl_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5429,7 +5047,7 @@ module Aws::WAFRegional
       :web_acl_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5453,7 +5071,7 @@ module Aws::WAFRegional
       :action,
       :activated_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5488,7 +5106,7 @@ module Aws::WAFRegional
       :name,
       :xss_match_tuples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5516,7 +5134,7 @@ module Aws::WAFRegional
       :xss_match_set_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5542,7 +5160,7 @@ module Aws::WAFRegional
       :action,
       :xss_match_tuple,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5656,7 +5274,7 @@ module Aws::WAFRegional
       :field_to_match,
       :text_transformation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

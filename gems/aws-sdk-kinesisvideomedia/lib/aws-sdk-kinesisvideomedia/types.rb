@@ -13,7 +13,7 @@ module Aws::KinesisVideoMedia
     class ClientLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
@@ -23,7 +23,7 @@ module Aws::KinesisVideoMedia
     class ConnectionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -43,7 +43,7 @@ module Aws::KinesisVideoMedia
       :stream_arn,
       :start_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -123,7 +123,7 @@ module Aws::KinesisVideoMedia
       :content_type,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload] = Base64.strict_decode64('') unless options.key?(:payload)
@@ -137,7 +137,7 @@ module Aws::KinesisVideoMedia
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status Code: 400, Caller used wrong endpoint to write data to a stream. On receiving
@@ -149,7 +149,7 @@ module Aws::KinesisVideoMedia
     class InvalidEndpointException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status Code: 403, The caller is not authorized to perform an operation on the given
@@ -159,7 +159,7 @@ module Aws::KinesisVideoMedia
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status Code: 404, The stream with the given name does not exist.</p>
@@ -168,7 +168,7 @@ module Aws::KinesisVideoMedia
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the chunk on the Kinesis video stream where you want the
@@ -239,16 +239,7 @@ module Aws::KinesisVideoMedia
       :start_timestamp,
       :continuation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartSelectorType
-      FRAGMENT_NUMBER = 'FRAGMENT_NUMBER'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      NOW = 'NOW'
-      EARLIEST = 'EARLIEST'
-      CONTINUATION_TOKEN = 'CONTINUATION_TOKEN'
+      include ::Smithy::Schema::Structure
     end
 
   end

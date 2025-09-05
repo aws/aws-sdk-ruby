@@ -20,7 +20,7 @@ module Aws::Account
       :primary_email,
       :otp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -29,7 +29,7 @@ module Aws::Account
     class AcceptPrimaryEmailUpdateResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the calling identity doesn't have the minimum required permissions.</p>
@@ -42,7 +42,7 @@ module Aws::Account
       :message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the details of an alternate contact associated with an Amazon Web Services account</p>
@@ -68,7 +68,7 @@ module Aws::Account
       :phone_number,
       :alternate_contact_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of a conflict in the current status of the resource. For example, this happens if you try to enable a Region that is currently being disabled (in a status of DISABLING) or if you try to change an account’s root user email to an email address which is already in use.</p>
@@ -81,7 +81,7 @@ module Aws::Account
       :message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the primary contact information associated with an Amazon Web Services account.</p>
@@ -135,7 +135,7 @@ module Aws::Account
       :company_name,
       :website_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alternate_contact_type
@@ -148,7 +148,7 @@ module Aws::Account
       :alternate_contact_type,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -161,7 +161,7 @@ module Aws::Account
       :account_id,
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -174,7 +174,7 @@ module Aws::Account
       :account_id,
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -183,7 +183,7 @@ module Aws::Account
     class GetAccountInformationRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -200,7 +200,7 @@ module Aws::Account
       :account_name,
       :account_created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alternate_contact_type
@@ -213,7 +213,7 @@ module Aws::Account
       :alternate_contact_type,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alternate_contact
@@ -222,7 +222,7 @@ module Aws::Account
     class GetAlternateContactResponse < Struct.new(
       :alternate_contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -231,7 +231,7 @@ module Aws::Account
     class GetContactInformationRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_information
@@ -240,7 +240,7 @@ module Aws::Account
     class GetContactInformationResponse < Struct.new(
       :contact_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -249,7 +249,7 @@ module Aws::Account
     class GetPrimaryEmailRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute primary_email
@@ -258,7 +258,7 @@ module Aws::Account
     class GetPrimaryEmailResponse < Struct.new(
       :primary_email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -271,7 +271,7 @@ module Aws::Account
       :account_id,
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region_name
@@ -284,7 +284,7 @@ module Aws::Account
       :region_name,
       :region_opt_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because of an error internal to Amazon Web Services. Try your operation again later.</p>
@@ -297,7 +297,7 @@ module Aws::Account
       :message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -318,7 +318,7 @@ module Aws::Account
       :next_token,
       :region_opt_status_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -331,7 +331,7 @@ module Aws::Account
       :next_token,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_name
@@ -344,7 +344,7 @@ module Aws::Account
       :account_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -373,7 +373,7 @@ module Aws::Account
       :alternate_contact_type,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_information
@@ -386,7 +386,7 @@ module Aws::Account
       :contact_information,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is a structure that expresses the Region for a given account, consisting of a name and opt-in status.</p>
@@ -400,7 +400,7 @@ module Aws::Account
       :region_name,
       :region_opt_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it specified a resource that can't be found.</p>
@@ -413,7 +413,7 @@ module Aws::Account
       :message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -426,7 +426,7 @@ module Aws::Account
       :account_id,
       :primary_email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -435,7 +435,7 @@ module Aws::Account
     class StartPrimaryEmailUpdateResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it was called too frequently and exceeded a throttle limit.</p>
@@ -448,7 +448,7 @@ module Aws::Account
       :message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because one of the input parameters was invalid.</p>
@@ -466,7 +466,7 @@ module Aws::Account
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the Amazon Web Services service in a specified field.</p>
@@ -480,7 +480,7 @@ module Aws::Account
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -19,7 +19,7 @@ module Aws::Route53Domains
       :domain_name,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AcceptDomainTransferFromAnotherAwsAccount response includes the following
@@ -31,7 +31,7 @@ module Aws::Route53Domains
     class AcceptDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -45,7 +45,7 @@ module Aws::Route53Domains
       :domain_name,
       :signing_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -55,7 +55,7 @@ module Aws::Route53Domains
     class AssociateDelegationSignerToDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for one billing record.</p>
@@ -86,7 +86,7 @@ module Aws::Route53Domains
       :bill_date,
       :price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:price] = 0 unless options.key?(:price)
@@ -102,7 +102,7 @@ module Aws::Route53Domains
     class CancelDomainTransferToAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CancelDomainTransferToAnotherAwsAccount</code> response includes the
@@ -116,7 +116,7 @@ module Aws::Route53Domains
     class CancelDomainTransferToAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CheckDomainAvailability request contains the following elements.</p>
@@ -155,7 +155,7 @@ module Aws::Route53Domains
       :domain_name,
       :idn_lang_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CheckDomainAvailability response includes the following elements.</p>
@@ -217,7 +217,7 @@ module Aws::Route53Domains
     class CheckDomainAvailabilityResponse < Struct.new(
       :availability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CheckDomainTransferability request contains the following elements.</p>
@@ -254,7 +254,7 @@ module Aws::Route53Domains
       :domain_name,
       :auth_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CheckDomainTransferability response includes the following elements.</p>
@@ -269,7 +269,7 @@ module Aws::Route53Domains
       :transferability,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Customer's consent for the owner change request. </p>
@@ -283,7 +283,7 @@ module Aws::Route53Domains
       :max_price,
       :currency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_price] = 0 unless options.key?(:max_price)
@@ -377,270 +377,7 @@ module Aws::Route53Domains
       :fax,
       :extra_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactType
-      PERSON = 'PERSON'
-      COMPANY = 'COMPANY'
-      ASSOCIATION = 'ASSOCIATION'
-      PUBLIC_BODY = 'PUBLIC_BODY'
-      RESELLER = 'RESELLER'
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module CountryCode
-      AC = 'AC'
-      AD = 'AD'
-      AE = 'AE'
-      AF = 'AF'
-      AG = 'AG'
-      AI = 'AI'
-      AL = 'AL'
-      AM = 'AM'
-      AN = 'AN'
-      AO = 'AO'
-      AQ = 'AQ'
-      AR = 'AR'
-      AS = 'AS'
-      AT = 'AT'
-      AU = 'AU'
-      AW = 'AW'
-      AX = 'AX'
-      AZ = 'AZ'
-      BA = 'BA'
-      BB = 'BB'
-      BD = 'BD'
-      BE = 'BE'
-      BF = 'BF'
-      BG = 'BG'
-      BH = 'BH'
-      BI = 'BI'
-      BJ = 'BJ'
-      BL = 'BL'
-      BM = 'BM'
-      BN = 'BN'
-      BO = 'BO'
-      BQ = 'BQ'
-      BR = 'BR'
-      BS = 'BS'
-      BT = 'BT'
-      BV = 'BV'
-      BW = 'BW'
-      BY = 'BY'
-      BZ = 'BZ'
-      CA = 'CA'
-      CC = 'CC'
-      CD = 'CD'
-      CF = 'CF'
-      CG = 'CG'
-      CH = 'CH'
-      CI = 'CI'
-      CK = 'CK'
-      CL = 'CL'
-      CM = 'CM'
-      CN = 'CN'
-      CO = 'CO'
-      CR = 'CR'
-      CU = 'CU'
-      CV = 'CV'
-      CW = 'CW'
-      CX = 'CX'
-      CY = 'CY'
-      CZ = 'CZ'
-      DE = 'DE'
-      DJ = 'DJ'
-      DK = 'DK'
-      DM = 'DM'
-      DO = 'DO'
-      DZ = 'DZ'
-      EC = 'EC'
-      EE = 'EE'
-      EG = 'EG'
-      EH = 'EH'
-      ER = 'ER'
-      ES = 'ES'
-      ET = 'ET'
-      FI = 'FI'
-      FJ = 'FJ'
-      FK = 'FK'
-      FM = 'FM'
-      FO = 'FO'
-      FR = 'FR'
-      GA = 'GA'
-      GB = 'GB'
-      GD = 'GD'
-      GE = 'GE'
-      GF = 'GF'
-      GG = 'GG'
-      GH = 'GH'
-      GI = 'GI'
-      GL = 'GL'
-      GM = 'GM'
-      GN = 'GN'
-      GP = 'GP'
-      GQ = 'GQ'
-      GR = 'GR'
-      GS = 'GS'
-      GT = 'GT'
-      GU = 'GU'
-      GW = 'GW'
-      GY = 'GY'
-      HK = 'HK'
-      HM = 'HM'
-      HN = 'HN'
-      HR = 'HR'
-      HT = 'HT'
-      HU = 'HU'
-      ID = 'ID'
-      IE = 'IE'
-      IL = 'IL'
-      IM = 'IM'
-      IN = 'IN'
-      IO = 'IO'
-      IQ = 'IQ'
-      IR = 'IR'
-      IS = 'IS'
-      IT = 'IT'
-      JE = 'JE'
-      JM = 'JM'
-      JO = 'JO'
-      JP = 'JP'
-      KE = 'KE'
-      KG = 'KG'
-      KH = 'KH'
-      KI = 'KI'
-      KM = 'KM'
-      KN = 'KN'
-      KP = 'KP'
-      KR = 'KR'
-      KW = 'KW'
-      KY = 'KY'
-      KZ = 'KZ'
-      LA = 'LA'
-      LB = 'LB'
-      LC = 'LC'
-      LI = 'LI'
-      LK = 'LK'
-      LR = 'LR'
-      LS = 'LS'
-      LT = 'LT'
-      LU = 'LU'
-      LV = 'LV'
-      LY = 'LY'
-      MA = 'MA'
-      MC = 'MC'
-      MD = 'MD'
-      ME = 'ME'
-      MF = 'MF'
-      MG = 'MG'
-      MH = 'MH'
-      MK = 'MK'
-      ML = 'ML'
-      MM = 'MM'
-      MN = 'MN'
-      MO = 'MO'
-      MP = 'MP'
-      MQ = 'MQ'
-      MR = 'MR'
-      MS = 'MS'
-      MT = 'MT'
-      MU = 'MU'
-      MV = 'MV'
-      MW = 'MW'
-      MX = 'MX'
-      MY = 'MY'
-      MZ = 'MZ'
-      NA = 'NA'
-      NC = 'NC'
-      NE = 'NE'
-      NF = 'NF'
-      NG = 'NG'
-      NI = 'NI'
-      NL = 'NL'
-      NO = 'NO'
-      NP = 'NP'
-      NR = 'NR'
-      NU = 'NU'
-      NZ = 'NZ'
-      OM = 'OM'
-      PA = 'PA'
-      PE = 'PE'
-      PF = 'PF'
-      PG = 'PG'
-      PH = 'PH'
-      PK = 'PK'
-      PL = 'PL'
-      PM = 'PM'
-      PN = 'PN'
-      PR = 'PR'
-      PS = 'PS'
-      PT = 'PT'
-      PW = 'PW'
-      PY = 'PY'
-      QA = 'QA'
-      RE = 'RE'
-      RO = 'RO'
-      RS = 'RS'
-      RU = 'RU'
-      RW = 'RW'
-      SA = 'SA'
-      SB = 'SB'
-      SC = 'SC'
-      SD = 'SD'
-      SE = 'SE'
-      SG = 'SG'
-      SH = 'SH'
-      SI = 'SI'
-      SJ = 'SJ'
-      SK = 'SK'
-      SL = 'SL'
-      SM = 'SM'
-      SN = 'SN'
-      SO = 'SO'
-      SR = 'SR'
-      SS = 'SS'
-      ST = 'ST'
-      SV = 'SV'
-      SX = 'SX'
-      SY = 'SY'
-      SZ = 'SZ'
-      TC = 'TC'
-      TD = 'TD'
-      TF = 'TF'
-      TG = 'TG'
-      TH = 'TH'
-      TJ = 'TJ'
-      TK = 'TK'
-      TL = 'TL'
-      TM = 'TM'
-      TN = 'TN'
-      TO = 'TO'
-      TP = 'TP'
-      TR = 'TR'
-      TT = 'TT'
-      TV = 'TV'
-      TW = 'TW'
-      TZ = 'TZ'
-      UA = 'UA'
-      UG = 'UG'
-      US = 'US'
-      UY = 'UY'
-      UZ = 'UZ'
-      VA = 'VA'
-      VC = 'VC'
-      VE = 'VE'
-      VG = 'VG'
-      VI = 'VI'
-      VN = 'VN'
-      VU = 'VU'
-      WF = 'WF'
-      WS = 'WS'
-      YE = 'YE'
-      YT = 'YT'
-      ZA = 'ZA'
-      ZM = 'ZM'
-      ZW = 'ZW'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -649,7 +386,7 @@ module Aws::Route53Domains
     class DeleteDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -659,7 +396,7 @@ module Aws::Route53Domains
     class DeleteDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DeleteTagsForDomainRequest includes the following elements.</p>
@@ -673,12 +410,12 @@ module Aws::Route53Domains
       :domain_name,
       :tags_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsForDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -687,12 +424,12 @@ module Aws::Route53Domains
     class DisableDomainAutoRenewRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableDomainAutoRenewResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DisableDomainTransferLock request includes the following element.</p>
@@ -702,7 +439,7 @@ module Aws::Route53Domains
     class DisableDomainTransferLockRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DisableDomainTransferLock response includes the following element.</p>
@@ -713,7 +450,7 @@ module Aws::Route53Domains
     class DisableDomainTransferLockResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -727,7 +464,7 @@ module Aws::Route53Domains
       :domain_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -737,7 +474,7 @@ module Aws::Route53Domains
     class DisassociateDelegationSignerFromDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the DNSSEC key.</p>
@@ -786,7 +523,7 @@ module Aws::Route53Domains
       :key_tag,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This error is returned if you call <code>AssociateDelegationSignerToDomain</code>
@@ -797,7 +534,7 @@ module Aws::Route53Domains
     class DnssecLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a delegation signer (DS) record that was created in the registry by
@@ -821,20 +558,7 @@ module Aws::Route53Domains
       :flags,
       :public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainAvailability
-      AVAILABLE = 'AVAILABLE'
-      AVAILABLE_RESERVED = 'AVAILABLE_RESERVED'
-      AVAILABLE_PREORDER = 'AVAILABLE_PREORDER'
-      UNAVAILABLE = 'UNAVAILABLE'
-      UNAVAILABLE_PREMIUM = 'UNAVAILABLE_PREMIUM'
-      UNAVAILABLE_RESTRICTED = 'UNAVAILABLE_RESTRICTED'
-      RESERVED = 'RESERVED'
-      DONT_KNOW = 'DONT_KNOW'
-      INVALID_NAME_FOR_TLD = 'INVALID_NAME_FOR_TLD'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of domains has exceeded the allowed threshold for the account.</p>
@@ -844,7 +568,7 @@ module Aws::Route53Domains
     class DomainLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the domain price associated with a TLD.</p>
@@ -874,7 +598,7 @@ module Aws::Route53Domains
       :change_ownership_price,
       :restoration_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one suggested domain name.</p>
@@ -937,7 +661,7 @@ module Aws::Route53Domains
       :domain_name,
       :availability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about one domain.</p>
@@ -961,7 +685,7 @@ module Aws::Route53Domains
       :transfer_lock,
       :expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about whether the specified domain can be
@@ -1003,7 +727,7 @@ module Aws::Route53Domains
     class DomainTransferability < Struct.new(
       :transferable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is already in progress for the domain.</p>
@@ -1017,7 +741,7 @@ module Aws::Route53Domains
       :request_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1026,12 +750,12 @@ module Aws::Route53Domains
     class EnableDomainAutoRenewRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableDomainAutoRenewResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to set the transfer lock for the specified domain.</p>
@@ -1041,7 +765,7 @@ module Aws::Route53Domains
     class EnableDomainTransferLockRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EnableDomainTransferLock response includes the following elements.</p>
@@ -1052,7 +776,7 @@ module Aws::Route53Domains
     class EnableDomainTransferLockResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ExtraParam includes the following elements.</p>
@@ -1882,41 +1606,7 @@ module Aws::Route53Domains
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExtraParamName
-      DUNS_NUMBER = 'DUNS_NUMBER'
-      BRAND_NUMBER = 'BRAND_NUMBER'
-      BIRTH_DEPARTMENT = 'BIRTH_DEPARTMENT'
-      BIRTH_DATE_IN_YYYY_MM_DD = 'BIRTH_DATE_IN_YYYY_MM_DD'
-      BIRTH_COUNTRY = 'BIRTH_COUNTRY'
-      BIRTH_CITY = 'BIRTH_CITY'
-      DOCUMENT_NUMBER = 'DOCUMENT_NUMBER'
-      AU_ID_NUMBER = 'AU_ID_NUMBER'
-      AU_ID_TYPE = 'AU_ID_TYPE'
-      CA_LEGAL_TYPE = 'CA_LEGAL_TYPE'
-      CA_BUSINESS_ENTITY_TYPE = 'CA_BUSINESS_ENTITY_TYPE'
-      CA_LEGAL_REPRESENTATIVE = 'CA_LEGAL_REPRESENTATIVE'
-      CA_LEGAL_REPRESENTATIVE_CAPACITY = 'CA_LEGAL_REPRESENTATIVE_CAPACITY'
-      ES_IDENTIFICATION = 'ES_IDENTIFICATION'
-      ES_IDENTIFICATION_TYPE = 'ES_IDENTIFICATION_TYPE'
-      ES_LEGAL_FORM = 'ES_LEGAL_FORM'
-      FI_BUSINESS_NUMBER = 'FI_BUSINESS_NUMBER'
-      ONWER_FI_ID_NUMBER = 'FI_ID_NUMBER'
-      FI_NATIONALITY = 'FI_NATIONALITY'
-      FI_ORGANIZATION_TYPE = 'FI_ORGANIZATION_TYPE'
-      IT_NATIONALITY = 'IT_NATIONALITY'
-      IT_PIN = 'IT_PIN'
-      IT_REGISTRANT_ENTITY_TYPE = 'IT_REGISTRANT_ENTITY_TYPE'
-      RU_PASSPORT_DATA = 'RU_PASSPORT_DATA'
-      SE_ID_NUMBER = 'SE_ID_NUMBER'
-      SG_ID_NUMBER = 'SG_ID_NUMBER'
-      VAT_NUMBER = 'VAT_NUMBER'
-      UK_CONTACT_TYPE = 'UK_CONTACT_TYPE'
-      UK_COMPANY_NUMBER = 'UK_COMPANY_NUMBER'
-      EU_COUNTRY_OF_CITIZENSHIP = 'EU_COUNTRY_OF_CITIZENSHIP'
-      AU_PRIORITY_TOKEN = 'AU_PRIORITY_TOKEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for the filtering of a list of domains returned by <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html">ListDomains</a>.</p>
@@ -1949,7 +1639,7 @@ module Aws::Route53Domains
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1959,7 +1649,7 @@ module Aws::Route53Domains
     class GetContactReachabilityStatusRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1986,7 +1676,7 @@ module Aws::Route53Domains
       :domain_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GetDomainDetail request includes the following element.</p>
@@ -1996,7 +1686,7 @@ module Aws::Route53Domains
     class GetDomainDetailRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GetDomainDetail response includes the following elements.</p>
@@ -2131,7 +1821,7 @@ module Aws::Route53Domains
       :billing_contact,
       :billing_privacy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2178,7 +1868,7 @@ module Aws::Route53Domains
       :suggestion_count,
       :only_available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suggestions_list
@@ -2189,7 +1879,7 @@ module Aws::Route53Domains
     class GetDomainSuggestionsResponse < Struct.new(
       :suggestions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html">GetOperationDetail</a> request includes the following element.</p>
@@ -2200,7 +1890,7 @@ module Aws::Route53Domains
     class GetOperationDetailRequest < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GetOperationDetail response includes the following elements.</p>
@@ -2266,7 +1956,7 @@ module Aws::Route53Domains
       :last_updated_date,
       :status_flag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested item is not acceptable. For example, for APIs that accept a domain name,
@@ -2281,12 +1971,7 @@ module Aws::Route53Domains
     class InvalidInput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListDomainsAttributeName
-      DomainName = 'DomainName'
-      Expiry = 'Expiry'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListDomains request includes the following elements.</p>
@@ -2318,7 +2003,7 @@ module Aws::Route53Domains
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListDomains response includes the following elements.</p>
@@ -2334,7 +2019,7 @@ module Aws::Route53Domains
       :domains,
       :next_page_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListOperations request includes the following elements.</p>
@@ -2376,7 +2061,7 @@ module Aws::Route53Domains
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListOperations response includes the following elements.</p>
@@ -2392,11 +2077,7 @@ module Aws::Route53Domains
       :operations,
       :next_page_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListOperationsSortAttributeName
-      SubmittedDate = 'SubmittedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tld
@@ -2425,7 +2106,7 @@ module Aws::Route53Domains
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prices
@@ -2443,7 +2124,7 @@ module Aws::Route53Domains
       :prices,
       :next_page_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListTagsForDomainRequest includes the following elements.</p>
@@ -2453,7 +2134,7 @@ module Aws::Route53Domains
     class ListTagsForDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListTagsForDomain response includes the following elements.</p>
@@ -2463,7 +2144,7 @@ module Aws::Route53Domains
     class ListTagsForDomainResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Name server includes the following elements.</p>
@@ -2482,7 +2163,7 @@ module Aws::Route53Domains
       :name,
       :glue_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of operations or jobs running exceeded the allowed threshold for the
@@ -2494,15 +2175,7 @@ module Aws::Route53Domains
     class OperationLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      ERROR = 'ERROR'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>OperationSummary includes the following elements.</p>
@@ -2570,37 +2243,7 @@ module Aws::Route53Domains
       :status_flag,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationType
-      REGISTER_DOMAIN = 'REGISTER_DOMAIN'
-      DELETE_DOMAIN = 'DELETE_DOMAIN'
-      TRANSFER_IN_DOMAIN = 'TRANSFER_IN_DOMAIN'
-      UPDATE_DOMAIN_CONTACT = 'UPDATE_DOMAIN_CONTACT'
-      UPDATE_NAMESERVER = 'UPDATE_NAMESERVER'
-      CHANGE_PRIVACY_PROTECTION = 'CHANGE_PRIVACY_PROTECTION'
-      DOMAIN_LOCK = 'DOMAIN_LOCK'
-      ENABLE_AUTORENEW = 'ENABLE_AUTORENEW'
-      DISABLE_AUTORENEW = 'DISABLE_AUTORENEW'
-      ADD_DNSSEC = 'ADD_DNSSEC'
-      REMOVE_DNSSEC = 'REMOVE_DNSSEC'
-      EXPIRE_DOMAIN = 'EXPIRE_DOMAIN'
-      TRANSFER_OUT_DOMAIN = 'TRANSFER_OUT_DOMAIN'
-      CHANGE_DOMAIN_OWNER = 'CHANGE_DOMAIN_OWNER'
-      RENEW_DOMAIN = 'RENEW_DOMAIN'
-      PUSH_DOMAIN = 'PUSH_DOMAIN'
-      INTERNAL_TRANSFER_OUT_DOMAIN = 'INTERNAL_TRANSFER_OUT_DOMAIN'
-      INTERNAL_TRANSFER_IN_DOMAIN = 'INTERNAL_TRANSFER_IN_DOMAIN'
-      RELEASE_TO_GANDI = 'RELEASE_TO_GANDI'
-      TRANSFER_ON_RENEW = 'TRANSFER_ON_RENEW'
-      RESTORE_DOMAIN = 'RESTORE_DOMAIN'
-    end
-
-    module Operator
-      LE = 'LE'
-      GE = 'GE'
-      BEGINS_WITH = 'BEGINS_WITH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Currency-specific price information.</p>
@@ -2614,7 +2257,7 @@ module Aws::Route53Domains
       :price,
       :currency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:price] = 0 unless options.key?(:price)
@@ -2632,13 +2275,7 @@ module Aws::Route53Domains
       :domain_name,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReachabilityStatus
-      PENDING = 'PENDING'
-      DONE = 'DONE'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RegisterDomain request includes the following elements.</p>
@@ -2766,7 +2403,7 @@ module Aws::Route53Domains
       :billing_contact,
       :privacy_protect_billing_contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RegisterDomain response includes the following element.</p>
@@ -2777,7 +2414,7 @@ module Aws::Route53Domains
     class RegisterDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RejectDomainTransferFromAnotherAwsAccount request includes the following
@@ -2789,7 +2426,7 @@ module Aws::Route53Domains
     class RejectDomainTransferFromAnotherAwsAccountRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RejectDomainTransferFromAnotherAwsAccount response includes the following
@@ -2803,7 +2440,7 @@ module Aws::Route53Domains
     class RejectDomainTransferFromAnotherAwsAccountResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>RenewDomain</code> request includes the number of years that you want to renew
@@ -2828,7 +2465,7 @@ module Aws::Route53Domains
       :duration_in_years,
       :current_expiry_year,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2838,7 +2475,7 @@ module Aws::Route53Domains
     class RenewDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2848,7 +2485,7 @@ module Aws::Route53Domains
     class ResendContactReachabilityEmailRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2869,7 +2506,7 @@ module Aws::Route53Domains
       :email_address,
       :is_already_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2878,7 +2515,7 @@ module Aws::Route53Domains
     class ResendOperationAuthorizationRequest < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for the authorization code for the specified domain. To transfer a domain to
@@ -2889,7 +2526,7 @@ module Aws::Route53Domains
     class RetrieveDomainAuthCodeRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RetrieveDomainAuthCode response includes the following element.</p>
@@ -2899,7 +2536,7 @@ module Aws::Route53Domains
     class RetrieveDomainAuthCodeResponse < Struct.new(
       :auth_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for sorting a list of domains.</p>
@@ -2918,20 +2555,7 @@ module Aws::Route53Domains
       :name,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
-    end
-
-    module StatusFlag
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      PENDING_CUSTOMER_ACTION = 'PENDING_CUSTOMER_ACTION'
-      PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION'
-      PENDING_PAYMENT_VERIFICATION = 'PENDING_PAYMENT_VERIFICATION'
-      PENDING_SUPPORT_CASE = 'PENDING_SUPPORT_CASE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The top-level domain does not support this operation.</p>
@@ -2941,7 +2565,7 @@ module Aws::Route53Domains
     class TLDRulesViolation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each tag includes the following elements.</p>
@@ -2959,7 +2583,7 @@ module Aws::Route53Domains
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TransferDomain request includes the following elements.</p>
@@ -3086,7 +2710,7 @@ module Aws::Route53Domains
       :billing_contact,
       :privacy_protect_billing_contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TransferDomain response includes the following element.</p>
@@ -3097,7 +2721,7 @@ module Aws::Route53Domains
     class TransferDomainResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TransferDomainToAnotherAwsAccount request includes the following elements.</p>
@@ -3112,7 +2736,7 @@ module Aws::Route53Domains
       :domain_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>TransferDomainToAnotherAwsAccount</code> response includes the following
@@ -3131,48 +2755,7 @@ module Aws::Route53Domains
       :operation_id,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Whether the domain name can be transferred to Route 53.</p>
-    #          <note>
-    #             <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> or
-    # 					<code>Transferable</code>.</p>
-    #          </note>
-    #          <p>Valid values:</p>
-    #          <dl>
-    #             <dt>TRANSFERABLE</dt>
-    #             <dd>
-    #                <p>The domain name can be transferred to Route 53.</p>
-    #             </dd>
-    #             <dt>UNTRANSFERRABLE</dt>
-    #             <dd>
-    #                <p>The domain name can't be transferred to Route 53.</p>
-    #             </dd>
-    #             <dt>DONT_KNOW</dt>
-    #             <dd>
-    #                <p>Reserved for future use.</p>
-    #             </dd>
-    #             <dt>DOMAIN_IN_OWN_ACCOUNT</dt>
-    #             <dd>
-    #                <p>The domain already exists in the current Amazon Web Services account.</p>
-    #             </dd>
-    #             <dt>DOMAIN_IN_ANOTHER_ACCOUNT</dt>
-    #             <dd>
-    #                <p> The domain exists in another Amazon Web Services account.</p>
-    #             </dd>
-    #             <dt>PREMIUM_DOMAIN</dt>
-    #             <dd>
-    #                <p>Premium domain transfer is not supported.</p>
-    #             </dd>
-    #          </dl>
-    module Transferable
-      TRANSFERABLE = 'TRANSFERABLE'
-      UNTRANSFERABLE = 'UNTRANSFERABLE'
-      DONT_KNOW = 'DONT_KNOW'
-      DOMAIN_IN_OWN_ACCOUNT = 'DOMAIN_IN_OWN_ACCOUNT'
-      DOMAIN_IN_ANOTHER_ACCOUNT = 'DOMAIN_IN_ANOTHER_ACCOUNT'
-      PREMIUM_DOMAIN = 'PREMIUM_DOMAIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Route 53 does not support this top-level domain (TLD).</p>
@@ -3182,7 +2765,7 @@ module Aws::Route53Domains
     class UnsupportedTLD < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateDomainContactPrivacy request includes the following elements.</p>
@@ -3242,7 +2825,7 @@ module Aws::Route53Domains
       :tech_privacy,
       :billing_privacy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateDomainContactPrivacy response includes the following element.</p>
@@ -3253,7 +2836,7 @@ module Aws::Route53Domains
     class UpdateDomainContactPrivacyResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateDomainContact request includes the following elements.</p>
@@ -3283,7 +2866,7 @@ module Aws::Route53Domains
       :consent,
       :billing_contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateDomainContact response includes the following element.</p>
@@ -3294,7 +2877,7 @@ module Aws::Route53Domains
     class UpdateDomainContactResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Replaces the current set of name servers for the domain with the specified set of name
@@ -3318,7 +2901,7 @@ module Aws::Route53Domains
       :fi_auth_key,
       :nameservers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateDomainNameservers response includes the following element.</p>
@@ -3329,7 +2912,7 @@ module Aws::Route53Domains
     class UpdateDomainNameserversResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateTagsForDomainRequest includes the following elements.</p>
@@ -3344,12 +2927,12 @@ module Aws::Route53Domains
       :domain_name,
       :tags_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTagsForDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ViewBilling request includes the following elements.</p>
@@ -3384,7 +2967,7 @@ module Aws::Route53Domains
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ViewBilling response includes the following elements.</p>
@@ -3400,7 +2983,7 @@ module Aws::Route53Domains
       :next_page_marker,
       :billing_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

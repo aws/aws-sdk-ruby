@@ -13,7 +13,7 @@ module Aws::LexModelsV2
     class ActiveContext < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides settings that enable advanced recognition settings for slot values.</p>
@@ -23,7 +23,7 @@ module Aws::LexModelsV2
     class AdvancedRecognitionSetting < Struct.new(
       :audio_recognition_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the agent turn in a test set execution.</p>
@@ -49,7 +49,7 @@ module Aws::LexModelsV2
       :actual_elicited_slot,
       :actual_intent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specification of an agent turn.</p>
@@ -59,7 +59,7 @@ module Aws::LexModelsV2
     class AgentTurnSpecification < Struct.new(
       :agent_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters responses returned by the
@@ -82,21 +82,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregatedUtterancesFilterName
-      Utterance = 'Utterance'
-    end
-
-    module AggregatedUtterancesFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
-    end
-
-    module AggregatedUtterancesSortAttribute
-      HitCount = 'HitCount'
-      MissedCount = 'MissedCount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of utterances.</p>
@@ -111,7 +97,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for aggregated utterances. The
@@ -156,7 +142,7 @@ module Aws::LexModelsV2
       :utterance_last_recorded_in_aggregation_duration,
       :contains_data_from_deleted_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the allowed input types.</p>
@@ -170,12 +156,7 @@ module Aws::LexModelsV2
       :allow_audio_input,
       :allow_dtmf_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsBinByName
-      ConversationStartTime = 'ConversationStartTime'
-      UtteranceTimestamp = 'UtteranceTimestamp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the time metric, interval, and method by which to bin the analytics data.</p>
@@ -193,7 +174,7 @@ module Aws::LexModelsV2
       :interval,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the criterion by which to bin the results and the value that defines that bin.</p>
@@ -207,27 +188,7 @@ module Aws::LexModelsV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsCommonFilterName
-      BotAliasId = 'BotAliasId'
-      BotVersion = 'BotVersion'
-      LocaleId = 'LocaleId'
-      Modality = 'Modality'
-      Channel = 'Channel'
-    end
-
-    module AnalyticsFilterOperator
-      Equals = 'EQ'
-      GreaterThan = 'GT'
-      LessThan = 'LT'
-    end
-
-    module AnalyticsIntentField
-      IntentName = 'IntentName'
-      IntentEndState = 'IntentEndState'
-      IntentLevel = 'IntentLevel'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains fields describing a condition by which to filter the intents. The expression may be understood as <code>name</code>
@@ -391,19 +352,7 @@ module Aws::LexModelsV2
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsIntentFilterName
-      BotAliasId = 'BotAliasId'
-      BotVersion = 'BotVersion'
-      LocaleId = 'LocaleId'
-      Modality = 'Modality'
-      Channel = 'Channel'
-      SessionId = 'SessionId'
-      OriginatingRequestId = 'OriginatingRequestId'
-      IntentName = 'IntentName'
-      IntentEndState = 'IntentEndState'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which the intent analytics were grouped and a member of that category.</p>
@@ -417,7 +366,7 @@ module Aws::LexModelsV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which to group the intents.</p>
@@ -427,7 +376,7 @@ module Aws::LexModelsV2
     class AnalyticsIntentGroupBySpecification < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intents in the bot.</p>
@@ -481,15 +430,7 @@ module Aws::LexModelsV2
       :statistic,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsIntentMetricName
-      Count = 'Count'
-      Success = 'Success'
-      Failure = 'Failure'
-      Switched = 'Switched'
-      Dropped = 'Dropped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the intent metric you requested.</p>
@@ -543,7 +484,7 @@ module Aws::LexModelsV2
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about the requested path.</p>
@@ -569,7 +510,7 @@ module Aws::LexModelsV2
       :intent_level,
       :node_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the intent metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>
@@ -587,12 +528,7 @@ module Aws::LexModelsV2
       :group_by_keys,
       :metrics_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsIntentStageField
-      IntentStageName = 'IntentStageName'
-      SwitchedToIntent = 'SwitchedToIntent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains fields describing a condition by which to filter the intent stages. The expression may be understood as <code>name</code>
@@ -756,19 +692,7 @@ module Aws::LexModelsV2
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsIntentStageFilterName
-      BotAliasId = 'BotAliasId'
-      BotVersion = 'BotVersion'
-      LocaleId = 'LocaleId'
-      Modality = 'Modality'
-      Channel = 'Channel'
-      SessionId = 'SessionId'
-      OriginatingRequestId = 'OriginatingRequestId'
-      IntentName = 'IntentName'
-      IntentStageName = 'IntentStageName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which the intent stage analytics and the values for that category were grouped.</p>
@@ -782,7 +706,7 @@ module Aws::LexModelsV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which to group the intent stages.</p>
@@ -792,7 +716,7 @@ module Aws::LexModelsV2
     class AnalyticsIntentStageGroupBySpecification < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intent stages across the user sessions with the bot.</p>
@@ -846,15 +770,7 @@ module Aws::LexModelsV2
       :statistic,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsIntentStageMetricName
-      Count = 'Count'
-      Success = 'Success'
-      Failed = 'Failed'
-      Dropped = 'Dropped'
-      Retry = 'Retry'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for an intent stage metric you requested.</p>
@@ -908,7 +824,7 @@ module Aws::LexModelsV2
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the intent stage metrics you requested and the bin and/or group they refer to, if applicable.</p>
@@ -926,30 +842,7 @@ module Aws::LexModelsV2
       :group_by_keys,
       :metrics_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsInterval
-      OneHour = 'OneHour'
-      OneDay = 'OneDay'
-    end
-
-    module AnalyticsMetricStatistic
-      Sum = 'Sum'
-      Avg = 'Avg'
-      Max = 'Max'
-    end
-
-    module AnalyticsModality
-      Speech = 'Speech'
-      Text = 'Text'
-      DTMF = 'DTMF'
-      MultiMode = 'MultiMode'
-    end
-
-    module AnalyticsNodeType
-      Inner = 'Inner'
-      Exit = 'Exit'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains fields describing a condition by which to filter the paths. The expression may be understood as <code>name</code>
@@ -1065,12 +958,7 @@ module Aws::LexModelsV2
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsSessionField
-      ConversationEndState = 'ConversationEndState'
-      LocaleId = 'LocaleId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains fields describing a condition by which to filter the sessions. The expression may be understood as <code>name</code>
@@ -1246,20 +1134,7 @@ module Aws::LexModelsV2
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsSessionFilterName
-      BotAliasId = 'BotAliasId'
-      BotVersion = 'BotVersion'
-      LocaleId = 'LocaleId'
-      Modality = 'Modality'
-      Channel = 'Channel'
-      Duration = 'Duration'
-      ConversationEndState = 'ConversationEndState'
-      SessionId = 'SessionId'
-      OriginatingRequestId = 'OriginatingRequestId'
-      IntentPath = 'IntentPath'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which the session analytics were grouped and a member of that category.</p>
@@ -1273,7 +1148,7 @@ module Aws::LexModelsV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which to group the sessions.</p>
@@ -1283,7 +1158,7 @@ module Aws::LexModelsV2
     class AnalyticsSessionGroupBySpecification < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the user sessions with the bot.</p>
@@ -1345,17 +1220,7 @@ module Aws::LexModelsV2
       :statistic,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsSessionMetricName
-      Count = 'Count'
-      Success = 'Success'
-      Failure = 'Failure'
-      Dropped = 'Dropped'
-      Duration = 'Duration'
-      TurnsPerConversation = 'TurnsPerConversation'
-      Concurrency = 'Concurrency'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for a session metric you requested.</p>
@@ -1417,7 +1282,7 @@ module Aws::LexModelsV2
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the session metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>
@@ -1435,18 +1300,7 @@ module Aws::LexModelsV2
       :group_by_keys,
       :metrics_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsSessionSortByName
-      ConversationStartTime = 'ConversationStartTime'
-      NumberOfTurns = 'NumberOfTurns'
-      Duration = 'Duration'
-    end
-
-    module AnalyticsSortOrder
-      Ascending = 'Ascending'
-      Descending = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies the last used intent at the time of the utterance as an attribute to return.</p>
@@ -1456,11 +1310,7 @@ module Aws::LexModelsV2
     class AnalyticsUtteranceAttribute < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsUtteranceAttributeName
-      LastUsedIntent = 'LastUsedIntent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the intent that the bot mapped the utterance to.</p>
@@ -1470,12 +1320,7 @@ module Aws::LexModelsV2
     class AnalyticsUtteranceAttributeResult < Struct.new(
       :last_used_intent,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsUtteranceField
-      UtteranceText = 'UtteranceText'
-      UtteranceState = 'UtteranceState'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains fields describing a condition by which to filter the utterances. The expression may be understood as <code>name</code>
@@ -1639,19 +1484,7 @@ module Aws::LexModelsV2
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsUtteranceFilterName
-      BotAliasId = 'BotAliasId'
-      BotVersion = 'BotVersion'
-      LocaleId = 'LocaleId'
-      Modality = 'Modality'
-      Channel = 'Channel'
-      SessionId = 'SessionId'
-      OriginatingRequestId = 'OriginatingRequestId'
-      UtteranceState = 'UtteranceState'
-      UtteranceText = 'UtteranceText'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which the utterance analytics were grouped and the values for that category.</p>
@@ -1665,7 +1498,7 @@ module Aws::LexModelsV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the category by which to group the utterances.</p>
@@ -1675,7 +1508,7 @@ module Aws::LexModelsV2
     class AnalyticsUtteranceGroupBySpecification < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the utterances across the user sessions with the bot.</p>
@@ -1725,14 +1558,7 @@ module Aws::LexModelsV2
       :statistic,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsUtteranceMetricName
-      Count = 'Count'
-      Missed = 'Missed'
-      Detected = 'Detected'
-      UtteranceTimestamp = 'UtteranceTimestamp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the utterance metric you requested.</p>
@@ -1782,7 +1608,7 @@ module Aws::LexModelsV2
       :statistic,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the results for the utterance metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>
@@ -1804,11 +1630,7 @@ module Aws::LexModelsV2
       :metrics_results,
       :attribute_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsUtteranceSortByName
-      UtteranceTimestamp = 'UtteranceTimestamp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object containing information that associates the recommended
@@ -1821,7 +1643,7 @@ module Aws::LexModelsV2
     class AssociatedTranscript < Struct.new(
       :transcript,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to search for the associated transcript.</p>
@@ -1836,12 +1658,7 @@ module Aws::LexModelsV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociatedTranscriptFilterName
-      IntentId = 'IntentId'
-      SlotTypeId = 'SlotTypeId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the audio and DTMF input specification.</p>
@@ -1860,7 +1677,7 @@ module Aws::LexModelsV2
       :audio_specification,
       :dtmf_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of audio log files collected when conversation logging
@@ -1873,7 +1690,7 @@ module Aws::LexModelsV2
     class AudioLogDestination < Struct.new(
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for logging audio of conversations between Amazon Lex and a
@@ -1894,16 +1711,12 @@ module Aws::LexModelsV2
       :destination,
       :selective_logging_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module AudioRecognitionStrategy
-      UseSlotValuesAsCustomVocabulary = 'UseSlotValuesAsCustomVocabulary'
     end
 
     # <p>Specifies the audio input specifications.</p>
@@ -1919,7 +1732,7 @@ module Aws::LexModelsV2
       :max_length_ms,
       :end_timeout_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -1944,7 +1757,7 @@ module Aws::LexModelsV2
       :locale_id,
       :custom_vocabulary_item_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -1974,7 +1787,7 @@ module Aws::LexModelsV2
       :errors,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -1999,7 +1812,7 @@ module Aws::LexModelsV2
       :locale_id,
       :custom_vocabulary_item_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -2030,7 +1843,7 @@ module Aws::LexModelsV2
       :errors,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -2055,7 +1868,7 @@ module Aws::LexModelsV2
       :locale_id,
       :custom_vocabulary_item_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -2085,7 +1898,7 @@ module Aws::LexModelsV2
       :errors,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details on the Bedrock guardrail configuration.</p>
@@ -2099,7 +1912,7 @@ module Aws::LexModelsV2
       :identifier,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the configuration of a Amazon Bedrock knowledge base.</p>
@@ -2117,7 +1930,7 @@ module Aws::LexModelsV2
       :exact_response,
       :exact_response_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exact_response] = false unless options.key?(:exact_response)
@@ -2132,7 +1945,7 @@ module Aws::LexModelsV2
     class BedrockKnowledgeStoreExactResponseFields < Struct.new(
       :answer_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.</p>
@@ -2154,12 +1967,7 @@ module Aws::LexModelsV2
       :trace_status,
       :custom_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BedrockTraceStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a record of an event that affects a bot alias. For example,
@@ -2178,7 +1986,7 @@ module Aws::LexModelsV2
       :start_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies settings that are unique to a locale. For example, you can
@@ -2195,7 +2003,7 @@ module Aws::LexModelsV2
       :enabled,
       :code_hook_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2230,23 +2038,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the operation to replicate the bot alias. Values: Creating, Updating, Available, Deleting, Failed.</p>
-    module BotAliasReplicationStatus
-      Creating = 'Creating'
-      Updating = 'Updating'
-      Available = 'Available'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-    end
-
-    module BotAliasStatus
-      Creating = 'Creating'
-      Available = 'Available'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about bot aliases returned from the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html">ListBotAliases</a> operation.</p>
@@ -2284,7 +2076,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target Amazon S3 location for the test set execution using a bot alias.</p>
@@ -2302,7 +2094,7 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the identity of a the bot that was exported.</p>
@@ -2317,7 +2109,7 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the responses returned by the <code>ListBots</code>
@@ -2340,18 +2132,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotFilterName
-      BotName = 'BotName'
-      BotType = 'BotType'
-    end
-
-    module BotFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
-      NotEquals = 'NE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the bot parameters required for importing a bot.</p>
@@ -2401,7 +2182,7 @@ module Aws::LexModelsV2
       :bot_tags,
       :test_bot_alias_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the bot locale parameters required for exporting a bot
@@ -2421,7 +2202,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters responses returned by the <code>ListBotLocales</code>
@@ -2444,16 +2225,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotLocaleFilterName
-      BotLocaleName = 'BotLocaleName'
-    end
-
-    module BotLocaleFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an event that occurred affecting the bot
@@ -2468,7 +2240,7 @@ module Aws::LexModelsV2
       :event,
       :event_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the bot locale parameters required for importing a bot
@@ -2556,11 +2328,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotLocaleSortAttribute
-      BotLocaleName = 'BotLocaleName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of bot locales.</p>
@@ -2575,19 +2343,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotLocaleStatus
-      Creating = 'Creating'
-      Building = 'Building'
-      Built = 'Built'
-      ReadyExpressTesting = 'ReadyExpressTesting'
-      Failed = 'Failed'
-      Deleting = 'Deleting'
-      NotBuilt = 'NotBuilt'
-      Importing = 'Importing'
-      Processing = 'Processing'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about bot locales returned by the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html">ListBotLocales</a> operation.</p>
@@ -2620,7 +2376,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :last_build_submitted_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A bot that is a member of a network of bots.</p>
@@ -2646,7 +2402,7 @@ module Aws::LexModelsV2
       :bot_member_alias_name,
       :bot_member_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A statistical summary of the bot recommendation results.</p>
@@ -2662,7 +2418,7 @@ module Aws::LexModelsV2
       :intents,
       :slot_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object representing the URL of the bot definition, the URL of
@@ -2682,19 +2438,7 @@ module Aws::LexModelsV2
       :associated_transcripts_url,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotRecommendationStatus
-      Processing = 'Processing'
-      Deleting = 'Deleting'
-      Deleted = 'Deleted'
-      Downloading = 'Downloading'
-      Updating = 'Updating'
-      Available = 'Available'
-      Failed = 'Failed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the bot recommendation.</p>
@@ -2721,15 +2465,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the operation to replicate the bot. Values: Enabling, Enabled, Deleting, Failed.</p>
-    module BotReplicaStatus
-      Enabling = 'Enabling'
-      Enabled = 'Enabled'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about all the replication statuses applicable for global resiliency.</p>
@@ -2751,11 +2487,7 @@ module Aws::LexModelsV2
       :bot_replica_status,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotSortAttribute
-      BotName = 'BotName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of bots.</p>
@@ -2770,18 +2502,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotStatus
-      Creating = 'Creating'
-      Available = 'Available'
-      Inactive = 'Inactive'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-      Versioning = 'Versioning'
-      Importing = 'Importing'
-      Updating = 'Updating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a bot returned by the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html">ListBots</a> operation.</p>
@@ -2817,12 +2538,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :bot_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotType
-      Bot = 'Bot'
-      BotNetwork = 'BotNetwork'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of a bot used for a bot locale.</p>
@@ -2832,11 +2548,7 @@ module Aws::LexModelsV2
     class BotVersionLocaleDetails < Struct.new(
       :source_bot_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotVersionReplicaSortAttribute
-      BotVersion = 'BotVersion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort category for the version replicated bots.</p>
@@ -2850,7 +2562,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information for all the version replication statuses applicable for Global resiliency.</p>
@@ -2872,19 +2584,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the operation to replicate the bot version. Values: Creating, Available, Deleting, Failed.</p>
-    module BotVersionReplicationStatus
-      Creating = 'Creating'
-      Available = 'Available'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-    end
-
-    module BotVersionSortAttribute
-      BotVersion = 'BotVersion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of bot versions.</p>
@@ -2899,7 +2599,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a bot version returned by the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html">ListBotVersions</a> operation.</p>
@@ -2928,7 +2628,7 @@ module Aws::LexModelsV2
       :bot_status,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -2950,7 +2650,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -2982,7 +2682,7 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :last_build_submitted_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications about the Amazon Lex build time generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
@@ -2996,11 +2696,7 @@ module Aws::LexModelsV2
       :descriptive_bot_builder,
       :sample_utterance_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuiltInIntentSortAttribute
-      IntentSignature = 'IntentSignature'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of built-in intents.</p>
@@ -3015,7 +2711,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a built-in intent for the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html"> ListBuiltInIntents </a> operation.</p>
@@ -3030,11 +2726,7 @@ module Aws::LexModelsV2
       :intent_signature,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuiltInSlotTypeSortAttribute
-      SlotTypeSignature = 'SlotTypeSignature'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of built-in slot
@@ -3050,7 +2742,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a built-in slot type for the
@@ -3067,7 +2759,7 @@ module Aws::LexModelsV2
       :slot_type_signature,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a button to use on a response card used to gather slot
@@ -3084,7 +2776,7 @@ module Aws::LexModelsV2
       :text,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon CloudWatch Logs log group where the text and metadata logs are
@@ -3101,7 +2793,7 @@ module Aws::LexModelsV2
       :cloud_watch_log_group_arn,
       :log_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about code hooks that Amazon Lex calls during a
@@ -3113,7 +2805,7 @@ module Aws::LexModelsV2
     class CodeHookSpecification < Struct.new(
       :lambda_code_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A composite slot is a combination of two or more slots 
@@ -3124,7 +2816,7 @@ module Aws::LexModelsV2
     class CompositeSlotTypeSetting < Struct.new(
       :sub_slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an expression that evaluates to true or false. </p>
@@ -3134,7 +2826,7 @@ module Aws::LexModelsV2
     class Condition < Struct.new(
       :expression_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of actions that Amazon Lex should run if the condition
@@ -3159,7 +2851,7 @@ module Aws::LexModelsV2
       :next_step,
       :response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of conditional branches. Branches are evaluated in
@@ -3188,7 +2880,7 @@ module Aws::LexModelsV2
       :conditional_branches,
       :default_branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action that you tried to perform couldn't be completed because
@@ -3199,13 +2891,7 @@ module Aws::LexModelsV2
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConversationEndState
-      Success = 'Success'
-      Failure = 'Failure'
-      Dropped = 'Dropped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The item listing the evaluation of intent level success or failure.</p>
@@ -3220,7 +2906,7 @@ module Aws::LexModelsV2
       :intent_name,
       :match_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conversation level details of the conversation used in the test set.</p>
@@ -3234,7 +2920,7 @@ module Aws::LexModelsV2
       :end_to_end_result,
       :speech_transcription_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The slots used for the slot resolution in the conversation.</p>
@@ -3252,7 +2938,7 @@ module Aws::LexModelsV2
       :slot_name,
       :match_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The test result evaluation item at the conversation level.</p>
@@ -3278,7 +2964,7 @@ module Aws::LexModelsV2
       :intent_classification_results,
       :slot_resolution_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The test set results data at the conversation level.</p>
@@ -3288,7 +2974,7 @@ module Aws::LexModelsV2
     class ConversationLevelTestResults < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selection to filter the test set results data at the conversation level.</p>
@@ -3299,7 +2985,7 @@ module Aws::LexModelsV2
     class ConversationLevelTestResultsFilterBy < Struct.new(
       :end_to_end_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures conversation logging that saves audio, text, and metadata
@@ -3314,7 +3000,7 @@ module Aws::LexModelsV2
       :text_log_settings,
       :audio_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data source that uses conversation logs.</p>
@@ -3336,7 +3022,7 @@ module Aws::LexModelsV2
       :locale_id,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selected data source to filter the conversation log.</p>
@@ -3354,12 +3040,7 @@ module Aws::LexModelsV2
       :end_time,
       :input_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConversationLogsInputModeFilter
-      Speech = 'Speech'
-      Text = 'Text'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_name
@@ -3408,7 +3089,7 @@ module Aws::LexModelsV2
       :bot_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -3463,7 +3144,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3526,7 +3207,7 @@ module Aws::LexModelsV2
       :voice_settings,
       :generative_ai_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3585,7 +3266,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :generative_ai_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3598,7 +3279,7 @@ module Aws::LexModelsV2
       :bot_id,
       :replica_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3623,7 +3304,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :bot_replica_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -3684,7 +3365,7 @@ module Aws::LexModelsV2
       :bot_members,
       :error_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3746,7 +3427,7 @@ module Aws::LexModelsV2
       :bot_members,
       :error_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3767,7 +3448,7 @@ module Aws::LexModelsV2
       :description,
       :bot_version_locale_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -3800,7 +3481,7 @@ module Aws::LexModelsV2
       :bot_status,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_specification
@@ -3820,7 +3501,7 @@ module Aws::LexModelsV2
       :file_format,
       :file_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -3850,7 +3531,7 @@ module Aws::LexModelsV2
       :export_status,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_name
@@ -3978,7 +3659,7 @@ module Aws::LexModelsV2
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -4062,7 +3743,7 @@ module Aws::LexModelsV2
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4082,7 +3763,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4099,7 +3780,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4151,7 +3832,7 @@ module Aws::LexModelsV2
       :condition,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4168,7 +3849,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_name
@@ -4236,7 +3917,7 @@ module Aws::LexModelsV2
       :multiple_values_setting,
       :sub_slot_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -4298,7 +3979,7 @@ module Aws::LexModelsV2
       :multiple_values_setting,
       :sub_slot_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_name
@@ -4373,7 +4054,7 @@ module Aws::LexModelsV2
       :external_source_setting,
       :composite_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -4432,7 +4113,7 @@ module Aws::LexModelsV2
       :external_source_setting,
       :composite_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -4445,7 +4126,7 @@ module Aws::LexModelsV2
       :test_set_id,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_discrepancy_report_id
@@ -4466,12 +4147,12 @@ module Aws::LexModelsV2
       :test_set_id,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUploadUrlRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4486,7 +4167,7 @@ module Aws::LexModelsV2
       :import_id,
       :upload_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom response string that Amazon Lex sends to your application. You
@@ -4497,7 +4178,7 @@ module Aws::LexModelsV2
     class CustomPayload < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique entry identifier for the custom vocabulary 
@@ -4509,7 +4190,7 @@ module Aws::LexModelsV2
     class CustomVocabularyEntryId < Struct.new(
       :item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the parameters required for exporting a custom vocabulary.</p>
@@ -4527,7 +4208,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the parameters required for importing a custom vocabulary.</p>
@@ -4546,7 +4227,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique custom vocabulary item from the custom 
@@ -4573,15 +4254,7 @@ module Aws::LexModelsV2
       :weight,
       :display_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomVocabularyStatus
-      Ready = 'Ready'
-      Deleting = 'Deleting'
-      Exporting = 'Exporting'
-      Importing = 'Importing'
-      Creating = 'Creating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the DTMF input specifications.</p>
@@ -4606,7 +4279,7 @@ module Aws::LexModelsV2
       :deletion_character,
       :end_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>By default, data stored by Amazon Lex is encrypted. The
@@ -4644,7 +4317,7 @@ module Aws::LexModelsV2
     class DataPrivacy < Struct.new(
       :child_directed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:child_directed] = false unless options.key?(:child_directed)
@@ -4667,7 +4340,7 @@ module Aws::LexModelsV2
       :kendra_configuration,
       :bedrock_knowledge_store_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object used for specifying the data range that the customer
@@ -4684,7 +4357,7 @@ module Aws::LexModelsV2
       :start_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of actions that Amazon Lex should run if none of the
@@ -4700,7 +4373,7 @@ module Aws::LexModelsV2
       :next_step,
       :response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -4723,7 +4396,7 @@ module Aws::LexModelsV2
       :bot_id,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -4744,7 +4417,7 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_alias_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4763,7 +4436,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4786,7 +4459,7 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_locale_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4799,7 +4472,7 @@ module Aws::LexModelsV2
       :bot_id,
       :replica_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4816,7 +4489,7 @@ module Aws::LexModelsV2
       :replica_region,
       :bot_replica_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4834,7 +4507,7 @@ module Aws::LexModelsV2
       :bot_id,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4848,7 +4521,7 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4870,7 +4543,7 @@ module Aws::LexModelsV2
       :bot_version,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4887,7 +4560,7 @@ module Aws::LexModelsV2
       :bot_version,
       :bot_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4907,7 +4580,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -4931,7 +4604,7 @@ module Aws::LexModelsV2
       :locale_id,
       :custom_vocabulary_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -4940,7 +4613,7 @@ module Aws::LexModelsV2
     class DeleteExportRequest < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -4956,7 +4629,7 @@ module Aws::LexModelsV2
       :export_id,
       :export_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4965,7 +4638,7 @@ module Aws::LexModelsV2
     class DeleteImportRequest < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -4980,7 +4653,7 @@ module Aws::LexModelsV2
       :import_id,
       :import_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -5003,7 +4676,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5020,7 +4693,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5037,7 +4710,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5059,7 +4732,7 @@ module Aws::LexModelsV2
       :statement_id,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5076,7 +4749,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -5103,7 +4776,7 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -5134,7 +4807,7 @@ module Aws::LexModelsV2
       :locale_id,
       :skip_resource_in_use_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -5143,7 +4816,7 @@ module Aws::LexModelsV2
     class DeleteTestSetRequest < Struct.new(
       :test_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5165,12 +4838,12 @@ module Aws::LexModelsV2
       :locale_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUtterancesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -5184,7 +4857,7 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -5247,7 +4920,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :parent_bot_networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5266,7 +4939,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5350,7 +5023,7 @@ module Aws::LexModelsV2
       :recommended_actions,
       :generative_ai_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5375,7 +5048,7 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5435,7 +5108,7 @@ module Aws::LexModelsV2
       :encryption_setting,
       :bot_recommendation_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5448,7 +5121,7 @@ module Aws::LexModelsV2
       :bot_id,
       :replica_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5477,7 +5150,7 @@ module Aws::LexModelsV2
       :bot_replica_status,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5486,7 +5159,7 @@ module Aws::LexModelsV2
     class DescribeBotRequest < Struct.new(
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5508,7 +5181,7 @@ module Aws::LexModelsV2
       :locale_id,
       :generation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5558,7 +5231,7 @@ module Aws::LexModelsV2
       :model_arn,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5622,7 +5295,7 @@ module Aws::LexModelsV2
       :failure_reasons,
       :error_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5636,7 +5309,7 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5698,7 +5371,7 @@ module Aws::LexModelsV2
       :bot_type,
       :bot_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5716,7 +5389,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -5746,7 +5419,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -5755,7 +5428,7 @@ module Aws::LexModelsV2
     class DescribeExportRequest < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -5798,7 +5471,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -5807,7 +5480,7 @@ module Aws::LexModelsV2
     class DescribeImportRequest < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -5856,7 +5529,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -5879,7 +5552,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -5978,7 +5651,7 @@ module Aws::LexModelsV2
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5988,7 +5661,7 @@ module Aws::LexModelsV2
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6011,7 +5684,7 @@ module Aws::LexModelsV2
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -6038,7 +5711,7 @@ module Aws::LexModelsV2
       :locale_id,
       :intent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -6107,7 +5780,7 @@ module Aws::LexModelsV2
       :multiple_values_setting,
       :sub_slot_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -6130,7 +5803,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -6191,7 +5864,7 @@ module Aws::LexModelsV2
       :external_source_setting,
       :composite_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -6200,7 +5873,7 @@ module Aws::LexModelsV2
     class DescribeTestExecutionRequest < Struct.new(
       :test_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -6248,7 +5921,7 @@ module Aws::LexModelsV2
       :test_execution_modality,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_discrepancy_report_id
@@ -6257,7 +5930,7 @@ module Aws::LexModelsV2
     class DescribeTestSetDiscrepancyReportRequest < Struct.new(
       :test_set_discrepancy_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_discrepancy_report_id
@@ -6298,7 +5971,7 @@ module Aws::LexModelsV2
       :test_set_discrepancy_raw_output_url,
       :failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_generation_id
@@ -6307,7 +5980,7 @@ module Aws::LexModelsV2
     class DescribeTestSetGenerationRequest < Struct.new(
       :test_set_generation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_generation_id
@@ -6356,7 +6029,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -6365,7 +6038,7 @@ module Aws::LexModelsV2
     class DescribeTestSetRequest < Struct.new(
       :test_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -6411,7 +6084,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications for the descriptive bot building feature.</p>
@@ -6425,7 +6098,7 @@ module Aws::LexModelsV2
       :enabled,
       :bedrock_model_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -6450,19 +6123,7 @@ module Aws::LexModelsV2
       :slot_to_elicit,
       :suppress_next_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DialogActionType
-      ElicitIntent = 'ElicitIntent'
-      StartIntent = 'StartIntent'
-      ElicitSlot = 'ElicitSlot'
-      EvaluateConditional = 'EvaluateConditional'
-      InvokeDialogCodeHook = 'InvokeDialogCodeHook'
-      ConfirmIntent = 'ConfirmIntent'
-      FulfillIntent = 'FulfillIntent'
-      CloseIntent = 'CloseIntent'
-      EndConversation = 'EndConversation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that specify the dialog code hook that is
@@ -6489,7 +6150,7 @@ module Aws::LexModelsV2
       :invocation_label,
       :post_code_hook_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that determine the Lambda function that Amazon Lex uses for
@@ -6501,7 +6162,7 @@ module Aws::LexModelsV2
     class DialogCodeHookSettings < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -6526,12 +6187,7 @@ module Aws::LexModelsV2
       :intent,
       :session_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Effect
-      Allow = 'Allow'
-      Deny = 'Deny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that specify the dialog code hook that is called by Amazon Lex between eliciting slot values.</p>
@@ -6547,7 +6203,7 @@ module Aws::LexModelsV2
       :enable_code_hook_invocation,
       :invocation_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object representing the passwords that were used to encrypt the
@@ -6569,14 +6225,7 @@ module Aws::LexModelsV2
       :bot_locale_export_password,
       :associated_transcripts_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      DUPLICATE_INPUT = 'DUPLICATE_INPUT'
-      RESOURCE_DOES_NOT_EXIST = 'RESOURCE_DOES_NOT_EXIST'
-      RESOURCE_ALREADY_EXISTS = 'RESOURCE_ALREADY_EXISTS'
-      INTERNAL_SERVER_FAILURE = 'INTERNAL_SERVER_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings parameters for the error logs, whether it is enabled or disabled.</p>
@@ -6586,7 +6235,7 @@ module Aws::LexModelsV2
     class ErrorLogSettings < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the names of the fields used for an exact response to the user.</p>
@@ -6600,7 +6249,7 @@ module Aws::LexModelsV2
       :question_field,
       :answer_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an error in an execution of a test set.</p>
@@ -6614,7 +6263,7 @@ module Aws::LexModelsV2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the response form the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html">ListExports</a> operation</p>
@@ -6638,16 +6287,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportFilterName
-      ExportResourceType = 'ExportResourceType'
-    end
-
-    module ExportFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the bot or bot locale that you want to
@@ -6671,11 +6311,7 @@ module Aws::LexModelsV2
       :custom_vocabulary_export_specification,
       :test_set_export_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportSortAttribute
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about sorting a list of exports.</p>
@@ -6689,14 +6325,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportStatus
-      InProgress = 'InProgress'
-      Completed = 'Completed'
-      Failed = 'Failed'
-      Deleting = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an export in an export list.
@@ -6728,7 +6357,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the external source of the slot type's definition.</p>
@@ -6738,7 +6367,7 @@ module Aws::LexModelsV2
     class ExternalSourceSetting < Struct.new(
       :grammar_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique failed custom vocabulary item from the custom 
@@ -6760,7 +6389,7 @@ module Aws::LexModelsV2
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines if a Lambda function should be invoked for a specific
@@ -6789,7 +6418,7 @@ module Aws::LexModelsV2
       :fulfillment_updates_specification,
       :active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -6817,7 +6446,7 @@ module Aws::LexModelsV2
       :message_groups,
       :allow_interrupt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides settings for a message that is sent periodically to the
@@ -6841,7 +6470,7 @@ module Aws::LexModelsV2
       :message_groups,
       :allow_interrupt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for updating the user on the progress of
@@ -6871,7 +6500,7 @@ module Aws::LexModelsV2
       :update_response,
       :timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -6892,7 +6521,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -6917,7 +6546,7 @@ module Aws::LexModelsV2
       :intent_id,
       :sample_utterances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the attribute and method by which to sort the generation request information.</p>
@@ -6941,18 +6570,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GenerationSortByAttribute
-      creationStartTime = 'creationStartTime'
-      lastUpdatedTime = 'lastUpdatedTime'
-    end
-
-    module GenerationStatus
-      Failed = 'Failed'
-      Complete = 'Complete'
-      InProgress = 'InProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a generation request made for the bot locale.</p>
@@ -6974,7 +6592,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications about the generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
@@ -6988,7 +6606,7 @@ module Aws::LexModelsV2
       :runtime_settings,
       :buildtime_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -6997,7 +6615,7 @@ module Aws::LexModelsV2
     class GetTestExecutionArtifactsUrlRequest < Struct.new(
       :test_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -7010,7 +6628,7 @@ module Aws::LexModelsV2
       :test_execution_id,
       :download_artifacts_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings requried for a slot type based on a grammar that you provide.</p>
@@ -7020,7 +6638,7 @@ module Aws::LexModelsV2
     class GrammarSlotTypeSetting < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon S3 bucket name and location for the grammar
@@ -7039,7 +6657,7 @@ module Aws::LexModelsV2
       :s3_object_key,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card that is shown to the user by a messaging platform. You define
@@ -7071,13 +6689,7 @@ module Aws::LexModelsV2
       :image_url,
       :buttons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportExportFileFormat
-      LexJson = 'LexJson'
-      TSV = 'TSV'
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the response from the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html">ListImports</a> operation.</p>
@@ -7101,16 +6713,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportFilterName
-      ImportResourceType = 'ImportResourceType'
-    end
-
-    module ImportFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the bot or bot locale that you want to
@@ -7134,18 +6737,7 @@ module Aws::LexModelsV2
       :custom_vocabulary_import_specification,
       :test_set_import_resource_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportResourceType
-      Bot = 'Bot'
-      BotLocale = 'BotLocale'
-      CustomVocabulary = 'CustomVocabulary'
-      TestSet = 'TestSet'
-    end
-
-    module ImportSortAttribute
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for sorting a list of imports.</p>
@@ -7159,14 +6751,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportStatus
-      InProgress = 'InProgress'
-      Completed = 'Completed'
-      Failed = 'Failed'
-      Deleting = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an import in an import
@@ -7208,7 +6793,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :imported_resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.</p>
@@ -7237,7 +6822,7 @@ module Aws::LexModelsV2
       :conditional,
       :code_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A context that must be active for an intent to be
@@ -7248,7 +6833,7 @@ module Aws::LexModelsV2
     class InputContext < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifications for the current state of the dialog 
@@ -7267,7 +6852,7 @@ module Aws::LexModelsV2
       :active_contexts,
       :runtime_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for an intent that is classified by the test workbench.</p>
@@ -7285,7 +6870,7 @@ module Aws::LexModelsV2
       :multi_turn_conversation,
       :result_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:multi_turn_conversation] = false unless options.key?(:multi_turn_conversation)
@@ -7308,7 +6893,7 @@ module Aws::LexModelsV2
       :speech_transcription_result_counts,
       :intent_match_result_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for the results of the intent classification test. </p>
@@ -7318,7 +6903,7 @@ module Aws::LexModelsV2
     class IntentClassificationTestResults < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a statement the Amazon Lex conveys to the user when the intent
@@ -7348,7 +6933,7 @@ module Aws::LexModelsV2
       :next_step,
       :conditional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a prompt for making sure that the user is ready for the
@@ -7436,7 +7021,7 @@ module Aws::LexModelsV2
       :code_hook,
       :elicitation_code_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the response from the <code>ListIntents</code>
@@ -7459,16 +7044,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntentFilterName
-      IntentName = 'IntentName'
-    end
-
-    module IntentFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about intent-level slot resolution in a test result.</p>
@@ -7486,7 +7062,7 @@ module Aws::LexModelsV2
       :multi_turn_conversation,
       :slot_resolution_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:multi_turn_conversation] = false unless options.key?(:multi_turn_conversation)
@@ -7501,7 +7077,7 @@ module Aws::LexModelsV2
     class IntentLevelSlotResolutionTestResults < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Override settings to configure the intent state.</p>
@@ -7518,12 +7094,7 @@ module Aws::LexModelsV2
       :name,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntentSortAttribute
-      IntentName = 'IntentName'
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of intents.</p>
@@ -7538,16 +7109,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntentState
-      Failed = 'Failed'
-      Fulfilled = 'Fulfilled'
-      InProgress = 'InProgress'
-      ReadyForFulfillment = 'ReadyForFulfillment'
-      Waiting = 'Waiting'
-      FulfillmentInProgress = 'FulfillmentInProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that contains the statistical summary of recommended
@@ -7559,7 +7121,7 @@ module Aws::LexModelsV2
     class IntentStatistics < Struct.new(
       :discovered_intent_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an intent returned by the
@@ -7600,7 +7162,7 @@ module Aws::LexModelsV2
       :output_contexts,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unexpected condition. Try your request
@@ -7610,7 +7172,7 @@ module Aws::LexModelsV2
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the name of an intent that was invoked.</p>
@@ -7620,7 +7182,7 @@ module Aws::LexModelsV2
     class InvokedIntentSample < Struct.new(
       :intent_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the <code>AMAZON.KendraSearchIntent</code>
@@ -7647,7 +7209,7 @@ module Aws::LexModelsV2
       :query_filter_string_enabled,
       :query_filter_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:query_filter_string_enabled] = false unless options.key?(:query_filter_string_enabled)
@@ -7668,7 +7230,7 @@ module Aws::LexModelsV2
       :lambda_arn,
       :code_hook_interface_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that contains transcript filter details that are
@@ -7681,7 +7243,7 @@ module Aws::LexModelsV2
     class LexTranscriptFilter < Struct.new(
       :date_range_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7740,7 +7302,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7816,7 +7378,7 @@ module Aws::LexModelsV2
       :aggregated_utterances_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7837,7 +7399,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7862,7 +7424,7 @@ module Aws::LexModelsV2
       :bot_alias_replica_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7885,7 +7447,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_summaries
@@ -7910,7 +7472,7 @@ module Aws::LexModelsV2
       :next_token,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7948,7 +7510,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -7977,7 +7539,7 @@ module Aws::LexModelsV2
       :next_token,
       :bot_locale_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8010,7 +7572,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8046,7 +7608,7 @@ module Aws::LexModelsV2
       :bot_recommendation_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8055,7 +7617,7 @@ module Aws::LexModelsV2
     class ListBotReplicasRequest < Struct.new(
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8072,7 +7634,7 @@ module Aws::LexModelsV2
       :source_region,
       :bot_replica_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8108,7 +7670,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8136,7 +7698,7 @@ module Aws::LexModelsV2
       :generation_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8161,7 +7723,7 @@ module Aws::LexModelsV2
       :next_token,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8186,7 +7748,7 @@ module Aws::LexModelsV2
       :bot_version_replica_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8215,7 +7777,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8240,7 +7802,7 @@ module Aws::LexModelsV2
       :bot_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -8274,7 +7836,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_summaries
@@ -8295,7 +7857,7 @@ module Aws::LexModelsV2
       :bot_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locale_id
@@ -8326,7 +7888,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute built_in_intent_summaries
@@ -8351,7 +7913,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locale_id
@@ -8383,7 +7945,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute built_in_slot_type_summaries
@@ -8409,7 +7971,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8440,7 +8002,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8470,7 +8032,7 @@ module Aws::LexModelsV2
       :custom_vocabulary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8518,7 +8080,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8551,7 +8113,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8599,7 +8161,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8633,7 +8195,7 @@ module Aws::LexModelsV2
       :next_token,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8685,7 +8247,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8703,7 +8265,7 @@ module Aws::LexModelsV2
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8739,7 +8301,7 @@ module Aws::LexModelsV2
       :intent_path,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_summaries
@@ -8748,7 +8310,7 @@ module Aws::LexModelsV2
     class ListIntentPathsResponse < Struct.new(
       :node_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8800,7 +8362,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8818,7 +8380,7 @@ module Aws::LexModelsV2
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8867,7 +8429,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8900,7 +8462,7 @@ module Aws::LexModelsV2
       :intent_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8937,7 +8499,7 @@ module Aws::LexModelsV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -8978,7 +8540,7 @@ module Aws::LexModelsV2
       :summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9012,7 +8574,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9030,7 +8592,7 @@ module Aws::LexModelsV2
       :next_token,
       :sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9082,7 +8644,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9100,7 +8662,7 @@ module Aws::LexModelsV2
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9147,7 +8709,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9180,7 +8742,7 @@ module Aws::LexModelsV2
       :slot_type_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9230,7 +8792,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9267,7 +8829,7 @@ module Aws::LexModelsV2
       :slot_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9277,7 +8839,7 @@ module Aws::LexModelsV2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -9286,7 +8848,7 @@ module Aws::LexModelsV2
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -9312,7 +8874,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_results
@@ -9329,7 +8891,7 @@ module Aws::LexModelsV2
       :test_execution_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -9350,7 +8912,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_executions
@@ -9366,7 +8928,7 @@ module Aws::LexModelsV2
       :test_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -9387,7 +8949,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_records
@@ -9403,7 +8965,7 @@ module Aws::LexModelsV2
       :test_set_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -9423,7 +8985,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_sets
@@ -9439,7 +9001,7 @@ module Aws::LexModelsV2
       :test_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9473,7 +9035,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9491,7 +9053,7 @@ module Aws::LexModelsV2
       :next_token,
       :utterances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9553,7 +9115,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -9571,13 +9133,7 @@ module Aws::LexModelsV2
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MergeStrategy
-      Overwrite = 'Overwrite'
-      FailOnConflict = 'FailOnConflict'
-      Append = 'Append'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that provides message text and its type.</p>
@@ -9601,7 +9157,7 @@ module Aws::LexModelsV2
       :ssml_message,
       :image_response_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides one or more messages that Amazon Lex should send to the
@@ -9618,12 +9174,7 @@ module Aws::LexModelsV2
       :message,
       :variations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageSelectionStrategy
-      Random = 'Random'
-      Ordered = 'Ordered'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether a slot can return multiple values.</p>
@@ -9641,7 +9192,7 @@ module Aws::LexModelsV2
     class MultipleValuesSetting < Struct.new(
       :allow_multiple_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_multiple_values] = false unless options.key?(:allow_multiple_values)
@@ -9668,7 +9219,7 @@ module Aws::LexModelsV2
       :weight,
       :display_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the assisted nlu feature is turned on or off.</p>
@@ -9678,7 +9229,7 @@ module Aws::LexModelsV2
     class NluImprovementSpecification < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -9695,12 +9246,7 @@ module Aws::LexModelsV2
     class ObfuscationSetting < Struct.new(
       :obfuscation_setting_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObfuscationSettingType
-      None = 'None'
-      DefaultObfuscation = 'DefaultObfuscation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the configuration of the Amazon OpenSearch Service database used for the <code>AMAZON.QnAIntent</code>.</p>
@@ -9726,7 +9272,7 @@ module Aws::LexModelsV2
       :exact_response_fields,
       :include_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exact_response] = false unless options.key?(:exact_response)
@@ -9754,7 +9300,7 @@ module Aws::LexModelsV2
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the overall results for a test execution result.</p>
@@ -9776,7 +9322,7 @@ module Aws::LexModelsV2
       :speech_transcription_result_counts,
       :end_to_end_result_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:multi_turn_conversation] = false unless options.key?(:multi_turn_conversation)
@@ -9791,7 +9337,7 @@ module Aws::LexModelsV2
     class OverallTestResults < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A network of bots.</p>
@@ -9805,7 +9351,7 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that contains a path format that will be applied when
@@ -9820,7 +9366,7 @@ module Aws::LexModelsV2
     class PathFormat < Struct.new(
       :object_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an ASCII text message to send to the user.</p>
@@ -9830,7 +9376,7 @@ module Aws::LexModelsV2
     class PlainTextMessage < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies next steps to run after the dialog code hook
@@ -9884,7 +9430,7 @@ module Aws::LexModelsV2
       :timeout_next_step,
       :timeout_conditional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a setting that determines whether the post-fulfillment
@@ -9940,7 +9486,7 @@ module Aws::LexModelsV2
       :timeout_next_step,
       :timeout_conditional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request couldn't be completed because one or more request
@@ -9951,7 +9497,7 @@ module Aws::LexModelsV2
     class PreconditionFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM principal that you allowing or denying access to an Amazon Lex
@@ -9968,17 +9514,7 @@ module Aws::LexModelsV2
       :service,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The attempt name of attempts of a prompt.</p>
-    module PromptAttempt
-      Initial = 'Initial'
-      Retry1 = 'Retry1'
-      Retry2 = 'Retry2'
-      Retry3 = 'Retry3'
-      Retry4 = 'Retry4'
-      Retry5 = 'Retry5'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings on a prompt attempt.</p>
@@ -10000,7 +9536,7 @@ module Aws::LexModelsV2
       :audio_and_dtmf_input_specification,
       :text_input_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a list of message groups that Amazon Lex sends to a user to
@@ -10030,7 +9566,7 @@ module Aws::LexModelsV2
       :message_selection_strategy,
       :prompt_attempts_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Qinconnect assistant.</p>
@@ -10040,7 +9576,7 @@ module Aws::LexModelsV2
     class QInConnectAssistantConfiguration < Struct.new(
       :assistant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Qinconnect intent.</p>
@@ -10050,7 +9586,7 @@ module Aws::LexModelsV2
     class QInConnectIntentConfiguration < Struct.new(
       :q_in_connect_assistant_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the the configuration of the built-in <code>Amazon.QnAIntent</code>.</p>
@@ -10064,7 +9600,7 @@ module Aws::LexModelsV2
       :data_source_configuration,
       :bedrock_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the configuration of the Amazon Kendra index used for the <code>AMAZON.QnAIntent</code>.</p>
@@ -10086,7 +9622,7 @@ module Aws::LexModelsV2
       :query_filter_string,
       :exact_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:query_filter_string_enabled] = false unless options.key?(:query_filter_string_enabled)
@@ -10113,7 +9649,7 @@ module Aws::LexModelsV2
       :intent_name,
       :sample_utterances_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the time window that utterance statistics are returned
@@ -10173,7 +9709,7 @@ module Aws::LexModelsV2
       :time_dimension,
       :time_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You asked to describe a resource that doesn't exist. Check the
@@ -10183,7 +9719,7 @@ module Aws::LexModelsV2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a list of message groups that Amazon Lex uses to respond the
@@ -10200,7 +9736,7 @@ module Aws::LexModelsV2
       :message_groups,
       :allow_interrupt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an array of phrases that should be given preference when
@@ -10220,7 +9756,7 @@ module Aws::LexModelsV2
       :runtime_hint_values,
       :sub_slot_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the phrase that Amazon Lex should look for in the user's input
@@ -10232,7 +9768,7 @@ module Aws::LexModelsV2
     class RuntimeHintValue < Struct.new(
       :phrase,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can provide Amazon Lex with hints to the phrases that a customer is
@@ -10256,7 +9792,7 @@ module Aws::LexModelsV2
     class RuntimeHints < Struct.new(
       :slot_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications about the Amazon Lex runtime generative AI capabilities from Amazon Bedrock that you can turn on for your bot.</p>
@@ -10270,7 +9806,7 @@ module Aws::LexModelsV2
       :slot_resolution_improvement,
       :nlu_improvement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon S3 bucket for logging audio conversations</p>
@@ -10290,7 +9826,7 @@ module Aws::LexModelsV2
       :s3_bucket_arn,
       :log_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object representing the Amazon S3 bucket containing the transcript,
@@ -10327,7 +9863,7 @@ module Aws::LexModelsV2
       :transcript_filter,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a Speech Synthesis Markup Language (SSML) prompt.</p>
@@ -10337,7 +9873,7 @@ module Aws::LexModelsV2
     class SSMLMessage < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A sample utterance that invokes an intent or respond to a slot
@@ -10349,7 +9885,7 @@ module Aws::LexModelsV2
     class SampleUtterance < Struct.new(
       :utterance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications for the sample utterance generation feature.</p>
@@ -10363,7 +9899,7 @@ module Aws::LexModelsV2
       :enabled,
       :bedrock_model_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -10378,7 +9914,7 @@ module Aws::LexModelsV2
     class SampleValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -10427,7 +9963,7 @@ module Aws::LexModelsV2
       :max_results,
       :next_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -10471,12 +10007,7 @@ module Aws::LexModelsV2
       :associated_transcripts,
       :total_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchOrder
-      Ascending = 'Ascending'
-      Descending = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of
@@ -10488,7 +10019,7 @@ module Aws::LexModelsV2
     class SentimentAnalysisSettings < Struct.new(
       :detect_sentiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:detect_sentiment] = false unless options.key?(:detect_sentiment)
@@ -10502,7 +10033,7 @@ module Aws::LexModelsV2
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object specifying the measure and method by which to sort the session analytics data.</p>
@@ -10530,7 +10061,7 @@ module Aws::LexModelsV2
       :name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about a specific session.</p>
@@ -10606,7 +10137,7 @@ module Aws::LexModelsV2
       :invoked_intent_samples,
       :originating_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings used when Amazon Lex successfully captures a slot
@@ -10653,12 +10184,7 @@ module Aws::LexModelsV2
       :code_hook,
       :elicitation_code_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotConstraint
-      Required = 'Required'
-      Optional = 'Optional'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default value to use when a user doesn't provide a
@@ -10670,7 +10196,7 @@ module Aws::LexModelsV2
     class SlotDefaultValue < Struct.new(
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a list of values that Amazon Lex should use as the default value
@@ -10682,7 +10208,7 @@ module Aws::LexModelsV2
     class SlotDefaultValueSpecification < Struct.new(
       :default_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the response from the <code>ListSlots</code>
@@ -10705,16 +10231,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotFilterName
-      SlotName = 'SlotName'
-    end
-
-    module SlotFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the priority that Amazon Lex should use when eliciting slot values
@@ -10729,7 +10246,7 @@ module Aws::LexModelsV2
       :priority,
       :slot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains specifications for the assisted slot resolution feature.</p>
@@ -10743,7 +10260,7 @@ module Aws::LexModelsV2
       :enabled,
       :bedrock_model_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -10758,12 +10275,7 @@ module Aws::LexModelsV2
     class SlotResolutionSetting < Struct.new(
       :slot_resolution_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotResolutionStrategy
-      EnhancedFallback = 'EnhancedFallback'
-      Default = 'Default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the success and failure rate of slot resolution 
@@ -10778,7 +10290,7 @@ module Aws::LexModelsV2
       :slot_name,
       :result_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the counts for a slot resolution in the results of a test execution.</p>
@@ -10796,17 +10308,7 @@ module Aws::LexModelsV2
       :speech_transcription_result_counts,
       :slot_match_result_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotShape
-      Scalar = 'Scalar'
-      List = 'List'
-    end
-
-    module SlotSortAttribute
-      SlotName = 'SlotName'
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of bots.</p>
@@ -10821,7 +10323,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a slot, a value that the bot elicits from
@@ -10860,14 +10362,7 @@ module Aws::LexModelsV2
       :value_elicitation_prompt_specification,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotTypeCategory
-      Custom = 'Custom'
-      Extended = 'Extended'
-      ExternalGrammar = 'ExternalGrammar'
-      Composite = 'Composite'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the response from the <code>ListSlotTypes</code>
@@ -10890,22 +10385,7 @@ module Aws::LexModelsV2
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotTypeFilterName
-      SlotTypeName = 'SlotTypeName'
-      ExternalSourceType = 'ExternalSourceType'
-    end
-
-    module SlotTypeFilterOperator
-      Contains = 'CO'
-      Equals = 'EQ'
-    end
-
-    module SlotTypeSortAttribute
-      SlotTypeName = 'SlotTypeName'
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attributes for sorting a list of slot types.</p>
@@ -10920,7 +10400,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that contains the statistical summary of the recommended
@@ -10932,7 +10412,7 @@ module Aws::LexModelsV2
     class SlotTypeStatistics < Struct.new(
       :discovered_slot_type_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a slot type.</p>
@@ -10985,7 +10465,7 @@ module Aws::LexModelsV2
       :last_updated_date_time,
       :slot_type_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each slot type can have a set of values. Each
@@ -11001,7 +10481,7 @@ module Aws::LexModelsV2
       :sample_value,
       :synonyms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value to set in a slot.</p>
@@ -11015,7 +10495,7 @@ module Aws::LexModelsV2
     class SlotValue < Struct.new(
       :interpreted_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the elicitation setting details eliciting a slot.</p>
@@ -11058,7 +10538,7 @@ module Aws::LexModelsV2
       :slot_capture_setting,
       :slot_resolution_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The slot values that Amazon Lex uses when it sets slot
@@ -11082,7 +10562,7 @@ module Aws::LexModelsV2
       :value,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a regular expression used to validate the value of a
@@ -11117,13 +10597,7 @@ module Aws::LexModelsV2
     class SlotValueRegexFilter < Struct.new(
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotValueResolutionStrategy
-      OriginalValue = 'OriginalValue'
-      TopResolution = 'TopResolution'
-      Concatenation = 'Concatenation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings used by Amazon Lex to select a slot value.</p>
@@ -11160,12 +10634,7 @@ module Aws::LexModelsV2
       :regex_filter,
       :advanced_recognition_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      Ascending = 'Ascending'
-      Descending = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subslot specifications.</p>
@@ -11179,7 +10648,7 @@ module Aws::LexModelsV2
       :slot_type_id,
       :value_elicitation_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -11211,7 +10680,7 @@ module Aws::LexModelsV2
       :transcript_source_setting,
       :encryption_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -11259,7 +10728,7 @@ module Aws::LexModelsV2
       :transcript_source_setting,
       :encryption_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_input_prompt
@@ -11280,7 +10749,7 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_input_prompt
@@ -11313,7 +10782,7 @@ module Aws::LexModelsV2
       :generation_status,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -11341,7 +10810,7 @@ module Aws::LexModelsV2
       :merge_strategy,
       :file_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -11371,7 +10840,7 @@ module Aws::LexModelsV2
       :import_status,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -11395,7 +10864,7 @@ module Aws::LexModelsV2
       :api_mode,
       :test_execution_modality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_execution_id
@@ -11426,7 +10895,7 @@ module Aws::LexModelsV2
       :api_mode,
       :test_execution_modality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_name
@@ -11456,7 +10925,7 @@ module Aws::LexModelsV2
       :role_arn,
       :test_set_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_generation_id
@@ -11498,7 +10967,7 @@ module Aws::LexModelsV2
       :role_arn,
       :test_set_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the messages that Amazon Lex sends to a user to remind them that
@@ -11525,7 +10994,7 @@ module Aws::LexModelsV2
       :timeout_in_seconds,
       :allow_interrupt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -11551,7 +11020,7 @@ module Aws::LexModelsV2
       :locale_id,
       :bot_recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -11583,7 +11052,7 @@ module Aws::LexModelsV2
       :bot_recommendation_status,
       :bot_recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifications for the constituent sub slots and the  
@@ -11598,7 +11067,7 @@ module Aws::LexModelsV2
       :expression,
       :slot_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subslot type composition.</p>
@@ -11613,7 +11082,7 @@ module Aws::LexModelsV2
       :name,
       :slot_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subslot elicitation settings.</p>
@@ -11647,7 +11116,7 @@ module Aws::LexModelsV2
       :sample_utterances,
       :wait_and_continue_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -11662,22 +11131,12 @@ module Aws::LexModelsV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestExecutionApiMode
-      Streaming = 'Streaming'
-      NonStreaming = 'NonStreaming'
-    end
-
-    module TestExecutionModality
-      Text = 'Text'
-      Audio = 'Audio'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the method by which to filter the results of the test execution.</p>
@@ -11692,7 +11151,7 @@ module Aws::LexModelsV2
       :result_type_filter,
       :conversation_level_test_results_filter_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the test execution, grouped by type of results.
@@ -11724,12 +11183,7 @@ module Aws::LexModelsV2
       :intent_level_slot_resolution_test_results,
       :utterance_level_test_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestExecutionSortAttribute
-      TestSetName = 'TestSetName'
-      CreationDateTime = 'CreationDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the method by which to sort the instances of 
@@ -11744,17 +11198,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestExecutionStatus
-      Pending = 'Pending'
-      Waiting = 'Waiting'
-      InProgress = 'InProgress'
-      Completed = 'Completed'
-      Failed = 'Failed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes metadata about the test execution.</p>
@@ -11798,7 +11242,7 @@ module Aws::LexModelsV2
       :api_mode,
       :test_execution_modality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the bot used for the test execution.</p>
@@ -11808,21 +11252,7 @@ module Aws::LexModelsV2
     class TestExecutionTarget < Struct.new(
       :bot_alias_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestResultMatchStatus
-      Matched = 'Matched'
-      Mismatched = 'Mismatched'
-      ExecutionError = 'ExecutionError'
-    end
-
-    module TestResultTypeFilter
-      OverallTestResults = 'OverallTestResults'
-      ConversationLevelTestResults = 'ConversationLevelTestResults'
-      IntentClassificationTestResults = 'IntentClassificationTestResults'
-      SlotResolutionTestResults = 'SlotResolutionTestResults'
-      UtteranceLevelResults = 'UtteranceLevelResults'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the errors in the test set discrepancy report</p>
@@ -11836,7 +11266,7 @@ module Aws::LexModelsV2
       :intent_discrepancies,
       :slot_discrepancies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the bot alias used for the 
@@ -11855,7 +11285,7 @@ module Aws::LexModelsV2
       :bot_alias_id,
       :locale_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the resource used for the 
@@ -11867,13 +11297,7 @@ module Aws::LexModelsV2
     class TestSetDiscrepancyReportResourceTarget < Struct.new(
       :bot_alias_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSetDiscrepancyReportStatus
-      InProgress = 'InProgress'
-      Completed = 'Completed'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the test set that is exported.</p>
@@ -11883,7 +11307,7 @@ module Aws::LexModelsV2
     class TestSetExportSpecification < Struct.new(
       :test_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the data source from which the test set is generated.</p>
@@ -11893,14 +11317,7 @@ module Aws::LexModelsV2
     class TestSetGenerationDataSource < Struct.new(
       :conversation_logs_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSetGenerationStatus
-      Generating = 'Generating'
-      Ready = 'Ready'
-      Failed = 'Failed'
-      Pending = 'Pending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon S3 location from which the test set is imported.</p>
@@ -11914,7 +11331,7 @@ module Aws::LexModelsV2
       :s3_bucket_name,
       :s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the test set that is imported.</p>
@@ -11949,7 +11366,7 @@ module Aws::LexModelsV2
       :modality,
       :test_set_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about discrepancy in an intent information between the test set and the 
@@ -11964,12 +11381,7 @@ module Aws::LexModelsV2
       :intent_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSetModality
-      Text = 'Text'
-      Audio = 'Audio'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about discrepancy in a slot information between the test set and the bot.</p>
@@ -11987,12 +11399,7 @@ module Aws::LexModelsV2
       :slot_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSetSortAttribute
-      TestSetName = 'TestSetName'
-      LastUpdatedDateTime = 'LastUpdatedDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the methods by which to sort the test set.</p>
@@ -12006,15 +11413,7 @@ module Aws::LexModelsV2
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestSetStatus
-      Importing = 'Importing'
-      PendingAnnotation = 'PendingAnnotation'
-      Deleting = 'Deleting'
-      ValidationError = 'ValidationError'
-      Ready = 'Ready'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the location in which the test set is stored.</p>
@@ -12033,7 +11432,7 @@ module Aws::LexModelsV2
       :s3_path,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the test set.</p>
@@ -12080,7 +11479,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a turn in a test set.</p>
@@ -12102,7 +11501,7 @@ module Aws::LexModelsV2
       :turn_number,
       :turn_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the results of the analysis of a turn in the test set.</p>
@@ -12116,7 +11515,7 @@ module Aws::LexModelsV2
       :agent,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the text input specifications.</p>
@@ -12126,7 +11525,7 @@ module Aws::LexModelsV2
     class TextInputSpecification < Struct.new(
       :start_timeout_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Amazon CloudWatch Logs destination log group for
@@ -12138,7 +11537,7 @@ module Aws::LexModelsV2
     class TextLogDestination < Struct.new(
       :cloud_watch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines settings to enable text conversation logs.</p>
@@ -12158,7 +11557,7 @@ module Aws::LexModelsV2
       :destination,
       :selective_logging_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -12177,18 +11576,12 @@ module Aws::LexModelsV2
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
         super
       end
-    end
-
-    module TimeDimension
-      Hours = 'Hours'
-      Days = 'Days'
-      Weeks = 'Weeks'
     end
 
     # <p>The object representing the filter that Amazon Lex will use to select the
@@ -12201,11 +11594,7 @@ module Aws::LexModelsV2
     class TranscriptFilter < Struct.new(
       :lex_transcript_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TranscriptFormat
-      Lex = 'Lex'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the setting of the location where the transcript is
@@ -12217,7 +11606,7 @@ module Aws::LexModelsV2
     class TranscriptSourceSetting < Struct.new(
       :s3_bucket_transcript_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the messages in the turn.</p>
@@ -12231,7 +11620,7 @@ module Aws::LexModelsV2
       :agent_turn,
       :user_turn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -12246,12 +11635,12 @@ module Aws::LexModelsV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -12291,7 +11680,7 @@ module Aws::LexModelsV2
       :sentiment_analysis_settings,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_alias_id
@@ -12345,7 +11734,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12385,7 +11774,7 @@ module Aws::LexModelsV2
       :voice_settings,
       :generative_ai_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12451,7 +11840,7 @@ module Aws::LexModelsV2
       :recommended_actions,
       :generative_ai_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12484,7 +11873,7 @@ module Aws::LexModelsV2
       :bot_recommendation_id,
       :encryption_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12538,7 +11927,7 @@ module Aws::LexModelsV2
       :transcript_source_setting,
       :encryption_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12590,7 +11979,7 @@ module Aws::LexModelsV2
       :bot_members,
       :error_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -12649,7 +12038,7 @@ module Aws::LexModelsV2
       :bot_members,
       :error_log_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -12662,7 +12051,7 @@ module Aws::LexModelsV2
       :export_id,
       :file_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -12695,7 +12084,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -12788,7 +12177,7 @@ module Aws::LexModelsV2
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intent_id
@@ -12887,7 +12276,7 @@ module Aws::LexModelsV2
       :qn_a_intent_configuration,
       :q_in_connect_intent_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -12915,7 +12304,7 @@ module Aws::LexModelsV2
       :policy,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -12932,7 +12321,7 @@ module Aws::LexModelsV2
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -12997,7 +12386,7 @@ module Aws::LexModelsV2
       :multiple_values_setting,
       :sub_slot_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_id
@@ -13065,7 +12454,7 @@ module Aws::LexModelsV2
       :multiple_values_setting,
       :sub_slot_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -13120,7 +12509,7 @@ module Aws::LexModelsV2
       :external_source_setting,
       :composite_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_type_id
@@ -13182,7 +12571,7 @@ module Aws::LexModelsV2
       :external_source_setting,
       :composite_slot_type_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -13199,7 +12588,7 @@ module Aws::LexModelsV2
       :test_set_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_set_id
@@ -13245,7 +12634,7 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the user messages in the turn in the input.</p>
@@ -13263,7 +12652,7 @@ module Aws::LexModelsV2
       :request_attributes,
       :session_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the intent that is output for the turn by the test execution.</p>
@@ -13277,7 +12666,7 @@ module Aws::LexModelsV2
       :name,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains results that are output for the user turn by the test execution.</p>
@@ -13295,7 +12684,7 @@ module Aws::LexModelsV2
       :active_contexts,
       :transcript,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results for the user turn by the test execution.</p>
@@ -13337,7 +12726,7 @@ module Aws::LexModelsV2
       :speech_transcription_result,
       :conversation_level_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a slot output by the test set execution.</p>
@@ -13355,7 +12744,7 @@ module Aws::LexModelsV2
       :values,
       :sub_slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the expected and input values for the user turn.</p>
@@ -13369,7 +12758,7 @@ module Aws::LexModelsV2
       :input,
       :expected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides parameters for setting the time window and duration for
@@ -13380,7 +12769,7 @@ module Aws::LexModelsV2
     class UtteranceAggregationDuration < Struct.new(
       :relative_aggregation_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the audio for an utterance.</p>
@@ -13390,7 +12779,7 @@ module Aws::LexModelsV2
     class UtteranceAudioInputSpecification < Struct.new(
       :audio_file_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a response to the utterance from the bot.</p>
@@ -13429,14 +12818,7 @@ module Aws::LexModelsV2
       :content_type,
       :image_response_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UtteranceContentType
-      PlainText = 'PlainText'
-      CustomPayload = 'CustomPayload'
-      SSML = 'SSML'
-      ImageResponseCard = 'ImageResponseCard'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object specifying the measure and method by which to sort the utterance data.</p>
@@ -13460,7 +12842,7 @@ module Aws::LexModelsV2
       :name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about input of an utterance.</p>
@@ -13474,7 +12856,7 @@ module Aws::LexModelsV2
       :text_input,
       :audio_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about multiple utterances in the results of a test set execution.</p>
@@ -13492,7 +12874,7 @@ module Aws::LexModelsV2
       :conversation_id,
       :turn_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the utterances in the results of the test set execution.</p>
@@ -13502,7 +12884,7 @@ module Aws::LexModelsV2
     class UtteranceLevelTestResults < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about a specific utterance.</p>
@@ -13682,7 +13064,7 @@ module Aws::LexModelsV2
       :utterance_request_id,
       :bot_responses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:utterance_understood] = false unless options.key?(:utterance_understood)
@@ -13697,14 +13079,7 @@ module Aws::LexModelsV2
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoiceEngine
-      Standard = 'standard'
-      Neural = 'neural'
-      LongForm = 'long-form'
-      Generative = 'generative'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines settings for using an Amazon Polly voice to communicate with a
@@ -13744,7 +13119,7 @@ module Aws::LexModelsV2
       :voice_id,
       :engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the prompts that Amazon Lex uses while a bot is waiting for
@@ -13773,7 +13148,7 @@ module Aws::LexModelsV2
       :still_waiting_response,
       :active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -17,7 +17,7 @@ module Aws::IoTEvents
     class AcknowledgeFlow < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action to be performed when the <code>condition</code> is TRUE.</p>
@@ -90,7 +90,7 @@ module Aws::IoTEvents
       :dynamo_d_bv2,
       :iot_site_wise,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one of the following actions to receive notifications when the alarm state
@@ -264,7 +264,7 @@ module Aws::IoTEvents
       :dynamo_d_bv2,
       :iot_site_wise,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of alarm state changes.</p>
@@ -279,7 +279,7 @@ module Aws::IoTEvents
       :initialization_configuration,
       :acknowledge_flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about one or more alarm actions.</p>
@@ -290,7 +290,7 @@ module Aws::IoTEvents
     class AlarmEventActions < Struct.new(
       :alarm_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an alarm model.</p>
@@ -308,14 +308,7 @@ module Aws::IoTEvents
       :alarm_model_description,
       :alarm_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlarmModelVersionStatus
-      ACTIVE = 'ACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      INACTIVE = 'INACTIVE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an alarm model version.</p>
@@ -376,7 +369,7 @@ module Aws::IoTEvents
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about one or more notification actions.</p>
@@ -387,7 +380,7 @@ module Aws::IoTEvents
     class AlarmNotification < Struct.new(
       :notification_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines when your alarm is invoked.</p>
@@ -397,7 +390,7 @@ module Aws::IoTEvents
     class AlarmRule < Struct.new(
       :simple_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of the analysis.</p>
@@ -481,13 +474,7 @@ module Aws::IoTEvents
       :message,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisResultLevel
-      INFO = 'INFO'
-      WARNING = 'WARNING'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that you can use to locate the field in your detector model that the
@@ -499,13 +486,7 @@ module Aws::IoTEvents
     class AnalysisResultLocation < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisStatus
-      RUNNING = 'RUNNING'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains timestamp information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>
@@ -551,7 +532,7 @@ module Aws::IoTEvents
       :time_in_seconds,
       :offset_in_nanos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains value information. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>
@@ -591,7 +572,7 @@ module Aws::IoTEvents
       :timestamp,
       :quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains an asset property value. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html">Variant</a>
@@ -652,7 +633,7 @@ module Aws::IoTEvents
       :double_value,
       :boolean_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes from the JSON payload that are made available by the input. Inputs are
@@ -671,7 +652,7 @@ module Aws::IoTEvents
     class Attribute < Struct.new(
       :json_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information needed to clear the timer.</p>
@@ -681,16 +662,7 @@ module Aws::IoTEvents
     class ClearTimerAction < Struct.new(
       :timer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      GREATER = 'GREATER'
-      GREATER_OR_EQUAL = 'GREATER_OR_EQUAL'
-      LESS = 'LESS'
-      LESS_OR_EQUAL = 'LESS_OR_EQUAL'
-      EQUAL = 'EQUAL'
-      NOT_EQUAL = 'NOT_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_name
@@ -741,7 +713,7 @@ module Aws::IoTEvents
       :alarm_event_actions,
       :alarm_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -787,7 +759,7 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_name
@@ -825,7 +797,7 @@ module Aws::IoTEvents
       :tags,
       :evaluation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_configuration
@@ -834,7 +806,7 @@ module Aws::IoTEvents
     class CreateDetectorModelResponse < Struct.new(
       :detector_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_name
@@ -855,7 +827,7 @@ module Aws::IoTEvents
       :input_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_configuration
@@ -864,7 +836,7 @@ module Aws::IoTEvents
     class CreateInputResponse < Struct.new(
       :input_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_name
@@ -873,12 +845,12 @@ module Aws::IoTEvents
     class DeleteAlarmModelRequest < Struct.new(
       :alarm_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAlarmModelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_name
@@ -887,12 +859,12 @@ module Aws::IoTEvents
     class DeleteDetectorModelRequest < Struct.new(
       :detector_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorModelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_name
@@ -901,12 +873,12 @@ module Aws::IoTEvents
     class DeleteInputRequest < Struct.new(
       :input_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_name
@@ -919,7 +891,7 @@ module Aws::IoTEvents
       :alarm_model_name,
       :alarm_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -1009,7 +981,7 @@ module Aws::IoTEvents
       :alarm_event_actions,
       :alarm_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -1018,7 +990,7 @@ module Aws::IoTEvents
     class DescribeDetectorModelAnalysisRequest < Struct.new(
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1043,7 +1015,7 @@ module Aws::IoTEvents
     class DescribeDetectorModelAnalysisResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_name
@@ -1056,7 +1028,7 @@ module Aws::IoTEvents
       :detector_model_name,
       :detector_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model
@@ -1065,7 +1037,7 @@ module Aws::IoTEvents
     class DescribeDetectorModelResponse < Struct.new(
       :detector_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_name
@@ -1074,7 +1046,7 @@ module Aws::IoTEvents
     class DescribeInputRequest < Struct.new(
       :input_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input
@@ -1083,12 +1055,12 @@ module Aws::IoTEvents
     class DescribeInputResponse < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_options
@@ -1097,7 +1069,7 @@ module Aws::IoTEvents
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detector model and the specific detectors (instances) for which the logging level is
@@ -1113,7 +1085,7 @@ module Aws::IoTEvents
       :detector_model_name,
       :key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the detector model.</p>
@@ -1127,7 +1099,7 @@ module Aws::IoTEvents
       :detector_model_definition,
       :detector_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how the detector model is configured.</p>
@@ -1180,7 +1152,7 @@ module Aws::IoTEvents
       :key,
       :evaluation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that defines how a detector operates.</p>
@@ -1194,7 +1166,7 @@ module Aws::IoTEvents
       :states,
       :initial_state_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the detector model.</p>
@@ -1212,17 +1184,7 @@ module Aws::IoTEvents
       :detector_model_description,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectorModelVersionStatus
-      ACTIVE = 'ACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      INACTIVE = 'INACTIVE'
-      DEPRECATED = 'DEPRECATED'
-      DRAFT = 'DRAFT'
-      PAUSED = 'PAUSED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the detector model version.</p>
@@ -1261,7 +1223,7 @@ module Aws::IoTEvents
       :status,
       :evaluation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action
@@ -1410,7 +1372,7 @@ module Aws::IoTEvents
       :table_name,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an action to write to the Amazon DynamoDB table that you created. The default action
@@ -1474,7 +1436,7 @@ module Aws::IoTEvents
       :table_name,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of email notifications.</p>
@@ -1499,7 +1461,7 @@ module Aws::IoTEvents
       :content,
       :recipients,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the subject and message of an email.</p>
@@ -1513,7 +1475,7 @@ module Aws::IoTEvents
       :subject,
       :additional_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the information of one or more recipients who receive the emails.</p>
@@ -1526,12 +1488,7 @@ module Aws::IoTEvents
     class EmailRecipients < Struct.new(
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationMethod
-      BATCH = 'BATCH'
-      SERIAL = 'SERIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the <code>actions</code> to be performed when the <code>condition</code>
@@ -1552,7 +1509,7 @@ module Aws::IoTEvents
       :condition,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends information about the detector model instance and the event that triggered the
@@ -1574,7 +1531,7 @@ module Aws::IoTEvents
       :separator,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -1591,7 +1548,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_results
@@ -1605,7 +1562,7 @@ module Aws::IoTEvents
       :analysis_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default alarm state. 
@@ -1618,7 +1575,7 @@ module Aws::IoTEvents
     class InitializationConfiguration < Struct.new(
       :disabled_on_initialization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the input.</p>
@@ -1632,7 +1589,7 @@ module Aws::IoTEvents
       :input_configuration,
       :input_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration of an input.</p>
@@ -1662,7 +1619,7 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the input.</p>
@@ -1676,7 +1633,7 @@ module Aws::IoTEvents
     class InputDefinition < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1696,14 +1653,7 @@ module Aws::IoTEvents
       :iot_events_input_identifier,
       :iot_site_wise_input_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the input.</p>
@@ -1733,7 +1683,7 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal failure occurred.</p>
@@ -1743,7 +1693,7 @@ module Aws::IoTEvents
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was invalid.</p>
@@ -1753,7 +1703,7 @@ module Aws::IoTEvents
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends an AWS IoT Events input, passing in information about the detector model instance and the
@@ -1768,7 +1718,7 @@ module Aws::IoTEvents
       :input_name,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1782,7 +1732,7 @@ module Aws::IoTEvents
     class IotEventsInputIdentifier < Struct.new(
       :input_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends information about the detector model instance and the event that triggered the
@@ -1845,7 +1795,7 @@ module Aws::IoTEvents
       :property_alias,
       :property_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1865,7 +1815,7 @@ module Aws::IoTEvents
       :asset_model_id,
       :property_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1879,7 +1829,7 @@ module Aws::IoTEvents
     class IotSiteWiseInputIdentifier < Struct.new(
       :iot_site_wise_asset_model_property_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to publish the MQTT message through the AWS IoT message broker.</p>
@@ -1896,7 +1846,7 @@ module Aws::IoTEvents
       :mqtt_topic,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Calls a Lambda function, passing in information about the detector model instance and the
@@ -1911,7 +1861,7 @@ module Aws::IoTEvents
       :function_arn,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit was exceeded.</p>
@@ -1921,7 +1871,7 @@ module Aws::IoTEvents
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_name
@@ -1938,7 +1888,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_version_summaries
@@ -1952,7 +1902,7 @@ module Aws::IoTEvents
       :alarm_model_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1965,7 +1915,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_summaries
@@ -1979,7 +1929,7 @@ module Aws::IoTEvents
       :alarm_model_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_name
@@ -1996,7 +1946,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_version_summaries
@@ -2010,7 +1960,7 @@ module Aws::IoTEvents
       :detector_model_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2023,7 +1973,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_summaries
@@ -2037,7 +1987,7 @@ module Aws::IoTEvents
       :detector_model_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_identifier
@@ -2060,7 +2010,7 @@ module Aws::IoTEvents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routed_resources
@@ -2078,7 +2028,7 @@ module Aws::IoTEvents
       :routed_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2091,7 +2041,7 @@ module Aws::IoTEvents
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_summaries
@@ -2105,7 +2055,7 @@ module Aws::IoTEvents
       :input_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2114,7 +2064,7 @@ module Aws::IoTEvents
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2123,13 +2073,7 @@ module Aws::IoTEvents
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoggingLevel
-      ERROR = 'ERROR'
-      INFO = 'INFO'
-      DEBUG = 'DEBUG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values of the AWS IoT Events logging options.</p>
@@ -2152,7 +2096,7 @@ module Aws::IoTEvents
       :enabled,
       :detector_debug_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2177,7 +2121,7 @@ module Aws::IoTEvents
       :sms_configurations,
       :email_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an AWS Lambda function to manage alarm notifications. 
@@ -2189,7 +2133,7 @@ module Aws::IoTEvents
     class NotificationTargetActions < Struct.new(
       :lambda_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When entering this state, perform these <code>actions</code> if the <code>condition</code>
@@ -2201,7 +2145,7 @@ module Aws::IoTEvents
     class OnEnterLifecycle < Struct.new(
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When exiting this state, perform these <code>actions</code> if the specified
@@ -2213,7 +2157,7 @@ module Aws::IoTEvents
     class OnExitLifecycle < Struct.new(
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the actions performed when the <code>condition</code> evaluates to TRUE.</p>
@@ -2228,7 +2172,7 @@ module Aws::IoTEvents
       :events,
       :transition_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information needed to configure the payload.</p>
@@ -2251,12 +2195,7 @@ module Aws::IoTEvents
       :content_expression,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PayloadType
-      STRING = 'STRING'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_options
@@ -2265,7 +2204,7 @@ module Aws::IoTEvents
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information that identifies the recipient.</p>
@@ -2275,7 +2214,7 @@ module Aws::IoTEvents
     class RecipientDetail < Struct.new(
       :sso_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to reset the timer. The timer is reset to the previously evaluated
@@ -2287,7 +2226,7 @@ module Aws::IoTEvents
     class ResetTimerAction < Struct.new(
       :timer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource already exists.</p>
@@ -2305,7 +2244,7 @@ module Aws::IoTEvents
       :resource_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is in use.</p>
@@ -2315,7 +2254,7 @@ module Aws::IoTEvents
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was not found.</p>
@@ -2325,7 +2264,7 @@ module Aws::IoTEvents
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2345,7 +2284,7 @@ module Aws::IoTEvents
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of SMS notifications.</p>
@@ -2366,7 +2305,7 @@ module Aws::IoTEvents
       :additional_message,
       :recipients,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to publish the Amazon SNS message.</p>
@@ -2381,7 +2320,7 @@ module Aws::IoTEvents
       :target_arn,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about your identity source in AWS Single Sign-On. For more information, see
@@ -2397,7 +2336,7 @@ module Aws::IoTEvents
       :identity_store_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -2407,7 +2346,7 @@ module Aws::IoTEvents
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information needed to set the timer.</p>
@@ -2432,7 +2371,7 @@ module Aws::IoTEvents
       :seconds,
       :duration_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the variable and its new value.</p>
@@ -2446,7 +2385,7 @@ module Aws::IoTEvents
       :variable_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule that compares an input property value to a threshold value with a comparison operator.</p>
@@ -2466,7 +2405,7 @@ module Aws::IoTEvents
       :comparison_operator,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends information about the detector model instance and the event that triggered the
@@ -2487,7 +2426,7 @@ module Aws::IoTEvents
       :use_base64,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_definition
@@ -2496,7 +2435,7 @@ module Aws::IoTEvents
     class StartDetectorModelAnalysisRequest < Struct.new(
       :detector_model_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -2505,7 +2444,7 @@ module Aws::IoTEvents
     class StartDetectorModelAnalysisResponse < Struct.new(
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that defines a state of a detector.</p>
@@ -2530,7 +2469,7 @@ module Aws::IoTEvents
       :on_enter,
       :on_exit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that can be used to manage the resource.</p>
@@ -2544,7 +2483,7 @@ module Aws::IoTEvents
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2557,12 +2496,12 @@ module Aws::IoTEvents
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be completed due to throttling.</p>
@@ -2572,7 +2511,7 @@ module Aws::IoTEvents
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the actions performed and the next state entered when a <code>condition</code>
@@ -2596,7 +2535,7 @@ module Aws::IoTEvents
       :actions,
       :next_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not supported.</p>
@@ -2606,7 +2545,7 @@ module Aws::IoTEvents
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2619,12 +2558,12 @@ module Aws::IoTEvents
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_model_name
@@ -2661,7 +2600,7 @@ module Aws::IoTEvents
       :alarm_event_actions,
       :alarm_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -2707,7 +2646,7 @@ module Aws::IoTEvents
       :last_update_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_name
@@ -2733,7 +2672,7 @@ module Aws::IoTEvents
       :role_arn,
       :evaluation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_model_configuration
@@ -2742,7 +2681,7 @@ module Aws::IoTEvents
     class UpdateDetectorModelResponse < Struct.new(
       :detector_model_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_name
@@ -2759,7 +2698,7 @@ module Aws::IoTEvents
       :input_description,
       :input_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_configuration
@@ -2768,7 +2707,7 @@ module Aws::IoTEvents
     class UpdateInputResponse < Struct.new(
       :input_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

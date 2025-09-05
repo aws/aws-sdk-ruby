@@ -12,7 +12,7 @@ module Aws::MWAA
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -21,7 +21,7 @@ module Aws::MWAA
     class CreateCliTokenInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cli_token
@@ -34,7 +34,7 @@ module Aws::MWAA
       :cli_token,
       :web_server_hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This section contains the Amazon Managed Workflows for Apache Airflow (Amazon MWAA) API reference documentation to create an environment. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html">Get started with Amazon Managed Workflows for Apache Airflow</a>.</p>
@@ -192,7 +192,7 @@ module Aws::MWAA
       :min_webservers,
       :max_webservers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -201,7 +201,7 @@ module Aws::MWAA
     class CreateEnvironmentOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -210,7 +210,7 @@ module Aws::MWAA
     class CreateWebLoginTokenInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_token
@@ -231,7 +231,7 @@ module Aws::MWAA
       :iam_identity,
       :airflow_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -240,12 +240,12 @@ module Aws::MWAA
     class DeleteEnvironmentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -264,7 +264,7 @@ module Aws::MWAA
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>
@@ -518,7 +518,7 @@ module Aws::MWAA
       :min_webservers,
       :max_webservers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -527,7 +527,7 @@ module Aws::MWAA
     class GetEnvironmentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -536,7 +536,7 @@ module Aws::MWAA
     class GetEnvironmentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>InternalServerException: An internal error has occurred.</p>
@@ -545,7 +545,7 @@ module Aws::MWAA
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -575,7 +575,7 @@ module Aws::MWAA
       :query_parameters,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rest_api_status_code
@@ -589,7 +589,7 @@ module Aws::MWAA
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the last update on the environment, and any errors that were encountered.</p>
@@ -615,7 +615,7 @@ module Aws::MWAA
       :source,
       :worker_replacement_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -628,7 +628,7 @@ module Aws::MWAA
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -641,7 +641,7 @@ module Aws::MWAA
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -650,7 +650,7 @@ module Aws::MWAA
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -659,7 +659,7 @@ module Aws::MWAA
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Apache Airflow log types that are published to CloudWatch Logs.</p>
@@ -685,7 +685,7 @@ module Aws::MWAA
       :worker_logs,
       :task_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Apache Airflow log types to send to CloudWatch Logs.</p>
@@ -711,7 +711,7 @@ module Aws::MWAA
       :worker_logs,
       :task_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -750,7 +750,7 @@ module Aws::MWAA
       :unit,
       :statistic_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Apache Airflow log details for the log type (e.g. <code>DagProcessingLogs</code>).</p>
@@ -768,7 +768,7 @@ module Aws::MWAA
       :log_level,
       :cloud_watch_log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) and defines the log level to send to CloudWatch Logs (e.g. <code>INFO</code>).</p>
@@ -782,7 +782,7 @@ module Aws::MWAA
       :enabled,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.</p>
@@ -796,7 +796,7 @@ module Aws::MWAA
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -813,14 +813,14 @@ module Aws::MWAA
       :environment_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
     #   This type is for internal use and not meant for public use. Data set for this type will be ignored.
     class PublishMetricsOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ResourceNotFoundException: The resource is not available.</p>
@@ -829,7 +829,7 @@ module Aws::MWAA
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating that a client-side error occurred during the Apache Airflow
@@ -845,7 +845,7 @@ module Aws::MWAA
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating that a server-side error occurred during the Apache Airflow
@@ -861,7 +861,7 @@ module Aws::MWAA
       :rest_api_status_code,
       :rest_api_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -890,7 +890,7 @@ module Aws::MWAA
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -903,12 +903,12 @@ module Aws::MWAA
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -921,12 +921,12 @@ module Aws::MWAA
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1080,7 +1080,7 @@ module Aws::MWAA
       :webserver_access_mode,
       :weekly_maintenance_window_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1089,7 +1089,7 @@ module Aws::MWAA
     class UpdateEnvironmentOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error(s) encountered with the last update of the environment.</p>
@@ -1103,7 +1103,7 @@ module Aws::MWAA
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.</p>
@@ -1113,7 +1113,7 @@ module Aws::MWAA
     class UpdateNetworkConfigurationInput < Struct.new(
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ValidationException: The provided input is not valid.</p>
@@ -1122,7 +1122,7 @@ module Aws::MWAA
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

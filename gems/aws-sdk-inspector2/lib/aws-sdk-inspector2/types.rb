@@ -14,7 +14,7 @@ module Aws::Inspector2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services account within your environment that Amazon Inspector has been enabled for.</p>
@@ -32,7 +32,7 @@ module Aws::Inspector2
       :status,
       :resource_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about an aggregation response based on
@@ -55,7 +55,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation of findings by Amazon Web Services account ID.</p>
@@ -77,7 +77,7 @@ module Aws::Inspector2
       :exploit_available_count,
       :fix_available_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with details the status of an Amazon Web Services account within your Amazon Inspector
@@ -96,7 +96,7 @@ module Aws::Inspector2
       :state,
       :resource_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an aggregation request.</p>
@@ -161,7 +161,7 @@ module Aws::Inspector2
       :code_repository_aggregation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccountAggregation < AggregationRequest; end
       class AmiAggregation < AggregationRequest; end
@@ -240,7 +240,7 @@ module Aws::Inspector2
       :code_repository_aggregation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccountAggregation < AggregationResponse; end
       class AmiAggregation < AggregationResponse; end
@@ -272,7 +272,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding aggregation by AMI.</p>
@@ -294,7 +294,7 @@ module Aws::Inspector2
       :severity_counts,
       :affected_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a request to associate a code repository with a scan
@@ -309,7 +309,7 @@ module Aws::Inspector2
       :scan_configuration_arn,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -318,7 +318,7 @@ module Aws::Inspector2
     class AssociateMemberInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -327,16 +327,7 @@ module Aws::Inspector2
     class AssociateMemberOutput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationResultStatusCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      SCAN_CONFIGURATION_NOT_FOUND = 'SCAN_CONFIGURATION_NOT_FOUND'
-      INVALID_INPUT = 'INVALID_INPUT'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      QUOTA_EXCEEDED = 'QUOTA_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Threat Intel Group (ATIG) details for a specific
@@ -360,7 +351,7 @@ module Aws::Inspector2
       :targets,
       :ttps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents which scan types are automatically enabled for new members of your Amazon Inspector
@@ -392,7 +383,7 @@ module Aws::Inspector2
       :lambda_code,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Amazon EC2 instance involved in a finding.</p>
@@ -438,7 +429,7 @@ module Aws::Inspector2
       :launched_at,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation of information about Amazon ECR containers.</p>
@@ -481,7 +472,7 @@ module Aws::Inspector2
       :last_in_use_at,
       :in_use_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation of information about Amazon ECR containers.</p>
@@ -524,7 +515,7 @@ module Aws::Inspector2
       :last_in_use_at,
       :in_use_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image details of the Amazon ECR container image.</p>
@@ -571,7 +562,7 @@ module Aws::Inspector2
       :last_in_use_at,
       :in_use_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about tasks where an image was in use.</p>
@@ -585,7 +576,7 @@ module Aws::Inspector2
       :details_group,
       :task_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for an Amazon EKS pod where an Amazon ECR image is in
@@ -600,7 +591,7 @@ module Aws::Inspector2
       :namespace,
       :workload_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the workload.</p>
@@ -614,7 +605,7 @@ module Aws::Inspector2
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A summary of information about the Amazon Web Services Lambda function.</p>
@@ -666,7 +657,7 @@ module Aws::Inspector2
       :architectures,
       :last_modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more tags submitted as part of the request is not valid.</p>
@@ -675,7 +666,7 @@ module Aws::Inspector2
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associate_configuration_requests
@@ -684,7 +675,7 @@ module Aws::Inspector2
     class BatchAssociateCodeSecurityScanConfigurationRequest < Struct.new(
       :associate_configuration_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_associations
@@ -699,7 +690,7 @@ module Aws::Inspector2
       :failed_associations,
       :successful_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociate_configuration_requests
@@ -709,7 +700,7 @@ module Aws::Inspector2
     class BatchDisassociateCodeSecurityScanConfigurationRequest < Struct.new(
       :disassociate_configuration_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_associations
@@ -724,7 +715,7 @@ module Aws::Inspector2
       :failed_associations,
       :successful_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -733,7 +724,7 @@ module Aws::Inspector2
     class BatchGetAccountStatusInput < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -747,7 +738,7 @@ module Aws::Inspector2
       :accounts,
       :failed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -757,7 +748,7 @@ module Aws::Inspector2
     class BatchGetCodeSnippetRequest < Struct.new(
       :finding_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_snippet_results
@@ -771,7 +762,7 @@ module Aws::Inspector2
       :code_snippet_results,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_arns
@@ -780,7 +771,7 @@ module Aws::Inspector2
     class BatchGetFindingDetailsRequest < Struct.new(
       :finding_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_details
@@ -793,7 +784,7 @@ module Aws::Inspector2
       :finding_details,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -802,7 +793,7 @@ module Aws::Inspector2
     class BatchGetFreeTrialInfoInput < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -817,7 +808,7 @@ module Aws::Inspector2
       :accounts,
       :failed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -827,7 +818,7 @@ module Aws::Inspector2
     class BatchGetMemberEc2DeepInspectionStatusRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -842,7 +833,7 @@ module Aws::Inspector2
       :account_ids,
       :failed_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -852,7 +843,7 @@ module Aws::Inspector2
     class BatchUpdateMemberEc2DeepInspectionStatusRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -867,7 +858,7 @@ module Aws::Inspector2
       :account_ids,
       :failed_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -876,7 +867,7 @@ module Aws::Inspector2
     class CancelFindingsReportInput < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -885,7 +876,7 @@ module Aws::Inspector2
     class CancelFindingsReportOutput < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -894,7 +885,7 @@ module Aws::Inspector2
     class CancelSbomExportRequest < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -903,7 +894,7 @@ module Aws::Inspector2
     class CancelSbomExportResponse < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CIS check.</p>
@@ -941,7 +932,7 @@ module Aws::Inspector2
       :status_counts,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS date filter.</p>
@@ -955,17 +946,7 @@ module Aws::Inspector2
       :earliest_scan_start_time,
       :latest_scan_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisFindingStatus
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
-    end
-
-    module CisFindingStatusComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS finding status filter.</p>
@@ -979,7 +960,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS number filter.</p>
@@ -993,28 +974,7 @@ module Aws::Inspector2
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisReportFormat
-      PDF = 'PDF'
-      CSV = 'CSV'
-    end
-
-    module CisReportStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-    end
-
-    module CisResultStatus
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
-    end
-
-    module CisResultStatusComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS result status filter.</p>
@@ -1028,17 +988,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisRuleStatus
-      FAILED = 'FAILED'
-      PASSED = 'PASSED'
-      NOT_EVALUATED = 'NOT_EVALUATED'
-      INFORMATIONAL = 'INFORMATIONAL'
-      UNKNOWN = 'UNKNOWN'
-      NOT_APPLICABLE = 'NOT_APPLICABLE'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS scan.</p>
@@ -1085,7 +1035,7 @@ module Aws::Inspector2
       :scheduled_by,
       :security_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS scan configuration.</p>
@@ -1119,12 +1069,7 @@ module Aws::Inspector2
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisScanConfigurationsSortBy
-      SCAN_NAME = 'SCAN_NAME'
-      SCAN_CONFIGURATION_ARN = 'SCAN_CONFIGURATION_ARN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS scan result details.</p>
@@ -1178,7 +1123,7 @@ module Aws::Inspector2
       :level,
       :finding_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS scan result details filter criteria.</p>
@@ -1205,12 +1150,7 @@ module Aws::Inspector2
       :security_level_filters,
       :finding_arn_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisScanResultDetailsSortBy
-      CHECK_ID = 'CHECK_ID'
-      STATUS = 'STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scan results aggregated by checks filter criteria.</p>
@@ -1240,15 +1180,7 @@ module Aws::Inspector2
       :failed_resources_filters,
       :security_level_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisScanResultsAggregatedByChecksSortBy
-      CHECK_ID = 'CHECK_ID'
-      TITLE = 'TITLE'
-      PLATFORM = 'PLATFORM'
-      FAILED_COUNTS = 'FAILED_COUNTS'
-      SECURITY_LEVEL = 'SECURITY_LEVEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scan results aggregated by target resource filter criteria.</p>
@@ -1290,27 +1222,7 @@ module Aws::Inspector2
       :target_status_reason_filters,
       :failed_checks_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisScanResultsAggregatedByTargetResourceSortBy
-      RESOURCE_ID = 'RESOURCE_ID'
-      FAILED_COUNTS = 'FAILED_COUNTS'
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      PLATFORM = 'PLATFORM'
-      TARGET_STATUS = 'TARGET_STATUS'
-      TARGET_STATUS_REASON = 'TARGET_STATUS_REASON'
-    end
-
-    module CisScanStatus
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-      IN_PROGRESS = 'IN_PROGRESS'
-    end
-
-    module CisScanStatusComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS scan status filter.</p>
@@ -1324,16 +1236,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisSecurityLevel
-      LEVEL_1 = 'LEVEL_1'
-      LEVEL_2 = 'LEVEL_2'
-    end
-
-    module CisSecurityLevelComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The CIS security level filter. Security level refers to the Benchmark levels that CIS
@@ -1348,7 +1251,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS session message.</p>
@@ -1366,18 +1269,7 @@ module Aws::Inspector2
       :status,
       :cis_rule_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisSortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
-    end
-
-    module CisStringComparison
-      EQUALS = 'EQUALS'
-      PREFIX = 'PREFIX'
-      NOT_EQUALS = 'NOT_EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS string filter.</p>
@@ -1391,7 +1283,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS target resource aggregation.</p>
@@ -1429,17 +1321,7 @@ module Aws::Inspector2
       :target_status,
       :target_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisTargetStatus
-      TIMED_OUT = 'TIMED_OUT'
-      CANCELLED = 'CANCELLED'
-      COMPLETED = 'COMPLETED'
-    end
-
-    module CisTargetStatusComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS target status filter.</p>
@@ -1453,13 +1335,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CisTargetStatusReason
-      SCAN_IN_PROGRESS = 'SCAN_IN_PROGRESS'
-      UNSUPPORTED_OS = 'UNSUPPORTED_OS'
-      SSM_UNMANAGED = 'SSM_UNMANAGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS target status reason filter.</p>
@@ -1473,7 +1349,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIS targets.</p>
@@ -1487,7 +1363,7 @@ module Aws::Inspector2
       :account_ids,
       :target_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Cybersecurity and Infrastructure Security Agency (CISA) details for a specific
@@ -1506,7 +1382,7 @@ module Aws::Inspector2
       :date_due,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the task or pod in the cluster.</p>
@@ -1530,7 +1406,7 @@ module Aws::Inspector2
       :stopped_unit_count,
       :cluster_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter criteria to be used.</p>
@@ -1540,7 +1416,7 @@ module Aws::Inspector2
     class ClusterForImageFilterCriteria < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the cluster.</p>
@@ -1554,7 +1430,7 @@ module Aws::Inspector2
       :cluster_arn,
       :cluster_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for a cluster.</p>
@@ -1569,7 +1445,7 @@ module Aws::Inspector2
       :aws_eks_metadata_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AwsEcsMetadataDetails < ClusterMetadata; end
       class AwsEksMetadataDetails < ClusterMetadata; end
@@ -1596,11 +1472,11 @@ module Aws::Inspector2
       :start_line,
       :end_line,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:start_line] =  unless options.key?(:start_line)
-        options[:end_line] =  unless options.key?(:end_line)
+        options[:start_line] = nil unless options.key?(:start_line)
+        options[:end_line] = nil unless options.key?(:end_line)
         super
       end
     end
@@ -1616,7 +1492,7 @@ module Aws::Inspector2
       :content,
       :line_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on code repositories.</p>
@@ -1643,7 +1519,7 @@ module Aws::Inspector2
       :sort_by,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding aggregation by code repository.</p>
@@ -1678,7 +1554,7 @@ module Aws::Inspector2
       :account_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a code repository associated with a finding.</p>
@@ -1697,7 +1573,7 @@ module Aws::Inspector2
       :integration_arn,
       :provider_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata information about a code repository that is being scanned by Amazon
@@ -1733,7 +1609,7 @@ module Aws::Inspector2
       :scan_configuration,
       :on_demand_scan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about on-demand scans performed on a code repository.</p>
@@ -1751,14 +1627,7 @@ module Aws::Inspector2
       :last_scan_at,
       :scan_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeScanStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a code security integration.</p>
@@ -1796,7 +1665,7 @@ module Aws::Inspector2
       :last_update_on,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a specific resource in a code repository that will be scanned.</p>
@@ -1807,7 +1676,7 @@ module Aws::Inspector2
       :project_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ProjectId < CodeSecurityResource; end
       class Unknown < CodeSecurityResource; end
@@ -1829,7 +1698,7 @@ module Aws::Inspector2
       :continuous_integration_scan_configuration,
       :rule_set_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an association between a code repository and a scan configuration.</p>
@@ -1839,7 +1708,7 @@ module Aws::Inspector2
     class CodeSecurityScanConfigurationAssociationSummary < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a code security scan configuration.</p>
@@ -1883,7 +1752,7 @@ module Aws::Inspector2
       :scope_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about any errors encountered while trying to retrieve a code
@@ -1902,7 +1771,7 @@ module Aws::Inspector2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a code snippet retrieved by Amazon Inspector from a code vulnerability
@@ -1929,7 +1798,7 @@ module Aws::Inspector2
       :code_snippet,
       :suggested_fixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the code vulnerability identified in your Lambda
@@ -1976,7 +1845,7 @@ module Aws::Inspector2
       :detector_name,
       :cwes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A compute platform.</p>
@@ -1994,12 +1863,7 @@ module Aws::Inspector2
       :product,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationLevel
-      ORGANIZATION = 'ORGANIZATION'
-      ACCOUNT = 'ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict occurred. This exception occurs when the same resource is being modified by
@@ -2017,7 +1881,7 @@ module Aws::Inspector2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for continuous integration scans that run automatically when code
@@ -2029,12 +1893,7 @@ module Aws::Inspector2
     class ContinuousIntegrationScanConfiguration < Struct.new(
       :supported_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContinuousIntegrationScanEvent
-      PULL_REQUEST = 'PULL_REQUEST'
-      PUSH = 'PUSH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>a structure that contains information on the count of resources within a group.</p>
@@ -2048,7 +1907,7 @@ module Aws::Inspector2
       :count,
       :group_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -2067,7 +1926,7 @@ module Aws::Inspector2
       :start_inclusive,
       :end_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that identifies filter criteria for
@@ -2170,7 +2029,7 @@ module Aws::Inspector2
       :code_repository_provider_type_visibility,
       :last_scanned_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of a coverage map filter.</p>
@@ -2188,7 +2047,7 @@ module Aws::Inspector2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The coverage number to be used in the filter.</p>
@@ -2202,7 +2061,7 @@ module Aws::Inspector2
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of a coverage string filter.</p>
@@ -2216,7 +2075,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about a resource covered by Amazon Inspector.</p>
@@ -2254,7 +2113,7 @@ module Aws::Inspector2
       :last_scanned_at,
       :scan_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -2280,7 +2139,7 @@ module Aws::Inspector2
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2289,7 +2148,7 @@ module Aws::Inspector2
     class CreateCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates CIS targets.</p>
@@ -2303,7 +2162,7 @@ module Aws::Inspector2
       :account_ids,
       :target_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2324,7 +2183,7 @@ module Aws::Inspector2
       :details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -2341,7 +2200,7 @@ module Aws::Inspector2
       :status,
       :authorization_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2371,7 +2230,7 @@ module Aws::Inspector2
       :scope_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2380,7 +2239,7 @@ module Aws::Inspector2
     class CreateCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -2411,7 +2270,7 @@ module Aws::Inspector2
       :tags,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2420,7 +2279,7 @@ module Aws::Inspector2
     class CreateFilterOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -2437,7 +2296,7 @@ module Aws::Inspector2
       :report_format,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -2446,7 +2305,7 @@ module Aws::Inspector2
     class CreateFindingsReportOutput < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details required to create an integration with a self-managed GitLab
@@ -2462,7 +2321,7 @@ module Aws::Inspector2
       :instance_url,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details required to create a code security integration with a specific
@@ -2474,7 +2333,7 @@ module Aws::Inspector2
       :gitlab_self_managed,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GitlabSelfManaged < CreateIntegrationDetail; end
       class Unknown < CreateIntegrationDetail; end
@@ -2494,7 +2353,7 @@ module Aws::Inspector2
       :report_format,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -2503,7 +2362,7 @@ module Aws::Inspector2
     class CreateSbomExportResponse < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Common Vulnerability Scoring System (CVSS) version 2 details for the
@@ -2518,7 +2377,7 @@ module Aws::Inspector2
       :base_score,
       :scoring_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:base_score] = 0 unless options.key?(:base_score)
@@ -2538,7 +2397,7 @@ module Aws::Inspector2
       :base_score,
       :scoring_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:base_score] = 0 unless options.key?(:base_score)
@@ -2557,7 +2416,7 @@ module Aws::Inspector2
       :base_score,
       :scoring_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:base_score] = 0 unless options.key?(:base_score)
@@ -2584,7 +2443,7 @@ module Aws::Inspector2
       :version,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on adjustments Amazon Inspector made to the CVSS score for a finding.</p>
@@ -2598,7 +2457,7 @@ module Aws::Inspector2
       :metric,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the CVSS score.</p>
@@ -2628,7 +2487,7 @@ module Aws::Inspector2
       :scoring_vector,
       :adjustments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A daily schedule.</p>
@@ -2638,7 +2497,7 @@ module Aws::Inspector2
     class DailySchedule < Struct.new(
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details on the time range used to filter findings.</p>
@@ -2652,17 +2511,7 @@ module Aws::Inspector2
       :start_inclusive,
       :end_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Day
-      SUN = 'SUN'
-      MON = 'MON'
-      TUE = 'TUE'
-      WED = 'WED'
-      THU = 'THU'
-      FRI = 'FRI'
-      SAT = 'SAT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Amazon Inspector delegated administrator for your organization.</p>
@@ -2676,7 +2525,7 @@ module Aws::Inspector2
       :account_id,
       :relationship_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Amazon Inspector delegated administrator for your organization.</p>
@@ -2690,7 +2539,7 @@ module Aws::Inspector2
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2699,7 +2548,7 @@ module Aws::Inspector2
     class DeleteCisScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2708,7 +2557,7 @@ module Aws::Inspector2
     class DeleteCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -2717,7 +2566,7 @@ module Aws::Inspector2
     class DeleteCodeSecurityIntegrationRequest < Struct.new(
       :integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -2726,7 +2575,7 @@ module Aws::Inspector2
     class DeleteCodeSecurityIntegrationResponse < Struct.new(
       :integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2735,7 +2584,7 @@ module Aws::Inspector2
     class DeleteCodeSecurityScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -2744,7 +2593,7 @@ module Aws::Inspector2
     class DeleteCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2753,7 +2602,7 @@ module Aws::Inspector2
     class DeleteFilterInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2762,12 +2611,12 @@ module Aws::Inspector2
     class DeleteFilterOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -2781,7 +2630,7 @@ module Aws::Inspector2
       :auto_enable,
       :max_account_limit_reached,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of the Amazon S3 bucket and KMS key used to export findings.</p>
@@ -2799,7 +2648,7 @@ module Aws::Inspector2
       :key_prefix,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin_account_id
@@ -2808,7 +2657,7 @@ module Aws::Inspector2
     class DisableDelegatedAdminAccountInput < Struct.new(
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin_account_id
@@ -2817,7 +2666,7 @@ module Aws::Inspector2
     class DisableDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -2830,7 +2679,7 @@ module Aws::Inspector2
       :account_ids,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -2845,7 +2694,7 @@ module Aws::Inspector2
       :accounts,
       :failed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a request to disassociate a code repository from a scan
@@ -2861,7 +2710,7 @@ module Aws::Inspector2
       :scan_configuration_arn,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2870,7 +2719,7 @@ module Aws::Inspector2
     class DisassociateMemberInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2879,7 +2728,7 @@ module Aws::Inspector2
     class DisassociateMemberOutput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables agent-based scanning, which scans instances that are not managed by SSM.</p>
@@ -2889,7 +2738,7 @@ module Aws::Inspector2
     class Ec2Configuration < Struct.new(
       :scan_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the state of the EC2 scan configuration for your environment.</p>
@@ -2899,7 +2748,7 @@ module Aws::Inspector2
     class Ec2ConfigurationState < Struct.new(
       :scan_mode_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on Amazon EC2 instances.</p>
@@ -2931,7 +2780,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding aggregation by Amazon EC2 instance.</p>
@@ -2965,7 +2814,7 @@ module Aws::Inspector2
       :severity_counts,
       :network_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Meta data details of an Amazon EC2 instance.</p>
@@ -2983,7 +2832,7 @@ module Aws::Inspector2
       :ami_id,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of your Amazon EC2 scan mode configuration.</p>
@@ -2997,7 +2846,7 @@ module Aws::Inspector2
       :scan_mode,
       :scan_mode_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the ECR automated re-scan duration setting for your environment.</p>
@@ -3015,7 +2864,7 @@ module Aws::Inspector2
       :pull_date_rescan_duration,
       :pull_date_rescan_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the state of the ECR scans for your environment.</p>
@@ -3025,7 +2874,7 @@ module Aws::Inspector2
     class EcrConfigurationState < Struct.new(
       :rescan_duration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the Amazon ECR image metadata associated with a finding.</p>
@@ -3048,7 +2897,7 @@ module Aws::Inspector2
       :last_in_use_at,
       :in_use_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the Amazon ECR repository metadata associated with a finding.</p>
@@ -3062,7 +2911,7 @@ module Aws::Inspector2
       :name,
       :scan_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the state of your ECR re-scan duration settings. The ECR re-scan duration
@@ -3093,7 +2942,7 @@ module Aws::Inspector2
       :pull_date_rescan_duration,
       :pull_date_rescan_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin_account_id
@@ -3106,7 +2955,7 @@ module Aws::Inspector2
       :delegated_admin_account_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin_account_id
@@ -3115,7 +2964,7 @@ module Aws::Inspector2
     class EnableDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -3132,7 +2981,7 @@ module Aws::Inspector2
       :resource_types,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -3147,7 +2996,7 @@ module Aws::Inspector2
       :accounts,
       :failed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Exploit Prediction Scoring System (EPSS) score.</p>
@@ -3157,7 +3006,7 @@ module Aws::Inspector2
     class Epss < Struct.new(
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -3172,7 +3021,7 @@ module Aws::Inspector2
     class EpssDetails < Struct.new(
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -3195,7 +3044,7 @@ module Aws::Inspector2
       :evidence_detail,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on when this exploit was observed.</p>
@@ -3209,7 +3058,7 @@ module Aws::Inspector2
       :last_seen,
       :first_seen,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an exploit available for a finding discovered in your environment.</p>
@@ -3220,7 +3069,7 @@ module Aws::Inspector2
     class ExploitabilityDetails < Struct.new(
       :last_known_exploit_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with details on why an account failed to enable Amazon Inspector.</p>
@@ -3246,7 +3095,7 @@ module Aws::Inspector2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a failed attempt to associate or disassociate a code repository with a
@@ -3270,7 +3119,7 @@ module Aws::Inspector2
       :status_code,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about a member account in your organization that failed
@@ -3292,7 +3141,7 @@ module Aws::Inspector2
       :ec2_scan_status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a filter.</p>
@@ -3338,7 +3187,7 @@ module Aws::Inspector2
       :reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the criteria used to define the filter.</p>
@@ -3546,7 +3395,7 @@ module Aws::Inspector2
       :code_repository_project_name,
       :code_repository_provider_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon Inspector finding.</p>
@@ -3648,7 +3497,7 @@ module Aws::Inspector2
       :code_vulnerability_details,
       :epss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the vulnerability identified in a finding.</p>
@@ -3696,7 +3545,7 @@ module Aws::Inspector2
       :cwes,
       :epss_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an error encountered when trying to return vulnerability data for a
@@ -3715,7 +3564,7 @@ module Aws::Inspector2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on finding type.</p>
@@ -3737,7 +3586,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding type aggregation.</p>
@@ -3759,7 +3608,7 @@ module Aws::Inspector2
       :exploit_available_count,
       :fix_available_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Inspector free trial for an account.</p>
@@ -3773,7 +3622,7 @@ module Aws::Inspector2
       :account_id,
       :free_trial_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the Amazon Inspector free trial for an account.</p>
@@ -3795,7 +3644,7 @@ module Aws::Inspector2
       :end,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an error received while accessing free trail data for an
@@ -3814,7 +3663,7 @@ module Aws::Inspector2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_arn
@@ -3832,7 +3681,7 @@ module Aws::Inspector2
       :target_accounts,
       :report_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -3845,7 +3694,7 @@ module Aws::Inspector2
       :url,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_arn
@@ -3884,7 +3733,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_result_details
@@ -3898,7 +3747,7 @@ module Aws::Inspector2
       :scan_result_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -3916,7 +3765,7 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3930,7 +3779,7 @@ module Aws::Inspector2
       :cluster,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -3943,7 +3792,7 @@ module Aws::Inspector2
       :integration_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -3986,7 +3835,7 @@ module Aws::Inspector2
       :tags,
       :authorization_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -3995,7 +3844,7 @@ module Aws::Inspector2
     class GetCodeSecurityScanConfigurationRequest < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -4034,7 +3883,7 @@ module Aws::Inspector2
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -4047,7 +3896,7 @@ module Aws::Inspector2
       :resource,
       :scan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_id
@@ -4085,12 +3934,12 @@ module Aws::Inspector2
       :updated_at,
       :last_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetConfigurationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_configuration
@@ -4105,12 +3954,12 @@ module Aws::Inspector2
       :ecr_configuration,
       :ec2_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDelegatedAdminAccountInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin
@@ -4119,12 +3968,12 @@ module Aws::Inspector2
     class GetDelegatedAdminAccountOutput < Struct.new(
       :delegated_admin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetEc2DeepInspectionConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_paths
@@ -4146,7 +3995,7 @@ module Aws::Inspector2
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_type
@@ -4159,7 +4008,7 @@ module Aws::Inspector2
       :scan_type,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -4168,7 +4017,7 @@ module Aws::Inspector2
     class GetEncryptionKeyResponse < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -4177,7 +4026,7 @@ module Aws::Inspector2
     class GetFindingsReportStatusInput < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -4206,7 +4055,7 @@ module Aws::Inspector2
       :destination,
       :filter_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -4215,7 +4064,7 @@ module Aws::Inspector2
     class GetMemberInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member
@@ -4224,7 +4073,7 @@ module Aws::Inspector2
     class GetMemberOutput < Struct.new(
       :member,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -4233,7 +4082,7 @@ module Aws::Inspector2
     class GetSbomExportRequest < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -4267,7 +4116,7 @@ module Aws::Inspector2
       :s3_destination,
       :filter_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on container image layers.</p>
@@ -4293,7 +4142,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding aggregation by image layer.</p>
@@ -4320,7 +4169,7 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Inspector score given to a finding.</p>
@@ -4330,20 +4179,7 @@ module Aws::Inspector2
     class InspectorScoreDetails < Struct.new(
       :adjusted_cvss,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DISABLING = 'DISABLING'
-    end
-
-    module IntegrationType
-      GITLAB_SELF_MANAGED = 'GITLAB_SELF_MANAGED'
-      GITHUB = 'GITHUB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed due to an internal failure of the Amazon Inspector service.</p>
@@ -4356,7 +4192,7 @@ module Aws::Inspector2
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define a findings aggregation based on Amazon Web Services Lambda
@@ -4389,7 +4225,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of an Amazon Web Services Lambda function finding
@@ -4426,7 +4262,7 @@ module Aws::Inspector2
       :severity_counts,
       :last_modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Lambda function metadata.</p>
@@ -4449,7 +4285,7 @@ module Aws::Inspector2
       :function_name,
       :runtime,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define a findings aggregation based on an Amazon Web Services Lambda
@@ -4476,7 +4312,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of an Amazon Web Services Lambda function layer
@@ -4503,7 +4339,7 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC security groups and subnets that are attached to an Amazon Web Services Lambda
@@ -4523,7 +4359,7 @@ module Aws::Inspector2
       :security_group_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -4546,7 +4382,7 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -4562,7 +4398,7 @@ module Aws::Inspector2
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CIS scan configurations filter criteria.</p>
@@ -4580,7 +4416,7 @@ module Aws::Inspector2
       :target_resource_tag_filters,
       :scan_configuration_arn_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -4607,7 +4443,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configurations
@@ -4621,7 +4457,7 @@ module Aws::Inspector2
       :scan_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_arn
@@ -4652,7 +4488,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_aggregations
@@ -4666,7 +4502,7 @@ module Aws::Inspector2
       :check_aggregations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_arn
@@ -4697,7 +4533,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_resource_aggregations
@@ -4711,12 +4547,7 @@ module Aws::Inspector2
       :target_resource_aggregations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListCisScansDetailLevel
-      ORGANIZATION = 'ORGANIZATION'
-      MEMBER = 'MEMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of CIS scans filter criteria.</p>
@@ -4762,7 +4593,7 @@ module Aws::Inspector2
       :failed_checks_filters,
       :target_account_id_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -4792,7 +4623,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scans
@@ -4806,14 +4637,7 @@ module Aws::Inspector2
       :scans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListCisScansSortBy
-      STATUS = 'STATUS'
-      SCHEDULED_BY = 'SCHEDULED_BY'
-      SCAN_START_DATE = 'SCAN_START_DATE'
-      FAILED_CHECKS = 'FAILED_CHECKS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4829,7 +4653,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integrations
@@ -4845,7 +4669,7 @@ module Aws::Inspector2
       :integrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -4868,7 +4692,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -4884,7 +4708,7 @@ module Aws::Inspector2
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4900,7 +4724,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -4916,7 +4740,7 @@ module Aws::Inspector2
       :configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -4940,7 +4764,7 @@ module Aws::Inspector2
       :next_token,
       :filter_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4956,7 +4780,7 @@ module Aws::Inspector2
       :next_token,
       :covered_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -4977,7 +4801,7 @@ module Aws::Inspector2
       :group_by,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute counts_by_group
@@ -4997,7 +4821,7 @@ module Aws::Inspector2
       :total_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5016,7 +4840,7 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegated_admin_accounts
@@ -5032,7 +4856,7 @@ module Aws::Inspector2
       :delegated_admin_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arns
@@ -5059,7 +4883,7 @@ module Aws::Inspector2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5075,7 +4899,7 @@ module Aws::Inspector2
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregation_type
@@ -5107,7 +4931,7 @@ module Aws::Inspector2
       :account_ids,
       :aggregation_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregation_type
@@ -5127,7 +4951,7 @@ module Aws::Inspector2
       :responses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5154,7 +4978,7 @@ module Aws::Inspector2
       :filter_criteria,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5170,7 +4994,7 @@ module Aws::Inspector2
       :next_token,
       :findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute only_associated
@@ -5194,7 +5018,7 @@ module Aws::Inspector2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -5208,7 +5032,7 @@ module Aws::Inspector2
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5217,7 +5041,7 @@ module Aws::Inspector2
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5226,7 +5050,7 @@ module Aws::Inspector2
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -5249,7 +5073,7 @@ module Aws::Inspector2
       :next_token,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5263,7 +5087,7 @@ module Aws::Inspector2
       :next_token,
       :totals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes details of a map filter.</p>
@@ -5281,7 +5105,7 @@ module Aws::Inspector2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on a member account in your organization.</p>
@@ -5304,7 +5128,7 @@ module Aws::Inspector2
       :delegated_admin_account_id,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about the status of Amazon Inspector deep inspection for a member
@@ -5320,7 +5144,7 @@ module Aws::Inspector2
       :account_id,
       :activate_deep_inspection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about the state of Amazon Inspector deep inspection for a member
@@ -5340,7 +5164,7 @@ module Aws::Inspector2
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A monthly schedule.</p>
@@ -5354,7 +5178,7 @@ module Aws::Inspector2
       :start_time,
       :day,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the network path associated with a finding.</p>
@@ -5364,7 +5188,7 @@ module Aws::Inspector2
     class NetworkPath < Struct.new(
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a network reachability finding.</p>
@@ -5383,7 +5207,7 @@ module Aws::Inspector2
       :protocol,
       :network_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the details of a number filter.</p>
@@ -5397,13 +5221,13 @@ module Aws::Inspector2
       :upper_inclusive,
       :lower_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A one time schedule.</p>
     class OneTimeSchedule < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on operating system package type.</p>
@@ -5421,7 +5245,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains the results of a finding aggregation by image layer.</p>
@@ -5439,7 +5263,7 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the details of a package filter.</p>
@@ -5477,7 +5301,7 @@ module Aws::Inspector2
       :source_lambda_layer_arn,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a package vulnerability finding.</p>
@@ -5524,7 +5348,7 @@ module Aws::Inspector2
       :vendor_updated_at,
       :reference_urls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for periodic scans that run on a scheduled basis.</p>
@@ -5541,13 +5365,7 @@ module Aws::Inspector2
       :frequency,
       :frequency_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PeriodicScanFrequency
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
-      NEVER = 'NEVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the permissions an account has within Amazon Inspector.</p>
@@ -5562,7 +5380,7 @@ module Aws::Inspector2
       :service,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the port range associated with a finding.</p>
@@ -5576,7 +5394,7 @@ module Aws::Inspector2
       :begin,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the details of a port range filter.</p>
@@ -5590,7 +5408,7 @@ module Aws::Inspector2
       :begin_inclusive,
       :end_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the scan configuration settings applied to a specific project in a code
@@ -5605,7 +5423,7 @@ module Aws::Inspector2
       :periodic_scan_configurations,
       :continuous_integration_scan_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the continuous integration scan configuration settings applied to a specific
@@ -5621,7 +5439,7 @@ module Aws::Inspector2
       :supported_event,
       :rule_set_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the periodic scan configuration settings applied to a specific project.</p>
@@ -5636,11 +5454,7 @@ module Aws::Inspector2
       :frequency_expression,
       :rule_set_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectSelectionScope
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the recommended course of action to remediate the finding.</p>
@@ -5654,7 +5468,7 @@ module Aws::Inspector2
       :text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on how to remediate a finding.</p>
@@ -5665,7 +5479,7 @@ module Aws::Inspector2
     class Remediation < Struct.new(
       :recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on repository.</p>
@@ -5683,7 +5497,7 @@ module Aws::Inspector2
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains details on the results of a finding aggregation by
@@ -5706,7 +5520,7 @@ module Aws::Inspector2
       :severity_counts,
       :affected_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_type
@@ -5719,12 +5533,12 @@ module Aws::Inspector2
       :scan_type,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetEncryptionKeyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resource involved in a finding.</p>
@@ -5754,7 +5568,7 @@ module Aws::Inspector2
       :tags,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the resource involved in the finding.</p>
@@ -5778,7 +5592,7 @@ module Aws::Inspector2
       :aws_lambda_function,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource filter criteria for a Software bill of materials (SBOM) report.</p>
@@ -5816,7 +5630,7 @@ module Aws::Inspector2
       :ec2_instance_tags,
       :lambda_function_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource map filter for a software bill of material report.</p>
@@ -5834,7 +5648,7 @@ module Aws::Inspector2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access an invalid resource. Make sure the resource is specified
@@ -5844,7 +5658,7 @@ module Aws::Inspector2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about the metadata for an Amazon ECR resource.</p>
@@ -5871,7 +5685,7 @@ module Aws::Inspector2
       :lambda_function,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details the state of Amazon Inspector for each resource type Amazon Inspector scans.</p>
@@ -5897,7 +5711,7 @@ module Aws::Inspector2
       :lambda_code,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details the status of Amazon Inspector for each resource type Amazon Inspector scans.</p>
@@ -5924,7 +5738,7 @@ module Aws::Inspector2
       :lambda_code,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource string filter for a software bill of materials report.</p>
@@ -5938,13 +5752,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleSetCategory
-      SAST = 'SAST'
-      IAC = 'IAC'
-      SCA = 'SCA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the scan.</p>
@@ -6057,7 +5865,7 @@ module Aws::Inspector2
       :status_code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A schedule.</p>
@@ -6080,7 +5888,7 @@ module Aws::Inspector2
       :monthly,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OneTime < Schedule; end
       class Daily < Schedule; end
@@ -6098,7 +5906,7 @@ module Aws::Inspector2
     class ScopeSettings < Struct.new(
       :project_selection_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the criteria used to define the filter for a vulnerability search. </p>
@@ -6108,7 +5916,7 @@ module Aws::Inspector2
     class SearchVulnerabilitiesFilterCriteria < Struct.new(
       :vulnerability_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_criteria
@@ -6124,7 +5932,7 @@ module Aws::Inspector2
       :filter_criteria,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vulnerabilities
@@ -6138,7 +5946,7 @@ module Aws::Inspector2
       :vulnerabilities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_job_id
@@ -6151,12 +5959,12 @@ module Aws::Inspector2
       :scan_job_id,
       :session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendCisSessionHealthResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_job_id
@@ -6173,12 +5981,12 @@ module Aws::Inspector2
       :session_token,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendCisSessionTelemetryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your service quota. To perform the requested action, remove some of
@@ -6192,7 +6000,7 @@ module Aws::Inspector2
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the counts of aggregated finding per severity.</p>
@@ -6214,7 +6022,7 @@ module Aws::Inspector2
       :high,
       :critical,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the criteria used to sort finding results.</p>
@@ -6228,7 +6036,7 @@ module Aws::Inspector2
       :field,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start CIS session message.</p>
@@ -6238,7 +6046,7 @@ module Aws::Inspector2
     class StartCisSessionMessage < Struct.new(
       :session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_job_id
@@ -6251,12 +6059,12 @@ module Aws::Inspector2
       :scan_job_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartCisSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -6270,7 +6078,7 @@ module Aws::Inspector2
       :client_token,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_id
@@ -6283,7 +6091,7 @@ module Aws::Inspector2
       :scan_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that described the state of Amazon Inspector scans for an account.</p>
@@ -6301,7 +6109,7 @@ module Aws::Inspector2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status counts.</p>
@@ -6319,7 +6127,7 @@ module Aws::Inspector2
       :skipped,
       :passed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the step associated with a finding.</p>
@@ -6338,7 +6146,7 @@ module Aws::Inspector2
       :component_type,
       :component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stop CIS message progress.</p>
@@ -6376,7 +6184,7 @@ module Aws::Inspector2
       :informational_checks,
       :error_checks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_checks] = 0 unless options.key?(:total_checks)
@@ -6418,7 +6226,7 @@ module Aws::Inspector2
       :benchmark_version,
       :benchmark_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_job_id
@@ -6435,19 +6243,12 @@ module Aws::Inspector2
       :session_token,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopCisSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopCisSessionStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
-      UNSUPPORTED_OS = 'UNSUPPORTED_OS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the details of a string filter.</p>
@@ -6461,7 +6262,7 @@ module Aws::Inspector2
       :comparison,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a successful association or disassociation between a code repository and a
@@ -6477,7 +6278,7 @@ module Aws::Inspector2
       :scan_configuration_arn,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A suggested fix for a vulnerability in your Lambda function code.</p>
@@ -6491,11 +6292,7 @@ module Aws::Inspector2
       :description,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagComparison
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag filter.</p>
@@ -6513,7 +6310,7 @@ module Aws::Inspector2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6526,12 +6323,12 @@ module Aws::Inspector2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -6544,7 +6341,7 @@ module Aws::Inspector2
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time.</p>
@@ -6558,7 +6355,7 @@ module Aws::Inspector2
       :time_of_day,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that define an aggregation based on finding title.</p>
@@ -6588,7 +6385,7 @@ module Aws::Inspector2
       :sort_by,
       :finding_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that contains details on the results of a finding aggregation by
@@ -6611,7 +6408,7 @@ module Aws::Inspector2
       :account_id,
       :severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6624,12 +6421,12 @@ module Aws::Inspector2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -6655,7 +6452,7 @@ module Aws::Inspector2
       :schedule,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -6664,7 +6461,7 @@ module Aws::Inspector2
     class UpdateCisScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates CIS targets.</p>
@@ -6678,7 +6475,7 @@ module Aws::Inspector2
       :account_ids,
       :target_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -6691,7 +6488,7 @@ module Aws::Inspector2
       :integration_arn,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -6704,7 +6501,7 @@ module Aws::Inspector2
       :integration_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -6717,7 +6514,7 @@ module Aws::Inspector2
       :scan_configuration_arn,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_configuration_arn
@@ -6726,7 +6523,7 @@ module Aws::Inspector2
     class UpdateCodeSecurityScanConfigurationResponse < Struct.new(
       :scan_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_configuration
@@ -6739,12 +6536,12 @@ module Aws::Inspector2
       :ecr_configuration,
       :ec2_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activate_deep_inspection
@@ -6760,7 +6557,7 @@ module Aws::Inspector2
       :activate_deep_inspection,
       :package_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_paths
@@ -6782,7 +6579,7 @@ module Aws::Inspector2
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -6799,12 +6596,12 @@ module Aws::Inspector2
       :scan_type,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEncryptionKeyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -6833,7 +6630,7 @@ module Aws::Inspector2
       :filter_arn,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6842,7 +6639,7 @@ module Aws::Inspector2
     class UpdateFilterOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details required to update an integration with GitHub.</p>
@@ -6856,7 +6653,7 @@ module Aws::Inspector2
       :code,
       :installation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details required to update an integration with a self-managed GitLab
@@ -6868,7 +6665,7 @@ module Aws::Inspector2
     class UpdateGitLabSelfManagedIntegrationDetail < Struct.new(
       :auth_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details required to update a code security integration with a specific
@@ -6884,7 +6681,7 @@ module Aws::Inspector2
       :github,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GitlabSelfManaged < UpdateIntegrationDetails; end
       class Github < UpdateIntegrationDetails; end
@@ -6897,12 +6694,12 @@ module Aws::Inspector2
     class UpdateOrgEc2DeepInspectionConfigurationRequest < Struct.new(
       :org_package_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateOrgEc2DeepInspectionConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -6912,7 +6709,7 @@ module Aws::Inspector2
     class UpdateOrganizationConfigurationInput < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -6922,7 +6719,7 @@ module Aws::Inspector2
     class UpdateOrganizationConfigurationOutput < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains usage information about the cost of Amazon Inspector operation.</p>
@@ -6944,7 +6741,7 @@ module Aws::Inspector2
       :estimated_monthly_cost,
       :currency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total] = 0 unless options.key?(:total)
@@ -6964,7 +6761,7 @@ module Aws::Inspector2
       :account_id,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed validation due to missing required fields or having invalid
@@ -6982,7 +6779,7 @@ module Aws::Inspector2
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes a validation exception.</p>
@@ -6996,7 +6793,7 @@ module Aws::Inspector2
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a specific vulnerability Amazon Inspector can detect.</p>
@@ -7080,7 +6877,7 @@ module Aws::Inspector2
       :detection_platforms,
       :epss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the vulnerable package identified by a finding.</p>
@@ -7131,7 +6928,7 @@ module Aws::Inspector2
       :remediation,
       :source_lambda_layer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:epoch] = 0 unless options.key?(:epoch)
@@ -7150,7 +6947,7 @@ module Aws::Inspector2
       :start_time,
       :days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

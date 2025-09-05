@@ -12,7 +12,7 @@ module Aws::Route53RecoveryCluster
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict with this request. Try again.</p>
@@ -30,7 +30,7 @@ module Aws::Route53RecoveryCluster
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster endpoint isn't available. Try another cluster endpoint.</p>
@@ -39,7 +39,7 @@ module Aws::Route53RecoveryCluster
     class EndpointTemporarilyUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control_arn
@@ -48,7 +48,7 @@ module Aws::Route53RecoveryCluster
     class GetRoutingControlStateRequest < Struct.new(
       :routing_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control_arn
@@ -65,7 +65,7 @@ module Aws::Route53RecoveryCluster
       :routing_control_state,
       :routing_control_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an unexpected error during processing of the request.</p>
@@ -78,7 +78,7 @@ module Aws::Route53RecoveryCluster
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -100,7 +100,7 @@ module Aws::Route53RecoveryCluster
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_controls
@@ -113,7 +113,7 @@ module Aws::Route53RecoveryCluster
       :routing_controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a routing control or control panel that was not found.</p>
@@ -130,7 +130,7 @@ module Aws::Route53RecoveryCluster
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A routing control, which is a simple on/off switch that you
@@ -164,12 +164,7 @@ module Aws::Route53RecoveryCluster
       :routing_control_state,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingControlState
-      On = 'On'
-      Off = 'Off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request can't update that many routing control states at the same time. Try again with fewer routing control states.</p>
@@ -194,7 +189,7 @@ module Aws::Route53RecoveryCluster
       :limit_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because of request throttling.</p>
@@ -207,7 +202,7 @@ module Aws::Route53RecoveryCluster
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -226,7 +221,7 @@ module Aws::Route53RecoveryCluster
       :routing_control_arn,
       :routing_control_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control_arn
@@ -247,12 +242,12 @@ module Aws::Route53RecoveryCluster
       :routing_control_state,
       :safety_rules_to_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRoutingControlStateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_routing_control_state_entries
@@ -269,12 +264,12 @@ module Aws::Route53RecoveryCluster
       :update_routing_control_state_entries,
       :safety_rules_to_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRoutingControlStatesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a validation error on the request.</p>
@@ -291,7 +286,7 @@ module Aws::Route53RecoveryCluster
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a validation error on the request.</p>
@@ -305,15 +300,7 @@ module Aws::Route53RecoveryCluster
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Reason the request failed validation
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

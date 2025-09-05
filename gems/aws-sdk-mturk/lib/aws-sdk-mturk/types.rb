@@ -19,12 +19,12 @@ module Aws::MTurk
       :qualification_request_id,
       :integer_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptQualificationRequestResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_id
@@ -47,12 +47,12 @@ module Aws::MTurk
       :requester_feedback,
       :override_rejection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ApproveAssignmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Assignment data structure represents a single assignment
@@ -129,13 +129,7 @@ module Aws::MTurk
       :answer,
       :requester_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssignmentStatus
-      Submitted = 'Submitted'
-      Approved = 'Approved'
-      Rejected = 'Rejected'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -163,12 +157,12 @@ module Aws::MTurk
       :integer_value,
       :send_notification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateQualificationWithWorkerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a Bonus payment paid to a Worker.</p>
@@ -194,20 +188,7 @@ module Aws::MTurk
       :reason,
       :grant_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Comparator
-      LessThan = 'LessThan'
-      LessThanOrEqualTo = 'LessThanOrEqualTo'
-      GreaterThan = 'GreaterThan'
-      GreaterThanOrEqualTo = 'GreaterThanOrEqualTo'
-      EqualTo = 'EqualTo'
-      NotEqualTo = 'NotEqualTo'
-      Exists = 'Exists'
-      DoesNotExist = 'DoesNotExist'
-      In = 'In'
-      NotIn = 'NotIn'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -231,12 +212,12 @@ module Aws::MTurk
       :number_of_additional_assignments,
       :unique_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateAdditionalAssignmentsForHITResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_assignments
@@ -394,7 +375,7 @@ module Aws::MTurk
       :hit_layout_id,
       :hit_layout_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit
@@ -406,7 +387,7 @@ module Aws::MTurk
     class CreateHITResponse < Struct.new(
       :hit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_approval_delay_in_seconds
@@ -470,7 +451,7 @@ module Aws::MTurk
       :description,
       :qualification_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_type_id
@@ -479,7 +460,7 @@ module Aws::MTurk
     class CreateHITTypeResponse < Struct.new(
       :hit_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_type_id
@@ -582,7 +563,7 @@ module Aws::MTurk
       :hit_layout_id,
       :hit_layout_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit
@@ -594,7 +575,7 @@ module Aws::MTurk
     class CreateHITWithHITTypeResponse < Struct.new(
       :hit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -679,7 +660,7 @@ module Aws::MTurk
       :auto_granted,
       :auto_granted_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type
@@ -689,7 +670,7 @@ module Aws::MTurk
     class CreateQualificationTypeResponse < Struct.new(
       :qualification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_id
@@ -702,12 +683,12 @@ module Aws::MTurk
       :worker_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateWorkerBlockResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -716,12 +697,12 @@ module Aws::MTurk
     class DeleteHITRequest < Struct.new(
       :hit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteHITResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -730,12 +711,12 @@ module Aws::MTurk
     class DeleteQualificationTypeRequest < Struct.new(
       :qualification_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQualificationTypeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_id
@@ -748,12 +729,12 @@ module Aws::MTurk
       :worker_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkerBlockResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_id
@@ -770,32 +751,17 @@ module Aws::MTurk
       :qualification_type_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateQualificationFromWorkerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      AssignmentAccepted = 'AssignmentAccepted'
-      AssignmentAbandoned = 'AssignmentAbandoned'
-      AssignmentReturned = 'AssignmentReturned'
-      AssignmentSubmitted = 'AssignmentSubmitted'
-      AssignmentRejected = 'AssignmentRejected'
-      AssignmentApproved = 'AssignmentApproved'
-      HITCreated = 'HITCreated'
-      HITExpired = 'HITExpired'
-      HITReviewable = 'HITReviewable'
-      HITExtended = 'HITExtended'
-      HITDisposed = 'HITDisposed'
-      Ping = 'Ping'
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountBalanceRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute available_balance
@@ -808,7 +774,7 @@ module Aws::MTurk
       :available_balance,
       :on_hold_balance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_id
@@ -817,7 +783,7 @@ module Aws::MTurk
     class GetAssignmentRequest < Struct.new(
       :assignment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment
@@ -833,7 +799,7 @@ module Aws::MTurk
       :assignment,
       :hit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_id
@@ -848,7 +814,7 @@ module Aws::MTurk
       :assignment_id,
       :question_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_upload_url
@@ -859,7 +825,7 @@ module Aws::MTurk
     class GetFileUploadURLResponse < Struct.new(
       :file_upload_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -868,7 +834,7 @@ module Aws::MTurk
     class GetHITRequest < Struct.new(
       :hit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit
@@ -877,7 +843,7 @@ module Aws::MTurk
     class GetHITResponse < Struct.new(
       :hit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -890,7 +856,7 @@ module Aws::MTurk
       :qualification_type_id,
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification
@@ -902,7 +868,7 @@ module Aws::MTurk
     class GetQualificationScoreResponse < Struct.new(
       :qualification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -911,7 +877,7 @@ module Aws::MTurk
     class GetQualificationTypeRequest < Struct.new(
       :qualification_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type
@@ -920,7 +886,7 @@ module Aws::MTurk
     class GetQualificationTypeResponse < Struct.new(
       :qualification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The HIT data structure represents a single HIT, including
@@ -1040,13 +1006,7 @@ module Aws::MTurk
       :number_of_assignments_available,
       :number_of_assignments_completed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HITAccessActions
-      Accept = 'Accept'
-      PreviewAndAccept = 'PreviewAndAccept'
-      DiscoverPreviewAndAccept = 'DiscoverPreviewAndAccept'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The HITLayoutParameter data structure defines parameter
@@ -1067,22 +1027,7 @@ module Aws::MTurk
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HITReviewStatus
-      NotReviewed = 'NotReviewed'
-      MarkedForReview = 'MarkedForReview'
-      ReviewedAppropriate = 'ReviewedAppropriate'
-      ReviewedInappropriate = 'ReviewedInappropriate'
-    end
-
-    module HITStatus
-      Assignable = 'Assignable'
-      Unassignable = 'Unassignable'
-      Reviewable = 'Reviewable'
-      Reviewing = 'Reviewing'
-      Disposed = 'Disposed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -1103,7 +1048,7 @@ module Aws::MTurk
       :max_results,
       :assignment_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1126,7 +1071,7 @@ module Aws::MTurk
       :num_results,
       :assignments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -1152,7 +1097,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute num_results
@@ -1177,7 +1122,7 @@ module Aws::MTurk
       :next_token,
       :bonus_payments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -1198,7 +1143,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1219,7 +1164,7 @@ module Aws::MTurk
       :num_results,
       :hi_ts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1231,7 +1176,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1252,7 +1197,7 @@ module Aws::MTurk
       :num_results,
       :hi_ts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -1273,7 +1218,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute num_results
@@ -1297,7 +1242,7 @@ module Aws::MTurk
       :next_token,
       :qualification_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query
@@ -1338,7 +1283,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute num_results
@@ -1363,7 +1308,7 @@ module Aws::MTurk
       :next_token,
       :qualification_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -1401,7 +1346,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -1439,7 +1384,7 @@ module Aws::MTurk
       :hit_review_report,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_type_id
@@ -1468,7 +1413,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1490,7 +1435,7 @@ module Aws::MTurk
       :num_results,
       :hi_ts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1502,7 +1447,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1525,7 +1470,7 @@ module Aws::MTurk
       :num_results,
       :worker_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -1552,7 +1497,7 @@ module Aws::MTurk
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1575,7 +1520,7 @@ module Aws::MTurk
       :num_results,
       :qualifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Locale data structure represents a geographical region or location.</p>
@@ -1594,7 +1539,7 @@ module Aws::MTurk
       :country,
       :subdivision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The NotificationSpecification data structure describes a HIT
@@ -1639,18 +1584,7 @@ module Aws::MTurk
       :version,
       :event_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationTransport
-      Email = 'Email'
-      SQS = 'SQS'
-      SNS = 'SNS'
-    end
-
-    module NotifyWorkersFailureCode
-      SoftFailure = 'SoftFailure'
-      HardFailure = 'HardFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> When MTurk encounters an issue with notifying the Workers
@@ -1673,7 +1607,7 @@ module Aws::MTurk
       :notify_workers_failure_message,
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subject
@@ -1694,7 +1628,7 @@ module Aws::MTurk
       :message_text,
       :worker_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notify_workers_failure_statuses
@@ -1706,7 +1640,7 @@ module Aws::MTurk
     class NotifyWorkersResponse < Struct.new(
       :notify_workers_failure_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This data structure is the data type for the AnswerKey
@@ -1728,7 +1662,7 @@ module Aws::MTurk
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Name of the parameter from the Review policy.
@@ -1749,7 +1683,7 @@ module Aws::MTurk
       :values,
       :map_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Qualification data structure represents a Qualification
@@ -1788,7 +1722,7 @@ module Aws::MTurk
       :locale_value,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The QualificationRequest data structure represents a request
@@ -1837,7 +1771,7 @@ module Aws::MTurk
       :answer,
       :submit_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1924,12 +1858,7 @@ module Aws::MTurk
       :required_to_preview,
       :actions_guarded,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QualificationStatus
-      Granted = 'Granted'
-      Revoked = 'Revoked'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The QualificationType data structure represents a
@@ -2031,12 +1960,7 @@ module Aws::MTurk
       :auto_granted,
       :auto_granted_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QualificationTypeStatus
-      Active = 'Active'
-      Inactive = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_id
@@ -2053,12 +1977,12 @@ module Aws::MTurk
       :assignment_id,
       :requester_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RejectAssignmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_request_id
@@ -2076,12 +2000,12 @@ module Aws::MTurk
       :qualification_request_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RejectQualificationRequestResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request is invalid.</p>
@@ -2093,7 +2017,7 @@ module Aws::MTurk
       :message,
       :turk_error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Both the AssignmentReviewReport and the HITReviewReport
@@ -2139,14 +2063,7 @@ module Aws::MTurk
       :result,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewActionStatus
-      Intended = 'Intended'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
-      Cancelled = 'Cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> HIT Review Policy data structures represent HIT review
@@ -2164,12 +2081,7 @@ module Aws::MTurk
       :policy_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewPolicyLevel
-      Assignment = 'Assignment'
-      HIT = 'HIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains both ReviewResult and ReviewAction elements for a
@@ -2189,7 +2101,7 @@ module Aws::MTurk
       :review_results,
       :review_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This data structure is returned multiple times for each
@@ -2237,12 +2149,7 @@ module Aws::MTurk
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewableHITStatus
-      Reviewable = 'Reviewable'
-      Reviewing = 'Reviewing'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_id
@@ -2277,12 +2184,12 @@ module Aws::MTurk
       :reason,
       :unique_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendBonusResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification
@@ -2304,12 +2211,12 @@ module Aws::MTurk
       :notification,
       :test_event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendTestEventNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>
@@ -2321,7 +2228,7 @@ module Aws::MTurk
       :message,
       :turk_error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -2338,12 +2245,12 @@ module Aws::MTurk
       :hit_id,
       :expire_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateExpirationForHITResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -2372,12 +2279,12 @@ module Aws::MTurk
       :hit_id,
       :revert,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateHITReviewStatusResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_id
@@ -2390,12 +2297,12 @@ module Aws::MTurk
       :hit_id,
       :hit_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateHITTypeOfHITResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hit_type_id
@@ -2421,12 +2328,12 @@ module Aws::MTurk
       :notification,
       :active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotificationSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type_id
@@ -2477,7 +2384,7 @@ module Aws::MTurk
       :auto_granted,
       :auto_granted_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_type
@@ -2486,7 +2393,7 @@ module Aws::MTurk
     class UpdateQualificationTypeResponse < Struct.new(
       :qualification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The WorkerBlock data structure represents a Worker who has
@@ -2504,7 +2411,7 @@ module Aws::MTurk
       :worker_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

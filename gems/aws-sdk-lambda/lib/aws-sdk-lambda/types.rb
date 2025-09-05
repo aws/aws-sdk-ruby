@@ -29,7 +29,7 @@ module Aws::Lambda
       :concurrent_executions,
       :unreserved_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_code_size] = 0 unless options.key?(:total_code_size)
@@ -51,7 +51,7 @@ module Aws::Lambda
       :total_code_size,
       :function_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_code_size] = 0 unless options.key?(:total_code_size)
@@ -90,7 +90,7 @@ module Aws::Lambda
       :organization_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement
@@ -103,7 +103,7 @@ module Aws::Lambda
       :statement,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -152,7 +152,7 @@ module Aws::Lambda
       :principal_org_id,
       :function_url_auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement
@@ -161,7 +161,7 @@ module Aws::Lambda
     class AddPermissionResponse < Struct.new(
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -191,7 +191,7 @@ module Aws::Lambda
       :routing_config,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">traffic-shifting</a> configuration of a Lambda function alias.</p>
@@ -201,7 +201,7 @@ module Aws::Lambda
     class AliasRoutingConfiguration < Struct.new(
       :additional_version_weights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of signing profiles that can sign a code package. </p>
@@ -211,7 +211,7 @@ module Aws::Lambda
     class AllowedPublishers < Struct.new(
       :signing_profile_version_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source.</p>
@@ -225,21 +225,7 @@ module Aws::Lambda
       :consumer_group_id,
       :schema_registry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationLogLevel
-      Trace = 'TRACE'
-      Debug = 'DEBUG'
-      Info = 'INFO'
-      Warn = 'WARN'
-      Error = 'ERROR'
-      Fatal = 'FATAL'
-    end
-
-    module Architecture
-      x86_64 = 'x86_64'
-      arm64 = 'arm64'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html">Code signing configuration</a>. </p>
@@ -269,7 +255,7 @@ module Aws::Lambda
       :code_signing_policies,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified code signing configuration does not exist.</p>
@@ -281,7 +267,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.</p>
@@ -291,12 +277,7 @@ module Aws::Lambda
     class CodeSigningPolicies < Struct.new(
       :untrusted_artifact_on_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeSigningPolicy
-      Warn = 'Warn'
-      Enforce = 'Enforce'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your Amazon Web Services account has exceeded its maximum total code size. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -309,7 +290,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The code signature failed one or more of the validation checks for signature mismatch or expiry, and the code signing policy is set to ENFORCE. Lambda blocks the deployment.</p>
@@ -321,7 +302,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_concurrent_executions
@@ -330,7 +311,7 @@ module Aws::Lambda
     class Concurrency < Struct.new(
       :reserved_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">cross-origin resource sharing (CORS)</a> settings for your Lambda function URL. Use CORS to grant access to your function URL from any origin. You can also use CORS to control access for specific HTTP headers and methods in requests to your function URL.</p>
@@ -360,7 +341,7 @@ module Aws::Lambda
       :expose_headers,
       :max_age,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -390,7 +371,7 @@ module Aws::Lambda
       :routing_config,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -415,7 +396,7 @@ module Aws::Lambda
       :description,
       :routing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -436,7 +417,7 @@ module Aws::Lambda
       :code_signing_policies,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config
@@ -445,7 +426,7 @@ module Aws::Lambda
     class CreateCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>
@@ -579,7 +560,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source_arn
@@ -692,7 +673,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's configuration.</p>
@@ -842,7 +823,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -948,7 +929,7 @@ module Aws::Lambda
       :snap_start,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -973,7 +954,7 @@ module Aws::Lambda
       :cors,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_url
@@ -1002,7 +983,7 @@ module Aws::Lambda
       :creation_time,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-dlq">dead-letter queue</a> for failed asynchronous invocations.</p>
@@ -1012,7 +993,7 @@ module Aws::Lambda
     class DeadLetterConfig < Struct.new(
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1025,7 +1006,7 @@ module Aws::Lambda
       :function_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -1034,12 +1015,12 @@ module Aws::Lambda
     class DeleteCodeSigningConfigRequest < Struct.new(
       :code_signing_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCodeSigningConfigResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>
@@ -1173,7 +1154,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute uuid
@@ -1182,7 +1163,7 @@ module Aws::Lambda
     class DeleteEventSourceMappingRequest < Struct.new(
       :uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1191,7 +1172,7 @@ module Aws::Lambda
     class DeleteFunctionCodeSigningConfigRequest < Struct.new(
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1200,7 +1181,7 @@ module Aws::Lambda
     class DeleteFunctionConcurrencyRequest < Struct.new(
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1213,7 +1194,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1226,7 +1207,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1239,7 +1220,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_name
@@ -1252,7 +1233,7 @@ module Aws::Lambda
       :layer_name,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1265,7 +1246,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration object that specifies the destination of an event after Lambda processes it. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations">Adding a destination</a>.</p>
@@ -1279,7 +1260,7 @@ module Aws::Lambda
       :on_success,
       :on_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specific configuration settings for a DocumentDB event source. </p>
@@ -1297,7 +1278,7 @@ module Aws::Lambda
       :collection_name,
       :full_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Need additional permissions to configure VPC settings.</p>
@@ -1309,7 +1290,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon EC2 throttled Lambda during Lambda function initialization using the execution role provided for the function.</p>
@@ -1321,7 +1302,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda received an unexpected Amazon EC2 client exception while setting up for the Lambda function.</p>
@@ -1336,7 +1317,7 @@ module Aws::Lambda
       :message,
       :ec2_error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred when reading from or writing to a connected file system.</p>
@@ -1348,7 +1329,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda function couldn't make a network connection to the configured file system.</p>
@@ -1360,7 +1341,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda function couldn't mount the configured file system due to a permission or configuration issue.</p>
@@ -1372,7 +1353,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda function made a network connection to the configured file system, but the mount operation timed out.</p>
@@ -1384,7 +1365,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't create an elastic network interface in the VPC, specified as part of Lambda function configuration, because the limit for network interfaces has been reached. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -1396,11 +1377,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndPointType
-      KAFKA_BOOTSTRAP_SERVERS = 'KAFKA_BOOTSTRAP_SERVERS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A function's environment variable settings. You can use environment variables to adjust your function's behavior without updating code. An environment variable is a pair of strings that are stored in a function's version-specific configuration.</p>
@@ -1410,7 +1387,7 @@ module Aws::Lambda
     class Environment < Struct.new(
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error messages for environment variables that couldn't be applied.</p>
@@ -1424,7 +1401,7 @@ module Aws::Lambda
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of an operation to update or read environment variables. If the operation succeeds, the response contains the environment variables. If it fails, the response contains details about the error.</p>
@@ -1438,7 +1415,7 @@ module Aws::Lambda
       :variables,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size of the function's <code>/tmp</code> directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage">Configuring ephemeral storage (console)</a>.</p>
@@ -1448,7 +1425,7 @@ module Aws::Lambda
     class EphemeralStorage < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>
@@ -1582,11 +1559,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceMappingMetric
-      EventCount = 'EventCount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metrics configuration for your event source. Use this configuration object to define which metrics you want your event source mapping to produce.</p>
@@ -1596,13 +1569,7 @@ module Aws::Lambda
     class EventSourceMappingMetricsConfig < Struct.new(
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourcePosition
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LATEST = 'LATEST'
-      AT_TIMESTAMP = 'AT_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the connection between a Lambda function and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html">Amazon EFS file system</a>.</p>
@@ -1616,7 +1583,7 @@ module Aws::Lambda
       :arn,
       :local_mount_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A structure within a <code>FilterCriteria</code> object that defines an event filtering pattern. </p>
@@ -1626,7 +1593,7 @@ module Aws::Lambda
     class Filter < Struct.new(
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An object that contains the filters for an event source. </p>
@@ -1636,7 +1603,7 @@ module Aws::Lambda
     class FilterCriteria < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about an error related to filter criteria encryption.</p>
@@ -1650,12 +1617,7 @@ module Aws::Lambda
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FullDocument
-      UpdateLookup = 'UpdateLookup'
-      Default = 'Default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The code for the Lambda function. You can either specify an object in Amazon S3, upload a .zip file archive deployment package directly, or specify the URI of a container image.</p>
@@ -1685,7 +1647,7 @@ module Aws::Lambda
       :image_uri,
       :source_kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's deployment package.</p>
@@ -1711,7 +1673,7 @@ module Aws::Lambda
       :resolved_image_uri,
       :source_kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's configuration.</p>
@@ -1861,7 +1823,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -1891,16 +1853,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FunctionResponseType
-      ReportBatchItemFailures = 'ReportBatchItemFailures'
-    end
-
-    module FunctionUrlAuthType
-      NONE = 'NONE'
-      AWS_IAM = 'AWS_IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a Lambda function URL.</p>
@@ -1934,16 +1887,12 @@ module Aws::Lambda
       :auth_type,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FunctionVersion
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_limit
@@ -1956,7 +1905,7 @@ module Aws::Lambda
       :account_limit,
       :account_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -1986,7 +1935,7 @@ module Aws::Lambda
       :routing_config,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -1999,7 +1948,7 @@ module Aws::Lambda
       :function_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -2008,7 +1957,7 @@ module Aws::Lambda
     class GetCodeSigningConfigRequest < Struct.new(
       :code_signing_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config
@@ -2017,7 +1966,7 @@ module Aws::Lambda
     class GetCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>
@@ -2151,7 +2100,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute uuid
@@ -2160,7 +2109,7 @@ module Aws::Lambda
     class GetEventSourceMappingRequest < Struct.new(
       :uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2169,7 +2118,7 @@ module Aws::Lambda
     class GetFunctionCodeSigningConfigRequest < Struct.new(
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -2182,7 +2131,7 @@ module Aws::Lambda
       :code_signing_config_arn,
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2191,7 +2140,7 @@ module Aws::Lambda
     class GetFunctionConcurrencyRequest < Struct.new(
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_concurrent_executions
@@ -2200,7 +2149,7 @@ module Aws::Lambda
     class GetFunctionConcurrencyResponse < Struct.new(
       :reserved_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's configuration.</p>
@@ -2350,7 +2299,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -2368,7 +2317,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified
@@ -2393,7 +2342,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2406,7 +2355,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2415,7 +2364,7 @@ module Aws::Lambda
     class GetFunctionRecursionConfigRequest < Struct.new(
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recursive_loop
@@ -2424,7 +2373,7 @@ module Aws::Lambda
     class GetFunctionRecursionConfigResponse < Struct.new(
       :recursive_loop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2437,7 +2386,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -2462,7 +2411,7 @@ module Aws::Lambda
       :tags_error,
       :concurrency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2475,7 +2424,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_url
@@ -2508,7 +2457,7 @@ module Aws::Lambda
       :last_modified_time,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -2549,7 +2498,7 @@ module Aws::Lambda
       :license_info,
       :compatible_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -2563,7 +2512,7 @@ module Aws::Lambda
     class GetLayerVersionByArnRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -2604,7 +2553,7 @@ module Aws::Lambda
       :license_info,
       :compatible_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -2622,7 +2571,7 @@ module Aws::Lambda
       :layer_name,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2635,7 +2584,7 @@ module Aws::Lambda
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_name
@@ -2648,7 +2597,7 @@ module Aws::Lambda
       :layer_name,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2661,7 +2610,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2674,7 +2623,7 @@ module Aws::Lambda
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2687,7 +2636,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requested_provisioned_concurrent_executions
@@ -2716,7 +2665,7 @@ module Aws::Lambda
       :status_reason,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2729,7 +2678,7 @@ module Aws::Lambda
       :function_name,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_runtime_on
@@ -2746,7 +2695,7 @@ module Aws::Lambda
       :runtime_version_arn,
       :function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration values that override the container image Dockerfile settings. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container image settings</a>.</p>
@@ -2764,7 +2713,7 @@ module Aws::Lambda
       :command,
       :working_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error response to <code>GetFunctionConfiguration</code>.</p>
@@ -2778,7 +2727,7 @@ module Aws::Lambda
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response to a <code>GetFunctionConfiguration</code> request.</p>
@@ -2792,7 +2741,7 @@ module Aws::Lambda
       :image_config,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The code signature failed the integrity check. If the integrity check fails, then Lambda blocks deployment, even if the code signing policy is set to WARN.</p>
@@ -2804,7 +2753,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the parameters in the request is not valid.</p>
@@ -2818,7 +2767,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body could not be parsed as JSON, or a request header is invalid. For example, the 'x-amzn-RequestId' header is not a valid UUID string.</p>
@@ -2832,7 +2781,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The runtime or runtime version specified is not supported.</p>
@@ -2844,7 +2793,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The security group ID provided in the Lambda function VPC configuration is not valid.</p>
@@ -2856,7 +2805,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet ID provided in the Lambda function VPC configuration is not valid.</p>
@@ -2868,7 +2817,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda could not unzip the deployment package.</p>
@@ -2880,7 +2829,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -2909,7 +2858,7 @@ module Aws::Lambda
       :payload,
       :qualifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -2934,18 +2883,12 @@ module Aws::Lambda
       :payload,
       :executed_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
         super
       end
-    end
-
-    module InvocationType
-      Event = 'Event'
-      RequestResponse = 'RequestResponse'
-      DryRun = 'DryRun'
     end
 
     # @deprecated
@@ -2959,7 +2902,7 @@ module Aws::Lambda
       :function_name,
       :invoke_args,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A success response (<code>202 Accepted</code>) indicates that the request is queued for invocation.</p>
@@ -2970,17 +2913,12 @@ module Aws::Lambda
     class InvokeAsyncResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
         super
       end
-    end
-
-    module InvokeMode
-      BUFFERED = 'BUFFERED'
-      RESPONSE_STREAM = 'RESPONSE_STREAM'
     end
 
     # <p>A chunk of the streamed response payload.</p>
@@ -2990,7 +2928,7 @@ module Aws::Lambda
     class InvokeResponseStreamUpdate < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response confirming that the event stream is complete.</p>
@@ -3008,7 +2946,7 @@ module Aws::Lambda
       :error_details,
       :log_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3037,7 +2975,7 @@ module Aws::Lambda
       :qualifier,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -3058,7 +2996,7 @@ module Aws::Lambda
       :event_stream,
       :response_stream_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -3078,7 +3016,7 @@ module Aws::Lambda
       :invoke_complete,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PayloadChunk < InvokeWithResponseStreamResponseEvent; end
       class InvokeComplete < InvokeWithResponseStreamResponseEvent; end
@@ -3094,7 +3032,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't decrypt the environment variables because the KMS key used is disabled. Check the Lambda function's KMS key settings.</p>
@@ -3106,7 +3044,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't decrypt the environment variables because the state of the KMS key used is not valid for Decrypt. Check the function's KMS key settings.</p>
@@ -3118,7 +3056,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't decrypt the environment variables because the KMS key was not found. Check the function's KMS key settings.</p>
@@ -3130,7 +3068,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific access configuration settings that tell Lambda how to authenticate with your schema registry.</p> <p>If you're working with an Glue schema registry, don't provide authentication details in this object. Instead, ensure that your execution role has the required permissions for Lambda to access your cluster.</p> <p>If you're working with a Confluent schema registry, choose the authentication method in the <code>Type</code> field, and provide the Secrets Manager secret ARN in the <code>URI</code> field.</p>
@@ -3144,13 +3082,7 @@ module Aws::Lambda
       :type,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KafkaSchemaRegistryAuthType
-      BASIC_AUTH = 'BASIC_AUTH'
-      CLIENT_CERTIFICATE_TLS_AUTH = 'CLIENT_CERTIFICATE_TLS_AUTH'
-      SERVER_ROOT_CA_CERTIFICATE = 'SERVER_ROOT_CA_CERTIFICATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific configuration settings for a Kafka schema registry.</p>
@@ -3172,12 +3104,7 @@ module Aws::Lambda
       :access_configs,
       :schema_validation_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KafkaSchemaValidationAttribute
-      KEY = 'KEY'
-      VALUE = 'VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific schema validation configuration settings that tell Lambda the message attributes you want to validate and filter using your schema registry.</p>
@@ -3187,37 +3114,7 @@ module Aws::Lambda
     class KafkaSchemaValidationConfig < Struct.new(
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LastUpdateStatus
-      Successful = 'Successful'
-      Failed = 'Failed'
-      InProgress = 'InProgress'
-    end
-
-    module LastUpdateStatusReasonCode
-      EniLimitExceeded = 'EniLimitExceeded'
-      InsufficientRolePermissions = 'InsufficientRolePermissions'
-      InvalidConfiguration = 'InvalidConfiguration'
-      InternalError = 'InternalError'
-      SubnetOutOfIPAddresses = 'SubnetOutOfIPAddresses'
-      InvalidSubnet = 'InvalidSubnet'
-      InvalidSecurityGroup = 'InvalidSecurityGroup'
-      ImageDeleted = 'ImageDeleted'
-      ImageAccessDenied = 'ImageAccessDenied'
-      InvalidImage = 'InvalidImage'
-      KMSKeyAccessDenied = 'KMSKeyAccessDenied'
-      KMSKeyNotFound = 'KMSKeyNotFound'
-      InvalidStateKMSKey = 'InvalidStateKMSKey'
-      DisabledKMSKey = 'DisabledKMSKey'
-      EFSIOError = 'EFSIOError'
-      EFSMountConnectivityError = 'EFSMountConnectivityError'
-      EFSMountFailure = 'EFSMountFailure'
-      EFSMountTimeout = 'EFSMountTimeout'
-      InvalidRuntime = 'InvalidRuntime'
-      InvalidZipFileException = 'InvalidZipFileException'
-      FunctionError = 'FunctionError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.</p>
@@ -3239,7 +3136,7 @@ module Aws::Lambda
       :signing_profile_version_arn,
       :signing_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -3266,7 +3163,7 @@ module Aws::Lambda
       :s3_object_version,
       :zip_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.</p>
@@ -3292,7 +3189,7 @@ module Aws::Lambda
       :signing_profile_version_arn,
       :signing_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -3331,7 +3228,7 @@ module Aws::Lambda
       :license_info,
       :compatible_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -3354,7 +3251,7 @@ module Aws::Lambda
       :layer_arn,
       :latest_matching_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3375,7 +3272,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3388,7 +3285,7 @@ module Aws::Lambda
       :next_marker,
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3401,7 +3298,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3414,7 +3311,7 @@ module Aws::Lambda
       :next_marker,
       :code_signing_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source_arn
@@ -3435,7 +3332,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3448,7 +3345,7 @@ module Aws::Lambda
       :next_marker,
       :event_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3465,7 +3362,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_event_invoke_configs
@@ -3478,7 +3375,7 @@ module Aws::Lambda
       :function_event_invoke_configs,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3495,7 +3392,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_url_configs
@@ -3508,7 +3405,7 @@ module Aws::Lambda
       :function_url_configs,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -3525,7 +3422,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3538,7 +3435,7 @@ module Aws::Lambda
       :next_marker,
       :function_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute master_region
@@ -3559,7 +3456,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Lambda functions.</p>
@@ -3573,7 +3470,7 @@ module Aws::Lambda
       :next_marker,
       :functions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compatible_runtime
@@ -3598,7 +3495,7 @@ module Aws::Lambda
       :max_items,
       :compatible_architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3611,7 +3508,7 @@ module Aws::Lambda
       :next_marker,
       :layer_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compatible_runtime
@@ -3632,7 +3529,7 @@ module Aws::Lambda
       :max_items,
       :compatible_architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3645,7 +3542,7 @@ module Aws::Lambda
       :next_marker,
       :layers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3662,7 +3559,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_concurrency_configs
@@ -3675,7 +3572,7 @@ module Aws::Lambda
       :provisioned_concurrency_configs,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -3684,7 +3581,7 @@ module Aws::Lambda
     class ListTagsRequest < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3693,7 +3590,7 @@ module Aws::Lambda
     class ListTagsResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -3710,7 +3607,7 @@ module Aws::Lambda
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3723,17 +3620,7 @@ module Aws::Lambda
       :next_marker,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogFormat
-      Json = 'JSON'
-      Text = 'Text'
-    end
-
-    module LogType
-      None = 'None'
-      Tail = 'Tail'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's Amazon CloudWatch Logs configuration settings.</p>
@@ -3755,7 +3642,7 @@ module Aws::Lambda
       :system_log_level,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A destination for events that failed processing. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html#invocation-async-destinations">Adding a destination</a>.</p>
@@ -3765,7 +3652,7 @@ module Aws::Lambda
     class OnFailure < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A destination for events that were processed successfully.</p> <p>To retain records of successful <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations">asynchronous invocations</a>, you can configure an Amazon SNS topic, Amazon SQS queue, Lambda function, or Amazon EventBridge event bus as the destination.</p> <note> <p> <code>OnSuccess</code> is not supported in <code>CreateEventSourceMapping</code> or <code>UpdateEventSourceMapping</code> requests.</p> </note>
@@ -3775,12 +3662,7 @@ module Aws::Lambda
     class OnSuccess < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageType
-      Zip = 'Zip'
-      Image = 'Image'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The permissions policy for the resource is too large. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -3792,7 +3674,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RevisionId provided does not match the latest RevisionId for the Lambda function or alias.</p> <ul> <li> <p> <b>For AddPermission and RemovePermission API operations:</b> Call <code>GetPolicy</code> to retrieve the latest RevisionId for your resource.</p> </li> <li> <p> <b>For all other API operations:</b> Call <code>GetFunction</code> or <code>GetAlias</code> to retrieve the latest RevisionId for your resource.</p> </li> </ul>
@@ -3806,7 +3688,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the provisioned concurrency configuration for a function alias or version.</p>
@@ -3840,7 +3722,7 @@ module Aws::Lambda
       :status_reason,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration does not exist.</p>
@@ -3852,13 +3734,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisionedConcurrencyStatusEnum
-      IN_PROGRESS = 'IN_PROGRESS'
-      READY = 'READY'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode"> provisioned mode</a> configuration for the event source. Use Provisioned Mode to customize the minimum and maximum number of event pollers for your event source. An event poller is a compute unit that provides approximately 5 MBps of throughput.</p>
@@ -3872,7 +3748,7 @@ module Aws::Lambda
       :minimum_pollers,
       :maximum_pollers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_name
@@ -3901,7 +3777,7 @@ module Aws::Lambda
       :license_info,
       :compatible_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -3942,7 +3818,7 @@ module Aws::Lambda
       :license_info,
       :compatible_architectures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -4097,7 +3973,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -4123,7 +3999,7 @@ module Aws::Lambda
       :description,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -4136,7 +4012,7 @@ module Aws::Lambda
       :code_signing_config_arn,
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -4149,7 +4025,7 @@ module Aws::Lambda
       :code_signing_config_arn,
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_concurrent_executions
@@ -4158,7 +4034,7 @@ module Aws::Lambda
     class PutFunctionConcurrencyOutput < Struct.new(
       :reserved_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4171,7 +4047,7 @@ module Aws::Lambda
       :function_name,
       :reserved_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified
@@ -4196,7 +4072,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4221,7 +4097,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4234,7 +4110,7 @@ module Aws::Lambda
       :function_name,
       :recursive_loop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recursive_loop
@@ -4243,7 +4119,7 @@ module Aws::Lambda
     class PutFunctionRecursionConfigResponse < Struct.new(
       :recursive_loop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4260,7 +4136,7 @@ module Aws::Lambda
       :qualifier,
       :provisioned_concurrent_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requested_provisioned_concurrent_executions
@@ -4289,7 +4165,7 @@ module Aws::Lambda
       :status_reason,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4310,7 +4186,7 @@ module Aws::Lambda
       :update_runtime_on,
       :runtime_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_runtime_on
@@ -4327,7 +4203,7 @@ module Aws::Lambda
       :function_arn,
       :runtime_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda has detected your function being invoked in a recursive loop with other Amazon Web Services resources and stopped your function's invocation.</p>
@@ -4341,12 +4217,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecursiveLoop
-      Allow = 'Allow'
-      Terminate = 'Terminate'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_name
@@ -4367,7 +4238,7 @@ module Aws::Lambda
       :statement_id,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4388,7 +4259,7 @@ module Aws::Lambda
       :qualifier,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request payload exceeded the <code>Invoke</code> request body JSON input quota. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">Lambda quotas</a>.</p>
@@ -4400,7 +4271,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource already exists, or another operation is in progress.</p>
@@ -4414,7 +4285,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation conflicts with the resource's availability. For example, you tried to update an event source mapping in the CREATING state, or you tried to delete an event source mapping currently UPDATING.</p>
@@ -4426,7 +4297,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request does not exist.</p>
@@ -4438,7 +4309,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function is inactive and its VPC connection is no longer available. Wait for the VPC connection to reestablish and try again.</p>
@@ -4452,56 +4323,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResponseStreamingInvocationType
-      RequestResponse = 'RequestResponse'
-      DryRun = 'DryRun'
-    end
-
-    module Runtime
-      nodejs = 'nodejs'
-      nodejs43 = 'nodejs4.3'
-      nodejs610 = 'nodejs6.10'
-      nodejs810 = 'nodejs8.10'
-      nodejs10x = 'nodejs10.x'
-      nodejs12x = 'nodejs12.x'
-      nodejs14x = 'nodejs14.x'
-      nodejs16x = 'nodejs16.x'
-      java8 = 'java8'
-      java8al2 = 'java8.al2'
-      java11 = 'java11'
-      python27 = 'python2.7'
-      python36 = 'python3.6'
-      python37 = 'python3.7'
-      python38 = 'python3.8'
-      python39 = 'python3.9'
-      dotnetcore10 = 'dotnetcore1.0'
-      dotnetcore20 = 'dotnetcore2.0'
-      dotnetcore21 = 'dotnetcore2.1'
-      dotnetcore31 = 'dotnetcore3.1'
-      dotnet6 = 'dotnet6'
-      dotnet8 = 'dotnet8'
-      nodejs43edge = 'nodejs4.3-edge'
-      go1x = 'go1.x'
-      ruby25 = 'ruby2.5'
-      ruby27 = 'ruby2.7'
-      provided = 'provided'
-      providedal2 = 'provided.al2'
-      nodejs18x = 'nodejs18.x'
-      python310 = 'python3.10'
-      java17 = 'java17'
-      ruby32 = 'ruby3.2'
-      ruby33 = 'ruby3.3'
-      ruby34 = 'ruby3.4'
-      python311 = 'python3.11'
-      nodejs20x = 'nodejs20.x'
-      providedal2023 = 'provided.al2023'
-      python312 = 'python3.12'
-      java21 = 'java21'
-      python313 = 'python3.13'
-      nodejs22x = 'nodejs22.x'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ARN of the runtime and any errors that occured.</p>
@@ -4515,7 +4337,7 @@ module Aws::Lambda
       :runtime_version_arn,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Any error returned when the runtime version information for the function could not be retrieved.</p>
@@ -4529,7 +4351,7 @@ module Aws::Lambda
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>(Amazon SQS only) The scaling configuration for the event source. To remove the configuration, pass an empty value.</p>
@@ -4539,12 +4361,7 @@ module Aws::Lambda
     class ScalingConfig < Struct.new(
       :maximum_concurrency,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaRegistryEventRecordFormat
-      JSON = 'JSON'
-      SOURCE = 'SOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The self-managed Apache Kafka cluster for your event source.</p>
@@ -4554,7 +4371,7 @@ module Aws::Lambda
     class SelfManagedEventSource < Struct.new(
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specific configuration settings for a self-managed Apache Kafka event source.</p>
@@ -4568,7 +4385,7 @@ module Aws::Lambda
       :consumer_group_id,
       :schema_registry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda service encountered an internal error.</p>
@@ -4580,7 +4397,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart</a> setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.</p>
@@ -4590,12 +4407,7 @@ module Aws::Lambda
     class SnapStart < Struct.new(
       :apply_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapStartApplyOn
-      PublishedVersions = 'PublishedVersions'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>afterRestore()</code> <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html">runtime hook</a> encountered an error. For more information, check the Amazon CloudWatch logs.</p>
@@ -4607,7 +4419,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda is initializing your function. You can invoke the function when the <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">function state</a> becomes <code>Active</code>.</p>
@@ -4619,12 +4431,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapStartOptimizationStatus
-      On = 'On'
-      Off = 'Off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">SnapStart</a> setting.</p>
@@ -4638,7 +4445,7 @@ module Aws::Lambda
       :apply_on,
       :optimization_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't restore the snapshot within the timeout limit.</p>
@@ -4650,7 +4457,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.</p>
@@ -4664,52 +4471,7 @@ module Aws::Lambda
       :type,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceAccessType
-      BASIC_AUTH = 'BASIC_AUTH'
-      VPC_SUBNET = 'VPC_SUBNET'
-      VPC_SECURITY_GROUP = 'VPC_SECURITY_GROUP'
-      SASL_SCRAM_512_AUTH = 'SASL_SCRAM_512_AUTH'
-      SASL_SCRAM_256_AUTH = 'SASL_SCRAM_256_AUTH'
-      VIRTUAL_HOST = 'VIRTUAL_HOST'
-      CLIENT_CERTIFICATE_TLS_AUTH = 'CLIENT_CERTIFICATE_TLS_AUTH'
-      SERVER_ROOT_CA_CERTIFICATE = 'SERVER_ROOT_CA_CERTIFICATE'
-    end
-
-    module State
-      Pending = 'Pending'
-      Active = 'Active'
-      Inactive = 'Inactive'
-      Failed = 'Failed'
-    end
-
-    module StateReasonCode
-      Idle = 'Idle'
-      Creating = 'Creating'
-      Restoring = 'Restoring'
-      EniLimitExceeded = 'EniLimitExceeded'
-      InsufficientRolePermissions = 'InsufficientRolePermissions'
-      InvalidConfiguration = 'InvalidConfiguration'
-      InternalError = 'InternalError'
-      SubnetOutOfIPAddresses = 'SubnetOutOfIPAddresses'
-      InvalidSubnet = 'InvalidSubnet'
-      InvalidSecurityGroup = 'InvalidSecurityGroup'
-      ImageDeleted = 'ImageDeleted'
-      ImageAccessDenied = 'ImageAccessDenied'
-      InvalidImage = 'InvalidImage'
-      KMSKeyAccessDenied = 'KMSKeyAccessDenied'
-      KMSKeyNotFound = 'KMSKeyNotFound'
-      InvalidStateKMSKey = 'InvalidStateKMSKey'
-      DisabledKMSKey = 'DisabledKMSKey'
-      EFSIOError = 'EFSIOError'
-      EFSMountConnectivityError = 'EFSMountConnectivityError'
-      EFSMountFailure = 'EFSMountFailure'
-      EFSMountTimeout = 'EFSMountTimeout'
-      InvalidRuntime = 'InvalidRuntime'
-      InvalidZipFileException = 'InvalidZipFileException'
-      FunctionError = 'FunctionError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lambda couldn't set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses.</p>
@@ -4721,13 +4483,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SystemLogLevel
-      Debug = 'DEBUG'
-      Info = 'INFO'
-      Warn = 'WARN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -4740,7 +4496,7 @@ module Aws::Lambda
       :resource,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about an error related to retrieving tags.</p>
@@ -4754,16 +4510,7 @@ module Aws::Lambda
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThrottleReason
-      ConcurrentInvocationLimitExceeded = 'ConcurrentInvocationLimitExceeded'
-      FunctionInvocationRateLimitExceeded = 'FunctionInvocationRateLimitExceeded'
-      ReservedFunctionConcurrentInvocationLimitExceeded = 'ReservedFunctionConcurrentInvocationLimitExceeded'
-      ReservedFunctionInvocationRateLimitExceeded = 'ReservedFunctionInvocationRateLimitExceeded'
-      CallerRateLimitExceeded = 'CallerRateLimitExceeded'
-      ConcurrentSnapshotCreateLimitExceeded = 'ConcurrentSnapshotCreateLimitExceeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
@@ -4782,7 +4529,7 @@ module Aws::Lambda
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's <a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">X-Ray</a> tracing configuration. To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.</p>
@@ -4792,7 +4539,7 @@ module Aws::Lambda
     class TracingConfig < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's X-Ray tracing configuration.</p>
@@ -4802,12 +4549,7 @@ module Aws::Lambda
     class TracingConfigResponse < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TracingMode
-      Active = 'Active'
-      PassThrough = 'PassThrough'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content type of the <code>Invoke</code> request body is not JSON.</p>
@@ -4819,7 +4561,7 @@ module Aws::Lambda
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -4832,7 +4574,7 @@ module Aws::Lambda
       :resource,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about a Lambda function <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">alias</a>.</p>
@@ -4862,7 +4604,7 @@ module Aws::Lambda
       :routing_config,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -4891,7 +4633,7 @@ module Aws::Lambda
       :routing_config,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config_arn
@@ -4912,7 +4654,7 @@ module Aws::Lambda
       :allowed_publishers,
       :code_signing_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_signing_config
@@ -4921,7 +4663,7 @@ module Aws::Lambda
     class UpdateCodeSigningConfigResponse < Struct.new(
       :code_signing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>
@@ -5055,7 +4797,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute uuid
@@ -5144,7 +4886,7 @@ module Aws::Lambda
       :metrics_config,
       :provisioned_poller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's configuration.</p>
@@ -5294,7 +5036,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -5348,7 +5090,7 @@ module Aws::Lambda
       :architectures,
       :source_kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a function's configuration.</p>
@@ -5498,7 +5240,7 @@ module Aws::Lambda
       :runtime_version_config,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code_size] = 0 unless options.key?(:code_size)
@@ -5584,7 +5326,7 @@ module Aws::Lambda
       :snap_start,
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified
@@ -5609,7 +5351,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -5634,7 +5376,7 @@ module Aws::Lambda
       :maximum_event_age_in_seconds,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_name
@@ -5659,7 +5401,7 @@ module Aws::Lambda
       :cors,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_url
@@ -5692,13 +5434,7 @@ module Aws::Lambda
       :last_modified_time,
       :invoke_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateRuntimeOn
-      Auto = 'Auto'
-      Manual = 'Manual'
-      FunctionUpdate = 'FunctionUpdate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">Configuring a Lambda function to access resources in a VPC</a>.</p>
@@ -5716,7 +5452,7 @@ module Aws::Lambda
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC security groups and subnets that are attached to a Lambda function.</p>
@@ -5738,7 +5474,7 @@ module Aws::Lambda
       :vpc_id,
       :ipv6_allowed_for_dual_stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

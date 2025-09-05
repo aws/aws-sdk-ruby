@@ -78,17 +78,12 @@ module Aws::Snowball
       :is_restricted,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_restricted] = false unless options.key?(:is_restricted)
         super
       end
-    end
-
-    module AddressType
-      CUST_PICKUP = 'CUST_PICKUP'
-      AWS_SHIP = 'AWS_SHIP'
     end
 
     # @!attribute cluster_id
@@ -98,12 +93,12 @@ module Aws::Snowball
     class CancelClusterRequest < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelClusterResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -113,12 +108,12 @@ module Aws::Snowball
     class CancelJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Job creation failed. Currently, clusters support five nodes. If you have fewer than
@@ -129,7 +124,7 @@ module Aws::Snowball
     class ClusterLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a cluster's state, a cluster's ID, and other important information.</p>
@@ -154,7 +149,7 @@ module Aws::Snowball
       :creation_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a specific cluster.</p>
@@ -251,15 +246,7 @@ module Aws::Snowball
       :tax_documents,
       :on_device_service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterState
-      AWAITING_QUORUM = 'AwaitingQuorum'
-      PENDING = 'Pending'
-      IN_USE = 'InUse'
-      COMPLETE = 'Complete'
-      CANCELLED = 'Cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
@@ -276,7 +263,7 @@ module Aws::Snowball
       :ami_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You get this exception when you call <code>CreateReturnShippingLabel</code> more than once
@@ -290,7 +277,7 @@ module Aws::Snowball
       :conflict_resource,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -299,7 +286,7 @@ module Aws::Snowball
     class CreateAddressRequest < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_id
@@ -310,7 +297,7 @@ module Aws::Snowball
     class CreateAddressResult < Struct.new(
       :address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_type
@@ -457,7 +444,7 @@ module Aws::Snowball
       :long_term_pricing_ids,
       :snowball_capacity_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -470,7 +457,7 @@ module Aws::Snowball
       :cluster_id,
       :job_list_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_type
@@ -619,7 +606,7 @@ module Aws::Snowball
       :impact_level,
       :pickup_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -629,7 +616,7 @@ module Aws::Snowball
     class CreateJobResult < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute long_term_pricing_type
@@ -648,7 +635,7 @@ module Aws::Snowball
       :is_long_term_pricing_auto_renew,
       :snowball_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute long_term_pricing_id
@@ -657,7 +644,7 @@ module Aws::Snowball
     class CreateLongTermPricingResult < Struct.new(
       :long_term_pricing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -673,7 +660,7 @@ module Aws::Snowball
       :job_id,
       :shipping_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -682,7 +669,7 @@ module Aws::Snowball
     class CreateReturnShippingLabelResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the real-time status of a Snow device's data transfer while the device is at
@@ -709,7 +696,7 @@ module Aws::Snowball
       :total_bytes,
       :total_objects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bytes_transferred] = 0 unless options.key?(:bytes_transferred)
@@ -731,7 +718,7 @@ module Aws::Snowball
       :service_name,
       :service_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_id
@@ -740,7 +727,7 @@ module Aws::Snowball
     class DescribeAddressRequest < Struct.new(
       :address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -750,7 +737,7 @@ module Aws::Snowball
     class DescribeAddressResult < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -765,7 +752,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addresses
@@ -780,7 +767,7 @@ module Aws::Snowball
       :addresses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -789,7 +776,7 @@ module Aws::Snowball
     class DescribeClusterRequest < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_metadata
@@ -799,7 +786,7 @@ module Aws::Snowball
     class DescribeClusterResult < Struct.new(
       :cluster_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -809,7 +796,7 @@ module Aws::Snowball
     class DescribeJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_metadata
@@ -824,7 +811,7 @@ module Aws::Snowball
       :job_metadata,
       :sub_job_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -834,7 +821,7 @@ module Aws::Snowball
     class DescribeReturnShippingLabelRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -851,7 +838,7 @@ module Aws::Snowball
       :expiration_date,
       :return_shipping_label_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for <code>SnowconeDeviceConfiguration</code>. </p>
@@ -862,12 +849,7 @@ module Aws::Snowball
     class DeviceConfiguration < Struct.new(
       :snowcone_device_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceServiceName
-      NFS_ON_DEVICE_SERVICE = 'NFS_ON_DEVICE_SERVICE'
-      S3_ON_DEVICE_SERVICE = 'S3_ON_DEVICE_SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the metadata and configuration settings of EKS Anywhere on the Snow Family device.</p>
@@ -881,7 +863,7 @@ module Aws::Snowball
       :kubernetes_version,
       :eks_anywhere_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
@@ -897,7 +879,7 @@ module Aws::Snowball
       :ami_id,
       :snowball_ami_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your user lacks the necessary Amazon EC2 permissions to perform the attempted
@@ -907,7 +889,7 @@ module Aws::Snowball
     class Ec2RequestFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the <a>EventTriggerDefinition$EventResourceARN</a>.</p>
@@ -917,7 +899,7 @@ module Aws::Snowball
     class EventTriggerDefinition < Struct.new(
       :event_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -927,7 +909,7 @@ module Aws::Snowball
     class GetJobManifestRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute manifest_uri
@@ -937,7 +919,7 @@ module Aws::Snowball
     class GetJobManifestResult < Struct.new(
       :manifest_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -947,7 +929,7 @@ module Aws::Snowball
     class GetJobUnlockCodeRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unlock_code
@@ -957,12 +939,12 @@ module Aws::Snowball
     class GetJobUnlockCodeResult < Struct.new(
       :unlock_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetSnowballUsageRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snowball_limit
@@ -976,7 +958,7 @@ module Aws::Snowball
       :snowball_limit,
       :snowballs_in_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -986,7 +968,7 @@ module Aws::Snowball
     class GetSoftwareUpdatesRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute updates_uri
@@ -998,7 +980,7 @@ module Aws::Snowball
     class GetSoftwareUpdatesResult < Struct.new(
       :updates_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax documents required in Amazon Web Services Region in India.</p>
@@ -1009,15 +991,7 @@ module Aws::Snowball
     class INDTaxDocuments < Struct.new(
       :gstin,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImpactLevel
-      IL2 = 'IL2'
-      IL4 = 'IL4'
-      IL5 = 'IL5'
-      IL6 = 'IL6'
-      IL99 = 'IL99'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The address provided was invalid. Check the address with your region's carrier, and try
@@ -1027,7 +1001,7 @@ module Aws::Snowball
     class InvalidAddressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Job or cluster creation failed. One or more inputs were invalid. Confirm that the <a>CreateClusterRequest$SnowballType</a> value supports your <a>CreateJobRequest$JobType</a>, and try again.</p>
@@ -1036,7 +1010,7 @@ module Aws::Snowball
     class InvalidInputCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action can't be performed because the job's current state doesn't allow that action
@@ -1046,7 +1020,7 @@ module Aws::Snowball
     class InvalidJobStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> string was altered unexpectedly, and the operation has
@@ -1057,7 +1031,7 @@ module Aws::Snowball
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource can't be found. Check the information you provided in your last
@@ -1071,7 +1045,7 @@ module Aws::Snowball
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each <code>JobListEntry</code> object contains a job's state, a job's ID, and a value
@@ -1112,7 +1086,7 @@ module Aws::Snowball
       :creation_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_master] = false unless options.key?(:is_master)
@@ -1150,7 +1124,7 @@ module Aws::Snowball
       :job_success_log_uri,
       :job_failure_log_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a specific job including shipping information, job status,
@@ -1286,7 +1260,7 @@ module Aws::Snowball
       :pickup_details,
       :snowball_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an array of Amazon Web Services resource objects. Each object represents an
@@ -1306,29 +1280,7 @@ module Aws::Snowball
       :lambda_resources,
       :ec2_ami_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobState
-      NEW = 'New'
-      PREPARING_APPLIANCE = 'PreparingAppliance'
-      PREPARING_SHIPMENT = 'PreparingShipment'
-      IN_TRANSIT_TO_CUSTOMER = 'InTransitToCustomer'
-      WITH_CUSTOMER = 'WithCustomer'
-      IN_TRANSIT_TO_AWS = 'InTransitToAWS'
-      WITH_AWS_SORTING_FACILITY = 'WithAWSSortingFacility'
-      WITH_AWS = 'WithAWS'
-      IN_PROGRESS = 'InProgress'
-      COMPLETE = 'Complete'
-      CANCELLED = 'Cancelled'
-      LISTING = 'Listing'
-      PENDING = 'Pending'
-    end
-
-    module JobType
-      IMPORT = 'IMPORT'
-      EXPORT = 'EXPORT'
-      LOCAL_USE = 'LOCAL_USE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided Key Management Service key lacks the permissions to perform the specified
@@ -1338,7 +1290,7 @@ module Aws::Snowball
     class KMSRequestFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a key range. For export jobs, a <code>S3Resource</code> object can have an
@@ -1357,7 +1309,7 @@ module Aws::Snowball
       :begin_marker,
       :end_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies </p>
@@ -1372,7 +1324,7 @@ module Aws::Snowball
       :lambda_arn,
       :event_triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -1392,7 +1344,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_list_entries
@@ -1408,7 +1360,7 @@ module Aws::Snowball
       :job_list_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1423,7 +1375,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_list_entries
@@ -1439,7 +1391,7 @@ module Aws::Snowball
       :cluster_list_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1455,7 +1407,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compatible_images
@@ -1470,7 +1422,7 @@ module Aws::Snowball
       :compatible_images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1485,7 +1437,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_list_entries
@@ -1501,7 +1453,7 @@ module Aws::Snowball
       :job_list_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1515,7 +1467,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute long_term_pricing_entries
@@ -1530,7 +1482,7 @@ module Aws::Snowball
       :long_term_pricing_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1543,7 +1495,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addresses
@@ -1556,7 +1508,7 @@ module Aws::Snowball
       :addresses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -1578,7 +1530,7 @@ module Aws::Snowball
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_versions
@@ -1600,7 +1552,7 @@ module Aws::Snowball
       :dependent_services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each <code>LongTermPricingListEntry</code> object contains information about a long-term
@@ -1648,13 +1600,7 @@ module Aws::Snowball
       :snowball_type,
       :job_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LongTermPricingType
-      ONE_YEAR = 'OneYear'
-      THREE_YEAR = 'ThreeYear'
-      ONE_MONTH = 'OneMonth'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the metadata and configuration settings for the NFS (Network
@@ -1670,7 +1616,7 @@ module Aws::Snowball
       :storage_limit,
       :storage_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:storage_limit] = 0 unless options.key?(:storage_limit)
@@ -1708,7 +1654,7 @@ module Aws::Snowball
       :notify_all,
       :device_pickup_sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:notify_all] = false unless options.key?(:notify_all)
@@ -1736,7 +1682,7 @@ module Aws::Snowball
       :eks_on_device_service,
       :s3_on_device_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information identifying the person picking up the device.</p>
@@ -1770,13 +1716,7 @@ module Aws::Snowball
       :identification_issuing_org,
       :device_pickup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemoteManagement
-      INSTALLED_ONLY = 'INSTALLED_ONLY'
-      INSTALLED_AUTOSTART = 'INSTALLED_AUTOSTART'
-      NOT_INSTALLED = 'NOT_INSTALLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You get this exception if you call <code>CreateReturnShippingLabel</code> and a valid
@@ -1787,7 +1727,7 @@ module Aws::Snowball
     class ReturnShippingLabelAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 compatible storage on Snow family devices configuration items.</p>
@@ -1811,7 +1751,7 @@ module Aws::Snowball
       :service_size,
       :fault_tolerance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each <code>S3Resource</code> object represents an Amazon S3 bucket that your
@@ -1838,12 +1778,7 @@ module Aws::Snowball
       :key_range,
       :target_on_device_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceName
-      KUBERNETES = 'KUBERNETES'
-      EKS_ANYWHERE = 'EKS_ANYWHERE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the requested service.</p>
@@ -1853,7 +1788,7 @@ module Aws::Snowball
     class ServiceVersion < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or
@@ -1871,12 +1806,7 @@ module Aws::Snowball
       :status,
       :tracking_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShipmentState
-      RECEIVED = 'RECEIVED'
-      RETURNED = 'RETURNED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job's shipping information, including inbound and outbound tracking numbers and
@@ -1918,48 +1848,7 @@ module Aws::Snowball
       :inbound_shipment,
       :outbound_shipment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShippingLabelStatus
-      IN_PROGRESS = 'InProgress'
-      TIMED_OUT = 'TimedOut'
-      SUCCEEDED = 'Succeeded'
-      FAILED = 'Failed'
-    end
-
-    module ShippingOption
-      SECOND_DAY = 'SECOND_DAY'
-      NEXT_DAY = 'NEXT_DAY'
-      EXPRESS = 'EXPRESS'
-      STANDARD = 'STANDARD'
-    end
-
-    module SnowballCapacity
-      T50 = 'T50'
-      T80 = 'T80'
-      T100 = 'T100'
-      T42 = 'T42'
-      T98 = 'T98'
-      T8 = 'T8'
-      T14 = 'T14'
-      T32 = 'T32'
-      NO_PREFERENCE = 'NoPreference'
-      T240 = 'T240'
-      T13 = 'T13'
-    end
-
-    module SnowballType
-      STANDARD = 'STANDARD'
-      EDGE = 'EDGE'
-      EDGE_C = 'EDGE_C'
-      EDGE_CG = 'EDGE_CG'
-      EDGE_S = 'EDGE_S'
-      SNC1_HDD = 'SNC1_HDD'
-      SNC1_SSD = 'SNC1_SSD'
-      V3_5C = 'V3_5C'
-      V3_5S = 'V3_5S'
-      RACK_5U_C = 'RACK_5U_C'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the device configuration for an Snowcone job.</p>
@@ -1969,11 +1858,7 @@ module Aws::Snowball
     class SnowconeDeviceConfiguration < Struct.new(
       :wireless_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageUnit
-      TB = 'TB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the metadata and configuration settings for the Storage Gateway
@@ -1989,7 +1874,7 @@ module Aws::Snowball
       :storage_limit,
       :storage_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:storage_limit] = 0 unless options.key?(:storage_limit)
@@ -2012,7 +1897,7 @@ module Aws::Snowball
       :service_name,
       :transfer_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax documents required in your Amazon Web Services Region.</p>
@@ -2022,13 +1907,7 @@ module Aws::Snowball
     class TaxDocuments < Struct.new(
       :ind,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransferOption
-      IMPORT = 'IMPORT'
-      EXPORT = 'EXPORT'
-      LOCAL_USE = 'LOCAL_USE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The address is either outside the serviceable area for your region, or an error
@@ -2039,7 +1918,7 @@ module Aws::Snowball
     class UnsupportedAddressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -2087,12 +1966,12 @@ module Aws::Snowball
       :notification,
       :forwarding_address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateClusterResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2154,12 +2033,12 @@ module Aws::Snowball
       :forwarding_address_id,
       :pickup_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2175,12 +2054,12 @@ module Aws::Snowball
       :job_id,
       :shipment_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateJobShipmentStateResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute long_term_pricing_id
@@ -2199,12 +2078,12 @@ module Aws::Snowball
       :replacement_job,
       :is_long_term_pricing_auto_renew,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLongTermPricingResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the wireless connection on an Snowcone device.</p>
@@ -2214,7 +2093,7 @@ module Aws::Snowball
     class WirelessConnection < Struct.new(
       :is_wifi_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_wifi_enabled] = false unless options.key?(:is_wifi_enabled)

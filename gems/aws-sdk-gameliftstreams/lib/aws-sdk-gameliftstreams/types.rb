@@ -13,7 +13,7 @@ module Aws::GameLiftStreams
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -26,7 +26,7 @@ module Aws::GameLiftStreams
       :identifier,
       :location_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -39,20 +39,7 @@ module Aws::GameLiftStreams
       :identifier,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      INITIALIZED = 'INITIALIZED'
-      PROCESSING = 'PROCESSING'
-      READY = 'READY'
-      DELETING = 'DELETING'
-      ERROR = 'ERROR'
-    end
-
-    module ApplicationStatusReason
-      INTERNAL_ERROR = 'internalError'
-      ACCESS_DENIED = 'accessDenied'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an application resource that represents a collection of content for streaming with Amazon GameLift Streams. To retrieve additional application details, call <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetApplication.html">GetApplication</a>.</p>
@@ -86,7 +73,7 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :runtime_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -99,7 +86,7 @@ module Aws::GameLiftStreams
       :identifier,
       :application_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -112,7 +99,7 @@ module Aws::GameLiftStreams
       :arn,
       :application_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.</p>
@@ -122,7 +109,7 @@ module Aws::GameLiftStreams
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -159,7 +146,7 @@ module Aws::GameLiftStreams
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -220,7 +207,7 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :associated_stream_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -249,7 +236,7 @@ module Aws::GameLiftStreams
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -298,7 +285,7 @@ module Aws::GameLiftStreams
       :created_at,
       :associated_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -319,7 +306,7 @@ module Aws::GameLiftStreams
       :stream_session_identifier,
       :signal_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signal_response
@@ -328,7 +315,7 @@ module Aws::GameLiftStreams
     class CreateStreamSessionConnectionOutput < Struct.new(
       :signal_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the default Amazon GameLift Streams application that a stream group hosts.</p>
@@ -342,7 +329,7 @@ module Aws::GameLiftStreams
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -351,7 +338,7 @@ module Aws::GameLiftStreams
     class DeleteApplicationInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -360,7 +347,7 @@ module Aws::GameLiftStreams
     class DeleteStreamGroupInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -373,7 +360,7 @@ module Aws::GameLiftStreams
       :identifier,
       :application_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -386,7 +373,7 @@ module Aws::GameLiftStreams
       :arn,
       :application_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the stream session's exported files. </p>
@@ -404,13 +391,7 @@ module Aws::GameLiftStreams
       :status_reason,
       :output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportFilesStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -427,12 +408,12 @@ module Aws::GameLiftStreams
       :stream_session_identifier,
       :output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ExportStreamSessionFilesOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -441,7 +422,7 @@ module Aws::GameLiftStreams
     class GetApplicationInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -502,7 +483,7 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :associated_stream_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -511,7 +492,7 @@ module Aws::GameLiftStreams
     class GetStreamGroupInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -560,7 +541,7 @@ module Aws::GameLiftStreams
       :created_at,
       :associated_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -573,7 +554,7 @@ module Aws::GameLiftStreams
       :identifier,
       :stream_session_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -658,7 +639,7 @@ module Aws::GameLiftStreams
       :application_arn,
       :export_files_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an internal error and is unable to complete the request.</p>
@@ -668,7 +649,7 @@ module Aws::GameLiftStreams
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -681,7 +662,7 @@ module Aws::GameLiftStreams
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -694,7 +675,7 @@ module Aws::GameLiftStreams
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -707,7 +688,7 @@ module Aws::GameLiftStreams
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -720,7 +701,7 @@ module Aws::GameLiftStreams
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -741,7 +722,7 @@ module Aws::GameLiftStreams
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -754,7 +735,7 @@ module Aws::GameLiftStreams
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -779,7 +760,7 @@ module Aws::GameLiftStreams
       :max_results,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -792,7 +773,7 @@ module Aws::GameLiftStreams
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -801,7 +782,7 @@ module Aws::GameLiftStreams
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -810,7 +791,7 @@ module Aws::GameLiftStreams
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings that define a stream group's stream capacity for a location. When configuring a location for the first time, you must specify a numeric value for at least one of the two capacity types. To update the capacity for an existing stream group, call <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html">UpdateStreamGroup</a>. To add a new location and specify its capacity, call <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_AddStreamGroupLocations.html">AddStreamGroupLocations</a>.</p>
@@ -828,7 +809,7 @@ module Aws::GameLiftStreams
       :always_on_capacity,
       :on_demand_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a location and its corresponding stream capacity and status.</p>
@@ -862,11 +843,7 @@ module Aws::GameLiftStreams
       :allocated_capacity,
       :idle_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      WEBRTC = 'WebRTC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -879,7 +856,7 @@ module Aws::GameLiftStreams
       :identifier,
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the status of the replication of an application to a location. An application cannot be streamed from a location until it has finished replicating there.</p>
@@ -893,12 +870,7 @@ module Aws::GameLiftStreams
       :location,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationStatusType
-      REPLICATING = 'REPLICATING'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request was not found. Correct the request before you try again.</p>
@@ -908,7 +880,7 @@ module Aws::GameLiftStreams
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings that identify the operating system for an application resource. This can also include a compatibility layer and other drivers.</p> <p>A runtime environment can be one of the following:</p> <ul> <li> <p> For Linux applications </p> <ul> <li> <p> Ubuntu 22.04 LTS (<code>Type=UBUNTU, Version=22_04_LTS</code>) </p> </li> </ul> </li> <li> <p> For Windows applications </p> <ul> <li> <p>Microsoft Windows Server 2022 Base (<code>Type=WINDOWS, Version=2022</code>)</p> </li> <li> <p>Proton 9.0-2 (<code>Type=PROTON, Version=20250516</code>)</p> </li> <li> <p>Proton 8.0-5 (<code>Type=PROTON, Version=20241007</code>)</p> </li> <li> <p>Proton 8.0-2c (<code>Type=PROTON, Version=20230704</code>)</p> </li> </ul> </li> </ul>
@@ -922,13 +894,7 @@ module Aws::GameLiftStreams
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuntimeEnvironmentType
-      PROTON = 'PROTON'
-      WINDOWS = 'WINDOWS'
-      UBUNTU = 'UBUNTU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause the resource to exceed an allowed service quota. Resolve the issue before you try again.</p>
@@ -938,7 +904,7 @@ module Aws::GameLiftStreams
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -991,7 +957,7 @@ module Aws::GameLiftStreams
       :additional_launch_args,
       :additional_environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1076,37 +1042,7 @@ module Aws::GameLiftStreams
       :application_arn,
       :export_files_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamClass
-      gen4n_high = 'gen4n_high'
-      gen4n_ultra = 'gen4n_ultra'
-      gen4n_win2022 = 'gen4n_win2022'
-      gen5n_high = 'gen5n_high'
-      gen5n_ultra = 'gen5n_ultra'
-      gen5n_win2022 = 'gen5n_win2022'
-    end
-
-    module StreamGroupLocationStatus
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      ERROR = 'ERROR'
-      REMOVING = 'REMOVING'
-    end
-
-    module StreamGroupStatus
-      ACTIVATING = 'ACTIVATING'
-      UPDATING_LOCATIONS = 'UPDATING_LOCATIONS'
-      ACTIVE = 'ACTIVE'
-      ACTIVE_WITH_ERRORS = 'ACTIVE_WITH_ERRORS'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
-    end
-
-    module StreamGroupStatusReason
-      INTERNAL_ERROR = 'internalError'
-      NO_AVAILABLE_INSTANCES = 'noAvailableInstances'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Amazon GameLift Streams stream group resource for hosting content streams. To retrieve additional stream group details, call <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamGroup.html">GetStreamGroup</a>.</p>
@@ -1144,25 +1080,7 @@ module Aws::GameLiftStreams
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamSessionStatus
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE = 'ACTIVE'
-      CONNECTED = 'CONNECTED'
-      PENDING_CLIENT_RECONNECTION = 'PENDING_CLIENT_RECONNECTION'
-      RECONNECTING = 'RECONNECTING'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      ERROR = 'ERROR'
-    end
-
-    module StreamSessionStatusReason
-      INTERNAL_ERROR = 'internalError'
-      INVALID_SIGNAL_REQUEST = 'invalidSignalRequest'
-      PLACEMENT_TIMEOUT = 'placementTimeout'
-      APP_LOG_S3_DESTINATION_ERROR = 'applicationLogS3DestinationError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Amazon GameLift Streams stream session. To retrieve additional details for the stream session, call <a href="https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html">GetStreamSession</a>.</p>
@@ -1204,7 +1122,7 @@ module Aws::GameLiftStreams
       :export_files_metadata,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1217,12 +1135,12 @@ module Aws::GameLiftStreams
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1235,7 +1153,7 @@ module Aws::GameLiftStreams
       :identifier,
       :stream_session_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. Retry the request after the suggested wait time.</p>
@@ -1245,7 +1163,7 @@ module Aws::GameLiftStreams
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1258,12 +1176,12 @@ module Aws::GameLiftStreams
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1284,7 +1202,7 @@ module Aws::GameLiftStreams
       :application_log_paths,
       :application_log_output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1345,7 +1263,7 @@ module Aws::GameLiftStreams
       :last_updated_at,
       :associated_stream_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1362,7 +1280,7 @@ module Aws::GameLiftStreams
       :location_configurations,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1411,7 +1329,7 @@ module Aws::GameLiftStreams
       :created_at,
       :associated_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter values in the request fail to satisfy the specified constraints. Correct the invalid parameter values before retrying the request.</p>
@@ -1421,7 +1339,7 @@ module Aws::GameLiftStreams
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

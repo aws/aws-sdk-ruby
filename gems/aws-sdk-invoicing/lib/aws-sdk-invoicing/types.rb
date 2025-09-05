@@ -16,7 +16,7 @@ module Aws::Invoicing
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about how the total amount was calculated and categorized. </p>
@@ -38,7 +38,7 @@ module Aws::Invoicing
       :taxes,
       :fees,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -47,7 +47,7 @@ module Aws::Invoicing
     class BatchGetInvoiceProfileRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profiles
@@ -56,7 +56,7 @@ module Aws::Invoicing
     class BatchGetInvoiceProfileResponse < Struct.new(
       :profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The billing period for which you want to retrieve invoice-related documents. </p>
@@ -70,7 +70,7 @@ module Aws::Invoicing
       :month,
       :year,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -99,7 +99,7 @@ module Aws::Invoicing
       :rule,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -108,7 +108,7 @@ module Aws::Invoicing
     class CreateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of currency exchange. </p>
@@ -126,7 +126,7 @@ module Aws::Invoicing
       :target_currency_code,
       :rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The time period that you want invoice-related documents for. </p>
@@ -140,7 +140,7 @@ module Aws::Invoicing
       :start_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -149,7 +149,7 @@ module Aws::Invoicing
     class DeleteInvoiceUnitRequest < Struct.new(
       :invoice_unit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -158,7 +158,7 @@ module Aws::Invoicing
     class DeleteInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The discounts details. </p>
@@ -172,7 +172,7 @@ module Aws::Invoicing
       :breakdown,
       :total_amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The discounted amount. </p>
@@ -190,7 +190,7 @@ module Aws::Invoicing
       :amount,
       :rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The organization name providing Amazon Web Services services.</p>
@@ -200,7 +200,7 @@ module Aws::Invoicing
     class Entity < Struct.new(
       :invoicing_entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of fees. </p>
@@ -214,7 +214,7 @@ module Aws::Invoicing
       :breakdown,
       :total_amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The fee amount. </p>
@@ -232,7 +232,7 @@ module Aws::Invoicing
       :amount,
       :rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional input to the list API. If multiple filters are specified, the returned list will be a configuration that match all of the provided filters. Supported filter types are <code>InvoiceReceivers</code>, <code>Names</code>, and <code>Accounts</code>. </p>
@@ -250,7 +250,7 @@ module Aws::Invoicing
       :invoice_receivers,
       :accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -263,7 +263,7 @@ module Aws::Invoicing
       :invoice_unit_arn,
       :as_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -296,10 +296,10 @@ module Aws::Invoicing
       :rule,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:tax_inheritance_disabled] =  unless options.key?(:tax_inheritance_disabled)
+        options[:tax_inheritance_disabled] = nil unless options.key?(:tax_inheritance_disabled)
         super
       end
     end
@@ -314,7 +314,7 @@ module Aws::Invoicing
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The amount charged after taxes, in the preferred currency. </p>
@@ -340,7 +340,7 @@ module Aws::Invoicing
       :amount_breakdown,
       :currency_exchange_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains high-level information about the invoice receiver. </p>
@@ -370,7 +370,7 @@ module Aws::Invoicing
       :issuer,
       :tax_registration_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filters for your invoice summaries. </p>
@@ -388,7 +388,7 @@ module Aws::Invoicing
       :billing_period,
       :invoicing_entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the invoice summary.</p>
@@ -402,7 +402,7 @@ module Aws::Invoicing
       :resource_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The invoice that the API retrieved. </p>
@@ -456,12 +456,7 @@ module Aws::Invoicing
       :tax_currency_amount,
       :payment_currency_amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvoiceType
-      INVOICE = 'INVOICE'
-      CREDIT_MEMO = 'CREDIT_MEMO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invoice unit is a set of mutually exclusive accounts that correspond to your business entity. Invoice units allow you separate Amazon Web Services account costs and configures your invoice for each business entity going forward. </p>
@@ -495,10 +490,10 @@ module Aws::Invoicing
       :rule,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:tax_inheritance_disabled] =  unless options.key?(:tax_inheritance_disabled)
+        options[:tax_inheritance_disabled] = nil unless options.key?(:tax_inheritance_disabled)
         super
       end
     end
@@ -510,7 +505,7 @@ module Aws::Invoicing
     class InvoiceUnitRule < Struct.new(
       :linked_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute selector
@@ -531,12 +526,7 @@ module Aws::Invoicing
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListInvoiceSummariesResourceType
-      ACCOUNT_ID = 'ACCOUNT_ID'
-      INVOICE_ID = 'INVOICE_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_summaries
@@ -549,7 +539,7 @@ module Aws::Invoicing
       :invoice_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -570,7 +560,7 @@ module Aws::Invoicing
       :max_results,
       :as_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_units
@@ -583,7 +573,7 @@ module Aws::Invoicing
       :invoice_units,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -592,7 +582,7 @@ module Aws::Invoicing
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -601,7 +591,7 @@ module Aws::Invoicing
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of the address associated with the receiver. </p>
@@ -644,7 +634,7 @@ module Aws::Invoicing
       :company_name,
       :postal_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found. </p>
@@ -657,7 +647,7 @@ module Aws::Invoicing
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value. </p>
@@ -671,7 +661,7 @@ module Aws::Invoicing
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services account limits. The error message describes the limit exceeded. </p>
@@ -680,7 +670,7 @@ module Aws::Invoicing
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -693,12 +683,12 @@ module Aws::Invoicing
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of the taxes. </p>
@@ -712,7 +702,7 @@ module Aws::Invoicing
       :breakdown,
       :total_amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The tax amount. </p>
@@ -730,7 +720,7 @@ module Aws::Invoicing
       :amount,
       :rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -739,7 +729,7 @@ module Aws::Invoicing
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -752,12 +742,12 @@ module Aws::Invoicing
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -778,7 +768,7 @@ module Aws::Invoicing
       :tax_inheritance_disabled,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invoice_unit_arn
@@ -787,7 +777,7 @@ module Aws::Invoicing
     class UpdateInvoiceUnitResponse < Struct.new(
       :invoice_unit_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
@@ -808,7 +798,7 @@ module Aws::Invoicing
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
@@ -822,24 +812,7 @@ module Aws::Invoicing
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      NON_MEMBERS_PRESENT = 'nonMemberPresent'
-      MAX_ACCOUNTS_EXCEEDED = 'maxAccountsExceeded'
-      MAX_INVOICE_UNITS_EXCEEDED = 'maxInvoiceUnitsExceeded'
-      DUPLICATE_INVOICE_UNIT = 'duplicateInvoiceUnit'
-      MUTUAL_EXCLUSION_ERROR = 'mutualExclusionError'
-      ACCOUNT_MEMBERSHIP_ERROR = 'accountMembershipError'
-      TAX_SETTINGS_ERROR = 'taxSettingsError'
-      EXPIRED_NEXT_TOKEN = 'expiredNextToken'
-      INVALID_NEXT_TOKEN = 'invalidNextToken'
-      INVALID_INPUT = 'invalidInput'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      CANNOT_PARSE = 'cannotParse'
-      UNKNOWN_OPERATION = 'unknownOperation'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

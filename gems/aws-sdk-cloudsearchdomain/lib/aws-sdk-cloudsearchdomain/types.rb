@@ -17,7 +17,7 @@ module Aws::CloudSearchDomain
       :value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -32,12 +32,7 @@ module Aws::CloudSearchDomain
     class BucketInfo < Struct.new(
       :buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentType
-      application_json = 'application/json'
-      application_xml = 'application/xml'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about any problems encountered while processing an upload request.</p>
@@ -51,7 +46,7 @@ module Aws::CloudSearchDomain
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A warning returned by the document service when an issue is discovered while processing an upload request.</p>
@@ -61,7 +56,7 @@ module Aws::CloudSearchDomain
     class DocumentServiceWarning < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The statistics for a field calculated in the request.</p>
@@ -102,7 +97,7 @@ module Aws::CloudSearchDomain
       :mean,
       :stddev,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -133,7 +128,7 @@ module Aws::CloudSearchDomain
       :exprs,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of documents that match the search request.</p>
@@ -155,20 +150,13 @@ module Aws::CloudSearchDomain
       :cursor,
       :hit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:found] = 0 unless options.key?(:found)
         options[:start] = 0 unless options.key?(:start)
         super
       end
-    end
-
-    module QueryParser
-      simple = 'simple'
-      structured = 'structured'
-      lucene = 'lucene'
-      dismax = 'dismax'
     end
 
     # <p>Information about any problems encountered while processing a search request.</p>
@@ -178,7 +166,7 @@ module Aws::CloudSearchDomain
     class SearchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>Search</code> request.</p>
@@ -451,7 +439,7 @@ module Aws::CloudSearchDomain
       :start,
       :stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.</p>
@@ -473,7 +461,7 @@ module Aws::CloudSearchDomain
       :facets,
       :stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).</p>
@@ -487,7 +475,7 @@ module Aws::CloudSearchDomain
       :timems,
       :rid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timems] = 0 unless options.key?(:timems)
@@ -510,7 +498,7 @@ module Aws::CloudSearchDomain
       :found,
       :suggestions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:found] = 0 unless options.key?(:found)
@@ -533,7 +521,7 @@ module Aws::CloudSearchDomain
       :suggester,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>Suggest</code> request.</p>
@@ -547,7 +535,7 @@ module Aws::CloudSearchDomain
       :status,
       :suggest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).</p>
@@ -561,7 +549,7 @@ module Aws::CloudSearchDomain
       :timems,
       :rid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timems] = 0 unless options.key?(:timems)
@@ -584,7 +572,7 @@ module Aws::CloudSearchDomain
       :score,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -607,7 +595,7 @@ module Aws::CloudSearchDomain
       :documents,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to an <code>UploadDocuments</code> request.</p>
@@ -629,7 +617,7 @@ module Aws::CloudSearchDomain
       :deletes,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:adds] = 0 unless options.key?(:adds)

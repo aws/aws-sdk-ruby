@@ -12,7 +12,7 @@ module Aws::Proton
     class AcceptEnvironmentAccountConnectionOperationInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -21,7 +21,7 @@ module Aws::Proton
     class AcceptEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There <i>isn't</i> sufficient access for performing this action.</p>
@@ -30,7 +30,7 @@ module Aws::Proton
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Proton settings that are used for multiple services in the Amazon Web Services account.</p>
@@ -51,7 +51,7 @@ module Aws::Proton
       :pipeline_provisioning_repository,
       :pipeline_codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_name
@@ -60,7 +60,7 @@ module Aws::Proton
     class CancelComponentDeploymentOperationInput < Struct.new(
       :component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -69,7 +69,7 @@ module Aws::Proton
     class CancelComponentDeploymentOperationOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_name
@@ -78,7 +78,7 @@ module Aws::Proton
     class CancelEnvironmentDeploymentOperationInput < Struct.new(
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -87,7 +87,7 @@ module Aws::Proton
     class CancelEnvironmentDeploymentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance_name
@@ -100,7 +100,7 @@ module Aws::Proton
       :service_instance_name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance
@@ -109,7 +109,7 @@ module Aws::Proton
     class CancelServiceInstanceDeploymentOperationOutput < Struct.new(
       :service_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -118,7 +118,7 @@ module Aws::Proton
     class CancelServicePipelineDeploymentOperationInput < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -127,7 +127,7 @@ module Aws::Proton
     class CancelServicePipelineDeploymentOperationOutput < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compatible environment template data.</p>
@@ -141,7 +141,7 @@ module Aws::Proton
       :template_name,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compatible environment template data.</p>
@@ -155,7 +155,7 @@ module Aws::Proton
       :template_name,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton component resource.</p>
@@ -228,7 +228,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed data about the current state of the component.</p>
@@ -250,7 +250,7 @@ module Aws::Proton
       :service_spec,
       :template_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton component resource.</p>
@@ -311,7 +311,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request <i>couldn't</i> be made due to a conflicting operation or resource.</p>
@@ -320,7 +320,7 @@ module Aws::Proton
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary counts of each Proton resource type.</p>
@@ -361,7 +361,7 @@ module Aws::Proton
       :service_templates,
       :pipelines,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -416,7 +416,7 @@ module Aws::Proton
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -425,7 +425,7 @@ module Aws::Proton
     class CreateComponentOperationOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -471,7 +471,7 @@ module Aws::Proton
       :component_role_arn,
       :codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -480,7 +480,7 @@ module Aws::Proton
     class CreateEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -553,7 +553,7 @@ module Aws::Proton
       :component_role_arn,
       :codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -562,7 +562,7 @@ module Aws::Proton
     class CreateEnvironmentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -593,7 +593,7 @@ module Aws::Proton
       :provisioning,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template
@@ -602,7 +602,7 @@ module Aws::Proton
     class CreateEnvironmentTemplateOperationOutput < Struct.new(
       :environment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -635,7 +635,7 @@ module Aws::Proton
       :source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template_version
@@ -644,7 +644,7 @@ module Aws::Proton
     class CreateEnvironmentTemplateVersionOperationOutput < Struct.new(
       :environment_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider
@@ -672,7 +672,7 @@ module Aws::Proton
       :encryption_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -681,7 +681,7 @@ module Aws::Proton
     class CreateRepositoryOperationOutput < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -720,7 +720,7 @@ module Aws::Proton
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance
@@ -729,7 +729,7 @@ module Aws::Proton
     class CreateServiceInstanceOperationOutput < Struct.new(
       :service_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -788,7 +788,7 @@ module Aws::Proton
       :branch_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -797,7 +797,7 @@ module Aws::Proton
     class CreateServiceOperationOutput < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -822,7 +822,7 @@ module Aws::Proton
       :branch,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_sync_config
@@ -831,7 +831,7 @@ module Aws::Proton
     class CreateServiceSyncConfigOperationOutput < Struct.new(
       :service_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -867,7 +867,7 @@ module Aws::Proton
       :pipeline_provisioning,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template
@@ -876,7 +876,7 @@ module Aws::Proton
     class CreateServiceTemplateOperationOutput < Struct.new(
       :service_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -928,7 +928,7 @@ module Aws::Proton
       :tags,
       :supported_component_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template_version
@@ -937,7 +937,7 @@ module Aws::Proton
     class CreateServiceTemplateVersionOperationOutput < Struct.new(
       :service_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -967,7 +967,7 @@ module Aws::Proton
       :branch,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_sync_config
@@ -976,7 +976,7 @@ module Aws::Proton
     class CreateTemplateSyncConfigOperationOutput < Struct.new(
       :template_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -985,7 +985,7 @@ module Aws::Proton
     class DeleteComponentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -994,7 +994,7 @@ module Aws::Proton
     class DeleteComponentOperationOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1003,7 +1003,7 @@ module Aws::Proton
     class DeleteDeploymentInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment
@@ -1012,7 +1012,7 @@ module Aws::Proton
     class DeleteDeploymentOutput < Struct.new(
       :deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1021,7 +1021,7 @@ module Aws::Proton
     class DeleteEnvironmentAccountConnectionOperationInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -1030,7 +1030,7 @@ module Aws::Proton
     class DeleteEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1039,7 +1039,7 @@ module Aws::Proton
     class DeleteEnvironmentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -1048,7 +1048,7 @@ module Aws::Proton
     class DeleteEnvironmentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1057,7 +1057,7 @@ module Aws::Proton
     class DeleteEnvironmentTemplateOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template
@@ -1066,7 +1066,7 @@ module Aws::Proton
     class DeleteEnvironmentTemplateOperationOutput < Struct.new(
       :environment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -1083,7 +1083,7 @@ module Aws::Proton
       :major_version,
       :minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template_version
@@ -1092,7 +1092,7 @@ module Aws::Proton
     class DeleteEnvironmentTemplateVersionOperationOutput < Struct.new(
       :environment_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider
@@ -1105,7 +1105,7 @@ module Aws::Proton
       :provider,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -1114,7 +1114,7 @@ module Aws::Proton
     class DeleteRepositoryOperationOutput < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1123,7 +1123,7 @@ module Aws::Proton
     class DeleteServiceOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -1132,7 +1132,7 @@ module Aws::Proton
     class DeleteServiceOperationOutput < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -1141,7 +1141,7 @@ module Aws::Proton
     class DeleteServiceSyncConfigOperationInput < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_sync_config
@@ -1150,7 +1150,7 @@ module Aws::Proton
     class DeleteServiceSyncConfigOperationOutput < Struct.new(
       :service_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1159,7 +1159,7 @@ module Aws::Proton
     class DeleteServiceTemplateOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template
@@ -1168,7 +1168,7 @@ module Aws::Proton
     class DeleteServiceTemplateOperationOutput < Struct.new(
       :service_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -1185,7 +1185,7 @@ module Aws::Proton
       :major_version,
       :minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template_version
@@ -1194,7 +1194,7 @@ module Aws::Proton
     class DeleteServiceTemplateVersionOperationOutput < Struct.new(
       :service_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -1207,7 +1207,7 @@ module Aws::Proton
       :template_name,
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_sync_config
@@ -1216,7 +1216,7 @@ module Aws::Proton
     class DeleteTemplateSyncConfigOperationOutput < Struct.new(
       :template_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed information about a deployment.</p>
@@ -1294,7 +1294,7 @@ module Aws::Proton
       :initial_state,
       :target_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed data about the current state of the deployment.</p>
@@ -1317,7 +1317,7 @@ module Aws::Proton
       :component,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ServiceInstance < DeploymentState; end
       class Environment < DeploymentState; end
@@ -1389,7 +1389,7 @@ module Aws::Proton
       :last_succeeded_deployment_id,
       :deployment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton environment resource. An Proton environment is a set of resources shared across Proton services.</p>
@@ -1487,7 +1487,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton environment account connection resource.</p>
@@ -1544,7 +1544,7 @@ module Aws::Proton
       :component_role_arn,
       :codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton environment account connection resource.</p>
@@ -1596,7 +1596,7 @@ module Aws::Proton
       :status,
       :component_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed data about the current state of the environment.</p>
@@ -1618,7 +1618,7 @@ module Aws::Proton
       :template_major_version,
       :template_minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton environment resource. An Proton environment is a set of resources shared across Proton services.</p>
@@ -1701,7 +1701,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment template data.</p>
@@ -1743,7 +1743,7 @@ module Aws::Proton
       :encryption_key,
       :provisioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A search filter for environment templates.</p>
@@ -1757,7 +1757,7 @@ module Aws::Proton
       :template_name,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment template data.</p>
@@ -1795,7 +1795,7 @@ module Aws::Proton
       :recommended_version,
       :provisioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment template version data.</p>
@@ -1845,7 +1845,7 @@ module Aws::Proton
       :last_modified_at,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the version of an environment template detail data.</p>
@@ -1891,12 +1891,12 @@ module Aws::Proton
       :created_at,
       :last_modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsOperationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -1905,7 +1905,7 @@ module Aws::Proton
     class GetAccountSettingsOperationOutput < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1914,7 +1914,7 @@ module Aws::Proton
     class GetComponentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -1923,7 +1923,7 @@ module Aws::Proton
     class GetComponentOperationOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1949,7 +1949,7 @@ module Aws::Proton
       :service_instance_name,
       :component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment
@@ -1958,7 +1958,7 @@ module Aws::Proton
     class GetDeploymentOutput < Struct.new(
       :deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1967,7 +1967,7 @@ module Aws::Proton
     class GetEnvironmentAccountConnectionOperationInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -1976,7 +1976,7 @@ module Aws::Proton
     class GetEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1985,7 +1985,7 @@ module Aws::Proton
     class GetEnvironmentOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -1994,7 +1994,7 @@ module Aws::Proton
     class GetEnvironmentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2003,7 +2003,7 @@ module Aws::Proton
     class GetEnvironmentTemplateOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template
@@ -2012,7 +2012,7 @@ module Aws::Proton
     class GetEnvironmentTemplateOperationOutput < Struct.new(
       :environment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2029,7 +2029,7 @@ module Aws::Proton
       :major_version,
       :minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template_version
@@ -2038,7 +2038,7 @@ module Aws::Proton
     class GetEnvironmentTemplateVersionOperationOutput < Struct.new(
       :environment_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider
@@ -2051,7 +2051,7 @@ module Aws::Proton
       :provider,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -2060,7 +2060,7 @@ module Aws::Proton
     class GetRepositoryOperationOutput < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2081,7 +2081,7 @@ module Aws::Proton
       :branch,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute latest_sync
@@ -2090,12 +2090,12 @@ module Aws::Proton
     class GetRepositorySyncStatusOperationOutput < Struct.new(
       :latest_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetResourcesSummaryOperationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute counts
@@ -2104,7 +2104,7 @@ module Aws::Proton
     class GetResourcesSummaryOperationOutput < Struct.new(
       :counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2117,7 +2117,7 @@ module Aws::Proton
       :name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance
@@ -2126,7 +2126,7 @@ module Aws::Proton
     class GetServiceInstanceOperationOutput < Struct.new(
       :service_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2139,7 +2139,7 @@ module Aws::Proton
       :service_name,
       :service_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute latest_sync
@@ -2156,7 +2156,7 @@ module Aws::Proton
       :latest_successful_sync,
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2165,7 +2165,7 @@ module Aws::Proton
     class GetServiceOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -2174,7 +2174,7 @@ module Aws::Proton
     class GetServiceOperationOutput < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2190,7 +2190,7 @@ module Aws::Proton
       :service_name,
       :service_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_sync_blocker_summary
@@ -2199,7 +2199,7 @@ module Aws::Proton
     class GetServiceSyncBlockerSummaryOperationOutput < Struct.new(
       :service_sync_blocker_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2208,7 +2208,7 @@ module Aws::Proton
     class GetServiceSyncConfigOperationInput < Struct.new(
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_sync_config
@@ -2217,7 +2217,7 @@ module Aws::Proton
     class GetServiceSyncConfigOperationOutput < Struct.new(
       :service_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2226,7 +2226,7 @@ module Aws::Proton
     class GetServiceTemplateOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template
@@ -2235,7 +2235,7 @@ module Aws::Proton
     class GetServiceTemplateOperationOutput < Struct.new(
       :service_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2255,7 +2255,7 @@ module Aws::Proton
       :major_version,
       :minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template_version
@@ -2264,7 +2264,7 @@ module Aws::Proton
     class GetServiceTemplateVersionOperationOutput < Struct.new(
       :service_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2277,7 +2277,7 @@ module Aws::Proton
       :template_name,
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_sync_config
@@ -2286,7 +2286,7 @@ module Aws::Proton
     class GetTemplateSyncConfigOperationOutput < Struct.new(
       :template_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2303,7 +2303,7 @@ module Aws::Proton
       :template_type,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute latest_sync
@@ -2320,7 +2320,7 @@ module Aws::Proton
       :latest_successful_sync,
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed to register with the service.</p>
@@ -2329,7 +2329,7 @@ module Aws::Proton
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_name
@@ -2346,7 +2346,7 @@ module Aws::Proton
       :next_token,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2359,7 +2359,7 @@ module Aws::Proton
       :next_token,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_name
@@ -2373,7 +2373,7 @@ module Aws::Proton
       :component_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2387,7 +2387,7 @@ module Aws::Proton
       :next_token,
       :provisioned_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2414,7 +2414,7 @@ module Aws::Proton
       :service_instance_name,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2427,7 +2427,7 @@ module Aws::Proton
       :next_token,
       :components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2457,7 +2457,7 @@ module Aws::Proton
       :component_name,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2470,7 +2470,7 @@ module Aws::Proton
       :next_token,
       :deployments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requested_by
@@ -2496,7 +2496,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connections
@@ -2510,7 +2510,7 @@ module Aws::Proton
       :environment_account_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_name
@@ -2528,7 +2528,7 @@ module Aws::Proton
       :next_token,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2542,7 +2542,7 @@ module Aws::Proton
       :next_token,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_name
@@ -2556,7 +2556,7 @@ module Aws::Proton
       :environment_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2570,7 +2570,7 @@ module Aws::Proton
       :next_token,
       :provisioned_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2594,7 +2594,7 @@ module Aws::Proton
       :template_name,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2608,7 +2608,7 @@ module Aws::Proton
       :next_token,
       :template_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2622,7 +2622,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2636,7 +2636,7 @@ module Aws::Proton
       :next_token,
       :templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2654,7 +2654,7 @@ module Aws::Proton
       :max_results,
       :environment_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2667,7 +2667,7 @@ module Aws::Proton
       :next_token,
       :environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2680,7 +2680,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2693,7 +2693,7 @@ module Aws::Proton
       :next_token,
       :repositories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -2715,7 +2715,7 @@ module Aws::Proton
       :sync_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2729,7 +2729,7 @@ module Aws::Proton
       :next_token,
       :sync_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance_name
@@ -2751,7 +2751,7 @@ module Aws::Proton
       :next_token,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2765,7 +2765,7 @@ module Aws::Proton
       :next_token,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2784,7 +2784,7 @@ module Aws::Proton
       :service_instance_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2798,7 +2798,7 @@ module Aws::Proton
       :next_token,
       :provisioned_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filtering criterion to scope down the result list of the <a>ListServiceInstances</a> action.</p>
@@ -2815,7 +2815,7 @@ module Aws::Proton
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2852,7 +2852,7 @@ module Aws::Proton
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2866,7 +2866,7 @@ module Aws::Proton
       :next_token,
       :service_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2884,7 +2884,7 @@ module Aws::Proton
       :next_token,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2898,7 +2898,7 @@ module Aws::Proton
       :next_token,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -2913,7 +2913,7 @@ module Aws::Proton
       :service_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2927,7 +2927,7 @@ module Aws::Proton
       :next_token,
       :provisioned_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2953,7 +2953,7 @@ module Aws::Proton
       :template_name,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2968,7 +2968,7 @@ module Aws::Proton
       :next_token,
       :template_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2982,7 +2982,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2996,7 +2996,7 @@ module Aws::Proton
       :next_token,
       :templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3010,7 +3010,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3024,7 +3024,7 @@ module Aws::Proton
       :next_token,
       :services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3042,7 +3042,7 @@ module Aws::Proton
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3056,7 +3056,7 @@ module Aws::Proton
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3081,12 +3081,12 @@ module Aws::Proton
       :deployment_id,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class NotifyResourceDeploymentStatusChangeOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An infrastructure as code defined resource output.</p>
@@ -3101,7 +3101,7 @@ module Aws::Proton
       :key,
       :value_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail data for a provisioned resource.</p>
@@ -3121,7 +3121,7 @@ module Aws::Proton
       :identifier,
       :provisioning_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3130,7 +3130,7 @@ module Aws::Proton
     class RejectEnvironmentAccountConnectionOperationInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -3139,7 +3139,7 @@ module Aws::Proton
     class RejectEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of a linked repository—a repository that has been registered with Proton.</p>
@@ -3165,7 +3165,7 @@ module Aws::Proton
       :connection_arn,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail data for a linked repository branch.</p>
@@ -3187,7 +3187,7 @@ module Aws::Proton
       :name,
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail input data for a linked repository branch.</p>
@@ -3205,7 +3205,7 @@ module Aws::Proton
       :name,
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of a linked repository—a repository that has been registered with Proton.</p>
@@ -3227,7 +3227,7 @@ module Aws::Proton
       :name,
       :connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail data for a repository sync attempt activated by a push to a repository.</p>
@@ -3245,7 +3245,7 @@ module Aws::Proton
       :status,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A repository sync definition.</p>
@@ -3267,7 +3267,7 @@ module Aws::Proton
       :branch,
       :directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Repository sync event detail data for a sync attempt.</p>
@@ -3289,7 +3289,7 @@ module Aws::Proton
       :time,
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary counts of each Proton resource types.</p>
@@ -3315,7 +3315,7 @@ module Aws::Proton
       :behind_major,
       :behind_minor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource <i>wasn't</i> found.</p>
@@ -3324,7 +3324,7 @@ module Aws::Proton
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail data for a resource sync attempt activated by a push to a repository.</p>
@@ -3354,7 +3354,7 @@ module Aws::Proton
       :status,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detail data for a resource sync event.</p>
@@ -3376,7 +3376,7 @@ module Aws::Proton
       :time,
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Revision detail data for a commit and push that activates a sync attempt</p>
@@ -3402,7 +3402,7 @@ module Aws::Proton
       :directory,
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template bundle S3 bucket data.</p>
@@ -3416,7 +3416,7 @@ module Aws::Proton
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton service resource.</p>
@@ -3477,7 +3477,7 @@ module Aws::Proton
       :repository_id,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton service instance resource.</p>
@@ -3549,7 +3549,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed data about the current state of this service instance.</p>
@@ -3585,7 +3585,7 @@ module Aws::Proton
       :last_successful_environment_deployment_id,
       :last_successful_service_pipeline_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton service instance resource.</p>
@@ -3647,7 +3647,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton service instance pipeline resource.</p>
@@ -3703,7 +3703,7 @@ module Aws::Proton
       :last_attempted_deployment_id,
       :last_succeeded_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed data about the current state of the service pipeline.</p>
@@ -3727,7 +3727,7 @@ module Aws::Proton
       :template_major_version,
       :template_minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A quota was exceeded. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/ag-limits.html">Proton Quotas</a> in
@@ -3737,7 +3737,7 @@ module Aws::Proton
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton service resource.</p>
@@ -3775,7 +3775,7 @@ module Aws::Proton
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If a service instance is manually updated, Proton wants to prevent accidentally overriding
@@ -3803,7 +3803,7 @@ module Aws::Proton
       :service_instance_name,
       :latest_blockers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of the service sync configuration.</p>
@@ -3832,7 +3832,7 @@ module Aws::Proton
       :branch,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton service template resource.</p>
@@ -3876,7 +3876,7 @@ module Aws::Proton
       :encryption_key,
       :pipeline_provisioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton service template resource.</p>
@@ -3916,7 +3916,7 @@ module Aws::Proton
       :recommended_version,
       :pipeline_provisioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of an Proton service template version resource.</p>
@@ -3979,7 +3979,7 @@ module Aws::Proton
       :schema,
       :supported_component_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary data of an Proton service template version resource.</p>
@@ -4025,7 +4025,7 @@ module Aws::Proton
       :created_at,
       :last_modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of the sync blocker.</p>
@@ -4063,7 +4063,7 @@ module Aws::Proton
       :resolved_reason,
       :resolved_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed data of the context of the sync blocker.</p>
@@ -4077,7 +4077,7 @@ module Aws::Proton
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a resource tag.</p>
@@ -4091,7 +4091,7 @@ module Aws::Proton
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4104,12 +4104,12 @@ module Aws::Proton
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detail data for a template sync configuration.</p>
@@ -4139,7 +4139,7 @@ module Aws::Proton
       :branch,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Template version source data.</p>
@@ -4150,7 +4150,7 @@ module Aws::Proton
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < TemplateVersionSourceInput; end
       class Unknown < TemplateVersionSourceInput; end
@@ -4162,7 +4162,7 @@ module Aws::Proton
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4175,12 +4175,12 @@ module Aws::Proton
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_service_role_arn
@@ -4208,7 +4208,7 @@ module Aws::Proton
       :delete_pipeline_provisioning_repository,
       :pipeline_codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -4217,7 +4217,7 @@ module Aws::Proton
     class UpdateAccountSettingsOperationOutput < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4280,7 +4280,7 @@ module Aws::Proton
       :template_file,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -4289,7 +4289,7 @@ module Aws::Proton
     class UpdateComponentOperationOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4317,7 +4317,7 @@ module Aws::Proton
       :component_role_arn,
       :codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_account_connection
@@ -4326,7 +4326,7 @@ module Aws::Proton
     class UpdateEnvironmentAccountConnectionOperationOutput < Struct.new(
       :environment_account_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4417,7 +4417,7 @@ module Aws::Proton
       :component_role_arn,
       :codebuild_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -4426,7 +4426,7 @@ module Aws::Proton
     class UpdateEnvironmentOperationOutput < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4443,7 +4443,7 @@ module Aws::Proton
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template
@@ -4452,7 +4452,7 @@ module Aws::Proton
     class UpdateEnvironmentTemplateOperationOutput < Struct.new(
       :environment_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4477,7 +4477,7 @@ module Aws::Proton
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_template_version
@@ -4486,7 +4486,7 @@ module Aws::Proton
     class UpdateEnvironmentTemplateVersionOperationOutput < Struct.new(
       :environment_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4558,7 +4558,7 @@ module Aws::Proton
       :template_minor_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_instance
@@ -4567,7 +4567,7 @@ module Aws::Proton
     class UpdateServiceInstanceOperationOutput < Struct.new(
       :service_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4587,7 +4587,7 @@ module Aws::Proton
       :description,
       :spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -4596,7 +4596,7 @@ module Aws::Proton
     class UpdateServiceOperationOutput < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -4663,7 +4663,7 @@ module Aws::Proton
       :template_major_version,
       :template_minor_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -4672,7 +4672,7 @@ module Aws::Proton
     class UpdateServicePipelineOperationOutput < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4685,7 +4685,7 @@ module Aws::Proton
       :id,
       :resolved_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -4703,7 +4703,7 @@ module Aws::Proton
       :service_instance_name,
       :service_sync_blocker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -4728,7 +4728,7 @@ module Aws::Proton
       :branch,
       :file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_sync_config
@@ -4737,7 +4737,7 @@ module Aws::Proton
     class UpdateServiceSyncConfigOperationOutput < Struct.new(
       :service_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4755,7 +4755,7 @@ module Aws::Proton
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template
@@ -4764,7 +4764,7 @@ module Aws::Proton
     class UpdateServiceTemplateOperationOutput < Struct.new(
       :service_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4809,7 +4809,7 @@ module Aws::Proton
       :compatible_environment_templates,
       :supported_component_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_template_version
@@ -4818,7 +4818,7 @@ module Aws::Proton
     class UpdateServiceTemplateVersionOperationOutput < Struct.new(
       :service_template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4847,7 +4847,7 @@ module Aws::Proton
       :branch,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_sync_config
@@ -4856,7 +4856,7 @@ module Aws::Proton
     class UpdateTemplateSyncConfigOperationOutput < Struct.new(
       :template_sync_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
@@ -4865,7 +4865,7 @@ module Aws::Proton
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

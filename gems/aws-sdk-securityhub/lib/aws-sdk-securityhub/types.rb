@@ -16,12 +16,12 @@ module Aws::SecurityHub
       :administrator_id,
       :invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptAdministratorInvitationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute master_id
@@ -34,12 +34,12 @@ module Aws::SecurityHub
       :master_id,
       :invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptInvitationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permission to perform the action specified in the request.</p>
@@ -51,7 +51,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon Web Services account.</p>
@@ -65,7 +65,7 @@ module Aws::SecurityHub
       :account_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about one of the following actions that affects or that was taken on a resource:</p>
@@ -131,7 +131,7 @@ module Aws::SecurityHub
       :dns_request_action,
       :port_probe_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the IP address where the scanned port is located.</p>
@@ -141,7 +141,7 @@ module Aws::SecurityHub
     class ActionLocalIpDetails < Struct.new(
       :ip_address_v4,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>NetworkConnectionAction</code> and <code>PortProbeDetails</code>,
@@ -158,7 +158,7 @@ module Aws::SecurityHub
       :port,
       :port_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and
@@ -187,7 +187,7 @@ module Aws::SecurityHub
       :city,
       :geo_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the remote port that was involved in an attempted network
@@ -203,7 +203,7 @@ module Aws::SecurityHub
       :port,
       :port_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An <code>ActionTarget</code> object.</p>
@@ -221,7 +221,7 @@ module Aws::SecurityHub
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -246,7 +246,7 @@ module Aws::SecurityHub
       :user,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -280,12 +280,7 @@ module Aws::SecurityHub
       :created_time,
       :issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActorSessionMfaStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -324,7 +319,7 @@ module Aws::SecurityHub
       :credential_uid,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An adjustment to the CVSS metric.</p>
@@ -338,7 +333,7 @@ module Aws::SecurityHub
       :metric,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a Security Hub administrator account designated by an organization management
@@ -354,12 +349,7 @@ module Aws::SecurityHub
       :account_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdminStatus
-      ENABLED = 'ENABLED'
-      DISABLE_IN_PROGRESS = 'DISABLE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a cross-Region data aggregation configuration, including the aggregation Region and any linked Regions.</p>
@@ -369,12 +359,7 @@ module Aws::SecurityHub
     class AggregatorV2 < Struct.new(
       :aggregator_v2_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllowedOperators
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -388,7 +373,7 @@ module Aws::SecurityHub
     class AssociatedStandard < Struct.new(
       :standards_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -416,7 +401,7 @@ module Aws::SecurityHub
       :association_type,
       :association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -460,7 +445,7 @@ module Aws::SecurityHub
       :route_table_id,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -480,22 +465,7 @@ module Aws::SecurityHub
       :state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module AssociationType
-      INHERITED = 'INHERITED'
-      APPLIED = 'APPLIED'
-    end
-
-    module AutoEnableStandards
-      NONE = 'NONE'
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -516,11 +486,7 @@ module Aws::SecurityHub
       :type,
       :finding_fields_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationRulesActionType
-      FINDING_FIELDS_UPDATE = 'FINDING_FIELDS_UPDATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to customize security response workflows.</p>
@@ -530,12 +496,7 @@ module Aws::SecurityHub
     class AutomationRulesActionTypeObjectV2 < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationRulesActionTypeV2
-      FINDING_FIELDS_UPDATE = 'FINDING_FIELDS_UPDATE'
-      EXTERNAL_INTEGRATION = 'EXTERNAL_INTEGRATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to configure automated responses.</p>
@@ -553,7 +514,7 @@ module Aws::SecurityHub
       :finding_fields_update,
       :external_integration_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -636,7 +597,7 @@ module Aws::SecurityHub
       :updated_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -692,7 +653,7 @@ module Aws::SecurityHub
       :workflow,
       :related_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to define the structure for modifying specific fields in security findings.</p>
@@ -710,7 +671,7 @@ module Aws::SecurityHub
       :comment,
       :status_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1075,7 +1036,7 @@ module Aws::SecurityHub
       :resource_application_name,
       :aws_account_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1146,7 +1107,7 @@ module Aws::SecurityHub
       :updated_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes essential metadata information about automation rules.</p>
@@ -1188,7 +1149,7 @@ module Aws::SecurityHub
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Availability Zone.</p>
@@ -1202,7 +1163,7 @@ module Aws::SecurityHub
       :zone_name,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1319,7 +1280,7 @@ module Aws::SecurityHub
       :subnet_ids,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1341,7 +1302,7 @@ module Aws::SecurityHub
       :kms_key_id,
       :use_aws_owned_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1409,7 +1370,7 @@ module Aws::SecurityHub
       :user_search_matching,
       :user_search_subtree,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1447,7 +1408,7 @@ module Aws::SecurityHub
       :general_log_group,
       :pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1468,7 +1429,7 @@ module Aws::SecurityHub
       :audit,
       :general,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1494,7 +1455,7 @@ module Aws::SecurityHub
       :time_of_day,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1514,7 +1475,7 @@ module Aws::SecurityHub
       :pending_change,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details
@@ -1562,7 +1523,7 @@ module Aws::SecurityHub
       :first_seen,
       :last_seen,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provided if <code>CallerType</code> is <code>domain</code>. It provides information
@@ -1574,7 +1535,7 @@ module Aws::SecurityHub
     class AwsApiCallActionDomainDetails < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about settings for logging access for the stage.</p>
@@ -1590,7 +1551,7 @@ module Aws::SecurityHub
       :format,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about settings for canary deployment in the stage.</p>
@@ -1615,7 +1576,7 @@ module Aws::SecurityHub
       :stage_variable_overrides,
       :use_stage_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the endpoints for the API.</p>
@@ -1628,7 +1589,7 @@ module Aws::SecurityHub
     class AwsApiGatewayEndpointConfiguration < Struct.new(
       :types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines settings for a method for the stage.</p>
@@ -1701,7 +1662,7 @@ module Aws::SecurityHub
       :http_method,
       :resource_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a REST API in version 1 of Amazon API Gateway.</p>
@@ -1752,7 +1713,7 @@ module Aws::SecurityHub
       :api_key_source,
       :endpoint_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a version 1 Amazon API Gateway stage.</p>
@@ -1837,7 +1798,7 @@ module Aws::SecurityHub
       :last_updated_date,
       :web_acl_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a version 2 API in Amazon API Gateway.</p>
@@ -1896,7 +1857,7 @@ module Aws::SecurityHub
       :route_selection_expression,
       :cors_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains route settings for a stage.</p>
@@ -1930,7 +1891,7 @@ module Aws::SecurityHub
       :throttling_burst_limit,
       :throttling_rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a version 2 stage for Amazon API Gateway.</p>
@@ -2004,7 +1965,7 @@ module Aws::SecurityHub
       :last_deployment_status_message,
       :api_gateway_managed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2036,7 +1997,7 @@ module Aws::SecurityHub
       :open_id_connect_config,
       :user_pool_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2115,7 +2076,7 @@ module Aws::SecurityHub
       :additional_authentication_providers,
       :waf_web_acl_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2143,7 +2104,7 @@ module Aws::SecurityHub
       :authorizer_uri,
       :identity_validation_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2172,7 +2133,7 @@ module Aws::SecurityHub
       :exclude_verbose_content,
       :field_log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2208,7 +2169,7 @@ module Aws::SecurityHub
       :iat_tt_l,
       :issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2243,7 +2204,7 @@ module Aws::SecurityHub
       :default_action,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2261,7 +2222,7 @@ module Aws::SecurityHub
     class AwsAthenaWorkGroupConfigurationDetails < Struct.new(
       :result_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2277,7 +2238,7 @@ module Aws::SecurityHub
     class AwsAthenaWorkGroupConfigurationResultConfigurationDetails < Struct.new(
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2299,7 +2260,7 @@ module Aws::SecurityHub
       :encryption_option,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2334,7 +2295,7 @@ module Aws::SecurityHub
       :state,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Availability Zone for the automatic scaling group.</p>
@@ -2344,7 +2305,7 @@ module Aws::SecurityHub
     class AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an auto scaling group.</p>
@@ -2389,7 +2350,7 @@ module Aws::SecurityHub
       :launch_template,
       :capacity_rebalance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the launch template to use.</p>
@@ -2407,7 +2368,7 @@ module Aws::SecurityHub
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mixed instances policy for the automatic scaling group.</p>
@@ -2421,7 +2382,7 @@ module Aws::SecurityHub
       :instances_distribution,
       :launch_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instances distribution.</p>
@@ -2468,7 +2429,7 @@ module Aws::SecurityHub
       :spot_instance_pools,
       :spot_max_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template and overrides for a mixed instances policy.</p>
@@ -2482,7 +2443,7 @@ module Aws::SecurityHub
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the launch template to use for a mixed instances policy.</p>
@@ -2500,7 +2461,7 @@ module Aws::SecurityHub
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Property values to use to override the values in the launch template.</p>
@@ -2514,7 +2475,7 @@ module Aws::SecurityHub
       :instance_type,
       :weighted_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block device for the instance.</p>
@@ -2538,7 +2499,7 @@ module Aws::SecurityHub
       :no_device,
       :virtual_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are used to automatically set up EBS volumes when an instance is launched.</p>
@@ -2617,7 +2578,7 @@ module Aws::SecurityHub
       :volume_size,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a launch configuration.</p>
@@ -2705,7 +2666,7 @@ module Aws::SecurityHub
       :user_data,
       :metadata_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the type of monitoring for instances in the group.</p>
@@ -2718,7 +2679,7 @@ module Aws::SecurityHub
     class AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instances.</p>
@@ -2736,7 +2697,7 @@ module Aws::SecurityHub
       :http_put_response_hop_limit,
       :http_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of backup options for each resource type.
@@ -2761,7 +2722,7 @@ module Aws::SecurityHub
       :backup_options,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Backup backup plan and an array of <code>BackupRule</code> objects, each of which specifies a backup rule.
@@ -2783,7 +2744,7 @@ module Aws::SecurityHub
       :advanced_backup_settings,
       :backup_plan_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Backup backup plan and an array of <code>BackupRule</code> objects, each of which specifies a backup rule.
@@ -2810,7 +2771,7 @@ module Aws::SecurityHub
       :backup_plan_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides lifecycle details for the backup plan. A lifecycle defines when a backup is transitioned to cold storage and when it expires.
@@ -2827,7 +2788,7 @@ module Aws::SecurityHub
       :delete_after_days,
       :move_to_cold_storage_after_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of <code>CopyAction</code> objects, each of which contains details of the copy operation.
@@ -2847,7 +2808,7 @@ module Aws::SecurityHub
       :destination_backup_vault_arn,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.
@@ -2898,7 +2859,7 @@ module Aws::SecurityHub
       :copy_actions,
       :lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Backup backup vault. In Backup, a backup vault is 
@@ -2934,7 +2895,7 @@ module Aws::SecurityHub
       :notifications,
       :access_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the Amazon SNS event notifications for the specified backup vault.
@@ -2973,7 +2934,7 @@ module Aws::SecurityHub
       :backup_vault_events,
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how long in days before a recovery point transitions to cold storage or is deleted.
@@ -2991,7 +2952,7 @@ module Aws::SecurityHub
       :delete_at,
       :move_to_cold_storage_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the backup plan and rule that Backup used to initiate the recovery point backup.
@@ -3019,7 +2980,7 @@ module Aws::SecurityHub
       :backup_plan_version,
       :backup_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about the recovery points stored in an Backup backup vault. 
@@ -3172,7 +3133,7 @@ module Aws::SecurityHub
       :status_message,
       :storage_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an array of Transition objects specifying how long in days before a recovery point transitions to cold storage or is deleted.
@@ -3190,7 +3151,7 @@ module Aws::SecurityHub
       :delete_after_days,
       :move_to_cold_storage_after_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Certificate Manager certificate.</p>
@@ -3332,7 +3293,7 @@ module Aws::SecurityHub
       :subject_alternative_names,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about one of the following:</p>
@@ -3373,7 +3334,7 @@ module Aws::SecurityHub
       :validation_method,
       :validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an extended key usage X.509 v3 extension object.</p>
@@ -3389,7 +3350,7 @@ module Aws::SecurityHub
       :name,
       :o_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a key usage X.509 v3 extension object.</p>
@@ -3399,7 +3360,7 @@ module Aws::SecurityHub
     class AwsCertificateManagerCertificateKeyUsage < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains other options for the certificate.</p>
@@ -3411,7 +3372,7 @@ module Aws::SecurityHub
     class AwsCertificateManagerCertificateOptions < Struct.new(
       :certificate_transparency_logging_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Certificate Manager managed renewal for an
@@ -3449,7 +3410,7 @@ module Aws::SecurityHub
       :renewal_status_reason,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the CNAME record that is added to the DNS database for domain
@@ -3468,7 +3429,7 @@ module Aws::SecurityHub
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Nests a stack as a resource in a top-level template. Nested stacks are stacks created as resources for 
@@ -3551,7 +3512,7 @@ module Aws::SecurityHub
       :stack_status_reason,
       :timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the stack's conformity to its expected template configuration.
@@ -3563,7 +3524,7 @@ module Aws::SecurityHub
     class AwsCloudFormationStackDriftInformationDetails < Struct.new(
       :stack_drift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the CloudFormation stack output.
@@ -3585,7 +3546,7 @@ module Aws::SecurityHub
       :output_key,
       :output_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a cache behavior for the distribution.</p>
@@ -3613,7 +3574,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionCacheBehavior < Struct.new(
       :viewer_protocol_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about caching for the CloudFront distribution.</p>
@@ -3623,7 +3584,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionCacheBehaviors < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the default cache configuration for the CloudFront distribution.</p>
@@ -3651,7 +3612,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionDefaultCacheBehavior < Struct.new(
       :viewer_protocol_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFront distribution configuration.</p>
@@ -3709,7 +3670,7 @@ module Aws::SecurityHub
       :status,
       :web_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that controls whether access logs are written for the CloudFront distribution.</p>
@@ -3732,7 +3693,7 @@ module Aws::SecurityHub
       :include_cookies,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom origin. A custom origin is any origin that is not an Amazon S3 bucket, with one exception. An Amazon S3 bucket that is <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">configured with
@@ -3769,7 +3730,7 @@ module Aws::SecurityHub
       :origin_read_timeout,
       :origin_ssl_protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an origin group for the CloudFront distribution.</p>
@@ -3779,7 +3740,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginGroup < Struct.new(
       :failover_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about when an origin group fails over.</p>
@@ -3789,7 +3750,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginGroupFailover < Struct.new(
       :status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status codes that cause an origin group to fail over.</p>
@@ -3803,7 +3764,7 @@ module Aws::SecurityHub
       :items,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about origin groups that are associated with the CloudFront distribution.</p>
@@ -3813,7 +3774,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginGroups < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes the
@@ -3846,7 +3807,7 @@ module Aws::SecurityHub
       :s3_origin_config,
       :custom_origin_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an origin that is an Amazon S3 bucket that is not configured with static website
@@ -3857,7 +3818,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOriginS3OriginConfig < Struct.new(
       :origin_access_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the SSL/TLS protocols that CloudFront can use 
@@ -3876,7 +3837,7 @@ module Aws::SecurityHub
       :items,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about origins and origin groups for this CloudFront distribution.</p>
@@ -3886,7 +3847,7 @@ module Aws::SecurityHub
     class AwsCloudFrontDistributionOrigins < Struct.new(
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the TLS/SSL configuration that the CloudFront distribution uses to communicate with viewers.</p>
@@ -3920,7 +3881,7 @@ module Aws::SecurityHub
       :minimum_protocol_version,
       :ssl_support_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a CloudTrail trail.</p>
@@ -3990,7 +3951,7 @@ module Aws::SecurityHub
       :sns_topic_name,
       :trail_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an alarm and associates it with the specified metric or metric math expression.
@@ -4118,7 +4079,7 @@ module Aws::SecurityHub
       :treat_missing_data,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the dimensions for the metric associated with the alarm.
@@ -4135,7 +4096,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build artifacts for the CodeBuild project.</p>
@@ -4177,7 +4138,7 @@ module Aws::SecurityHub
       :path,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an CodeBuild project.</p>
@@ -4223,7 +4184,7 @@ module Aws::SecurityHub
       :vpc_config,
       :secondary_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build environment for this build project.</p>
@@ -4286,7 +4247,7 @@ module Aws::SecurityHub
       :registry_credential,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an environment variable that is available to builds for the build project.</p>
@@ -4304,7 +4265,7 @@ module Aws::SecurityHub
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credentials for access to a private registry.</p>
@@ -4323,7 +4284,7 @@ module Aws::SecurityHub
       :credential,
       :credential_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about CloudWatch Logs for the build project.</p>
@@ -4341,7 +4302,7 @@ module Aws::SecurityHub
       :status,
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about logs for the build project.</p>
@@ -4355,7 +4316,7 @@ module Aws::SecurityHub
       :cloud_watch_logs,
       :s3_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about logs built to an S3 bucket for a build project.</p>
@@ -4373,7 +4334,7 @@ module Aws::SecurityHub
       :location,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the build input source code for this build project.</p>
@@ -4464,7 +4425,7 @@ module Aws::SecurityHub
       :git_clone_depth,
       :insecure_ssl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the VPC configuration that CodeBuild accesses.</p>
@@ -4482,7 +4443,7 @@ module Aws::SecurityHub
       :subnets,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the cross-origin resource sharing (CORS) configuration for the API. CORS is
@@ -4513,7 +4474,7 @@ module Aws::SecurityHub
       :allow_methods,
       :allow_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4600,7 +4561,7 @@ module Aws::SecurityHub
       :ssl_mode,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4682,7 +4643,7 @@ module Aws::SecurityHub
       :replication_subnet_group,
       :vpc_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4695,7 +4656,7 @@ module Aws::SecurityHub
     class AwsDmsReplicationInstanceReplicationSubnetGroupDetails < Struct.new(
       :replication_subnet_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4708,7 +4669,7 @@ module Aws::SecurityHub
     class AwsDmsReplicationInstanceVpcSecurityGroupsDetails < Struct.new(
       :vpc_security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4788,7 +4749,7 @@ module Aws::SecurityHub
       :target_endpoint_arn,
       :task_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a definition of an attribute for the table.</p>
@@ -4802,7 +4763,7 @@ module Aws::SecurityHub
       :attribute_name,
       :attribute_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the billing for read/write capacity on the table.</p>
@@ -4818,7 +4779,7 @@ module Aws::SecurityHub
       :billing_mode,
       :last_update_to_pay_per_request_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a DynamoDB table.</p>
@@ -4944,7 +4905,7 @@ module Aws::SecurityHub
       :table_status,
       :deletion_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information abut a global secondary index for the table.</p>
@@ -5008,7 +4969,7 @@ module Aws::SecurityHub
       :projection,
       :provisioned_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A component of the key schema for the DynamoDB table, a global secondary index, or a
@@ -5023,7 +4984,7 @@ module Aws::SecurityHub
       :attribute_name,
       :key_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a local secondary index for a DynamoDB table.</p>
@@ -5046,7 +5007,7 @@ module Aws::SecurityHub
       :key_schema,
       :projection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For global and local secondary indexes, identifies the attributes that are copied from
@@ -5079,7 +5040,7 @@ module Aws::SecurityHub
       :non_key_attributes,
       :projection_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the provisioned throughput for the table or for a global secondary
@@ -5111,7 +5072,7 @@ module Aws::SecurityHub
       :read_capacity_units,
       :write_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Replica-specific configuration for the provisioned throughput.</p>
@@ -5121,7 +5082,7 @@ module Aws::SecurityHub
     class AwsDynamoDbTableProvisionedThroughputOverride < Struct.new(
       :read_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a replica of a DynamoDB table.</p>
@@ -5179,7 +5140,7 @@ module Aws::SecurityHub
       :replica_status,
       :replica_status_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a global secondary index for a DynamoDB table replica.</p>
@@ -5193,7 +5154,7 @@ module Aws::SecurityHub
       :index_name,
       :provisioned_throughput_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the restore for the table.</p>
@@ -5216,7 +5177,7 @@ module Aws::SecurityHub
       :restore_date_time,
       :restore_in_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the server-side encryption for the table.</p>
@@ -5241,7 +5202,7 @@ module Aws::SecurityHub
       :sse_type,
       :kms_master_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current DynamoDB Streams configuration for the table.</p>
@@ -5255,7 +5216,7 @@ module Aws::SecurityHub
       :stream_enabled,
       :stream_view_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5269,7 +5230,7 @@ module Aws::SecurityHub
     class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5300,7 +5261,7 @@ module Aws::SecurityHub
       :mutual_authentication,
       :federated_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5320,7 +5281,7 @@ module Aws::SecurityHub
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5334,7 +5295,7 @@ module Aws::SecurityHub
     class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
       :client_root_certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5360,7 +5321,7 @@ module Aws::SecurityHub
       :lambda_function_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5380,7 +5341,7 @@ module Aws::SecurityHub
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5402,7 +5363,7 @@ module Aws::SecurityHub
       :enabled,
       :banner_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5428,7 +5389,7 @@ module Aws::SecurityHub
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5534,7 +5495,7 @@ module Aws::SecurityHub
       :session_timeout_hours,
       :client_login_banner_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Elastic IP address.</p>
@@ -5585,7 +5546,7 @@ module Aws::SecurityHub
       :network_interface_owner_id,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon EC2 instance.</p>
@@ -5648,7 +5609,7 @@ module Aws::SecurityHub
       :metadata_options,
       :monitoring,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata options that allow you to configure and secure the Amazon EC2 instance.</p>
@@ -5680,7 +5641,7 @@ module Aws::SecurityHub
       :http_tokens,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5694,7 +5655,7 @@ module Aws::SecurityHub
     class AwsEc2InstanceMonitoringDetails < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a network interface for the Amazon EC2 instance.</p>
@@ -5704,7 +5665,7 @@ module Aws::SecurityHub
     class AwsEc2InstanceNetworkInterfacesDetails < Struct.new(
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5740,7 +5701,7 @@ module Aws::SecurityHub
       :no_device,
       :virtual_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5799,7 +5760,7 @@ module Aws::SecurityHub
       :volume_size,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5819,7 +5780,7 @@ module Aws::SecurityHub
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5840,7 +5801,7 @@ module Aws::SecurityHub
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5862,7 +5823,7 @@ module Aws::SecurityHub
       :core_count,
       :threads_per_core,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5876,7 +5837,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataCreditSpecificationDetails < Struct.new(
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6069,7 +6030,7 @@ module Aws::SecurityHub
       :security_group_set,
       :user_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6083,7 +6044,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6103,7 +6064,7 @@ module Aws::SecurityHub
       :count,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6117,7 +6078,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataEnclaveOptionsDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6131,7 +6092,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataHibernationOptionsDetails < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6151,7 +6112,7 @@ module Aws::SecurityHub
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6171,7 +6132,7 @@ module Aws::SecurityHub
       :market_type,
       :spot_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6209,7 +6170,7 @@ module Aws::SecurityHub
       :spot_instance_type,
       :valid_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6229,7 +6190,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6249,7 +6210,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6270,7 +6231,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6408,7 +6369,7 @@ module Aws::SecurityHub
       :total_local_storage_gb,
       :v_cpu_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6428,7 +6389,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6448,7 +6409,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6468,7 +6429,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6488,7 +6449,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6508,7 +6469,7 @@ module Aws::SecurityHub
       :max,
       :min,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6522,7 +6483,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataLicenseSetDetails < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6536,7 +6497,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataMaintenanceOptionsDetails < Struct.new(
       :auto_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6576,7 +6537,7 @@ module Aws::SecurityHub
       :http_put_response_hop_limit,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6592,7 +6553,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataMonitoringDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6727,7 +6688,7 @@ module Aws::SecurityHub
       :secondary_private_ip_address_count,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6741,7 +6702,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6755,7 +6716,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails < Struct.new(
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6769,7 +6730,7 @@ module Aws::SecurityHub
     class AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6789,7 +6750,7 @@ module Aws::SecurityHub
       :primary,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6845,7 +6806,7 @@ module Aws::SecurityHub
       :spread_domain,
       :tenancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6871,7 +6832,7 @@ module Aws::SecurityHub
       :enable_resource_name_dns_a_record,
       :hostname_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6909,7 +6870,7 @@ module Aws::SecurityHub
       :default_version_number,
       :latest_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An association between the network ACL and a subnet.</p>
@@ -6927,7 +6888,7 @@ module Aws::SecurityHub
       :network_acl_id,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an Amazon EC2 network access control list (ACL).</p>
@@ -6957,7 +6918,7 @@ module Aws::SecurityHub
       :associations,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule for the network ACL. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol.</p>
@@ -6996,7 +6957,7 @@ module Aws::SecurityHub
       :rule_action,
       :rule_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the network interface attachment.</p>
@@ -7035,7 +6996,7 @@ module Aws::SecurityHub
       :instance_owner_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the network interface</p>
@@ -7073,7 +7034,7 @@ module Aws::SecurityHub
       :public_dns_name,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an IPV6 address that is associated with the network
@@ -7084,7 +7045,7 @@ module Aws::SecurityHub
     class AwsEc2NetworkInterfaceIpV6AddressDetail < Struct.new(
       :ip_v6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a private IPv4 address that is with the network
@@ -7099,7 +7060,7 @@ module Aws::SecurityHub
       :private_ip_address,
       :private_dns_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group associated with the network interface.</p>
@@ -7113,7 +7074,7 @@ module Aws::SecurityHub
       :group_name,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7157,7 +7118,7 @@ module Aws::SecurityHub
       :route_set,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon EC2 security group.</p>
@@ -7187,7 +7148,7 @@ module Aws::SecurityHub
       :ip_permissions,
       :ip_permissions_egress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IP permission for an EC2 security group.</p>
@@ -7238,7 +7199,7 @@ module Aws::SecurityHub
       :ipv6_ranges,
       :prefix_list_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of IPv4 addresses.</p>
@@ -7249,7 +7210,7 @@ module Aws::SecurityHub
     class AwsEc2SecurityGroupIpRange < Struct.new(
       :cidr_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of IPv6 addresses.</p>
@@ -7260,7 +7221,7 @@ module Aws::SecurityHub
     class AwsEc2SecurityGroupIpv6Range < Struct.new(
       :cidr_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A prefix list ID.</p>
@@ -7270,7 +7231,7 @@ module Aws::SecurityHub
     class AwsEc2SecurityGroupPrefixListId < Struct.new(
       :prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A relationship between a security group and a user.</p>
@@ -7305,7 +7266,7 @@ module Aws::SecurityHub
       :vpc_id,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a subnet in Amazon EC2.</p>
@@ -7363,7 +7324,7 @@ module Aws::SecurityHub
       :vpc_id,
       :ipv6_cidr_block_association_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services Amazon EC2 Transit Gateway that interconnects 
@@ -7431,7 +7392,7 @@ module Aws::SecurityHub
       :multicast_support,
       :amazon_side_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attachment to an Amazon EC2 volume.</p>
@@ -7480,7 +7441,7 @@ module Aws::SecurityHub
       :instance_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an EC2 volume.</p>
@@ -7568,7 +7529,7 @@ module Aws::SecurityHub
       :volume_type,
       :volume_scan_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an EC2 VPC.</p>
@@ -7592,7 +7553,7 @@ module Aws::SecurityHub
       :dhcp_options_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the service configuration for a VPC endpoint service.</p>
@@ -7669,7 +7630,7 @@ module Aws::SecurityHub
       :service_state,
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service type information for a VPC endpoint service.</p>
@@ -7679,7 +7640,7 @@ module Aws::SecurityHub
     class AwsEc2VpcEndpointServiceServiceTypeDetails < Struct.new(
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a VPC peering connection between two VPCs: a requester VPC that you own and an 
@@ -7712,7 +7673,7 @@ module Aws::SecurityHub
       :status,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the status of the VPC peering connection.
@@ -7729,7 +7690,7 @@ module Aws::SecurityHub
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC in a VPC peering connection.
@@ -7771,7 +7732,7 @@ module Aws::SecurityHub
       :region,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon EC2 VPN
@@ -7847,7 +7808,7 @@ module Aws::SecurityHub
       :routes,
       :transit_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>VPN connection options.</p>
@@ -7861,7 +7822,7 @@ module Aws::SecurityHub
       :static_routes_only,
       :tunnel_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPN tunnel options.</p>
@@ -7940,7 +7901,7 @@ module Aws::SecurityHub
       :replay_window_size,
       :tunnel_inside_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A static routes associated with
@@ -7955,7 +7916,7 @@ module Aws::SecurityHub
       :destination_cidr_block,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the VPN tunnel.</p>
@@ -7987,7 +7948,7 @@ module Aws::SecurityHub
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon ECR image.</p>
@@ -8036,7 +7997,7 @@ module Aws::SecurityHub
       :image_tags,
       :image_published_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Elastic Container Registry repository.</p>
@@ -8066,7 +8027,7 @@ module Aws::SecurityHub
       :repository_name,
       :repository_policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image scanning configuration for a repository.</p>
@@ -8076,7 +8037,7 @@ module Aws::SecurityHub
     class AwsEcrRepositoryImageScanningConfigurationDetails < Struct.new(
       :scan_on_push,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the lifecycle policy for the repository.</p>
@@ -8090,7 +8051,7 @@ module Aws::SecurityHub
       :lifecycle_policy_text,
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether to enable CloudWatch Container Insights for the ECS cluster.</p>
@@ -8104,7 +8065,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The run command configuration for the cluster.</p>
@@ -8114,7 +8075,7 @@ module Aws::SecurityHub
     class AwsEcsClusterConfigurationDetails < Struct.new(
       :execute_command_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the run command configuration for the cluster.</p>
@@ -8132,7 +8093,7 @@ module Aws::SecurityHub
       :log_configuration,
       :logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log configuration for the results of the run command actions.</p>
@@ -8158,7 +8119,7 @@ module Aws::SecurityHub
       :s3_encryption_enabled,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.</p>
@@ -8176,7 +8137,7 @@ module Aws::SecurityHub
       :capacity_provider,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Amazon ECS cluster.</p>
@@ -8230,7 +8191,7 @@ module Aws::SecurityHub
       :running_tasks_count,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon ECS container.
@@ -8258,7 +8219,7 @@ module Aws::SecurityHub
       :mount_points,
       :privileged,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Strategy item for the capacity provider strategy that the service uses.</p>
@@ -8279,7 +8240,7 @@ module Aws::SecurityHub
       :capacity_provider,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether a service deployment fails if a service cannot reach a steady state.</p>
@@ -8293,7 +8254,7 @@ module Aws::SecurityHub
       :enable,
       :rollback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional deployment parameters for the service.</p>
@@ -8315,7 +8276,7 @@ module Aws::SecurityHub
       :maximum_percent,
       :minimum_healthy_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the deployment controller type that the service uses.</p>
@@ -8329,7 +8290,7 @@ module Aws::SecurityHub
     class AwsEcsServiceDeploymentControllerDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a service within an ECS cluster.</p>
@@ -8432,7 +8393,7 @@ module Aws::SecurityHub
       :service_registries,
       :task_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer that the service uses.</p>
@@ -8456,7 +8417,7 @@ module Aws::SecurityHub
       :load_balancer_name,
       :target_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.</p>
@@ -8478,7 +8439,7 @@ module Aws::SecurityHub
       :security_groups,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.</p>
@@ -8488,7 +8449,7 @@ module Aws::SecurityHub
     class AwsEcsServiceNetworkConfigurationDetails < Struct.new(
       :aws_vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A placement constraint for the tasks in the service.</p>
@@ -8504,7 +8465,7 @@ module Aws::SecurityHub
       :expression,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A placement strategy that determines how to place the tasks for the service.</p>
@@ -8526,7 +8487,7 @@ module Aws::SecurityHub
       :field,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a service discovery registry to assign to the service.</p>
@@ -8552,7 +8513,7 @@ module Aws::SecurityHub
       :port,
       :registry_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dependency that is defined for container startup and shutdown.</p>
@@ -8588,7 +8549,7 @@ module Aws::SecurityHub
       :condition,
       :container_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container definition that describes a container in the task.</p>
@@ -8805,7 +8766,7 @@ module Aws::SecurityHub
       :volumes_from,
       :working_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An environment variable to pass to the container.</p>
@@ -8819,7 +8780,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file that contain environment variables to pass to a container.</p>
@@ -8833,7 +8794,7 @@ module Aws::SecurityHub
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A hostname and IP address mapping to append to the <b>/etc/hosts</b> file on the container.</p>
@@ -8847,7 +8808,7 @@ module Aws::SecurityHub
       :hostname,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The FireLens configuration for the container. The configuration specifies and configures a log router for container logs.</p>
@@ -8878,7 +8839,7 @@ module Aws::SecurityHub
       :options,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container health check command and associated configuration parameters for the container.</p>
@@ -8904,7 +8865,7 @@ module Aws::SecurityHub
       :start_period,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>
@@ -8946,7 +8907,7 @@ module Aws::SecurityHub
       :add,
       :drop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>
@@ -8980,7 +8941,7 @@ module Aws::SecurityHub
       :swappiness,
       :tmpfs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A host device to expose to the container.</p>
@@ -8998,7 +8959,7 @@ module Aws::SecurityHub
       :host_path,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container path, mount options, and size (in MiB) of a tmpfs mount.</p>
@@ -9029,7 +8990,7 @@ module Aws::SecurityHub
       :mount_options,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log configuration specification for the container.</p>
@@ -9113,7 +9074,7 @@ module Aws::SecurityHub
       :options,
       :secret_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A secret to pass to the log configuration.</p>
@@ -9129,7 +9090,7 @@ module Aws::SecurityHub
       :name,
       :value_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mount point for the data volumes in the container.</p>
@@ -9147,7 +9108,7 @@ module Aws::SecurityHub
       :read_only,
       :source_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A port mapping for the container.</p>
@@ -9165,7 +9126,7 @@ module Aws::SecurityHub
       :host_port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The private repository authentication credentials to use.</p>
@@ -9175,7 +9136,7 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails < Struct.new(
       :credentials_parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource to assign to a container.</p>
@@ -9193,7 +9154,7 @@ module Aws::SecurityHub
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A secret to pass to the container.</p>
@@ -9208,7 +9169,7 @@ module Aws::SecurityHub
       :name,
       :value_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A namespaced kernel parameter to set in the container.</p>
@@ -9222,7 +9183,7 @@ module Aws::SecurityHub
       :namespace,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A ulimit to set in the container.</p>
@@ -9317,7 +9278,7 @@ module Aws::SecurityHub
       :name,
       :soft_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data volume to mount from another container.</p>
@@ -9331,7 +9292,7 @@ module Aws::SecurityHub
       :read_only,
       :source_container,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a task definition. A task definition describes the container and volume definitions
@@ -9470,7 +9431,7 @@ module Aws::SecurityHub
       :volumes,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Elastic Inference accelerator to use
@@ -9485,7 +9446,7 @@ module Aws::SecurityHub
       :device_name,
       :device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A placement constraint object to use for tasks.</p>
@@ -9499,7 +9460,7 @@ module Aws::SecurityHub
       :expression,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the App Mesh
@@ -9518,7 +9479,7 @@ module Aws::SecurityHub
       :proxy_configuration_properties,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A network configuration parameter to provide to the Container Network Interface (CNI) plugin.</p>
@@ -9532,7 +9493,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data volume to mount from another container.</p>
@@ -9554,7 +9515,7 @@ module Aws::SecurityHub
       :host,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Docker volume.</p>
@@ -9581,7 +9542,7 @@ module Aws::SecurityHub
       :labels,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9595,7 +9556,7 @@ module Aws::SecurityHub
       :access_point_id,
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Elastic File System file system that is used for task storage.</p>
@@ -9621,7 +9582,7 @@ module Aws::SecurityHub
       :transit_encryption,
       :transit_encryption_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a bind mount host volume.</p>
@@ -9631,7 +9592,7 @@ module Aws::SecurityHub
     class AwsEcsTaskDefinitionVolumesHostDetails < Struct.new(
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a task in a cluster.
@@ -9686,7 +9647,7 @@ module Aws::SecurityHub
       :volumes,
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a data volume that's used in a task definition.
@@ -9705,7 +9666,7 @@ module Aws::SecurityHub
       :name,
       :host,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details on a container instance bind mount host volume.
@@ -9718,7 +9679,7 @@ module Aws::SecurityHub
     class AwsEcsTaskVolumeHostDetails < Struct.new(
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon EFS access point.
@@ -9756,7 +9717,7 @@ module Aws::SecurityHub
       :posix_user,
       :root_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details for all file system operations using this Amazon EFS access point.
@@ -9778,7 +9739,7 @@ module Aws::SecurityHub
       :secondary_gids,
       :uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the settings that Amazon EFS uses to create the root directory 
@@ -9802,7 +9763,7 @@ module Aws::SecurityHub
       :owner_uid,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the directory on the Amazon EFS file system that the access point exposes 
@@ -9822,7 +9783,7 @@ module Aws::SecurityHub
       :creation_info,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Amazon EKS cluster.</p>
@@ -9896,7 +9857,7 @@ module Aws::SecurityHub
       :version,
       :logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a cluster logging configuration.</p>
@@ -9937,7 +9898,7 @@ module Aws::SecurityHub
       :enabled,
       :types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration for an Amazon EKS cluster.</p>
@@ -9947,7 +9908,7 @@ module Aws::SecurityHub
     class AwsEksClusterLoggingDetails < Struct.new(
       :cluster_logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the VPC configuration used by the cluster control plane.</p>
@@ -9969,7 +9930,7 @@ module Aws::SecurityHub
       :subnet_ids,
       :endpoint_public_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an Elastic Beanstalk environment.</p>
@@ -10081,7 +10042,7 @@ module Aws::SecurityHub
       :tier,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a link to another environment that is in the same group.</p>
@@ -10095,7 +10056,7 @@ module Aws::SecurityHub
       :environment_name,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration option setting for the environment.</p>
@@ -10117,7 +10078,7 @@ module Aws::SecurityHub
       :resource_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the tier of the environment.</p>
@@ -10135,7 +10096,7 @@ module Aws::SecurityHub
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Elasticsearch domain.</p>
@@ -10201,7 +10162,7 @@ module Aws::SecurityHub
       :service_software_options,
       :vpc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options for the domain endpoint, such as whether to require HTTPS for all
@@ -10228,7 +10189,7 @@ module Aws::SecurityHub
       :enforce_https,
       :tls_security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>details about the configuration of an OpenSearch cluster.</p>
@@ -10264,7 +10225,7 @@ module Aws::SecurityHub
       :zone_awareness_config,
       :zone_awareness_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for zone awareness.</p>
@@ -10274,7 +10235,7 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails < Struct.new(
       :availability_zone_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the configuration for encryption at rest.</p>
@@ -10288,7 +10249,7 @@ module Aws::SecurityHub
       :enabled,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>configures the CloudWatch Logs to publish for the
@@ -10309,7 +10270,7 @@ module Aws::SecurityHub
       :search_slow_logs,
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log configuration.</p>
@@ -10323,7 +10284,7 @@ module Aws::SecurityHub
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the configuration for node-to-node encryption.</p>
@@ -10333,7 +10294,7 @@ module Aws::SecurityHub
     class AwsElasticsearchDomainNodeToNodeEncryptionOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state of the domain relative to the latest service software.</p>
@@ -10395,7 +10356,7 @@ module Aws::SecurityHub
       :update_available,
       :update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that OpenSearch derives based on <code>VPCOptions</code> for the
@@ -10418,7 +10379,7 @@ module Aws::SecurityHub
       :subnet_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a stickiness policy that was created using
@@ -10434,7 +10395,7 @@ module Aws::SecurityHub
       :cookie_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a stickiness policy that was created using
@@ -10452,7 +10413,7 @@ module Aws::SecurityHub
       :cookie_expiration_period,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the access log configuration for the load balancer.</p>
@@ -10476,7 +10437,7 @@ module Aws::SecurityHub
       :s3_bucket_name,
       :s3_bucket_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about additional attributes for the load balancer.</p>
@@ -10490,7 +10451,7 @@ module Aws::SecurityHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains attributes for the load balancer.</p>
@@ -10525,7 +10486,7 @@ module Aws::SecurityHub
       :cross_zone_load_balancing,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the configuration of an EC2 instance for the load
@@ -10540,7 +10501,7 @@ module Aws::SecurityHub
       :instance_port,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the connection draining configuration for the load
@@ -10556,7 +10517,7 @@ module Aws::SecurityHub
       :enabled,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains connection settings for the load balancer.</p>
@@ -10567,7 +10528,7 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerConnectionSettings < Struct.new(
       :idle_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains cross-zone load balancing settings for the load balancer.</p>
@@ -10577,7 +10538,7 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerCrossZoneLoadBalancing < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Classic Load Balancer.</p>
@@ -10658,7 +10619,7 @@ module Aws::SecurityHub
       :subnets,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the health checks that are conducted on the load
@@ -10703,7 +10664,7 @@ module Aws::SecurityHub
       :timeout,
       :unhealthy_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an EC2 instance for a load balancer.</p>
@@ -10713,7 +10674,7 @@ module Aws::SecurityHub
     class AwsElbLoadBalancerInstance < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer listener.</p>
@@ -10748,7 +10709,7 @@ module Aws::SecurityHub
       :protocol,
       :ssl_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the policies that are enabled for a load balancer listener.</p>
@@ -10762,7 +10723,7 @@ module Aws::SecurityHub
       :listener,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the policies for a load balancer.</p>
@@ -10782,7 +10743,7 @@ module Aws::SecurityHub
       :lb_cookie_stickiness_policies,
       :other_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the security group for the load balancer.</p>
@@ -10796,7 +10757,7 @@ module Aws::SecurityHub
       :group_name,
       :owner_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A load balancer attribute.</p>
@@ -10810,7 +10771,7 @@ module Aws::SecurityHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer.</p>
@@ -10863,7 +10824,7 @@ module Aws::SecurityHub
       :vpc_id,
       :load_balancer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10890,7 +10851,7 @@ module Aws::SecurityHub
       :registry_arn,
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10959,7 +10920,7 @@ module Aws::SecurityHub
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10971,7 +10932,7 @@ module Aws::SecurityHub
     class AwsEventsEndpointEventBusesDetails < Struct.new(
       :event_bus_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10984,7 +10945,7 @@ module Aws::SecurityHub
     class AwsEventsEndpointReplicationConfigDetails < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10996,7 +10957,7 @@ module Aws::SecurityHub
     class AwsEventsEndpointRoutingConfigDetails < Struct.new(
       :failover_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11013,7 +10974,7 @@ module Aws::SecurityHub
       :primary,
       :secondary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11025,7 +10986,7 @@ module Aws::SecurityHub
     class AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails < Struct.new(
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11037,7 +10998,7 @@ module Aws::SecurityHub
     class AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11062,7 +11023,7 @@ module Aws::SecurityHub
       :name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11076,7 +11037,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesCloudTrailDetails < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11120,7 +11081,7 @@ module Aws::SecurityHub
       :malware_protection,
       :s3_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11134,7 +11095,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesDnsLogsDetails < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11148,7 +11109,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesFlowLogsDetails < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11162,7 +11123,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11176,7 +11137,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesKubernetesDetails < Struct.new(
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11196,7 +11157,7 @@ module Aws::SecurityHub
       :scan_ec2_instance_with_findings,
       :service_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11210,7 +11171,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails < Struct.new(
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11230,7 +11191,7 @@ module Aws::SecurityHub
       :reason,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11244,7 +11205,7 @@ module Aws::SecurityHub
     class AwsGuardDutyDetectorDataSourcesS3LogsDetails < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11282,7 +11243,7 @@ module Aws::SecurityHub
       :service_role,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -11302,7 +11263,7 @@ module Aws::SecurityHub
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IAM access key details related to a finding.</p>
@@ -11350,7 +11311,7 @@ module Aws::SecurityHub
       :access_key_id,
       :session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the session that the key was used for.</p>
@@ -11364,7 +11325,7 @@ module Aws::SecurityHub
       :attributes,
       :session_issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of the session that the key was used for.</p>
@@ -11379,7 +11340,7 @@ module Aws::SecurityHub
       :mfa_authenticated,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the entity that created the session.</p>
@@ -11406,12 +11367,7 @@ module Aws::SecurityHub
       :account_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsIamAccessKeyStatus
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A managed policy that is attached to an IAM principal.</p>
@@ -11425,7 +11381,7 @@ module Aws::SecurityHub
       :policy_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an IAM group.</p>
@@ -11456,7 +11412,7 @@ module Aws::SecurityHub
       :group_policy_list,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A managed policy that is attached to the IAM group.</p>
@@ -11466,7 +11422,7 @@ module Aws::SecurityHub
     class AwsIamGroupPolicy < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an instance profile.</p>
@@ -11497,7 +11453,7 @@ module Aws::SecurityHub
       :path,
       :roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a role associated with an instance profile.</p>
@@ -11528,7 +11484,7 @@ module Aws::SecurityHub
       :role_id,
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the policy used to set the permissions boundary for an IAM
@@ -11543,7 +11499,7 @@ module Aws::SecurityHub
       :permissions_boundary_arn,
       :permissions_boundary_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an IAM permissions policy.</p>
@@ -11596,7 +11552,7 @@ module Aws::SecurityHub
       :policy_version_list,
       :update_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A version of an IAM policy.</p>
@@ -11615,7 +11571,7 @@ module Aws::SecurityHub
       :is_default_version,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM role, including all of the role's policies.</p>
@@ -11663,7 +11619,7 @@ module Aws::SecurityHub
       :max_session_duration,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inline policy that is embedded in the role.</p>
@@ -11673,7 +11629,7 @@ module Aws::SecurityHub
     class AwsIamRolePolicy < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an IAM user.</p>
@@ -11712,7 +11668,7 @@ module Aws::SecurityHub
       :user_name,
       :user_policy_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an inline policy that is embedded in the user.</p>
@@ -11722,7 +11678,7 @@ module Aws::SecurityHub
     class AwsIamUserPolicy < Struct.new(
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Kinesis data stream.
@@ -11756,7 +11712,7 @@ module Aws::SecurityHub
       :shard_count,
       :retention_period_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about stream encryption.
@@ -11772,7 +11728,7 @@ module Aws::SecurityHub
       :encryption_type,
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about an KMS key.</p>
@@ -11842,7 +11798,7 @@ module Aws::SecurityHub
       :description,
       :key_rotation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.</p>
@@ -11864,7 +11820,7 @@ module Aws::SecurityHub
       :s3_object_version,
       :zip_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dead-letter queue for failed asynchronous invocations.</p>
@@ -11874,7 +11830,7 @@ module Aws::SecurityHub
     class AwsLambdaFunctionDeadLetterConfig < Struct.new(
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Lambda function's configuration.</p>
@@ -11963,7 +11919,7 @@ module Aws::SecurityHub
       :architectures,
       :package_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A function's environment variable settings.</p>
@@ -11977,7 +11933,7 @@ module Aws::SecurityHub
       :variables,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error messages for environment variables that could not be applied.</p>
@@ -11991,7 +11947,7 @@ module Aws::SecurityHub
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Lambda layer.</p>
@@ -12005,7 +11961,7 @@ module Aws::SecurityHub
       :arn,
       :code_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function's X-Ray tracing configuration.</p>
@@ -12015,7 +11971,7 @@ module Aws::SecurityHub
     class AwsLambdaFunctionTracingConfig < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC security groups and subnets that are attached to a Lambda function.</p>
@@ -12033,7 +11989,7 @@ module Aws::SecurityHub
       :subnet_ids,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a Lambda layer version.</p>
@@ -12056,7 +12012,7 @@ module Aws::SecurityHub
       :compatible_runtimes,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a volume mount point that's used in a container definition.
@@ -12074,7 +12030,7 @@ module Aws::SecurityHub
       :source_volume,
       :container_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12096,7 +12052,7 @@ module Aws::SecurityHub
       :unauthenticated,
       :tls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12113,7 +12069,7 @@ module Aws::SecurityHub
       :iam,
       :scram,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12125,7 +12081,7 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12137,7 +12093,7 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12156,7 +12112,7 @@ module Aws::SecurityHub
       :certificate_authority_arn_list,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12169,7 +12125,7 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12208,7 +12164,7 @@ module Aws::SecurityHub
       :client_authentication,
       :enhanced_monitoring,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12226,7 +12182,7 @@ module Aws::SecurityHub
       :encryption_in_transit,
       :encryption_at_rest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12239,7 +12195,7 @@ module Aws::SecurityHub
     class AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails < Struct.new(
       :data_volume_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12258,7 +12214,7 @@ module Aws::SecurityHub
       :in_cluster,
       :client_broker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -12271,7 +12227,7 @@ module Aws::SecurityHub
     class AwsMskClusterDetails < Struct.new(
       :cluster_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Network Firewall firewall.</p>
@@ -12317,7 +12273,7 @@ module Aws::SecurityHub
       :subnet_mappings,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a firewall policy. A firewall policy defines the behavior of a network firewall.</p>
@@ -12343,7 +12299,7 @@ module Aws::SecurityHub
       :firewall_policy_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A public subnet that Network Firewall uses for the firewall.</p>
@@ -12353,7 +12309,7 @@ module Aws::SecurityHub
     class AwsNetworkFirewallFirewallSubnetMappingsDetails < Struct.new(
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Network Firewall rule group. Rule groups are used to inspect and control network traffic. Stateless rule groups apply to individual packets. Stateful rule groups apply to packets in the context of their traffic flow.</p>
@@ -12389,7 +12345,7 @@ module Aws::SecurityHub
       :rule_group_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about domain access control options.
@@ -12411,7 +12367,7 @@ module Aws::SecurityHub
       :internal_user_database_enabled,
       :master_user_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the configuration of an OpenSearch cluster.</p>
@@ -12460,7 +12416,7 @@ module Aws::SecurityHub
       :zone_awareness_enabled,
       :dedicated_master_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for zone awareness.</p>
@@ -12470,7 +12426,7 @@ module Aws::SecurityHub
     class AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails < Struct.new(
       :availability_zone_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon OpenSearch Service domain.</p>
@@ -12538,7 +12494,7 @@ module Aws::SecurityHub
       :domain_endpoints,
       :advanced_security_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about additional options for the domain endpoint.</p>
@@ -12564,7 +12520,7 @@ module Aws::SecurityHub
       :custom_endpoint,
       :tls_security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the configuration for encryption at rest for the OpenSearch domain.</p>
@@ -12578,7 +12534,7 @@ module Aws::SecurityHub
       :enabled,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details for a log publishing option.</p>
@@ -12592,7 +12548,7 @@ module Aws::SecurityHub
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the CloudWatch Logs to publish for the OpenSearch domain.</p>
@@ -12610,7 +12566,7 @@ module Aws::SecurityHub
       :search_slow_logs,
       :audit_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies information about the master user of the domain.
@@ -12632,7 +12588,7 @@ module Aws::SecurityHub
       :master_user_name,
       :master_user_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the configuration for node-to-node encryption.</p>
@@ -12642,7 +12598,7 @@ module Aws::SecurityHub
     class AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the state of the domain relative to the latest service software.</p>
@@ -12707,7 +12663,7 @@ module Aws::SecurityHub
       :update_status,
       :optional_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information that OpenSearch Service derives based on the <code>VPCOptions</code> for the domain.</p>
@@ -12721,7 +12677,7 @@ module Aws::SecurityHub
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IAM role that is associated with the Amazon RDS DB cluster.</p>
@@ -12752,7 +12708,7 @@ module Aws::SecurityHub
       :role_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon RDS DB cluster.</p>
@@ -12995,7 +12951,7 @@ module Aws::SecurityHub
       :iam_database_authentication_enabled,
       :auto_minor_version_upgrade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an instance in the DB cluster.</p>
@@ -13018,7 +12974,7 @@ module Aws::SecurityHub
       :db_instance_identifier,
       :db_cluster_parameter_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an option group membership for a DB cluster.</p>
@@ -13032,7 +12988,7 @@ module Aws::SecurityHub
       :db_cluster_option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -13056,7 +13012,7 @@ module Aws::SecurityHub
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon RDS DB cluster snapshot.</p>
@@ -13143,7 +13099,7 @@ module Aws::SecurityHub
       :iam_database_authentication_enabled,
       :db_cluster_snapshot_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Active Directory domain membership record associated with the DB
@@ -13166,7 +13122,7 @@ module Aws::SecurityHub
       :fqdn,
       :iam_role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IAM role associated with the DB instance.</p>
@@ -13204,7 +13160,7 @@ module Aws::SecurityHub
       :feature_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB instance.</p>
@@ -13495,7 +13451,7 @@ module Aws::SecurityHub
       :listener_endpoint,
       :max_allocated_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the connection endpoint.</p>
@@ -13513,7 +13469,7 @@ module Aws::SecurityHub
       :port,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VPC security groups that the DB instance belongs to.</p>
@@ -13527,7 +13483,7 @@ module Aws::SecurityHub
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An option group membership.</p>
@@ -13541,7 +13497,7 @@ module Aws::SecurityHub
       :option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a parameter group for a DB instance.</p>
@@ -13555,7 +13511,7 @@ module Aws::SecurityHub
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Changes to a DB instance that are currently pending.</p>
@@ -13621,7 +13577,7 @@ module Aws::SecurityHub
       :pending_cloud_watch_logs_exports,
       :processor_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A processor feature.</p>
@@ -13635,7 +13591,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon RDS DB security group.</p>
@@ -13670,7 +13626,7 @@ module Aws::SecurityHub
       :owner_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>EC2 security group information for an RDS DB security group.</p>
@@ -13692,7 +13648,7 @@ module Aws::SecurityHub
       :ec2_security_group_owner_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IP range information for an RDS DB security group.</p>
@@ -13706,7 +13662,7 @@ module Aws::SecurityHub
       :cidr_ip,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an Amazon RDS DB cluster snapshot.</p>
@@ -13909,7 +13865,7 @@ module Aws::SecurityHub
       :processor_features,
       :dbi_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of a read replica.</p>
@@ -13931,7 +13887,7 @@ module Aws::SecurityHub
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the subnet group for the database instance.</p>
@@ -13961,7 +13917,7 @@ module Aws::SecurityHub
       :subnets,
       :db_subnet_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a subnet in a subnet group.</p>
@@ -13979,7 +13935,7 @@ module Aws::SecurityHub
       :subnet_availability_zone,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Availability Zone for a subnet in a subnet group.</p>
@@ -13989,7 +13945,7 @@ module Aws::SecurityHub
     class AwsRdsDbSubnetGroupSubnetAvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.</p>
@@ -14038,7 +13994,7 @@ module Aws::SecurityHub
       :status,
       :subscription_creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the log types to enable and disable.</p>
@@ -14052,7 +14008,7 @@ module Aws::SecurityHub
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node in an Amazon Redshift cluster.</p>
@@ -14070,7 +14026,7 @@ module Aws::SecurityHub
       :private_ip_address,
       :public_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster parameter group that is associated with an Amazon Redshift cluster.</p>
@@ -14088,7 +14044,7 @@ module Aws::SecurityHub
       :parameter_apply_status,
       :parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of a parameter in a cluster parameter group for an Amazon Redshift
@@ -14112,7 +14068,7 @@ module Aws::SecurityHub
       :parameter_apply_status,
       :parameter_apply_error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group that is associated with the cluster.</p>
@@ -14126,7 +14082,7 @@ module Aws::SecurityHub
       :cluster_security_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can configure Amazon Redshift to copy snapshots for a cluster to another Amazon Web Services Region. This parameter 
@@ -14156,7 +14112,7 @@ module Aws::SecurityHub
       :retention_period,
       :snapshot_copy_grant_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time windows during which maintenance was deferred for an Amazon Redshift
@@ -14177,7 +14133,7 @@ module Aws::SecurityHub
       :defer_maintenance_identifier,
       :defer_maintenance_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon Redshift cluster.</p>
@@ -14428,7 +14384,7 @@ module Aws::SecurityHub
       :vpc_security_groups,
       :logging_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the elastic IP (EIP) address for an Amazon Redshift cluster.</p>
@@ -14442,7 +14398,7 @@ module Aws::SecurityHub
       :elastic_ip,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection endpoint for an Amazon Redshift cluster.</p>
@@ -14456,7 +14412,7 @@ module Aws::SecurityHub
       :address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about whether an Amazon Redshift cluster finished applying any hardware
@@ -14482,7 +14438,7 @@ module Aws::SecurityHub
       :hsm_configuration_identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IAM role that the cluster can use to access other Amazon Web Services services.</p>
@@ -14498,7 +14454,7 @@ module Aws::SecurityHub
       :apply_status,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the logging status of the cluster.</p>
@@ -14530,7 +14486,7 @@ module Aws::SecurityHub
       :logging_enabled,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Changes to the Amazon Redshift cluster that are currently pending.</p>
@@ -14582,7 +14538,7 @@ module Aws::SecurityHub
       :number_of_nodes,
       :publicly_accessible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resize operation for the cluster.</p>
@@ -14598,7 +14554,7 @@ module Aws::SecurityHub
       :allow_cancel_resize,
       :resize_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of a cluster restore action. It only applies if the cluster
@@ -14640,7 +14596,7 @@ module Aws::SecurityHub
       :snapshot_size_in_mega_bytes,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VPC security group that the cluster belongs to, if the cluster is in a VPC.</p>
@@ -14654,7 +14610,7 @@ module Aws::SecurityHub
       :status,
       :vpc_security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14666,7 +14622,7 @@ module Aws::SecurityHub
     class AwsRoute53HostedZoneConfigDetails < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14697,7 +14653,7 @@ module Aws::SecurityHub
       :name_servers,
       :query_logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14719,7 +14675,7 @@ module Aws::SecurityHub
       :name,
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14737,7 +14693,7 @@ module Aws::SecurityHub
       :id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14749,7 +14705,7 @@ module Aws::SecurityHub
     class AwsRoute53QueryLoggingConfigDetails < Struct.new(
       :cloud_watch_logs_log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14804,7 +14760,7 @@ module Aws::SecurityHub
       :public_access_block_configuration,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14818,7 +14774,7 @@ module Aws::SecurityHub
     class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>provides information about the Amazon S3 Public Access Block configuration for accounts.</p>
@@ -14840,7 +14796,7 @@ module Aws::SecurityHub
       :ignore_public_acls,
       :restrict_public_buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lifecycle configuration for the objects in the S3 bucket.</p>
@@ -14850,7 +14806,7 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationDetails < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about what Amazon S3
@@ -14861,7 +14817,7 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails < Struct.new(
       :days_after_initiation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for a lifecycle rule.</p>
@@ -14917,7 +14873,7 @@ module Aws::SecurityHub
       :status,
       :transitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the objects that a rule applies to.</p>
@@ -14927,7 +14883,7 @@ module Aws::SecurityHub
     class AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails < Struct.new(
       :predicate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the filter.</p>
@@ -14950,7 +14906,7 @@ module Aws::SecurityHub
       :tag,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value to use for the filter.</p>
@@ -14969,7 +14925,7 @@ module Aws::SecurityHub
       :tag,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag that is assigned to matching objects.</p>
@@ -14983,7 +14939,7 @@ module Aws::SecurityHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag filter.</p>
@@ -14997,7 +14953,7 @@ module Aws::SecurityHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transition rule that describes when noncurrent objects transition to a specified storage class.</p>
@@ -15011,7 +14967,7 @@ module Aws::SecurityHub
       :days,
       :storage_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule for when objects transition to specific storage classes.</p>
@@ -15057,7 +15013,7 @@ module Aws::SecurityHub
       :days,
       :storage_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the versioning state of an S3 bucket.</p>
@@ -15071,7 +15027,7 @@ module Aws::SecurityHub
       :is_mfa_delete_enabled,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon Simple Storage Service (Amazon S3) bucket.</p>
@@ -15138,7 +15094,7 @@ module Aws::SecurityHub
       :object_lock_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about logging for
@@ -15153,7 +15109,7 @@ module Aws::SecurityHub
       :destination_bucket_name,
       :log_file_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The notification
@@ -15164,7 +15120,7 @@ module Aws::SecurityHub
     class AwsS3BucketNotificationConfiguration < Struct.new(
       :configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an S3 bucket notification configuration.</p>
@@ -15205,7 +15161,7 @@ module Aws::SecurityHub
       :destination,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filtering information for the notifications. The
@@ -15216,7 +15172,7 @@ module Aws::SecurityHub
     class AwsS3BucketNotificationConfigurationFilter < Struct.new(
       :s3_key_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an Amazon S3 filter.</p>
@@ -15226,7 +15182,7 @@ module Aws::SecurityHub
     class AwsS3BucketNotificationConfigurationS3KeyFilter < Struct.new(
       :filter_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a filter rule.</p>
@@ -15240,12 +15196,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsS3BucketNotificationConfigurationS3KeyFilterRuleName
-      PREFIX = 'Prefix'
-      SUFFIX = 'Suffix'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15265,7 +15216,7 @@ module Aws::SecurityHub
       :object_lock_enabled,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15291,7 +15242,7 @@ module Aws::SecurityHub
       :mode,
       :years,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15305,7 +15256,7 @@ module Aws::SecurityHub
     class AwsS3BucketObjectLockConfigurationRuleDetails < Struct.new(
       :default_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default server-side encryption to apply to new objects in the
@@ -15321,7 +15272,7 @@ module Aws::SecurityHub
       :sse_algorithm,
       :kms_master_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption configuration for the S3 bucket.</p>
@@ -15331,7 +15282,7 @@ module Aws::SecurityHub
     class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encryption rule to apply to the S3 bucket.</p>
@@ -15343,7 +15294,7 @@ module Aws::SecurityHub
     class AwsS3BucketServerSideEncryptionRule < Struct.new(
       :apply_server_side_encryption_by_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Website parameters for the S3
@@ -15366,7 +15317,7 @@ module Aws::SecurityHub
       :redirect_all_requests_to,
       :routing_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The redirect behavior for requests
@@ -15382,7 +15333,7 @@ module Aws::SecurityHub
       :hostname,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule for redirecting requests
@@ -15398,7 +15349,7 @@ module Aws::SecurityHub
       :condition,
       :redirect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The condition that must be met in order to apply the routing rule.</p>
@@ -15412,7 +15363,7 @@ module Aws::SecurityHub
       :http_error_code_returned_equals,
       :key_prefix_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rules to redirect the request if the condition in <code>Condition</code> is
@@ -15442,7 +15393,7 @@ module Aws::SecurityHub
       :replace_key_prefix_with,
       :replace_key_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon S3 object.</p>
@@ -15475,7 +15426,7 @@ module Aws::SecurityHub
       :server_side_encryption,
       :ssekms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15606,7 +15557,7 @@ module Aws::SecurityHub
       :url,
       :volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15620,7 +15571,7 @@ module Aws::SecurityHub
     class AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails < Struct.new(
       :minimum_instance_metadata_service_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Secrets Manager secret.</p>
@@ -15660,7 +15611,7 @@ module Aws::SecurityHub
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the rotation schedule for the secret.</p>
@@ -15670,7 +15621,7 @@ module Aws::SecurityHub
     class AwsSecretsManagerSecretRotationRules < Struct.new(
       :automatically_after_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a consistent format for Security Hub findings.
@@ -15925,7 +15876,7 @@ module Aws::SecurityHub
       :aws_account_name,
       :detection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of filters that are applied to all active findings aggregated by Security Hub.</p>
@@ -16489,7 +16440,7 @@ module Aws::SecurityHub
       :resource_application_name,
       :resource_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies which finding to get the finding history for.</p>
@@ -16505,7 +16456,7 @@ module Aws::SecurityHub
       :id,
       :product_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon SNS topic to which notifications can be published.</p>
@@ -16561,7 +16512,7 @@ module Aws::SecurityHub
       :http_success_feedback_role_arn,
       :http_failure_feedback_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper type for the attributes of an Amazon SNS subscription.</p>
@@ -16575,7 +16526,7 @@ module Aws::SecurityHub
       :endpoint,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data about a queue.</p>
@@ -16599,7 +16550,7 @@ module Aws::SecurityHub
       :queue_name,
       :dead_letter_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details about the compliance status for a patch.</p>
@@ -16741,7 +16692,7 @@ module Aws::SecurityHub
       :non_compliant_unspecified_count,
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the compliance for a patch.</p>
@@ -16751,7 +16702,7 @@ module Aws::SecurityHub
     class AwsSsmPatch < Struct.new(
       :compliance_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the state of a patch on an instance based on the patch
@@ -16762,7 +16713,7 @@ module Aws::SecurityHub
     class AwsSsmPatchComplianceDetails < Struct.new(
       :patch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16820,7 +16771,7 @@ module Aws::SecurityHub
       :tracing_configuration,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16834,7 +16785,7 @@ module Aws::SecurityHub
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16850,7 +16801,7 @@ module Aws::SecurityHub
     class AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails < Struct.new(
       :cloud_watch_logs_log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16876,7 +16827,7 @@ module Aws::SecurityHub
       :include_execution_data,
       :level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -16890,7 +16841,7 @@ module Aws::SecurityHub
     class AwsStepFunctionStateMachineTracingConfigurationDetails < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a rate-based rule for global resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>
@@ -16920,7 +16871,7 @@ module Aws::SecurityHub
       :rule_id,
       :match_predicates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>
@@ -16977,7 +16928,7 @@ module Aws::SecurityHub
       :negated,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>contains details about a rate-based rule for Regional resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>
@@ -17007,7 +16958,7 @@ module Aws::SecurityHub
       :rule_id,
       :match_predicates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>
@@ -17063,7 +17014,7 @@ module Aws::SecurityHub
       :negated,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an WAF Regional rule. This rule identifies the web requests that you want to allow, block, or count. </p>
@@ -17091,7 +17042,7 @@ module Aws::SecurityHub
       :predicate_list,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an WAF Regional rule group. The rule group is a collection of rules for inspecting and controlling web
@@ -17119,7 +17070,7 @@ module Aws::SecurityHub
       :rule_group_id,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the action that WAF should take on a web request when it matches the criteria defined in the rule.
@@ -17131,7 +17082,7 @@ module Aws::SecurityHub
     class AwsWafRegionalRuleGroupRulesActionDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the rules attached to a rule group
@@ -17157,7 +17108,7 @@ module Aws::SecurityHub
       :rule_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the <code>ByteMatchSet</code>, <code>IPSet</code>, <code>SqlInjectionMatchSet</code>, <code>XssMatchSet</code>, 
@@ -17182,7 +17133,7 @@ module Aws::SecurityHub
       :negated,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the web access control list (web ACL). The web ACL contains the rules that identify the requests that you
@@ -17215,7 +17166,7 @@ module Aws::SecurityHub
       :rules_list,
       :web_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action that WAF takes when a web request matches all conditions in the
@@ -17227,7 +17178,7 @@ module Aws::SecurityHub
     class AwsWafRegionalWebAclRulesListActionDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A combination of <code>ByteMatchSet</code>, <code>IPSet</code>, and/or <code>SqlInjectionMatchSet</code> 
@@ -17261,7 +17212,7 @@ module Aws::SecurityHub
       :rule_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the action to use in the place of the action that results from the rule group 
@@ -17274,7 +17225,7 @@ module Aws::SecurityHub
     class AwsWafRegionalWebAclRulesListOverrideActionDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a WAF rule. This rule specifies the web requests that you want to allow, block, or count.
@@ -17303,7 +17254,7 @@ module Aws::SecurityHub
       :predicate_list,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an WAF rule group. A rule group is a collection of rules for inspecting and controlling web requests. 
@@ -17331,7 +17282,7 @@ module Aws::SecurityHub
       :rule_group_id,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about what action WAF should take on a web request when it matches the criteria defined in the rule.
@@ -17343,7 +17294,7 @@ module Aws::SecurityHub
     class AwsWafRuleGroupRulesActionDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the rules attached to the rule group. These rules identify the web requests that you want to 
@@ -17371,7 +17322,7 @@ module Aws::SecurityHub
       :rule_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the <code>ByteMatchSet</code>, <code>IPSet</code>, <code>SqlInjectionMatchSet</code>, <code>XssMatchSet</code>, 
@@ -17397,7 +17348,7 @@ module Aws::SecurityHub
       :negated,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an WAF web access control list (web ACL).</p>
@@ -17419,7 +17370,7 @@ module Aws::SecurityHub
       :rules,
       :web_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a rule in an WAF web ACL.</p>
@@ -17471,7 +17422,7 @@ module Aws::SecurityHub
       :rule_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17486,7 +17437,7 @@ module Aws::SecurityHub
     class AwsWafv2ActionAllowDetails < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17501,7 +17452,7 @@ module Aws::SecurityHub
     class AwsWafv2ActionBlockDetails < Struct.new(
       :custom_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17521,7 +17472,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17535,7 +17486,7 @@ module Aws::SecurityHub
     class AwsWafv2CustomRequestHandlingDetails < Struct.new(
       :insert_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17562,7 +17513,7 @@ module Aws::SecurityHub
       :response_code,
       :response_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17622,7 +17573,7 @@ module Aws::SecurityHub
       :scope,
       :visibility_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17637,7 +17588,7 @@ module Aws::SecurityHub
     class AwsWafv2RulesActionCaptchaDetails < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17652,7 +17603,7 @@ module Aws::SecurityHub
     class AwsWafv2RulesActionCountDetails < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17685,7 +17636,7 @@ module Aws::SecurityHub
       :captcha,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17724,7 +17675,7 @@ module Aws::SecurityHub
       :priority,
       :visibility_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17752,7 +17703,7 @@ module Aws::SecurityHub
       :metric_name,
       :sampled_requests_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17772,7 +17723,7 @@ module Aws::SecurityHub
       :allow,
       :block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17786,7 +17737,7 @@ module Aws::SecurityHub
     class AwsWafv2WebAclCaptchaConfigDetails < Struct.new(
       :immunity_time_property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17800,7 +17751,7 @@ module Aws::SecurityHub
     class AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails < Struct.new(
       :immunity_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -17871,7 +17822,7 @@ module Aws::SecurityHub
       :rules,
       :visibility_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the encryption configuration for X-Ray.</p>
@@ -17890,7 +17841,7 @@ module Aws::SecurityHub
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_rules_arns
@@ -17901,7 +17852,7 @@ module Aws::SecurityHub
     class BatchDeleteAutomationRulesRequest < Struct.new(
       :automation_rules_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_automation_rules
@@ -17919,7 +17870,7 @@ module Aws::SecurityHub
       :processed_automation_rules,
       :unprocessed_automation_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscription_arns
@@ -17928,7 +17879,7 @@ module Aws::SecurityHub
     class BatchDisableStandardsRequest < Struct.new(
       :standards_subscription_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscriptions
@@ -17937,7 +17888,7 @@ module Aws::SecurityHub
     class BatchDisableStandardsResponse < Struct.new(
       :standards_subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscription_requests
@@ -17946,7 +17897,7 @@ module Aws::SecurityHub
     class BatchEnableStandardsRequest < Struct.new(
       :standards_subscription_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscriptions
@@ -17955,7 +17906,7 @@ module Aws::SecurityHub
     class BatchEnableStandardsResponse < Struct.new(
       :standards_subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_rules_arns
@@ -17966,7 +17917,7 @@ module Aws::SecurityHub
     class BatchGetAutomationRulesRequest < Struct.new(
       :automation_rules_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -17984,7 +17935,7 @@ module Aws::SecurityHub
       :rules,
       :unprocessed_automation_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_association_identifiers
@@ -17995,7 +17946,7 @@ module Aws::SecurityHub
     class BatchGetConfigurationPolicyAssociationsRequest < Struct.new(
       :configuration_policy_association_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_associations
@@ -18013,7 +17964,7 @@ module Aws::SecurityHub
       :configuration_policy_associations,
       :unprocessed_configuration_policy_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_ids
@@ -18024,7 +17975,7 @@ module Aws::SecurityHub
     class BatchGetSecurityControlsRequest < Struct.new(
       :security_control_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_controls
@@ -18043,7 +17994,7 @@ module Aws::SecurityHub
       :security_controls,
       :unprocessed_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_control_association_ids
@@ -18055,7 +18006,7 @@ module Aws::SecurityHub
     class BatchGetStandardsControlAssociationsRequest < Struct.new(
       :standards_control_association_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_control_association_details
@@ -18073,7 +18024,7 @@ module Aws::SecurityHub
       :standards_control_association_details,
       :unprocessed_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -18083,7 +18034,7 @@ module Aws::SecurityHub
     class BatchImportFindingsRequest < Struct.new(
       :findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_count
@@ -18100,7 +18051,7 @@ module Aws::SecurityHub
       :success_count,
       :failed_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_automation_rules_request_items
@@ -18112,7 +18063,7 @@ module Aws::SecurityHub
     class BatchUpdateAutomationRulesRequest < Struct.new(
       :update_automation_rules_request_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_automation_rules
@@ -18130,7 +18081,7 @@ module Aws::SecurityHub
       :processed_automation_rules,
       :unprocessed_automation_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_identifiers
@@ -18227,7 +18178,7 @@ module Aws::SecurityHub
       :workflow,
       :related_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_findings
@@ -18240,7 +18191,7 @@ module Aws::SecurityHub
       :processed_findings,
       :unprocessed_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A finding from a <code>BatchUpdateFindings</code> request that Security Hub was unable to
@@ -18323,7 +18274,7 @@ module Aws::SecurityHub
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of findings that were updated.</p>
@@ -18337,7 +18288,7 @@ module Aws::SecurityHub
       :finding_identifier,
       :metadata_uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_uids
@@ -18370,7 +18321,7 @@ module Aws::SecurityHub
       :severity_id,
       :status_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_findings
@@ -18383,7 +18334,7 @@ module Aws::SecurityHub
       :processed_findings,
       :unprocessed_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of findings that were not updated.</p>
@@ -18405,14 +18356,7 @@ module Aws::SecurityHub
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchUpdateFindingsV2UnprocessedFindingErrorCode
-      ResourceNotFoundException = 'ResourceNotFoundException'
-      ValidationException = 'ValidationException'
-      InternalServerException = 'InternalServerException'
-      ConflictException = 'ConflictException'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_control_association_updates
@@ -18426,7 +18370,7 @@ module Aws::SecurityHub
     class BatchUpdateStandardsControlAssociationsRequest < Struct.new(
       :standards_control_association_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_association_updates
@@ -18437,7 +18381,7 @@ module Aws::SecurityHub
     class BatchUpdateStandardsControlAssociationsResponse < Struct.new(
       :unprocessed_association_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18452,7 +18396,7 @@ module Aws::SecurityHub
     class BooleanConfigurationOptions < Struct.new(
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Boolean filter for querying findings.</p>
@@ -18462,7 +18406,7 @@ module Aws::SecurityHub
     class BooleanFilter < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An occurrence of sensitive data detected in a Microsoft Excel workbook, comma-separated value (CSV) file, or tab-separated value (TSV) file.</p>
@@ -18484,7 +18428,7 @@ module Aws::SecurityHub
       :column_name,
       :cell_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPv4 CIDR block association.</p>
@@ -18502,7 +18446,7 @@ module Aws::SecurityHub
       :cidr_block,
       :cidr_block_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a city.</p>
@@ -18512,7 +18456,7 @@ module Aws::SecurityHub
     class City < Struct.new(
       :city_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the sensitive data that was detected on the resource.</p>
@@ -18542,7 +18486,7 @@ module Aws::SecurityHub
       :sensitive_data,
       :custom_data_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the current status of the sensitive data detection.</p>
@@ -18556,7 +18500,7 @@ module Aws::SecurityHub
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18580,7 +18524,7 @@ module Aws::SecurityHub
       :hosted_zone_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18607,7 +18551,7 @@ module Aws::SecurityHub
       :project_name,
       :code_security_integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18639,7 +18583,7 @@ module Aws::SecurityHub
       :file_path,
       :start_line,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object typically provides details about a control finding, such as applicable standards and the status of 
@@ -18709,14 +18653,7 @@ module Aws::SecurityHub
       :associated_standards,
       :security_control_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComplianceStatus
-      PASSED = 'PASSED'
-      WARNING = 'WARNING'
-      FAILED = 'FAILED'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables the creation of filtering criteria for security findings.</p>
@@ -18746,7 +18683,7 @@ module Aws::SecurityHub
       :map_filters,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18804,7 +18741,7 @@ module Aws::SecurityHub
       :enum_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Integer < ConfigurationOptions; end
       class IntegerList < ConfigurationOptions; end
@@ -18830,13 +18767,7 @@ module Aws::SecurityHub
     class ConfigurationPolicyAssociation < Struct.new(
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationPolicyAssociationStatus
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18888,7 +18819,7 @@ module Aws::SecurityHub
       :association_status,
       :association_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -18934,7 +18865,7 @@ module Aws::SecurityHub
       :updated_at,
       :service_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request causes conflict with the current state of the service resource.</p>
@@ -18946,22 +18877,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionDirection
-      INBOUND = 'INBOUND'
-      OUTBOUND = 'OUTBOUND'
-    end
-
-    module ConnectorAuthStatus
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
-    end
-
-    module ConnectorProviderName
-      JIRA_CLOUD = 'JIRA_CLOUD'
-      SERVICENOW = 'SERVICENOW'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auth_code
@@ -18974,7 +18890,7 @@ module Aws::SecurityHub
       :auth_code,
       :auth_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -18987,14 +18903,7 @@ module Aws::SecurityHub
       :connector_arn,
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorStatus
-      CONNECTED = 'CONNECTED'
-      FAILED_TO_CONNECT = 'FAILED_TO_CONNECT'
-      PENDING_CONFIGURATION = 'PENDING_CONFIGURATION'
-      PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A condensed overview of the connectorV2..</p>
@@ -19024,7 +18933,7 @@ module Aws::SecurityHub
       :provider_summary,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container details related to a finding.</p>
@@ -19063,17 +18972,7 @@ module Aws::SecurityHub
       :volume_mounts,
       :privileged,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlFindingGenerator
-      STANDARD_CONTROL = 'STANDARD_CONTROL'
-      SECURITY_CONTROL = 'SECURITY_CONTROL'
-    end
-
-    module ControlStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a country.</p>
@@ -19087,7 +18986,7 @@ module Aws::SecurityHub
       :country_code,
       :country_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -19104,7 +19003,7 @@ module Aws::SecurityHub
       :description,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_target_arn
@@ -19113,7 +19012,7 @@ module Aws::SecurityHub
     class CreateActionTargetResponse < Struct.new(
       :action_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region_linking_mode
@@ -19134,7 +19033,7 @@ module Aws::SecurityHub
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -19155,7 +19054,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :linked_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -19217,7 +19116,7 @@ module Aws::SecurityHub
       :criteria,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -19228,7 +19127,7 @@ module Aws::SecurityHub
     class CreateAutomationRuleResponse < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_name
@@ -19265,7 +19164,7 @@ module Aws::SecurityHub
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -19278,7 +19177,7 @@ module Aws::SecurityHub
       :rule_arn,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -19314,7 +19213,7 @@ module Aws::SecurityHub
       :configuration_policy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -19365,7 +19264,7 @@ module Aws::SecurityHub
       :created_at,
       :configuration_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -19394,7 +19293,7 @@ module Aws::SecurityHub
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -19411,7 +19310,7 @@ module Aws::SecurityHub
       :connector_id,
       :auth_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region_linking_mode
@@ -19452,7 +19351,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -19473,7 +19372,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -19494,7 +19393,7 @@ module Aws::SecurityHub
       :filters,
       :group_by_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arn
@@ -19503,7 +19402,7 @@ module Aws::SecurityHub
     class CreateInsightResponse < Struct.new(
       :insight_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_details
@@ -19513,7 +19412,7 @@ module Aws::SecurityHub
     class CreateMembersRequest < Struct.new(
       :account_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -19523,7 +19422,7 @@ module Aws::SecurityHub
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -19540,7 +19439,7 @@ module Aws::SecurityHub
       :finding_metadata_uid,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ticket_id
@@ -19553,7 +19452,7 @@ module Aws::SecurityHub
       :ticket_id,
       :ticket_src_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the parameters and conditions used to evaluate and filter security findings.</p>
@@ -19564,7 +19463,7 @@ module Aws::SecurityHub
       :ocsf_finding_criteria,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OcsfFindingCriteria < Criteria; end
       class Unknown < Criteria; end
@@ -19589,7 +19488,7 @@ module Aws::SecurityHub
       :name,
       :occurrences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an instance of sensitive data that was detected by a customer-defined identifier.</p>
@@ -19603,7 +19502,7 @@ module Aws::SecurityHub
       :detections,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CVSS scores from the advisory related to the vulnerability.</p>
@@ -19629,7 +19528,7 @@ module Aws::SecurityHub
       :source,
       :adjustments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about sensitive data that was detected on a resource.</p>
@@ -19643,7 +19542,7 @@ module Aws::SecurityHub
       :detailed_results_location,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date filter for querying findings.</p>
@@ -19663,7 +19562,7 @@ module Aws::SecurityHub
       :end,
       :date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date range for the date filter.</p>
@@ -19677,11 +19576,7 @@ module Aws::SecurityHub
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DateRangeUnit
-      DAYS = 'DAYS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -19690,7 +19585,7 @@ module Aws::SecurityHub
     class DeclineInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -19700,7 +19595,7 @@ module Aws::SecurityHub
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_target_arn
@@ -19709,7 +19604,7 @@ module Aws::SecurityHub
     class DeleteActionTargetRequest < Struct.new(
       :action_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_target_arn
@@ -19718,7 +19613,7 @@ module Aws::SecurityHub
     class DeleteActionTargetResponse < Struct.new(
       :action_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -19727,12 +19622,12 @@ module Aws::SecurityHub
     class DeleteAggregatorV2Request < Struct.new(
       :aggregator_v2_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAggregatorV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -19741,12 +19636,12 @@ module Aws::SecurityHub
     class DeleteAutomationRuleV2Request < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomationRuleV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -19757,12 +19652,12 @@ module Aws::SecurityHub
     class DeleteConfigurationPolicyRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConfigurationPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -19771,12 +19666,12 @@ module Aws::SecurityHub
     class DeleteConnectorV2Request < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectorV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -19785,12 +19680,12 @@ module Aws::SecurityHub
     class DeleteFindingAggregatorRequest < Struct.new(
       :finding_aggregator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFindingAggregatorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arn
@@ -19799,7 +19694,7 @@ module Aws::SecurityHub
     class DeleteInsightRequest < Struct.new(
       :insight_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arn
@@ -19808,7 +19703,7 @@ module Aws::SecurityHub
     class DeleteInsightResponse < Struct.new(
       :insight_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -19817,7 +19712,7 @@ module Aws::SecurityHub
     class DeleteInvitationsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -19827,7 +19722,7 @@ module Aws::SecurityHub
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -19836,7 +19731,7 @@ module Aws::SecurityHub
     class DeleteMembersRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -19846,7 +19741,7 @@ module Aws::SecurityHub
     class DeleteMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_target_arns
@@ -19867,7 +19762,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_targets
@@ -19882,7 +19777,7 @@ module Aws::SecurityHub
       :action_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -19891,7 +19786,7 @@ module Aws::SecurityHub
     class DescribeHubRequest < Struct.new(
       :hub_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -19929,12 +19824,12 @@ module Aws::SecurityHub
       :auto_enable_controls,
       :control_finding_generator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeOrganizationConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -19970,7 +19865,7 @@ module Aws::SecurityHub
       :auto_enable_standards,
       :organization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -19991,7 +19886,7 @@ module Aws::SecurityHub
       :max_results,
       :product_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute products
@@ -20004,7 +19899,7 @@ module Aws::SecurityHub
       :products,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20019,7 +19914,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute products_v2
@@ -20033,12 +19928,12 @@ module Aws::SecurityHub
       :products_v2,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeSecurityHubV2Request < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_v2_arn
@@ -20051,7 +19946,7 @@ module Aws::SecurityHub
       :hub_v2_arn,
       :subscribed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscription_arn
@@ -20073,7 +19968,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute controls
@@ -20086,7 +19981,7 @@ module Aws::SecurityHub
       :controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20103,7 +19998,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards
@@ -20116,7 +20011,7 @@ module Aws::SecurityHub
       :standards,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20131,7 +20026,7 @@ module Aws::SecurityHub
     class Detection < Struct.new(
       :sequence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_subscription_arn
@@ -20140,12 +20035,12 @@ module Aws::SecurityHub
     class DisableImportFindingsForProductRequest < Struct.new(
       :product_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableImportFindingsForProductResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -20159,52 +20054,52 @@ module Aws::SecurityHub
       :admin_account_id,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationAdminAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Request < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSecurityHubV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromAdministratorAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromMasterAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -20213,12 +20108,12 @@ module Aws::SecurityHub
     class DisassociateMembersRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMembersResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details
@@ -20239,7 +20134,7 @@ module Aws::SecurityHub
       :protocol,
       :blocked,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20265,7 +20160,7 @@ module Aws::SecurityHub
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_arn
@@ -20274,7 +20169,7 @@ module Aws::SecurityHub
     class EnableImportFindingsForProductRequest < Struct.new(
       :product_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_subscription_arn
@@ -20283,7 +20178,7 @@ module Aws::SecurityHub
     class EnableImportFindingsForProductResponse < Struct.new(
       :product_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -20298,7 +20193,7 @@ module Aws::SecurityHub
       :admin_account_id,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -20312,7 +20207,7 @@ module Aws::SecurityHub
       :admin_account_id,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -20341,12 +20236,12 @@ module Aws::SecurityHub
       :enable_default_standards,
       :control_finding_generator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableSecurityHubResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -20355,7 +20250,7 @@ module Aws::SecurityHub
     class EnableSecurityHubV2Request < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_v2_arn
@@ -20364,7 +20259,7 @@ module Aws::SecurityHub
     class EnableSecurityHubV2Response < Struct.new(
       :hub_v2_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20384,7 +20279,7 @@ module Aws::SecurityHub
       :default_value,
       :allowed_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20410,7 +20305,7 @@ module Aws::SecurityHub
       :max_items,
       :allowed_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the settings and parameters required for integrating external security tools and services.</p>
@@ -20420,7 +20315,7 @@ module Aws::SecurityHub
     class ExternalIntegrationConfiguration < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the file paths that were affected by the threat.
@@ -20451,7 +20346,7 @@ module Aws::SecurityHub
       :resource_id,
       :hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A finding aggregator is a Security Hub resource that specifies cross-Region aggregation settings, including the 
@@ -20462,7 +20357,7 @@ module Aws::SecurityHub
     class FindingAggregator < Struct.new(
       :finding_aggregator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20515,7 +20410,7 @@ module Aws::SecurityHub
       :updates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An array of objects that provides details about a change to a finding, including the
@@ -20544,7 +20439,7 @@ module Aws::SecurityHub
       :old_value,
       :new_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20568,12 +20463,7 @@ module Aws::SecurityHub
       :type,
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FindingHistoryUpdateSourceType
-      BATCH_UPDATE_FINDINGS = 'BATCH_UPDATE_FINDINGS'
-      BATCH_IMPORT_FINDINGS = 'BATCH_IMPORT_FINDINGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a <a href="https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html">
@@ -20651,7 +20541,7 @@ module Aws::SecurityHub
       :severity,
       :types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The severity assigned to a finding by the finding provider. This object may include one or more of the following 
@@ -20704,7 +20594,7 @@ module Aws::SecurityHub
       :label,
       :original,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the behavior of the firewall.</p>
@@ -20734,7 +20624,7 @@ module Aws::SecurityHub
       :stateless_fragment_default_actions,
       :stateless_rule_group_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stateful rule group that is used by the firewall policy.</p>
@@ -20744,7 +20634,7 @@ module Aws::SecurityHub
     class FirewallPolicyStatefulRuleGroupReferencesDetails < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom action that can be used for stateless packet handling.</p>
@@ -20758,7 +20648,7 @@ module Aws::SecurityHub
       :action_definition,
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stateless rule group that is used by the firewall policy.</p>
@@ -20772,7 +20662,7 @@ module Aws::SecurityHub
       :priority,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20802,7 +20692,7 @@ module Aws::SecurityHub
       :description,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the latitude and longitude coordinates of a location.</p>
@@ -20816,12 +20706,12 @@ module Aws::SecurityHub
       :lon,
       :lat,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAdministratorAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute administrator
@@ -20830,7 +20720,7 @@ module Aws::SecurityHub
     class GetAdministratorAccountResponse < Struct.new(
       :administrator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -20839,7 +20729,7 @@ module Aws::SecurityHub
     class GetAggregatorV2Request < Struct.new(
       :aggregator_v2_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -20860,7 +20750,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :linked_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -20869,7 +20759,7 @@ module Aws::SecurityHub
     class GetAutomationRuleV2Request < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -20914,7 +20804,7 @@ module Aws::SecurityHub
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -20925,7 +20815,7 @@ module Aws::SecurityHub
     class GetConfigurationPolicyAssociationRequest < Struct.new(
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_id
@@ -20974,7 +20864,7 @@ module Aws::SecurityHub
       :association_status,
       :association_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -20985,7 +20875,7 @@ module Aws::SecurityHub
     class GetConfigurationPolicyRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -21036,7 +20926,7 @@ module Aws::SecurityHub
       :created_at,
       :configuration_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -21045,7 +20935,7 @@ module Aws::SecurityHub
     class GetConnectorV2Request < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -21086,7 +20976,7 @@ module Aws::SecurityHub
       :health,
       :provider_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscription_arns
@@ -21107,7 +20997,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_subscriptions
@@ -21121,7 +21011,7 @@ module Aws::SecurityHub
       :standards_subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -21130,7 +21020,7 @@ module Aws::SecurityHub
     class GetFindingAggregatorRequest < Struct.new(
       :finding_aggregator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -21151,7 +21041,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_identifier
@@ -21201,7 +21091,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -21219,7 +21109,7 @@ module Aws::SecurityHub
       :records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_by_rules
@@ -21238,7 +21128,7 @@ module Aws::SecurityHub
       :sort_order,
       :max_statistic_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_by_results
@@ -21247,7 +21137,7 @@ module Aws::SecurityHub
     class GetFindingStatisticsV2Response < Struct.new(
       :group_by_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -21277,7 +21167,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -21290,7 +21180,7 @@ module Aws::SecurityHub
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -21316,7 +21206,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -21330,7 +21220,7 @@ module Aws::SecurityHub
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arn
@@ -21339,7 +21229,7 @@ module Aws::SecurityHub
     class GetInsightResultsRequest < Struct.new(
       :insight_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_results
@@ -21348,7 +21238,7 @@ module Aws::SecurityHub
     class GetInsightResultsResponse < Struct.new(
       :insight_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arns
@@ -21371,7 +21261,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insights
@@ -21384,12 +21274,12 @@ module Aws::SecurityHub
       :insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetInvitationsCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations_count
@@ -21399,12 +21289,12 @@ module Aws::SecurityHub
     class GetInvitationsCountResponse < Struct.new(
       :invitations_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetMasterAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute master
@@ -21414,7 +21304,7 @@ module Aws::SecurityHub
     class GetMasterAccountResponse < Struct.new(
       :master,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -21423,7 +21313,7 @@ module Aws::SecurityHub
     class GetMembersRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -21437,7 +21327,7 @@ module Aws::SecurityHub
       :members,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_by_rules
@@ -21454,7 +21344,7 @@ module Aws::SecurityHub
       :sort_order,
       :max_statistic_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_by_results
@@ -21463,7 +21353,7 @@ module Aws::SecurityHub
     class GetResourcesStatisticsV2Response < Struct.new(
       :group_by_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -21486,7 +21376,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -21500,7 +21390,7 @@ module Aws::SecurityHub
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_id
@@ -21511,7 +21401,7 @@ module Aws::SecurityHub
     class GetSecurityControlDefinitionRequest < Struct.new(
       :security_control_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_definition
@@ -21523,27 +21413,7 @@ module Aws::SecurityHub
     class GetSecurityControlDefinitionResponse < Struct.new(
       :security_control_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupByField
-      ACTIVITY_NAME = 'activity_name'
-      CLOUD_ACCOUNT_UID = 'cloud.account.uid'
-      CLOUD_PROVIDER = 'cloud.provider'
-      CLOUD_REGION = 'cloud.region'
-      COMPLIANCE_ASSESSMENTS_NAME = 'compliance.assessments.name'
-      COMPLIANCE_STATUS = 'compliance.status'
-      COMPLIANCE_CONTROL = 'compliance.control'
-      FINDING_INFO_TITLE = 'finding_info.title'
-      FINDING_INFO_TYPES = 'finding_info.types'
-      METADATA_PRODUCT_NAME = 'metadata.product.name'
-      METADATA_PRODUCT_UID = 'metadata.product.uid'
-      RESOURCES_TYPE = 'resources.type'
-      RESOURCES_UID = 'resources.uid'
-      SEVERITY = 'severity'
-      STATUS = 'status'
-      VULNERABILITIES_FIX_COVERAGE = 'vulnerabilities.fix_coverage'
-      CLASS_NAME = 'class_name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents finding statistics grouped by <code>GroupedByField</code>.</p>
@@ -21557,7 +21427,7 @@ module Aws::SecurityHub
       :group_by_field,
       :group_by_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the how the finding attribute should be grouped.</p>
@@ -21571,7 +21441,7 @@ module Aws::SecurityHub
       :filters,
       :group_by_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents individual aggregated results when grouping security findings for each <code>GroupByField</code>.</p>
@@ -21585,7 +21455,7 @@ module Aws::SecurityHub
       :field_value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the operational status and health of a connectorV2.</p>
@@ -21603,7 +21473,7 @@ module Aws::SecurityHub
       :message,
       :last_checked_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Internet Control Message Protocol (ICMP) type and code.</p>
@@ -21619,7 +21489,7 @@ module Aws::SecurityHub
       :code,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of the findings that cannot be imported. For each finding, the list provides
@@ -21639,7 +21509,7 @@ module Aws::SecurityHub
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -21674,7 +21544,7 @@ module Aws::SecurityHub
       :title,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a Security Hub insight.</p>
@@ -21700,7 +21570,7 @@ module Aws::SecurityHub
       :filters,
       :group_by_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The insight result values returned by the <code>GetInsightResults</code>
@@ -21716,7 +21586,7 @@ module Aws::SecurityHub
       :group_by_attribute_value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The insight results returned by the <code>GetInsightResults</code> operation.</p>
@@ -21737,7 +21607,7 @@ module Aws::SecurityHub
       :group_by_attribute,
       :result_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -21763,7 +21633,7 @@ module Aws::SecurityHub
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -21795,19 +21665,7 @@ module Aws::SecurityHub
       :max,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationType
-      SEND_FINDINGS_TO_SECURITY_HUB = 'SEND_FINDINGS_TO_SECURITY_HUB'
-      RECEIVE_FINDINGS_FROM_SECURITY_HUB = 'RECEIVE_FINDINGS_FROM_SECURITY_HUB'
-      UPDATE_FINDINGS_IN_SECURITY_HUB = 'UPDATE_FINDINGS_IN_SECURITY_HUB'
-    end
-
-    module IntegrationV2Type
-      SEND_FINDINGS_TO_SECURITY_HUB = 'SEND_FINDINGS_TO_SECURITY_HUB'
-      RECEIVE_FINDINGS_FROM_SECURITY_HUB = 'RECEIVE_FINDINGS_FROM_SECURITY_HUB'
-      UPDATE_FINDINGS_IN_SECURITY_HUB = 'UPDATE_FINDINGS_IN_SECURITY_HUB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internal server error.</p>
@@ -21819,7 +21677,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -21833,7 +21691,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account doesn't have permission to perform this action.</p>
@@ -21845,7 +21703,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because you supplied an invalid or out-of-range value for an
@@ -21858,7 +21716,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an invitation.</p>
@@ -21880,7 +21738,7 @@ module Aws::SecurityHub
       :invited_at,
       :member_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -21889,7 +21747,7 @@ module Aws::SecurityHub
     class InviteMembersRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unprocessed_accounts
@@ -21899,7 +21757,7 @@ module Aws::SecurityHub
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IP filter for querying findings.</p>
@@ -21909,7 +21767,7 @@ module Aws::SecurityHub
     class IpFilter < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an internet provider.</p>
@@ -21931,7 +21789,7 @@ module Aws::SecurityHub
       :isp,
       :org,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPV6 CIDR block association.</p>
@@ -21981,7 +21839,7 @@ module Aws::SecurityHub
       :ipv6_cidr_block,
       :cidr_block_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration and status of a Jira Cloud integration.</p>
@@ -22007,7 +21865,7 @@ module Aws::SecurityHub
       :auth_url,
       :auth_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The initial configuration settings required to establish an integration between Security Hub and Jira Cloud.</p>
@@ -22017,7 +21875,7 @@ module Aws::SecurityHub
     class JiraCloudProviderConfiguration < Struct.new(
       :project_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters used to modify an existing Jira Cloud integration.</p>
@@ -22027,7 +21885,7 @@ module Aws::SecurityHub
     class JiraCloudUpdateConfiguration < Struct.new(
       :project_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A keyword filter for querying findings.</p>
@@ -22037,7 +21895,7 @@ module Aws::SecurityHub
     class KeywordFilter < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create resources beyond the current Amazon Web Services
@@ -22050,7 +21908,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22065,7 +21923,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregators_v2
@@ -22079,7 +21937,7 @@ module Aws::SecurityHub
       :aggregators_v2,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22097,7 +21955,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_rules_metadata
@@ -22115,7 +21973,7 @@ module Aws::SecurityHub
       :automation_rules_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22130,7 +21988,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -22144,7 +22002,7 @@ module Aws::SecurityHub
       :rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22169,7 +22027,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_summaries
@@ -22188,7 +22046,7 @@ module Aws::SecurityHub
       :configuration_policy_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22219,7 +22077,7 @@ module Aws::SecurityHub
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_association_summaries
@@ -22239,7 +22097,7 @@ module Aws::SecurityHub
       :configuration_policy_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22260,7 +22118,7 @@ module Aws::SecurityHub
       :provider_name,
       :connector_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22274,7 +22132,7 @@ module Aws::SecurityHub
       :next_token,
       :connectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22291,7 +22149,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_subscriptions
@@ -22304,7 +22162,7 @@ module Aws::SecurityHub
       :product_subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22317,7 +22175,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregators
@@ -22332,7 +22190,7 @@ module Aws::SecurityHub
       :finding_aggregators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -22349,7 +22207,7 @@ module Aws::SecurityHub
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations
@@ -22362,7 +22220,7 @@ module Aws::SecurityHub
       :invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute only_associated
@@ -22388,7 +22246,7 @@ module Aws::SecurityHub
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -22401,7 +22259,7 @@ module Aws::SecurityHub
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -22422,7 +22280,7 @@ module Aws::SecurityHub
       :next_token,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_accounts
@@ -22440,7 +22298,7 @@ module Aws::SecurityHub
       :next_token,
       :feature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_arn
@@ -22465,7 +22323,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_definitions
@@ -22481,7 +22339,7 @@ module Aws::SecurityHub
       :security_control_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_id
@@ -22509,7 +22367,7 @@ module Aws::SecurityHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_control_association_summaries
@@ -22524,7 +22382,7 @@ module Aws::SecurityHub
       :standards_control_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -22533,7 +22391,7 @@ module Aws::SecurityHub
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -22542,7 +22400,7 @@ module Aws::SecurityHub
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state of the load balancer.</p>
@@ -22559,7 +22417,7 @@ module Aws::SecurityHub
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of malware related to a finding.</p>
@@ -22583,31 +22441,7 @@ module Aws::SecurityHub
       :path,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MalwareState
-      OBSERVED = 'OBSERVED'
-      REMOVAL_FAILED = 'REMOVAL_FAILED'
-      REMOVED = 'REMOVED'
-    end
-
-    module MalwareType
-      ADWARE = 'ADWARE'
-      BLENDED_THREAT = 'BLENDED_THREAT'
-      BOTNET_AGENT = 'BOTNET_AGENT'
-      COIN_MINER = 'COIN_MINER'
-      EXPLOIT_KIT = 'EXPLOIT_KIT'
-      KEYLOGGER = 'KEYLOGGER'
-      MACRO = 'MACRO'
-      POTENTIALLY_UNWANTED = 'POTENTIALLY_UNWANTED'
-      SPYWARE = 'SPYWARE'
-      RANSOMWARE = 'RANSOMWARE'
-      REMOTE_ACCESS = 'REMOTE_ACCESS'
-      ROOTKIT = 'ROOTKIT'
-      TROJAN = 'TROJAN'
-      VIRUS = 'VIRUS'
-      WORM = 'WORM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map filter for filtering Security Hub findings. Each map filter provides the field to check for, the
@@ -22678,14 +22512,7 @@ module Aws::SecurityHub
       :value,
       :comparison,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MapFilterComparison
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      CONTAINS = 'CONTAINS'
-      NOT_CONTAINS = 'NOT_CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about a member account.</p>
@@ -22762,7 +22589,7 @@ module Aws::SecurityHub
       :invited_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of network-related information about a finding.</p>
@@ -22820,7 +22647,7 @@ module Aws::SecurityHub
       :destination_port,
       :destination_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -22843,7 +22670,7 @@ module Aws::SecurityHub
       :name,
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -22859,7 +22686,7 @@ module Aws::SecurityHub
     class NetworkConnection < Struct.new(
       :direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides
@@ -22893,12 +22720,7 @@ module Aws::SecurityHub
       :protocol,
       :blocked,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkDirection
-      IN = 'IN'
-      OUT = 'OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -22952,7 +22774,7 @@ module Aws::SecurityHub
       :autonomous_system,
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -22987,7 +22809,7 @@ module Aws::SecurityHub
       :lat,
       :lon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a network path component that occurs before or after the current
@@ -23007,7 +22829,7 @@ module Aws::SecurityHub
       :destination,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a network path component.</p>
@@ -23033,7 +22855,7 @@ module Aws::SecurityHub
       :egress,
       :ingress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the destination of the next component in the network path.</p>
@@ -23047,7 +22869,7 @@ module Aws::SecurityHub
       :address,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user-defined note added to a finding.</p>
@@ -23067,7 +22889,7 @@ module Aws::SecurityHub
       :updated_by,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The updated note.</p>
@@ -23081,7 +22903,7 @@ module Aws::SecurityHub
       :text,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A number filter for querying findings.</p>
@@ -23114,7 +22936,7 @@ module Aws::SecurityHub
       :gt,
       :lt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detected occurrences of sensitive data.</p>
@@ -23140,13 +22962,7 @@ module Aws::SecurityHub
       :records,
       :cells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OcsfBooleanField
-      COMPLIANCE_ASSESSMENTS_MEETS_CRITERIA = 'compliance.assessments.meets_criteria'
-      VULNERABILITIES_IS_EXPLOIT_AVAILABLE = 'vulnerabilities.is_exploit_available'
-      VULNERABILITIES_IS_FIX_AVAILABLE = 'vulnerabilities.is_fix_available'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of security findings based on boolean field values in OCSF.</p>
@@ -23160,14 +22976,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OcsfDateField
-      FINDING_INFO_CREATED_TIME_DT = 'finding_info.created_time_dt'
-      FINDING_INFO_FIRST_SEEN_TIME_DT = 'finding_info.first_seen_time_dt'
-      FINDING_INFO_LAST_SEEN_TIME_DT = 'finding_info.last_seen_time_dt'
-      FINDING_INFO_MODIFIED_TIME_DT = 'finding_info.modified_time_dt'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of security findings based on date and timestamp fields in OCSF.</p>
@@ -23181,7 +22990,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the filtering criteria for security findings using OCSF.</p>
@@ -23195,7 +23004,7 @@ module Aws::SecurityHub
       :composite_filters,
       :composite_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a standard to identify security findings using OCSF.</p>
@@ -23213,11 +23022,7 @@ module Aws::SecurityHub
       :finding_info_uid,
       :metadata_product_uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OcsfMapField
-      RESOURCES_TAGS = 'resources.tags'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of security findings based on map field values in OCSF.</p>
@@ -23232,16 +23037,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OcsfNumberField
-      ACTIVITY_ID = 'activity_id'
-      COMPLIANCE_STATUS_ID = 'compliance.status_id'
-      CONFIDENCE_SCORE = 'confidence_score'
-      SEVERITY_ID = 'severity_id'
-      STATUS_ID = 'status_id'
-      FINDING_INFO_RELATED_EVENTS_COUNT = 'finding_info.related_events_count'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of security findings based on numerical field values in OCSF.</p>
@@ -23255,42 +23051,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OcsfStringField
-      METADATA_UID = 'metadata.uid'
-      ACTIVITY_NAME = 'activity_name'
-      CLOUD_ACCOUNT_UID = 'cloud.account.uid'
-      CLOUD_PROVIDER = 'cloud.provider'
-      CLOUD_REGION = 'cloud.region'
-      COMPLIANCE_ASSESSMENTS_CATEGORY = 'compliance.assessments.category'
-      COMPLIANCE_ASSESSMENTS_NAME = 'compliance.assessments.name'
-      COMPLIANCE_CONTROL = 'compliance.control'
-      COMPLIANCE_STATUS = 'compliance.status'
-      COMPLIANCE_STANDARDS = 'compliance.standards'
-      FINDING_INFO_DESC = 'finding_info.desc'
-      FINDING_INFO_SRC_URL = 'finding_info.src_url'
-      FINDING_INFO_TITLE = 'finding_info.title'
-      FINDING_INFO_TYPES = 'finding_info.types'
-      FINDING_INFO_UID = 'finding_info.uid'
-      FINDING_INFO_RELATED_EVENTS_UID = 'finding_info.related_events.uid'
-      FINDING_INFO_RELATED_EVENTS_PRODUCT_UID = 'finding_info.related_events.product.uid'
-      FINDING_INFO_RELATED_EVENTS_TITLE = 'finding_info.related_events.title'
-      METADATA_PRODUCT_NAME = 'metadata.product.name'
-      METADATA_PRODUCT_UID = 'metadata.product.uid'
-      METADATA_PRODUCT_VENDOR_NAME = 'metadata.product.vendor_name'
-      REMEDIATION_DESC = 'remediation.desc'
-      REMEDIATION_REFERENCES = 'remediation.references'
-      RESOURCES_CLOUD_PARTITION = 'resources.cloud_partition'
-      RESOURCES_REGION = 'resources.region'
-      RESOURCES_TYPE = 'resources.type'
-      RESOURCES_UID = 'resources.uid'
-      SEVERITY = 'severity'
-      STATUS = 'status'
-      COMMENT = 'comment'
-      VULNERABILITIES_FIX_COVERAGE = 'vulnerabilities.fix_coverage'
-      CLASS_NAME = 'class_name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of security findings based on string field values in OCSF.</p>
@@ -23304,7 +23065,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23346,18 +23107,7 @@ module Aws::SecurityHub
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationConfigurationConfigurationType
-      CENTRAL = 'CENTRAL'
-      LOCAL = 'LOCAL'
-    end
-
-    module OrganizationConfigurationStatus
-      PENDING = 'PENDING'
-      ENABLED = 'ENABLED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.</p>
@@ -23375,7 +23125,7 @@ module Aws::SecurityHub
       :line_range,
       :offset_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23400,7 +23150,7 @@ module Aws::SecurityHub
       :value_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23420,7 +23170,7 @@ module Aws::SecurityHub
       :description,
       :configuration_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23477,7 +23227,7 @@ module Aws::SecurityHub
       :enum_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Integer < ParameterValue; end
       class IntegerList < ParameterValue; end
@@ -23488,17 +23238,6 @@ module Aws::SecurityHub
       class Enum < ParameterValue; end
       class EnumList < ParameterValue; end
       class Unknown < ParameterValue; end
-    end
-
-    module ParameterValueType
-      DEFAULT = 'DEFAULT'
-      CUSTOM = 'CUSTOM'
-    end
-
-    module Partition
-      AWS = 'aws'
-      AWS_CN = 'aws-cn'
-      AWS_US_GOV = 'aws-us-gov'
     end
 
     # <p>Provides an overview of the patch compliance status for an instance against a selected
@@ -23566,7 +23305,7 @@ module Aws::SecurityHub
       :reboot_option,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23586,7 +23325,7 @@ module Aws::SecurityHub
       :security_hub,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SecurityHub < Policy; end
       class Unknown < Policy; end
@@ -23604,7 +23343,7 @@ module Aws::SecurityHub
       :port_probe_details,
       :blocked,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A port scan that was part of the port probe. For each scan, PortProbeDetails provides
@@ -23624,7 +23363,7 @@ module Aws::SecurityHub
       :local_ip_details,
       :remote_ip_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of ports.</p>
@@ -23638,7 +23377,7 @@ module Aws::SecurityHub
       :begin,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of ports.</p>
@@ -23652,7 +23391,7 @@ module Aws::SecurityHub
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of process-related information about a finding.</p>
@@ -23686,7 +23425,7 @@ module Aws::SecurityHub
       :launched_at,
       :terminated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a product.</p>
@@ -23746,7 +23485,7 @@ module Aws::SecurityHub
       :activation_url,
       :product_subscription_resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the structure for the productV2.</p>
@@ -23780,7 +23519,7 @@ module Aws::SecurityHub
       :marketplace_url,
       :activation_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23794,7 +23533,7 @@ module Aws::SecurityHub
     class PropagatingVgwSetDetails < Struct.new(
       :gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The initial configuration settings required to establish an integration between Security Hub and third-party provider.</p>
@@ -23809,7 +23548,7 @@ module Aws::SecurityHub
       :service_now,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderConfiguration; end
       class ServiceNow < ProviderConfiguration; end
@@ -23828,7 +23567,7 @@ module Aws::SecurityHub
       :service_now,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderDetail; end
       class ServiceNow < ProviderDetail; end
@@ -23846,7 +23585,7 @@ module Aws::SecurityHub
       :provider_name,
       :connector_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters required to update the configuration of an integration provider.</p>
@@ -23857,7 +23596,7 @@ module Aws::SecurityHub
       :jira_cloud,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JiraCloud < ProviderUpdateConfiguration; end
       class Unknown < ProviderUpdateConfiguration; end
@@ -23878,7 +23617,7 @@ module Aws::SecurityHub
       :end,
       :start_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A recommendation on how to remediate the issue identified in a finding.</p>
@@ -23893,7 +23632,7 @@ module Aws::SecurityHub
       :text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An occurrence of sensitive data in an Apache Avro object container or an Apache Parquet file.</p>
@@ -23907,17 +23646,7 @@ module Aws::SecurityHub
       :json_path,
       :record_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordState
-      ACTIVE = 'ACTIVE'
-      ARCHIVED = 'ARCHIVED'
-    end
-
-    module RegionAvailabilityStatus
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a related finding.</p>
@@ -23931,7 +23660,7 @@ module Aws::SecurityHub
       :product_arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the remediation steps for a finding.</p>
@@ -23941,7 +23670,7 @@ module Aws::SecurityHub
     class Remediation < Struct.new(
       :recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource related to a finding.</p>
@@ -23998,18 +23727,7 @@ module Aws::SecurityHub
       :application_name,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceCategory
-      COMPUTE = 'Compute'
-      DATABASE = 'Database'
-      STORAGE = 'Storage'
-      CODE = 'Code'
-      AI_ML = 'AI/ML'
-      IDENTITY = 'Identity'
-      NETWORK = 'Network'
-      OTHER = 'Other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request conflicts with an existing resource.</p>
@@ -24021,7 +23739,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional details about a resource related to a finding.</p>
@@ -24510,7 +24228,7 @@ module Aws::SecurityHub
       :aws_ec2_client_vpn_endpoint,
       :code_repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of summaries for all finding types on a resource.</p>
@@ -24532,16 +24250,7 @@ module Aws::SecurityHub
       :total_findings,
       :severities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceGroupByField
-      ACCOUNT_ID = 'account_id'
-      REGION = 'region'
-      RESOURCE_CATEGORY = 'resource_category'
-      RESOURCE_TYPE = 'resource_type'
-      RESOURCE_NAME = 'resource_name'
-      FINDING_TYPE = 'findings_summary.finding_type'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration for organizing and categorizing Amazon Web Services resources based on associated security findings.</p>
@@ -24555,7 +24264,7 @@ module Aws::SecurityHub
       :group_by_field,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -24570,7 +24279,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because we can't find the specified resource.</p>
@@ -24582,7 +24291,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides comprehensive details about an Amazon Web Services resource and its associated security findings.</p>
@@ -24636,7 +24345,7 @@ module Aws::SecurityHub
       :resource_tags,
       :resource_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A comprehensive distribution of security findings by severity level for Amazon Web Services resources.</p>
@@ -24674,7 +24383,7 @@ module Aws::SecurityHub
       :informational,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents tag information associated with Amazon Web Services resources.</p>
@@ -24688,7 +24397,7 @@ module Aws::SecurityHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables the creation of criteria for Amazon Web Services resources in Security Hub.</p>
@@ -24714,12 +24423,7 @@ module Aws::SecurityHub
       :map_filters,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourcesDateField
-      RESOURCE_DETAIL_CAPTURE_TIME_DT = 'resource_detail_capture_time_dt'
-      RESOURCE_CREATION_TIME_DT = 'resource_creation_time_dt'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables the filtering of Amazon Web Services resources based on date and timestamp attributes.</p>
@@ -24733,7 +24437,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of Amazon Web Services resources based on data.</p>
@@ -24747,11 +24451,7 @@ module Aws::SecurityHub
       :composite_filters,
       :composite_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourcesMapField
-      TAG = 'tags'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of Amazon Web Services resources based on key-value map attributes.</p>
@@ -24766,19 +24466,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourcesNumberField
-      TOTAL_FINDINGS = 'findings_summary.total_findings'
-      SEVERITY_OTHER = 'findings_summary.severities.other'
-      SEVERITY_FATAL = 'findings_summary.severities.fatal'
-      SEVERITY_CRITICAL = 'findings_summary.severities.critical'
-      SEVERITY_HIGH = 'findings_summary.severities.high'
-      SEVERITY_MEDIUM = 'findings_summary.severities.medium'
-      SEVERITY_LOW = 'findings_summary.severities.low'
-      SEVERITY_INFORMATIONAL = 'findings_summary.severities.informational'
-      SEVERITY_UNKNOWN = 'findings_summary.severities.unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of Amazon Web Services resources based on numerical values.</p>
@@ -24792,19 +24480,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourcesStringField
-      RESOURCE_ARN = 'resource_arn'
-      RESOURCE_ID = 'resource_id'
-      ACCOUNT_ID = 'account_id'
-      REGION = 'region'
-      RESOURCE_CATEGORY = 'resource_category'
-      RESOURCE_TYPE = 'resource_type'
-      RESOURCE_NAME = 'resource_name'
-      FINDING_TYPE = 'findings_summary.finding_type'
-      PRODUCT_NAME = 'findings_summary.product_name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of Amazon Web Services resources based on string field values.</p>
@@ -24818,7 +24494,7 @@ module Aws::SecurityHub
       :field_name,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the account that was not processed.</p>
@@ -24832,7 +24508,7 @@ module Aws::SecurityHub
       :account_id,
       :processing_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -24936,7 +24612,7 @@ module Aws::SecurityHub
       :transit_gateway_id,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the rule group.</p>
@@ -24952,7 +24628,7 @@ module Aws::SecurityHub
       :rule_variables,
       :rules_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rules and actions for the rule group.</p>
@@ -24974,7 +24650,7 @@ module Aws::SecurityHub
       :stateful_rules,
       :stateless_rules_and_custom_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom action definition. A custom action is an optional, non-standard action to use for stateless packet handling.</p>
@@ -24988,7 +24664,7 @@ module Aws::SecurityHub
       :action_definition,
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stateful inspection criteria for a domain list rule group.</p>
@@ -25006,7 +24682,7 @@ module Aws::SecurityHub
       :target_types,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Suricata rule specification.</p>
@@ -25024,7 +24700,7 @@ module Aws::SecurityHub
       :header,
       :rule_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inspection criteria for a stateful rule.</p>
@@ -25054,7 +24730,7 @@ module Aws::SecurityHub
       :source,
       :source_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule option for a stateful rule.</p>
@@ -25068,7 +24744,7 @@ module Aws::SecurityHub
       :keyword,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the stateless rule.</p>
@@ -25082,7 +24758,7 @@ module Aws::SecurityHub
       :actions,
       :match_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Criteria for the stateless rule.</p>
@@ -25112,7 +24788,7 @@ module Aws::SecurityHub
       :sources,
       :tcp_flags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A port range to specify the destination ports to inspect for.</p>
@@ -25126,7 +24802,7 @@ module Aws::SecurityHub
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A destination IP address or range.</p>
@@ -25136,7 +24812,7 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleMatchAttributesDestinations < Struct.new(
       :address_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A port range to specify the source ports to inspect for.</p>
@@ -25150,7 +24826,7 @@ module Aws::SecurityHub
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source IP addresses and address range to inspect for.</p>
@@ -25160,7 +24836,7 @@ module Aws::SecurityHub
     class RuleGroupSourceStatelessRuleMatchAttributesSources < Struct.new(
       :address_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of TCP flags and masks to inspect for.</p>
@@ -25174,7 +24850,7 @@ module Aws::SecurityHub
       :flags,
       :masks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stateless rules and custom actions for a stateless rule group.</p>
@@ -25188,7 +24864,7 @@ module Aws::SecurityHub
       :custom_actions,
       :stateless_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stateless rule in the rule group.</p>
@@ -25202,7 +24878,7 @@ module Aws::SecurityHub
       :priority,
       :rule_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional settings to use in the specified rules.</p>
@@ -25216,7 +24892,7 @@ module Aws::SecurityHub
       :ip_sets,
       :port_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of IP addresses and address ranges, in CIDR notation.</p>
@@ -25226,7 +24902,7 @@ module Aws::SecurityHub
     class RuleGroupVariablesIpSetsDetails < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of port ranges.</p>
@@ -25236,17 +24912,7 @@ module Aws::SecurityHub
     class RuleGroupVariablesPortSetsDetails < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module RuleStatusV2
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25323,7 +24989,7 @@ module Aws::SecurityHub
       :parameters,
       :last_update_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25343,7 +25009,7 @@ module Aws::SecurityHub
       :security_control_id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25407,7 +25073,7 @@ module Aws::SecurityHub
       :customizable_properties,
       :parameter_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25427,11 +25093,7 @@ module Aws::SecurityHub
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityControlProperty
-      Parameters = 'Parameters'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25460,12 +25122,7 @@ module Aws::SecurityHub
       :disabled_security_control_identifiers,
       :security_control_custom_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityHubFeature
-      SECURITY_HUB = 'SecurityHub'
-      SECURITY_HUB_V2 = 'SecurityHubV2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25497,7 +25154,7 @@ module Aws::SecurityHub
       :enabled_standard_identifiers,
       :security_controls_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of detected instances of sensitive data.</p>
@@ -25515,7 +25172,7 @@ module Aws::SecurityHub
       :type,
       :occurrences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a detected instance of sensitive data that are based on built-in identifiers.</p>
@@ -25533,7 +25190,7 @@ module Aws::SecurityHub
       :detections,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25574,7 +25231,7 @@ module Aws::SecurityHub
       :signals,
       :sequence_indicators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a ServiceNow ITSM integration.</p>
@@ -25592,7 +25249,7 @@ module Aws::SecurityHub
       :client_id,
       :auth_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM.</p>
@@ -25610,7 +25267,7 @@ module Aws::SecurityHub
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The severity of the finding.</p>
@@ -25716,22 +25373,7 @@ module Aws::SecurityHub
       :normalized,
       :original,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SeverityLabel
-      INFORMATIONAL = 'INFORMATIONAL'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      CRITICAL = 'CRITICAL'
-    end
-
-    module SeverityRating
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      CRITICAL = 'CRITICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the severity information for a finding.</p>
@@ -25798,7 +25440,7 @@ module Aws::SecurityHub
       :product,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -25926,7 +25568,7 @@ module Aws::SecurityHub
       :actor_ids,
       :endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a software package.</p>
@@ -25980,7 +25622,7 @@ module Aws::SecurityHub
       :source_layer_hash,
       :source_layer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of finding attributes used to sort findings.</p>
@@ -25994,12 +25636,7 @@ module Aws::SecurityHub
       :field,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'asc'
-      DESCENDING = 'desc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a specific security standard.</p>
@@ -26031,7 +25668,7 @@ module Aws::SecurityHub
       :enabled_by_default,
       :standards_managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an individual security standard control.</p>
@@ -26083,7 +25720,7 @@ module Aws::SecurityHub
       :severity_rating,
       :related_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides details about a control's enablement status in a specified standard. </p>
@@ -26150,7 +25787,7 @@ module Aws::SecurityHub
       :standards_control_description,
       :standards_control_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26172,7 +25809,7 @@ module Aws::SecurityHub
       :security_control_id,
       :standards_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An array that provides the enablement status and other details for each control that
@@ -26231,7 +25868,7 @@ module Aws::SecurityHub
       :standards_control_title,
       :standards_control_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of requested updates to the enablement status of controls in specified
@@ -26256,12 +25893,7 @@ module Aws::SecurityHub
       :association_status,
       :updated_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardsControlsUpdatable
-      READY_FOR_UPDATES = 'READY_FOR_UPDATES'
-      NOT_READY_FOR_UPDATES = 'NOT_READY_FOR_UPDATES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the management of a security standard.</p>
@@ -26278,15 +25910,7 @@ module Aws::SecurityHub
       :company,
       :product,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardsStatus
-      PENDING = 'PENDING'
-      READY = 'READY'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-      INCOMPLETE = 'INCOMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason for the current status of your subscription to the standard.</p>
@@ -26296,7 +25920,7 @@ module Aws::SecurityHub
     class StandardsStatusReason < Struct.new(
       :status_reason_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that represents your subscription to a supported standard.</p>
@@ -26361,7 +25985,7 @@ module Aws::SecurityHub
       :standards_controls_updatable,
       :standards_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The standard that you want to enable.</p>
@@ -26376,7 +26000,7 @@ module Aws::SecurityHub
       :standards_arn,
       :standards_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_identifier
@@ -26394,7 +26018,7 @@ module Aws::SecurityHub
       :configuration_policy_identifier,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_policy_id
@@ -26442,7 +26066,7 @@ module Aws::SecurityHub
       :association_status,
       :association_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -26460,12 +26084,12 @@ module Aws::SecurityHub
       :target,
       :configuration_policy_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartConfigurationPolicyDisassociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a custom action that can be used for stateless packet handling.</p>
@@ -26475,7 +26099,7 @@ module Aws::SecurityHub
     class StatelessCustomActionDefinition < Struct.new(
       :publish_metric_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about metrics to publish to CloudWatch.</p>
@@ -26485,7 +26109,7 @@ module Aws::SecurityHub
     class StatelessCustomPublishMetricAction < Struct.new(
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a CloudWatch dimension value to publish.</p>
@@ -26495,7 +26119,7 @@ module Aws::SecurityHub
     class StatelessCustomPublishMetricActionDimension < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional context for the value of <code>Compliance.Status</code>.</p>
@@ -26511,13 +26135,7 @@ module Aws::SecurityHub
       :reason_code,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusReasonCode
-      NO_AVAILABLE_CONFIGURATION_RECORDER = 'NO_AVAILABLE_CONFIGURATION_RECORDER'
-      MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED = 'MAXIMUM_NUMBER_OF_CONFIG_RULES_EXCEEDED'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26543,7 +26161,7 @@ module Aws::SecurityHub
       :re2_expression,
       :expression_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string filter for filtering Security Hub findings.</p>
@@ -26642,17 +26260,7 @@ module Aws::SecurityHub
       :value,
       :comparison,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StringFilterComparison
-      EQUALS = 'EQUALS'
-      PREFIX = 'PREFIX'
-      NOT_EQUALS = 'NOT_EQUALS'
-      PREFIX_NOT_EQUALS = 'PREFIX_NOT_EQUALS'
-      CONTAINS = 'CONTAINS'
-      NOT_CONTAINS = 'NOT_CONTAINS'
-      CONTAINS_WORD = 'CONTAINS_WORD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26685,7 +26293,7 @@ module Aws::SecurityHub
       :max_items,
       :expression_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -26698,12 +26306,12 @@ module Aws::SecurityHub
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26731,18 +26339,12 @@ module Aws::SecurityHub
       :root_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccountId < Target; end
       class OrganizationalUnitId < Target; end
       class RootId < Target; end
       class Unknown < Target; end
-    end
-
-    module TargetType
-      ACCOUNT = 'ACCOUNT'
-      ORGANIZATIONAL_UNIT = 'ORGANIZATIONAL_UNIT'
-      ROOT = 'ROOT'
     end
 
     # <p>Provides information about the threat detected in a security finding and the file paths that were affected by the threat.
@@ -26772,7 +26374,7 @@ module Aws::SecurityHub
       :item_count,
       :file_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the threat intelligence related to a finding.</p>
@@ -26807,30 +26409,7 @@ module Aws::SecurityHub
       :source,
       :source_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThreatIntelIndicatorCategory
-      BACKDOOR = 'BACKDOOR'
-      CARD_STEALER = 'CARD_STEALER'
-      COMMAND_AND_CONTROL = 'COMMAND_AND_CONTROL'
-      DROP_SITE = 'DROP_SITE'
-      EXPLOIT_SITE = 'EXPLOIT_SITE'
-      KEYLOGGER = 'KEYLOGGER'
-    end
-
-    module ThreatIntelIndicatorType
-      DOMAIN = 'DOMAIN'
-      EMAIL_ADDRESS = 'EMAIL_ADDRESS'
-      HASH_MD5 = 'HASH_MD5'
-      HASH_SHA1 = 'HASH_SHA1'
-      HASH_SHA256 = 'HASH_SHA256'
-      HASH_SHA512 = 'HASH_SHA512'
-      IPV4_ADDRESS = 'IPV4_ADDRESS'
-      IPV6_ADDRESS = 'IPV6_ADDRESS'
-      MUTEX = 'MUTEX'
-      PROCESS = 'PROCESS'
-      URL = 'URL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26844,7 +26423,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26871,7 +26450,7 @@ module Aws::SecurityHub
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -26900,14 +26479,7 @@ module Aws::SecurityHub
       :error_code,
       :error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnprocessedErrorCode
-      INVALID_INPUT = 'INVALID_INPUT'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      NOT_FOUND = 'NOT_FOUND'
-      LIMIT_EXCEEDED = 'LIMIT_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides details about a security control for which a response couldn't be returned. </p>
@@ -26931,7 +26503,7 @@ module Aws::SecurityHub
       :error_code,
       :error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides details about which
@@ -26956,7 +26528,7 @@ module Aws::SecurityHub
       :error_code,
       :error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about which control's enablement status could not be updated in a
@@ -26979,7 +26551,7 @@ module Aws::SecurityHub
       :error_code,
       :error_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -26992,12 +26564,12 @@ module Aws::SecurityHub
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_target_arn
@@ -27014,12 +26586,12 @@ module Aws::SecurityHub
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateActionTargetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -27036,7 +26608,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :linked_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregator_v2_arn
@@ -27057,7 +26629,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :linked_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -27090,12 +26662,12 @@ module Aws::SecurityHub
       :criteria,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAutomationRuleV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -27160,7 +26732,7 @@ module Aws::SecurityHub
       :criteria,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -27202,7 +26774,7 @@ module Aws::SecurityHub
       :updated_reason,
       :configuration_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -27253,7 +26825,7 @@ module Aws::SecurityHub
       :created_at,
       :configuration_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -27274,12 +26846,12 @@ module Aws::SecurityHub
       :description,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectorV2Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -27323,7 +26895,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_aggregator_arn
@@ -27344,7 +26916,7 @@ module Aws::SecurityHub
       :region_linking_mode,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -27361,12 +26933,12 @@ module Aws::SecurityHub
       :note,
       :record_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFindingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_arn
@@ -27387,12 +26959,12 @@ module Aws::SecurityHub
       :filters,
       :group_by_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateInsightResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -27424,12 +26996,12 @@ module Aws::SecurityHub
       :auto_enable_standards,
       :organization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateOrganizationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_control_id
@@ -27453,12 +27025,12 @@ module Aws::SecurityHub
       :parameters,
       :last_update_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSecurityControlResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_controls
@@ -27487,12 +27059,12 @@ module Aws::SecurityHub
       :auto_enable_controls,
       :control_finding_generator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSecurityHubConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute standards_control_arn
@@ -27510,17 +27082,12 @@ module Aws::SecurityHub
       :control_status,
       :disabled_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateStandardsControlResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStatus
-      READY = 'READY'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -27542,7 +27109,7 @@ module Aws::SecurityHub
       :uid,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed validation because it's missing required fields or has invalid inputs.</p>
@@ -27554,14 +27121,7 @@ module Aws::SecurityHub
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerificationState
-      UNKNOWN = 'UNKNOWN'
-      TRUE_POSITIVE = 'TRUE_POSITIVE'
-      FALSE_POSITIVE = 'FALSE_POSITIVE'
-      BENIGN_POSITIVE = 'BENIGN_POSITIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the mounting of a volume in a container.
@@ -27578,7 +27138,7 @@ module Aws::SecurityHub
       :name,
       :mount_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the IPv4 CIDR blocks for the VPC.
@@ -27590,7 +27150,7 @@ module Aws::SecurityHub
     class VpcInfoCidrBlockSetDetails < Struct.new(
       :cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the IPv6 CIDR blocks for the VPC.
@@ -27602,7 +27162,7 @@ module Aws::SecurityHub
     class VpcInfoIpv6CidrBlockSetDetails < Struct.new(
       :ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the VPC peering connection options for the accepter or requester VPC.
@@ -27624,7 +27184,7 @@ module Aws::SecurityHub
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A vulnerability associated with a finding.</p>
@@ -27699,7 +27259,7 @@ module Aws::SecurityHub
       :last_known_exploit_at,
       :code_vulnerabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the vulnerabilities found in your Lambda function code. This field pertains to findings that 
@@ -27725,18 +27285,7 @@ module Aws::SecurityHub
       :file_path,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VulnerabilityExploitAvailable
-      YES = 'YES'
-      NO = 'NO'
-    end
-
-    module VulnerabilityFixAvailable
-      YES = 'YES'
-      NO = 'NO'
-      PARTIAL = 'PARTIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A vendor that generates a vulnerability report.</p>
@@ -27764,7 +27313,7 @@ module Aws::SecurityHub
       :vendor_created_at,
       :vendor_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the action that CloudFront or WAF takes when a web request matches the
@@ -27794,7 +27343,7 @@ module Aws::SecurityHub
     class WafAction < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a rule to exclude from a rule group.</p>
@@ -27804,7 +27353,7 @@ module Aws::SecurityHub
     class WafExcludedRule < Struct.new(
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an override action for a rule.</p>
@@ -27817,7 +27366,7 @@ module Aws::SecurityHub
     class WafOverrideAction < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about the status of the investigation into a finding.</p>
@@ -27864,24 +27413,7 @@ module Aws::SecurityHub
     class Workflow < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @deprecated
-    #   This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.
-    module WorkflowState
-      NEW = 'NEW'
-      ASSIGNED = 'ASSIGNED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      DEFERRED = 'DEFERRED'
-      RESOLVED = 'RESOLVED'
-    end
-
-    module WorkflowStatus
-      NEW = 'NEW'
-      NOTIFIED = 'NOTIFIED'
-      RESOLVED = 'RESOLVED'
-      SUPPRESSED = 'SUPPRESSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to update information about the investigation into the finding.</p>
@@ -27926,7 +27458,7 @@ module Aws::SecurityHub
     class WorkflowUpdate < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

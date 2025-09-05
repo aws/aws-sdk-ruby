@@ -23,7 +23,7 @@ module Aws::ResourceGroupsTaggingAPI
       :keys_with_noncompliant_values,
       :compliance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target of the operation is currently being modified by a different request. Try
@@ -33,7 +33,7 @@ module Aws::ResourceGroupsTaggingAPI
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because performing this operation violates a constraint. </p>
@@ -61,12 +61,12 @@ module Aws::ResourceGroupsTaggingAPI
     class ConstraintViolationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeReportCreationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -109,12 +109,7 @@ module Aws::ResourceGroupsTaggingAPI
       :start_date,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      INTERNAL_SERVICE_EXCEPTION = 'InternalServiceException'
-      INVALID_PARAMETER_EXCEPTION = 'InvalidParameterException'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the errors that are returned for each failed resource. This
@@ -165,7 +160,7 @@ module Aws::ResourceGroupsTaggingAPI
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -241,7 +236,7 @@ module Aws::ResourceGroupsTaggingAPI
       :max_results,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_list
@@ -256,7 +251,7 @@ module Aws::ResourceGroupsTaggingAPI
       :summary_list,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -398,7 +393,7 @@ module Aws::ResourceGroupsTaggingAPI
       :exclude_compliant_resources,
       :resource_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -414,7 +409,7 @@ module Aws::ResourceGroupsTaggingAPI
       :pagination_token,
       :resource_tag_mapping_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -425,7 +420,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetTagKeysInput < Struct.new(
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -440,7 +435,7 @@ module Aws::ResourceGroupsTaggingAPI
       :pagination_token,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -456,7 +451,7 @@ module Aws::ResourceGroupsTaggingAPI
       :pagination_token,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pagination_token
@@ -472,13 +467,7 @@ module Aws::ResourceGroupsTaggingAPI
       :pagination_token,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupByAttribute
-      TARGET_ID = 'TARGET_ID'
-      REGION = 'REGION'
-      RESOURCE_TYPE = 'RESOURCE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing failed because of an unknown error, exception, or failure. You
@@ -488,7 +477,7 @@ module Aws::ResourceGroupsTaggingAPI
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error indicates one of the following:</p>
@@ -517,7 +506,7 @@ module Aws::ResourceGroupsTaggingAPI
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was
@@ -527,7 +516,7 @@ module Aws::ResourceGroupsTaggingAPI
     class PaginationTokenExpiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of resource ARNs and the tags (keys and values) that are associated with
@@ -547,7 +536,7 @@ module Aws::ResourceGroupsTaggingAPI
       :tags,
       :compliance_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_bucket
@@ -561,12 +550,12 @@ module Aws::ResourceGroupsTaggingAPI
     class StartReportCreationInput < Struct.new(
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartReportCreationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A count of noncompliant resources.</p>
@@ -597,7 +586,7 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_type,
       :non_compliant_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:non_compliant_resources] = 0 unless options.key?(:non_compliant_resources)
@@ -620,7 +609,7 @@ module Aws::ResourceGroupsTaggingAPI
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of tags (keys and values) that are used to specify the associated
@@ -637,7 +626,7 @@ module Aws::ResourceGroupsTaggingAPI
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn_list
@@ -655,7 +644,7 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_arn_list,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_resources_map
@@ -667,13 +656,7 @@ module Aws::ResourceGroupsTaggingAPI
     class TagResourcesOutput < Struct.new(
       :failed_resources_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetIdType
-      ACCOUNT = 'ACCOUNT'
-      OU = 'OU'
-      ROOT = 'ROOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied to limit the frequency of submitted requests.</p>
@@ -682,7 +665,7 @@ module Aws::ResourceGroupsTaggingAPI
     class ThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn_list
@@ -700,7 +683,7 @@ module Aws::ResourceGroupsTaggingAPI
       :resource_arn_list,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_resources_map
@@ -712,7 +695,7 @@ module Aws::ResourceGroupsTaggingAPI
     class UntagResourcesOutput < Struct.new(
       :failed_resources_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

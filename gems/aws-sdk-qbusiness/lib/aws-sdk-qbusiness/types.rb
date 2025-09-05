@@ -18,15 +18,11 @@ module Aws::QBusiness
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Payload < APISchema; end
       class S3 < APISchema; end
       class Unknown < APISchema; end
-    end
-
-    module APISchemaType
-      OPEN_API_V3 = 'OPEN_API_V3'
     end
 
     # <p>Used to configure access permissions for a document.</p>
@@ -40,7 +36,7 @@ module Aws::QBusiness
       :access_controls,
       :member_relation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of principals. Each principal can be either a <code>USER</code> or a <code>GROUP</code> and can be designated document access permissions of either <code>ALLOW</code> or <code>DENY</code>.</p>
@@ -54,7 +50,7 @@ module Aws::QBusiness
       :principals,
       :member_relation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You don't have access to perform this action. Make sure you have the required permission policies and user accounts and try again.</p>
@@ -63,7 +59,7 @@ module Aws::QBusiness
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an allowed action and its associated filter configuration.</p>
@@ -77,7 +73,7 @@ module Aws::QBusiness
       :action,
       :filter_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Performs an Amazon Q Business plugin action during a non-streaming chat conversation.</p>
@@ -95,7 +91,7 @@ module Aws::QBusiness
       :payload,
       :payload_field_name_separator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request from an end user signalling an intent to perform an Amazon Q Business plugin action during a streaming chat.</p>
@@ -113,7 +109,7 @@ module Aws::QBusiness
       :payload,
       :payload_field_name_separator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user input field in an plugin action execution payload.</p>
@@ -123,7 +119,7 @@ module Aws::QBusiness
     class ActionExecutionPayloadField < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies filters to apply to an allowed action.</p>
@@ -133,14 +129,7 @@ module Aws::QBusiness
     class ActionFilterConfiguration < Struct.new(
       :document_attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionPayloadFieldType
-      STRING = 'STRING'
-      NUMBER = 'NUMBER'
-      ARRAY = 'ARRAY'
-      BOOLEAN = 'BOOLEAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An output event that Amazon Q Business returns to an user who wants to perform a plugin action during a non-streaming chat conversation. It contains information about the selected action with a list of possible user input fields, some pre-populated by Amazon Q Business.</p>
@@ -162,7 +151,7 @@ module Aws::QBusiness
       :payload,
       :payload_field_name_separator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An output event that Amazon Q Business returns to an user who wants to perform a plugin action during a streaming chat conversation. It contains information about the selected action with a list of possible user input fields, some pre-populated by Amazon Q Business. </p>
@@ -196,7 +185,7 @@ module Aws::QBusiness
       :payload,
       :payload_field_name_separator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user input field in an plugin action review payload.</p>
@@ -238,7 +227,7 @@ module Aws::QBusiness
       :array_item_json_schema,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the field values that an end user can use to provide to Amazon Q Business for Amazon Q Business to perform the requested plugin action.</p>
@@ -252,7 +241,7 @@ module Aws::QBusiness
       :value,
       :display_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an Amazon Q Business plugin action.</p>
@@ -274,7 +263,7 @@ module Aws::QBusiness
       :instruction_example,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an Amazon Q Business application.</p>
@@ -308,15 +297,7 @@ module Aws::QBusiness
       :identity_type,
       :quick_sight_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the file upload during chat feature for your application.</p>
@@ -326,7 +307,7 @@ module Aws::QBusiness
     class AppliedAttachmentsConfiguration < Struct.new(
       :attachments_control_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The creator mode specific admin controls configured for an Amazon Q Business application. Determines whether an end user can generate LLM-only responses when they use the web experience.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html">Admin controls and guardrails</a> and <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope">Conversation settings</a>.</p>
@@ -336,7 +317,7 @@ module Aws::QBusiness
     class AppliedCreatorModeConfiguration < Struct.new(
       :creator_mode_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The chat orchestration specific admin controls configured for an Amazon Q Business application. Determines whether Amazon Q Business automatically routes chat requests across configured plugins and data sources in your Amazon Q Business application.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails-global-controls.html#guardrails-global-orchestration">Chat orchestration settings</a>.</p>
@@ -346,7 +327,7 @@ module Aws::QBusiness
     class AppliedOrchestrationConfiguration < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -371,7 +352,7 @@ module Aws::QBusiness
       :conditions,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement
@@ -380,7 +361,7 @@ module Aws::QBusiness
     class AssociatePermissionResponse < Struct.new(
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a group associated with a given user in the access control system.</p>
@@ -394,7 +375,7 @@ module Aws::QBusiness
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an associated user in the access control system.</p>
@@ -408,7 +389,7 @@ module Aws::QBusiness
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attachment in an Amazon Q Business conversation.</p>
@@ -454,7 +435,7 @@ module Aws::QBusiness
       :status,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is either a file directly uploaded into a web experience chat or a reference to an existing attachment that is part of a web experience chat.</p>
@@ -472,7 +453,7 @@ module Aws::QBusiness
       :name,
       :copy_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file input event activated by a end user request to upload files into their web experience chat.</p>
@@ -482,7 +463,7 @@ module Aws::QBusiness
     class AttachmentInputEvent < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a file uploaded during chat.</p>
@@ -508,12 +489,7 @@ module Aws::QBusiness
       :attachment_id,
       :conversation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentStatus
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the file upload during chat feature.</p>
@@ -523,12 +499,7 @@ module Aws::QBusiness
     class AttachmentsConfiguration < Struct.new(
       :attachments_control_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentsControlMode
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables filtering of responses based on document attributes or metadata fields.</p>
@@ -574,18 +545,7 @@ module Aws::QBusiness
       :less_than,
       :less_than_or_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeType
-      STRING = 'STRING'
-      STRING_LIST = 'STRING_LIST'
-      NUMBER = 'NUMBER'
-      DATE = 'DATE'
-    end
-
-    module AttributeValueOperator
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for audio content extraction and processing.</p>
@@ -595,17 +555,7 @@ module Aws::QBusiness
     class AudioExtractionConfiguration < Struct.new(
       :audio_extraction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudioExtractionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module AudioExtractionType
-      TRANSCRIPT = 'TRANSCRIPT'
-      SUMMARY = 'SUMMARY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an audio source, including its identifier, format, and time information.</p>
@@ -631,7 +581,7 @@ module Aws::QBusiness
       :end_time_milliseconds,
       :audio_extraction_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request made by Amazon Q Business to a third paty authentication server to authenticate a custom plugin user.</p>
@@ -641,7 +591,7 @@ module Aws::QBusiness
     class AuthChallengeRequest < Struct.new(
       :authorization_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An authentication verification event activated by an end user request to use a custom plugin.</p>
@@ -651,7 +601,7 @@ module Aws::QBusiness
     class AuthChallengeRequestEvent < Struct.new(
       :authorization_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of the authentication information received from a third party authentication server in response to an authentication challenge.</p>
@@ -661,7 +611,7 @@ module Aws::QBusiness
     class AuthChallengeResponse < Struct.new(
       :response_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An authentication verification event response by a third party authentication server to Amazon Q Business.</p>
@@ -671,7 +621,7 @@ module Aws::QBusiness
     class AuthChallengeResponseEvent < Struct.new(
       :response_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subscription configuration information for an Amazon Q Business application using IAM identity federation for user management. </p>
@@ -685,12 +635,7 @@ module Aws::QBusiness
       :auto_subscribe,
       :default_subscription_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoSubscriptionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the basic authentication credentials used to configure a plugin.</p>
@@ -704,7 +649,7 @@ module Aws::QBusiness
       :secret_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -725,7 +670,7 @@ module Aws::QBusiness
       :documents,
       :data_source_sync_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_documents
@@ -734,7 +679,7 @@ module Aws::QBusiness
     class BatchDeleteDocumentResponse < Struct.new(
       :failed_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -759,7 +704,7 @@ module Aws::QBusiness
       :role_arn,
       :data_source_sync_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_documents
@@ -768,7 +713,7 @@ module Aws::QBusiness
     class BatchPutDocumentResponse < Struct.new(
       :failed_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the phrases blocked from chat by your chat control configuration.</p>
@@ -782,7 +727,7 @@ module Aws::QBusiness
       :blocked_phrases,
       :system_message_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a blocked phrases configuration in your Amazon Q Business application.</p>
@@ -800,7 +745,7 @@ module Aws::QBusiness
       :blocked_phrases_to_delete,
       :system_message_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for browser extension configuration for an Amazon Q Business web experience.</p>
@@ -810,7 +755,7 @@ module Aws::QBusiness
     class BrowserExtensionConfiguration < Struct.new(
       :enabled_browser_extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -823,7 +768,7 @@ module Aws::QBusiness
       :application_id,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -840,7 +785,7 @@ module Aws::QBusiness
       :current_subscription,
       :next_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -873,7 +818,7 @@ module Aws::QBusiness
       :client_token,
       :input_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The streaming input for the <code>Chat</code> API.</p>
@@ -904,7 +849,7 @@ module Aws::QBusiness
       :auth_challenge_response_event,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ConfigurationEvent < ChatInputStream; end
       class TextEvent < ChatInputStream; end
@@ -915,12 +860,6 @@ module Aws::QBusiness
       class Unknown < ChatInputStream; end
     end
 
-    module ChatMode
-      RETRIEVAL_MODE = 'RETRIEVAL_MODE'
-      CREATOR_MODE = 'CREATOR_MODE'
-      PLUGIN_MODE = 'PLUGIN_MODE'
-    end
-
     # <p>Configuration information for Amazon Q Business conversation modes.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html">Admin controls and guardrails</a> and <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope">Conversation settings</a>.</p>
     # @!attribute plugin_configuration
     #   <p>Configuration information required to invoke chat in <code>PLUGIN_MODE</code>.</p>
@@ -929,7 +868,7 @@ module Aws::QBusiness
       :plugin_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PluginConfiguration < ChatModeConfiguration; end
       class Unknown < ChatModeConfiguration; end
@@ -941,7 +880,7 @@ module Aws::QBusiness
     class ChatOutput < Struct.new(
       :output_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The streaming output for the <code>Chat</code> API.</p>
@@ -968,7 +907,7 @@ module Aws::QBusiness
       :auth_challenge_request_event,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TextEvent < ChatOutputStream; end
       class MetadataEvent < ChatOutputStream; end
@@ -1009,7 +948,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a chat response configuration, including comprehensive settings and parameters that define how Amazon Q Business generates and formats responses.</p>
@@ -1035,14 +974,7 @@ module Aws::QBusiness
       :error,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChatResponseConfigurationStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1099,7 +1031,7 @@ module Aws::QBusiness
       :chat_mode_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversation_id
@@ -1136,7 +1068,7 @@ module Aws::QBusiness
       :source_attributions,
       :failed_attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1161,7 +1093,7 @@ module Aws::QBusiness
       :document_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_groups
@@ -1182,7 +1114,7 @@ module Aws::QBusiness
       :has_access,
       :document_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration event activated by an end user request to select a specific chat mode.</p>
@@ -1200,7 +1132,7 @@ module Aws::QBusiness
       :chat_mode_configuration,
       :attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are trying to perform an action that conflicts with the current status of your resource. Fix any inconsistencies with your resources and try again.</p>
@@ -1218,7 +1150,7 @@ module Aws::QBusiness
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule for configuring how Amazon Q Business responds when it encounters a a blocked topic. You can configure a custom message to inform your end users that they have asked about a restricted topic and suggest any next steps they should take.</p>
@@ -1228,7 +1160,7 @@ module Aws::QBusiness
     class ContentBlockerRule < Struct.new(
       :system_message_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Rules for retrieving content from data sources connected to a Amazon Q Business application for a specific topic control configuration.</p>
@@ -1238,7 +1170,7 @@ module Aws::QBusiness
     class ContentRetrievalRule < Struct.new(
       :eligible_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the source of content to search in.</p>
@@ -1249,25 +1181,10 @@ module Aws::QBusiness
       :retriever,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Retriever < ContentSource; end
       class Unknown < ContentSource; end
-    end
-
-    module ContentType
-      PDF = 'PDF'
-      HTML = 'HTML'
-      MS_WORD = 'MS_WORD'
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      PPT = 'PPT'
-      RTF = 'RTF'
-      XML = 'XML'
-      XSLT = 'XSLT'
-      MS_EXCEL = 'MS_EXCEL'
-      CSV = 'CSV'
-      JSON = 'JSON'
-      MD = 'MD'
     end
 
     # <p>A conversation in an Amazon Q Business application.</p>
@@ -1285,7 +1202,7 @@ module Aws::QBusiness
       :title,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source reference for an existing attachment in an existing conversation.</p>
@@ -1299,7 +1216,7 @@ module Aws::QBusiness
       :conversation_id,
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source reference for an existing attachment.</p>
@@ -1310,7 +1227,7 @@ module Aws::QBusiness
       :conversation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Conversation < CopyFromSource; end
       class Unknown < CopyFromSource; end
@@ -1330,7 +1247,7 @@ module Aws::QBusiness
       :web_experience_id,
       :session_duration_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anonymous_url
@@ -1339,7 +1256,7 @@ module Aws::QBusiness
     class CreateAnonymousWebExperienceUrlResponse < Struct.new(
       :anonymous_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1400,7 +1317,7 @@ module Aws::QBusiness
       :personalization_configuration,
       :quick_sight_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1413,7 +1330,7 @@ module Aws::QBusiness
       :application_id,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1438,7 +1355,7 @@ module Aws::QBusiness
       :response_configurations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_response_configuration_id
@@ -1451,7 +1368,7 @@ module Aws::QBusiness
       :chat_response_configuration_id,
       :chat_response_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1484,7 +1401,7 @@ module Aws::QBusiness
       :authentication_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_accessor_id
@@ -1501,7 +1418,7 @@ module Aws::QBusiness
       :idc_application_arn,
       :data_accessor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1554,7 +1471,7 @@ module Aws::QBusiness
       :document_enrichment_configuration,
       :media_extraction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -1567,7 +1484,7 @@ module Aws::QBusiness
       :data_source_id,
       :data_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1600,7 +1517,7 @@ module Aws::QBusiness
       :capacity_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1613,7 +1530,7 @@ module Aws::QBusiness
       :index_id,
       :index_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1650,7 +1567,7 @@ module Aws::QBusiness
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plugin_id
@@ -1667,7 +1584,7 @@ module Aws::QBusiness
       :plugin_arn,
       :build_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1700,7 +1617,7 @@ module Aws::QBusiness
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retriever_id
@@ -1713,7 +1630,7 @@ module Aws::QBusiness
       :retriever_id,
       :retriever_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1734,7 +1651,7 @@ module Aws::QBusiness
       :type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_id
@@ -1755,7 +1672,7 @@ module Aws::QBusiness
       :current_subscription,
       :next_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1776,12 +1693,12 @@ module Aws::QBusiness
       :user_aliases,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1834,7 +1751,7 @@ module Aws::QBusiness
       :browser_extension_configuration,
       :customization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_experience_id
@@ -1847,7 +1764,7 @@ module Aws::QBusiness
       :web_experience_id,
       :web_experience_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information required to invoke chat in <code>CREATOR_MODE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html">Admin controls and guardrails</a> and <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope">Conversation settings</a>.</p>
@@ -1857,12 +1774,7 @@ module Aws::QBusiness
     class CreatorModeConfiguration < Struct.new(
       :creator_mode_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CreatorModeControl
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configuration information required to create a custom plugin.</p>
@@ -1880,7 +1792,7 @@ module Aws::QBusiness
       :api_schema_type,
       :api_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information to customize the logo, font, and color of an Amazon Q Business web experience with individual files for each property or a CSS file for them all.</p>
@@ -1902,7 +1814,7 @@ module Aws::QBusiness
       :font_url,
       :favicon_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a data accessor.</p>
@@ -1940,7 +1852,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union type that contains the specific authentication configuration based on the authentication type selected.</p>
@@ -1951,7 +1863,7 @@ module Aws::QBusiness
       :idc_trusted_token_issuer_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IdcTrustedTokenIssuerConfiguration < DataAccessorAuthenticationConfiguration; end
       class Unknown < DataAccessorAuthenticationConfiguration; end
@@ -1972,13 +1884,7 @@ module Aws::QBusiness
       :authentication_configuration,
       :external_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of authentication mechanism used by the data accessor.</p>
-    module DataAccessorAuthenticationType
-      AWS_IAM_IDC_TTI = 'AWS_IAM_IDC_TTI'
-      AWS_IAM_IDC_AUTH_CODE = 'AWS_IAM_IDC_AUTH_CODE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details for IAM Identity Center Trusted Token Issuer (TTI) authentication.</p>
@@ -1988,7 +1894,7 @@ module Aws::QBusiness
     class DataAccessorIdcTrustedTokenIssuerConfiguration < Struct.new(
       :idc_trusted_token_issuer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data source in an Amazon Q Business application.</p>
@@ -2018,16 +1924,7 @@ module Aws::QBusiness
       :updated_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceStatus
-      PENDING_CREATION = 'PENDING_CREATION'
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon Q Business data source connector synchronization job.</p>
@@ -2061,7 +1958,7 @@ module Aws::QBusiness
       :data_source_error_code,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps a batch delete document request to a specific Amazon Q Business data source connector sync job.</p>
@@ -2087,17 +1984,7 @@ module Aws::QBusiness
       :documents_failed,
       :documents_scanned,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceSyncJobStatus
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      SYNCING = 'SYNCING'
-      INCOMPLETE = 'INCOMPLETE'
-      STOPPING = 'STOPPING'
-      ABORTED = 'ABORTED'
-      SYNCING_INDEXING = 'SYNCING_INDEXING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information needed to connect to an Amazon VPC (Virtual Private Cloud).</p>
@@ -2111,7 +1998,7 @@ module Aws::QBusiness
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on boosting <code>DATE</code> type document attributes.</p> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html">Boosting using document attributes</a>.</p>
@@ -2125,7 +2012,7 @@ module Aws::QBusiness
       :boosting_level,
       :boosting_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2134,12 +2021,12 @@ module Aws::QBusiness
     class DeleteApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2160,12 +2047,12 @@ module Aws::QBusiness
       :attachment_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAttachmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2174,12 +2061,12 @@ module Aws::QBusiness
     class DeleteChatControlsConfigurationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChatControlsConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2192,12 +2079,12 @@ module Aws::QBusiness
       :application_id,
       :chat_response_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChatResponseConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversation_id
@@ -2214,12 +2101,12 @@ module Aws::QBusiness
       :application_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConversationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2232,12 +2119,12 @@ module Aws::QBusiness
       :application_id,
       :data_accessor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataAccessorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2254,12 +2141,12 @@ module Aws::QBusiness
       :index_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document deleted from an Amazon Q Business data source connector.</p>
@@ -2269,7 +2156,7 @@ module Aws::QBusiness
     class DeleteDocument < Struct.new(
       :document_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2290,12 +2177,12 @@ module Aws::QBusiness
       :group_name,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2308,12 +2195,12 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2326,12 +2213,12 @@ module Aws::QBusiness
       :application_id,
       :plugin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePluginResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2344,12 +2231,12 @@ module Aws::QBusiness
       :application_id,
       :retriever_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRetrieverResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2362,12 +2249,12 @@ module Aws::QBusiness
       :application_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2380,12 +2267,12 @@ module Aws::QBusiness
       :application_id,
       :web_experience_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWebExperienceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2398,12 +2285,12 @@ module Aws::QBusiness
       :application_id,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociatePermissionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document in an Amazon Q Business application.</p>
@@ -2441,7 +2328,7 @@ module Aws::QBusiness
       :document_enrichment_configuration,
       :media_extraction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the Access Control List (ACL) for a document, containing both allowlist and denylist conditions.</p>
@@ -2455,7 +2342,7 @@ module Aws::QBusiness
       :allowlist,
       :deny_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a condition in the document's ACL, specifying access rules for users and groups.</p>
@@ -2473,7 +2360,7 @@ module Aws::QBusiness
       :users,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a group in the document's ACL, used to define access permissions for multiple users collectively.</p>
@@ -2487,7 +2374,7 @@ module Aws::QBusiness
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents membership rules in the document's ACL, defining how users or groups are associated with access permissions.</p>
@@ -2501,7 +2388,7 @@ module Aws::QBusiness
       :member_relation,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a user in the document's ACL, used to define access permissions for individual users.</p>
@@ -2515,7 +2402,7 @@ module Aws::QBusiness
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document attribute or metadata field.</p>
@@ -2529,7 +2416,7 @@ module Aws::QBusiness
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on boosting supported Amazon Q Business document attribute types. When an end user chat query matches document attributes that have been boosted, Amazon Q Business prioritizes generating responses from content that matches the boosted document attributes.</p> <p>In version 2, boosting uses numeric values (ONE, TWO) to indicate priority tiers that establish clear hierarchical relationships between boosted attributes. This allows for more precise control over how different attributes influence search results.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html">DocumentAttributeConfiguration</a> object of the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html">Boosting using document attributes</a>.</p>
@@ -2552,23 +2439,13 @@ module Aws::QBusiness
       :string_list_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class NumberConfiguration < DocumentAttributeBoostingConfiguration; end
       class StringConfiguration < DocumentAttributeBoostingConfiguration; end
       class DateConfiguration < DocumentAttributeBoostingConfiguration; end
       class StringListConfiguration < DocumentAttributeBoostingConfiguration; end
       class Unknown < DocumentAttributeBoostingConfiguration; end
-    end
-
-    module DocumentAttributeBoostingLevel
-      NONE = 'NONE'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      VERY_HIGH = 'VERY_HIGH'
-      ONE = 'ONE'
-      TWO = 'TWO'
     end
 
     # <p>The condition used for the target document attribute or metadata field when ingesting documents into Amazon Q Business. You use this with <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html"> <code>DocumentAttributeTarget</code> </a> to apply the condition.</p> <p>For example, you can create the 'Department' target field and have it prefill department names associated with the documents based on information in the 'Source_URI' field. Set the condition that if the 'Source_URI' field contains 'financial' in its URI value, then prefill the target field 'Department' with the target value 'Finance' for the document.</p> <p>Amazon Q Business can't create a target field if it has not already been created as an index field. After you create your index field, you can create a document metadata field using <code>DocumentAttributeTarget</code>. Amazon Q Business then will map your newly created metadata field to your index field.</p>
@@ -2586,7 +2463,7 @@ module Aws::QBusiness
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for document attributes. Document attributes are metadata or fields associated with your documents. For example, the company department name associated with each document.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html">Understanding document attributes</a>.</p>
@@ -2604,7 +2481,7 @@ module Aws::QBusiness
       :type,
       :search,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target document attribute or metadata field you want to alter when ingesting documents into Amazon Q Business.</p> <p>For example, you can delete all customer identification numbers associated with the documents, stored in the document metadata field called 'Customer_ID' by setting the target key as 'Customer_ID' and the deletion flag to <code>TRUE</code>. This removes all customer ID values in the field 'Customer_ID'. This would scrub personally identifiable information from each document's metadata.</p> <p>Amazon Q Business can't create a target field if it has not already been created as an index field. After you create your index field, you can create a document metadata field using <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html"> <code>DocumentAttributeTarget</code> </a>. Amazon Q Business will then map your newly created document attribute to your index field.</p> <p>You can also use this with <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html"> <code>DocumentAttributeCondition</code> </a>.</p>
@@ -2622,7 +2499,7 @@ module Aws::QBusiness
       :value,
       :attribute_value_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a document attribute. You can only provide one value for a document attribute.</p>
@@ -2645,7 +2522,7 @@ module Aws::QBusiness
       :date_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < DocumentAttributeValue; end
       class StringListValue < DocumentAttributeValue; end
@@ -2666,15 +2543,11 @@ module Aws::QBusiness
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Blob < DocumentContent; end
       class S3 < DocumentContent; end
       class Unknown < DocumentContent; end
-    end
-
-    module DocumentContentOperator
-      DELETE = 'DELETE'
     end
 
     # <p>The details of a document within an Amazon Q Business index.</p>
@@ -2700,21 +2573,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentEnrichmentConditionOperator
-      GREATER_THAN = 'GREATER_THAN'
-      GREATER_THAN_OR_EQUALS = 'GREATER_THAN_OR_EQUALS'
-      LESS_THAN = 'LESS_THAN'
-      LESS_THAN_OR_EQUALS = 'LESS_THAN_OR_EQUALS'
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      CONTAINS = 'CONTAINS'
-      NOT_CONTAINS = 'NOT_CONTAINS'
-      EXISTS = 'EXISTS'
-      NOT_EXISTS = 'NOT_EXISTS'
-      BEGINS_WITH = 'BEGINS_WITH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for altering document metadata and content during the document ingestion process.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html">Custom document enrichment</a>.</p>
@@ -2732,18 +2591,7 @@ module Aws::QBusiness
       :pre_extraction_hook_configuration,
       :post_extraction_hook_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentStatus
-      RECEIVED = 'RECEIVED'
-      PROCESSING = 'PROCESSING'
-      INDEXED = 'INDEXED'
-      UPDATED = 'UPDATED'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DOCUMENT_FAILED_TO_INDEX = 'DOCUMENT_FAILED_TO_INDEX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier of the data source Amazon Q Business will generate responses from.</p>
@@ -2757,7 +2605,7 @@ module Aws::QBusiness
       :index_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the identifier of the KMS key used to encrypt data indexed by Amazon Q Business. Amazon Q Business doesn't support asymmetric keys.</p>
@@ -2767,20 +2615,13 @@ module Aws::QBusiness
     class EncryptionConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The end of the streaming input for the <code>Chat</code> API.</p>
     class EndOfInputEvent < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      INTERNAL_ERROR = 'InternalError'
-      INVALID_REQUEST = 'InvalidRequest'
-      RESOURCE_INACTIVE = 'ResourceInactive'
-      RESOURCE_NOT_FOUND = 'ResourceNotFound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a Amazon Q Business request error.</p>
@@ -2794,7 +2635,7 @@ module Aws::QBusiness
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An external resource that you configured with your application is returning errors and preventing this operation from succeeding. Fix those errors and try again. </p>
@@ -2803,7 +2644,7 @@ module Aws::QBusiness
     class ExternalResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A failed file upload during web experience chat.</p>
@@ -2825,7 +2666,7 @@ module Aws::QBusiness
       :system_message_id,
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of documents that could not be removed from an Amazon Q Business index. Each entry contains an error message that indicates why the document couldn't be removed from the index.</p>
@@ -2843,7 +2684,7 @@ module Aws::QBusiness
       :error,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2852,7 +2693,7 @@ module Aws::QBusiness
     class GetApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -2933,7 +2774,7 @@ module Aws::QBusiness
       :client_ids_for_oidc,
       :quick_sight_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2950,7 +2791,7 @@ module Aws::QBusiness
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_scope
@@ -2983,7 +2824,7 @@ module Aws::QBusiness
       :next_token,
       :hallucination_reduction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2996,7 +2837,7 @@ module Aws::QBusiness
       :application_id,
       :chat_response_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_response_configuration_id
@@ -3025,7 +2866,7 @@ module Aws::QBusiness
       :in_use_configuration,
       :last_update_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3038,7 +2879,7 @@ module Aws::QBusiness
       :application_id,
       :data_accessor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -3083,7 +2924,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3100,7 +2941,7 @@ module Aws::QBusiness
       :index_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3173,7 +3014,7 @@ module Aws::QBusiness
       :document_enrichment_configuration,
       :media_extraction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3198,7 +3039,7 @@ module Aws::QBusiness
       :document_id,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute presigned_url
@@ -3211,7 +3052,7 @@ module Aws::QBusiness
       :presigned_url,
       :mime_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3232,7 +3073,7 @@ module Aws::QBusiness
       :group_name,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3245,7 +3086,7 @@ module Aws::QBusiness
       :status,
       :status_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3258,7 +3099,7 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3315,7 +3156,7 @@ module Aws::QBusiness
       :error,
       :index_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3336,7 +3177,7 @@ module Aws::QBusiness
       :message_id,
       :media_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute media_bytes
@@ -3349,7 +3190,7 @@ module Aws::QBusiness
       :media_bytes,
       :media_mime_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3362,7 +3203,7 @@ module Aws::QBusiness
       :application_id,
       :plugin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3415,7 +3256,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3424,7 +3265,7 @@ module Aws::QBusiness
     class GetPolicyRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3433,7 +3274,7 @@ module Aws::QBusiness
     class GetPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3446,7 +3287,7 @@ module Aws::QBusiness
       :application_id,
       :retriever_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3491,7 +3332,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3504,7 +3345,7 @@ module Aws::QBusiness
       :application_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_aliases
@@ -3513,7 +3354,7 @@ module Aws::QBusiness
     class GetUserResponse < Struct.new(
       :user_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3526,7 +3367,7 @@ module Aws::QBusiness
       :application_id,
       :web_experience_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3605,7 +3446,7 @@ module Aws::QBusiness
       :browser_extension_configuration,
       :customization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of users or sub groups that belong to a group. This is for generating Amazon Q Business chat results only from document a user has access to.</p>
@@ -3623,15 +3464,7 @@ module Aws::QBusiness
       :member_users,
       :s3_path_for_group_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupStatus
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      PROCESSING = 'PROCESSING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of a group's status.</p>
@@ -3649,7 +3482,7 @@ module Aws::QBusiness
       :last_updated_at,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for groups.</p>
@@ -3659,7 +3492,7 @@ module Aws::QBusiness
     class GroupSummary < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information required to setup hallucination reduction. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/hallucination-reduction.html"> hallucination reduction</a>.</p> <note> <p>The hallucination reduction feature won't work if chat orchestration controls are enabled for your application.</p> </note>
@@ -3669,12 +3502,7 @@ module Aws::QBusiness
     class HallucinationReductionConfiguration < Struct.new(
       :hallucination_reduction_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HallucinationReductionControl
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for invoking a Lambda function in Lambda to alter document metadata and content when ingesting documents into Amazon Q Business.</p> <p>You can configure your Lambda function using the <code>PreExtractionHookConfiguration</code> parameter if you want to apply advanced alterations on the original or raw documents.</p> <p>If you want to apply advanced alterations on the Amazon Q Business structured documents, you must configure your Lambda function using <code>PostExtractionHookConfiguration</code>.</p> <p>You can only invoke one Lambda function. However, this function can invoke other functions it requires.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html">Custom document enrichment</a>. </p>
@@ -3696,7 +3524,7 @@ module Aws::QBusiness
       :s3_bucket_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the IAM Identity Center Application used to configure authentication for a plugin.</p>
@@ -3710,7 +3538,7 @@ module Aws::QBusiness
       :idc_application_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.</p>
@@ -3725,19 +3553,11 @@ module Aws::QBusiness
       :open_id_connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SamlConfiguration < IdentityProviderConfiguration; end
       class OpenIDConnectConfiguration < IdentityProviderConfiguration; end
       class Unknown < IdentityProviderConfiguration; end
-    end
-
-    module IdentityType
-      AWS_IAM_IDP_SAML = 'AWS_IAM_IDP_SAML'
-      AWS_IAM_IDP_OIDC = 'AWS_IAM_IDP_OIDC'
-      AWS_IAM_IDC = 'AWS_IAM_IDC'
-      AWS_QUICKSIGHT_IDP = 'AWS_QUICKSIGHT_IDP'
-      ANONYMOUS = 'ANONYMOUS'
     end
 
     # <p>The configuration for extracting semantic meaning from images in documents. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/extracting-meaning-from-images.html">Extracting semantic meaning from images and visuals</a>.</p>
@@ -3747,12 +3567,7 @@ module Aws::QBusiness
     class ImageExtractionConfiguration < Struct.new(
       :image_extraction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageExtractionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an image source, including its identifier and format.</p>
@@ -3766,7 +3581,7 @@ module Aws::QBusiness
       :media_id,
       :media_mime_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for your Amazon Q Business index.</p>
@@ -3792,7 +3607,7 @@ module Aws::QBusiness
       :updated_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about index capacity configuration.</p>
@@ -3802,7 +3617,7 @@ module Aws::QBusiness
     class IndexCapacityConfiguration < Struct.new(
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of documents in an index.</p>
@@ -3812,20 +3627,7 @@ module Aws::QBusiness
     class IndexStatistics < Struct.new(
       :text_document_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndexStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-    end
-
-    module IndexType
-      ENTERPRISE = 'ENTERPRISE'
-      STARTER = 'STARTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for applying basic logic to alter document metadata and content when ingesting documents into Amazon Q Business.</p> <p>To apply advanced logic, to go beyond what you can do with basic logic, see <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html"> <code>HookConfiguration</code> </a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html">Custom document enrichment</a>. </p>
@@ -3843,7 +3645,7 @@ module Aws::QBusiness
       :target,
       :document_content_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of instructions that define how Amazon Q Business should generate and format responses to user queries. This collection includes parameters for controlling response characteristics such as length, audience targeting, perspective, style, identity, tone, and custom instructions.</p>
@@ -3881,7 +3683,7 @@ module Aws::QBusiness
       :custom_instructions,
       :examples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An issue occurred with the internal server used for your Amazon Q Business service. Wait some minutes and try again, or contact <a href="http://aws.amazon.com/contact-us/">Support</a> for help.</p>
@@ -3890,7 +3692,7 @@ module Aws::QBusiness
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores an Amazon Kendra index as a retriever.</p>
@@ -3900,7 +3702,7 @@ module Aws::QBusiness
     class KendraIndexConfiguration < Struct.new(
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permissions to perform the action because your license is inactive. Ask your admin to activate your license and try again after your licence is active.</p>
@@ -3909,7 +3711,7 @@ module Aws::QBusiness
     class LicenseNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3922,7 +3724,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3935,7 +3737,7 @@ module Aws::QBusiness
       :next_token,
       :applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3960,7 +3762,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachments
@@ -3973,7 +3775,7 @@ module Aws::QBusiness
       :attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3990,7 +3792,7 @@ module Aws::QBusiness
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_response_configurations
@@ -4003,7 +3805,7 @@ module Aws::QBusiness
       :chat_response_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4024,7 +3826,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4037,7 +3839,7 @@ module Aws::QBusiness
       :next_token,
       :conversations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4054,7 +3856,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_accessors
@@ -4067,7 +3869,7 @@ module Aws::QBusiness
       :data_accessors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -4104,7 +3906,7 @@ module Aws::QBusiness
       :end_time,
       :status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute history
@@ -4117,7 +3919,7 @@ module Aws::QBusiness
       :history,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4138,7 +3940,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_sources
@@ -4151,7 +3953,7 @@ module Aws::QBusiness
       :data_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4176,7 +3978,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_detail_list
@@ -4189,7 +3991,7 @@ module Aws::QBusiness
       :document_detail_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4218,7 +4020,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4231,7 +4033,7 @@ module Aws::QBusiness
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4248,7 +4050,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4261,7 +4063,7 @@ module Aws::QBusiness
       :next_token,
       :indices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversation_id
@@ -4286,7 +4088,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute messages
@@ -4299,7 +4101,7 @@ module Aws::QBusiness
       :messages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4320,7 +4122,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4333,7 +4135,7 @@ module Aws::QBusiness
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plugin_type
@@ -4350,7 +4152,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4363,7 +4165,7 @@ module Aws::QBusiness
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4376,7 +4178,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4389,7 +4191,7 @@ module Aws::QBusiness
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4406,7 +4208,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4419,7 +4221,7 @@ module Aws::QBusiness
       :next_token,
       :plugins,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4436,7 +4238,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retrievers
@@ -4449,7 +4251,7 @@ module Aws::QBusiness
       :retrievers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4466,7 +4268,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4479,7 +4281,7 @@ module Aws::QBusiness
       :next_token,
       :subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4488,7 +4290,7 @@ module Aws::QBusiness
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4497,7 +4299,7 @@ module Aws::QBusiness
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4514,7 +4316,7 @@ module Aws::QBusiness
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_experiences
@@ -4527,7 +4329,7 @@ module Aws::QBusiness
       :web_experiences,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for extracting information from media in documents.</p>
@@ -4545,7 +4347,7 @@ module Aws::QBusiness
       :audio_extraction_configuration,
       :video_extraction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested media object is too large to be returned.</p>
@@ -4554,7 +4356,7 @@ module Aws::QBusiness
     class MediaTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sub groups that belong to a group.</p>
@@ -4568,12 +4370,7 @@ module Aws::QBusiness
       :group_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberRelation
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The users that belong to a group.</p>
@@ -4587,12 +4384,7 @@ module Aws::QBusiness
       :user_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipType
-      INDEX = 'INDEX'
-      DATASOURCE = 'DATASOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A message in an Amazon Q Business web experience.</p>
@@ -4630,17 +4422,7 @@ module Aws::QBusiness
       :action_review,
       :action_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageType
-      USER = 'USER'
-      SYSTEM = 'SYSTEM'
-    end
-
-    module MessageUsefulness
-      USEFUL = 'USEFUL'
-      NOT_USEFUL = 'NOT_USEFUL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>End user feedback on an AI-generated web experience chat message usefulness.</p>
@@ -4662,22 +4444,7 @@ module Aws::QBusiness
       :comment,
       :submitted_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageUsefulnessReason
-      NOT_FACTUALLY_CORRECT = 'NOT_FACTUALLY_CORRECT'
-      HARMFUL_OR_UNSAFE = 'HARMFUL_OR_UNSAFE'
-      INCORRECT_OR_MISSING_SOURCES = 'INCORRECT_OR_MISSING_SOURCES'
-      NOT_HELPFUL = 'NOT_HELPFUL'
-      FACTUALLY_CORRECT = 'FACTUALLY_CORRECT'
-      COMPLETE = 'COMPLETE'
-      RELEVANT_SOURCES = 'RELEVANT_SOURCES'
-      HELPFUL = 'HELPFUL'
-      NOT_BASED_ON_DOCUMENTS = 'NOT_BASED_ON_DOCUMENTS'
-      NOT_COMPLETE = 'NOT_COMPLETE'
-      NOT_CONCISE = 'NOT_CONCISE'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metadata event for a AI-generated text output message in a Amazon Q Business conversation, containing associated metadata generated.</p>
@@ -4703,7 +4470,7 @@ module Aws::QBusiness
       :source_attributions,
       :final_text_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for an Amazon Q Business index.</p>
@@ -4721,13 +4488,13 @@ module Aws::QBusiness
       :version,
       :boosting_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about invoking a custom plugin without any authentication or authorization requirement.</p>
     class NoAuthConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on boosting <code>NUMBER</code> type document attributes.</p> <p>In the current boosting implementation, boosting focuses primarily on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization. <code>NUMBER</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html">Boosting using document attributes</a>.</p>
@@ -4741,12 +4508,7 @@ module Aws::QBusiness
       :boosting_level,
       :boosting_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumberAttributeBoostingType
-      PRIORITIZE_LARGER_VALUES = 'PRIORITIZE_LARGER_VALUES'
-      PRIORITIZE_SMALLER_VALUES = 'PRIORITIZE_SMALLER_VALUES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the OAuth 2.0 authentication credential/token used to configure a plugin.</p>
@@ -4768,7 +4530,7 @@ module Aws::QBusiness
       :authorization_url,
       :token_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the OIDC-compliant identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.</p>
@@ -4782,7 +4544,7 @@ module Aws::QBusiness
       :secrets_arn,
       :secrets_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information required to enable chat orchestration for your Amazon Q Business application.</p> <note> <p>Chat orchestration is optimized to work for English language content. For more details on language support in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/supported-languages.html">Supported languages</a>.</p> </note>
@@ -4792,16 +4554,7 @@ module Aws::QBusiness
     class OrchestrationConfiguration < Struct.new(
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrchestrationControl
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module OutputFormat
-      RAW = 'RAW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition that restricts when a permission is effective. Conditions allow you to control access based on specific attributes of the request.</p>
@@ -4819,11 +4572,7 @@ module Aws::QBusiness
       :condition_key,
       :condition_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionConditionOperator
-      STRING_EQUALS = 'StringEquals'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about chat response personalization. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/personalizing-chat-responses.html">Personalizing chat responses</a>.</p>
@@ -4833,12 +4582,7 @@ module Aws::QBusiness
     class PersonalizationConfiguration < Struct.new(
       :personalization_control_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PersonalizationControlMode
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Q Business plugin and its configuration.</p>
@@ -4876,7 +4620,7 @@ module Aws::QBusiness
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Authentication configuration information for an Amazon Q Business plugin.</p>
@@ -4899,23 +4643,13 @@ module Aws::QBusiness
       :idc_auth_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BasicAuthConfiguration < PluginAuthConfiguration; end
       class OAuth2ClientCredentialConfiguration < PluginAuthConfiguration; end
       class NoAuthConfiguration < PluginAuthConfiguration; end
       class IdcAuthConfiguration < PluginAuthConfiguration; end
       class Unknown < PluginAuthConfiguration; end
-    end
-
-    module PluginBuildStatus
-      READY = 'READY'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
     end
 
     # <p>Configuration information required to invoke chat in <code>PLUGIN_MODE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html">Admin controls and guardrails</a>, <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html">Plugins</a>, and <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope">Conversation settings</a>.</p>
@@ -4925,40 +4659,7 @@ module Aws::QBusiness
     class PluginConfiguration < Struct.new(
       :plugin_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PluginState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module PluginType
-      SERVICE_NOW = 'SERVICE_NOW'
-      SALESFORCE = 'SALESFORCE'
-      JIRA = 'JIRA'
-      ZENDESK = 'ZENDESK'
-      CUSTOM = 'CUSTOM'
-      QUICKSIGHT = 'QUICKSIGHT'
-      SERVICENOW_NOW_PLATFORM = 'SERVICENOW_NOW_PLATFORM'
-      JIRA_CLOUD = 'JIRA_CLOUD'
-      SALESFORCE_CRM = 'SALESFORCE_CRM'
-      ZENDESK_SUITE = 'ZENDESK_SUITE'
-      ATLASSIAN_CONFLUENCE = 'ATLASSIAN_CONFLUENCE'
-      GOOGLE_CALENDAR = 'GOOGLE_CALENDAR'
-      MICROSOFT_TEAMS = 'MICROSOFT_TEAMS'
-      MICROSOFT_EXCHANGE = 'MICROSOFT_EXCHANGE'
-      PAGERDUTY_ADVANCE = 'PAGERDUTY_ADVANCE'
-      SMARTSHEET = 'SMARTSHEET'
-      ASANA = 'ASANA'
-    end
-
-    module PluginTypeCategory
-      CRM = 'Customer relationship management (CRM)'
-      PROJECT_MANAGEMENT = 'Project management'
-      COMMUNICATION = 'Communication'
-      PRODUCTIVITY = 'Productivity'
-      TICKETING_MANAGEMENT = 'Ticketing and incident management'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary metadata information for a Amazon Q Business plugin.</p>
@@ -4976,7 +4677,7 @@ module Aws::QBusiness
       :category,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides user and group information used for filtering documents to use for generating Amazon Q Business conversation responses.</p>
@@ -4991,7 +4692,7 @@ module Aws::QBusiness
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < Principal; end
       class Group < Principal; end
@@ -5013,7 +4714,7 @@ module Aws::QBusiness
       :access,
       :membership_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a user associated with a principal.</p>
@@ -5031,7 +4732,7 @@ module Aws::QBusiness
       :access,
       :membership_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5060,7 +4761,7 @@ module Aws::QBusiness
       :message_copied_at,
       :message_usefulness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5093,12 +4794,12 @@ module Aws::QBusiness
       :group_members,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about Amazon Q Apps.</p>
@@ -5108,12 +4809,7 @@ module Aws::QBusiness
     class QAppsConfiguration < Struct.new(
       :q_apps_control_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QAppsControlMode
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider. For more information, see <a href="https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html">Creating an Amazon QuickSight integrated application</a>.</p>
@@ -5123,12 +4819,7 @@ module Aws::QBusiness
     class QuickSightConfiguration < Struct.new(
       :client_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReadAccessType
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a piece of content that is relevant to a search query.</p>
@@ -5158,7 +4849,7 @@ module Aws::QBusiness
       :document_attributes,
       :score_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application or plugin resource you want to use doesn’t exist. Make sure you have provided the correct resource and try again.</p>
@@ -5176,7 +4867,7 @@ module Aws::QBusiness
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings to define how Amazon Q Business generates and formats responses to user queries. This includes customization options for response style, tone, length, and other characteristics.</p>
@@ -5186,16 +4877,7 @@ module Aws::QBusiness
     class ResponseConfiguration < Struct.new(
       :instruction_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResponseConfigurationType
-      ALL = 'ALL'
-    end
-
-    module ResponseScope
-      ENTERPRISE_CONTENT_ONLY = 'ENTERPRISE_CONTENT_ONLY'
-      EXTENDED_KNOWLEDGE_ENABLED = 'EXTENDED_KNOWLEDGE_ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for the retriever used for your Amazon Q Business application.</p>
@@ -5221,7 +4903,7 @@ module Aws::QBusiness
       :status,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on how the retriever used for your Amazon Q Business application is configured.</p>
@@ -5236,7 +4918,7 @@ module Aws::QBusiness
       :kendra_index_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class NativeIndexConfiguration < RetrieverConfiguration; end
       class KendraIndexConfiguration < RetrieverConfiguration; end
@@ -5250,18 +4932,7 @@ module Aws::QBusiness
     class RetrieverContentSource < Struct.new(
       :retriever_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetrieverStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
-    end
-
-    module RetrieverType
-      NATIVE_INDEX = 'NATIVE_INDEX'
-      KENDRA_INDEX = 'KENDRA_INDEX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Guardrail rules for an Amazon Q Business application. Amazon Q Business supports only one rule at a time.</p>
@@ -5283,7 +4954,7 @@ module Aws::QBusiness
       :rule_type,
       :rule_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about a rule.</p>
@@ -5298,16 +4969,11 @@ module Aws::QBusiness
       :content_retrieval_rule,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ContentBlockerRule < RuleConfiguration; end
       class ContentRetrievalRule < RuleConfiguration; end
       class Unknown < RuleConfiguration; end
-    end
-
-    module RuleType
-      CONTENT_BLOCKER_RULE = 'CONTENT_BLOCKER_RULE'
-      CONTENT_RETRIEVAL_RULE = 'CONTENT_RETRIEVAL_RULE'
     end
 
     # <p>Information required for Amazon Q Business to find a specific file in an Amazon S3 bucket.</p>
@@ -5321,7 +4987,7 @@ module Aws::QBusiness
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the SAML 2.0 compliant identity provider (IdP) configuration information Amazon Q Business needs to deploy a Amazon Q Business web experience.</p>
@@ -5343,7 +5009,7 @@ module Aws::QBusiness
       :user_id_attribute,
       :user_group_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the SAML 2.0-compliant identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.</p>
@@ -5353,7 +5019,7 @@ module Aws::QBusiness
     class SamlProviderConfiguration < Struct.new(
       :authentication_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the relevance score of content.</p>
@@ -5363,15 +5029,7 @@ module Aws::QBusiness
     class ScoreAttributes < Struct.new(
       :score_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScoreConfidence
-      VERY_HIGH = 'VERY_HIGH'
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5400,7 +5058,7 @@ module Aws::QBusiness
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relevant_content
@@ -5413,7 +5071,7 @@ module Aws::QBusiness
       :relevant_content,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the set limits for your Amazon Q Business service. </p>
@@ -5431,7 +5089,7 @@ module Aws::QBusiness
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the relevant text excerpt from a source that was used to generate a citation text segment in an Amazon Q Business chat response.</p>
@@ -5441,7 +5099,7 @@ module Aws::QBusiness
     class SnippetExcerpt < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The documents used to generate an Amazon Q Business web experience response.</p>
@@ -5483,7 +5141,7 @@ module Aws::QBusiness
       :index_id,
       :datasource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for details about different types of media sources (image, audio, or video).</p>
@@ -5502,7 +5160,7 @@ module Aws::QBusiness
       :video_source_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ImageSourceDetails < SourceDetails; end
       class AudioSourceDetails < SourceDetails; end
@@ -5524,7 +5182,7 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -5533,12 +5191,7 @@ module Aws::QBusiness
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_id
@@ -5555,12 +5208,12 @@ module Aws::QBusiness
       :application_id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopDataSourceSyncJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on boosting <code>STRING</code> type document attributes.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html">DocumentAttributeConfiguration</a> object of the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html">Boosting using document attributes</a>.</p>
@@ -5574,19 +5227,7 @@ module Aws::QBusiness
       :boosting_level,
       :attribute_value_boosting,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StringAttributeValueBoostingLevel
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      VERY_HIGH = 'VERY_HIGH'
-      ONE = 'ONE'
-      TWO = 'TWO'
-      THREE = 'THREE'
-      FOUR = 'FOUR'
-      FIVE = 'FIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on boosting <code>STRING_LIST</code> type document attributes.</p> <p>In the current boosting implementation, boosting focuses primarily on <code>DATE</code> attributes for recency and <code>STRING</code> attributes for source prioritization. <code>STRING_LIST</code> attributes can serve as additional boosting factors when needed, but are not supported when using <code>NativeIndexConfiguration</code> version 2.</p> <note> <p>For <code>STRING</code> and <code>STRING_LIST</code> type document attributes to be used for boosting on the console and the API, they must be enabled for search using the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html">DocumentAttributeConfiguration</a> object of the <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html">UpdateIndex</a> API. If you haven't enabled searching on these attributes, you can't boost attributes of these data types on either the console or the API.</p> </note> <p>For more information on how boosting document attributes work in Amazon Q Business, see <a href="https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html">Boosting using document attributes</a>.</p>
@@ -5596,7 +5237,7 @@ module Aws::QBusiness
     class StringListAttributeBoostingConfiguration < Struct.new(
       :boosting_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Q Business subscription.</p> <p>Subscriptions are used to provide access for an IAM Identity Center user or a group to an Amazon Q Business application.</p> <p>Amazon Q Business offers two subscription tiers: <code>Q_LITE</code> and <code>Q_BUSINESS</code>. Subscription tier determines feature access for the user. For more information on subscriptions and pricing tiers, see <a href="https://aws.amazon.com/q/business/pricing/">Amazon Q Business pricing</a>.</p>
@@ -5622,7 +5263,7 @@ module Aws::QBusiness
       :current_subscription,
       :next_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of an Amazon Q Business subscription. </p>
@@ -5632,7 +5273,7 @@ module Aws::QBusiness
     class SubscriptionDetails < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user or group in the IAM Identity Center instance connected to the Amazon Q Business application.</p>
@@ -5647,21 +5288,11 @@ module Aws::QBusiness
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < SubscriptionPrincipal; end
       class Group < SubscriptionPrincipal; end
       class Unknown < SubscriptionPrincipal; end
-    end
-
-    module SubscriptionType
-      Q_LITE = 'Q_LITE'
-      Q_BUSINESS = 'Q_BUSINESS'
-    end
-
-    module SystemMessageType
-      RESPONSE = 'RESPONSE'
-      GROUNDED_RESPONSE = 'GROUNDED_RESPONSE'
     end
 
     # <p>A list of key/value pairs that identify an index, FAQ, or data source. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.</p>
@@ -5675,7 +5306,7 @@ module Aws::QBusiness
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5688,12 +5319,12 @@ module Aws::QBusiness
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about text documents in an index.</p>
@@ -5707,7 +5338,7 @@ module Aws::QBusiness
       :indexed_text_bytes,
       :indexed_text_document_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input event for a end user message in an Amazon Q Business web experience. </p>
@@ -5717,7 +5348,7 @@ module Aws::QBusiness
     class TextInputEvent < Struct.new(
       :user_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An output event for an AI-generated response in an Amazon Q Business web experience.</p>
@@ -5743,7 +5374,7 @@ module Aws::QBusiness
       :system_message_id,
       :system_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a text extract in a chat response that can be attributed to a source document.</p>
@@ -5779,7 +5410,7 @@ module Aws::QBusiness
       :media_mime_type,
       :source_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to throttling. Reduce the number of requests and try again.</p>
@@ -5788,7 +5419,7 @@ module Aws::QBusiness
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The topic specific controls configured for an Amazon Q Business application.</p>
@@ -5810,7 +5441,7 @@ module Aws::QBusiness
       :example_chat_messages,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5823,12 +5454,12 @@ module Aws::QBusiness
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5869,12 +5500,12 @@ module Aws::QBusiness
       :personalization_configuration,
       :auto_subscription_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5915,12 +5546,12 @@ module Aws::QBusiness
       :creator_mode_configuration,
       :hallucination_reduction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateChatControlsConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5945,12 +5576,12 @@ module Aws::QBusiness
       :response_configurations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateChatResponseConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5975,12 +5606,12 @@ module Aws::QBusiness
       :authentication_detail,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataAccessorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6029,12 +5660,12 @@ module Aws::QBusiness
       :document_enrichment_configuration,
       :media_extraction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6063,12 +5694,12 @@ module Aws::QBusiness
       :capacity_configuration,
       :document_attribute_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIndexResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6101,12 +5732,12 @@ module Aws::QBusiness
       :custom_plugin_configuration,
       :auth_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePluginResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6131,12 +5762,12 @@ module Aws::QBusiness
       :display_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRetrieverResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6153,7 +5784,7 @@ module Aws::QBusiness
       :subscription_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_arn
@@ -6170,7 +5801,7 @@ module Aws::QBusiness
       :current_subscription,
       :next_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6191,7 +5822,7 @@ module Aws::QBusiness
       :user_aliases_to_update,
       :user_aliases_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_aliases_added
@@ -6208,7 +5839,7 @@ module Aws::QBusiness
       :user_aliases_updated,
       :user_aliases_deleted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6263,12 +5894,12 @@ module Aws::QBusiness
       :browser_extension_configuration,
       :customization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWebExperienceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aliases attached to a user id within an Amazon Q Business application.</p>
@@ -6286,7 +5917,7 @@ module Aws::QBusiness
       :data_source_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about users and group names associated with a topic control rule.</p>
@@ -6300,7 +5931,7 @@ module Aws::QBusiness
       :user_ids,
       :user_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input doesn't meet the constraints set by the Amazon Q Business service. Provide the correct input and try again.</p>
@@ -6318,7 +5949,7 @@ module Aws::QBusiness
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by Amazon Q Business in a specified field.</p>
@@ -6332,13 +5963,7 @@ module Aws::QBusiness
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for video content extraction and processing.</p>
@@ -6348,17 +5973,7 @@ module Aws::QBusiness
     class VideoExtractionConfiguration < Struct.new(
       :video_extraction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoExtractionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module VideoExtractionType
-      TRANSCRIPT = 'TRANSCRIPT'
-      SUMMARY = 'SUMMARY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a video source, including its identifier, format, and time information.</p>
@@ -6384,7 +5999,7 @@ module Aws::QBusiness
       :end_time_milliseconds,
       :video_extraction_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for an Amazon Q Business web experience.</p>
@@ -6410,7 +6025,7 @@ module Aws::QBusiness
       :default_endpoint,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the authorization configuration information needed to deploy a Amazon Q Business web experience to end users.</p>
@@ -6421,23 +6036,10 @@ module Aws::QBusiness
       :saml_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SamlConfiguration < WebExperienceAuthConfiguration; end
       class Unknown < WebExperienceAuthConfiguration; end
-    end
-
-    module WebExperienceSamplePromptsControlMode
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module WebExperienceStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      PENDING_AUTH_CONFIG = 'PENDING_AUTH_CONFIG'
     end
 
   end

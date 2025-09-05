@@ -12,7 +12,7 @@ module Aws::EntityResolution
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -41,7 +41,7 @@ module Aws::EntityResolution
       :principal,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -58,12 +58,7 @@ module Aws::EntityResolution
       :token,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeMatchingModel
-      ONE_TO_ONE = 'ONE_TO_ONE'
-      MANY_TO_MANY = 'MANY_TO_MANY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -80,7 +75,7 @@ module Aws::EntityResolution
       :input_source,
       :unique_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -101,7 +96,7 @@ module Aws::EntityResolution
       :deleted,
       :disconnected_unique_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the resource. Example: Workflow already exists, Schema already exists, Workflow is currently running, etc. </p>
@@ -110,7 +105,7 @@ module Aws::EntityResolution
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -143,7 +138,7 @@ module Aws::EntityResolution
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -176,7 +171,7 @@ module Aws::EntityResolution
       :id_mapping_techniques,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:role_arn] = '' unless options.key?(:role_arn)
@@ -214,7 +209,7 @@ module Aws::EntityResolution
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_name
@@ -259,7 +254,7 @@ module Aws::EntityResolution
       :updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -296,7 +291,7 @@ module Aws::EntityResolution
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -333,7 +328,7 @@ module Aws::EntityResolution
       :incremental_run_config,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -354,7 +349,7 @@ module Aws::EntityResolution
       :mapped_input_fields,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -375,7 +370,7 @@ module Aws::EntityResolution
       :description,
       :mapped_input_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -384,7 +379,7 @@ module Aws::EntityResolution
     class DeleteIdMappingWorkflowInput < Struct.new(
       :workflow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -393,7 +388,7 @@ module Aws::EntityResolution
     class DeleteIdMappingWorkflowOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_name
@@ -402,7 +397,7 @@ module Aws::EntityResolution
     class DeleteIdNamespaceInput < Struct.new(
       :id_namespace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -411,7 +406,7 @@ module Aws::EntityResolution
     class DeleteIdNamespaceOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -420,7 +415,7 @@ module Aws::EntityResolution
     class DeleteMatchingWorkflowInput < Struct.new(
       :workflow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -429,7 +424,7 @@ module Aws::EntityResolution
     class DeleteMatchingWorkflowOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -442,7 +437,7 @@ module Aws::EntityResolution
       :arn,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -459,7 +454,7 @@ module Aws::EntityResolution
       :token,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -468,7 +463,7 @@ module Aws::EntityResolution
     class DeleteSchemaMappingInput < Struct.new(
       :schema_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -477,7 +472,7 @@ module Aws::EntityResolution
     class DeleteSchemaMappingOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Delete Unique Id error.</p>
@@ -491,17 +486,7 @@ module Aws::EntityResolution
       :unique_id,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteUniqueIdErrorType
-      SERVICE_ERROR = 'SERVICE_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-    end
-
-    module DeleteUniqueIdStatus
-      COMPLETED = 'COMPLETED'
-      ACCEPTED = 'ACCEPTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deleted unique ID.</p>
@@ -511,7 +496,7 @@ module Aws::EntityResolution
     class DeletedUniqueId < Struct.new(
       :unique_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing an error message, if there was an error.</p>
@@ -521,7 +506,7 @@ module Aws::EntityResolution
     class ErrorDetails < Struct.new(
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create resources beyond the current Entity Resolution account limits. The error message describes the limit exceeded. </p>
@@ -538,7 +523,7 @@ module Aws::EntityResolution
       :quota_name,
       :quota_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The record that didn't generate a Match ID.</p>
@@ -556,7 +541,7 @@ module Aws::EntityResolution
       :unique_id,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -573,7 +558,7 @@ module Aws::EntityResolution
       :records,
       :processing_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match_groups
@@ -586,7 +571,7 @@ module Aws::EntityResolution
       :match_groups,
       :failed_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -599,7 +584,7 @@ module Aws::EntityResolution
       :workflow_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -632,7 +617,7 @@ module Aws::EntityResolution
       :error_details,
       :output_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -641,7 +626,7 @@ module Aws::EntityResolution
     class GetIdMappingWorkflowInput < Struct.new(
       :workflow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -686,7 +671,7 @@ module Aws::EntityResolution
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:role_arn] = '' unless options.key?(:role_arn)
@@ -700,7 +685,7 @@ module Aws::EntityResolution
     class GetIdNamespaceInput < Struct.new(
       :id_namespace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_name
@@ -745,7 +730,7 @@ module Aws::EntityResolution
       :updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -762,7 +747,7 @@ module Aws::EntityResolution
       :record,
       :apply_normalization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match_id
@@ -775,7 +760,7 @@ module Aws::EntityResolution
       :match_id,
       :match_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -788,7 +773,7 @@ module Aws::EntityResolution
       :workflow_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -821,7 +806,7 @@ module Aws::EntityResolution
       :error_details,
       :output_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -830,7 +815,7 @@ module Aws::EntityResolution
     class GetMatchingWorkflowInput < Struct.new(
       :workflow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -879,7 +864,7 @@ module Aws::EntityResolution
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -888,7 +873,7 @@ module Aws::EntityResolution
     class GetPolicyInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -905,7 +890,7 @@ module Aws::EntityResolution
       :token,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_name
@@ -918,7 +903,7 @@ module Aws::EntityResolution
       :provider_name,
       :provider_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_name
@@ -975,7 +960,7 @@ module Aws::EntityResolution
       :provider_intermediate_data_access_configuration,
       :provider_component_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -984,7 +969,7 @@ module Aws::EntityResolution
     class GetSchemaMappingInput < Struct.new(
       :schema_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -1021,7 +1006,7 @@ module Aws::EntityResolution
       :tags,
       :has_workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains metrics about an ID mapping job, including counts of input records, processed records, and mapped records between source and target identifiers. </p>
@@ -1055,7 +1040,7 @@ module Aws::EntityResolution
       :total_mapped_target_records,
       :unique_records_loaded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>KMSArn</code>, <code>outputS3Path</code>, and <code>roleARN</code>.</p>
@@ -1073,7 +1058,7 @@ module Aws::EntityResolution
       :output_s3_path,
       :kms_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An object that defines the list of matching rules to run in an ID mapping workflow.</p>
@@ -1095,7 +1080,7 @@ module Aws::EntityResolution
       :attribute_matching_model,
       :record_matching_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object which defines the ID mapping technique and any additional configurations.</p>
@@ -1113,12 +1098,7 @@ module Aws::EntityResolution
       :rule_based_properties,
       :provider_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdMappingType
-      PROVIDER = 'PROVIDER'
-      RULE_BASED = 'RULE_BASED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>inputSourceARN</code>, <code>schemaName</code>, and <code>type</code>.</p>
@@ -1136,7 +1116,7 @@ module Aws::EntityResolution
       :schema_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output source for the ID mapping workflow.</p>
@@ -1150,12 +1130,7 @@ module Aws::EntityResolution
       :output_s3_path,
       :kms_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdMappingWorkflowRuleDefinitionType
-      SOURCE = 'SOURCE'
-      TARGET = 'TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>IdMappingWorkflowSummary</code> objects, each of which contain the fields <code>WorkflowName</code>, <code>WorkflowArn</code>, <code>CreatedAt</code>, and <code>UpdatedAt</code>.</p>
@@ -1177,7 +1152,7 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for the ID namespace for the ID mapping workflow job.</p>
@@ -1187,7 +1162,7 @@ module Aws::EntityResolution
     class IdNamespaceIdMappingWorkflowMetadata < Struct.new(
       :id_mapping_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>idMappingType</code>, <code>providerProperties</code>, and <code>ruleBasedProperties</code>.</p>
@@ -1205,7 +1180,7 @@ module Aws::EntityResolution
       :rule_based_properties,
       :provider_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>inputSourceARN</code> and <code>schemaName</code>.</p>
@@ -1219,7 +1194,7 @@ module Aws::EntityResolution
       :input_source_arn,
       :schema_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of ID namespaces.</p>
@@ -1253,12 +1228,7 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdNamespaceType
-      SOURCE = 'SOURCE'
-      TARGET = 'TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional. An object that defines the incremental run type. This object contains only the <code>incrementalRunType</code> field, which appears as "Automatic" in the console. </p> <important> <p>For workflows where <code>resolutionType</code> is <code>ML_MATCHING</code>, incremental processing is not supported. </p> </important>
@@ -1268,11 +1238,7 @@ module Aws::EntityResolution
     class IncrementalRunConfig < Struct.new(
       :incremental_run_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IncrementalRunType
-      IMMEDIATE = 'IMMEDIATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>inputSourceARN</code>, <code>schemaName</code>, and <code>applyNormalization</code>.</p>
@@ -1290,7 +1256,7 @@ module Aws::EntityResolution
       :schema_name,
       :apply_normalization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location that temporarily stores your data while it processes. Your information won't be saved permanently.</p>
@@ -1300,7 +1266,7 @@ module Aws::EntityResolution
     class IntermediateSourceConfiguration < Struct.new(
       :intermediate_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when there is an internal failure in the Entity Resolution service. </p>
@@ -1309,7 +1275,7 @@ module Aws::EntityResolution
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>inputRecords</code>, <code>totalRecordsProcessed</code>, <code>matchIDs</code>, and <code>recordsNotProcessed</code>.</p>
@@ -1331,7 +1297,7 @@ module Aws::EntityResolution
       :records_not_processed,
       :match_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>KMSArn</code>, <code>outputS3Path</code>, and <code>roleArn</code>.</p>
@@ -1349,14 +1315,7 @@ module Aws::EntityResolution
       :output_s3_path,
       :kms_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      QUEUED = 'QUEUED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the <code>jobId</code>, <code>status</code>, <code>startTime</code>, and <code>endTime</code> of a job.</p>
@@ -1378,7 +1337,7 @@ module Aws::EntityResolution
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -1395,7 +1354,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -1408,7 +1367,7 @@ module Aws::EntityResolution
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1421,7 +1380,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_summaries
@@ -1434,7 +1393,7 @@ module Aws::EntityResolution
       :workflow_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1447,7 +1406,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_summaries
@@ -1460,7 +1419,7 @@ module Aws::EntityResolution
       :id_namespace_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -1477,7 +1436,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -1490,7 +1449,7 @@ module Aws::EntityResolution
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1503,7 +1462,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_summaries
@@ -1516,7 +1475,7 @@ module Aws::EntityResolution
       :workflow_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1533,7 +1492,7 @@ module Aws::EntityResolution
       :max_results,
       :provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_service_summaries
@@ -1546,7 +1505,7 @@ module Aws::EntityResolution
       :provider_service_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1559,7 +1518,7 @@ module Aws::EntityResolution
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_list
@@ -1572,7 +1531,7 @@ module Aws::EntityResolution
       :schema_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1581,7 +1540,7 @@ module Aws::EntityResolution
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1590,7 +1549,7 @@ module Aws::EntityResolution
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The match group.</p>
@@ -1608,12 +1567,7 @@ module Aws::EntityResolution
       :match_id,
       :match_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchPurpose
-      IDENTIFIER_GENERATION = 'IDENTIFIER_GENERATION'
-      INDEXING = 'INDEXING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The matched record.</p>
@@ -1627,7 +1581,7 @@ module Aws::EntityResolution
       :input_source_arn,
       :record_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>workflowName</code>, <code>workflowArn</code>, <code>resolutionType</code>, <code>createdAt</code>, <code>updatedAt</code>.</p>
@@ -1653,7 +1607,7 @@ module Aws::EntityResolution
       :updated_at,
       :resolution_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>providerConfiguration</code> and <code>providerServiceArn</code>.</p>
@@ -1667,7 +1621,7 @@ module Aws::EntityResolution
       :provider_service_arn,
       :provider_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The rule-based properties of an ID namespace. These properties define how the ID namespace can be used in an ID mapping workflow.</p>
@@ -1689,7 +1643,7 @@ module Aws::EntityResolution
       :attribute_matching_model,
       :record_matching_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>OutputAttribute</code> objects, each of which have the fields <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.</p>
@@ -1703,7 +1657,7 @@ module Aws::EntityResolution
       :name,
       :hashed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>OutputAttribute</code> objects, each of which have the fields <code>Name</code> and <code>Hashed</code>. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.</p>
@@ -1725,13 +1679,7 @@ module Aws::EntityResolution
       :output,
       :apply_normalization,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingType
-      CONSISTENT = 'CONSISTENT'
-      EVENTUAL = 'EVENTUAL'
-      EVENTUAL_NO_LOOKUP = 'EVENTUAL_NO_LOOKUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input schema supported by provider service.</p>
@@ -1745,7 +1693,7 @@ module Aws::EntityResolution
       :schemas,
       :provider_schema_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The required configuration fields to use with the provider service.</p>
@@ -1756,7 +1704,7 @@ module Aws::EntityResolution
       :marketplace_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MarketplaceConfiguration < ProviderEndpointConfiguration; end
       class Unknown < ProviderEndpointConfiguration; end
@@ -1777,7 +1725,7 @@ module Aws::EntityResolution
       :provider_target_configuration_definition,
       :provider_source_configuration_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The required configuration fields to give intermediate access to a provider service.</p>
@@ -1791,7 +1739,7 @@ module Aws::EntityResolution
       :aws_account_ids,
       :required_bucket_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifiers of the provider service, from Data Exchange.</p>
@@ -1813,7 +1761,7 @@ module Aws::EntityResolution
       :asset_id,
       :listing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the <code>providerServiceARN</code>, <code>intermediateSourceConfiguration</code>, and <code>providerConfiguration</code>.</p>
@@ -1831,7 +1779,7 @@ module Aws::EntityResolution
       :provider_configuration,
       :intermediate_source_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provider schema attribute.</p>
@@ -1853,7 +1801,7 @@ module Aws::EntityResolution
       :sub_type,
       :hashing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>ProviderService</code> objects, each of which contain the fields <code>providerName</code>, <code>providerServiceArn</code>, <code>providerServiceName</code>, and <code>providerServiceType</code>.</p>
@@ -1879,7 +1827,7 @@ module Aws::EntityResolution
       :provider_service_name,
       :provider_service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1896,7 +1844,7 @@ module Aws::EntityResolution
       :token,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1913,7 +1861,7 @@ module Aws::EntityResolution
       :token,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The record.</p>
@@ -1931,12 +1879,7 @@ module Aws::EntityResolution
       :unique_id,
       :record_attribute_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordMatchingModel
-      ONE_SOURCE_TO_ONE_TARGET = 'ONE_SOURCE_TO_ONE_TARGET'
-      MANY_SOURCE_TO_ONE_TARGET = 'MANY_SOURCE_TO_ONE_TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code>.</p>
@@ -1958,13 +1901,7 @@ module Aws::EntityResolution
       :rule_condition_properties,
       :provider_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolutionType
-      RULE_MATCHING = 'RULE_MATCHING'
-      ML_MATCHING = 'ML_MATCHING'
-      PROVIDER = 'PROVIDER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found. </p>
@@ -1973,7 +1910,7 @@ module Aws::EntityResolution
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the <code>ruleName</code> and <code>matchingKeys</code>.</p>
@@ -1987,7 +1924,7 @@ module Aws::EntityResolution
       :rule_name,
       :matching_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object which defines the list of matching rules to run in a matching workflow. </p>
@@ -2005,7 +1942,7 @@ module Aws::EntityResolution
       :attribute_matching_model,
       :match_purpose,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the <code>ruleCondition</code> and the <code>ruleName</code> to use in a matching workflow.</p>
@@ -2019,7 +1956,7 @@ module Aws::EntityResolution
       :rule_name,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a rule condition that provides the ability to use more complex syntax.</p>
@@ -2029,33 +1966,7 @@ module Aws::EntityResolution
     class RuleConditionProperties < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaAttributeType
-      NAME = 'NAME'
-      NAME_FIRST = 'NAME_FIRST'
-      NAME_MIDDLE = 'NAME_MIDDLE'
-      NAME_LAST = 'NAME_LAST'
-      ADDRESS = 'ADDRESS'
-      ADDRESS_STREET1 = 'ADDRESS_STREET1'
-      ADDRESS_STREET2 = 'ADDRESS_STREET2'
-      ADDRESS_STREET3 = 'ADDRESS_STREET3'
-      ADDRESS_CITY = 'ADDRESS_CITY'
-      ADDRESS_STATE = 'ADDRESS_STATE'
-      ADDRESS_COUNTRY = 'ADDRESS_COUNTRY'
-      ADDRESS_POSTALCODE = 'ADDRESS_POSTALCODE'
-      PHONE = 'PHONE'
-      PHONE_NUMBER = 'PHONE_NUMBER'
-      PHONE_COUNTRYCODE = 'PHONE_COUNTRYCODE'
-      EMAIL_ADDRESS = 'EMAIL_ADDRESS'
-      UNIQUE_ID = 'UNIQUE_ID'
-      DATE = 'DATE'
-      STRING = 'STRING'
-      PROVIDER_ID = 'PROVIDER_ID'
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
-      MAID = 'MAID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration object for defining input data fields in Entity Resolution. The <code>SchemaInputAttribute</code> specifies how individual fields in your input data should be processed and matched.</p>
@@ -2085,7 +1996,7 @@ module Aws::EntityResolution
       :sub_type,
       :hashed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing <code>schemaName</code>, <code>schemaArn</code>, <code>createdAt</code>, <code>updatedAt</code>, and <code>hasWorkflows</code>.</p>
@@ -2111,12 +2022,7 @@ module Aws::EntityResolution
       :updated_at,
       :has_workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceType
-      ASSIGNMENT = 'ASSIGNMENT'
-      ID_MAPPING = 'ID_MAPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2129,7 +2035,7 @@ module Aws::EntityResolution
       :workflow_name,
       :output_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2142,7 +2048,7 @@ module Aws::EntityResolution
       :job_id,
       :output_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2151,7 +2057,7 @@ module Aws::EntityResolution
     class StartMatchingJobInput < Struct.new(
       :workflow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2160,12 +2066,7 @@ module Aws::EntityResolution
     class StartMatchingJobOutput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatementEffect
-      Allow = 'Allow'
-      Deny = 'Deny'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2178,12 +2079,12 @@ module Aws::EntityResolution
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. </p>
@@ -2192,7 +2093,7 @@ module Aws::EntityResolution
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2205,12 +2106,12 @@ module Aws::EntityResolution
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2239,7 +2140,7 @@ module Aws::EntityResolution
       :id_mapping_techniques,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2272,7 +2173,7 @@ module Aws::EntityResolution
       :id_mapping_techniques,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:role_arn] = '' unless options.key?(:role_arn)
@@ -2302,7 +2203,7 @@ module Aws::EntityResolution
       :id_mapping_workflow_properties,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_name
@@ -2343,7 +2244,7 @@ module Aws::EntityResolution
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2376,7 +2277,7 @@ module Aws::EntityResolution
       :incremental_run_config,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_name
@@ -2409,7 +2310,7 @@ module Aws::EntityResolution
       :incremental_run_config,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -2426,7 +2327,7 @@ module Aws::EntityResolution
       :description,
       :mapped_input_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_name
@@ -2447,7 +2348,7 @@ module Aws::EntityResolution
       :description,
       :mapped_input_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by Entity Resolution. </p>
@@ -2456,7 +2357,7 @@ module Aws::EntityResolution
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

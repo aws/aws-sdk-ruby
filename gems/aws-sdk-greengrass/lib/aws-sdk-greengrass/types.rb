@@ -16,7 +16,7 @@ module Aws::Greengrass
       :group_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -25,7 +25,7 @@ module Aws::Greengrass
     class AssociateRoleToGroupResponse < Struct.new(
       :associated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -34,7 +34,7 @@ module Aws::Greengrass
     class AssociateServiceRoleToAccountRequest < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -43,7 +43,7 @@ module Aws::Greengrass
     class AssociateServiceRoleToAccountResponse < Struct.new(
       :associated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # General error information.
@@ -57,7 +57,7 @@ module Aws::Greengrass
       :error_details,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
@@ -75,7 +75,7 @@ module Aws::Greengrass
       :bulk_deployment_id,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Relevant metrics on input records processed during bulk deployment.
@@ -93,7 +93,7 @@ module Aws::Greengrass
       :records_processed,
       :retry_attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about an individual group deployment in a bulk deployment operation.
@@ -131,22 +131,7 @@ module Aws::Greengrass
       :error_message,
       :group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The current status of the bulk deployment.
-    module BulkDeploymentStatus
-      Initializing = 'Initializing'
-      Running = 'Running'
-      Completed = 'Completed'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
-      Failed = 'Failed'
-    end
-
-    module ConfigurationSyncStatus
-      InSync = 'InSync'
-      OutOfSync = 'OutOfSync'
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a Greengrass core's connectivity.
@@ -168,7 +153,7 @@ module Aws::Greengrass
       :metadata,
       :port_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
@@ -186,7 +171,7 @@ module Aws::Greengrass
       :id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about the connector definition version, which is a container for connectors.
@@ -196,7 +181,7 @@ module Aws::Greengrass
     class ConnectorDefinitionVersion < Struct.new(
       :connectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a core.
@@ -218,7 +203,7 @@ module Aws::Greengrass
       :sync_shadow,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a core definition version.
@@ -228,7 +213,7 @@ module Aws::Greengrass
     class CoreDefinitionVersion < Struct.new(
       :cores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -249,7 +234,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -282,7 +267,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -299,7 +284,7 @@ module Aws::Greengrass
       :connector_definition_id,
       :connectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -320,7 +305,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information needed to create a core definition.
@@ -342,7 +327,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -375,7 +360,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -392,7 +377,7 @@ module Aws::Greengrass
       :core_definition_id,
       :cores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -413,7 +398,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -438,7 +423,7 @@ module Aws::Greengrass
       :group_id,
       :group_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_arn
@@ -451,7 +436,7 @@ module Aws::Greengrass
       :deployment_arn,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -472,7 +457,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -505,7 +490,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -522,7 +507,7 @@ module Aws::Greengrass
       :device_definition_id,
       :devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -543,7 +528,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -564,7 +549,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -597,7 +582,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information needed to create a function definition version.
@@ -619,7 +604,7 @@ module Aws::Greengrass
       :function_definition_id,
       :functions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -640,7 +625,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -653,7 +638,7 @@ module Aws::Greengrass
       :amzn_client_token,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_certificate_authority_arn
@@ -662,7 +647,7 @@ module Aws::Greengrass
     class CreateGroupCertificateAuthorityResponse < Struct.new(
       :group_certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -683,7 +668,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -716,7 +701,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -757,7 +742,7 @@ module Aws::Greengrass
       :resource_definition_version_arn,
       :subscription_definition_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -778,7 +763,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -799,7 +784,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -832,7 +817,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -849,7 +834,7 @@ module Aws::Greengrass
       :logger_definition_id,
       :loggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -870,7 +855,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -891,7 +876,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -924,7 +909,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -941,7 +926,7 @@ module Aws::Greengrass
       :resource_definition_id,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -962,7 +947,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -995,7 +980,7 @@ module Aws::Greengrass
       :update_targets_architecture,
       :update_targets_operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iot_job_arn
@@ -1012,7 +997,7 @@ module Aws::Greengrass
       :iot_job_id,
       :platform_software_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -1033,7 +1018,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1066,7 +1051,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -1083,7 +1068,7 @@ module Aws::Greengrass
       :subscription_definition_id,
       :subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1104,7 +1089,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a definition.
@@ -1142,7 +1127,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_definition_id
@@ -1151,12 +1136,12 @@ module Aws::Greengrass
     class DeleteConnectorDefinitionRequest < Struct.new(
       :connector_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectorDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_definition_id
@@ -1165,12 +1150,12 @@ module Aws::Greengrass
     class DeleteCoreDefinitionRequest < Struct.new(
       :core_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCoreDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_definition_id
@@ -1179,12 +1164,12 @@ module Aws::Greengrass
     class DeleteDeviceDefinitionRequest < Struct.new(
       :device_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDeviceDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_definition_id
@@ -1193,12 +1178,12 @@ module Aws::Greengrass
     class DeleteFunctionDefinitionRequest < Struct.new(
       :function_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFunctionDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -1207,12 +1192,12 @@ module Aws::Greengrass
     class DeleteGroupRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logger_definition_id
@@ -1221,12 +1206,12 @@ module Aws::Greengrass
     class DeleteLoggerDefinitionRequest < Struct.new(
       :logger_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLoggerDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_definition_id
@@ -1235,12 +1220,12 @@ module Aws::Greengrass
     class DeleteResourceDefinitionRequest < Struct.new(
       :resource_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_definition_id
@@ -1249,12 +1234,12 @@ module Aws::Greengrass
     class DeleteSubscriptionDefinitionRequest < Struct.new(
       :subscription_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSubscriptionDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a deployment.
@@ -1280,15 +1265,7 @@ module Aws::Greengrass
       :deployment_type,
       :group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
-    module DeploymentType
-      NewDeployment = 'NewDeployment'
-      Redeployment = 'Redeployment'
-      ResetDeployment = 'ResetDeployment'
-      ForceResetDeployment = 'ForceResetDeployment'
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a device.
@@ -1310,7 +1287,7 @@ module Aws::Greengrass
       :sync_shadow,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a device definition version.
@@ -1320,7 +1297,7 @@ module Aws::Greengrass
     class DeviceDefinitionVersion < Struct.new(
       :devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -1329,7 +1306,7 @@ module Aws::Greengrass
     class DisassociateRoleFromGroupRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociated_at
@@ -1338,12 +1315,12 @@ module Aws::Greengrass
     class DisassociateRoleFromGroupResponse < Struct.new(
       :disassociated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceRoleFromAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociated_at
@@ -1352,12 +1329,7 @@ module Aws::Greengrass
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
       :disassociated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncodingType
-      binary = 'binary'
-      json = 'json'
+      include ::Smithy::Schema::Structure
     end
 
     # Details about the error.
@@ -1371,7 +1343,7 @@ module Aws::Greengrass
       :detailed_error_code,
       :detailed_error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a Lambda function.
@@ -1389,7 +1361,7 @@ module Aws::Greengrass
       :function_configuration,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The configuration of the Lambda function.
@@ -1427,7 +1399,7 @@ module Aws::Greengrass
       :timeout,
       :function_runtime_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The environment configuration of the function.
@@ -1449,7 +1421,7 @@ module Aws::Greengrass
       :resource_access_policies,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
@@ -1459,7 +1431,7 @@ module Aws::Greengrass
     class FunctionDefaultConfig < Struct.new(
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configuration information that specifies how a Lambda function runs.
@@ -1473,7 +1445,7 @@ module Aws::Greengrass
       :isolation_mode,
       :run_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a function definition version.
@@ -1487,7 +1459,7 @@ module Aws::Greengrass
       :default_config,
       :functions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configuration information that specifies how a Lambda function runs.
@@ -1501,13 +1473,7 @@ module Aws::Greengrass
       :isolation_mode,
       :run_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Specifies whether the Lambda function runs in a Greengrass container (default) or without containerization. Unless your scenario requires that you run without containerization, we recommend that you run in a Greengrass container. Omit this value to run the Lambda function with the default containerization for the group.
-    module FunctionIsolationMode
-      GreengrassContainer = 'GreengrassContainer'
-      NoContainer = 'NoContainer'
+      include ::Smithy::Schema::Structure
     end
 
     # Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
@@ -1521,7 +1487,7 @@ module Aws::Greengrass
       :gid,
       :uid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -1530,7 +1496,7 @@ module Aws::Greengrass
     class GetAssociatedRoleRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -1543,7 +1509,7 @@ module Aws::Greengrass
       :associated_at,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployment_id
@@ -1552,7 +1518,7 @@ module Aws::Greengrass
     class GetBulkDeploymentStatusRequest < Struct.new(
       :bulk_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployment_metrics
@@ -1581,7 +1547,7 @@ module Aws::Greengrass
       :error_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -1590,7 +1556,7 @@ module Aws::Greengrass
     class GetConnectivityInfoRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectivity_info
@@ -1603,7 +1569,7 @@ module Aws::Greengrass
       :connectivity_info,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_definition_id
@@ -1612,7 +1578,7 @@ module Aws::Greengrass
     class GetConnectorDefinitionRequest < Struct.new(
       :connector_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1649,7 +1615,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_definition_id
@@ -1666,7 +1632,7 @@ module Aws::Greengrass
       :connector_definition_version_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1695,7 +1661,7 @@ module Aws::Greengrass
       :next_token,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_definition_id
@@ -1704,7 +1670,7 @@ module Aws::Greengrass
     class GetCoreDefinitionRequest < Struct.new(
       :core_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1741,7 +1707,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_definition_id
@@ -1754,7 +1720,7 @@ module Aws::Greengrass
       :core_definition_id,
       :core_definition_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1783,7 +1749,7 @@ module Aws::Greengrass
       :next_token,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -1796,7 +1762,7 @@ module Aws::Greengrass
       :deployment_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_status
@@ -1821,7 +1787,7 @@ module Aws::Greengrass
       :error_message,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_definition_id
@@ -1830,7 +1796,7 @@ module Aws::Greengrass
     class GetDeviceDefinitionRequest < Struct.new(
       :device_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1867,7 +1833,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_definition_id
@@ -1884,7 +1850,7 @@ module Aws::Greengrass
       :device_definition_version_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1913,7 +1879,7 @@ module Aws::Greengrass
       :next_token,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_definition_id
@@ -1922,7 +1888,7 @@ module Aws::Greengrass
     class GetFunctionDefinitionRequest < Struct.new(
       :function_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1959,7 +1925,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_definition_id
@@ -1976,7 +1942,7 @@ module Aws::Greengrass
       :function_definition_version_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2005,7 +1971,7 @@ module Aws::Greengrass
       :next_token,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_id
@@ -2018,7 +1984,7 @@ module Aws::Greengrass
       :certificate_authority_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_certificate_authority_arn
@@ -2035,7 +2001,7 @@ module Aws::Greengrass
       :group_certificate_authority_id,
       :pem_encoded_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2044,7 +2010,7 @@ module Aws::Greengrass
     class GetGroupCertificateConfigurationRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_expiry_in_milliseconds
@@ -2061,7 +2027,7 @@ module Aws::Greengrass
       :certificate_expiry_in_milliseconds,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2070,7 +2036,7 @@ module Aws::Greengrass
     class GetGroupRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2107,7 +2073,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2120,7 +2086,7 @@ module Aws::Greengrass
       :group_id,
       :group_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2145,7 +2111,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logger_definition_id
@@ -2154,7 +2120,7 @@ module Aws::Greengrass
     class GetLoggerDefinitionRequest < Struct.new(
       :logger_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2191,7 +2157,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logger_definition_id
@@ -2208,7 +2174,7 @@ module Aws::Greengrass
       :logger_definition_version_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2233,7 +2199,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_definition_id
@@ -2242,7 +2208,7 @@ module Aws::Greengrass
     class GetResourceDefinitionRequest < Struct.new(
       :resource_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2279,7 +2245,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_definition_id
@@ -2292,7 +2258,7 @@ module Aws::Greengrass
       :resource_definition_id,
       :resource_definition_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2317,12 +2283,12 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetServiceRoleForAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -2335,7 +2301,7 @@ module Aws::Greengrass
       :associated_at,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_definition_id
@@ -2344,7 +2310,7 @@ module Aws::Greengrass
     class GetSubscriptionDefinitionRequest < Struct.new(
       :subscription_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2381,7 +2347,7 @@ module Aws::Greengrass
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2398,7 +2364,7 @@ module Aws::Greengrass
       :subscription_definition_id,
       :subscription_definition_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2427,7 +2393,7 @@ module Aws::Greengrass
       :next_token,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -2436,7 +2402,7 @@ module Aws::Greengrass
     class GetThingRuntimeConfigurationRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime_configuration
@@ -2445,7 +2411,7 @@ module Aws::Greengrass
     class GetThingRuntimeConfigurationResponse < Struct.new(
       :runtime_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a certificate authority for a group.
@@ -2459,7 +2425,7 @@ module Aws::Greengrass
       :group_certificate_authority_arn,
       :group_certificate_authority_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a group.
@@ -2493,7 +2459,7 @@ module Aws::Greengrass
       :latest_version_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Group owner related settings for local resources.
@@ -2507,7 +2473,7 @@ module Aws::Greengrass
       :auto_add_group_owner,
       :group_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a group version.
@@ -2541,7 +2507,7 @@ module Aws::Greengrass
       :resource_definition_version_arn,
       :subscription_definition_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # General error information.
@@ -2555,7 +2521,7 @@ module Aws::Greengrass
       :error_details,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployment_id
@@ -2572,7 +2538,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -2585,7 +2551,7 @@ module Aws::Greengrass
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2598,7 +2564,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployments
@@ -2611,7 +2577,7 @@ module Aws::Greengrass
       :bulk_deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_definition_id
@@ -2628,7 +2594,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2641,7 +2607,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2654,7 +2620,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -2667,7 +2633,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_definition_id
@@ -2684,7 +2650,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2697,7 +2663,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2710,7 +2676,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -2723,7 +2689,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2740,7 +2706,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -2753,7 +2719,7 @@ module Aws::Greengrass
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_definition_id
@@ -2770,7 +2736,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2783,7 +2749,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2796,7 +2762,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -2809,7 +2775,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_definition_id
@@ -2826,7 +2792,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2839,7 +2805,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2852,7 +2818,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -2865,7 +2831,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2874,7 +2840,7 @@ module Aws::Greengrass
     class ListGroupCertificateAuthoritiesRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_certificate_authorities
@@ -2883,7 +2849,7 @@ module Aws::Greengrass
     class ListGroupCertificateAuthoritiesResponse < Struct.new(
       :group_certificate_authorities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2900,7 +2866,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2913,7 +2879,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2926,7 +2892,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -2939,7 +2905,7 @@ module Aws::Greengrass
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logger_definition_id
@@ -2956,7 +2922,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2969,7 +2935,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2982,7 +2948,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -2995,7 +2961,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3012,7 +2978,7 @@ module Aws::Greengrass
       :next_token,
       :resource_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3025,7 +2991,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3038,7 +3004,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -3051,7 +3017,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3068,7 +3034,7 @@ module Aws::Greengrass
       :next_token,
       :subscription_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3081,7 +3047,7 @@ module Aws::Greengrass
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3094,7 +3060,7 @@ module Aws::Greengrass
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definitions
@@ -3107,7 +3073,7 @@ module Aws::Greengrass
       :definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3116,7 +3082,7 @@ module Aws::Greengrass
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3125,7 +3091,7 @@ module Aws::Greengrass
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Attributes that define a local device resource.
@@ -3139,7 +3105,7 @@ module Aws::Greengrass
       :group_owner_setting,
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Attributes that define a local volume resource.
@@ -3157,7 +3123,7 @@ module Aws::Greengrass
       :group_owner_setting,
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a logger
@@ -3183,12 +3149,7 @@ module Aws::Greengrass
       :space,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoggerComponent
-      GreengrassSystem = 'GreengrassSystem'
-      Lambda = 'Lambda'
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a logger definition version.
@@ -3198,26 +3159,7 @@ module Aws::Greengrass
     class LoggerDefinitionVersion < Struct.new(
       :loggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoggerLevel
-      DEBUG = 'DEBUG'
-      INFO = 'INFO'
-      WARN = 'WARN'
-      ERROR = 'ERROR'
-      FATAL = 'FATAL'
-    end
-
-    module LoggerType
-      FileSystem = 'FileSystem'
-      AWSCloudWatch = 'AWSCloudWatch'
-    end
-
-    # The type of permission a function has to access a resource.
-    module Permission
-      ro = 'ro'
-      rw = 'rw'
+      include ::Smithy::Schema::Structure
     end
 
     # Information needed to reset deployments.
@@ -3235,7 +3177,7 @@ module Aws::Greengrass
       :force,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_arn
@@ -3248,7 +3190,7 @@ module Aws::Greengrass
       :deployment_arn,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a resource.
@@ -3266,7 +3208,7 @@ module Aws::Greengrass
       :name,
       :resource_data_container,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A policy used by the function to access a resource.
@@ -3280,7 +3222,7 @@ module Aws::Greengrass
       :permission,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A container for resource data. The container takes only one of the following supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'', ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData'', ''SecretsManagerSecretResourceData''.
@@ -3306,7 +3248,7 @@ module Aws::Greengrass
       :sage_maker_machine_learning_model_resource_data,
       :secrets_manager_secret_resource_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a resource definition version.
@@ -3316,7 +3258,7 @@ module Aws::Greengrass
     class ResourceDefinitionVersion < Struct.new(
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The owner setting for downloaded machine learning resources.
@@ -3330,7 +3272,7 @@ module Aws::Greengrass
       :group_owner,
       :group_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Runtime configuration for a thing.
@@ -3340,7 +3282,7 @@ module Aws::Greengrass
     class RuntimeConfiguration < Struct.new(
       :telemetry_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Attributes that define an Amazon S3 machine learning resource.
@@ -3358,7 +3300,7 @@ module Aws::Greengrass
       :owner_setting,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Attributes that define an Amazon SageMaker machine learning resource.
@@ -3376,7 +3318,7 @@ module Aws::Greengrass
       :owner_setting,
       :sage_maker_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.
@@ -3390,13 +3332,7 @@ module Aws::Greengrass
       :arn,
       :additional_staging_labels_to_download,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The piece of software on the Greengrass core that will be updated.
-    module SoftwareToUpdate
-      core = 'core'
-      ota_agent = 'ota_agent'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amzn_client_token
@@ -3417,7 +3353,7 @@ module Aws::Greengrass
       :input_file_uri,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployment_arn
@@ -3430,7 +3366,7 @@ module Aws::Greengrass
       :bulk_deployment_arn,
       :bulk_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bulk_deployment_id
@@ -3439,12 +3375,12 @@ module Aws::Greengrass
     class StopBulkDeploymentRequest < Struct.new(
       :bulk_deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopBulkDeploymentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a subscription.
@@ -3466,7 +3402,7 @@ module Aws::Greengrass
       :subject,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a subscription definition version.
@@ -3476,7 +3412,7 @@ module Aws::Greengrass
     class SubscriptionDefinitionVersion < Struct.new(
       :subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A map of the key-value pairs for the resource tag.
@@ -3490,12 +3426,7 @@ module Aws::Greengrass
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Telemetry
-      On = 'On'
-      Off = 'Off'
+      include ::Smithy::Schema::Structure
     end
 
     # Configuration settings for running telemetry.
@@ -3509,7 +3440,7 @@ module Aws::Greengrass
       :configuration_sync_status,
       :telemetry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configuration settings for running telemetry.
@@ -3519,7 +3450,7 @@ module Aws::Greengrass
     class TelemetryConfigurationUpdate < Struct.new(
       :telemetry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3532,19 +3463,7 @@ module Aws::Greengrass
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The minimum level of log statements that should be logged by the OTA Agent during an update.
-    module UpdateAgentLogLevel
-      NONE = 'NONE'
-      TRACE = 'TRACE'
-      DEBUG = 'DEBUG'
-      VERBOSE = 'VERBOSE'
-      INFO = 'INFO'
-      WARN = 'WARN'
-      ERROR = 'ERROR'
-      FATAL = 'FATAL'
+      include ::Smithy::Schema::Structure
     end
 
     # Connectivity information.
@@ -3558,7 +3477,7 @@ module Aws::Greengrass
       :connectivity_info,
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -3571,7 +3490,7 @@ module Aws::Greengrass
       :message,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_definition_id
@@ -3584,12 +3503,12 @@ module Aws::Greengrass
       :connector_definition_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectorDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_definition_id
@@ -3602,12 +3521,12 @@ module Aws::Greengrass
       :core_definition_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCoreDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_definition_id
@@ -3620,12 +3539,12 @@ module Aws::Greengrass
       :device_definition_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDeviceDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_definition_id
@@ -3638,12 +3557,12 @@ module Aws::Greengrass
       :function_definition_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFunctionDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_expiry_in_milliseconds
@@ -3656,7 +3575,7 @@ module Aws::Greengrass
       :certificate_expiry_in_milliseconds,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_authority_expiry_in_milliseconds
@@ -3673,7 +3592,7 @@ module Aws::Greengrass
       :certificate_expiry_in_milliseconds,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -3686,12 +3605,12 @@ module Aws::Greengrass
       :group_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logger_definition_id
@@ -3704,12 +3623,12 @@ module Aws::Greengrass
       :logger_definition_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLoggerDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3722,12 +3641,12 @@ module Aws::Greengrass
       :name,
       :resource_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3740,28 +3659,12 @@ module Aws::Greengrass
       :name,
       :subscription_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSubscriptionDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The architecture of the cores which are the targets of an update.
-    module UpdateTargetsArchitecture
-      armv6l = 'armv6l'
-      armv7l = 'armv7l'
-      x86_64 = 'x86_64'
-      aarch64 = 'aarch64'
-    end
-
-    # The operating system of the cores which are the targets of an update.
-    module UpdateTargetsOperatingSystem
-      ubuntu = 'ubuntu'
-      raspbian = 'raspbian'
-      amazon_linux = 'amazon_linux'
-      openwrt = 'openwrt'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telemetry_configuration
@@ -3774,12 +3677,12 @@ module Aws::Greengrass
       :telemetry_configuration,
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateThingRuntimeConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about a version.
@@ -3801,7 +3704,7 @@ module Aws::Greengrass
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

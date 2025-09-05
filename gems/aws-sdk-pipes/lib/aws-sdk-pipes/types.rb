@@ -28,7 +28,7 @@ module Aws::Pipes
       :security_groups,
       :assign_public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. 
@@ -39,7 +39,7 @@ module Aws::Pipes
     class BatchArrayProperties < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that are sent to a container.</p>
@@ -74,7 +74,7 @@ module Aws::Pipes
       :instance_type,
       :resource_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment variables to send to the container. You can add new environment
@@ -96,7 +96,7 @@ module Aws::Pipes
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch job dependency.</p>
@@ -111,7 +111,7 @@ module Aws::Pipes
       :job_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type and amount of a resource to assign to a container. The supported resources
@@ -299,7 +299,7 @@ module Aws::Pipes
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry strategy that's associated with a job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html"> Automated job
@@ -312,7 +312,7 @@ module Aws::Pipes
     class BatchRetryStrategy < Struct.new(
       :attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a capacity provider strategy. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.</p>
@@ -334,7 +334,7 @@ module Aws::Pipes
       :weight,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -350,7 +350,7 @@ module Aws::Pipes
     class CloudwatchLogsLogDestination < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon CloudWatch Logs logging configuration settings for the pipe.</p>
@@ -360,7 +360,7 @@ module Aws::Pipes
     class CloudwatchLogsLogDestinationParameters < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action you attempted resulted in an exception.</p>
@@ -377,7 +377,7 @@ module Aws::Pipes
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -441,7 +441,7 @@ module Aws::Pipes
       :log_configuration,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -470,7 +470,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter
@@ -483,7 +483,7 @@ module Aws::Pipes
     class DeadLetterConfig < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -492,7 +492,7 @@ module Aws::Pipes
     class DeletePipeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -521,7 +521,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -530,7 +530,7 @@ module Aws::Pipes
     class DescribePipeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -610,7 +610,7 @@ module Aws::Pipes
       :log_configuration,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps source data to a dimension in the target Timestream for LiveAnalytics
@@ -633,7 +633,7 @@ module Aws::Pipes
       :dimension_value_type,
       :dimension_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that are sent to a container. An empty container override can be passed
@@ -685,7 +685,7 @@ module Aws::Pipes
       :name,
       :resource_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of files containing the environment variables to pass to a container. You can
@@ -723,7 +723,7 @@ module Aws::Pipes
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment variables to send to the container. You can add new environment
@@ -742,7 +742,7 @@ module Aws::Pipes
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of ephemeral storage to allocate for the task. This parameter is used to
@@ -762,7 +762,7 @@ module Aws::Pipes
     class EcsEphemeralStorage < Struct.new(
       :size_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on an Elastic Inference accelerator task override. This parameter is used to
@@ -781,7 +781,7 @@ module Aws::Pipes
       :device_name,
       :device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type and amount of a resource to assign to a container. The supported resource types
@@ -808,7 +808,7 @@ module Aws::Pipes
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that are associated with a task.</p>
@@ -860,7 +860,7 @@ module Aws::Pipes
       :memory,
       :task_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter events using an event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
@@ -871,7 +871,7 @@ module Aws::Pipes
     class Filter < Struct.new(
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of event patterns used to filter events.</p>
@@ -884,7 +884,7 @@ module Aws::Pipes
     class FilterCriteria < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Data Firehose logging configuration settings for the pipe.</p>
@@ -894,7 +894,7 @@ module Aws::Pipes
     class FirehoseLogDestination < Struct.new(
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Data Firehose logging configuration settings for the pipe.</p>
@@ -905,7 +905,7 @@ module Aws::Pipes
     class FirehoseLogDestinationParameters < Struct.new(
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs due to unexpected causes.</p>
@@ -919,7 +919,7 @@ module Aws::Pipes
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -956,7 +956,7 @@ module Aws::Pipes
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipes
@@ -971,7 +971,7 @@ module Aws::Pipes
       :pipes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -980,7 +980,7 @@ module Aws::Pipes
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -989,7 +989,7 @@ module Aws::Pipes
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Secrets Manager secret that stores your broker credentials.</p>
@@ -1000,7 +1000,7 @@ module Aws::Pipes
       :basic_auth,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BasicAuth < MQBrokerAccessCredentials; end
       class Unknown < MQBrokerAccessCredentials; end
@@ -1018,7 +1018,7 @@ module Aws::Pipes
       :client_certificate_tls_auth,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SaslScram512Auth < MSKAccessCredentials; end
       class ClientCertificateTlsAuth < MSKAccessCredentials; end
@@ -1041,7 +1041,7 @@ module Aws::Pipes
       :measure_value_type,
       :multi_measure_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps multiple measures from the source event to the same Timestream for
@@ -1059,7 +1059,7 @@ module Aws::Pipes
       :multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies the network configuration for an Amazon ECS
@@ -1072,7 +1072,7 @@ module Aws::Pipes
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity that you specified does not exist.</p>
@@ -1081,7 +1081,7 @@ module Aws::Pipes
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a pipe. Amazon EventBridgePipes connect event sources to
@@ -1128,7 +1128,7 @@ module Aws::Pipes
       :target,
       :enrichment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameter to be used when the target is an API Gateway REST APIs
@@ -1151,7 +1151,7 @@ module Aws::Pipes
       :header_parameters,
       :query_string_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters required to set up enrichment on your pipe.</p>
@@ -1174,7 +1174,7 @@ module Aws::Pipes
       :input_template,
       :http_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration settings for the pipe.</p>
@@ -1205,7 +1205,7 @@ module Aws::Pipes
       :level,
       :include_execution_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the logging configuration settings for the pipe.</p>
@@ -1255,7 +1255,7 @@ module Aws::Pipes
       :level,
       :include_execution_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an Active MQ broker as a source.</p>
@@ -1277,7 +1277,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a DynamoDB stream as a source.</p>
@@ -1318,7 +1318,7 @@ module Aws::Pipes
       :parallelization_factor,
       :starting_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Kinesis stream as a source.</p>
@@ -1364,7 +1364,7 @@ module Aws::Pipes
       :starting_position,
       :starting_position_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an MSK stream as a source.</p>
@@ -1394,7 +1394,7 @@ module Aws::Pipes
       :consumer_group_id,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters required to set up a source for your pipe.</p>
@@ -1439,7 +1439,7 @@ module Aws::Pipes
       :managed_streaming_kafka_parameters,
       :self_managed_kafka_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Rabbit MQ broker as a source.</p>
@@ -1465,7 +1465,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a self-managed Apache Kafka stream as a source.</p>
@@ -1511,7 +1511,7 @@ module Aws::Pipes
       :server_root_ca_certificate,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Amazon SQS stream as a source.</p>
@@ -1525,7 +1525,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an Batch job as a target.</p>
@@ -1573,7 +1573,7 @@ module Aws::Pipes
       :depends_on,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an CloudWatch Logs log stream as a target.</p>
@@ -1588,7 +1588,7 @@ module Aws::Pipes
       :log_stream_name,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an Amazon ECS task as a target.</p>
@@ -1686,7 +1686,7 @@ module Aws::Pipes
       :overrides,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_ecs_managed_tags] = false unless options.key?(:enable_ecs_managed_tags)
@@ -1722,7 +1722,7 @@ module Aws::Pipes
       :resources,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameter to be used when the target is an API Gateway REST APIs or
@@ -1743,7 +1743,7 @@ module Aws::Pipes
       :header_parameters,
       :query_string_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Kinesis stream as a target.</p>
@@ -1758,7 +1758,7 @@ module Aws::Pipes
     class PipeTargetKinesisStreamParameters < Struct.new(
       :partition_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Lambda function as a target.</p>
@@ -1788,7 +1788,7 @@ module Aws::Pipes
     class PipeTargetLambdaFunctionParameters < Struct.new(
       :invocation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters required to set up a target for your pipe.</p>
@@ -1853,7 +1853,7 @@ module Aws::Pipes
       :cloud_watch_logs_parameters,
       :timestream_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the
@@ -1888,7 +1888,7 @@ module Aws::Pipes
       :with_event,
       :sqls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:with_event] = false unless options.key?(:with_event)
@@ -1904,7 +1904,7 @@ module Aws::Pipes
     class PipeTargetSageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Amazon SQS stream as a target.</p>
@@ -1919,7 +1919,7 @@ module Aws::Pipes
       :message_group_id,
       :message_deduplication_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Step Functions state machine as a target.</p>
@@ -1951,7 +1951,7 @@ module Aws::Pipes
     class PipeTargetStateMachineParameters < Struct.new(
       :invocation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Timestream for LiveAnalytics table as a
@@ -2011,7 +2011,7 @@ module Aws::Pipes
       :single_measure_mappings,
       :multi_measure_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a constraint on task placement. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement
@@ -2031,7 +2031,7 @@ module Aws::Pipes
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task placement strategy for a task or service. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement
@@ -2056,7 +2056,7 @@ module Aws::Pipes
       :type,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 logging configuration settings for the pipe.</p>
@@ -2082,7 +2082,7 @@ module Aws::Pipes
       :bucket_owner,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 logging configuration settings for the pipe.</p>
@@ -2112,7 +2112,7 @@ module Aws::Pipes
       :output_format,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Name/Value pair of a parameter to start execution of a SageMaker Model Building
@@ -2129,7 +2129,7 @@ module Aws::Pipes
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Secrets Manager secret that stores your stream credentials.</p>
@@ -2152,7 +2152,7 @@ module Aws::Pipes
       :client_certificate_tls_auth,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BasicAuth < SelfManagedKafkaAccessConfigurationCredentials; end
       class SaslScram512Auth < SelfManagedKafkaAccessConfigurationCredentials; end
@@ -2175,7 +2175,7 @@ module Aws::Pipes
       :subnets,
       :security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A quota has been exceeded.</p>
@@ -2200,7 +2200,7 @@ module Aws::Pipes
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps a single source data field to a single record in the specified Timestream
@@ -2221,7 +2221,7 @@ module Aws::Pipes
       :measure_value_type,
       :measure_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2230,7 +2230,7 @@ module Aws::Pipes
     class StartPipeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2259,7 +2259,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2268,7 +2268,7 @@ module Aws::Pipes
     class StopPipeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2297,7 +2297,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair associated with an Amazon Web Services resource. In EventBridge,
@@ -2313,7 +2313,7 @@ module Aws::Pipes
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2326,12 +2326,12 @@ module Aws::Pipes
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action was throttled.</p>
@@ -2353,7 +2353,7 @@ module Aws::Pipes
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2366,12 +2366,12 @@ module Aws::Pipes
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2428,7 +2428,7 @@ module Aws::Pipes
       :log_configuration,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2457,7 +2457,7 @@ module Aws::Pipes
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an Active MQ broker as a source.</p>
@@ -2475,7 +2475,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a DynamoDB stream as a source.</p>
@@ -2512,7 +2512,7 @@ module Aws::Pipes
       :maximum_retry_attempts,
       :parallelization_factor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Kinesis stream as a source.</p>
@@ -2549,7 +2549,7 @@ module Aws::Pipes
       :maximum_retry_attempts,
       :parallelization_factor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using an MSK stream as a source.</p>
@@ -2567,7 +2567,7 @@ module Aws::Pipes
       :credentials,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters required to set up a source for your pipe.</p>
@@ -2612,7 +2612,7 @@ module Aws::Pipes
       :managed_streaming_kafka_parameters,
       :self_managed_kafka_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Rabbit MQ broker as a source.</p>
@@ -2630,7 +2630,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a self-managed Apache Kafka stream as a source.</p>
@@ -2660,7 +2660,7 @@ module Aws::Pipes
       :server_root_ca_certificate,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for using a Amazon SQS stream as a source.</p>
@@ -2674,7 +2674,7 @@ module Aws::Pipes
       :batch_size,
       :maximum_batching_window_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error has occurred while performing a validate operation.</p>
@@ -2688,7 +2688,7 @@ module Aws::Pipes
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error has occurred while performing a validate operation.</p>
@@ -2702,7 +2702,7 @@ module Aws::Pipes
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

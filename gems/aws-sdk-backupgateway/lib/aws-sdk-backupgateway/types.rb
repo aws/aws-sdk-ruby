@@ -16,7 +16,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -30,7 +30,7 @@ module Aws::BackupGateway
       :gateway_arn,
       :server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -39,7 +39,7 @@ module Aws::BackupGateway
     class AssociateGatewayToServerOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a bandwidth rate limit interval for a gateway. A bandwidth 
@@ -86,7 +86,7 @@ module Aws::BackupGateway
       :end_minute_of_hour,
       :days_of_week,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation cannot proceed because it is not supported.</p>
@@ -99,7 +99,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activation_key
@@ -120,7 +120,7 @@ module Aws::BackupGateway
       :gateway_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -129,7 +129,7 @@ module Aws::BackupGateway
     class CreateGatewayOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -138,7 +138,7 @@ module Aws::BackupGateway
     class DeleteGatewayOperationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -147,7 +147,7 @@ module Aws::BackupGateway
     class DeleteGatewayOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -156,7 +156,7 @@ module Aws::BackupGateway
     class DeleteHypervisorOperationInput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -165,7 +165,7 @@ module Aws::BackupGateway
     class DeleteHypervisorOperationOutput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -174,7 +174,7 @@ module Aws::BackupGateway
     class DisassociateGatewayFromServerOperationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -183,7 +183,7 @@ module Aws::BackupGateway
     class DisassociateGatewayFromServerOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gateway is an Backup Gateway appliance that runs on the customer's network
@@ -212,7 +212,7 @@ module Aws::BackupGateway
       :hypervisor_id,
       :last_seen_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of gateway.</p>
@@ -257,7 +257,7 @@ module Aws::BackupGateway
       :next_update_availability_time,
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -270,7 +270,7 @@ module Aws::BackupGateway
     class GetBandwidthRateLimitScheduleOperationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -288,7 +288,7 @@ module Aws::BackupGateway
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -297,7 +297,7 @@ module Aws::BackupGateway
     class GetGatewayOperationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway
@@ -307,7 +307,7 @@ module Aws::BackupGateway
     class GetGatewayOperationOutput < Struct.new(
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -316,7 +316,7 @@ module Aws::BackupGateway
     class GetHypervisorOperationInput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor
@@ -325,7 +325,7 @@ module Aws::BackupGateway
     class GetHypervisorOperationOutput < Struct.new(
       :hypervisor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -334,7 +334,7 @@ module Aws::BackupGateway
     class GetHypervisorPropertyMappingsOperationInput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -352,7 +352,7 @@ module Aws::BackupGateway
       :vmware_to_aws_tag_mappings,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -361,7 +361,7 @@ module Aws::BackupGateway
     class GetVirtualMachineOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_machine
@@ -372,7 +372,7 @@ module Aws::BackupGateway
     class GetVirtualMachineOperationOutput < Struct.new(
       :virtual_machine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the hypervisor's permissions to which the gateway will connect.</p>
@@ -402,7 +402,7 @@ module Aws::BackupGateway
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are the details of the specified hypervisor. A hypervisor is hardware, 
@@ -452,7 +452,7 @@ module Aws::BackupGateway
       :latest_metadata_sync_status_message,
       :latest_metadata_sync_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -482,7 +482,7 @@ module Aws::BackupGateway
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -491,7 +491,7 @@ module Aws::BackupGateway
     class ImportHypervisorConfigurationOperationOutput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation did not succeed because an internal error occurred. Try again later.</p>
@@ -504,7 +504,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -520,7 +520,7 @@ module Aws::BackupGateway
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateways
@@ -536,7 +536,7 @@ module Aws::BackupGateway
       :gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -552,7 +552,7 @@ module Aws::BackupGateway
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisors
@@ -569,7 +569,7 @@ module Aws::BackupGateway
       :hypervisors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -578,7 +578,7 @@ module Aws::BackupGateway
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -591,7 +591,7 @@ module Aws::BackupGateway
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -611,7 +611,7 @@ module Aws::BackupGateway
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_machines
@@ -628,7 +628,7 @@ module Aws::BackupGateway
       :virtual_machines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is your gateway's weekly maintenance start time including the day and time of the week. 
@@ -655,7 +655,7 @@ module Aws::BackupGateway
       :hour_of_day,
       :minute_of_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -673,7 +673,7 @@ module Aws::BackupGateway
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -686,7 +686,7 @@ module Aws::BackupGateway
     class PutBandwidthRateLimitScheduleOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -704,7 +704,7 @@ module Aws::BackupGateway
       :vmware_to_aws_tag_mappings,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -713,7 +713,7 @@ module Aws::BackupGateway
     class PutHypervisorPropertyMappingsOperationOutput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -740,7 +740,7 @@ module Aws::BackupGateway
       :day_of_week,
       :day_of_month,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -750,7 +750,7 @@ module Aws::BackupGateway
     class PutMaintenanceStartTimeOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that is required for the action wasn't found.</p>
@@ -763,7 +763,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -772,7 +772,7 @@ module Aws::BackupGateway
     class StartVirtualMachinesMetadataSyncOperationInput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -781,7 +781,7 @@ module Aws::BackupGateway
     class StartVirtualMachinesMetadataSyncOperationOutput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair you can use to manage, filter, and search for your resources. Allowed
@@ -797,7 +797,7 @@ module Aws::BackupGateway
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -810,7 +810,7 @@ module Aws::BackupGateway
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -819,7 +819,7 @@ module Aws::BackupGateway
     class TagResourceOperationOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -841,12 +841,12 @@ module Aws::BackupGateway
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TestHypervisorConfigurationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TPS has been limited to protect against intentional or unintentional 
@@ -861,7 +861,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -874,7 +874,7 @@ module Aws::BackupGateway
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -883,7 +883,7 @@ module Aws::BackupGateway
     class UntagResourceOperationOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -896,7 +896,7 @@ module Aws::BackupGateway
       :gateway_arn,
       :gateway_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -905,7 +905,7 @@ module Aws::BackupGateway
     class UpdateGatewayInformationOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -915,7 +915,7 @@ module Aws::BackupGateway
     class UpdateGatewaySoftwareNowOperationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -925,7 +925,7 @@ module Aws::BackupGateway
     class UpdateGatewaySoftwareNowOperationOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -955,7 +955,7 @@ module Aws::BackupGateway
       :name,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hypervisor_arn
@@ -964,7 +964,7 @@ module Aws::BackupGateway
     class UpdateHypervisorOperationOutput < Struct.new(
       :hypervisor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation did not succeed because a validation error occurred.</p>
@@ -977,7 +977,7 @@ module Aws::BackupGateway
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A virtual machine that is on a hypervisor.</p>
@@ -1008,7 +1008,7 @@ module Aws::BackupGateway
       :resource_arn,
       :last_backup_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names (ARNs).</p>
@@ -1044,7 +1044,7 @@ module Aws::BackupGateway
       :last_backup_date,
       :vmware_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VMware tag is a tag attached to a specific virtual machine.
@@ -1065,7 +1065,7 @@ module Aws::BackupGateway
       :vmware_tag_name,
       :vmware_tag_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This displays the mapping of on-premises VMware tags to the 
@@ -1088,7 +1088,7 @@ module Aws::BackupGateway
       :aws_tag_key,
       :aws_tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

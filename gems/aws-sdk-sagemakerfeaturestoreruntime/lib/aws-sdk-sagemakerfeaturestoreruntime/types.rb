@@ -12,7 +12,7 @@ module Aws::SageMakerFeatureStoreRuntime
     class AccessForbidden < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error that has occurred when attempting to retrieve a batch of Records.</p>
@@ -38,7 +38,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier that identifies the batch of Records you are retrieving in a
@@ -59,7 +59,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :record_identifiers_value_as_string,
       :feature_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifiers
@@ -77,7 +77,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :identifiers,
       :expiration_time_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -95,7 +95,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :errors,
       :unprocessed_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of records that have been retrieved in a batch.</p>
@@ -117,7 +117,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :record,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -148,17 +148,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :target_stores,
       :deletion_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionMode
-      SOFT_DELETE = 'SoftDelete'
-      HARD_DELETE = 'HardDelete'
-    end
-
-    module ExpirationTimeResponse
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value associated with a feature.</p>
@@ -183,7 +173,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :value_as_string,
       :value_as_string_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -209,7 +199,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :feature_names,
       :expiration_time_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute record
@@ -222,7 +212,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :record,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal failure occurred. Try your request again. If the problem persists, contact
@@ -232,7 +222,7 @@ module Aws::SageMakerFeatureStoreRuntime
     class InternalFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -269,7 +259,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :target_stores,
       :ttl_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that is required to perform an action was not found.</p>
@@ -278,7 +268,7 @@ module Aws::SageMakerFeatureStoreRuntime
     class ResourceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -287,12 +277,7 @@ module Aws::SageMakerFeatureStoreRuntime
     class ServiceUnavailable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetStore
-      ONLINE_STORE = 'OnlineStore'
-      OFFLINE_STORE = 'OfflineStore'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Time to live duration, where the record is hard deleted after the expiration time is
@@ -310,15 +295,7 @@ module Aws::SageMakerFeatureStoreRuntime
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TtlDurationUnit
-      SECONDS = 'Seconds'
-      MINUTES = 'Minutes'
-      HOURS = 'Hours'
-      DAYS = 'Days'
-      WEEKS = 'Weeks'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an error validating your request.</p>
@@ -327,7 +304,7 @@ module Aws::SageMakerFeatureStoreRuntime
     class ValidationError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

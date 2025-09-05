@@ -18,7 +18,7 @@ module Aws::CognitoIdentityProvider
     class AccountRecoverySettingType < Struct.new(
       :recovery_mechanisms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The automated response to a risk level for adaptive authentication in full-function,
@@ -61,7 +61,7 @@ module Aws::CognitoIdentityProvider
       :notify,
       :event_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:notify] = false unless options.key?(:notify)
@@ -85,14 +85,7 @@ module Aws::CognitoIdentityProvider
       :medium_action,
       :high_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountTakeoverEventActionType
-      BLOCK = 'BLOCK'
-      MFA_IF_CONFIGURED = 'MFA_IF_CONFIGURED'
-      MFA_REQUIRED = 'MFA_REQUIRED'
-      NO_ACTION = 'NO_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for automated responses and notification templates for adaptive
@@ -111,7 +104,7 @@ module Aws::CognitoIdentityProvider
       :notify_configuration,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to add custom attributes.</p>
@@ -165,14 +158,14 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to add custom
     #             attributes.</p>
     class AddCustomAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -194,7 +187,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirm a user's registration as a user pool administrator.</p>
@@ -247,14 +240,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to confirm
     #             registration.</p>
     class AdminConfirmSignUpResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for administrator creation of users in a user pool. Contains settings for
@@ -284,7 +277,7 @@ module Aws::CognitoIdentityProvider
       :unused_account_validity_days,
       :invite_message_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_admin_create_user_only] = false unless options.key?(:allow_admin_create_user_only)
@@ -449,7 +442,7 @@ module Aws::CognitoIdentityProvider
       :desired_delivery_mediums,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to create the user.</p>
@@ -459,7 +452,7 @@ module Aws::CognitoIdentityProvider
     class AdminCreateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete user attributes as an administrator.</p>
@@ -483,14 +476,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :user_attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response received from the server for a request to delete user
     #             attributes.</p>
     class AdminDeleteUserAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete a user as an administrator.</p>
@@ -508,7 +501,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -522,12 +515,12 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AdminDisableProviderForUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to disable the user as an administrator.</p>
@@ -545,14 +538,14 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response received from the server to disable the user as an
     #             administrator.</p>
     class AdminDisableUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request that enables the user as an administrator.</p>
@@ -570,14 +563,14 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to enable a user as an
     #             administrator.</p>
     class AdminEnableUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends the forgot device request, as an administrator.</p>
@@ -599,7 +592,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :device_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get the device, as an administrator.</p>
@@ -621,7 +614,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the device response, as an administrator.</p>
@@ -632,7 +625,7 @@ module Aws::CognitoIdentityProvider
     class AdminGetDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get the specified user as an administrator.</p>
@@ -650,7 +643,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server from the request to get the specified user as
@@ -728,7 +721,7 @@ module Aws::CognitoIdentityProvider
       :preferred_mfa_setting,
       :user_mfa_setting_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -922,7 +915,7 @@ module Aws::CognitoIdentityProvider
       :context_data,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Initiates the authentication response, as an administrator.</p>
@@ -1076,7 +1069,7 @@ module Aws::CognitoIdentityProvider
       :authentication_result,
       :available_challenges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -1140,12 +1133,12 @@ module Aws::CognitoIdentityProvider
       :destination_user,
       :source_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AdminLinkProviderForUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list devices, as an administrator.</p>
@@ -1175,7 +1168,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the device's response, as an administrator.</p>
@@ -1192,7 +1185,7 @@ module Aws::CognitoIdentityProvider
       :devices,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -1221,7 +1214,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -1236,7 +1229,7 @@ module Aws::CognitoIdentityProvider
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -1267,7 +1260,7 @@ module Aws::CognitoIdentityProvider
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auth_events
@@ -1284,7 +1277,7 @@ module Aws::CognitoIdentityProvider
       :auth_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -1307,7 +1300,7 @@ module Aws::CognitoIdentityProvider
       :username,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to reset a user's password as an administrator.</p>
@@ -1359,14 +1352,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to reset a user password as an
     #             administrator.</p>
     class AdminResetUserPasswordResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to respond to the authentication challenge, as an administrator.</p>
@@ -1752,7 +1745,7 @@ module Aws::CognitoIdentityProvider
       :context_data,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Responds to the authentication challenge, as an administrator.</p>
@@ -1886,7 +1879,7 @@ module Aws::CognitoIdentityProvider
       :challenge_parameters,
       :authentication_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_mfa_settings
@@ -1922,12 +1915,12 @@ module Aws::CognitoIdentityProvider
       :username,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AdminSetUserMFAPreferenceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -1957,12 +1950,12 @@ module Aws::CognitoIdentityProvider
       :password,
       :permanent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AdminSetUserPasswordResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can use this parameter to set an MFA configuration that uses the SMS delivery
@@ -1986,14 +1979,14 @@ module Aws::CognitoIdentityProvider
       :username,
       :mfa_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to set user settings as an
     #             administrator.</p>
     class AdminSetUserSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -2022,12 +2015,12 @@ module Aws::CognitoIdentityProvider
       :event_id,
       :feedback_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AdminUpdateAuthEventFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to update the device status, as an administrator.</p>
@@ -2055,13 +2048,13 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :device_remembered_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status response to the request to update the device, as an administrator.</p>
     class AdminUpdateDeviceStatusResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to update the user's attributes as an administrator.</p>
@@ -2131,14 +2124,14 @@ module Aws::CognitoIdentityProvider
       :user_attributes,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to update user attributes as
     #             an administrator.</p>
     class AdminUpdateUserAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to sign out of all devices, as an administrator.</p>
@@ -2156,13 +2149,13 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The global sign-out response, as an administrator.</p>
     class AdminUserGlobalSignOutResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Threat protection configuration options for additional authentication types in your
@@ -2175,24 +2168,7 @@ module Aws::CognitoIdentityProvider
     class AdvancedSecurityAdditionalFlowsType < Struct.new(
       :custom_auth_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdvancedSecurityEnabledModeType
-      AUDIT = 'AUDIT'
-      ENFORCED = 'ENFORCED'
-    end
-
-    module AdvancedSecurityModeType
-      OFF = 'OFF'
-      AUDIT = 'AUDIT'
-      ENFORCED = 'ENFORCED'
-    end
-
-    module AliasAttributeType
-      PHONE_NUMBER = 'phone_number'
-      EMAIL = 'email'
-      PREFERRED_USERNAME = 'preferred_username'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user tries to confirm the account with an email
@@ -2207,7 +2183,7 @@ module Aws::CognitoIdentityProvider
     class AliasExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for Amazon Pinpoint analytics configuration. With an analytics configuration,
@@ -2245,7 +2221,7 @@ module Aws::CognitoIdentityProvider
       :external_id,
       :user_data_shared,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:user_data_shared] = false unless options.key?(:user_data_shared)
@@ -2265,33 +2241,7 @@ module Aws::CognitoIdentityProvider
     class AnalyticsMetadataType < Struct.new(
       :analytics_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetCategoryType
-      FAVICON_ICO = 'FAVICON_ICO'
-      FAVICON_SVG = 'FAVICON_SVG'
-      EMAIL_GRAPHIC = 'EMAIL_GRAPHIC'
-      SMS_GRAPHIC = 'SMS_GRAPHIC'
-      AUTH_APP_GRAPHIC = 'AUTH_APP_GRAPHIC'
-      PASSWORD_GRAPHIC = 'PASSWORD_GRAPHIC'
-      PASSKEY_GRAPHIC = 'PASSKEY_GRAPHIC'
-      PAGE_HEADER_LOGO = 'PAGE_HEADER_LOGO'
-      PAGE_HEADER_BACKGROUND = 'PAGE_HEADER_BACKGROUND'
-      PAGE_FOOTER_LOGO = 'PAGE_FOOTER_LOGO'
-      PAGE_FOOTER_BACKGROUND = 'PAGE_FOOTER_BACKGROUND'
-      PAGE_BACKGROUND = 'PAGE_BACKGROUND'
-      FORM_BACKGROUND = 'FORM_BACKGROUND'
-      FORM_LOGO = 'FORM_LOGO'
-      IDP_BUTTON_ICON = 'IDP_BUTTON_ICON'
-    end
-
-    module AssetExtensionType
-      ICO = 'ICO'
-      JPEG = 'JPEG'
-      PNG = 'PNG'
-      SVG = 'SVG'
-      WEBP = 'WEBP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An image file from a managed login branding style in a user pool.</p>
@@ -2321,7 +2271,7 @@ module Aws::CognitoIdentityProvider
       :bytes,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -2339,7 +2289,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_code
@@ -2354,14 +2304,7 @@ module Aws::CognitoIdentityProvider
       :secret_code,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeDataType
-      STRING = 'String'
-      NUMBER = 'Number'
-      DATETIME = 'DateTime'
-      BOOLEAN = 'Boolean'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and value of a user attribute.</p>
@@ -2375,7 +2318,7 @@ module Aws::CognitoIdentityProvider
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One authentication event that Amazon Cognito logged in a user pool with threat protection
@@ -2425,25 +2368,7 @@ module Aws::CognitoIdentityProvider
       :event_context_data,
       :event_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthFactorType
-      PASSWORD = 'PASSWORD'
-      EMAIL_OTP = 'EMAIL_OTP'
-      SMS_OTP = 'SMS_OTP'
-      WEB_AUTHN = 'WEB_AUTHN'
-    end
-
-    module AuthFlowType
-      USER_SRP_AUTH = 'USER_SRP_AUTH'
-      REFRESH_TOKEN_AUTH = 'REFRESH_TOKEN_AUTH'
-      REFRESH_TOKEN = 'REFRESH_TOKEN'
-      CUSTOM_AUTH = 'CUSTOM_AUTH'
-      ADMIN_NO_SRP_AUTH = 'ADMIN_NO_SRP_AUTH'
-      USER_PASSWORD_AUTH = 'USER_PASSWORD_AUTH'
-      ADMIN_USER_PASSWORD_AUTH = 'ADMIN_USER_PASSWORD_AUTH'
-      USER_AUTH = 'USER_AUTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that your application receives after authentication. Contains tokens and
@@ -2474,41 +2399,12 @@ module Aws::CognitoIdentityProvider
       :id_token,
       :new_device_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expires_in] = 0 unless options.key?(:expires_in)
         super
       end
-    end
-
-    module ChallengeName
-      Password = 'Password'
-      Mfa = 'Mfa'
-    end
-
-    module ChallengeNameType
-      SMS_MFA = 'SMS_MFA'
-      EMAIL_OTP = 'EMAIL_OTP'
-      SOFTWARE_TOKEN_MFA = 'SOFTWARE_TOKEN_MFA'
-      SELECT_MFA_TYPE = 'SELECT_MFA_TYPE'
-      MFA_SETUP = 'MFA_SETUP'
-      PASSWORD_VERIFIER = 'PASSWORD_VERIFIER'
-      CUSTOM_CHALLENGE = 'CUSTOM_CHALLENGE'
-      SELECT_CHALLENGE = 'SELECT_CHALLENGE'
-      DEVICE_SRP_AUTH = 'DEVICE_SRP_AUTH'
-      DEVICE_PASSWORD_VERIFIER = 'DEVICE_PASSWORD_VERIFIER'
-      ADMIN_NO_SRP_AUTH = 'ADMIN_NO_SRP_AUTH'
-      NEW_PASSWORD_REQUIRED = 'NEW_PASSWORD_REQUIRED'
-      SMS_OTP = 'SMS_OTP'
-      PASSWORD = 'PASSWORD'
-      WEB_AUTHN = 'WEB_AUTHN'
-      PASSWORD_SRP = 'PASSWORD_SRP'
-    end
-
-    module ChallengeResponse
-      Success = 'Success'
-      Failure = 'Failure'
     end
 
     # <p>The responses to the challenge that you received in the previous request. Each
@@ -2697,7 +2593,7 @@ module Aws::CognitoIdentityProvider
       :challenge_name,
       :challenge_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to change a user password.</p>
@@ -2718,13 +2614,13 @@ module Aws::CognitoIdentityProvider
       :proposed_password,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server to the change password request.</p>
     class ChangePasswordResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the CloudWatch log group destination of user pool detailed activity
@@ -2741,7 +2637,7 @@ module Aws::CognitoIdentityProvider
     class CloudWatchLogsConfigurationType < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The delivery details for an email or SMS message that Amazon Cognito sent for authentication or
@@ -2760,7 +2656,7 @@ module Aws::CognitoIdentityProvider
       :delivery_medium,
       :attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a verification code fails to deliver
@@ -2771,7 +2667,7 @@ module Aws::CognitoIdentityProvider
     class CodeDeliveryFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if the provided code doesn't match what the server was
@@ -2782,13 +2678,7 @@ module Aws::CognitoIdentityProvider
     class CodeMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColorSchemeModeType
-      LIGHT = 'LIGHT'
-      DARK = 'DARK'
-      DYNAMIC = 'DYNAMIC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -2803,12 +2693,12 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :credential,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CompleteWebAuthnRegistrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for user pool actions when Amazon Cognito detects compromised credentials with threat
@@ -2819,12 +2709,7 @@ module Aws::CognitoIdentityProvider
     class CompromisedCredentialsActionsType < Struct.new(
       :event_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompromisedCredentialsEventActionType
-      BLOCK = 'BLOCK'
-      NO_ACTION = 'NO_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for compromised-credentials actions and authentication-event sources with
@@ -2841,7 +2726,7 @@ module Aws::CognitoIdentityProvider
       :event_filter,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if two or more modifications are happening
@@ -2852,7 +2737,7 @@ module Aws::CognitoIdentityProvider
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The confirm-device request.</p>
@@ -2876,7 +2761,7 @@ module Aws::CognitoIdentityProvider
       :device_secret_verifier_config,
       :device_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The confirm-device response.</p>
@@ -2893,7 +2778,7 @@ module Aws::CognitoIdentityProvider
     class ConfirmDeviceResponse < Struct.new(
       :user_confirmation_necessary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:user_confirmation_necessary] = false unless options.key?(:user_confirmation_necessary)
@@ -2982,14 +2867,14 @@ module Aws::CognitoIdentityProvider
       :user_context_data,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server that results from a user's request to retrieve a
     #             forgotten password.</p>
     class ConfirmForgotPasswordResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to confirm registration of a user.</p>
@@ -3088,7 +2973,7 @@ module Aws::CognitoIdentityProvider
       :client_metadata,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the registration confirmation.</p>
@@ -3100,7 +2985,7 @@ module Aws::CognitoIdentityProvider
     class ConfirmSignUpResponse < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contextual user data used for evaluating the risk of an authentication event by user
@@ -3128,7 +3013,7 @@ module Aws::CognitoIdentityProvider
       :http_headers,
       :encoded_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -3172,7 +3057,7 @@ module Aws::CognitoIdentityProvider
       :role_arn,
       :precedence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -3181,7 +3066,7 @@ module Aws::CognitoIdentityProvider
     class CreateGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -3336,7 +3221,7 @@ module Aws::CognitoIdentityProvider
       :attribute_mapping,
       :idp_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -3345,7 +3230,7 @@ module Aws::CognitoIdentityProvider
     class CreateIdentityProviderResponse < Struct.new(
       :identity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -3377,7 +3262,7 @@ module Aws::CognitoIdentityProvider
       :settings,
       :assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_branding
@@ -3386,7 +3271,7 @@ module Aws::CognitoIdentityProvider
     class CreateManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -3415,7 +3300,7 @@ module Aws::CognitoIdentityProvider
       :name,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_server
@@ -3424,7 +3309,7 @@ module Aws::CognitoIdentityProvider
     class CreateResourceServerResponse < Struct.new(
       :resource_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to create the user import job.</p>
@@ -3443,7 +3328,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :cloud_watch_logs_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to create the user import
@@ -3455,7 +3340,7 @@ module Aws::CognitoIdentityProvider
     class CreateUserImportJobResponse < Struct.new(
       :user_import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to create a user pool client.</p>
@@ -3789,7 +3674,7 @@ module Aws::CognitoIdentityProvider
       :auth_session_validity,
       :refresh_token_rotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to create a user pool client.</p>
@@ -3799,7 +3684,7 @@ module Aws::CognitoIdentityProvider
     class CreateUserPoolClientResponse < Struct.new(
       :user_pool_client,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3834,7 +3719,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_version,
       :custom_domain_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_version
@@ -3853,7 +3738,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_version,
       :cloud_front_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to create a user pool.</p>
@@ -4033,7 +3918,7 @@ module Aws::CognitoIdentityProvider
       :account_recovery_setting,
       :user_pool_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to create a user pool.</p>
@@ -4043,7 +3928,7 @@ module Aws::CognitoIdentityProvider
     class CreateUserPoolResponse < Struct.new(
       :user_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a hosted UI custom domain.</p>
@@ -4054,7 +3939,7 @@ module Aws::CognitoIdentityProvider
     class CustomDomainConfigType < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a custom email sender Lambda trigger.</p>
@@ -4070,11 +3955,7 @@ module Aws::CognitoIdentityProvider
       :lambda_version,
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomEmailSenderLambdaVersionType
-      V1_0 = 'V1_0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a custom SMS sender Lambda trigger.</p>
@@ -4090,16 +3971,7 @@ module Aws::CognitoIdentityProvider
       :lambda_version,
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomSMSSenderLambdaVersionType
-      V1_0 = 'V1_0'
-    end
-
-    module DefaultEmailOptionType
-      CONFIRM_WITH_LINK = 'CONFIRM_WITH_LINK'
-      CONFIRM_WITH_CODE = 'CONFIRM_WITH_CODE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -4112,7 +3984,7 @@ module Aws::CognitoIdentityProvider
       :group_name,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4125,7 +3997,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_branding_id
@@ -4139,7 +4011,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_branding_id,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4152,7 +4024,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete user attributes.</p>
@@ -4169,13 +4041,13 @@ module Aws::CognitoIdentityProvider
       :user_attribute_names,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to delete user attributes.</p>
     class DeleteUserAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete a user pool client.</p>
@@ -4189,7 +4061,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4204,12 +4076,12 @@ module Aws::CognitoIdentityProvider
       :domain,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserPoolDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete a user pool.</p>
@@ -4219,7 +4091,7 @@ module Aws::CognitoIdentityProvider
     class DeleteUserPoolRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to delete a user.</p>
@@ -4230,7 +4102,7 @@ module Aws::CognitoIdentityProvider
     class DeleteUserRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -4244,22 +4116,12 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :credential_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWebAuthnCredentialResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionProtectionType
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module DeliveryMediumType
-      SMS = 'SMS'
-      EMAIL = 'EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4272,7 +4134,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -4281,7 +4143,7 @@ module Aws::CognitoIdentityProvider
     class DescribeIdentityProviderResponse < Struct.new(
       :identity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4302,7 +4164,7 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :return_merged_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_branding
@@ -4311,7 +4173,7 @@ module Aws::CognitoIdentityProvider
     class DescribeManagedLoginBrandingByClientResponse < Struct.new(
       :managed_login_branding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4332,7 +4194,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_branding_id,
       :return_merged_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_branding
@@ -4341,7 +4203,7 @@ module Aws::CognitoIdentityProvider
     class DescribeManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4359,7 +4221,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_server
@@ -4368,7 +4230,7 @@ module Aws::CognitoIdentityProvider
     class DescribeResourceServerResponse < Struct.new(
       :resource_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -4389,7 +4251,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute risk_configuration
@@ -4398,7 +4260,7 @@ module Aws::CognitoIdentityProvider
     class DescribeRiskConfigurationResponse < Struct.new(
       :risk_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to describe the user import job.</p>
@@ -4412,7 +4274,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to describe the user import
@@ -4424,7 +4286,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserImportJobResponse < Struct.new(
       :user_import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to describe a user pool client.</p>
@@ -4438,7 +4300,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server from a request to describe the user pool
@@ -4449,7 +4311,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolClientResponse < Struct.new(
       :user_pool_client,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4460,7 +4322,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolDomainRequest < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_description
@@ -4469,7 +4331,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolDomainResponse < Struct.new(
       :domain_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to describe the user pool.</p>
@@ -4479,7 +4341,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response to describe the user pool.</p>
@@ -4489,7 +4351,7 @@ module Aws::CognitoIdentityProvider
     class DescribeUserPoolResponse < Struct.new(
       :user_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The device-remembering configuration for a user pool.</p>
@@ -4520,7 +4382,7 @@ module Aws::CognitoIdentityProvider
       :challenge_required_on_new_device,
       :device_only_remembered_on_user_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:challenge_required_on_new_device] = false unless options.key?(:challenge_required_on_new_device)
@@ -4536,12 +4398,7 @@ module Aws::CognitoIdentityProvider
     class DeviceKeyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceRememberedStatusType
-      REMEMBERED = 'remembered'
-      NOT_REMEMBERED = 'not_remembered'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Secure Remote Password (SRP) value that your application generates when you register
@@ -4556,7 +4413,7 @@ module Aws::CognitoIdentityProvider
       :password_verifier,
       :salt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a user's device that they've registered for device SRP
@@ -4586,7 +4443,7 @@ module Aws::CognitoIdentityProvider
       :device_last_modified_date,
       :device_last_authenticated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for information about the user pool domain associated with the hosted UI
@@ -4635,15 +4492,7 @@ module Aws::CognitoIdentityProvider
       :custom_domain_config,
       :managed_login_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatusType
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the provider is already supported by the user
@@ -4653,7 +4502,7 @@ module Aws::CognitoIdentityProvider
     class DuplicateProviderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The email configuration of your user pool. The email configuration type sets your
@@ -4764,7 +4613,7 @@ module Aws::CognitoIdentityProvider
       :from,
       :configuration_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets or shows configuration for user pool email message MFA and sign-in with one-time
@@ -4785,7 +4634,7 @@ module Aws::CognitoIdentityProvider
       :message,
       :subject,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User preferences for multi-factor authentication with email messages. Activates or
@@ -4804,18 +4653,13 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :preferred_mfa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         options[:preferred_mfa] = false unless options.key?(:preferred_mfa)
         super
       end
-    end
-
-    module EmailSendingAccountType
-      COGNITO_DEFAULT = 'COGNITO_DEFAULT'
-      DEVELOPER = 'DEVELOPER'
     end
 
     # <p>This exception is thrown when there is a code mismatch and the service fails to
@@ -4825,7 +4669,7 @@ module Aws::CognitoIdentityProvider
     class EnableSoftwareTokenMFAException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The context data that your application submitted in an authentication request with
@@ -4853,7 +4697,7 @@ module Aws::CognitoIdentityProvider
       :city,
       :country,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The feedback that your application submitted to a threat protection event log, as
@@ -4877,19 +4721,7 @@ module Aws::CognitoIdentityProvider
       :provider,
       :feedback_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventFilterType
-      SIGN_IN = 'SIGN_IN'
-      PASSWORD_CHANGE = 'PASSWORD_CHANGE'
-      SIGN_UP = 'SIGN_UP'
-    end
-
-    module EventResponseType
-      Pass = 'Pass'
-      Fail = 'Fail'
-      InProgress = 'InProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The risk evaluation by adaptive authentication, as displayed in an
@@ -4915,20 +4747,7 @@ module Aws::CognitoIdentityProvider
       :risk_level,
       :compromised_credentials_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceName
-      USER_NOTIFICATION = 'userNotification'
-      USER_AUTH_EVENTS = 'userAuthEvents'
-    end
-
-    module EventType
-      SignIn = 'SignIn'
-      SignUp = 'SignUp'
-      ForgotPassword = 'ForgotPassword'
-      PasswordChange = 'PasswordChange'
-      ResendCode = 'ResendCode'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if a code has expired.</p>
@@ -4938,24 +4757,7 @@ module Aws::CognitoIdentityProvider
     class ExpiredCodeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExplicitAuthFlowsType
-      ADMIN_NO_SRP_AUTH = 'ADMIN_NO_SRP_AUTH'
-      CUSTOM_AUTH_FLOW_ONLY = 'CUSTOM_AUTH_FLOW_ONLY'
-      USER_PASSWORD_AUTH = 'USER_PASSWORD_AUTH'
-      ALLOW_ADMIN_USER_PASSWORD_AUTH = 'ALLOW_ADMIN_USER_PASSWORD_AUTH'
-      ALLOW_CUSTOM_AUTH = 'ALLOW_CUSTOM_AUTH'
-      ALLOW_USER_PASSWORD_AUTH = 'ALLOW_USER_PASSWORD_AUTH'
-      ALLOW_USER_SRP_AUTH = 'ALLOW_USER_SRP_AUTH'
-      ALLOW_REFRESH_TOKEN_AUTH = 'ALLOW_REFRESH_TOKEN_AUTH'
-      ALLOW_USER_AUTH = 'ALLOW_USER_AUTH'
-    end
-
-    module FeatureType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a feature you attempted to configure isn't
@@ -4965,12 +4767,7 @@ module Aws::CognitoIdentityProvider
     class FeatureUnavailableInTierException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeedbackValueType
-      VALID = 'Valid'
-      INVALID = 'Invalid'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the Amazon Data Firehose stream destination of user activity log export with
@@ -4982,7 +4779,7 @@ module Aws::CognitoIdentityProvider
     class FirehoseConfigurationType < Struct.new(
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when WAF doesn't allow your request based on a web
@@ -4994,7 +4791,7 @@ module Aws::CognitoIdentityProvider
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to forget the device.</p>
@@ -5010,7 +4807,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :device_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to reset a user's password.</p>
@@ -5084,7 +4881,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from Amazon Cognito to a request to reset a password.</p>
@@ -5095,7 +4892,7 @@ module Aws::CognitoIdentityProvider
     class ForgotPasswordResponse < Struct.new(
       :code_delivery_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get the header information of the CSV file for the user
@@ -5106,7 +4903,7 @@ module Aws::CognitoIdentityProvider
     class GetCSVHeaderRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to get the header information
@@ -5123,7 +4920,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :csv_header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get the device.</p>
@@ -5138,7 +4935,7 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the device response.</p>
@@ -5149,7 +4946,7 @@ module Aws::CognitoIdentityProvider
     class GetDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -5162,7 +4959,7 @@ module Aws::CognitoIdentityProvider
       :group_name,
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -5172,7 +4969,7 @@ module Aws::CognitoIdentityProvider
     class GetGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -5188,7 +4985,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :idp_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -5198,7 +4995,7 @@ module Aws::CognitoIdentityProvider
     class GetIdentityProviderByIdentifierResponse < Struct.new(
       :identity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -5208,7 +5005,7 @@ module Aws::CognitoIdentityProvider
     class GetLogDeliveryConfigurationRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_delivery_configuration
@@ -5218,7 +5015,7 @@ module Aws::CognitoIdentityProvider
     class GetLogDeliveryConfigurationResponse < Struct.new(
       :log_delivery_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to get a signing certificate from Amazon Cognito.</p>
@@ -5228,7 +5025,7 @@ module Aws::CognitoIdentityProvider
     class GetSigningCertificateRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response from Amazon Cognito for a signing certificate request.</p>
@@ -5239,7 +5036,7 @@ module Aws::CognitoIdentityProvider
     class GetSigningCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute refresh_token
@@ -5299,7 +5096,7 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_result
@@ -5309,7 +5106,7 @@ module Aws::CognitoIdentityProvider
     class GetTokensFromRefreshTokenResponse < Struct.new(
       :authentication_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -5322,7 +5119,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ui_customization
@@ -5332,7 +5129,7 @@ module Aws::CognitoIdentityProvider
     class GetUICustomizationResponse < Struct.new(
       :ui_customization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get user attribute verification.</p>
@@ -5382,7 +5179,7 @@ module Aws::CognitoIdentityProvider
       :attribute_name,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The verification code response returned by the server response to get the user
@@ -5394,7 +5191,7 @@ module Aws::CognitoIdentityProvider
     class GetUserAttributeVerificationCodeResponse < Struct.new(
       :code_delivery_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -5404,7 +5201,7 @@ module Aws::CognitoIdentityProvider
     class GetUserAuthFactorsRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -5430,7 +5227,7 @@ module Aws::CognitoIdentityProvider
       :user_mfa_setting_list,
       :configured_user_auth_factors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -5439,7 +5236,7 @@ module Aws::CognitoIdentityProvider
     class GetUserPoolMfaConfigRequest < Struct.new(
       :user_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_mfa_configuration
@@ -5480,7 +5277,7 @@ module Aws::CognitoIdentityProvider
       :mfa_configuration,
       :web_authn_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to get information about the user.</p>
@@ -5491,7 +5288,7 @@ module Aws::CognitoIdentityProvider
     class GetUserRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server from the request to get information about the
@@ -5527,7 +5324,7 @@ module Aws::CognitoIdentityProvider
       :preferred_mfa_setting,
       :user_mfa_setting_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to sign out all devices.</p>
@@ -5538,13 +5335,13 @@ module Aws::CognitoIdentityProvider
     class GlobalSignOutRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request to sign out all devices.</p>
     class GlobalSignOutResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters a group that already exists in the user
@@ -5554,7 +5351,7 @@ module Aws::CognitoIdentityProvider
     class GroupExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user pool group. Contains details about the group and the way that it contributes to
@@ -5608,7 +5405,7 @@ module Aws::CognitoIdentityProvider
       :last_modified_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP header in the <code>ContextData</code> parameter.</p>
@@ -5622,7 +5419,7 @@ module Aws::CognitoIdentityProvider
       :header_name,
       :header_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user pool identity provider (IdP). Contains information about a third-party IdP to a
@@ -5786,16 +5583,7 @@ module Aws::CognitoIdentityProvider
       :last_modified_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdentityProviderTypeType
-      SAML = 'SAML'
-      Facebook = 'Facebook'
-      Google = 'Google'
-      LoginWithAmazon = 'LoginWithAmazon'
-      SignInWithApple = 'SignInWithApple'
-      OIDC = 'OIDC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Initiates the authentication request.</p>
@@ -5992,7 +5780,7 @@ module Aws::CognitoIdentityProvider
       :user_context_data,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Initiates the authentication response.</p>
@@ -6134,7 +5922,7 @@ module Aws::CognitoIdentityProvider
       :authentication_result,
       :available_challenges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters an internal error.</p>
@@ -6144,7 +5932,7 @@ module Aws::CognitoIdentityProvider
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito isn't allowed to use your email identity. HTTP
@@ -6156,7 +5944,7 @@ module Aws::CognitoIdentityProvider
     class InvalidEmailRoleAccessPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters an invalid Lambda response.</p>
@@ -6167,7 +5955,7 @@ module Aws::CognitoIdentityProvider
     class InvalidLambdaResponseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified OAuth flow is not valid.</p>
@@ -6176,7 +5964,7 @@ module Aws::CognitoIdentityProvider
     class InvalidOAuthFlowException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the Amazon Cognito service encounters an invalid
@@ -6192,7 +5980,7 @@ module Aws::CognitoIdentityProvider
       :message,
       :reason_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters an invalid password.</p>
@@ -6202,7 +5990,7 @@ module Aws::CognitoIdentityProvider
     class InvalidPasswordException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is returned when the role provided for SMS configuration doesn't have
@@ -6214,7 +6002,7 @@ module Aws::CognitoIdentityProvider
     class InvalidSmsRoleAccessPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the trust relationship is not valid for the role
@@ -6228,7 +6016,7 @@ module Aws::CognitoIdentityProvider
     class InvalidSmsRoleTrustRelationshipException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the user pool configuration is not valid.</p>
@@ -6238,7 +6026,7 @@ module Aws::CognitoIdentityProvider
     class InvalidUserPoolConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at several possible
@@ -6328,7 +6116,7 @@ module Aws::CognitoIdentityProvider
       :custom_email_sender,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user exceeds the limit for a requested Amazon Web Services
@@ -6339,7 +6127,7 @@ module Aws::CognitoIdentityProvider
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list the devices.</p>
@@ -6362,7 +6150,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response to list devices.</p>
@@ -6379,7 +6167,7 @@ module Aws::CognitoIdentityProvider
       :devices,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -6400,7 +6188,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -6416,7 +6204,7 @@ module Aws::CognitoIdentityProvider
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -6437,7 +6225,7 @@ module Aws::CognitoIdentityProvider
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute providers
@@ -6453,7 +6241,7 @@ module Aws::CognitoIdentityProvider
       :providers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -6475,7 +6263,7 @@ module Aws::CognitoIdentityProvider
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_servers
@@ -6491,7 +6279,7 @@ module Aws::CognitoIdentityProvider
       :resource_servers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6500,7 +6288,7 @@ module Aws::CognitoIdentityProvider
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -6509,7 +6297,7 @@ module Aws::CognitoIdentityProvider
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list the user import jobs.</p>
@@ -6532,7 +6320,7 @@ module Aws::CognitoIdentityProvider
       :max_results,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to list the user import
@@ -6550,7 +6338,7 @@ module Aws::CognitoIdentityProvider
       :user_import_jobs,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list the user pool clients.</p>
@@ -6573,7 +6361,7 @@ module Aws::CognitoIdentityProvider
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server that lists user pool clients.</p>
@@ -6589,7 +6377,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_clients,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list user pools.</p>
@@ -6607,7 +6395,7 @@ module Aws::CognitoIdentityProvider
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response to list user pools.</p>
@@ -6623,7 +6411,7 @@ module Aws::CognitoIdentityProvider
       :user_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -6649,7 +6437,7 @@ module Aws::CognitoIdentityProvider
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -6664,7 +6452,7 @@ module Aws::CognitoIdentityProvider
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to list users.</p>
@@ -6792,7 +6580,7 @@ module Aws::CognitoIdentityProvider
       :pagination_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the request to list users.</p>
@@ -6808,7 +6596,7 @@ module Aws::CognitoIdentityProvider
       :users,
       :pagination_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -6831,7 +6619,7 @@ module Aws::CognitoIdentityProvider
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credentials
@@ -6846,7 +6634,7 @@ module Aws::CognitoIdentityProvider
       :credentials,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of user event logs to an external Amazon Web Services service like
@@ -6887,7 +6675,7 @@ module Aws::CognitoIdentityProvider
       :s3_configuration,
       :firehose_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging parameters of a user pool, as returned in the response to a
@@ -6903,12 +6691,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :log_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      ERROR = 'ERROR'
-      INFO = 'INFO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito can't find a multi-factor authentication
@@ -6920,7 +6703,7 @@ module Aws::CognitoIdentityProvider
     class MFAMethodNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6939,7 +6722,7 @@ module Aws::CognitoIdentityProvider
       :delivery_medium,
       :attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when you attempt to apply a managed login branding style to
@@ -6949,7 +6732,7 @@ module Aws::CognitoIdentityProvider
     class ManagedLoginBrandingExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A managed login branding style that's assigned to a user pool app client.</p>
@@ -6992,17 +6775,12 @@ module Aws::CognitoIdentityProvider
       :creation_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_cognito_provided_values] = false unless options.key?(:use_cognito_provided_values)
         super
       end
-    end
-
-    module MessageActionType
-      RESEND = 'RESEND'
-      SUPPRESS = 'SUPPRESS'
     end
 
     # <p>The message template structure.</p>
@@ -7020,7 +6798,7 @@ module Aws::CognitoIdentityProvider
       :email_message,
       :email_subject,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that your user pool responds with in <code>AuthenticationResult</code>when
@@ -7039,7 +6817,7 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :device_group_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user isn't authorized.</p>
@@ -7049,7 +6827,7 @@ module Aws::CognitoIdentityProvider
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for Amazon SES email messages that threat protection sends to a user when
@@ -7088,7 +6866,7 @@ module Aws::CognitoIdentityProvider
       :no_action_email,
       :mfa_email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template for email messages that threat protection sends to a user when your
@@ -7111,7 +6889,7 @@ module Aws::CognitoIdentityProvider
       :html_body,
       :text_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum values of an attribute that is of the number type, for example
@@ -7128,13 +6906,7 @@ module Aws::CognitoIdentityProvider
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OAuthFlowType
-      code = 'code'
-      implicit = 'implicit'
-      client_credentials = 'client_credentials'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message returned when a user's new password matches a previous password and
@@ -7144,7 +6916,7 @@ module Aws::CognitoIdentityProvider
     class PasswordHistoryPolicyViolationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The password policy settings for a user pool, including complexity, history, and
@@ -7194,7 +6966,7 @@ module Aws::CognitoIdentityProvider
       :password_history_size,
       :temporary_password_validity_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:require_uppercase] = false unless options.key?(:require_uppercase)
@@ -7213,13 +6985,7 @@ module Aws::CognitoIdentityProvider
     class PasswordResetRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreTokenGenerationLambdaVersionType
-      V1_0 = 'V1_0'
-      V2_0 = 'V2_0'
-      V3_0 = 'V3_0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a pre token generation Lambda trigger.</p>
@@ -7236,7 +7002,7 @@ module Aws::CognitoIdentityProvider
       :lambda_version,
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a precondition is not met.</p>
@@ -7246,12 +7012,7 @@ module Aws::CognitoIdentityProvider
     class PreconditionNotMetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreventUserExistenceErrorTypes
-      LEGACY = 'LEGACY'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a user pool identity provider (IdP), including name and type.</p>
@@ -7277,7 +7038,7 @@ module Aws::CognitoIdentityProvider
       :last_modified_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The characteristics of a source or destination user for linking a federated user
@@ -7297,13 +7058,7 @@ module Aws::CognitoIdentityProvider
       :provider_attribute_name,
       :provider_attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecoveryOptionNameType
-      VERIFIED_EMAIL = 'verified_email'
-      VERIFIED_PHONE_NUMBER = 'verified_phone_number'
-      ADMIN_ONLY = 'admin_only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A recovery option for a user. The <code>AccountRecoverySettingType</code> data type is
@@ -7325,7 +7080,7 @@ module Aws::CognitoIdentityProvider
       :priority,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is throw when your application requests token refresh with a refresh
@@ -7335,7 +7090,7 @@ module Aws::CognitoIdentityProvider
     class RefreshTokenReuseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of your app client for refresh token rotation. When enabled, your
@@ -7356,7 +7111,7 @@ module Aws::CognitoIdentityProvider
       :feature,
       :retry_grace_period_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to resend the confirmation code.</p>
@@ -7428,7 +7183,7 @@ module Aws::CognitoIdentityProvider
       :analytics_metadata,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server when Amazon Cognito makes the request to resend a confirmation
@@ -7440,7 +7195,7 @@ module Aws::CognitoIdentityProvider
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the Amazon Cognito service can't find the requested
@@ -7452,7 +7207,7 @@ module Aws::CognitoIdentityProvider
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One custom scope associated with a user pool resource server. This data type is a
@@ -7472,7 +7227,7 @@ module Aws::CognitoIdentityProvider
       :scope_name,
       :scope_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a resource server configuration and associated custom scopes in a user
@@ -7500,7 +7255,7 @@ module Aws::CognitoIdentityProvider
       :name,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to respond to an authentication challenge.</p>
@@ -7862,7 +7617,7 @@ module Aws::CognitoIdentityProvider
       :user_context_data,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to respond to the authentication challenge.</p>
@@ -7996,7 +7751,7 @@ module Aws::CognitoIdentityProvider
       :challenge_parameters,
       :authentication_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token
@@ -8013,12 +7768,12 @@ module Aws::CognitoIdentityProvider
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RevokeTokenResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings of risk configuration for threat protection with threat protection in a
@@ -8055,13 +7810,7 @@ module Aws::CognitoIdentityProvider
       :risk_exception_configuration,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RiskDecisionType
-      NoRisk = 'NoRisk'
-      AccountTakeover = 'AccountTakeover'
-      Block = 'Block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceptions to the risk evaluation configuration, including always-allow and
@@ -8078,13 +7827,7 @@ module Aws::CognitoIdentityProvider
       :blocked_ip_range_list,
       :skipped_ip_range_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RiskLevelType
-      Low = 'Low'
-      Medium = 'Medium'
-      High = 'High'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the Amazon S3 bucket destination of user activity log export with threat
@@ -8096,7 +7839,7 @@ module Aws::CognitoIdentityProvider
     class S3ConfigurationType < Struct.new(
       :bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user's preference for using SMS message multi-factor authentication (MFA). Turns SMS
@@ -8117,7 +7860,7 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :preferred_mfa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -8190,12 +7933,12 @@ module Aws::CognitoIdentityProvider
       :number_attribute_constraints,
       :string_attribute_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:developer_only_attribute] =  unless options.key?(:developer_only_attribute)
-        options[:mutable] =  unless options.key?(:mutable)
-        options[:required] =  unless options.key?(:required)
+        options[:developer_only_attribute] = nil unless options.key?(:developer_only_attribute)
+        options[:mutable] = nil unless options.key?(:mutable)
+        options[:required] = nil unless options.key?(:required)
         super
       end
     end
@@ -8206,7 +7949,7 @@ module Aws::CognitoIdentityProvider
     class ScopeDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -8219,7 +7962,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :log_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_delivery_configuration
@@ -8228,7 +7971,7 @@ module Aws::CognitoIdentityProvider
     class SetLogDeliveryConfigurationResponse < Struct.new(
       :log_delivery_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -8267,7 +8010,7 @@ module Aws::CognitoIdentityProvider
       :account_takeover_risk_configuration,
       :risk_exception_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute risk_configuration
@@ -8277,7 +8020,7 @@ module Aws::CognitoIdentityProvider
     class SetRiskConfigurationResponse < Struct.new(
       :risk_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -8306,7 +8049,7 @@ module Aws::CognitoIdentityProvider
       :css,
       :image_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ui_customization
@@ -8315,7 +8058,7 @@ module Aws::CognitoIdentityProvider
     class SetUICustomizationResponse < Struct.new(
       :ui_customization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_mfa_settings
@@ -8344,12 +8087,12 @@ module Aws::CognitoIdentityProvider
       :email_mfa_settings,
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SetUserMFAPreferenceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -8393,7 +8136,7 @@ module Aws::CognitoIdentityProvider
       :mfa_configuration,
       :web_authn_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_mfa_configuration
@@ -8434,7 +8177,7 @@ module Aws::CognitoIdentityProvider
       :mfa_configuration,
       :web_authn_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to set user settings.</p>
@@ -8450,13 +8193,13 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :mfa_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server for a set user settings request.</p>
     class SetUserSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy for allowed types of authentication in a user pool.
@@ -8470,7 +8213,7 @@ module Aws::CognitoIdentityProvider
     class SignInPolicyType < Struct.new(
       :allowed_first_auth_factors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to register a user.</p>
@@ -8564,7 +8307,7 @@ module Aws::CognitoIdentityProvider
       :user_context_data,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the server for a registration request.</p>
@@ -8593,7 +8336,7 @@ module Aws::CognitoIdentityProvider
       :user_sub,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:user_confirmed] = false unless options.key?(:user_confirmed)
@@ -8636,7 +8379,7 @@ module Aws::CognitoIdentityProvider
       :external_id,
       :sns_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of multi-factor authentication (MFA) with SMS messages in a user
@@ -8658,7 +8401,7 @@ module Aws::CognitoIdentityProvider
       :sms_authentication_message,
       :sms_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the software token time-based one-time password (TOTP)
@@ -8668,7 +8411,7 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMFANotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for time-based one-time password (TOTP) multi-factor authentication (MFA) in
@@ -8679,7 +8422,7 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMfaConfigType < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -8703,7 +8446,7 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :preferred_mfa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -8723,7 +8466,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to start the user import
@@ -8735,7 +8478,7 @@ module Aws::CognitoIdentityProvider
     class StartUserImportJobResponse < Struct.new(
       :user_import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -8745,7 +8488,7 @@ module Aws::CognitoIdentityProvider
     class StartWebAuthnRegistrationRequest < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credential_creation_options
@@ -8755,12 +8498,7 @@ module Aws::CognitoIdentityProvider
     class StartWebAuthnRegistrationResponse < Struct.new(
       :credential_creation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusType
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to stop the user import job.</p>
@@ -8774,7 +8512,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to stop the user import
@@ -8786,7 +8524,7 @@ module Aws::CognitoIdentityProvider
     class StopUserImportJobResponse < Struct.new(
       :user_import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum length values of an attribute that is of the string type, for
@@ -8803,7 +8541,7 @@ module Aws::CognitoIdentityProvider
       :min_length,
       :max_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8816,12 +8554,12 @@ module Aws::CognitoIdentityProvider
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when you've attempted to change your feature plan but
@@ -8831,14 +8569,7 @@ module Aws::CognitoIdentityProvider
     class TierChangeNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeUnitsType
-      SECONDS = 'seconds'
-      MINUTES = 'minutes'
-      HOURS = 'hours'
-      DAYS = 'days'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time units that, with <code>IdTokenValidity</code>,
@@ -8867,7 +8598,7 @@ module Aws::CognitoIdentityProvider
       :id_token,
       :refresh_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the user has made too many failed attempts for a given
@@ -8879,7 +8610,7 @@ module Aws::CognitoIdentityProvider
     class TooManyFailedAttemptsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the user has made too many requests for a given
@@ -8891,7 +8622,7 @@ module Aws::CognitoIdentityProvider
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for the UI customization information for the hosted UI in a user
@@ -8930,7 +8661,7 @@ module Aws::CognitoIdentityProvider
       :last_modified_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that is thrown when the request isn't authorized. This can happen due to an
@@ -8940,7 +8671,7 @@ module Aws::CognitoIdentityProvider
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters an unexpected exception with
@@ -8951,7 +8682,7 @@ module Aws::CognitoIdentityProvider
     class UnexpectedLambdaException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the specified identifier isn't supported.</p>
@@ -8960,7 +8691,7 @@ module Aws::CognitoIdentityProvider
     class UnsupportedIdentityProviderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that is thrown when you attempt to perform an operation that isn't enabled
@@ -8970,7 +8701,7 @@ module Aws::CognitoIdentityProvider
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that is thrown when an unsupported token is passed to an operation.</p>
@@ -8979,7 +8710,7 @@ module Aws::CognitoIdentityProvider
     class UnsupportedTokenTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because the user is in an unsupported state.</p>
@@ -8989,7 +8720,7 @@ module Aws::CognitoIdentityProvider
     class UnsupportedUserStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9002,12 +8733,12 @@ module Aws::CognitoIdentityProvider
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -9041,12 +8772,12 @@ module Aws::CognitoIdentityProvider
       :feedback_token,
       :feedback_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAuthEventFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to update the device status.</p>
@@ -9067,13 +8798,13 @@ module Aws::CognitoIdentityProvider
       :device_key,
       :device_remembered_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to the request to update the device status.</p>
     class UpdateDeviceStatusResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -9114,7 +8845,7 @@ module Aws::CognitoIdentityProvider
       :role_arn,
       :precedence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -9124,7 +8855,7 @@ module Aws::CognitoIdentityProvider
     class UpdateGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -9274,7 +9005,7 @@ module Aws::CognitoIdentityProvider
       :attribute_mapping,
       :idp_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -9283,7 +9014,7 @@ module Aws::CognitoIdentityProvider
     class UpdateIdentityProviderResponse < Struct.new(
       :identity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -9316,7 +9047,7 @@ module Aws::CognitoIdentityProvider
       :settings,
       :assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_login_branding
@@ -9325,7 +9056,7 @@ module Aws::CognitoIdentityProvider
     class UpdateManagedLoginBrandingResponse < Struct.new(
       :managed_login_branding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_pool_id
@@ -9353,7 +9084,7 @@ module Aws::CognitoIdentityProvider
       :name,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_server
@@ -9362,7 +9093,7 @@ module Aws::CognitoIdentityProvider
     class UpdateResourceServerResponse < Struct.new(
       :resource_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to update user attributes.</p>
@@ -9418,7 +9149,7 @@ module Aws::CognitoIdentityProvider
       :access_token,
       :client_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server for the request to update user
@@ -9435,7 +9166,7 @@ module Aws::CognitoIdentityProvider
     class UpdateUserAttributesResponse < Struct.new(
       :code_delivery_details_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to update the user pool client.</p>
@@ -9763,7 +9494,7 @@ module Aws::CognitoIdentityProvider
       :auth_session_validity,
       :refresh_token_rotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server to the request to update the user pool
@@ -9774,7 +9505,7 @@ module Aws::CognitoIdentityProvider
     class UpdateUserPoolClientResponse < Struct.new(
       :user_pool_client,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateUserPoolDomain request input.</p>
@@ -9807,7 +9538,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_version,
       :custom_domain_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateUserPoolDomain response output.</p>
@@ -9827,7 +9558,7 @@ module Aws::CognitoIdentityProvider
       :managed_login_version,
       :cloud_front_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to update the user pool.</p>
@@ -9976,14 +9707,14 @@ module Aws::CognitoIdentityProvider
       :pool_name,
       :user_pool_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the response from the server when you make a request to update the user
     #             pool.</p>
     class UpdateUserPoolResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,
@@ -10005,7 +9736,7 @@ module Aws::CognitoIdentityProvider
     class UserAttributeUpdateSettingsType < Struct.new(
       :attributes_require_verification_before_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contextual data, such as the user's device fingerprint, IP address, or location, used
@@ -10022,7 +9753,7 @@ module Aws::CognitoIdentityProvider
       :ip_address,
       :encoded_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when you're trying to modify a user pool while a user import
@@ -10033,18 +9764,7 @@ module Aws::CognitoIdentityProvider
     class UserImportInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserImportJobStatusType
-      Created = 'Created'
-      Pending = 'Pending'
-      InProgress = 'InProgress'
-      Stopping = 'Stopping'
-      Expired = 'Expired'
-      Stopped = 'Stopped'
-      Failed = 'Failed'
-      Succeeded = 'Succeeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user import job in a user pool. Describes the status of user import with a CSV file.
@@ -10146,7 +9866,7 @@ module Aws::CognitoIdentityProvider
       :failed_users,
       :completion_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:imported_users] = 0 unless options.key?(:imported_users)
@@ -10165,7 +9885,7 @@ module Aws::CognitoIdentityProvider
     class UserLambdaValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user isn't confirmed successfully.</p>
@@ -10175,7 +9895,7 @@ module Aws::CognitoIdentityProvider
     class UserNotConfirmedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user isn't found.</p>
@@ -10185,7 +9905,7 @@ module Aws::CognitoIdentityProvider
     class UserNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when user pool add-ons aren't enabled.</p>
@@ -10194,7 +9914,7 @@ module Aws::CognitoIdentityProvider
     class UserPoolAddOnNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings for activation of threat protection, including the operating 
@@ -10217,7 +9937,7 @@ module Aws::CognitoIdentityProvider
       :advanced_security_mode,
       :advanced_security_additional_flows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A short description of a user pool app client.</p>
@@ -10235,7 +9955,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_id,
       :client_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a user pool client.</p>
@@ -10591,11 +10311,11 @@ module Aws::CognitoIdentityProvider
       :auth_session_validity,
       :refresh_token_rotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:refresh_token_validity] = 0 unless options.key?(:refresh_token_validity)
-        options[:allowed_o_auth_flows_user_pool_client] =  unless options.key?(:allowed_o_auth_flows_user_pool_client)
+        options[:allowed_o_auth_flows_user_pool_client] = nil unless options.key?(:allowed_o_auth_flows_user_pool_client)
         super
       end
     end
@@ -10633,13 +10353,7 @@ module Aws::CognitoIdentityProvider
       :last_modified_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserPoolMfaType
-      OFF = 'OFF'
-      ON = 'ON'
-      OPTIONAL = 'OPTIONAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of user pool policies. Contains the policy that sets password-complexity
@@ -10655,7 +10369,7 @@ module Aws::CognitoIdentityProvider
       :password_policy,
       :sign_in_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user pool tag can't be set or updated.</p>
@@ -10664,13 +10378,7 @@ module Aws::CognitoIdentityProvider
     class UserPoolTaggingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserPoolTierType
-      LITE = 'LITE'
-      ESSENTIALS = 'ESSENTIALS'
-      PLUS = 'PLUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a user pool.</p>
@@ -10909,23 +10617,12 @@ module Aws::CognitoIdentityProvider
       :account_recovery_setting,
       :user_pool_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_number_of_users] = 0 unless options.key?(:estimated_number_of_users)
         super
       end
-    end
-
-    module UserStatusType
-      UNCONFIRMED = 'UNCONFIRMED'
-      CONFIRMED = 'CONFIRMED'
-      ARCHIVED = 'ARCHIVED'
-      COMPROMISED = 'COMPROMISED'
-      UNKNOWN = 'UNKNOWN'
-      RESET_REQUIRED = 'RESET_REQUIRED'
-      FORCE_CHANGE_PASSWORD = 'FORCE_CHANGE_PASSWORD'
-      EXTERNAL_PROVIDER = 'EXTERNAL_PROVIDER'
     end
 
     # <p>A user profile in a Amazon Cognito user pool.</p>
@@ -10988,22 +10685,12 @@ module Aws::CognitoIdentityProvider
       :user_status,
       :mfa_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module UserVerificationType
-      REQUIRED = 'required'
-      PREFERRED = 'preferred'
-    end
-
-    module UsernameAttributeType
-      PHONE_NUMBER = 'phone_number'
-      EMAIL = 'email'
     end
 
     # <p>The configuration of a user pool for username case sensitivity.</p>
@@ -11035,7 +10722,7 @@ module Aws::CognitoIdentityProvider
     class UsernameConfigurationType < Struct.new(
       :case_sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when Amazon Cognito encounters a user name that already
@@ -11046,7 +10733,7 @@ module Aws::CognitoIdentityProvider
     class UsernameExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template for the verification message that your user pool delivers to users who
@@ -11090,12 +10777,7 @@ module Aws::CognitoIdentityProvider
       :email_subject_by_link,
       :default_email_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAttributeType
-      PHONE_NUMBER = 'phone_number'
-      EMAIL = 'email'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -11117,7 +10799,7 @@ module Aws::CognitoIdentityProvider
       :user_code,
       :friendly_device_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -11133,12 +10815,7 @@ module Aws::CognitoIdentityProvider
       :status,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifySoftwareTokenResponseType
-      SUCCESS = 'SUCCESS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the request to verify user attributes.</p>
@@ -11158,14 +10835,14 @@ module Aws::CognitoIdentityProvider
       :attribute_name,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container representing the response from the server from the request to verify user
     #             attributes.</p>
     class VerifyUserAttributeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the challenge from <code>StartWebAuthn</code>
@@ -11175,7 +10852,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnChallengeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the access token is for a different client than the one
@@ -11185,7 +10862,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnClientMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user pool doesn't have a configured relying party
@@ -11195,7 +10872,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnConfigurationMissingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for authentication (MFA) with passkey, or webauthN, biometric and
@@ -11243,7 +10920,7 @@ module Aws::CognitoIdentityProvider
       :relying_party_id,
       :user_verification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a passkey, or webauthN, biometric or security-key authentication factor
@@ -11278,7 +10955,7 @@ module Aws::CognitoIdentityProvider
       :authenticator_transports,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a user presents passkey credentials from an unsupported
@@ -11288,7 +10965,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnCredentialNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the passkey feature isn't enabled for the user
@@ -11298,7 +10975,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the passkey credential's registration origin does not
@@ -11308,7 +10985,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnOriginNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the given passkey credential is associated with a
@@ -11318,7 +10995,7 @@ module Aws::CognitoIdentityProvider
     class WebAuthnRelyingPartyMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

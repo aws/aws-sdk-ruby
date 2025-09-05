@@ -26,7 +26,7 @@ module Aws::EFS
       :message,
       :access_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of an EFS file system access point.</p>
@@ -75,7 +75,7 @@ module Aws::EFS
       :owner_id,
       :life_cycle_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the Amazon Web Services account has already created the maximum number of access points
@@ -95,7 +95,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the specified <code>AccessPointId</code> value doesn't exist in the
@@ -115,7 +115,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the Availability Zone that was specified for a mount target is 
@@ -136,7 +136,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The backup policy for the file system used to create automatic daily backups. If status has a value of 
@@ -177,7 +177,7 @@ module Aws::EFS
     class BackupPolicy < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the request is malformed or contains an error such as an invalid
@@ -197,7 +197,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the source file system in a replication is encrypted but the destination file system is unencrypted.</p>
@@ -216,7 +216,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of an EFS file system access point.</p>
@@ -265,7 +265,7 @@ module Aws::EFS
       :owner_id,
       :life_cycle_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -302,7 +302,7 @@ module Aws::EFS
       :posix_user,
       :root_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the file system.</p>
@@ -407,7 +407,7 @@ module Aws::EFS
       :tags,
       :file_system_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_mount_targets] = 0 unless options.key?(:number_of_mount_targets)
@@ -525,7 +525,7 @@ module Aws::EFS
       :backup,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of a mount target.</p>
@@ -581,7 +581,7 @@ module Aws::EFS
       :availability_zone_name,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -634,7 +634,7 @@ module Aws::EFS
       :ip_address_type,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the replication configuration for a specific file system.</p>
@@ -671,7 +671,7 @@ module Aws::EFS
       :destinations,
       :source_file_system_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_file_system_id
@@ -685,7 +685,7 @@ module Aws::EFS
       :source_file_system_id,
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -701,7 +701,7 @@ module Aws::EFS
       :file_system_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist. 
@@ -730,7 +730,7 @@ module Aws::EFS
       :owner_gid,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_point_id
@@ -739,7 +739,7 @@ module Aws::EFS
     class DeleteAccessPointRequest < Struct.new(
       :access_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -749,7 +749,7 @@ module Aws::EFS
     class DeleteFileSystemPolicyRequest < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -759,7 +759,7 @@ module Aws::EFS
     class DeleteFileSystemRequest < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -769,7 +769,7 @@ module Aws::EFS
     class DeleteMountTargetRequest < Struct.new(
       :mount_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_file_system_id
@@ -796,7 +796,7 @@ module Aws::EFS
       :source_file_system_id,
       :deletion_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -810,12 +810,7 @@ module Aws::EFS
       :file_system_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionMode
-      ALL_CONFIGURATIONS = 'ALL_CONFIGURATIONS'
-      LOCAL_CONFIGURATION_ONLY = 'LOCAL_CONFIGURATION_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service timed out trying to fulfill the request, and the client should try the
@@ -835,7 +830,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -862,7 +857,7 @@ module Aws::EFS
       :access_point_id,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_points
@@ -876,7 +871,7 @@ module Aws::EFS
       :access_points,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -892,7 +887,7 @@ module Aws::EFS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id_preference
@@ -906,7 +901,7 @@ module Aws::EFS
       :resource_id_preference,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_policy
@@ -916,7 +911,7 @@ module Aws::EFS
     class DescribeBackupPolicyOutput < Struct.new(
       :backup_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -926,7 +921,7 @@ module Aws::EFS
     class DescribeBackupPolicyRequest < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -941,7 +936,7 @@ module Aws::EFS
       :file_system_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -951,7 +946,7 @@ module Aws::EFS
     class DescribeFileSystemPolicyRequest < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -979,7 +974,7 @@ module Aws::EFS
       :creation_token,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -997,7 +992,7 @@ module Aws::EFS
       :file_systems,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policies
@@ -1007,7 +1002,7 @@ module Aws::EFS
     class DescribeLifecycleConfigurationOutput < Struct.new(
       :lifecycle_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -1017,7 +1012,7 @@ module Aws::EFS
     class DescribeLifecycleConfigurationRequest < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1027,7 +1022,7 @@ module Aws::EFS
     class DescribeMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_groups
@@ -1036,7 +1031,7 @@ module Aws::EFS
     class DescribeMountTargetSecurityGroupsResponse < Struct.new(
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1069,7 +1064,7 @@ module Aws::EFS
       :mount_target_id,
       :access_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1091,7 +1086,7 @@ module Aws::EFS
       :mount_targets,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -1114,7 +1109,7 @@ module Aws::EFS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replications
@@ -1128,7 +1123,7 @@ module Aws::EFS
       :replications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1150,7 +1145,7 @@ module Aws::EFS
       :marker,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1172,7 +1167,7 @@ module Aws::EFS
       :tags,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination file system in the replication configuration.</p>
@@ -1218,7 +1213,7 @@ module Aws::EFS
       :status_message,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the new or existing destination file system for the replication
@@ -1308,7 +1303,7 @@ module Aws::EFS
       :file_system_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the file system you are trying to create already exists, with the
@@ -1331,7 +1326,7 @@ module Aws::EFS
       :message,
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the file system.</p>
@@ -1436,7 +1431,7 @@ module Aws::EFS
       :tags,
       :file_system_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_mount_targets] = 0 unless options.key?(:number_of_mount_targets)
@@ -1460,7 +1455,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the Amazon Web Services account has already created the maximum number of file systems
@@ -1480,7 +1475,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the specified <code>FileSystemId</code> value doesn't exist in the
@@ -1500,7 +1495,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the protection on a file system. </p>
@@ -1532,7 +1527,7 @@ module Aws::EFS
     class FileSystemProtectionDescription < Struct.new(
       :replication_overwrite_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The latest known metered size (in bytes) of data stored in the file system, in its
@@ -1568,7 +1563,7 @@ module Aws::EFS
       :value_in_standard,
       :value_in_archive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -1592,7 +1587,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the mount target is not in the correct state for the
@@ -1612,7 +1607,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if there's not enough capacity to provision additional throughput. This value
@@ -1635,7 +1630,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if an error occurred on the server side.</p>
@@ -1654,7 +1649,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the <code>FileSystemPolicy</code> is malformed or contains an error such
@@ -1675,7 +1670,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the request specified an <code>IpAddress</code> that is already in use
@@ -1695,22 +1690,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      IPV4_ONLY = 'IPV4_ONLY'
-      IPV6_ONLY = 'IPV6_ONLY'
-      DUAL_STACK = 'DUAL_STACK'
-    end
-
-    module LifeCycleState
-      CREATING = 'creating'
-      AVAILABLE = 'available'
-      UPDATING = 'updating'
-      DELETING = 'deleting'
-      DELETED = 'deleted'
-      ERROR = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a policy used by lifecycle management that specifies when to transition files
@@ -1746,7 +1726,7 @@ module Aws::EFS
       :transition_to_primary_storage_class,
       :transition_to_archive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1764,7 +1744,7 @@ module Aws::EFS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1778,7 +1758,7 @@ module Aws::EFS
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1792,7 +1772,7 @@ module Aws::EFS
       :mount_target_id,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the mount target would violate one of the specified restrictions based
@@ -1812,7 +1792,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of a mount target.</p>
@@ -1868,7 +1848,7 @@ module Aws::EFS
       :availability_zone_name,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if there is no mount target with the specified ID found in the
@@ -1888,7 +1868,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calling account has reached the limit for elastic network interfaces for the
@@ -1912,7 +1892,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if <code>IpAddress</code> was not specified in the request and there are
@@ -1932,12 +1912,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PerformanceMode
-      GENERAL_PURPOSE = 'generalPurpose'
-      MAX_IO = 'maxIO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if <code>no backup</code> is specified for a One Zone EFS file system.</p>
@@ -1956,7 +1931,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The full POSIX identity, including the user ID, group ID, and any secondary group IDs, on the access point that is used for all file system operations performed by
@@ -1975,7 +1950,7 @@ module Aws::EFS
       :gid,
       :secondary_gids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id_type
@@ -1990,7 +1965,7 @@ module Aws::EFS
     class PutAccountPreferencesRequest < Struct.new(
       :resource_id_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id_preference
@@ -1999,7 +1974,7 @@ module Aws::EFS
     class PutAccountPreferencesResponse < Struct.new(
       :resource_id_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_policy
@@ -2009,7 +1984,7 @@ module Aws::EFS
     class PutBackupPolicyOutput < Struct.new(
       :backup_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2022,7 +1997,7 @@ module Aws::EFS
       :file_system_id,
       :backup_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2037,7 +2012,7 @@ module Aws::EFS
       :file_system_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2062,7 +2037,7 @@ module Aws::EFS
       :policy,
       :bypass_policy_lockout_safety_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_policies
@@ -2072,7 +2047,7 @@ module Aws::EFS
     class PutLifecycleConfigurationOutput < Struct.new(
       :lifecycle_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2127,7 +2102,7 @@ module Aws::EFS
       :file_system_id,
       :lifecycle_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the file system is already included in a replication configuration.></p>
@@ -2146,7 +2121,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the replication configuration for a specific file system.</p>
@@ -2183,7 +2158,7 @@ module Aws::EFS
       :destinations,
       :source_file_system_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the specified file system does not have a replication
@@ -2202,28 +2177,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationOverwriteProtection
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      REPLICATING = 'REPLICATING'
-    end
-
-    module ReplicationStatus
-      ENABLED = 'ENABLED'
-      ENABLING = 'ENABLING'
-      DELETING = 'DELETING'
-      ERROR = 'ERROR'
-      PAUSED = 'PAUSED'
-      PAUSING = 'PAUSING'
-    end
-
-    # An EFS resource, for example a file system or a mount target.
-    module Resource
-      FileSystem = 'FILE_SYSTEM'
-      MountTarget = 'MOUNT_TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource type and its ID preference for the user's Amazon Web Services account, in the current Amazon Web Services Region.</p>
@@ -2238,13 +2192,7 @@ module Aws::EFS
       :resource_id_type,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
-    module ResourceIdType
-      LongId = 'LONG_ID'
-      ShortId = 'SHORT_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the directory on the Amazon EFS file system that the access point
@@ -2273,7 +2221,7 @@ module Aws::EFS
       :path,
       :creation_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the number of <code>SecurityGroups</code> specified in the request is
@@ -2297,7 +2245,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if one of the specified security groups doesn't exist in the subnet's
@@ -2317,14 +2265,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      ENABLED = 'ENABLED'
-      ENABLING = 'ENABLING'
-      DISABLED = 'DISABLED'
-      DISABLING = 'DISABLING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if there is no subnet with ID <code>SubnetId</code> provided in the
@@ -2344,7 +2285,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a key-value pair. Allowed characters are letters, white space, and numbers that
@@ -2359,7 +2300,7 @@ module Aws::EFS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -2373,7 +2314,7 @@ module Aws::EFS
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the <code>CreateAccessPoint</code> API action is called too quickly and 
@@ -2394,7 +2335,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the throughput mode or amount of provisioned throughput can't be changed
@@ -2414,13 +2355,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThroughputMode
-      BURSTING = 'bursting'
-      PROVISIONED = 'provisioned'
-      ELASTIC = 'elastic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if you don’t wait at least 24 hours before either changing the throughput mode, or
@@ -2440,35 +2375,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitionToArchiveRules
-      AFTER_1_DAY = 'AFTER_1_DAY'
-      AFTER_7_DAYS = 'AFTER_7_DAYS'
-      AFTER_14_DAYS = 'AFTER_14_DAYS'
-      AFTER_30_DAYS = 'AFTER_30_DAYS'
-      AFTER_60_DAYS = 'AFTER_60_DAYS'
-      AFTER_90_DAYS = 'AFTER_90_DAYS'
-      AFTER_180_DAYS = 'AFTER_180_DAYS'
-      AFTER_270_DAYS = 'AFTER_270_DAYS'
-      AFTER_365_DAYS = 'AFTER_365_DAYS'
-    end
-
-    module TransitionToIARules
-      AFTER_7_DAYS = 'AFTER_7_DAYS'
-      AFTER_14_DAYS = 'AFTER_14_DAYS'
-      AFTER_30_DAYS = 'AFTER_30_DAYS'
-      AFTER_60_DAYS = 'AFTER_60_DAYS'
-      AFTER_90_DAYS = 'AFTER_90_DAYS'
-      AFTER_1_DAY = 'AFTER_1_DAY'
-      AFTER_180_DAYS = 'AFTER_180_DAYS'
-      AFTER_270_DAYS = 'AFTER_270_DAYS'
-      AFTER_365_DAYS = 'AFTER_365_DAYS'
-    end
-
-    module TransitionToPrimaryStorageClassRules
-      AFTER_1_ACCESS = 'AFTER_1_ACCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the requested Amazon EFS functionality is not available in the specified Availability Zone.</p>
@@ -2487,7 +2394,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -2501,7 +2408,7 @@ module Aws::EFS
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the file system.</p>
@@ -2606,7 +2513,7 @@ module Aws::EFS
       :tags,
       :file_system_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_mount_targets] = 0 unless options.key?(:number_of_mount_targets)
@@ -2643,7 +2550,7 @@ module Aws::EFS
     class UpdateFileSystemProtectionOutput < Struct.new(
       :replication_overwrite_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2678,7 +2585,7 @@ module Aws::EFS
       :file_system_id,
       :replication_overwrite_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_id
@@ -2704,7 +2611,7 @@ module Aws::EFS
       :throughput_mode,
       :provisioned_throughput_in_mibps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the Backup service is not available in the Amazon Web Services Region in which the request was made.</p>
@@ -2723,7 +2630,7 @@ module Aws::EFS
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

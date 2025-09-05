@@ -25,7 +25,7 @@ module Aws::CodeGuruSecurity
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of findings metrics for an account on a specified date.</p>
@@ -52,12 +52,7 @@ module Aws::CodeGuruSecurity
       :open_findings,
       :mean_time_to_close,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisType
-      SECURITY = 'Security'
-      ALL = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the error that caused a finding to fail to be retrieved.</p>
@@ -79,7 +74,7 @@ module Aws::CodeGuruSecurity
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute finding_identifiers
@@ -90,7 +85,7 @@ module Aws::CodeGuruSecurity
     class BatchGetFindingsRequest < Struct.new(
       :finding_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -105,7 +100,7 @@ module Aws::CodeGuruSecurity
       :findings,
       :failed_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a finding category with open findings.</p>
@@ -120,7 +115,7 @@ module Aws::CodeGuruSecurity
       :category_name,
       :finding_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The line of code where a finding was detected.</p>
@@ -134,7 +129,7 @@ module Aws::CodeGuruSecurity
       :number,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service
@@ -158,7 +153,7 @@ module Aws::CodeGuruSecurity
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -209,7 +204,7 @@ module Aws::CodeGuruSecurity
       :analysis_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -235,7 +230,7 @@ module Aws::CodeGuruSecurity
       :scan_state,
       :scan_name_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -246,7 +241,7 @@ module Aws::CodeGuruSecurity
     class CreateUploadUrlRequest < Struct.new(
       :scan_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_url
@@ -266,7 +261,7 @@ module Aws::CodeGuruSecurity
       :request_headers,
       :code_artifact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the encryption configuration for an account. Required to call
@@ -278,15 +273,7 @@ module Aws::CodeGuruSecurity
     class EncryptionConfig < Struct.new(
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      DUPLICATE_IDENTIFIER = 'DUPLICATE_IDENTIFIER'
-      ITEM_DOES_NOT_EXIST = 'ITEM_DOES_NOT_EXIST'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      INVALID_FINDING_ID = 'INVALID_FINDING_ID'
-      INVALID_SCAN_NAME = 'INVALID_SCAN_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of security vulnerabilities that Amazon CodeGuru Security
@@ -315,7 +302,7 @@ module Aws::CodeGuruSecurity
       :end_line,
       :code_snippet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a finding that was detected in your code.</p>
@@ -392,7 +379,7 @@ module Aws::CodeGuruSecurity
       :detector_name,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a finding and the scan that generated it. </p>
@@ -406,7 +393,7 @@ module Aws::CodeGuruSecurity
       :scan_name,
       :finding_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A numeric value corresponding to the severity of a finding, such as the number of open
@@ -433,12 +420,12 @@ module Aws::CodeGuruSecurity
       :high,
       :critical,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_config
@@ -450,7 +437,7 @@ module Aws::CodeGuruSecurity
     class GetAccountConfigurationResponse < Struct.new(
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -477,7 +464,7 @@ module Aws::CodeGuruSecurity
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -491,7 +478,7 @@ module Aws::CodeGuruSecurity
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute date
@@ -501,7 +488,7 @@ module Aws::CodeGuruSecurity
     class GetMetricsSummaryRequest < Struct.new(
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics_summary
@@ -510,7 +497,7 @@ module Aws::CodeGuruSecurity
     class GetMetricsSummaryResponse < Struct.new(
       :metrics_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -524,7 +511,7 @@ module Aws::CodeGuruSecurity
       :scan_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_name
@@ -569,7 +556,7 @@ module Aws::CodeGuruSecurity
       :scan_name_arn,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request.</p>
@@ -583,7 +570,7 @@ module Aws::CodeGuruSecurity
       :error,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -612,7 +599,7 @@ module Aws::CodeGuruSecurity
       :start_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings_metrics
@@ -626,7 +613,7 @@ module Aws::CodeGuruSecurity
       :findings_metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -644,7 +631,7 @@ module Aws::CodeGuruSecurity
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -658,7 +645,7 @@ module Aws::CodeGuruSecurity
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -668,7 +655,7 @@ module Aws::CodeGuruSecurity
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -689,7 +676,7 @@ module Aws::CodeGuruSecurity
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of metrics for an account as of a specified date.</p>
@@ -718,7 +705,7 @@ module Aws::CodeGuruSecurity
       :scans_with_most_open_findings,
       :scans_with_most_open_critical_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the recommended course of action to remediate a finding.</p>
@@ -732,7 +719,7 @@ module Aws::CodeGuruSecurity
       :text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how to remediate a finding.</p>
@@ -747,7 +734,7 @@ module Aws::CodeGuruSecurity
       :recommendation,
       :suggested_fixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a resource that contains a finding.</p>
@@ -761,7 +748,7 @@ module Aws::CodeGuruSecurity
       :id,
       :sub_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier for a resource object that contains resources to scan. Specifying a
@@ -774,7 +761,7 @@ module Aws::CodeGuruSecurity
       :code_artifact_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CodeArtifactId < ResourceId; end
       class Unknown < ResourceId; end
@@ -799,7 +786,7 @@ module Aws::CodeGuruSecurity
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the number of findings generated by a scan.</p>
@@ -813,13 +800,7 @@ module Aws::CodeGuruSecurity
       :scan_name,
       :finding_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanState
-      IN_PROGRESS = 'InProgress'
-      SUCCESSFUL = 'Successful'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a scan. </p>
@@ -850,26 +831,7 @@ module Aws::CodeGuruSecurity
       :run_id,
       :scan_name_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanType
-      STANDARD = 'Standard'
-      EXPRESS = 'Express'
-    end
-
-    module Severity
-      CRITICAL = 'Critical'
-      HIGH = 'High'
-      MEDIUM = 'Medium'
-      LOW = 'Low'
-      INFO = 'Info'
-    end
-
-    module Status
-      CLOSED = 'Closed'
-      OPEN = 'Open'
-      ALL = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the suggested code fix to remediate a finding.</p>
@@ -883,7 +845,7 @@ module Aws::CodeGuruSecurity
       :description,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -909,12 +871,12 @@ module Aws::CodeGuruSecurity
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -936,7 +898,7 @@ module Aws::CodeGuruSecurity
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -950,12 +912,12 @@ module Aws::CodeGuruSecurity
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_config
@@ -967,7 +929,7 @@ module Aws::CodeGuruSecurity
     class UpdateAccountConfigurationRequest < Struct.new(
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_config
@@ -978,7 +940,7 @@ module Aws::CodeGuruSecurity
     class UpdateAccountConfigurationResponse < Struct.new(
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the specified constraints.</p>
@@ -1000,7 +962,7 @@ module Aws::CodeGuruSecurity
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a validation exception.</p>
@@ -1014,15 +976,7 @@ module Aws::CodeGuruSecurity
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
-      LAMBDA_CODE_SHA_MISMATCH = 'lambdaCodeShaMisMatch'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a security vulnerability that Amazon CodeGuru Security detected.</p>
@@ -1051,7 +1005,7 @@ module Aws::CodeGuruSecurity
       :file_path,
       :item_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

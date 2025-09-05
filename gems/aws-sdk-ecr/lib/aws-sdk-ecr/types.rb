@@ -17,7 +17,7 @@ module Aws::ECR
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing authorization data for an Amazon ECR registry.</p>
@@ -42,7 +42,7 @@ module Aws::ECR
       :expires_at,
       :proxy_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image details of the Amazon ECR container image.</p>
@@ -89,7 +89,7 @@ module Aws::ECR
       :registry,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -107,7 +107,7 @@ module Aws::ECR
       :repository_name,
       :layer_digests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layers
@@ -121,7 +121,7 @@ module Aws::ECR
       :layers,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes specified images within a specified repository. Images are specified with
@@ -143,7 +143,7 @@ module Aws::ECR
       :repository_name,
       :image_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -156,7 +156,7 @@ module Aws::ECR
       :image_ids,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -184,7 +184,7 @@ module Aws::ECR
       :image_ids,
       :accepted_media_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -197,7 +197,7 @@ module Aws::ECR
       :images,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_names
@@ -206,7 +206,7 @@ module Aws::ECR
     class BatchGetRepositoryScanningConfigurationRequest < Struct.new(
       :repository_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scanning_configurations
@@ -219,7 +219,7 @@ module Aws::ECR
       :scanning_configurations,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -242,7 +242,7 @@ module Aws::ECR
       :upload_id,
       :layer_digests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -263,7 +263,7 @@ module Aws::ECR
       :upload_id,
       :layer_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -348,7 +348,7 @@ module Aws::ECR
       :custom_role_arn,
       :upstream_repository_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -387,7 +387,7 @@ module Aws::ECR
       :custom_role_arn,
       :upstream_repository_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix
@@ -459,7 +459,7 @@ module Aws::ECR
       :applied_for,
       :custom_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -472,7 +472,7 @@ module Aws::ECR
       :registry_id,
       :repository_creation_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -518,7 +518,7 @@ module Aws::ECR
       :image_scanning_configuration,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -527,7 +527,7 @@ module Aws::ECR
     class CreateRepositoryResponse < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CVSS score for a finding.</p>
@@ -549,7 +549,7 @@ module Aws::ECR
       :source,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:base_score] = 0 unless options.key?(:base_score)
@@ -568,7 +568,7 @@ module Aws::ECR
       :metric,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the CVSS score.</p>
@@ -594,7 +594,7 @@ module Aws::ECR
       :scoring_vector,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -613,7 +613,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -634,7 +634,7 @@ module Aws::ECR
       :lifecycle_policy_text,
       :last_evaluated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -649,7 +649,7 @@ module Aws::ECR
       :ecr_repository_prefix,
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -683,12 +683,12 @@ module Aws::ECR
       :custom_role_arn,
       :upstream_repository_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRegistryPolicyRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -701,7 +701,7 @@ module Aws::ECR
       :registry_id,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix
@@ -711,7 +711,7 @@ module Aws::ECR
     class DeleteRepositoryCreationTemplateRequest < Struct.new(
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -724,7 +724,7 @@ module Aws::ECR
       :registry_id,
       :repository_creation_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -739,7 +739,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -756,7 +756,7 @@ module Aws::ECR
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -775,7 +775,7 @@ module Aws::ECR
       :repository_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -784,7 +784,7 @@ module Aws::ECR
     class DeleteRepositoryResponse < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -801,7 +801,7 @@ module Aws::ECR
       :image_id,
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -818,7 +818,7 @@ module Aws::ECR
       :image_id,
       :replication_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -856,7 +856,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -889,7 +889,7 @@ module Aws::ECR
       :image_scan_findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a filter on a <a>DescribeImages</a>
@@ -902,7 +902,7 @@ module Aws::ECR
     class DescribeImagesFilter < Struct.new(
       :tag_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -946,7 +946,7 @@ module Aws::ECR
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_details
@@ -964,7 +964,7 @@ module Aws::ECR
       :image_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1001,7 +1001,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pull_through_cache_rules
@@ -1018,12 +1018,12 @@ module Aws::ECR
       :pull_through_cache_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeRegistryRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1036,7 +1036,7 @@ module Aws::ECR
       :registry_id,
       :replication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1077,7 +1077,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repositories
@@ -1094,7 +1094,7 @@ module Aws::ECR
       :repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefixes
@@ -1132,7 +1132,7 @@ module Aws::ECR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1154,7 +1154,7 @@ module Aws::ECR
       :repository_creation_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified layer upload does not contain any layer parts.</p>
@@ -1164,7 +1164,7 @@ module Aws::ECR
     class EmptyUploadException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption configuration for the repository. This determines how the contents of
@@ -1204,7 +1204,7 @@ module Aws::ECR
       :encryption_type,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption configuration to associate with the repository creation
@@ -1234,13 +1234,7 @@ module Aws::ECR
       :encryption_type,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      AES256 = 'AES256'
-      KMS = 'KMS'
-      KMS_DSSE = 'KMS_DSSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an enhanced image scan. This is returned when enhanced scanning is
@@ -1318,21 +1312,12 @@ module Aws::ECR
       :fix_available,
       :exploit_available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
         super
       end
-    end
-
-    module FindingSeverity
-      INFORMATIONAL = 'INFORMATIONAL'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      CRITICAL = 'CRITICAL'
-      UNDEFINED = 'UNDEFINED'
     end
 
     # @!attribute name
@@ -1342,7 +1327,7 @@ module Aws::ECR
     class GetAccountSettingRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1358,7 +1343,7 @@ module Aws::ECR
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_ids
@@ -1370,7 +1355,7 @@ module Aws::ECR
     class GetAuthorizationTokenRequest < Struct.new(
       :registry_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorization_data
@@ -1384,7 +1369,7 @@ module Aws::ECR
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1402,7 +1387,7 @@ module Aws::ECR
       :repository_name,
       :layer_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute download_url
@@ -1415,7 +1400,7 @@ module Aws::ECR
       :download_url,
       :layer_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1461,7 +1446,7 @@ module Aws::ECR
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1498,7 +1483,7 @@ module Aws::ECR
       :preview_results,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1512,7 +1497,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1533,12 +1518,12 @@ module Aws::ECR
       :lifecycle_policy_text,
       :last_evaluated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetRegistryPolicyRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1551,12 +1536,12 @@ module Aws::ECR
       :registry_id,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetRegistryScanningConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1569,7 +1554,7 @@ module Aws::ECR
       :registry_id,
       :scanning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1583,7 +1568,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1600,7 +1585,7 @@ module Aws::ECR
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon ECR image.</p>
@@ -1626,11 +1611,7 @@ module Aws::ECR
       :image_manifest,
       :image_manifest_media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageActionType
-      EXPIRE = 'EXPIRE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image has already been pushed, and there were no changes to the manifest
@@ -1641,7 +1622,7 @@ module Aws::ECR
     class ImageAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes an image returned by a <a>DescribeImages</a>
@@ -1710,7 +1691,7 @@ module Aws::ECR
       :artifact_media_type,
       :last_recorded_pull_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image digest does not match the digest that Amazon ECR calculated for the
@@ -1720,7 +1701,7 @@ module Aws::ECR
     class ImageDigestDoesNotMatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon ECR image failure.</p>
@@ -1738,20 +1719,7 @@ module Aws::ECR
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageFailureCode
-      InvalidImageDigest = 'InvalidImageDigest'
-      InvalidImageTag = 'InvalidImageTag'
-      ImageTagDoesNotMatchDigest = 'ImageTagDoesNotMatchDigest'
-      ImageNotFound = 'ImageNotFound'
-      MissingDigestAndTag = 'MissingDigestAndTag'
-      ImageReferencedByManifestList = 'ImageReferencedByManifestList'
-      KmsError = 'KmsError'
-      UpstreamAccessDenied = 'UpstreamAccessDenied'
-      UpstreamTooManyRequests = 'UpstreamTooManyRequests'
-      UpstreamUnavailable = 'UpstreamUnavailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with identifying information for an image in an Amazon ECR repository.</p>
@@ -1765,7 +1733,7 @@ module Aws::ECR
       :image_digest,
       :image_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image requested does not exist in the specified repository.</p>
@@ -1774,7 +1742,7 @@ module Aws::ECR
     class ImageNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the replication process for an image.</p>
@@ -1796,7 +1764,7 @@ module Aws::ECR
       :status,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an image scan finding.</p>
@@ -1822,7 +1790,7 @@ module Aws::ECR
       :severity,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an image scan.</p>
@@ -1848,7 +1816,7 @@ module Aws::ECR
       :findings,
       :enhanced_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the last completed image scan.</p>
@@ -1866,7 +1834,7 @@ module Aws::ECR
       :vulnerability_source_updated_at,
       :finding_severity_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of an image scan.</p>
@@ -1880,7 +1848,7 @@ module Aws::ECR
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image scanning configuration for a repository.</p>
@@ -1893,7 +1861,7 @@ module Aws::ECR
     class ImageScanningConfiguration < Struct.new(
       :scan_on_push,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scan_on_push] = false unless options.key?(:scan_on_push)
@@ -1908,14 +1876,7 @@ module Aws::ECR
     class ImageTagAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageTagMutability
-      MUTABLE = 'MUTABLE'
-      IMMUTABLE = 'IMMUTABLE'
-      IMMUTABLE_WITH_EXCLUSION = 'IMMUTABLE_WITH_EXCLUSION'
-      MUTABLE_WITH_EXCLUSION = 'MUTABLE_WITH_EXCLUSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.</p>
@@ -1929,11 +1890,7 @@ module Aws::ECR
       :filter_type,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageTagMutabilityExclusionFilterType
-      WILDCARD = 'WILDCARD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1947,7 +1904,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -1961,7 +1918,7 @@ module Aws::ECR
       :upload_id,
       :part_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The layer digest calculation performed by Amazon ECR upon receipt of the image layer does
@@ -1972,7 +1929,7 @@ module Aws::ECR
     class InvalidLayerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The layer part size is not valid, or the first byte specified is not consecutive to
@@ -2000,7 +1957,7 @@ module Aws::ECR
       :last_valid_byte_received,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter is invalid. Review the available parameters for the API
@@ -2011,7 +1968,7 @@ module Aws::ECR
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid parameter has been specified. Tag keys can have a maximum character length of 128 characters, and tag values can have
@@ -2021,7 +1978,7 @@ module Aws::ECR
     class InvalidTagParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed due to a KMS exception.</p>
@@ -2034,7 +1991,7 @@ module Aws::ECR
       :message,
       :kms_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon ECR image layer.</p>
@@ -2058,7 +2015,7 @@ module Aws::ECR
       :layer_size,
       :media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image layer already exists in the associated repository.</p>
@@ -2068,12 +2025,7 @@ module Aws::ECR
     class LayerAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerAvailability
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Amazon ECR image layer failure.</p>
@@ -2091,12 +2043,7 @@ module Aws::ECR
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerFailureCode
-      InvalidLayerDigest = 'InvalidLayerDigest'
-      MissingLayerDigest = 'MissingLayerDigest'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified layer is not available because it is not associated with an image.
@@ -2107,7 +2054,7 @@ module Aws::ECR
     class LayerInaccessibleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Layer parts must be at least 5 MiB in size.</p>
@@ -2117,7 +2064,7 @@ module Aws::ECR
     class LayerPartTooSmallException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified layers could not be found, or the specified layer is not valid for this
@@ -2128,7 +2075,7 @@ module Aws::ECR
     class LayersNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lifecycle policy could not be found, and no policy is set to the
@@ -2138,7 +2085,7 @@ module Aws::ECR
     class LifecyclePolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter for the lifecycle policy preview.</p>
@@ -2148,7 +2095,7 @@ module Aws::ECR
     class LifecyclePolicyPreviewFilter < Struct.new(
       :tag_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The previous lifecycle policy preview request has not completed. Wait and try
@@ -2158,7 +2105,7 @@ module Aws::ECR
     class LifecyclePolicyPreviewInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no dry run for this repository.</p>
@@ -2167,7 +2114,7 @@ module Aws::ECR
     class LifecyclePolicyPreviewNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the lifecycle policy preview.</p>
@@ -2194,14 +2141,7 @@ module Aws::ECR
       :action,
       :applied_rule_priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecyclePolicyPreviewStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      EXPIRED = 'EXPIRED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the lifecycle policy preview request.</p>
@@ -2211,7 +2151,7 @@ module Aws::ECR
     class LifecyclePolicyPreviewSummary < Struct.new(
       :expiring_image_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of action to be taken.</p>
@@ -2221,7 +2161,7 @@ module Aws::ECR
     class LifecyclePolicyRuleAction < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation did not succeed because it would have exceeded a service limit for your
@@ -2233,7 +2173,7 @@ module Aws::ECR
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a filter on a <a>ListImages</a> operation.</p>
@@ -2245,7 +2185,7 @@ module Aws::ECR
     class ListImagesFilter < Struct.new(
       :tag_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2287,7 +2227,7 @@ module Aws::ECR
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -2304,7 +2244,7 @@ module Aws::ECR
       :image_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2314,7 +2254,7 @@ module Aws::ECR
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2323,7 +2263,7 @@ module Aws::ECR
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a package vulnerability finding.</p>
@@ -2370,7 +2310,7 @@ module Aws::ECR
       :vulnerability_id,
       :vulnerable_packages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a pull through cache rule.</p>
@@ -2415,7 +2355,7 @@ module Aws::ECR
       :upstream_registry,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pull through cache rule with these settings already exists for the private
@@ -2425,7 +2365,7 @@ module Aws::ECR
     class PullThroughCacheRuleAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pull through cache rule was not found. Specify a valid pull through cache rule and
@@ -2435,7 +2375,7 @@ module Aws::ECR
     class PullThroughCacheRuleNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2452,7 +2392,7 @@ module Aws::ECR
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2465,7 +2405,7 @@ module Aws::ECR
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2498,7 +2438,7 @@ module Aws::ECR
       :image_tag,
       :image_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -2507,7 +2447,7 @@ module Aws::ECR
     class PutImageResponse < Struct.new(
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2529,7 +2469,7 @@ module Aws::ECR
       :repository_name,
       :image_scanning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2546,7 +2486,7 @@ module Aws::ECR
       :repository_name,
       :image_scanning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2572,7 +2512,7 @@ module Aws::ECR
       :image_tag_mutability,
       :image_tag_mutability_exclusion_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2593,7 +2533,7 @@ module Aws::ECR
       :image_tag_mutability,
       :image_tag_mutability_exclusion_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2611,7 +2551,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2628,7 +2568,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_text
@@ -2639,7 +2579,7 @@ module Aws::ECR
     class PutRegistryPolicyRequest < Struct.new(
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -2652,7 +2592,7 @@ module Aws::ECR
       :registry_id,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scan_type
@@ -2675,7 +2615,7 @@ module Aws::ECR
       :scan_type,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_scanning_configuration
@@ -2684,7 +2624,7 @@ module Aws::ECR
     class PutRegistryScanningConfigurationResponse < Struct.new(
       :registry_scanning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration
@@ -2693,7 +2633,7 @@ module Aws::ECR
     class PutReplicationConfigurationRequest < Struct.new(
       :replication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration
@@ -2702,12 +2642,7 @@ module Aws::ECR
     class PutReplicationConfigurationResponse < Struct.new(
       :replication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RCTAppliedFor
-      REPLICATION = 'REPLICATION'
-      PULL_THROUGH_CACHE = 'PULL_THROUGH_CACHE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the recommended course of action to remediate the finding.</p>
@@ -2721,7 +2656,7 @@ module Aws::ECR
       :url,
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The manifest list is referencing an image that does not exist.</p>
@@ -2730,7 +2665,7 @@ module Aws::ECR
     class ReferencedImagesNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registry doesn't have an associated registry policy.</p>
@@ -2739,7 +2674,7 @@ module Aws::ECR
     class RegistryPolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scanning configuration for a private registry.</p>
@@ -2753,7 +2688,7 @@ module Aws::ECR
       :scan_type,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a scanning rule for a private registry.</p>
@@ -2773,7 +2708,7 @@ module Aws::ECR
       :scan_frequency,
       :repository_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on how to remediate a finding.</p>
@@ -2784,7 +2719,7 @@ module Aws::ECR
     class Remediation < Struct.new(
       :recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The replication configuration for a registry.</p>
@@ -2795,7 +2730,7 @@ module Aws::ECR
     class ReplicationConfiguration < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of objects representing the destination for a replication rule.</p>
@@ -2810,7 +2745,7 @@ module Aws::ECR
       :region,
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of objects representing the replication destinations and repository filters
@@ -2827,13 +2762,7 @@ module Aws::ECR
       :destinations,
       :repository_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a repository.</p>
@@ -2879,7 +2808,7 @@ module Aws::ECR
       :image_scanning_configuration,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository already exists in the specified registry.</p>
@@ -2889,7 +2818,7 @@ module Aws::ECR
     class RepositoryAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the repository creation template associated with the request.</p>
@@ -2957,7 +2886,7 @@ module Aws::ECR
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter settings used with image replication. Specifying a repository filter to a
@@ -2978,11 +2907,7 @@ module Aws::ECR
       :filter,
       :filter_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositoryFilterType
-      PREFIX_MATCH = 'PREFIX_MATCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository contains images. To delete a repository that contains images,
@@ -2993,7 +2918,7 @@ module Aws::ECR
     class RepositoryNotEmptyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository could not be found. Check the spelling of the specified
@@ -3004,7 +2929,7 @@ module Aws::ECR
     class RepositoryNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository and registry combination does not have an associated
@@ -3015,7 +2940,7 @@ module Aws::ECR
     class RepositoryPolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the scanning configuration for a repository.</p>
@@ -3041,7 +2966,7 @@ module Aws::ECR
       :scan_frequency,
       :applied_scan_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scan_on_push] = false unless options.key?(:scan_on_push)
@@ -3065,7 +2990,7 @@ module Aws::ECR
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resource involved in a finding.</p>
@@ -3087,7 +3012,7 @@ module Aws::ECR
       :tags,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the resource involved in the finding.</p>
@@ -3098,13 +3023,7 @@ module Aws::ECR
     class ResourceDetails < Struct.new(
       :aws_ecr_container_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanFrequency
-      SCAN_ON_PUSH = 'SCAN_ON_PUSH'
-      CONTINUOUS_SCAN = 'CONTINUOUS_SCAN'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image scan could not be found. Ensure that image scanning is enabled on
@@ -3114,28 +3033,7 @@ module Aws::ECR
     class ScanNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      UNSUPPORTED_IMAGE = 'UNSUPPORTED_IMAGE'
-      ACTIVE = 'ACTIVE'
-      PENDING = 'PENDING'
-      SCAN_ELIGIBILITY_EXPIRED = 'SCAN_ELIGIBILITY_EXPIRED'
-      FINDINGS_UNAVAILABLE = 'FINDINGS_UNAVAILABLE'
-      LIMIT_EXCEEDED = 'LIMIT_EXCEEDED'
-    end
-
-    module ScanType
-      BASIC = 'BASIC'
-      ENHANCED = 'ENHANCED'
-    end
-
-    module ScanningConfigurationFailureCode
-      REPOSITORY_NOT_FOUND = 'REPOSITORY_NOT_FOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a scanning repository filter. For more information on how to use
@@ -3151,11 +3049,7 @@ module Aws::ECR
       :filter,
       :filter_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanningRepositoryFilterType
-      WILDCARD = 'WILDCARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Inspector score given to a finding.</p>
@@ -3165,7 +3059,7 @@ module Aws::ECR
     class ScoreDetails < Struct.new(
       :cvss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ARN of the secret specified in the pull through cache rule was not found. Update
@@ -3175,7 +3069,7 @@ module Aws::ECR
     class SecretNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server-side issue.</p>
@@ -3185,7 +3079,7 @@ module Aws::ECR
     class ServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3211,7 +3105,7 @@ module Aws::ECR
       :policy_text,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3228,7 +3122,7 @@ module Aws::ECR
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3246,7 +3140,7 @@ module Aws::ECR
       :repository_name,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3267,7 +3161,7 @@ module Aws::ECR
       :image_id,
       :image_scan_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3286,7 +3180,7 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3307,7 +3201,7 @@ module Aws::ECR
       :lifecycle_policy_text,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata to apply to a resource to help you categorize and organize them. Each tag
@@ -3324,7 +3218,7 @@ module Aws::ECR
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3340,18 +3234,12 @@ module Aws::ECR
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagStatus
-      TAGGED = 'TAGGED'
-      UNTAGGED = 'UNTAGGED'
-      ANY = 'ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The repository creation template already exists. Specify a unique prefix and try
@@ -3361,7 +3249,7 @@ module Aws::ECR
     class TemplateAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository creation template can't be found. Verify the registry ID and
@@ -3371,7 +3259,7 @@ module Aws::ECR
     class TemplateNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags on the repository is over the limit. The maximum number of tags that
@@ -3381,7 +3269,7 @@ module Aws::ECR
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The secret is unable to be accessed. Verify the resource permissions for the secret
@@ -3391,7 +3279,7 @@ module Aws::ECR
     class UnableToAccessSecretException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The secret is accessible but is unable to be decrypted. Verify the resource
@@ -3401,7 +3289,7 @@ module Aws::ECR
     class UnableToDecryptSecretValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image or images were unable to be pulled using the pull through cache rule. This
@@ -3412,7 +3300,7 @@ module Aws::ECR
     class UnableToGetUpstreamImageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an issue getting the upstream layer matching the pull through cache
@@ -3422,7 +3310,7 @@ module Aws::ECR
     class UnableToGetUpstreamLayerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image is of a type that cannot be scanned.</p>
@@ -3431,7 +3319,7 @@ module Aws::ECR
     class UnsupportedImageTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified upstream registry isn't supported.</p>
@@ -3440,7 +3328,7 @@ module Aws::ECR
     class UnsupportedUpstreamRegistryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3454,12 +3342,12 @@ module Aws::ECR
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3484,7 +3372,7 @@ module Aws::ECR
       :credential_arn,
       :custom_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -3515,7 +3403,7 @@ module Aws::ECR
       :custom_role_arn,
       :upstream_repository_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix
@@ -3581,7 +3469,7 @@ module Aws::ECR
       :applied_for,
       :custom_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3594,7 +3482,7 @@ module Aws::ECR
       :registry_id,
       :repository_creation_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3625,7 +3513,7 @@ module Aws::ECR
       :part_last_byte,
       :layer_part_blob,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -3646,7 +3534,7 @@ module Aws::ECR
       :upload_id,
       :last_byte_received,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The upload could not be found, or the specified upload ID is not valid for this
@@ -3657,18 +3545,7 @@ module Aws::ECR
     class UploadNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpstreamRegistry
-      Ecr = 'ecr'
-      EcrPublic = 'ecr-public'
-      Quay = 'quay'
-      K8s = 'k8s'
-      DockerHub = 'docker-hub'
-      GitHubContainerRegistry = 'github-container-registry'
-      AzureContainerRegistry = 'azure-container-registry'
-      GitLabContainerRegistry = 'gitlab-container-registry'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -3682,7 +3559,7 @@ module Aws::ECR
       :ecr_repository_prefix,
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecr_repository_prefix
@@ -3725,7 +3602,7 @@ module Aws::ECR
       :is_valid,
       :failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_valid] = false unless options.key?(:is_valid)
@@ -3739,7 +3616,7 @@ module Aws::ECR
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the vulnerable package identified by a finding.</p>
@@ -3781,7 +3658,7 @@ module Aws::ECR
       :version,
       :fixed_in_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

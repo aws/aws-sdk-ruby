@@ -12,7 +12,7 @@ module Aws::AIOps
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation couldn't be completed because of a conflict in resource states.</p>
@@ -21,7 +21,7 @@ module Aws::AIOps
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -62,7 +62,7 @@ module Aws::AIOps
       :is_cloud_trail_event_history_enabled,
       :cross_account_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -71,7 +71,7 @@ module Aws::AIOps
     class CreateInvestigationGroupOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the cross-account configuration in the account. </p>
@@ -81,12 +81,12 @@ module Aws::AIOps
     class CrossAccountConfiguration < Struct.new(
       :source_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInvestigationGroupPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -95,7 +95,7 @@ module Aws::AIOps
     class DeleteInvestigationGroupPolicyRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -104,7 +104,7 @@ module Aws::AIOps
     class DeleteInvestigationGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to specify a customer managed KMS key to use to encrypt investigation data. </p>
@@ -118,12 +118,7 @@ module Aws::AIOps
       :type,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionConfigurationType
-      AWS_OWNED_KEY = 'AWS_OWNED_KEY'
-      CUSTOMER_MANAGED_KMS_KEY = 'CUSTOMER_MANAGED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access id denied for this operation, or this operation is not valid for the specified resource.</p>
@@ -132,7 +127,7 @@ module Aws::AIOps
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -141,7 +136,7 @@ module Aws::AIOps
     class GetInvestigationGroupPolicyRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute investigation_group_arn
@@ -154,7 +149,7 @@ module Aws::AIOps
       :investigation_group_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -163,7 +158,7 @@ module Aws::AIOps
     class GetInvestigationGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_by
@@ -220,7 +215,7 @@ module Aws::AIOps
       :is_cloud_trail_event_history_enabled,
       :cross_account_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. You can try again later.</p>
@@ -229,7 +224,7 @@ module Aws::AIOps
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -242,7 +237,7 @@ module Aws::AIOps
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one investigation group in the account.</p>
@@ -256,7 +251,7 @@ module Aws::AIOps
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -269,7 +264,7 @@ module Aws::AIOps
       :next_token,
       :investigation_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -278,7 +273,7 @@ module Aws::AIOps
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -287,7 +282,7 @@ module Aws::AIOps
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -300,7 +295,7 @@ module Aws::AIOps
       :identifier,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute investigation_group_arn
@@ -309,7 +304,7 @@ module Aws::AIOps
     class PutInvestigationGroupPolicyResponse < Struct.new(
       :investigation_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -318,7 +313,7 @@ module Aws::AIOps
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request exceeds a service quota.</p>
@@ -343,7 +338,7 @@ module Aws::AIOps
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -356,12 +351,12 @@ module Aws::AIOps
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled because of quota limits. You can try again later.</p>
@@ -370,7 +365,7 @@ module Aws::AIOps
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -383,17 +378,17 @@ module Aws::AIOps
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateInvestigationGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -426,7 +421,7 @@ module Aws::AIOps
       :is_cloud_trail_event_history_enabled,
       :cross_account_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation or its parameters aren't formatted correctly.</p>
@@ -435,7 +430,7 @@ module Aws::AIOps
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

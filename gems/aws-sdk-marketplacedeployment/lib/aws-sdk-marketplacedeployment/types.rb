@@ -12,7 +12,7 @@ module Aws::MarketplaceDeployment
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request configuration has conflicts. For details, see the accompanying error message.</p>
@@ -25,7 +25,7 @@ module Aws::MarketplaceDeployment
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shape containing the requested deployment parameter name and secretString.</p>
@@ -44,7 +44,7 @@ module Aws::MarketplaceDeployment
       :name,
       :secret_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal service exception.</p>
@@ -53,7 +53,7 @@ module Aws::MarketplaceDeployment
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -62,7 +62,7 @@ module Aws::MarketplaceDeployment
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -71,7 +71,7 @@ module Aws::MarketplaceDeployment
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -109,7 +109,7 @@ module Aws::MarketplaceDeployment
       :expiration_date,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -130,7 +130,7 @@ module Aws::MarketplaceDeployment
       :deployment_parameter_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource wasn't found.</p>
@@ -139,7 +139,7 @@ module Aws::MarketplaceDeployment
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of requests per account has been exceeded.</p>
@@ -148,7 +148,7 @@ module Aws::MarketplaceDeployment
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -161,12 +161,12 @@ module Aws::MarketplaceDeployment
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many requests.</p>
@@ -175,7 +175,7 @@ module Aws::MarketplaceDeployment
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -188,12 +188,12 @@ module Aws::MarketplaceDeployment
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred during validation.</p>
@@ -206,7 +206,7 @@ module Aws::MarketplaceDeployment
       :message,
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

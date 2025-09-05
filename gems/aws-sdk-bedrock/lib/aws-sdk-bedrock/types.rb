@@ -12,7 +12,7 @@ module Aws::Bedrock
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the agreement availability</p>
@@ -26,31 +26,7 @@ module Aws::Bedrock
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgreementStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
-      ERROR = 'ERROR'
-    end
-
-    module ApplicationType
-      MODEL_EVALUATION = 'ModelEvaluation'
-      RAG_EVALUATION = 'RagEvaluation'
-    end
-
-    module AttributeType
-      STRING = 'STRING'
-      NUMBER = 'NUMBER'
-      BOOLEAN = 'BOOLEAN'
-      STRING_LIST = 'STRING_LIST'
-    end
-
-    module AuthorizationStatus
-      AUTHORIZED = 'AUTHORIZED'
-      NOT_AUTHORIZED = 'NOT_AUTHORIZED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of an automated evaluation job. The <code>EvaluationDatasetMetricConfig</code> object is used to specify the prompt datasets, task type, and metric names.</p>
@@ -68,7 +44,7 @@ module Aws::Bedrock
       :evaluator_model_config,
       :custom_metric_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration of custom metrics to be used in an evaluation job. To learn more about using custom metrics in Amazon Bedrock evaluation jobs, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html">Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)</a> and <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-evaluation-custom-metrics-prompt-formats.html">Create a prompt for a custom metrics (RAG evaluations)</a>.</p>
@@ -82,7 +58,7 @@ module Aws::Bedrock
       :custom_metrics,
       :evaluator_model_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array item definining a single custom metric for use in an Amazon Bedrock evaluation job.</p>
@@ -93,7 +69,7 @@ module Aws::Bedrock
       :custom_metric_definition,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CustomMetricDefinition < AutomatedEvaluationCustomMetricSource; end
       class Unknown < AutomatedEvaluationCustomMetricSource; end
@@ -131,7 +107,7 @@ module Aws::Bedrock
       :no_translations,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Valid < AutomatedReasoningCheckFinding; end
       class Invalid < AutomatedReasoningCheckFinding; end
@@ -158,7 +134,7 @@ module Aws::Bedrock
       :contradicting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>References a portion of the original input text that corresponds to logical elements.</p>
@@ -168,7 +144,7 @@ module Aws::Bedrock
     class AutomatedReasoningCheckInputTextReference < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims are logically false and contradictory to the established rules or premises.</p>
@@ -186,7 +162,7 @@ module Aws::Bedrock
       :contradicting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies logical issues in the translated statements that exist independent of any policy rules, such as statements that are always true or always false.</p>
@@ -204,28 +180,13 @@ module Aws::Bedrock
       :premises,
       :claims,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningCheckLogicWarningType
-      ALWAYS_TRUE = 'ALWAYS_TRUE'
-      ALWAYS_FALSE = 'ALWAYS_FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that no relevant logical information could be extracted from the input for validation.</p>
     class AutomatedReasoningCheckNoTranslationsFinding < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningCheckResult
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-      SATISFIABLE = 'SATISFIABLE'
-      IMPOSSIBLE = 'IMPOSSIBLE'
-      TRANSLATION_AMBIGUOUS = 'TRANSLATION_AMBIGUOUS'
-      TOO_COMPLEX = 'TOO_COMPLEX'
-      NO_TRANSLATION = 'NO_TRANSLATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>References a specific automated reasoning policy rule that was applied during evaluation.</p>
@@ -239,7 +200,7 @@ module Aws::Bedrock
       :id,
       :policy_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims could be either true or false depending on additional assumptions not provided in the input.</p>
@@ -261,7 +222,7 @@ module Aws::Bedrock
       :claims_false_scenario,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a logical scenario where claims can be evaluated as true or false, containing specific logical assignments.</p>
@@ -271,13 +232,13 @@ module Aws::Bedrock
     class AutomatedReasoningCheckScenario < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the input exceeds the processing capacity due to the volume or complexity of the logical information.</p>
     class AutomatedReasoningCheckTooComplexFinding < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the logical translation of natural language input into formal logical statements, including premises, claims, and confidence scores.</p>
@@ -303,7 +264,7 @@ module Aws::Bedrock
       :untranslated_claims,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the input has multiple valid logical interpretations, requiring additional context or clarification.</p>
@@ -317,7 +278,7 @@ module Aws::Bedrock
       :options,
       :difference_scenarios,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents one possible logical interpretation of ambiguous input content.</p>
@@ -327,7 +288,7 @@ module Aws::Bedrock
     class AutomatedReasoningCheckTranslationOption < Struct.new(
       :translations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the claims are definitively true and logically implied by the premises, with no possible alternative interpretations.</p>
@@ -349,7 +310,7 @@ module Aws::Bedrock
       :supporting_rules,
       :logic_warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a logical statement that can be expressed both in formal logic notation and natural language, providing dual representations for better understanding and validation.</p>
@@ -363,7 +324,7 @@ module Aws::Bedrock
       :logic,
       :natural_language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for adding a new rule to an Automated Reasoning policy using a formal logical expression.</p>
@@ -373,7 +334,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddRuleAnnotation < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for adding a new rule to the policy by converting a natural language description into a formal logical expression.</p>
@@ -383,7 +344,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation < Struct.new(
       :natural_language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that adds a new rule to the policy definition during the build process.</p>
@@ -393,7 +354,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddRuleMutation < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for adding a new custom type to an Automated Reasoning policy, defining a set of possible values for variables.</p>
@@ -411,7 +372,7 @@ module Aws::Bedrock
       :description,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that adds a new custom type to the policy definition during the build process.</p>
@@ -421,7 +382,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddTypeMutation < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single value that can be added to an existing custom type in the policy.</p>
@@ -435,7 +396,7 @@ module Aws::Bedrock
       :value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for adding a new variable to an Automated Reasoning policy, which can be used in rule expressions.</p>
@@ -453,7 +414,7 @@ module Aws::Bedrock
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that adds a new variable to the policy definition during the build process.</p>
@@ -463,7 +424,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyAddVariableMutation < Struct.new(
       :variable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the various operations that can be performed on an Automated Reasoning policy, including adding, updating, and deleting rules, variables, and types.</p>
@@ -522,7 +483,7 @@ module Aws::Bedrock
       :ingest_content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AddType < AutomatedReasoningPolicyAnnotation; end
       class UpdateType < AutomatedReasoningPolicyAnnotation; end
@@ -540,16 +501,6 @@ module Aws::Bedrock
       class Unknown < AutomatedReasoningPolicyAnnotation; end
     end
 
-    module AutomatedReasoningPolicyAnnotationStatus
-      APPLIED = 'APPLIED'
-      FAILED = 'FAILED'
-    end
-
-    module AutomatedReasoningPolicyBuildDocumentContentType
-      PDF = 'pdf'
-      TEXT = 'txt'
-    end
-
     # <p>Contains detailed logging information about the policy build process, including steps taken, decisions made, and any issues encountered.</p>
     # @!attribute entries
     #   <p>A list of log entries documenting each step in the policy build process, including timestamps, status, and detailed messages.</p>
@@ -557,7 +508,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyBuildLog < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single entry in the policy build log, containing information about a specific step or event in the build process.</p>
@@ -575,19 +526,7 @@ module Aws::Bedrock
       :status,
       :build_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningPolicyBuildMessageType
-      INFO = 'INFO'
-      WARNING = 'WARNING'
-      ERROR = 'ERROR'
-    end
-
-    module AutomatedReasoningPolicyBuildResultAssetType
-      BUILD_LOG = 'BUILD_LOG'
-      QUALITY_REPORT = 'QUALITY_REPORT'
-      POLICY_DEFINITION = 'POLICY_DEFINITION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the various assets generated during a policy build workflow, including logs, quality reports, and the final policy definition.</p>
@@ -606,7 +545,7 @@ module Aws::Bedrock
       :build_log,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PolicyDefinition < AutomatedReasoningPolicyBuildResultAssets; end
       class QualityReport < AutomatedReasoningPolicyBuildResultAssets; end
@@ -629,7 +568,7 @@ module Aws::Bedrock
       :prior_element,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides context about what type of operation was being performed during a build step.</p>
@@ -644,7 +583,7 @@ module Aws::Bedrock
       :mutation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Planning < AutomatedReasoningPolicyBuildStepContext; end
       class Mutation < AutomatedReasoningPolicyBuildStepContext; end
@@ -662,7 +601,7 @@ module Aws::Bedrock
       :message,
       :message_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a source document used in the policy build workflow, containing the content and metadata needed for policy generation.</p>
@@ -684,7 +623,7 @@ module Aws::Bedrock
       :document_name,
       :document_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains content and instructions for repairing or improving an existing Automated Reasoning policy.</p>
@@ -694,7 +633,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyBuildWorkflowRepairContent < Struct.new(
       :annotations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the source content for a policy build workflow, which can include documents, repair instructions, or other input materials.</p>
@@ -708,18 +647,7 @@ module Aws::Bedrock
       :policy_definition,
       :workflow_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningPolicyBuildWorkflowStatus
-      SCHEDULED = 'SCHEDULED'
-      CANCEL_REQUESTED = 'CANCEL_REQUESTED'
-      PREPROCESSING = 'PREPROCESSING'
-      BUILDING = 'BUILDING'
-      TESTING = 'TESTING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a policy build workflow, including its current status, timing information, and key identifiers.</p>
@@ -749,13 +677,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningPolicyBuildWorkflowType
-      INGEST_CONTENT = 'INGEST_CONTENT'
-      REFINE_POLICY = 'REFINE_POLICY'
-      IMPORT_POLICY = 'IMPORT_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the formal logic rules, variables, and custom variable types that define an Automated Reasoning policy. The policy definition specifies the constraints used to validate foundation model responses for accuracy and logical consistency.</p>
@@ -777,7 +699,7 @@ module Aws::Bedrock
       :rules,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = '1' unless options.key?(:version)
@@ -801,7 +723,7 @@ module Aws::Bedrock
       :policy_definition_rule,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PolicyDefinitionVariable < AutomatedReasoningPolicyDefinitionElement; end
       class PolicyDefinitionType < AutomatedReasoningPolicyDefinitionElement; end
@@ -844,7 +766,7 @@ module Aws::Bedrock
       :conflicting_rules,
       :disjoint_rule_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a formal logic rule in an Automated Reasoning policy. For example, rules can be expressed as if-then statements that define logical constraints.</p>
@@ -862,7 +784,7 @@ module Aws::Bedrock
       :expression,
       :alternate_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom user-defined viarble type in an Automated Reasoning policy. Types are enum-based and provide additional context beyond predefined variable types.</p>
@@ -880,7 +802,7 @@ module Aws::Bedrock
       :description,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single value within a custom type definition, including its identifier and description.</p>
@@ -894,7 +816,7 @@ module Aws::Bedrock
       :value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates a type name with a specific value name, used for referencing type values in rules and other policy elements.</p>
@@ -908,7 +830,7 @@ module Aws::Bedrock
       :type_name,
       :value_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a variable in an Automated Reasoning policy. Variables represent concepts that can have values assigned during natural language translation.</p>
@@ -926,7 +848,7 @@ module Aws::Bedrock
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for removing a rule from an Automated Reasoning policy.</p>
@@ -936,7 +858,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteRuleAnnotation < Struct.new(
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that removes a rule from the policy definition during the build process.</p>
@@ -946,7 +868,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteRuleMutation < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for removing a custom type from an Automated Reasoning policy.</p>
@@ -956,7 +878,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteTypeAnnotation < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that removes a custom type from the policy definition during the build process.</p>
@@ -966,7 +888,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteTypeMutation < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a value to be removed from an existing custom type in the policy.</p>
@@ -976,7 +898,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteTypeValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for removing a variable from an Automated Reasoning policy.</p>
@@ -986,7 +908,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteVariableAnnotation < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that removes a variable from the policy definition during the build process.</p>
@@ -996,7 +918,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDeleteVariableMutation < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of rules that operate on completely separate variables, indicating they address different concerns or domains within the policy.</p>
@@ -1010,7 +932,7 @@ module Aws::Bedrock
       :variables,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for processing and incorporating new content into an Automated Reasoning policy.</p>
@@ -1020,7 +942,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyIngestContentAnnotation < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for various mutation operations that can be applied to an Automated Reasoning policy, including adding, updating, and deleting policy elements.</p>
@@ -1063,7 +985,7 @@ module Aws::Bedrock
       :delete_rule,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AddType < AutomatedReasoningPolicyMutation; end
       class UpdateType < AutomatedReasoningPolicyMutation; end
@@ -1080,7 +1002,7 @@ module Aws::Bedrock
     # <p>Represents the planning phase of policy build workflow, where the system analyzes source content and determines what operations to perform.</p>
     class AutomatedReasoningPolicyPlanning < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a test scenario used to validate an Automated Reasoning policy, including the test conditions and expected outcomes.</p>
@@ -1102,7 +1024,7 @@ module Aws::Bedrock
       :rule_ids,
       :expected_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about an Automated Reasoning policy, including metadata and timestamps.</p>
@@ -1136,7 +1058,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a test for validating an Automated Reasoning policy. tests contain sample inputs and expected outcomes to verify policy behavior.</p>
@@ -1170,7 +1092,7 @@ module Aws::Bedrock
       :updated_at,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of testing an Automated Reasoning policy against various scenarios and validation checks.</p>
@@ -1204,20 +1126,7 @@ module Aws::Bedrock
       :aggregated_test_findings_result,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomatedReasoningPolicyTestRunResult
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-    end
-
-    module AutomatedReasoningPolicyTestRunStatus
-      NOT_STARTED = 'NOT_STARTED'
-      SCHEDULED = 'SCHEDULED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for managing values within custom types, including adding, updating, or removing specific type values.</p>
@@ -1236,7 +1145,7 @@ module Aws::Bedrock
       :delete_type_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AddTypeValue < AutomatedReasoningPolicyTypeValueAnnotation; end
       class UpdateTypeValue < AutomatedReasoningPolicyTypeValueAnnotation; end
@@ -1255,7 +1164,7 @@ module Aws::Bedrock
       :rule_ids,
       :feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for updating the policy based on feedback about how it performed on specific test scenarios.</p>
@@ -1273,7 +1182,7 @@ module Aws::Bedrock
       :scenario_expression,
       :feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for modifying an existing rule in an Automated Reasoning policy.</p>
@@ -1287,7 +1196,7 @@ module Aws::Bedrock
       :rule_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that modifies an existing rule in the policy definition during the build process.</p>
@@ -1297,7 +1206,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyUpdateRuleMutation < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for modifying an existing custom type in an Automated Reasoning policy.</p>
@@ -1319,7 +1228,7 @@ module Aws::Bedrock
       :description,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that modifies an existing custom type in the policy definition during the build process.</p>
@@ -1329,7 +1238,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyUpdateTypeMutation < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a modification to a value within an existing custom type.</p>
@@ -1347,7 +1256,7 @@ module Aws::Bedrock
       :new_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation for modifying an existing variable in an Automated Reasoning policy.</p>
@@ -1365,7 +1274,7 @@ module Aws::Bedrock
       :new_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mutation operation that modifies an existing variable in the policy definition during the build process.</p>
@@ -1375,7 +1284,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyUpdateVariableMutation < Struct.new(
       :variable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the content and configuration for different types of policy build workflows.</p>
@@ -1390,7 +1299,7 @@ module Aws::Bedrock
       :policy_repair_assets,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Documents < AutomatedReasoningPolicyWorkflowTypeContent; end
       class PolicyRepairAssets < AutomatedReasoningPolicyWorkflowTypeContent; end
@@ -1412,7 +1321,7 @@ module Aws::Bedrock
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An evaluation job for deletion, and it’s current status.</p>
@@ -1426,7 +1335,7 @@ module Aws::Bedrock
       :job_identifier,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifiers
@@ -1435,7 +1344,7 @@ module Aws::Bedrock
     class BatchDeleteEvaluationJobRequest < Struct.new(
       :job_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -1448,7 +1357,7 @@ module Aws::Bedrock
       :errors,
       :evaluation_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The evaluator model used in knowledge base evaluation job or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>
@@ -1458,7 +1367,7 @@ module Aws::Bedrock
     class BedrockEvaluatorModel < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the document contained in the wrapper object, along with its attributes/fields.</p>
@@ -1476,7 +1385,7 @@ module Aws::Bedrock
       :content_type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1489,12 +1398,12 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CloudWatch logging configuration.</p>
@@ -1512,12 +1421,7 @@ module Aws::Bedrock
       :role_arn,
       :large_data_delivery_s3_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommitmentDuration
-      ONE_MONTH = 'OneMonth'
-      SIX_MONTHS = 'SixMonths'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error occurred because of a conflict while performing an operation.</p>
@@ -1526,7 +1430,7 @@ module Aws::Bedrock
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1551,7 +1455,7 @@ module Aws::Bedrock
       :policy_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1584,7 +1488,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1613,7 +1517,7 @@ module Aws::Bedrock
       :client_request_token,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1626,7 +1530,7 @@ module Aws::Bedrock
       :policy_arn,
       :test_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1647,7 +1551,7 @@ module Aws::Bedrock
       :last_updated_definition_hash,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1676,7 +1580,7 @@ module Aws::Bedrock
       :definition_hash,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_deployment_name
@@ -1701,7 +1605,7 @@ module Aws::Bedrock
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_model_deployment_arn
@@ -1710,7 +1614,7 @@ module Aws::Bedrock
     class CreateCustomModelDeploymentResponse < Struct.new(
       :custom_model_deployment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1739,7 +1643,7 @@ module Aws::Bedrock
       :model_tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -1748,7 +1652,7 @@ module Aws::Bedrock
     class CreateCustomModelResponse < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -1793,7 +1697,7 @@ module Aws::Bedrock
       :inference_config,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -1802,7 +1706,7 @@ module Aws::Bedrock
     class CreateEvaluationJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offer_token
@@ -1815,7 +1719,7 @@ module Aws::Bedrock
       :offer_token,
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -1824,7 +1728,7 @@ module Aws::Bedrock
     class CreateFoundationModelAgreementResponse < Struct.new(
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1885,7 +1789,7 @@ module Aws::Bedrock
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_id
@@ -1906,7 +1810,7 @@ module Aws::Bedrock
       :version,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -1923,7 +1827,7 @@ module Aws::Bedrock
       :description,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_id
@@ -1936,7 +1840,7 @@ module Aws::Bedrock
       :guardrail_id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_name
@@ -1961,7 +1865,7 @@ module Aws::Bedrock
       :model_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_arn
@@ -1974,7 +1878,7 @@ module Aws::Bedrock
       :inference_profile_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_source_identifier
@@ -2003,7 +1907,7 @@ module Aws::Bedrock
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marketplace_model_endpoint
@@ -2012,7 +1916,7 @@ module Aws::Bedrock
     class CreateMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_model_arn
@@ -2037,7 +1941,7 @@ module Aws::Bedrock
       :target_model_tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -2046,7 +1950,7 @@ module Aws::Bedrock
     class CreateModelCopyJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -2111,7 +2015,7 @@ module Aws::Bedrock
       :vpc_config,
       :customization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -2120,7 +2024,7 @@ module Aws::Bedrock
     class CreateModelCustomizationJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -2161,7 +2065,7 @@ module Aws::Bedrock
       :vpc_config,
       :imported_model_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -2170,7 +2074,7 @@ module Aws::Bedrock
     class CreateModelImportJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -2211,7 +2115,7 @@ module Aws::Bedrock
       :timeout_duration_in_hours,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -2220,7 +2124,7 @@ module Aws::Bedrock
     class CreateModelInvocationJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -2253,7 +2157,7 @@ module Aws::Bedrock
       :fallback_model,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_router_arn
@@ -2262,7 +2166,7 @@ module Aws::Bedrock
     class CreatePromptRouterResponse < Struct.new(
       :prompt_router_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -2291,7 +2195,7 @@ module Aws::Bedrock
       :commitment_duration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_model_arn
@@ -2300,7 +2204,7 @@ module Aws::Bedrock
     class CreateProvisionedModelThroughputResponse < Struct.new(
       :provisioned_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the model you want to evaluate custom metrics in an Amazon Bedrock evaluation job.</p>
@@ -2310,7 +2214,7 @@ module Aws::Bedrock
     class CustomMetricBedrockEvaluatorModel < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a custom metric for use in an Amazon Bedrock evaluation job. A custom metric definition includes a metric name, prompt (instructions) and optionally, a rating scale. Your prompt must include a task description and input variables. The required input variables are different for model-as-a-judge and RAG evaluations.</p> <p>For more information about how to define a custom metric in Amazon Bedrock, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-custom-metrics-prompt-formats.html">Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)</a> and <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/kb-evaluation-custom-metrics-prompt-formats.html">Create a prompt for a custom metrics (RAG evaluations)</a>.</p>
@@ -2329,7 +2233,7 @@ module Aws::Bedrock
       :instructions,
       :rating_scale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the evaluator model you want to use to evaluate custom metrics in an Amazon Bedrock evaluation job.</p>
@@ -2339,13 +2243,7 @@ module Aws::Bedrock
     class CustomMetricEvaluatorModelConfig < Struct.new(
       :bedrock_evaluator_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomModelDeploymentStatus
-      CREATING = 'Creating'
-      ACTIVE = 'Active'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a custom model deployment, including its ARN, name, status, and associated custom model.</p>
@@ -2379,7 +2277,7 @@ module Aws::Bedrock
       :last_updated_at,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a custom model.</p>
@@ -2417,7 +2315,7 @@ module Aws::Bedrock
       :owner_account_id,
       :model_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>CustomModelUnit</code> (CMU) is an abstract view of the hardware utilization that Amazon Bedrock needs to host a single copy of your custom model. A model copy represents a single instance of your imported model that is ready to serve inference requests. Amazon Bedrock determines the number of custom model units that a model copy needs when you import the custom model. </p> <p>You can use <code>CustomModelUnits</code> to estimate the cost of running your custom model. For more information, see Calculate the cost of running a custom model in the Amazon Bedrock user guide. </p>
@@ -2431,7 +2329,7 @@ module Aws::Bedrock
       :custom_model_units_per_model_copy,
       :custom_model_units_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A model customization configuration</p>
@@ -2442,17 +2340,10 @@ module Aws::Bedrock
       :distillation_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DistillationConfig < CustomizationConfig; end
       class Unknown < CustomizationConfig; end
-    end
-
-    module CustomizationType
-      FINE_TUNING = 'FINE_TUNING'
-      CONTINUED_PRE_TRAINING = 'CONTINUED_PRE_TRAINING'
-      DISTILLATION = 'DISTILLATION'
-      IMPORTED = 'IMPORTED'
     end
 
     # <p>For a Distillation job, the status details for the data processing sub-task of the job.</p>
@@ -2470,7 +2361,7 @@ module Aws::Bedrock
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2487,12 +2378,12 @@ module Aws::Bedrock
       :build_workflow_id,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyBuildWorkflowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2501,12 +2392,12 @@ module Aws::Bedrock
     class DeleteAutomatedReasoningPolicyRequest < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2523,12 +2414,12 @@ module Aws::Bedrock
       :test_case_id,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAutomatedReasoningPolicyTestCaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_model_deployment_identifier
@@ -2537,12 +2428,12 @@ module Aws::Bedrock
     class DeleteCustomModelDeploymentRequest < Struct.new(
       :custom_model_deployment_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomModelDeploymentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_identifier
@@ -2551,12 +2442,12 @@ module Aws::Bedrock
     class DeleteCustomModelRequest < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomModelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -2565,12 +2456,12 @@ module Aws::Bedrock
     class DeleteFoundationModelAgreementRequest < Struct.new(
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFoundationModelAgreementResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -2583,12 +2474,12 @@ module Aws::Bedrock
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGuardrailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_identifier
@@ -2597,12 +2488,12 @@ module Aws::Bedrock
     class DeleteImportedModelRequest < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImportedModelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_identifier
@@ -2611,12 +2502,12 @@ module Aws::Bedrock
     class DeleteInferenceProfileRequest < Struct.new(
       :inference_profile_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInferenceProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -2625,22 +2516,22 @@ module Aws::Bedrock
     class DeleteMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMarketplaceModelEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteModelInvocationLoggingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_router_arn
@@ -2649,12 +2540,12 @@ module Aws::Bedrock
     class DeletePromptRouterRequest < Struct.new(
       :prompt_router_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePromptRouterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_model_id
@@ -2663,12 +2554,12 @@ module Aws::Bedrock
     class DeleteProvisionedModelThroughputRequest < Struct.new(
       :provisioned_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProvisionedModelThroughputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -2677,12 +2568,12 @@ module Aws::Bedrock
     class DeregisterMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterMarketplaceModelEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dimensional price rate.</p>
@@ -2704,7 +2595,7 @@ module Aws::Bedrock
       :description,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for distilling a foundation model into a smaller and more efficient model.</p>
@@ -2714,7 +2605,7 @@ module Aws::Bedrock
     class DistillationConfig < Struct.new(
       :teacher_model_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for the endpoint.</p>
@@ -2725,15 +2616,10 @@ module Aws::Bedrock
       :sage_maker,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SageMaker < EndpointConfig; end
       class Unknown < EndpointConfig; end
-    end
-
-    module EntitlementAvailability
-      AVAILABLE = 'AVAILABLE'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
     end
 
     # <p>Contains the ARN of the Amazon Bedrock model or <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html">inference profile</a> specified in your evaluation job. Each Amazon Bedrock model supports different <code>inferenceParams</code>. To learn more about supported inference parameters for Amazon Bedrock models, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html">Inference parameters for foundation models</a>.</p> <p>The <code>inferenceParams</code> are specified using JSON. To successfully insert JSON as string make sure that all quotations are properly escaped. For example, <code>"temperature":"0.25"</code> key value pair would need to be formatted as <code>\"temperature\":\"0.25\"</code> to successfully accepted in the request.</p>
@@ -2751,7 +2637,7 @@ module Aws::Bedrock
       :inference_params,
       :performance_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inference_params] = '{}' unless options.key?(:inference_params)
@@ -2771,7 +2657,7 @@ module Aws::Bedrock
       :human,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Automated < EvaluationConfig; end
       class Human < EvaluationConfig; end
@@ -2789,7 +2675,7 @@ module Aws::Bedrock
       :name,
       :dataset_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location in Amazon S3 where your prompt dataset is stored.</p>
@@ -2800,7 +2686,7 @@ module Aws::Bedrock
       :s3_uri,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Uri < EvaluationDatasetLocation; end
       class Unknown < EvaluationDatasetLocation; end
@@ -2821,7 +2707,7 @@ module Aws::Bedrock
       :dataset,
       :metric_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the inference model for an evaluation job.</p> <p>For automated model evaluation jobs, only a single model is supported.</p> <p>For human-based model evaluation jobs, your annotator can compare the responses for up to two different models.</p>
@@ -2836,7 +2722,7 @@ module Aws::Bedrock
       :rag_configs,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Models < EvaluationInferenceConfig; end
       class RagConfigs < EvaluationInferenceConfig; end
@@ -2854,21 +2740,7 @@ module Aws::Bedrock
       :model_config_summary,
       :rag_config_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      DELETING = 'Deleting'
-    end
-
-    module EvaluationJobType
-      HUMAN = 'Human'
-      AUTOMATED = 'Automated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the models used in the model evaluation job.</p>
@@ -2883,7 +2755,7 @@ module Aws::Bedrock
       :precomputed_inference_source,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BedrockModel < EvaluationModelConfig; end
       class PrecomputedInferenceSource < EvaluationModelConfig; end
@@ -2901,7 +2773,7 @@ module Aws::Bedrock
       :bedrock_model_identifiers,
       :precomputed_inference_source_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location where the results of your evaluation job are saved.</p>
@@ -2911,7 +2783,7 @@ module Aws::Bedrock
     class EvaluationOutputDataConfig < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a model used for a model evaluation job where you provide your own inference response data.</p>
@@ -2921,7 +2793,7 @@ module Aws::Bedrock
     class EvaluationPrecomputedInferenceSource < Struct.new(
       :inference_source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a RAG source used for a Knowledge Base evaluation job where you provide your own inference response data.</p>
@@ -2936,7 +2808,7 @@ module Aws::Bedrock
       :retrieve_and_generate_source_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RetrieveSourceConfig < EvaluationPrecomputedRagSourceConfig; end
       class RetrieveAndGenerateSourceConfig < EvaluationPrecomputedRagSourceConfig; end
@@ -2950,7 +2822,7 @@ module Aws::Bedrock
     class EvaluationPrecomputedRetrieveAndGenerateSourceConfig < Struct.new(
       :rag_source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a RAG source used for a retrieve-only Knowledge Base evaluation job where you provide your own inference response data.</p>
@@ -2960,7 +2832,7 @@ module Aws::Bedrock
     class EvaluationPrecomputedRetrieveSourceConfig < Struct.new(
       :rag_source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the RAG resources used in an Amazon Bedrock Knowledge Base evaluation job. These resources can be Knowledge Bases in Amazon Bedrock or RAG sources outside of Amazon Bedrock that you use to generate your own inference response data.</p>
@@ -2974,7 +2846,7 @@ module Aws::Bedrock
       :bedrock_knowledge_base_identifiers,
       :precomputed_rag_source_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information of an evaluation job.</p>
@@ -3034,20 +2906,12 @@ module Aws::Bedrock
       :inference_config_summary,
       :application_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:model_identifiers] = [] unless options.key?(:model_identifiers)
         super
       end
-    end
-
-    module EvaluationTaskType
-      SUMMARIZATION = 'Summarization'
-      CLASSIFICATION = 'Classification'
-      QUESTION_AND_ANSWER = 'QuestionAndAnswer'
-      GENERATION = 'Generation'
-      CUSTOM = 'Custom'
     end
 
     # <p>Specifies the model configuration for the evaluator model. <code>EvaluatorModelConfig</code> is required for evaluation jobs that use a knowledge base or in model evaluation job that use a model as judge. This model computes all evaluation related metrics.</p>
@@ -3058,7 +2922,7 @@ module Aws::Bedrock
       :bedrock_evaluator_models,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BedrockEvaluatorModels < EvaluatorModelConfig; end
       class Unknown < EvaluatorModelConfig; end
@@ -3070,7 +2934,7 @@ module Aws::Bedrock
     class ExportAutomatedReasoningPolicyVersionRequest < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_definition
@@ -3079,7 +2943,7 @@ module Aws::Bedrock
     class ExportAutomatedReasoningPolicyVersionResponse < Struct.new(
       :policy_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique external source of the content contained in the wrapper object.</p>
@@ -3097,12 +2961,7 @@ module Aws::Bedrock
       :s3_location,
       :byte_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExternalSourceType
-      S3 = 'S3'
-      BYTE_CONTENT = 'BYTE_CONTENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response generation configuration of the external source wrapper object.</p>
@@ -3124,7 +2983,7 @@ module Aws::Bedrock
       :kb_inference_config,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the external source wrapper object in the <code>retrieveAndGenerate</code> function.</p>
@@ -3142,7 +3001,7 @@ module Aws::Bedrock
       :sources,
       :generation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a field to be used during the reranking process in a Knowledge Base vector search. This structure identifies metadata fields that should be considered when reordering search results to improve relevance.</p>
@@ -3152,7 +3011,7 @@ module Aws::Bedrock
     class FieldForReranking < Struct.new(
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the name of the metadata attribute/field to apply filters. You must match the name of the attribute/field in your data source/document metadata.</p>
@@ -3166,15 +3025,7 @@ module Aws::Bedrock
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FineTuningJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a foundation model.</p>
@@ -3220,7 +3071,7 @@ module Aws::Bedrock
       :inference_types_supported,
       :model_lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about whether a model version is available or deprecated.</p>
@@ -3230,12 +3081,7 @@ module Aws::Bedrock
     class FoundationModelLifecycle < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FoundationModelLifecycleStatus
-      ACTIVE = 'ACTIVE'
-      LEGACY = 'LEGACY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a foundation model.</p>
@@ -3281,7 +3127,7 @@ module Aws::Bedrock
       :inference_types_supported,
       :model_lifecycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for response generation based on retrieved text chunks.</p>
@@ -3303,7 +3149,7 @@ module Aws::Bedrock
       :kb_inference_config,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3316,7 +3162,7 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3345,7 +3191,7 @@ module Aws::Bedrock
       :annotation_set_hash,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3358,7 +3204,7 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3399,7 +3245,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3416,7 +3262,7 @@ module Aws::Bedrock
       :build_workflow_id,
       :asset_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3433,7 +3279,7 @@ module Aws::Bedrock
       :build_workflow_id,
       :build_workflow_assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3446,7 +3292,7 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3459,7 +3305,7 @@ module Aws::Bedrock
       :policy_arn,
       :scenario,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3468,7 +3314,7 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyRequest < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3505,7 +3351,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3518,7 +3364,7 @@ module Aws::Bedrock
       :policy_arn,
       :test_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3531,7 +3377,7 @@ module Aws::Bedrock
       :policy_arn,
       :test_case,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -3548,7 +3394,7 @@ module Aws::Bedrock
       :build_workflow_id,
       :test_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_result
@@ -3557,7 +3403,7 @@ module Aws::Bedrock
     class GetAutomatedReasoningPolicyTestResultResponse < Struct.new(
       :test_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_model_deployment_identifier
@@ -3566,7 +3412,7 @@ module Aws::Bedrock
     class GetCustomModelDeploymentRequest < Struct.new(
       :custom_model_deployment_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_model_deployment_arn
@@ -3603,7 +3449,7 @@ module Aws::Bedrock
       :failure_message,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_identifier
@@ -3612,7 +3458,7 @@ module Aws::Bedrock
     class GetCustomModelRequest < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -3685,7 +3531,7 @@ module Aws::Bedrock
       :model_status,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -3694,7 +3540,7 @@ module Aws::Bedrock
     class GetEvaluationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -3755,7 +3601,7 @@ module Aws::Bedrock
       :last_modified_time,
       :failure_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -3764,7 +3610,7 @@ module Aws::Bedrock
     class GetFoundationModelAvailabilityRequest < Struct.new(
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -3789,7 +3635,7 @@ module Aws::Bedrock
       :entitlement_availability,
       :region_availability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_identifier
@@ -3798,7 +3644,7 @@ module Aws::Bedrock
     class GetFoundationModelRequest < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_details
@@ -3807,7 +3653,7 @@ module Aws::Bedrock
     class GetFoundationModelResponse < Struct.new(
       :model_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -3820,7 +3666,7 @@ module Aws::Bedrock
       :guardrail_identifier,
       :guardrail_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3905,7 +3751,7 @@ module Aws::Bedrock
       :blocked_outputs_messaging,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_identifier
@@ -3914,7 +3760,7 @@ module Aws::Bedrock
     class GetImportedModelRequest < Struct.new(
       :model_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -3959,7 +3805,7 @@ module Aws::Bedrock
       :instruct_supported,
       :custom_model_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_identifier
@@ -3968,7 +3814,7 @@ module Aws::Bedrock
     class GetInferenceProfileRequest < Struct.new(
       :inference_profile_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_name
@@ -4009,7 +3855,7 @@ module Aws::Bedrock
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -4018,7 +3864,7 @@ module Aws::Bedrock
     class GetMarketplaceModelEndpointRequest < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marketplace_model_endpoint
@@ -4027,7 +3873,7 @@ module Aws::Bedrock
     class GetMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -4036,7 +3882,7 @@ module Aws::Bedrock
     class GetModelCopyJobRequest < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -4085,7 +3931,7 @@ module Aws::Bedrock
       :failure_message,
       :source_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -4094,7 +3940,7 @@ module Aws::Bedrock
     class GetModelCustomizationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -4191,7 +4037,7 @@ module Aws::Bedrock
       :vpc_config,
       :customization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -4200,7 +4046,7 @@ module Aws::Bedrock
     class GetModelImportJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -4257,7 +4103,7 @@ module Aws::Bedrock
       :vpc_config,
       :imported_model_kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -4266,7 +4112,7 @@ module Aws::Bedrock
     class GetModelInvocationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -4331,12 +4177,12 @@ module Aws::Bedrock
       :timeout_duration_in_hours,
       :job_expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetModelInvocationLoggingConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_config
@@ -4345,7 +4191,7 @@ module Aws::Bedrock
     class GetModelInvocationLoggingConfigurationResponse < Struct.new(
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_router_arn
@@ -4354,7 +4200,7 @@ module Aws::Bedrock
     class GetPromptRouterRequest < Struct.new(
       :prompt_router_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_router_name
@@ -4399,7 +4245,7 @@ module Aws::Bedrock
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_model_id
@@ -4408,7 +4254,7 @@ module Aws::Bedrock
     class GetProvisionedModelThroughputRequest < Struct.new(
       :provisioned_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_units
@@ -4465,12 +4311,12 @@ module Aws::Bedrock
       :commitment_duration,
       :commitment_expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetUseCaseForModelAccessRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute form_data
@@ -4479,7 +4325,7 @@ module Aws::Bedrock
     class GetUseCaseForModelAccessResponse < Struct.new(
       :form_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the configuration of Automated Reasoning policies within a Amazon Bedrock Guardrail, including the policies to apply and confidence thresholds.</p>
@@ -4493,7 +4339,7 @@ module Aws::Bedrock
       :policies,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for integrating Automated Reasoning policies with Amazon Bedrock Guardrails.</p>
@@ -4507,7 +4353,7 @@ module Aws::Bedrock
       :policies,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the guardrail.</p>
@@ -4521,7 +4367,7 @@ module Aws::Bedrock
       :guardrail_id,
       :guardrail_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filter strengths for harmful content. Guardrails support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p> <ul> <li> <p> <b>Hate</b> – Describes language or a statement that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p> </li> <li> <p> <b>Insults</b> – Describes language or a statement that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p> </li> <li> <p> <b>Sexual</b> – Describes language or a statement that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p> </li> <li> <p> <b>Violence</b> – Describes language or a statement that includes glorification of or threats to inflict physical pain, hurt, or injury toward a person, group or thing.</p> </li> </ul> <p>Content filtering depends on the confidence classification of user inputs and FM responses across each of the four harmful categories. All input and output statements are classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each harmful category. For example, if a statement is classified as <i>Hate</i> with HIGH confidence, the likelihood of the statement representing hateful content is high. A single statement can be classified across multiple categories with varying confidence levels. For example, a single statement can be classified as <i>Hate</i> with HIGH confidence, <i>Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html">Guardrails content filters</a>.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax">GetGuardrail response body</a> </p> </li> </ul>
@@ -4563,13 +4409,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailContentFilterAction
-      BLOCK = 'BLOCK'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filter strengths for harmful content. Guardrails support the following content filters to detect and filter harmful user inputs and FM-generated outputs.</p> <ul> <li> <p> <b>Hate</b> – Describes language or a statement that discriminates, criticizes, insults, denounces, or dehumanizes a person or group on the basis of an identity (such as race, ethnicity, gender, religion, sexual orientation, ability, and national origin).</p> </li> <li> <p> <b>Insults</b> – Describes language or a statement that includes demeaning, humiliating, mocking, insulting, or belittling language. This type of language is also labeled as bullying.</p> </li> <li> <p> <b>Sexual</b> – Describes language or a statement that indicates sexual interest, activity, or arousal using direct or indirect references to body parts, physical traits, or sex.</p> </li> <li> <p> <b>Violence</b> – Describes language or a statement that includes glorification of or threats to inflict physical pain, hurt, or injury toward a person, group or thing.</p> </li> </ul> <p>Content filtering depends on the confidence classification of user inputs and FM responses across each of the four harmful categories. All input and output statements are classified into one of four confidence levels (NONE, LOW, MEDIUM, HIGH) for each harmful category. For example, if a statement is classified as <i>Hate</i> with HIGH confidence, the likelihood of the statement representing hateful content is high. A single statement can be classified across multiple categories with varying confidence levels. For example, a single statement can be classified as <i>Hate</i> with HIGH confidence, <i>Insults</i> with LOW confidence, <i>Sexual</i> with NONE confidence, and <i>Violence</i> with MEDIUM confidence.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html">Guardrails content filters</a>.</p>
@@ -4611,16 +4451,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailContentFilterType
-      SEXUAL = 'SEXUAL'
-      VIOLENCE = 'VIOLENCE'
-      HATE = 'HATE'
-      INSULTS = 'INSULTS'
-      MISCONDUCT = 'MISCONDUCT'
-      PROMPT_ATTACK = 'PROMPT_ATTACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tier that your guardrail uses for content filters.</p>
@@ -4630,7 +4461,7 @@ module Aws::Bedrock
     class GuardrailContentFiltersTier < Struct.new(
       :tier_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tier that your guardrail uses for content filters. Consider using a tier that balances performance, accuracy, and compatibility with your existing generative AI workflows.</p>
@@ -4640,13 +4471,7 @@ module Aws::Bedrock
     class GuardrailContentFiltersTierConfig < Struct.new(
       :tier_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailContentFiltersTierName
-      CLASSIC = 'CLASSIC'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about how to handle harmful content.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax">GetGuardrail response body</a> </p> </li> </ul>
@@ -4660,7 +4485,7 @@ module Aws::Bedrock
       :filters,
       :tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about how to handle harmful content.</p>
@@ -4674,13 +4499,7 @@ module Aws::Bedrock
       :filters_config,
       :tier_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailContextualGroundingAction
-      BLOCK = 'BLOCK'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the guardrails contextual grounding filter.</p>
@@ -4702,7 +4521,7 @@ module Aws::Bedrock
       :action,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter configuration details for the guardrails contextual grounding filter.</p>
@@ -4724,12 +4543,7 @@ module Aws::Bedrock
       :action,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailContextualGroundingFilterType
-      GROUNDING = 'GROUNDING'
-      RELEVANCE = 'RELEVANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the guardrails contextual grounding policy.</p>
@@ -4739,7 +4553,7 @@ module Aws::Bedrock
     class GuardrailContextualGroundingPolicy < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy configuration details for the guardrails contextual grounding policy.</p>
@@ -4749,7 +4563,7 @@ module Aws::Bedrock
     class GuardrailContextualGroundingPolicyConfig < Struct.new(
       :filters_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system-defined guardrail profile that you're using with your guardrail. Guardrail profiles define the destination Amazon Web Services Regions where guardrail inference requests can be automatically routed. Using guardrail profiles helps maintain guardrail performance and reliability when demand increases.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">Amazon Bedrock User Guide</a>.</p>
@@ -4759,7 +4573,7 @@ module Aws::Bedrock
     class GuardrailCrossRegionConfig < Struct.new(
       :guardrail_profile_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the system-defined guardrail profile that you're using with your guardrail for cross-Region inference.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html">Amazon Bedrock User Guide</a>.</p>
@@ -4773,14 +4587,7 @@ module Aws::Bedrock
       :guardrail_profile_id,
       :guardrail_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailFilterStrength
-      NONE = 'NONE'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed word list that was configured for the guardrail. (This is a list of words that are pre-defined and managed by guardrails only.)</p>
@@ -4806,7 +4613,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed word list to configure for the guardrail.</p>
@@ -4832,17 +4639,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailManagedWordsType
-      PROFANITY = 'PROFANITY'
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailModality
-      TEXT = 'TEXT'
-      IMAGE = 'IMAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PII entity configured for the guardrail.</p>
@@ -4872,7 +4669,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PII entity to configure for the guardrail.</p>
@@ -4902,41 +4699,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailPiiEntityType
-      ADDRESS = 'ADDRESS'
-      AGE = 'AGE'
-      AWS_ACCESS_KEY = 'AWS_ACCESS_KEY'
-      AWS_SECRET_KEY = 'AWS_SECRET_KEY'
-      CA_HEALTH_NUMBER = 'CA_HEALTH_NUMBER'
-      CA_SOCIAL_INSURANCE_NUMBER = 'CA_SOCIAL_INSURANCE_NUMBER'
-      CREDIT_DEBIT_CARD_CVV = 'CREDIT_DEBIT_CARD_CVV'
-      CREDIT_DEBIT_CARD_EXPIRY = 'CREDIT_DEBIT_CARD_EXPIRY'
-      CREDIT_DEBIT_CARD_NUMBER = 'CREDIT_DEBIT_CARD_NUMBER'
-      DRIVER_ID = 'DRIVER_ID'
-      EMAIL = 'EMAIL'
-      INTERNATIONAL_BANK_ACCOUNT_NUMBER = 'INTERNATIONAL_BANK_ACCOUNT_NUMBER'
-      IP_ADDRESS = 'IP_ADDRESS'
-      LICENSE_PLATE = 'LICENSE_PLATE'
-      MAC_ADDRESS = 'MAC_ADDRESS'
-      NAME = 'NAME'
-      PASSWORD = 'PASSWORD'
-      PHONE = 'PHONE'
-      PIN = 'PIN'
-      SWIFT_CODE = 'SWIFT_CODE'
-      UK_NATIONAL_HEALTH_SERVICE_NUMBER = 'UK_NATIONAL_HEALTH_SERVICE_NUMBER'
-      UK_NATIONAL_INSURANCE_NUMBER = 'UK_NATIONAL_INSURANCE_NUMBER'
-      UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = 'UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER'
-      URL = 'URL'
-      USERNAME = 'USERNAME'
-      US_BANK_ACCOUNT_NUMBER = 'US_BANK_ACCOUNT_NUMBER'
-      US_BANK_ROUTING_NUMBER = 'US_BANK_ROUTING_NUMBER'
-      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = 'US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER'
-      US_PASSPORT_NUMBER = 'US_PASSPORT_NUMBER'
-      US_SOCIAL_SECURITY_NUMBER = 'US_SOCIAL_SECURITY_NUMBER'
-      VEHICLE_IDENTIFICATION_NUMBER = 'VEHICLE_IDENTIFICATION_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The regular expression configured for the guardrail.</p>
@@ -4974,7 +4737,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The regular expression to configure for the guardrail.</p>
@@ -5012,13 +4775,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailSensitiveInformationAction
-      BLOCK = 'BLOCK'
-      ANONYMIZE = 'ANONYMIZE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about PII entities and regular expressions configured for the guardrail.</p>
@@ -5032,7 +4789,7 @@ module Aws::Bedrock
       :pii_entities,
       :regexes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about PII entities and regular expressions to configure for the guardrail.</p>
@@ -5046,16 +4803,7 @@ module Aws::Bedrock
       :pii_entities_config,
       :regexes_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      VERSIONING = 'VERSIONING'
-      READY = 'READY'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a guardrail.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListGuardrails.html#API_ListGuardrails_ResponseSyntax">ListGuardrails response body</a> </p> </li> </ul>
@@ -5097,7 +4845,7 @@ module Aws::Bedrock
       :updated_at,
       :cross_region_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about topics for the guardrail to identify and deny.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax">GetGuardrail response body</a> </p> </li> </ul>
@@ -5135,13 +4883,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailTopicAction
-      BLOCK = 'BLOCK'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about topics for the guardrail to identify and deny.</p>
@@ -5179,7 +4921,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about topics that the guardrail should identify and deny.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax">GetGuardrail response body</a> </p> </li> </ul>
@@ -5193,7 +4935,7 @@ module Aws::Bedrock
       :topics,
       :tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about topics that the guardrail should identify and deny.</p>
@@ -5207,11 +4949,7 @@ module Aws::Bedrock
       :topics_config,
       :tier_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GuardrailTopicType
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tier that your guardrail uses for denied topic filters.</p>
@@ -5221,7 +4959,7 @@ module Aws::Bedrock
     class GuardrailTopicsTier < Struct.new(
       :tier_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tier that your guardrail uses for denied topic filters. Consider using a tier that balances performance, accuracy, and compatibility with your existing generative AI workflows.</p>
@@ -5231,13 +4969,7 @@ module Aws::Bedrock
     class GuardrailTopicsTierConfig < Struct.new(
       :tier_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailTopicsTierName
-      CLASSIC = 'CLASSIC'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word configured for the guardrail.</p>
@@ -5263,13 +4995,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module GuardrailWordAction
-      BLOCK = 'BLOCK'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word to configure for the guardrail.</p>
@@ -5295,7 +5021,7 @@ module Aws::Bedrock
       :input_enabled,
       :output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the word policy configured for the guardrail.</p>
@@ -5309,7 +5035,7 @@ module Aws::Bedrock
       :words,
       :managed_word_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the word policy to configured for the guardrail.</p>
@@ -5323,7 +5049,7 @@ module Aws::Bedrock
       :words_config,
       :managed_word_lists_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the custom metrics, how tasks will be rated, the flow definition ARN, and your custom prompt datasets. Model evaluation jobs use human workers <i>only</i> support the use of custom prompt datasets. To learn more about custom prompt datasets and the required format, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html">Custom prompt datasets</a>.</p> <p>When you create custom metrics in <code>HumanEvaluationCustomMetric</code> you must specify the metric's <code>name</code>. The list of <code>names</code> specified in the <code>HumanEvaluationCustomMetric</code> array, must match the <code>metricNames</code> array of strings specified in <code>EvaluationDatasetMetricConfig</code>. For example, if in the <code>HumanEvaluationCustomMetric</code> array your specified the names <code>"accuracy", "toxicity", "readability"</code> as custom metrics <i>then</i> the <code>metricNames</code> array would need to look like the following <code>["accuracy", "toxicity", "readability"]</code> in <code>EvaluationDatasetMetricConfig</code>.</p>
@@ -5341,7 +5067,7 @@ module Aws::Bedrock
       :custom_metrics,
       :dataset_metric_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a model evaluation job that uses human workers you must define the name of the metric, and how you want that metric rated <code>ratingMethod</code>, and an optional description of the metric.</p>
@@ -5359,7 +5085,7 @@ module Aws::Bedrock
       :description,
       :rating_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains <code>SageMakerFlowDefinition</code> object. The object is used to specify the prompt dataset, task type, rating method and metric names.</p>
@@ -5373,7 +5099,7 @@ module Aws::Bedrock
       :flow_definition_arn,
       :instructions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for implicit filtering in Knowledge Base vector searches. Implicit filtering allows you to automatically filter search results based on metadata attributes without requiring explicit filter expressions in each query.</p>
@@ -5387,7 +5113,7 @@ module Aws::Bedrock
       :metadata_attributes,
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the imported model.</p>
@@ -5413,7 +5139,7 @@ module Aws::Bedrock
       :instruct_supported,
       :model_architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a model.</p>
@@ -5423,7 +5149,7 @@ module Aws::Bedrock
     class InferenceProfileModel < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the model or system-defined inference profile that is the source for an inference profile..</p>
@@ -5434,14 +5160,10 @@ module Aws::Bedrock
       :copy_from,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CopyFrom < InferenceProfileModelSource; end
       class Unknown < InferenceProfileModelSource; end
-    end
-
-    module InferenceProfileStatus
-      ACTIVE = 'ACTIVE'
     end
 
     # <p>Contains information about an inference profile.</p>
@@ -5483,17 +5205,7 @@ module Aws::Bedrock
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceProfileType
-      SYSTEM_DEFINED = 'SYSTEM_DEFINED'
-      APPLICATION = 'APPLICATION'
-    end
-
-    module InferenceType
-      ON_DEMAND = 'ON_DEMAND'
-      PROVISIONED = 'PROVISIONED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -5502,7 +5214,7 @@ module Aws::Bedrock
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A storage location for invocation logs.</p>
@@ -5513,7 +5225,7 @@ module Aws::Bedrock
       :s3_uri,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Uri < InvocationLogSource; end
       class Unknown < InvocationLogSource; end
@@ -5534,21 +5246,12 @@ module Aws::Bedrock
       :invocation_log_source,
       :request_metadata_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_prompt_response] = false unless options.key?(:use_prompt_response)
         super
       end
-    end
-
-    module JobStatusDetails
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      FAILED = 'Failed'
-      NOT_STARTED = 'NotStarted'
     end
 
     # <p>Contains configuration details of the inference for knowledge base retrieval and response generation.</p>
@@ -5558,7 +5261,7 @@ module Aws::Bedrock
     class KbInferenceConfig < Struct.new(
       :text_inference_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for retrieving information from a knowledge base and generating responses.</p>
@@ -5573,7 +5276,7 @@ module Aws::Bedrock
       :retrieve_and_generate_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RetrieveConfig < KnowledgeBaseConfig; end
       class RetrieveAndGenerateConfig < KnowledgeBaseConfig; end
@@ -5587,7 +5290,7 @@ module Aws::Bedrock
     class KnowledgeBaseRetrievalConfiguration < Struct.new(
       :vector_search_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details for retrieving information from a knowledge base and generating responses.</p>
@@ -5613,7 +5316,7 @@ module Aws::Bedrock
       :generation_configuration,
       :orchestration_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for returning the results from the knowledge base vector search.</p>
@@ -5639,7 +5342,7 @@ module Aws::Bedrock
       :implicit_filter_configuration,
       :reranking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The legal term of the agreement.</p>
@@ -5649,7 +5352,7 @@ module Aws::Bedrock
     class LegalTerm < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -5666,7 +5369,7 @@ module Aws::Bedrock
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automated_reasoning_policy_summaries
@@ -5679,7 +5382,7 @@ module Aws::Bedrock
       :automated_reasoning_policy_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -5696,7 +5399,7 @@ module Aws::Bedrock
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automated_reasoning_policy_build_workflow_summaries
@@ -5709,7 +5412,7 @@ module Aws::Bedrock
       :automated_reasoning_policy_build_workflow_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -5726,7 +5429,7 @@ module Aws::Bedrock
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_cases
@@ -5739,7 +5442,7 @@ module Aws::Bedrock
       :test_cases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -5760,7 +5463,7 @@ module Aws::Bedrock
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_results
@@ -5773,7 +5476,7 @@ module Aws::Bedrock
       :test_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_before
@@ -5814,7 +5517,7 @@ module Aws::Bedrock
       :status_equals,
       :model_arn_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5827,7 +5530,7 @@ module Aws::Bedrock
       :next_token,
       :model_deployment_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_before
@@ -5876,7 +5579,7 @@ module Aws::Bedrock
       :is_owned,
       :model_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5889,7 +5592,7 @@ module Aws::Bedrock
       :next_token,
       :model_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -5930,7 +5633,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5943,7 +5646,7 @@ module Aws::Bedrock
       :next_token,
       :job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -5956,7 +5659,7 @@ module Aws::Bedrock
       :model_id,
       :offer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -5969,7 +5672,7 @@ module Aws::Bedrock
       :model_id,
       :offers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute by_provider
@@ -5990,7 +5693,7 @@ module Aws::Bedrock
       :by_output_modality,
       :by_inference_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_summaries
@@ -5999,7 +5702,7 @@ module Aws::Bedrock
     class ListFoundationModelsResponse < Struct.new(
       :model_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -6016,7 +5719,7 @@ module Aws::Bedrock
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrails
@@ -6029,7 +5732,7 @@ module Aws::Bedrock
       :guardrails,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_before
@@ -6062,7 +5765,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6075,7 +5778,7 @@ module Aws::Bedrock
       :next_token,
       :model_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -6092,7 +5795,7 @@ module Aws::Bedrock
       :next_token,
       :type_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_profile_summaries
@@ -6105,7 +5808,7 @@ module Aws::Bedrock
       :inference_profile_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -6122,7 +5825,7 @@ module Aws::Bedrock
       :next_token,
       :model_source_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marketplace_model_endpoints
@@ -6135,7 +5838,7 @@ module Aws::Bedrock
       :marketplace_model_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -6180,7 +5883,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6193,7 +5896,7 @@ module Aws::Bedrock
       :next_token,
       :model_copy_job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -6230,7 +5933,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6243,7 +5946,7 @@ module Aws::Bedrock
       :next_token,
       :model_customization_job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -6280,7 +5983,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6293,7 +5996,7 @@ module Aws::Bedrock
       :next_token,
       :model_import_job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute submit_time_after
@@ -6330,7 +6033,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6343,7 +6046,7 @@ module Aws::Bedrock
       :next_token,
       :invocation_job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -6360,7 +6063,7 @@ module Aws::Bedrock
       :next_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_router_summaries
@@ -6373,7 +6076,7 @@ module Aws::Bedrock
       :prompt_router_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -6414,7 +6117,7 @@ module Aws::Bedrock
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -6427,7 +6130,7 @@ module Aws::Bedrock
       :next_token,
       :provisioned_model_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6436,7 +6139,7 @@ module Aws::Bedrock
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -6445,7 +6148,7 @@ module Aws::Bedrock
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration fields for invocation logging.</p>
@@ -6475,7 +6178,7 @@ module Aws::Bedrock
       :embedding_data_delivery_enabled,
       :video_data_delivery_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an endpoint for a model from Amazon Bedrock Marketplace.</p>
@@ -6517,7 +6220,7 @@ module Aws::Bedrock
       :endpoint_status,
       :endpoint_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of an endpoint for a model from Amazon Bedrock Marketplace.</p>
@@ -6547,7 +6250,7 @@ module Aws::Bedrock
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the schema for a metadata attribute used in Knowledge Base vector searches. Metadata attributes provide additional context for documents and can be used for filtering and reranking search results.</p>
@@ -6566,7 +6269,7 @@ module Aws::Bedrock
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for how metadata should be used during the reranking process in Knowledge Base vector searches. This determines which metadata fields are included or excluded when reordering search results.</p>
@@ -6580,13 +6283,7 @@ module Aws::Bedrock
       :selection_mode,
       :selective_mode_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCopyJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about each model copy job.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListModelCopyJobs.html#API_ListModelCopyJobs_ResponseSyntax">ListModelCopyJobs response</a> </p> </li> </ul>
@@ -6636,21 +6333,7 @@ module Aws::Bedrock
       :failure_message,
       :source_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCustomization
-      FINE_TUNING = 'FINE_TUNING'
-      CONTINUED_PRE_TRAINING = 'CONTINUED_PRE_TRAINING'
-      DISTILLATION = 'DISTILLATION'
-    end
-
-    module ModelCustomizationJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one customization job</p>
@@ -6700,7 +6383,7 @@ module Aws::Bedrock
       :custom_model_name,
       :customization_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data source of the model to import.</p>
@@ -6711,16 +6394,10 @@ module Aws::Bedrock
       :s3_data_source,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3DataSource < ModelDataSource; end
       class Unknown < ModelDataSource; end
-    end
-
-    module ModelImportJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
     end
 
     # <p>Information about the import job.</p>
@@ -6758,7 +6435,7 @@ module Aws::Bedrock
       :imported_model_arn,
       :imported_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the location of the input to the batch inference job.</p>
@@ -6769,7 +6446,7 @@ module Aws::Bedrock
       :s3_input_data_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3InputDataConfig < ModelInvocationJobInputDataConfig; end
       class Unknown < ModelInvocationJobInputDataConfig; end
@@ -6783,7 +6460,7 @@ module Aws::Bedrock
       :s3_output_data_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3OutputDataConfig < ModelInvocationJobOutputDataConfig; end
       class Unknown < ModelInvocationJobOutputDataConfig; end
@@ -6804,7 +6481,7 @@ module Aws::Bedrock
       :s3_uri,
       :s3_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration of the S3 location of the output data.</p>
@@ -6822,20 +6499,7 @@ module Aws::Bedrock
       :s3_encryption_key_id,
       :s3_bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelInvocationJobStatus
-      SUBMITTED = 'Submitted'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      PARTIALLY_COMPLETED = 'PartiallyCompleted'
-      EXPIRED = 'Expired'
-      VALIDATING = 'Validating'
-      SCHEDULED = 'Scheduled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a batch inference job.</p>
@@ -6901,19 +6565,7 @@ module Aws::Bedrock
       :timeout_duration_in_hours,
       :job_expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelModality
-      TEXT = 'TEXT'
-      IMAGE = 'IMAGE'
-      EMBEDDING = 'EMBEDDING'
-    end
-
-    module ModelStatus
-      ACTIVE = 'Active'
-      CREATING = 'Creating'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An offer dictates usage terms for the model.</p>
@@ -6931,12 +6583,7 @@ module Aws::Bedrock
       :offer_token,
       :term_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfferType
-      ALL = 'ALL'
-      PUBLIC = 'PUBLIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the model to process the prompt prior to retrieval and response generation.</p>
@@ -6946,7 +6593,7 @@ module Aws::Bedrock
     class OrchestrationConfiguration < Struct.new(
       :query_transformation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3 Location of the output data.</p>
@@ -6956,12 +6603,7 @@ module Aws::Bedrock
     class OutputDataConfig < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PerformanceConfigLatency
-      STANDARD = 'standard'
-      OPTIMIZED = 'optimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains performance settings for a model.</p>
@@ -6971,7 +6613,7 @@ module Aws::Bedrock
     class PerformanceConfiguration < Struct.new(
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the usage-based pricing term.</p>
@@ -6981,11 +6623,7 @@ module Aws::Bedrock
     class PricingTerm < Struct.new(
       :rate_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PromptRouterStatus
-      AVAILABLE = 'AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a prompt router.</p>
@@ -7031,7 +6669,7 @@ module Aws::Bedrock
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target model for a prompt router.</p>
@@ -7041,12 +6679,7 @@ module Aws::Bedrock
     class PromptRouterTargetModel < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PromptRouterType
-      CUSTOM = 'custom'
-      DEFAULT = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template for the prompt that's sent to the model for response generation.</p>
@@ -7056,14 +6689,7 @@ module Aws::Bedrock
     class PromptTemplate < Struct.new(
       :text_prompt_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisionedModelStatus
-      CREATING = 'Creating'
-      IN_SERVICE = 'InService'
-      UPDATING = 'Updating'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a Provisioned Throughput.</p> <p>This data type is used in the following API operations:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListProvisionedModelThroughputs.html#API_ListProvisionedModelThroughputs_ResponseSyntax">ListProvisionedThroughputs response</a> </p> </li> </ul>
@@ -7117,7 +6743,7 @@ module Aws::Bedrock
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_config
@@ -7126,12 +6752,12 @@ module Aws::Bedrock
     class PutModelInvocationLoggingConfigurationRequest < Struct.new(
       :logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutModelInvocationLoggingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute form_data
@@ -7140,12 +6766,12 @@ module Aws::Bedrock
     class PutUseCaseForModelAccessRequest < Struct.new(
       :form_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutUseCaseForModelAccessResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for transforming the prompt.</p>
@@ -7155,11 +6781,7 @@ module Aws::Bedrock
     class QueryTransformationConfiguration < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryTransformationType
-      QUERY_DECOMPOSITION = 'QUERY_DECOMPOSITION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details for retrieval of information and response generation.</p>
@@ -7174,7 +6796,7 @@ module Aws::Bedrock
       :precomputed_rag_source_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class KnowledgeBaseConfig < RAGConfig; end
       class PrecomputedRagSourceConfig < RAGConfig; end
@@ -7192,7 +6814,7 @@ module Aws::Bedrock
       :definition,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the value for one rating in a custom metric rating scale.</p>
@@ -7207,16 +6829,11 @@ module Aws::Bedrock
       :float_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < RatingScaleItemValue; end
       class FloatValue < RatingScaleItemValue; end
       class Unknown < RatingScaleItemValue; end
-    end
-
-    module RegionAvailability
-      AVAILABLE = 'AVAILABLE'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
     end
 
     # @!attribute endpoint_identifier
@@ -7229,7 +6846,7 @@ module Aws::Bedrock
       :endpoint_identifier,
       :model_source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marketplace_model_endpoint
@@ -7238,7 +6855,7 @@ module Aws::Bedrock
     class RegisterMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping of a metadata key to a value that it should or should not equal.</p>
@@ -7252,7 +6869,7 @@ module Aws::Bedrock
       :equals,
       :not_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Rules for filtering invocation logs. A filter can be a mapping of a metadata key to a value that it should or should not equal (a base filter), or a list of base filters that are all applied with <code>AND</code> or <code>OR</code> logical operators</p>
@@ -7275,18 +6892,13 @@ module Aws::Bedrock
       :or_all,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Equals < RequestMetadataFilters; end
       class NotEquals < RequestMetadataFilters; end
       class AndAll < RequestMetadataFilters; end
       class OrAll < RequestMetadataFilters; end
       class Unknown < RequestMetadataFilters; end
-    end
-
-    module RerankingMetadataSelectionMode
-      SELECTIVE = 'SELECTIVE'
-      ALL = 'ALL'
     end
 
     # <p>Configuration for selectively including or excluding metadata fields during the reranking process. This allows you to control which metadata attributes are considered when reordering search results.</p>
@@ -7301,7 +6913,7 @@ module Aws::Bedrock
       :fields_to_exclude,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration; end
       class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration; end
@@ -7314,7 +6926,7 @@ module Aws::Bedrock
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>
@@ -7323,7 +6935,7 @@ module Aws::Bedrock
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the filters to use on the metadata attributes/fields in the knowledge base data sources before returning results.</p>
@@ -7383,7 +6995,7 @@ module Aws::Bedrock
       :or_all,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Equals < RetrievalFilter; end
       class NotEquals < RetrievalFilter; end
@@ -7416,12 +7028,7 @@ module Aws::Bedrock
       :knowledge_base_configuration,
       :external_sources_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetrieveAndGenerateType
-      KNOWLEDGE_BASE = 'KNOWLEDGE_BASE'
-      EXTERNAL_SOURCES = 'EXTERNAL_SOURCES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for retrieving information from a knowledge base.</p>
@@ -7435,7 +7042,7 @@ module Aws::Bedrock
       :knowledge_base_id,
       :knowledge_base_retrieval_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Routing criteria for a prompt router.</p>
@@ -7445,7 +7052,7 @@ module Aws::Bedrock
     class RoutingCriteria < Struct.new(
       :response_quality_difference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3 configuration for storing log data.</p>
@@ -7459,7 +7066,7 @@ module Aws::Bedrock
       :bucket_name,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 data source of the model to import. </p>
@@ -7469,11 +7076,7 @@ module Aws::Bedrock
     class S3DataSource < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3InputFormat
-      JSONL = 'JSONL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique wrapper object of the document from the S3 location.</p>
@@ -7483,7 +7086,7 @@ module Aws::Bedrock
     class S3ObjectDoc < Struct.new(
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for a Amazon SageMaker endpoint.</p>
@@ -7509,12 +7112,7 @@ module Aws::Bedrock
       :kms_encryption_key,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchType
-      HYBRID = 'HYBRID'
-      SEMANTIC = 'SEMANTIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeds the service quota. Resubmit your request later.</p>
@@ -7523,7 +7121,7 @@ module Aws::Bedrock
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the service cannot complete the request.</p>
@@ -7532,24 +7130,7 @@ module Aws::Bedrock
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortByProvisionedModels
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortJobsBy
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortModelsBy
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7570,7 +7151,7 @@ module Aws::Bedrock
       :client_request_token,
       :source_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7583,7 +7164,7 @@ module Aws::Bedrock
       :policy_arn,
       :build_workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7604,7 +7185,7 @@ module Aws::Bedrock
       :test_case_ids,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7613,12 +7194,7 @@ module Aws::Bedrock
     class StartAutomatedReasoningPolicyTestWorkflowResponse < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      REGISTERED = 'REGISTERED'
-      INCOMPATIBLE_ENDPOINT = 'INCOMPATIBLE_ENDPOINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a Distillation job, the status details for sub-tasks of the job. Possible statuses for each sub-task include the following:</p> <ul> <li> <p>NotStarted</p> </li> <li> <p>InProgress</p> </li> <li> <p>Completed</p> </li> <li> <p>Stopping</p> </li> <li> <p>Stopped</p> </li> <li> <p>Failed</p> </li> </ul>
@@ -7636,7 +7212,7 @@ module Aws::Bedrock
       :data_processing_details,
       :training_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -7645,12 +7221,12 @@ module Aws::Bedrock
     class StopEvaluationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopEvaluationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -7659,12 +7235,12 @@ module Aws::Bedrock
     class StopModelCustomizationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopModelCustomizationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_identifier
@@ -7673,12 +7249,12 @@ module Aws::Bedrock
     class StopModelInvocationJobRequest < Struct.new(
       :job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopModelInvocationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a support term.</p>
@@ -7688,7 +7264,7 @@ module Aws::Bedrock
     class SupportTerm < Struct.new(
       :refund_policy_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Definition of the key/value pair for a tag.</p>
@@ -7702,7 +7278,7 @@ module Aws::Bedrock
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7715,12 +7291,12 @@ module Aws::Bedrock
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a teacher model used for model customization.</p>
@@ -7734,7 +7310,7 @@ module Aws::Bedrock
       :teacher_model_identifier,
       :max_response_length_for_inference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the usage terms of an offer.</p>
@@ -7756,7 +7332,7 @@ module Aws::Bedrock
       :support_term,
       :validity_term,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for text generation using a language model via the <code>RetrieveAndGenerate</code> function.</p>
@@ -7778,7 +7354,7 @@ module Aws::Bedrock
       :max_tokens,
       :stop_sequences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeds the limit. Resubmit your request later.</p>
@@ -7787,7 +7363,7 @@ module Aws::Bedrock
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains more tags than can be associated with a resource (50 tags per resource). The maximum number of tags includes both existing tags and those included in your current request. </p>
@@ -7800,7 +7376,7 @@ module Aws::Bedrock
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3 Location of the training data.</p>
@@ -7814,7 +7390,7 @@ module Aws::Bedrock
       :s3_uri,
       :invocation_logs_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a Distillation job, the status details for the training sub-task of the job.</p>
@@ -7832,7 +7408,7 @@ module Aws::Bedrock
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics associated with the custom job.</p>
@@ -7842,7 +7418,7 @@ module Aws::Bedrock
     class TrainingMetrics < Struct.new(
       :training_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7855,12 +7431,12 @@ module Aws::Bedrock
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7881,7 +7457,7 @@ module Aws::Bedrock
       :annotations,
       :last_updated_annotation_set_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7902,7 +7478,7 @@ module Aws::Bedrock
       :annotation_set_hash,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7923,7 +7499,7 @@ module Aws::Bedrock
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7944,7 +7520,7 @@ module Aws::Bedrock
       :definition_hash,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7985,7 +7561,7 @@ module Aws::Bedrock
       :kms_key_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7998,7 +7574,7 @@ module Aws::Bedrock
       :policy_arn,
       :test_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_identifier
@@ -8055,7 +7631,7 @@ module Aws::Bedrock
       :blocked_outputs_messaging,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute guardrail_id
@@ -8076,7 +7652,7 @@ module Aws::Bedrock
       :version,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -8093,7 +7669,7 @@ module Aws::Bedrock
       :endpoint_config,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marketplace_model_endpoint
@@ -8102,7 +7678,7 @@ module Aws::Bedrock
     class UpdateMarketplaceModelEndpointResponse < Struct.new(
       :marketplace_model_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_model_id
@@ -8119,12 +7695,12 @@ module Aws::Bedrock
       :desired_provisioned_model_name,
       :desired_model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateProvisionedModelThroughputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Array of up to 10 validators.</p>
@@ -8134,7 +7710,7 @@ module Aws::Bedrock
     class ValidationDataConfig < Struct.new(
       :validators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a Distillation job, the status details for the validation sub-task of the job.</p>
@@ -8152,7 +7728,7 @@ module Aws::Bedrock
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input validation failed. Check your request parameters and retry the request.</p>
@@ -8161,7 +7737,7 @@ module Aws::Bedrock
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a validator.</p>
@@ -8171,7 +7747,7 @@ module Aws::Bedrock
     class Validator < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric for the validator.</p>
@@ -8181,7 +7757,7 @@ module Aws::Bedrock
     class ValidatorMetric < Struct.new(
       :validation_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the validity terms.</p>
@@ -8191,7 +7767,7 @@ module Aws::Bedrock
     class ValidityTerm < Struct.new(
       :agreement_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for using Amazon Bedrock foundation models to rerank Knowledge Base vector search results. This enables more sophisticated relevance ranking using large language models.</p>
@@ -8209,7 +7785,7 @@ module Aws::Bedrock
       :number_of_reranked_results,
       :metadata_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the Amazon Bedrock foundation model used for reranking vector search results. This specifies which model to use and any additional parameters required by the model.</p>
@@ -8223,7 +7799,7 @@ module Aws::Bedrock
       :model_arn,
       :additional_model_request_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for reranking vector search results to improve relevance. Reranking applies additional relevance models to reorder the initial vector search results based on more sophisticated criteria.</p>
@@ -8237,11 +7813,7 @@ module Aws::Bedrock
       :type,
       :bedrock_reranking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VectorSearchRerankingConfigurationType
-      BEDROCK_RERANKING_MODEL = 'BEDROCK_RERANKING_MODEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html">Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink</a>.</p>
@@ -8255,7 +7827,7 @@ module Aws::Bedrock
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

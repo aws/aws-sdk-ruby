@@ -12,7 +12,7 @@ module Aws::KinesisVideoWebRTCStorage
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -23,7 +23,7 @@ module Aws::KinesisVideoWebRTCStorage
     class ClientLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for this input parameter is invalid.</p>
@@ -32,7 +32,7 @@ module Aws::KinesisVideoWebRTCStorage
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -49,7 +49,7 @@ module Aws::KinesisVideoWebRTCStorage
       :channel_arn,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -60,7 +60,7 @@ module Aws::KinesisVideoWebRTCStorage
     class JoinStorageSessionInput < Struct.new(
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is not found.</p>
@@ -69,7 +69,7 @@ module Aws::KinesisVideoWebRTCStorage
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

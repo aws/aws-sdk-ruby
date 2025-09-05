@@ -16,12 +16,12 @@ module Aws::Omics
       :sequence_store_id,
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AbortMultipartReadSetUploadResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -30,7 +30,7 @@ module Aws::Omics
     class AcceptShareRequest < Struct.new(
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -39,7 +39,7 @@ module Aws::Omics
     class AcceptShareResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -48,7 +48,7 @@ module Aws::Omics
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A read set activation job filter.</p>
@@ -66,7 +66,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A read set activation job.</p>
@@ -92,7 +92,7 @@ module Aws::Omics
       :creation_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for a read set activation job.</p>
@@ -110,7 +110,7 @@ module Aws::Omics
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an imported annotation item.</p>
@@ -124,7 +124,7 @@ module Aws::Omics
       :source,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for an annotation import job.</p>
@@ -134,7 +134,7 @@ module Aws::Omics
     class AnnotationImportItemSource < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An annotation import job.</p>
@@ -180,7 +180,7 @@ module Aws::Omics
       :run_left_normalization,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:run_left_normalization] = false unless options.key?(:run_left_normalization)
@@ -239,7 +239,7 @@ module Aws::Omics
       :status_message,
       :store_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Annotation store versions. </p>
@@ -289,7 +289,7 @@ module Aws::Omics
       :status_message,
       :version_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -302,7 +302,7 @@ module Aws::Omics
       :ids,
       :sequence_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -311,7 +311,7 @@ module Aws::Omics
     class BatchDeleteReadSetResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -320,12 +320,12 @@ module Aws::Omics
     class CancelAnnotationImportRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelAnnotationImportResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -334,7 +334,7 @@ module Aws::Omics
     class CancelRunRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -343,12 +343,12 @@ module Aws::Omics
     class CancelVariantImportRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelVariantImportResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -365,7 +365,7 @@ module Aws::Omics
       :upload_id,
       :parts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute read_set_id
@@ -374,7 +374,7 @@ module Aws::Omics
     class CompleteMultipartReadSetUploadResponse < Struct.new(
       :read_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Part of the response to the CompleteReadSetUpload API, including metadata. </p>
@@ -392,7 +392,7 @@ module Aws::Omics
       :part_source,
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be applied to the target resource in its current state.</p>
@@ -401,7 +401,7 @@ module Aws::Omics
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reference
@@ -438,7 +438,7 @@ module Aws::Omics
       :store_format,
       :store_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -475,7 +475,7 @@ module Aws::Omics
       :version_name,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -500,7 +500,7 @@ module Aws::Omics
       :version_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -533,7 +533,7 @@ module Aws::Omics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -578,7 +578,7 @@ module Aws::Omics
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -627,7 +627,7 @@ module Aws::Omics
       :tags,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -652,7 +652,7 @@ module Aws::Omics
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -681,7 +681,7 @@ module Aws::Omics
       :sse_config,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_behavior
@@ -714,7 +714,7 @@ module Aws::Omics
       :tags,
       :cache_bucket_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -735,7 +735,7 @@ module Aws::Omics
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -768,7 +768,7 @@ module Aws::Omics
       :request_id,
       :max_gpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -785,7 +785,7 @@ module Aws::Omics
       :id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -826,7 +826,7 @@ module Aws::Omics
       :propagated_set_level_tags,
       :s3_access_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -879,7 +879,7 @@ module Aws::Omics
       :propagated_set_level_tags,
       :s3_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -896,7 +896,7 @@ module Aws::Omics
       :principal_subscriber,
       :share_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -913,7 +913,7 @@ module Aws::Omics
       :status,
       :share_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reference
@@ -938,7 +938,7 @@ module Aws::Omics
       :tags,
       :sse_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -963,7 +963,7 @@ module Aws::Omics
       :name,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1040,7 +1040,7 @@ module Aws::Omics
       :workflow_bucket_owner_id,
       :readme_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1065,7 +1065,7 @@ module Aws::Omics
       :tags,
       :uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1146,7 +1146,7 @@ module Aws::Omics
       :definition_repository,
       :readme_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1175,7 +1175,7 @@ module Aws::Omics
       :tags,
       :uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a source code repository that hosts the workflow definition files.</p>
@@ -1197,7 +1197,7 @@ module Aws::Omics
       :source_reference,
       :exclude_file_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about the source code repository that hosts the workflow definition files.</p>
@@ -1223,7 +1223,7 @@ module Aws::Omics
       :provider_type,
       :provider_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1236,7 +1236,7 @@ module Aws::Omics
       :name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1245,7 +1245,7 @@ module Aws::Omics
     class DeleteAnnotationStoreResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1262,7 +1262,7 @@ module Aws::Omics
       :versions,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -1271,7 +1271,7 @@ module Aws::Omics
     class DeleteAnnotationStoreVersionsResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1284,12 +1284,12 @@ module Aws::Omics
       :id,
       :reference_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReferenceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1298,12 +1298,12 @@ module Aws::Omics
     class DeleteReferenceStoreRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReferenceStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1312,7 +1312,7 @@ module Aws::Omics
     class DeleteRunCacheRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1321,7 +1321,7 @@ module Aws::Omics
     class DeleteRunGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1330,7 +1330,7 @@ module Aws::Omics
     class DeleteRunRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_arn
@@ -1339,12 +1339,12 @@ module Aws::Omics
     class DeleteS3AccessPolicyRequest < Struct.new(
       :s3_access_point_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteS3AccessPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1353,12 +1353,12 @@ module Aws::Omics
     class DeleteSequenceStoreRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSequenceStoreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -1367,7 +1367,7 @@ module Aws::Omics
     class DeleteShareRequest < Struct.new(
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1376,7 +1376,7 @@ module Aws::Omics
     class DeleteShareResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1389,7 +1389,7 @@ module Aws::Omics
       :name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1398,7 +1398,7 @@ module Aws::Omics
     class DeleteVariantStoreResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1407,7 +1407,7 @@ module Aws::Omics
     class DeleteWorkflowRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1420,7 +1420,7 @@ module Aws::Omics
       :workflow_id,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity tag (ETag) is a hash of the object representing its semantic content.</p>
@@ -1438,7 +1438,7 @@ module Aws::Omics
       :source1,
       :source2,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A read set.</p>
@@ -1448,7 +1448,7 @@ module Aws::Omics
     class ExportReadSet < Struct.new(
       :read_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a read set.</p>
@@ -1466,7 +1466,7 @@ module Aws::Omics
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An read set export job filter.</p>
@@ -1484,7 +1484,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a read set export job.</p>
@@ -1514,7 +1514,7 @@ module Aws::Omics
       :creation_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a file.</p>
@@ -1536,7 +1536,7 @@ module Aws::Omics
       :content_length,
       :s3_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use filters to return a subset of resources. You can define filters for specific parameters, such as the resource status.</p>
@@ -1554,7 +1554,7 @@ module Aws::Omics
       :status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting options for a file.</p>
@@ -1569,7 +1569,7 @@ module Aws::Omics
       :vcf_options,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TsvOptions < FormatOptions; end
       class VcfOptions < FormatOptions; end
@@ -1582,7 +1582,7 @@ module Aws::Omics
     class GetAnnotationImportRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1639,7 +1639,7 @@ module Aws::Omics
       :format_options,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:run_left_normalization] = false unless options.key?(:run_left_normalization)
@@ -1653,7 +1653,7 @@ module Aws::Omics
     class GetAnnotationStoreRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1718,7 +1718,7 @@ module Aws::Omics
       :store_size_bytes,
       :num_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1731,7 +1731,7 @@ module Aws::Omics
       :name,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute store_id
@@ -1788,7 +1788,7 @@ module Aws::Omics
       :status_message,
       :version_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1801,7 +1801,7 @@ module Aws::Omics
       :id,
       :sequence_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1834,7 +1834,7 @@ module Aws::Omics
       :completion_time,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -1847,7 +1847,7 @@ module Aws::Omics
       :sequence_store_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1884,7 +1884,7 @@ module Aws::Omics
       :completion_time,
       :read_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1897,7 +1897,7 @@ module Aws::Omics
       :id,
       :sequence_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1934,7 +1934,7 @@ module Aws::Omics
       :completion_time,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1947,7 +1947,7 @@ module Aws::Omics
       :id,
       :sequence_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2020,7 +2020,7 @@ module Aws::Omics
       :etag,
       :creation_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2041,7 +2041,7 @@ module Aws::Omics
       :file,
       :part_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payload
@@ -2050,7 +2050,7 @@ module Aws::Omics
     class GetReadSetResponse < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload] = Base64.strict_decode64('') unless options.key?(:payload)
@@ -2068,7 +2068,7 @@ module Aws::Omics
       :id,
       :reference_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2105,7 +2105,7 @@ module Aws::Omics
       :completion_time,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2118,7 +2118,7 @@ module Aws::Omics
       :id,
       :reference_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2171,7 +2171,7 @@ module Aws::Omics
       :creation_type,
       :creation_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2196,7 +2196,7 @@ module Aws::Omics
       :part_number,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payload
@@ -2205,7 +2205,7 @@ module Aws::Omics
     class GetReferenceResponse < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload] = Base64.strict_decode64('') unless options.key?(:payload)
@@ -2219,7 +2219,7 @@ module Aws::Omics
     class GetReferenceStoreRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2248,7 +2248,7 @@ module Aws::Omics
       :sse_config,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2257,7 +2257,7 @@ module Aws::Omics
     class GetRunCacheRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2302,7 +2302,7 @@ module Aws::Omics
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2311,7 +2311,7 @@ module Aws::Omics
     class GetRunGroupRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2352,7 +2352,7 @@ module Aws::Omics
       :tags,
       :max_gpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2365,7 +2365,7 @@ module Aws::Omics
       :id,
       :export,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2514,7 +2514,7 @@ module Aws::Omics
       :workflow_version_name,
       :workflow_uuid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2527,7 +2527,7 @@ module Aws::Omics
       :id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -2592,7 +2592,7 @@ module Aws::Omics
       :instance_type,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_arn
@@ -2601,7 +2601,7 @@ module Aws::Omics
     class GetS3AccessPolicyRequest < Struct.new(
       :s3_access_point_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_arn
@@ -2626,7 +2626,7 @@ module Aws::Omics
       :update_time,
       :s3_access_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2635,7 +2635,7 @@ module Aws::Omics
     class GetSequenceStoreRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2692,7 +2692,7 @@ module Aws::Omics
       :propagated_set_level_tags,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -2701,7 +2701,7 @@ module Aws::Omics
     class GetShareRequest < Struct.new(
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share
@@ -2710,7 +2710,7 @@ module Aws::Omics
     class GetShareResponse < Struct.new(
       :share,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2719,7 +2719,7 @@ module Aws::Omics
     class GetVariantImportRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2768,7 +2768,7 @@ module Aws::Omics
       :run_left_normalization,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:run_left_normalization] = false unless options.key?(:run_left_normalization)
@@ -2782,7 +2782,7 @@ module Aws::Omics
     class GetVariantStoreRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2835,7 +2835,7 @@ module Aws::Omics
       :status_message,
       :store_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2856,7 +2856,7 @@ module Aws::Omics
       :export,
       :workflow_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2949,7 +2949,7 @@ module Aws::Omics
       :definition_repository_details,
       :readme_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -2974,7 +2974,7 @@ module Aws::Omics
       :export,
       :workflow_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3071,7 +3071,7 @@ module Aws::Omics
       :definition_repository_details,
       :readme_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for import read set jobs.</p>
@@ -3089,7 +3089,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An import read set job.</p>
@@ -3119,7 +3119,7 @@ module Aws::Omics
       :creation_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for an import read set job.</p>
@@ -3173,7 +3173,7 @@ module Aws::Omics
       :tags,
       :read_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for import references.</p>
@@ -3191,7 +3191,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An import reference job.</p>
@@ -3221,7 +3221,7 @@ module Aws::Omics
       :creation_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An genome reference source.</p>
@@ -3255,7 +3255,7 @@ module Aws::Omics
       :tags,
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred. Try the request again.</p>
@@ -3264,7 +3264,7 @@ module Aws::Omics
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for annotation import jobs.</p>
@@ -3278,7 +3278,7 @@ module Aws::Omics
       :status,
       :store_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3299,7 +3299,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute annotation_import_jobs
@@ -3312,7 +3312,7 @@ module Aws::Omics
       :annotation_import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use filters to focus the returned annotation store versions on a specific parameter, such as the status of the annotation store.</p>
@@ -3322,7 +3322,7 @@ module Aws::Omics
     class ListAnnotationStoreVersionsFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3343,7 +3343,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute annotation_store_versions
@@ -3356,7 +3356,7 @@ module Aws::Omics
       :annotation_store_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for annotation stores.</p>
@@ -3366,7 +3366,7 @@ module Aws::Omics
     class ListAnnotationStoresFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -3387,7 +3387,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute annotation_stores
@@ -3400,7 +3400,7 @@ module Aws::Omics
       :annotation_stores,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -3417,7 +3417,7 @@ module Aws::Omics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3430,7 +3430,7 @@ module Aws::Omics
       :next_token,
       :uploads,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -3451,7 +3451,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3464,7 +3464,7 @@ module Aws::Omics
       :next_token,
       :activation_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -3485,7 +3485,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3498,7 +3498,7 @@ module Aws::Omics
       :next_token,
       :export_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3519,7 +3519,7 @@ module Aws::Omics
       :sequence_store_id,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3532,7 +3532,7 @@ module Aws::Omics
       :next_token,
       :import_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -3561,7 +3561,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3574,7 +3574,7 @@ module Aws::Omics
       :next_token,
       :parts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -3595,7 +3595,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3608,7 +3608,7 @@ module Aws::Omics
       :next_token,
       :read_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3629,7 +3629,7 @@ module Aws::Omics
       :reference_store_id,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3642,7 +3642,7 @@ module Aws::Omics
       :next_token,
       :import_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3659,7 +3659,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3672,7 +3672,7 @@ module Aws::Omics
       :next_token,
       :reference_stores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reference_store_id
@@ -3693,7 +3693,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3706,7 +3706,7 @@ module Aws::Omics
       :next_token,
       :references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3719,7 +3719,7 @@ module Aws::Omics
       :max_results,
       :starting_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3732,7 +3732,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3749,7 +3749,7 @@ module Aws::Omics
       :starting_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3762,7 +3762,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3783,7 +3783,7 @@ module Aws::Omics
       :starting_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3796,7 +3796,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3821,7 +3821,7 @@ module Aws::Omics
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3834,7 +3834,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3851,7 +3851,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3864,7 +3864,7 @@ module Aws::Omics
       :next_token,
       :sequence_stores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_owner
@@ -3885,7 +3885,7 @@ module Aws::Omics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shares
@@ -3898,7 +3898,7 @@ module Aws::Omics
       :shares,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3907,7 +3907,7 @@ module Aws::Omics
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3916,7 +3916,7 @@ module Aws::Omics
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for variant import jobs.</p>
@@ -3930,7 +3930,7 @@ module Aws::Omics
       :status,
       :store_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3951,7 +3951,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute variant_import_jobs
@@ -3964,7 +3964,7 @@ module Aws::Omics
       :variant_import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for variant stores.</p>
@@ -3974,7 +3974,7 @@ module Aws::Omics
     class ListVariantStoresFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3995,7 +3995,7 @@ module Aws::Omics
       :next_token,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute variant_stores
@@ -4008,7 +4008,7 @@ module Aws::Omics
       :variant_stores,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -4033,7 +4033,7 @@ module Aws::Omics
       :starting_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4046,7 +4046,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -4067,7 +4067,7 @@ module Aws::Omics
       :starting_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4080,7 +4080,7 @@ module Aws::Omics
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads. </p>
@@ -4130,7 +4130,7 @@ module Aws::Omics
       :tags,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The operation is not supported by Amazon Omics, or the API does not exist. </p>
@@ -4139,7 +4139,7 @@ module Aws::Omics
     class NotSupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_arn
@@ -4152,7 +4152,7 @@ module Aws::Omics
       :s3_access_point_arn,
       :s3_access_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_access_point_arn
@@ -4169,7 +4169,7 @@ module Aws::Omics
       :store_id,
       :store_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ranges specified in the request are not valid.</p>
@@ -4178,7 +4178,7 @@ module Aws::Omics
     class RangeNotSatisfiableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Read options for an annotation import job.</p>
@@ -4220,7 +4220,7 @@ module Aws::Omics
       :header,
       :line_sep,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:quote_all] = false unless options.key?(:quote_all)
@@ -4245,7 +4245,7 @@ module Aws::Omics
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Files in a read set.</p>
@@ -4263,7 +4263,7 @@ module Aws::Omics
       :source2,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for read sets.</p>
@@ -4305,7 +4305,7 @@ module Aws::Omics
       :generated_from,
       :creation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A read set.</p>
@@ -4371,7 +4371,7 @@ module Aws::Omics
       :creation_type,
       :etag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 URI for each read set file.</p>
@@ -4381,7 +4381,7 @@ module Aws::Omics
     class ReadSetS3Access < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filter settings that select for read set upload parts of interest. </p>
@@ -4395,7 +4395,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata of a single part of a file that was added to a multipart upload. A list of these parts is returned in the response to the ListReadSetUploadParts API. </p>
@@ -4425,7 +4425,7 @@ module Aws::Omics
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of genome reference files.</p>
@@ -4439,7 +4439,7 @@ module Aws::Omics
       :source,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for references.</p>
@@ -4461,7 +4461,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A genome reference.</p>
@@ -4472,7 +4472,7 @@ module Aws::Omics
       :reference_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ReferenceArn < ReferenceItem; end
       class Unknown < ReferenceItem; end
@@ -4517,7 +4517,7 @@ module Aws::Omics
       :creation_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a reference store.</p>
@@ -4547,7 +4547,7 @@ module Aws::Omics
       :sse_config,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for reference stores.</p>
@@ -4565,7 +4565,7 @@ module Aws::Omics
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request timed out.</p>
@@ -4574,7 +4574,7 @@ module Aws::Omics
     class RequestTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target resource was not found in the current Region.</p>
@@ -4583,7 +4583,7 @@ module Aws::Omics
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List entry for one run cache.</p>
@@ -4617,7 +4617,7 @@ module Aws::Omics
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A run group.</p>
@@ -4655,7 +4655,7 @@ module Aws::Omics
       :creation_time,
       :max_gpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow run.</p>
@@ -4709,7 +4709,7 @@ module Aws::Omics
       :storage_type,
       :workflow_version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URI for the run log.</p>
@@ -4723,7 +4723,7 @@ module Aws::Omics
       :engine_log_stream,
       :run_log_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3 access configuration parameters.</p>
@@ -4733,7 +4733,7 @@ module Aws::Omics
     class S3AccessConfig < Struct.new(
       :access_log_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a sequence.</p>
@@ -4755,7 +4755,7 @@ module Aws::Omics
       :generated_from,
       :alignment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a sequence store.</p>
@@ -4805,7 +4805,7 @@ module Aws::Omics
       :status_message,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for a sequence store.</p>
@@ -4835,7 +4835,7 @@ module Aws::Omics
       :updated_after,
       :updated_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 access metadata of the sequence store.</p>
@@ -4853,7 +4853,7 @@ module Aws::Omics
       :s3_access_point_arn,
       :access_log_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds a service quota.</p>
@@ -4862,7 +4862,7 @@ module Aws::Omics
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a resource share.</p>
@@ -4908,7 +4908,7 @@ module Aws::Omics
       :creation_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source files for a sequence.</p>
@@ -4922,7 +4922,7 @@ module Aws::Omics
       :source1,
       :source2,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the source reference in a code repository, such as a branch, tag, or commit.</p>
@@ -4936,7 +4936,7 @@ module Aws::Omics
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Server-side encryption (SSE) settings for a store.</p>
@@ -4950,7 +4950,7 @@ module Aws::Omics
       :type,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -4983,7 +4983,7 @@ module Aws::Omics
       :run_left_normalization,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -4992,7 +4992,7 @@ module Aws::Omics
     class StartAnnotationImportResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -5009,7 +5009,7 @@ module Aws::Omics
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5030,7 +5030,7 @@ module Aws::Omics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for a read set activation job.</p>
@@ -5040,7 +5040,7 @@ module Aws::Omics
     class StartReadSetActivationJobSourceItem < Struct.new(
       :read_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -5065,7 +5065,7 @@ module Aws::Omics
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5090,7 +5090,7 @@ module Aws::Omics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -5111,7 +5111,7 @@ module Aws::Omics
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5136,7 +5136,7 @@ module Aws::Omics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for a read set import job.</p>
@@ -5178,7 +5178,7 @@ module Aws::Omics
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reference_store_id
@@ -5199,7 +5199,7 @@ module Aws::Omics
       :client_token,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5224,7 +5224,7 @@ module Aws::Omics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source for a reference import job.</p>
@@ -5246,7 +5246,7 @@ module Aws::Omics
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -5327,7 +5327,7 @@ module Aws::Omics
       :workflow_owner_id,
       :workflow_version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5356,7 +5356,7 @@ module Aws::Omics
       :uuid,
       :run_output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -5381,7 +5381,7 @@ module Aws::Omics
       :run_left_normalization,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5390,7 +5390,7 @@ module Aws::Omics
     class StartVariantImportResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for a store.</p>
@@ -5401,15 +5401,10 @@ module Aws::Omics
       :tsv_store_options,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TsvStoreOptions < StoreOptions; end
       class Unknown < StoreOptions; end
-    end
-
-    module StoreType
-      SEQUENCE_STORE = 'SEQUENCE_STORE'
-      REFERENCE_STORE = 'REFERENCE_STORE'
     end
 
     # @!attribute resource_arn
@@ -5422,12 +5417,12 @@ module Aws::Omics
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow run task.</p>
@@ -5481,7 +5476,7 @@ module Aws::Omics
       :gpus,
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -5490,7 +5485,7 @@ module Aws::Omics
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting options for a TSV file.</p>
@@ -5500,7 +5495,7 @@ module Aws::Omics
     class TsvOptions < Struct.new(
       :read_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>File settings for a TSV store.</p>
@@ -5518,7 +5513,7 @@ module Aws::Omics
       :format_to_header,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The options for a TSV file. </p>
@@ -5536,7 +5531,7 @@ module Aws::Omics
       :format_to_header,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5549,12 +5544,12 @@ module Aws::Omics
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5567,7 +5562,7 @@ module Aws::Omics
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5608,7 +5603,7 @@ module Aws::Omics
       :store_options,
       :store_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5625,7 +5620,7 @@ module Aws::Omics
       :version_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute store_id
@@ -5662,7 +5657,7 @@ module Aws::Omics
       :creation_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_behavior
@@ -5683,7 +5678,7 @@ module Aws::Omics
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5712,7 +5707,7 @@ module Aws::Omics
       :max_duration,
       :max_gpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5745,7 +5740,7 @@ module Aws::Omics
       :propagated_set_level_tags,
       :s3_access_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5802,7 +5797,7 @@ module Aws::Omics
       :s3_access,
       :e_tag_algorithm_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5815,7 +5810,7 @@ module Aws::Omics
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5848,7 +5843,7 @@ module Aws::Omics
       :creation_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5877,7 +5872,7 @@ module Aws::Omics
       :storage_capacity,
       :readme_markdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -5906,7 +5901,7 @@ module Aws::Omics
       :storage_capacity,
       :readme_markdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sequence_store_id
@@ -5931,7 +5926,7 @@ module Aws::Omics
       :part_number,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute checksum
@@ -5940,7 +5935,7 @@ module Aws::Omics
     class UploadReadSetPartResponse < Struct.new(
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -5949,7 +5944,7 @@ module Aws::Omics
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an imported variant item.</p>
@@ -5967,7 +5962,7 @@ module Aws::Omics
       :job_status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A imported variant item's source.</p>
@@ -5977,7 +5972,7 @@ module Aws::Omics
     class VariantImportItemSource < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A variant import job.</p>
@@ -6019,7 +6014,7 @@ module Aws::Omics
       :run_left_normalization,
       :annotation_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:run_left_normalization] = false unless options.key?(:run_left_normalization)
@@ -6074,7 +6069,7 @@ module Aws::Omics
       :status_message,
       :store_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting options for a VCF file.</p>
@@ -6088,7 +6083,7 @@ module Aws::Omics
       :ignore_qual_field,
       :ignore_filter_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The error preventing deletion of the annotation store version. </p>
@@ -6102,7 +6097,7 @@ module Aws::Omics
       :version_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The options for an annotation store version. </p>
@@ -6113,7 +6108,7 @@ module Aws::Omics
       :tsv_version_options,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TsvVersionOptions < VersionOptions; end
       class Unknown < VersionOptions; end
@@ -6154,7 +6149,7 @@ module Aws::Omics
       :creation_time,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow parameter.</p>
@@ -6168,7 +6163,7 @@ module Aws::Omics
       :description,
       :optional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of workflow version items.</p>
@@ -6210,7 +6205,7 @@ module Aws::Omics
       :creation_time,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

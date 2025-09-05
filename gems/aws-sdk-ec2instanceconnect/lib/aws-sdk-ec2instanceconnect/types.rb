@@ -12,7 +12,7 @@ module Aws::EC2InstanceConnect
     class AuthException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified instance was not found.</p>
@@ -21,7 +21,7 @@ module Aws::EC2InstanceConnect
     class EC2InstanceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to connect because the instance is not in a valid state. 
@@ -32,7 +32,7 @@ module Aws::EC2InstanceConnect
     class EC2InstanceStateInvalidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance type is not supported for connecting via the serial console. Only Nitro
@@ -42,7 +42,7 @@ module Aws::EC2InstanceConnect
     class EC2InstanceTypeInvalidException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance is currently unavailable. Wait a few minutes and try again.</p>
@@ -51,7 +51,7 @@ module Aws::EC2InstanceConnect
     class EC2InstanceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the parameters is not valid.</p>
@@ -60,7 +60,7 @@ module Aws::EC2InstanceConnect
     class InvalidArgsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -81,7 +81,7 @@ module Aws::EC2InstanceConnect
       :ssh_public_key,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -94,7 +94,7 @@ module Aws::EC2InstanceConnect
       :request_id,
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:success] = false unless options.key?(:success)
@@ -119,7 +119,7 @@ module Aws::EC2InstanceConnect
       :serial_port,
       :ssh_public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -132,7 +132,7 @@ module Aws::EC2InstanceConnect
       :request_id,
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:success] = false unless options.key?(:success)
@@ -148,7 +148,7 @@ module Aws::EC2InstanceConnect
     class SerialConsoleAccessDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance currently has 1 active serial console session. Only 1 session is supported at a time.</p>
@@ -157,7 +157,7 @@ module Aws::EC2InstanceConnect
     class SerialConsoleSessionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to start a serial console session. Please try again.</p>
@@ -166,7 +166,7 @@ module Aws::EC2InstanceConnect
     class SerialConsoleSessionUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your instance's BIOS version is unsupported for serial console connection. Reboot your instance to update its BIOS, and then try again to connect.</p>
@@ -175,7 +175,7 @@ module Aws::EC2InstanceConnect
     class SerialConsoleSessionUnsupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an error. Follow the instructions in the error message and try again.</p>
@@ -184,7 +184,7 @@ module Aws::EC2InstanceConnect
     class ServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requests were made too frequently and have been throttled. Wait a while and try again. 
@@ -194,7 +194,7 @@ module Aws::EC2InstanceConnect
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

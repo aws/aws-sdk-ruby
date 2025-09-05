@@ -20,7 +20,7 @@ module Aws::MarketplaceMetering
       :usage_records,
       :product_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the <code>UsageRecords</code> processed by <code>BatchMeterUsage</code> and
@@ -40,7 +40,7 @@ module Aws::MarketplaceMetering
       :results,
       :unprocessed_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception thrown when the customer does not have a valid subscription for the
@@ -50,7 +50,7 @@ module Aws::MarketplaceMetering
     class CustomerNotEntitledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API is disabled in the Region.</p>
@@ -59,7 +59,7 @@ module Aws::MarketplaceMetering
     class DisabledApiException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metering record has already been emitted by the same EC2 instance, ECS task, or EKS
@@ -70,7 +70,7 @@ module Aws::MarketplaceMetering
     class DuplicateRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The submitted registration token has expired. This can happen if the buyer's browser
@@ -83,7 +83,7 @@ module Aws::MarketplaceMetering
     class ExpiredTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred. Retry your request. If the problem persists, post a
@@ -93,7 +93,7 @@ module Aws::MarketplaceMetering
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have metered usage for a <code>CustomerIdentifier</code> that does not
@@ -103,7 +103,7 @@ module Aws::MarketplaceMetering
     class InvalidCustomerIdentifierException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint being called is in a Amazon Web Services Region different from your EC2 instance, ECS
@@ -114,7 +114,7 @@ module Aws::MarketplaceMetering
     class InvalidEndpointRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The product code passed does not match the product code used for publishing the
@@ -124,7 +124,7 @@ module Aws::MarketplaceMetering
     class InvalidProductCodeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Public Key version is invalid.</p>
@@ -133,7 +133,7 @@ module Aws::MarketplaceMetering
     class InvalidPublicKeyVersionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -145,7 +145,7 @@ module Aws::MarketplaceMetering
     class InvalidRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag is invalid, or the number of tags is greater than 5.</p>
@@ -154,7 +154,7 @@ module Aws::MarketplaceMetering
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Registration token is invalid.</p>
@@ -163,7 +163,7 @@ module Aws::MarketplaceMetering
     class InvalidTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sum of allocated usage quantities is not equal to the usage quantity.</p>
@@ -172,7 +172,7 @@ module Aws::MarketplaceMetering
     class InvalidUsageAllocationsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage dimension does not match one of the <code>UsageDimensions</code> associated
@@ -182,7 +182,7 @@ module Aws::MarketplaceMetering
     class InvalidUsageDimensionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_code
@@ -222,7 +222,7 @@ module Aws::MarketplaceMetering
       :dry_run,
       :usage_allocations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metering_record_id
@@ -231,7 +231,7 @@ module Aws::MarketplaceMetering
     class MeterUsageResult < Struct.new(
       :metering_record_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services Marketplace does not support metering usage from the underlying platform. Currently, Amazon ECS, Amazon EKS, and Fargate are supported.</p>
@@ -240,7 +240,7 @@ module Aws::MarketplaceMetering
     class PlatformNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_code
@@ -259,7 +259,7 @@ module Aws::MarketplaceMetering
       :public_key_version,
       :nonce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_rotation_timestamp
@@ -272,7 +272,7 @@ module Aws::MarketplaceMetering
       :public_key_rotation_timestamp,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains input to the <code>ResolveCustomer</code> operation.</p>
@@ -285,7 +285,7 @@ module Aws::MarketplaceMetering
     class ResolveCustomerRequest < Struct.new(
       :registration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the <code>ResolveCustomer</code> operation. Contains the
@@ -310,7 +310,7 @@ module Aws::MarketplaceMetering
       :product_code,
       :customer_aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an allocation. Each tag is made up of a <code>key</code> and a
@@ -327,7 +327,7 @@ module Aws::MarketplaceMetering
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calls to the API are throttled.</p>
@@ -336,7 +336,7 @@ module Aws::MarketplaceMetering
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>timestamp</code> value passed in the <code>UsageRecord</code> is out of
@@ -349,7 +349,7 @@ module Aws::MarketplaceMetering
     class TimestampOutOfBoundsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Usage allocations allow you to split usage into buckets by tags.</p>
@@ -366,7 +366,7 @@ module Aws::MarketplaceMetering
       :allocated_usage_quantity,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>UsageRecord</code> indicates a quantity of usage for a given product,
@@ -409,7 +409,7 @@ module Aws::MarketplaceMetering
       :usage_allocations,
       :customer_aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:customer_identifier] = '' unless options.key?(:customer_identifier)
@@ -471,13 +471,7 @@ module Aws::MarketplaceMetering
       :metering_record_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageRecordResultStatus
-      SUCCESS = 'Success'
-      CUSTOMER_NOT_SUBSCRIBED = 'CustomerNotSubscribed'
-      DUPLICATE_RECORD = 'DuplicateRecord'
+      include ::Smithy::Schema::Structure
     end
 
   end

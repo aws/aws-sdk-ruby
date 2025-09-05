@@ -12,7 +12,7 @@ module Aws::ConnectContactLens
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the category rules that are used to automatically categorize contacts based
@@ -27,7 +27,7 @@ module Aws::ConnectContactLens
       :matched_categories,
       :matched_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the category rule that was matched.</p>
@@ -37,7 +37,7 @@ module Aws::ConnectContactLens
     class CategoryDetails < Struct.new(
       :points_of_interest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For characters that were detected as issues, where they occur in the
@@ -52,7 +52,7 @@ module Aws::ConnectContactLens
       :begin_offset_char,
       :end_offset_char,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed due to an error or failure with the service.</p>
@@ -61,7 +61,7 @@ module Aws::ConnectContactLens
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -70,7 +70,7 @@ module Aws::ConnectContactLens
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Potential issues that are detected based on an artificial intelligence analysis of
@@ -81,7 +81,7 @@ module Aws::ConnectContactLens
     class IssueDetected < Struct.new(
       :character_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -103,7 +103,7 @@ module Aws::ConnectContactLens
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segments
@@ -129,7 +129,7 @@ module Aws::ConnectContactLens
       :segments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The section of the contact audio where that category rule was detected.</p>
@@ -143,7 +143,7 @@ module Aws::ConnectContactLens
       :begin_offset_millis,
       :end_offset_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the post-contact summary.</p>
@@ -192,20 +192,7 @@ module Aws::ConnectContactLens
       :status,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PostContactSummaryFailureCode
-      QUOTA_EXCEEDED = 'QUOTA_EXCEEDED'
-      INSUFFICIENT_CONVERSATION_CONTENT = 'INSUFFICIENT_CONVERSATION_CONTENT'
-      FAILED_SAFETY_GUIDELINES = 'FAILED_SAFETY_GUIDELINES'
-      INVALID_ANALYSIS_CONFIGURATION = 'INVALID_ANALYSIS_CONFIGURATION'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-    end
-
-    module PostContactSummaryStatus
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An analyzed segment for a real-time analysis session.</p>
@@ -223,7 +210,7 @@ module Aws::ConnectContactLens
       :categories,
       :post_contact_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -232,13 +219,7 @@ module Aws::ConnectContactLens
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SentimentValue
-      POSITIVE = 'POSITIVE'
-      NEUTRAL = 'NEUTRAL'
-      NEGATIVE = 'NEGATIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The throttling limit has been exceeded.</p>
@@ -247,7 +228,7 @@ module Aws::ConnectContactLens
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of messages in the session.</p>
@@ -285,7 +266,7 @@ module Aws::ConnectContactLens
       :sentiment,
       :issues_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

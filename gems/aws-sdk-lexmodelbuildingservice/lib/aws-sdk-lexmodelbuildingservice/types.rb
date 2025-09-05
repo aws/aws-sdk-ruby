@@ -13,7 +13,7 @@ module Aws::LexModelBuildingService
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not well formed. For example, a value is invalid or
@@ -24,7 +24,7 @@ module Aws::LexModelBuildingService
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a bot alias.</p>
@@ -64,7 +64,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :conversation_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an association between an Amazon Lex bot and an external
@@ -136,7 +136,7 @@ module Aws::LexModelBuildingService
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a bot. .</p>
@@ -168,7 +168,7 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides metadata for a built-in intent.</p>
@@ -185,7 +185,7 @@ module Aws::LexModelBuildingService
       :signature,
       :supported_locales,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a slot used in a built-in
@@ -196,7 +196,7 @@ module Aws::LexModelBuildingService
     class BuiltinIntentSlot < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a built in slot type.</p>
@@ -212,20 +212,7 @@ module Aws::LexModelBuildingService
       :signature,
       :supported_locales,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      CREATED = 'CREATED'
-      FAILED = 'FAILED'
-    end
-
-    module ChannelType
-      FACEBOOK = 'Facebook'
-      SLACK = 'Slack'
-      TWILIO_SMS = 'Twilio-Sms'
-      KIK = 'Kik'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Lambda function that verifies requests to a bot or
@@ -241,7 +228,7 @@ module Aws::LexModelBuildingService
       :uri,
       :message_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> There was a conflict processing the request. Try your request
@@ -251,13 +238,7 @@ module Aws::LexModelBuildingService
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentType
-      PLAIN_TEXT = 'PlainText'
-      SSML = 'SSML'
-      CUSTOM_PAYLOAD = 'CustomPayload'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the settings needed for conversation logs.</p>
@@ -277,7 +258,7 @@ module Aws::LexModelBuildingService
       :log_settings,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about conversation log settings.</p>
@@ -293,7 +274,7 @@ module Aws::LexModelBuildingService
       :log_settings,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -312,7 +293,7 @@ module Aws::LexModelBuildingService
       :name,
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -426,7 +407,7 @@ module Aws::LexModelBuildingService
       :enable_model_improvements,
       :detect_sentiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -445,7 +426,7 @@ module Aws::LexModelBuildingService
       :name,
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -535,7 +516,7 @@ module Aws::LexModelBuildingService
       :input_contexts,
       :output_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -554,7 +535,7 @@ module Aws::LexModelBuildingService
       :name,
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -604,7 +585,7 @@ module Aws::LexModelBuildingService
       :parent_slot_type_signature,
       :slot_type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -618,7 +599,7 @@ module Aws::LexModelBuildingService
       :name,
       :bot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -636,7 +617,7 @@ module Aws::LexModelBuildingService
       :bot_name,
       :bot_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -645,7 +626,7 @@ module Aws::LexModelBuildingService
     class DeleteBotRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -661,7 +642,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -670,7 +651,7 @@ module Aws::LexModelBuildingService
     class DeleteIntentRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -686,7 +667,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -695,7 +676,7 @@ module Aws::LexModelBuildingService
     class DeleteSlotTypeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -711,7 +692,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -726,12 +707,7 @@ module Aws::LexModelBuildingService
       :bot_name,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Destination
-      CLOUDWATCH_LOGS = 'CLOUDWATCH_LOGS'
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each slot type can have a set of values. Each enumeration value
@@ -760,18 +736,7 @@ module Aws::LexModelBuildingService
       :value,
       :synonyms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      READY = 'READY'
-      FAILED = 'FAILED'
-    end
-
-    module ExportType
-      ALEXA_SKILLS_KIT = 'ALEXA_SKILLS_KIT'
-      LEX = 'LEX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A prompt for additional activity after an intent is fulfilled. For
@@ -790,7 +755,7 @@ module Aws::LexModelBuildingService
       :prompt,
       :rejection_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes how the intent is fulfilled after the user provides all
@@ -828,12 +793,7 @@ module Aws::LexModelBuildingService
       :type,
       :code_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FulfillmentActivityType
-      RETURN_INTENT = 'ReturnIntent'
-      CODE_HOOK = 'CodeHook'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -846,7 +806,7 @@ module Aws::LexModelBuildingService
       :name,
       :bot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -886,7 +846,7 @@ module Aws::LexModelBuildingService
       :checksum,
       :conversation_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -913,7 +873,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_aliases
@@ -930,7 +890,7 @@ module Aws::LexModelBuildingService
       :bot_aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -949,7 +909,7 @@ module Aws::LexModelBuildingService
       :bot_name,
       :bot_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1014,7 +974,7 @@ module Aws::LexModelBuildingService
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -1048,7 +1008,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_channel_associations
@@ -1066,7 +1026,7 @@ module Aws::LexModelBuildingService
       :bot_channel_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1079,7 +1039,7 @@ module Aws::LexModelBuildingService
       :name,
       :version_or_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1212,7 +1172,7 @@ module Aws::LexModelBuildingService
       :child_directed,
       :detect_sentiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1234,7 +1194,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bots
@@ -1252,7 +1212,7 @@ module Aws::LexModelBuildingService
       :bots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1275,7 +1235,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bots
@@ -1291,7 +1251,7 @@ module Aws::LexModelBuildingService
       :bots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signature
@@ -1302,7 +1262,7 @@ module Aws::LexModelBuildingService
     class GetBuiltinIntentRequest < Struct.new(
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signature
@@ -1320,7 +1280,7 @@ module Aws::LexModelBuildingService
       :supported_locales,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locale
@@ -1349,7 +1309,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intents
@@ -1366,7 +1326,7 @@ module Aws::LexModelBuildingService
       :intents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locale
@@ -1393,7 +1353,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_types
@@ -1409,7 +1369,7 @@ module Aws::LexModelBuildingService
       :slot_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1430,7 +1390,7 @@ module Aws::LexModelBuildingService
       :resource_type,
       :export_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1482,7 +1442,7 @@ module Aws::LexModelBuildingService
       :failure_reason,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_id
@@ -1491,7 +1451,7 @@ module Aws::LexModelBuildingService
     class GetImportRequest < Struct.new(
       :import_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1529,7 +1489,7 @@ module Aws::LexModelBuildingService
       :failure_reason,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1542,7 +1502,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1633,7 +1593,7 @@ module Aws::LexModelBuildingService
       :input_contexts,
       :output_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1655,7 +1615,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intents
@@ -1673,7 +1633,7 @@ module Aws::LexModelBuildingService
       :intents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1696,7 +1656,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute intents
@@ -1712,7 +1672,7 @@ module Aws::LexModelBuildingService
       :intents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_id
@@ -1722,7 +1682,7 @@ module Aws::LexModelBuildingService
     class GetMigrationRequest < Struct.new(
       :migration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_id
@@ -1791,7 +1751,7 @@ module Aws::LexModelBuildingService
       :migration_timestamp,
       :alerts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by_attribute
@@ -1827,7 +1787,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_summaries
@@ -1845,7 +1805,7 @@ module Aws::LexModelBuildingService
       :migration_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1858,7 +1818,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1908,7 +1868,7 @@ module Aws::LexModelBuildingService
       :parent_slot_type_signature,
       :slot_type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1930,7 +1890,7 @@ module Aws::LexModelBuildingService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_types
@@ -1948,7 +1908,7 @@ module Aws::LexModelBuildingService
       :slot_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1971,7 +1931,7 @@ module Aws::LexModelBuildingService
       :max_results,
       :name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slot_types
@@ -1988,7 +1948,7 @@ module Aws::LexModelBuildingService
       :slot_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -2009,7 +1969,7 @@ module Aws::LexModelBuildingService
       :bot_versions,
       :status_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_name
@@ -2028,13 +1988,7 @@ module Aws::LexModelBuildingService
       :bot_name,
       :utterances,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of a context that must be active for an intent to be selected
@@ -2045,7 +1999,7 @@ module Aws::LexModelBuildingService
     class InputContext < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the specific version of an intent.</p>
@@ -2059,7 +2013,7 @@ module Aws::LexModelBuildingService
       :intent_name,
       :intent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an intent.</p>
@@ -2086,7 +2040,7 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal Amazon Lex error occurred. Try your request again.</p>
@@ -2095,7 +2049,7 @@ module Aws::LexModelBuildingService
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the AMAZON.KendraSearchIntent
@@ -2129,7 +2083,7 @@ module Aws::LexModelBuildingService
       :query_filter_string,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded a limit. Try your request again.</p>
@@ -2141,7 +2095,7 @@ module Aws::LexModelBuildingService
       :retry_after_seconds,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2151,7 +2105,7 @@ module Aws::LexModelBuildingService
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2160,23 +2114,7 @@ module Aws::LexModelBuildingService
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Locale
-      DE_DE = 'de-DE'
-      EN_AU = 'en-AU'
-      EN_GB = 'en-GB'
-      EN_IN = 'en-IN'
-      EN_US = 'en-US'
-      ES_419 = 'es-419'
-      ES_ES = 'es-ES'
-      ES_US = 'es-US'
-      FR_FR = 'fr-FR'
-      FR_CA = 'fr-CA'
-      IT_IT = 'it-IT'
-      JA_JP = 'ja-JP'
-      KO_KR = 'ko-KR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings used to configure delivery mode and destination for
@@ -2205,7 +2143,7 @@ module Aws::LexModelBuildingService
       :kms_key_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for conversation logs.</p>
@@ -2236,17 +2174,7 @@ module Aws::LexModelBuildingService
       :resource_arn,
       :resource_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogType
-      AUDIO = 'AUDIO'
-      TEXT = 'TEXT'
-    end
-
-    module MergeStrategy
-      OVERWRITE_LATEST = 'OVERWRITE_LATEST'
-      FAIL_ON_CONFLICT = 'FAIL_ON_CONFLICT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message object that provides the message text and its
@@ -2267,7 +2195,7 @@ module Aws::LexModelBuildingService
       :content,
       :group_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about alerts and warnings that Amazon Lex sends during
@@ -2305,28 +2233,7 @@ module Aws::LexModelBuildingService
       :details,
       :reference_ur_ls,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MigrationAlertType
-      ERROR = 'ERROR'
-      WARN = 'WARN'
-    end
-
-    module MigrationSortAttribute
-      V1_BOT_NAME = 'V1_BOT_NAME'
-      MIGRATION_DATE_TIME = 'MIGRATION_DATE_TIME'
-    end
-
-    module MigrationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    module MigrationStrategy
-      CREATE_NEW = 'CREATE_NEW'
-      UPDATE_EXISTING = 'UPDATE_EXISTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.</p>
@@ -2370,7 +2277,7 @@ module Aws::LexModelBuildingService
       :migration_strategy,
       :migration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request was not found. Check the
@@ -2380,12 +2287,7 @@ module Aws::LexModelBuildingService
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObfuscationSetting
-      NONE = 'NONE'
-      DEFAULT_OBFUSCATION = 'DEFAULT_OBFUSCATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specification of an output context that is set when an intent is
@@ -2409,7 +2311,7 @@ module Aws::LexModelBuildingService
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The checksum of the resource that you are trying to change does
@@ -2420,12 +2322,7 @@ module Aws::LexModelBuildingService
     class PreconditionFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessBehavior
-      SAVE = 'SAVE'
-      BUILD = 'BUILD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Obtains information from the user. To define a prompt, provide one
@@ -2451,7 +2348,7 @@ module Aws::LexModelBuildingService
       :max_attempts,
       :response_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2498,7 +2395,7 @@ module Aws::LexModelBuildingService
       :conversation_logs,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2542,7 +2439,7 @@ module Aws::LexModelBuildingService
       :conversation_logs,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2806,7 +2703,7 @@ module Aws::LexModelBuildingService
       :create_version,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2955,7 +2852,7 @@ module Aws::LexModelBuildingService
       :detect_sentiment,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3123,7 +3020,7 @@ module Aws::LexModelBuildingService
       :input_contexts,
       :output_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3228,7 +3125,7 @@ module Aws::LexModelBuildingService
       :input_contexts,
       :output_contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3320,7 +3217,7 @@ module Aws::LexModelBuildingService
       :parent_slot_type_signature,
       :slot_type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3379,14 +3276,7 @@ module Aws::LexModelBuildingService
       :parent_slot_type_signature,
       :slot_type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReferenceType
-      INTENT = 'Intent'
-      BOT = 'Bot'
-      BOTALIAS = 'BotAlias'
-      BOTCHANNEL = 'BotChannel'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you are attempting to delete is referred to by
@@ -3416,7 +3306,7 @@ module Aws::LexModelBuildingService
       :reference_type,
       :example_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource that refers to the resource that you are
@@ -3434,13 +3324,7 @@ module Aws::LexModelBuildingService
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      BOT = 'BOT'
-      INTENT = 'INTENT'
-      SLOT_TYPE = 'SLOT_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the version of a specific slot.</p>
@@ -3508,12 +3392,7 @@ module Aws::LexModelBuildingService
       :obfuscation_setting,
       :default_value_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotConstraint
-      REQUIRED = 'Required'
-      OPTIONAL = 'Optional'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A default value for a slot.</p>
@@ -3540,7 +3419,7 @@ module Aws::LexModelBuildingService
     class SlotDefaultValue < Struct.new(
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the default values for a slot. Default values are used when
@@ -3557,7 +3436,7 @@ module Aws::LexModelBuildingService
     class SlotDefaultValueSpec < Struct.new(
       :default_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for a slot type.</p>
@@ -3567,7 +3446,7 @@ module Aws::LexModelBuildingService
     class SlotTypeConfiguration < Struct.new(
       :regex_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a slot type..</p>
@@ -3594,7 +3473,7 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a regular expression used to validate the value of a
@@ -3629,17 +3508,7 @@ module Aws::LexModelBuildingService
     class SlotTypeRegexConfiguration < Struct.new(
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlotValueSelectionStrategy
-      ORIGINAL_VALUE = 'ORIGINAL_VALUE'
-      TOP_RESOLUTION = 'TOP_RESOLUTION'
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payload
@@ -3687,7 +3556,7 @@ module Aws::LexModelBuildingService
       :merge_strategy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3723,7 +3592,7 @@ module Aws::LexModelBuildingService
       :tags,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute v1_bot_name
@@ -3774,7 +3643,7 @@ module Aws::LexModelBuildingService
       :v2_bot_role,
       :migration_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute v1_bot_name
@@ -3811,7 +3680,7 @@ module Aws::LexModelBuildingService
       :migration_strategy,
       :migration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of messages that convey information to the user. At
@@ -3828,20 +3697,7 @@ module Aws::LexModelBuildingService
       :messages,
       :response_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      BUILDING = 'BUILDING'
-      READY = 'READY'
-      READY_BASIC_TESTING = 'READY_BASIC_TESTING'
-      FAILED = 'FAILED'
-      NOT_BUILT = 'NOT_BUILT'
-    end
-
-    module StatusType
-      DETECTED = 'Detected'
-      MISSED = 'Missed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of key/value pairs that identify a bot, bot alias, or bot
@@ -3859,7 +3715,7 @@ module Aws::LexModelBuildingService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3874,12 +3730,12 @@ module Aws::LexModelBuildingService
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3894,12 +3750,12 @@ module Aws::LexModelBuildingService
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a single utterance that was made to your
@@ -3927,7 +3783,7 @@ module Aws::LexModelBuildingService
       :first_uttered_date,
       :last_uttered_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of utterances that have been made to a specific
@@ -3945,7 +3801,7 @@ module Aws::LexModelBuildingService
       :bot_version,
       :utterances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

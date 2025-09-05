@@ -15,7 +15,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.</p>
@@ -59,7 +59,7 @@ module Aws::Chime
       :account_status,
       :signin_delegate_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings related to the Amazon Chime account. This includes settings that start or stop
@@ -76,19 +76,7 @@ module Aws::Chime
       :disable_remote_control,
       :enable_dial_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountStatus
-      Suspended = 'Suspended'
-      Active = 'Active'
-    end
-
-    module AccountType
-      Team = 'Team'
-      EnterpriseDirectory = 'EnterpriseDirectory'
-      EnterpriseLWA = 'EnterpriseLWA'
-      EnterpriseOIDC = 'EnterpriseOIDC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.</p>
@@ -102,7 +90,7 @@ module Aws::Chime
       :is_alexa_for_business_enabled,
       :alexa_for_business_room_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -119,12 +107,12 @@ module Aws::Chime
       :user_id,
       :e164_phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociatePhoneNumberWithUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -137,12 +125,12 @@ module Aws::Chime
       :account_id,
       :signin_delegate_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateSigninDelegateGroupsWithAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters don't match the service's restrictions.</p>
@@ -154,7 +142,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -171,7 +159,7 @@ module Aws::Chime
       :room_id,
       :membership_item_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -180,7 +168,7 @@ module Aws::Chime
     class BatchCreateRoomMembershipResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_ids
@@ -189,7 +177,7 @@ module Aws::Chime
     class BatchDeletePhoneNumberRequest < Struct.new(
       :phone_number_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -198,7 +186,7 @@ module Aws::Chime
     class BatchDeletePhoneNumberResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -211,7 +199,7 @@ module Aws::Chime
       :account_id,
       :user_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_errors
@@ -221,7 +209,7 @@ module Aws::Chime
     class BatchSuspendUserResponse < Struct.new(
       :user_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -234,7 +222,7 @@ module Aws::Chime
       :account_id,
       :user_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_errors
@@ -244,7 +232,7 @@ module Aws::Chime
     class BatchUnsuspendUserResponse < Struct.new(
       :user_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_phone_number_request_items
@@ -253,7 +241,7 @@ module Aws::Chime
     class BatchUpdatePhoneNumberRequest < Struct.new(
       :update_phone_number_request_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -262,7 +250,7 @@ module Aws::Chime
     class BatchUpdatePhoneNumberResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -275,7 +263,7 @@ module Aws::Chime
       :account_id,
       :update_user_request_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_errors
@@ -285,7 +273,7 @@ module Aws::Chime
     class BatchUpdateUserResponse < Struct.new(
       :user_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that allows Enterprise account administrators to configure an interface to receive events from Amazon Chime.</p>
@@ -327,11 +315,7 @@ module Aws::Chime
       :bot_email,
       :security_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BotType
-      ChatBot = 'ChatBot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any
@@ -342,14 +326,7 @@ module Aws::Chime
     class BusinessCallingSettings < Struct.new(
       :cdr_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CallingNameStatus
-      Unassigned = 'Unassigned'
-      UpdateInProgress = 'UpdateInProgress'
-      UpdateSucceeded = 'UpdateSucceeded'
-      UpdateFailed = 'UpdateFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the
@@ -362,7 +339,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention settings that determine how long to retain conversation messages for an Amazon Chime Enterprise account.</p>
@@ -372,7 +349,7 @@ module Aws::Chime
     class ConversationRetentionSettings < Struct.new(
       :retention_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -381,7 +358,7 @@ module Aws::Chime
     class CreateAccountRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -390,7 +367,7 @@ module Aws::Chime
     class CreateAccountResponse < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -407,7 +384,7 @@ module Aws::Chime
       :display_name,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot
@@ -416,7 +393,7 @@ module Aws::Chime
     class CreateBotResponse < Struct.new(
       :bot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -437,7 +414,7 @@ module Aws::Chime
       :to_phone_number,
       :join_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -446,7 +423,7 @@ module Aws::Chime
     class CreateMeetingDialOutResponse < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_type
@@ -459,7 +436,7 @@ module Aws::Chime
       :product_type,
       :e164_phone_numbers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order
@@ -468,7 +445,7 @@ module Aws::Chime
     class CreatePhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -489,7 +466,7 @@ module Aws::Chime
       :member_id,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_membership
@@ -498,7 +475,7 @@ module Aws::Chime
     class CreateRoomMembershipResponse < Struct.new(
       :room_membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -515,7 +492,7 @@ module Aws::Chime
       :name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room
@@ -524,7 +501,7 @@ module Aws::Chime
     class CreateRoomResponse < Struct.new(
       :room,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -545,7 +522,7 @@ module Aws::Chime
       :email,
       :user_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -554,7 +531,7 @@ module Aws::Chime
     class CreateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -563,12 +540,12 @@ module Aws::Chime
     class DeleteAccountRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -581,7 +558,7 @@ module Aws::Chime
       :account_id,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -590,7 +567,7 @@ module Aws::Chime
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -607,7 +584,7 @@ module Aws::Chime
       :room_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -620,7 +597,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -633,12 +610,12 @@ module Aws::Chime
       :account_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociatePhoneNumberFromUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -651,36 +628,12 @@ module Aws::Chime
       :account_id,
       :group_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateSigninDelegateGroupsFromAccountResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EmailStatus
-      NotSent = 'NotSent'
-      Sent = 'Sent'
-      Failed = 'Failed'
-    end
-
-    module ErrorCode
-      BadRequest = 'BadRequest'
-      Conflict = 'Conflict'
-      Forbidden = 'Forbidden'
-      NotFound = 'NotFound'
-      PreconditionFailed = 'PreconditionFailed'
-      ResourceLimitExceeded = 'ResourceLimitExceeded'
-      ServiceFailure = 'ServiceFailure'
-      AccessDenied = 'AccessDenied'
-      ServiceUnavailable = 'ServiceUnavailable'
-      Throttled = 'Throttled'
-      Throttling = 'Throttling'
-      Unauthorized = 'Unauthorized'
-      Unprocessable = 'Unprocessable'
-      VoiceConnectorGroupAssociationsExist = 'VoiceConnectorGroupAssociationsExist'
-      PhoneNumberAssociationsExist = 'PhoneNumberAssociationsExist'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.</p>
@@ -698,7 +651,7 @@ module Aws::Chime
       :outbound_events_https_endpoint,
       :lambda_function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is permanently forbidden from making the request.</p>
@@ -710,7 +663,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -719,7 +672,7 @@ module Aws::Chime
     class GetAccountRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -728,7 +681,7 @@ module Aws::Chime
     class GetAccountResponse < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -737,7 +690,7 @@ module Aws::Chime
     class GetAccountSettingsRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -746,7 +699,7 @@ module Aws::Chime
     class GetAccountSettingsResponse < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -759,7 +712,7 @@ module Aws::Chime
       :account_id,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot
@@ -768,7 +721,7 @@ module Aws::Chime
     class GetBotResponse < Struct.new(
       :bot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -781,7 +734,7 @@ module Aws::Chime
       :account_id,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events_configuration
@@ -790,7 +743,7 @@ module Aws::Chime
     class GetEventsConfigurationResponse < Struct.new(
       :events_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute business_calling
@@ -803,7 +756,7 @@ module Aws::Chime
       :business_calling,
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order_id
@@ -812,7 +765,7 @@ module Aws::Chime
     class GetPhoneNumberOrderRequest < Struct.new(
       :phone_number_order_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order
@@ -821,7 +774,7 @@ module Aws::Chime
     class GetPhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -830,7 +783,7 @@ module Aws::Chime
     class GetPhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -839,7 +792,7 @@ module Aws::Chime
     class GetPhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calling_name
@@ -852,7 +805,7 @@ module Aws::Chime
       :calling_name,
       :calling_name_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -861,7 +814,7 @@ module Aws::Chime
     class GetRetentionSettingsRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_settings
@@ -874,7 +827,7 @@ module Aws::Chime
       :retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -887,7 +840,7 @@ module Aws::Chime
       :account_id,
       :room_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room
@@ -896,7 +849,7 @@ module Aws::Chime
     class GetRoomResponse < Struct.new(
       :room,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -909,7 +862,7 @@ module Aws::Chime
       :account_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -918,7 +871,7 @@ module Aws::Chime
     class GetUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -931,7 +884,7 @@ module Aws::Chime
       :account_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_settings
@@ -940,7 +893,7 @@ module Aws::Chime
     class GetUserSettingsResponse < Struct.new(
       :user_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invitation object returned after emailing users to invite them to join the Amazon Chime
@@ -963,13 +916,7 @@ module Aws::Chime
       :email_address,
       :email_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InviteStatus
-      Pending = 'Pending'
-      Accepted = 'Accepted'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -986,7 +933,7 @@ module Aws::Chime
       :user_email_list,
       :user_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invites
@@ -995,14 +942,7 @@ module Aws::Chime
     class InviteUsersResponse < Struct.new(
       :invites,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module License
-      Basic = 'Basic'
-      Plus = 'Plus'
-      Pro = 'Pro'
-      ProTrial = 'ProTrial'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1023,7 +963,7 @@ module Aws::Chime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -1036,7 +976,7 @@ module Aws::Chime
       :accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1053,7 +993,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bots
@@ -1066,7 +1006,7 @@ module Aws::Chime
       :bots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1079,7 +1019,7 @@ module Aws::Chime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_orders
@@ -1092,7 +1032,7 @@ module Aws::Chime
       :phone_number_orders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1121,7 +1061,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_numbers
@@ -1134,7 +1074,7 @@ module Aws::Chime
       :phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1155,7 +1095,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_memberships
@@ -1168,7 +1108,7 @@ module Aws::Chime
       :room_memberships,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1189,7 +1129,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rooms
@@ -1202,7 +1142,7 @@ module Aws::Chime
       :rooms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_type
@@ -1211,7 +1151,7 @@ module Aws::Chime
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
       :product_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_countries
@@ -1220,7 +1160,7 @@ module Aws::Chime
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
       :phone_number_countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1245,7 +1185,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -1258,7 +1198,7 @@ module Aws::Chime
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1271,12 +1211,12 @@ module Aws::Chime
       :account_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class LogoutUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The member details, such as email address, name, member ID, and member type.</p>
@@ -1302,7 +1242,7 @@ module Aws::Chime
       :full_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of errors returned when a member action results in an error.</p>
@@ -1320,13 +1260,7 @@ module Aws::Chime
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberType
-      User = 'User'
-      Bot = 'Bot'
-      Webhook = 'Webhook'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Membership details, such as member ID and member role.</p>
@@ -1340,7 +1274,7 @@ module Aws::Chime
       :member_id,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the resources in the request does not exist in the system.</p>
@@ -1352,7 +1286,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A phone number for which an order has been placed.</p>
@@ -1366,13 +1300,7 @@ module Aws::Chime
       :e164_phone_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderedPhoneNumberStatus
-      Processing = 'Processing'
-      Acquired = 'Acquired'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice
@@ -1431,7 +1359,7 @@ module Aws::Chime
       :updated_timestamp,
       :deletion_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, Amazon
@@ -1451,15 +1379,7 @@ module Aws::Chime
       :name,
       :associated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberAssociationName
-      AccountId = 'AccountId'
-      UserId = 'UserId'
-      VoiceConnectorId = 'VoiceConnectorId'
-      VoiceConnectorGroupId = 'VoiceConnectorGroupId'
-      SipRuleId = 'SipRuleId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled
@@ -1490,7 +1410,7 @@ module Aws::Chime
       :inbound_mms,
       :outbound_mms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number country.</p>
@@ -1504,7 +1424,7 @@ module Aws::Chime
       :country_code,
       :supported_phone_number_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the phone number action fails for one or more of the phone numbers in the request, a list of
@@ -1523,7 +1443,7 @@ module Aws::Chime
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a phone number order created for Amazon Chime.</p>
@@ -1554,36 +1474,7 @@ module Aws::Chime
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberOrderStatus
-      Processing = 'Processing'
-      Successful = 'Successful'
-      Failed = 'Failed'
-      Partial = 'Partial'
-    end
-
-    module PhoneNumberProductType
-      BusinessCalling = 'BusinessCalling'
-      VoiceConnector = 'VoiceConnector'
-      SipMediaApplicationDialIn = 'SipMediaApplicationDialIn'
-    end
-
-    module PhoneNumberStatus
-      AcquireInProgress = 'AcquireInProgress'
-      AcquireFailed = 'AcquireFailed'
-      Unassigned = 'Unassigned'
-      Assigned = 'Assigned'
-      ReleaseInProgress = 'ReleaseInProgress'
-      DeleteInProgress = 'DeleteInProgress'
-      ReleaseFailed = 'ReleaseFailed'
-      DeleteFailed = 'DeleteFailed'
-    end
-
-    module PhoneNumberType
-      Local = 'Local'
-      TollFree = 'TollFree'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1604,7 +1495,7 @@ module Aws::Chime
       :outbound_events_https_endpoint,
       :lambda_function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events_configuration
@@ -1614,7 +1505,7 @@ module Aws::Chime
     class PutEventsConfigurationResponse < Struct.new(
       :events_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1627,7 +1518,7 @@ module Aws::Chime
       :account_id,
       :retention_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_settings
@@ -1640,7 +1531,7 @@ module Aws::Chime
       :retention_settings,
       :initiate_deletion_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1657,12 +1548,12 @@ module Aws::Chime
       :conversation_id,
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RedactConversationMessageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1679,12 +1570,12 @@ module Aws::Chime
       :room_id,
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RedactRoomMessageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1697,7 +1588,7 @@ module Aws::Chime
       :account_id,
       :bot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot
@@ -1706,13 +1597,7 @@ module Aws::Chime
     class RegenerateSecurityTokenResponse < Struct.new(
       :bot,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      Unregistered = 'Unregistered'
-      Registered = 'Registered'
-      Suspended = 'Suspended'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1725,7 +1610,7 @@ module Aws::Chime
       :account_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -1734,7 +1619,7 @@ module Aws::Chime
     class ResetPersonalPINResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the resource limit.</p>
@@ -1746,7 +1631,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -1755,7 +1640,7 @@ module Aws::Chime
     class RestorePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -1764,7 +1649,7 @@ module Aws::Chime
     class RestorePhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat-room messages and chat-conversation messages.</p>
@@ -1778,7 +1663,7 @@ module Aws::Chime
       :room_retention_settings,
       :conversation_retention_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime chat room details.</p>
@@ -1808,7 +1693,7 @@ module Aws::Chime
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The room membership details.</p>
@@ -1834,12 +1719,7 @@ module Aws::Chime
       :invited_by,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoomMembershipRole
-      Administrator = 'Administrator'
-      Member = 'Member'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention settings that determine how long to retain chat-room messages for an Amazon Chime Enterprise account.</p>
@@ -1849,7 +1729,7 @@ module Aws::Chime
     class RoomRetentionSettings < Struct.new(
       :retention_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute area_code
@@ -1886,7 +1766,7 @@ module Aws::Chime
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute e164_phone_numbers
@@ -1899,7 +1779,7 @@ module Aws::Chime
       :e164_phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unexpected error.</p>
@@ -1911,7 +1791,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -1923,7 +1803,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory (AD) group whose members are granted permission to act as delegates.</p>
@@ -1933,7 +1813,7 @@ module Aws::Chime
     class SigninDelegateGroup < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that allow management of telephony permissions for an Amazon Chime user, such as
@@ -1952,7 +1832,7 @@ module Aws::Chime
       :outbound_calling,
       :sms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client exceeded its request rate limit.</p>
@@ -1964,7 +1844,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is not currently authorized to make the request.</p>
@@ -1976,7 +1856,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was well-formed but was unable to be followed due to semantic errors.</p>
@@ -1988,7 +1868,7 @@ module Aws::Chime
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2005,7 +1885,7 @@ module Aws::Chime
       :name,
       :default_license,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account
@@ -2014,7 +1894,7 @@ module Aws::Chime
     class UpdateAccountResponse < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2027,12 +1907,12 @@ module Aws::Chime
       :account_id,
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAccountSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2049,7 +1929,7 @@ module Aws::Chime
       :bot_id,
       :disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot
@@ -2058,7 +1938,7 @@ module Aws::Chime
     class UpdateBotResponse < Struct.new(
       :bot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute business_calling
@@ -2071,7 +1951,7 @@ module Aws::Chime
       :business_calling,
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -2088,7 +1968,7 @@ module Aws::Chime
       :product_type,
       :calling_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number ID, product type, or calling name fields to update, used with the 
@@ -2107,7 +1987,7 @@ module Aws::Chime
       :product_type,
       :calling_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -2116,7 +1996,7 @@ module Aws::Chime
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calling_name
@@ -2125,7 +2005,7 @@ module Aws::Chime
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2146,7 +2026,7 @@ module Aws::Chime
       :member_id,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room_membership
@@ -2155,7 +2035,7 @@ module Aws::Chime
     class UpdateRoomMembershipResponse < Struct.new(
       :room_membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2172,7 +2052,7 @@ module Aws::Chime
       :room_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute room
@@ -2181,7 +2061,7 @@ module Aws::Chime
     class UpdateRoomResponse < Struct.new(
       :room,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2207,7 +2087,7 @@ module Aws::Chime
       :user_type,
       :alexa_for_business_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user ID and user fields to update, used with the 
@@ -2230,7 +2110,7 @@ module Aws::Chime
       :user_type,
       :alexa_for_business_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -2239,7 +2119,7 @@ module Aws::Chime
     class UpdateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2256,7 +2136,7 @@ module Aws::Chime
       :user_id,
       :user_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user on the Amazon Chime account.</p>
@@ -2314,7 +2194,7 @@ module Aws::Chime
       :alexa_for_business_metadata,
       :personal_pin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or 
@@ -2333,7 +2213,7 @@ module Aws::Chime
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings associated with an Amazon Chime user, including inbound and outbound calling and text
@@ -2344,12 +2224,7 @@ module Aws::Chime
     class UserSettings < Struct.new(
       :telephony,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserType
-      PrivateUser = 'PrivateUser'
-      SharedDevice = 'SharedDevice'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for
@@ -2360,7 +2235,7 @@ module Aws::Chime
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

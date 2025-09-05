@@ -12,7 +12,7 @@ module Aws::M2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an alternate key. This value is optional. A legacy data set might not have any
@@ -38,7 +38,7 @@ module Aws::M2
       :length,
       :allow_duplicates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset] = 0 unless options.key?(:offset)
@@ -105,7 +105,7 @@ module Aws::M2
       :deployment_status,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an application version summary.</p>
@@ -127,7 +127,7 @@ module Aws::M2
       :status_reason,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the details of a batch job.</p>
@@ -142,7 +142,7 @@ module Aws::M2
       :script_batch_job_definition,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FileBatchJobDefinition < BatchJobDefinition; end
       class ScriptBatchJobDefinition < BatchJobDefinition; end
@@ -195,7 +195,7 @@ module Aws::M2
       :return_code,
       :batch_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a specific batch job.</p>
@@ -219,7 +219,7 @@ module Aws::M2
       :restart_batch_job_identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FileBatchJobIdentifier < BatchJobIdentifier; end
       class ScriptBatchJobIdentifier < BatchJobIdentifier; end
@@ -242,12 +242,12 @@ module Aws::M2
       :execution_id,
       :auth_secrets_manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelBatchJobExecutionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters provided in the request conflict with existing resources.</p>
@@ -264,7 +264,7 @@ module Aws::M2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -304,7 +304,7 @@ module Aws::M2
       :kms_key_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -321,7 +321,7 @@ module Aws::M2
       :application_id,
       :application_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -342,7 +342,7 @@ module Aws::M2
       :client_token,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -351,7 +351,7 @@ module Aws::M2
     class CreateDataSetExportTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -372,7 +372,7 @@ module Aws::M2
       :import_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -381,7 +381,7 @@ module Aws::M2
     class CreateDataSetImportTaskOutput < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -407,7 +407,7 @@ module Aws::M2
       :application_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -416,7 +416,7 @@ module Aws::M2
     class CreateDeploymentOutput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -486,7 +486,7 @@ module Aws::M2
       :client_token,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -495,7 +495,7 @@ module Aws::M2
     class CreateEnvironmentOutput < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a data set.</p>
@@ -523,7 +523,7 @@ module Aws::M2
       :relative_path,
       :record_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies one or more data sets you want to import with the <a>CreateDataSetExportTask</a> operation.</p>
@@ -538,7 +538,7 @@ module Aws::M2
       :data_sets,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Location < DataSetExportConfig; end
       class DataSets < DataSetExportConfig; end
@@ -556,7 +556,7 @@ module Aws::M2
       :dataset_name,
       :external_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a summary of data set exports.</p>
@@ -582,7 +582,7 @@ module Aws::M2
       :pending,
       :in_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total] = 0 unless options.key?(:total)
@@ -613,7 +613,7 @@ module Aws::M2
       :summary,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies one or more data sets you want to import with the <a>CreateDataSetImportTask</a> operation.</p>
@@ -628,7 +628,7 @@ module Aws::M2
       :data_sets,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Location < DataSetImportConfig; end
       class DataSets < DataSetImportConfig; end
@@ -646,7 +646,7 @@ module Aws::M2
       :data_set,
       :external_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a summary of data set imports.</p>
@@ -672,7 +672,7 @@ module Aws::M2
       :pending,
       :in_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total] = 0 unless options.key?(:total)
@@ -703,7 +703,7 @@ module Aws::M2
       :summary,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subset of the possible data set attributes.</p>
@@ -733,7 +733,7 @@ module Aws::M2
       :last_updated_time,
       :last_referenced_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional details about the data set. Different attributes correspond to different data
@@ -758,7 +758,7 @@ module Aws::M2
       :ps,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Vsam < DatasetDetailOrgAttributes; end
       class Gdg < DatasetDetailOrgAttributes; end
@@ -789,7 +789,7 @@ module Aws::M2
       :ps,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Vsam < DatasetOrgAttributes; end
       class Gdg < DatasetOrgAttributes; end
@@ -811,7 +811,7 @@ module Aws::M2
       :content,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Location < Definition; end
       class Content < Definition; end
@@ -829,12 +829,12 @@ module Aws::M2
       :application_id,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationFromEnvironmentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -843,12 +843,12 @@ module Aws::M2
     class DeleteApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -857,12 +857,12 @@ module Aws::M2
     class DeleteEnvironmentInput < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a deployed application.</p>
@@ -880,7 +880,7 @@ module Aws::M2
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subset of information about a specific deployment.</p>
@@ -914,7 +914,7 @@ module Aws::M2
       :creation_time,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the storage configuration for an Amazon EFS file system.</p>
@@ -928,7 +928,7 @@ module Aws::M2
       :file_system_id,
       :mount_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subset of information about the engine version for a specific application.</p>
@@ -942,7 +942,7 @@ module Aws::M2
       :engine_type,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a subset of the possible runtime environment attributes. Used in the
@@ -985,7 +985,7 @@ module Aws::M2
       :creation_time,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Failed to connect to server, or didn’t receive response within expected time period.</p>
@@ -994,7 +994,7 @@ module Aws::M2
     class ExecutionTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an external storage location.</p>
@@ -1005,7 +1005,7 @@ module Aws::M2
       :s3_location,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Location < ExternalLocation; end
       class Unknown < ExternalLocation; end
@@ -1022,7 +1022,7 @@ module Aws::M2
       :file_name,
       :folder_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch job identifier in which the batch job to run is identified by the file name and
@@ -1037,7 +1037,7 @@ module Aws::M2
       :file_name,
       :folder_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the storage configuration for an Amazon FSx file system.</p>
@@ -1051,7 +1051,7 @@ module Aws::M2
       :file_system_id,
       :mount_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The required attributes for a generation data group data set. A generation data set is
@@ -1069,7 +1069,7 @@ module Aws::M2
       :limit,
       :roll_disposition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -1092,7 +1092,7 @@ module Aws::M2
       :limit,
       :roll_disposition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -1106,7 +1106,7 @@ module Aws::M2
     class GetApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1199,7 +1199,7 @@ module Aws::M2
       :kms_key_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1212,7 +1212,7 @@ module Aws::M2
       :application_id,
       :application_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1246,7 +1246,7 @@ module Aws::M2
       :creation_time,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1259,7 +1259,7 @@ module Aws::M2
       :application_id,
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -1319,7 +1319,7 @@ module Aws::M2
       :batch_job_identifier,
       :job_step_restart_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1332,7 +1332,7 @@ module Aws::M2
       :application_id,
       :data_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_name
@@ -1373,12 +1373,12 @@ module Aws::M2
       :last_referenced_time,
       :file_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:record_length] =  unless options.key?(:record_length)
-        options[:blocksize] =  unless options.key?(:blocksize)
-        options[:file_size] =  unless options.key?(:file_size)
+        options[:record_length] = nil unless options.key?(:record_length)
+        options[:blocksize] = nil unless options.key?(:blocksize)
+        options[:file_size] = nil unless options.key?(:file_size)
         super
       end
     end
@@ -1393,7 +1393,7 @@ module Aws::M2
       :application_id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1418,7 +1418,7 @@ module Aws::M2
       :status_reason,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1432,7 +1432,7 @@ module Aws::M2
       :application_id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1449,7 +1449,7 @@ module Aws::M2
       :status,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -1462,7 +1462,7 @@ module Aws::M2
       :deployment_id,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -1495,7 +1495,7 @@ module Aws::M2
       :creation_time,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1504,7 +1504,7 @@ module Aws::M2
     class GetEnvironmentInput < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1609,7 +1609,7 @@ module Aws::M2
       :kms_key_id,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:publicly_accessible] = false unless options.key?(:publicly_accessible)
@@ -1623,7 +1623,7 @@ module Aws::M2
     class GetSignedBluinsightsUrlResponse < Struct.new(
       :signed_bi_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the details of a high availability configuration.</p>
@@ -1633,7 +1633,7 @@ module Aws::M2
     class HighAvailabilityConfig < Struct.new(
       :desired_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during the processing of the request.</p>
@@ -1646,7 +1646,7 @@ module Aws::M2
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1666,7 +1666,7 @@ module Aws::M2
       :script_name,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FileName < JobIdentifier; end
       class ScriptName < JobIdentifier; end
@@ -1712,13 +1712,13 @@ module Aws::M2
       :step_checkpoint_status,
       :step_checkpoint_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:step_number] = 0 unless options.key?(:step_number)
         options[:proc_step_number] = 0 unless options.key?(:proc_step_number)
         options[:step_restartable] = false unless options.key?(:step_restartable)
-        options[:step_checkpoint] =  unless options.key?(:step_checkpoint)
+        options[:step_checkpoint] = nil unless options.key?(:step_checkpoint)
         super
       end
     end
@@ -1750,11 +1750,11 @@ module Aws::M2
       :step_checkpoint,
       :skip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:step_checkpoint] =  unless options.key?(:step_checkpoint)
-        options[:skip] =  unless options.key?(:skip)
+        options[:step_checkpoint] = nil unless options.key?(:step_checkpoint)
+        options[:skip] = nil unless options.key?(:skip)
         super
       end
     end
@@ -1775,7 +1775,7 @@ module Aws::M2
       :max_results,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_versions
@@ -1789,7 +1789,7 @@ module Aws::M2
       :application_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1811,7 +1811,7 @@ module Aws::M2
       :names,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -1826,7 +1826,7 @@ module Aws::M2
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1850,7 +1850,7 @@ module Aws::M2
       :application_id,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_job_definitions
@@ -1864,7 +1864,7 @@ module Aws::M2
       :batch_job_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1902,7 +1902,7 @@ module Aws::M2
       :started_after,
       :started_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_job_executions
@@ -1916,7 +1916,7 @@ module Aws::M2
       :batch_job_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1933,7 +1933,7 @@ module Aws::M2
       :execution_id,
       :auth_secrets_manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_job_steps
@@ -1942,7 +1942,7 @@ module Aws::M2
     class ListBatchJobRestartPointsResponse < Struct.new(
       :batch_job_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1961,7 +1961,7 @@ module Aws::M2
       :max_results,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_export_tasks
@@ -1975,7 +1975,7 @@ module Aws::M2
       :data_set_export_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1994,7 +1994,7 @@ module Aws::M2
       :max_results,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_import_tasks
@@ -2008,7 +2008,7 @@ module Aws::M2
       :data_set_import_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2037,7 +2037,7 @@ module Aws::M2
       :prefix,
       :name_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_sets
@@ -2053,7 +2053,7 @@ module Aws::M2
       :data_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2072,7 +2072,7 @@ module Aws::M2
       :max_results,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -2086,7 +2086,7 @@ module Aws::M2
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_type
@@ -2105,7 +2105,7 @@ module Aws::M2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_versions
@@ -2119,7 +2119,7 @@ module Aws::M2
       :engine_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2141,7 +2141,7 @@ module Aws::M2
       :names,
       :engine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -2156,7 +2156,7 @@ module Aws::M2
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2165,7 +2165,7 @@ module Aws::M2
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2174,7 +2174,7 @@ module Aws::M2
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subset of the attributes that describe a log group. In CloudWatch a log group is a group of
@@ -2189,7 +2189,7 @@ module Aws::M2
       :log_type,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the maintenance schedule.</p>
@@ -2203,7 +2203,7 @@ module Aws::M2
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduled maintenance for a runtime engine.</p>
@@ -2217,7 +2217,7 @@ module Aws::M2
       :schedule,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supported properties for a PO type data set.</p>
@@ -2236,7 +2236,7 @@ module Aws::M2
       :encoding,
       :member_file_extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supported properties for a PO type data set.</p>
@@ -2250,7 +2250,7 @@ module Aws::M2
       :format,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The primary key for a KSDS data set.</p>
@@ -2269,7 +2269,7 @@ module Aws::M2
       :offset,
       :length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset] = 0 unless options.key?(:offset)
@@ -2289,7 +2289,7 @@ module Aws::M2
       :format,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supported properties for a PS type data set.</p>
@@ -2303,7 +2303,7 @@ module Aws::M2
       :format,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of the records in the data set.</p>
@@ -2318,7 +2318,7 @@ module Aws::M2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min] = 0 unless options.key?(:min)
@@ -2341,7 +2341,7 @@ module Aws::M2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An identifier for the <code>StartBatchJob</code> API to show that it is a restart operation.</p>
@@ -2355,7 +2355,7 @@ module Aws::M2
       :execution_id,
       :job_step_restart_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch job identifier in which the batch jobs to run are identified by an Amazon S3 location.</p>
@@ -2373,7 +2373,7 @@ module Aws::M2
       :key_prefix,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch job definition contained in a script.</p>
@@ -2383,7 +2383,7 @@ module Aws::M2
     class ScriptBatchJobDefinition < Struct.new(
       :script_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch job identifier in which the batch job to run is identified by the script
@@ -2394,7 +2394,7 @@ module Aws::M2
     class ScriptBatchJobIdentifier < Struct.new(
       :script_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more quotas for Amazon Web Services Mainframe Modernization exceeds the limit.</p>
@@ -2419,7 +2419,7 @@ module Aws::M2
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Server cannot process the request at the moment.</p>
@@ -2428,7 +2428,7 @@ module Aws::M2
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2437,12 +2437,12 @@ module Aws::M2
     class StartApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2464,7 +2464,7 @@ module Aws::M2
       :job_params,
       :auth_secrets_manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -2473,7 +2473,7 @@ module Aws::M2
     class StartBatchJobOutput < Struct.new(
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2488,12 +2488,12 @@ module Aws::M2
       :application_id,
       :force_stop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the storage configuration for a runtime environment.</p>
@@ -2508,7 +2508,7 @@ module Aws::M2
       :fsx,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Efs < StorageConfiguration; end
       class Fsx < StorageConfiguration; end
@@ -2525,12 +2525,12 @@ module Aws::M2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests made exceeds the limit.</p>
@@ -2551,7 +2551,7 @@ module Aws::M2
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -2569,12 +2569,12 @@ module Aws::M2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2596,7 +2596,7 @@ module Aws::M2
       :current_application_version,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_version
@@ -2605,7 +2605,7 @@ module Aws::M2
     class UpdateApplicationOutput < Struct.new(
       :application_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -2645,7 +2645,7 @@ module Aws::M2
       :apply_during_maintenance_window,
       :force_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -2654,7 +2654,7 @@ module Aws::M2
     class UpdateEnvironmentOutput < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters provided in the request is not valid.</p>
@@ -2671,7 +2671,7 @@ module Aws::M2
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a validation exception field.</p>
@@ -2685,7 +2685,7 @@ module Aws::M2
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes of a VSAM type data set.</p>
@@ -2714,7 +2714,7 @@ module Aws::M2
       :primary_key,
       :alternate_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compressed] = false unless options.key?(:compressed)
@@ -2753,11 +2753,11 @@ module Aws::M2
       :primary_key,
       :alternate_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:compressed] =  unless options.key?(:compressed)
-        options[:cache_at_startup] =  unless options.key?(:cache_at_startup)
+        options[:compressed] = nil unless options.key?(:compressed)
+        options[:cache_at_startup] = nil unless options.key?(:cache_at_startup)
         super
       end
     end

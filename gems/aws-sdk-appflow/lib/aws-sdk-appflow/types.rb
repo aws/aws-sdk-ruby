@@ -12,7 +12,7 @@ module Aws::Appflow
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The aggregation settings that you can use to customize the output format of your flow
@@ -31,16 +31,7 @@ module Aws::Appflow
       :aggregation_type,
       :target_file_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregationType
-      NONE = 'None'
-      SINGLE_FILE = 'SingleFile'
-    end
-
-    module AmplitudeConnectorOperator
-      BETWEEN = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific credentials required when using Amplitude. </p>
@@ -55,19 +46,19 @@ module Aws::Appflow
       :api_key,
       :secret_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Amplitude. </p>
     class AmplitudeConnectorProfileProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amplitude. </p>
     class AmplitudeMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amplitude is being used as a source. </p>
@@ -77,7 +68,7 @@ module Aws::Appflow
     class AmplitudeSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API key credentials required for API key authentication.</p>
@@ -91,7 +82,7 @@ module Aws::Appflow
       :api_key,
       :api_secret_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about required authentication parameters.</p>
@@ -122,7 +113,7 @@ module Aws::Appflow
       :is_sensitive_field,
       :connector_supplied_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_required] = false unless options.key?(:is_required)
@@ -158,7 +149,7 @@ module Aws::Appflow
       :o_auth2_defaults,
       :custom_auth_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_basic_auth_supported] = false unless options.key?(:is_basic_auth_supported)
@@ -167,13 +158,6 @@ module Aws::Appflow
         options[:is_custom_auth_supported] = false unless options.key?(:is_custom_auth_supported)
         super
       end
-    end
-
-    module AuthenticationType
-      OAUTH2 = 'OAUTH2'
-      APIKEY = 'APIKEY'
-      BASIC = 'BASIC'
-      CUSTOM = 'CUSTOM'
     end
 
     # <p> The basic auth credentials required for basic authentication. </p>
@@ -187,7 +171,7 @@ module Aws::Appflow
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -203,7 +187,7 @@ module Aws::Appflow
       :flow_name,
       :execution_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invalid_executions
@@ -213,11 +197,7 @@ module Aws::Appflow
     class CancelFlowExecutionsResponse < Struct.new(
       :invalid_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CatalogType
-      GLUE = 'GLUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> There was a conflict when processing the request (for example, a flow with the given name
@@ -227,12 +207,7 @@ module Aws::Appflow
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionMode
-      PUBLIC = 'Public'
-      PRIVATE = 'Private'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error occurred when authenticating with the connector endpoint. </p>
@@ -241,7 +216,7 @@ module Aws::Appflow
     class ConnectorAuthenticationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration settings related to a given connector. </p>
@@ -371,7 +346,7 @@ module Aws::Appflow
       :supported_data_transfer_types,
       :supported_data_transfer_apis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:can_use_as_source] = false unless options.key?(:can_use_as_source)
@@ -443,7 +418,7 @@ module Aws::Appflow
       :connector_modes,
       :supported_data_transfer_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The high-level entity that can be queried in Amazon AppFlow. For example, a
@@ -468,7 +443,7 @@ module Aws::Appflow
       :label,
       :has_nested_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_nested_entities] = false unless options.key?(:has_nested_entities)
@@ -528,7 +503,7 @@ module Aws::Appflow
       :destination_properties,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_primary_key] = false unless options.key?(:is_primary_key)
@@ -629,7 +604,7 @@ module Aws::Appflow
       :sapo_data,
       :pardot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used by select connectors for which the OAuth workflow is supported, such as Salesforce,
@@ -646,7 +621,7 @@ module Aws::Appflow
       :auth_code,
       :redirect_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The operation to be performed on the provided source fields. </p>
@@ -720,7 +695,7 @@ module Aws::Appflow
       :custom_connector,
       :pardot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes an instance of a connector. This includes the provided name, credentials ARN,
@@ -771,7 +746,7 @@ module Aws::Appflow
       :last_updated_at,
       :private_connection_provisioning_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Defines the connector-specific configuration and credentials for the connector profile.
@@ -786,7 +761,7 @@ module Aws::Appflow
       :connector_profile_properties,
       :connector_profile_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific credentials required by a connector. </p>
@@ -869,7 +844,7 @@ module Aws::Appflow
       :custom_connector,
       :pardot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by each connector. </p>
@@ -951,7 +926,7 @@ module Aws::Appflow
       :custom_connector,
       :pardot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of the connector being registered.</p>
@@ -962,12 +937,7 @@ module Aws::Appflow
     class ConnectorProvisioningConfig < Struct.new(
       :lambda,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of provisioning that the connector supports, such as Lambda.</p>
-    module ConnectorProvisioningType
-      LAMBDA = 'LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the connector runtime settings that are required for flow
@@ -1003,7 +973,7 @@ module Aws::Appflow
       :scope,
       :connector_supplied_value_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_required] = false unless options.key?(:is_required)
@@ -1017,34 +987,7 @@ module Aws::Appflow
     class ConnectorServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorType
-      SALESFORCE = 'Salesforce'
-      SINGULAR = 'Singular'
-      SLACK = 'Slack'
-      REDSHIFT = 'Redshift'
-      S3 = 'S3'
-      MARKETO = 'Marketo'
-      GOOGLEANALYTICS = 'Googleanalytics'
-      ZENDESK = 'Zendesk'
-      SERVICENOW = 'Servicenow'
-      DATADOG = 'Datadog'
-      TRENDMICRO = 'Trendmicro'
-      SNOWFLAKE = 'Snowflake'
-      DYNATRACE = 'Dynatrace'
-      INFORNEXUS = 'Infornexus'
-      AMPLITUDE = 'Amplitude'
-      VEEVA = 'Veeva'
-      EVENTBRIDGE = 'EventBridge'
-      LOOKOUTMETRICS = 'LookoutMetrics'
-      UPSOLVER = 'Upsolver'
-      HONEYCODE = 'Honeycode'
-      CUSTOMERPROFILES = 'CustomerProfiles'
-      SAPODATA = 'SAPOData'
-      CUSTOMCONNECTOR = 'CustomConnector'
-      PARDOT = 'Pardot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_name
@@ -1093,7 +1036,7 @@ module Aws::Appflow
       :connector_profile_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_arn
@@ -1102,7 +1045,7 @@ module Aws::Appflow
     class CreateConnectorProfileResponse < Struct.new(
       :connector_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -1164,7 +1107,7 @@ module Aws::Appflow
       :metadata_catalog_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -1177,7 +1120,7 @@ module Aws::Appflow
       :flow_arn,
       :flow_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information required for custom authentication.</p>
@@ -1191,7 +1134,7 @@ module Aws::Appflow
       :custom_authentication_type,
       :auth_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom credentials required for custom authentication.</p>
@@ -1205,7 +1148,7 @@ module Aws::Appflow
       :custom_authentication_type,
       :credentials_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when the custom connector is being used as a
@@ -1236,7 +1179,7 @@ module Aws::Appflow
       :id_field_names,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector-specific profile credentials that are required when using the custom
@@ -1265,7 +1208,7 @@ module Aws::Appflow
       :api_key,
       :custom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The profile properties required by the custom connector.</p>
@@ -1279,7 +1222,7 @@ module Aws::Appflow
       :profile_properties,
       :o_auth2_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when the custom connector is being used as a
@@ -1299,7 +1242,7 @@ module Aws::Appflow
       :custom_properties,
       :data_transfer_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon Connect Customer Profiles is used as a
@@ -1315,18 +1258,13 @@ module Aws::Appflow
       :domain_name,
       :object_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon Connect Customer Profiles. </p>
     class CustomerProfilesMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataPullMode
-      INCREMENTAL = 'Incremental'
-      COMPLETE = 'Complete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API of the connector application that Amazon AppFlow uses to transfer your
@@ -1358,31 +1296,7 @@ module Aws::Appflow
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataTransferApiType
-      SYNC = 'SYNC'
-      ASYNC = 'ASYNC'
-      AUTOMATIC = 'AUTOMATIC'
-    end
-
-    module DatadogConnectorOperator
-      PROJECTION = 'PROJECTION'
-      BETWEEN = 'BETWEEN'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific credentials required by Datadog. </p>
@@ -1399,7 +1313,7 @@ module Aws::Appflow
       :api_key,
       :application_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by Datadog. </p>
@@ -1409,13 +1323,13 @@ module Aws::Appflow
     class DatadogConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Datadog. </p>
     class DatadogMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Datadog is being used as a source. </p>
@@ -1425,7 +1339,7 @@ module Aws::Appflow
     class DatadogSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_name
@@ -1440,12 +1354,12 @@ module Aws::Appflow
       :connector_profile_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectorProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -1460,12 +1374,12 @@ module Aws::Appflow
       :flow_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFlowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_entity_name
@@ -1487,7 +1401,7 @@ module Aws::Appflow
       :connector_profile_name,
       :api_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_entity_fields
@@ -1498,7 +1412,7 @@ module Aws::Appflow
     class DescribeConnectorEntityResponse < Struct.new(
       :connector_entity_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_names
@@ -1527,7 +1441,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_details
@@ -1541,7 +1455,7 @@ module Aws::Appflow
       :connector_profile_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_type
@@ -1557,7 +1471,7 @@ module Aws::Appflow
       :connector_type,
       :connector_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_configuration
@@ -1566,7 +1480,7 @@ module Aws::Appflow
     class DescribeConnectorResponse < Struct.new(
       :connector_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_types
@@ -1584,7 +1498,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_configurations
@@ -1601,7 +1515,7 @@ module Aws::Appflow
       :connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -1620,7 +1534,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_executions
@@ -1633,7 +1547,7 @@ module Aws::Appflow
       :flow_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -1643,7 +1557,7 @@ module Aws::Appflow
     class DescribeFlowRequest < Struct.new(
       :flow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -1746,7 +1660,7 @@ module Aws::Appflow
       :last_run_metadata_catalog_details,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This stores the information that is required to query a particular connector. </p>
@@ -1804,7 +1718,7 @@ module Aws::Appflow
       :custom_connector,
       :sapo_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that can be applied to a field when connector is being used as a
@@ -1839,7 +1753,7 @@ module Aws::Appflow
       :is_defaulted_on_create,
       :supported_write_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_creatable] = false unless options.key?(:is_creatable)
@@ -1872,25 +1786,7 @@ module Aws::Appflow
       :connector_profile_name,
       :destination_connector_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DynatraceConnectorOperator
-      PROJECTION = 'PROJECTION'
-      BETWEEN = 'BETWEEN'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required by Dynatrace. </p>
@@ -1900,7 +1796,7 @@ module Aws::Appflow
     class DynatraceConnectorProfileCredentials < Struct.new(
       :api_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by Dynatrace. </p>
@@ -1910,13 +1806,13 @@ module Aws::Appflow
     class DynatraceConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Dynatrace. </p>
     class DynatraceMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Dynatrace is being used as a source. </p>
@@ -1926,7 +1822,7 @@ module Aws::Appflow
     class DynatraceSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings that determine how Amazon AppFlow handles an error when placing data in
@@ -1949,7 +1845,7 @@ module Aws::Appflow
       :bucket_prefix,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fail_on_first_destination_error] = false unless options.key?(:fail_on_first_destination_error)
@@ -1969,7 +1865,7 @@ module Aws::Appflow
       :put_failures_count,
       :execution_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon EventBridge is being used as a
@@ -1988,13 +1884,13 @@ module Aws::Appflow
       :object,
       :error_handling_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon EventBridge. </p>
     class EventBridgeMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the details of the flow run, including the timestamp, status, and message.
@@ -2013,7 +1909,7 @@ module Aws::Appflow
       :most_recent_execution_time,
       :most_recent_execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies information about the past flow run instances for a given flow. </p>
@@ -2054,7 +1950,7 @@ module Aws::Appflow
       :data_pull_end_time,
       :metadata_catalog_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the end result of the flow run. </p>
@@ -2086,15 +1982,7 @@ module Aws::Appflow
       :num_parallel_processes,
       :max_page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionStatus
-      INPROGRESS = 'InProgress'
-      SUCCESSFUL = 'Successful'
-      ERROR = 'Error'
-      CANCELSTARTED = 'CancelStarted'
-      CANCELED = 'Canceled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains details regarding the supported field type and the operators that can be applied
@@ -2130,13 +2018,7 @@ module Aws::Appflow
       :field_value_range,
       :field_length_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileType
-      CSV = 'CSV'
-      JSON = 'JSON'
-      PARQUET = 'PARQUET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties of the flow, such as its source, destination, trigger type, and so on.
@@ -2207,16 +2089,7 @@ module Aws::Appflow
       :tags,
       :last_run_execution_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowStatus
-      ACTIVE = 'Active'
-      DEPRECATED = 'Deprecated'
-      DELETED = 'Deleted'
-      DRAFT = 'Draft'
-      ERRORED = 'Errored'
-      SUSPENDED = 'Suspended'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data with
@@ -2250,12 +2123,7 @@ module Aws::Appflow
       :database_name,
       :table_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GoogleAnalyticsConnectorOperator
-      PROJECTION = 'PROJECTION'
-      BETWEEN = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required by Google Analytics. </p>
@@ -2284,13 +2152,13 @@ module Aws::Appflow
       :refresh_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by Google Analytics. </p>
     class GoogleAnalyticsConnectorProfileProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Google Analytics. </p>
@@ -2300,7 +2168,7 @@ module Aws::Appflow
     class GoogleAnalyticsMetadata < Struct.new(
       :o_auth_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Google Analytics is being used as a source. </p>
@@ -2310,7 +2178,7 @@ module Aws::Appflow
     class GoogleAnalyticsSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific credentials required when using Amazon Honeycode. </p>
@@ -2329,13 +2197,13 @@ module Aws::Appflow
       :refresh_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific properties required when using Amazon Honeycode. </p>
     class HoneycodeConnectorProfileProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon Honeycode is used as a destination. </p>
@@ -2353,7 +2221,7 @@ module Aws::Appflow
       :object,
       :error_handling_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon Honeycode. </p>
@@ -2363,7 +2231,7 @@ module Aws::Appflow
     class HoneycodeMetadata < Struct.new(
       :o_auth_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the configuration used when importing incremental records from the source.
@@ -2375,25 +2243,7 @@ module Aws::Appflow
     class IncrementalPullConfig < Struct.new(
       :datetime_type_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InforNexusConnectorOperator
-      PROJECTION = 'PROJECTION'
-      BETWEEN = 'BETWEEN'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required by Infor Nexus. </p>
@@ -2415,7 +2265,7 @@ module Aws::Appflow
       :secret_access_key,
       :datakey,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required by Infor Nexus. </p>
@@ -2425,13 +2275,13 @@ module Aws::Appflow
     class InforNexusConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Infor Nexus. </p>
     class InforNexusMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Infor Nexus is being used as a source. </p>
@@ -2441,7 +2291,7 @@ module Aws::Appflow
     class InforNexusSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An internal service error occurred during the processing of your request. Try again
@@ -2451,7 +2301,7 @@ module Aws::Appflow
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of the lambda which is being registered as
@@ -2462,7 +2312,7 @@ module Aws::Appflow
     class LambdaConnectorProvisioningConfig < Struct.new(
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_name
@@ -2499,7 +2349,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_entity_map
@@ -2516,7 +2366,7 @@ module Aws::Appflow
       :connector_entity_map,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2530,7 +2380,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectors
@@ -2544,7 +2394,7 @@ module Aws::Appflow
       :connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2557,7 +2407,7 @@ module Aws::Appflow
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flows
@@ -2570,7 +2420,7 @@ module Aws::Appflow
       :flows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2579,7 +2429,7 @@ module Aws::Appflow
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2588,33 +2438,14 @@ module Aws::Appflow
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon Lookout for Metrics is used as a destination.
     #     </p>
     class LookoutMetricsDestinationProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketoConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required by Marketo. </p>
@@ -2638,7 +2469,7 @@ module Aws::Appflow
       :access_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Marketo. </p>
@@ -2648,7 +2479,7 @@ module Aws::Appflow
     class MarketoConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that Amazon AppFlow applies when you use Marketo as a flow
@@ -2667,13 +2498,13 @@ module Aws::Appflow
       :object,
       :error_handling_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Marketo. </p>
     class MarketoMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Marketo is being used as a source. </p>
@@ -2683,7 +2514,7 @@ module Aws::Appflow
     class MarketoSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data. When
@@ -2695,7 +2526,7 @@ module Aws::Appflow
     class MetadataCatalogConfig < Struct.new(
       :glue_data_catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.</p>
@@ -2732,7 +2563,7 @@ module Aws::Appflow
       :table_registration_output,
       :partition_registration_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth 2.0 credentials required for OAuth 2.0 authentication.</p>
@@ -2760,7 +2591,7 @@ module Aws::Appflow
       :refresh_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Custom parameter required for OAuth 2.0 authentication.</p>
@@ -2795,18 +2626,13 @@ module Aws::Appflow
       :connector_supplied_values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_required] = false unless options.key?(:is_required)
         options[:is_sensitive_field] = false unless options.key?(:is_sensitive_field)
         super
       end
-    end
-
-    module OAuth2CustomPropType
-      TOKEN_URL = 'TOKEN_URL'
-      AUTH_URL = 'AUTH_URL'
     end
 
     # <p>Contains the default values required for OAuth 2.0 authentication.</p>
@@ -2832,13 +2658,7 @@ module Aws::Appflow
       :oauth2_grant_types_supported,
       :oauth2_custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OAuth2GrantType
-      CLIENT_CREDENTIALS = 'CLIENT_CREDENTIALS'
-      AUTHORIZATION_CODE = 'AUTHORIZATION_CODE'
-      JWT_BEARER = 'JWT_BEARER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth 2.0 properties required for OAuth 2.0 authentication.</p>
@@ -2858,7 +2678,7 @@ module Aws::Appflow
       :o_auth2_grant_type,
       :token_url_custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The OAuth credentials required for OAuth type authentication. </p>
@@ -2886,7 +2706,7 @@ module Aws::Appflow
       :refresh_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The OAuth properties required for OAuth type authentication. </p>
@@ -2906,92 +2726,7 @@ module Aws::Appflow
       :auth_code_url,
       :o_auth_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      CONTAINS = 'CONTAINS'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
-    end
-
-    module OperatorPropertiesKeys
-      VALUE = 'VALUE'
-      VALUES = 'VALUES'
-      DATA_TYPE = 'DATA_TYPE'
-      UPPER_BOUND = 'UPPER_BOUND'
-      LOWER_BOUND = 'LOWER_BOUND'
-      SOURCE_DATA_TYPE = 'SOURCE_DATA_TYPE'
-      DESTINATION_DATA_TYPE = 'DESTINATION_DATA_TYPE'
-      VALIDATION_ACTION = 'VALIDATION_ACTION'
-      MASK_VALUE = 'MASK_VALUE'
-      MASK_LENGTH = 'MASK_LENGTH'
-      TRUNCATE_LENGTH = 'TRUNCATE_LENGTH'
-      MATH_OPERATION_FIELDS_ORDER = 'MATH_OPERATION_FIELDS_ORDER'
-      CONCAT_FORMAT = 'CONCAT_FORMAT'
-      SUBFIELD_CATEGORY_MAP = 'SUBFIELD_CATEGORY_MAP'
-      EXCLUDE_SOURCE_FIELDS_LIST = 'EXCLUDE_SOURCE_FIELDS_LIST'
-      INCLUDE_NEW_FIELDS = 'INCLUDE_NEW_FIELDS'
-      ORDERED_PARTITION_KEYS_LIST = 'ORDERED_PARTITION_KEYS_LIST'
-    end
-
-    module Operators
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      CONTAINS = 'CONTAINS'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
-    end
-
-    module PardotConnectorOperator
-      PROJECTION = 'PROJECTION'
-      EQUAL_TO = 'EQUAL_TO'
-      NO_OP = 'NO_OP'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector-specific profile credentials required when using Salesforce Pardot.</p>
@@ -3015,7 +2750,7 @@ module Aws::Appflow
       :o_auth_request,
       :client_credentials_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector-specific profile properties required when using Salesforce Pardot.</p>
@@ -3034,7 +2769,7 @@ module Aws::Appflow
       :is_sandbox_environment,
       :business_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_sandbox_environment] = false unless options.key?(:is_sandbox_environment)
@@ -3045,7 +2780,7 @@ module Aws::Appflow
     # <p>The connector metadata specific to Salesforce Pardot.</p>
     class PardotMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when Salesforce Pardot is being used as a source.</p>
@@ -3055,12 +2790,7 @@ module Aws::Appflow
     class PardotSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PathPrefix
-      EXECUTION_ID = 'EXECUTION_ID'
-      SCHEMA_VERSION = 'SCHEMA_VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies elements that Amazon AppFlow includes in the file and folder names in the flow
@@ -3105,29 +2835,7 @@ module Aws::Appflow
       :prefix_format,
       :path_prefix_hierarchy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrefixFormat
-      YEAR = 'YEAR'
-      MONTH = 'MONTH'
-      DAY = 'DAY'
-      HOUR = 'HOUR'
-      MINUTE = 'MINUTE'
-    end
-
-    module PrefixType
-      FILENAME = 'FILENAME'
-      PATH = 'PATH'
-      PATH_AND_FILENAME = 'PATH_AND_FILENAME'
-    end
-
-    module PrivateConnectionProvisioningFailureCause
-      CONNECTOR_AUTHENTICATION = 'CONNECTOR_AUTHENTICATION'
-      CONNECTOR_SERVER = 'CONNECTOR_SERVER'
-      INTERNAL_SERVER = 'INTERNAL_SERVER'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      VALIDATION = 'VALIDATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the private connection provisioning state. </p>
@@ -3145,13 +2853,7 @@ module Aws::Appflow
       :failure_message,
       :failure_cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrivateConnectionProvisioningStatus
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
-      CREATED = 'CREATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of values that the property supports.</p>
@@ -3165,7 +2867,7 @@ module Aws::Appflow
       :maximum,
       :minimum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum] = 0 unless options.key?(:maximum)
@@ -3185,7 +2887,7 @@ module Aws::Appflow
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties when using Amazon Redshift. </p>
@@ -3233,7 +2935,7 @@ module Aws::Appflow
       :workgroup_name,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_redshift_serverless] = false unless options.key?(:is_redshift_serverless)
@@ -3266,13 +2968,13 @@ module Aws::Appflow
       :bucket_prefix,
       :error_handling_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon Redshift. </p>
     class RedshiftMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_label
@@ -3309,7 +3011,7 @@ module Aws::Appflow
       :connector_provisioning_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -3318,7 +3020,7 @@ module Aws::Appflow
     class RegisterConnectorResponse < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of an attempt from Amazon AppFlow to register a resource.</p>
@@ -3342,7 +3044,7 @@ module Aws::Appflow
       :result,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_name
@@ -3394,12 +3096,12 @@ module Aws::Appflow
       :entities_path,
       :api_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetConnectorMetadataCacheResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The resource specified in the request (such as the source or destination connector
@@ -3409,30 +3111,7 @@ module Aws::Appflow
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3ConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon S3 is used as a destination. </p>
@@ -3453,12 +3132,7 @@ module Aws::Appflow
       :bucket_prefix,
       :s3_output_format_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3InputFileType
-      CSV = 'CSV'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> When you use Amazon S3 as the source, the configuration format that you provide
@@ -3469,13 +3143,13 @@ module Aws::Appflow
     class S3InputFormatConfig < Struct.new(
       :s3_input_file_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Amazon S3. </p>
     class S3Metadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration that determines how Amazon AppFlow should format the flow output
@@ -3514,7 +3188,7 @@ module Aws::Appflow
       :aggregation_config,
       :preserve_source_data_typing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Amazon S3 is being used as the flow source.
@@ -3535,31 +3209,7 @@ module Aws::Appflow
       :bucket_prefix,
       :s3_input_format_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SAPODataConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      CONTAINS = 'CONTAINS'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using SAPOData. </p>
@@ -3573,7 +3223,7 @@ module Aws::Appflow
       :basic_auth_credentials,
       :o_auth_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using SAPOData. </p>
@@ -3618,7 +3268,7 @@ module Aws::Appflow
       :o_auth_properties,
       :disable_sso,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_sso] = false unless options.key?(:disable_sso)
@@ -3658,13 +3308,13 @@ module Aws::Appflow
       :error_handling_config,
       :write_operation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to SAPOData. </p>
     class SAPODataMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the page size for each <i>concurrent process</i> that transfers OData
@@ -3680,7 +3330,7 @@ module Aws::Appflow
     class SAPODataPaginationConfig < Struct.new(
       :max_page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the number of <i>concurrent processes</i> that transfer OData records
@@ -3694,7 +3344,7 @@ module Aws::Appflow
     class SAPODataParallelismConfig < Struct.new(
       :max_parallelism,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when using SAPOData as a flow source. </p>
@@ -3714,31 +3364,7 @@ module Aws::Appflow
       :parallelism_config,
       :pagination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      CONTAINS = 'CONTAINS'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Salesforce. </p>
@@ -3794,7 +3420,7 @@ module Aws::Appflow
       :o_auth2_grant_type,
       :jwt_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Salesforce. </p>
@@ -3858,19 +3484,13 @@ module Aws::Appflow
       :is_sandbox_environment,
       :use_private_link_for_metadata_and_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_sandbox_environment] = false unless options.key?(:is_sandbox_environment)
         options[:use_private_link_for_metadata_and_authorization] = false unless options.key?(:use_private_link_for_metadata_and_authorization)
         super
       end
-    end
-
-    module SalesforceDataTransferApi
-      AUTOMATIC = 'AUTOMATIC'
-      BULKV2 = 'BULKV2'
-      REST_SYNC = 'REST_SYNC'
     end
 
     # <p> The properties that are applied when Salesforce is being used as a destination. </p>
@@ -3938,7 +3558,7 @@ module Aws::Appflow
       :write_operation_type,
       :data_transfer_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Salesforce. </p>
@@ -3979,7 +3599,7 @@ module Aws::Appflow
       :data_transfer_apis,
       :oauth2_grant_types_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Salesforce is being used as a source. </p>
@@ -4038,22 +3658,13 @@ module Aws::Appflow
       :include_deleted_records,
       :data_transfer_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_dynamic_field_update] = false unless options.key?(:enable_dynamic_field_update)
         options[:include_deleted_records] = false unless options.key?(:include_deleted_records)
         super
       end
-    end
-
-    module ScheduleFrequencyType
-      BYMINUTE = 'BYMINUTE'
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
-      ONCE = 'ONCE'
     end
 
     # <p> Specifies the configuration details of a schedule-triggered flow as defined by the user.
@@ -4106,36 +3717,12 @@ module Aws::Appflow
       :first_execution_from,
       :flow_error_deactivation_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:schedule_offset] =  unless options.key?(:schedule_offset)
+        options[:schedule_offset] = nil unless options.key?(:schedule_offset)
         super
       end
-    end
-
-    module ServiceNowConnectorOperator
-      PROJECTION = 'PROJECTION'
-      CONTAINS = 'CONTAINS'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
     end
 
     # <p> The connector-specific profile credentials required when using ServiceNow. </p>
@@ -4153,7 +3740,7 @@ module Aws::Appflow
       :password,
       :o_auth2_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using ServiceNow. </p>
@@ -4163,13 +3750,13 @@ module Aws::Appflow
     class ServiceNowConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to ServiceNow. </p>
     class ServiceNowMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when ServiceNow is being used as a source. </p>
@@ -4179,7 +3766,7 @@ module Aws::Appflow
     class ServiceNowSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request would cause a service quota (such as the number of flows) to be exceeded.
@@ -4189,24 +3776,7 @@ module Aws::Appflow
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SingularConnectorOperator
-      PROJECTION = 'PROJECTION'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Singular. </p>
@@ -4217,19 +3787,19 @@ module Aws::Appflow
     class SingularConnectorProfileCredentials < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Singular. </p>
     class SingularConnectorProfileProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Singular. </p>
     class SingularMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Singular is being used as a source. </p>
@@ -4239,29 +3809,7 @@ module Aws::Appflow
     class SingularSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlackConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Slack. </p>
@@ -4285,7 +3833,7 @@ module Aws::Appflow
       :access_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Slack. </p>
@@ -4295,7 +3843,7 @@ module Aws::Appflow
     class SlackConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Slack. </p>
@@ -4305,7 +3853,7 @@ module Aws::Appflow
     class SlackMetadata < Struct.new(
       :o_auth_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Slack is being used as a source. </p>
@@ -4315,7 +3863,7 @@ module Aws::Appflow
     class SlackSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Snowflake. </p>
@@ -4329,7 +3877,7 @@ module Aws::Appflow
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Snowflake. </p>
@@ -4365,7 +3913,7 @@ module Aws::Appflow
       :account_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Snowflake is being used as a destination. </p>
@@ -4393,7 +3941,7 @@ module Aws::Appflow
       :bucket_prefix,
       :error_handling_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Snowflake. </p>
@@ -4403,7 +3951,7 @@ module Aws::Appflow
     class SnowflakeMetadata < Struct.new(
       :supported_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the information that is required to query a particular connector. </p>
@@ -4478,7 +4026,7 @@ module Aws::Appflow
       :custom_connector,
       :pardot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that can be applied to a field when the connector is being used as a
@@ -4497,7 +4045,7 @@ module Aws::Appflow
       :is_queryable,
       :is_timestamp_field_for_incremental_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_retrievable] = false unless options.key?(:is_retrievable)
@@ -4535,7 +4083,7 @@ module Aws::Appflow
       :source_connector_properties,
       :incremental_pull_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -4561,7 +4109,7 @@ module Aws::Appflow
       :flow_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -4579,7 +4127,7 @@ module Aws::Appflow
       :flow_status,
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -4589,7 +4137,7 @@ module Aws::Appflow
     class StopFlowRequest < Struct.new(
       :flow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -4602,7 +4150,7 @@ module Aws::Appflow
       :flow_arn,
       :flow_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines how Amazon AppFlow handles the success response that it gets from the
@@ -4619,12 +4167,7 @@ module Aws::Appflow
       :bucket_prefix,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SupportedDataTransferType
-      RECORD = 'RECORD'
-      FILE = 'FILE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains details regarding all the supported <code>FieldTypes</code> and their
@@ -4636,7 +4179,7 @@ module Aws::Appflow
     class SupportedFieldTypeDetails < Struct.new(
       :v1,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4649,12 +4192,12 @@ module Aws::Appflow
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A class for modeling different type of tasks. Task implementation varies based on the
@@ -4683,20 +4226,7 @@ module Aws::Appflow
       :task_type,
       :task_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskType
-      ARITHMETIC = 'Arithmetic'
-      FILTER = 'Filter'
-      MAP = 'Map'
-      MAP_ALL = 'Map_all'
-      MASK = 'Mask'
-      MERGE = 'Merge'
-      PASSTHROUGH = 'Passthrough'
-      TRUNCATE = 'Truncate'
-      VALIDATE = 'Validate'
-      PARTITION = 'Partition'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>API calls have exceeded the maximum allowed API request rate per account and per Region.
@@ -4706,24 +4236,7 @@ module Aws::Appflow
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrendmicroConnectorOperator
-      PROJECTION = 'PROJECTION'
-      EQUAL_TO = 'EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Trend Micro. </p>
@@ -4733,19 +4246,19 @@ module Aws::Appflow
     class TrendmicroConnectorProfileCredentials < Struct.new(
       :api_secret_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Trend Micro. </p>
     class TrendmicroConnectorProfileProperties < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Trend Micro. </p>
     class TrendmicroMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when using Trend Micro as a flow source. </p>
@@ -4755,7 +4268,7 @@ module Aws::Appflow
     class TrendmicroSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The trigger settings that determine how and when Amazon AppFlow runs the specified
@@ -4772,7 +4285,7 @@ module Aws::Appflow
       :trigger_type,
       :trigger_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the configuration details that control the trigger for a flow. Currently, these
@@ -4784,13 +4297,7 @@ module Aws::Appflow
     class TriggerProperties < Struct.new(
       :scheduled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerType
-      SCHEDULED = 'Scheduled'
-      EVENT = 'Event'
-      ONDEMAND = 'OnDemand'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_label
@@ -4805,12 +4312,12 @@ module Aws::Appflow
       :connector_label,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UnregisterConnectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The requested operation is not supported for the current flow. </p>
@@ -4819,7 +4326,7 @@ module Aws::Appflow
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4832,12 +4339,12 @@ module Aws::Appflow
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_name
@@ -4868,7 +4375,7 @@ module Aws::Appflow
       :connector_profile_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_profile_arn
@@ -4877,7 +4384,7 @@ module Aws::Appflow
     class UpdateConnectorProfileResponse < Struct.new(
       :connector_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_label
@@ -4908,7 +4415,7 @@ module Aws::Appflow
       :connector_provisioning_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_arn
@@ -4917,7 +4424,7 @@ module Aws::Appflow
     class UpdateConnectorRegistrationResponse < Struct.new(
       :connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_name
@@ -4969,7 +4476,7 @@ module Aws::Appflow
       :metadata_catalog_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_status
@@ -4978,7 +4485,7 @@ module Aws::Appflow
     class UpdateFlowResponse < Struct.new(
       :flow_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when Upsolver is used as a destination. </p>
@@ -4998,13 +4505,13 @@ module Aws::Appflow
       :bucket_prefix,
       :s3_output_format_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Upsolver. </p>
     class UpsolverMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration that determines how Amazon AppFlow formats the flow output data
@@ -5026,7 +4533,7 @@ module Aws::Appflow
       :prefix_config,
       :aggregation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request has invalid or missing parameters. </p>
@@ -5035,31 +4542,7 @@ module Aws::Appflow
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VeevaConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      CONTAINS = 'CONTAINS'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile credentials required when using Veeva. </p>
@@ -5073,7 +4556,7 @@ module Aws::Appflow
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Veeva. </p>
@@ -5083,13 +4566,13 @@ module Aws::Appflow
     class VeevaConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Veeva. </p>
     class VeevaMetadata < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when using Veeva as a flow source. </p>
@@ -5115,7 +4598,7 @@ module Aws::Appflow
       :include_renditions,
       :include_all_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_source_files] = false unless options.key?(:include_source_files)
@@ -5123,32 +4606,6 @@ module Aws::Appflow
         options[:include_all_versions] = false unless options.key?(:include_all_versions)
         super
       end
-    end
-
-    # <p> The possible write operations in the destination connector. When this value is not
-    #       provided, this defaults to the <code>INSERT</code> operation. </p>
-    module WriteOperationType
-      INSERT = 'INSERT'
-      UPSERT = 'UPSERT'
-      UPDATE = 'UPDATE'
-      DELETE = 'DELETE'
-    end
-
-    module ZendeskConnectorOperator
-      PROJECTION = 'PROJECTION'
-      GREATER_THAN = 'GREATER_THAN'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
     end
 
     # <p> The connector-specific profile credentials required when using Zendesk. </p>
@@ -5172,7 +4629,7 @@ module Aws::Appflow
       :access_token,
       :o_auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector-specific profile properties required when using Zendesk. </p>
@@ -5182,7 +4639,7 @@ module Aws::Appflow
     class ZendeskConnectorProfileProperties < Struct.new(
       :instance_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when Zendesk is used as a destination.</p>
@@ -5210,7 +4667,7 @@ module Aws::Appflow
       :error_handling_config,
       :write_operation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The connector metadata specific to Zendesk. </p>
@@ -5220,7 +4677,7 @@ module Aws::Appflow
     class ZendeskMetadata < Struct.new(
       :o_auth_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The properties that are applied when using Zendesk as a flow source. </p>
@@ -5230,7 +4687,7 @@ module Aws::Appflow
     class ZendeskSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

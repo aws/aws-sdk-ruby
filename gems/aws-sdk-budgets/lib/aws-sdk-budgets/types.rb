@@ -13,7 +13,7 @@ module Aws::Budgets
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A budget action resource. </p>
@@ -62,7 +62,7 @@ module Aws::Budgets
       :status,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The historical records for a budget action. </p>
@@ -85,7 +85,7 @@ module Aws::Budgets
       :event_type,
       :action_history_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the details for the event. </p>
@@ -99,25 +99,7 @@ module Aws::Budgets
       :message,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionStatus
-      Standby = 'STANDBY'
-      Pending = 'PENDING'
-      Execution_In_Progress = 'EXECUTION_IN_PROGRESS'
-      Execution_Success = 'EXECUTION_SUCCESS'
-      Execution_Failure = 'EXECUTION_FAILURE'
-      Reverse_In_Progress = 'REVERSE_IN_PROGRESS'
-      Reverse_Success = 'REVERSE_SUCCESS'
-      Reverse_Failure = 'REVERSE_FAILURE'
-      Reset_In_Progress = 'RESET_IN_PROGRESS'
-      Reset_Failure = 'RESET_FAILURE'
-    end
-
-    module ActionSubType
-      STOP_EC2 = 'STOP_EC2_INSTANCES'
-      STOP_RDS = 'STOP_RDS_INSTANCES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trigger threshold of the action. </p>
@@ -131,23 +113,12 @@ module Aws::Budgets
       :action_threshold_value,
       :action_threshold_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:action_threshold_value] = 0 unless options.key?(:action_threshold_value)
         super
       end
-    end
-
-    module ActionType
-      IAM = 'APPLY_IAM_POLICY'
-      SCP = 'APPLY_SCP_POLICY'
-      SSM = 'RUN_SSM_DOCUMENTS'
-    end
-
-    module ApprovalModel
-      AUTO = 'AUTOMATIC'
-      MANUAL = 'MANUAL'
     end
 
     # <p>The parameters that determine the budget amount for an auto-adjusting budget.</p>
@@ -167,12 +138,7 @@ module Aws::Budgets
       :historical_options,
       :last_auto_adjust_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoAdjustType
-      HISTORICAL = 'HISTORICAL'
-      FORECAST = 'FORECAST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of the <code>CreateBudget</code> operation. The content consists
@@ -328,7 +294,7 @@ module Aws::Budgets
       :billing_view_arn,
       :health_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -345,7 +311,7 @@ module Aws::Budgets
       :notifications,
       :budget_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A history of the state of a budget at the end of the budget's specified time
@@ -390,21 +356,7 @@ module Aws::Budgets
       :billing_view_arn,
       :budgeted_and_actual_amounts_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The type of a budget. It must be one of the following types: </p>
-    #          <p>
-    #             <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>,
-    # 				<code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, or
-    # 				<code>SAVINGS_PLANS_COVERAGE</code>.</p>
-    module BudgetType
-      Usage = 'USAGE'
-      Cost = 'COST'
-      RIUtilization = 'RI_UTILIZATION'
-      RICoverage = 'RI_COVERAGE'
-      SPUtilization = 'SAVINGS_PLANS_UTILIZATION'
-      SPCoverage = 'SAVINGS_PLANS_COVERAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of cost or usage that you created the budget for, compared to your actual
@@ -423,7 +375,7 @@ module Aws::Budgets
       :actual_amount,
       :time_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The spend objects that are associated with this budget. The <code>actualSpend</code>
@@ -444,18 +396,7 @@ module Aws::Budgets
       :actual_spend,
       :forecasted_spend,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The comparison operator of a notification. Currently, the service supports the
-    # 			following operators:</p>
-    #          <p>
-    #             <code>GREATER_THAN</code>, <code>LESS_THAN</code>, <code>EQUAL_TO</code>
-    #          </p>
-    module ComparisonOperator
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      EQUAL_TO = 'EQUAL_TO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cost category values used for filtering the costs.</p>
@@ -473,7 +414,7 @@ module Aws::Budgets
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The types of cost that are included in a <code>COST</code> budget, such as tax and
@@ -539,7 +480,7 @@ module Aws::Budgets
       :include_discount,
       :use_amortized,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -592,7 +533,7 @@ module Aws::Budgets
       :subscribers,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -612,7 +553,7 @@ module Aws::Budgets
       :budget_name,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of CreateBudget </p>
@@ -635,13 +576,13 @@ module Aws::Budgets
       :notifications_with_subscribers,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateBudget </p>
     class CreateBudgetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of CreateNotification </p>
@@ -663,13 +604,13 @@ module Aws::Budgets
       :notification,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateNotification </p>
     class CreateNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of CreateSubscriber </p>
@@ -691,13 +632,13 @@ module Aws::Budgets
       :notification,
       :subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of CreateSubscriber </p>
     class CreateSubscriberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the notification or subscriber limit.</p>
@@ -707,7 +648,7 @@ module Aws::Budgets
     class CreationLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies all of the type-specific parameters. </p>
@@ -725,7 +666,7 @@ module Aws::Budgets
       :scp_action_definition,
       :ssm_action_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -745,7 +686,7 @@ module Aws::Budgets
       :budget_name,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -763,7 +704,7 @@ module Aws::Budgets
       :budget_name,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DeleteBudget </p>
@@ -777,13 +718,13 @@ module Aws::Budgets
       :account_id,
       :budget_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteBudget </p>
     class DeleteBudgetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DeleteNotification </p>
@@ -801,13 +742,13 @@ module Aws::Budgets
       :budget_name,
       :notification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteNotification </p>
     class DeleteNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DeleteSubscriber </p>
@@ -829,13 +770,13 @@ module Aws::Budgets
       :notification,
       :subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DeleteSubscriber </p>
     class DeleteSubscriberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -870,7 +811,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_histories
@@ -885,7 +826,7 @@ module Aws::Budgets
       :action_histories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -905,7 +846,7 @@ module Aws::Budgets
       :budget_name,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -925,7 +866,7 @@ module Aws::Budgets
       :budget_name,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -943,7 +884,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -958,7 +899,7 @@ module Aws::Budgets
       :actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -981,7 +922,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -996,7 +937,7 @@ module Aws::Budgets
       :actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1014,7 +955,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute budget_notifications_for_account
@@ -1027,7 +968,7 @@ module Aws::Budgets
       :budget_notifications_for_account,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1054,7 +995,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute budget_performance_history
@@ -1068,7 +1009,7 @@ module Aws::Budgets
       :budget_performance_history,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DescribeBudget </p>
@@ -1088,7 +1029,7 @@ module Aws::Budgets
       :budget_name,
       :show_filter_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DescribeBudget </p>
@@ -1098,7 +1039,7 @@ module Aws::Budgets
     class DescribeBudgetResponse < Struct.new(
       :budget,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DescribeBudgets </p>
@@ -1124,7 +1065,7 @@ module Aws::Budgets
       :next_token,
       :show_filter_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DescribeBudgets </p>
@@ -1138,7 +1079,7 @@ module Aws::Budgets
       :budgets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DescribeNotificationsForBudget </p>
@@ -1161,7 +1102,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of GetNotificationsForBudget </p>
@@ -1175,7 +1116,7 @@ module Aws::Budgets
       :notifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of DescribeSubscribersForNotification </p>
@@ -1201,7 +1142,7 @@ module Aws::Budgets
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of DescribeSubscribersForNotification </p>
@@ -1215,43 +1156,7 @@ module Aws::Budgets
       :subscribers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Dimension
-      AZ = 'AZ'
-      INSTANCE_TYPE = 'INSTANCE_TYPE'
-      LINKED_ACCOUNT = 'LINKED_ACCOUNT'
-      LINKED_ACCOUNT_NAME = 'LINKED_ACCOUNT_NAME'
-      OPERATION = 'OPERATION'
-      PURCHASE_TYPE = 'PURCHASE_TYPE'
-      REGION = 'REGION'
-      SERVICE = 'SERVICE'
-      SERVICE_CODE = 'SERVICE_CODE'
-      USAGE_TYPE = 'USAGE_TYPE'
-      USAGE_TYPE_GROUP = 'USAGE_TYPE_GROUP'
-      RECORD_TYPE = 'RECORD_TYPE'
-      OPERATING_SYSTEM = 'OPERATING_SYSTEM'
-      TENANCY = 'TENANCY'
-      SCOPE = 'SCOPE'
-      PLATFORM = 'PLATFORM'
-      SUBSCRIPTION_ID = 'SUBSCRIPTION_ID'
-      LEGAL_ENTITY_NAME = 'LEGAL_ENTITY_NAME'
-      INVOICING_ENTITY = 'INVOICING_ENTITY'
-      DEPLOYMENT_OPTION = 'DEPLOYMENT_OPTION'
-      DATABASE_ENGINE = 'DATABASE_ENGINE'
-      CACHE_ENGINE = 'CACHE_ENGINE'
-      INSTANCE_TYPE_FAMILY = 'INSTANCE_TYPE_FAMILY'
-      BILLING_ENTITY = 'BILLING_ENTITY'
-      RESERVATION_ID = 'RESERVATION_ID'
-      RESOURCE_ID = 'RESOURCE_ID'
-      RIGHTSIZING_TYPE = 'RIGHTSIZING_TYPE'
-      SAVINGS_PLANS_TYPE = 'SAVINGS_PLANS_TYPE'
-      SAVINGS_PLAN_ARN = 'SAVINGS_PLAN_ARN'
-      PAYMENT_OPTION = 'PAYMENT_OPTION'
-      RESERVATION_MODIFIED = 'RESERVATION_MODIFIED'
-      TAG_KEY = 'TAG_KEY'
-      COST_CATEGORY_NAME = 'COST_CATEGORY_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The budget name already exists. Budget names must be unique within an account.</p>
@@ -1261,15 +1166,7 @@ module Aws::Budgets
     class DuplicateRecordException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      System = 'SYSTEM'
-      CreateAction = 'CREATE_ACTION'
-      DeleteAction = 'DELETE_ACTION'
-      UpdateAction = 'UPDATE_ACTION'
-      ExecuteAction = 'EXECUTE_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1295,7 +1192,7 @@ module Aws::Budgets
       :action_id,
       :execution_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1321,14 +1218,7 @@ module Aws::Budgets
       :action_id,
       :execution_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionType
-      ApproveBudgetAction = 'APPROVE_BUDGET_ACTION'
-      RetryBudgetAction = 'RETRY_BUDGET_ACTION'
-      ReverseBudgetAction = 'REVERSE_BUDGET_ACTION'
-      ResetBudgetAction = 'RESET_BUDGET_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination token expired.</p>
@@ -1338,7 +1228,7 @@ module Aws::Budgets
     class ExpiredNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use Expression to filter in various Budgets APIs.</p>
@@ -1368,7 +1258,7 @@ module Aws::Budgets
       :tags,
       :cost_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the specifications for the filters to use for your request.</p>
@@ -1388,7 +1278,7 @@ module Aws::Budgets
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the current operational state of a billing view resource,
@@ -1424,18 +1314,7 @@ module Aws::Budgets
       :status_reason,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthStatusReason
-      BILLING_VIEW_NO_ACCESS = 'BILLING_VIEW_NO_ACCESS'
-      BILLING_VIEW_UNHEALTHY = 'BILLING_VIEW_UNHEALTHY'
-      FILTER_INVALID = 'FILTER_INVALID'
-    end
-
-    module HealthStatusValue
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that define or describe the historical data that your auto-adjusting
@@ -1481,7 +1360,7 @@ module Aws::Budgets
       :budget_adjustment_period,
       :look_back_available_periods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Identity and Access Management (IAM) action definition details. </p>
@@ -1503,7 +1382,7 @@ module Aws::Budgets
       :groups,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the server occurred during the processing of your request. Try again later.</p>
@@ -1513,7 +1392,7 @@ module Aws::Budgets
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination token is invalid.</p>
@@ -1523,7 +1402,7 @@ module Aws::Budgets
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the client occurred. Typically, the cause is an invalid input value.</p>
@@ -1533,7 +1412,7 @@ module Aws::Budgets
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1542,7 +1421,7 @@ module Aws::Budgets
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -1551,29 +1430,7 @@ module Aws::Budgets
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchOption
-      EQUALS = 'EQUALS'
-      ABSENT = 'ABSENT'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      CASE_SENSITIVE = 'CASE_SENSITIVE'
-      CASE_INSENSITIVE = 'CASE_INSENSITIVE'
-    end
-
-    module Metric
-      BLENDED_COST = 'BlendedCost'
-      UNBLENDED_COST = 'UnblendedCost'
-      AMORTIZED_COST = 'AmortizedCost'
-      NET_UNBLENDED_COST = 'NetUnblendedCost'
-      NET_AMORTIZED_COST = 'NetAmortizedCost'
-      USAGE_QUANTITY = 'UsageQuantity'
-      NORMALIZED_USAGE_AMOUNT = 'NormalizedUsageAmount'
-      HOURS = 'Hours'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t locate the resource that you specified.</p>
@@ -1583,7 +1440,7 @@ module Aws::Budgets
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification that's associated with a budget. A budget can have up to ten
@@ -1644,23 +1501,12 @@ module Aws::Budgets
       :threshold_type,
       :notification_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:threshold] = 0 unless options.key?(:threshold)
         super
       end
-    end
-
-    module NotificationState
-      OK = 'OK'
-      ALARM = 'ALARM'
-    end
-
-    # <p> The type of a notification. It must be ACTUAL or FORECASTED.</p>
-    module NotificationType
-      ACTUAL = 'ACTUAL'
-      FORECASTED = 'FORECASTED'
     end
 
     # <p>A notification with subscribers. A notification can have one SNS subscriber and up to
@@ -1675,7 +1521,7 @@ module Aws::Budgets
       :notification,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was received and recognized by the server, but the server rejected that
@@ -1686,7 +1532,7 @@ module Aws::Budgets
     class ResourceLockedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value.</p>
@@ -1700,7 +1546,7 @@ module Aws::Budgets
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service control policies (SCP) action definition details. </p>
@@ -1714,7 +1560,7 @@ module Aws::Budgets
       :policy_id,
       :target_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of tags you can associate with a resource.</p>
@@ -1724,7 +1570,7 @@ module Aws::Budgets
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of cost or usage that's measured for a budget.</p>
@@ -1766,7 +1612,7 @@ module Aws::Budgets
       :amount,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Systems Manager (SSM) action definition details. </p>
@@ -1784,7 +1630,7 @@ module Aws::Budgets
       :region,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subscriber to a budget notification. The subscriber consists of a subscription
@@ -1813,13 +1659,7 @@ module Aws::Budgets
       :subscription_type,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The subscription type of the subscriber. It can be SMS or EMAIL.</p>
-    module SubscriptionType
-      SNS = 'SNS'
-      EMAIL = 'EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1832,12 +1672,12 @@ module Aws::Budgets
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values that are available for a tag.</p>
@@ -1855,13 +1695,7 @@ module Aws::Budgets
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The type of threshold for a notification.</p>
-    module ThresholdType
-      PERCENTAGE = 'PERCENTAGE'
-      ABSOLUTE_VALUE = 'ABSOLUTE_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of API requests has exceeded the maximum allowed API request throttling limit
@@ -1872,7 +1706,7 @@ module Aws::Budgets
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The period of time that's covered by a budget. The period has a start date and an end
@@ -1900,15 +1734,7 @@ module Aws::Budgets
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The time unit of the budget, such as MONTHLY or QUARTERLY.</p>
-    module TimeUnit
-      DAILY = 'DAILY'
-      MONTHLY = 'MONTHLY'
-      QUARTERLY = 'QUARTERLY'
-      ANNUALLY = 'ANNUALLY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1921,12 +1747,12 @@ module Aws::Budgets
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1974,7 +1800,7 @@ module Aws::Budgets
       :approval_model,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -2000,7 +1826,7 @@ module Aws::Budgets
       :old_action,
       :new_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of UpdateBudget </p>
@@ -2014,13 +1840,13 @@ module Aws::Budgets
       :account_id,
       :new_budget,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateBudget </p>
     class UpdateBudgetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of UpdateNotification </p>
@@ -2042,13 +1868,13 @@ module Aws::Budgets
       :old_notification,
       :new_notification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateNotification </p>
     class UpdateNotificationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Request of UpdateSubscriber </p>
@@ -2074,13 +1900,13 @@ module Aws::Budgets
       :old_subscriber,
       :new_subscriber,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Response of UpdateSubscriber </p>
     class UpdateSubscriberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

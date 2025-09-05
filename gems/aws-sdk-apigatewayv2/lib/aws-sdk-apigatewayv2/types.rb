@@ -11,7 +11,7 @@ module Aws::ApiGatewayV2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for logging access in a stage.</p>
@@ -25,7 +25,7 @@ module Aws::ApiGatewayV2
       :destination_arn,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API.</p>
@@ -99,7 +99,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API mapping.</p>
@@ -121,15 +121,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The authorization type. For WebSocket APIs, valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer. For HTTP APIs, valid values are NONE for open access, JWT for using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.</p>
-    module AuthorizationType
-      NONE = 'NONE'
-      AWS_IAM = 'AWS_IAM'
-      CUSTOM = 'CUSTOM'
-      JWT = 'JWT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an authorizer.</p>
@@ -180,13 +172,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The authorizer type. Specify REQUEST for a Lambda function using incoming request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP APIs).</p>
-    module AuthorizerType
-      REQUEST = 'REQUEST'
-      JWT = 'JWT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.</p>
@@ -196,7 +182,7 @@ module Aws::ApiGatewayV2
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. See the accompanying error message for details.</p>
@@ -206,19 +192,7 @@ module Aws::ApiGatewayV2
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Represents a connection type.</p>
-    module ConnectionType
-      INTERNET = 'INTERNET'
-      VPC_LINK = 'VPC_LINK'
-    end
-
-    # <p>Specifies how to handle response payload content type conversions. Supported only for WebSocket APIs.</p>
-    module ContentHandlingStrategy
-      CONVERT_TO_BINARY = 'CONVERT_TO_BINARY'
-      CONVERT_TO_TEXT = 'CONVERT_TO_TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a CORS configuration. Supported only for HTTP APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html">Configuring CORS</a> for more information.</p>
@@ -248,7 +222,7 @@ module Aws::ApiGatewayV2
       :expose_headers,
       :max_age,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new ApiMapping resource to represent an API mapping.</p>
@@ -270,7 +244,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -291,7 +265,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Api resource to represent an API.</p>
@@ -353,7 +327,7 @@ module Aws::ApiGatewayV2
       :target,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_endpoint
@@ -426,7 +400,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Authorizer resource to represent an authorizer.</p>
@@ -477,7 +451,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_credentials_arn
@@ -527,7 +501,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Deployment resource to represent a deployment.</p>
@@ -545,7 +519,7 @@ module Aws::ApiGatewayV2
       :description,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_deployed
@@ -574,7 +548,7 @@ module Aws::ApiGatewayV2
       :deployment_status_message,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new DomainName resource to represent a domain name.</p>
@@ -600,7 +574,7 @@ module Aws::ApiGatewayV2
       :routing_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_mapping_selection_expression
@@ -633,7 +607,7 @@ module Aws::ApiGatewayV2
       :routing_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Integration resource to represent an integration.</p>
@@ -716,7 +690,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new IntegrationResponse resource to represent an integration response.</p>
@@ -750,7 +724,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_handling_strategy
@@ -779,7 +753,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -869,7 +843,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Model.</p>
@@ -895,7 +869,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -920,7 +894,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Route resource to represent a route.</p>
@@ -974,7 +948,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new RouteResponse resource to represent a route response.</p>
@@ -1004,7 +978,7 @@ module Aws::ApiGatewayV2
       :route_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_selection_expression
@@ -1029,7 +1003,7 @@ module Aws::ApiGatewayV2
       :route_response_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -1086,7 +1060,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -1111,7 +1085,7 @@ module Aws::ApiGatewayV2
       :domain_name_id,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -1136,7 +1110,7 @@ module Aws::ApiGatewayV2
       :routing_rule_arn,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Stage resource to represent a stage.</p>
@@ -1186,7 +1160,7 @@ module Aws::ApiGatewayV2
       :stage_variables,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_settings
@@ -1247,7 +1221,7 @@ module Aws::ApiGatewayV2
       :stage_variables,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a VPC link</p>
@@ -1269,7 +1243,7 @@ module Aws::ApiGatewayV2
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -1310,7 +1284,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status_message,
       :vpc_link_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1323,7 +1297,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_mapping_id
@@ -1336,7 +1310,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1345,7 +1319,7 @@ module Aws::ApiGatewayV2
     class DeleteApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1358,7 +1332,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :authorizer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1367,7 +1341,7 @@ module Aws::ApiGatewayV2
     class DeleteCorsConfigurationRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1380,7 +1354,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1389,7 +1363,7 @@ module Aws::ApiGatewayV2
     class DeleteDomainNameRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1402,7 +1376,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1419,7 +1393,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_response_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1432,7 +1406,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1445,7 +1419,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1462,7 +1436,7 @@ module Aws::ApiGatewayV2
       :request_parameter_key,
       :route_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1479,7 +1453,7 @@ module Aws::ApiGatewayV2
       :route_id,
       :route_response_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1496,7 +1470,7 @@ module Aws::ApiGatewayV2
       :route_key,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1513,7 +1487,7 @@ module Aws::ApiGatewayV2
       :domain_name_id,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1526,7 +1500,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_link_id
@@ -1535,12 +1509,12 @@ module Aws::ApiGatewayV2
     class DeleteVpcLinkRequest < Struct.new(
       :vpc_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVpcLinkResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An immutable representation of an API that can be called by users. A Deployment must be associated with a Stage for it to be callable over the internet.</p>
@@ -1570,14 +1544,7 @@ module Aws::ApiGatewayV2
       :deployment_status_message,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Represents a deployment status.</p>
-    module DeploymentStatus
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
-      DEPLOYED = 'DEPLOYED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a domain name.</p>
@@ -1611,7 +1578,7 @@ module Aws::ApiGatewayV2
       :routing_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain name configuration.</p>
@@ -1661,21 +1628,7 @@ module Aws::ApiGatewayV2
       :security_policy,
       :ownership_verification_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>
-    module DomainNameStatus
-      AVAILABLE = 'AVAILABLE'
-      UPDATING = 'UPDATING'
-      PENDING_CERTIFICATE_REIMPORT = 'PENDING_CERTIFICATE_REIMPORT'
-      PENDING_OWNERSHIP_VERIFICATION = 'PENDING_OWNERSHIP_VERIFICATION'
-    end
-
-    # <p>Represents an endpoint type.</p>
-    module EndpointType
-      REGIONAL = 'REGIONAL'
-      EDGE = 'EDGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1704,7 +1657,7 @@ module Aws::ApiGatewayV2
       :specification,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -1713,7 +1666,7 @@ module Aws::ApiGatewayV2
     class ExportApiResponse < Struct.new(
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_mapping_id
@@ -1726,7 +1679,7 @@ module Aws::ApiGatewayV2
       :api_mapping_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1747,7 +1700,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1764,7 +1717,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1777,7 +1730,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1786,7 +1739,7 @@ module Aws::ApiGatewayV2
     class GetApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_endpoint
@@ -1859,7 +1812,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1872,7 +1825,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1885,7 +1838,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1898,7 +1851,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :authorizer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_credentials_arn
@@ -1948,7 +1901,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1965,7 +1918,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1978,7 +1931,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1991,7 +1944,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_deployed
@@ -2020,7 +1973,7 @@ module Aws::ApiGatewayV2
       :deployment_status_message,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2037,7 +1990,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2050,7 +2003,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2059,7 +2012,7 @@ module Aws::ApiGatewayV2
     class GetDomainNameRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_mapping_selection_expression
@@ -2092,7 +2045,7 @@ module Aws::ApiGatewayV2
       :routing_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2105,7 +2058,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2118,7 +2071,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2131,7 +2084,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :integration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2148,7 +2101,7 @@ module Aws::ApiGatewayV2
       :integration_id,
       :integration_response_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_handling_strategy
@@ -2177,7 +2130,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2198,7 +2151,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2211,7 +2164,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -2301,7 +2254,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2318,7 +2271,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2331,7 +2284,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2344,7 +2297,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -2369,7 +2322,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2382,7 +2335,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :model_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute value
@@ -2391,7 +2344,7 @@ module Aws::ApiGatewayV2
     class GetModelTemplateResponse < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2408,7 +2361,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2421,7 +2374,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2434,7 +2387,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :route_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2451,7 +2404,7 @@ module Aws::ApiGatewayV2
       :route_id,
       :route_response_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_selection_expression
@@ -2476,7 +2429,7 @@ module Aws::ApiGatewayV2
       :route_response_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2497,7 +2450,7 @@ module Aws::ApiGatewayV2
       :next_token,
       :route_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2510,7 +2463,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -2567,7 +2520,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2584,7 +2537,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2597,7 +2550,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2614,7 +2567,7 @@ module Aws::ApiGatewayV2
       :domain_name_id,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -2639,7 +2592,7 @@ module Aws::ApiGatewayV2
       :routing_rule_arn,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2652,7 +2605,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_settings
@@ -2713,7 +2666,7 @@ module Aws::ApiGatewayV2
       :stage_variables,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2730,7 +2683,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2743,7 +2696,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2752,7 +2705,7 @@ module Aws::ApiGatewayV2
     class GetTagsRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2761,7 +2714,7 @@ module Aws::ApiGatewayV2
     class GetTagsResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_link_id
@@ -2770,7 +2723,7 @@ module Aws::ApiGatewayV2
     class GetVpcLinkRequest < Struct.new(
       :vpc_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -2811,7 +2764,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status_message,
       :vpc_link_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2824,7 +2777,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2837,7 +2790,7 @@ module Aws::ApiGatewayV2
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2855,7 +2808,7 @@ module Aws::ApiGatewayV2
       :body,
       :fail_on_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_endpoint
@@ -2928,7 +2881,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an integration.</p>
@@ -3019,7 +2972,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an integration response.</p>
@@ -3049,22 +3002,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Represents an API method integration type.</p>
-    module IntegrationType
-      AWS = 'AWS'
-      HTTP = 'HTTP'
-      MOCK = 'MOCK'
-      HTTP_PROXY = 'HTTP_PROXY'
-      AWS_PROXY = 'AWS_PROXY'
-    end
-
-    # <p>The IP address types that can invoke your API or domain name.</p>
-    module IpAddressType
-      ipv4 = 'ipv4'
-      dualstack = 'dualstack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.</p>
@@ -3079,7 +3017,7 @@ module Aws::ApiGatewayV2
       :audience,
       :issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3100,7 +3038,7 @@ module Aws::ApiGatewayV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3113,14 +3051,7 @@ module Aws::ApiGatewayV2
       :next_token,
       :routing_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The logging level.</p>
-    module LoggingLevel
-      ERROR = 'ERROR'
-      INFO = 'INFO'
-      OFF = 'OFF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a data model for an API. Supported only for WebSocket APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html">Create Models and Mapping Templates for Request and Response Mappings</a>.</p>
@@ -3146,7 +3077,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute truststore_uri
@@ -3163,7 +3094,7 @@ module Aws::ApiGatewayV2
       :truststore_version,
       :truststore_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute truststore_uri
@@ -3176,7 +3107,7 @@ module Aws::ApiGatewayV2
       :truststore_uri,
       :truststore_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request was not found. See the message field for more information.</p>
@@ -3190,7 +3121,7 @@ module Aws::ApiGatewayV2
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validation constraints imposed on parameters of a request (path, query string, headers).</p>
@@ -3200,20 +3131,7 @@ module Aws::ApiGatewayV2
     class ParameterConstraints < Struct.new(
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Represents passthrough behavior for an integration response. Supported only for WebSocket APIs.</p>
-    module PassthroughBehavior
-      WHEN_NO_MATCH = 'WHEN_NO_MATCH'
-      NEVER = 'NEVER'
-      WHEN_NO_TEMPLATES = 'WHEN_NO_TEMPLATES'
-    end
-
-    # Represents a protocol type.
-    module ProtocolType
-      WEBSOCKET = 'WEBSOCKET'
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -3242,7 +3160,7 @@ module Aws::ApiGatewayV2
       :priority,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute actions
@@ -3267,7 +3185,7 @@ module Aws::ApiGatewayV2
       :routing_rule_arn,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3289,7 +3207,7 @@ module Aws::ApiGatewayV2
       :body,
       :fail_on_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_endpoint
@@ -3362,7 +3280,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3375,7 +3293,7 @@ module Aws::ApiGatewayV2
       :api_id,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a route.</p>
@@ -3433,7 +3351,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a route response.</p>
@@ -3459,7 +3377,7 @@ module Aws::ApiGatewayV2
       :route_response_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of route settings.</p>
@@ -3485,13 +3403,7 @@ module Aws::ApiGatewayV2
       :throttling_burst_limit,
       :throttling_rate_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingMode
-      API_MAPPING_ONLY = 'API_MAPPING_ONLY'
-      ROUTING_RULE_ONLY = 'ROUTING_RULE_ONLY'
-      ROUTING_RULE_THEN_API_MAPPING = 'ROUTING_RULE_THEN_API_MAPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a routing rule.</p>
@@ -3517,7 +3429,7 @@ module Aws::ApiGatewayV2
       :routing_rule_arn,
       :routing_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The routing rule action.</p>
@@ -3527,7 +3439,7 @@ module Aws::ApiGatewayV2
     class RoutingRuleAction < Struct.new(
       :invoke_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an InvokeApi action.</p>
@@ -3545,7 +3457,7 @@ module Aws::ApiGatewayV2
       :stage,
       :strip_base_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a routing rule condition.</p>
@@ -3559,7 +3471,7 @@ module Aws::ApiGatewayV2
       :match_base_paths,
       :match_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a MatchBasePaths condition.</p>
@@ -3569,7 +3481,7 @@ module Aws::ApiGatewayV2
     class RoutingRuleMatchBasePaths < Struct.new(
       :any_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a MatchHeaderValue.</p>
@@ -3583,7 +3495,7 @@ module Aws::ApiGatewayV2
       :header,
       :value_glob,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a MatchHeaders condition.</p>
@@ -3593,13 +3505,7 @@ module Aws::ApiGatewayV2
     class RoutingRuleMatchHeaders < Struct.new(
       :any_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>
-    module SecurityPolicy
-      TLS_1_0 = 'TLS_1_0'
-      TLS_1_2 = 'TLS_1_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an API stage.</p>
@@ -3661,7 +3567,7 @@ module Aws::ApiGatewayV2
       :stage_variables,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new Tag resource to represent a tag.</p>
@@ -3675,12 +3581,12 @@ module Aws::ApiGatewayV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
@@ -3690,7 +3596,7 @@ module Aws::ApiGatewayV2
     class TlsConfig < Struct.new(
       :server_name_to_verify,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.</p>
@@ -3700,7 +3606,7 @@ module Aws::ApiGatewayV2
     class TlsConfigInput < Struct.new(
       :server_name_to_verify,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit has been exceeded. See the accompanying error message for details.</p>
@@ -3714,7 +3620,7 @@ module Aws::ApiGatewayV2
       :limit_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3727,7 +3633,7 @@ module Aws::ApiGatewayV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an ApiMapping.</p>
@@ -3753,7 +3659,7 @@ module Aws::ApiGatewayV2
       :domain_name,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3774,7 +3680,7 @@ module Aws::ApiGatewayV2
       :api_mapping_key,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an Api.</p>
@@ -3832,7 +3738,7 @@ module Aws::ApiGatewayV2
       :target,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_endpoint
@@ -3905,7 +3811,7 @@ module Aws::ApiGatewayV2
       :version,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an Authorizer.</p>
@@ -3960,7 +3866,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorizer_credentials_arn
@@ -4010,7 +3916,7 @@ module Aws::ApiGatewayV2
       :jwt_configuration,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a Deployment.</p>
@@ -4028,7 +3934,7 @@ module Aws::ApiGatewayV2
       :deployment_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_deployed
@@ -4057,7 +3963,7 @@ module Aws::ApiGatewayV2
       :deployment_status_message,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a DomainName.</p>
@@ -4079,7 +3985,7 @@ module Aws::ApiGatewayV2
       :mutual_tls_authentication,
       :routing_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_mapping_selection_expression
@@ -4112,7 +4018,7 @@ module Aws::ApiGatewayV2
       :routing_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an Integration.</p>
@@ -4199,7 +4105,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates an IntegrationResponses.</p>
@@ -4244,7 +4150,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_handling_strategy
@@ -4273,7 +4179,7 @@ module Aws::ApiGatewayV2
       :response_templates,
       :template_selection_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -4363,7 +4269,7 @@ module Aws::ApiGatewayV2
       :timeout_in_millis,
       :tls_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a Model.</p>
@@ -4393,7 +4299,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -4418,7 +4324,7 @@ module Aws::ApiGatewayV2
       :name,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a Route.</p>
@@ -4476,7 +4382,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a RouteResponse.</p>
@@ -4510,7 +4416,7 @@ module Aws::ApiGatewayV2
       :route_response_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_selection_expression
@@ -4535,7 +4441,7 @@ module Aws::ApiGatewayV2
       :route_response_id,
       :route_response_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_gateway_managed
@@ -4592,7 +4498,7 @@ module Aws::ApiGatewayV2
       :route_response_selection_expression,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a Stage.</p>
@@ -4638,7 +4544,7 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_log_settings
@@ -4699,7 +4605,7 @@ module Aws::ApiGatewayV2
       :stage_variables,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a VPC link.</p>
@@ -4713,7 +4619,7 @@ module Aws::ApiGatewayV2
       :name,
       :vpc_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -4754,7 +4660,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status_message,
       :vpc_link_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a VPC link.</p>
@@ -4796,21 +4702,7 @@ module Aws::ApiGatewayV2
       :vpc_link_status_message,
       :vpc_link_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the VPC link.</p>
-    module VpcLinkStatus
-      PENDING = 'PENDING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      INACTIVE = 'INACTIVE'
-    end
-
-    # <p>The version of the VPC link.</p>
-    module VpcLinkVersion
-      V2 = 'V2'
+      include ::Smithy::Schema::Structure
     end
 
   end

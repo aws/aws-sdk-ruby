@@ -11,13 +11,13 @@ module Aws::ApiGatewayManagementApi
     class DeleteConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller is not authorized to invoke this operation.</p>
     class ForbiddenException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -25,7 +25,7 @@ module Aws::ApiGatewayManagementApi
     class GetConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connected_at
@@ -41,13 +41,13 @@ module Aws::ApiGatewayManagementApi
       :identity,
       :last_active_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection with the provided id no longer exists.</p>
     class GoneException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_ip
@@ -60,13 +60,13 @@ module Aws::ApiGatewayManagementApi
       :source_ip,
       :user_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is sending more than the allowed number of requests per unit of time or the WebSocket client side buffer is full.</p>
     class LimitExceededException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data has exceeded the maximum size allowed.</p>
@@ -75,7 +75,7 @@ module Aws::ApiGatewayManagementApi
     class PayloadTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data
@@ -88,7 +88,7 @@ module Aws::ApiGatewayManagementApi
       :data,
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

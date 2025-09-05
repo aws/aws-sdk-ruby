@@ -13,7 +13,7 @@ module Aws::SageMakerRuntime
     class InternalDependencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An internal failure occurred. </p>
@@ -22,7 +22,7 @@ module Aws::SageMakerRuntime
     class InternalFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stream processing failed because of an unknown error, exception or failure. Try your request again.</p>
@@ -31,7 +31,7 @@ module Aws::SageMakerRuntime
     class InternalStreamFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -85,7 +85,7 @@ module Aws::SageMakerRuntime
       :request_ttl_seconds,
       :invocation_timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_id
@@ -105,7 +105,7 @@ module Aws::SageMakerRuntime
       :output_location,
       :failure_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -203,7 +203,7 @@ module Aws::SageMakerRuntime
       :inference_component_name,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -253,7 +253,7 @@ module Aws::SageMakerRuntime
       :new_session_id,
       :closed_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -331,7 +331,7 @@ module Aws::SageMakerRuntime
       :inference_component_name,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -368,7 +368,7 @@ module Aws::SageMakerRuntime
       :invoked_production_variant,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Model (owned by the customer in the container) returned 4xx or 5xx error code.
@@ -390,7 +390,7 @@ module Aws::SageMakerRuntime
       :original_message,
       :log_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Either a serverless endpoint variant's resources are still being provisioned, or a
@@ -401,7 +401,7 @@ module Aws::SageMakerRuntime
     class ModelNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An error occurred while streaming the response body. This error can have the
@@ -438,7 +438,7 @@ module Aws::SageMakerRuntime
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper for pieces of the payload that's returned in response to a streaming
@@ -450,7 +450,7 @@ module Aws::SageMakerRuntime
     class PayloadPart < Struct.new(
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stream of payload parts. Each part contains a portion of the response for a
@@ -484,7 +484,7 @@ module Aws::SageMakerRuntime
       :internal_stream_failure,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PayloadPart < ResponseStream; end
       class ModelStreamError < ResponseStream; end
@@ -498,7 +498,7 @@ module Aws::SageMakerRuntime
     class ServiceUnavailable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Inspect your request and try again. </p>
@@ -507,7 +507,7 @@ module Aws::SageMakerRuntime
     class ValidationError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

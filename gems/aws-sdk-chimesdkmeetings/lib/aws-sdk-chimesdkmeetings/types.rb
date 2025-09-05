@@ -68,7 +68,7 @@ module Aws::ChimeSDKMeetings
       :join_token,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media capabilities of an attendee: audio, video, or content.</p>
@@ -114,7 +114,7 @@ module Aws::ChimeSDKMeetings
       :video,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the maximum number of attendees allowed into the meeting.</p>
@@ -128,7 +128,7 @@ module Aws::ChimeSDKMeetings
     class AttendeeFeatures < Struct.new(
       :max_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains one or more attendee IDs.</p>
@@ -138,7 +138,7 @@ module Aws::ChimeSDKMeetings
     class AttendeeIdItem < Struct.new(
       :attendee_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional category of meeting features that contains audio-specific configurations, such as operating parameters for Amazon Voice Focus. </p>
@@ -148,7 +148,7 @@ module Aws::ChimeSDKMeetings
     class AudioFeatures < Struct.new(
       :echo_reduction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters don't match the service's restrictions.</p>
@@ -164,7 +164,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -177,7 +177,7 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :attendees,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attendees
@@ -190,7 +190,7 @@ module Aws::ChimeSDKMeetings
       :attendees,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -207,7 +207,7 @@ module Aws::ChimeSDKMeetings
       :excluded_attendee_ids,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Multiple instances of the same request have been made simultaneously.</p>
@@ -223,7 +223,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the content (screen share) features for the meeting. Applies to all attendees.</p>
@@ -241,13 +241,7 @@ module Aws::ChimeSDKMeetings
     class ContentFeatures < Struct.new(
       :max_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentResolution
-      NONE = 'None'
-      FHD = 'FHD'
-      UHD = 'UHD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of errors returned when errors are encountered during the BatchCreateAttendee and CreateAttendee actions. This includes external user IDs, error codes, and error messages.</p>
@@ -269,7 +263,7 @@ module Aws::ChimeSDKMeetings
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -319,7 +313,7 @@ module Aws::ChimeSDKMeetings
       :external_user_id,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.</p>
@@ -337,7 +331,7 @@ module Aws::ChimeSDKMeetings
       :external_user_id,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attendee
@@ -346,7 +340,7 @@ module Aws::ChimeSDKMeetings
     class CreateAttendeeResponse < Struct.new(
       :attendee,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -450,7 +444,7 @@ module Aws::ChimeSDKMeetings
       :tenant_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting
@@ -460,7 +454,7 @@ module Aws::ChimeSDKMeetings
     class CreateMeetingResponse < Struct.new(
       :meeting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -531,7 +525,7 @@ module Aws::ChimeSDKMeetings
       :tenant_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting
@@ -549,7 +543,7 @@ module Aws::ChimeSDKMeetings
       :attendees,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -562,7 +556,7 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :attendee_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -571,7 +565,7 @@ module Aws::ChimeSDKMeetings
     class DeleteMeetingRequest < Struct.new(
       :meeting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings specific to the Amazon Transcribe Medical engine.</p>
@@ -601,7 +595,7 @@ module Aws::ChimeSDKMeetings
       :region,
       :content_identification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings specific for Amazon Transcribe as the live transcription engine. </p>
@@ -721,7 +715,7 @@ module Aws::ChimeSDKMeetings
       :vocabulary_names,
       :vocabulary_filter_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_partial_results_stabilization] = false unless options.key?(:enable_partial_results_stabilization)
@@ -743,7 +737,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -756,7 +750,7 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :attendee_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attendee
@@ -765,7 +759,7 @@ module Aws::ChimeSDKMeetings
     class GetAttendeeResponse < Struct.new(
       :attendee,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -774,7 +768,7 @@ module Aws::ChimeSDKMeetings
     class GetMeetingRequest < Struct.new(
       :meeting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting
@@ -783,7 +777,7 @@ module Aws::ChimeSDKMeetings
     class GetMeetingResponse < Struct.new(
       :meeting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the resource limit.</p>
@@ -799,7 +793,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -816,7 +810,7 @@ module Aws::ChimeSDKMeetings
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attendees
@@ -829,7 +823,7 @@ module Aws::ChimeSDKMeetings
       :attendees,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -838,7 +832,7 @@ module Aws::ChimeSDKMeetings
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -847,14 +841,7 @@ module Aws::ChimeSDKMeetings
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaCapabilities
-      SEND_RECEIVE = 'SendReceive'
-      SEND = 'Send'
-      RECEIVE = 'Receive'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>
@@ -912,7 +899,7 @@ module Aws::ChimeSDKMeetings
       :screen_sharing_url,
       :event_ingestion_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A meeting created using the Amazon Chime SDK.</p>
@@ -964,12 +951,7 @@ module Aws::ChimeSDKMeetings
       :tenant_ids,
       :meeting_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MeetingFeatureStatus
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings of the features available to a meeting.</p>
@@ -991,7 +973,7 @@ module Aws::ChimeSDKMeetings
       :content,
       :attendee,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the resources in the request does not exist in the system.</p>
@@ -1007,7 +989,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for resource targets to receive notifications when meeting and attendee events occur.</p>
@@ -1025,7 +1007,7 @@ module Aws::ChimeSDKMeetings
       :sns_topic_arn,
       :sqs_queue_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you want to tag couldn't be found.</p>
@@ -1045,7 +1027,7 @@ module Aws::ChimeSDKMeetings
       :request_id,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unexpected error.</p>
@@ -1061,7 +1043,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -1081,7 +1063,7 @@ module Aws::ChimeSDKMeetings
       :request_id,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -1095,7 +1077,7 @@ module Aws::ChimeSDKMeetings
       :meeting_id,
       :transcription_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -1104,7 +1086,7 @@ module Aws::ChimeSDKMeetings
     class StopMeetingTranscriptionRequest < Struct.new(
       :meeting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that you define.</p>
@@ -1118,7 +1100,7 @@ module Aws::ChimeSDKMeetings
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1131,12 +1113,12 @@ module Aws::ChimeSDKMeetings
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of customer requests exceeds the request rate limit.</p>
@@ -1152,7 +1134,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many tags were added to the specified resource.</p>
@@ -1172,92 +1154,7 @@ module Aws::ChimeSDKMeetings
       :request_id,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TranscribeContentIdentificationType
-      PII = 'PII'
-    end
-
-    module TranscribeContentRedactionType
-      PII = 'PII'
-    end
-
-    module TranscribeLanguageCode
-      EN_US = 'en-US'
-      EN_GB = 'en-GB'
-      ES_US = 'es-US'
-      FR_CA = 'fr-CA'
-      FR_FR = 'fr-FR'
-      EN_AU = 'en-AU'
-      IT_IT = 'it-IT'
-      DE_DE = 'de-DE'
-      PT_BR = 'pt-BR'
-      JA_JP = 'ja-JP'
-      KO_KR = 'ko-KR'
-      ZH_CN = 'zh-CN'
-      TH_TH = 'th-TH'
-      HI_IN = 'hi-IN'
-    end
-
-    module TranscribeMedicalContentIdentificationType
-      PHI = 'PHI'
-    end
-
-    module TranscribeMedicalLanguageCode
-      EN_US = 'en-US'
-    end
-
-    module TranscribeMedicalRegion
-      US_EAST_1 = 'us-east-1'
-      US_EAST_2 = 'us-east-2'
-      US_WEST_2 = 'us-west-2'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
-      CA_CENTRAL_1 = 'ca-central-1'
-      EU_WEST_1 = 'eu-west-1'
-      AUTO = 'auto'
-    end
-
-    module TranscribeMedicalSpecialty
-      PRIMARYCARE = 'PRIMARYCARE'
-      CARDIOLOGY = 'CARDIOLOGY'
-      NEUROLOGY = 'NEUROLOGY'
-      ONCOLOGY = 'ONCOLOGY'
-      RADIOLOGY = 'RADIOLOGY'
-      UROLOGY = 'UROLOGY'
-    end
-
-    module TranscribeMedicalType
-      CONVERSATION = 'CONVERSATION'
-      DICTATION = 'DICTATION'
-    end
-
-    module TranscribePartialResultsStability
-      LOW = 'low'
-      MEDIUM = 'medium'
-      HIGH = 'high'
-    end
-
-    module TranscribeRegion
-      US_EAST_2 = 'us-east-2'
-      US_EAST_1 = 'us-east-1'
-      US_WEST_2 = 'us-west-2'
-      AP_NORTHEAST_2 = 'ap-northeast-2'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
-      AP_NORTHEAST_1 = 'ap-northeast-1'
-      CA_CENTRAL_1 = 'ca-central-1'
-      EU_CENTRAL_1 = 'eu-central-1'
-      EU_WEST_1 = 'eu-west-1'
-      EU_WEST_2 = 'eu-west-2'
-      SA_EAST_1 = 'sa-east-1'
-      AUTO = 'auto'
-      US_GOV_WEST_1 = 'us-gov-west-1'
-    end
-
-    module TranscribeVocabularyFilterMethod
-      REMOVE = 'remove'
-      MASK = 'mask'
-      TAG = 'tag'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>
@@ -1271,7 +1168,7 @@ module Aws::ChimeSDKMeetings
       :engine_transcribe_settings,
       :engine_transcribe_medical_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user isn't authorized to request a resource.</p>
@@ -1287,7 +1184,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was well-formed but was unable to be followed due to semantic errors.</p>
@@ -1303,7 +1200,7 @@ module Aws::ChimeSDKMeetings
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1316,12 +1213,12 @@ module Aws::ChimeSDKMeetings
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meeting_id
@@ -1338,7 +1235,7 @@ module Aws::ChimeSDKMeetings
       :attendee_id,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attendee
@@ -1347,7 +1244,7 @@ module Aws::ChimeSDKMeetings
     class UpdateAttendeeCapabilitiesResponse < Struct.new(
       :attendee,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The video features set for the meeting. Applies to all attendees.</p>
@@ -1365,13 +1262,7 @@ module Aws::ChimeSDKMeetings
     class VideoFeatures < Struct.new(
       :max_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoResolution
-      NONE = 'None'
-      HD = 'HD'
-      FHD = 'FHD'
+      include ::Smithy::Schema::Structure
     end
 
   end

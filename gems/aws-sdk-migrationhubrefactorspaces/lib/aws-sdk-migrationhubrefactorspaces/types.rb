@@ -12,7 +12,7 @@ module Aws::MigrationHubRefactorSpaces
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper object holding the Amazon API Gateway proxy configuration. </p>
@@ -47,7 +47,7 @@ module Aws::MigrationHubRefactorSpaces
       :endpoint_type,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper object holding the Amazon API Gateway endpoint input. </p>
@@ -68,7 +68,7 @@ module Aws::MigrationHubRefactorSpaces
       :endpoint_type,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper object holding the Amazon API Gateway proxy summary. </p>
@@ -103,7 +103,7 @@ module Aws::MigrationHubRefactorSpaces
       :endpoint_type,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of <code>ApplicationSummary</code> objects. </p>
@@ -166,7 +166,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -183,7 +183,7 @@ module Aws::MigrationHubRefactorSpaces
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -218,7 +218,7 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -282,7 +282,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -308,7 +308,7 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -353,7 +353,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -395,7 +395,7 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_id
@@ -456,7 +456,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -505,7 +505,7 @@ module Aws::MigrationHubRefactorSpaces
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -574,7 +574,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration for the default route type. </p>
@@ -585,7 +585,7 @@ module Aws::MigrationHubRefactorSpaces
     class DefaultRouteInput < Struct.new(
       :activation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -598,7 +598,7 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -627,7 +627,7 @@ module Aws::MigrationHubRefactorSpaces
       :state,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -636,7 +636,7 @@ module Aws::MigrationHubRefactorSpaces
     class DeleteEnvironmentInput < Struct.new(
       :environment_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -661,7 +661,7 @@ module Aws::MigrationHubRefactorSpaces
       :state,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -670,12 +670,12 @@ module Aws::MigrationHubRefactorSpaces
     class DeleteResourcePolicyInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -692,7 +692,7 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :route_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_id
@@ -721,7 +721,7 @@ module Aws::MigrationHubRefactorSpaces
       :state,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -743,7 +743,7 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :service_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -776,7 +776,7 @@ module Aws::MigrationHubRefactorSpaces
       :state,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information for environments as a response to <code>ListEnvironments</code>.
@@ -831,7 +831,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for the <code>EnvironmentVpc</code> resource as a response to
@@ -866,7 +866,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error associated with a resource returned for a Get or List resource response. </p>
@@ -896,7 +896,7 @@ module Aws::MigrationHubRefactorSpaces
       :resource_type,
       :additional_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -909,7 +909,7 @@ module Aws::MigrationHubRefactorSpaces
       :environment_identifier,
       :application_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -971,7 +971,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -980,7 +980,7 @@ module Aws::MigrationHubRefactorSpaces
     class GetEnvironmentInput < Struct.new(
       :environment_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1033,7 +1033,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1042,7 +1042,7 @@ module Aws::MigrationHubRefactorSpaces
     class GetResourcePolicyInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1051,7 +1051,7 @@ module Aws::MigrationHubRefactorSpaces
     class GetResourcePolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1068,7 +1068,7 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :route_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_id
@@ -1156,7 +1156,7 @@ module Aws::MigrationHubRefactorSpaces
       :created_time,
       :append_source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1173,7 +1173,7 @@ module Aws::MigrationHubRefactorSpaces
       :application_identifier,
       :service_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -1250,7 +1250,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred while processing the request.</p>
@@ -1259,7 +1259,7 @@ module Aws::MigrationHubRefactorSpaces
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource policy is not valid.</p>
@@ -1268,7 +1268,7 @@ module Aws::MigrationHubRefactorSpaces
     class InvalidResourcePolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Lambda endpoint type. </p>
@@ -1278,7 +1278,7 @@ module Aws::MigrationHubRefactorSpaces
     class LambdaEndpointConfig < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the Lambda endpoint type. </p>
@@ -1288,7 +1288,7 @@ module Aws::MigrationHubRefactorSpaces
     class LambdaEndpointInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary for the Lambda endpoint type. </p>
@@ -1298,7 +1298,7 @@ module Aws::MigrationHubRefactorSpaces
     class LambdaEndpointSummary < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1316,7 +1316,7 @@ module Aws::MigrationHubRefactorSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_summary_list
@@ -1329,7 +1329,7 @@ module Aws::MigrationHubRefactorSpaces
       :application_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1347,7 +1347,7 @@ module Aws::MigrationHubRefactorSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_vpc_list
@@ -1360,7 +1360,7 @@ module Aws::MigrationHubRefactorSpaces
       :environment_vpc_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1374,7 +1374,7 @@ module Aws::MigrationHubRefactorSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_summary_list
@@ -1387,7 +1387,7 @@ module Aws::MigrationHubRefactorSpaces
       :environment_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1409,7 +1409,7 @@ module Aws::MigrationHubRefactorSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_summary_list
@@ -1422,7 +1422,7 @@ module Aws::MigrationHubRefactorSpaces
       :route_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1444,7 +1444,7 @@ module Aws::MigrationHubRefactorSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_summary_list
@@ -1457,7 +1457,7 @@ module Aws::MigrationHubRefactorSpaces
       :service_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1466,7 +1466,7 @@ module Aws::MigrationHubRefactorSpaces
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1475,7 +1475,7 @@ module Aws::MigrationHubRefactorSpaces
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1489,12 +1489,12 @@ module Aws::MigrationHubRefactorSpaces
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist. </p>
@@ -1511,7 +1511,7 @@ module Aws::MigrationHubRefactorSpaces
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information for the routes as a response to <code>ListRoutes</code>. </p>
@@ -1593,7 +1593,7 @@ module Aws::MigrationHubRefactorSpaces
       :created_time,
       :append_source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded. </p>
@@ -1620,7 +1620,7 @@ module Aws::MigrationHubRefactorSpaces
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary for the service as a response to <code>ListServices</code>. </p>
@@ -1694,7 +1694,7 @@ module Aws::MigrationHubRefactorSpaces
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1707,12 +1707,12 @@ module Aws::MigrationHubRefactorSpaces
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied because the request was throttled. </p>
@@ -1735,7 +1735,7 @@ module Aws::MigrationHubRefactorSpaces
       :service_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1753,12 +1753,12 @@ module Aws::MigrationHubRefactorSpaces
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_identifier
@@ -1780,7 +1780,7 @@ module Aws::MigrationHubRefactorSpaces
       :route_identifier,
       :activation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_id
@@ -1815,7 +1815,7 @@ module Aws::MigrationHubRefactorSpaces
       :state,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the URI path route type. </p>
@@ -1847,7 +1847,7 @@ module Aws::MigrationHubRefactorSpaces
       :include_child_paths,
       :append_source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the URL endpoint type. </p>
@@ -1861,7 +1861,7 @@ module Aws::MigrationHubRefactorSpaces
       :url,
       :health_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the URL endpoint type. </p>
@@ -1880,7 +1880,7 @@ module Aws::MigrationHubRefactorSpaces
       :url,
       :health_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the configuration for the URL endpoint type. </p>
@@ -1899,7 +1899,7 @@ module Aws::MigrationHubRefactorSpaces
       :url,
       :health_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input does not satisfy the constraints specified by an Amazon Web Service.
@@ -1909,7 +1909,7 @@ module Aws::MigrationHubRefactorSpaces
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

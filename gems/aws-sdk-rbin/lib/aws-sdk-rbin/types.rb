@@ -16,11 +16,7 @@ module Aws::Rbin
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictExceptionReason
-      INVALID_RULE_STATE = 'INVALID_RULE_STATE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retention_period
@@ -65,7 +61,7 @@ module Aws::Rbin
       :lock_configuration,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -140,7 +136,7 @@ module Aws::Rbin
       :rule_arn,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -149,12 +145,12 @@ module Aws::Rbin
     class DeleteRuleRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -163,7 +159,7 @@ module Aws::Rbin
     class GetRuleRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -240,7 +236,7 @@ module Aws::Rbin
       :rule_arn,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service could not respond to the request due to an internal problem.</p>
@@ -249,7 +245,7 @@ module Aws::Rbin
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -286,7 +282,7 @@ module Aws::Rbin
       :lock_state,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -299,7 +295,7 @@ module Aws::Rbin
       :rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -308,7 +304,7 @@ module Aws::Rbin
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -317,7 +313,7 @@ module Aws::Rbin
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a retention rule lock configuration.</p>
@@ -327,7 +323,7 @@ module Aws::Rbin
     class LockConfiguration < Struct.new(
       :unlock_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -340,7 +336,7 @@ module Aws::Rbin
       :identifier,
       :lock_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -411,13 +407,7 @@ module Aws::Rbin
       :rule_arn,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LockState
-      LOCKED = 'locked'
-      PENDING_UNLOCK = 'pending_unlock'
-      UNLOCKED = 'unlocked'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -430,11 +420,7 @@ module Aws::Rbin
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceNotFoundExceptionReason
-      RULE_NOT_FOUND = 'RULE_NOT_FOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>[Tag-level retention rules only] Information about the resource tags used to identify resources that are retained by the retention 
@@ -449,12 +435,7 @@ module Aws::Rbin
       :resource_tag_key,
       :resource_tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      EBS_SNAPSHOT = 'EBS_SNAPSHOT'
-      EC2_IMAGE = 'EC2_IMAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the retention period for which the retention rule is to retain resources.</p>
@@ -470,16 +451,7 @@ module Aws::Rbin
       :retention_period_value,
       :retention_period_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionPeriodUnit
-      DAYS = 'DAYS'
-    end
-
-    module RuleStatus
-      PENDING = 'pending'
-      AVAILABLE = 'available'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Recycle Bin retention rule.</p>
@@ -528,7 +500,7 @@ module Aws::Rbin
       :lock_state,
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota for the number of tags per resource to be exceeded.</p>
@@ -541,11 +513,7 @@ module Aws::Rbin
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceQuotaExceededExceptionReason
-      SERVICE_QUOTA_EXCEEDED = 'SERVICE_QUOTA_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the tags to assign to the retention rule.</p>
@@ -559,7 +527,7 @@ module Aws::Rbin
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -572,12 +540,12 @@ module Aws::Rbin
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the retention rule unlock delay. The unlock delay is the period after which 
@@ -595,11 +563,7 @@ module Aws::Rbin
       :unlock_delay_value,
       :unlock_delay_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnlockDelayUnit
-      DAYS = 'DAYS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -608,7 +572,7 @@ module Aws::Rbin
     class UnlockRuleRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -685,7 +649,7 @@ module Aws::Rbin
       :rule_arn,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -698,12 +662,12 @@ module Aws::Rbin
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -745,7 +709,7 @@ module Aws::Rbin
       :resource_tags,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -818,7 +782,7 @@ module Aws::Rbin
       :rule_arn,
       :exclude_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the parameters in the request is not valid.</p>
@@ -831,12 +795,7 @@ module Aws::Rbin
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      INVALID_PAGE_TOKEN = 'INVALID_PAGE_TOKEN'
-      INVALID_PARAMETER_VALUE = 'INVALID_PARAMETER_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
   end

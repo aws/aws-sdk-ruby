@@ -25,7 +25,7 @@ module Aws::DirectConnect
       :associated_gateway_owner_account,
       :override_allowed_prefixes_to_direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association
@@ -34,12 +34,7 @@ module Aws::DirectConnect
     class AcceptDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressFamily
-      IPv4 = 'ipv4'
-      IPv6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -178,7 +173,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -211,7 +206,7 @@ module Aws::DirectConnect
       :interconnect_id,
       :vlan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -350,7 +345,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -387,7 +382,7 @@ module Aws::DirectConnect
       :vlan,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -541,7 +536,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -564,7 +559,7 @@ module Aws::DirectConnect
       :owner_account,
       :new_private_virtual_interface_allocation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -718,7 +713,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -741,7 +736,7 @@ module Aws::DirectConnect
       :owner_account,
       :new_public_virtual_interface_allocation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -758,7 +753,7 @@ module Aws::DirectConnect
       :owner_account,
       :new_transit_virtual_interface_allocation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface
@@ -767,7 +762,7 @@ module Aws::DirectConnect
     class AllocateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -906,7 +901,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -924,7 +919,7 @@ module Aws::DirectConnect
       :connection_id,
       :lag_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -1063,7 +1058,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -1081,7 +1076,7 @@ module Aws::DirectConnect
       :connection_id,
       :parent_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -1111,7 +1106,7 @@ module Aws::DirectConnect
       :ckn,
       :cak,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -1124,7 +1119,7 @@ module Aws::DirectConnect
       :connection_id,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -1278,7 +1273,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -1297,7 +1292,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Cloud WAN core network that the Direct Connect gateway is associated to. This is only returned when a Direct Connect gateway is associated to a Cloud WAN core network.</p>
@@ -1315,7 +1310,7 @@ module Aws::DirectConnect
       :owner_account,
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the associated gateway.</p>
@@ -1337,7 +1332,7 @@ module Aws::DirectConnect
       :owner_account,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a BGP peer.</p>
@@ -1421,26 +1416,12 @@ module Aws::DirectConnect
       :aws_device_v2,
       :aws_logical_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:asn] = 0 unless options.key?(:asn)
         super
       end
-    end
-
-    module BGPPeerState
-      Verifying = 'verifying'
-      Pending = 'pending'
-      Available = 'available'
-      Deleting = 'deleting'
-      Deleted = 'deleted'
-    end
-
-    module BGPStatus
-      Up = 'up'
-      Down = 'down'
-      Unknown = 'unknown'
     end
 
     # @!attribute connection_id
@@ -1449,7 +1430,7 @@ module Aws::DirectConnect
     class ConfirmConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_state
@@ -1496,7 +1477,7 @@ module Aws::DirectConnect
     class ConfirmConnectionResponse < Struct.new(
       :connection_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_name
@@ -1509,7 +1490,7 @@ module Aws::DirectConnect
     class ConfirmCustomerAgreementRequest < Struct.new(
       :agreement_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1520,7 +1501,7 @@ module Aws::DirectConnect
     class ConfirmCustomerAgreementResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -1537,7 +1518,7 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :direct_connect_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_state
@@ -1588,7 +1569,7 @@ module Aws::DirectConnect
     class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -1597,7 +1578,7 @@ module Aws::DirectConnect
     class ConfirmPublicVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_state
@@ -1648,7 +1629,7 @@ module Aws::DirectConnect
     class ConfirmPublicVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -1661,7 +1642,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :direct_connect_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_state
@@ -1712,7 +1693,7 @@ module Aws::DirectConnect
     class ConfirmTransitVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -1851,24 +1832,12 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
         super
       end
-    end
-
-    module ConnectionState
-      ordering = 'ordering'
-      requested = 'requested'
-      pending = 'pending'
-      available = 'available'
-      down = 'down'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      rejected = 'rejected'
-      unknown = 'unknown'
     end
 
     # @!attribute virtual_interface_id
@@ -1881,7 +1850,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :new_bgp_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface
@@ -1890,7 +1859,7 @@ module Aws::DirectConnect
     class CreateBGPPeerResponse < Struct.new(
       :virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -2029,7 +1998,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -2068,7 +2037,7 @@ module Aws::DirectConnect
       :provider_name,
       :request_mac_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -2093,7 +2062,7 @@ module Aws::DirectConnect
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association_proposal
@@ -2102,7 +2071,7 @@ module Aws::DirectConnect
     class CreateDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -2125,7 +2094,7 @@ module Aws::DirectConnect
       :add_allowed_prefixes_to_direct_connect_gateway,
       :virtual_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association
@@ -2134,7 +2103,7 @@ module Aws::DirectConnect
     class CreateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_name
@@ -2153,7 +2122,7 @@ module Aws::DirectConnect
       :tags,
       :amazon_side_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway
@@ -2162,7 +2131,7 @@ module Aws::DirectConnect
     class CreateDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an interconnect.</p>
@@ -2278,7 +2247,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_name
@@ -2311,7 +2280,7 @@ module Aws::DirectConnect
       :provider_name,
       :request_mac_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a link aggregation group (LAG).</p>
@@ -2437,7 +2406,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_connections] = 0 unless options.key?(:number_of_connections)
@@ -2491,7 +2460,7 @@ module Aws::DirectConnect
       :provider_name,
       :request_mac_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -2645,7 +2614,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -2664,7 +2633,7 @@ module Aws::DirectConnect
       :connection_id,
       :new_private_virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -2818,7 +2787,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -2837,7 +2806,7 @@ module Aws::DirectConnect
       :connection_id,
       :new_public_virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -2850,7 +2819,7 @@ module Aws::DirectConnect
       :connection_id,
       :new_transit_virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface
@@ -2859,7 +2828,7 @@ module Aws::DirectConnect
     class CreateTransitVirtualInterfaceResult < Struct.new(
       :virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and status of a customer agreement. </p>
@@ -2874,7 +2843,7 @@ module Aws::DirectConnect
       :agreement_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -2895,7 +2864,7 @@ module Aws::DirectConnect
       :customer_address,
       :bgp_peer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface
@@ -2904,7 +2873,7 @@ module Aws::DirectConnect
     class DeleteBGPPeerResponse < Struct.new(
       :virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -3043,7 +3012,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -3057,7 +3026,7 @@ module Aws::DirectConnect
     class DeleteConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proposal_id
@@ -3066,7 +3035,7 @@ module Aws::DirectConnect
     class DeleteDirectConnectGatewayAssociationProposalRequest < Struct.new(
       :proposal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association_proposal
@@ -3075,7 +3044,7 @@ module Aws::DirectConnect
     class DeleteDirectConnectGatewayAssociationProposalResult < Struct.new(
       :direct_connect_gateway_association_proposal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -3092,7 +3061,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :virtual_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association
@@ -3101,7 +3070,7 @@ module Aws::DirectConnect
     class DeleteDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -3110,7 +3079,7 @@ module Aws::DirectConnect
     class DeleteDirectConnectGatewayRequest < Struct.new(
       :direct_connect_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway
@@ -3119,7 +3088,7 @@ module Aws::DirectConnect
     class DeleteDirectConnectGatewayResult < Struct.new(
       :direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_id
@@ -3128,7 +3097,7 @@ module Aws::DirectConnect
     class DeleteInterconnectRequest < Struct.new(
       :interconnect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_state
@@ -3168,7 +3137,7 @@ module Aws::DirectConnect
     class DeleteInterconnectResponse < Struct.new(
       :interconnect_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a link aggregation group (LAG).</p>
@@ -3294,7 +3263,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_connections] = 0 unless options.key?(:number_of_connections)
@@ -3310,7 +3279,7 @@ module Aws::DirectConnect
     class DeleteLagRequest < Struct.new(
       :lag_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -3319,7 +3288,7 @@ module Aws::DirectConnect
     class DeleteVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_state
@@ -3370,7 +3339,7 @@ module Aws::DirectConnect
     class DeleteVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -3388,7 +3357,7 @@ module Aws::DirectConnect
       :provider_name,
       :loa_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute loa
@@ -3397,7 +3366,7 @@ module Aws::DirectConnect
     class DescribeConnectionLoaResponse < Struct.new(
       :loa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -3406,7 +3375,7 @@ module Aws::DirectConnect
     class DescribeConnectionsOnInterconnectOutput < Struct.new(
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_id
@@ -3415,7 +3384,7 @@ module Aws::DirectConnect
     class DescribeConnectionsOnInterconnectRequest < Struct.new(
       :interconnect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -3424,7 +3393,7 @@ module Aws::DirectConnect
     class DescribeConnectionsOutput < Struct.new(
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -3433,7 +3402,7 @@ module Aws::DirectConnect
     class DescribeConnectionsRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreements
@@ -3457,7 +3426,7 @@ module Aws::DirectConnect
       :agreements,
       :nni_partner_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -3485,7 +3454,7 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association_proposals
@@ -3498,7 +3467,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_association_proposals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -3530,7 +3499,7 @@ module Aws::DirectConnect
       :next_token,
       :virtual_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_associations
@@ -3543,7 +3512,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -3567,7 +3536,7 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_attachments
@@ -3580,7 +3549,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -3600,7 +3569,7 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateways
@@ -3613,7 +3582,7 @@ module Aws::DirectConnect
       :direct_connect_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -3622,7 +3591,7 @@ module Aws::DirectConnect
     class DescribeHostedConnectionsOutput < Struct.new(
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -3631,7 +3600,7 @@ module Aws::DirectConnect
     class DescribeHostedConnectionsRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_id
@@ -3648,7 +3617,7 @@ module Aws::DirectConnect
       :provider_name,
       :loa_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute loa
@@ -3657,7 +3626,7 @@ module Aws::DirectConnect
     class DescribeInterconnectLoaResponse < Struct.new(
       :loa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnects
@@ -3666,7 +3635,7 @@ module Aws::DirectConnect
     class DescribeInterconnectsOutput < Struct.new(
       :interconnects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interconnect_id
@@ -3675,7 +3644,7 @@ module Aws::DirectConnect
     class DescribeInterconnectsRequest < Struct.new(
       :interconnect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lags
@@ -3684,7 +3653,7 @@ module Aws::DirectConnect
     class DescribeLagsOutput < Struct.new(
       :lags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lag_id
@@ -3693,7 +3662,7 @@ module Aws::DirectConnect
     class DescribeLagsRequest < Struct.new(
       :lag_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.</p>
@@ -3707,7 +3676,7 @@ module Aws::DirectConnect
       :loa_content,
       :loa_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -3725,7 +3694,7 @@ module Aws::DirectConnect
       :provider_name,
       :loa_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute locations
@@ -3734,7 +3703,7 @@ module Aws::DirectConnect
     class DescribeLocationsOutput < Struct.new(
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details about a virtual interface's router.</p>
@@ -3748,7 +3717,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :router_type_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_router_config
@@ -3769,7 +3738,7 @@ module Aws::DirectConnect
       :virtual_interface_id,
       :virtual_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -3778,7 +3747,7 @@ module Aws::DirectConnect
     class DescribeTagsRequest < Struct.new(
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -3787,7 +3756,7 @@ module Aws::DirectConnect
     class DescribeTagsResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateways
@@ -3796,7 +3765,7 @@ module Aws::DirectConnect
     class DescribeVirtualGatewaysOutput < Struct.new(
       :virtual_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interfaces
@@ -3805,7 +3774,7 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesOutput < Struct.new(
       :virtual_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -3818,7 +3787,7 @@ module Aws::DirectConnect
       :connection_id,
       :virtual_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters are not valid.</p>
@@ -3827,7 +3796,7 @@ module Aws::DirectConnect
     class DirectConnectClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateway or transit gateways.</p>
@@ -3879,7 +3848,7 @@ module Aws::DirectConnect
       :state_change_error,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>
@@ -3952,7 +3921,7 @@ module Aws::DirectConnect
       :virtual_gateway_region,
       :virtual_gateway_owner_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the  proposal request to attach a virtual private gateway to a Direct Connect gateway. </p>
@@ -4000,21 +3969,7 @@ module Aws::DirectConnect
       :existing_allowed_prefixes_to_direct_connect_gateway,
       :requested_allowed_prefixes_to_direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectConnectGatewayAssociationProposalState
-      requested = 'requested'
-      accepted = 'accepted'
-      deleted = 'deleted'
-    end
-
-    module DirectConnectGatewayAssociationState
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      updating = 'updating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an attachment between a Direct Connect gateway and a virtual interface.</p>
@@ -4066,26 +4021,7 @@ module Aws::DirectConnect
       :attachment_type,
       :state_change_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectConnectGatewayAttachmentState
-      attaching = 'attaching'
-      attached = 'attached'
-      detaching = 'detaching'
-      detached = 'detached'
-    end
-
-    module DirectConnectGatewayAttachmentType
-      TransitVirtualInterface = 'TransitVirtualInterface'
-      PrivateVirtualInterface = 'PrivateVirtualInterface'
-    end
-
-    module DirectConnectGatewayState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A server-side error occurred.</p>
@@ -4094,7 +4030,7 @@ module Aws::DirectConnect
     class DirectConnectServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -4233,7 +4169,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -4251,7 +4187,7 @@ module Aws::DirectConnect
       :connection_id,
       :lag_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -4266,7 +4202,7 @@ module Aws::DirectConnect
       :connection_id,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -4279,7 +4215,7 @@ module Aws::DirectConnect
       :connection_id,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag key was specified more than once.</p>
@@ -4288,18 +4224,7 @@ module Aws::DirectConnect
     class DuplicateTagKeysException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GatewayType
-      VirtualPrivateGateway = 'virtualPrivateGateway'
-      TransitGateway = 'transitGateway'
-    end
-
-    module HasLogicalRedundancy
-      Unknown = 'unknown'
-      Yes = 'yes'
-      No = 'no'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an interconnect.</p>
@@ -4415,17 +4340,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InterconnectState
-      requested = 'requested'
-      pending = 'pending'
-      available = 'available'
-      down = 'down'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      unknown = 'unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a link aggregation group (LAG).</p>
@@ -4551,7 +4466,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_connections] = 0 unless options.key?(:number_of_connections)
@@ -4559,16 +4474,6 @@ module Aws::DirectConnect
         options[:allows_hosted_connections] = false unless options.key?(:allows_hosted_connections)
         super
       end
-    end
-
-    module LagState
-      requested = 'requested'
-      pending = 'pending'
-      available = 'available'
-      down = 'down'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      unknown = 'unknown'
     end
 
     # @!attribute test_id
@@ -4600,7 +4505,7 @@ module Aws::DirectConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_test_history
@@ -4613,7 +4518,7 @@ module Aws::DirectConnect
       :virtual_interface_test_history,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.</p>
@@ -4627,11 +4532,7 @@ module Aws::DirectConnect
       :loa_content,
       :loa_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoaContentType
-      PDF = 'application/pdf'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect location.</p>
@@ -4661,7 +4562,7 @@ module Aws::DirectConnect
       :available_providers,
       :available_mac_sec_port_speeds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the MAC Security (MACsec) secret key.</p>
@@ -4702,7 +4603,7 @@ module Aws::DirectConnect
       :state,
       :start_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a new BGP peer.</p>
@@ -4728,7 +4629,7 @@ module Aws::DirectConnect
       :amazon_address,
       :customer_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:asn] = 0 unless options.key?(:asn)
@@ -4788,7 +4689,7 @@ module Aws::DirectConnect
       :tags,
       :enable_site_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -4837,7 +4738,7 @@ module Aws::DirectConnect
       :customer_address,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -4886,7 +4787,7 @@ module Aws::DirectConnect
       :route_filter_prefixes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -4935,7 +4836,7 @@ module Aws::DirectConnect
       :route_filter_prefixes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -4992,7 +4893,7 @@ module Aws::DirectConnect
       :tags,
       :enable_site_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -5041,19 +4942,13 @@ module Aws::DirectConnect
       :address_family,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
         options[:asn] = 0 unless options.key?(:asn)
         super
       end
-    end
-
-    module NniPartnerType
-      V1 = 'v1'
-      V2 = 'v2'
-      NonPartner = 'nonPartner'
     end
 
     # <p>Information about a tag associated with an Direct Connect resource.</p>
@@ -5067,7 +4962,7 @@ module Aws::DirectConnect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) 
@@ -5078,7 +4973,7 @@ module Aws::DirectConnect
     class RouteFilterPrefix < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the virtual router.</p>
@@ -5108,7 +5003,7 @@ module Aws::DirectConnect
       :xslt_template_name_for_mac_sec,
       :router_type_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -5127,7 +5022,7 @@ module Aws::DirectConnect
       :bgp_peers,
       :test_duration_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_test
@@ -5136,7 +5031,7 @@ module Aws::DirectConnect
     class StartBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_id
@@ -5145,7 +5040,7 @@ module Aws::DirectConnect
     class StopBgpFailoverTestRequest < Struct.new(
       :virtual_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_interface_test
@@ -5154,7 +5049,7 @@ module Aws::DirectConnect
     class StopBgpFailoverTestResponse < Struct.new(
       :virtual_interface_test,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tag.</p>
@@ -5168,7 +5063,7 @@ module Aws::DirectConnect
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5181,12 +5076,12 @@ module Aws::DirectConnect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit on the number of tags that can be assigned.</p>
@@ -5195,7 +5090,7 @@ module Aws::DirectConnect
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5208,12 +5103,12 @@ module Aws::DirectConnect
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Direct Connect connection.</p>
@@ -5352,7 +5247,7 @@ module Aws::DirectConnect
       :mac_sec_keys,
       :partner_interconnect_mac_sec_capable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -5376,7 +5271,7 @@ module Aws::DirectConnect
       :connection_name,
       :encryption_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -5393,7 +5288,7 @@ module Aws::DirectConnect
       :add_allowed_prefixes_to_direct_connect_gateway,
       :remove_allowed_prefixes_to_direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_association
@@ -5402,7 +5297,7 @@ module Aws::DirectConnect
     class UpdateDirectConnectGatewayAssociationResult < Struct.new(
       :direct_connect_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_id
@@ -5415,7 +5310,7 @@ module Aws::DirectConnect
       :direct_connect_gateway_id,
       :new_direct_connect_gateway_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway
@@ -5424,7 +5319,7 @@ module Aws::DirectConnect
     class UpdateDirectConnectGatewayResponse < Struct.new(
       :direct_connect_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a link aggregation group (LAG).</p>
@@ -5550,7 +5445,7 @@ module Aws::DirectConnect
       :encryption_mode,
       :mac_sec_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_connections] = 0 unless options.key?(:number_of_connections)
@@ -5579,7 +5474,7 @@ module Aws::DirectConnect
       :minimum_links,
       :encryption_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -5733,7 +5628,7 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
@@ -5760,7 +5655,7 @@ module Aws::DirectConnect
       :enable_site_link,
       :virtual_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual private gateway for a private virtual interface.</p>
@@ -5792,7 +5687,7 @@ module Aws::DirectConnect
       :virtual_gateway_id,
       :virtual_gateway_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a virtual interface.</p>
@@ -5946,26 +5841,13 @@ module Aws::DirectConnect
       :tags,
       :site_link_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vlan] = 0 unless options.key?(:vlan)
         options[:asn] = 0 unless options.key?(:asn)
         super
       end
-    end
-
-    module VirtualInterfaceState
-      confirming = 'confirming'
-      verifying = 'verifying'
-      pending = 'pending'
-      available = 'available'
-      down = 'down'
-      testing = 'testing'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      rejected = 'rejected'
-      unknown = 'unknown'
     end
 
     # <p>Information about the virtual interface failover test.</p>
@@ -6003,7 +5885,7 @@ module Aws::DirectConnect
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

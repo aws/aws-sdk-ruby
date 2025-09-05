@@ -18,24 +18,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorManufacturer
-      NVIDIA = 'nvidia'
-      AMD = 'amd'
-      AMAZON_WEB_SERVICES = 'amazon-web-services'
-      XILINX = 'xilinx'
-    end
-
-    module AcceleratorName
-      A100 = 'a100'
-      V100 = 'v100'
-      K80 = 'k80'
-      T4 = 't4'
-      M60 = 'm60'
-      RADEON_PRO_V520 = 'radeon-pro-v520'
-      VU9P = 'vu9p'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>AcceleratorTotalMemoryMiB</code>
@@ -50,13 +33,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorType
-      GPU = 'gpu'
-      FPGA = 'fpga'
-      INFERENCE = 'inference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because an active instance refresh or rollback for the specified
@@ -66,7 +43,7 @@ module Aws::AutoScaling
     class ActiveInstanceRefreshNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes scaling activity, which is a long-running process that represents a change
@@ -122,7 +99,7 @@ module Aws::AutoScaling
       :auto_scaling_group_state,
       :auto_scaling_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a policy adjustment type.</p>
@@ -133,7 +110,7 @@ module Aws::AutoScaling
     class AdjustmentType < Struct.new(
       :adjustment_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an alarm.</p>
@@ -147,7 +124,7 @@ module Aws::AutoScaling
       :alarm_name,
       :alarm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the CloudWatch alarm specification to use in an instance refresh.</p>
@@ -158,7 +135,7 @@ module Aws::AutoScaling
     class AlarmSpecification < Struct.new(
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have an Auto Scaling group or launch configuration with this name.</p>
@@ -168,7 +145,7 @@ module Aws::AutoScaling
     class AlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -181,7 +158,7 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -195,12 +172,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :target_group_ar_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachLoadBalancerTargetGroupsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -213,12 +190,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :load_balancer_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachLoadBalancersOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -239,12 +216,12 @@ module Aws::AutoScaling
       :traffic_sources,
       :skip_zonal_shift_validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachTrafficSourcesOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Auto Scaling group.</p>
@@ -415,7 +392,7 @@ module Aws::AutoScaling
       :availability_zone_impairment_policy,
       :capacity_reservation_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 instance associated with an Auto Scaling group.</p>
@@ -480,7 +457,7 @@ module Aws::AutoScaling
       :protected_from_scale_in,
       :weighted_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -503,7 +480,7 @@ module Aws::AutoScaling
     class AvailabilityZoneDistribution < Struct.new(
       :capacity_distribution_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -526,13 +503,7 @@ module Aws::AutoScaling
       :zonal_shift_enabled,
       :impaired_zone_health_check_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BareMetal
-      INCLUDED = 'included'
-      EXCLUDED = 'excluded'
-      REQUIRED = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>BaselineEbsBandwidthMbps</code> object
@@ -547,7 +518,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -564,7 +535,7 @@ module Aws::AutoScaling
     class BaselinePerformanceFactorsRequest < Struct.new(
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -578,7 +549,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :scheduled_action_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_scheduled_actions
@@ -588,7 +559,7 @@ module Aws::AutoScaling
     class BatchDeleteScheduledActionOutput < Struct.new(
       :failed_scheduled_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -601,7 +572,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :scheduled_update_group_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_scheduled_update_group_actions
@@ -611,7 +582,7 @@ module Aws::AutoScaling
     class BatchPutScheduledUpdateGroupActionOutput < Struct.new(
       :failed_scheduled_update_group_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping.</p>
@@ -647,13 +618,7 @@ module Aws::AutoScaling
       :ebs,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BurstablePerformance
-      INCLUDED = 'included'
-      EXCLUDED = 'excluded'
-      REQUIRED = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -662,7 +627,7 @@ module Aws::AutoScaling
     class CancelInstanceRefreshInput < Struct.new(
       :auto_scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_refresh_id
@@ -672,12 +637,7 @@ module Aws::AutoScaling
     class CancelInstanceRefreshOutput < Struct.new(
       :instance_refresh_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityDistributionStrategy
-      BALANCED_ONLY = 'balanced-only'
-      BALANCED_BEST_EFFORT = 'balanced-best-effort'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>GetPredictiveScalingForecast</code> call returns the capacity forecast for a
@@ -693,14 +653,7 @@ module Aws::AutoScaling
       :timestamps,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationPreference
-      CapacityReservationsOnly = 'capacity-reservations-only'
-      CapacityReservationsFirst = 'capacity-reservations-first'
-      None = 'none'
-      Default = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -738,7 +691,7 @@ module Aws::AutoScaling
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -758,7 +711,7 @@ module Aws::AutoScaling
       :capacity_reservation_ids,
       :capacity_reservation_resource_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hook_name
@@ -786,19 +739,12 @@ module Aws::AutoScaling
       :lifecycle_action_result,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CompleteLifecycleActionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CpuManufacturer
-      INTEL = 'intel'
-      AMD = 'amd'
-      AMAZON_WEB_SERVICES = 'amazon-web-services'
-      APPLE = 'apple'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -816,7 +762,7 @@ module Aws::AutoScaling
     class CpuPerformanceFactorRequest < Struct.new(
       :references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1090,7 +1036,7 @@ module Aws::AutoScaling
       :skip_zonal_shift_validation,
       :capacity_reservation_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_name
@@ -1256,7 +1202,7 @@ module Aws::AutoScaling
       :placement_tenancy,
       :metadata_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1265,7 +1211,7 @@ module Aws::AutoScaling
     class CreateOrUpdateTagsInput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use
@@ -1333,7 +1279,7 @@ module Aws::AutoScaling
       :period,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1348,7 +1294,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_name
@@ -1357,7 +1303,7 @@ module Aws::AutoScaling
     class DeleteLaunchConfigurationInput < Struct.new(
       :launch_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hook_name
@@ -1370,12 +1316,12 @@ module Aws::AutoScaling
       :lifecycle_hook_name,
       :auto_scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLifecycleHookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1388,7 +1334,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1401,7 +1347,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1414,7 +1360,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :scheduled_action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1423,7 +1369,7 @@ module Aws::AutoScaling
     class DeleteTagsInput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1439,12 +1385,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWarmPoolOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_number_of_auto_scaling_groups
@@ -1467,7 +1413,7 @@ module Aws::AutoScaling
       :number_of_auto_scaling_groups,
       :number_of_launch_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adjustment_types
@@ -1476,7 +1422,7 @@ module Aws::AutoScaling
     class DescribeAdjustmentTypesOutput < Struct.new(
       :adjustment_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_names
@@ -1508,7 +1454,7 @@ module Aws::AutoScaling
       :max_records,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_groups
@@ -1524,7 +1470,7 @@ module Aws::AutoScaling
       :auto_scaling_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -1545,7 +1491,7 @@ module Aws::AutoScaling
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_instances
@@ -1561,7 +1507,7 @@ module Aws::AutoScaling
       :auto_scaling_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_notification_types
@@ -1570,7 +1516,7 @@ module Aws::AutoScaling
     class DescribeAutoScalingNotificationTypesOutput < Struct.new(
       :auto_scaling_notification_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1593,7 +1539,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_refreshes
@@ -1610,7 +1556,7 @@ module Aws::AutoScaling
       :instance_refreshes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_names
@@ -1631,7 +1577,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configurations
@@ -1647,7 +1593,7 @@ module Aws::AutoScaling
       :launch_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hook_types
@@ -1656,7 +1602,7 @@ module Aws::AutoScaling
     class DescribeLifecycleHookTypesOutput < Struct.new(
       :lifecycle_hook_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1670,7 +1616,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :lifecycle_hook_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hooks
@@ -1679,7 +1625,7 @@ module Aws::AutoScaling
     class DescribeLifecycleHooksOutput < Struct.new(
       :lifecycle_hooks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1698,7 +1644,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_target_groups
@@ -1714,7 +1660,7 @@ module Aws::AutoScaling
       :load_balancer_target_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1733,7 +1679,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancers
@@ -1749,7 +1695,7 @@ module Aws::AutoScaling
       :load_balancers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics
@@ -1762,7 +1708,7 @@ module Aws::AutoScaling
       :metrics,
       :granularities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_names
@@ -1781,7 +1727,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_configurations
@@ -1797,7 +1743,7 @@ module Aws::AutoScaling
       :notification_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1829,7 +1775,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_policies
@@ -1845,7 +1791,7 @@ module Aws::AutoScaling
       :scaling_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_ids
@@ -1876,7 +1822,7 @@ module Aws::AutoScaling
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -1893,7 +1839,7 @@ module Aws::AutoScaling
       :activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processes
@@ -1902,7 +1848,7 @@ module Aws::AutoScaling
     class DescribeScalingProcessTypesOutput < Struct.new(
       :processes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -1938,7 +1884,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_update_group_actions
@@ -1954,7 +1900,7 @@ module Aws::AutoScaling
       :scheduled_update_group_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1974,7 +1920,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1990,7 +1936,7 @@ module Aws::AutoScaling
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute termination_policy_types
@@ -2002,7 +1948,7 @@ module Aws::AutoScaling
     class DescribeTerminationPolicyTypesOutput < Struct.new(
       :termination_policy_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2040,7 +1986,7 @@ module Aws::AutoScaling
       :next_token,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_sources
@@ -2056,7 +2002,7 @@ module Aws::AutoScaling
       :traffic_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2075,7 +2021,7 @@ module Aws::AutoScaling
       :max_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute warm_pool_configuration
@@ -2095,7 +2041,7 @@ module Aws::AutoScaling
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the desired configuration for an instance refresh. </p>
@@ -2118,7 +2064,7 @@ module Aws::AutoScaling
       :launch_template,
       :mixed_instances_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -2136,7 +2082,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :should_decrement_desired_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -2145,7 +2091,7 @@ module Aws::AutoScaling
     class DetachInstancesOutput < Struct.new(
       :activities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2159,12 +2105,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :target_group_ar_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachLoadBalancerTargetGroupsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2177,12 +2123,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :load_balancer_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachLoadBalancersOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2196,12 +2142,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :traffic_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachTrafficSourcesOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2320,7 +2266,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information used to set up an Amazon EBS volume specified in a block device
@@ -2417,7 +2363,7 @@ module Aws::AutoScaling
       :encrypted,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2542,7 +2488,7 @@ module Aws::AutoScaling
       :metrics,
       :granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an enabled Auto Scaling group metric.</p>
@@ -2660,7 +2606,7 @@ module Aws::AutoScaling
       :metric,
       :granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -2678,7 +2624,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :should_decrement_desired_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -2687,7 +2633,7 @@ module Aws::AutoScaling
     class EnterStandbyOutput < Struct.new(
       :activities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2726,7 +2672,7 @@ module Aws::AutoScaling
       :metric_value,
       :breach_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -2739,7 +2685,7 @@ module Aws::AutoScaling
       :instance_ids,
       :auto_scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -2748,7 +2694,7 @@ module Aws::AutoScaling
     class ExitStandbyOutput < Struct.new(
       :activities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled action that could not be created, updated, or deleted.</p>
@@ -2766,7 +2712,7 @@ module Aws::AutoScaling
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that is used to return a more specific list of results from a
@@ -2845,7 +2791,7 @@ module Aws::AutoScaling
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -2871,7 +2817,7 @@ module Aws::AutoScaling
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_forecast
@@ -2888,12 +2834,7 @@ module Aws::AutoScaling
       :capacity_forecast,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImpairedZoneHealthCheckBehavior
-      ReplaceUnhealthy = 'ReplaceUnhealthy'
-      IgnoreUnhealthy = 'IgnoreUnhealthy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 instance.</p>
@@ -2942,12 +2883,7 @@ module Aws::AutoScaling
       :protected_from_scale_in,
       :weighted_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGeneration
-      CURRENT = 'current'
-      PREVIOUS = 'previous'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance maintenance policy.</p>
@@ -2972,17 +2908,7 @@ module Aws::AutoScaling
       :min_healthy_percentage,
       :max_healthy_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMetadataEndpointState
-      Disabled = 'disabled'
-      Enabled = 'enabled'
-    end
-
-    module InstanceMetadataHttpTokensState
-      Optional = 'optional'
-      Required = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instances. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-config.html#launch-configurations-imds">Configure the instance metadata options</a> in the
@@ -3018,7 +2944,7 @@ module Aws::AutoScaling
       :http_put_response_hop_limit,
       :http_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether detailed monitoring is enabled for the Auto Scaling instances.</p>
@@ -3029,7 +2955,7 @@ module Aws::AutoScaling
     class InstanceMonitoring < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance refresh for an Auto Scaling group. </p>
@@ -3145,7 +3071,7 @@ module Aws::AutoScaling
       :desired_configuration,
       :rollback_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because an active instance refresh already exists for the specified
@@ -3155,7 +3081,7 @@ module Aws::AutoScaling
     class InstanceRefreshInProgressFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reports progress on replacing instances that are in the Auto Scaling group.</p>
@@ -3173,7 +3099,7 @@ module Aws::AutoScaling
       :percentage_complete,
       :instances_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reports progress on replacing instances in an Auto Scaling group that has a warm pool. This
@@ -3189,20 +3115,7 @@ module Aws::AutoScaling
       :live_pool_progress,
       :warm_pool_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceRefreshStatus
-      Pending = 'Pending'
-      InProgress = 'InProgress'
-      Successful = 'Successful'
-      Failed = 'Failed'
-      Cancelling = 'Cancelling'
-      Cancelled = 'Cancelled'
-      RollbackInProgress = 'RollbackInProgress'
-      RollbackFailed = 'RollbackFailed'
-      RollbackSuccessful = 'RollbackSuccessful'
-      Baking = 'Baking'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reports progress on replacing instances that are in the warm pool.</p>
@@ -3220,7 +3133,7 @@ module Aws::AutoScaling
       :percentage_complete,
       :instances_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes for the instance types for a mixed instances policy. Amazon EC2 Auto Scaling uses your
@@ -3569,7 +3482,7 @@ module Aws::AutoScaling
       :allowed_instance_types,
       :baseline_performance_factors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance reuse policy for a warm pool. </p>
@@ -3582,7 +3495,7 @@ module Aws::AutoScaling
     class InstanceReusePolicy < Struct.new(
       :reuse_on_scale_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to specify the distribution of On-Demand Instances and Spot
@@ -3700,7 +3613,7 @@ module Aws::AutoScaling
       :spot_instance_pools,
       :spot_max_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> value is not valid.</p>
@@ -3710,7 +3623,7 @@ module Aws::AutoScaling
     class InvalidNextToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because a desired configuration was not found or an incompatible
@@ -3722,7 +3635,7 @@ module Aws::AutoScaling
     class IrreversibleInstanceRefreshFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch configuration.</p>
@@ -3846,7 +3759,7 @@ module Aws::AutoScaling
       :placement_tenancy,
       :metadata_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to specify the launch templates and instance types (overrides) for
@@ -3862,7 +3775,7 @@ module Aws::AutoScaling
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed
@@ -3941,7 +3854,7 @@ module Aws::AutoScaling
       :launch_template_specification,
       :instance_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling
@@ -3972,7 +3885,7 @@ module Aws::AutoScaling
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a lifecycle hook. A lifecycle hook lets you create solutions that are aware
@@ -4030,7 +3943,7 @@ module Aws::AutoScaling
       :global_timeout,
       :default_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information used to specify a lifecycle hook for an Auto Scaling
@@ -4090,33 +4003,7 @@ module Aws::AutoScaling
       :notification_target_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleState
-      PENDING = 'Pending'
-      PENDING_WAIT = 'Pending:Wait'
-      PENDING_PROCEED = 'Pending:Proceed'
-      QUARANTINED = 'Quarantined'
-      IN_SERVICE = 'InService'
-      TERMINATING = 'Terminating'
-      TERMINATING_WAIT = 'Terminating:Wait'
-      TERMINATING_PROCEED = 'Terminating:Proceed'
-      TERMINATED = 'Terminated'
-      DETACHING = 'Detaching'
-      DETACHED = 'Detached'
-      ENTERING_STANDBY = 'EnteringStandby'
-      STANDBY = 'Standby'
-      WARMED_PENDING = 'Warmed:Pending'
-      WARMED_PENDING_WAIT = 'Warmed:Pending:Wait'
-      WARMED_PENDING_PROCEED = 'Warmed:Pending:Proceed'
-      WARMED_TERMINATING = 'Warmed:Terminating'
-      WARMED_TERMINATING_WAIT = 'Warmed:Terminating:Wait'
-      WARMED_TERMINATING_PROCEED = 'Warmed:Terminating:Proceed'
-      WARMED_TERMINATED = 'Warmed:Terminated'
-      WARMED_STOPPED = 'Warmed:Stopped'
-      WARMED_RUNNING = 'Warmed:Running'
-      WARMED_HIBERNATED = 'Warmed:Hibernated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have already reached a limit for your Amazon EC2 Auto Scaling
@@ -4129,7 +4016,7 @@ module Aws::AutoScaling
     class LimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a Classic Load Balancer.</p>
@@ -4171,7 +4058,7 @@ module Aws::AutoScaling
       :load_balancer_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a target group.</p>
@@ -4213,7 +4100,7 @@ module Aws::AutoScaling
       :load_balancer_target_group_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>GetPredictiveScalingForecast</code> call returns the load forecast for a
@@ -4234,18 +4121,7 @@ module Aws::AutoScaling
       :values,
       :metric_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalStorage
-      INCLUDED = 'included'
-      EXCLUDED = 'excluded'
-      REQUIRED = 'required'
-    end
-
-    module LocalStorageType
-      HDD = 'hdd'
-      SSD = 'ssd'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>MemoryGiBPerVCpu</code> object when
@@ -4260,7 +4136,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>MemoryMiB</code> object when you
@@ -4275,7 +4151,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a specific metric. </p>
@@ -4300,7 +4176,7 @@ module Aws::AutoScaling
       :metric_name,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a metric.</p>
@@ -4412,7 +4288,7 @@ module Aws::AutoScaling
     class MetricCollectionType < Struct.new(
       :metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric data to return. Also defines whether this call is returning data for one
@@ -4463,7 +4339,7 @@ module Aws::AutoScaling
       :label,
       :return_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dimension of a metric.</p>
@@ -4477,7 +4353,7 @@ module Aws::AutoScaling
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a granularity of a metric.</p>
@@ -4487,7 +4363,7 @@ module Aws::AutoScaling
     class MetricGranularityType < Struct.new(
       :granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the CloudWatch metric to return, along with the statistic and
@@ -4514,22 +4390,7 @@ module Aws::AutoScaling
       :stat,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricStatistic
-      Average = 'Average'
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
-      SampleCount = 'SampleCount'
-      Sum = 'Sum'
-    end
-
-    module MetricType
-      ASGAverageCPUUtilization = 'ASGAverageCPUUtilization'
-      ASGAverageNetworkIn = 'ASGAverageNetworkIn'
-      ASGAverageNetworkOut = 'ASGAverageNetworkOut'
-      ALBRequestCountPerTarget = 'ALBRequestCountPerTarget'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to launch multiple instance types and On-Demand Instances and Spot
@@ -4549,7 +4410,7 @@ module Aws::AutoScaling
       :launch_template,
       :instances_distribution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>NetworkBandwidthGbps</code> object
@@ -4571,7 +4432,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>NetworkInterfaceCount</code> object
@@ -4586,7 +4447,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a notification.</p>
@@ -4631,7 +4492,7 @@ module Aws::AutoScaling
       :topic_arn,
       :notification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4699,21 +4560,7 @@ module Aws::AutoScaling
     class PerformanceFactorReferenceRequest < Struct.new(
       :instance_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredefinedLoadMetricType
-      ASGTotalCPUUtilization = 'ASGTotalCPUUtilization'
-      ASGTotalNetworkIn = 'ASGTotalNetworkIn'
-      ASGTotalNetworkOut = 'ASGTotalNetworkOut'
-      ALBTargetGroupRequestCount = 'ALBTargetGroupRequestCount'
-    end
-
-    module PredefinedMetricPairType
-      ASGCPUUtilization = 'ASGCPUUtilization'
-      ASGNetworkIn = 'ASGNetworkIn'
-      ASGNetworkOut = 'ASGNetworkOut'
-      ALBRequestCount = 'ALBRequestCount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a predefined metric for a target tracking scaling policy to use with
@@ -4770,14 +4617,7 @@ module Aws::AutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredefinedScalingMetricType
-      ASGAverageCPUUtilization = 'ASGAverageCPUUtilization'
-      ASGAverageNetworkIn = 'ASGAverageNetworkIn'
-      ASGAverageNetworkOut = 'ASGAverageNetworkOut'
-      ALBRequestCountPerTarget = 'ALBRequestCountPerTarget'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.</p>
@@ -4849,7 +4689,7 @@ module Aws::AutoScaling
       :max_capacity_breach_behavior,
       :max_capacity_buffer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a customized capacity metric for a predictive scaling policy.</p>
@@ -4861,7 +4701,7 @@ module Aws::AutoScaling
     class PredictiveScalingCustomizedCapacityMetric < Struct.new(
       :metric_data_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom load metric for a predictive scaling policy.</p>
@@ -4873,7 +4713,7 @@ module Aws::AutoScaling
     class PredictiveScalingCustomizedLoadMetric < Struct.new(
       :metric_data_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom scaling metric for a predictive scaling policy.</p>
@@ -4885,12 +4725,7 @@ module Aws::AutoScaling
     class PredictiveScalingCustomizedScalingMetric < Struct.new(
       :metric_data_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredictiveScalingMaxCapacityBreachBehavior
-      HonorMaxCapacity = 'HonorMaxCapacity'
-      IncreaseMaxCapacity = 'IncreaseMaxCapacity'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies the metrics and target utilization settings for a predictive
@@ -4975,12 +4810,7 @@ module Aws::AutoScaling
       :customized_load_metric_specification,
       :customized_capacity_metric_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredictiveScalingMode
-      ForecastAndScale = 'ForecastAndScale'
-      ForecastOnly = 'ForecastOnly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load metric for a predictive scaling policy.</p>
@@ -5017,7 +4847,7 @@ module Aws::AutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a metric pair for a predictive scaling policy. </p>
@@ -5054,7 +4884,7 @@ module Aws::AutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scaling metric for a predictive scaling policy.</p>
@@ -5091,7 +4921,7 @@ module Aws::AutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a process type.</p>
@@ -5150,7 +4980,7 @@ module Aws::AutoScaling
     class ProcessType < Struct.new(
       :process_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hook_name
@@ -5216,12 +5046,12 @@ module Aws::AutoScaling
       :heartbeat_timeout,
       :default_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutLifecycleHookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5239,7 +5069,7 @@ module Aws::AutoScaling
       :topic_arn,
       :notification_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5408,7 +5238,7 @@ module Aws::AutoScaling
       :enabled,
       :predictive_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of PutScalingPolicy.</p>
@@ -5422,7 +5252,7 @@ module Aws::AutoScaling
       :policy_arn,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5489,7 +5319,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5536,12 +5366,12 @@ module Aws::AutoScaling
       :pool_state,
       :instance_reuse_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutWarmPoolOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_hook_name
@@ -5564,12 +5394,12 @@ module Aws::AutoScaling
       :lifecycle_action_token,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RecordLifecycleActionHeartbeatOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the preferences for an instance refresh.</p>
@@ -5714,11 +5544,7 @@ module Aws::AutoScaling
       :max_healthy_percentage,
       :bake_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RefreshStrategy
-      Rolling = 'Rolling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a pending update to an Amazon EC2 Auto Scaling resource (for example, an Auto Scaling group,
@@ -5729,7 +5555,7 @@ module Aws::AutoScaling
     class ResourceContentionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation can't be performed because the resource is in use.</p>
@@ -5739,7 +5565,7 @@ module Aws::AutoScaling
     class ResourceInUseFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5800,7 +5626,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :scaling_processes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an instance refresh rollback.</p>
@@ -5831,7 +5657,7 @@ module Aws::AutoScaling
       :instances_to_update_on_rollback,
       :progress_details_on_rollback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -5840,7 +5666,7 @@ module Aws::AutoScaling
     class RollbackInstanceRefreshInput < Struct.new(
       :auto_scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_refresh_id
@@ -5850,13 +5676,7 @@ module Aws::AutoScaling
     class RollbackInstanceRefreshOutput < Struct.new(
       :instance_refresh_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScaleInProtectedInstances
-      Refresh = 'Refresh'
-      Ignore = 'Ignore'
-      Wait = 'Wait'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation can't be performed because there are scaling activities in
@@ -5867,23 +5687,7 @@ module Aws::AutoScaling
     class ScalingActivityInProgressFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingActivityStatusCode
-      PendingSpotBidPlacement = 'PendingSpotBidPlacement'
-      WaitingForSpotInstanceRequestId = 'WaitingForSpotInstanceRequestId'
-      WaitingForSpotInstanceId = 'WaitingForSpotInstanceId'
-      WaitingForInstanceId = 'WaitingForInstanceId'
-      PreInService = 'PreInService'
-      InProgress = 'InProgress'
-      WaitingForELBConnectionDraining = 'WaitingForELBConnectionDraining'
-      MidLifecycleAction = 'MidLifecycleAction'
-      WaitingForInstanceWarmup = 'WaitingForInstanceWarmup'
-      Successful = 'Successful'
-      Failed = 'Failed'
-      Cancelled = 'Cancelled'
-      WaitingForConnectionDraining = 'WaitingForConnectionDraining'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scaling policy.</p>
@@ -5987,7 +5791,7 @@ module Aws::AutoScaling
       :enabled,
       :predictive_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled scaling
@@ -6044,7 +5848,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information used for one or more scheduled scaling action updates in a 
@@ -6102,7 +5906,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service-linked role is not yet ready for use.</p>
@@ -6111,7 +5915,7 @@ module Aws::AutoScaling
     class ServiceLinkedRoleFailure < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -6131,7 +5935,7 @@ module Aws::AutoScaling
       :desired_capacity,
       :honor_cooldown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6155,7 +5959,7 @@ module Aws::AutoScaling
       :health_status,
       :should_respect_grace_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -6173,18 +5977,12 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :protected_from_scale_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SetInstanceProtectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandbyInstances
-      Terminate = 'Terminate'
-      Ignore = 'Ignore'
-      Wait = 'Wait'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -6238,7 +6036,7 @@ module Aws::AutoScaling
       :desired_configuration,
       :preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_refresh_id
@@ -6247,7 +6045,7 @@ module Aws::AutoScaling
     class StartInstanceRefreshOutput < Struct.new(
       :instance_refresh_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information used to create a step adjustment for a step scaling
@@ -6310,7 +6108,7 @@ module Aws::AutoScaling
       :metric_interval_upper_bound,
       :scaling_adjustment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -6371,7 +6169,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :scaling_processes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an auto scaling process that has been suspended.</p>
@@ -6387,7 +6185,7 @@ module Aws::AutoScaling
       :process_name,
       :suspension_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag for an Auto Scaling group.</p>
@@ -6415,7 +6213,7 @@ module Aws::AutoScaling
       :value,
       :propagate_at_launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag for an Auto Scaling group.</p>
@@ -6443,7 +6241,7 @@ module Aws::AutoScaling
       :value,
       :propagate_at_launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a target tracking scaling policy configuration to use with Amazon EC2 Auto Scaling.</p>
@@ -6477,7 +6275,7 @@ module Aws::AutoScaling
       :target_value,
       :disable_scale_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric data to return. Also defines whether this call is returning data for one
@@ -6533,7 +6331,7 @@ module Aws::AutoScaling
       :period,
       :return_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the CloudWatch metric to return, along with the statistic and
@@ -6565,7 +6363,7 @@ module Aws::AutoScaling
       :unit,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6579,7 +6377,7 @@ module Aws::AutoScaling
       :instance_id,
       :should_decrement_desired_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity
@@ -6588,7 +6386,7 @@ module Aws::AutoScaling
     class TerminateInstanceInAutoScalingGroupOutput < Struct.new(
       :activity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>TotalLocalStorageGB</code> object when
@@ -6603,7 +6401,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifying information for a traffic source.</p>
@@ -6658,7 +6456,7 @@ module Aws::AutoScaling
       :identifier,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a traffic source.</p>
@@ -6731,7 +6529,7 @@ module Aws::AutoScaling
       :identifier,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_group_name
@@ -6941,7 +6739,7 @@ module Aws::AutoScaling
       :skip_zonal_shift_validation,
       :capacity_reservation_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the minimum and maximum for the <code>VCpuCount</code> object when you
@@ -6956,7 +6754,7 @@ module Aws::AutoScaling
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a warm pool configuration. </p>
@@ -6983,17 +6781,7 @@ module Aws::AutoScaling
       :status,
       :instance_reuse_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WarmPoolState
-      Stopped = 'Stopped'
-      Running = 'Running'
-      Hibernated = 'Hibernated'
-    end
-
-    module WarmPoolStatus
-      PendingDelete = 'PendingDelete'
+      include ::Smithy::Schema::Structure
     end
 
   end

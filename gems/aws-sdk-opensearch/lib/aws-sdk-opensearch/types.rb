@@ -17,7 +17,7 @@ module Aws::OpenSearch
       :natural_language_query_generation_options,
       :s3_vectors_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters representing the state of machine learning features on the specified domain.</p>
@@ -31,7 +31,7 @@ module Aws::OpenSearch
       :natural_language_query_generation_options,
       :s3_vectors_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of machine learning options on the specified domain.</p>
@@ -45,7 +45,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon OpenSearch Service domain.</p>
@@ -63,11 +63,7 @@ module Aws::OpenSearch
       :domain_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AWSServicePrincipal
-      application_opensearchservice_amazonaws_com = 'application.opensearchservice.amazonaws.com'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>AcceptInboundConnection</code> operation.</p>
@@ -77,7 +73,7 @@ module Aws::OpenSearch
     class AcceptInboundConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the accepted inbound connection.</p>
@@ -87,7 +83,7 @@ module Aws::OpenSearch
     class AcceptInboundConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred because you don't have permissions to access the resource.</p>
@@ -97,7 +93,7 @@ module Aws::OpenSearch
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured access rules for the domain's search endpoint, and the current status of
@@ -113,28 +109,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionSeverity
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
-    end
-
-    module ActionStatus
-      PENDING_UPDATE = 'PENDING_UPDATE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      NOT_ELIGIBLE = 'NOT_ELIGIBLE'
-      ELIGIBLE = 'ELIGIBLE'
-    end
-
-    module ActionType
-      SERVICE_SOFTWARE_UPDATE = 'SERVICE_SOFTWARE_UPDATE'
-      JVM_HEAP_SIZE_TUNING = 'JVM_HEAP_SIZE_TUNING'
-      JVM_YOUNG_GEN_TUNING = 'JVM_YOUNG_GEN_TUNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>AddDataSource</code>
@@ -157,7 +132,7 @@ module Aws::OpenSearch
       :data_source_type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an <code>AddDataSource</code> operation.</p>
@@ -167,7 +142,7 @@ module Aws::OpenSearch
     class AddDataSourceResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_name
@@ -202,7 +177,7 @@ module Aws::OpenSearch
       :open_search_arns,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_arn
@@ -213,7 +188,7 @@ module Aws::OpenSearch
     class AddDirectQueryDataSourceResponse < Struct.new(
       :data_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>AddTags</code> operation. Specifies the tags to
@@ -229,7 +204,7 @@ module Aws::OpenSearch
       :arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> List of limits that are specific to a given instance type.</p>
@@ -256,7 +231,7 @@ module Aws::OpenSearch
       :limit_name,
       :limit_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the advanced options for the specified domain. The following options are
@@ -302,7 +277,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for fine-grained access control settings.</p>
@@ -339,7 +314,7 @@ module Aws::OpenSearch
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for enabling and configuring fine-grained access control. For more information, see
@@ -376,7 +351,7 @@ module Aws::OpenSearch
       :iam_federation_options,
       :anonymous_auth_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of fine-grained access control settings for a domain.</p>
@@ -390,7 +365,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for an OpenSearch application. For more information, see 
@@ -405,20 +380,7 @@ module Aws::OpenSearch
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppConfigType
-      OpensearchDashboardAdminUsers = 'opensearchDashboards.dashboardAdmin.users'
-      OpensearchDashboardAdminGroups = 'opensearchDashboards.dashboardAdmin.groups'
-    end
-
-    module ApplicationStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic details of an OpenSearch application.</p>
@@ -454,7 +416,7 @@ module Aws::OpenSearch
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>AssociatePackage</code> operation.</p>
@@ -477,7 +439,7 @@ module Aws::OpenSearch
       :prerequisite_package_id_list,
       :association_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>AssociatePackage</code> operation.</p>
@@ -487,7 +449,7 @@ module Aws::OpenSearch
     class AssociatePackageResponse < Struct.new(
       :domain_package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_list
@@ -501,7 +463,7 @@ module Aws::OpenSearch
       :package_list,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_package_details_list
@@ -510,7 +472,7 @@ module Aws::OpenSearch
     class AssociatePackagesResponse < Struct.new(
       :domain_package_details_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -527,7 +489,7 @@ module Aws::OpenSearch
       :account,
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_principal
@@ -537,7 +499,7 @@ module Aws::OpenSearch
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
       :authorized_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services account or service that has access to an Amazon
@@ -552,7 +514,7 @@ module Aws::OpenSearch
       :principal_type,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Auto-Tune action. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch
@@ -567,13 +529,7 @@ module Aws::OpenSearch
       :auto_tune_type,
       :auto_tune_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Auto-Tune desired state. Valid values are ENABLED and DISABLED.</p>
-    module AutoTuneDesiredState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details about a scheduled Auto-Tune action. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for
@@ -584,7 +540,7 @@ module Aws::OpenSearch
     class AutoTuneDetails < Struct.new(
       :scheduled_auto_tune_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -611,7 +567,7 @@ module Aws::OpenSearch
       :duration,
       :cron_expression_for_recurrence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Auto-Tune settings when updating a domain. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for
@@ -640,7 +596,7 @@ module Aws::OpenSearch
       :maintenance_schedules,
       :use_off_peak_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for configuring Auto-Tune. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch
@@ -660,7 +616,7 @@ module Aws::OpenSearch
       :maintenance_schedules,
       :use_off_peak_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Auto-Tune settings for a domain, displayed when enabling or disabling Auto-Tune.</p>
@@ -679,7 +635,7 @@ module Aws::OpenSearch
       :error_message,
       :use_off_peak_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Auto-Tune status for the domain.</p>
@@ -693,21 +649,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Auto-Tune state for the domain. For valid states see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for Amazon OpenSearch Service</a>.
-    #   </p>
-    module AutoTuneState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ENABLE_IN_PROGRESS = 'ENABLE_IN_PROGRESS'
-      DISABLE_IN_PROGRESS = 'DISABLE_IN_PROGRESS'
-      DISABLED_AND_ROLLBACK_SCHEDULED = 'DISABLED_AND_ROLLBACK_SCHEDULED'
-      DISABLED_AND_ROLLBACK_IN_PROGRESS = 'DISABLED_AND_ROLLBACK_IN_PROGRESS'
-      DISABLED_AND_ROLLBACK_COMPLETE = 'DISABLED_AND_ROLLBACK_COMPLETE'
-      DISABLED_AND_ROLLBACK_ERROR = 'DISABLED_AND_ROLLBACK_ERROR'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of Auto-Tune for the domain. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for
@@ -738,17 +680,12 @@ module Aws::OpenSearch
       :error_message,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:update_version] = 0 unless options.key?(:update_version)
         super
       end
-    end
-
-    # <p>Specifies the Auto-Tune type. Valid value is SCHEDULED_ACTION.</p>
-    module AutoTuneType
-      SCHEDULED_ACTION = 'SCHEDULED_ACTION'
     end
 
     # <p>Information about an Availability Zone on a domain.</p>
@@ -792,7 +729,7 @@ module Aws::OpenSearch
       :total_shards,
       :total_un_assigned_shards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred while processing the request.</p>
@@ -802,7 +739,7 @@ module Aws::OpenSearch
     class BaseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -816,7 +753,7 @@ module Aws::OpenSearch
       :domain_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cancelled_change_ids
@@ -833,7 +770,7 @@ module Aws::OpenSearch
       :cancelled_change_properties,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to cancel a service software update.</p>
@@ -844,7 +781,7 @@ module Aws::OpenSearch
     class CancelServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response to a <code>CancelServiceSoftwareUpdate</code> operation. Contains
@@ -855,7 +792,7 @@ module Aws::OpenSearch
     class CancelServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A property change that was cancelled for an Amazon OpenSearch Service domain.</p>
@@ -873,7 +810,7 @@ module Aws::OpenSearch
       :cancelled_value,
       :active_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for information about a configuration change happening on a domain.</p>
@@ -903,7 +840,7 @@ module Aws::OpenSearch
       :start_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Progress details for each stage of a domain update.</p>
@@ -925,7 +862,7 @@ module Aws::OpenSearch
       :description,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The progress details of a specific domain configuration change.</p>
@@ -971,7 +908,7 @@ module Aws::OpenSearch
       :config_change_status,
       :initiated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_number_of_stages] = 0 unless options.key?(:total_number_of_stages)
@@ -992,7 +929,7 @@ module Aws::OpenSearch
     class CloudWatchDirectQueryDataSource < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the cluster configuration of an OpenSearch Service domain. For more
@@ -1055,7 +992,7 @@ module Aws::OpenSearch
       :multi_az_with_standby_enabled,
       :node_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster configuration status for a domain.</p>
@@ -1069,7 +1006,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters required to enable Cognito authentication for an OpenSearch
@@ -1096,7 +1033,7 @@ module Aws::OpenSearch
       :identity_pool_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the Cognito options for the specified domain.</p>
@@ -1110,7 +1047,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters required to enable cold storage for an OpenSearch Service
@@ -1122,7 +1059,7 @@ module Aws::OpenSearch
     class ColdStorageOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of OpenSearch or Elasticsearch versions and the versions you can upgrade them
@@ -1137,18 +1074,7 @@ module Aws::OpenSearch
       :source_version,
       :target_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigChangeStatus
-      PENDING = 'Pending'
-      INITIALIZING = 'Initializing'
-      VALIDATING = 'Validating'
-      VALIDATION_FAILED = 'ValidationFailed'
-      APPLYING_CHANGES = 'ApplyingChanges'
-      COMPLETED = 'Completed'
-      PENDING_USER_INPUT = 'PendingUserInput'
-      CANCELLED = 'Cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred because the client attempts to remove a resource that is currently in use.</p>
@@ -1158,24 +1084,7 @@ module Aws::OpenSearch
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The connection mode for the cross-cluster connection.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>DIRECT</b> - Used for cross-cluster search or cross-cluster replication.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>VPC_ENDPOINT</b> - Used for remote reindex
-    #      between Amazon OpenSearch Service VPC domains.</p>
-    #             </li>
-    #          </ul>
-    module ConnectionMode
-      DIRECT = 'DIRECT'
-      VPC_ENDPOINT = 'VPC_ENDPOINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection properties of an outbound connection.</p>
@@ -1192,7 +1101,7 @@ module Aws::OpenSearch
       :endpoint,
       :cross_cluster_search,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1221,7 +1130,7 @@ module Aws::OpenSearch
       :app_configs,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1260,7 +1169,7 @@ module Aws::OpenSearch
       :tag_list,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1397,7 +1306,7 @@ module Aws::OpenSearch
       :software_update_options,
       :aiml_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>CreateDomain</code> operation. Contains the status of the newly
@@ -1408,7 +1317,7 @@ module Aws::OpenSearch
     class CreateDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>CreateOutboundConnection</code> operation.</p>
@@ -1434,7 +1343,7 @@ module Aws::OpenSearch
       :connection_mode,
       :connection_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>CreateOutboundConnection</code> request. Contains details about the
@@ -1470,7 +1379,7 @@ module Aws::OpenSearch
       :connection_mode,
       :connection_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code>CreatePackage</code> operation.</p>
@@ -1509,7 +1418,7 @@ module Aws::OpenSearch
       :package_vending_options,
       :package_encryption_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>CreatePackage</code> operation.</p>
@@ -1519,7 +1428,7 @@ module Aws::OpenSearch
     class CreatePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_arn
@@ -1536,7 +1445,7 @@ module Aws::OpenSearch
       :vpc_options,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint
@@ -1545,7 +1454,7 @@ module Aws::OpenSearch
     class CreateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cross-cluster search specific connection properties.</p>
@@ -1557,7 +1466,7 @@ module Aws::OpenSearch
     class CrossClusterSearchConnectionProperties < Struct.new(
       :skip_unavailable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data sources that are associated with an OpenSearch application. </p>
@@ -1573,7 +1482,7 @@ module Aws::OpenSearch
       :data_source_arn,
       :data_source_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a direct-query data source.</p>
@@ -1595,12 +1504,7 @@ module Aws::OpenSearch
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceStatus
-      ACTIVE = 'ACTIVE'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of data source.</p>
@@ -1611,7 +1515,7 @@ module Aws::OpenSearch
       :s3_glue_data_catalog,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3GlueDataCatalog < DataSourceType; end
       class Unknown < DataSourceType; end
@@ -1623,12 +1527,12 @@ module Aws::OpenSearch
     class DeleteApplicationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DeleteDataSource</code>
@@ -1643,7 +1547,7 @@ module Aws::OpenSearch
       :domain_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>GetDataSource</code> operation.</p>
@@ -1653,7 +1557,7 @@ module Aws::OpenSearch
     class DeleteDataSourceResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_name
@@ -1665,7 +1569,7 @@ module Aws::OpenSearch
     class DeleteDirectQueryDataSourceRequest < Struct.new(
       :data_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DeleteDomain</code> operation.</p>
@@ -1675,7 +1579,7 @@ module Aws::OpenSearch
     class DeleteDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of a <code>DeleteDomain</code> request. Contains the status of the pending
@@ -1686,7 +1590,7 @@ module Aws::OpenSearch
     class DeleteDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DeleteInboundConnection</code> operation.</p>
@@ -1696,7 +1600,7 @@ module Aws::OpenSearch
     class DeleteInboundConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of a <code>DeleteInboundConnection</code> operation. Contains details about the
@@ -1707,7 +1611,7 @@ module Aws::OpenSearch
     class DeleteInboundConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DeleteOutboundConnection</code> operation.</p>
@@ -1717,7 +1621,7 @@ module Aws::OpenSearch
     class DeleteOutboundConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the deleted outbound connection.</p>
@@ -1727,7 +1631,7 @@ module Aws::OpenSearch
     class DeleteOutboundConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes a package from OpenSearch Service. The package can't be associated with any
@@ -1738,7 +1642,7 @@ module Aws::OpenSearch
     class DeletePackageRequest < Struct.new(
       :package_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response parameters to the <code>DeletePackage</code> operation.</p>
@@ -1748,7 +1652,7 @@ module Aws::OpenSearch
     class DeletePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_id
@@ -1757,7 +1661,7 @@ module Aws::OpenSearch
     class DeleteVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_summary
@@ -1767,7 +1671,7 @@ module Aws::OpenSearch
     class DeleteVpcEndpointResponse < Struct.new(
       :vpc_endpoint_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for when a failure in one of the dependencies results in the service being unable to fetch details about the resource.</p>
@@ -1777,15 +1681,7 @@ module Aws::OpenSearch
     class DependencyFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      PENDING_UPDATE = 'PENDING_UPDATE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      NOT_ELIGIBLE = 'NOT_ELIGIBLE'
-      ELIGIBLE = 'ELIGIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>
@@ -1806,7 +1702,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainAutoTunes</code> request.</p>
@@ -1822,7 +1718,7 @@ module Aws::OpenSearch
       :auto_tunes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainChangeProgress</code>
@@ -1838,7 +1734,7 @@ module Aws::OpenSearch
       :domain_name,
       :change_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains progress
@@ -1849,7 +1745,7 @@ module Aws::OpenSearch
     class DescribeDomainChangeProgressResponse < Struct.new(
       :change_progress_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainConfig</code> operation.</p>
@@ -1859,7 +1755,7 @@ module Aws::OpenSearch
     class DescribeDomainConfigRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of the requested domain.</p>
@@ -1869,7 +1765,7 @@ module Aws::OpenSearch
     class DescribeDomainConfigResponse < Struct.new(
       :domain_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainHealth</code> operation.</p>
@@ -1879,7 +1775,7 @@ module Aws::OpenSearch
     class DescribeDomainHealthRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainHealth</code> request. Contains health information for the requested domain.</p>
@@ -1976,7 +1872,7 @@ module Aws::OpenSearch
       :total_un_assigned_shards,
       :environment_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainNodes</code>
@@ -1987,7 +1883,7 @@ module Aws::OpenSearch
     class DescribeDomainNodesRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainNodes</code> request. Contains information about the nodes on the requested domain. </p>
@@ -1998,7 +1894,7 @@ module Aws::OpenSearch
     class DescribeDomainNodesResponse < Struct.new(
       :domain_nodes_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomain</code> operation.</p>
@@ -2008,7 +1904,7 @@ module Aws::OpenSearch
     class DescribeDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the status of the domain specified in the request.</p>
@@ -2018,7 +1914,7 @@ module Aws::OpenSearch
     class DescribeDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomains</code> operation.</p>
@@ -2029,7 +1925,7 @@ module Aws::OpenSearch
     class DescribeDomainsRequest < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the status of the specified domains or all domains owned by the account.</p>
@@ -2039,7 +1935,7 @@ module Aws::OpenSearch
     class DescribeDomainsResponse < Struct.new(
       :domain_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2057,7 +1953,7 @@ module Aws::OpenSearch
       :dry_run_id,
       :load_dry_run_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run_progress_status
@@ -2074,7 +1970,7 @@ module Aws::OpenSearch
       :dry_run_config,
       :dry_run_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeInboundConnections</code> operation.</p>
@@ -2096,7 +1992,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of connections matching the filter criteria.</p>
@@ -2112,7 +2008,7 @@ module Aws::OpenSearch
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeInstanceTypeLimits</code> operation.</p>
@@ -2131,7 +2027,7 @@ module Aws::OpenSearch
       :instance_type,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters received from the <code>DescribeInstanceTypeLimits</code>
@@ -2143,7 +2039,7 @@ module Aws::OpenSearch
     class DescribeInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeOutboundConnections</code> operation.</p>
@@ -2165,7 +2061,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of connections matching the filter criteria.</p>
@@ -2181,7 +2077,7 @@ module Aws::OpenSearch
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter to apply to the <code>DescribePackage</code> response.</p>
@@ -2195,16 +2091,7 @@ module Aws::OpenSearch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribePackagesFilterName
-      PackageID = 'PackageID'
-      PackageName = 'PackageName'
-      PackageStatus = 'PackageStatus'
-      PackageType = 'PackageType'
-      EngineVersion = 'EngineVersion'
-      PackageOwner = 'PackageOwner'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>DescribePackage</code> operation.</p>
@@ -2225,7 +2112,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>DescribePackages</code> operation.</p>
@@ -2241,7 +2128,7 @@ module Aws::OpenSearch
       :package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to a <code>DescribeReservedInstanceOfferings</code>
@@ -2265,7 +2152,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for results of a <code>DescribeReservedInstanceOfferings</code> request.</p>
@@ -2281,7 +2168,7 @@ module Aws::OpenSearch
       :next_token,
       :reserved_instance_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>DescribeReservedInstances</code>
@@ -2305,7 +2192,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for results from <code>DescribeReservedInstances</code>
@@ -2322,7 +2209,7 @@ module Aws::OpenSearch
       :next_token,
       :reserved_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_ids
@@ -2331,7 +2218,7 @@ module Aws::OpenSearch
     class DescribeVpcEndpointsRequest < Struct.new(
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoints
@@ -2344,7 +2231,7 @@ module Aws::OpenSearch
       :vpc_endpoints,
       :vpc_endpoint_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2387,7 +2274,7 @@ module Aws::OpenSearch
       :data_source_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2409,7 +2296,7 @@ module Aws::OpenSearch
       :security_lake,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CloudWatchLog < DirectQueryDataSourceType; end
       class SecurityLake < DirectQueryDataSourceType; end
@@ -2423,7 +2310,7 @@ module Aws::OpenSearch
     class DisabledOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>DissociatePackage</code> operation.</p>
@@ -2438,7 +2325,7 @@ module Aws::OpenSearch
       :package_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by an <code>DissociatePackage</code> operation.</p>
@@ -2448,7 +2335,7 @@ module Aws::OpenSearch
     class DissociatePackageResponse < Struct.new(
       :domain_package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_list
@@ -2462,7 +2349,7 @@ module Aws::OpenSearch
       :package_list,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_package_details_list
@@ -2471,7 +2358,7 @@ module Aws::OpenSearch
     class DissociatePackagesResponse < Struct.new(
       :domain_package_details_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the configuration of an OpenSearch Service domain.</p>
@@ -2566,7 +2453,7 @@ module Aws::OpenSearch
       :modifying_properties,
       :aiml_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to configure a custom endpoint for an OpenSearch Service domain.</p>
@@ -2611,7 +2498,7 @@ module Aws::OpenSearch
       :custom_endpoint,
       :custom_endpoint_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured endpoint options for a domain and their current status.</p>
@@ -2625,14 +2512,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainHealth
-      Red = 'Red'
-      Yellow = 'Yellow'
-      Green = 'Green'
-      NotAvailable = 'NotAvailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an OpenSearch Service domain.</p>
@@ -2647,7 +2527,7 @@ module Aws::OpenSearch
       :domain_name,
       :engine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for information about an OpenSearch Service domain.</p>
@@ -2657,7 +2537,7 @@ module Aws::OpenSearch
     class DomainInformationContainer < Struct.new(
       :aws_domain_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the domain maintenance details.</p>
@@ -2695,7 +2575,7 @@ module Aws::OpenSearch
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for information about nodes on the domain.</p>
@@ -2734,7 +2614,7 @@ module Aws::OpenSearch
       :storage_volume_type,
       :storage_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a package that is associated with a domain. For more information, see
@@ -2786,31 +2666,7 @@ module Aws::OpenSearch
       :error_details,
       :association_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainPackageStatus
-      ASSOCIATING = 'ASSOCIATING'
-      ASSOCIATION_FAILED = 'ASSOCIATION_FAILED'
-      ACTIVE = 'ACTIVE'
-      DISSOCIATING = 'DISSOCIATING'
-      DISSOCIATION_FAILED = 'DISSOCIATION_FAILED'
-    end
-
-    module DomainProcessingStatusType
-      CREATING = 'Creating'
-      ACTIVE = 'Active'
-      MODIFYING = 'Modifying'
-      UPGRADING = 'UpgradingEngineVersion'
-      UPDATING = 'UpdatingServiceSoftware'
-      ISOLATED = 'Isolated'
-      DELETING = 'Deleting'
-    end
-
-    module DomainState
-      Active = 'Active'
-      Processing = 'Processing'
-      NotAvailable = 'NotAvailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of an OpenSearch Service domain.</p>
@@ -2983,12 +2839,7 @@ module Aws::OpenSearch
       :modifying_properties,
       :aiml_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DryRunMode
-      Basic = 'Basic'
-      Verbose = 'Verbose'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the progress of a pre-upgrade dry run analysis.</p>
@@ -3014,7 +2865,7 @@ module Aws::OpenSearch
       :update_date,
       :validation_failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Results of a dry run performed in an update domain request.</p>
@@ -3050,7 +2901,7 @@ module Aws::OpenSearch
       :deployment_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The duration of a maintenance schedule. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for
@@ -3065,7 +2916,7 @@ module Aws::OpenSearch
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters required to enable EBS-based storage for an OpenSearch Service
@@ -3095,7 +2946,7 @@ module Aws::OpenSearch
       :iops,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the EBS options for the specified OpenSearch Service domain.</p>
@@ -3109,7 +2960,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the domain should encrypt data at rest, and if so, the Key Management
@@ -3126,7 +2977,7 @@ module Aws::OpenSearch
       :enabled,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the encryption at rest options for the specified OpenSearch Service domain.</p>
@@ -3140,12 +2991,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngineType
-      OpenSearch = 'OpenSearch'
-      Elasticsearch = 'Elasticsearch'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the active domain environment.</p>
@@ -3155,7 +3001,7 @@ module Aws::OpenSearch
     class EnvironmentInfo < Struct.new(
       :availability_zone_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional information if the package is in an error state. Null otherwise.</p>
@@ -3169,7 +3015,7 @@ module Aws::OpenSearch
       :error_type,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to limit results when describing inbound or outbound cross-cluster
@@ -3185,7 +3031,7 @@ module Aws::OpenSearch
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3194,7 +3040,7 @@ module Aws::OpenSearch
     class GetApplicationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3241,7 +3087,7 @@ module Aws::OpenSearch
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to <code>GetCompatibleVersions</code> operation.</p>
@@ -3252,7 +3098,7 @@ module Aws::OpenSearch
     class GetCompatibleVersionsRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>GetCompatibleVersions</code> operation.</p>
@@ -3263,7 +3109,7 @@ module Aws::OpenSearch
     class GetCompatibleVersionsResponse < Struct.new(
       :compatible_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>GetDataSource</code>
@@ -3278,7 +3124,7 @@ module Aws::OpenSearch
       :domain_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>GetDataSource</code> operation.</p>
@@ -3300,7 +3146,7 @@ module Aws::OpenSearch
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_name
@@ -3312,7 +3158,7 @@ module Aws::OpenSearch
     class GetDirectQueryDataSourceRequest < Struct.new(
       :data_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_name
@@ -3350,7 +3196,7 @@ module Aws::OpenSearch
       :open_search_arns,
       :data_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>GetDomainMaintenanceStatus</code>
@@ -3365,7 +3211,7 @@ module Aws::OpenSearch
       :domain_name,
       :maintenance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>GetDomainMaintenanceStatus</code> request that information about the requested action.</p>
@@ -3395,7 +3241,7 @@ module Aws::OpenSearch
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>GetPackageVersionHistory</code> operation.</p>
@@ -3417,7 +3263,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response returned by <code>GetPackageVersionHistory</code>  operation.</p>
@@ -3437,7 +3283,7 @@ module Aws::OpenSearch
       :package_version_history_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>GetUpgradeHistory</code> operation.</p>
@@ -3458,7 +3304,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>GetUpgradeHistory</code> operation.</p>
@@ -3475,7 +3321,7 @@ module Aws::OpenSearch
       :upgrade_histories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>GetUpgradeStatus</code> operation.</p>
@@ -3485,7 +3331,7 @@ module Aws::OpenSearch
     class GetUpgradeStatusRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>GetUpgradeStatus</code> operation.</p>
@@ -3503,7 +3349,7 @@ module Aws::OpenSearch
       :step_status,
       :upgrade_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM federation authentication configuration for an Amazon OpenSearch Service domain.</p>
@@ -3523,7 +3369,7 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IAM federation options configured for the domain.</p>
@@ -3541,12 +3387,7 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IPAddressType
-      IPV4 = 'ipv4'
-      DUALSTACK = 'dualstack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IP address type status for the domain.</p>
@@ -3560,7 +3401,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for IAM Identity Center in an OpenSearch application.</p>
@@ -3586,7 +3427,7 @@ module Aws::OpenSearch
       :iam_role_for_identity_center_application_arn,
       :iam_identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for enabling and managing IAM Identity Center.</p>
@@ -3606,7 +3447,7 @@ module Aws::OpenSearch
       :iam_identity_center_instance_arn,
       :iam_role_for_identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings container for integrating IAM Identity Center with OpenSearch UI applications, 
@@ -3638,7 +3479,7 @@ module Aws::OpenSearch
       :identity_center_application_arn,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for enabling and managing IAM Identity Center.</p>
@@ -3660,7 +3501,7 @@ module Aws::OpenSearch
       :subject_key,
       :roles_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of IAM Identity Center configuration settings for a domain.</p>
@@ -3674,7 +3515,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an inbound cross-cluster connection for Amazon OpenSearch Service. For more
@@ -3702,7 +3543,7 @@ module Aws::OpenSearch
       :connection_status,
       :connection_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an inbound cross-cluster connection for OpenSearch Service.</p>
@@ -3757,23 +3598,7 @@ module Aws::OpenSearch
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InboundConnectionStatusCode
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      APPROVED = 'APPROVED'
-      PROVISIONING = 'PROVISIONING'
-      ACTIVE = 'ACTIVE'
-      REJECTING = 'REJECTING'
-      REJECTED = 'REJECTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module InitiatedBy
-      CUSTOMER = 'CUSTOMER'
-      SERVICE = 'SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Limits on the number of instances that can be created in OpenSearch Service for a given
@@ -3788,7 +3613,7 @@ module Aws::OpenSearch
       :minimum_instance_count,
       :maximum_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_instance_count] = 0 unless options.key?(:minimum_instance_count)
@@ -3804,7 +3629,7 @@ module Aws::OpenSearch
     class InstanceLimits < Struct.new(
       :instance_count_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists all instance types and available features for a given OpenSearch or Elasticsearch
@@ -3845,7 +3670,7 @@ module Aws::OpenSearch
       :instance_role,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed because of an unknown error, exception, or internal failure.</p>
@@ -3855,7 +3680,7 @@ module Aws::OpenSearch
     class InternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed because you provided an invalid pagination token.</p>
@@ -3865,7 +3690,7 @@ module Aws::OpenSearch
     class InvalidPaginationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for trying to create or access a sub-resource that's either invalid or not supported.</p>
@@ -3875,7 +3700,7 @@ module Aws::OpenSearch
     class InvalidTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The JWT authentication and authorization configuration for an Amazon OpenSearch Service domain.</p>
@@ -3897,7 +3722,7 @@ module Aws::OpenSearch
       :roles_key,
       :public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the JWT options configured for the domain.</p>
@@ -3919,7 +3744,7 @@ module Aws::OpenSearch
       :roles_key,
       :public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters to enable access to the key store required by the package.</p>
@@ -3933,7 +3758,7 @@ module Aws::OpenSearch
       :key_access_role_arn,
       :key_store_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for trying to create more than the allowed number of resources or sub-resources.</p>
@@ -3943,7 +3768,7 @@ module Aws::OpenSearch
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Limits for a given instance type and for each of its roles.</p>
@@ -3962,7 +3787,7 @@ module Aws::OpenSearch
       :instance_limits,
       :additional_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3982,7 +3807,7 @@ module Aws::OpenSearch
       :statuses,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_summaries
@@ -3997,7 +3822,7 @@ module Aws::OpenSearch
       :application_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>ListDataSources</code>
@@ -4008,7 +3833,7 @@ module Aws::OpenSearch
     class ListDataSourcesRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>ListDataSources</code> operation.</p>
@@ -4018,7 +3843,7 @@ module Aws::OpenSearch
     class ListDataSourcesResponse < Struct.new(
       :data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4029,7 +3854,7 @@ module Aws::OpenSearch
     class ListDirectQueryDataSourcesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4047,7 +3872,7 @@ module Aws::OpenSearch
       :next_token,
       :direct_query_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>ListDomainMaintenances</code>
@@ -4077,7 +3902,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>ListDomainMaintenances</code> request that contains information about the requested actions. </p>
@@ -4093,7 +3918,7 @@ module Aws::OpenSearch
       :domain_maintenances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>ListDomainNames</code> operation.</p>
@@ -4103,7 +3928,7 @@ module Aws::OpenSearch
     class ListDomainNamesRequest < Struct.new(
       :engine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of a <code>ListDomainNames</code> operation. Contains the names of all domains
@@ -4115,7 +3940,7 @@ module Aws::OpenSearch
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>ListDomainsForPackage</code> operation.</p>
@@ -4136,7 +3961,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response parameters to the <code>ListDomainsForPackage</code> operation.</p>
@@ -4152,7 +3977,7 @@ module Aws::OpenSearch
       :domain_package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_version
@@ -4185,7 +4010,7 @@ module Aws::OpenSearch
       :retrieve_a_zs,
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_type_details
@@ -4201,7 +4026,7 @@ module Aws::OpenSearch
       :instance_type_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>ListPackagesForDomain</code> operation.</p>
@@ -4222,7 +4047,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response parameters to the <code>ListPackagesForDomain</code> operation.</p>
@@ -4238,7 +4063,7 @@ module Aws::OpenSearch
       :domain_package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4258,7 +4083,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_actions
@@ -4273,7 +4098,7 @@ module Aws::OpenSearch
       :scheduled_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>ListTags</code> operation.</p>
@@ -4284,7 +4109,7 @@ module Aws::OpenSearch
     class ListTagsRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of a <code>ListTags</code> operation.</p>
@@ -4295,7 +4120,7 @@ module Aws::OpenSearch
     class ListTagsResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>ListVersions</code> operation.</p>
@@ -4312,7 +4137,7 @@ module Aws::OpenSearch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters for response received from the <code>ListVersions</code>
@@ -4330,7 +4155,7 @@ module Aws::OpenSearch
       :versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4345,7 +4170,7 @@ module Aws::OpenSearch
       :domain_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_principal_list
@@ -4361,7 +4186,7 @@ module Aws::OpenSearch
       :authorized_principal_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4376,7 +4201,7 @@ module Aws::OpenSearch
       :domain_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_summary_list
@@ -4391,7 +4216,7 @@ module Aws::OpenSearch
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4402,7 +4227,7 @@ module Aws::OpenSearch
     class ListVpcEndpointsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_summary_list
@@ -4417,7 +4242,7 @@ module Aws::OpenSearch
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the Amazon OpenSearch Service domain publishes the OpenSearch application
@@ -4436,7 +4261,7 @@ module Aws::OpenSearch
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured log publishing options for the domain and their current status.</p>
@@ -4450,57 +4275,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of log file. Can be one of the following:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>INDEX_SLOW_LOGS</b> - Index slow logs contain insert requests
-    #      that took more time than the configured index query log threshold to execute.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>SEARCH_SLOW_LOGS</b> - Search slow logs contain search
-    #      queries that took more time than the configured search query log threshold to execute.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>ES_APPLICATION_LOGS</b> - OpenSearch application logs contain
-    #      information about errors and warnings raised during the operation of the service and can be
-    #      useful for troubleshooting.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>AUDIT_LOGS</b> - Audit logs contain records of user requests
-    #      for access to the domain.</p>
-    #             </li>
-    #          </ul>
-    module LogType
-      INDEX_SLOW_LOGS = 'INDEX_SLOW_LOGS'
-      SEARCH_SLOW_LOGS = 'SEARCH_SLOW_LOGS'
-      ES_APPLICATION_LOGS = 'ES_APPLICATION_LOGS'
-      AUDIT_LOGS = 'AUDIT_LOGS'
-    end
-
-    module MaintenanceStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      TIMED_OUT = 'TIMED_OUT'
-    end
-
-    module MaintenanceType
-      REBOOT_NODE = 'REBOOT_NODE'
-      RESTART_SEARCH_PROCESS = 'RESTART_SEARCH_PROCESS'
-      RESTART_DASHBOARD = 'RESTART_DASHBOARD'
-    end
-
-    module MasterNodeStatus
-      Available = 'Available'
-      UnAvailable = 'UnAvailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Credentials for the master user for a domain.</p>
@@ -4521,7 +4296,7 @@ module Aws::OpenSearch
       :master_user_name,
       :master_user_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the domain properties that are currently being modified.</p>
@@ -4553,22 +4328,7 @@ module Aws::OpenSearch
       :pending_value,
       :value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NaturalLanguageQueryGenerationCurrentState
-      NotEnabled = 'NOT_ENABLED'
-      EnableComplete = 'ENABLE_COMPLETE'
-      EnableInProgress = 'ENABLE_IN_PROGRESS'
-      EnableFailed = 'ENABLE_FAILED'
-      DisableComplete = 'DISABLE_COMPLETE'
-      DisableInProgress = 'DISABLE_IN_PROGRESS'
-      DisableFailed = 'DISABLE_FAILED'
-    end
-
-    module NaturalLanguageQueryGenerationDesiredState
-      Enabled = 'ENABLED'
-      Disabled = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters required to enable the natural language query generation feature.</p>
@@ -4578,7 +4338,7 @@ module Aws::OpenSearch
     class NaturalLanguageQueryGenerationOptionsInput < Struct.new(
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters representing the state of the natural language query generation feature on the specified domain.</p>
@@ -4592,7 +4352,7 @@ module Aws::OpenSearch
       :desired_state,
       :current_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for defining the setup of any node type within the cluster.</p>
@@ -4610,7 +4370,7 @@ module Aws::OpenSearch
       :type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for defining the node type within a cluster.</p>
@@ -4624,17 +4384,7 @@ module Aws::OpenSearch
       :node_type,
       :node_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeOptionsNodeType
-      COORDINATOR = 'coordinator'
-    end
-
-    module NodeStatus
-      Active = 'Active'
-      StandBy = 'StandBy'
-      NotAvailable = 'NotAvailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables or disables node-to-node encryption. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html">Node-to-node encryption for Amazon OpenSearch Service</a>.</p>
@@ -4644,7 +4394,7 @@ module Aws::OpenSearch
     class NodeToNodeEncryptionOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the node-to-node encryption options for the specified domain.</p>
@@ -4658,13 +4408,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeType
-      Data = 'Data'
-      Ultrawarm = 'Ultrawarm'
-      Master = 'Master'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom 10-hour, low-traffic window during which OpenSearch Service can perform mandatory
@@ -4682,7 +4426,7 @@ module Aws::OpenSearch
     class OffPeakWindow < Struct.new(
       :window_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a domain's <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a>,
@@ -4700,7 +4444,7 @@ module Aws::OpenSearch
       :enabled,
       :off_peak_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak window</a>
@@ -4715,138 +4459,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenSearchPartitionInstanceType
-      m3_medium_search = 'm3.medium.search'
-      m3_large_search = 'm3.large.search'
-      m3_xlarge_search = 'm3.xlarge.search'
-      m3_2xlarge_search = 'm3.2xlarge.search'
-      m4_large_search = 'm4.large.search'
-      m4_xlarge_search = 'm4.xlarge.search'
-      m4_2xlarge_search = 'm4.2xlarge.search'
-      m4_4xlarge_search = 'm4.4xlarge.search'
-      m4_10xlarge_search = 'm4.10xlarge.search'
-      m5_large_search = 'm5.large.search'
-      m5_xlarge_search = 'm5.xlarge.search'
-      m5_2xlarge_search = 'm5.2xlarge.search'
-      m5_4xlarge_search = 'm5.4xlarge.search'
-      m5_12xlarge_search = 'm5.12xlarge.search'
-      m5_24xlarge_search = 'm5.24xlarge.search'
-      r5_large_search = 'r5.large.search'
-      r5_xlarge_search = 'r5.xlarge.search'
-      r5_2xlarge_search = 'r5.2xlarge.search'
-      r5_4xlarge_search = 'r5.4xlarge.search'
-      r5_12xlarge_search = 'r5.12xlarge.search'
-      r5_24xlarge_search = 'r5.24xlarge.search'
-      c5_large_search = 'c5.large.search'
-      c5_xlarge_search = 'c5.xlarge.search'
-      c5_2xlarge_search = 'c5.2xlarge.search'
-      c5_4xlarge_search = 'c5.4xlarge.search'
-      c5_9xlarge_search = 'c5.9xlarge.search'
-      c5_18xlarge_search = 'c5.18xlarge.search'
-      t3_nano_search = 't3.nano.search'
-      t3_micro_search = 't3.micro.search'
-      t3_small_search = 't3.small.search'
-      t3_medium_search = 't3.medium.search'
-      t3_large_search = 't3.large.search'
-      t3_xlarge_search = 't3.xlarge.search'
-      t3_2xlarge_search = 't3.2xlarge.search'
-      or1_medium_search = 'or1.medium.search'
-      or1_large_search = 'or1.large.search'
-      or1_xlarge_search = 'or1.xlarge.search'
-      or1_2xlarge_search = 'or1.2xlarge.search'
-      or1_4xlarge_search = 'or1.4xlarge.search'
-      or1_8xlarge_search = 'or1.8xlarge.search'
-      or1_12xlarge_search = 'or1.12xlarge.search'
-      or1_16xlarge_search = 'or1.16xlarge.search'
-      ultrawarm1_medium_search = 'ultrawarm1.medium.search'
-      ultrawarm1_large_search = 'ultrawarm1.large.search'
-      ultrawarm1_xlarge_search = 'ultrawarm1.xlarge.search'
-      t2_micro_search = 't2.micro.search'
-      t2_small_search = 't2.small.search'
-      t2_medium_search = 't2.medium.search'
-      r3_large_search = 'r3.large.search'
-      r3_xlarge_search = 'r3.xlarge.search'
-      r3_2xlarge_search = 'r3.2xlarge.search'
-      r3_4xlarge_search = 'r3.4xlarge.search'
-      r3_8xlarge_search = 'r3.8xlarge.search'
-      i2_xlarge_search = 'i2.xlarge.search'
-      i2_2xlarge_search = 'i2.2xlarge.search'
-      d2_xlarge_search = 'd2.xlarge.search'
-      d2_2xlarge_search = 'd2.2xlarge.search'
-      d2_4xlarge_search = 'd2.4xlarge.search'
-      d2_8xlarge_search = 'd2.8xlarge.search'
-      c4_large_search = 'c4.large.search'
-      c4_xlarge_search = 'c4.xlarge.search'
-      c4_2xlarge_search = 'c4.2xlarge.search'
-      c4_4xlarge_search = 'c4.4xlarge.search'
-      c4_8xlarge_search = 'c4.8xlarge.search'
-      r4_large_search = 'r4.large.search'
-      r4_xlarge_search = 'r4.xlarge.search'
-      r4_2xlarge_search = 'r4.2xlarge.search'
-      r4_4xlarge_search = 'r4.4xlarge.search'
-      r4_8xlarge_search = 'r4.8xlarge.search'
-      r4_16xlarge_search = 'r4.16xlarge.search'
-      i3_large_search = 'i3.large.search'
-      i3_xlarge_search = 'i3.xlarge.search'
-      i3_2xlarge_search = 'i3.2xlarge.search'
-      i3_4xlarge_search = 'i3.4xlarge.search'
-      i3_8xlarge_search = 'i3.8xlarge.search'
-      i3_16xlarge_search = 'i3.16xlarge.search'
-      r6g_large_search = 'r6g.large.search'
-      r6g_xlarge_search = 'r6g.xlarge.search'
-      r6g_2xlarge_search = 'r6g.2xlarge.search'
-      r6g_4xlarge_search = 'r6g.4xlarge.search'
-      r6g_8xlarge_search = 'r6g.8xlarge.search'
-      r6g_12xlarge_search = 'r6g.12xlarge.search'
-      m6g_large_search = 'm6g.large.search'
-      m6g_xlarge_search = 'm6g.xlarge.search'
-      m6g_2xlarge_search = 'm6g.2xlarge.search'
-      m6g_4xlarge_search = 'm6g.4xlarge.search'
-      m6g_8xlarge_search = 'm6g.8xlarge.search'
-      m6g_12xlarge_search = 'm6g.12xlarge.search'
-      c6g_large_search = 'c6g.large.search'
-      c6g_xlarge_search = 'c6g.xlarge.search'
-      c6g_2xlarge_search = 'c6g.2xlarge.search'
-      c6g_4xlarge_search = 'c6g.4xlarge.search'
-      c6g_8xlarge_search = 'c6g.8xlarge.search'
-      c6g_12xlarge_search = 'c6g.12xlarge.search'
-      r6gd_large_search = 'r6gd.large.search'
-      r6gd_xlarge_search = 'r6gd.xlarge.search'
-      r6gd_2xlarge_search = 'r6gd.2xlarge.search'
-      r6gd_4xlarge_search = 'r6gd.4xlarge.search'
-      r6gd_8xlarge_search = 'r6gd.8xlarge.search'
-      r6gd_12xlarge_search = 'r6gd.12xlarge.search'
-      r6gd_16xlarge_search = 'r6gd.16xlarge.search'
-      t4g_small_search = 't4g.small.search'
-      t4g_medium_search = 't4g.medium.search'
-    end
-
-    module OpenSearchWarmPartitionInstanceType
-      ultrawarm1_medium_search = 'ultrawarm1.medium.search'
-      ultrawarm1_large_search = 'ultrawarm1.large.search'
-      ultrawarm1_xlarge_search = 'ultrawarm1.xlarge.search'
-    end
-
-    # <p>The state of a requested domain configuration change. Can be one of the following:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>Processing</b> - The requested change is still in
-    #      progress.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>Active</b> - The requested change is processed and deployed
-    #      to the domain.</p>
-    #             </li>
-    #          </ul>
-    module OptionState
-      RequiresIndexDocuments = 'RequiresIndexDocuments'
-      Processing = 'Processing'
-      Active = 'Active'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the current status of an entity.</p>
@@ -4872,7 +4485,7 @@ module Aws::OpenSearch
       :state,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:update_version] = 0 unless options.key?(:update_version)
@@ -4911,7 +4524,7 @@ module Aws::OpenSearch
       :connection_mode,
       :connection_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an outbound cross-cluster connection.</p>
@@ -4974,28 +4587,7 @@ module Aws::OpenSearch
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutboundConnectionStatusCode
-      VALIDATING = 'VALIDATING'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      APPROVED = 'APPROVED'
-      PROVISIONING = 'PROVISIONING'
-      ACTIVE = 'ACTIVE'
-      REJECTING = 'REJECTING'
-      REJECTED = 'REJECTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    # <p>The overall status value of the domain configuration change.</p>
-    module OverallChangeStatus
-      PENDING = 'PENDING'
-      PROCESSING = 'PROCESSING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for associating a package with a domain.</p>
@@ -5005,7 +4597,7 @@ module Aws::OpenSearch
     class PackageAssociationConfiguration < Struct.new(
       :key_store_access_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration parameters for a package.</p>
@@ -5027,7 +4619,7 @@ module Aws::OpenSearch
       :configuration_requirement,
       :requires_restart_for_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic information about a package.</p>
@@ -5098,7 +4690,7 @@ module Aws::OpenSearch
       :package_vending_options,
       :package_encryption_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details of a package that is associated with a domain.</p>
@@ -5116,7 +4708,7 @@ module Aws::OpenSearch
       :prerequisite_package_id_list,
       :association_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encryption options for a package.</p>
@@ -5130,13 +4722,7 @@ module Aws::OpenSearch
       :kms_key_identifier,
       :encryption_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageScopeOperationEnum
-      ADD = 'ADD'
-      OVERRIDE = 'OVERRIDE'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location to import the package from.</p>
@@ -5150,25 +4736,7 @@ module Aws::OpenSearch
       :s3_bucket_name,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageStatus
-      COPYING = 'COPYING'
-      COPY_FAILED = 'COPY_FAILED'
-      VALIDATING = 'VALIDATING'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
-    module PackageType
-      TXT_DICTIONARY = 'TXT-DICTIONARY'
-      ZIP_PLUGIN = 'ZIP-PLUGIN'
-      PACKAGE_LICENSE = 'PACKAGE-LICENSE'
-      PACKAGE_CONFIG = 'PACKAGE-CONFIG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for determining whether a package can be made available for use by other users.</p>
@@ -5178,7 +4746,7 @@ module Aws::OpenSearch
     class PackageVendingOptions < Struct.new(
       :vending_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a package version.</p>
@@ -5204,7 +4772,7 @@ module Aws::OpenSearch
       :plugin_properties,
       :package_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic information about the plugin.</p>
@@ -5230,17 +4798,7 @@ module Aws::OpenSearch
       :class_name,
       :uncompressed_size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrincipalType
-      AWS_ACCOUNT = 'AWS_ACCOUNT'
-      AWS_SERVICE = 'AWS_SERVICE'
-    end
-
-    module PropertyValueType
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      STRINGIFIED_JSON = 'STRINGIFIED_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code>PurchaseReservedInstanceOffering</code>
@@ -5259,7 +4817,7 @@ module Aws::OpenSearch
       :reservation_name,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PurchaseReservedInstanceOffering</code> operation.</p>
@@ -5273,7 +4831,7 @@ module Aws::OpenSearch
       :reserved_instance_id,
       :reservation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the specific price and frequency of a recurring charges for an OpenSearch Reserved
@@ -5288,7 +4846,7 @@ module Aws::OpenSearch
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>RejectInboundConnection</code> operation.</p>
@@ -5298,7 +4856,7 @@ module Aws::OpenSearch
     class RejectInboundConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>RejectInboundConnection</code> operation.</p>
@@ -5308,7 +4866,7 @@ module Aws::OpenSearch
     class RejectInboundConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>RemoveTags</code> operation.</p>
@@ -5323,13 +4881,7 @@ module Aws::OpenSearch
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequirementLevel
-      REQUIRED = 'REQUIRED'
-      OPTIONAL = 'OPTIONAL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an OpenSearch Reserved Instance.</p>
@@ -5393,7 +4945,7 @@ module Aws::OpenSearch
       :payment_option,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -5439,18 +4991,12 @@ module Aws::OpenSearch
       :payment_option,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
         super
       end
-    end
-
-    module ReservedInstancePaymentOption
-      ALL_UPFRONT = 'ALL_UPFRONT'
-      PARTIAL_UPFRONT = 'PARTIAL_UPFRONT'
-      NO_UPFRONT = 'NO_UPFRONT'
     end
 
     # <p>An exception for creating a resource that already exists.</p>
@@ -5460,7 +5006,7 @@ module Aws::OpenSearch
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for accessing or deleting a resource that doesn't exist.</p>
@@ -5470,7 +5016,7 @@ module Aws::OpenSearch
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5487,23 +5033,12 @@ module Aws::OpenSearch
       :account,
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RevokeVpcEndpointAccessResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RolesKeyIdCOption
-      GroupName = 'GroupName'
-      GroupId = 'GroupId'
-    end
-
-    # <p>The rollback state while disabling Auto-Tune for the domain.</p>
-    module RollbackOnDisable
-      NO_ROLLBACK = 'NO_ROLLBACK'
-      DEFAULT_ROLLBACK = 'DEFAULT_ROLLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon S3 Glue Data Catalog.</p>
@@ -5513,7 +5048,7 @@ module Aws::OpenSearch
     class S3GlueDataCatalog < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for enabling S3 vectors engine features on the specified domain.</p>
@@ -5523,7 +5058,7 @@ module Aws::OpenSearch
     class S3VectorsEngine < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SAML identity povider information.</p>
@@ -5537,7 +5072,7 @@ module Aws::OpenSearch
       :metadata_content,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SAML authentication configuration for an Amazon OpenSearch Service domain.</p>
@@ -5574,7 +5109,7 @@ module Aws::OpenSearch
       :roles_key,
       :session_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the SAML application configured for the domain.</p>
@@ -5600,13 +5135,7 @@ module Aws::OpenSearch
       :roles_key,
       :session_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleAt
-      NOW = 'NOW'
-      TIMESTAMP = 'TIMESTAMP'
-      OFF_PEAK_WINDOW = 'OFF_PEAK_WINDOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a scheduled configuration change for an OpenSearch Service domain. This
@@ -5651,13 +5180,7 @@ module Aws::OpenSearch
       :mandatory,
       :cancellable,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Auto-Tune action type.</p>
-    module ScheduledAutoTuneActionType
-      JVM_HEAP_SIZE_TUNING = 'JVM_HEAP_SIZE_TUNING'
-      JVM_YOUNG_GEN_TUNING = 'JVM_YOUNG_GEN_TUNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details about a scheduled Auto-Tune action. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html">Auto-Tune for
@@ -5681,19 +5204,7 @@ module Aws::OpenSearch
       :action,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The Auto-Tune action severity.</p>
-    module ScheduledAutoTuneSeverityType
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module ScheduledBy
-      CUSTOMER = 'CUSTOMER'
-      SYSTEM = 'SYSTEM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5709,7 +5220,7 @@ module Aws::OpenSearch
     class SecurityLakeDirectQueryDataSource < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of the service software for an Amazon OpenSearch Service domain. For more
@@ -5753,25 +5264,7 @@ module Aws::OpenSearch
       :automated_update_date,
       :optional_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of <code>SkipUnavailable</code> setting for the outbound connection.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>ENABLED</b> - The <code>SkipUnavailable</code> setting is enabled
-    #      for the connection.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>DISABLED</b> - The <code>SkipUnavailable</code> setting is disabled
-    #      for the connection.</p>
-    #             </li>
-    #          </ul>
-    module SkipUnavailableStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for attempting to schedule a domain action during an unavailable time slot.</p>
@@ -5785,7 +5278,7 @@ module Aws::OpenSearch
       :slot_suggestions,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time, in UTC format, when OpenSearch Service takes a daily automated snapshot of the
@@ -5797,7 +5290,7 @@ module Aws::OpenSearch
     class SnapshotOptions < Struct.new(
       :automated_snapshot_start_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for information about a daily automated snapshot for an OpenSearch Service
@@ -5812,7 +5305,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for configuring service software updates for a domain.</p>
@@ -5822,7 +5315,7 @@ module Aws::OpenSearch
     class SoftwareUpdateOptions < Struct.new(
       :auto_software_update_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the service software options for a domain.</p>
@@ -5836,7 +5329,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>StartDomainMaintenance</code>
@@ -5855,7 +5348,7 @@ module Aws::OpenSearch
       :action,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>StartDomainMaintenance</code> request that information about the requested action. </p>
@@ -5865,7 +5358,7 @@ module Aws::OpenSearch
     class StartDomainMaintenanceResponse < Struct.new(
       :maintenance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>StartServiceSoftwareUpdate</code>
@@ -5905,7 +5398,7 @@ module Aws::OpenSearch
       :schedule_at,
       :desired_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>StartServiceSoftwareUpdate</code> operation. Contains the
@@ -5916,7 +5409,7 @@ module Aws::OpenSearch
     class StartServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of storage types for an Amazon OpenSearch Service domain that are available for a
@@ -5935,7 +5428,7 @@ module Aws::OpenSearch
       :storage_sub_type_name,
       :storage_type_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Limits that are applicable for the given Amazon OpenSearch Service storage type.</p>
@@ -5982,19 +5475,7 @@ module Aws::OpenSearch
       :limit_name,
       :limit_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubjectKeyIdCOption
-      UserName = 'UserName'
-      UserId = 'UserId'
-      Email = 'Email'
-    end
-
-    module TLSSecurityPolicy
-      POLICY_MIN_TLS_1_0_2019_07 = 'Policy-Min-TLS-1-0-2019-07'
-      POLICY_MIN_TLS_1_2_2019_07 = 'Policy-Min-TLS-1-2-2019-07'
-      POLICY_MIN_TLS_1_2_PFS_2023_10 = 'Policy-Min-TLS-1-2-PFS-2023-10'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag (key-value pair) for an Amazon OpenSearch Service resource.</p>
@@ -6011,12 +5492,7 @@ module Aws::OpenSearch
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The unit of a maintenance schedule duration. Valid value is <code>HOUR</code>.</p>
-    module TimeUnit
-      HOURS = 'HOURS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6033,7 +5509,7 @@ module Aws::OpenSearch
       :data_sources,
       :app_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6072,7 +5548,7 @@ module Aws::OpenSearch
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>UpdateDataSource</code>
@@ -6099,7 +5575,7 @@ module Aws::OpenSearch
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an <code>UpdateDataSource</code> operation.</p>
@@ -6109,7 +5585,7 @@ module Aws::OpenSearch
     class UpdateDataSourceResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_name
@@ -6142,7 +5618,7 @@ module Aws::OpenSearch
       :description,
       :open_search_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_arn
@@ -6153,7 +5629,7 @@ module Aws::OpenSearch
     class UpdateDirectQueryDataSourceResponse < Struct.new(
       :data_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>UpdateDomain</code> operation.</p>
@@ -6290,7 +5766,7 @@ module Aws::OpenSearch
       :software_update_options,
       :aiml_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of an <code>UpdateDomain</code> request. Contains the status of the domain being
@@ -6309,7 +5785,7 @@ module Aws::OpenSearch
       :dry_run_results,
       :dry_run_progress_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code>UpdatePackage</code> operation.</p>
@@ -6340,7 +5816,7 @@ module Aws::OpenSearch
       :package_configuration,
       :package_encryption_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by the <code>UpdatePackage</code> operation.</p>
@@ -6350,7 +5826,7 @@ module Aws::OpenSearch
     class UpdatePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -6367,7 +5843,7 @@ module Aws::OpenSearch
       :operation,
       :package_user_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -6384,7 +5860,7 @@ module Aws::OpenSearch
       :operation,
       :package_user_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6429,7 +5905,7 @@ module Aws::OpenSearch
       :schedule_at,
       :desired_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action
@@ -6438,7 +5914,7 @@ module Aws::OpenSearch
     class UpdateScheduledActionResponse < Struct.new(
       :scheduled_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_id
@@ -6451,7 +5927,7 @@ module Aws::OpenSearch
       :vpc_endpoint_id,
       :vpc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint
@@ -6460,7 +5936,7 @@ module Aws::OpenSearch
     class UpdateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the request parameters to the <code>UpgradeDomain</code> operation.</p>
@@ -6487,7 +5963,7 @@ module Aws::OpenSearch
       :perform_check_only,
       :advanced_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the response returned by <code>UpgradeDomain</code> operation.</p>
@@ -6517,7 +5993,7 @@ module Aws::OpenSearch
       :advanced_options,
       :change_progress_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>History of the last 10 upgrades and upgrade eligibility checks for an Amazon OpenSearch
@@ -6555,20 +6031,7 @@ module Aws::OpenSearch
       :upgrade_status,
       :steps_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpgradeStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      SUCCEEDED_WITH_ISSUES = 'SUCCEEDED_WITH_ISSUES'
-      FAILED = 'FAILED'
-    end
-
-    module UpgradeStep
-      PRE_UPGRADE_CHECK = 'PRE_UPGRADE_CHECK'
-      SNAPSHOT = 'SNAPSHOT'
-      UPGRADE = 'UPGRADE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single step of an upgrade or upgrade eligibility check workflow.</p>
@@ -6615,7 +6078,7 @@ module Aws::OpenSearch
       :issues,
       :progress_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the subnets and security groups for an Amazon OpenSearch Service domain
@@ -6640,7 +6103,7 @@ module Aws::OpenSearch
       :availability_zones,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the VPC options for a specified domain.</p>
@@ -6654,7 +6117,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to specify the subnets and security groups for an Amazon OpenSearch Service VPC
@@ -6673,7 +6136,7 @@ module Aws::OpenSearch
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for accessing or deleting a resource that doesn't exist.</p>
@@ -6683,7 +6146,7 @@ module Aws::OpenSearch
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation failure that occurred as the result of a pre-update validation check (verbose
@@ -6698,7 +6161,7 @@ module Aws::OpenSearch
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the the OpenSearch or Elasticsearch version options for the specified Amazon
@@ -6713,15 +6176,7 @@ module Aws::OpenSearch
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of EBS volume that a domain uses. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/opensearch-createupdatedomains.html#opensearch-createdomain-configure-ebs">Configuring EBS-based storage</a>.</p>
-    module VolumeType
-      standard = 'standard'
-      gp2 = 'gp2'
-      io1 = 'io1'
-      gp3 = 'gp3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection endpoint for connecting to an Amazon OpenSearch Service domain through a
@@ -6753,7 +6208,7 @@ module Aws::OpenSearch
       :status,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information when attempting to describe an Amazon OpenSearch Service-managed VPC
@@ -6772,22 +6227,7 @@ module Aws::OpenSearch
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcEndpointErrorCode
-      ENDPOINT_NOT_FOUND = 'ENDPOINT_NOT_FOUND'
-      SERVER_ERROR = 'SERVER_ERROR'
-    end
-
-    module VpcEndpointStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an Amazon OpenSearch Service-managed VPC endpoint.</p>
@@ -6809,7 +6249,7 @@ module Aws::OpenSearch
       :domain_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The desired start time for an <a href="https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_OffPeakWindow.html">off-peak maintenance
@@ -6825,7 +6265,7 @@ module Aws::OpenSearch
       :hours,
       :minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:hours] = 0 unless options.key?(:hours)
@@ -6843,13 +6283,7 @@ module Aws::OpenSearch
     class ZoneAwarenessConfig < Struct.new(
       :availability_zone_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ZoneStatus
-      Active = 'Active'
-      StandBy = 'StandBy'
-      NotAvailable = 'NotAvailable'
+      include ::Smithy::Schema::Structure
     end
 
   end

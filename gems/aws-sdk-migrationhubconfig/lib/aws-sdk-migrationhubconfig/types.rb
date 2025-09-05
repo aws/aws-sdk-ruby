@@ -12,7 +12,7 @@ module Aws::MigrationHubConfig
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_region
@@ -31,7 +31,7 @@ module Aws::MigrationHubConfig
       :target,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_region_control
@@ -41,7 +41,7 @@ module Aws::MigrationHubConfig
     class CreateHomeRegionControlResult < Struct.new(
       :home_region_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_id
@@ -51,12 +51,12 @@ module Aws::MigrationHubConfig
     class DeleteHomeRegionControlRequest < Struct.new(
       :control_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteHomeRegionControlResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_id
@@ -86,7 +86,7 @@ module Aws::MigrationHubConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_region_controls
@@ -101,7 +101,7 @@ module Aws::MigrationHubConfig
       :home_region_controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised to indicate that authorization of an action was successful, when the
@@ -111,12 +111,12 @@ module Aws::MigrationHubConfig
     class DryRunOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetHomeRegionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_region
@@ -125,7 +125,7 @@ module Aws::MigrationHubConfig
     class GetHomeRegionResult < Struct.new(
       :home_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A home region control is an object that specifies the home region for an account, with
@@ -154,7 +154,7 @@ module Aws::MigrationHubConfig
       :target,
       :requested_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when an internal, configuration, or dependency error is
@@ -164,7 +164,7 @@ module Aws::MigrationHubConfig
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when the provided input violates a policy constraint or is entered in the
@@ -174,7 +174,7 @@ module Aws::MigrationHubConfig
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when a request fails due to temporary unavailability of the
@@ -184,7 +184,7 @@ module Aws::MigrationHubConfig
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target parameter specifies the identifier to which the home region is applied, which
@@ -201,11 +201,7 @@ module Aws::MigrationHubConfig
       :type,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      ACCOUNT = 'ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -218,7 +214,7 @@ module Aws::MigrationHubConfig
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)

@@ -28,7 +28,7 @@ module Aws::ServiceDiscovery
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -38,7 +38,7 @@ module Aws::ServiceDiscovery
     class CreateHttpNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -73,7 +73,7 @@ module Aws::ServiceDiscovery
       :tags,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -83,7 +83,7 @@ module Aws::ServiceDiscovery
     class CreatePrivateDnsNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -116,7 +116,7 @@ module Aws::ServiceDiscovery
       :tags,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -126,7 +126,7 @@ module Aws::ServiceDiscovery
     class CreatePublicDnsNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -213,7 +213,7 @@ module Aws::ServiceDiscovery
       :tags,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -222,7 +222,7 @@ module Aws::ServiceDiscovery
     class CreateServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The health check for the instance that's specified by <code>ServiceId</code> and <code>InstanceId</code>
@@ -232,12 +232,7 @@ module Aws::ServiceDiscovery
     class CustomHealthNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomHealthStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -246,7 +241,7 @@ module Aws::ServiceDiscovery
     class DeleteNamespaceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -256,7 +251,7 @@ module Aws::ServiceDiscovery
     class DeleteNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -269,12 +264,12 @@ module Aws::ServiceDiscovery
       :service_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -283,12 +278,12 @@ module Aws::ServiceDiscovery
     class DeleteServiceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -301,7 +296,7 @@ module Aws::ServiceDiscovery
       :service_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -311,7 +306,7 @@ module Aws::ServiceDiscovery
     class DeregisterInstanceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_name
@@ -371,7 +366,7 @@ module Aws::ServiceDiscovery
       :optional_parameters,
       :health_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -386,7 +381,7 @@ module Aws::ServiceDiscovery
       :instances,
       :instances_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_name
@@ -400,7 +395,7 @@ module Aws::ServiceDiscovery
       :namespace_name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances_revision
@@ -411,7 +406,7 @@ module Aws::ServiceDiscovery
     class DiscoverInstancesRevisionResponse < Struct.new(
       :instances_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the Amazon Route 53 DNS records that you want Cloud Map to create
@@ -477,7 +472,7 @@ module Aws::ServiceDiscovery
       :routing_policy,
       :dns_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about changes to the Route 53 DNS records that Cloud Map creates
@@ -489,7 +484,7 @@ module Aws::ServiceDiscovery
     class DnsConfigChange < Struct.new(
       :dns_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the ID for the Route 53 hosted zone that Cloud Map creates when you create a
@@ -504,7 +499,7 @@ module Aws::ServiceDiscovery
       :hosted_zone_id,
       :soa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the Route 53 DNS records that you want Cloud Map to create
@@ -653,7 +648,7 @@ module Aws::ServiceDiscovery
       :type,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is already in progress.</p>
@@ -666,14 +661,7 @@ module Aws::ServiceDiscovery
       :message,
       :duplicate_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterCondition
-      EQ = 'EQ'
-      IN = 'IN'
-      BETWEEN = 'BETWEEN'
-      BEGINS_WITH = 'BEGINS_WITH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -686,7 +674,7 @@ module Aws::ServiceDiscovery
       :service_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance
@@ -695,7 +683,7 @@ module Aws::ServiceDiscovery
     class GetInstanceResponse < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -726,7 +714,7 @@ module Aws::ServiceDiscovery
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -742,7 +730,7 @@ module Aws::ServiceDiscovery
       :status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -751,7 +739,7 @@ module Aws::ServiceDiscovery
     class GetNamespaceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -760,7 +748,7 @@ module Aws::ServiceDiscovery
     class GetNamespaceResponse < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -769,7 +757,7 @@ module Aws::ServiceDiscovery
     class GetOperationRequest < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation
@@ -778,7 +766,7 @@ module Aws::ServiceDiscovery
     class GetOperationResponse < Struct.new(
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -787,7 +775,7 @@ module Aws::ServiceDiscovery
     class GetServiceAttributesRequest < Struct.new(
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_attributes
@@ -796,7 +784,7 @@ module Aws::ServiceDiscovery
     class GetServiceAttributesResponse < Struct.new(
       :service_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -805,7 +793,7 @@ module Aws::ServiceDiscovery
     class GetServiceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -814,7 +802,7 @@ module Aws::ServiceDiscovery
     class GetServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -928,7 +916,7 @@ module Aws::ServiceDiscovery
       :resource_path,
       :failure_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about an optional custom health check. A custom health check,
@@ -999,26 +987,7 @@ module Aws::ServiceDiscovery
     class HealthCheckCustomConfig < Struct.new(
       :failure_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthCheckType
-      HTTP = 'HTTP'
-      HTTPS = 'HTTPS'
-      TCP = 'TCP'
-    end
-
-    module HealthStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module HealthStatusFilter
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-      ALL = 'ALL'
-      HEALTHY_OR_ELSE_ALL = 'HEALTHY_OR_ELSE_ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a response to a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html">DiscoverInstances</a> request, <code>HttpInstanceSummary</code> contains information about one instance
@@ -1051,7 +1020,7 @@ module Aws::ServiceDiscovery
       :health_status,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated properties for the HTTP
@@ -1063,7 +1032,7 @@ module Aws::ServiceDiscovery
     class HttpNamespaceChange < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the name of an HTTP namespace.</p>
@@ -1073,7 +1042,7 @@ module Aws::ServiceDiscovery
     class HttpProperties < Struct.new(
       :http_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about an instance that Cloud Map creates when you submit a
@@ -1211,7 +1180,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No instance exists with the specified ID, or the instance was recently registered, and information about
@@ -1221,7 +1190,7 @@ module Aws::ServiceDiscovery
     class InstanceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the instances that you registered by using a specified
@@ -1285,7 +1254,7 @@ module Aws::ServiceDiscovery
       :id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more specified values aren't valid. For example, a required value might be missing, a numeric value
@@ -1295,7 +1264,7 @@ module Aws::ServiceDiscovery
     class InvalidInput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -1317,7 +1286,7 @@ module Aws::ServiceDiscovery
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -1332,7 +1301,7 @@ module Aws::ServiceDiscovery
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1362,7 +1331,7 @@ module Aws::ServiceDiscovery
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespaces
@@ -1384,7 +1353,7 @@ module Aws::ServiceDiscovery
       :namespaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1415,7 +1384,7 @@ module Aws::ServiceDiscovery
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operations
@@ -1436,7 +1405,7 @@ module Aws::ServiceDiscovery
       :operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1465,7 +1434,7 @@ module Aws::ServiceDiscovery
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -1486,7 +1455,7 @@ module Aws::ServiceDiscovery
       :services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1495,7 +1464,7 @@ module Aws::ServiceDiscovery
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1504,7 +1473,7 @@ module Aws::ServiceDiscovery
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a specified namespace.</p>
@@ -1567,7 +1536,7 @@ module Aws::ServiceDiscovery
       :create_date,
       :creator_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The namespace that you're trying to create already exists.</p>
@@ -1584,7 +1553,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :namespace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that identifies the namespaces that you want to list. You can choose to list public or
@@ -1649,13 +1618,7 @@ module Aws::ServiceDiscovery
       :values,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamespaceFilterName
-      TYPE = 'TYPE'
-      NAME = 'NAME'
-      HTTP_NAME = 'HTTP_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No namespace exists with the specified ID.</p>
@@ -1664,7 +1627,7 @@ module Aws::ServiceDiscovery
     class NamespaceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information that's specific to the namespace type.</p>
@@ -1679,7 +1642,7 @@ module Aws::ServiceDiscovery
       :dns_properties,
       :http_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a namespace.</p>
@@ -1718,13 +1681,7 @@ module Aws::ServiceDiscovery
       :properties,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamespaceType
-      DNS_PUBLIC = 'DNS_PUBLIC'
-      DNS_PRIVATE = 'DNS_PRIVATE'
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a specified operation.</p>
@@ -1836,7 +1793,7 @@ module Aws::ServiceDiscovery
       :update_date,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that lets you select the operations that you want to list.</p>
@@ -1925,15 +1882,7 @@ module Aws::ServiceDiscovery
       :values,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationFilterName
-      NAMESPACE_ID = 'NAMESPACE_ID'
-      SERVICE_ID = 'SERVICE_ID'
-      STATUS = 'STATUS'
-      TYPE = 'TYPE'
-      UPDATE_DATE = 'UPDATE_DATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No operation exists with the specified ID.</p>
@@ -1942,14 +1891,7 @@ module Aws::ServiceDiscovery
     class OperationNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationStatus
-      SUBMITTED = 'SUBMITTED'
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      FAIL = 'FAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about an operation that matches the criteria that you specified in
@@ -1985,22 +1927,7 @@ module Aws::ServiceDiscovery
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationTargetType
-      NAMESPACE = 'NAMESPACE'
-      SERVICE = 'SERVICE'
-      INSTANCE = 'INSTANCE'
-    end
-
-    module OperationType
-      CREATE_NAMESPACE = 'CREATE_NAMESPACE'
-      DELETE_NAMESPACE = 'DELETE_NAMESPACE'
-      UPDATE_NAMESPACE = 'UPDATE_NAMESPACE'
-      UPDATE_SERVICE = 'UPDATE_SERVICE'
-      REGISTER_INSTANCE = 'REGISTER_INSTANCE'
-      DEREGISTER_INSTANCE = 'DEREGISTER_INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated properties for the private
@@ -2017,7 +1944,7 @@ module Aws::ServiceDiscovery
       :description,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DNS properties for the private DNS
@@ -2029,7 +1956,7 @@ module Aws::ServiceDiscovery
     class PrivateDnsNamespaceProperties < Struct.new(
       :dns_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated properties for the private
@@ -2041,7 +1968,7 @@ module Aws::ServiceDiscovery
     class PrivateDnsNamespacePropertiesChange < Struct.new(
       :dns_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DNS properties for the private DNS
@@ -2053,7 +1980,7 @@ module Aws::ServiceDiscovery
     class PrivateDnsPropertiesMutable < Struct.new(
       :soa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated DNS properties for the
@@ -2065,7 +1992,7 @@ module Aws::ServiceDiscovery
     class PrivateDnsPropertiesMutableChange < Struct.new(
       :soa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated properties for the public
@@ -2082,7 +2009,7 @@ module Aws::ServiceDiscovery
       :description,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DNS properties for the public DNS
@@ -2094,7 +2021,7 @@ module Aws::ServiceDiscovery
     class PublicDnsNamespaceProperties < Struct.new(
       :dns_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated properties for the public
@@ -2106,7 +2033,7 @@ module Aws::ServiceDiscovery
     class PublicDnsNamespacePropertiesChange < Struct.new(
       :dns_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DNS properties for the public DNS
@@ -2118,7 +2045,7 @@ module Aws::ServiceDiscovery
     class PublicDnsPropertiesMutable < Struct.new(
       :soa,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated DNS properties for the
@@ -2130,14 +2057,7 @@ module Aws::ServiceDiscovery
     class PublicDnsPropertiesMutableChange < Struct.new(
       :soa,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordType
-      SRV = 'SRV'
-      A = 'A'
-      AAAA = 'AAAA'
-      CNAME = 'CNAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -2295,7 +2215,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2305,7 +2225,7 @@ module Aws::ServiceDiscovery
     class RegisterInstanceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation can't be completed because you've reached the quota for the number of requests. For more
@@ -2316,7 +2236,7 @@ module Aws::ServiceDiscovery
     class RequestLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource can't be deleted because it contains other resources. For example, you can't delete
@@ -2326,7 +2246,7 @@ module Aws::ServiceDiscovery
     class ResourceInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource can't be created because you've reached the quota on the number of resources.</p>
@@ -2335,7 +2255,7 @@ module Aws::ServiceDiscovery
     class ResourceLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation can't be completed because the resource was not found.</p>
@@ -2344,12 +2264,7 @@ module Aws::ServiceDiscovery
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingPolicy
-      MULTIVALUE = 'MULTIVALUE'
-      WEIGHTED = 'WEIGHTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Start of Authority (SOA) properties
@@ -2361,7 +2276,7 @@ module Aws::ServiceDiscovery
     class SOA < Struct.new(
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updated Start of Authority (SOA)
@@ -2373,7 +2288,7 @@ module Aws::ServiceDiscovery
     class SOAChange < Struct.new(
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the specified service.</p>
@@ -2462,7 +2377,7 @@ module Aws::ServiceDiscovery
       :create_date,
       :creator_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service can't be created because a service with the same name already exists.</p>
@@ -2479,7 +2394,7 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about attributes associated with a specific service.</p>
@@ -2503,7 +2418,7 @@ module Aws::ServiceDiscovery
       :service_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attribute can't be added to the service because you've exceeded the quota for the number of attributes you can add to a service.</p>
@@ -2512,7 +2427,7 @@ module Aws::ServiceDiscovery
     class ServiceAttributesLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains changes to an existing service.</p>
@@ -2534,7 +2449,7 @@ module Aws::ServiceDiscovery
       :dns_config,
       :health_check_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that lets you specify the namespaces that you want to list services for.</p>
@@ -2561,11 +2476,7 @@ module Aws::ServiceDiscovery
       :values,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceFilterName
-      NAMESPACE_ID = 'NAMESPACE_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No service exists with the specified ID.</p>
@@ -2574,7 +2485,7 @@ module Aws::ServiceDiscovery
     class ServiceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a specified service.</p>
@@ -2658,17 +2569,7 @@ module Aws::ServiceDiscovery
       :health_check_custom_config,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceType
-      HTTP = 'HTTP'
-      DNS_HTTP = 'DNS_HTTP'
-      DNS = 'DNS'
-    end
-
-    module ServiceTypeOption
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom key-value pair that's associated with a resource.</p>
@@ -2683,7 +2584,7 @@ module Aws::ServiceDiscovery
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2697,12 +2598,12 @@ module Aws::ServiceDiscovery
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags on the resource is over the quota. The maximum number of tags that can be applied to a
@@ -2716,7 +2617,7 @@ module Aws::ServiceDiscovery
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2729,12 +2630,12 @@ module Aws::ServiceDiscovery
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2756,7 +2657,7 @@ module Aws::ServiceDiscovery
       :updater_request_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2766,7 +2667,7 @@ module Aws::ServiceDiscovery
     class UpdateHttpNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -2784,7 +2685,7 @@ module Aws::ServiceDiscovery
       :instance_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2806,7 +2707,7 @@ module Aws::ServiceDiscovery
       :updater_request_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2816,7 +2717,7 @@ module Aws::ServiceDiscovery
     class UpdatePrivateDnsNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2838,7 +2739,7 @@ module Aws::ServiceDiscovery
       :updater_request_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2848,7 +2749,7 @@ module Aws::ServiceDiscovery
     class UpdatePublicDnsNamespaceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_id
@@ -2861,12 +2762,12 @@ module Aws::ServiceDiscovery
       :service_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2879,7 +2780,7 @@ module Aws::ServiceDiscovery
       :id,
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2889,7 +2790,7 @@ module Aws::ServiceDiscovery
     class UpdateServiceResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

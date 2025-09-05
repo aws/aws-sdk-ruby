@@ -70,7 +70,7 @@ module Aws::GlobalAccelerator
       :dual_stack_dns_name,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of an accelerator.</p>
@@ -96,7 +96,7 @@ module Aws::GlobalAccelerator
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains a <code>Timestamp</code> value and <code>Message</code> for changes 
@@ -114,7 +114,7 @@ module Aws::GlobalAccelerator
       :message,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accelerator that you specified could not be disabled.</p>
@@ -123,7 +123,7 @@ module Aws::GlobalAccelerator
     class AcceleratorNotDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accelerator that you specified doesn't exist.</p>
@@ -132,12 +132,7 @@ module Aws::GlobalAccelerator
     class AcceleratorNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorStatus
-      DEPLOYED = 'DEPLOYED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have access permission.</p>
@@ -146,7 +141,7 @@ module Aws::GlobalAccelerator
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_configurations
@@ -159,7 +154,7 @@ module Aws::GlobalAccelerator
       :endpoint_configurations,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_descriptions
@@ -172,7 +167,7 @@ module Aws::GlobalAccelerator
       :endpoint_descriptions,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_configurations
@@ -185,7 +180,7 @@ module Aws::GlobalAccelerator
       :endpoint_configurations,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_descriptions
@@ -198,7 +193,7 @@ module Aws::GlobalAccelerator
       :endpoint_descriptions,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -211,7 +206,7 @@ module Aws::GlobalAccelerator
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -220,7 +215,7 @@ module Aws::GlobalAccelerator
     class AdvertiseByoipCidrResponse < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -256,7 +251,7 @@ module Aws::GlobalAccelerator
       :destination_ports,
       :allow_all_traffic_to_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The listener that you specified has an endpoint group associated with it. You must remove all dependent resources
@@ -266,7 +261,7 @@ module Aws::GlobalAccelerator
     class AssociatedEndpointGroupFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accelerator that you specified has a listener associated with it. You must remove all dependent resources from an
@@ -276,7 +271,7 @@ module Aws::GlobalAccelerator
     class AssociatedListenerFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cross-account attachment in Global Accelerator. A cross-account attachment
@@ -308,7 +303,7 @@ module Aws::GlobalAccelerator
       :last_modified_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No cross-account attachment was found.</p>
@@ -317,7 +312,7 @@ module Aws::GlobalAccelerator
     class AttachmentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an IP address range that is provisioned for use with your Amazon Web Services resources through 
@@ -408,7 +403,7 @@ module Aws::GlobalAccelerator
       :state,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes 
@@ -426,7 +421,7 @@ module Aws::GlobalAccelerator
       :message,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR that you specified was not found or is incorrect.</p>
@@ -435,21 +430,7 @@ module Aws::GlobalAccelerator
     class ByoipCidrNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ByoipCidrState
-      PENDING_PROVISIONING = 'PENDING_PROVISIONING'
-      READY = 'READY'
-      PENDING_ADVERTISING = 'PENDING_ADVERTISING'
-      ADVERTISING = 'ADVERTISING'
-      PENDING_WITHDRAWING = 'PENDING_WITHDRAWING'
-      PENDING_DEPROVISIONING = 'PENDING_DEPROVISIONING'
-      DEPROVISIONED = 'DEPROVISIONED'
-      FAILED_PROVISION = 'FAILED_PROVISION'
-      FAILED_ADVERTISING = 'FAILED_ADVERTISING'
-      FAILED_WITHDRAW = 'FAILED_WITHDRAW'
-      FAILED_DEPROVISION = 'FAILED_DEPROVISION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides authorization for Amazon to bring a specific IP address range to a specific Amazon Web Services 
@@ -466,12 +447,7 @@ module Aws::GlobalAccelerator
       :message,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientAffinity
-      NONE = 'NONE'
-      SOURCE_IP = 'SOURCE_IP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't use both of those options.</p>
@@ -480,7 +456,7 @@ module Aws::GlobalAccelerator
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -525,7 +501,7 @@ module Aws::GlobalAccelerator
       :idempotency_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -534,7 +510,7 @@ module Aws::GlobalAccelerator
     class CreateAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -565,7 +541,7 @@ module Aws::GlobalAccelerator
       :idempotency_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cross_account_attachment
@@ -574,7 +550,7 @@ module Aws::GlobalAccelerator
     class CreateCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -619,7 +595,7 @@ module Aws::GlobalAccelerator
       :idempotency_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -628,7 +604,7 @@ module Aws::GlobalAccelerator
     class CreateCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -652,7 +628,7 @@ module Aws::GlobalAccelerator
       :destination_configurations,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group
@@ -661,7 +637,7 @@ module Aws::GlobalAccelerator
     class CreateCustomRoutingEndpointGroupResponse < Struct.new(
       :endpoint_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -681,7 +657,7 @@ module Aws::GlobalAccelerator
       :port_ranges,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -690,7 +666,7 @@ module Aws::GlobalAccelerator
     class CreateCustomRoutingListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -755,7 +731,7 @@ module Aws::GlobalAccelerator
       :idempotency_token,
       :port_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group
@@ -764,7 +740,7 @@ module Aws::GlobalAccelerator
     class CreateEndpointGroupResponse < Struct.new(
       :endpoint_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -801,7 +777,7 @@ module Aws::GlobalAccelerator
       :client_affinity,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -810,7 +786,7 @@ module Aws::GlobalAccelerator
     class CreateListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An endpoint (Amazon Web Services resource) or an IP address range, in CIDR format, that is 
@@ -840,7 +816,7 @@ module Aws::GlobalAccelerator
       :cidr,
       :attachment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of a custom routing accelerator.</p>
@@ -891,7 +867,7 @@ module Aws::GlobalAccelerator
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of a custom routing accelerator.</p>
@@ -918,12 +894,7 @@ module Aws::GlobalAccelerator
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomRoutingAcceleratorStatus
-      DEPLOYED = 'DEPLOYED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a custom routing accelerator, sets the port range and protocol for all endpoints (virtual
@@ -942,7 +913,7 @@ module Aws::GlobalAccelerator
       :to_port,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a custom routing accelerator, describes the port range and protocol for all endpoints
@@ -961,12 +932,7 @@ module Aws::GlobalAccelerator
       :to_port,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomRoutingDestinationTrafficState
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of endpoint objects. For custom routing, this is a list of virtual private cloud (VPC) subnet IDs.</p>
@@ -982,7 +948,7 @@ module Aws::GlobalAccelerator
       :endpoint_id,
       :attachment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for an endpoint for a custom routing accelerator. Each endpoint group can include one or more endpoints, 
@@ -994,7 +960,7 @@ module Aws::GlobalAccelerator
     class CustomRoutingEndpointDescription < Struct.new(
       :endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for the endpoint group for a custom routing accelerator. An Amazon Web Services Region can have only one endpoint group for a specific listener.
@@ -1019,7 +985,7 @@ module Aws::GlobalAccelerator
       :destination_descriptions,
       :endpoint_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for a listener for a custom routing accelerator.</p>
@@ -1035,12 +1001,7 @@ module Aws::GlobalAccelerator
       :listener_arn,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomRoutingProtocol
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1049,7 +1010,7 @@ module Aws::GlobalAccelerator
     class DeleteAcceleratorRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_arn
@@ -1058,7 +1019,7 @@ module Aws::GlobalAccelerator
     class DeleteCrossAccountAttachmentRequest < Struct.new(
       :attachment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1067,7 +1028,7 @@ module Aws::GlobalAccelerator
     class DeleteCustomRoutingAcceleratorRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -1076,7 +1037,7 @@ module Aws::GlobalAccelerator
     class DeleteCustomRoutingEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1085,7 +1046,7 @@ module Aws::GlobalAccelerator
     class DeleteCustomRoutingListenerRequest < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -1094,7 +1055,7 @@ module Aws::GlobalAccelerator
     class DeleteEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1103,7 +1064,7 @@ module Aws::GlobalAccelerator
     class DeleteListenerRequest < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -1138,7 +1099,7 @@ module Aws::GlobalAccelerator
       :destination_ports,
       :deny_all_traffic_to_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -1151,7 +1112,7 @@ module Aws::GlobalAccelerator
     class DeprovisionByoipCidrRequest < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -1160,7 +1121,7 @@ module Aws::GlobalAccelerator
     class DeprovisionByoipCidrResponse < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1169,7 +1130,7 @@ module Aws::GlobalAccelerator
     class DescribeAcceleratorAttributesRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_attributes
@@ -1178,7 +1139,7 @@ module Aws::GlobalAccelerator
     class DescribeAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1187,7 +1148,7 @@ module Aws::GlobalAccelerator
     class DescribeAcceleratorRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -1196,7 +1157,7 @@ module Aws::GlobalAccelerator
     class DescribeAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_arn
@@ -1205,7 +1166,7 @@ module Aws::GlobalAccelerator
     class DescribeCrossAccountAttachmentRequest < Struct.new(
       :attachment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cross_account_attachment
@@ -1214,7 +1175,7 @@ module Aws::GlobalAccelerator
     class DescribeCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1223,7 +1184,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingAcceleratorAttributesRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_attributes
@@ -1232,7 +1193,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1241,7 +1202,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingAcceleratorRequest < Struct.new(
       :accelerator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -1250,7 +1211,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -1259,7 +1220,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group
@@ -1268,7 +1229,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingEndpointGroupResponse < Struct.new(
       :endpoint_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1277,7 +1238,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingListenerRequest < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -1286,7 +1247,7 @@ module Aws::GlobalAccelerator
     class DescribeCustomRoutingListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -1295,7 +1256,7 @@ module Aws::GlobalAccelerator
     class DescribeEndpointGroupRequest < Struct.new(
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group
@@ -1304,7 +1265,7 @@ module Aws::GlobalAccelerator
     class DescribeEndpointGroupResponse < Struct.new(
       :endpoint_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1313,7 +1274,7 @@ module Aws::GlobalAccelerator
     class DescribeListenerRequest < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -1322,7 +1283,7 @@ module Aws::GlobalAccelerator
     class DescribeListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The port mappings for a specified endpoint IP address (destination).</p>
@@ -1363,7 +1324,7 @@ module Aws::GlobalAccelerator
       :ip_address_type,
       :destination_traffic_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint that you specified doesn't exist.</p>
@@ -1372,7 +1333,7 @@ module Aws::GlobalAccelerator
     class EndpointAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for endpoints. A resource must be valid and active when you add it as an endpoint.</p>
@@ -1411,7 +1372,7 @@ module Aws::GlobalAccelerator
       :client_ip_preservation_enabled,
       :attachment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load
@@ -1453,7 +1414,7 @@ module Aws::GlobalAccelerator
       :health_reason,
       :client_ip_preservation_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for the endpoint group. An Amazon Web Services Region can have only one endpoint group for a specific listener.
@@ -1512,7 +1473,7 @@ module Aws::GlobalAccelerator
       :threshold_count,
       :port_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint group that you specified already exists.</p>
@@ -1521,7 +1482,7 @@ module Aws::GlobalAccelerator
     class EndpointGroupAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint group that you specified doesn't exist.</p>
@@ -1530,7 +1491,7 @@ module Aws::GlobalAccelerator
     class EndpointGroupNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for an endpoint. Specifies information about the endpoint to remove from the endpoint group.</p>
@@ -1549,7 +1510,7 @@ module Aws::GlobalAccelerator
       :endpoint_id,
       :client_ip_preservation_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint that you specified doesn't exist.</p>
@@ -1558,19 +1519,7 @@ module Aws::GlobalAccelerator
     class EndpointNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthCheckProtocol
-      TCP = 'TCP'
-      HTTP = 'HTTP'
-      HTTPS = 'HTTPS'
-    end
-
-    module HealthState
-      INITIAL = 'INITIAL'
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR that you specified is not valid for this action. For example, the state of the CIDR might be
@@ -1580,7 +1529,7 @@ module Aws::GlobalAccelerator
     class IncorrectCidrStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal error for Global Accelerator.</p>
@@ -1589,7 +1538,7 @@ module Aws::GlobalAccelerator
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An argument that you specified is invalid.</p>
@@ -1598,7 +1547,7 @@ module Aws::GlobalAccelerator
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There isn't another item to return.</p>
@@ -1607,7 +1556,7 @@ module Aws::GlobalAccelerator
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The port numbers that you specified are not valid numbers or are not unique for this accelerator.</p>
@@ -1616,17 +1565,7 @@ module Aws::GlobalAccelerator
     class InvalidPortRangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressFamily
-      IPv4 = 'IPv4'
-      IPv6 = 'IPv6'
-    end
-
-    module IpAddressType
-      IPV4 = 'IPV4'
-      DUAL_STACK = 'DUAL_STACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for the set of IP addresses for an accelerator.</p>
@@ -1646,7 +1585,7 @@ module Aws::GlobalAccelerator
       :ip_addresses,
       :ip_address_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing your request would cause you to exceed an Global Accelerator limit.</p>
@@ -1655,7 +1594,7 @@ module Aws::GlobalAccelerator
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1668,7 +1607,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerators
@@ -1681,7 +1620,7 @@ module Aws::GlobalAccelerator
       :accelerators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1695,7 +1634,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidrs
@@ -1708,7 +1647,7 @@ module Aws::GlobalAccelerator
       :byoip_cidrs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1721,7 +1660,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cross_account_attachments
@@ -1734,12 +1673,12 @@ module Aws::GlobalAccelerator
       :cross_account_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ListCrossAccountResourceAccountsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_owner_aws_account_ids
@@ -1749,7 +1688,7 @@ module Aws::GlobalAccelerator
     class ListCrossAccountResourceAccountsResponse < Struct.new(
       :resource_owner_aws_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1770,7 +1709,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cross_account_resources
@@ -1783,7 +1722,7 @@ module Aws::GlobalAccelerator
       :cross_account_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1796,7 +1735,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerators
@@ -1809,7 +1748,7 @@ module Aws::GlobalAccelerator
       :accelerators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1826,7 +1765,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_groups
@@ -1839,7 +1778,7 @@ module Aws::GlobalAccelerator
       :endpoint_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1856,7 +1795,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listeners
@@ -1869,7 +1808,7 @@ module Aws::GlobalAccelerator
       :listeners,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_id
@@ -1891,7 +1830,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_port_mappings
@@ -1904,7 +1843,7 @@ module Aws::GlobalAccelerator
       :destination_port_mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1925,7 +1864,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute port_mappings
@@ -1938,7 +1877,7 @@ module Aws::GlobalAccelerator
       :port_mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1955,7 +1894,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_groups
@@ -1968,7 +1907,7 @@ module Aws::GlobalAccelerator
       :endpoint_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -1985,7 +1924,7 @@ module Aws::GlobalAccelerator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listeners
@@ -1998,7 +1937,7 @@ module Aws::GlobalAccelerator
       :listeners,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2007,7 +1946,7 @@ module Aws::GlobalAccelerator
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2016,7 +1955,7 @@ module Aws::GlobalAccelerator
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for a listener.</p>
@@ -2049,7 +1988,7 @@ module Aws::GlobalAccelerator
       :protocol,
       :client_affinity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The listener that you specified doesn't exist.</p>
@@ -2058,7 +1997,7 @@ module Aws::GlobalAccelerator
     class ListenerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the ports and associated IP addresses and ports of Amazon EC2 instances in your virtual
@@ -2092,7 +2031,7 @@ module Aws::GlobalAccelerator
       :protocols,
       :destination_traffic_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Override specific listener ports used to route traffic to endpoints that are part of an endpoint group.
@@ -2113,7 +2052,7 @@ module Aws::GlobalAccelerator
       :listener_port,
       :endpoint_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type for a range of ports for a listener.</p>
@@ -2127,12 +2066,7 @@ module Aws::GlobalAccelerator
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -2152,7 +2086,7 @@ module Aws::GlobalAccelerator
       :cidr,
       :cidr_authorization_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -2161,7 +2095,7 @@ module Aws::GlobalAccelerator
     class ProvisionByoipCidrResponse < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_ids
@@ -2175,7 +2109,7 @@ module Aws::GlobalAccelerator
       :endpoint_ids,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_identifiers
@@ -2188,7 +2122,7 @@ module Aws::GlobalAccelerator
       :endpoint_identifiers,
       :endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource is one of the following: the ARN for an Amazon Web Services resource that is supported by 
@@ -2214,7 +2148,7 @@ module Aws::GlobalAccelerator
       :cidr,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:endpoint_id] = '' unless options.key?(:endpoint_id)
@@ -2233,7 +2167,7 @@ module Aws::GlobalAccelerator
       :ip_address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains a <code>Tag</code> key and <code>Tag</code> value.</p>
@@ -2247,7 +2181,7 @@ module Aws::GlobalAccelerator
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2260,12 +2194,12 @@ module Aws::GlobalAccelerator
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There's already a transaction in progress. Another transaction can't be processed.</p>
@@ -2274,7 +2208,7 @@ module Aws::GlobalAccelerator
     class TransactionInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2287,12 +2221,12 @@ module Aws::GlobalAccelerator
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -2322,7 +2256,7 @@ module Aws::GlobalAccelerator
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_attributes
@@ -2331,7 +2265,7 @@ module Aws::GlobalAccelerator
     class UpdateAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -2358,7 +2292,7 @@ module Aws::GlobalAccelerator
       :ip_addresses,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -2367,7 +2301,7 @@ module Aws::GlobalAccelerator
     class UpdateAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_arn
@@ -2406,7 +2340,7 @@ module Aws::GlobalAccelerator
       :add_resources,
       :remove_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cross_account_attachment
@@ -2415,7 +2349,7 @@ module Aws::GlobalAccelerator
     class UpdateCrossAccountAttachmentResponse < Struct.new(
       :cross_account_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -2445,7 +2379,7 @@ module Aws::GlobalAccelerator
       :flow_logs_s3_bucket,
       :flow_logs_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_attributes
@@ -2454,7 +2388,7 @@ module Aws::GlobalAccelerator
     class UpdateCustomRoutingAcceleratorAttributesResponse < Struct.new(
       :accelerator_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator_arn
@@ -2481,7 +2415,7 @@ module Aws::GlobalAccelerator
       :ip_addresses,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accelerator
@@ -2490,7 +2424,7 @@ module Aws::GlobalAccelerator
     class UpdateCustomRoutingAcceleratorResponse < Struct.new(
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -2506,7 +2440,7 @@ module Aws::GlobalAccelerator
       :listener_arn,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -2515,7 +2449,7 @@ module Aws::GlobalAccelerator
     class UpdateCustomRoutingListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group_arn
@@ -2570,7 +2504,7 @@ module Aws::GlobalAccelerator
       :threshold_count,
       :port_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_group
@@ -2579,7 +2513,7 @@ module Aws::GlobalAccelerator
     class UpdateEndpointGroupResponse < Struct.new(
       :endpoint_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -2611,7 +2545,7 @@ module Aws::GlobalAccelerator
       :protocol,
       :client_affinity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener
@@ -2620,7 +2554,7 @@ module Aws::GlobalAccelerator
     class UpdateListenerResponse < Struct.new(
       :listener,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -2632,7 +2566,7 @@ module Aws::GlobalAccelerator
     class WithdrawByoipCidrRequest < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -2641,7 +2575,7 @@ module Aws::GlobalAccelerator
     class WithdrawByoipCidrResponse < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -21,7 +21,7 @@ module Aws::Pinpoint
       :client_secret,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the ADM (Amazon Device Messaging) channel for an application.</p>
@@ -67,7 +67,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a one-time message that's sent directly to an endpoint through the ADM (Amazon Device Messaging) channel.</p>
@@ -137,7 +137,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the APNs (Apple Push Notification service) channel for an application.</p>
@@ -175,7 +175,7 @@ module Aws::Pinpoint
       :token_key,
       :token_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the APNs (Apple Push Notification service) channel for an application.</p>
@@ -229,7 +229,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a one-time message that's sent directly to an endpoint through the APNs (Apple Push Notification service) channel.</p>
@@ -307,7 +307,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies channel-specific content and settings for a message template that can be used in push notifications that are sent through the APNs (Apple Push Notification service) channel.</p>
@@ -341,7 +341,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.</p>
@@ -379,7 +379,7 @@ module Aws::Pinpoint
       :token_key,
       :token_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the APNs (Apple Push Notification service) sandbox channel for an application.</p>
@@ -433,7 +433,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.</p>
@@ -471,7 +471,7 @@ module Aws::Pinpoint
       :token_key,
       :token_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP channel for an application.</p>
@@ -525,7 +525,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the APNs (Apple Push Notification service) VoIP sandbox channel for an application.</p>
@@ -563,7 +563,7 @@ module Aws::Pinpoint
       :token_key,
       :token_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the APNs (Apple Push Notification service) VoIP sandbox channel for an application.</p>
@@ -617,13 +617,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Action
-      OPEN_APP = 'OPEN_APP'
-      DEEP_LINK = 'DEEP_LINK'
-      URL = 'URL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the activities that were performed by a campaign.</p>
@@ -637,7 +631,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration and other settings for an activity in a journey.</p>
@@ -687,7 +681,7 @@ module Aws::Pinpoint
       :wait,
       :contact_center,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an activity that was performed by a campaign.</p>
@@ -749,7 +743,7 @@ module Aws::Pinpoint
       :treatment_id,
       :execution_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies address-based configuration settings for a message that's sent directly to an endpoint.</p>
@@ -779,13 +773,7 @@ module Aws::Pinpoint
       :substitutions,
       :title_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Alignment
-      LEFT = 'LEFT'
-      CENTER = 'CENTER'
-      RIGHT = 'RIGHT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies channel-specific content and settings for a message template that can be used in push notifications that are sent through the ADM (Amazon Device Messaging), Baidu (Baidu Cloud Push), or GCM (Firebase Cloud Messaging, formerly Google Cloud Messaging) channel.</p>
@@ -827,7 +815,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.</p>
@@ -857,7 +845,7 @@ module Aws::Pinpoint
       :next_token,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an application.</p>
@@ -883,7 +871,7 @@ module Aws::Pinpoint
       :tags,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default sending limits for journeys in the application. To override these limits and define custom limits for a specific journey, use the Journey resource.</p>
@@ -901,7 +889,7 @@ module Aws::Pinpoint
       :timeframe_cap,
       :total_cap,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an application, including the default settings for an application.</p>
@@ -931,7 +919,7 @@ module Aws::Pinpoint
       :quiet_time,
       :journey_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all of your applications.</p>
@@ -945,7 +933,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies attribute-based criteria for including or excluding endpoints from a segment.</p>
@@ -959,17 +947,7 @@ module Aws::Pinpoint
       :attribute_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
-      CONTAINS = 'CONTAINS'
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
-      ON = 'ON'
-      BETWEEN = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the type and the names of attributes that were removed from all the endpoints that are associated with an application.</p>
@@ -987,7 +965,7 @@ module Aws::Pinpoint
       :attribute_type,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -1001,7 +979,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
@@ -1019,7 +997,7 @@ module Aws::Pinpoint
       :enabled,
       :secret_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the Baidu (Baidu Cloud Push) channel for an application.</p>
@@ -1069,7 +1047,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a one-time message that's sent directly to an endpoint through the Baidu (Baidu Cloud Push) channel.</p>
@@ -1131,7 +1109,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.</p>
@@ -1141,13 +1119,7 @@ module Aws::Pinpoint
     class BaseKpiResult < Struct.new(
       :rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ButtonAction
-      LINK = 'LINK'
-      DEEP_LINK = 'DEEP_LINK'
-      CLOSE = 'CLOSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the contents of a message that's sent through a custom channel to recipients of a campaign.</p>
@@ -1157,7 +1129,7 @@ module Aws::Pinpoint
     class CampaignCustomMessage < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard metric that applies to a campaign, and provides information about that query.</p>
@@ -1191,7 +1163,7 @@ module Aws::Pinpoint
       :next_token,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and "From" address for an email message that's sent to recipients of a campaign.</p>
@@ -1217,7 +1189,7 @@ module Aws::Pinpoint
       :html_body,
       :title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for events that cause a campaign to be sent.</p>
@@ -1231,7 +1203,7 @@ module Aws::Pinpoint
       :dimensions,
       :filter_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.</p>
@@ -1249,7 +1221,7 @@ module Aws::Pinpoint
       :mode,
       :web_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In-app message configuration.</p>
@@ -1271,7 +1243,7 @@ module Aws::Pinpoint
       :custom_config,
       :layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.</p>
@@ -1297,7 +1269,7 @@ module Aws::Pinpoint
       :total,
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status, configuration, and other settings for a campaign.</p>
@@ -1403,7 +1375,7 @@ module Aws::Pinpoint
       :version,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for an SMS message that's sent to recipients of a campaign.</p>
@@ -1433,7 +1405,7 @@ module Aws::Pinpoint
       :entity_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status of a campaign.</p>
@@ -1443,17 +1415,7 @@ module Aws::Pinpoint
     class CampaignState < Struct.new(
       :campaign_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CampaignStatus
-      SCHEDULED = 'SCHEDULED'
-      EXECUTING = 'EXECUTING'
-      PENDING_NEXT_RUN = 'PENDING_NEXT_RUN'
-      COMPLETED = 'COMPLETED'
-      PAUSED = 'PAUSED'
-      DELETED = 'DELETED'
-      INVALID = 'INVALID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the configuration and other settings for all the campaigns that are associated with an application.</p>
@@ -1467,7 +1429,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the general settings and status of a channel for an application.</p>
@@ -1509,23 +1471,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelType
-      PUSH = 'PUSH'
-      GCM = 'GCM'
-      APNS = 'APNS'
-      APNS_SANDBOX = 'APNS_SANDBOX'
-      APNS_VOIP = 'APNS_VOIP'
-      APNS_VOIP_SANDBOX = 'APNS_VOIP_SANDBOX'
-      ADM = 'ADM'
-      SMS = 'SMS'
-      VOICE = 'VOICE'
-      EMAIL = 'EMAIL'
-      BAIDU = 'BAIDU'
-      CUSTOM = 'CUSTOM'
-      IN_APP = 'IN_APP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the general settings and status of all channels for an application, including channels that aren't enabled for the application.</p>
@@ -1535,7 +1481,7 @@ module Aws::Pinpoint
     class ChannelsResponse < Struct.new(
       :channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>
@@ -1561,7 +1507,7 @@ module Aws::Pinpoint
       :voice,
       :custom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the rule settings for when messages can't be sent.</p>
@@ -1579,7 +1525,7 @@ module Aws::Pinpoint
       :start_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the conditions to evaluate for an activity in a journey, and how to evaluate those conditions.</p>
@@ -1593,7 +1539,7 @@ module Aws::Pinpoint
       :conditions,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p> <note><p>To create yes/no split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>
@@ -1615,7 +1561,7 @@ module Aws::Pinpoint
       :false_activity,
       :true_activity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -1629,7 +1575,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_activity
@@ -1638,7 +1584,7 @@ module Aws::Pinpoint
     class ContactCenterActivity < Struct.new(
       :next_activity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_application_request
@@ -1647,7 +1593,7 @@ module Aws::Pinpoint
     class CreateAppRequest < Struct.new(
       :create_application_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_response
@@ -1656,7 +1602,7 @@ module Aws::Pinpoint
     class CreateAppResponse < Struct.new(
       :application_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the display name of an application and the tags to associate with the application.</p>
@@ -1670,7 +1616,7 @@ module Aws::Pinpoint
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1683,7 +1629,7 @@ module Aws::Pinpoint
       :application_id,
       :write_campaign_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_response
@@ -1692,7 +1638,7 @@ module Aws::Pinpoint
     class CreateCampaignResponse < Struct.new(
       :campaign_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_template_request
@@ -1705,7 +1651,7 @@ module Aws::Pinpoint
       :email_template_request,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_template_message_body
@@ -1714,7 +1660,7 @@ module Aws::Pinpoint
     class CreateEmailTemplateResponse < Struct.new(
       :create_template_message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1727,7 +1673,7 @@ module Aws::Pinpoint
       :application_id,
       :export_job_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_response
@@ -1736,7 +1682,7 @@ module Aws::Pinpoint
     class CreateExportJobResponse < Struct.new(
       :export_job_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1749,7 +1695,7 @@ module Aws::Pinpoint
       :application_id,
       :import_job_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_response
@@ -1758,7 +1704,7 @@ module Aws::Pinpoint
     class CreateImportJobResponse < Struct.new(
       :import_job_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute in_app_template_request
@@ -1771,7 +1717,7 @@ module Aws::Pinpoint
       :in_app_template_request,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_create_message_body
@@ -1780,7 +1726,7 @@ module Aws::Pinpoint
     class CreateInAppTemplateResponse < Struct.new(
       :template_create_message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1793,7 +1739,7 @@ module Aws::Pinpoint
       :application_id,
       :write_journey_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_response
@@ -1802,7 +1748,7 @@ module Aws::Pinpoint
     class CreateJourneyResponse < Struct.new(
       :journey_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute push_notification_template_request
@@ -1815,7 +1761,7 @@ module Aws::Pinpoint
       :push_notification_template_request,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_template_message_body
@@ -1824,7 +1770,7 @@ module Aws::Pinpoint
     class CreatePushTemplateResponse < Struct.new(
       :create_template_message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_recommender_configuration
@@ -1833,7 +1779,7 @@ module Aws::Pinpoint
     class CreateRecommenderConfigurationRequest < Struct.new(
       :create_recommender_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_configuration_response
@@ -1842,7 +1788,7 @@ module Aws::Pinpoint
     class CreateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>
@@ -1884,7 +1830,7 @@ module Aws::Pinpoint
       :recommendations_display_name,
       :recommendations_per_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1897,7 +1843,7 @@ module Aws::Pinpoint
       :application_id,
       :write_segment_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_response
@@ -1906,7 +1852,7 @@ module Aws::Pinpoint
     class CreateSegmentResponse < Struct.new(
       :segment_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_template_request
@@ -1919,7 +1865,7 @@ module Aws::Pinpoint
       :sms_template_request,
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_template_message_body
@@ -1928,7 +1874,7 @@ module Aws::Pinpoint
     class CreateSmsTemplateResponse < Struct.new(
       :create_template_message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a request to create a message template.</p>
@@ -1946,7 +1892,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -1959,7 +1905,7 @@ module Aws::Pinpoint
       :template_name,
       :voice_template_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_template_message_body
@@ -1968,7 +1914,7 @@ module Aws::Pinpoint
     class CreateVoiceTemplateResponse < Struct.new(
       :create_template_message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the delivery configuration settings for sending a campaign or campaign treatment through a custom channel. This object is required if you use the CampaignCustomMessage object to define the message to send for the campaign or campaign treatment.</p>
@@ -1982,7 +1928,7 @@ module Aws::Pinpoint
       :delivery_uri,
       :endpoint_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.</p>
@@ -2012,17 +1958,7 @@ module Aws::Pinpoint
       :template_name,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DayOfWeek
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Default button configuration.</p>
@@ -2052,7 +1988,7 @@ module Aws::Pinpoint
       :text,
       :text_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default message for all channels.</p>
@@ -2066,7 +2002,7 @@ module Aws::Pinpoint
       :body,
       :substitutions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default settings and content for a push notification that's sent directly to an endpoint.</p>
@@ -2100,7 +2036,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default settings and content for a message template that can be used in messages that are sent through a push notification channel.</p>
@@ -2126,7 +2062,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2135,7 +2071,7 @@ module Aws::Pinpoint
     class DeleteAdmChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adm_channel_response
@@ -2144,7 +2080,7 @@ module Aws::Pinpoint
     class DeleteAdmChannelResponse < Struct.new(
       :adm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2153,7 +2089,7 @@ module Aws::Pinpoint
     class DeleteApnsChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_channel_response
@@ -2162,7 +2098,7 @@ module Aws::Pinpoint
     class DeleteApnsChannelResponse < Struct.new(
       :apns_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2171,7 +2107,7 @@ module Aws::Pinpoint
     class DeleteApnsSandboxChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_sandbox_channel_response
@@ -2180,7 +2116,7 @@ module Aws::Pinpoint
     class DeleteApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2189,7 +2125,7 @@ module Aws::Pinpoint
     class DeleteApnsVoipChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_channel_response
@@ -2198,7 +2134,7 @@ module Aws::Pinpoint
     class DeleteApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2207,7 +2143,7 @@ module Aws::Pinpoint
     class DeleteApnsVoipSandboxChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_sandbox_channel_response
@@ -2216,7 +2152,7 @@ module Aws::Pinpoint
     class DeleteApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2225,7 +2161,7 @@ module Aws::Pinpoint
     class DeleteAppRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_response
@@ -2234,7 +2170,7 @@ module Aws::Pinpoint
     class DeleteAppResponse < Struct.new(
       :application_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2243,7 +2179,7 @@ module Aws::Pinpoint
     class DeleteBaiduChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baidu_channel_response
@@ -2252,7 +2188,7 @@ module Aws::Pinpoint
     class DeleteBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2265,7 +2201,7 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_response
@@ -2274,7 +2210,7 @@ module Aws::Pinpoint
     class DeleteCampaignResponse < Struct.new(
       :campaign_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2283,7 +2219,7 @@ module Aws::Pinpoint
     class DeleteEmailChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_channel_response
@@ -2292,7 +2228,7 @@ module Aws::Pinpoint
     class DeleteEmailChannelResponse < Struct.new(
       :email_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2305,7 +2241,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -2314,7 +2250,7 @@ module Aws::Pinpoint
     class DeleteEmailTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2327,7 +2263,7 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_response
@@ -2336,7 +2272,7 @@ module Aws::Pinpoint
     class DeleteEndpointResponse < Struct.new(
       :endpoint_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2345,7 +2281,7 @@ module Aws::Pinpoint
     class DeleteEventStreamRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_stream
@@ -2354,7 +2290,7 @@ module Aws::Pinpoint
     class DeleteEventStreamResponse < Struct.new(
       :event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2363,7 +2299,7 @@ module Aws::Pinpoint
     class DeleteGcmChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gcm_channel_response
@@ -2372,7 +2308,7 @@ module Aws::Pinpoint
     class DeleteGcmChannelResponse < Struct.new(
       :gcm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2385,7 +2321,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -2394,7 +2330,7 @@ module Aws::Pinpoint
     class DeleteInAppTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2407,7 +2343,7 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_response
@@ -2416,7 +2352,7 @@ module Aws::Pinpoint
     class DeleteJourneyResponse < Struct.new(
       :journey_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2429,7 +2365,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -2438,7 +2374,7 @@ module Aws::Pinpoint
     class DeletePushTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_id
@@ -2447,7 +2383,7 @@ module Aws::Pinpoint
     class DeleteRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_configuration_response
@@ -2456,7 +2392,7 @@ module Aws::Pinpoint
     class DeleteRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2469,7 +2405,7 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_response
@@ -2478,7 +2414,7 @@ module Aws::Pinpoint
     class DeleteSegmentResponse < Struct.new(
       :segment_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2487,7 +2423,7 @@ module Aws::Pinpoint
     class DeleteSmsChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_channel_response
@@ -2496,7 +2432,7 @@ module Aws::Pinpoint
     class DeleteSmsChannelResponse < Struct.new(
       :sms_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2509,7 +2445,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -2518,7 +2454,7 @@ module Aws::Pinpoint
     class DeleteSmsTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2531,7 +2467,7 @@ module Aws::Pinpoint
       :application_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints_response
@@ -2540,7 +2476,7 @@ module Aws::Pinpoint
     class DeleteUserEndpointsResponse < Struct.new(
       :endpoints_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2549,7 +2485,7 @@ module Aws::Pinpoint
     class DeleteVoiceChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_channel_response
@@ -2558,7 +2494,7 @@ module Aws::Pinpoint
     class DeleteVoiceChannelResponse < Struct.new(
       :voice_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -2571,7 +2507,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -2580,22 +2516,7 @@ module Aws::Pinpoint
     class DeleteVoiceTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryStatus
-      SUCCESSFUL = 'SUCCESSFUL'
-      THROTTLED = 'THROTTLED'
-      TEMPORARY_FAILURE = 'TEMPORARY_FAILURE'
-      PERMANENT_FAILURE = 'PERMANENT_FAILURE'
-      UNKNOWN_FAILURE = 'UNKNOWN_FAILURE'
-      OPT_OUT = 'OPT_OUT'
-      DUPLICATE = 'DUPLICATE'
-    end
-
-    module DimensionType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings and content for the default message and any default messages that you tailored for specific channels.</p>
@@ -2637,14 +2558,7 @@ module Aws::Pinpoint
       :sms_message,
       :voice_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Duration
-      HR_24 = 'HR_24'
-      DAY_7 = 'DAY_7'
-      DAY_14 = 'DAY_14'
-      DAY_30 = 'DAY_30'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the email channel for an application.</p>
@@ -2674,7 +2588,7 @@ module Aws::Pinpoint
       :role_arn,
       :orchestration_sending_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the email channel for an application.</p>
@@ -2744,7 +2658,7 @@ module Aws::Pinpoint
       :orchestration_sending_role_arn,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default settings and content for a one-time email message that's sent directly to an endpoint.</p>
@@ -2778,7 +2692,7 @@ module Aws::Pinpoint
       :simple_email,
       :substitutions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for an email activity in a journey. This type of activity sends an email message to participants.</p>
@@ -2800,7 +2714,7 @@ module Aws::Pinpoint
       :template_name,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.</p>
@@ -2838,7 +2752,7 @@ module Aws::Pinpoint
       :template_description,
       :text_part,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the content and settings for a message template that can be used in messages that are sent through the email channel.</p>
@@ -2900,7 +2814,7 @@ module Aws::Pinpoint
       :text_part,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an endpoint to create or update and the settings and attributes to set or change for the endpoint.</p>
@@ -2954,7 +2868,7 @@ module Aws::Pinpoint
       :request_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a batch of endpoints to create or update and the settings and attributes to set or change for each endpoint.</p>
@@ -2964,7 +2878,7 @@ module Aws::Pinpoint
     class EndpointBatchRequest < Struct.new(
       :item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies demographic information about an endpoint, such as the applicable time zone and platform.</p>
@@ -3002,7 +2916,7 @@ module Aws::Pinpoint
       :platform_version,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the status code and message that result from processing data for an endpoint.</p>
@@ -3016,7 +2930,7 @@ module Aws::Pinpoint
       :message,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies geographic information about an endpoint.</p>
@@ -3046,7 +2960,7 @@ module Aws::Pinpoint
       :postal_code,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the delivery status and results of sending a message directly to an endpoint.</p>
@@ -3076,7 +2990,7 @@ module Aws::Pinpoint
       :status_message,
       :updated_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the channel type and other settings for an endpoint.</p>
@@ -3126,7 +3040,7 @@ module Aws::Pinpoint
       :request_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the channel type and other settings for an endpoint.</p>
@@ -3192,7 +3106,7 @@ module Aws::Pinpoint
       :request_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content, including message variables and attributes, to use in a message that's sent directly to an endpoint.</p>
@@ -3218,7 +3132,7 @@ module Aws::Pinpoint
       :substitutions,
       :title_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies data for one or more attributes that describe the user who's associated with an endpoint.</p>
@@ -3232,7 +3146,7 @@ module Aws::Pinpoint
       :user_attributes,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the endpoints that are associated with a user ID.</p>
@@ -3242,7 +3156,7 @@ module Aws::Pinpoint
     class EndpointsResponse < Struct.new(
       :item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies information about an event that reports data to Amazon Pinpoint.</p>
@@ -3288,7 +3202,7 @@ module Aws::Pinpoint
       :session,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the conditions to evaluate for an event that applies to an activity in a journey.</p>
@@ -3302,7 +3216,7 @@ module Aws::Pinpoint
       :dimensions,
       :message_activity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the dimensions for an event filter that determines when a campaign is sent or a journey activity is performed.</p>
@@ -3320,7 +3234,7 @@ module Aws::Pinpoint
       :event_type,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for an event that causes a campaign to be sent or a journey activity to be performed.</p>
@@ -3334,7 +3248,7 @@ module Aws::Pinpoint
       :dimensions,
       :filter_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the status code and message that result from processing an event.</p>
@@ -3348,7 +3262,7 @@ module Aws::Pinpoint
       :message,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for an event that causes a journey activity to start.</p>
@@ -3361,7 +3275,7 @@ module Aws::Pinpoint
       :event_filter,
       :segment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies settings for publishing event data to an Amazon Kinesis data stream or an Amazon Kinesis Data Firehose delivery stream.</p>
@@ -3393,7 +3307,7 @@ module Aws::Pinpoint
       :last_updated_by,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a batch of endpoints and events to process.</p>
@@ -3407,7 +3321,7 @@ module Aws::Pinpoint
       :endpoint,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a batch of events to process.</p>
@@ -3417,7 +3331,7 @@ module Aws::Pinpoint
     class EventsRequest < Struct.new(
       :batch_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about endpoints and the events that they're associated with.</p>
@@ -3427,7 +3341,7 @@ module Aws::Pinpoint
     class EventsResponse < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a job that exports endpoint definitions to an Amazon Simple Storage Service (Amazon S3) bucket.</p>
@@ -3449,7 +3363,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the resource settings for a job that exports endpoint definitions to a file. The file can be added directly to an Amazon Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or downloaded directly to a computer by using the Amazon Pinpoint console.</p>
@@ -3471,7 +3385,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of a job that exports endpoint definitions to a file. The file can be added directly to an Amazon Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or downloaded directly to a computer by using the Amazon Pinpoint console.</p>
@@ -3529,7 +3443,7 @@ module Aws::Pinpoint
       :total_processed,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the export jobs that are associated with an application or segment. An export job is a job that exports endpoint definitions to a file.</p>
@@ -3543,12 +3457,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterType
-      SYSTEM = 'SYSTEM'
-      ENDPOINT = 'ENDPOINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -3562,22 +3471,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      CSV = 'CSV'
-      JSON = 'JSON'
-    end
-
-    module Frequency
-      ONCE = 'ONCE'
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
-      EVENT = 'EVENT'
-      IN_APP_EVENT = 'IN_APP_EVENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
@@ -3599,7 +3493,7 @@ module Aws::Pinpoint
       :enabled,
       :service_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
@@ -3657,7 +3551,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a one-time message that's sent directly to an endpoint through the GCM channel. The GCM channel enables Amazon Pinpoint to send messages to the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>
@@ -3735,7 +3629,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the GPS coordinates of a location.</p>
@@ -3749,7 +3643,7 @@ module Aws::Pinpoint
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies GPS-based criteria for including or excluding endpoints from a segment.</p>
@@ -3763,7 +3657,7 @@ module Aws::Pinpoint
       :coordinates,
       :range_in_kilometers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3772,7 +3666,7 @@ module Aws::Pinpoint
     class GetAdmChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adm_channel_response
@@ -3781,7 +3675,7 @@ module Aws::Pinpoint
     class GetAdmChannelResponse < Struct.new(
       :adm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3790,7 +3684,7 @@ module Aws::Pinpoint
     class GetApnsChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_channel_response
@@ -3799,7 +3693,7 @@ module Aws::Pinpoint
     class GetApnsChannelResponse < Struct.new(
       :apns_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3808,7 +3702,7 @@ module Aws::Pinpoint
     class GetApnsSandboxChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_sandbox_channel_response
@@ -3817,7 +3711,7 @@ module Aws::Pinpoint
     class GetApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3826,7 +3720,7 @@ module Aws::Pinpoint
     class GetApnsVoipChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_channel_response
@@ -3835,7 +3729,7 @@ module Aws::Pinpoint
     class GetApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3844,7 +3738,7 @@ module Aws::Pinpoint
     class GetApnsVoipSandboxChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_sandbox_channel_response
@@ -3853,7 +3747,7 @@ module Aws::Pinpoint
     class GetApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3862,7 +3756,7 @@ module Aws::Pinpoint
     class GetAppRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_response
@@ -3871,7 +3765,7 @@ module Aws::Pinpoint
     class GetAppResponse < Struct.new(
       :application_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3900,7 +3794,7 @@ module Aws::Pinpoint
       :page_size,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_date_range_kpi_response
@@ -3909,7 +3803,7 @@ module Aws::Pinpoint
     class GetApplicationDateRangeKpiResponse < Struct.new(
       :application_date_range_kpi_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3918,7 +3812,7 @@ module Aws::Pinpoint
     class GetApplicationSettingsRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_settings_resource
@@ -3927,7 +3821,7 @@ module Aws::Pinpoint
     class GetApplicationSettingsResponse < Struct.new(
       :application_settings_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -3940,7 +3834,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications_response
@@ -3949,7 +3843,7 @@ module Aws::Pinpoint
     class GetAppsResponse < Struct.new(
       :applications_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3958,7 +3852,7 @@ module Aws::Pinpoint
     class GetBaiduChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baidu_channel_response
@@ -3967,7 +3861,7 @@ module Aws::Pinpoint
     class GetBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3988,7 +3882,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities_response
@@ -3997,7 +3891,7 @@ module Aws::Pinpoint
     class GetCampaignActivitiesResponse < Struct.new(
       :activities_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4030,7 +3924,7 @@ module Aws::Pinpoint
       :page_size,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_date_range_kpi_response
@@ -4039,7 +3933,7 @@ module Aws::Pinpoint
     class GetCampaignDateRangeKpiResponse < Struct.new(
       :campaign_date_range_kpi_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4052,7 +3946,7 @@ module Aws::Pinpoint
       :application_id,
       :campaign_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_response
@@ -4061,7 +3955,7 @@ module Aws::Pinpoint
     class GetCampaignResponse < Struct.new(
       :campaign_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4078,7 +3972,7 @@ module Aws::Pinpoint
       :campaign_id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_response
@@ -4087,7 +3981,7 @@ module Aws::Pinpoint
     class GetCampaignVersionResponse < Struct.new(
       :campaign_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4108,7 +4002,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaigns_response
@@ -4117,7 +4011,7 @@ module Aws::Pinpoint
     class GetCampaignVersionsResponse < Struct.new(
       :campaigns_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4134,7 +4028,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaigns_response
@@ -4143,7 +4037,7 @@ module Aws::Pinpoint
     class GetCampaignsResponse < Struct.new(
       :campaigns_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4152,7 +4046,7 @@ module Aws::Pinpoint
     class GetChannelsRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels_response
@@ -4161,7 +4055,7 @@ module Aws::Pinpoint
     class GetChannelsResponse < Struct.new(
       :channels_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4170,7 +4064,7 @@ module Aws::Pinpoint
     class GetEmailChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_channel_response
@@ -4179,7 +4073,7 @@ module Aws::Pinpoint
     class GetEmailChannelResponse < Struct.new(
       :email_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4192,7 +4086,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_template_response
@@ -4201,7 +4095,7 @@ module Aws::Pinpoint
     class GetEmailTemplateResponse < Struct.new(
       :email_template_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4214,7 +4108,7 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_response
@@ -4223,7 +4117,7 @@ module Aws::Pinpoint
     class GetEndpointResponse < Struct.new(
       :endpoint_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4232,7 +4126,7 @@ module Aws::Pinpoint
     class GetEventStreamRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_stream
@@ -4241,7 +4135,7 @@ module Aws::Pinpoint
     class GetEventStreamResponse < Struct.new(
       :event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4254,7 +4148,7 @@ module Aws::Pinpoint
       :application_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_response
@@ -4263,7 +4157,7 @@ module Aws::Pinpoint
     class GetExportJobResponse < Struct.new(
       :export_job_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4280,7 +4174,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_jobs_response
@@ -4289,7 +4183,7 @@ module Aws::Pinpoint
     class GetExportJobsResponse < Struct.new(
       :export_jobs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4298,7 +4192,7 @@ module Aws::Pinpoint
     class GetGcmChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gcm_channel_response
@@ -4307,7 +4201,7 @@ module Aws::Pinpoint
     class GetGcmChannelResponse < Struct.new(
       :gcm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4320,7 +4214,7 @@ module Aws::Pinpoint
       :application_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_response
@@ -4329,7 +4223,7 @@ module Aws::Pinpoint
     class GetImportJobResponse < Struct.new(
       :import_job_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4346,7 +4240,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_jobs_response
@@ -4355,7 +4249,7 @@ module Aws::Pinpoint
     class GetImportJobsResponse < Struct.new(
       :import_jobs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4368,7 +4262,7 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute in_app_messages_response
@@ -4377,7 +4271,7 @@ module Aws::Pinpoint
     class GetInAppMessagesResponse < Struct.new(
       :in_app_messages_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4390,7 +4284,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute in_app_template_response
@@ -4399,7 +4293,7 @@ module Aws::Pinpoint
     class GetInAppTemplateResponse < Struct.new(
       :in_app_template_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4432,7 +4326,7 @@ module Aws::Pinpoint
       :page_size,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_date_range_kpi_response
@@ -4441,7 +4335,7 @@ module Aws::Pinpoint
     class GetJourneyDateRangeKpiResponse < Struct.new(
       :journey_date_range_kpi_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4466,7 +4360,7 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_execution_activity_metrics_response
@@ -4475,7 +4369,7 @@ module Aws::Pinpoint
     class GetJourneyExecutionActivityMetricsResponse < Struct.new(
       :journey_execution_activity_metrics_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4496,7 +4390,7 @@ module Aws::Pinpoint
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_execution_metrics_response
@@ -4505,7 +4399,7 @@ module Aws::Pinpoint
     class GetJourneyExecutionMetricsResponse < Struct.new(
       :journey_execution_metrics_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4518,7 +4412,7 @@ module Aws::Pinpoint
       :application_id,
       :journey_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_response
@@ -4527,7 +4421,7 @@ module Aws::Pinpoint
     class GetJourneyResponse < Struct.new(
       :journey_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4556,7 +4450,7 @@ module Aws::Pinpoint
       :page_size,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_run_execution_activity_metrics_response
@@ -4565,7 +4459,7 @@ module Aws::Pinpoint
     class GetJourneyRunExecutionActivityMetricsResponse < Struct.new(
       :journey_run_execution_activity_metrics_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4590,7 +4484,7 @@ module Aws::Pinpoint
       :page_size,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_run_execution_metrics_response
@@ -4599,7 +4493,7 @@ module Aws::Pinpoint
     class GetJourneyRunExecutionMetricsResponse < Struct.new(
       :journey_run_execution_metrics_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4620,7 +4514,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_runs_response
@@ -4629,7 +4523,7 @@ module Aws::Pinpoint
     class GetJourneyRunsResponse < Struct.new(
       :journey_runs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4642,7 +4536,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute push_notification_template_response
@@ -4651,7 +4545,7 @@ module Aws::Pinpoint
     class GetPushTemplateResponse < Struct.new(
       :push_notification_template_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_id
@@ -4660,7 +4554,7 @@ module Aws::Pinpoint
     class GetRecommenderConfigurationRequest < Struct.new(
       :recommender_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_configuration_response
@@ -4669,7 +4563,7 @@ module Aws::Pinpoint
     class GetRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -4682,7 +4576,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute list_recommender_configurations_response
@@ -4691,7 +4585,7 @@ module Aws::Pinpoint
     class GetRecommenderConfigurationsResponse < Struct.new(
       :list_recommender_configurations_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4712,7 +4606,7 @@ module Aws::Pinpoint
       :segment_id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_jobs_response
@@ -4721,7 +4615,7 @@ module Aws::Pinpoint
     class GetSegmentExportJobsResponse < Struct.new(
       :export_jobs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4742,7 +4636,7 @@ module Aws::Pinpoint
       :segment_id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_jobs_response
@@ -4751,7 +4645,7 @@ module Aws::Pinpoint
     class GetSegmentImportJobsResponse < Struct.new(
       :import_jobs_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4764,7 +4658,7 @@ module Aws::Pinpoint
       :application_id,
       :segment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_response
@@ -4773,7 +4667,7 @@ module Aws::Pinpoint
     class GetSegmentResponse < Struct.new(
       :segment_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4790,7 +4684,7 @@ module Aws::Pinpoint
       :segment_id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_response
@@ -4799,7 +4693,7 @@ module Aws::Pinpoint
     class GetSegmentVersionResponse < Struct.new(
       :segment_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4820,7 +4714,7 @@ module Aws::Pinpoint
       :segment_id,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segments_response
@@ -4829,7 +4723,7 @@ module Aws::Pinpoint
     class GetSegmentVersionsResponse < Struct.new(
       :segments_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4846,7 +4740,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segments_response
@@ -4855,7 +4749,7 @@ module Aws::Pinpoint
     class GetSegmentsResponse < Struct.new(
       :segments_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4864,7 +4758,7 @@ module Aws::Pinpoint
     class GetSmsChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_channel_response
@@ -4873,7 +4767,7 @@ module Aws::Pinpoint
     class GetSmsChannelResponse < Struct.new(
       :sms_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4886,7 +4780,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_template_response
@@ -4895,7 +4789,7 @@ module Aws::Pinpoint
     class GetSmsTemplateResponse < Struct.new(
       :sms_template_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4908,7 +4802,7 @@ module Aws::Pinpoint
       :application_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints_response
@@ -4917,7 +4811,7 @@ module Aws::Pinpoint
     class GetUserEndpointsResponse < Struct.new(
       :endpoints_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -4926,7 +4820,7 @@ module Aws::Pinpoint
     class GetVoiceChannelRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_channel_response
@@ -4935,7 +4829,7 @@ module Aws::Pinpoint
     class GetVoiceChannelResponse < Struct.new(
       :voice_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -4948,7 +4842,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_template_response
@@ -4957,7 +4851,7 @@ module Aws::Pinpoint
     class GetVoiceTemplateResponse < Struct.new(
       :voice_template_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a holdout activity in a journey. This type of activity stops a journey for a specified percentage of participants.</p>
@@ -4971,7 +4865,7 @@ module Aws::Pinpoint
       :next_activity,
       :percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a job that imports endpoint definitions from an Amazon Simple Storage Service (Amazon S3) bucket.</p>
@@ -5009,7 +4903,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the resource settings for a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>
@@ -5047,7 +4941,7 @@ module Aws::Pinpoint
       :segment_id,
       :segment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>
@@ -5105,7 +4999,7 @@ module Aws::Pinpoint
       :total_processed,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.</p>
@@ -5119,7 +5013,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Schedule of the campaign.</p>
@@ -5137,7 +5031,7 @@ module Aws::Pinpoint
       :event_filter,
       :quiet_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides all fields required for building an in-app message.</p>
@@ -5155,7 +5049,7 @@ module Aws::Pinpoint
       :custom_config,
       :layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Text config for Message Body.</p>
@@ -5173,7 +5067,7 @@ module Aws::Pinpoint
       :body,
       :text_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Button Config for an in-app message.</p>
@@ -5195,7 +5089,7 @@ module Aws::Pinpoint
       :ios,
       :web,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Targeted in-app message campaign.</p>
@@ -5233,7 +5127,7 @@ module Aws::Pinpoint
       :total_cap,
       :treatment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the message content.</p>
@@ -5263,7 +5157,7 @@ module Aws::Pinpoint
       :primary_btn,
       :secondary_btn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Text config for Message Header.</p>
@@ -5281,7 +5175,7 @@ module Aws::Pinpoint
       :header,
       :text_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Get in-app messages response object.</p>
@@ -5291,7 +5185,7 @@ module Aws::Pinpoint
     class InAppMessagesResponse < Struct.new(
       :in_app_message_campaigns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>InApp Template Request.</p>
@@ -5317,7 +5211,7 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In-App Template Response.</p>
@@ -5367,13 +5261,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Include
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -5387,7 +5275,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the results of a request to create or update an endpoint that's associated with an event.</p>
@@ -5401,19 +5289,7 @@ module Aws::Pinpoint
       :endpoint_item_response,
       :events_item_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      CREATED = 'CREATED'
-      PREPARING_FOR_INITIALIZATION = 'PREPARING_FOR_INITIALIZATION'
-      INITIALIZING = 'INITIALIZING'
-      PROCESSING = 'PROCESSING'
-      PENDING_JOB = 'PENDING_JOB'
-      COMPLETING = 'COMPLETING'
-      COMPLETED = 'COMPLETED'
-      FAILING = 'FAILING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The channel-specific configurations for the journey.</p>
@@ -5427,7 +5303,7 @@ module Aws::Pinpoint
       :connect_campaign_arn,
       :connect_campaign_execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the message content for a custom channel message that's sent to participants in a journey.</p>
@@ -5437,7 +5313,7 @@ module Aws::Pinpoint
     class JourneyCustomMessage < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard engagement metric that applies to a journey, and provides information about that query.</p>
@@ -5471,7 +5347,7 @@ module Aws::Pinpoint
       :next_token,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the "From" address for an email message that's sent to participants in a journey.</p>
@@ -5481,7 +5357,7 @@ module Aws::Pinpoint
     class JourneyEmailMessage < Struct.new(
       :from_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity, and provides information about that query.</p>
@@ -5511,7 +5387,7 @@ module Aws::Pinpoint
       :last_evaluated_time,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.</p>
@@ -5533,7 +5409,7 @@ module Aws::Pinpoint
       :last_evaluated_time,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.</p>
@@ -5563,7 +5439,7 @@ module Aws::Pinpoint
       :timeframe_cap,
       :total_cap,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the message configuration for a push notification that's sent to participants in a journey.</p>
@@ -5573,7 +5449,7 @@ module Aws::Pinpoint
     class JourneyPushMessage < Struct.new(
       :time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status, configuration, and other settings for a journey.</p>
@@ -5667,7 +5543,7 @@ module Aws::Pinpoint
       :closed_days,
       :timezone_estimation_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity for a particular journey run, and provides information about that query.</p>
@@ -5701,7 +5577,7 @@ module Aws::Pinpoint
       :metrics,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey run, and provides information about that query.</p>
@@ -5727,7 +5603,7 @@ module Aws::Pinpoint
       :metrics,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information from a specified run of a journey.</p>
@@ -5749,14 +5625,7 @@ module Aws::Pinpoint
       :run_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JourneyRunStatus
-      SCHEDULED = 'SCHEDULED'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information from all runs of a journey.</p>
@@ -5770,7 +5639,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.</p>
@@ -5796,7 +5665,7 @@ module Aws::Pinpoint
       :entity_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the schedule settings for a journey.</p>
@@ -5819,7 +5688,7 @@ module Aws::Pinpoint
       :start_time,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Changes the status of a journey.</p>
@@ -5829,7 +5698,7 @@ module Aws::Pinpoint
     class JourneyStateRequest < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of messages that can be sent to an endpoint during the specified timeframe for all journeys.</p>
@@ -5843,7 +5712,7 @@ module Aws::Pinpoint
       :cap,
       :days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status, configuration, and other settings for all the journeys that are associated with an application.</p>
@@ -5857,16 +5726,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Layout
-      BOTTOM_BANNER = 'BOTTOM_BANNER'
-      TOP_BANNER = 'TOP_BANNER'
-      OVERLAYS = 'OVERLAYS'
-      MOBILE_FEED = 'MOBILE_FEED'
-      MIDDLE_BANNER = 'MIDDLE_BANNER'
-      CAROUSEL = 'CAROUSEL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -5883,7 +5743,7 @@ module Aws::Pinpoint
       :page_size,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journeys_response
@@ -5892,7 +5752,7 @@ module Aws::Pinpoint
     class ListJourneysResponse < Struct.new(
       :journeys_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the recommender model configurations that are associated with your Amazon Pinpoint account.</p>
@@ -5906,7 +5766,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5915,7 +5775,7 @@ module Aws::Pinpoint
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags_model
@@ -5924,7 +5784,7 @@ module Aws::Pinpoint
     class ListTagsForResourceResponse < Struct.new(
       :tags_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5945,7 +5805,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_versions_response
@@ -5954,7 +5814,7 @@ module Aws::Pinpoint
     class ListTemplateVersionsResponse < Struct.new(
       :template_versions_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5975,7 +5835,7 @@ module Aws::Pinpoint
       :prefix,
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates_response
@@ -5984,7 +5844,7 @@ module Aws::Pinpoint
     class ListTemplatesResponse < Struct.new(
       :templates_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for a push notification that's sent to recipients of a campaign.</p>
@@ -6038,7 +5898,7 @@ module Aws::Pinpoint
       :title,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -6052,7 +5912,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the message configuration settings for a campaign.</p>
@@ -6094,7 +5954,7 @@ module Aws::Pinpoint
       :sms_message,
       :in_app_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and value pair of an email header to add to your email. You can have up to 15 MessageHeaders. A header can contain information such as the sender, receiver, route, or timestamp.</p>
@@ -6108,7 +5968,7 @@ module Aws::Pinpoint
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration and other settings for a message.</p>
@@ -6138,7 +5998,7 @@ module Aws::Pinpoint
       :template_configuration,
       :trace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the results of a request to send a message to an endpoint address.</p>
@@ -6160,7 +6020,7 @@ module Aws::Pinpoint
       :request_id,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the results of sending a message directly to an endpoint address.</p>
@@ -6186,12 +6046,7 @@ module Aws::Pinpoint
       :status_message,
       :updated_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageType
-      TRANSACTIONAL = 'TRANSACTIONAL'
-      PROMOTIONAL = 'PROMOTIONAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -6205,7 +6060,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies metric-based criteria for including or excluding endpoints from a segment. These criteria derive from custom metrics that you define for endpoints.</p>
@@ -6219,12 +6074,7 @@ module Aws::Pinpoint
       :comparison_operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Mode
-      DELIVERY = 'DELIVERY'
-      FILTER = 'FILTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a condition to evaluate for an activity path in a journey.</p>
@@ -6238,7 +6088,7 @@ module Aws::Pinpoint
       :condition,
       :next_activity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a multivariate split activity in a journey. This type of activity sends participants down one of as many as five paths (including a default <i>Else</i> path) in a journey, based on conditions that you specify.</p> <note><p>To create multivariate split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href="https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>
@@ -6256,7 +6106,7 @@ module Aws::Pinpoint
       :default_activity,
       :evaluation_wait_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -6270,7 +6120,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a phone number to validate and retrieve information about.</p>
@@ -6284,7 +6134,7 @@ module Aws::Pinpoint
       :iso_country_code,
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a phone number.</p>
@@ -6347,7 +6197,7 @@ module Aws::Pinpoint
       :timezone,
       :zip_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the times when message are allowed to be sent to endpoints.</p>
@@ -6373,7 +6223,7 @@ module Aws::Pinpoint
       :voice,
       :custom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the start and end time for OpenHours.</p>
@@ -6387,12 +6237,7 @@ module Aws::Pinpoint
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      ALL = 'ALL'
-      ANY = 'ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Override button configuration.</p>
@@ -6406,7 +6251,7 @@ module Aws::Pinpoint
       :button_action,
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -6420,7 +6265,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute number_validate_request
@@ -6429,7 +6274,7 @@ module Aws::Pinpoint
     class PhoneNumberValidateRequest < Struct.new(
       :number_validate_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute number_validate_response
@@ -6438,7 +6283,7 @@ module Aws::Pinpoint
     class PhoneNumberValidateResponse < Struct.new(
       :number_validate_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the properties and attributes of an endpoint that's associated with an event.</p>
@@ -6488,7 +6333,7 @@ module Aws::Pinpoint
       :request_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a push notification activity in a journey. This type of activity sends a push notification to participants.</p>
@@ -6510,7 +6355,7 @@ module Aws::Pinpoint
       :template_name,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>
@@ -6552,7 +6397,7 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the content and settings for a message template that can be used in messages that are sent through a push notification channel.</p>
@@ -6618,7 +6463,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6631,7 +6476,7 @@ module Aws::Pinpoint
       :application_id,
       :write_event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_stream
@@ -6640,7 +6485,7 @@ module Aws::Pinpoint
     class PutEventStreamResponse < Struct.new(
       :event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6653,7 +6498,7 @@ module Aws::Pinpoint
       :application_id,
       :events_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events_response
@@ -6662,7 +6507,7 @@ module Aws::Pinpoint
     class PutEventsResponse < Struct.new(
       :events_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the start and end times that define a time range when messages aren't sent to endpoints.</p>
@@ -6676,7 +6521,7 @@ module Aws::Pinpoint
       :end,
       :start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a random split activity in a journey. This type of activity randomly sends specified percentages of participants down one of as many as five paths in a journey, based on conditions that you specify.</p>
@@ -6686,7 +6531,7 @@ module Aws::Pinpoint
     class RandomSplitActivity < Struct.new(
       :branches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a path in a random split activity in a journey.</p>
@@ -6700,7 +6545,7 @@ module Aws::Pinpoint
       :next_activity,
       :percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the contents of an email message, represented as a raw MIME message.</p>
@@ -6710,7 +6555,7 @@ module Aws::Pinpoint
     class RawEmail < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies criteria for including or excluding endpoints from a segment based on how recently an endpoint was active.</p>
@@ -6724,12 +6569,7 @@ module Aws::Pinpoint
       :duration,
       :recency_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecencyType
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>
@@ -6783,7 +6623,7 @@ module Aws::Pinpoint
       :recommendations_display_name,
       :recommendations_per_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -6800,7 +6640,7 @@ module Aws::Pinpoint
       :attribute_type,
       :update_attributes_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes_resource
@@ -6809,7 +6649,7 @@ module Aws::Pinpoint
     class RemoveAttributesResponse < Struct.new(
       :attributes_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the results of a query that retrieved the data for a standard metric that applies to an application, campaign, or journey.</p>
@@ -6823,7 +6663,7 @@ module Aws::Pinpoint
       :grouped_bys,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a single value and metadata about that value as part of an array of query results for a standard metric that applies to an application, campaign, or journey.</p>
@@ -6841,7 +6681,7 @@ module Aws::Pinpoint
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the SMS channel for an application.</p>
@@ -6859,7 +6699,7 @@ module Aws::Pinpoint
       :sender_id,
       :short_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the SMS channel for an application.</p>
@@ -6921,7 +6761,7 @@ module Aws::Pinpoint
       :transactional_messages_per_second,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.</p>
@@ -6963,7 +6803,7 @@ module Aws::Pinpoint
       :entity_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for an SMS activity in a journey. This type of activity sends a text message to participants.</p>
@@ -6985,7 +6825,7 @@ module Aws::Pinpoint
       :template_name,
       :template_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>
@@ -7011,7 +6851,7 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the content and settings for a message template that can be used in text messages that are sent through the SMS channel.</p>
@@ -7061,7 +6901,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the schedule settings for a campaign.</p>
@@ -7098,7 +6938,7 @@ module Aws::Pinpoint
       :start_time,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies dimension settings for including or excluding endpoints from a segment based on how recently an endpoint was active.</p>
@@ -7108,7 +6948,7 @@ module Aws::Pinpoint
     class SegmentBehaviors < Struct.new(
       :recency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a segment to associate with an activity in a journey.</p>
@@ -7118,7 +6958,7 @@ module Aws::Pinpoint
     class SegmentCondition < Struct.new(
       :segment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies demographic-based dimension settings for including or excluding endpoints from a segment. These settings derive from characteristics of endpoint devices, such as platform, make, and model.</p>
@@ -7148,7 +6988,7 @@ module Aws::Pinpoint
       :model,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the dimension settings for a segment.</p>
@@ -7178,7 +7018,7 @@ module Aws::Pinpoint
       :metrics,
       :user_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the base segments and dimensions for a segment, and the relationships between these base segments and dimensions.</p>
@@ -7200,7 +7040,7 @@ module Aws::Pinpoint
       :source_type,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings that define the relationships between segment groups for a segment.</p>
@@ -7214,7 +7054,7 @@ module Aws::Pinpoint
       :groups,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the import job that created a segment. An import job is a job that creates a user segment by importing endpoint definitions.</p>
@@ -7244,7 +7084,7 @@ module Aws::Pinpoint
       :s3_url,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies geographical dimension settings for a segment.</p>
@@ -7258,7 +7098,7 @@ module Aws::Pinpoint
       :country,
       :gps_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the segment identifier and version of a segment.</p>
@@ -7272,7 +7112,7 @@ module Aws::Pinpoint
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the configuration, dimension, and other settings for a segment.</p>
@@ -7326,12 +7166,7 @@ module Aws::Pinpoint
       :tags,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SegmentType
-      DIMENSIONAL = 'DIMENSIONAL'
-      IMPORT = 'IMPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the segments that are associated with an application.</p>
@@ -7345,7 +7180,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -7358,7 +7193,7 @@ module Aws::Pinpoint
       :application_id,
       :message_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_response
@@ -7367,7 +7202,7 @@ module Aws::Pinpoint
     class SendMessagesResponse < Struct.new(
       :message_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -7380,7 +7215,7 @@ module Aws::Pinpoint
       :application_id,
       :send_otp_message_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Send OTP message request parameters.</p>
@@ -7430,7 +7265,7 @@ module Aws::Pinpoint
       :template_id,
       :validity_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_response
@@ -7439,7 +7274,7 @@ module Aws::Pinpoint
     class SendOTPMessageResponse < Struct.new(
       :message_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration and other settings for a message to send to all the endpoints that are associated with a list of users.</p>
@@ -7465,7 +7300,7 @@ module Aws::Pinpoint
       :trace_id,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about which users and endpoints a message was sent to.</p>
@@ -7483,7 +7318,7 @@ module Aws::Pinpoint
       :request_id,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -7496,7 +7331,7 @@ module Aws::Pinpoint
       :application_id,
       :send_users_message_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute send_users_message_response
@@ -7505,7 +7340,7 @@ module Aws::Pinpoint
     class SendUsersMessagesResponse < Struct.new(
       :send_users_message_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a session.</p>
@@ -7527,7 +7362,7 @@ module Aws::Pinpoint
       :start_timestamp,
       :stop_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the dimension type and values for a segment dimension.</p>
@@ -7541,7 +7376,7 @@ module Aws::Pinpoint
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a condition to evaluate for an activity in a journey.</p>
@@ -7559,7 +7394,7 @@ module Aws::Pinpoint
       :segment_condition,
       :segment_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the contents of an email message, composed of a subject, a text part, and an HTML part.</p>
@@ -7581,7 +7416,7 @@ module Aws::Pinpoint
       :text_part,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the subject or body of an email message, represented as textual email data and the applicable character set.</p>
@@ -7595,13 +7430,7 @@ module Aws::Pinpoint
       :charset,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the conditions for the first activity in a journey. This activity and its conditions determine which users are participants in a journey.</p>
@@ -7619,16 +7448,7 @@ module Aws::Pinpoint
       :event_start_condition,
       :segment_start_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      DRAFT = 'DRAFT'
-      ACTIVE = 'ACTIVE'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-      CLOSED = 'CLOSED'
-      PAUSED = 'PAUSED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7641,7 +7461,7 @@ module Aws::Pinpoint
       :resource_arn,
       :tags_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the tags (keys and values) for an application, campaign, message template, or segment.</p>
@@ -7651,7 +7471,7 @@ module Aws::Pinpoint
     class TagsModel < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the name and version of the message template to use for the message.</p>
@@ -7665,7 +7485,7 @@ module Aws::Pinpoint
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies which version of a message template to use as the active version of the template.</p>
@@ -7675,7 +7495,7 @@ module Aws::Pinpoint
     class TemplateActiveVersionRequest < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the message template to use for the message, for each type of channel.</p>
@@ -7701,7 +7521,7 @@ module Aws::Pinpoint
       :voice_template,
       :in_app_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a request to create a message template.</p>
@@ -7719,7 +7539,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a message template that's associated with your Amazon Pinpoint account.</p>
@@ -7761,15 +7581,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateType
-      EMAIL = 'EMAIL'
-      SMS = 'SMS'
-      VOICE = 'VOICE'
-      PUSH = 'PUSH'
-      INAPP = 'INAPP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a specific version of a message template.</p>
@@ -7803,7 +7615,7 @@ module Aws::Pinpoint
       :template_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the versions of a specific message template.</p>
@@ -7825,7 +7637,7 @@ module Aws::Pinpoint
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about all the message templates that are associated with your Amazon Pinpoint account.</p>
@@ -7839,7 +7651,7 @@ module Aws::Pinpoint
       :item,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an API request or response.</p>
@@ -7853,7 +7665,7 @@ module Aws::Pinpoint
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.</p>
@@ -7895,13 +7707,7 @@ module Aws::Pinpoint
       :treatment_description,
       :treatment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7914,7 +7720,7 @@ module Aws::Pinpoint
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adm_channel_request
@@ -7927,7 +7733,7 @@ module Aws::Pinpoint
       :adm_channel_request,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adm_channel_response
@@ -7936,7 +7742,7 @@ module Aws::Pinpoint
     class UpdateAdmChannelResponse < Struct.new(
       :adm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_channel_request
@@ -7949,7 +7755,7 @@ module Aws::Pinpoint
       :apns_channel_request,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_channel_response
@@ -7958,7 +7764,7 @@ module Aws::Pinpoint
     class UpdateApnsChannelResponse < Struct.new(
       :apns_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_sandbox_channel_request
@@ -7971,7 +7777,7 @@ module Aws::Pinpoint
       :apns_sandbox_channel_request,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_sandbox_channel_response
@@ -7980,7 +7786,7 @@ module Aws::Pinpoint
     class UpdateApnsSandboxChannelResponse < Struct.new(
       :apns_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_channel_request
@@ -7993,7 +7799,7 @@ module Aws::Pinpoint
       :apns_voip_channel_request,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_channel_response
@@ -8002,7 +7808,7 @@ module Aws::Pinpoint
     class UpdateApnsVoipChannelResponse < Struct.new(
       :apns_voip_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_sandbox_channel_request
@@ -8015,7 +7821,7 @@ module Aws::Pinpoint
       :apns_voip_sandbox_channel_request,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apns_voip_sandbox_channel_response
@@ -8024,7 +7830,7 @@ module Aws::Pinpoint
     class UpdateApnsVoipSandboxChannelResponse < Struct.new(
       :apns_voip_sandbox_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8037,7 +7843,7 @@ module Aws::Pinpoint
       :application_id,
       :write_application_settings_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_settings_resource
@@ -8046,7 +7852,7 @@ module Aws::Pinpoint
     class UpdateApplicationSettingsResponse < Struct.new(
       :application_settings_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one or more attributes to remove from all the endpoints that are associated with an application.</p>
@@ -8056,7 +7862,7 @@ module Aws::Pinpoint
     class UpdateAttributesRequest < Struct.new(
       :blacklist,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8069,7 +7875,7 @@ module Aws::Pinpoint
       :application_id,
       :baidu_channel_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baidu_channel_response
@@ -8078,7 +7884,7 @@ module Aws::Pinpoint
     class UpdateBaiduChannelResponse < Struct.new(
       :baidu_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8095,7 +7901,7 @@ module Aws::Pinpoint
       :campaign_id,
       :write_campaign_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_response
@@ -8104,7 +7910,7 @@ module Aws::Pinpoint
     class UpdateCampaignResponse < Struct.new(
       :campaign_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8117,7 +7923,7 @@ module Aws::Pinpoint
       :application_id,
       :email_channel_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_channel_response
@@ -8126,7 +7932,7 @@ module Aws::Pinpoint
     class UpdateEmailChannelResponse < Struct.new(
       :email_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_new_version
@@ -8147,7 +7953,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8156,7 +7962,7 @@ module Aws::Pinpoint
     class UpdateEmailTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8173,7 +7979,7 @@ module Aws::Pinpoint
       :endpoint_id,
       :endpoint_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8182,7 +7988,7 @@ module Aws::Pinpoint
     class UpdateEndpointResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8195,7 +8001,7 @@ module Aws::Pinpoint
       :application_id,
       :endpoint_batch_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8204,7 +8010,7 @@ module Aws::Pinpoint
     class UpdateEndpointsBatchResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8217,7 +8023,7 @@ module Aws::Pinpoint
       :application_id,
       :gcm_channel_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gcm_channel_response
@@ -8226,7 +8032,7 @@ module Aws::Pinpoint
     class UpdateGcmChannelResponse < Struct.new(
       :gcm_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_new_version
@@ -8247,7 +8053,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8256,7 +8062,7 @@ module Aws::Pinpoint
     class UpdateInAppTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8273,7 +8079,7 @@ module Aws::Pinpoint
       :journey_id,
       :write_journey_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_response
@@ -8282,7 +8088,7 @@ module Aws::Pinpoint
     class UpdateJourneyResponse < Struct.new(
       :journey_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8299,7 +8105,7 @@ module Aws::Pinpoint
       :journey_id,
       :journey_state_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journey_response
@@ -8308,7 +8114,7 @@ module Aws::Pinpoint
     class UpdateJourneyStateResponse < Struct.new(
       :journey_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_new_version
@@ -8329,7 +8135,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8338,7 +8144,7 @@ module Aws::Pinpoint
     class UpdatePushTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_id
@@ -8351,7 +8157,7 @@ module Aws::Pinpoint
       :recommender_id,
       :update_recommender_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_configuration_response
@@ -8360,7 +8166,7 @@ module Aws::Pinpoint
     class UpdateRecommenderConfigurationResponse < Struct.new(
       :recommender_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>
@@ -8402,7 +8208,7 @@ module Aws::Pinpoint
       :recommendations_display_name,
       :recommendations_per_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8419,7 +8225,7 @@ module Aws::Pinpoint
       :segment_id,
       :write_segment_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_response
@@ -8428,7 +8234,7 @@ module Aws::Pinpoint
     class UpdateSegmentResponse < Struct.new(
       :segment_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8441,7 +8247,7 @@ module Aws::Pinpoint
       :application_id,
       :sms_channel_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sms_channel_response
@@ -8450,7 +8256,7 @@ module Aws::Pinpoint
     class UpdateSmsChannelResponse < Struct.new(
       :sms_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_new_version
@@ -8471,7 +8277,7 @@ module Aws::Pinpoint
       :template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8480,7 +8286,7 @@ module Aws::Pinpoint
     class UpdateSmsTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_active_version_request
@@ -8497,7 +8303,7 @@ module Aws::Pinpoint
       :template_name,
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8506,7 +8312,7 @@ module Aws::Pinpoint
     class UpdateTemplateActiveVersionResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8519,7 +8325,7 @@ module Aws::Pinpoint
       :application_id,
       :voice_channel_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_channel_response
@@ -8528,7 +8334,7 @@ module Aws::Pinpoint
     class UpdateVoiceChannelResponse < Struct.new(
       :voice_channel_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_new_version
@@ -8549,7 +8355,7 @@ module Aws::Pinpoint
       :version,
       :voice_template_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_body
@@ -8558,7 +8364,7 @@ module Aws::Pinpoint
     class UpdateVoiceTemplateResponse < Struct.new(
       :message_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Verify OTP Message Response.</p>
@@ -8568,7 +8374,7 @@ module Aws::Pinpoint
     class VerificationResponse < Struct.new(
       :valid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -8581,7 +8387,7 @@ module Aws::Pinpoint
       :application_id,
       :verify_otp_message_request_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Verify OTP message request.</p>
@@ -8599,7 +8405,7 @@ module Aws::Pinpoint
       :otp,
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verification_response
@@ -8608,7 +8414,7 @@ module Aws::Pinpoint
     class VerifyOTPMessageResponse < Struct.new(
       :verification_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the status and settings of the voice channel for an application.</p>
@@ -8618,7 +8424,7 @@ module Aws::Pinpoint
     class VoiceChannelRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status and settings of the voice channel for an application.</p>
@@ -8664,7 +8470,7 @@ module Aws::Pinpoint
       :platform,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a one-time voice message that's sent directly to an endpoint through the voice channel.</p>
@@ -8690,7 +8496,7 @@ module Aws::Pinpoint
       :substitutions,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>
@@ -8720,7 +8526,7 @@ module Aws::Pinpoint
       :template_description,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the content and settings for a message template that can be used in messages that are sent through the voice channel.</p>
@@ -8774,7 +8580,7 @@ module Aws::Pinpoint
       :version,
       :voice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a wait activity in a journey. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p>
@@ -8788,7 +8594,7 @@ module Aws::Pinpoint
       :next_activity,
       :wait_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a duration or a date and time that indicates when Amazon Pinpoint determines whether an activity's conditions have been met or an activity moves participants to the next activity in a journey.</p>
@@ -8802,7 +8608,7 @@ module Aws::Pinpoint
       :wait_for,
       :wait_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the default settings for an application.</p>
@@ -8831,7 +8637,7 @@ module Aws::Pinpoint
       :quiet_time,
       :journey_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration and other settings for a campaign.</p>
@@ -8905,7 +8711,7 @@ module Aws::Pinpoint
       :treatment_name,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Amazon Resource Name (ARN) of an event stream to publish events to and the AWS Identity and Access Management (IAM) role to use when publishing those events.</p>
@@ -8921,7 +8727,7 @@ module Aws::Pinpoint
       :destination_stream_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration and other settings for a journey.</p>
@@ -9003,7 +8809,7 @@ module Aws::Pinpoint
       :closed_days,
       :timezone_estimation_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.</p>
@@ -9025,7 +8831,7 @@ module Aws::Pinpoint
       :segment_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.</p>
@@ -9059,28 +8865,7 @@ module Aws::Pinpoint
       :treatment_description,
       :treatment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Endpointtypeselement
-      PUSH = 'PUSH'
-      GCM = 'GCM'
-      APNS = 'APNS'
-      APNS_SANDBOX = 'APNS_SANDBOX'
-      APNS_VOIP = 'APNS_VOIP'
-      APNS_VOIP_SANDBOX = 'APNS_VOIP_SANDBOX'
-      ADM = 'ADM'
-      SMS = 'SMS'
-      VOICE = 'VOICE'
-      EMAIL = 'EMAIL'
-      BAIDU = 'BAIDU'
-      CUSTOM = 'CUSTOM'
-      IN_APP = 'IN_APP'
-    end
-
-    module Timezoneestimationmethodselement
-      PHONE_NUMBER = 'PHONE_NUMBER'
-      POSTAL_CODE = 'POSTAL_CODE'
+      include ::Smithy::Schema::Structure
     end
 
   end

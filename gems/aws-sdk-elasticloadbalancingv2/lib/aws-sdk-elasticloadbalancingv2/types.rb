@@ -12,7 +12,7 @@ module Aws::ElasticLoadBalancingV2
     class ALPNPolicyNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an action.</p>
@@ -65,15 +65,7 @@ module Aws::ElasticLoadBalancingV2
       :fixed_response_config,
       :forward_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionTypeEnum
-      FORWARD = 'forward'
-      AUTHENTICATE_OIDC = 'authenticate-oidc'
-      AUTHENTICATE_COGNITO = 'authenticate-cognito'
-      REDIRECT = 'redirect'
-      FIXED_RESPONSE = 'fixed-response'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -88,7 +80,7 @@ module Aws::ElasticLoadBalancingV2
       :listener_arn,
       :certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificates
@@ -97,7 +89,7 @@ module Aws::ElasticLoadBalancingV2
     class AddListenerCertificatesOutput < Struct.new(
       :certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -110,12 +102,12 @@ module Aws::ElasticLoadBalancingV2
       :resource_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -128,7 +120,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :revocation_contents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_revocations
@@ -137,7 +129,7 @@ module Aws::ElasticLoadBalancingV2
     class AddTrustStoreRevocationsOutput < Struct.new(
       :trust_store_revocations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the override status applied to a target.</p>
@@ -155,12 +147,7 @@ module Aws::ElasticLoadBalancingV2
       :reason,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdvertiseTrustStoreCaNamesEnum
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified allocation ID does not exist.</p>
@@ -169,7 +156,7 @@ module Aws::ElasticLoadBalancingV2
     class AllocationIdNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about anomaly detection and mitigation.</p>
@@ -183,18 +170,7 @@ module Aws::ElasticLoadBalancingV2
       :result,
       :mitigation_in_effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyResultEnum
-      ANOMALOUS = 'anomalous'
-      NORMAL = 'normal'
-    end
-
-    module AuthenticateCognitoActionConditionalBehaviorEnum
-      DENY = 'deny'
-      ALLOW = 'allow'
-      AUTHENTICATE = 'authenticate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request parameters to use when integrating with Amazon Cognito to authenticate
@@ -251,13 +227,7 @@ module Aws::ElasticLoadBalancingV2
       :authentication_request_extra_params,
       :on_unauthenticated_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticateOidcActionConditionalBehaviorEnum
-      DENY = 'deny'
-      ALLOW = 'allow'
-      AUTHENTICATE = 'authenticate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request parameters when using an identity provider (IdP) that is compliant with OpenID
@@ -337,7 +307,7 @@ module Aws::ElasticLoadBalancingV2
       :on_unauthenticated_request,
       :use_existing_client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Availability Zone.</p>
@@ -369,7 +339,7 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_addresses,
       :source_nat_ipv6_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Availability Zone is not supported.</p>
@@ -378,7 +348,7 @@ module Aws::ElasticLoadBalancingV2
     class AvailabilityZoneNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified ca certificate bundle does not exist.</p>
@@ -387,7 +357,7 @@ module Aws::ElasticLoadBalancingV2
     class CaCertificatesBundleNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the daily capacity decrease limit for this reservation.</p>
@@ -396,7 +366,7 @@ module Aws::ElasticLoadBalancingV2
     class CapacityDecreaseRequestsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is a pending capacity reservation.</p>
@@ -405,14 +375,7 @@ module Aws::ElasticLoadBalancingV2
     class CapacityReservationPendingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationStateEnum
-      PROVISIONED = 'provisioned'
-      PENDING = 'pending'
-      REBALANCING = 'rebalancing'
-      FAILED = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of a capacity reservation.</p>
@@ -426,7 +389,7 @@ module Aws::ElasticLoadBalancingV2
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the capacity units limit.</p>
@@ -435,7 +398,7 @@ module Aws::ElasticLoadBalancingV2
     class CapacityUnitsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an SSL server certificate.</p>
@@ -451,7 +414,7 @@ module Aws::ElasticLoadBalancingV2
       :certificate_arn,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified certificate does not exist.</p>
@@ -460,7 +423,7 @@ module Aws::ElasticLoadBalancingV2
     class CertificateNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a cipher used in a policy.</p>
@@ -474,7 +437,7 @@ module Aws::ElasticLoadBalancingV2
       :name,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -555,7 +518,7 @@ module Aws::ElasticLoadBalancingV2
       :tags,
       :mutual_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listeners
@@ -564,7 +527,7 @@ module Aws::ElasticLoadBalancingV2
     class CreateListenerOutput < Struct.new(
       :listeners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -656,7 +619,7 @@ module Aws::ElasticLoadBalancingV2
       :enable_prefix_for_ipv6_source_nat,
       :ipam_pools,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancers
@@ -665,7 +628,7 @@ module Aws::ElasticLoadBalancingV2
     class CreateLoadBalancerOutput < Struct.new(
       :load_balancers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -690,7 +653,7 @@ module Aws::ElasticLoadBalancingV2
       :actions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -699,7 +662,7 @@ module Aws::ElasticLoadBalancingV2
     class CreateRuleOutput < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -836,7 +799,7 @@ module Aws::ElasticLoadBalancingV2
       :tags,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_groups
@@ -845,7 +808,7 @@ module Aws::ElasticLoadBalancingV2
     class CreateTargetGroupOutput < Struct.new(
       :target_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -871,7 +834,7 @@ module Aws::ElasticLoadBalancingV2
       :ca_certificates_bundle_s3_object_version,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_stores
@@ -880,7 +843,7 @@ module Aws::ElasticLoadBalancingV2
     class CreateTrustStoreOutput < Struct.new(
       :trust_stores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified association can't be within the same account.</p>
@@ -889,7 +852,7 @@ module Aws::ElasticLoadBalancingV2
     class DeleteAssociationSameAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -898,12 +861,12 @@ module Aws::ElasticLoadBalancingV2
     class DeleteListenerInput < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteListenerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -912,12 +875,12 @@ module Aws::ElasticLoadBalancingV2
     class DeleteLoadBalancerInput < Struct.new(
       :load_balancer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLoadBalancerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -926,12 +889,12 @@ module Aws::ElasticLoadBalancingV2
     class DeleteRuleInput < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -944,12 +907,12 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSharedTrustStoreAssociationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -958,12 +921,12 @@ module Aws::ElasticLoadBalancingV2
     class DeleteTargetGroupInput < Struct.new(
       :target_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTargetGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -972,12 +935,12 @@ module Aws::ElasticLoadBalancingV2
     class DeleteTrustStoreInput < Struct.new(
       :trust_store_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTrustStoreOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -991,12 +954,12 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterTargetsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -1010,7 +973,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limits
@@ -1024,7 +987,7 @@ module Aws::ElasticLoadBalancingV2
       :limits,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -1033,7 +996,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeCapacityReservationInput < Struct.new(
       :load_balancer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified_time
@@ -1054,7 +1017,7 @@ module Aws::ElasticLoadBalancingV2
       :minimum_load_balancer_capacity,
       :capacity_reservation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1063,7 +1026,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenerAttributesInput < Struct.new(
       :listener_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -1072,7 +1035,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeListenerAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1090,7 +1053,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificates
@@ -1104,7 +1067,7 @@ module Aws::ElasticLoadBalancingV2
       :certificates,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -1126,7 +1089,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listeners
@@ -1140,7 +1103,7 @@ module Aws::ElasticLoadBalancingV2
       :listeners,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -1149,7 +1112,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -1158,7 +1121,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arns
@@ -1181,7 +1144,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancers
@@ -1195,7 +1158,7 @@ module Aws::ElasticLoadBalancingV2
       :load_balancers,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -1217,7 +1180,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -1231,7 +1194,7 @@ module Aws::ElasticLoadBalancingV2
       :rules,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -1254,7 +1217,7 @@ module Aws::ElasticLoadBalancingV2
       :page_size,
       :load_balancer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ssl_policies
@@ -1268,7 +1231,7 @@ module Aws::ElasticLoadBalancingV2
       :ssl_policies,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -1278,7 +1241,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTagsInput < Struct.new(
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_descriptions
@@ -1287,7 +1250,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -1296,7 +1259,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetGroupAttributesInput < Struct.new(
       :target_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -1305,7 +1268,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetGroupAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -1331,7 +1294,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_groups
@@ -1345,7 +1308,7 @@ module Aws::ElasticLoadBalancingV2
       :target_groups,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -1362,12 +1325,7 @@ module Aws::ElasticLoadBalancingV2
       :targets,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribeTargetHealthInputIncludeEnum
-      ANOMALY = 'AnomalyDetection'
-      ALL = 'All'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_health_descriptions
@@ -1376,7 +1334,7 @@ module Aws::ElasticLoadBalancingV2
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -1393,7 +1351,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_associations
@@ -1407,7 +1365,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_associations,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the revocations used by a trust store.</p>
@@ -1429,7 +1387,7 @@ module Aws::ElasticLoadBalancingV2
       :revocation_type,
       :number_of_revoked_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -1450,7 +1408,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_revocations
@@ -1464,7 +1422,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_revocations,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arns
@@ -1485,7 +1443,7 @@ module Aws::ElasticLoadBalancingV2
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_stores
@@ -1499,7 +1457,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_stores,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A listener with the specified port already exists.</p>
@@ -1508,7 +1466,7 @@ module Aws::ElasticLoadBalancingV2
     class DuplicateListenerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A load balancer with the specified name already exists.</p>
@@ -1517,7 +1475,7 @@ module Aws::ElasticLoadBalancingV2
     class DuplicateLoadBalancerNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag key was specified more than once.</p>
@@ -1526,7 +1484,7 @@ module Aws::ElasticLoadBalancingV2
     class DuplicateTagKeysException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target group with the specified name already exists.</p>
@@ -1535,7 +1493,7 @@ module Aws::ElasticLoadBalancingV2
     class DuplicateTargetGroupNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A trust store with the specified name already exists.</p>
@@ -1544,17 +1502,7 @@ module Aws::ElasticLoadBalancingV2
     class DuplicateTrustStoreNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnablePrefixForIpv6SourceNatEnum
-      ON = 'on'
-      OFF = 'off'
-    end
-
-    module EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an action that returns a custom HTTP response.</p>
@@ -1574,7 +1522,7 @@ module Aws::ElasticLoadBalancingV2
       :status_code,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a forward action.</p>
@@ -1589,7 +1537,7 @@ module Aws::ElasticLoadBalancingV2
       :target_groups,
       :target_group_stickiness_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1598,7 +1546,7 @@ module Aws::ElasticLoadBalancingV2
     class GetResourcePolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1607,7 +1555,7 @@ module Aws::ElasticLoadBalancingV2
     class GetResourcePolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -1616,7 +1564,7 @@ module Aws::ElasticLoadBalancingV2
     class GetTrustStoreCaCertificatesBundleInput < Struct.new(
       :trust_store_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location
@@ -1625,7 +1573,7 @@ module Aws::ElasticLoadBalancingV2
     class GetTrustStoreCaCertificatesBundleOutput < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -1638,7 +1586,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :revocation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location
@@ -1647,7 +1595,7 @@ module Aws::ElasticLoadBalancingV2
     class GetTrustStoreRevocationContentOutput < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The health of the specified targets could not be retrieved due to an internal
@@ -1657,7 +1605,7 @@ module Aws::ElasticLoadBalancingV2
     class HealthUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a host header condition.</p>
@@ -1672,7 +1620,7 @@ module Aws::ElasticLoadBalancingV2
     class HostHeaderConditionConfig < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an HTTP header condition.</p>
@@ -1699,7 +1647,7 @@ module Aws::ElasticLoadBalancingV2
       :http_header_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an HTTP method condition.</p>
@@ -1717,7 +1665,7 @@ module Aws::ElasticLoadBalancingV2
     class HttpRequestMethodConditionConfig < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified configuration is not valid with this protocol.</p>
@@ -1726,7 +1674,7 @@ module Aws::ElasticLoadBalancingV2
     class IncompatibleProtocolsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is insufficient capacity to reserve.</p>
@@ -1735,7 +1683,7 @@ module Aws::ElasticLoadBalancingV2
     class InsufficientCapacityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified ca certificate bundle is in an invalid format, or corrupt.</p>
@@ -1744,7 +1692,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidCaCertificatesBundleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested configuration is not valid.</p>
@@ -1753,7 +1701,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidConfigurationRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested action is not valid.</p>
@@ -1762,7 +1710,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidLoadBalancerActionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided revocation file is an invalid format, or uses an incorrect algorithm.</p>
@@ -1771,7 +1719,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidRevocationContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested scheme is not valid.</p>
@@ -1780,7 +1728,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidSchemeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified security group does not exist.</p>
@@ -1789,7 +1737,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidSecurityGroupException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subnet is out of available addresses.</p>
@@ -1798,7 +1746,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidSubnetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target does not exist, is not in the same VPC as the target group, or has an
@@ -1808,13 +1756,7 @@ module Aws::ElasticLoadBalancingV2
     class InvalidTargetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      IPV4 = 'ipv4'
-      DUALSTACK = 'dualstack'
-      DUALSTACK_WITHOUT_PUBLIC_IPV4 = 'dualstack-without-public-ipv4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPAM pool is a collection of IP address CIDRs. 
@@ -1826,7 +1768,7 @@ module Aws::ElasticLoadBalancingV2
     class IpamPools < Struct.new(
       :ipv4_ipam_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Elastic Load Balancing resource limit for your Amazon Web Services
@@ -1918,7 +1860,7 @@ module Aws::ElasticLoadBalancingV2
       :name,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a listener.</p>
@@ -1962,7 +1904,7 @@ module Aws::ElasticLoadBalancingV2
       :alpn_policy,
       :mutual_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a listener attribute.</p>
@@ -2098,7 +2040,7 @@ module Aws::ElasticLoadBalancingV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified listener does not exist.</p>
@@ -2107,7 +2049,7 @@ module Aws::ElasticLoadBalancingV2
     class ListenerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer.</p>
@@ -2193,7 +2135,7 @@ module Aws::ElasticLoadBalancingV2
       :enable_prefix_for_ipv6_source_nat,
       :ipam_pools,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a static IP address for a load balancer.</p>
@@ -2216,7 +2158,7 @@ module Aws::ElasticLoadBalancingV2
       :private_i_pv4_address,
       :i_pv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer attribute.</p>
@@ -2406,7 +2348,7 @@ module Aws::ElasticLoadBalancingV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified load balancer does not exist.</p>
@@ -2415,12 +2357,7 @@ module Aws::ElasticLoadBalancingV2
     class LoadBalancerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerSchemeEnum
-      INTERNET_FACING = 'internet-facing'
-      INTERNAL = 'internal'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state of the load balancer.</p>
@@ -2438,20 +2375,7 @@ module Aws::ElasticLoadBalancingV2
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoadBalancerStateEnum
-      ACTIVE = 'active'
-      PROVISIONING = 'provisioning'
-      ACTIVE_IMPAIRED = 'active_impaired'
-      FAILED = 'failed'
-    end
-
-    module LoadBalancerTypeEnum
-      APPLICATION = 'application'
-      NETWORK = 'network'
-      GATEWAY = 'gateway'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The codes to use when checking for a successful response from a target. If the protocol
@@ -2473,7 +2397,7 @@ module Aws::ElasticLoadBalancingV2
       :http_code,
       :grpc_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum capacity for a load balancer.</p>
@@ -2483,12 +2407,7 @@ module Aws::ElasticLoadBalancingV2
     class MinimumLoadBalancerCapacity < Struct.new(
       :capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MitigationInEffectEnum
-      YES = 'yes'
-      NO = 'no'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -2505,7 +2424,7 @@ module Aws::ElasticLoadBalancingV2
       :minimum_load_balancer_capacity,
       :reset_capacity_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified_time
@@ -2526,7 +2445,7 @@ module Aws::ElasticLoadBalancingV2
       :minimum_load_balancer_capacity,
       :capacity_reservation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -2543,7 +2462,7 @@ module Aws::ElasticLoadBalancingV2
       :ipam_pools,
       :remove_ipam_pools,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pools
@@ -2552,7 +2471,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyIpPoolsOutput < Struct.new(
       :ipam_pools,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -2565,7 +2484,7 @@ module Aws::ElasticLoadBalancingV2
       :listener_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2574,7 +2493,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyListenerAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -2650,7 +2569,7 @@ module Aws::ElasticLoadBalancingV2
       :alpn_policy,
       :mutual_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listeners
@@ -2659,7 +2578,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyListenerOutput < Struct.new(
       :listeners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -2672,7 +2591,7 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2681,7 +2600,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyLoadBalancerAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -2698,7 +2617,7 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -2707,7 +2626,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyRuleOutput < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -2720,7 +2639,7 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2729,7 +2648,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyTargetGroupAttributesOutput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -2788,7 +2707,7 @@ module Aws::ElasticLoadBalancingV2
       :unhealthy_threshold_count,
       :matcher,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_groups
@@ -2797,7 +2716,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -2818,7 +2737,7 @@ module Aws::ElasticLoadBalancingV2
       :ca_certificates_bundle_s3_key,
       :ca_certificates_bundle_s3_object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_stores
@@ -2827,7 +2746,7 @@ module Aws::ElasticLoadBalancingV2
     class ModifyTrustStoreOutput < Struct.new(
       :trust_stores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the mutual authentication attributes of a listener.</p>
@@ -2855,7 +2774,7 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_association_status,
       :advertise_trust_store_ca_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not allowed.</p>
@@ -2864,7 +2783,7 @@ module Aws::ElasticLoadBalancingV2
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a path pattern condition.</p>
@@ -2879,7 +2798,7 @@ module Aws::ElasticLoadBalancingV2
     class PathPatternConditionConfig < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not allowed while a prior request has not been completed.</p>
@@ -2888,7 +2807,7 @@ module Aws::ElasticLoadBalancingV2
     class PriorRequestNotCompleteException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified priority is in use.</p>
@@ -2897,17 +2816,7 @@ module Aws::ElasticLoadBalancingV2
     class PriorityInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProtocolEnum
-      HTTP = 'HTTP'
-      HTTPS = 'HTTPS'
-      TCP = 'TCP'
-      TLS = 'TLS'
-      UDP = 'UDP'
-      TCP_UDP = 'TCP_UDP'
-      GENEVE = 'GENEVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a query string condition.</p>
@@ -2927,7 +2836,7 @@ module Aws::ElasticLoadBalancingV2
     class QueryStringConditionConfig < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a key/value pair.</p>
@@ -2941,7 +2850,7 @@ module Aws::ElasticLoadBalancingV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a redirect action.</p>
@@ -3000,12 +2909,7 @@ module Aws::ElasticLoadBalancingV2
       :query,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RedirectActionStatusCodeEnum
-      HTTP_301 = 'HTTP_301'
-      HTTP_302 = 'HTTP_302'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_arn
@@ -3018,16 +2922,12 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterTargetsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemoveIpamPoolEnum
-      ipv4 = 'ipv4'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listener_arn
@@ -3042,12 +2942,12 @@ module Aws::ElasticLoadBalancingV2
       :listener_arn,
       :certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveListenerCertificatesOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -3060,12 +2960,12 @@ module Aws::ElasticLoadBalancingV2
       :resource_arns,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_store_arn
@@ -3078,12 +2978,12 @@ module Aws::ElasticLoadBalancingV2
       :trust_store_arn,
       :revocation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveTrustStoreRevocationsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified resource is in use.</p>
@@ -3092,7 +2992,7 @@ module Aws::ElasticLoadBalancingV2
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -3101,7 +3001,7 @@ module Aws::ElasticLoadBalancingV2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a revocation file.</p>
@@ -3123,7 +3023,7 @@ module Aws::ElasticLoadBalancingV2
       :s3_object_version,
       :revocation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified revocation file does not exist.</p>
@@ -3132,7 +3032,7 @@ module Aws::ElasticLoadBalancingV2
     class RevocationContentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified revocation ID does not exist.</p>
@@ -3141,11 +3041,7 @@ module Aws::ElasticLoadBalancingV2
     class RevocationIdNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RevocationType
-      CRL = 'CRL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a rule.</p>
@@ -3176,7 +3072,7 @@ module Aws::ElasticLoadBalancingV2
       :actions,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a condition for a rule.</p>
@@ -3300,7 +3196,7 @@ module Aws::ElasticLoadBalancingV2
       :http_request_method_config,
       :source_ip_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified rule does not exist.</p>
@@ -3309,7 +3205,7 @@ module Aws::ElasticLoadBalancingV2
     class RuleNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the priorities for the rules for a listener.</p>
@@ -3323,7 +3219,7 @@ module Aws::ElasticLoadBalancingV2
       :rule_arn,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified SSL policy does not exist.</p>
@@ -3332,7 +3228,7 @@ module Aws::ElasticLoadBalancingV2
     class SSLPolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -3354,7 +3250,7 @@ module Aws::ElasticLoadBalancingV2
       :load_balancer_arn,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_address_type
@@ -3363,7 +3259,7 @@ module Aws::ElasticLoadBalancingV2
     class SetIpAddressTypeOutput < Struct.new(
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_priorities
@@ -3372,7 +3268,7 @@ module Aws::ElasticLoadBalancingV2
     class SetRulePrioritiesInput < Struct.new(
       :rule_priorities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -3381,7 +3277,7 @@ module Aws::ElasticLoadBalancingV2
     class SetRulePrioritiesOutput < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -3399,7 +3295,7 @@ module Aws::ElasticLoadBalancingV2
       :security_groups,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_ids
@@ -3413,7 +3309,7 @@ module Aws::ElasticLoadBalancingV2
       :security_group_ids,
       :enforce_security_group_inbound_rules_on_private_link_traffic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_balancer_arn
@@ -3466,7 +3362,7 @@ module Aws::ElasticLoadBalancingV2
       :ip_address_type,
       :enable_prefix_for_ipv6_source_nat,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -3483,7 +3379,7 @@ module Aws::ElasticLoadBalancingV2
       :ip_address_type,
       :enable_prefix_for_ipv6_source_nat,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a source IP condition.</p>
@@ -3502,7 +3398,7 @@ module Aws::ElasticLoadBalancingV2
     class SourceIpConditionConfig < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy used for SSL negotiation.</p>
@@ -3524,7 +3420,7 @@ module Aws::ElasticLoadBalancingV2
       :name,
       :supported_load_balancer_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a subnet mapping.</p>
@@ -3553,7 +3449,7 @@ module Aws::ElasticLoadBalancingV2
       :i_pv6_address,
       :source_nat_ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified subnet does not exist.</p>
@@ -3562,7 +3458,7 @@ module Aws::ElasticLoadBalancingV2
     class SubnetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tag.</p>
@@ -3576,7 +3472,7 @@ module Aws::ElasticLoadBalancingV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags associated with a resource.</p>
@@ -3590,21 +3486,7 @@ module Aws::ElasticLoadBalancingV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetAdministrativeOverrideReasonEnum
-      INTERNAL_ERROR = 'AdministrativeOverride.Unknown'
-      NO_OVERRIDE_ENGAGED = 'AdministrativeOverride.NoOverride'
-      ZONAL_SHIFT_ENGAGED = 'AdministrativeOverride.ZonalShiftActive'
-      ZONAL_SHIFT_DELEGATED_TO_DNS = 'AdministrativeOverride.ZonalShiftDelegatedToDns'
-    end
-
-    module TargetAdministrativeOverrideStateEnum
-      UNKNOWN = 'unknown'
-      NO_OVERRIDE = 'no_override'
-      ZONAL_SHIFT_ACTIVE = 'zonal_shift_active'
-      ZONAL_SHIFT_DELEGATED_TO_DNS = 'zonal_shift_delegated_to_dns'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a target.</p>
@@ -3643,7 +3525,7 @@ module Aws::ElasticLoadBalancingV2
       :port,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a target group.</p>
@@ -3734,7 +3616,7 @@ module Aws::ElasticLoadBalancingV2
       :protocol_version,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of load balancers per target group.</p>
@@ -3743,7 +3625,7 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupAssociationLimitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a target group attribute.</p>
@@ -3956,12 +3838,7 @@ module Aws::ElasticLoadBalancingV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetGroupIpAddressTypeEnum
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target group does not exist.</p>
@@ -3970,7 +3847,7 @@ module Aws::ElasticLoadBalancingV2
     class TargetGroupNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the target group stickiness for a rule.</p>
@@ -3986,7 +3863,7 @@ module Aws::ElasticLoadBalancingV2
       :enabled,
       :duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how traffic will be distributed between multiple target groups in a
@@ -4001,7 +3878,7 @@ module Aws::ElasticLoadBalancingV2
       :target_group_arn,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the current health of a target.</p>
@@ -4107,7 +3984,7 @@ module Aws::ElasticLoadBalancingV2
       :reason,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the health of a target.</p>
@@ -4135,39 +4012,7 @@ module Aws::ElasticLoadBalancingV2
       :anomaly_detection,
       :administrative_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetHealthReasonEnum
-      REGISTRATION_IN_PROGRESS = 'Elb.RegistrationInProgress'
-      INITIAL_HEALTH_CHECKING = 'Elb.InitialHealthChecking'
-      RESPONSE_CODE_MISMATCH = 'Target.ResponseCodeMismatch'
-      TIMEOUT = 'Target.Timeout'
-      FAILED_HEALTH_CHECKS = 'Target.FailedHealthChecks'
-      NOT_REGISTERED = 'Target.NotRegistered'
-      NOT_IN_USE = 'Target.NotInUse'
-      DEREGISTRATION_IN_PROGRESS = 'Target.DeregistrationInProgress'
-      INVALID_STATE = 'Target.InvalidState'
-      IP_UNUSABLE = 'Target.IpUnusable'
-      HEALTH_CHECK_DISABLED = 'Target.HealthCheckDisabled'
-      INTERNAL_ERROR = 'Elb.InternalError'
-    end
-
-    module TargetHealthStateEnum
-      INITIAL = 'initial'
-      HEALTHY = 'healthy'
-      UNHEALTHY = 'unhealthy'
-      UNHEALTHY_DRAINING = 'unhealthy.draining'
-      UNUSED = 'unused'
-      DRAINING = 'draining'
-      UNAVAILABLE = 'unavailable'
-    end
-
-    module TargetTypeEnum
-      INSTANCE = 'instance'
-      IP = 'ip'
-      LAMBDA = 'lambda'
-      ALB = 'alb'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of actions per rule.</p>
@@ -4176,7 +4021,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyActionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of certificates per load balancer.</p>
@@ -4185,7 +4030,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyCertificatesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of listeners per load balancer.</p>
@@ -4194,7 +4039,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyListenersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of load balancers for your Amazon Web Services
@@ -4204,7 +4049,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyLoadBalancersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of times a target can be registered with a load
@@ -4214,7 +4059,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyRegistrationsForTargetIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of rules per load balancer.</p>
@@ -4223,7 +4068,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyRulesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of tags for this resource.</p>
@@ -4232,7 +4077,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of target groups for your Amazon Web Services
@@ -4242,7 +4087,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyTargetGroupsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of targets.</p>
@@ -4251,7 +4096,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyTargetsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified trust store has too many revocation entries.</p>
@@ -4260,7 +4105,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyTrustStoreRevocationEntriesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of trust stores for your Amazon Web Services account.</p>
@@ -4269,7 +4114,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyTrustStoresException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of unique target groups per load balancer across
@@ -4280,7 +4125,7 @@ module Aws::ElasticLoadBalancingV2
     class TooManyUniqueTargetGroupsPerLoadBalancerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a trust store.</p>
@@ -4306,7 +4151,7 @@ module Aws::ElasticLoadBalancingV2
       :number_of_ca_certificates,
       :total_revoked_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resources a trust store is associated with.</p>
@@ -4316,7 +4161,7 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreAssociation < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified association does not exist.</p>
@@ -4325,12 +4170,7 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreAssociationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustStoreAssociationStatusEnum
-      ACTIVE = 'active'
-      REMOVED = 'removed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified trust store is currently in use.</p>
@@ -4339,7 +4179,7 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified trust store does not exist.</p>
@@ -4348,7 +4188,7 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified trust store is not active.</p>
@@ -4357,7 +4197,7 @@ module Aws::ElasticLoadBalancingV2
     class TrustStoreNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a revocation file in use by a trust store.</p>
@@ -4379,12 +4219,7 @@ module Aws::ElasticLoadBalancingV2
       :revocation_type,
       :number_of_revoked_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustStoreStatus
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified protocol is not supported.</p>
@@ -4393,7 +4228,7 @@ module Aws::ElasticLoadBalancingV2
     class UnsupportedProtocolException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capacity reservation status for each Availability Zone.</p>
@@ -4411,7 +4246,7 @@ module Aws::ElasticLoadBalancingV2
       :availability_zone,
       :effective_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,7 +13,7 @@ module Aws::DocDBElastic
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -64,7 +64,7 @@ module Aws::DocDBElastic
       :opt_in_type,
       :apply_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_action
@@ -73,7 +73,7 @@ module Aws::DocDBElastic
     class ApplyPendingMaintenanceActionOutput < Struct.new(
       :resource_pending_maintenance_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific elastic cluster.</p>
@@ -152,7 +152,7 @@ module Aws::DocDBElastic
       :preferred_backup_window,
       :shard_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Amazon DocumentDB elastic clusters.</p>
@@ -170,7 +170,7 @@ module Aws::DocDBElastic
       :cluster_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a specific elastic cluster snapshot.</p>
@@ -235,7 +235,7 @@ module Aws::DocDBElastic
       :kms_key_id,
       :snapshot_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of elastic cluster snapshots.</p>
@@ -261,7 +261,7 @@ module Aws::DocDBElastic
       :status,
       :snapshot_creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an access conflict.</p>
@@ -278,7 +278,7 @@ module Aws::DocDBElastic
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_arn
@@ -325,7 +325,7 @@ module Aws::DocDBElastic
       :copy_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -334,7 +334,7 @@ module Aws::DocDBElastic
     class CopyClusterSnapshotOutput < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -459,7 +459,7 @@ module Aws::DocDBElastic
       :preferred_backup_window,
       :shard_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -468,7 +468,7 @@ module Aws::DocDBElastic
     class CreateClusterOperationOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -485,7 +485,7 @@ module Aws::DocDBElastic
       :snapshot_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -494,7 +494,7 @@ module Aws::DocDBElastic
     class CreateClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -503,7 +503,7 @@ module Aws::DocDBElastic
     class DeleteClusterOperationInput < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -512,7 +512,7 @@ module Aws::DocDBElastic
     class DeleteClusterOperationOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_arn
@@ -521,7 +521,7 @@ module Aws::DocDBElastic
     class DeleteClusterSnapshotOperationInput < Struct.new(
       :snapshot_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -530,7 +530,7 @@ module Aws::DocDBElastic
     class DeleteClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -539,7 +539,7 @@ module Aws::DocDBElastic
     class GetClusterOperationInput < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -548,7 +548,7 @@ module Aws::DocDBElastic
     class GetClusterOperationOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_arn
@@ -557,7 +557,7 @@ module Aws::DocDBElastic
     class GetClusterSnapshotOperationInput < Struct.new(
       :snapshot_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -566,7 +566,7 @@ module Aws::DocDBElastic
     class GetClusterSnapshotOperationOutput < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -575,7 +575,7 @@ module Aws::DocDBElastic
     class GetPendingMaintenanceActionInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_action
@@ -584,7 +584,7 @@ module Aws::DocDBElastic
     class GetPendingMaintenanceActionOutput < Struct.new(
       :resource_pending_maintenance_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal server error.</p>
@@ -593,7 +593,7 @@ module Aws::DocDBElastic
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -626,7 +626,7 @@ module Aws::DocDBElastic
       :max_results,
       :snapshot_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshots
@@ -641,7 +641,7 @@ module Aws::DocDBElastic
       :snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -656,7 +656,7 @@ module Aws::DocDBElastic
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -671,7 +671,7 @@ module Aws::DocDBElastic
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -685,7 +685,7 @@ module Aws::DocDBElastic
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_actions
@@ -698,7 +698,7 @@ module Aws::DocDBElastic
       :resource_pending_maintenance_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -707,7 +707,7 @@ module Aws::DocDBElastic
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -716,7 +716,7 @@ module Aws::DocDBElastic
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the details of maintenance actions that are pending.</p>
@@ -752,7 +752,7 @@ module Aws::DocDBElastic
       :current_apply_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be located.</p>
@@ -770,7 +770,7 @@ module Aws::DocDBElastic
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a pending maintenance action for a resource.</p>
@@ -784,7 +784,7 @@ module Aws::DocDBElastic
       :resource_arn,
       :pending_maintenance_action_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -829,7 +829,7 @@ module Aws::DocDBElastic
       :shard_capacity,
       :shard_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -838,7 +838,7 @@ module Aws::DocDBElastic
     class RestoreClusterFromSnapshotOperationOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service quota for the action was exceeded.</p>
@@ -847,7 +847,7 @@ module Aws::DocDBElastic
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the shard.</p>
@@ -865,7 +865,7 @@ module Aws::DocDBElastic
       :create_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -874,7 +874,7 @@ module Aws::DocDBElastic
     class StartClusterInput < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -883,7 +883,7 @@ module Aws::DocDBElastic
     class StartClusterOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -892,7 +892,7 @@ module Aws::DocDBElastic
     class StopClusterInput < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -901,7 +901,7 @@ module Aws::DocDBElastic
     class StopClusterOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -914,12 +914,12 @@ module Aws::DocDBElastic
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ThrottlingException will be thrown when request was denied due to request throttling.</p>
@@ -932,7 +932,7 @@ module Aws::DocDBElastic
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -945,12 +945,12 @@ module Aws::DocDBElastic
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1018,7 +1018,7 @@ module Aws::DocDBElastic
       :preferred_backup_window,
       :shard_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -1027,7 +1027,7 @@ module Aws::DocDBElastic
     class UpdateClusterOperationOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure defining a validation exception.</p>
@@ -1046,7 +1046,7 @@ module Aws::DocDBElastic
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific field in which a given validation exception occurred.</p>
@@ -1060,7 +1060,7 @@ module Aws::DocDBElastic
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

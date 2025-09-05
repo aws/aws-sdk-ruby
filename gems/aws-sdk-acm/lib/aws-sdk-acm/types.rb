@@ -12,7 +12,7 @@ module Aws::ACM
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -25,7 +25,7 @@ module Aws::ACM
       :certificate_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about an ACM certificate. This structure is returned in the response to a <a>DescribeCertificate</a> request. </p>
@@ -139,16 +139,7 @@ module Aws::ACM
       :renewal_eligibility,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateExport
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module CertificateManagedBy
-      CLOUDFRONT = 'CLOUDFRONT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains options for your certificate. You can use this structure to specify whether to opt in to or out of certificate transparency logging and export your certificate. </p> <p>Some browsers require that public certificates issued for your domain be recorded in a log. Certificates that are not logged typically generate a browser error. Transparency makes it possible for you to detect SSL/TLS certificates that have been mistakenly or maliciously issued for your domain. For general information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency">Certificate Transparency Logging</a>.</p> <p>You can export public ACM certificates to use with Amazon Web Services services as well as outside Amazon Web Services Cloud. For more information, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html">Certificate Manager exportable public certificate</a>.</p>
@@ -162,17 +153,7 @@ module Aws::ACM
       :certificate_transparency_logging_preference,
       :export,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateStatus
-      PENDING_VALIDATION = 'PENDING_VALIDATION'
-      ISSUED = 'ISSUED'
-      INACTIVE = 'INACTIVE'
-      EXPIRED = 'EXPIRED'
-      VALIDATION_TIMED_OUT = 'VALIDATION_TIMED_OUT'
-      REVOKED = 'REVOKED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure is returned in the response object of <a>ListCertificates</a> action. </p>
@@ -258,18 +239,7 @@ module Aws::ACM
       :revoked_at,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateTransparencyLoggingPreference
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module CertificateType
-      IMPORTED = 'IMPORTED'
-      AMAZON_ISSUED = 'AMAZON_ISSUED'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are trying to update a resource or configuration that is already being created or updated. Wait for the previous operation to finish and try again.</p>
@@ -278,7 +248,7 @@ module Aws::ACM
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -287,7 +257,7 @@ module Aws::ACM
     class DeleteCertificateRequest < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -296,7 +266,7 @@ module Aws::ACM
     class DescribeCertificateRequest < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -305,13 +275,7 @@ module Aws::ACM
     class DescribeCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      PENDING_VALIDATION = 'PENDING_VALIDATION'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the validation of each domain name in the certificate.</p>
@@ -345,7 +309,7 @@ module Aws::ACM
       :http_redirect,
       :validation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the domain names that you want ACM to use to send you emails that enable you to validate domain ownership.</p>
@@ -359,7 +323,7 @@ module Aws::ACM
       :domain_name,
       :validation_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing expiration events options associated with an Amazon Web Services account.</p>
@@ -369,7 +333,7 @@ module Aws::ACM
     class ExpiryEventsConfiguration < Struct.new(
       :days_before_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -382,7 +346,7 @@ module Aws::ACM
       :certificate_arn,
       :passphrase,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -399,7 +363,7 @@ module Aws::ACM
       :certificate_chain,
       :private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Extended Key Usage X.509 v3 extension defines one or more purposes for which the public key can be used. This is in addition to or in place of the basic purposes specified by the Key Usage extension. </p>
@@ -413,42 +377,7 @@ module Aws::ACM
       :name,
       :oid,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExtendedKeyUsageName
-      TLS_WEB_SERVER_AUTHENTICATION = 'TLS_WEB_SERVER_AUTHENTICATION'
-      TLS_WEB_CLIENT_AUTHENTICATION = 'TLS_WEB_CLIENT_AUTHENTICATION'
-      CODE_SIGNING = 'CODE_SIGNING'
-      EMAIL_PROTECTION = 'EMAIL_PROTECTION'
-      TIME_STAMPING = 'TIME_STAMPING'
-      OCSP_SIGNING = 'OCSP_SIGNING'
-      IPSEC_END_SYSTEM = 'IPSEC_END_SYSTEM'
-      IPSEC_TUNNEL = 'IPSEC_TUNNEL'
-      IPSEC_USER = 'IPSEC_USER'
-      ANY = 'ANY'
-      NONE = 'NONE'
-      CUSTOM = 'CUSTOM'
-    end
-
-    module FailureReason
-      NO_AVAILABLE_CONTACTS = 'NO_AVAILABLE_CONTACTS'
-      ADDITIONAL_VERIFICATION_REQUIRED = 'ADDITIONAL_VERIFICATION_REQUIRED'
-      DOMAIN_NOT_ALLOWED = 'DOMAIN_NOT_ALLOWED'
-      INVALID_PUBLIC_DOMAIN = 'INVALID_PUBLIC_DOMAIN'
-      DOMAIN_VALIDATION_DENIED = 'DOMAIN_VALIDATION_DENIED'
-      CAA_ERROR = 'CAA_ERROR'
-      PCA_LIMIT_EXCEEDED = 'PCA_LIMIT_EXCEEDED'
-      PCA_INVALID_ARN = 'PCA_INVALID_ARN'
-      PCA_INVALID_STATE = 'PCA_INVALID_STATE'
-      PCA_REQUEST_FAILED = 'PCA_REQUEST_FAILED'
-      PCA_NAME_CONSTRAINTS_VALIDATION = 'PCA_NAME_CONSTRAINTS_VALIDATION'
-      PCA_RESOURCE_NOT_FOUND = 'PCA_RESOURCE_NOT_FOUND'
-      PCA_INVALID_ARGS = 'PCA_INVALID_ARGS'
-      PCA_INVALID_DURATION = 'PCA_INVALID_DURATION'
-      PCA_ACCESS_DENIED = 'PCA_ACCESS_DENIED'
-      SLR_NOT_FOUND = 'SLR_NOT_FOUND'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure can be used in the <a>ListCertificates</a> action to filter the output of the certificate list. </p>
@@ -474,7 +403,7 @@ module Aws::ACM
       :export_option,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute expiry_events
@@ -483,7 +412,7 @@ module Aws::ACM
     class GetAccountConfigurationResponse < Struct.new(
       :expiry_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -492,7 +421,7 @@ module Aws::ACM
     class GetCertificateRequest < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -505,7 +434,7 @@ module Aws::ACM
       :certificate,
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information for HTTP-based domain validation of certificates requested through Amazon CloudFront and issued by ACM. This field exists only when the certificate type is <code>AMAZON_ISSUED</code> and the validation method is <code>HTTP</code>.</p>
@@ -519,7 +448,7 @@ module Aws::ACM
       :redirect_from,
       :redirect_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -544,7 +473,7 @@ module Aws::ACM
       :certificate_chain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -553,7 +482,7 @@ module Aws::ACM
     class ImportCertificateResponse < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of request parameters specified is not valid.</p>
@@ -562,7 +491,7 @@ module Aws::ACM
     class InvalidArgsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested Amazon Resource Name (ARN) does not refer to an existing resource.</p>
@@ -571,7 +500,7 @@ module Aws::ACM
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more values in the <a>DomainValidationOption</a> structure is incorrect.</p>
@@ -580,7 +509,7 @@ module Aws::ACM
     class InvalidDomainValidationOptionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input parameter was invalid.</p>
@@ -589,7 +518,7 @@ module Aws::ACM
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Processing has reached an invalid state.</p>
@@ -598,7 +527,7 @@ module Aws::ACM
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or both of the values that make up the key-value pair is not valid. For example, you cannot specify a tag value that begins with <code>aws:</code>.</p>
@@ -607,17 +536,7 @@ module Aws::ACM
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyAlgorithm
-      RSA_1024 = 'RSA_1024'
-      RSA_2048 = 'RSA_2048'
-      RSA_3072 = 'RSA_3072'
-      RSA_4096 = 'RSA_4096'
-      EC_prime256v1 = 'EC_prime256v1'
-      EC_secp384r1 = 'EC_secp384r1'
-      EC_secp521r1 = 'EC_secp521r1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Key Usage X.509 v3 extension defines the purpose of the public key contained in the certificate.</p>
@@ -627,21 +546,7 @@ module Aws::ACM
     class KeyUsage < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyUsageName
-      DIGITAL_SIGNATURE = 'DIGITAL_SIGNATURE'
-      NON_REPUDATION = 'NON_REPUDIATION'
-      KEY_ENCIPHERMENT = 'KEY_ENCIPHERMENT'
-      DATA_ENCIPHERMENT = 'DATA_ENCIPHERMENT'
-      KEY_AGREEMENT = 'KEY_AGREEMENT'
-      CERTIFICATE_SIGNING = 'CERTIFICATE_SIGNING'
-      CRL_SIGNING = 'CRL_SIGNING'
-      ENCHIPER_ONLY = 'ENCIPHER_ONLY'
-      DECIPHER_ONLY = 'DECIPHER_ONLY'
-      ANY = 'ANY'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ACM quota has been exceeded.</p>
@@ -650,7 +555,7 @@ module Aws::ACM
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_statuses
@@ -679,7 +584,7 @@ module Aws::ACM
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -692,7 +597,7 @@ module Aws::ACM
       :next_token,
       :certificate_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -701,7 +606,7 @@ module Aws::ACM
     class ListTagsForCertificateRequest < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -710,7 +615,7 @@ module Aws::ACM
     class ListTagsForCertificateResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute expiry_events
@@ -723,11 +628,7 @@ module Aws::ACM
       :expiry_events,
       :idempotency_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordType
-      CNAME = 'CNAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -740,7 +641,7 @@ module Aws::ACM
       :certificate_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -749,19 +650,7 @@ module Aws::ACM
     class RenewCertificateRequest < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RenewalEligibility
-      ELIGIBLE = 'ELIGIBLE'
-      INELIGIBLE = 'INELIGIBLE'
-    end
-
-    module RenewalStatus
-      PENDING_AUTO_RENEWAL = 'PENDING_AUTO_RENEWAL'
-      PENDING_VALIDATION = 'PENDING_VALIDATION'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the status of ACM's <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html">managed renewal</a> for the certificate. This structure exists only when the certificate type is <code>AMAZON_ISSUED</code>.</p>
@@ -783,7 +672,7 @@ module Aws::ACM
       :renewal_status_reason,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -828,7 +717,7 @@ module Aws::ACM
       :key_algorithm,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -837,7 +726,7 @@ module Aws::ACM
     class RequestCertificateResponse < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate request is in process and the certificate in your account has not yet been issued.</p>
@@ -846,7 +735,7 @@ module Aws::ACM
     class RequestInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -863,7 +752,7 @@ module Aws::ACM
       :domain,
       :validation_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate is in use by another Amazon Web Services service in the caller's account. Remove the association and try again.</p>
@@ -872,7 +761,7 @@ module Aws::ACM
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified certificate cannot be found in the caller's account or the caller's account cannot be found.</p>
@@ -881,7 +770,7 @@ module Aws::ACM
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a DNS record value that you can use to validate ownership or control of a domain. This is used by the <a>DescribeCertificate</a> action. </p>
@@ -899,21 +788,7 @@ module Aws::ACM
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RevocationReason
-      UNSPECIFIED = 'UNSPECIFIED'
-      KEY_COMPROMISE = 'KEY_COMPROMISE'
-      CA_COMPROMISE = 'CA_COMPROMISE'
-      AFFILIATION_CHANGED = 'AFFILIATION_CHANGED'
-      SUPERCEDED = 'SUPERCEDED'
-      SUPERSEDED = 'SUPERSEDED'
-      CESSATION_OF_OPERATION = 'CESSATION_OF_OPERATION'
-      CERTIFICATE_HOLD = 'CERTIFICATE_HOLD'
-      REMOVE_FROM_CRL = 'REMOVE_FROM_CRL'
-      PRIVILEGE_WITHDRAWN = 'PRIVILEGE_WITHDRAWN'
-      A_A_COMPROMISE = 'A_A_COMPROMISE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -926,7 +801,7 @@ module Aws::ACM
       :certificate_arn,
       :revocation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -935,16 +810,7 @@ module Aws::ACM
     class RevokeCertificateResponse < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortBy
-      CREATED_AT = 'CREATED_AT'
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that identifies or specifies metadata about an ACM resource.</p>
@@ -958,7 +824,7 @@ module Aws::ACM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified tag did not comply with an existing tag policy and was rejected.</p>
@@ -967,7 +833,7 @@ module Aws::ACM
     class TagPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because it exceeded a quota.</p>
@@ -976,7 +842,7 @@ module Aws::ACM
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains too many tags. Try the request again with fewer tags.</p>
@@ -985,7 +851,7 @@ module Aws::ACM
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -998,7 +864,7 @@ module Aws::ACM
       :certificate_arn,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>
@@ -1007,13 +873,7 @@ module Aws::ACM
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationMethod
-      EMAIL = 'EMAIL'
-      DNS = 'DNS'
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
   end

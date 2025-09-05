@@ -12,7 +12,7 @@ module Aws::ControlTower
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object of shape <code>BaselineOperation</code>, returning details about the specified <code>Baseline</code> operation ID.</p>
@@ -42,20 +42,7 @@ module Aws::ControlTower
       :end_time,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BaselineOperationStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-    end
-
-    module BaselineOperationType
-      ENABLE_BASELINE = 'ENABLE_BASELINE'
-      DISABLE_BASELINE = 'DISABLE_BASELINE'
-      UPDATE_ENABLED_BASELINE = 'UPDATE_ENABLED_BASELINE'
-      RESET_ENABLED_BASELINE = 'RESET_ENABLED_BASELINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about a <code>Baseline</code> object.</p>
@@ -73,7 +60,7 @@ module Aws::ControlTower
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting the resource can cause an inconsistent state.</p>
@@ -82,7 +69,7 @@ module Aws::ControlTower
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation performed by the control.</p>
@@ -124,7 +111,7 @@ module Aws::ControlTower
       :target_identifier,
       :enabled_control_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter object that lets you call <code>ListControlOperations</code> with a specific filter.</p>
@@ -150,13 +137,7 @@ module Aws::ControlTower
       :statuses,
       :control_operation_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlOperationStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about the specified control operation.</p>
@@ -198,14 +179,7 @@ module Aws::ControlTower
       :target_identifier,
       :enabled_control_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlOperationType
-      ENABLE_CONTROL = 'ENABLE_CONTROL'
-      DISABLE_CONTROL = 'DISABLE_CONTROL'
-      UPDATE_ENABLED_CONTROL = 'UPDATE_ENABLED_CONTROL'
-      RESET_ENABLED_CONTROL = 'RESET_ENABLED_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -222,7 +196,7 @@ module Aws::ControlTower
       :manifest,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -235,7 +209,7 @@ module Aws::ControlTower
       :arn,
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zone_identifier
@@ -244,7 +218,7 @@ module Aws::ControlTower
     class DeleteLandingZoneInput < Struct.new(
       :landing_zone_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -253,7 +227,7 @@ module Aws::ControlTower
     class DeleteLandingZoneOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_baseline_identifier
@@ -262,7 +236,7 @@ module Aws::ControlTower
     class DisableBaselineInput < Struct.new(
       :enabled_baseline_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -271,7 +245,7 @@ module Aws::ControlTower
     class DisableBaselineOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_identifier
@@ -284,7 +258,7 @@ module Aws::ControlTower
       :control_identifier,
       :target_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -293,14 +267,7 @@ module Aws::ControlTower
     class DisableControlOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DriftStatus
-      DRIFTED = 'DRIFTED'
-      IN_SYNC = 'IN_SYNC'
-      NOT_CHECKING = 'NOT_CHECKING'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The drift summary of the enabled control.</p> <p>Amazon Web Services Control Tower expects the enabled control configuration to include all supported and governed Regions. If the enabled control differs from the expected configuration, it is defined to be in a state of drift. You can repair this drift by resetting the enabled control.</p>
@@ -310,7 +277,7 @@ module Aws::ControlTower
     class DriftStatusSummary < Struct.new(
       :drift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_version
@@ -335,7 +302,7 @@ module Aws::ControlTower
       :target_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -348,7 +315,7 @@ module Aws::ControlTower
       :operation_identifier,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_identifier
@@ -369,7 +336,7 @@ module Aws::ControlTower
       :tags,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -382,7 +349,7 @@ module Aws::ControlTower
       :operation_identifier,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the <code>EnabledBaseline</code> resource.</p>
@@ -420,12 +387,7 @@ module Aws::ControlTower
       :status_summary,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnabledBaselineDriftStatus
-      IN_SYNC = 'IN_SYNC'
-      DRIFTED = 'DRIFTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The drift summary of the enabled baseline. Amazon Web Services Control Tower reports inheritance drift when an enabled baseline configuration of a member account is different than the configuration that applies to the OU. Amazon Web Services Control Tower reports this type of drift for a parent or child enabled baseline. One way to repair this drift by resetting the parent enabled baseline, on the OU.</p> <p>For example, you may see this type of drift if you move accounts between OUs, but the accounts are not yet (re-)enrolled.</p>
@@ -435,7 +397,7 @@ module Aws::ControlTower
     class EnabledBaselineDriftStatusSummary < Struct.new(
       :types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The types of drift that can be detected for an enabled baseline.</p> <ul> <li> <p> Amazon Web Services Control Tower detects inheritance drift on the enabled baselines that target OUs: <code>AWSControlTowerBaseline</code> and <code>BackupBaseline</code>. </p> </li> <li> <p>Amazon Web Services Control Tower does not detect drift on the baselines that apply to your landing zone: <code>IdentityCenterBaseline</code>, <code>AuditBaseline</code>, <code>LogArchiveBaseline</code>, <code>BackupCentralVaultBaseline</code>, or <code>BackupAdminBaseline</code>. For more information, see <a href="https://docs.aws.amazon.com/controltower/latest/userguide/types-of-baselines.html">Types of baselines</a>.</p> </li> </ul> <p>Baselines enabled on an OU are inherited by its member accounts as child <code>EnabledBaseline</code> resources. The baseline on the OU serves as the parent <code>EnabledBaseline</code>, which governs the configuration of each child <code>EnabledBaseline</code>.</p> <p>If the baseline configuration of a member account in an OU does not match the configuration of the parent OU, the parent and child baseline is in a state of inheritance drift. This drift could occur in the <code>AWSControlTowerBaseline</code> or the <code>BackupBaseline</code> related to that account.</p>
@@ -445,7 +407,7 @@ module Aws::ControlTower
     class EnabledBaselineDriftTypes < Struct.new(
       :inheritance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter applied on the <code>ListEnabledBaseline</code> operation. Allowed filters are <code>baselineIdentifiers</code> and <code>targetIdentifiers</code>. The filter can be applied for either, or both.</p>
@@ -471,7 +433,7 @@ module Aws::ControlTower
       :statuses,
       :inheritance_drift_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inheritance drift summary for the enabled baseline. Inheritance drift occurs when any accounts in the target OU do not match the baseline configuration defined on that OU. </p>
@@ -481,7 +443,7 @@ module Aws::ControlTower
     class EnabledBaselineInheritanceDrift < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value parameter to an <code>EnabledBaseline</code> resource.</p>
@@ -495,7 +457,7 @@ module Aws::ControlTower
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of an applied parameter to an <code>EnabledBaseline</code> resource. </p>
@@ -509,7 +471,7 @@ module Aws::ControlTower
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about an <code>EnabledBaseline</code> object.</p>
@@ -543,7 +505,7 @@ module Aws::ControlTower
       :parent_identifier,
       :status_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the enabled control.</p>
@@ -577,7 +539,7 @@ module Aws::ControlTower
       :drift_status_summary,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that returns a set of control identifiers, the control status for each control in the set, and the drift status for each control in the set.</p>
@@ -595,7 +557,7 @@ module Aws::ControlTower
       :statuses,
       :drift_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key/value pair, where <code>Key</code> is of type <code>String</code> and <code>Value</code> is of type <code>Document</code>.</p>
@@ -609,7 +571,7 @@ module Aws::ControlTower
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about the parameters of an enabled control.</p>
@@ -623,7 +585,7 @@ module Aws::ControlTower
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about an enabled control.</p>
@@ -649,13 +611,7 @@ module Aws::ControlTower
       :status_summary,
       :drift_status_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnablementStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      UNDER_CHANGE = 'UNDER_CHANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment summary of an <code>EnabledControl</code> or <code>EnabledBaseline</code> resource.</p>
@@ -669,7 +625,7 @@ module Aws::ControlTower
       :status,
       :last_operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_identifier
@@ -678,7 +634,7 @@ module Aws::ControlTower
     class GetBaselineInput < Struct.new(
       :baseline_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -687,7 +643,7 @@ module Aws::ControlTower
     class GetBaselineOperationInput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_operation
@@ -696,7 +652,7 @@ module Aws::ControlTower
     class GetBaselineOperationOutput < Struct.new(
       :baseline_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -713,7 +669,7 @@ module Aws::ControlTower
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -722,7 +678,7 @@ module Aws::ControlTower
     class GetControlOperationInput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_operation
@@ -731,7 +687,7 @@ module Aws::ControlTower
     class GetControlOperationOutput < Struct.new(
       :control_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_baseline_identifier
@@ -740,7 +696,7 @@ module Aws::ControlTower
     class GetEnabledBaselineInput < Struct.new(
       :enabled_baseline_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_baseline_details
@@ -749,7 +705,7 @@ module Aws::ControlTower
     class GetEnabledBaselineOutput < Struct.new(
       :enabled_baseline_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_control_identifier
@@ -758,7 +714,7 @@ module Aws::ControlTower
     class GetEnabledControlInput < Struct.new(
       :enabled_control_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_control_details
@@ -767,7 +723,7 @@ module Aws::ControlTower
     class GetEnabledControlOutput < Struct.new(
       :enabled_control_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zone_identifier
@@ -776,7 +732,7 @@ module Aws::ControlTower
     class GetLandingZoneInput < Struct.new(
       :landing_zone_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -785,7 +741,7 @@ module Aws::ControlTower
     class GetLandingZoneOperationInput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_details
@@ -794,7 +750,7 @@ module Aws::ControlTower
     class GetLandingZoneOperationOutput < Struct.new(
       :operation_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zone
@@ -803,7 +759,7 @@ module Aws::ControlTower
     class GetLandingZoneOutput < Struct.new(
       :landing_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during processing of a request.</p>
@@ -812,7 +768,7 @@ module Aws::ControlTower
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the landing zone.</p>
@@ -842,12 +798,7 @@ module Aws::ControlTower
       :latest_available_version,
       :drift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LandingZoneDriftStatus
-      DRIFTED = 'DRIFTED'
-      IN_SYNC = 'IN_SYNC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The drift status summary of the landing zone. </p> <p>If the landing zone differs from the expected configuration, it is defined to be in a state of drift. You can repair this drift by resetting the landing zone.</p>
@@ -857,7 +808,7 @@ module Aws::ControlTower
     class LandingZoneDriftStatusSummary < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a landing zone operation.</p>
@@ -887,7 +838,7 @@ module Aws::ControlTower
       :end_time,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter object that lets you call <code>ListLandingZoneOperations</code> with a specific filter.</p>
@@ -901,13 +852,7 @@ module Aws::ControlTower
       :types,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LandingZoneOperationStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about a landing zone operation.</p>
@@ -925,20 +870,7 @@ module Aws::ControlTower
       :operation_identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LandingZoneOperationType
-      DELETE = 'DELETE'
-      CREATE = 'CREATE'
-      UPDATE = 'UPDATE'
-      RESET = 'RESET'
-    end
-
-    module LandingZoneStatus
-      ACTIVE = 'ACTIVE'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a summary of information about a landing zone.</p>
@@ -948,7 +880,7 @@ module Aws::ControlTower
     class LandingZoneSummary < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -961,7 +893,7 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baselines
@@ -974,7 +906,7 @@ module Aws::ControlTower
       :baselines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -991,7 +923,7 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_operations
@@ -1004,7 +936,7 @@ module Aws::ControlTower
       :control_operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -1025,7 +957,7 @@ module Aws::ControlTower
       :max_results,
       :include_children,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_baselines
@@ -1038,7 +970,7 @@ module Aws::ControlTower
       :enabled_baselines,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_identifier
@@ -1059,7 +991,7 @@ module Aws::ControlTower
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_controls
@@ -1072,7 +1004,7 @@ module Aws::ControlTower
       :enabled_controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -1089,7 +1021,7 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zone_operations
@@ -1102,7 +1034,7 @@ module Aws::ControlTower
       :landing_zone_operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1115,7 +1047,7 @@ module Aws::ControlTower
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zones
@@ -1128,7 +1060,7 @@ module Aws::ControlTower
       :landing_zones,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1137,7 +1069,7 @@ module Aws::ControlTower
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1146,7 +1078,7 @@ module Aws::ControlTower
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services Region in which Amazon Web Services Control Tower expects to find the control deployed. </p> <p>The expected Regions are based on the Regions that are governed by the landing zone. In certain cases, a control is not actually enabled in the Region as expected, such as during drift, or <a href="https://docs.aws.amazon.com/controltower/latest/userguide/region-how.html#mixed-governance">mixed governance</a>.</p>
@@ -1156,7 +1088,7 @@ module Aws::ControlTower
     class Region < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_baseline_identifier
@@ -1165,7 +1097,7 @@ module Aws::ControlTower
     class ResetEnabledBaselineInput < Struct.new(
       :enabled_baseline_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1174,7 +1106,7 @@ module Aws::ControlTower
     class ResetEnabledBaselineOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_control_identifier
@@ -1183,7 +1115,7 @@ module Aws::ControlTower
     class ResetEnabledControlInput < Struct.new(
       :enabled_control_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1192,7 +1124,7 @@ module Aws::ControlTower
     class ResetEnabledControlOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute landing_zone_identifier
@@ -1201,7 +1133,7 @@ module Aws::ControlTower
     class ResetLandingZoneInput < Struct.new(
       :landing_zone_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1210,7 +1142,7 @@ module Aws::ControlTower
     class ResetLandingZoneOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist.</p>
@@ -1219,7 +1151,7 @@ module Aws::ControlTower
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded. The limit is 100 concurrent operations.</p>
@@ -1228,7 +1160,7 @@ module Aws::ControlTower
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1241,12 +1173,12 @@ module Aws::ControlTower
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1267,7 +1199,7 @@ module Aws::ControlTower
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1280,12 +1212,12 @@ module Aws::ControlTower
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_version
@@ -1302,7 +1234,7 @@ module Aws::ControlTower
       :parameters,
       :enabled_baseline_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1311,7 +1243,7 @@ module Aws::ControlTower
     class UpdateEnabledBaselineOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -1324,7 +1256,7 @@ module Aws::ControlTower
       :parameters,
       :enabled_control_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1333,7 +1265,7 @@ module Aws::ControlTower
     class UpdateEnabledControlOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -1350,7 +1282,7 @@ module Aws::ControlTower
       :manifest,
       :landing_zone_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_identifier
@@ -1359,7 +1291,7 @@ module Aws::ControlTower
     class UpdateLandingZoneOutput < Struct.new(
       :operation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1368,7 +1300,7 @@ module Aws::ControlTower
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end
