@@ -6,7 +6,7 @@ module Aws
     class DefaultCredentials
       include CredentialsProvider
 
-      def initialize(config = {})
+      def initialize(config)
         @config = config
       end
 
@@ -49,13 +49,13 @@ module Aws
       end
 
       def code_static_credentials
-        return unless @config[:access_key_id] && @config[:secret_access_key]
+        return unless @config.access_key_id && @config.secret_access_key
 
         creds = StaticCredentials.new(
-          access_key_id: @config[:access_key_id],
-          secret_access_key: @config[:secret_access_key],
-          session_token: @config[:session_token],
-          account_id: @config[:account_id]
+          access_key_id: @config.access_key_id,
+          secret_access_key: @config.secret_access_key,
+          session_token: @config.session_token,
+          account_id: @config.account_id
         )
         creds.features = ['CREDENTIALS_CODE']
         creds
@@ -79,7 +79,7 @@ module Aws
       end
 
       def profile_static_credentials
-        profile = @config[:profile] || 'default'
+        profile = @config.profile
         profile_config = Aws::Core.shared_config.profiles[profile]
         return unless profile_config &&
                       profile_config['aws_access_key_id'] &&
@@ -108,7 +108,7 @@ module Aws
       end
 
       def profile_process_credentials
-        profile = @config[:profile] || 'default'
+        profile = @config.profile
         profile_config = Aws::Core.shared_config.profiles[profile]
         return unless profile_config && profile_config['credential_process']
 
@@ -129,7 +129,7 @@ module Aws
       def instance_profile_credentials
         return if ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
 
-        profile = @config[:profile] || 'default'
+        profile = @config.profile
         profile_config = Aws::Core.shared_config.profiles[profile]
         endpoint = ENV.fetch('AWS_EC2_METADATA_SERVICE_ENDPOINT', nil) ||
                    (profile_config && profile_config['ec2_metadata_service_endpoint'])
