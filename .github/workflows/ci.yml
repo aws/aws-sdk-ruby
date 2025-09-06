@@ -17,7 +17,7 @@ env:
   GITHUB_BRANCH: ${{ github.head_ref || github.ref_name }}
 
 jobs:
-  core-test:
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -38,8 +38,11 @@ jobs:
           bundle config set --local with 'build test'
           bundle install
 
+      - name: Build
+        run: bundle exec rake build
+
       - name: Test
-        run: bundle exec rake test:spec:aws-sdk-core
+        run: bundle exec rake test:spec
 
   protocol-test:
     runs-on: ubuntu-latest
