@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-require_relative '../query/codec'
-require_relative '../query/handler'
-require_relative '../stubbing/ec2'
-require_relative '../xml/error_handler'
+require 'smithy-xml'
+
+require 'aws-sdk-core/query'
+require 'aws-sdk-core/stubbing/ec2'
+require 'aws-sdk-core/xml'
 
 module Aws
   module Core
     module Plugins
       # @api private
-      class Ec2 < Smithy::Client::Plugin
+      class Ec2Protocol < Smithy::Client::Plugin
         option(:protocol, default: 'aws.protocols#ec2Query')
         option(:query_codec) { Core::Query::Codec.new(ec2: true) }
         option(:xml_codec) { Smithy::Xml::Codec.new }

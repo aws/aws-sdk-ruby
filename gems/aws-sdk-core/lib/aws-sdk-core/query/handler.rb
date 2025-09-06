@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'param_list'
-
 module Aws
   module Core
     module Query

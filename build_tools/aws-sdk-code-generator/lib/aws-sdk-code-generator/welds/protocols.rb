@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'aws-sdk-core/plugins/query'
-require 'aws-sdk-core/plugins/ec2'
-require 'aws-sdk-core/plugins/json_rpc'
-require 'aws-sdk-core/plugins/rest_json'
-require 'aws-sdk-core/plugins/rest_xml'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/ec2_protocol'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/json_rpc_protocol'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/query_protocol'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_json_protocol'
+require_relative '../../../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/rest_xml_protocol'
 
 module AwsSdkCodeGenerator
   module Welds
@@ -34,15 +34,15 @@ module AwsSdkCodeGenerator
       def add_plugins
         case @protocol
         when 'aws.protocols#awsJson1_1', 'aws.protocols#awsJson1_0'
-          { Aws::Core::Plugins::JsonRpc => { require_path: 'aws-sdk-core/plugins/json_rpc' } }
+          { Aws::Core::Plugins::JsonRpcProtocol => { require_path: 'aws-sdk-core/plugins/json_rpc_protocol' } }
         when 'aws.protocols#awsQuery'
-          { Aws::Core::Plugins::Query => { require_path: 'aws-sdk-core/plugins/query' } }
+          { Aws::Core::Plugins::QueryProtocol => { require_path: 'aws-sdk-core/plugins/query_protocol' } }
         when 'aws.protocols#ec2Query'
-          { Aws::Core::Plugins::Ec2 => { require_path: 'aws-sdk-core/plugins/ec2' } }
+          { Aws::Core::Plugins::Ec2Protocol => { require_path: 'aws-sdk-core/plugins/ec2_protocol' } }
         when 'aws.protocols#restJson1'
-          { Aws::Core::Plugins::RestJson => { require_path: 'aws-sdk-core/plugins/rest_json' } }
+          { Aws::Core::Plugins::RestJsonProtocol => { require_path: 'aws-sdk-core/plugins/rest_json_protocol' } }
         when 'aws.protocols#restXml'
-          { Aws::Core::Plugins::RestXml => { require_path: 'aws-sdk-core/plugins/rest_xml' } }
+          { Aws::Core::Plugins::RestXmlProtocol => { require_path: 'aws-sdk-core/plugins/rest_xml_protocol' } }
         else {}
         end
       end

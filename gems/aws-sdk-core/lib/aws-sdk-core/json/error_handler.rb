@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../rest/response/headers'
-
 module Aws
   module Core
     module Json

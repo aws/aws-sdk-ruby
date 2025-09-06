@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-require_relative '../rest'
-require_relative '../xml/error_handler'
-require_relative '../stubbing/rest_xml'
+require 'smithy-xml'
+
+require 'aws-sdk-core/xml'
+require 'aws-sdk-core/rest'
+require 'aws-sdk-core/stubbing/rest_xml'
 
 module Aws
   module Core
     module Plugins
       # @api private
-      class RestXml < Smithy::Client::Plugin
+      class RestXmlProtocol < Smithy::Client::Plugin
         option(:protocol, default: 'aws.protocols#restXml')
         option(:xml_codec) { Smithy::Xml::Codec.new }
         option(:stubber) { Stubbing::RestXml.new }
