@@ -770,16 +770,12 @@ module Aws::EventBridge
           endpoint_provider: subject,
           region: 'us-east-1',
         )
-          response = client.put_events(
-            endpoint_id: 'abc123.456def',
-            entries: [{detail_type: "detailType", detail: "{ \"test\": [\"test\"] }", event_bus_name: "my-sdk-app"}],
-          )
-        expected_uri = URI.parse(expected['endpoint']['url'])
+        response = client.put_events(
+          endpoint_id: 'abc123.456def',
+          entries: [{detail_type: "detailType", detail: "{ \"test\": [\"test\"] }", event_bus_name: "my-sdk-app"}],
+        )
         actual_uri = response.context.http_request.endpoint
-        expect(actual_uri.host).to eq(expected_uri.host)
-        expect(actual_uri.scheme).to eq(expected_uri.scheme)
-        expect(actual_uri.path).to eq(expected_uri.path)
-
+        expect(actual_uri).to eq(URI.parse(expected['endpoint']['url']))
         actual_headers = response.context.http_request.headers
         expected['endpoint'].fetch('headers', {}).each do |k,v|
           expect(actual_headers[k]).to eq(v)
