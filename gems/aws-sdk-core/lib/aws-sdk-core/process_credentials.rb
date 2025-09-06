@@ -73,7 +73,7 @@ module Aws
           raise "Invalid JSON payload for credentials from: #{@process}"
         end
 
-        Identities::Credentials.new(
+        Credentials.new(
           access_key_id: creds_json['AccessKeyId'],
           secret_access_key: creds_json['SecretAccessKey'],
           session_token: creds_json['SessionToken'],

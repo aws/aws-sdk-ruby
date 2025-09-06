@@ -14,7 +14,7 @@ require_relative 'aws-sdk-core/config_file_utils'
 require_relative 'aws-sdk-core/shared_config'
 
 # Credentials and Credentials Providers
-require_relative 'aws-sdk-core/identities/credentials'
+require_relative 'aws-sdk-core/credentials'
 require_relative 'aws-sdk-core/credentials_provider'
 require_relative 'aws-sdk-core/default_credentials'
 require_relative 'aws-sdk-core/container_credentials'

@@ -12,7 +12,7 @@ module Aws
       # @options [String] :session_token (nil)
       # @options [String] :account_id (nil)
       def initialize(options = {})
-        @identity = Identities::Credentials.new(**options)
+        @identity = Credentials.new(**options)
         @features = ['CREDENTIALS_CODE']
       end
     end

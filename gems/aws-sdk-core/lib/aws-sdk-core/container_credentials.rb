@@ -157,7 +157,7 @@ module Aws
         # JSON documents in response to the GET profile credentials call.
         retry_errors([JSON::ParserError, StandardError], max_retries: @retries) do
           creds = JSON.parse(get_credentials.to_s)
-          @identity = Identities::Credentials.new(
+          @identity = Credentials.new(
             access_key_id: creds['AccessKeyId'],
             secret_access_key: creds['SecretAccessKey'],
             session_token: creds['Token'],

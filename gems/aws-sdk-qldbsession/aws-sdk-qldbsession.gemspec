@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.files       = Dir['VERSION', 'CHANGELOG.md', 'lib/**/*.rb', base: __dir__]
   spec.license     = 'Apache-2.0'
 
+  spec.add_dependency('aws-sigv4', '~> 1')
   spec.add_dependency('aws-sdk-core', '4.0.0.pre0')
   spec.add_dependency('smithy-json', '1.0.0.pre1')
   spec.add_dependency('smithy-client', '~> 1')

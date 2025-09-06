@@ -15,7 +15,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('base64')
   spec.add_dependency('logger')
 
-  spec.add_dependency('aws-sigv4', '~> 1.9')
   spec.add_dependency('smithy-client', '1.0.0.pre1')
 
   spec.required_ruby_version = '>= 3.3'

@@ -320,7 +320,7 @@ module Aws
           let(:mock_instance_creds) do
             double(
               'InstanceProfileCredentials',
-              identity: Identities::Credentials.new(
+              identity: Credentials.new(
                 access_key_id: 'ACCESS_KEY_INSTANCE',
                 secret_access_key: 'SECRET_AK_INSTANCE',
                 session_token: 'TOKEN_INSTANCE'
@@ -406,7 +406,7 @@ module Aws
         test_cases = JSON.load_file(file)
 
         def credentials(values)
-          Identities::Credentials.new(
+          Credentials.new(
             access_key_id: values['accessKeyId'],
             secret_access_key: values['secretAccessKey'],
             session_token: values['sessionToken'],

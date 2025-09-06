@@ -25,6 +25,10 @@ module AwsSdkCodeGenerator
       def add_auth_schemes
         ['aws.auth#sigv4']
       end
+
+      def add_dependencies
+        { 'aws-sigv4' => '~> 1' }
+      end
     end
   end
 end

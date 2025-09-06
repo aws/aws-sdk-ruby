@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../credentials_provider'
 require 'aws-sigv4'
+
+require_relative '../credentials_provider'
 
 module Aws
   module Core

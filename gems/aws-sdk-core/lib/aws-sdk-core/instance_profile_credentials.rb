@@ -90,7 +90,7 @@ module Aws
 
       def update_credentials(creds)
         expiration = creds['Expiration'] ? Time.iso8601(creds['Expiration']) : nil
-        @identity = Identities::Credentials.new(
+        @identity = Credentials.new(
           access_key_id: creds['AccessKeyId'],
           secret_access_key: creds['SecretAccessKey'],
           session_token: creds['Token'],
