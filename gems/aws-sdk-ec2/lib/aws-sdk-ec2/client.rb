@@ -22,7 +22,7 @@ require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
-require 'aws-sdk-core/plugins/ec2'
+require 'aws-sdk-core/plugins/ec2_protocol'
 
 module Aws::EC2
   # An API client for Aws::EC2.
@@ -52,7 +52,7 @@ module Aws::EC2
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
-    add_plugin(Aws::Core::Plugins::Ec2)
+    add_plugin(Aws::Core::Plugins::Ec2Protocol)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id

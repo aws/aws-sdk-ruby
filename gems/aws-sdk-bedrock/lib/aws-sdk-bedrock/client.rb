@@ -23,7 +23,7 @@ require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
-require 'aws-sdk-core/plugins/rest_json'
+require 'aws-sdk-core/plugins/rest_json_protocol'
 
 module Aws::Bedrock
   # An API client for Aws::Bedrock.
@@ -54,7 +54,7 @@ module Aws::Bedrock
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
-    add_plugin(Aws::Core::Plugins::RestJson)
+    add_plugin(Aws::Core::Plugins::RestJsonProtocol)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
