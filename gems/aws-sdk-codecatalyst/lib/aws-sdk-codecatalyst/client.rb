@@ -22,7 +22,7 @@ require 'smithy-client/plugins/retry_errors'
 require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
-require 'aws-sdk-core/plugins/rest_json'
+require 'aws-sdk-core/plugins/rest_json_protocol'
 
 module Aws::CodeCatalyst
   # An API client for Aws::CodeCatalyst.
@@ -52,7 +52,7 @@ module Aws::CodeCatalyst
     add_plugin(Smithy::Client::Plugins::StubResponses)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
-    add_plugin(Aws::Core::Plugins::RestJson)
+    add_plugin(Aws::Core::Plugins::RestJsonProtocol)
 
     # @param options [Hash] Client options
     # @option options [Boolean] :adaptive_retry_wait_to_fill (true)

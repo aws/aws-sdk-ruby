@@ -22,7 +22,7 @@ require 'smithy-client/plugins/stub_responses'
 require 'aws-sdk-core/plugins/sigv4'
 require 'aws-sdk-core/plugins/shared_config'
 require 'aws-sdk-core/plugins/user_agent'
-require 'aws-sdk-core/plugins/query'
+require 'aws-sdk-core/plugins/query_protocol'
 
 module Aws::AutoScaling
   # An API client for Aws::AutoScaling.
@@ -52,7 +52,7 @@ module Aws::AutoScaling
     add_plugin(Aws::Core::Plugins::SigV4)
     add_plugin(Aws::Core::Plugins::SharedConfig)
     add_plugin(Aws::Core::Plugins::UserAgent)
-    add_plugin(Aws::Core::Plugins::Query)
+    add_plugin(Aws::Core::Plugins::QueryProtocol)
 
     # @param options [Hash] Client options
     # @option options [String] :access_key_id
