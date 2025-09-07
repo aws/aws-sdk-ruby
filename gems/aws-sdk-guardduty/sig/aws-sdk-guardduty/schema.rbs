@@ -100,8 +100,12 @@ module Aws::GuardDuty
     CreateS3BucketResource: StructureShape
     CreateSampleFindingsRequest: StructureShape
     CreateSampleFindingsResponse: StructureShape
+    CreateThreatEntitySetRequest: StructureShape
+    CreateThreatEntitySetResponse: StructureShape
     CreateThreatIntelSetRequest: StructureShape
     CreateThreatIntelSetResponse: StructureShape
+    CreateTrustedEntitySetRequest: StructureShape
+    CreateTrustedEntitySetResponse: StructureShape
     Criterion: MapShape
     CriterionKey: EnumShape
     DNSLogsConfigurationResult: StructureShape
@@ -129,8 +133,12 @@ module Aws::GuardDuty
     DeleteMembersResponse: StructureShape
     DeletePublishingDestinationRequest: StructureShape
     DeletePublishingDestinationResponse: StructureShape
+    DeleteThreatEntitySetRequest: StructureShape
+    DeleteThreatEntitySetResponse: StructureShape
     DeleteThreatIntelSetRequest: StructureShape
     DeleteThreatIntelSetResponse: StructureShape
+    DeleteTrustedEntitySetRequest: StructureShape
+    DeleteTrustedEntitySetResponse: StructureShape
     DescribeMalwareScansRequest: StructureShape
     DescribeMalwareScansResponse: StructureShape
     DescribeOrganizationConfigurationRequest: StructureShape
@@ -186,6 +194,7 @@ module Aws::GuardDuty
     Eq: ListShape
     Equals: ListShape
     Evidence: StructureShape
+    ExpectedBucketOwner: StringShape
     FargateDetails: StructureShape
     FeatureAdditionalConfiguration: EnumShape
     FeatureStatus: EnumShape
@@ -248,8 +257,12 @@ module Aws::GuardDuty
     GetOrganizationStatisticsResponse: StructureShape
     GetRemainingFreeTrialDaysRequest: StructureShape
     GetRemainingFreeTrialDaysResponse: StructureShape
+    GetThreatEntitySetRequest: StructureShape
+    GetThreatEntitySetResponse: StructureShape
     GetThreatIntelSetRequest: StructureShape
     GetThreatIntelSetResponse: StructureShape
+    GetTrustedEntitySetRequest: StructureShape
+    GetTrustedEntitySetResponse: StructureShape
     GetUsageStatisticsRequest: StructureShape
     GetUsageStatisticsResponse: StructureShape
     GroupByType: EnumShape
@@ -325,8 +338,12 @@ module Aws::GuardDuty
     ListPublishingDestinationsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
+    ListThreatEntitySetsRequest: StructureShape
+    ListThreatEntitySetsResponse: StructureShape
     ListThreatIntelSetsRequest: StructureShape
     ListThreatIntelSetsResponse: StructureShape
+    ListTrustedEntitySetsRequest: StructureShape
+    ListTrustedEntitySetsResponse: StructureShape
     LocalIpDetails: StructureShape
     LocalPortDetails: StructureShape
     Location: StringShape
@@ -518,6 +535,9 @@ module Aws::GuardDuty
     Tags: ListShape
     Threat: StructureShape
     ThreatDetectedByName: StructureShape
+    ThreatEntitySetFormat: EnumShape
+    ThreatEntitySetIds: ListShape
+    ThreatEntitySetStatus: EnumShape
     ThreatIntelSetFormat: EnumShape
     ThreatIntelSetIds: ListShape
     ThreatIntelSetStatus: EnumShape
@@ -529,6 +549,9 @@ module Aws::GuardDuty
     Timestamp: TimestampShape
     Total: StructureShape
     TriggerDetails: StructureShape
+    TrustedEntitySetFormat: EnumShape
+    TrustedEntitySetIds: ListShape
+    TrustedEntitySetStatus: EnumShape
     UnarchiveFindingsRequest: StructureShape
     UnarchiveFindingsResponse: StructureShape
     UnprocessedAccount: StructureShape
@@ -555,8 +578,12 @@ module Aws::GuardDuty
     UpdatePublishingDestinationRequest: StructureShape
     UpdatePublishingDestinationResponse: StructureShape
     UpdateS3BucketResource: StructureShape
+    UpdateThreatEntitySetRequest: StructureShape
+    UpdateThreatEntitySetResponse: StructureShape
     UpdateThreatIntelSetRequest: StructureShape
     UpdateThreatIntelSetResponse: StructureShape
+    UpdateTrustedEntitySetRequest: StructureShape
+    UpdateTrustedEntitySetResponse: StructureShape
     UsageAccountResult: StructureShape
     UsageAccountResultList: ListShape
     UsageCriteria: StructureShape

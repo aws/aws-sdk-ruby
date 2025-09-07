@@ -60,7 +60,11 @@ module Aws::BedrockRuntime
     ConverseStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#ConverseStreamRequest', name: 'ConverseStreamRequest')
     ConverseStreamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#ConverseStreamResponse', name: 'ConverseStreamResponse')
     ConverseStreamTrace = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#ConverseStreamTrace', name: 'ConverseStreamTrace')
+    ConverseTokensRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#ConverseTokensRequest', name: 'ConverseTokensRequest')
     ConverseTrace = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#ConverseTrace', name: 'ConverseTrace')
+    CountTokensInput = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockruntime#CountTokensInput', name: 'CountTokensInput')
+    CountTokensRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#CountTokensRequest', name: 'CountTokensRequest')
+    CountTokensResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#CountTokensResponse', name: 'CountTokensResponse')
     DocumentBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#DocumentBlock', name: 'DocumentBlock')
     DocumentCharLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#DocumentCharLocation', name: 'DocumentCharLocation')
     DocumentChunkLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#DocumentChunkLocation', name: 'DocumentChunkLocation')
@@ -69,6 +73,7 @@ module Aws::BedrockRuntime
     DocumentFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockruntime#DocumentFormat', name: 'DocumentFormat')
     DocumentPageLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#DocumentPageLocation', name: 'DocumentPageLocation')
     DocumentSource = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockruntime#DocumentSource', name: 'DocumentSource')
+    FoundationModelVersionIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier', name: 'FoundationModelVersionIdentifier', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z_\\.\\-/0-9:]+$"})
     GetAsyncInvokeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#GetAsyncInvokeRequest', name: 'GetAsyncInvokeRequest')
     GetAsyncInvokeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#GetAsyncInvokeResponse', name: 'GetAsyncInvokeResponse')
     GuardrailAction = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockruntime#GuardrailAction', name: 'GuardrailAction')
@@ -188,6 +193,7 @@ module Aws::BedrockRuntime
     InvokeModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelIdentifier', name: 'InvokeModelIdentifier', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)$|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)$"})
     InvokeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelRequest', name: 'InvokeModelRequest')
     InvokeModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelResponse', name: 'InvokeModelResponse')
+    InvokeModelTokensRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelTokensRequest', name: 'InvokeModelTokensRequest')
     InvokeModelWithBidirectionalStreamInput = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamInput', name: 'InvokeModelWithBidirectionalStreamInput', traits: {"smithy.api#streaming" => {}})
     InvokeModelWithBidirectionalStreamOutput = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamOutput', name: 'InvokeModelWithBidirectionalStreamOutput', traits: {"smithy.api#streaming" => {}})
     InvokeModelWithBidirectionalStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockruntime#InvokeModelWithBidirectionalStreamRequest', name: 'InvokeModelWithBidirectionalStreamRequest')
@@ -445,9 +451,21 @@ module Aws::BedrockRuntime
     ConverseStreamTrace.add_member(:guardrail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailTraceAssessment, location_name: 'guardrail'))
     ConverseStreamTrace.add_member(:prompt_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptRouterTrace, location_name: 'promptRouter'))
     ConverseStreamTrace.type = Types::ConverseStreamTrace
+    ConverseTokensRequest.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Messages, location_name: 'messages'))
+    ConverseTokensRequest.add_member(:system, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SystemContentBlocks, location_name: 'system'))
+    ConverseTokensRequest.type = Types::ConverseTokensRequest
     ConverseTrace.add_member(:guardrail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailTraceAssessment, location_name: 'guardrail'))
     ConverseTrace.add_member(:prompt_router, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptRouterTrace, location_name: 'promptRouter'))
     ConverseTrace.type = Types::ConverseTrace
+    CountTokensInput.add_member(:invoke_model, Types::CountTokensInput::InvokeModel, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvokeModelTokensRequest, location_name: 'invokeModel'))
+    CountTokensInput.add_member(:converse, Types::CountTokensInput::Converse, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConverseTokensRequest, location_name: 'converse'))
+    CountTokensInput.add_member(:unknown, Types::CountTokensInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    CountTokensInput.type = Types::CountTokensInput
+    CountTokensRequest.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FoundationModelVersionIdentifier, location_name: 'modelId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CountTokensRequest.add_member(:input, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CountTokensInput, location_name: 'input', traits: {"smithy.api#required" => {}}))
+    CountTokensRequest.type = Types::CountTokensRequest
+    CountTokensResponse.add_member(:input_tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'inputTokens', traits: {"smithy.api#required" => {}}))
+    CountTokensResponse.type = Types::CountTokensResponse
     DocumentBlock.add_member(:format, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentFormat, location_name: 'format', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "txt"}))
     DocumentBlock.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'name', traits: {"smithy.api#length" => {"min" => 1, "max" => 200}, "smithy.api#required" => {}}))
     DocumentBlock.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DocumentSource, location_name: 'source', traits: {"smithy.api#required" => {}}))
@@ -795,7 +813,7 @@ module Aws::BedrockRuntime
     InferenceConfiguration.add_member(:max_tokens, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxTokens', traits: {"smithy.api#range" => {"min" => 1}}))
     InferenceConfiguration.add_member(:temperature, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: 'temperature', traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
     InferenceConfiguration.add_member(:top_p, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Float, location_name: 'topP', traits: {"smithy.api#range" => {"min" => 0, "max" => 1}}))
-    InferenceConfiguration.add_member(:stop_sequences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: 'stopSequences', traits: {"smithy.api#length" => {"max" => 4}}))
+    InferenceConfiguration.add_member(:stop_sequences, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: 'stopSequences', traits: {"smithy.api#length" => {"max" => 2500}}))
     InferenceConfiguration.type = Types::InferenceConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonBlankString, location_name: 'message'))
     InternalServerException.type = Types::InternalServerException
@@ -816,6 +834,8 @@ module Aws::BedrockRuntime
     InvokeModelResponse[:http_payload] = :body
     InvokeModelResponse[:http_payload_member] = InvokeModelResponse.member(:body)
     InvokeModelResponse.type = Types::InvokeModelResponse
+    InvokeModelTokensRequest.add_member(:body, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Body, location_name: 'body', traits: {"smithy.api#required" => {}}))
+    InvokeModelTokensRequest.type = Types::InvokeModelTokensRequest
     InvokeModelWithBidirectionalStreamInput.add_member(:chunk, Types::InvokeModelWithBidirectionalStreamInput::Chunk, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BidirectionalInputPayloadPart, location_name: 'chunk'))
     InvokeModelWithBidirectionalStreamInput.add_member(:unknown, Types::InvokeModelWithBidirectionalStreamInput::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     InvokeModelWithBidirectionalStreamInput.type = Types::InvokeModelWithBidirectionalStreamInput
@@ -1084,6 +1104,19 @@ module Aws::BedrockRuntime
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/model/{modelId}/converse-stream"}}
+      end)
+      service.add_operation(:count_tokens, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockruntime#CountTokens"
+        operation.name = "CountTokens"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CountTokensRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CountTokensResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/model/{modelId}/count-tokens"}, "smithy.api#readonly" => {}}
       end)
       service.add_operation(:get_async_invoke, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockruntime#GetAsyncInvoke"

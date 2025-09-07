@@ -38,6 +38,30 @@ module Aws::ConnectParticipant
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The attendee information, including attendee ID and join token.</p>
+    # @!attribute attendee_id
+    #   <p>The Amazon Chime SDK attendee ID.</p>
+    #   @return [String]
+    # @!attribute join_token
+    #   <p>The join token used by the Amazon Chime SDK attendee.</p>
+    #   @return [String]
+    class Attendee < Struct.new(
+      :attendee_id,
+      :join_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Has audio-specific configurations as the operating parameter for Echo Reduction.</p>
+    # @!attribute echo_reduction
+    #   <p>Makes echo reduction available to clients who connect to the meeting.</p>
+    #   @return [String]
+    class AudioFeatures < Struct.new(
+      :echo_reduction,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute session_id
     #   <p>The <code>sessionId</code> provided in the <code>authenticationInitiated</code>
     #               event.</p>
@@ -138,9 +162,14 @@ module Aws::ConnectParticipant
     #   <p>Creates the participant's connection credentials. The authentication token associated
     #               with the participant's connection.</p>
     #   @return [Types::ConnectionCredentials]
+    # @!attribute web_rtc_connection
+    #   <p>Creates the participant's WebRTC connection data required for the client application
+    #               (mobile application or website) to connect to the call. </p>
+    #   @return [Types::WebRTCConnection]
     class CreateParticipantConnectionResponse < Struct.new(
       :websocket,
       :connection_credentials,
+      :web_rtc_connection,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -382,6 +411,16 @@ module Aws::ConnectParticipant
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration settings of the features available to a meeting.</p>
+    # @!attribute audio
+    #   <p>The configuration settings for the audio features available to a meeting.</p>
+    #   @return [Types::AudioFeatures]
+    class MeetingFeaturesConfiguration < Struct.new(
+      :audio,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains metadata related to a message.</p>
     # @!attribute message_id
     #   <p>The identifier of the message that contains the metadata information. </p>
@@ -438,8 +477,8 @@ module Aws::ConnectParticipant
     #                  <p>application/vnd.amazonaws.connect.event.typing</p>
     #               </li>
     #               <li>
-    #                  <p>application/vnd.amazonaws.connect.event.connection.acknowledged (will be
-    #                       deprecated on December 31, 2024) </p>
+    #                  <p>application/vnd.amazonaws.connect.event.connection.acknowledged (is no longer
+    #                       maintained since December 31, 2024) </p>
     #               </li>
     #               <li>
     #                  <p>application/vnd.amazonaws.connect.event.message.delivered</p>
@@ -488,9 +527,15 @@ module Aws::ConnectParticipant
     end
 
     # @!attribute content_type
-    #   <p>The type of the content. Supported types are <code>text/plain</code>,
+    #   <p>The type of the content. Possible types are <code>text/plain</code>,
     #                   <code>text/markdown</code>, <code>application/json</code>, and
-    #                   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>
+    #                   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.
+    #               </p>
+    #            <p>Supported types on the contact are configured through
+    #                   <code>SupportedMessagingContentTypes</code> on <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a>
+    #               and <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html">StartOutboundChatContact</a>.</p>
+    #            <p> For Apple Messages for Business, SMS, and WhatsApp Business Messaging contacts, only
+    #                   <code>text/plain</code> is supported.</p>
     #   @return [String]
     # @!attribute content
     #   <p>The content of the message. </p>
@@ -700,6 +745,62 @@ module Aws::ConnectParticipant
       :input_schema,
       :template,
       :actions,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Creates the participant’s WebRTC connection data required for the client application
+    #             (mobile or web) to connect to the call.</p>
+    # @!attribute attendee
+    #   <p>The attendee information, including attendee ID and join token.</p>
+    #   @return [Types::Attendee]
+    # @!attribute meeting
+    #   <p>A meeting created using the Amazon Chime SDK.</p>
+    #   @return [Types::WebRTCMeeting]
+    class WebRTCConnection < Struct.new(
+      :attendee,
+      :meeting,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A set of endpoints used by clients to connect to the media service group for an
+    #             Amazon Chime SDK meeting.</p>
+    # @!attribute audio_host_url
+    #   <p>The audio host URL.</p>
+    #   @return [String]
+    # @!attribute audio_fallback_url
+    #   <p>The audio fallback URL.</p>
+    #   @return [String]
+    # @!attribute signaling_url
+    #   <p>The signaling URL.</p>
+    #   @return [String]
+    # @!attribute event_ingestion_url
+    #   <p>The event ingestion URL to which you send client meeting events.</p>
+    #   @return [String]
+    class WebRTCMediaPlacement < Struct.new(
+      :audio_host_url,
+      :audio_fallback_url,
+      :signaling_url,
+      :event_ingestion_url,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A meeting created using the Amazon Chime SDK.</p>
+    # @!attribute media_placement
+    #   <p>The media placement for the meeting.</p>
+    #   @return [Types::WebRTCMediaPlacement]
+    # @!attribute meeting_features
+    #   <p>The configuration settings of the features available to a meeting.</p>
+    #   @return [Types::MeetingFeaturesConfiguration]
+    # @!attribute meeting_id
+    #   <p>The Amazon Chime SDK meeting ID.</p>
+    #   @return [String]
+    class WebRTCMeeting < Struct.new(
+      :media_placement,
+      :meeting_features,
+      :meeting_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

@@ -69,6 +69,8 @@ module Aws::DataZone
     AssetTypesForRule = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AssetTypesForRule', name: 'AssetTypesForRule')
     AssociateEnvironmentRoleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AssociateEnvironmentRoleInput', name: 'AssociateEnvironmentRoleInput')
     AssociateEnvironmentRoleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AssociateEnvironmentRoleOutput', name: 'AssociateEnvironmentRoleOutput')
+    AssociateGovernedTermsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AssociateGovernedTermsInput', name: 'AssociateGovernedTermsInput')
+    AssociateGovernedTermsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AssociateGovernedTermsOutput', name: 'AssociateGovernedTermsOutput')
     AthenaPropertiesInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AthenaPropertiesInput', name: 'AthenaPropertiesInput')
     AthenaPropertiesOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AthenaPropertiesOutput', name: 'AthenaPropertiesOutput')
     AthenaPropertiesPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#AthenaPropertiesPatch', name: 'AthenaPropertiesPatch')
@@ -278,6 +280,8 @@ module Aws::DataZone
     DetailedGlossaryTerms = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#DetailedGlossaryTerms', name: 'DetailedGlossaryTerms')
     DisassociateEnvironmentRoleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DisassociateEnvironmentRoleInput', name: 'DisassociateEnvironmentRoleInput')
     DisassociateEnvironmentRoleOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DisassociateEnvironmentRoleOutput', name: 'DisassociateEnvironmentRoleOutput')
+    DisassociateGovernedTermsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DisassociateGovernedTermsInput', name: 'DisassociateGovernedTermsInput')
+    DisassociateGovernedTermsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#DisassociateGovernedTermsOutput', name: 'DisassociateGovernedTermsOutput')
     DomainDescription = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#DomainDescription', name: 'DomainDescription', traits: {"smithy.api#sensitive" => {}})
     DomainId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#DomainId', name: 'DomainId', traits: {"smithy.api#pattern" => "^dzd[-_][a-zA-Z0-9_-]{1,36}$"})
     DomainName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#DomainName', name: 'DomainName', traits: {"smithy.api#sensitive" => {}})
@@ -457,6 +461,8 @@ module Aws::DataZone
     GlossaryTermName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#GlossaryTermName', name: 'GlossaryTermName', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
     GlossaryTermStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.datazone#GlossaryTermStatus', name: 'GlossaryTermStatus')
     GlossaryTerms = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#GlossaryTerms', name: 'GlossaryTerms', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    GlossaryUsageRestriction = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.datazone#GlossaryUsageRestriction', name: 'GlossaryUsageRestriction')
+    GlossaryUsageRestrictions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#GlossaryUsageRestrictions', name: 'GlossaryUsageRestrictions', traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     GlueConnection = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlueConnection', name: 'GlueConnection')
     GlueConnectionInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlueConnectionInput', name: 'GlueConnectionInput')
     GlueConnectionPatch = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlueConnectionPatch', name: 'GlueConnectionPatch')
@@ -469,6 +475,9 @@ module Aws::DataZone
     GlueRunConfigurationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlueRunConfigurationOutput', name: 'GlueRunConfigurationOutput')
     GlueSelfGrantStatusOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GlueSelfGrantStatusOutput', name: 'GlueSelfGrantStatusOutput')
     GovernanceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.datazone#GovernanceType', name: 'GovernanceType')
+    GovernedEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.datazone#GovernedEntityType', name: 'GovernedEntityType')
+    GovernedGlossaryTerms = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.datazone#GovernedGlossaryTerms', name: 'GovernedGlossaryTerms')
+    GrantIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.datazone#GrantIdentifier', name: 'GrantIdentifier', traits: {"smithy.api#pattern" => "^[A-Za-z0-9+/]{10}$"})
     GrantedEntity = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.datazone#GrantedEntity', name: 'GrantedEntity')
     GrantedEntityInput = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.datazone#GrantedEntityInput', name: 'GrantedEntityInput')
     GreaterThanExpression = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.datazone#GreaterThanExpression', name: 'GreaterThanExpression')
@@ -1043,6 +1052,7 @@ module Aws::DataZone
     AddPolicyGrantInput.add_member(:detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyGrantDetail, location_name: 'detail', traits: {"smithy.api#required" => {}}))
     AddPolicyGrantInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     AddPolicyGrantInput.type = Types::AddPolicyGrantInput
+    AddPolicyGrantOutput.add_member(:grant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantIdentifier, location_name: 'grantId'))
     AddPolicyGrantOutput.type = Types::AddPolicyGrantOutput
     AddToProjectMemberPoolPolicyGrantDetail.add_member(:include_child_domain_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'includeChildDomainUnits'))
     AddToProjectMemberPoolPolicyGrantDetail.type = Types::AddToProjectMemberPoolPolicyGrantDetail
@@ -1098,6 +1108,7 @@ module Aws::DataZone
     AssetItem.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
     AssetItem.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     AssetItem.add_member(:additional_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetItemAdditionalAttributes, location_name: 'additionalAttributes'))
+    AssetItem.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     AssetItem.type = Types::AssetItem
     AssetItemAdditionalAttributes.add_member(:forms_output, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormOutputList, location_name: 'formsOutput'))
     AssetItemAdditionalAttributes.add_member(:read_only_forms_output, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FormOutputList, location_name: 'readOnlyFormsOutput'))
@@ -1111,6 +1122,7 @@ module Aws::DataZone
     AssetListing.add_member(:forms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Forms, location_name: 'forms'))
     AssetListing.add_member(:latest_time_series_data_point_forms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: 'latestTimeSeriesDataPointForms'))
     AssetListing.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: 'glossaryTerms'))
+    AssetListing.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     AssetListing.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId'))
     AssetListing.type = Types::AssetListing
     AssetListingDetails.add_member(:listing_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListingId, location_name: 'listingId', traits: {"smithy.api#required" => {}}))
@@ -1127,6 +1139,7 @@ module Aws::DataZone
     AssetListingItem.add_member(:listing_created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'listingCreatedBy'))
     AssetListingItem.add_member(:listing_updated_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedBy, location_name: 'listingUpdatedBy'))
     AssetListingItem.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: 'glossaryTerms'))
+    AssetListingItem.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     AssetListingItem.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId'))
     AssetListingItem.add_member(:additional_attributes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListingItemAdditionalAttributes, location_name: 'additionalAttributes'))
     AssetListingItem.type = Types::AssetListingItem
@@ -1172,6 +1185,12 @@ module Aws::DataZone
     AssociateEnvironmentRoleInput.add_member(:environment_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'environmentRoleArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     AssociateEnvironmentRoleInput.type = Types::AssociateEnvironmentRoleInput
     AssociateEnvironmentRoleOutput.type = Types::AssociateEnvironmentRoleOutput
+    AssociateGovernedTermsInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateGovernedTermsInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: 'entityIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateGovernedTermsInput.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedEntityType, location_name: 'entityType', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateGovernedTermsInput.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#required" => {}}))
+    AssociateGovernedTermsInput.type = Types::AssociateGovernedTermsInput
+    AssociateGovernedTermsOutput.type = Types::AssociateGovernedTermsOutput
     AthenaPropertiesInput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'workgroupName', traits: {"smithy.api#length" => {"max" => 64}}))
     AthenaPropertiesInput.type = Types::AthenaPropertiesInput
     AthenaPropertiesOutput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'workgroupName', traits: {"smithy.api#length" => {"max" => 64}}))
@@ -1395,6 +1414,7 @@ module Aws::DataZone
     CreateAssetOutput.add_member(:first_revision_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: 'firstRevisionCreatedAt'))
     CreateAssetOutput.add_member(:first_revision_created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'firstRevisionCreatedBy'))
     CreateAssetOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
+    CreateAssetOutput.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     CreateAssetOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     CreateAssetOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
     CreateAssetOutput.add_member(:listing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: 'listing'))
@@ -1425,6 +1445,7 @@ module Aws::DataZone
     CreateAssetRevisionOutput.add_member(:first_revision_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: 'firstRevisionCreatedAt'))
     CreateAssetRevisionOutput.add_member(:first_revision_created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'firstRevisionCreatedBy'))
     CreateAssetRevisionOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
+    CreateAssetRevisionOutput.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     CreateAssetRevisionOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     CreateAssetRevisionOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
     CreateAssetRevisionOutput.add_member(:listing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: 'listing'))
@@ -1695,6 +1716,7 @@ module Aws::DataZone
     CreateGlossaryInput.add_member(:owning_project_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectIdentifier', traits: {"smithy.api#required" => {}}))
     CreateGlossaryInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: 'description'))
     CreateGlossaryInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: 'status'))
+    CreateGlossaryInput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     CreateGlossaryInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     CreateGlossaryInput.type = Types::CreateGlossaryInput
     CreateGlossaryOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
@@ -1703,6 +1725,7 @@ module Aws::DataZone
     CreateGlossaryOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     CreateGlossaryOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: 'description'))
     CreateGlossaryOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: 'status'))
+    CreateGlossaryOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     CreateGlossaryOutput.type = Types::CreateGlossaryOutput
     CreateGlossaryPolicyGrantDetail.add_member(:include_child_domain_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'includeChildDomainUnits'))
     CreateGlossaryPolicyGrantDetail.type = Types::CreateGlossaryPolicyGrantDetail
@@ -1723,6 +1746,7 @@ module Aws::DataZone
     CreateGlossaryTermOutput.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortDescription, location_name: 'shortDescription'))
     CreateGlossaryTermOutput.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongDescription, location_name: 'longDescription'))
     CreateGlossaryTermOutput.add_member(:term_relations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermRelations, location_name: 'termRelations'))
+    CreateGlossaryTermOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     CreateGlossaryTermOutput.type = Types::CreateGlossaryTermOutput
     CreateGroupProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateGroupProfileInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: 'groupIdentifier', traits: {"smithy.api#required" => {}}))
@@ -2225,6 +2249,12 @@ module Aws::DataZone
     DisassociateEnvironmentRoleInput.add_member(:environment_role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'environmentRoleArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DisassociateEnvironmentRoleInput.type = Types::DisassociateEnvironmentRoleInput
     DisassociateEnvironmentRoleOutput.type = Types::DisassociateEnvironmentRoleOutput
+    DisassociateGovernedTermsInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateGovernedTermsInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: 'entityIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateGovernedTermsInput.add_member(:entity_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedEntityType, location_name: 'entityType', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateGovernedTermsInput.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 1, "max" => 5}, "smithy.api#required" => {}}))
+    DisassociateGovernedTermsInput.type = Types::DisassociateGovernedTermsInput
+    DisassociateGovernedTermsOutput.type = Types::DisassociateGovernedTermsOutput
     DomainStatus.add_member(:creating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATING', traits: {"smithy.api#enumValue" => "CREATING"}))
     DomainStatus.add_member(:available, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AVAILABLE', traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     DomainStatus.add_member(:creation_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CREATION_FAILED', traits: {"smithy.api#enumValue" => "CREATION_FAILED"}))
@@ -2510,6 +2540,7 @@ module Aws::DataZone
     GetAssetOutput.add_member(:first_revision_created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: 'firstRevisionCreatedAt'))
     GetAssetOutput.add_member(:first_revision_created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'firstRevisionCreatedBy'))
     GetAssetOutput.add_member(:glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: 'glossaryTerms'))
+    GetAssetOutput.add_member(:governed_glossary_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GovernedGlossaryTerms, location_name: 'governedGlossaryTerms', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}}))
     GetAssetOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     GetAssetOutput.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
     GetAssetOutput.add_member(:listing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: 'listing'))
@@ -2766,6 +2797,7 @@ module Aws::DataZone
     GetGlossaryOutput.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'createdBy'))
     GetGlossaryOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedAt, location_name: 'updatedAt'))
     GetGlossaryOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedBy, location_name: 'updatedBy'))
+    GetGlossaryOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     GetGlossaryOutput.type = Types::GetGlossaryOutput
     GetGlossaryTermInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetGlossaryTermInput.add_member(:identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermId, location_name: 'identifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2782,6 +2814,7 @@ module Aws::DataZone
     GetGlossaryTermOutput.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'createdBy'))
     GetGlossaryTermOutput.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedAt, location_name: 'updatedAt'))
     GetGlossaryTermOutput.add_member(:updated_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedBy, location_name: 'updatedBy'))
+    GetGlossaryTermOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     GetGlossaryTermOutput.type = Types::GetGlossaryTermOutput
     GetGroupProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetGroupProfileInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: 'groupIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -3020,6 +3053,7 @@ module Aws::DataZone
     GlossaryItem.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     GlossaryItem.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: 'description'))
     GlossaryItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    GlossaryItem.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     GlossaryItem.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: 'createdAt'))
     GlossaryItem.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'createdBy'))
     GlossaryItem.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdatedAt, location_name: 'updatedAt'))
@@ -3035,6 +3069,7 @@ module Aws::DataZone
     GlossaryTermItem.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermId, location_name: 'id', traits: {"smithy.api#required" => {}}))
     GlossaryTermItem.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     GlossaryTermItem.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortDescription, location_name: 'shortDescription'))
+    GlossaryTermItem.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     GlossaryTermItem.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongDescription, location_name: 'longDescription'))
     GlossaryTermItem.add_member(:term_relations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermRelations, location_name: 'termRelations'))
     GlossaryTermItem.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
@@ -3049,6 +3084,8 @@ module Aws::DataZone
     GlossaryTermStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     GlossaryTermStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     GlossaryTerms.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermId)
+    GlossaryUsageRestriction.add_member(:asset_governed_terms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ASSET_GOVERNED_TERMS', traits: {"smithy.api#enumValue" => "ASSET_GOVERNED_TERMS"}))
+    GlossaryUsageRestrictions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestriction)
     GlueConnection.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'name'))
     GlueConnection.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'description', traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}}))
     GlueConnection.add_member(:connection_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionType, location_name: 'connectionType'))
@@ -3126,6 +3163,8 @@ module Aws::DataZone
     GlueSelfGrantStatusOutput.type = Types::GlueSelfGrantStatusOutput
     GovernanceType.add_member(:aws_managed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AWS_MANAGED', traits: {"smithy.api#enumValue" => "AWS_MANAGED"}))
     GovernanceType.add_member(:user_managed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'USER_MANAGED', traits: {"smithy.api#enumValue" => "USER_MANAGED"}))
+    GovernedEntityType.add_member(:asset, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ASSET', traits: {"smithy.api#enumValue" => "ASSET"}))
+    GovernedGlossaryTerms.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermId)
     GrantedEntity.add_member(:listing, Types::GrantedEntity::Listing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListingRevision, location_name: 'listing'))
     GrantedEntity.add_member(:unknown, Types::GrantedEntity::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     GrantedEntity.type = Types::GrantedEntity
@@ -3843,6 +3882,7 @@ module Aws::DataZone
     PolicyGrantMember.add_member(:detail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyGrantDetail, location_name: 'detail'))
     PolicyGrantMember.add_member(:created_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedAt, location_name: 'createdAt'))
     PolicyGrantMember.add_member(:created_by, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreatedBy, location_name: 'createdBy'))
+    PolicyGrantMember.add_member(:grant_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantIdentifier, location_name: 'grantId'))
     PolicyGrantMember.type = Types::PolicyGrantMember
     PolicyGrantPrincipal.add_member(:user, Types::PolicyGrantPrincipal::User, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UserPolicyGrantPrincipal, location_name: 'user'))
     PolicyGrantPrincipal.add_member(:group, Types::PolicyGrantPrincipal::Group, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupPolicyGrantPrincipal, location_name: 'group'))
@@ -3908,6 +3948,7 @@ module Aws::DataZone
     ProjectStatus.add_member(:delete_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DELETE_FAILED', traits: {"smithy.api#enumValue" => "DELETE_FAILED"}))
     ProjectStatus.add_member(:updating, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATING', traits: {"smithy.api#enumValue" => "UPDATING"}))
     ProjectStatus.add_member(:update_failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UPDATE_FAILED', traits: {"smithy.api#enumValue" => "UPDATE_FAILED"}))
+    ProjectStatus.add_member(:moving, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MOVING', traits: {"smithy.api#enumValue" => "MOVING"}))
     ProjectSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectSummary)
     ProjectSummary.add_member(:domain_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainId', traits: {"smithy.api#required" => {}}))
     ProjectSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'id', traits: {"smithy.api#required" => {}}))
@@ -4088,6 +4129,7 @@ module Aws::DataZone
     RemovePolicyGrantInput.add_member(:entity_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'entityIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     RemovePolicyGrantInput.add_member(:policy_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedPolicyType, location_name: 'policyType', traits: {"smithy.api#required" => {}}))
     RemovePolicyGrantInput.add_member(:principal, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PolicyGrantPrincipal, location_name: 'principal', traits: {"smithy.api#required" => {}}))
+    RemovePolicyGrantInput.add_member(:grant_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrantIdentifier, location_name: 'grantIdentifier'))
     RemovePolicyGrantInput.add_member(:client_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ClientToken, location_name: 'clientToken', traits: {"smithy.api#idempotencyToken" => {}}))
     RemovePolicyGrantInput.type = Types::RemovePolicyGrantInput
     RemovePolicyGrantOutput.type = Types::RemovePolicyGrantOutput
@@ -4877,6 +4919,7 @@ module Aws::DataZone
     UpdateGlossaryOutput.add_member(:owning_project_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProjectId, location_name: 'owningProjectId', traits: {"smithy.api#required" => {}}))
     UpdateGlossaryOutput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: 'description'))
     UpdateGlossaryOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: 'status'))
+    UpdateGlossaryOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     UpdateGlossaryOutput.type = Types::UpdateGlossaryOutput
     UpdateGlossaryTermInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateGlossaryTermInput.add_member(:glossary_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryTermId, location_name: 'glossaryIdentifier'))
@@ -4895,6 +4938,7 @@ module Aws::DataZone
     UpdateGlossaryTermOutput.add_member(:short_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShortDescription, location_name: 'shortDescription'))
     UpdateGlossaryTermOutput.add_member(:long_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LongDescription, location_name: 'longDescription'))
     UpdateGlossaryTermOutput.add_member(:term_relations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TermRelations, location_name: 'termRelations'))
+    UpdateGlossaryTermOutput.add_member(:usage_restrictions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: 'usageRestrictions'))
     UpdateGlossaryTermOutput.type = Types::UpdateGlossaryTermOutput
     UpdateGroupProfileInput.add_member(:domain_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DomainId, location_name: 'domainIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateGroupProfileInput.add_member(:group_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GroupIdentifier, location_name: 'groupIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -5166,6 +5210,20 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"}}
+      end)
+      service.add_operation(:associate_governed_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#AssociateGovernedTerms"
+        operation.name = "AssociateGovernedTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateGovernedTermsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateGovernedTermsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/associate-governed-terms"}}
       end)
       service.add_operation(:cancel_metadata_generation_run, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#CancelMetadataGenerationRun"
@@ -5938,6 +5996,20 @@ module Aws::DataZone
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "DELETE", "uri" => "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"}}
+      end)
+      service.add_operation(:disassociate_governed_terms, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.datazone#DisassociateGovernedTerms"
+        operation.name = "DisassociateGovernedTerms"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateGovernedTermsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateGovernedTermsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "PATCH", "uri" => "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/disassociate-governed-terms"}}
       end)
       service.add_operation(:get_account_pool, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.datazone#GetAccountPool"

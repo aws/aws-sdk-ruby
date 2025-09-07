@@ -73,8 +73,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The filter criteria used on responses based on document attributes or metadata
-    #       fields.</p>
+    # <p>The filter criteria used on responses based on document attributes or metadata fields.</p>
     # @!attribute and_all_filters
     #   <p>Performs a logical <code>AND</code> operation on all supplied filters.</p>
     #   @return [Array<Types::AttributeFilter>]
@@ -85,37 +84,25 @@ module Aws::QApps
     #   <p>Performs a logical <code>NOT</code> operation on all supplied filters. </p>
     #   @return [Types::AttributeFilter]
     # @!attribute equals_to
-    #   <p>Performs an <i>equals</i> operation on two document attributes or metadata
-    #         fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code>, <code>longValue</code>,
-    #           <code>stringListValue</code> and <code>stringValue</code>.</p>
+    #   <p>Performs an <i>equals</i> operation on two document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code>, <code>longValue</code>, <code>stringListValue</code> and <code>stringValue</code>.</p>
     #   @return [Types::DocumentAttribute]
     # @!attribute contains_all
-    #   <p>Returns <code>true</code> when a document contains all the specified document attributes
-    #         or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>stringListValue</code>.</p>
+    #   <p>Returns <code>true</code> when a document contains all the specified document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>stringListValue</code>.</p>
     #   @return [Types::DocumentAttribute]
     # @!attribute contains_any
-    #   <p>Returns <code>true</code> when a document contains any of the specified document
-    #         attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>stringListValue</code>.</p>
+    #   <p>Returns <code>true</code> when a document contains any of the specified document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>stringListValue</code>.</p>
     #   @return [Types::DocumentAttribute]
     # @!attribute greater_than
-    #   <p>Performs a <i>greater than</i> operation on two document attributes or
-    #         metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and
-    #         <code>longValue</code>.</p>
+    #   <p>Performs a <i>greater than</i> operation on two document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and <code>longValue</code>.</p>
     #   @return [Types::DocumentAttribute]
     # @!attribute greater_than_or_equals
-    #   <p>Performs a <i>greater than or equals</i> operation on two document
-    #         attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and <code>longValue</code>.
-    #       </p>
+    #   <p>Performs a <i>greater than or equals</i> operation on two document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and <code>longValue</code>. </p>
     #   @return [Types::DocumentAttribute]
     # @!attribute less_than
-    #   <p>Performs a <i>less than</i> operation on two document attributes or metadata
-    #         fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and
-    #         <code>longValue</code>.</p>
+    #   <p>Performs a <i>less than</i> operation on two document attributes or metadata fields. Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value types</a>: <code>dateValue</code> and <code>longValue</code>.</p>
     #   @return [Types::DocumentAttribute]
     # @!attribute less_than_or_equals
-    #   <p>Performs a <i>less than or equals</i> operation on two document attributes
-    #         or metadata fields.Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value type</a>: <code>dateValue</code> and <code>longValue</code>.
-    #       </p>
+    #   <p>Performs a <i>less than or equals</i> operation on two document attributes or metadata fields.Supported for the following <a href="https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html">document attribute value type</a>: <code>dateValue</code> and <code>longValue</code>. </p>
     #   @return [Types::DocumentAttribute]
     class AttributeFilter < Struct.new(
       :and_all_filters,
@@ -147,15 +134,13 @@ module Aws::QApps
 
     # <p>The category object to be created.</p>
     # @!attribute id
-    #   <p>The unique identifier to be associated with a category. If you don't include a value, the
-    #         category is automatically assigned a unique identifier.</p>
+    #   <p>The unique identifier to be associated with a category. If you don't include a value, the category is automatically assigned a unique identifier.</p>
     #   @return [String]
     # @!attribute title
     #   <p>The name of the category.</p>
     #   @return [String]
     # @!attribute color
-    #   <p>The color to be associated with a category. The color must be a hexadecimal value of
-    #         either 3 or 6 digits.</p>
+    #   <p>The color to be associated with a category. The color must be a hexadecimal value of either 3 or 6 digits.</p>
     #   @return [String]
     class BatchCreateCategoryInputCategory < Struct.new(
       :id,
@@ -285,8 +270,7 @@ module Aws::QApps
     #   <p>The value or result associated with the card.</p>
     #   @return [String]
     # @!attribute submission_mutation
-    #   <p>The structure that describes how the current form card value is mutated. Only applies for
-    #         form cards when multiple responses are allowed.</p>
+    #   <p>The structure that describes how the current form card value is mutated. Only applies for form cards when multiple responses are allowed.</p>
     #   @return [Types::SubmissionMutation]
     class CardValue < Struct.new(
       :card_id,
@@ -318,8 +302,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A label that web experience users associate with a library item. Web experience users use
-    #       Categories to tag and filter library items.</p>
+    # <p>A label that web experience users associate with a library item. Web experience users use Categories to tag and filter library items.</p>
     # @!attribute id
     #   <p>The unique identifier of the category.</p>
     #   @return [String]
@@ -327,8 +310,7 @@ module Aws::QApps
     #   <p>The name of the category.</p>
     #   @return [String]
     # @!attribute color
-    #   <p>The color of the category, represented as a hexadecimal value of either 3 or 6
-    #         digits.</p>
+    #   <p>The color of the category, represented as a hexadecimal value of either 3 or 6 digits.</p>
     #   @return [String]
     class CategoryInput < Struct.new(
       :id,
@@ -338,8 +320,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested operation could not be completed due to a conflict with the current state of
-    #       the resource.</p>
+    # <p>The requested operation could not be completed due to a conflict with the current state of the resource.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resource_id
@@ -356,8 +337,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested operation could not be completed because the content exceeds the maximum
-    #       allowed size.</p>
+    # <p>The requested operation could not be completed because the content exceeds the maximum allowed size.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resource_id
@@ -462,12 +442,10 @@ module Aws::QApps
     #   <p>The name of the file to be uploaded.</p>
     #   @return [String]
     # @!attribute scope
-    #   <p>Whether the file is associated with a Q App definition or a specific Q App
-    #         session.</p>
+    #   <p>Whether the file is associated with a Q App definition or a specific Q App session.</p>
     #   @return [String]
     # @!attribute session_id
-    #   <p>The unique identifier of the Q App session the file is associated with, if
-    #         applicable.</p>
+    #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     #   @return [String]
     class CreatePresignedUrlInput < Struct.new(
       :instance_id,
@@ -488,8 +466,7 @@ module Aws::QApps
     #   <p>The URL for a presigned S3 POST operation used to upload a file.</p>
     #   @return [String]
     # @!attribute presigned_url_fields
-    #   <p>The form fields to include in the presigned S3 POST operation used to upload a
-    #         file.</p>
+    #   <p>The form fields to include in the presigned S3 POST operation used to upload a file.</p>
     #   @return [Hash<String, String>]
     # @!attribute presigned_url_expiration
     #   <p>The date and time that the presigned URL will expire in ISO 8601 format.</p>
@@ -562,8 +539,7 @@ module Aws::QApps
     #   <p>The user who last updated the Q App.</p>
     #   @return [String]
     # @!attribute required_capabilities
-    #   <p>The capabilities required to run the Q App, such as file upload or third-party
-    #         integrations.</p>
+    #   <p>The capabilities required to run the Q App, such as file upload or third-party integrations.</p>
     #   @return [Array<String>]
     class CreateQAppOutput < Struct.new(
       :app_id,
@@ -622,8 +598,7 @@ module Aws::QApps
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions are
-    #         returned.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions are returned.</p>
     #   @return [String]
     # @!attribute app_id
     #   <p>The unique identifier of the Amazon Q App for which permissions are returned.</p>
@@ -679,8 +654,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The value of a document attribute. You can only provide one value for a document
-    #       attribute.</p>
+    # <p>The value of a document attribute. You can only provide one value for a document attribute.</p>
     # @!attribute string_value
     #   <p>A string.</p>
     #   @return [String]
@@ -691,11 +665,7 @@ module Aws::QApps
     #   <p>A long integer value. </p>
     #   @return [Integer]
     # @!attribute date_value
-    #   <p>A date expressed as an ISO 8601 string.</p>
-    #            <p>It's important for the time zone to be included in the <i>ISO 8601
-    #           date-time</i> format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601
-    #         date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
-    #       </p>
+    #   <p>A date expressed as an ISO 8601 string.</p> <p>It's important for the time zone to be included in the <i>ISO 8601 date-time</i> format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time. </p>
     #   @return [Time]
     class DocumentAttributeValue < Struct.new(
       :string_value,
@@ -777,9 +747,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a file upload card. It can optionally receive a <code>filename</code> and
-    #         <code>fileId</code> to set a default file. If not received, the user must provide the file
-    #       when the Q App runs.</p>
+    # <p>Represents a file upload card. It can optionally receive a <code>filename</code> and <code>fileId</code> to set a default file. If not received, the user must provide the file when the Q App runs.</p>
     # @!attribute title
     #   <p>The title or label of the file upload card.</p>
     #   @return [String]
@@ -831,11 +799,7 @@ module Aws::QApps
     #   <p>The metadata that defines the form input card data.</p>
     #   @return [Types::FormInputCardMetadata]
     # @!attribute compute_mode
-    #   <p>The compute mode of the form input card. This property determines whether individual
-    #         participants of a data collection session can submit multiple response or one response. A
-    #         compute mode of <code>append</code> shall allow participants to submit the same form multiple
-    #         times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the
-    #         current value for each participant.</p>
+    #   <p>The compute mode of the form input card. This property determines whether individual participants of a data collection session can submit multiple response or one response. A compute mode of <code>append</code> shall allow participants to submit the same form multiple times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the current value for each participant.</p>
     #   @return [String]
     class FormInputCard < Struct.new(
       :id,
@@ -862,11 +826,7 @@ module Aws::QApps
     #   <p>The metadata that defines the form input card data.</p>
     #   @return [Types::FormInputCardMetadata]
     # @!attribute compute_mode
-    #   <p>The compute mode of the form input card. This property determines whether individual
-    #         participants of a data collection session can submit multiple response or one response. A
-    #         compute mode of <code>append</code> shall allow participants to submit the same form multiple
-    #         times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the
-    #         current value for each participant.</p>
+    #   <p>The compute mode of the form input card. This property determines whether individual participants of a data collection session can submit multiple response or one response. A compute mode of <code>append</code> shall allow participants to submit the same form multiple times with different values. A compute mode of <code>replace</code>code&gt; shall overwrite the current value for each participant.</p>
     #   @return [String]
     class FormInputCardInput < Struct.new(
       :title,
@@ -1018,8 +978,7 @@ module Aws::QApps
     #   <p>The user who last updated the Q App.</p>
     #   @return [String]
     # @!attribute required_capabilities
-    #   <p>The capabilities required to run the Q App, such as file upload or third-party
-    #         integrations.</p>
+    #   <p>The capabilities required to run the Q App, such as file upload or third-party integrations.</p>
     #   @return [Array<String>]
     # @!attribute app_definition
     #   <p>The full definition of the Q App, specifying the cards and flow.</p>
@@ -1115,8 +1074,7 @@ module Aws::QApps
     #   <p>The current status for each card in the Q App session.</p>
     #   @return [Hash<String, Types::CardStatus>]
     # @!attribute user_is_host
-    #   <p>Indicates whether the current user is the owner of the Q App data collection
-    #         session.</p>
+    #   <p>Indicates whether the current user is the owner of the Q App data collection session.</p>
     #   @return [Boolean]
     class GetQAppSessionOutput < Struct.new(
       :session_id,
@@ -1147,12 +1105,10 @@ module Aws::QApps
     #   <p>The name of the file being uploaded.</p>
     #   @return [String]
     # @!attribute scope
-    #   <p>Whether the file is associated with a Q App definition or a specific Q App
-    #         session.</p>
+    #   <p>Whether the file is associated with a Q App definition or a specific Q App session.</p>
     #   @return [String]
     # @!attribute session_id
-    #   <p>The unique identifier of the Q App session the file is associated with, if
-    #         applicable.</p>
+    #   <p>The unique identifier of the Q App session the file is associated with, if applicable.</p>
     #   @return [String]
     class ImportDocumentInput < Struct.new(
       :instance_id,
@@ -1188,8 +1144,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A library item is a snapshot of an Amazon Q App that can be published so the users in their
-    #       Amazon Q Apps library can discover it, clone it, and run it.</p>
+    # <p>A library item is a snapshot of an Amazon Q App that can be published so the users in their Amazon Q Apps library can discover it, clone it, and run it.</p>
     # @!attribute library_item_id
     #   <p>The unique identifier of the library item.</p>
     #   @return [String]
@@ -1409,8 +1364,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The definition of an Amazon Q App generated based on input such as a conversation or problem
-    #       statement.</p>
+    # <p>The definition of an Amazon Q App generated based on input such as a conversation or problem statement.</p>
     # @!attribute title
     #   <p>The title of the generated Q App definition.</p>
     #   @return [String]
@@ -1432,8 +1386,7 @@ module Aws::QApps
     #   <p>The unique identifier of the Amazon Q Business application environment instance.</p>
     #   @return [String]
     # @!attribute options
-    #   <p>The input to generate the Q App definition from, either a conversation or problem
-    #         statement.</p>
+    #   <p>The input to generate the Q App definition from, either a conversation or problem statement.</p>
     #   @return [Types::PredictQAppInputOptions]
     class PredictQAppInput < Struct.new(
       :instance_id,
@@ -1492,8 +1445,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The response collected for a Amazon Q App session. This container represents a single
-    #       response to a Q App session.</p>
+    # <p>The response collected for a Amazon Q App session. This container represents a single response to a Q App session.</p>
     # @!attribute card_id
     #   <p>The card Id associated with the response submitted for a Q App session.</p>
     #   @return [String]
@@ -1615,8 +1567,7 @@ module Aws::QApps
     #   <p>The Amazon Q Business filters applied in this query card when resolving data sources</p>
     #   @return [Types::AttributeFilter]
     # @!attribute memory_references
-    #   <p>Any dependencies for the query card, where the dependencies are references to the
-    #         collected responses.</p>
+    #   <p>Any dependencies for the query card, where the dependencies are references to the collected responses.</p>
     #   @return [Array<String>]
     class QQueryCard < Struct.new(
       :id,
@@ -1684,8 +1635,7 @@ module Aws::QApps
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The requested operation could not be completed because it would exceed the service's quota
-    #       or limit.</p>
+    # <p>The requested operation could not be completed because it would exceed the service's quota or limit.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute resource_id
@@ -1718,8 +1668,7 @@ module Aws::QApps
     #   <p>Indicates whether an Q App session can accept responses from users.</p>
     #   @return [Boolean]
     # @!attribute reveal_cards
-    #   <p>Indicates whether collected responses for an Q App session are revealed for all
-    #         users.</p>
+    #   <p>Indicates whether collected responses for an Q App session are revealed for all users.</p>
     #   @return [Boolean]
     class SessionSharingConfiguration < Struct.new(
       :enabled,
@@ -1895,8 +1844,7 @@ module Aws::QApps
       end
     end
 
-    # <p>The requested operation could not be completed because too many requests were sent at
-    #       once. Wait a bit and try again later.</p>
+    # <p>The requested operation could not be completed because too many requests were sent at once. Wait a bit and try again later.</p>
     # @!attribute message
     #   @return [String]
     # @!attribute service_code
@@ -2139,8 +2087,7 @@ module Aws::QApps
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions were
-    #         updated.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q App for which permissions were updated.</p>
     #   @return [String]
     # @!attribute app_id
     #   <p>The unique identifier of the Amazon Q App for which permissions were updated.</p>

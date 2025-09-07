@@ -12,7 +12,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('SageMakerRuntime', Module.new) unless Aws.const_defined?('SageMakerRuntime')
 
 # @title Amazon SageMaker Runtime
-# <p> The Amazon SageMaker runtime API. </p>
+# <p> The Amazon SageMaker AI runtime API. </p>
 module Aws::SageMakerRuntime
   VERSION = '2.0.0.pre0'
 end

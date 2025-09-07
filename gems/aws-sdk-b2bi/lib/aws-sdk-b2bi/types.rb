@@ -113,10 +113,14 @@ module Aws::B2bi
     #   Customer uses this to provide a sample on what should file look like after conversion
     #   X12 EDI use case around this would be discovering the file syntax
     #   @return [Types::OutputSampleFileSource]
+    # @!attribute advanced_options
+    #   <p>A structure that contains advanced options for EDI processing. Currently, only X12 advanced options are supported.</p>
+    #   @return [Types::AdvancedOptions]
     class ConversionTarget < Struct.new(
       :file_format,
       :format_details,
       :output_sample_file,
+      :advanced_options,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1115,9 +1119,13 @@ module Aws::B2bi
     # @!attribute format_options
     #   <p>A structure that contains the X12 transaction set and version for the transformer output.</p>
     #   @return [Types::FormatOptions]
+    # @!attribute advanced_options
+    #   <p>A structure that contains advanced options for EDI processing. Currently, only X12 advanced options are supported.</p>
+    #   @return [Types::AdvancedOptions]
     class OutputConversion < Struct.new(
       :to_format,
       :format_options,
+      :advanced_options,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1372,7 +1380,7 @@ module Aws::B2bi
     #   <p>Returns the converted file content.</p>
     #   @return [String]
     # @!attribute validation_messages
-    #   <p>Returns an array of strings, each containing a message that Amazon Web Services B2B Data Interchange generates during the conversion.</p>
+    #   <p>Returns an array of validation messages that Amazon Web Services B2B Data Interchange generates during the conversion process. These messages include both standard EDI validation results and custom validation messages when custom validation rules are configured. Custom validation messages provide detailed feedback on element length constraints, code list validations, and element requirement checks applied during the outbound EDI generation process.</p>
     #   @return [Array<String>]
     class TestConversionResponse < Struct.new(
       :converted_file_content,
@@ -1434,9 +1442,13 @@ module Aws::B2bi
     # @!attribute parsed_split_file_contents
     #   <p>Returns an array of parsed file contents when the input file is split according to the specified split options. Each element in the array represents a separate split file's parsed content.</p>
     #   @return [Array<String>]
+    # @!attribute validation_messages
+    #   <p>Returns an array of validation messages generated during EDI validation. These messages provide detailed information about validation errors, warnings, or confirmations based on the configured X12 validation rules such as element length constraints, code list validations, and element requirement checks. This field is populated when the <code>TestParsing</code> API validates EDI documents.</p>
+    #   @return [Array<String>]
     class TestParsingResponse < Struct.new(
       :parsed_file_content,
       :parsed_split_file_contents,
+      :validation_messages,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1869,7 +1881,7 @@ module Aws::B2bi
       end
     end
 
-    # <p>Occurs when a B2BI object cannot be validated against a request from another object.</p>
+    # <p>Occurs when a B2BI object cannot be validated against a request from another object. This exception can be thrown during standard EDI validation or when custom validation rules fail, such as when element length constraints are violated, invalid codes are used in code list validations, or required elements are missing based on configured element requirement rules.</p>
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
@@ -1914,8 +1926,30 @@ module Aws::B2bi
     # @!attribute split_options
     #   <p>Specifies options for splitting X12 EDI files. These options control how large X12 files are divided into smaller, more manageable units.</p>
     #   @return [Types::X12SplitOptions]
+    # @!attribute validation_options
+    #   <p>Specifies validation options for X12 EDI processing. These options control how validation rules are applied during EDI document processing, including custom validation rules for element length constraints, code list validations, and element requirement checks.</p>
+    #   @return [Types::X12ValidationOptions]
     class X12AdvancedOptions < Struct.new(
       :split_options,
+      :validation_options,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a validation rule that modifies the allowed code values for a specific X12 element. This rule allows you to add or remove valid codes from an element's standard code list, providing flexibility to accommodate trading partner-specific requirements or industry variations. You can specify codes to add to expand the allowed values beyond the X12 standard, or codes to remove to restrict the allowed values for stricter validation.</p>
+    # @!attribute element_id
+    #   <p>Specifies the four-digit element ID to which the code list modifications apply. This identifies which X12 element will have its allowed code values modified.</p>
+    #   @return [String]
+    # @!attribute codes_to_add
+    #   <p>Specifies a list of code values to add to the element's allowed values. These codes will be considered valid for the specified element in addition to the standard codes defined by the X12 specification.</p>
+    #   @return [Array<String>]
+    # @!attribute codes_to_remove
+    #   <p>Specifies a list of code values to remove from the element's allowed values. These codes will be considered invalid for the specified element, even if they are part of the standard codes defined by the X12 specification.</p>
+    #   @return [Array<String>]
+    class X12CodeListValidationRule < Struct.new(
+      :element_id,
+      :codes_to_add,
+      :codes_to_remove,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1966,6 +2000,38 @@ module Aws::B2bi
     class X12Details < Struct.new(
       :transaction_set,
       :version,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a validation rule that specifies custom length constraints for a specific X12 element. This rule allows you to override the standard minimum and maximum length requirements for an element, enabling validation of trading partner-specific length requirements that may differ from the X12 specification. Both minimum and maximum length values must be specified and must be between 1 and 200 characters.</p>
+    # @!attribute element_id
+    #   <p>Specifies the four-digit element ID to which the length constraints will be applied. This identifies which X12 element will have its length requirements modified.</p>
+    #   @return [String]
+    # @!attribute max_length
+    #   <p>Specifies the maximum allowed length for the identified element. This value must be between 1 and 200 characters and defines the upper limit for the element's content length.</p>
+    #   @return [Integer]
+    # @!attribute min_length
+    #   <p>Specifies the minimum required length for the identified element. This value must be between 1 and 200 characters and defines the lower limit for the element's content length.</p>
+    #   @return [Integer]
+    class X12ElementLengthValidationRule < Struct.new(
+      :element_id,
+      :max_length,
+      :min_length,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a validation rule that modifies the requirement status of a specific X12 element within a segment. This rule allows you to make optional elements mandatory or mandatory elements optional, providing flexibility to accommodate different trading partner requirements and business rules. The rule targets a specific element position within a segment and sets its requirement status to either OPTIONAL or MANDATORY.</p>
+    # @!attribute element_position
+    #   <p>Specifies the position of the element within an X12 segment for which the requirement status will be modified. The format follows the pattern of segment identifier followed by element position (e.g., "ST-01" for the first element of the ST segment).</p>
+    #   @return [String]
+    # @!attribute requirement
+    #   <p>Specifies the requirement status for the element at the specified position. Valid values are OPTIONAL (the element may be omitted) or MANDATORY (the element must be present).</p>
+    #   @return [String]
+    class X12ElementRequirementValidationRule < Struct.new(
+      :element_position,
+      :requirement,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2057,7 +2123,7 @@ module Aws::B2bi
     #   <p>The delimiters, for example semicolon (<code>;</code>), that separates sections of the headers for the X12 object.</p>
     #   @return [Types::X12Delimiters]
     # @!attribute validate_edi
-    #   <p>Specifies whether or not to validate the EDI for this X12 object: <code>TRUE</code> or <code>FALSE</code>.</p>
+    #   <p>Specifies whether or not to validate the EDI for this X12 object: <code>TRUE</code> or <code>FALSE</code>. When enabled, this performs both standard EDI validation and applies any configured custom validation rules including element length constraints, code list validations, and element requirement checks. Validation results are returned in the response validation messages.</p>
     #   @return [Boolean]
     # @!attribute control_numbers
     #   <p>Specifies control number configuration for outbound X12 EDI headers. These settings determine the starting values for interchange, functional group, and transaction set control numbers.</p>
@@ -2084,6 +2150,40 @@ module Aws::B2bi
       :split_by,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains configuration options for X12 EDI validation. This structure allows you to specify custom validation rules that will be applied during EDI document processing, including element length constraints, code list modifications, and element requirement changes. These validation options provide flexibility to accommodate trading partner-specific requirements while maintaining EDI compliance. The validation rules are applied in addition to standard X12 validation to ensure documents meet both standard and custom requirements.</p>
+    # @!attribute validation_rules
+    #   <p>Specifies a list of validation rules to apply during EDI document processing. These rules can include code list modifications, element length constraints, and element requirement changes.</p>
+    #   @return [Array<Types::X12ValidationRule>]
+    class X12ValidationOptions < Struct.new(
+      :validation_rules,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a single validation rule that can be applied during X12 EDI processing. This is a union type that can contain one of several specific validation rule types: code list validation rules for modifying allowed element codes, element length validation rules for enforcing custom length constraints, or element requirement validation rules for changing mandatory/optional status. Each validation rule targets specific aspects of EDI document validation to ensure compliance with trading partner requirements and business rules.</p>
+    # @!attribute code_list_validation_rule
+    #   <p>Specifies a code list validation rule that modifies the allowed code values for a specific X12 element. This rule enables you to customize which codes are considered valid for an element, allowing for trading partner-specific code requirements.</p>
+    #   @return [Types::X12CodeListValidationRule]
+    # @!attribute element_length_validation_rule
+    #   <p>Specifies an element length validation rule that defines custom length constraints for a specific X12 element. This rule allows you to enforce minimum and maximum length requirements that may differ from the standard X12 specification.</p>
+    #   @return [Types::X12ElementLengthValidationRule]
+    # @!attribute element_requirement_validation_rule
+    #   <p>Specifies an element requirement validation rule that modifies whether a specific X12 element is required or optional within a segment. This rule provides flexibility to accommodate different trading partner requirements for element presence.</p>
+    #   @return [Types::X12ElementRequirementValidationRule]
+    class X12ValidationRule < Struct.new(
+      :code_list_validation_rule,
+      :element_length_validation_rule,
+      :element_requirement_validation_rule,
+      :unknown,
+      keyword_init: true)
+      include ::Smithy::Schema::Union
+
+      class CodeListValidationRule < X12ValidationRule; end
+      class ElementLengthValidationRule < X12ValidationRule; end
+      class ElementRequirementValidationRule < X12ValidationRule; end
+      class Unknown < X12ValidationRule; end
     end
 
   end

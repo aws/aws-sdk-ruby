@@ -408,11 +408,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -517,6 +547,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -585,11 +616,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -694,6 +755,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -1145,11 +1207,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -1254,6 +1346,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -1340,7 +1433,38 @@ module Aws::DirectConnect
     #   <p>The ID of the BGP peer.</p>
     #   @return [String]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the BGP peer. The valid range is from 1 to 4294967294 for BGP configuration. </p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -1407,6 +1531,7 @@ module Aws::DirectConnect
     class BGPPeer < Struct.new(
       :bgp_peer_id,
       :asn,
+      :asn_long,
       :auth_key,
       :address_family,
       :amazon_address,
@@ -2486,11 +2611,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -2595,6 +2750,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -2659,11 +2815,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -2768,6 +2954,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -2850,7 +3037,38 @@ module Aws::DirectConnect
     #   <p>The ID of the virtual interface.</p>
     #   @return [String]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface. The valid range is from 1 to 4294967294 for BGP configuration. </p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute customer_address
     #   <p>The IP address assigned to the customer interface.</p>
@@ -2861,6 +3079,7 @@ module Aws::DirectConnect
     class DeleteBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :asn,
+      :asn_long,
       :customer_address,
       :bgp_peer_id,
       keyword_init: true)
@@ -3372,8 +3591,12 @@ module Aws::DirectConnect
     # @!attribute connections
     #   <p>The connections.</p>
     #   @return [Array<Types::Connection>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeConnectionsOnInterconnectOutput < Struct.new(
       :connections,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3390,8 +3613,12 @@ module Aws::DirectConnect
     # @!attribute connections
     #   <p>The connections.</p>
     #   @return [Array<Types::Connection>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeConnectionsOutput < Struct.new(
       :connections,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3399,8 +3626,19 @@ module Aws::DirectConnect
     # @!attribute connection_id
     #   <p>The ID of the connection.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
     class DescribeConnectionsRequest < Struct.new(
       :connection_id,
+      :max_results,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3588,8 +3826,12 @@ module Aws::DirectConnect
     # @!attribute connections
     #   <p>The connections.</p>
     #   @return [Array<Types::Connection>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeHostedConnectionsOutput < Struct.new(
       :connections,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3597,8 +3839,19 @@ module Aws::DirectConnect
     # @!attribute connection_id
     #   <p>The ID of the interconnect or LAG.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
     class DescribeHostedConnectionsRequest < Struct.new(
       :connection_id,
+      :max_results,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3632,8 +3885,12 @@ module Aws::DirectConnect
     # @!attribute interconnects
     #   <p>The interconnects.</p>
     #   @return [Array<Types::Interconnect>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeInterconnectsOutput < Struct.new(
       :interconnects,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3641,8 +3898,19 @@ module Aws::DirectConnect
     # @!attribute interconnect_id
     #   <p>The ID of the interconnect.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
     class DescribeInterconnectsRequest < Struct.new(
       :interconnect_id,
+      :max_results,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3650,8 +3918,12 @@ module Aws::DirectConnect
     # @!attribute lags
     #   <p>The LAGs.</p>
     #   @return [Array<Types::Lag>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeLagsOutput < Struct.new(
       :lags,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3659,8 +3931,19 @@ module Aws::DirectConnect
     # @!attribute lag_id
     #   <p>The ID of the LAG.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
     class DescribeLagsRequest < Struct.new(
       :lag_id,
+      :max_results,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3771,8 +4054,12 @@ module Aws::DirectConnect
     # @!attribute virtual_interfaces
     #   <p>The virtual interfaces</p>
     #   @return [Array<Types::VirtualInterface>]
+    # @!attribute next_token
+    #   <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+    #   @return [String]
     class DescribeVirtualInterfacesOutput < Struct.new(
       :virtual_interfaces,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3783,9 +4070,20 @@ module Aws::DirectConnect
     # @!attribute virtual_interface_id
     #   <p>The ID of the virtual interface.</p>
     #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return with a single call.
+    #   	To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+    #            <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are
+    #         returned.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for the next page of results.</p>
+    #   @return [String]
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
       :virtual_interface_id,
+      :max_results,
+      :next_token,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3807,7 +4105,7 @@ module Aws::DirectConnect
     #   <p>The name of the Direct Connect gateway.</p>
     #   @return [String]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute owner_account
     #   <p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>
@@ -4608,7 +4906,10 @@ module Aws::DirectConnect
 
     # <p>Information about a new BGP peer.</p>
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for a new BGP peer.  The valid range is  from 1 to 4294967294.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -4624,6 +4925,7 @@ module Aws::DirectConnect
     #   @return [String]
     class NewBGPPeer < Struct.new(
       :asn,
+      :asn_long,
       :auth_key,
       :address_family,
       :amazon_address,
@@ -4645,8 +4947,39 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #            <p>The valid values are 1-2147483646.</p>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -4679,6 +5012,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -4706,8 +5040,39 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #            <p>The valid values are 1-2147483646.</p>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The ASN when allocating a new private virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -4731,6 +5096,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -4755,8 +5121,38 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -4780,6 +5176,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :auth_key,
       :amazon_address,
       :customer_address,
@@ -4804,8 +5201,39 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #            <p>The valid values are 1-2147483646.</p>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The ASN when allocating a new public virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -4829,6 +5257,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :auth_key,
       :amazon_address,
       :customer_address,
@@ -4853,8 +5282,38 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for a new transit virtual interface.The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.</p>
@@ -4884,6 +5343,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -4910,8 +5370,39 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #            <p>The valid values are 1-2147483646.</p>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The ASN when allocating a new transit virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute mtu
     #   <p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500 </p>
@@ -4935,6 +5426,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :mtu,
       :auth_key,
       :amazon_address,
@@ -5500,11 +5992,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -5609,6 +6131,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,
@@ -5713,11 +6236,41 @@ module Aws::DirectConnect
     #   <p>The ID of the VLAN.</p>
     #   @return [Integer]
     # @!attribute asn
-    #   <p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>
-    #            <p>The valid values are 1-2147483647.</p>
+    #   <p>The autonomous system number (ASN). The valid range is from 1 to 2147483646 for Border Gateway Protocol (BGP) configuration. If you provide a number greater than the maximum, an error is returned. Use <code>asnLong</code> instead.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
+    #   @return [Integer]
+    # @!attribute asn_long
+    #   <p>The long ASN for the virtual interface. The valid range is from 1 to 4294967294 for BGP configuration.</p>
+    #            <note>
+    #               <p>You can use <code>asnLong</code> or <code>asn</code>, but not both. We recommend using <code>asnLong</code> as it supports a greater pool of numbers. </p>
+    #               <ul>
+    #                  <li>
+    #                     <p>The <code>asnLong</code> attribute accepts both ASN and long ASN
+    #                               ranges.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>If you provide a value in the same API call for both <code>asn</code>
+    #                               and <code>asnLong</code>, the API will only accept the value for
+    #                                   <code>asnLong</code>.</p>
+    #                  </li>
+    #               </ul>
+    #            </note>
     #   @return [Integer]
     # @!attribute amazon_side_asn
-    #   <p>The autonomous system number (ASN) for the Amazon side of the connection.</p>
+    #   <p>The autonomous system number (AS) for the Amazon side of the connection.</p>
     #   @return [Integer]
     # @!attribute auth_key
     #   <p>The authentication key for BGP configuration. This string has a minimum length of 6 characters and and a maximun lenth of 80 characters.</p>
@@ -5822,6 +6375,7 @@ module Aws::DirectConnect
       :virtual_interface_name,
       :vlan,
       :asn,
+      :asn_long,
       :amazon_side_asn,
       :auth_key,
       :amazon_address,

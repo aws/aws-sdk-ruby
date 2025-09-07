@@ -866,6 +866,8 @@ module Aws::CloudFormation
     def list_hook_results: (
       ?target_type: String,
       ?target_id: String,
+      ?type_arn: String,
+      ?status: String,
       ?next_token: String
     ) -> _ListHookResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHookResultsResponse
 

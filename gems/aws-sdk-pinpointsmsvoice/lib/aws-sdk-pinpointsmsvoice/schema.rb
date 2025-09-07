@@ -148,7 +148,7 @@ module Aws::PinpointSMSVoice
       service.id = "com.amazonaws.pinpointsmsvoice#PinpointSMSVoice"
       service.name = "PinpointSMSVoice"
       service.version = "2018-09-05"
-      service.traits = {"aws.api#service" => {"sdkId" => "Pinpoint SMS Voice", "arnNamespace" => "sms-voice", "cloudFormationName" => "PinpointSMSVoice", "cloudTrailEventSource" => "pinpointsmsvoice.amazonaws.com", "endpointPrefix" => "sms-voice.pinpoint"}, "aws.auth#sigv4" => {"name" => "sms-voice"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "Amazon Pinpoint SMS and Voice Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Pinpoint SMS Voice", "arnNamespace" => "sms-voice", "cloudFormationName" => "PinpointSMSVoice", "cloudTrailEventSource" => "pinpointsmsvoice.amazonaws.com", "endpointPrefix" => "sms-voice.pinpoint"}, "aws.auth#sigv4" => {"name" => "sms-voice"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "Amazon Pinpoint SMS and Voice Service"}
       service.add_operation(:create_configuration_set, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.pinpointsmsvoice#CreateConfigurationSet"
         operation.name = "CreateConfigurationSet"

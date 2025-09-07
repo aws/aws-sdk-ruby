@@ -24,6 +24,8 @@ module Aws::Notifications
     AssociateManagedNotificationAccountContactResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#AssociateManagedNotificationAccountContactResponse', name: 'AssociateManagedNotificationAccountContactResponse')
     AssociateManagedNotificationAdditionalChannelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#AssociateManagedNotificationAdditionalChannelRequest', name: 'AssociateManagedNotificationAdditionalChannelRequest')
     AssociateManagedNotificationAdditionalChannelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#AssociateManagedNotificationAdditionalChannelResponse', name: 'AssociateManagedNotificationAdditionalChannelResponse')
+    AssociateOrganizationalUnitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#AssociateOrganizationalUnitRequest', name: 'AssociateOrganizationalUnitRequest')
+    AssociateOrganizationalUnitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#AssociateOrganizationalUnitResponse', name: 'AssociateOrganizationalUnitResponse')
     ChannelArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#ChannelArn', name: 'ChannelArn', traits: {"aws.api#arnReference" => {}, "smithy.api#pattern" => "^arn:aws:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$"})
     ChannelAssociationOverrideOption = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#ChannelAssociationOverrideOption', name: 'ChannelAssociationOverrideOption', traits: {"smithy.api#enum" => [{"name" => "ENABLED", "value" => "ENABLED", "documentation" => "    AWS User Notification service users can associate or disassociate a Channel with a notification configuration.\n"}, {"name" => "DISABLED", "value" => "DISABLED", "documentation" => "    AWS User Notification service users can not associate or disassociate a Channel with a notification configuration.\n"}]})
     ChannelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#ChannelIdentifier', name: 'ChannelIdentifier', traits: {"smithy.api#pattern" => "^ACCOUNT_PRIMARY|ACCOUNT_ALTERNATE_BILLING|ACCOUNT_ALTERNATE_OPERATIONS|ACCOUNT_ALTERNATE_SECURITY|arn:aws:(chatbot|consoleapp|notifications-contacts):[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-_.@]+/[a-zA-Z0-9/_.@:-]+$"})
@@ -51,6 +53,8 @@ module Aws::Notifications
     DisassociateManagedNotificationAccountContactResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#DisassociateManagedNotificationAccountContactResponse', name: 'DisassociateManagedNotificationAccountContactResponse')
     DisassociateManagedNotificationAdditionalChannelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#DisassociateManagedNotificationAdditionalChannelRequest', name: 'DisassociateManagedNotificationAdditionalChannelRequest')
     DisassociateManagedNotificationAdditionalChannelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#DisassociateManagedNotificationAdditionalChannelResponse', name: 'DisassociateManagedNotificationAdditionalChannelResponse')
+    DisassociateOrganizationalUnitRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#DisassociateOrganizationalUnitRequest', name: 'DisassociateOrganizationalUnitRequest')
+    DisassociateOrganizationalUnitResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#DisassociateOrganizationalUnitResponse', name: 'DisassociateOrganizationalUnitResponse')
     EnableNotificationsAccessForOrganizationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#EnableNotificationsAccessForOrganizationRequest', name: 'EnableNotificationsAccessForOrganizationRequest')
     EnableNotificationsAccessForOrganizationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#EnableNotificationsAccessForOrganizationResponse', name: 'EnableNotificationsAccessForOrganizationResponse')
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#ErrorMessage', name: 'ErrorMessage')
@@ -91,12 +95,16 @@ module Aws::Notifications
     ListManagedNotificationConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListManagedNotificationConfigurationsResponse', name: 'ListManagedNotificationConfigurationsResponse')
     ListManagedNotificationEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListManagedNotificationEventsRequest', name: 'ListManagedNotificationEventsRequest')
     ListManagedNotificationEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListManagedNotificationEventsResponse', name: 'ListManagedNotificationEventsResponse')
+    ListMemberAccountsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListMemberAccountsRequest', name: 'ListMemberAccountsRequest')
+    ListMemberAccountsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListMemberAccountsResponse', name: 'ListMemberAccountsResponse')
     ListNotificationConfigurationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationConfigurationsRequest', name: 'ListNotificationConfigurationsRequest')
     ListNotificationConfigurationsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationConfigurationsResponse', name: 'ListNotificationConfigurationsResponse')
     ListNotificationEventsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationEventsRequest', name: 'ListNotificationEventsRequest')
     ListNotificationEventsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationEventsResponse', name: 'ListNotificationEventsResponse')
     ListNotificationHubsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationHubsRequest', name: 'ListNotificationHubsRequest')
     ListNotificationHubsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListNotificationHubsResponse', name: 'ListNotificationHubsResponse')
+    ListOrganizationalUnitsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListOrganizationalUnitsRequest', name: 'ListOrganizationalUnitsRequest')
+    ListOrganizationalUnitsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListOrganizationalUnitsResponse', name: 'ListOrganizationalUnitsResponse')
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListTagsForResourceRequest', name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#ListTagsForResourceResponse', name: 'ListTagsForResourceResponse')
     LocaleCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#LocaleCode', name: 'LocaleCode', traits: {"smithy.api#enum" => [{"name" => "de_DE", "value" => "de_DE", "documentation" => "German (Germany)"}, {"name" => "en_CA", "value" => "en_CA", "documentation" => "English (Canada)"}, {"name" => "en_US", "value" => "en_US", "documentation" => "English (United States). This is the default locale."}, {"name" => "en_UK", "value" => "en_UK", "documentation" => "English (United Kingdom)"}, {"name" => "es_ES", "value" => "es_ES", "documentation" => "Spanish (Spain)"}, {"name" => "fr_CA", "value" => "fr_CA", "documentation" => "French (Canada)"}, {"name" => "fr_FR", "value" => "fr_FR", "documentation" => "French (France)"}, {"name" => "id_ID", "value" => "id_ID", "documentation" => "Bahasa Indonesian (Indonesia)"}, {"name" => "it_IT", "value" => "it_IT", "documentation" => "Italian (Italy)"}, {"name" => "ja_JP", "value" => "ja_JP", "documentation" => "Japanese (Japan)"}, {"name" => "ko_KR", "value" => "ko_KR", "documentation" => "Korean (Korea)"}, {"name" => "pt_BR", "value" => "pt_BR", "documentation" => "Portuguese (Brazil)"}, {"name" => "tr_TR", "value" => "tr_TR", "documentation" => "Turkish (Turkey)"}, {"name" => "zh_CN", "value" => "zh_CN", "documentation" => "Chinese (China)"}, {"name" => "zh_TW", "value" => "zh_TW", "documentation" => "Chinese (Taiwan)"}], "smithy.api#suppress" => ["EnumTrait"]})
@@ -124,6 +132,9 @@ module Aws::Notifications
     MediaElement = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#MediaElement', name: 'MediaElement')
     MediaElementType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#MediaElementType', name: 'MediaElementType', traits: {"smithy.api#enum" => [{"name" => "IMAGE", "value" => "IMAGE"}]})
     MediaId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#MediaId', name: 'MediaId', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
+    MemberAccount = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#MemberAccount', name: 'MemberAccount')
+    MemberAccountNotificationConfigurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#MemberAccountNotificationConfigurationStatus', name: 'MemberAccountNotificationConfigurationStatus', traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "The member account Notification Configuration status is ACTIVE."}, {"name" => "PENDING", "value" => "PENDING", "documentation" => "The member account Notification Configuration status is PENDING."}, {"name" => "INACTIVE", "value" => "INACTIVE", "documentation" => "The member account Notification Configuration status is INACTIVE."}, {"name" => "CREATING", "value" => "CREATING", "documentation" => "The member account Notification Configuration status is CREATING."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "The member account Notification Configuration status is DELETING."}]})
+    MemberAccounts = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.notifications#MemberAccounts', name: 'MemberAccounts')
     MessageComponents = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#MessageComponents', name: 'MessageComponents')
     MessageComponentsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#MessageComponentsSummary', name: 'MessageComponentsSummary')
     NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NextToken', name: 'NextToken', traits: {"smithy.api#length" => {"min" => 1, "max" => 4096}, "smithy.api#pattern" => "^[\\w+-/=]+$"})
@@ -132,6 +143,7 @@ module Aws::Notifications
     NotificationConfigurationName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationConfigurationName', name: 'NotificationConfigurationName', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[A-Za-z0-9_\\-]+$"})
     NotificationConfigurationStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationConfigurationStatus', name: 'NotificationConfigurationStatus', traits: {"smithy.api#enum" => [{"name" => "ACTIVE", "value" => "ACTIVE", "documentation" => "All of the EventRules are in ACTIVE Status. Any call can be executed."}, {"name" => "PARTIALLY_ACTIVE", "value" => "PARTIALLY_ACTIVE", "documentation" => "Some EventRules are in ACTIVE Status and some are INACTIVE. Any call can be executed."}, {"name" => "INACTIVE", "value" => "INACTIVE", "documentation" => "All of the EventRules are in INACTIVE Status. Any call can be executed."}, {"name" => "DELETING", "value" => "DELETING", "documentation" => "This NotificationConfiguration is being deleted. Only GET/LIST calls can be executed."}]})
     NotificationConfigurationStructure = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#NotificationConfigurationStructure', name: 'NotificationConfigurationStructure')
+    NotificationConfigurationSubtype = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationConfigurationSubtype', name: 'NotificationConfigurationSubtype', traits: {"smithy.api#enum" => [{"name" => "ACCOUNT", "value" => "ACCOUNT", "documentation" => "Notification configuration created by the account"}, {"name" => "ADMIN_MANAGED", "value" => "ADMIN_MANAGED", "documentation" => "Notification configuration managed by an administrator account"}]})
     NotificationConfigurations = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.notifications#NotificationConfigurations', name: 'NotificationConfigurations')
     NotificationEventArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationEventArn', name: 'NotificationEventArn', traits: {"aws.api#arnReference" => {"service" => "com.amazonaws.notifications#Notifications", "resource" => "com.amazonaws.notifications#NotificationEventSchema"}, "smithy.api#pattern" => "^arn:[-.a-z0-9]{1,63}:notifications:[-.a-z0-9]{1,63}:[0-9]{12}:configuration/[a-z0-9]{27}/event/[a-z0-9]{27}$"})
     NotificationEventId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationEventId', name: 'NotificationEventId', traits: {"smithy.api#pattern" => "^[a-z0-9]{27}$"})
@@ -146,7 +158,8 @@ module Aws::Notifications
     NotificationHubs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.notifications#NotificationHubs', name: 'NotificationHubs')
     NotificationType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#NotificationType', name: 'NotificationType', traits: {"smithy.api#enum" => [{"name" => "ALERT", "value" => "ALERT"}, {"name" => "WARNING", "value" => "WARNING"}, {"name" => "ANNOUNCEMENT", "value" => "ANNOUNCEMENT"}, {"name" => "INFORMATIONAL", "value" => "INFORMATIONAL"}]})
     NotificationsAccessForOrganization = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.notifications#NotificationsAccessForOrganization', name: 'NotificationsAccessForOrganization')
-    OrganizationalUnitId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#OrganizationalUnitId', name: 'OrganizationalUnitId', traits: {"smithy.api#pattern" => "^Root|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$"})
+    OrganizationalUnitId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#OrganizationalUnitId', name: 'OrganizationalUnitId', traits: {"smithy.api#pattern" => "^(Root|r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"})
+    OrganizationalUnits = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.notifications#OrganizationalUnits', name: 'OrganizationalUnits')
     QuotaCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#QuotaCode', name: 'QuotaCode')
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.notifications#Region', name: 'Region', traits: {"smithy.api#length" => {"min" => 2, "max" => 25}, "smithy.api#pattern" => "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$"})
     Regions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.notifications#Regions', name: 'Regions', traits: {"smithy.api#length" => {"min" => 1}})
@@ -200,6 +213,7 @@ module Aws::Notifications
     AccessStatus.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     AccessStatus.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     AccessStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING', traits: {"smithy.api#enumValue" => "PENDING"}))
+    AccessStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
     AggregatedNotificationRegions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
     AggregationDetail.add_member(:summarization_dimensions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SummarizationDimensionDetails, location_name: 'summarizationDimensions'))
     AggregationDetail.type = Types::AggregationDetail
@@ -226,6 +240,10 @@ module Aws::Notifications
     AssociateManagedNotificationAdditionalChannelRequest.add_member(:managed_notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedNotificationConfigurationOsArn, location_name: 'managedNotificationConfigurationArn', traits: {"smithy.api#required" => {}}))
     AssociateManagedNotificationAdditionalChannelRequest.type = Types::AssociateManagedNotificationAdditionalChannelRequest
     AssociateManagedNotificationAdditionalChannelResponse.type = Types::AssociateManagedNotificationAdditionalChannelResponse
+    AssociateOrganizationalUnitRequest.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    AssociateOrganizationalUnitRequest.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'notificationConfigurationArn', traits: {"smithy.api#required" => {}}))
+    AssociateOrganizationalUnitRequest.type = Types::AssociateOrganizationalUnitRequest
+    AssociateOrganizationalUnitResponse.type = Types::AssociateOrganizationalUnitResponse
     Channels.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn)
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceId, location_name: 'resourceId', traits: {"smithy.api#required" => {}}))
@@ -277,6 +295,10 @@ module Aws::Notifications
     DisassociateManagedNotificationAdditionalChannelRequest.add_member(:managed_notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedNotificationConfigurationOsArn, location_name: 'managedNotificationConfigurationArn', traits: {"smithy.api#required" => {}}))
     DisassociateManagedNotificationAdditionalChannelRequest.type = Types::DisassociateManagedNotificationAdditionalChannelRequest
     DisassociateManagedNotificationAdditionalChannelResponse.type = Types::DisassociateManagedNotificationAdditionalChannelResponse
+    DisassociateOrganizationalUnitRequest.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DisassociateOrganizationalUnitRequest.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'notificationConfigurationArn', traits: {"smithy.api#required" => {}}))
+    DisassociateOrganizationalUnitRequest.type = Types::DisassociateOrganizationalUnitRequest
+    DisassociateOrganizationalUnitResponse.type = Types::DisassociateOrganizationalUnitResponse
     EnableNotificationsAccessForOrganizationRequest.type = Types::EnableNotificationsAccessForOrganizationRequest
     EnableNotificationsAccessForOrganizationResponse.type = Types::EnableNotificationsAccessForOrganizationResponse
     EventRuleStatusSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EventRuleStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
@@ -337,6 +359,7 @@ module Aws::Notifications
     GetNotificationConfigurationResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     GetNotificationConfigurationResponse.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: 'creationTime', traits: {"smithy.api#required" => {}}))
     GetNotificationConfigurationResponse.add_member(:aggregation_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationDuration, location_name: 'aggregationDuration'))
+    GetNotificationConfigurationResponse.add_member(:subtype, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location_name: 'subtype'))
     GetNotificationConfigurationResponse.type = Types::GetNotificationConfigurationResponse
     GetNotificationEventRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventArn, location_name: 'arn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetNotificationEventRequest.add_member(:locale, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LocaleCode, location_name: 'locale', traits: {"smithy.api#httpQuery" => "locale"}))
@@ -403,9 +426,20 @@ module Aws::Notifications
     ListManagedNotificationEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListManagedNotificationEventsResponse.add_member(:managed_notification_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ManagedNotificationEvents, location_name: 'managedNotificationEvents', traits: {"smithy.api#required" => {}}))
     ListManagedNotificationEventsResponse.type = Types::ListManagedNotificationEventsResponse
+    ListMemberAccountsRequest.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'notificationConfigurationArn', traits: {"smithy.api#httpQuery" => "notificationConfigurationArn", "smithy.api#required" => {}}))
+    ListMemberAccountsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListMemberAccountsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMemberAccountsRequest.add_member(:member_account, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'memberAccount', traits: {"smithy.api#httpQuery" => "memberAccount"}))
+    ListMemberAccountsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccountNotificationConfigurationStatus, location_name: 'status', traits: {"smithy.api#httpQuery" => "status"}))
+    ListMemberAccountsRequest.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId', traits: {"smithy.api#httpQuery" => "organizationalUnitId"}))
+    ListMemberAccountsRequest.type = Types::ListMemberAccountsRequest
+    ListMemberAccountsResponse.add_member(:member_accounts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccounts, location_name: 'memberAccounts', traits: {"smithy.api#required" => {}}))
+    ListMemberAccountsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
+    ListMemberAccountsResponse.type = Types::ListMemberAccountsResponse
     ListNotificationConfigurationsRequest.add_member(:event_rule_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Source, location_name: 'eventRuleSource', traits: {"smithy.api#httpQuery" => "eventRuleSource"}))
     ListNotificationConfigurationsRequest.add_member(:channel_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChannelArn, location_name: 'channelArn', traits: {"smithy.api#httpQuery" => "channelArn"}))
     ListNotificationConfigurationsRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, location_name: 'status', traits: {"smithy.api#httpQuery" => "status"}))
+    ListNotificationConfigurationsRequest.add_member(:subtype, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location_name: 'subtype', traits: {"smithy.api#httpQuery" => "subtype"}))
     ListNotificationConfigurationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListNotificationConfigurationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListNotificationConfigurationsRequest.type = Types::ListNotificationConfigurationsRequest
@@ -420,6 +454,7 @@ module Aws::Notifications
     ListNotificationEventsRequest.add_member(:aggregate_notification_event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventArn, location_name: 'aggregateNotificationEventArn', traits: {"smithy.api#httpQuery" => "aggregateNotificationEventArn"}))
     ListNotificationEventsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
     ListNotificationEventsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListNotificationEventsRequest.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId', traits: {"smithy.api#httpQuery" => "organizationalUnitId"}))
     ListNotificationEventsRequest.type = Types::ListNotificationEventsRequest
     ListNotificationEventsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListNotificationEventsResponse.add_member(:notification_events, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEvents, location_name: 'notificationEvents', traits: {"smithy.api#required" => {}}))
@@ -430,6 +465,13 @@ module Aws::Notifications
     ListNotificationHubsResponse.add_member(:notification_hubs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationHubs, location_name: 'notificationHubs', traits: {"smithy.api#required" => {}}))
     ListNotificationHubsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
     ListNotificationHubsResponse.type = Types::ListNotificationHubsResponse
+    ListOrganizationalUnitsRequest.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'notificationConfigurationArn', traits: {"smithy.api#httpQuery" => "notificationConfigurationArn", "smithy.api#required" => {}}))
+    ListOrganizationalUnitsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults", "smithy.api#range" => {"min" => 1, "max" => 100}}))
+    ListOrganizationalUnitsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListOrganizationalUnitsRequest.type = Types::ListOrganizationalUnitsRequest
+    ListOrganizationalUnitsResponse.add_member(:organizational_units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnits, location_name: 'organizationalUnits', traits: {"smithy.api#required" => {}}))
+    ListOrganizationalUnitsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'nextToken'))
+    ListOrganizationalUnitsResponse.type = Types::ListOrganizationalUnitsResponse
     ListTagsForResourceRequest.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'arn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
@@ -516,6 +558,13 @@ module Aws::Notifications
     MediaElement.add_member(:url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Url, location_name: 'url', traits: {"smithy.api#required" => {}}))
     MediaElement.add_member(:caption, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextPartReference, location_name: 'caption', traits: {"smithy.api#required" => {}}))
     MediaElement.type = Types::MediaElement
+    MemberAccount.add_member(:notification_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationArn, location_name: 'notificationConfigurationArn'))
+    MemberAccount.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'accountId', traits: {"smithy.api#required" => {}}))
+    MemberAccount.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccountNotificationConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    MemberAccount.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'statusReason', traits: {"smithy.api#required" => {}}))
+    MemberAccount.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId', traits: {"smithy.api#required" => {}}))
+    MemberAccount.type = Types::MemberAccount
+    MemberAccounts.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAccount)
     MessageComponents.add_member(:headline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextPartReference, location_name: 'headline'))
     MessageComponents.add_member(:paragraph_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextPartReference, location_name: 'paragraphSummary'))
     MessageComponents.add_member(:complete_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextPartReference, location_name: 'completeDescription'))
@@ -529,6 +578,7 @@ module Aws::Notifications
     NotificationConfigurationStructure.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     NotificationConfigurationStructure.add_member(:creation_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreationTime, location_name: 'creationTime', traits: {"smithy.api#required" => {}}))
     NotificationConfigurationStructure.add_member(:aggregation_duration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationDuration, location_name: 'aggregationDuration'))
+    NotificationConfigurationStructure.add_member(:subtype, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationSubtype, location_name: 'subtype'))
     NotificationConfigurationStructure.type = Types::NotificationConfigurationStructure
     NotificationConfigurations.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationConfigurationStructure)
     NotificationEventOverview.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -539,6 +589,7 @@ module Aws::Notifications
     NotificationEventOverview.add_member(:aggregation_event_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationEventType, location_name: 'aggregationEventType'))
     NotificationEventOverview.add_member(:aggregate_notification_event_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventArn, location_name: 'aggregateNotificationEventArn'))
     NotificationEventOverview.add_member(:aggregation_summary, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AggregationSummary, location_name: 'aggregationSummary'))
+    NotificationEventOverview.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId'))
     NotificationEventOverview.type = Types::NotificationEventOverview
     NotificationEventSchema.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaVersion, location_name: 'schemaVersion', traits: {"smithy.api#required" => {}}))
     NotificationEventSchema.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationEventId, location_name: 'id', traits: {"smithy.api#required" => {}}))
@@ -555,6 +606,7 @@ module Aws::Notifications
     NotificationEventSchema.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'endTime', traits: {"smithy.api#timestampFormat" => "date-time"}))
     NotificationEventSchema.add_member(:text_parts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TextParts, location_name: 'textParts', traits: {"smithy.api#required" => {}}))
     NotificationEventSchema.add_member(:media, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Media, location_name: 'media', traits: {"smithy.api#required" => {}}))
+    NotificationEventSchema.add_member(:organizational_unit_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: 'organizationalUnitId'))
     NotificationEventSchema.type = Types::NotificationEventSchema
     NotificationEventSummary.add_member(:schema_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SchemaVersion, location_name: 'schemaVersion', traits: {"smithy.api#required" => {}}))
     NotificationEventSummary.add_member(:source_event_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SourceEventMetadataSummary, location_name: 'sourceEventMetadata', traits: {"smithy.api#required" => {}}))
@@ -574,6 +626,7 @@ module Aws::Notifications
     NotificationHubs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotificationHubOverview)
     NotificationsAccessForOrganization.add_member(:access_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessStatus, location_name: 'accessStatus', traits: {"smithy.api#required" => {}}))
     NotificationsAccessForOrganization.type = Types::NotificationsAccessForOrganization
+    OrganizationalUnits.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationalUnitId)
     Regions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
     RegisterNotificationHubRequest.add_member(:notification_hub_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region, location_name: 'notificationHubRegion', traits: {"smithy.api#required" => {}}))
     RegisterNotificationHubRequest.type = Types::RegisterNotificationHubRequest
@@ -719,6 +772,20 @@ module Aws::Notifications
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to associate a Channel\n    to a particular Managed Notification Configuration"}, "smithy.api#http" => {"code" => 201, "method" => "PUT", "uri" => "/channels/associate-managed-notification/{channelArn}"}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:associate_organizational_unit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.notifications#AssociateOrganizationalUnit"
+        operation.name = "AssociateOrganizationalUnit"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateOrganizationalUnitRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociateOrganizationalUnitResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to associate an Organizational Unit with a particular NotificationConfiguration"}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/organizational-units/associate/{organizationalUnitId}"}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:create_event_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.notifications#CreateEventRule"
         operation.name = "CreateEventRule"
@@ -835,6 +902,18 @@ module Aws::Notifications
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to remove a Channel from a Managed Notification Configuration"}, "smithy.api#http" => {"code" => 200, "method" => "PUT", "uri" => "/channels/disassociate-managed-notification/{channelArn}"}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:disassociate_organizational_unit, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.notifications#DisassociateOrganizationalUnit"
+        operation.name = "DisassociateOrganizationalUnit"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateOrganizationalUnitRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisassociateOrganizationalUnitResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to remove an Organizational Unit from a NotificationConfiguration"}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/organizational-units/disassociate/{organizationalUnitId}"}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:enable_notifications_access_for_organization, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.notifications#EnableNotificationsAccessForOrganization"
@@ -1008,6 +1087,19 @@ module Aws::Notifications
         operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list Managed Notification Events"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/managed-notification-events"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListManagedNotificationEventsSuccess", "params" => {"maxResults" => 3}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListManagedNotificationEvents.new
       end)
+      service.add_operation(:list_member_accounts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.notifications#ListMemberAccounts"
+        operation.name = "ListMemberAccounts"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMemberAccountsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListMemberAccountsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list MemberAccounts by AdminNotificationConfiguration"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/list-member-accounts"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListMemberAccounts.new
+      end)
       service.add_operation(:list_notification_configurations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.notifications#ListNotificationConfigurations"
         operation.name = "ListNotificationConfigurations"
@@ -1043,6 +1135,19 @@ module Aws::Notifications
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list NotificationHubs"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/notification-hubs"}, "smithy.api#readonly" => {}, "smithy.test#smokeTests" => [{"id" => "ListNotificationHubsSuccess", "params" => {"maxResults" => 3}, "expect" => {"success" => {}}, "vendorParamsShape" => "aws.test#AwsVendorParams", "vendorParams" => {"region" => "us-east-1"}}]}
         operation[:paginator] = Paginators::ListNotificationHubs.new
+      end)
+      service.add_operation(:list_organizational_units, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.notifications#ListOrganizationalUnits"
+        operation.name = "ListOrganizationalUnits"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOrganizationalUnitsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListOrganizationalUnitsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "aws.iam#iamAction" => {"documentation" => "Grants permission to list Organizational Units by NotificationConfiguration"}, "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/organizational-units"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListOrganizationalUnits.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.notifications#ListTagsForResource"

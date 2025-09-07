@@ -18,6 +18,7 @@ module Aws::SsmSap
     ApplicationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ApplicationSummary', name: 'ApplicationSummary')
     ApplicationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ApplicationSummaryList', name: 'ApplicationSummaryList')
     ApplicationType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#ApplicationType', name: 'ApplicationType')
+    ApplicationTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ApplicationTypeList', name: 'ApplicationTypeList')
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#Arn', name: 'Arn', traits: {"smithy.api#pattern" => "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"})
     AssociatedHost = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#AssociatedHost', name: 'AssociatedHost')
     BackintConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#BackintConfig', name: 'BackintConfig')
@@ -33,6 +34,13 @@ module Aws::SsmSap
     ComponentSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ComponentSummary', name: 'ComponentSummary')
     ComponentSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ComponentSummaryList', name: 'ComponentSummaryList')
     ComponentType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#ComponentType', name: 'ComponentType')
+    ConfigurationCheckDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckDefinition', name: 'ConfigurationCheckDefinition')
+    ConfigurationCheckDefinitionList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckDefinitionList', name: 'ConfigurationCheckDefinitionList')
+    ConfigurationCheckOperation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckOperation', name: 'ConfigurationCheckOperation')
+    ConfigurationCheckOperationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckOperationList', name: 'ConfigurationCheckOperationList')
+    ConfigurationCheckOperationListingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckOperationListingMode', name: 'ConfigurationCheckOperationListingMode')
+    ConfigurationCheckType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckType', name: 'ConfigurationCheckType')
+    ConfigurationCheckTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#ConfigurationCheckTypeList', name: 'ConfigurationCheckTypeList')
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
     ConnectedEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#ConnectedEntityType', name: 'ConnectedEntityType')
     CredentialType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#CredentialType', name: 'CredentialType')
@@ -59,6 +67,8 @@ module Aws::SsmSap
     GetApplicationOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetApplicationOperationOutput', name: 'GetApplicationOperationOutput')
     GetComponentOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetComponentOperationInput', name: 'GetComponentOperationInput')
     GetComponentOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetComponentOperationOutput', name: 'GetComponentOperationOutput')
+    GetConfigurationCheckOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetConfigurationCheckOperationInput', name: 'GetConfigurationCheckOperationInput')
+    GetConfigurationCheckOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetConfigurationCheckOperationOutput', name: 'GetConfigurationCheckOperationOutput')
     GetDatabaseOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetDatabaseOperationInput', name: 'GetDatabaseOperationInput')
     GetDatabaseOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetDatabaseOperationOutput', name: 'GetDatabaseOperationOutput')
     GetOperationOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#GetOperationOperationInput', name: 'GetOperationOperationInput')
@@ -77,16 +87,24 @@ module Aws::SsmSap
     ListApplicationsOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListApplicationsOperationOutput', name: 'ListApplicationsOperationOutput')
     ListComponentsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListComponentsOperationInput', name: 'ListComponentsOperationInput')
     ListComponentsOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListComponentsOperationOutput', name: 'ListComponentsOperationOutput')
+    ListConfigurationCheckDefinitionsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsInput', name: 'ListConfigurationCheckDefinitionsInput')
+    ListConfigurationCheckDefinitionsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListConfigurationCheckDefinitionsOutput', name: 'ListConfigurationCheckDefinitionsOutput')
+    ListConfigurationCheckOperationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListConfigurationCheckOperationsInput', name: 'ListConfigurationCheckOperationsInput')
+    ListConfigurationCheckOperationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListConfigurationCheckOperationsOutput', name: 'ListConfigurationCheckOperationsOutput')
     ListDatabasesOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListDatabasesOperationInput', name: 'ListDatabasesOperationInput')
     ListDatabasesOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListDatabasesOperationOutput', name: 'ListDatabasesOperationOutput')
     ListOperationEventsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListOperationEventsInput', name: 'ListOperationEventsInput')
     ListOperationEventsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListOperationEventsOutput', name: 'ListOperationEventsOutput')
     ListOperationsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListOperationsOperationInput', name: 'ListOperationsOperationInput')
     ListOperationsOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListOperationsOperationOutput', name: 'ListOperationsOperationOutput')
+    ListSubCheckResultsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListSubCheckResultsInput', name: 'ListSubCheckResultsInput')
+    ListSubCheckResultsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListSubCheckResultsOutput', name: 'ListSubCheckResultsOutput')
+    ListSubCheckRuleResultsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListSubCheckRuleResultsInput', name: 'ListSubCheckRuleResultsInput')
+    ListSubCheckRuleResultsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListSubCheckRuleResultsOutput', name: 'ListSubCheckRuleResultsOutput')
     ListTagsForResourceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListTagsForResourceInput', name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ListTagsForResourceOutput', name: 'ListTagsForResourceOutput')
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.ssmsap#MaxResults', name: 'MaxResults', traits: {"smithy.api#default" => 50, "smithy.api#range" => {"min" => 1, "max" => 50}})
-    NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#NextToken', name: 'NextToken', traits: {"smithy.api#pattern" => "^.{16,1024}$"})
+    NextToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#NextToken', name: 'NextToken', traits: {"smithy.api#pattern" => "^.{16,2048}$"})
     Operation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#Operation', name: 'Operation')
     OperationEvent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#OperationEvent', name: 'OperationEvent')
     OperationEventList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#OperationEventList', name: 'OperationEventList')
@@ -110,6 +128,14 @@ module Aws::SsmSap
     ResourceId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#ResourceId', name: 'ResourceId', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResourceType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#ResourceType', name: 'ResourceType', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
+    RuleResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#RuleResult', name: 'RuleResult')
+    RuleResultId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#RuleResultId', name: 'RuleResultId', traits: {"smithy.api#pattern" => "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"})
+    RuleResultList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#RuleResultList', name: 'RuleResultList')
+    RuleResultMetadata = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmsap#RuleResultMetadata', name: 'RuleResultMetadata', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    RuleResultMetadataKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#RuleResultMetadataKey', name: 'RuleResultMetadataKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    RuleResultMetadataValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#RuleResultMetadataValue', name: 'RuleResultMetadataValue', traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}})
+    RuleResultStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.ssmsap#RuleResultStatus', name: 'RuleResultStatus')
+    RuleStatusCounts = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#RuleStatusCounts', name: 'RuleStatusCounts')
     SAPInstanceNumber = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#SAPInstanceNumber', name: 'SAPInstanceNumber', traits: {"smithy.api#pattern" => "^[0-9]{2}$"})
     SID = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#SID', name: 'SID', traits: {"smithy.api#pattern" => "^[A-Z][A-Z0-9]{2}$"})
     SecretId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#SecretId', name: 'SecretId', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#sensitive" => {}})
@@ -118,8 +144,14 @@ module Aws::SsmSap
     StartApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StartApplicationOutput', name: 'StartApplicationOutput')
     StartApplicationRefreshInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StartApplicationRefreshInput', name: 'StartApplicationRefreshInput')
     StartApplicationRefreshOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StartApplicationRefreshOutput', name: 'StartApplicationRefreshOutput')
+    StartConfigurationChecksInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StartConfigurationChecksInput', name: 'StartConfigurationChecksInput')
+    StartConfigurationChecksOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StartConfigurationChecksOutput', name: 'StartConfigurationChecksOutput')
     StopApplicationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StopApplicationInput', name: 'StopApplicationInput')
     StopApplicationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#StopApplicationOutput', name: 'StopApplicationOutput')
+    SubCheckReferencesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#SubCheckReferencesList', name: 'SubCheckReferencesList')
+    SubCheckResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.ssmsap#SubCheckResult', name: 'SubCheckResult')
+    SubCheckResultId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#SubCheckResultId', name: 'SubCheckResultId', traits: {"smithy.api#pattern" => "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"})
+    SubCheckResultList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#SubCheckResultList', name: 'SubCheckResultList')
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.ssmsap#TagKey', name: 'TagKey', traits: {"smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.ssmsap#TagKeyList', name: 'TagKeyList')
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.ssmsap#TagMap', name: 'TagMap')
@@ -176,6 +208,7 @@ module Aws::SsmSap
     ApplicationSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationSummary)
     ApplicationType.add_member(:hana, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HANA', traits: {"smithy.api#enumValue" => "HANA"}))
     ApplicationType.add_member(:sap_abap, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAP_ABAP', traits: {"smithy.api#enumValue" => "SAP_ABAP"}))
+    ApplicationTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationType)
     AssociatedHost.add_member(:hostname, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Hostname'))
     AssociatedHost.add_member(:ec2_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Ec2InstanceId'))
     AssociatedHost.add_member(:ip_addresses, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IpAddressList, location_name: 'IpAddresses'))
@@ -240,6 +273,30 @@ module Aws::SsmSap
     ComponentType.add_member(:webdisp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WEBDISP', traits: {"smithy.api#enumValue" => "WEBDISP"}))
     ComponentType.add_member(:wd, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WD', traits: {"smithy.api#enumValue" => "WD"}))
     ComponentType.add_member(:ers, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERS', traits: {"smithy.api#enumValue" => "ERS"}))
+    ConfigurationCheckDefinition.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckType, location_name: 'Id'))
+    ConfigurationCheckDefinition.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Name'))
+    ConfigurationCheckDefinition.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Description'))
+    ConfigurationCheckDefinition.add_member(:applicable_application_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationTypeList, location_name: 'ApplicableApplicationTypes'))
+    ConfigurationCheckDefinition.type = Types::ConfigurationCheckDefinition
+    ConfigurationCheckDefinitionList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckDefinition)
+    ConfigurationCheckOperation.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'Id'))
+    ConfigurationCheckOperation.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId'))
+    ConfigurationCheckOperation.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationStatus, location_name: 'Status'))
+    ConfigurationCheckOperation.add_member(:status_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'StatusMessage'))
+    ConfigurationCheckOperation.add_member(:configuration_check_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckType, location_name: 'ConfigurationCheckId'))
+    ConfigurationCheckOperation.add_member(:configuration_check_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'ConfigurationCheckName'))
+    ConfigurationCheckOperation.add_member(:configuration_check_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'ConfigurationCheckDescription'))
+    ConfigurationCheckOperation.add_member(:start_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'StartTime'))
+    ConfigurationCheckOperation.add_member(:end_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'EndTime'))
+    ConfigurationCheckOperation.add_member(:rule_status_counts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleStatusCounts, location_name: 'RuleStatusCounts'))
+    ConfigurationCheckOperation.type = Types::ConfigurationCheckOperation
+    ConfigurationCheckOperationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckOperation)
+    ConfigurationCheckOperationListingMode.add_member(:all_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALL_OPERATIONS', traits: {"smithy.api#enumValue" => "ALL_OPERATIONS"}))
+    ConfigurationCheckOperationListingMode.add_member(:latest_per_check, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'LATEST_PER_CHECK', traits: {"smithy.api#enumValue" => "LATEST_PER_CHECK"}))
+    ConfigurationCheckType.add_member(:sap_check_01, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAP_CHECK_01', traits: {"smithy.api#enumValue" => "SAP_CHECK_01"}))
+    ConfigurationCheckType.add_member(:sap_check_02, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAP_CHECK_02', traits: {"smithy.api#enumValue" => "SAP_CHECK_02"}))
+    ConfigurationCheckType.add_member(:sap_check_03, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SAP_CHECK_03', traits: {"smithy.api#enumValue" => "SAP_CHECK_03"}))
+    ConfigurationCheckTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckType)
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ConflictException.type = Types::ConflictException
     ConnectedEntityType.add_member(:dbms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DBMS', traits: {"smithy.api#enumValue" => "DBMS"}))
@@ -310,6 +367,10 @@ module Aws::SsmSap
     GetComponentOperationOutput.add_member(:component, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Component, location_name: 'Component'))
     GetComponentOperationOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags'))
     GetComponentOperationOutput.type = Types::GetComponentOperationOutput
+    GetConfigurationCheckOperationInput.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'OperationId', traits: {"smithy.api#required" => {}}))
+    GetConfigurationCheckOperationInput.type = Types::GetConfigurationCheckOperationInput
+    GetConfigurationCheckOperationOutput.add_member(:configuration_check_operation, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckOperation, location_name: 'ConfigurationCheckOperation'))
+    GetConfigurationCheckOperationOutput.type = Types::GetConfigurationCheckOperationOutput
     GetDatabaseOperationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId'))
     GetDatabaseOperationInput.add_member(:component_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComponentId, location_name: 'ComponentId'))
     GetDatabaseOperationInput.add_member(:database_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseId, location_name: 'DatabaseId'))
@@ -361,6 +422,21 @@ module Aws::SsmSap
     ListComponentsOperationOutput.add_member(:components, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComponentSummaryList, location_name: 'Components'))
     ListComponentsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListComponentsOperationOutput.type = Types::ListComponentsOperationOutput
+    ListConfigurationCheckDefinitionsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil}))
+    ListConfigurationCheckDefinitionsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListConfigurationCheckDefinitionsInput.type = Types::ListConfigurationCheckDefinitionsInput
+    ListConfigurationCheckDefinitionsOutput.add_member(:configuration_checks, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckDefinitionList, location_name: 'ConfigurationChecks'))
+    ListConfigurationCheckDefinitionsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListConfigurationCheckDefinitionsOutput.type = Types::ListConfigurationCheckDefinitionsOutput
+    ListConfigurationCheckOperationsInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId', traits: {"smithy.api#required" => {}}))
+    ListConfigurationCheckOperationsInput.add_member(:list_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckOperationListingMode, location_name: 'ListMode', traits: {"smithy.api#default" => "LATEST_PER_CHECK"}))
+    ListConfigurationCheckOperationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil}))
+    ListConfigurationCheckOperationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListConfigurationCheckOperationsInput.add_member(:filters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FilterList, location_name: 'Filters'))
+    ListConfigurationCheckOperationsInput.type = Types::ListConfigurationCheckOperationsInput
+    ListConfigurationCheckOperationsOutput.add_member(:configuration_check_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckOperationList, location_name: 'ConfigurationCheckOperations'))
+    ListConfigurationCheckOperationsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListConfigurationCheckOperationsOutput.type = Types::ListConfigurationCheckOperationsOutput
     ListDatabasesOperationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId'))
     ListDatabasesOperationInput.add_member(:component_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ComponentId, location_name: 'ComponentId'))
     ListDatabasesOperationInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
@@ -385,6 +461,20 @@ module Aws::SsmSap
     ListOperationsOperationOutput.add_member(:operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationList, location_name: 'Operations'))
     ListOperationsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListOperationsOperationOutput.type = Types::ListOperationsOperationOutput
+    ListSubCheckResultsInput.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'OperationId', traits: {"smithy.api#required" => {}}))
+    ListSubCheckResultsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil}))
+    ListSubCheckResultsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListSubCheckResultsInput.type = Types::ListSubCheckResultsInput
+    ListSubCheckResultsOutput.add_member(:sub_check_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubCheckResultList, location_name: 'SubCheckResults'))
+    ListSubCheckResultsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListSubCheckResultsOutput.type = Types::ListSubCheckResultsOutput
+    ListSubCheckRuleResultsInput.add_member(:sub_check_result_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubCheckResultId, location_name: 'SubCheckResultId', traits: {"smithy.api#required" => {}}))
+    ListSubCheckRuleResultsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'MaxResults', traits: {"smithy.api#default" => nil}))
+    ListSubCheckRuleResultsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListSubCheckRuleResultsInput.type = Types::ListSubCheckRuleResultsInput
+    ListSubCheckRuleResultsOutput.add_member(:rule_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultList, location_name: 'RuleResults'))
+    ListSubCheckRuleResultsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
+    ListSubCheckRuleResultsOutput.type = Types::ListSubCheckRuleResultsOutput
     ListTagsForResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SsmSapArn, location_name: 'resourceArn', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
@@ -459,6 +549,26 @@ module Aws::SsmSap
     Resource.type = Types::Resource
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    RuleResult.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultId, location_name: 'Id'))
+    RuleResult.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Description'))
+    RuleResult.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultStatus, location_name: 'Status'))
+    RuleResult.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Message'))
+    RuleResult.add_member(:metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultMetadata, location_name: 'Metadata'))
+    RuleResult.type = Types::RuleResult
+    RuleResultList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResult)
+    RuleResultMetadata.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultMetadataKey)
+    RuleResultMetadata.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RuleResultMetadataValue)
+    RuleResultStatus.add_member(:passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PASSED', traits: {"smithy.api#enumValue" => "PASSED"}))
+    RuleResultStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
+    RuleResultStatus.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WARNING', traits: {"smithy.api#enumValue" => "WARNING"}))
+    RuleResultStatus.add_member(:info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INFO', traits: {"smithy.api#enumValue" => "INFO"}))
+    RuleResultStatus.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'UNKNOWN', traits: {"smithy.api#enumValue" => "UNKNOWN"}))
+    RuleStatusCounts.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'Failed'))
+    RuleStatusCounts.add_member(:warning, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'Warning'))
+    RuleStatusCounts.add_member(:info, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'Info'))
+    RuleStatusCounts.add_member(:passed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'Passed'))
+    RuleStatusCounts.add_member(:unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'Unknown'))
+    RuleStatusCounts.type = Types::RuleStatusCounts
     StartApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId', traits: {"smithy.api#required" => {}}))
     StartApplicationInput.type = Types::StartApplicationInput
     StartApplicationOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'OperationId'))
@@ -467,12 +577,24 @@ module Aws::SsmSap
     StartApplicationRefreshInput.type = Types::StartApplicationRefreshInput
     StartApplicationRefreshOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'OperationId'))
     StartApplicationRefreshOutput.type = Types::StartApplicationRefreshOutput
+    StartConfigurationChecksInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId', traits: {"smithy.api#required" => {}}))
+    StartConfigurationChecksInput.add_member(:configuration_check_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckTypeList, location_name: 'ConfigurationCheckIds'))
+    StartConfigurationChecksInput.type = Types::StartConfigurationChecksInput
+    StartConfigurationChecksOutput.add_member(:configuration_check_operations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfigurationCheckOperationList, location_name: 'ConfigurationCheckOperations'))
+    StartConfigurationChecksOutput.type = Types::StartConfigurationChecksOutput
     StopApplicationInput.add_member(:application_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationId, location_name: 'ApplicationId', traits: {"smithy.api#required" => {}}))
     StopApplicationInput.add_member(:stop_connected_entity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectedEntityType, location_name: 'StopConnectedEntity'))
     StopApplicationInput.add_member(:include_ec2_instance_shutdown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'IncludeEc2InstanceShutdown'))
     StopApplicationInput.type = Types::StopApplicationInput
     StopApplicationOutput.add_member(:operation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationId, location_name: 'OperationId'))
     StopApplicationOutput.type = Types::StopApplicationOutput
+    SubCheckReferencesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String)
+    SubCheckResult.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubCheckResultId, location_name: 'Id'))
+    SubCheckResult.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Name'))
+    SubCheckResult.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'Description'))
+    SubCheckResult.add_member(:references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubCheckReferencesList, location_name: 'References'))
+    SubCheckResult.type = Types::SubCheckResult
+    SubCheckResultList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubCheckResult)
     TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
     TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
     TagMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagValue)
@@ -542,6 +664,15 @@ module Aws::SsmSap
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/get-component"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_configuration_check_operation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#GetConfigurationCheckOperation"
+        operation.name = "GetConfigurationCheckOperation"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationCheckOperationInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetConfigurationCheckOperationOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/get-configuration-check-operation"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_database, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmsap#GetDatabase"
         operation.name = "GetDatabase"
@@ -593,6 +724,27 @@ module Aws::SsmSap
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-components"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListComponents.new
       end)
+      service.add_operation(:list_configuration_check_definitions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#ListConfigurationCheckDefinitions"
+        operation.name = "ListConfigurationCheckDefinitions"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationCheckDefinitionsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationCheckDefinitionsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-configuration-check-definitions"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListConfigurationCheckDefinitions.new
+      end)
+      service.add_operation(:list_configuration_check_operations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#ListConfigurationCheckOperations"
+        operation.name = "ListConfigurationCheckOperations"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationCheckOperationsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListConfigurationCheckOperationsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-configuration-check-operations"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListConfigurationCheckOperations.new
+      end)
       service.add_operation(:list_databases, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmsap#ListDatabases"
         operation.name = "ListDatabases"
@@ -623,6 +775,26 @@ module Aws::SsmSap
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-operations"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListOperations.new
+      end)
+      service.add_operation(:list_sub_check_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#ListSubCheckResults"
+        operation.name = "ListSubCheckResults"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubCheckResultsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubCheckResultsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-sub-check-results"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSubCheckResults.new
+      end)
+      service.add_operation(:list_sub_check_rule_results, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#ListSubCheckRuleResults"
+        operation.name = "ListSubCheckRuleResults"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubCheckRuleResultsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListSubCheckRuleResultsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/list-sub-check-rule-results"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSubCheckRuleResults.new
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmsap#ListTagsForResource"
@@ -677,6 +849,17 @@ module Aws::SsmSap
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnauthorizedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/start-application-refresh"}}
+      end)
+      service.add_operation(:start_configuration_checks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ssmsap#StartConfigurationChecks"
+        operation.name = "StartConfigurationChecks"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigurationChecksInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartConfigurationChecksOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/start-configuration-checks"}}
       end)
       service.add_operation(:stop_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ssmsap#StopApplication"

@@ -293,6 +293,7 @@ module Aws::CleanRooms
         ?source_metadata: Types::AnalysisSourceMetadata,
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
+        ?error_message_configuration: Types::ErrorMessageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -312,6 +313,7 @@ module Aws::CleanRooms
       attr_accessor source_metadata: Types::AnalysisSourceMetadata?
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
+      attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
     end
 
     class AnalysisTemplateArtifact
@@ -443,6 +445,10 @@ module Aws::CleanRooms
       attr_accessor output_location: String?
       attr_accessor database_name: String?
       attr_accessor table_name: String?
+    end
+
+    module AutoApprovedChangeType
+      ADD_MEMBER: String
     end
 
     class BatchGetCollaborationAnalysisTemplateError
@@ -592,6 +598,66 @@ module Aws::CleanRooms
       attr_accessor units: Float?
     end
 
+    class Change
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?specification_type: String,
+        ?specification: Types::ChangeSpecification,
+        ?types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor specification_type: String?
+      attr_accessor specification: Types::ChangeSpecification?
+      attr_accessor types: Array[String]?
+    end
+
+    class ChangeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?specification_type: String,
+        ?specification: Types::ChangeSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor specification_type: String?
+      attr_accessor specification: Types::ChangeSpecification?
+    end
+
+    module ChangeRequestStatus
+      PENDING: String
+      APPROVED: String
+      CANCELLED: String
+      DENIED: String
+      COMMITTED: String
+    end
+
+    class ChangeSpecification
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?member: Types::MemberChangeSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member: Types::MemberChangeSpecification?
+
+      class Member < ChangeSpecification
+      end
+      class Unknown < ChangeSpecification
+      end
+    end
+
+    module ChangeSpecificationType
+      MEMBER: String
+    end
+
+    module ChangeType
+      ADD_MEMBER: String
+    end
+
     class Collaboration
       include Smithy::Schema::Structure
 
@@ -611,6 +677,7 @@ module Aws::CleanRooms
         ?query_log_status: String,
         ?job_log_status: String,
         ?analytics_engine: String,
+        ?auto_approved_change_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -629,6 +696,7 @@ module Aws::CleanRooms
       attr_accessor query_log_status: String?
       attr_accessor job_log_status: String?
       attr_accessor analytics_engine: String?
+      attr_accessor auto_approved_change_types: Array[String]?
     end
 
     class CollaborationAnalysisTemplate
@@ -650,6 +718,7 @@ module Aws::CleanRooms
         ?source_metadata: Types::AnalysisSourceMetadata,
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?validations: Array[Types::AnalysisTemplateValidationStatusDetail],
+        ?error_message_configuration: Types::ErrorMessageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -668,6 +737,7 @@ module Aws::CleanRooms
       attr_accessor source_metadata: Types::AnalysisSourceMetadata?
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor validations: Array[Types::AnalysisTemplateValidationStatusDetail]?
+      attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
     end
 
     class CollaborationAnalysisTemplateSummary
@@ -695,6 +765,52 @@ module Aws::CleanRooms
       attr_accessor collaboration_id: String?
       attr_accessor creator_account_id: String?
       attr_accessor description: String?
+    end
+
+    class CollaborationChangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?collaboration_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?is_auto_approved: bool,
+        ?changes: Array[Types::Change],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor is_auto_approved: bool?
+      attr_accessor changes: Array[Types::Change]?
+    end
+
+    class CollaborationChangeRequestSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?collaboration_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?status: String,
+        ?is_auto_approved: bool,
+        ?changes: Array[Types::Change],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor collaboration_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor status: String?
+      attr_accessor is_auto_approved: bool?
+      attr_accessor changes: Array[Types::Change]?
     end
 
     class CollaborationConfiguredAudienceModelAssociation
@@ -1483,6 +1599,7 @@ module Aws::CleanRooms
         ?tags: Hash[String, String],
         ?analysis_parameters: Array[Types::AnalysisParameter],
         ?schema: Types::AnalysisSchema,
+        ?error_message_configuration: Types::ErrorMessageConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1494,6 +1611,7 @@ module Aws::CleanRooms
       attr_accessor tags: Hash[String, String]?
       attr_accessor analysis_parameters: Array[Types::AnalysisParameter]?
       attr_accessor schema: Types::AnalysisSchema?
+      attr_accessor error_message_configuration: Types::ErrorMessageConfiguration?
     end
 
     class CreateAnalysisTemplateOperationOutput
@@ -1505,6 +1623,30 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor analysis_template: Types::AnalysisTemplate?
+    end
+
+    class CreateCollaborationChangeRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?changes: Array[Types::ChangeInput],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor changes: Array[Types::ChangeInput]?
+    end
+
+    class CreateCollaborationChangeRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_change_request: Types::CollaborationChangeRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest?
     end
 
     class CreateCollaborationOperationInput
@@ -1523,6 +1665,7 @@ module Aws::CleanRooms
         ?tags: Hash[String, String],
         ?creator_payment_configuration: Types::PaymentConfiguration,
         ?analytics_engine: String,
+        ?auto_approved_change_request_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1538,6 +1681,7 @@ module Aws::CleanRooms
       attr_accessor tags: Hash[String, String]?
       attr_accessor creator_payment_configuration: Types::PaymentConfiguration?
       attr_accessor analytics_engine: String?
+      attr_accessor auto_approved_change_request_types: Array[String]?
     end
 
     class CreateCollaborationOperationOutput
@@ -2288,6 +2432,21 @@ module Aws::CleanRooms
       attr_accessor receiver_account_ids: Array[String]?
     end
 
+    class ErrorMessageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module ErrorMessageType
+      DETAILED: String
+    end
+
     class GetAnalysisTemplateOperationInput
       include Smithy::Schema::Structure
 
@@ -2334,6 +2493,30 @@ module Aws::CleanRooms
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor collaboration_analysis_template: Types::CollaborationAnalysisTemplate?
+    end
+
+    class GetCollaborationChangeRequestInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?change_request_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor change_request_identifier: String?
+    end
+
+    class GetCollaborationChangeRequestOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_change_request: Types::CollaborationChangeRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_change_request: Types::CollaborationChangeRequest?
     end
 
     class GetCollaborationConfiguredAudienceModelAssociationInput
@@ -3079,6 +3262,36 @@ module Aws::CleanRooms
       attr_accessor collaboration_analysis_template_summaries: Array[Types::CollaborationAnalysisTemplateSummary]?
     end
 
+    class ListCollaborationChangeRequestsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_identifier: String,
+        ?status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_identifier: String?
+      attr_accessor status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCollaborationChangeRequestsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collaboration_change_request_summaries: Array[Types::CollaborationChangeRequestSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collaboration_change_request_summaries: Array[Types::CollaborationChangeRequestSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListCollaborationConfiguredAudienceModelAssociationsInput
       include Smithy::Schema::Structure
 
@@ -3613,6 +3826,21 @@ module Aws::CleanRooms
       CAN_QUERY: String
       CAN_RECEIVE_RESULTS: String
       CAN_RUN_JOB: String
+    end
+
+    class MemberChangeSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?member_abilities: Array[String],
+        ?display_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor member_abilities: Array[String]?
+      attr_accessor display_name: String?
     end
 
     class MemberSpecification
@@ -4205,6 +4433,7 @@ module Aws::CleanRooms
         ?statistics: Types::ProtectedJobStatistics,
         ?result: Types::ProtectedJobResult,
         ?error: Types::ProtectedJobError,
+        ?compute_configuration: Types::ProtectedJobComputeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4218,10 +4447,27 @@ module Aws::CleanRooms
       attr_accessor statistics: Types::ProtectedJobStatistics?
       attr_accessor result: Types::ProtectedJobResult?
       attr_accessor error: Types::ProtectedJobError?
+      attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration?
     end
 
     module ProtectedJobAnalysisType
       DIRECT_ANALYSIS: String
+    end
+
+    class ProtectedJobComputeConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?worker: Types::ProtectedJobWorkerComputeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker: Types::ProtectedJobWorkerComputeConfiguration?
+
+      class Worker < ProtectedJobComputeConfiguration
+      end
+      class Unknown < ProtectedJobComputeConfiguration
+      end
     end
 
     class ProtectedJobConfigurationDetails
@@ -4492,6 +4738,24 @@ module Aws::CleanRooms
 
     module ProtectedJobType
       PYSPARK: String
+    end
+
+    class ProtectedJobWorkerComputeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor number: Integer?
+    end
+
+    module ProtectedJobWorkerComputeType
+      CR1X: String
+      CR4X: String
     end
 
     class ProtectedQuery
@@ -5067,6 +5331,7 @@ module Aws::CleanRooms
         ?membership_identifier: String,
         ?job_parameters: Types::ProtectedJobParameters,
         ?result_configuration: Types::ProtectedJobResultConfigurationInput,
+        ?compute_configuration: Types::ProtectedJobComputeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5074,6 +5339,7 @@ module Aws::CleanRooms
       attr_accessor membership_identifier: String?
       attr_accessor job_parameters: Types::ProtectedJobParameters?
       attr_accessor result_configuration: Types::ProtectedJobResultConfigurationInput?
+      attr_accessor compute_configuration: Types::ProtectedJobComputeConfiguration?
     end
 
     class StartProtectedJobOutput

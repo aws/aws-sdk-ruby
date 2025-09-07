@@ -2613,6 +2613,9 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute opt_out_list_name
     #   <p>The name of the OptOutList associated with the phone number.</p>
     #   @return [String]
+    # @!attribute international_sending_enabled
+    #   <p>When set to true the international sending of phone number is Enabled.</p>
+    #   @return [Boolean]
     # @!attribute deletion_protection_enabled
     #   <p>When set to true the phone number can't be deleted.</p>
     #   @return [Boolean]
@@ -2640,6 +2643,7 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
+      :international_sending_enabled,
       :deletion_protection_enabled,
       :pool_id,
       :registration_id,
@@ -2650,6 +2654,7 @@ module Aws::PinpointSMSVoiceV2
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
         options[:self_managed_opt_outs_enabled] = false unless options.key?(:self_managed_opt_outs_enabled)
+        options[:international_sending_enabled] = false unless options.key?(:international_sending_enabled)
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
         super
       end
@@ -3694,6 +3699,9 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute registration_id
     #   <p>Use this field to attach your phone number for an external registration process.</p>
     #   @return [String]
+    # @!attribute international_sending_enabled
+    #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
+    #   @return [Boolean]
     # @!attribute deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted.</p>
     #   @return [Boolean]
@@ -3711,6 +3719,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :pool_id,
       :registration_id,
+      :international_sending_enabled,
       :deletion_protection_enabled,
       :tags,
       :client_token,
@@ -3760,6 +3769,9 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute opt_out_list_name
     #   <p>The name of the OptOutList that is associated with the requested phone number.</p>
     #   @return [String]
+    # @!attribute international_sending_enabled
+    #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
+    #   @return [Boolean]
     # @!attribute deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted. </p>
     #   @return [Boolean]
@@ -3790,6 +3802,7 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
+      :international_sending_enabled,
       :deletion_protection_enabled,
       :pool_id,
       :registration_id,
@@ -3801,6 +3814,7 @@ module Aws::PinpointSMSVoiceV2
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
         options[:self_managed_opt_outs_enabled] = false unless options.key?(:self_managed_opt_outs_enabled)
+        options[:international_sending_enabled] = false unless options.key?(:international_sending_enabled)
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
         super
       end
@@ -4650,6 +4664,9 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute opt_out_list_name
     #   <p>The OptOutList to add the phone number to. Valid values for this field can be either the OutOutListName or OutOutListArn.</p>
     #   @return [String]
+    # @!attribute international_sending_enabled
+    #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
+    #   @return [Boolean]
     # @!attribute deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted. </p>
     #   @return [Boolean]
@@ -4660,6 +4677,7 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
+      :international_sending_enabled,
       :deletion_protection_enabled,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -4707,6 +4725,9 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute opt_out_list_name
     #   <p>The name of the OptOutList associated with the phone number.</p>
     #   @return [String]
+    # @!attribute international_sending_enabled
+    #   <p>When set to true the international sending of phone number is Enabled.</p>
+    #   @return [Boolean]
     # @!attribute deletion_protection_enabled
     #   <p>When set to true the phone number can't be deleted.</p>
     #   @return [Boolean]
@@ -4731,6 +4752,7 @@ module Aws::PinpointSMSVoiceV2
       :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
+      :international_sending_enabled,
       :deletion_protection_enabled,
       :registration_id,
       :created_timestamp,
@@ -4740,6 +4762,7 @@ module Aws::PinpointSMSVoiceV2
       def initialize(options = {})
         options[:two_way_enabled] = false unless options.key?(:two_way_enabled)
         options[:self_managed_opt_outs_enabled] = false unless options.key?(:self_managed_opt_outs_enabled)
+        options[:international_sending_enabled] = false unless options.key?(:international_sending_enabled)
         options[:deletion_protection_enabled] = false unless options.key?(:deletion_protection_enabled)
         super
       end

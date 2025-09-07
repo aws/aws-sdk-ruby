@@ -2596,6 +2596,9 @@
                     "target": "com.amazonaws.ec2#CreateImage"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateImageUsageReport"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateInstanceConnectEndpoint"
                 },
                 {
@@ -2849,6 +2852,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteFpgaImage"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteImageUsageReport"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteInstanceConnectEndpoint"
@@ -3229,7 +3235,16 @@
                     "target": "com.amazonaws.ec2#DescribeImageAttribute"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeImageReferences"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeImages"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReportEntries"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReports"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeImportImageTasks"
@@ -4031,6 +4046,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyInstanceCapacityReservationAttributes"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyInstanceConnectEndpoint"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyInstanceCpuOptions"
@@ -5383,17 +5401,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -5404,17 +5411,6 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -5431,17 +5427,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": true
-                            }
-                        },
-                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -5452,17 +5437,6 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
                             }
                         },
                         {
@@ -8724,6 +8698,23 @@
                 "smithy.api#documentation": "<p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic \n\t\t\tautomatically uses it. However, some UDP-based applications are designed to handle network packets that are \n\t\t\tout of order, without a need for retransmission, such as live video broadcasting or other near-real-time \n\t\t\tapplications. For UDP traffic, you can specify whether to use ENA Express, based on your application \n\t\t\tenvironment needs.</p>"
             }
         },
+        "com.amazonaws.ec2#AttachmentLimitType": {
+            "type": "enum",
+            "members": {
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shared"
+                    }
+                },
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dedicated"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#AttachmentStatus": {
             "type": "enum",
             "members": {
@@ -9888,7 +9879,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DeviceName",
-                        "smithy.api#documentation": "<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>",
+                        "smithy.api#documentation": "<p>The device name. For available device names, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device names for volumes</a>.</p>",
                         "smithy.api#xmlName": "deviceName"
                     }
                 },
@@ -13937,6 +13928,14 @@
                         "smithy.api#xmlName": "clientIp"
                     }
                 },
+                "ClientIpv6Address": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientIpv6Address",
+                        "smithy.api#documentation": "<p>The IPv6 address assigned to the client connection when using a dual-stack Client VPN endpoint. This field is only populated when the endpoint is configured for dual-stack addressing, and the client is using IPv6 for connectivity.</p>",
+                        "smithy.api#xmlName": "clientIpv6Address"
+                    }
+                },
                 "CommonName": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -14240,6 +14239,22 @@
                         "aws.protocols#ec2QueryName": "DisconnectOnSessionTimeout",
                         "smithy.api#documentation": "<p>Indicates whether the client VPN session is disconnected after the maximum <code>sessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. The default value is <code>true</code>.</p>",
                         "smithy.api#xmlName": "disconnectOnSessionTimeout"
+                    }
+                },
+                "EndpointIpAddressType": {
+                    "target": "com.amazonaws.ec2#EndpointIpAddressType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndpointIpAddressType",
+                        "smithy.api#documentation": "<p>The IP address type of the Client VPN endpoint. Possible values are <code>ipv4</code> for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack </code>for both IPv4 and IPv6 addressing.</p>",
+                        "smithy.api#xmlName": "endpointIpAddressType"
+                    }
+                },
+                "TrafficIpAddressType": {
+                    "target": "com.amazonaws.ec2#TrafficIpAddressType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TrafficIpAddressType",
+                        "smithy.api#documentation": "<p>The IP address type of the Client VPN endpoint. Possible values are either <code>ipv4</code> for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 addressing.</p>",
+                        "smithy.api#xmlName": "trafficIpAddressType"
                     }
                 }
             },
@@ -15326,7 +15341,7 @@
                 "target": "com.amazonaws.ec2#CopyImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates an AMI copy operation. You can copy an AMI from one Region to another, or from a\n      Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to\n      another, or within the same Outpost. To copy an AMI to another partition, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>When you copy an AMI from one Region to another, the destination Region is the current\n      Region.</p>\n         <p>When you copy an AMI from a Region to an Outpost, specify the ARN of the Outpost as the\n      destination. Backing snapshots copied to an Outpost are encrypted by default using the default\n      encryption key for the Region or the key that you specify. Outposts do not support unencrypted\n      snapshots.</p>\n         <p>For information about the prerequisites when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copy an Amazon EC2 AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Initiates an AMI copy operation. You must specify the source AMI ID and both the source\n      and destination locations. The copy operation must be initiated in the destination\n      Region.</p>\n         <p class=\"title\">\n            <b>CopyImage supports the following source to destination copies:</b>\n         </p>\n         <ul>\n            <li>\n               <p>Region to Region</p>\n            </li>\n            <li>\n               <p>Region to Outpost</p>\n            </li>\n            <li>\n               <p>Parent Region to Local Zone</p>\n            </li>\n            <li>\n               <p>Local Zone to parent Region</p>\n            </li>\n            <li>\n               <p>Between Local Zones with the same parent Region (only supported for certain Local\n          Zones)</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>CopyImage does not support the following source to destination copies:</b>\n         </p>\n         <ul>\n            <li>\n               <p>Local Zone to non-parent Regions</p>\n            </li>\n            <li>\n               <p>Between Local Zones with different parent Regions</p>\n            </li>\n            <li>\n               <p>Local Zone to Outpost</p>\n            </li>\n            <li>\n               <p>Outpost to Local Zone</p>\n            </li>\n            <li>\n               <p>Outpost to Region</p>\n            </li>\n            <li>\n               <p>Between Outposts</p>\n            </li>\n            <li>\n               <p>Within same Outpost</p>\n            </li>\n            <li>\n               <p>Cross-partition copies (use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a> instead)</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Destination specification</b>\n         </p>\n         <ul>\n            <li>\n               <p>Region to Region: The destination Region is the Region in which you initiate the copy\n          operation.</p>\n            </li>\n            <li>\n               <p>Region to Outpost: Specify the destination using the\n            <code>DestinationOutpostArn</code> parameter (the ARN of the Outpost)</p>\n            </li>\n            <li>\n               <p>Region to Local Zone, and Local Zone to Local Zone copies: Specify the destination\n          using the <code>DestinationAvailabilityZone</code> parameter (the name of the destination\n          Local Zone) or <code>DestinationAvailabilityZoneId</code> parameter (the ID of the\n          destination Local Zone).</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Snapshot encryption</b>\n         </p>\n         <ul>\n            <li>\n               <p>Region to Outpost: Backing snapshots copied to an Outpost are encrypted by default\n          using the default encryption key for the Region or the key that you specify. Outposts do\n          not support unencrypted snapshots.</p>\n            </li>\n            <li>\n               <p>Region to Local Zone, and Local Zone to Local Zone: Not all Local Zones require\n          encrypted snapshots. In Local Zones that require encrypted snapshots, backing snapshots\n          are automatically encrypted during copy. In Local Zones where encryption is not required,\n          snapshots retain their original encryption state (encrypted or unencrypted) by\n          default.</p>\n            </li>\n         </ul>\n         <p>For more information, including the required permissions for copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copy an Amazon EC2 AMI</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To copy an AMI to another region",
@@ -15357,14 +15372,14 @@
                 "Description": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the new AMI in the destination Region.</p>"
+                        "smithy.api#documentation": "<p>A description for the new AMI.</p>"
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Encrypted",
-                        "smithy.api#documentation": "<p>Specifies whether the destination snapshots of the copied image should be encrypted. You\n      can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an\n      encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default\n      Key Management Service (KMS) KMS key using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Use encryption with\n        EBS-backed AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to encrypt the snapshots of the copied image.</p>\n         <p>You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted\n      copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a\n      non-default Key Management Service (KMS) KMS key using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Use encryption with\n        EBS-backed AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#xmlName": "encrypted"
                     }
                 },
@@ -15380,7 +15395,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the new AMI in the destination Region.</p>",
+                        "smithy.api#documentation": "<p>The name of the new AMI.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15403,13 +15418,13 @@
                 "DestinationOutpostArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this\n      parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the\n      Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from\n      one Outpost to another, or within the same Outpost.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis\">Copy AMIs from an Amazon Web Services Region\n        to an Outpost</a> in the <i>Amazon EBS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost for the new AMI.</p>\n         <p>Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The\n      AMI must be in the Region of the destination Outpost. You can't copy an AMI from an Outpost to\n      a Region, from one Outpost to another, or within the same Outpost.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis\">Copy AMIs from an Amazon Web Services Region\n        to an Outpost</a> in the <i>Amazon EBS User Guide</i>.</p>\n         <p>Only one of <code>DestinationAvailabilityZone</code>,\n        <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be\n      specified.</p>"
                     }
                 },
                 "CopyImageTags": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to include your user-defined AMI tags when copying the AMI.</p>\n         <p>The following tags will not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to copy your user-defined AMI tags to the new AMI.</p>\n         <p>The following tags are not be copied:</p>\n         <ul>\n            <li>\n               <p>System tags (prefixed with <code>aws:</code>)</p>\n            </li>\n            <li>\n               <p>For public and shared AMIs, user-defined tags that are attached by other Amazon Web Services\n          accounts</p>\n            </li>\n         </ul>\n         <p>Default: Your user-defined AMI tags are not copied.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -15422,7 +15437,19 @@
                 "SnapshotCopyCompletionDurationMinutes": {
                     "target": "com.amazonaws.ec2#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a completion duration, in 15 minute increments, to initiate a time-based AMI copy.\n      The specified completion duration applies to each of the snapshots associated with the AMI.\n      Each snapshot associated with the AMI will be completed within the specified completion\n      duration, with copy throughput automatically adjusted for each snapshot based on its size to\n      meet the timing target.</p>\n         <p>If you do not specify a value, the AMI copy operation is completed on a best-effort \n      basis.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">Time-based copies for Amazon EBS snapshots and\n        EBS-backed AMIs</a>.</p>"
+                        "smithy.api#documentation": "<p>Specify a completion duration, in 15 minute increments, to initiate a time-based AMI copy.\n      The specified completion duration applies to each of the snapshots associated with the AMI.\n      Each snapshot associated with the AMI will be completed within the specified completion\n      duration, with copy throughput automatically adjusted for each snapshot based on its size to\n      meet the timing target.</p>\n         <p>If you do not specify a value, the AMI copy operation is completed on a best-effort \n      basis.</p>\n         <note>\n            <p>This parameter is not supported when copying an AMI to or from a Local Zone, or to an\n        Outpost.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">Time-based copies for Amazon EBS snapshots and\n        EBS-backed AMIs</a>.</p>"
+                    }
+                },
+                "DestinationAvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Local Zone for the new AMI (for example, <code>cn-north-1-pkx-1a</code>).</p>\n         <p>Only one of <code>DestinationAvailabilityZone</code>,\n        <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be\n      specified.</p>"
+                    }
+                },
+                "DestinationAvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Local Zone for the new AMI (for example, <code>cnn1-pkx1-az1</code>).</p>\n         <p>Only one of <code>DestinationAvailabilityZone</code>,\n        <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be\n      specified.</p>"
                     }
                 },
                 "DryRun": {
@@ -15465,7 +15492,7 @@
                 "target": "com.amazonaws.ec2#CopySnapshotResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy a\n      snapshot within the same Region, from one Region to another, or from a Region to an Outpost. \n      You can't copy a snapshot from an Outpost to a Region, from one Outpost to another, or within \n      the same Outpost.</p>\n         <p>You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p>\n         <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted. \n    \tCopies of unencrypted snapshots remain unencrypted, unless you enable encryption for the \n    \tsnapshot copy operation. By default, encrypted snapshot copies use the default KMS key; \n    \thowever, you can specify a different KMS key. To copy an encrypted \n    \tsnapshot that has been shared from another account, you must have permissions for the KMS key \n    \tused to encrypt the snapshot.</p>\n         <p>Snapshots copied to an Outpost are encrypted by default using the default encryption key\n      for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information,\n      see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami\">Amazon EBS\n        local snapshots on Outposts</a> in the <i>Amazon EBS User Guide</i>.</p>\n         <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not\n      be used for any purpose.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html\">Copy an Amazon EBS snapshot</a> in the\n        <i>Amazon EBS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an exact copy of an Amazon EBS snapshot.</p>\n         <p>The location of the source snapshot determines whether you can copy it or not, \n      and the allowed destinations for the snapshot copy.</p>\n         <ul>\n            <li>\n               <p>If the source snapshot is in a Region, you can copy it within that Region, \n          to another Region, to an Outpost associated with that Region, or to a Local \n          Zone in that Region.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is in a Local Zone, you can copy it within that Local Zone, \n          to another Local Zone in the same zone group, or to the parent Region of the Local \n          Zone.</p>\n            </li>\n            <li>\n               <p>If the source snapshot is on an Outpost, you can't copy it.</p>\n            </li>\n         </ul>\n         <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted. \n    \tCopies of unencrypted snapshots remain unencrypted, unless you enable encryption for the \n    \tsnapshot copy operation. By default, encrypted snapshot copies use the default KMS key; \n    \thowever, you can specify a different KMS key. To copy an encrypted \n    \tsnapshot that has been shared from another account, you must have permissions for the KMS key \n    \tused to encrypt the snapshot.</p>\n         <p>Snapshots copied to an Outpost are encrypted by default using the default encryption key\n      for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information,\n      see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami\">Amazon EBS\n        local snapshots on Outposts</a> in the <i>Amazon EBS User Guide</i>.</p>\n         <note>\n            <p>Snapshots copies have an arbitrary source volume ID. Do not use this volume ID for \n        any purpose.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/ebs-copy-snapshot.html\">Copy an Amazon EBS snapshot</a> in the\n        <i>Amazon EBS User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To copy a snapshot",
@@ -15495,7 +15522,7 @@
                 "DestinationOutpostArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot. Only \n\t\tspecify this parameter when copying a snapshot from an Amazon Web Services Region to an Outpost. \n\t\tThe snapshot must be in the Region for the destination Outpost. You cannot copy a \n\t\tsnapshot from an Outpost to a Region, from one Outpost to another, or within the same \n\t\tOutpost.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots\">\n  \t\tCopy snapshots from an Amazon Web Services Region to an Outpost</a> in the \n  \t\t<i>Amazon EBS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot.</p>\n         <note>\n            <p>Only supported when copying a snapshot to an Outpost.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots\">\n  \t\tCopy snapshots from an Amazon Web Services Region to an Outpost</a> in the \n      <i>Amazon EBS User Guide</i>.</p>"
                     }
                 },
                 "DestinationRegion": {
@@ -15556,7 +15583,13 @@
                 "CompletionDurationMinutes": {
                     "target": "com.amazonaws.ec2#SnapshotCompletionDurationMinutesRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot \n      copy. Time-based snapshot copy operations complete within the specified duration. For more \n      information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">\n        Time-based copies</a>.</p>\n         <p>If you do not specify a value, the snapshot copy operation is completed on a \n      best-effort basis.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Not supported when copying snapshots to or from Local Zones or Outposts.</p>\n         </note>\n         <p>Specify a completion duration, in 15 minute increments, to initiate a time-based snapshot \n      copy. Time-based snapshot copy operations complete within the specified duration. For more \n      information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html\">\n        Time-based copies</a>.</p>\n         <p>If you do not specify a value, the snapshot copy operation is completed on a \n      best-effort basis.</p>"
+                    }
+                },
+                "DestinationAvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Local Zone, for example, <code>cn-north-1-pkx-1a</code> to which to copy the \n      snapshot.</p>\n         <note>\n            <p>Only supported when copying a snapshot to a Local Zone.</p>\n         </note>"
                     }
                 },
                 "DryRun": {
@@ -16261,9 +16294,7 @@
                 "ClientCidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. Client CIDR range must have a size of at least /22 and must not be greater than /12.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IPv4 address range, in CIDR notation, from which to assign client IP addresses. The address range cannot overlap with the local CIDR of the VPC in which the associated subnet is located, or the routes that you add manually. The address range cannot be changed after the Client VPN endpoint has been created. Client CIDR range must have a size of at least /22 and must not be greater than /12.</p>"
                     }
                 },
                 "ServerCertificateArn": {
@@ -16388,6 +16419,18 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the client VPN session is disconnected after the maximum timeout specified in <code>SessionTimeoutHours</code> is reached. If <code>true</code>, users are prompted to reconnect client VPN. If <code>false</code>, client VPN attempts to reconnect automatically. \n                   The default value is <code>true</code>.</p>"
+                    }
+                },
+                "EndpointIpAddressType": {
+                    "target": "com.amazonaws.ec2#EndpointIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the Client VPN endpoint. Valid values are <code>ipv4</code>\n\t\t\t(default) for IPv4 addressing only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6\n\t\t\taddressing. When set to <code>dual-stack,</code> clients can connect to the endpoint\n\t\t\tusing either IPv4 or IPv6 addresses..</p>"
+                    }
+                },
+                "TrafficIpAddressType": {
+                    "target": "com.amazonaws.ec2#TrafficIpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for traffic within the Client VPN tunnel. Valid values are <code>ipv4</code> (default) for IPv4 traffic only, <code>ipv6</code> for IPv6 addressing only, or <code>dual-stack</code> for both IPv4 and IPv6 traffic. When set to <code>dual-stack</code>, clients can access both IPv4 and IPv6 resources through the VPN .</p>"
                     }
                 }
             },
@@ -17652,6 +17695,86 @@
                         "aws.protocols#ec2QueryName": "ImageId",
                         "smithy.api#documentation": "<p>The ID of the new AMI.</p>",
                         "smithy.api#xmlName": "imageId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateImageUsageReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateImageUsageReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateImageUsageReportResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a report that shows how your image is used across other Amazon Web Services accounts. The report\n      provides visibility into which accounts are using the specified image, and how many resources\n      (EC2 instances or launch templates) are referencing it.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateImageUsageReportRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the image to report on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeRequestList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The resource types to include in the report.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ResourceType"
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportUserIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs to include in the report. To include all accounts, omit this\n      parameter.</p>",
+                        "smithy.api#xmlName": "AccountId"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the report on creation. The <code>ResourceType</code> must be set to\n        <code>image-usage-report</code>; any other value will cause the report creation to\n      fail.</p>\n         <p>To tag a report after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateImageUsageReportResult": {
+            "type": "structure",
+            "members": {
+                "ReportId": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReportId",
+                        "smithy.api#documentation": "<p>The ID of the report.</p>",
+                        "smithy.api#xmlName": "reportId"
                     }
                 }
             },
@@ -25998,6 +26121,56 @@
                     "traits": {
                         "aws.protocols#ec2QueryName": "Return",
                         "smithy.api#documentation": "<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteImageUsageReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteImageUsageReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteImageUsageReportResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified image usage report.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteImageUsageReportRequest": {
+            "type": "structure",
+            "members": {
+                "ReportId": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the report to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteImageUsageReportResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
                         "smithy.api#xmlName": "return"
                     }
                 }
@@ -34970,6 +35143,349 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.ec2#DescribeImageReferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeImageReferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeImageReferencesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes your Amazon Web Services resources that are referencing the specified images.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-references.html\">Identify your resources referencing\n        specified AMIs</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ImageReferences",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageReferencesImageIdStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageReferencesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageReferencesRequest": {
+            "type": "structure",
+            "members": {
+                "ImageIds": {
+                    "target": "com.amazonaws.ec2#DescribeImageReferencesImageIdStringList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The IDs of the images to check for resource references.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ImageId"
+                    }
+                },
+                "IncludeAllResourceTypes": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to check all supported Amazon Web Services resource types for image references. When\n      specified, default values are applied for <code>ResourceTypeOptions</code>. For the default\n      values, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-ami-references-works.html\">How AMI reference checks\n        work</a> in the <i>Amazon EC2 User Guide</i>. If you also specify\n        <code>ResourceTypes</code> with <code>ResourceTypeOptions</code>, your specified values\n      override the default values.</p>\n         <p>Supported resource types: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code> |\n        <code>ssm:Parameter</code> | <code>imagebuilder:ImageRecipe</code> |\n        <code>imagebuilder:ContainerRecipe</code>\n         </p>\n         <p>Either <code>IncludeAllResourceTypes</code> or <code>ResourceTypes</code> must be\n      specified.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.ec2#ResourceTypeRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource types to check for image references.</p>\n         <p>Either <code>IncludeAllResourceTypes</code> or <code>ResourceTypes</code> must be\n      specified.</p>",
+                        "smithy.api#xmlName": "ResourceType"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeImageReferencesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageReferencesResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "ImageReferences": {
+                    "target": "com.amazonaws.ec2#ImageReferenceList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageReferenceSet",
+                        "smithy.api#documentation": "<p>The resources that are referencing the specified images.</p>",
+                        "smithy.api#xmlName": "imageReferenceSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the entries in image usage reports, showing how your images are used across\n      other Amazon Web Services accounts.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n        <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ImageUsageReportEntries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportEntriesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "ImageIds": {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReportsImageIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the images for filtering the report entries. If specified, only report entries\n      containing these images are returned.</p>",
+                        "smithy.api#xmlName": "ImageId"
+                    }
+                },
+                "ReportIds": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the usage reports.</p>",
+                        "smithy.api#xmlName": "ReportId"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account-id</code> - A 12-digit Amazon Web Services account ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-time</code> - The time when the report was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n          <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2025-11-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-type</code> - The resource type (<code>ec2:Instance</code> |\n            <code>ec2:LaunchTemplate</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReportEntriesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportEntriesResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "ImageUsageReportEntries": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportEntryList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageUsageReportEntrySet",
+                        "smithy.api#documentation": "<p>The content of the usage reports.</p>",
+                        "smithy.api#xmlName": "imageUsageReportEntrySet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeImageUsageReportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeImageUsageReportsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration and status of image usage reports, filtered by report IDs or\n      image IDs.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html\">View your AMI usage</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ImageUsageReports",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.waiters#waitable": {
+                    "ImageUsageReportAvailable": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageUsageReports[].State",
+                                        "expected": "available",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageUsageReports[].State",
+                                        "expected": "failed",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportsImageIdStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportsRequest": {
+            "type": "structure",
+            "members": {
+                "ImageIds": {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReportsImageIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the images for filtering the reports. If specified, only reports containing\n      these images are returned.</p>",
+                        "smithy.api#xmlName": "ImageId"
+                    }
+                },
+                "ReportIds": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the image usage reports.</p>",
+                        "smithy.api#xmlName": "ReportId"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creation-time</code> - The time when the report was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n          <code>2025-11-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2025-11-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the report (<code>available</code> |\n            <code>pending</code> | <code>error</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeImageUsageReportsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeImageUsageReportsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                },
+                "ImageUsageReports": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageUsageReportSet",
+                        "smithy.api#documentation": "<p>The image usage reports.</p>",
+                        "smithy.api#xmlName": "imageUsageReportSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DescribeImages": {
             "type": "operation",
             "input": {
@@ -36250,7 +36766,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether Amazon CloudWatch action\n     based recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether the instance type is a\n     burstable performance T instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>dedicated-hosts-supported</code> - Indicates whether the instance type supports\n     Dedicated Hosts.  (<code>true</code> | <code>false</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n     bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n     performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this instance type can\n     be used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance\n     storage disk, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.encryption-support</code> - Indicates whether data is\n     encrypted at rest (<code>required</code> | <code>supported</code> |\n     <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage\n     available from all local instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.bandwidth-weightings</code> - For instances that support bandwidth\n     weighting to boost performance (<code>default</code>, <code>vpc-1</code>,\n     <code>ebs-1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic\n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.flexible-ena-queues-support</code> - Indicates whether an instance supports\n     flexible ENA queues (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance\n     type automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private\n     IPv4 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private\n     IPv6 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-cards</code> - The maximum number of network cards per\n     instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network\n     interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-enclaves-support</code> - Indicates whether Nitro Enclaves is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-support</code> - Indicates whether NitroTPM is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-info.supported-versions</code> - The supported NitroTPM version\n      (<code>2.0</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in\n     GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-features</code> - The supported CPU features\n      (<code>amd-sev-snp</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>reboot-migration-support</code> - Indicates whether enabling reboot migration is\n     supported (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code> | <code>capacity-block</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core\n     for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the\n     instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be\n     configured for the instance type. For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether Amazon CloudWatch action\n     based recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether the instance type is a\n     burstable performance T instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>dedicated-hosts-supported</code> - Indicates whether the instance type supports\n     Dedicated Hosts.  (<code>true</code> | <code>false</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.attachment-limit-type</code> - The type of Amazon EBS volume attachment limit \n     (<code>shared</code> | <code>dedicated</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.maximum-ebs-attachments</code> - The maximum number of Amazon EBS volumes that \n     can be attached to the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n     bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n     performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this instance type can\n     be used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance\n     storage disk, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.encryption-support</code> - Indicates whether data is\n     encrypted at rest (<code>required</code> | <code>supported</code> |\n     <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage\n     available from all local instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.bandwidth-weightings</code> - For instances that support bandwidth\n     weighting to boost performance (<code>default</code>, <code>vpc-1</code>,\n     <code>ebs-1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic\n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.flexible-ena-queues-support</code> - Indicates whether an instance supports\n     flexible ENA queues (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance\n     type automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private\n     IPv4 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private\n     IPv6 addresses per network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-cards</code> - The maximum number of network cards per\n     instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network\n     interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-enclaves-support</code> - Indicates whether Nitro Enclaves is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-support</code> - Indicates whether NitroTPM is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>nitro-tpm-info.supported-versions</code> - The supported NitroTPM version\n      (<code>2.0</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in\n     GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-features</code> - The supported CPU features\n      (<code>amd-sev-snp</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>reboot-migration-support</code> - Indicates whether enabling reboot migration is\n     supported (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code> | <code>capacity-block</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core\n     for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the\n     instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be\n     configured for the instance type. For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -46352,7 +46868,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the VPC endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated-resource-accessibility</code> - The association state. When the\n               state is <code>accessible</code>, it returns <code>AVAILABLE</code>. When the state\n               is <code>inaccessible</code>, it returns <code>PENDING</code> or\n               <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>association-id</code> - The ID of the VPC endpoint association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated-resource-id</code> - The ID of the associated resource\n               configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-network-arn</code> - The Amazon Resource Name (ARN) of the\n               associated service network. Only VPC endpoints of type service network will be\n               returned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-configuration-group-arn</code> - The Amazon Resource Name (ARN) of\n               the resource configuration of type GROUP.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-network-resource-association-id</code> - The ID of the\n               association.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the VPC endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated-resource-accessibility</code> - The association state. When the\n               state is <code>accessible</code>, it returns <code>AVAILABLE</code>. When the state\n               is <code>inaccessible</code>, it returns <code>PENDING</code> or\n               <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>association-id</code> - The ID of the VPC endpoint association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated-resource-id</code> - The ID of the associated resource\n               configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-network-arn</code> - The Amazon Resource Name (ARN) of the\n               associated service network. Only VPC endpoints of type service network will be\n               returned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-configuration-group-arn</code> - The Amazon Resource Name (ARN) of\n               the resource configuration of type GROUP.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -50922,6 +51438,22 @@
                         "smithy.api#documentation": "<p>Indicates whether non-volatile memory express (NVMe) is supported.</p>",
                         "smithy.api#xmlName": "nvmeSupport"
                     }
+                },
+                "MaximumEbsAttachments": {
+                    "target": "com.amazonaws.ec2#MaximumEbsAttachments",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaximumEbsAttachments",
+                        "smithy.api#documentation": "<p>Indicates the maximum number of Amazon EBS volumes that can be attached to \n   the instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html\">Amazon EBS volume limits for \n    Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "maximumEbsAttachments"
+                    }
+                },
+                "AttachmentLimitType": {
+                    "target": "com.amazonaws.ec2#AttachmentLimitType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AttachmentLimitType",
+                        "smithy.api#documentation": "<p>Indicates whether the instance type features a shared or dedicated Amazon EBS \n   volume attachment limit. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/volume_limits.html\">Amazon EBS volume limits for \n    Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "attachmentLimitType"
+                    }
                 }
             },
             "traits": {
@@ -51313,6 +51845,14 @@
                         "smithy.api#documentation": "<p>The IP address type of the endpoint.</p>",
                         "smithy.api#xmlName": "ipAddressType"
                     }
+                },
+                "PublicDnsNames": {
+                    "target": "com.amazonaws.ec2#InstanceConnectEndpointPublicDnsNames",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PublicDnsNames",
+                        "smithy.api#documentation": "<p>The public DNS names of the endpoint.</p>",
+                        "smithy.api#xmlName": "publicDnsNames"
+                    }
                 }
             },
             "traits": {
@@ -51356,6 +51896,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "delete-failed"
+                    }
+                },
+                "update_in_progress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update-in-progress"
+                    }
+                },
+                "update_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update-complete"
+                    }
+                },
+                "update_failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "update-failed"
                     }
                 }
             }
@@ -53284,6 +53842,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "limited"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#EndpointIpAddressType": {
+            "type": "enum",
+            "members": {
+                "ipv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "ipv6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "dual_stack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dual-stack"
                     }
                 }
             }
@@ -55432,7 +56013,7 @@
                     "target": "com.amazonaws.ec2#FleetActivityStatus",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ActivityStatus",
-                        "smithy.api#documentation": "<p>The progress of the EC2 Fleet. If there is an error, the status is <code>error</code>. After\n         all requests are placed, the status is <code>pending_fulfillment</code>. If the size of the\n         EC2 Fleet is equal to or greater than its target capacity, the status is <code>fulfilled</code>.\n         If the size of the EC2 Fleet is decreased, the status is <code>pending_termination</code> while\n         instances are terminating.</p>",
+                        "smithy.api#documentation": "<p>The progress of the EC2 Fleet.</p>\n         <p>For fleets of type <code>instant</code>, the status is <code>fulfilled</code> after all\n         requests are placed, regardless of whether target capacity is met (this is the only\n         possible status for <code>instant</code> fleets).</p>\n         <p>For fleets of type <code>request</code> or <code>maintain</code>, the status is\n            <code>pending_fulfillment</code> after all requests are placed, <code>fulfilled</code>\n         when the fleet size meets or exceeds target capacity, <code>pending_termination</code>\n         while instances are terminating when fleet size is decreased, and <code>error</code> if\n         there's an error.</p>",
                         "smithy.api#xmlName": "activityStatus"
                     }
                 },
@@ -63247,6 +63828,99 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ImageReference": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageId",
+                        "smithy.api#documentation": "<p>The ID of the referenced image.</p>",
+                        "smithy.api#xmlName": "imageId"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ec2#ImageReferenceResourceType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceType",
+                        "smithy.api#documentation": "<p>The type of resource referencing the image.</p>",
+                        "smithy.api#xmlName": "resourceType"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Arn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource referencing the image.</p>",
+                        "smithy.api#xmlName": "arn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource that is referencing an image.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageReference",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageReferenceOptionName": {
+            "type": "enum",
+            "members": {
+                "STATE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "state-name"
+                    }
+                },
+                "VERSION_DEPTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "version-depth"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageReferenceResourceType": {
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ec2:Instance"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ec2:LaunchTemplate"
+                    }
+                },
+                "SSM_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssm:Parameter"
+                    }
+                },
+                "IMAGE_BUILDER_IMAGE_RECIPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "imagebuilder:ImageRecipe"
+                    }
+                },
+                "IMAGE_BUILDER_CONTAINER_RECIPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "imagebuilder:ContainerRecipe"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#ImageState": {
             "type": "enum",
             "members": {
@@ -63321,6 +63995,331 @@
                         "smithy.api#enumValue": "ramdisk"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReport": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageId",
+                        "smithy.api#documentation": "<p>The ID of the image that was specified when the report was created.</p>",
+                        "smithy.api#xmlName": "imageId"
+                    }
+                },
+                "ReportId": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReportId",
+                        "smithy.api#documentation": "<p>The ID of the report.</p>",
+                        "smithy.api#xmlName": "reportId"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceTypeSet",
+                        "smithy.api#documentation": "<p>The resource types that were specified when the report was created.</p>",
+                        "smithy.api#xmlName": "resourceTypeSet"
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.ec2#UserIdList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccountIdSet",
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts that were specified when the report was created.</p>",
+                        "smithy.api#xmlName": "accountIdSet"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The current state of the report. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>available</code> - The report is available to view.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> - The report is being created and not available to view.</p>\n            </li>\n            <li>\n               <p>\n                  <code>error</code> - The report could not be created.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportStateReason",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StateReason",
+                        "smithy.api#documentation": "<p>Provides additional details when the report is in an <code>error</code> state.</p>",
+                        "smithy.api#xmlName": "stateReason"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreationTime",
+                        "smithy.api#documentation": "<p>The date and time when the report was created.</p>",
+                        "smithy.api#xmlName": "creationTime"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ExpirationTime",
+                        "smithy.api#documentation": "<p>The date and time when Amazon EC2 will delete the report (30 days after the report was\n      created).</p>",
+                        "smithy.api#xmlName": "expirationTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>Any tags assigned to the report.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration and status of an image usage report.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReportEntry": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceType",
+                        "smithy.api#documentation": "<p>The type of resource (<code>ec2:Instance</code> or\n      <code>ec2:LaunchTemplate</code>).</p>",
+                        "smithy.api#xmlName": "resourceType"
+                    }
+                },
+                "ReportId": {
+                    "target": "com.amazonaws.ec2#ImageUsageReportId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReportId",
+                        "smithy.api#documentation": "<p>The ID of the report.</p>",
+                        "smithy.api#xmlName": "reportId"
+                    }
+                },
+                "UsageCount": {
+                    "target": "com.amazonaws.ec2#Long",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UsageCount",
+                        "smithy.api#documentation": "<p>The number of times resources of this type reference this image in the account.</p>",
+                        "smithy.api#xmlName": "usageCount"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccountId",
+                        "smithy.api#documentation": "<p>The ID of the account that uses the image.</p>",
+                        "smithy.api#xmlName": "accountId"
+                    }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageId",
+                        "smithy.api#documentation": "<p>The ID of the image.</p>",
+                        "smithy.api#xmlName": "imageId"
+                    }
+                },
+                "ReportCreationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReportCreationTime",
+                        "smithy.api#documentation": "<p>The date and time the report creation was initiated.</p>",
+                        "smithy.api#xmlName": "reportCreationTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single entry in an image usage report, detailing how an image is being used by a\n      specific Amazon Web Services account and resource type.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReportEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageReportEntry",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReportId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ImageUsageReportIdStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageReportId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageReport",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageReportState": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ImageUsageReportStateReason": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ImageUsageReportUserIdStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "UserId"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceType": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceType",
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>\n         </p>",
+                        "smithy.api#xmlName": "resourceType"
+                    }
+                },
+                "ResourceTypeOptions": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceTypeOptionSet",
+                        "smithy.api#documentation": "<p>The options that affect the scope of the report. Valid only when <code>ResourceType</code>\n      is <code>ec2:LaunchTemplate</code>.</p>",
+                        "smithy.api#xmlName": "resourceTypeOptionSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource type to include in the report. Associated options can also be specified if the\n      resource type is a launch template.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageResourceType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeName": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOption": {
+            "type": "structure",
+            "members": {
+                "OptionName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OptionName",
+                        "smithy.api#documentation": "<p>The name of the option.</p>",
+                        "smithy.api#xmlName": "optionName"
+                    }
+                },
+                "OptionValues": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionValuesList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OptionValueSet",
+                        "smithy.api#documentation": "<p>The number of launch template versions to check.</p>",
+                        "smithy.api#xmlName": "optionValueSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that affect the scope of the report.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageResourceTypeOption",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOptionRequest": {
+            "type": "structure",
+            "members": {
+                "OptionName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the option.</p>\n         <p>Valid value: <code>version-depth</code> - The number of launch template versions to\n      check.</p>"
+                    }
+                },
+                "OptionValues": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value for the specified option.</p>\n         <p>Valid values: Integers between <code>1</code> and <code>10000</code>\n         </p>\n         <p>Default: <code>20</code>\n         </p>",
+                        "smithy.api#xmlName": "OptionValue"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that affect the scope of the report.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOptionRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionRequest"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOptionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeOptionValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionValue",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>Valid values: <code>ec2:Instance</code> | <code>ec2:LaunchTemplate</code>\n         </p>"
+                    }
+                },
+                "ResourceTypeOptions": {
+                    "target": "com.amazonaws.ec2#ImageUsageResourceTypeOptionRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that affect the scope of the report. Valid only when <code>ResourceType</code>\n      is <code>ec2:LaunchTemplate</code>.</p>",
+                        "smithy.api#xmlName": "ResourceTypeOption"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource type to include in the report. Associated options can also be specified if the\n      resource type is a launch template.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageUsageResourceTypeRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageUsageResourceTypeRequest"
             }
         },
         "com.amazonaws.ec2#ImdsSupportValues": {
@@ -65550,7 +66549,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DeviceName",
-                        "smithy.api#documentation": "<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>",
+                        "smithy.api#documentation": "<p>The device name.</p>",
                         "smithy.api#xmlName": "deviceName"
                     }
                 },
@@ -65583,7 +66582,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DeviceName",
-                        "smithy.api#documentation": "<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>",
+                        "smithy.api#documentation": "<p>The device name. For available device names, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device names for volumes</a>.</p>",
                         "smithy.api#xmlName": "deviceName"
                     }
                 },
@@ -65674,6 +66673,30 @@
                 "smithy.api#documentation": "<p>Information about the number of instances that can be launched onto the Dedicated\n            Host.</p>"
             }
         },
+        "com.amazonaws.ec2#InstanceConnectEndpointDnsNames": {
+            "type": "structure",
+            "members": {
+                "DnsName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DnsName",
+                        "smithy.api#documentation": "<p>The DNS name of the EC2 Instance Connect Endpoint.</p>",
+                        "smithy.api#xmlName": "dnsName"
+                    }
+                },
+                "FipsDnsName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FipsDnsName",
+                        "smithy.api#documentation": "<p>The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.</p>",
+                        "smithy.api#xmlName": "fipsDnsName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DNS names of the endpoint.</p>"
+            }
+        },
         "com.amazonaws.ec2#InstanceConnectEndpointId": {
             "type": "string"
         },
@@ -65684,6 +66707,30 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.ec2#InstanceConnectEndpointPublicDnsNames": {
+            "type": "structure",
+            "members": {
+                "Ipv4": {
+                    "target": "com.amazonaws.ec2#InstanceConnectEndpointDnsNames",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv4",
+                        "smithy.api#documentation": "<p>The IPv4-only DNS name of the EC2 Instance Connect Endpoint.</p>",
+                        "smithy.api#xmlName": "ipv4"
+                    }
+                },
+                "Dualstack": {
+                    "target": "com.amazonaws.ec2#InstanceConnectEndpointDnsNames",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Dualstack",
+                        "smithy.api#documentation": "<p>The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients.</p>",
+                        "smithy.api#xmlName": "dualstack"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The public DNS names of the endpoint, including IPv4-only and dualstack DNS\n            names.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceConnectEndpointSet": {
@@ -74112,6 +75159,348 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "p6e-gb200.36xlarge"
+                    }
+                },
+                "g6f_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g6f.large"
+                    }
+                },
+                "g6f_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g6f.xlarge"
+                    }
+                },
+                "g6f_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g6f.2xlarge"
+                    }
+                },
+                "g6f_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g6f.4xlarge"
+                    }
+                },
+                "gr6f_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gr6f.4xlarge"
+                    }
+                },
+                "p5_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "p5.4xlarge"
+                    }
+                },
+                "r8i_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.large"
+                    }
+                },
+                "r8i_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.xlarge"
+                    }
+                },
+                "r8i_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.2xlarge"
+                    }
+                },
+                "r8i_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.4xlarge"
+                    }
+                },
+                "r8i_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.8xlarge"
+                    }
+                },
+                "r8i_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.12xlarge"
+                    }
+                },
+                "r8i_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.16xlarge"
+                    }
+                },
+                "r8i_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.24xlarge"
+                    }
+                },
+                "r8i_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.32xlarge"
+                    }
+                },
+                "r8i_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.48xlarge"
+                    }
+                },
+                "r8i_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.96xlarge"
+                    }
+                },
+                "r8i_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.metal-48xl"
+                    }
+                },
+                "r8i_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i.metal-96xl"
+                    }
+                },
+                "r8i_flex_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.large"
+                    }
+                },
+                "r8i_flex_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.xlarge"
+                    }
+                },
+                "r8i_flex_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.2xlarge"
+                    }
+                },
+                "r8i_flex_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.4xlarge"
+                    }
+                },
+                "r8i_flex_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.8xlarge"
+                    }
+                },
+                "r8i_flex_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.12xlarge"
+                    }
+                },
+                "r8i_flex_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r8i-flex.16xlarge"
+                    }
+                },
+                "m8i_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.large"
+                    }
+                },
+                "m8i_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.xlarge"
+                    }
+                },
+                "m8i_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.2xlarge"
+                    }
+                },
+                "m8i_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.4xlarge"
+                    }
+                },
+                "m8i_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.8xlarge"
+                    }
+                },
+                "m8i_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.12xlarge"
+                    }
+                },
+                "m8i_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.16xlarge"
+                    }
+                },
+                "m8i_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.24xlarge"
+                    }
+                },
+                "m8i_32xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.32xlarge"
+                    }
+                },
+                "m8i_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.48xlarge"
+                    }
+                },
+                "m8i_96xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.96xlarge"
+                    }
+                },
+                "m8i_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.metal-48xl"
+                    }
+                },
+                "m8i_metal_96xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i.metal-96xl"
+                    }
+                },
+                "m8i_flex_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.large"
+                    }
+                },
+                "m8i_flex_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.xlarge"
+                    }
+                },
+                "m8i_flex_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.2xlarge"
+                    }
+                },
+                "m8i_flex_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.4xlarge"
+                    }
+                },
+                "m8i_flex_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.8xlarge"
+                    }
+                },
+                "m8i_flex_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.12xlarge"
+                    }
+                },
+                "m8i_flex_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m8i-flex.16xlarge"
+                    }
+                },
+                "i8ge_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.large"
+                    }
+                },
+                "i8ge_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.xlarge"
+                    }
+                },
+                "i8ge_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.2xlarge"
+                    }
+                },
+                "i8ge_3xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.3xlarge"
+                    }
+                },
+                "i8ge_6xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.6xlarge"
+                    }
+                },
+                "i8ge_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.12xlarge"
+                    }
+                },
+                "i8ge_18xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.18xlarge"
+                    }
+                },
+                "i8ge_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.24xlarge"
+                    }
+                },
+                "i8ge_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.48xlarge"
+                    }
+                },
+                "i8ge_metal_24xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.metal-24xl"
+                    }
+                },
+                "i8ge_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i8ge.metal-48xl"
                     }
                 }
             }
@@ -82712,6 +84101,9 @@
         "com.amazonaws.ec2#MaximumBandwidthInMbps": {
             "type": "integer"
         },
+        "com.amazonaws.ec2#MaximumEbsAttachments": {
+            "type": "integer"
+        },
         "com.amazonaws.ec2#MaximumEfaInterfaces": {
             "type": "integer"
         },
@@ -84285,6 +85677,75 @@
                     "traits": {
                         "aws.protocols#ec2QueryName": "Return",
                         "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyInstanceConnectEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyInstanceConnectEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyInstanceConnectEndpointResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the specified EC2 Instance Connect Endpoint.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/modify-ec2-instance-connect-endpoint.html\">Modify an\n                EC2 Instance Connect Endpoint</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyInstanceConnectEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the operation, without actually making the \n  request, and provides an error response. If you have the required permissions, the error response is \n  <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "InstanceConnectEndpointId": {
+                    "target": "com.amazonaws.ec2#InstanceConnectEndpointId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the EC2 Instance Connect Endpoint to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IpAddressType": {
+                    "target": "com.amazonaws.ec2#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new IP address type for the EC2 Instance Connect Endpoint.</p>\n         <note>\n            <p>\n               <code>PreserveClientIp</code> is only supported on IPv4 EC2 Instance Connect\n                Endpoints. To use <code>PreserveClientIp</code>, the value for\n                <code>IpAddressType</code> must be <code>ipv4</code>.</p>\n         </note>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.ec2#SecurityGroupIdStringListRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Changes the security groups for the EC2 Instance Connect Endpoint. The new set of\n            groups you specify replaces the current set. You must specify at least one group, even\n            if it's just the default security group in the VPC. You must specify the ID of the\n            security group, not the name.</p>",
+                        "smithy.api#xmlName": "SecurityGroupId"
+                    }
+                },
+                "PreserveClientIp": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the client IP address is preserved as the source. The following are the possible values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code> - Use the client IP address as the source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code> - Use the network interface IP address as the source.</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>PreserveClientIp=true</code> is only supported on IPv4 EC2 Instance Connect\n                Endpoints. If modifying <code>PreserveClientIp</code> to <code>true</code>, either\n                the endpoint's existing <code>IpAddressType</code> must be <code>ipv4</code>, or if\n                modifying <code>IpAddressType</code> in the same request, the new value must be\n                    <code>ipv4</code>.</p>\n         </note>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyInstanceConnectEndpointResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>The return value of the request. Returns <code>true</code> if the specified product\n            code is owned by the requester and associated with the specified instance.</p>",
                         "smithy.api#xmlName": "return"
                     }
                 }
@@ -86781,7 +88242,7 @@
                 "DefaultRouteTablePropagation": {
                     "target": "com.amazonaws.ec2#DefaultRouteTablePropagationValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable automatic propagation of routes to the default propagation route table.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether resource attachments automatically propagate routes to the default\n          propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>\n          is set to <code>enable</code>,\n          Amazon Web Services Transit Gateway will create the default transit gateway route\n          table.</p>"
                     }
                 },
                 "PropagationDefaultRouteTableId": {
@@ -93575,7 +95036,7 @@
                     "target": "com.amazonaws.ec2#AvailabilityZoneId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AvailabilityZoneId",
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the instance.</p>\n         <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be\n            specified, but not both. If neither is specified, Amazon EC2 automatically selects an\n            Availability Zone based on the load balancing criteria for the Region.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the instance.</p>\n         <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, \n            but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone\n            for you.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
                         "smithy.api#xmlName": "availabilityZoneId"
                     }
                 },
@@ -93591,7 +95052,7 @@
                     "target": "com.amazonaws.ec2#PlacementGroupName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupName",
-                        "smithy.api#documentation": "<p>The name of the placement group that the instance is in. If you specify\n                <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the placement group that the instance is in.</p>\n         <p>On input, you can specify <code>GroupId</code> or <code>GroupName</code>,\n            but not both.</p>",
                         "smithy.api#xmlName": "groupName"
                     }
                 },
@@ -93631,7 +95092,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "HostResourceGroupArn",
-                        "smithy.api#documentation": "<p>The ARN of the host resource group in which to launch the instances.</p>\n         <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the host resource group in which to launch the instances.</p>\n         <p>On input, if you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
                         "smithy.api#xmlName": "hostResourceGroupArn"
                     }
                 },
@@ -93639,7 +95100,7 @@
                     "target": "com.amazonaws.ec2#PlacementGroupId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupId",
-                        "smithy.api#documentation": "<p>The ID of the placement group that the instance is in. If you specify\n                <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the placement group that the instance is in.</p>\n         <p>On input, you can specify <code>GroupId</code> or <code>GroupName</code>,\n            but not both.</p>",
                         "smithy.api#xmlName": "groupId"
                     }
                 },
@@ -93647,7 +95108,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AvailabilityZone",
-                        "smithy.api#documentation": "<p>The Availability Zone of the instance.</p>\n         <p>Either <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code> can be\n            specified, but not both. If neither is specified, Amazon EC2 automatically selects an\n            Availability Zone based on the load balancing criteria for the Region.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone of the instance.</p>\n         <p>On input, you can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>, \n            but not both. If you specify neither one, Amazon EC2 automatically selects an Availability Zone\n            for you.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
                         "smithy.api#xmlName": "availabilityZone"
                     }
                 }
@@ -100565,6 +102026,12 @@
                         "smithy.api#enumValue": "image"
                     }
                 },
+                "image_usage_report": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "image-usage-report"
+                    }
+                },
                 "import_image_task": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -101039,6 +102506,69 @@
                         "smithy.api#enumValue": "mac-modification-task"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#ResourceTypeOption": {
+            "type": "structure",
+            "members": {
+                "OptionName": {
+                    "target": "com.amazonaws.ec2#ImageReferenceOptionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the option.</p>\n         <ul>\n            <li>\n               <p>For <code>ec2:Instance</code>:</p>\n               <p>Specify <code>state-name</code> - The current state of the EC2 instance.</p>\n            </li>\n            <li>\n               <p>For <code>ec2:LaunchTemplate</code>:</p>\n               <p>Specify <code>version-depth</code> - The number of launch template versions to check,\n          starting from the most recent version.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OptionValues": {
+                    "target": "com.amazonaws.ec2#ResourceTypeOptionValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value for the specified option.</p>\n         <ul>\n            <li>\n               <p>For <code>state-name</code>:</p>\n               <ul>\n                  <li>\n                     <p>Valid values: <code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n            <code>terminated</code> | <code>stopping</code> | <code>stopped</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Default: All states</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <code>version-depth</code>:</p>\n               <ul>\n                  <li>\n                     <p>Valid values: Integers between <code>1</code> and <code>10000</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Default: <code>10</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "OptionValue"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The options that affect the scope of the response.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ResourceTypeOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ResourceTypeOption"
+            }
+        },
+        "com.amazonaws.ec2#ResourceTypeOptionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ResourceTypeOptionValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ResourceTypeOptionValue"
+            }
+        },
+        "com.amazonaws.ec2#ResourceTypeRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.ec2#ImageReferenceResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "ResourceTypeOptions": {
+                    "target": "com.amazonaws.ec2#ResourceTypeOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that affect the scope of the response. Valid only when\n        <code>ResourceType</code> is <code>ec2:Instance</code> or\n      <code>ec2:LaunchTemplate</code>.</p>",
+                        "smithy.api#xmlName": "ResourceTypeOption"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource type to check for image references. Associated options can also be specified if the\n      resource type is an EC2 instance or launch template.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ResourceTypeRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ResourceTypeRequest"
             }
         },
         "com.amazonaws.ec2#ResponseError": {
@@ -102421,6 +103951,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EnableVgwRoutePropagation"
                     }
+                },
+                "Advertisement": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Advertisement"
+                    }
                 }
             }
         },
@@ -103372,6 +104908,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "blackhole"
+                    }
+                },
+                "filtered": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "filtered"
                     }
                 }
             }
@@ -111391,6 +112933,29 @@
                 }
             }
         },
+        "com.amazonaws.ec2#TrafficIpAddressType": {
+            "type": "enum",
+            "members": {
+                "ipv4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "ipv6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "dual_stack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dual-stack"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#TrafficMirrorFilter": {
             "type": "structure",
             "members": {
@@ -113406,7 +114971,7 @@
                     "target": "com.amazonaws.ec2#DefaultRouteTableAssociationValue",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DefaultRouteTableAssociation",
-                        "smithy.api#documentation": "<p>Indicates whether resource attachments are automatically associated with the default\n         association route table. Enabled by default. If <code>defaultRouteTableAssociation</code>\n         is set to <code>enable</code>,\n         Amazon Web Services Transit Gateway will create the default transit gateway route\n         table.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether resource attachments are automatically associated with the default\n         association route table. Enabled by default. Either <code>defaultRouteTableAssociation</code> or <code>defaultRouteTablePropagation</code> must be set to <code>enable</code> for Amazon Web Services Transit Gateway to create the default transit gateway route table.</p>",
                         "smithy.api#xmlName": "defaultRouteTableAssociation"
                     }
                 },
@@ -113422,7 +114987,7 @@
                     "target": "com.amazonaws.ec2#DefaultRouteTablePropagationValue",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DefaultRouteTablePropagation",
-                        "smithy.api#documentation": "<p>Indicates whether resource attachments automatically propagate routes to the default\n         propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>\n         is set to <code>enable</code>,\n         Amazon Web Services Transit Gateway will create the default transit gateway route\n         table.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether resource attachments automatically propagate routes to the default\n         propagation route table. Enabled by default. If <code>defaultRouteTablePropagation</code>\n         is set to <code>enable</code>,\n         Amazon Web Services Transit Gateway creates the default transit gateway route\n         table.</p>",
                         "smithy.api#xmlName": "defaultRouteTablePropagation"
                     }
                 },
@@ -116092,6 +117657,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#UserIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#UserIdStringList": {
             "type": "list",
             "member": {
@@ -118745,6 +120319,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "warning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "warning"
                     }
                 }
             }

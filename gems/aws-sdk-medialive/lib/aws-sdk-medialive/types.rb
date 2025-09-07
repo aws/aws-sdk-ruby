@@ -114,6 +114,16 @@ module Aws::MediaLive
       include ::Smithy::Schema::Structure
     end
 
+    # Additional output destinations for a CMAF Ingest output group
+    # @!attribute destination
+    #   The destination location
+    #   @return [Types::OutputLocationRef]
+    class AdditionalDestinations < Struct.new(
+      :destination,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # Ancillary Source Settings
     # @!attribute source_ancillary_channel_number
     #   Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
@@ -1033,6 +1043,9 @@ module Aws::MediaLive
     # @!attribute y_position
     #   Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
+    # @!attribute subtitle_rows
+    #   Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.
+    #   @return [String]
     class BurnInDestinationSettings < Struct.new(
       :alignment,
       :background_color,
@@ -1051,6 +1064,7 @@ module Aws::MediaLive
       :teletext_grid_control,
       :x_position,
       :y_position,
+      :subtitle_rows,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1717,6 +1731,9 @@ module Aws::MediaLive
     # @!attribute timed_metadata_passthrough
     #   Set to enabled to pass through ID3 metadata from the input sources.
     #   @return [String]
+    # @!attribute additional_destinations
+    #   Optional an array of additional destinational HTTP destinations for the OutputGroup outputs
+    #   @return [Array<Types::AdditionalDestinations>]
     class CmafIngestGroupSettings < Struct.new(
       :destination,
       :nielsen_id3_behavior,
@@ -1734,6 +1751,7 @@ module Aws::MediaLive
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
       :timed_metadata_passthrough,
+      :additional_destinations,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4696,6 +4714,9 @@ module Aws::MediaLive
     # @!attribute y_position
     #   Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
+    # @!attribute subtitle_rows
+    #   Applies only when the input captions are Teletext and the output captions are DVB-Sub or Burn-In. Choose the number of lines for the captions bitmap. The captions bitmap is 700 wide × 576 high and will be laid over the video. For example, a value of 16 divides the bitmap into 16 lines, with each line 36 pixels high (16 × 36 = 576). The default is 24 (24 pixels high). Enter the same number in every encode in every output that converts the same Teletext source to DVB-Sub or Burn-in.
+    #   @return [String]
     class DvbSubDestinationSettings < Struct.new(
       :alignment,
       :background_color,
@@ -4714,6 +4735,7 @@ module Aws::MediaLive
       :teletext_grid_control,
       :x_position,
       :y_position,
+      :subtitle_rows,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

@@ -264,6 +264,15 @@ module Aws::DirectoryService
       attr_accessor request_id: String?
     end
 
+    module CaEnrollmentPolicyStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILED: String
+      DISABLING: String
+      DISABLED: String
+      IMPAIRED: String
+    end
+
     class CancelSchemaExtensionRequest
       include Smithy::Schema::Structure
 
@@ -969,6 +978,36 @@ module Aws::DirectoryService
 
       attr_accessor assessment: Types::Assessment?
       attr_accessor assessment_reports: Array[Types::AssessmentReport]?
+    end
+
+    class DescribeCAEnrollmentPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DescribeCAEnrollmentPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?pca_connector_arn: String,
+        ?ca_enrollment_policy_status: String,
+        ?last_updated_date_time: Time,
+        ?ca_enrollment_policy_status_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor pca_connector_arn: String?
+      attr_accessor ca_enrollment_policy_status: String?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor ca_enrollment_policy_status_reason: String?
     end
 
     class DescribeCertificateRequest
@@ -1678,6 +1717,39 @@ module Aws::DirectoryService
       attr_accessor availability_zones: Array[String]?
     end
 
+    class DisableAlreadyInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class DisableCAEnrollmentPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DisableCAEnrollmentPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DisableClientAuthenticationRequest
       include Smithy::Schema::Structure
 
@@ -1837,6 +1909,41 @@ module Aws::DirectoryService
       DELETED: String
       FAILED: String
       UPDATING: String
+    end
+
+    class EnableAlreadyInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class EnableCAEnrollmentPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?pca_connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor pca_connector_arn: String?
+    end
+
+    class EnableCAEnrollmentPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class EnableClientAuthenticationRequest

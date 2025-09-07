@@ -26,7 +26,11 @@ module Aws::GeoMaps
     MapStyle: StringShape
     PositionListString: StringShape
     PositionString: StringShape
+    ResourceNotFoundException: StructureShape
     ScaleBarUnit: StringShape
+    SensitiveFloat: FloatShape
+    SensitiveInteger: IntegerShape
+    SensitiveString: StringShape
     StaticMapStyle: StringShape
     ThrottlingException: StructureShape
     Tileset: StringShape

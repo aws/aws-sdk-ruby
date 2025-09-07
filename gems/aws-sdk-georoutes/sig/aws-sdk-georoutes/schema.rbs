@@ -307,6 +307,9 @@ module Aws::GeoRoutes
     RouteZoneCategory: StringShape
     RouteZoneList: ListShape
     RoutingObjective: StringShape
+    SensitiveBoolean: BooleanShape
+    SensitiveDouble: FloatShape
+    SensitiveInteger: IntegerShape
     SensitiveString: StringShape
     SideOfStreetMatchingStrategy: StringShape
     SnapToRoadsRequest: StructureShape

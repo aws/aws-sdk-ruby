@@ -72,6 +72,7 @@ module Aws::OpenSearchServerless
     EffectiveLifecyclePolicyDetails: ListShape
     EffectiveLifecyclePolicyErrorDetail: StructureShape
     EffectiveLifecyclePolicyErrorDetails: ListShape
+    FipsEndpoints: StructureShape
     GetAccessPolicyInput: StructureShape
     GetAccessPolicyOutput: StructureShape
     GetAccountSettingsInput: StructureShape

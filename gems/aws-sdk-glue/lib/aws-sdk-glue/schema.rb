@@ -36,6 +36,7 @@ module Aws::Glue
     AnnotationErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#AnnotationErrorList', name: 'AnnotationErrorList')
     AnnotationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#AnnotationList', name: 'AnnotationList')
     ApiVersion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#ApiVersion', name: 'ApiVersion', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9.-]*$"})
+    ApplicationArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#ApplicationArn', name: 'ApplicationArn', traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}})
     ApplyMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#ApplyMapping', name: 'ApplyMapping')
     ArnString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#ArnString', name: 'ArnString', traits: {"smithy.api#length" => {"min" => 20, "max" => 2048}})
     AthenaConnectorSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#AthenaConnectorSource', name: 'AthenaConnectorSource')
@@ -270,6 +271,7 @@ module Aws::Glue
     ContextKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#ContextKey', name: 'ContextKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     ContextValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#ContextValue', name: 'ContextValue', traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
     ContextWords = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#ContextWords', name: 'ContextWords', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}})
+    ContinuousSync = ::Smithy::Schema::Shapes::BooleanShape.new(id: 'com.amazonaws.glue#ContinuousSync', name: 'ContinuousSync')
     Crawl = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#Crawl', name: 'Crawl')
     CrawlId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#CrawlId', name: 'CrawlId')
     CrawlList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#CrawlList', name: 'CrawlList')
@@ -314,6 +316,8 @@ module Aws::Glue
     CreateDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateDatabaseResponse', name: 'CreateDatabaseResponse')
     CreateDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateDevEndpointRequest', name: 'CreateDevEndpointRequest')
     CreateDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateDevEndpointResponse', name: 'CreateDevEndpointResponse')
+    CreateGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateGlueIdentityCenterConfigurationRequest', name: 'CreateGlueIdentityCenterConfigurationRequest')
+    CreateGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateGlueIdentityCenterConfigurationResponse', name: 'CreateGlueIdentityCenterConfigurationResponse')
     CreateGrokClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateGrokClassifierRequest', name: 'CreateGrokClassifierRequest')
     CreateIcebergTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateIcebergTableInput', name: 'CreateIcebergTableInput')
     CreateIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#CreateIntegrationRequest', name: 'CreateIntegrationRequest')
@@ -398,6 +402,7 @@ module Aws::Glue
     DataQualityEncryption = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DataQualityEncryption', name: 'DataQualityEncryption')
     DataQualityEncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.glue#DataQualityEncryptionMode', name: 'DataQualityEncryptionMode')
     DataQualityEvaluationRunAdditionalRunOptions = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DataQualityEvaluationRunAdditionalRunOptions', name: 'DataQualityEvaluationRunAdditionalRunOptions')
+    DataQualityGlueTable = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DataQualityGlueTable', name: 'DataQualityGlueTable')
     DataQualityMetricValues = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DataQualityMetricValues', name: 'DataQualityMetricValues')
     DataQualityModelStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.glue#DataQualityModelStatus', name: 'DataQualityModelStatus')
     DataQualityObservation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DataQualityObservation', name: 'DataQualityObservation')
@@ -468,6 +473,8 @@ module Aws::Glue
     DeleteDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteDatabaseResponse', name: 'DeleteDatabaseResponse')
     DeleteDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteDevEndpointRequest', name: 'DeleteDevEndpointRequest')
     DeleteDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteDevEndpointResponse', name: 'DeleteDevEndpointResponse')
+    DeleteGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationRequest', name: 'DeleteGlueIdentityCenterConfigurationRequest')
+    DeleteGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteGlueIdentityCenterConfigurationResponse', name: 'DeleteGlueIdentityCenterConfigurationResponse')
     DeleteIntegrationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteIntegrationRequest', name: 'DeleteIntegrationRequest')
     DeleteIntegrationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteIntegrationResponse', name: 'DeleteIntegrationResponse')
     DeleteIntegrationTablePropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#DeleteIntegrationTablePropertiesRequest', name: 'DeleteIntegrationTablePropertiesRequest')
@@ -682,6 +689,8 @@ module Aws::Glue
     GetDevEndpointsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetDevEndpointsResponse', name: 'GetDevEndpointsResponse')
     GetEntityRecordsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetEntityRecordsRequest', name: 'GetEntityRecordsRequest')
     GetEntityRecordsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetEntityRecordsResponse', name: 'GetEntityRecordsResponse')
+    GetGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetGlueIdentityCenterConfigurationRequest', name: 'GetGlueIdentityCenterConfigurationRequest')
+    GetGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetGlueIdentityCenterConfigurationResponse', name: 'GetGlueIdentityCenterConfigurationResponse')
     GetIntegrationResourcePropertyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetIntegrationResourcePropertyRequest', name: 'GetIntegrationResourcePropertyRequest')
     GetIntegrationResourcePropertyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetIntegrationResourcePropertyResponse', name: 'GetIntegrationResourcePropertyResponse')
     GetIntegrationTablePropertiesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#GetIntegrationTablePropertiesRequest', name: 'GetIntegrationTablePropertiesRequest')
@@ -830,6 +839,9 @@ module Aws::Glue
     IcebergTransformString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#IcebergTransformString', name: 'IcebergTransformString')
     IdString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#IdString', name: 'IdString', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"})
     IdempotentParameterMismatchException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#IdempotentParameterMismatchException', name: 'IdempotentParameterMismatchException', traits: {"smithy.api#error" => "client"})
+    IdentityCenterInstanceArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#IdentityCenterInstanceArn', name: 'IdentityCenterInstanceArn', traits: {"smithy.api#length" => {"min" => 10, "max" => 1224}})
+    IdentityCenterScope = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#IdentityCenterScope', name: 'IdentityCenterScope', traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
+    IdentityCenterScopesList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#IdentityCenterScopesList', name: 'IdentityCenterScopesList', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     IdleTimeout = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.glue#IdleTimeout', name: 'IdleTimeout')
     IllegalBlueprintStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#IllegalBlueprintStateException', name: 'IllegalBlueprintStateException', traits: {"smithy.api#error" => "client"})
     IllegalSessionStateException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#IllegalSessionStateException', name: 'IllegalSessionStateException', traits: {"smithy.api#error" => "client"})
@@ -1126,6 +1138,7 @@ module Aws::Glue
     PositiveLong = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.glue#PositiveLong', name: 'PositiveLong', traits: {"smithy.api#range" => {"min" => 1}})
     PostgreSQLCatalogSource = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#PostgreSQLCatalogSource', name: 'PostgreSQLCatalogSource')
     PostgreSQLCatalogTarget = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#PostgreSQLCatalogTarget', name: 'PostgreSQLCatalogTarget')
+    PreProcessingQueryString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.glue#PreProcessingQueryString', name: 'PreProcessingQueryString', traits: {"smithy.api#length" => {"min" => 0, "max" => 51200}, "smithy.api#pattern" => "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"})
     Predecessor = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#Predecessor', name: 'Predecessor')
     PredecessorList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.glue#PredecessorList', name: 'PredecessorList')
     Predicate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#Predicate', name: 'Predicate')
@@ -1504,6 +1517,8 @@ module Aws::Glue
     UpdateDatabaseResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateDatabaseResponse', name: 'UpdateDatabaseResponse')
     UpdateDevEndpointRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateDevEndpointRequest', name: 'UpdateDevEndpointRequest')
     UpdateDevEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateDevEndpointResponse', name: 'UpdateDevEndpointResponse')
+    UpdateGlueIdentityCenterConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationRequest', name: 'UpdateGlueIdentityCenterConfigurationRequest')
+    UpdateGlueIdentityCenterConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateGlueIdentityCenterConfigurationResponse', name: 'UpdateGlueIdentityCenterConfigurationResponse')
     UpdateGrokClassifierRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateGrokClassifierRequest', name: 'UpdateGrokClassifierRequest')
     UpdateIcebergInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateIcebergInput', name: 'UpdateIcebergInput')
     UpdateIcebergTableInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.glue#UpdateIcebergTableInput', name: 'UpdateIcebergTableInput')
@@ -2709,6 +2724,11 @@ module Aws::Glue
     CreateDevEndpointResponse.add_member(:created_timestamp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TimestampValue, location_name: 'CreatedTimestamp'))
     CreateDevEndpointResponse.add_member(:arguments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MapValue, location_name: 'Arguments'))
     CreateDevEndpointResponse.type = Types::CreateDevEndpointResponse
+    CreateGlueIdentityCenterConfigurationRequest.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: 'InstanceArn', traits: {"smithy.api#required" => {}}))
+    CreateGlueIdentityCenterConfigurationRequest.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterScopesList, location_name: 'Scopes'))
+    CreateGlueIdentityCenterConfigurationRequest.type = Types::CreateGlueIdentityCenterConfigurationRequest
+    CreateGlueIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: 'ApplicationArn'))
+    CreateGlueIdentityCenterConfigurationResponse.type = Types::CreateGlueIdentityCenterConfigurationResponse
     CreateGrokClassifierRequest.add_member(:classification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Classification, location_name: 'Classification', traits: {"smithy.api#required" => {}}))
     CreateGrokClassifierRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'Name', traits: {"smithy.api#required" => {}}))
     CreateGrokClassifierRequest.add_member(:grok_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrokPattern, location_name: 'GrokPattern', traits: {"smithy.api#required" => {}}))
@@ -3048,6 +3068,13 @@ module Aws::Glue
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:results_s3_prefix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UriString, location_name: 'ResultsS3Prefix'))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:composite_rule_evaluation_method, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DQCompositeRuleEvaluationMethod, location_name: 'CompositeRuleEvaluationMethod'))
     DataQualityEvaluationRunAdditionalRunOptions.type = Types::DataQualityEvaluationRunAdditionalRunOptions
+    DataQualityGlueTable.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'DatabaseName', traits: {"smithy.api#required" => {}}))
+    DataQualityGlueTable.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'TableName', traits: {"smithy.api#required" => {}}))
+    DataQualityGlueTable.add_member(:catalog_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'CatalogId'))
+    DataQualityGlueTable.add_member(:connection_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'ConnectionName'))
+    DataQualityGlueTable.add_member(:additional_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlueTableAdditionalOptions, location_name: 'AdditionalOptions'))
+    DataQualityGlueTable.add_member(:pre_processing_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PreProcessingQueryString, location_name: 'PreProcessingQuery'))
+    DataQualityGlueTable.type = Types::DataQualityGlueTable
     DataQualityMetricValues.add_member(:actual_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableDouble, location_name: 'ActualValue'))
     DataQualityMetricValues.add_member(:expected_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableDouble, location_name: 'ExpectedValue'))
     DataQualityMetricValues.add_member(:lower_limit, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableDouble, location_name: 'LowerLimit'))
@@ -3145,7 +3172,8 @@ module Aws::Glue
     DataQualityTargetTable.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'DatabaseName', traits: {"smithy.api#required" => {}}))
     DataQualityTargetTable.add_member(:catalog_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'CatalogId'))
     DataQualityTargetTable.type = Types::DataQualityTargetTable
-    DataSource.add_member(:glue_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlueTable, location_name: 'GlueTable', traits: {"smithy.api#required" => {}}))
+    DataSource.add_member(:glue_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GlueTable, location_name: 'GlueTable'))
+    DataSource.add_member(:data_quality_glue_table, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataQualityGlueTable, location_name: 'DataQualityGlueTable'))
     DataSource.type = Types::DataSource
     DataSourceMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString)
     DataSourceMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataSource)
@@ -3160,6 +3188,7 @@ module Aws::Glue
     Database.add_member(:federated_database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FederatedDatabase, location_name: 'FederatedDatabase'))
     Database.type = Types::Database
     DatabaseAttributes.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NAME', traits: {"smithy.api#enumValue" => "NAME"}))
+    DatabaseAttributes.add_member(:target_database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'TARGET_DATABASE', traits: {"smithy.api#enumValue" => "TARGET_DATABASE"}))
     DatabaseAttributesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DatabaseAttributes)
     DatabaseIdentifier.add_member(:catalog_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CatalogIdString, location_name: 'CatalogId'))
     DatabaseIdentifier.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'DatabaseName'))
@@ -3248,6 +3277,8 @@ module Aws::Glue
     DeleteDevEndpointRequest.add_member(:endpoint_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GenericString, location_name: 'EndpointName', traits: {"smithy.api#required" => {}}))
     DeleteDevEndpointRequest.type = Types::DeleteDevEndpointRequest
     DeleteDevEndpointResponse.type = Types::DeleteDevEndpointResponse
+    DeleteGlueIdentityCenterConfigurationRequest.type = Types::DeleteGlueIdentityCenterConfigurationRequest
+    DeleteGlueIdentityCenterConfigurationResponse.type = Types::DeleteGlueIdentityCenterConfigurationResponse
     DeleteIntegrationRequest.add_member(:integration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'IntegrationIdentifier', traits: {"smithy.api#required" => {}}))
     DeleteIntegrationRequest.type = Types::DeleteIntegrationRequest
     DeleteIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'SourceArn', traits: {"smithy.api#required" => {}}))
@@ -3956,6 +3987,11 @@ module Aws::Glue
     GetEntityRecordsResponse.add_member(:records, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Records, location_name: 'Records'))
     GetEntityRecordsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     GetEntityRecordsResponse.type = Types::GetEntityRecordsResponse
+    GetGlueIdentityCenterConfigurationRequest.type = Types::GetGlueIdentityCenterConfigurationRequest
+    GetGlueIdentityCenterConfigurationResponse.add_member(:application_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ApplicationArn, location_name: 'ApplicationArn'))
+    GetGlueIdentityCenterConfigurationResponse.add_member(:instance_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: 'InstanceArn'))
+    GetGlueIdentityCenterConfigurationResponse.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrchestrationStringList, location_name: 'Scopes'))
+    GetGlueIdentityCenterConfigurationResponse.type = Types::GetGlueIdentityCenterConfigurationResponse
     GetIntegrationResourcePropertyRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'ResourceArn', traits: {"smithy.api#required" => {}}))
     GetIntegrationResourcePropertyRequest.type = Types::GetIntegrationResourcePropertyRequest
     GetIntegrationResourcePropertyResponse.add_member(:resource_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'ResourceArn'))
@@ -4518,6 +4554,7 @@ module Aws::Glue
     IcebergTargetList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IcebergTarget)
     IdempotentParameterMismatchException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageString, location_name: 'Message'))
     IdempotentParameterMismatchException.type = Types::IdempotentParameterMismatchException
+    IdentityCenterScopesList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterScope)
     IllegalBlueprintStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageString, location_name: 'Message'))
     IllegalBlueprintStateException.type = Types::IllegalBlueprintStateException
     IllegalSessionStateException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MessageString, location_name: 'Message'))
@@ -4561,6 +4598,7 @@ module Aws::Glue
     IntegrationAdditionalEncryptionContextMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationString)
     IntegrationConfig.add_member(:refresh_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'RefreshInterval'))
     IntegrationConfig.add_member(:source_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationSourcePropertiesMap, location_name: 'SourceProperties'))
+    IntegrationConfig.add_member(:continuous_sync, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContinuousSync, location_name: 'ContinuousSync'))
     IntegrationConfig.type = Types::IntegrationConfig
     IntegrationConflictOperationFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationErrorMessage, location_name: 'Message'))
     IntegrationConflictOperationFault.type = Types::IntegrationConflictOperationFault
@@ -5187,6 +5225,7 @@ module Aws::Glue
     ModifyIntegrationRequest.add_member(:integration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'IntegrationIdentifier', traits: {"smithy.api#required" => {}}))
     ModifyIntegrationRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationDescription, location_name: 'Description'))
     ModifyIntegrationRequest.add_member(:data_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String2048, location_name: 'DataFilter'))
+    ModifyIntegrationRequest.add_member(:integration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationConfig, location_name: 'IntegrationConfig'))
     ModifyIntegrationRequest.add_member(:integration_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'IntegrationName'))
     ModifyIntegrationRequest.type = Types::ModifyIntegrationRequest
     ModifyIntegrationResponse.add_member(:source_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String128, location_name: 'SourceArn', traits: {"smithy.api#required" => {}}))
@@ -5201,6 +5240,7 @@ module Aws::Glue
     ModifyIntegrationResponse.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationTimestamp, location_name: 'CreateTime', traits: {"smithy.api#required" => {}}))
     ModifyIntegrationResponse.add_member(:errors, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationErrorList, location_name: 'Errors'))
     ModifyIntegrationResponse.add_member(:data_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String2048, location_name: 'DataFilter'))
+    ModifyIntegrationResponse.add_member(:integration_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegrationConfig, location_name: 'IntegrationConfig'))
     ModifyIntegrationResponse.type = Types::ModifyIntegrationResponse
     MongoDBTarget.add_member(:connection_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionName, location_name: 'ConnectionName'))
     MongoDBTarget.add_member(:path, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Path, location_name: 'Path'))
@@ -6709,6 +6749,9 @@ module Aws::Glue
     UpdateDevEndpointRequest.add_member(:add_arguments, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MapValue, location_name: 'AddArguments'))
     UpdateDevEndpointRequest.type = Types::UpdateDevEndpointRequest
     UpdateDevEndpointResponse.type = Types::UpdateDevEndpointResponse
+    UpdateGlueIdentityCenterConfigurationRequest.add_member(:scopes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IdentityCenterScopesList, location_name: 'Scopes'))
+    UpdateGlueIdentityCenterConfigurationRequest.type = Types::UpdateGlueIdentityCenterConfigurationRequest
+    UpdateGlueIdentityCenterConfigurationResponse.type = Types::UpdateGlueIdentityCenterConfigurationResponse
     UpdateGrokClassifierRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NameString, location_name: 'Name', traits: {"smithy.api#required" => {}}))
     UpdateGrokClassifierRequest.add_member(:classification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Classification, location_name: 'Classification'))
     UpdateGrokClassifierRequest.add_member(:grok_pattern, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GrokPattern, location_name: 'GrokPattern'))
@@ -7374,6 +7417,19 @@ module Aws::Glue
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {}
       end)
+      service.add_operation(:create_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#CreateGlueIdentityCenterConfiguration"
+        operation.name = "CreateGlueIdentityCenterConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGlueIdentityCenterConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateGlueIdentityCenterConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        operation.traits = {}
+      end)
       service.add_operation(:create_integration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.glue#CreateIntegration"
         operation.name = "CreateIntegration"
@@ -7759,6 +7815,19 @@ module Aws::Glue
         operation.name = "DeleteDevEndpoint"
         operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDevEndpointRequest)
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteDevEndpointResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        operation.traits = {}
+      end)
+      service.add_operation(:delete_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#DeleteGlueIdentityCenterConfiguration"
+        operation.name = "DeleteGlueIdentityCenterConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGlueIdentityCenterConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteGlueIdentityCenterConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
@@ -8404,6 +8473,19 @@ module Aws::Glue
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:get_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#GetGlueIdentityCenterConfiguration"
+        operation.name = "GetGlueIdentityCenterConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGlueIdentityCenterConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetGlueIdentityCenterConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
         operation.traits = {}
       end)
       service.add_operation(:get_integration_resource_property, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -9847,6 +9929,19 @@ module Aws::Glue
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {}
+      end)
+      service.add_operation(:update_glue_identity_center_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration"
+        operation.name = "UpdateGlueIdentityCenterConfiguration"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGlueIdentityCenterConfigurationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: UpdateGlueIdentityCenterConfigurationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServiceException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidInputException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationTimeoutException)
         operation.traits = {}
       end)
       service.add_operation(:update_integration_resource_property, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

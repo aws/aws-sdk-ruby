@@ -1204,7 +1204,7 @@ module Aws::Greengrass
       service.id = "com.amazonaws.greengrass#Greengrass"
       service.name = "Greengrass"
       service.version = "2017-06-07"
-      service.traits = {"aws.api#service" => {"sdkId" => "Greengrass", "arnNamespace" => "greengrass", "cloudFormationName" => "Greengrass", "cloudTrailEventSource" => "greengrass.amazonaws.com", "endpointPrefix" => "greengrass"}, "aws.auth#sigv4" => {"name" => "greengrass"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Greengrass"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Greengrass", "arnNamespace" => "greengrass", "cloudFormationName" => "Greengrass", "cloudTrailEventSource" => "greengrass.amazonaws.com", "endpointPrefix" => "greengrass"}, "aws.auth#sigv4" => {"name" => "greengrass"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Greengrass"}
       service.add_operation(:associate_role_to_group, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.greengrass#AssociateRoleToGroup"
         operation.name = "AssociateRoleToGroup"

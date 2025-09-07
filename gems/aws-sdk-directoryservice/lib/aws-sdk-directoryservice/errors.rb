@@ -37,7 +37,9 @@ module Aws::DirectoryService
   # * {DirectoryLimitExceededException}
   # * {DirectoryNotSharedException}
   # * {DirectoryUnavailableException}
+  # * {DisableAlreadyInProgressException}
   # * {DomainControllerLimitExceededException}
+  # * {EnableAlreadyInProgressException}
   # * {EntityAlreadyExistsException}
   # * {EntityDoesNotExistException}
   # * {IncompatibleSettingsException}
@@ -335,11 +337,45 @@ module Aws::DirectoryService
       end
     end
 
+    # <p>A disable operation for CA enrollment policy is already in progress for this directory.</p>
+    class DisableAlreadyInProgressException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::DirectoryService::Types::DisableAlreadyInProgressException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super(context, data)
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def request_id
+        @data[:request_id]
+      end
+    end
+
     # <p>The maximum allowed number of domain controllers per directory was exceeded. The
     #       default limit per directory is 20 domain controllers.</p>
     class DomainControllerLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DirectoryService::Types::DomainControllerLimitExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super(context, data)
+      end
+
+      def message
+        @data[:message]
+      end
+
+      def request_id
+        @data[:request_id]
+      end
+    end
+
+    # <p>An enable operation for CA enrollment policy is already in progress for this directory.</p>
+    class EnableAlreadyInProgressException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::DirectoryService::Types::EnableAlreadyInProgressException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super(context, data)
       end

@@ -50,8 +50,7 @@ module Aws::QApps
       end
     end
 
-    # <p>The requested operation could not be completed due to a conflict with the current state of
-    #       the resource.</p>
+    # <p>The requested operation could not be completed due to a conflict with the current state of the resource.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QApps::Types::ConflictException] data
@@ -74,8 +73,7 @@ module Aws::QApps
       end
     end
 
-    # <p>The requested operation could not be completed because the content exceeds the maximum
-    #       allowed size.</p>
+    # <p>The requested operation could not be completed because the content exceeds the maximum allowed size.</p>
     class ContentTooLargeException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QApps::Types::ContentTooLargeException] data
@@ -143,8 +141,7 @@ module Aws::QApps
       end
     end
 
-    # <p>The requested operation could not be completed because it would exceed the service's quota
-    #       or limit.</p>
+    # <p>The requested operation could not be completed because it would exceed the service's quota or limit.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QApps::Types::ServiceQuotaExceededException] data
@@ -177,8 +174,7 @@ module Aws::QApps
       end
     end
 
-    # <p>The requested operation could not be completed because too many requests were sent at
-    #       once. Wait a bit and try again later.</p>
+    # <p>The requested operation could not be completed because too many requests were sent at once. Wait a bit and try again later.</p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::QApps::Types::ThrottlingException] data

@@ -6348,6 +6348,9 @@ module Aws::QConnect
     # @!attribute description
     #   <p>The description of the Amazon Q in Connect AI Prompt.</p>
     #   @return [String]
+    # @!attribute model_id
+    #   <p>The identifier of the model used for this AI Prompt.</p> <note> <p>For more information on supported models, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-ai-prompts.html#cli-create-aiprompt">Supported models for system and custom prompts</a>.</p> </note>
+    #   @return [String]
     class UpdateAIPromptRequest < Struct.new(
       :client_token,
       :assistant_id,
@@ -6355,6 +6358,7 @@ module Aws::QConnect
       :visibility_status,
       :template_configuration,
       :description,
+      :model_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

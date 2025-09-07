@@ -218,6 +218,19 @@ module Aws::Connect
       attr_accessor last_modified_region: String?
     end
 
+    class AgentStatusIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor id: String?
+    end
+
     class AgentStatusReference
       include Smithy::Schema::Structure
 
@@ -4417,6 +4430,7 @@ module Aws::Connect
         ?channel: String,
         ?routing_profile: Types::RoutingProfileReference,
         ?routing_step_expression: String,
+        ?agent_status: Types::AgentStatusIdentifier,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4424,6 +4438,7 @@ module Aws::Connect
       attr_accessor channel: String?
       attr_accessor routing_profile: Types::RoutingProfileReference?
       attr_accessor routing_step_expression: String?
+      attr_accessor agent_status: Types::AgentStatusIdentifier?
     end
 
     module DirectoryType
@@ -5596,6 +5611,7 @@ module Aws::Connect
         ?channels: Array[String],
         ?routing_profiles: Array[String],
         ?routing_step_expressions: Array[String],
+        ?agent_statuses: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5603,6 +5619,7 @@ module Aws::Connect
       attr_accessor channels: Array[String]?
       attr_accessor routing_profiles: Array[String]?
       attr_accessor routing_step_expressions: Array[String]?
+      attr_accessor agent_statuses: Array[String]?
     end
 
     module FlowAssociationResourceType
@@ -6083,6 +6100,7 @@ module Aws::Connect
       CHANNEL: String
       ROUTING_PROFILE: String
       ROUTING_STEP_EXPRESSION: String
+      AGENT_STATUS: String
     end
 
     class HierarchyGroup
@@ -8980,11 +8998,13 @@ module Aws::Connect
       def initialize: (
         ?participant_role: String,
         ?display_name: String,
+        ?participant_capabilities: Types::ParticipantCapabilities,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor participant_role: String?
       attr_accessor display_name: String?
+      attr_accessor participant_capabilities: Types::ParticipantCapabilities?
     end
 
     class ParticipantMetrics

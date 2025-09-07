@@ -16,6 +16,7 @@ module Aws::Notifications
       ENABLED: String
       DISABLED: String
       PENDING: String
+      FAILED: String
     end
 
     class AggregationDetail
@@ -121,6 +122,28 @@ module Aws::Notifications
     end
 
     class AssociateManagedNotificationAdditionalChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+        ?notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+      attr_accessor notification_configuration_arn: String?
+    end
+
+    class AssociateOrganizationalUnitResponse
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -367,6 +390,28 @@ module Aws::Notifications
 
     end
 
+    class DisassociateOrganizationalUnitRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_unit_id: String,
+        ?notification_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_unit_id: String?
+      attr_accessor notification_configuration_arn: String?
+    end
+
+    class DisassociateOrganizationalUnitResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class EnableNotificationsAccessForOrganizationRequest
       include Smithy::Schema::Structure
 
@@ -574,6 +619,7 @@ module Aws::Notifications
         ?status: String,
         ?creation_time: Time,
         ?aggregation_duration: String,
+        ?subtype: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -583,6 +629,7 @@ module Aws::Notifications
       attr_accessor status: String?
       attr_accessor creation_time: Time?
       attr_accessor aggregation_duration: String?
+      attr_accessor subtype: String?
     end
 
     class GetNotificationEventRequest
@@ -834,6 +881,40 @@ module Aws::Notifications
       attr_accessor managed_notification_events: Array[Types::ManagedNotificationEventOverview]?
     end
 
+    class ListMemberAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?member_account: String,
+        ?status: String,
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor member_account: String?
+      attr_accessor status: String?
+      attr_accessor organizational_unit_id: String?
+    end
+
+    class ListMemberAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_accounts: Array[Types::MemberAccount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_accounts: Array[Types::MemberAccount]?
+      attr_accessor next_token: String?
+    end
+
     class ListNotificationConfigurationsRequest
       include Smithy::Schema::Structure
 
@@ -841,6 +922,7 @@ module Aws::Notifications
         ?event_rule_source: String,
         ?channel_arn: String,
         ?status: String,
+        ?subtype: String,
         ?max_results: Integer,
         ?next_token: String,
       ) -> void
@@ -849,6 +931,7 @@ module Aws::Notifications
       attr_accessor event_rule_source: String?
       attr_accessor channel_arn: String?
       attr_accessor status: String?
+      attr_accessor subtype: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
     end
@@ -878,6 +961,7 @@ module Aws::Notifications
         ?aggregate_notification_event_arn: String,
         ?max_results: Integer,
         ?next_token: String,
+        ?organizational_unit_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -889,6 +973,7 @@ module Aws::Notifications
       attr_accessor aggregate_notification_event_arn: String?
       attr_accessor max_results: Integer?
       attr_accessor next_token: String?
+      attr_accessor organizational_unit_id: String?
     end
 
     class ListNotificationEventsResponse
@@ -927,6 +1012,34 @@ module Aws::Notifications
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor notification_hubs: Array[Types::NotificationHubOverview]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationalUnitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationalUnitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organizational_units: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organizational_units: Array[String]?
       attr_accessor next_token: String?
     end
 
@@ -1174,6 +1287,25 @@ module Aws::Notifications
       attr_accessor caption: String?
     end
 
+    class MemberAccount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration_arn: String,
+        ?account_id: String,
+        ?status: String,
+        ?status_reason: String,
+        ?organizational_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor organizational_unit_id: String?
+    end
+
     class MessageComponents
       include Smithy::Schema::Structure
 
@@ -1212,6 +1344,7 @@ module Aws::Notifications
         ?status: String,
         ?creation_time: Time,
         ?aggregation_duration: String,
+        ?subtype: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1221,6 +1354,7 @@ module Aws::Notifications
       attr_accessor status: String?
       attr_accessor creation_time: Time?
       attr_accessor aggregation_duration: String?
+      attr_accessor subtype: String?
     end
 
     class NotificationEventOverview
@@ -1235,6 +1369,7 @@ module Aws::Notifications
         ?aggregation_event_type: String,
         ?aggregate_notification_event_arn: String,
         ?aggregation_summary: Types::AggregationSummary,
+        ?organizational_unit_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1246,6 +1381,7 @@ module Aws::Notifications
       attr_accessor aggregation_event_type: String?
       attr_accessor aggregate_notification_event_arn: String?
       attr_accessor aggregation_summary: Types::AggregationSummary?
+      attr_accessor organizational_unit_id: String?
     end
 
     class NotificationEventSchema
@@ -1267,6 +1403,7 @@ module Aws::Notifications
         ?end_time: Time,
         ?text_parts: Hash[String, Types::TextPartValue],
         ?media: Array[Types::MediaElement],
+        ?organizational_unit_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1285,6 +1422,7 @@ module Aws::Notifications
       attr_accessor end_time: Time?
       attr_accessor text_parts: Hash[String, Types::TextPartValue]?
       attr_accessor media: Array[Types::MediaElement]?
+      attr_accessor organizational_unit_id: String?
     end
 
     class NotificationEventSummary

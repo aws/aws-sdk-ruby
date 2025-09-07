@@ -1753,13 +1753,16 @@ module Aws::Connect
       request.send_request(options)
     end
 
-    # <p>Adds a new participant into an on-going chat contact. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html">Customize chat
-    #     flow experiences by integrating custom participants</a>.</p>
+    # <p>Adds a new participant into an on-going chat contact or webRTC call. For more information,
+    #    see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html">Customize chat flow experiences by integrating custom participants</a> or <a href="https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html">Enable
+    #     multi-user web, in-app, and video calling</a>.</p>
     # @param [Hash, Types::CreateParticipantRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. </p>
     # @option params [String] :contact_id
-    #   <p>The identifier of the contact in this instance of Amazon Connect.  Only contacts in the CHAT channel are supported.</p>
+    #   <p>The identifier of the contact in this instance of Amazon Connect.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC
+    #      calls, this should be the initial contact ID that was generated when the contact was first
+    #      created (from the StartWebRTCContact API) in the VOICE channel</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
     #               request. If not provided, the Amazon Web Services
@@ -1768,9 +1771,8 @@ module Aws::Connect
     # @option params [Types::ParticipantDetailsToAdd] :participant_details
     #   <p>Information identifying the participant.</p>
     #            <important>
-    #               <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p>
-    #               <p>
-    #                  <code>DisplayName</code> is <b>Required</b>.</p>
+    #               <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> for chat
+    #       contact and <code>CUSTOMER</code> for voice contact.</p>
     #            </important>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1779,7 +1781,11 @@ module Aws::Connect
     #     client_token: "ClientToken",
     #     participant_details: { # required
     #       participant_role: "AGENT" # One of: ["AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"],
-    #       display_name: "DisplayName"
+    #       display_name: "DisplayName",
+    #       participant_capabilities: {
+    #         video: "SEND" # One of: ["SEND"],
+    #         screen_share: "SEND" # One of: ["SEND"]
+    #       }
     #     }
     #   }
     #   options = {}
@@ -3699,7 +3705,7 @@ module Aws::Connect
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change. To 
-    # request access to this API, contact Amazon Web ServicesSupport.</p>
+    # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Describes the target authentication profile.</p>
     # @param [Hash, Types::DescribeAuthenticationProfileRequest] params
     # @option params [String] :authentication_profile_id
@@ -5966,19 +5972,23 @@ module Aws::Connect
     #          <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html">Metrics definitions</a> in the
     #      <i>Amazon Connect Administrator Guide</i>.</p>
     #          <note>
-    #             <p>When you make a successful API request, you can expect the following metric values in the response:</p>
+    #             <p>When you make a successful API request, you can expect the following metric values in the
+    #     response:</p>
     #             <ol>
     #                <li>
     #                   <p>
-    #                      <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>
+    #                      <b>Metric value is null</b>: The calculation cannot be
+    #       performed due to divide by zero or insufficient data</p>
     #                </li>
     #                <li>
     #                   <p>
-    #                      <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>
+    #                      <b>Metric value is a number (including 0) of defined type</b>:
+    #       The number provided is the calculation result</p>
     #                </li>
     #                <li>
     #                   <p>
-    #                      <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>
+    #                      <b>MetricResult list is empty</b>: The request cannot find any
+    #       data in the system</p>
     #                </li>
     #             </ol>
     #             <p>The following guidelines can help you work with the API:</p>
@@ -5992,9 +6002,6 @@ module Aws::Connect
     #                <li>
     #                   <p>If the response is slow due to large result sets, try these approaches:</p>
     #                   <ul>
-    #                      <li>
-    #                         <p>Narrow the time range of your request</p>
-    #                      </li>
     #                      <li>
     #                         <p>Add filters to reduce the amount of data returned</p>
     #                      </li>
@@ -6020,33 +6027,43 @@ module Aws::Connect
     #               <li>
     #                  <p>RoutingStepExpressions: 50</p>
     #               </li>
+    #               <li>
+    #                  <p>AgentStatuses: 50</p>
+    #               </li>
     #            </ul>
     #            <p>Metric data is retrieved only for the resources associated with the queues or routing
     #      profiles, and by any channels included in the filter. (You cannot filter by both queue AND
     #      routing profile.) You can include both resource IDs and resource ARNs in the same request.</p>
+    #            <p>When using <code>AgentStatuses</code> as filter make sure Queues is added as primary
+    #      filter.</p>
     #            <p>When using the <code>RoutingStepExpression</code> filter, you need to pass exactly one
     #       <code>QueueId</code>. The filter is also case sensitive so when using the
     #       <code>RoutingStepExpression</code> filter, grouping by <code>ROUTING_STEP_EXPRESSION</code> is
     #      required.</p>
     #            <p>Currently tagging is only supported on the resources that are passed in the filter.</p>
     # @option params [Array<String>] :groupings
-    #   <p>The grouping applied to the metrics returned. For example, when grouped by
-    #       <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all
-    #      queues. </p>
+    #   <p>Defines the level of aggregation for metrics data by a dimension(s). Its similar to sorting
+    #      items into buckets based on a common characteristic, then counting or calculating something for
+    #      each bucket. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each
+    #      queue rather than aggregated for all queues. </p>
+    #            <p>The grouping list is an ordered list, with the first item in the list defined as the primary
+    #      grouping. If no grouping is included in the request, the aggregation happens at the
+    #      instance-level.</p>
     #            <ul>
     #               <li>
     #                  <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.
     #        VOICE, CHAT, and TASK channels are supported.</p>
     #               </li>
     #               <li>
+    #                  <p>If you group by <code>AGENT_STATUS</code>, you must include the <code>QUEUE</code> as the
+    #        primary grouping and use queue filter. When you group by <code>AGENT_STATUS</code>, the only
+    #        metric available is the <code>AGENTS_ONLINE</code> metric.</p>
+    #               </li>
+    #               <li>
     #                  <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing
     #        profile filter. In addition, a routing profile filter is required for metrics
     #         <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and <code>
     #         OLDEST_CONTACT_AGE</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>If no <code>Grouping</code> is included in the request, a summary of metrics is
-    #        returned.</p>
     #               </li>
     #               <li>
     #                  <p>When using the <code>RoutingStepExpression</code> filter, group by
@@ -6178,9 +6195,10 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"]],
     #       routing_profiles: ["RoutingProfileId"],
-    #       routing_step_expressions: ["RoutingExpression"]
+    #       routing_step_expressions: ["RoutingExpression"],
+    #       agent_statuses: ["AgentStatusId"]
     #     },
-    #     groupings: ["QUEUE" # One of: ["QUEUE", "CHANNEL", "ROUTING_PROFILE", "ROUTING_STEP_EXPRESSION"]],
+    #     groupings: ["QUEUE" # One of: ["QUEUE", "CHANNEL", "ROUTING_PROFILE", "ROUTING_STEP_EXPRESSION", "AGENT_STATUS"]],
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE" # One of: ["AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"],
@@ -6214,7 +6232,11 @@ module Aws::Connect
     #             id: "RoutingProfileId",
     #             arn: "ARN"
     #           },
-    #           routing_step_expression: "RoutingExpression"
+    #           routing_step_expression: "RoutingExpression",
+    #           agent_status: {
+    #             arn: "ARN",
+    #             id: "AgentStatusId"
+    #           }
     #         },
     #         collections: [
     #           {
@@ -6755,9 +6777,10 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE" # One of: ["VOICE", "CHAT", "TASK", "EMAIL"]],
     #       routing_profiles: ["RoutingProfileId"],
-    #       routing_step_expressions: ["RoutingExpression"]
+    #       routing_step_expressions: ["RoutingExpression"],
+    #       agent_statuses: ["AgentStatusId"]
     #     },
-    #     groupings: ["QUEUE" # One of: ["QUEUE", "CHANNEL", "ROUTING_PROFILE", "ROUTING_STEP_EXPRESSION"]],
+    #     groupings: ["QUEUE" # One of: ["QUEUE", "CHANNEL", "ROUTING_PROFILE", "ROUTING_STEP_EXPRESSION", "AGENT_STATUS"]],
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED" # One of: ["CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"],
@@ -6790,7 +6813,11 @@ module Aws::Connect
     #             id: "RoutingProfileId",
     #             arn: "ARN"
     #           },
-    #           routing_step_expression: "RoutingExpression"
+    #           routing_step_expression: "RoutingExpression",
+    #           agent_status: {
+    #             arn: "ARN",
+    #             id: "AgentStatusId"
+    #           }
     #         },
     #         collections: [
     #           {
@@ -6826,19 +6853,23 @@ module Aws::Connect
     #     <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html">Metrics definitions</a> in the
     #      <i>Amazon Connect Administrator Guide</i>.</p>
     #          <note>
-    #             <p>When you make a successful API request, you can expect the following metric values in the response:</p>
+    #             <p>When you make a successful API request, you can expect the following metric values in the
+    #     response:</p>
     #             <ol>
     #                <li>
     #                   <p>
-    #                      <b>Metric value is null</b>: The calculation cannot be performed due to divide by zero or insufficient data</p>
+    #                      <b>Metric value is null</b>: The calculation cannot be
+    #       performed due to divide by zero or insufficient data</p>
     #                </li>
     #                <li>
     #                   <p>
-    #                      <b>Metric value is a number (including 0) of defined type</b>: The number provided is the calculation result</p>
+    #                      <b>Metric value is a number (including 0) of defined type</b>:
+    #       The number provided is the calculation result</p>
     #                </li>
     #                <li>
     #                   <p>
-    #                      <b>MetricResult list is empty</b>: The request cannot find any data in the system</p>
+    #                      <b>MetricResult list is empty</b>: The request cannot find any
+    #       data in the system</p>
     #                </li>
     #             </ol>
     #             <p>The following guidelines can help you work with the API:</p>
@@ -8533,7 +8564,7 @@ module Aws::Connect
     #          <p>For example, if you already have 99 claimed or imported numbers and a service level quota of
     #    99 phone numbers, and in any 180 day period you release 99, claim 99, and then release 99, you
     #    will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers
-    #    until you open an Amazon Web ServicesSupport ticket. </p>
+    #    until you open an Amazon Web Services Support ticket. </p>
     # @param [Hash, Types::ImportPhoneNumberRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
@@ -8766,7 +8797,7 @@ module Aws::Connect
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change. To 
-    # request access to this API, contact Amazon Web ServicesSupport.</p>
+    # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Provides summary information about the authentication profiles in a specified Amazon Connect instance.</p>
     # @param [Hash, Types::ListAuthenticationProfilesRequest] params
     # @option params [String] :instance_id
@@ -10892,7 +10923,7 @@ module Aws::Connect
     #     Amazon Connect admin website.</p>
     #             <p>After releasing a phone number, the phone number enters into a cooldown period for up to
     #     180 days. It cannot be searched for or claimed again until the period has ended. If you
-    #     accidentally release a phone number, contact Amazon Web ServicesSupport.</p>
+    #     accidentally release a phone number, contact Amazon Web Services Support.</p>
     #          </important>
     #          <p>If you plan to claim and release numbers frequently,
     #                 contact us for a service quota exception. Otherwise, it is possible you will be blocked from
@@ -13007,7 +13038,7 @@ module Aws::Connect
     #          </ul>
     #          <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your
     #    account may not support the ability to configure custom chat durations. For more information,
-    #    contact Amazon Web ServicesSupport. </p>
+    #    contact Amazon Web Services Support. </p>
     #          <p>For more information about chat, see the following topics in the <i>Amazon Connect
     #    Administrator Guide</i>: </p>
     #          <ul>
@@ -14506,7 +14537,7 @@ module Aws::Connect
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change. To 
-    # request access to this API, contact Amazon Web ServicesSupport.</p>
+    # request access to this API, contact Amazon Web Services Support.</p>
     #          <p>Updates the selected authentication profile.</p>
     # @param [Hash, Types::UpdateAuthenticationProfileRequest] params
     # @option params [String] :authentication_profile_id
@@ -15303,7 +15334,7 @@ module Aws::Connect
     #   <p>The type of attribute.</p>
     #            <note>
     #               <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,
-    #       contact Amazon Web ServicesSupport for allowlisting.</p>
+    #       contact Amazon Web Services Support for allowlisting.</p>
     #            </note>
     # @option params [String] :value
     #   <p>The value for the attribute. Maximum character limit is 100. </p>

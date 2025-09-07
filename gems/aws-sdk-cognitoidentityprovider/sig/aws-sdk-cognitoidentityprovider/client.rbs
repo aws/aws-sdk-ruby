@@ -558,6 +558,19 @@ module Aws::CognitoIdentityProvider
       ]
     ) -> _CreateResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceServerResponse
 
+    interface _CreateTermsResponse
+      include Smithy::Client::_Response[Types::CreateTermsResponse]
+      def terms: () -> Types::TermsType?
+    end
+    def create_terms: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?terms_name: String,
+      ?terms_source: String,
+      ?enforcement: String,
+      ?links: Hash[String, String]
+    ) -> _CreateTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTermsResponse
+
     interface _CreateUserImportJobResponse
       include Smithy::Client::_Response[Types::CreateUserImportJobResponse]
       def user_import_job: () -> Types::UserImportJobType?
@@ -785,6 +798,14 @@ module Aws::CognitoIdentityProvider
       ?identifier: String
     ) -> _DeleteResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceServerResponse
 
+    interface _DeleteTermsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_terms: (
+      ?terms_id: String,
+      ?user_pool_id: String
+    ) -> _DeleteTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTermsResponse
+
     interface _DeleteUserResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -877,6 +898,15 @@ module Aws::CognitoIdentityProvider
       ?user_pool_id: String,
       ?client_id: String
     ) -> _DescribeRiskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRiskConfigurationResponse
+
+    interface _DescribeTermsResponse
+      include Smithy::Client::_Response[Types::DescribeTermsResponse]
+      def terms: () -> Types::TermsType?
+    end
+    def describe_terms: (
+      ?terms_id: String,
+      ?user_pool_id: String
+    ) -> _DescribeTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTermsResponse
 
     interface _DescribeUserImportJobResponse
       include Smithy::Client::_Response[Types::DescribeUserImportJobResponse]
@@ -1137,6 +1167,17 @@ module Aws::CognitoIdentityProvider
     def list_tags_for_resource: (
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTermsResponse
+      include Smithy::Client::_Response[Types::ListTermsResponse]
+      def terms: () -> Array[Types::TermsDescriptionType]?
+      def next_token: () -> String?
+    end
+    def list_terms: (
+      ?user_pool_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTermsResponse
 
     interface _ListUserImportJobsResponse
       include Smithy::Client::_Response[Types::ListUserImportJobsResponse]
@@ -1549,6 +1590,19 @@ module Aws::CognitoIdentityProvider
         }
       ]
     ) -> _UpdateResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceServerResponse
+
+    interface _UpdateTermsResponse
+      include Smithy::Client::_Response[Types::UpdateTermsResponse]
+      def terms: () -> Types::TermsType?
+    end
+    def update_terms: (
+      ?terms_id: String,
+      ?user_pool_id: String,
+      ?terms_name: String,
+      ?terms_source: String,
+      ?enforcement: String,
+      ?links: Hash[String, String]
+    ) -> _UpdateTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTermsResponse
 
     interface _UpdateUserAttributesResponse
       include Smithy::Client::_Response[Types::UpdateUserAttributesResponse]

@@ -509,7 +509,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           parents: [
@@ -557,7 +559,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           cedar_json: "CedarJson"
@@ -606,7 +610,9 @@ module Aws::VerifiedPermissions
     #                   }
     #                 },
     #                 ipaddr: "IpAddr",
-    #                 decimal: "Decimal"
+    #                 decimal: "Decimal",
+    #                 datetime: "DatetimeAttribute",
+    #                 duration: "Duration"
     #               }
     #             },
     #             cedar_json: "CedarJson"
@@ -806,7 +812,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           parents: [
@@ -850,7 +858,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           cedar_json: "CedarJson"
@@ -899,7 +909,9 @@ module Aws::VerifiedPermissions
     #                   }
     #                 },
     #                 ipaddr: "IpAddr",
-    #                 decimal: "Decimal"
+    #                 decimal: "Decimal",
+    #                 datetime: "DatetimeAttribute",
+    #                 duration: "Duration"
     #               }
     #             },
     #             cedar_json: "CedarJson"
@@ -1822,7 +1834,9 @@ module Aws::VerifiedPermissions
     #             }
     #           },
     #           ipaddr: "IpAddr",
-    #           decimal: "Decimal"
+    #           decimal: "Decimal",
+    #           datetime: "DatetimeAttribute",
+    #           duration: "Duration"
     #         }
     #       },
     #       cedar_json: "CedarJson"
@@ -1854,7 +1868,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           parents: [
@@ -1974,7 +1990,9 @@ module Aws::VerifiedPermissions
     #             }
     #           },
     #           ipaddr: "IpAddr",
-    #           decimal: "Decimal"
+    #           decimal: "Decimal",
+    #           datetime: "DatetimeAttribute",
+    #           duration: "Duration"
     #         }
     #       },
     #       cedar_json: "CedarJson"
@@ -2006,7 +2024,9 @@ module Aws::VerifiedPermissions
     #                 }
     #               },
     #               ipaddr: "IpAddr",
-    #               decimal: "Decimal"
+    #               decimal: "Decimal",
+    #               datetime: "DatetimeAttribute",
+    #               duration: "Duration"
     #             }
     #           },
     #           parents: [

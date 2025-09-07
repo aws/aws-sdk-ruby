@@ -53,6 +53,7 @@ module Aws::CognitoIdentityProvider
   # * {ResourceNotFoundException}
   # * {ScopeDoesNotExistException}
   # * {SoftwareTokenMFANotFoundException}
+  # * {TermsExistsException}
   # * {TierChangeNotAllowedException}
   # * {TooManyFailedAttemptsException}
   # * {TooManyRequestsException}
@@ -536,6 +537,20 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMFANotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentityProvider::Types::SoftwareTokenMFANotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super(context, data)
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>Terms document names must be unique to the app client. This exception is thrown when
+    #             you attempt to create terms documents with a duplicate <code>TermsName</code>.</p>
+    class TermsExistsException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CognitoIdentityProvider::Types::TermsExistsException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super(context, data)
       end

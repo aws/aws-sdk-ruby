@@ -194,6 +194,13 @@ module Aws::ConnectParticipant
     #             <p>The current supported channel is chat. This API is not supported for Apple
     #                 Messages for Business, WhatsApp, or SMS chats.</p>
     #          </note>
+    #          <note>
+    #             <p>
+    #                <code>ConnectionToken</code> is used for invoking this API instead of
+    #                     <code>ParticipantToken</code>.</p>
+    #          </note>
+    #          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
+    #                     authentication</a>.</p>
     # @param [Hash, Types::CancelParticipantAuthenticationRequest] params
     # @option params [String] :session_id
     #   <p>The <code>sessionId</code> provided in the <code>authenticationInitiated</code>
@@ -219,7 +226,7 @@ module Aws::ConnectParticipant
     # <p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL
     #             provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment
     #             with that identifier is already being uploaded.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -255,17 +262,20 @@ module Aws::ConnectParticipant
     end
 
     # <p>Creates the participant's connection. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For WebRTC security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security">Amazon Connect WebRTC security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ParticipantToken</code> is used for invoking this API instead of
     #                     <code>ConnectionToken</code>.</p>
     #          </note>
     #          <p>The participant token is valid for the lifetime of the participant – until they are
-    #             part of a contact.</p>
-    #          <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.
-    #             Clients must manually connect to the returned websocket URL and subscribe to the desired
-    #             topic. </p>
+    #             part of a contact. For WebRTC participants, if they leave or are disconnected for 60
+    #             seconds, a new participant needs to be created using the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html">CreateParticipant</a> API. </p>
+    #          <p>
+    #             <b>For <code>WEBSOCKET</code> Type</b>: </p>
+    #          <p>The response URL for has a connect expiry timeout of 100s. Clients must manually
+    #             connect to the returned websocket URL and subscribe to the desired topic. </p>
     #          <p>For chat, you need to publish the following on the established websocket
     #             connection:</p>
     #          <p>
@@ -274,6 +284,18 @@ module Aws::ConnectParticipant
     #          <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,
     #             clients need to call this API again to obtain a new websocket URL and perform the same
     #             steps as before.</p>
+    #          <p>The expiry time for the connection token is different than the
+    #                 <code>ChatDurationInMinutes</code>. Expiry time for the connection token is 1
+    #             day.</p>
+    #          <p>
+    #             <b>For <code>WEBRTC_CONNECTION</code> Type</b>: </p>
+    #          <p>The response includes connection data required for the client application to join the
+    #             call using the Amazon Chime SDK client libraries. The WebRTCConnection response contains
+    #             Meeting and Attendee information needed to establish the media connection. </p>
+    #          <p>The attendee join token in WebRTCConnection response is valid for the lifetime of the
+    #             participant in the call. If a participant leaves or is disconnected for 60 seconds,
+    #             their participant credentials will no longer be valid, and a new participant will need
+    #             to be created to rejoin the call. </p>
     #          <p>
     #             <b>Message streaming support</b>: This API can also be used
     #             together with the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html">StartContactStreaming</a> API to create a participant connection for chat
@@ -282,9 +304,16 @@ module Aws::ConnectParticipant
     #                 message streaming</a> in the <i>Amazon Connect Administrator
     #             Guide</i>.</p>
     #          <p>
+    #             <b>Multi-user web, in-app, video calling support</b>: </p>
+    #          <p>For WebRTC calls, this API is used in conjunction with the CreateParticipant API to
+    #             enable multi-party calling. The StartWebRTCContact API creates the initial contact and
+    #             routes it to an agent, while CreateParticipant adds additional participants to the
+    #             ongoing call. For more information about multi-party WebRTC calls, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html">Enable multi-user web, in-app, and video calling</a> in the <i>Amazon Connect
+    #                 Administrator Guide</i>. </p>
+    #          <p>
     #             <b>Feature specifications</b>: For information about feature
-    #             specifications, such as the allowed number of open websocket connections per
-    #             participant, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator
+    #             specifications, such as the allowed number of open websocket connections per participant
+    #             or maximum number of WebRTC participants, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator
     #                 Guide</i>. </p>
     #          <note>
     #             <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
@@ -305,7 +334,7 @@ module Aws::ConnectParticipant
     #               non-streaming chats.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     type: ["WEBSOCKET" # One of: ["WEBSOCKET", "CONNECTION_CREDENTIALS"]],
+    #     type: ["WEBSOCKET" # One of: ["WEBSOCKET", "CONNECTION_CREDENTIALS", "WEBRTC_CONNECTION"]],
     #     participant_token: "ParticipantToken", # required
     #     connect_participant: false
     #   }
@@ -321,6 +350,26 @@ module Aws::ConnectParticipant
     #     connection_credentials: {
     #       connection_token: "ParticipantToken",
     #       expiry: "ISO8601Datetime"
+    #     },
+    #     web_rtc_connection: {
+    #       attendee: {
+    #         attendee_id: "AttendeeId",
+    #         join_token: "JoinToken"
+    #       },
+    #       meeting: {
+    #         media_placement: {
+    #           audio_host_url: "URI",
+    #           audio_fallback_url: "URI",
+    #           signaling_url: "URI",
+    #           event_ingestion_url: "URI"
+    #         },
+    #         meeting_features: {
+    #           audio: {
+    #             echo_reduction: "AVAILABLE" # One of: ["AVAILABLE", "UNAVAILABLE"]
+    #           }
+    #         },
+    #         meeting_id: "GuidString"
+    #       }
     #     }
     #   }
     # @return [Types::CreateParticipantConnectionResponse]
@@ -330,7 +379,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Retrieves the view for the specified view token.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     # @param [Hash, Types::DescribeViewRequest] params
     # @option params [String] :view_token
     #   <p>An encrypted token originating from the interactive message of a ShowView block
@@ -366,7 +415,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Disconnects a participant. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -400,11 +449,21 @@ module Aws::ConnectParticipant
 
     # <p>Provides a pre-signed URL for download of a completed attachment. This is an
     #             asynchronous API for use with active contacts.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
-    #             <p>
-    #                <code>ConnectionToken</code> is used for invoking this API instead of
-    #                     <code>ParticipantToken</code>.</p>
+    #             <ul>
+    #                <li>
+    #                   <p>The participant role <code>CUSTOM_BOT</code> is not permitted to access
+    #                         attachments customers may upload. An <code>AccessDeniedException</code> can
+    #                         indicate that the participant may be a CUSTOM_BOT, and it doesn't have
+    #                         access to attachments.</p>
+    #                </li>
+    #                <li>
+    #                   <p>
+    #                      <code>ConnectionToken</code> is used for invoking this API instead of
+    #                             <code>ParticipantToken</code>.</p>
+    #                </li>
+    #             </ul>
     #          </note>
     #          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
     #                     authentication</a>.</p>
@@ -452,6 +511,13 @@ module Aws::ConnectParticipant
     #                </li>
     #             </ul>
     #          </note>
+    #          <note>
+    #             <p>
+    #                <code>ConnectionToken</code> is used for invoking this API instead of
+    #                     <code>ParticipantToken</code>.</p>
+    #          </note>
+    #          <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4
+    #                     authentication</a>.</p>
     # @param [Hash, Types::GetAuthenticationUrlRequest] params
     # @option params [String] :session_id
     #   <p>The sessionId provided in the authenticationInitiated event.</p>
@@ -482,19 +548,24 @@ module Aws::ConnectParticipant
     # <p>Retrieves a transcript of the session, including details about any attachments. For
     #             information about accessing past chat contact transcripts for a persistent chat, see
     #                 <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html">Enable persistent chat</a>. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <p>If you have a process that consumes events in the transcript of an chat that has
     #             ended, note that chat transcripts contain the following event content types if the event
     #             has occurred during the chat session:</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>application/vnd.amazonaws.connect.event.participant.left</code>
+    #                   <code>application/vnd.amazonaws.connect.event.participant.invited</code>
     #                </p>
     #             </li>
     #             <li>
     #                <p>
     #                   <code>application/vnd.amazonaws.connect.event.participant.joined</code>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <code>application/vnd.amazonaws.connect.event.participant.left</code>
     #                </p>
     #             </li>
     #             <li>
@@ -599,14 +670,14 @@ module Aws::ConnectParticipant
 
     # <note>
     #             <p>The <code>application/vnd.amazonaws.connect.event.connection.acknowledged</code>
-    #                 ContentType will no longer be supported starting December 31, 2024. This event has
-    #                 been migrated to the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API using the
+    #                 ContentType is no longer maintained since December 31, 2024. This event has been
+    #                 migrated to the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API using the
     #                     <code>ConnectParticipant</code> field.</p>
     #          </note>
     #          <p>Sends an event. Message receipts are not supported when there are more than two active
     #             participants in the chat. Using the SendEvent API for message receipts when a supervisor
     #             is barged-in will result in a conflict exception.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -622,8 +693,8 @@ module Aws::ConnectParticipant
     #                  <p>application/vnd.amazonaws.connect.event.typing</p>
     #               </li>
     #               <li>
-    #                  <p>application/vnd.amazonaws.connect.event.connection.acknowledged (will be
-    #                       deprecated on December 31, 2024) </p>
+    #                  <p>application/vnd.amazonaws.connect.event.connection.acknowledged (is no longer
+    #                       maintained since December 31, 2024) </p>
     #               </li>
     #               <li>
     #                  <p>application/vnd.amazonaws.connect.event.message.delivered</p>
@@ -665,7 +736,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Sends a message.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -675,9 +746,15 @@ module Aws::ConnectParticipant
     #                     authentication</a>.</p>
     # @param [Hash, Types::SendMessageRequest] params
     # @option params [String] :content_type
-    #   <p>The type of the content. Supported types are <code>text/plain</code>,
+    #   <p>The type of the content. Possible types are <code>text/plain</code>,
     #                   <code>text/markdown</code>, <code>application/json</code>, and
-    #                   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>
+    #                   <code>application/vnd.amazonaws.connect.message.interactive.response</code>.
+    #               </p>
+    #            <p>Supported types on the contact are configured through
+    #                   <code>SupportedMessagingContentTypes</code> on <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a>
+    #               and <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html">StartOutboundChatContact</a>.</p>
+    #            <p> For Apple Messages for Business, SMS, and WhatsApp Business Messaging contacts, only
+    #                   <code>text/plain</code> is supported.</p>
     # @option params [String] :content
     #   <p>The content of the message. </p>
     #            <ul>
@@ -725,7 +802,7 @@ module Aws::ConnectParticipant
 
     # <p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to
     #             S3.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of

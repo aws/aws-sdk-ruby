@@ -370,6 +370,10 @@ module Aws::KinesisAnalyticsV2
               }
             }
           ]
+        },
+        application_encryption_configuration: {
+          key_id: String,
+          key_type: String
         }
       },
       ?cloud_watch_logging_options: Array[
@@ -827,6 +831,10 @@ module Aws::KinesisAnalyticsV2
               }
             }
           ]
+        },
+        application_encryption_configuration_update: {
+          key_id_update: String,
+          key_type_update: String
         }
       },
       ?service_execution_role_update: String,

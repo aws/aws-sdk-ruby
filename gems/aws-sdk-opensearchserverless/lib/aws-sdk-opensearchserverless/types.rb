@@ -52,8 +52,7 @@ module Aws::OpenSearchServerless
 
     # <p>A summary of the data access policy.</p>
     # @!attribute type
-    #   <p>The type of access policy. Currently, the only available type is
-    #               <code>data</code>.</p>
+    #   <p>The type of access policy. Currently, the only available type is <code>data</code>.</p>
     #   @return [String]
     # @!attribute name
     #   <p>The name of the access policy.</p>
@@ -83,10 +82,7 @@ module Aws::OpenSearchServerless
 
     # <p>OpenSearch Serverless-related information for the current account.</p>
     # @!attribute capacity_limits
-    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units
-    #               (OCUs). These limits are used to scale your collections based on the current workload.
-    #               For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing
-    #                   capacity limits for Amazon OpenSearch Serverless</a>.</p>
+    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     #   @return [Types::CapacityLimits]
     class AccountSettingsDetail < Struct.new(
       :capacity_limits,
@@ -95,12 +91,10 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute ids
-    #   <p>A list of collection IDs. You can't provide names and IDs in the same request. The ID
-    #               is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
+    #   <p>A list of collection IDs. You can't provide names and IDs in the same request. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
     #   @return [Array<String>]
     # @!attribute names
-    #   <p>A list of collection names. You can't provide names and IDs in the same
-    #               request.</p>
+    #   <p>A list of collection names. You can't provide names and IDs in the same request.</p>
     #   @return [Array<String>]
     class BatchGetCollectionInput < Struct.new(
       :ids,
@@ -188,10 +182,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units
-    #             (OCUs). These limits are used to scale your collections based on the current workload.
-    #             For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing
-    #                 capacity limits for Amazon OpenSearch Serverless</a>.</p>
+    # <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     # @!attribute max_indexing_capacity_in_ocu
     #   <p>The maximum indexing capacity for collections.</p>
     #   @return [Integer]
@@ -205,8 +196,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details about each OpenSearch Serverless collection, including the collection endpoint and the
-    #             OpenSearch Dashboards endpoint.</p>
+    # <p>Details about each OpenSearch Serverless collection, including the collection endpoint, the OpenSearch Dashboards endpoint, and FIPS-compliant endpoints for federal government workloads.</p>
     # @!attribute id
     #   <p>A unique identifier for the collection.</p>
     #   @return [String]
@@ -238,12 +228,14 @@ module Aws::OpenSearchServerless
     #   <p>The date and time when the collection was last modified.</p>
     #   @return [Integer]
     # @!attribute collection_endpoint
-    #   <p>Collection-specific endpoint used to submit index, search, and data upload requests to
-    #               an OpenSearch Serverless collection.</p>
+    #   <p>Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.</p>
     #   @return [String]
     # @!attribute dashboard_endpoint
     #   <p>Collection-specific endpoint used to access OpenSearch Dashboards.</p>
     #   @return [String]
+    # @!attribute fips_endpoints
+    #   <p>FIPS-compliant endpoints for the collection. These endpoints use FIPS 140-3 validated cryptographic modules and are required for federal government workloads that must comply with FedRAMP security standards.</p>
+    #   @return [Types::FipsEndpoints]
     # @!attribute failure_code
     #   <p>A failure code associated with the request.</p>
     #   @return [String]
@@ -263,6 +255,7 @@ module Aws::OpenSearchServerless
       :last_modified_date,
       :collection_endpoint,
       :dashboard_endpoint,
+      :fips_endpoints,
       :failure_code,
       :failure_message,
       keyword_init: true)
@@ -271,17 +264,13 @@ module Aws::OpenSearchServerless
 
     # <p>Error information for an OpenSearch Serverless request.</p>
     # @!attribute id
-    #   <p>If the request contains collection IDs, the response includes the IDs provided in the
-    #               request.</p>
+    #   <p>If the request contains collection IDs, the response includes the IDs provided in the request.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>If the request contains collection names, the response includes the names provided in
-    #               the request.</p>
+    #   <p>If the request contains collection names, the response includes the names provided in the request.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>A description of the error. For example, <code>The specified Collection is not
-    #                   found.</code>
-    #            </p>
+    #   <p>A description of the error. For example, <code>The specified Collection is not found.</code> </p>
     #   @return [String]
     # @!attribute error_code
     #   <p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>
@@ -295,8 +284,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A list of filter keys that you can use for LIST, UPDATE, and DELETE requests to OpenSearch Serverless
-    #             collections.</p>
+    # <p>A list of filter keys that you can use for LIST, UPDATE, and DELETE requests to OpenSearch Serverless collections.</p>
     # @!attribute name
     #   <p>The name of the collection.</p>
     #   @return [String]
@@ -332,9 +320,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>When creating a resource, thrown when a resource with the same name already exists or
-    #             is being created. When deleting a resource, thrown when the resource is not in the
-    #             ACTIVE or FAILED state.</p>
+    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE or FAILED state.</p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
@@ -350,8 +336,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the policy.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     #   @return [String]
     # @!attribute policy
     #   <p>The JSON policy document to use as the content for the policy.</p>
@@ -398,8 +383,7 @@ module Aws::OpenSearchServerless
     #   <p>The Amazon Resource Name (ARN) of the collection.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the
-    #               collection.</p>
+    #   <p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the collection.</p>
     #   @return [String]
     # @!attribute standby_replicas
     #   <p>Creates details about an OpenSearch Serverless collection.</p>
@@ -435,8 +419,7 @@ module Aws::OpenSearchServerless
     #   <p>Description of the collection.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless
-    #               collection.</p>
+    #   <p>An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute standby_replicas
     #   <p>Indicates whether standby replicas should be used for a collection.</p>
@@ -464,19 +447,15 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes IAM Identity Center options for creating an OpenSearch Serverless security
-    #             configuration in the form of a key-value map.</p>
+    # <p>Describes IAM Identity Center options for creating an OpenSearch Serverless security configuration in the form of a key-value map.</p>
     # @!attribute instance_arn
-    #   <p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch
-    #               Serverless.</p>
+    #   <p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>
     #   @return [String]
     # @!attribute user_attribute
-    #   <p>The user attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>UserId</code>.</p>
+    #   <p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>
     #   @return [String]
     # @!attribute group_attribute
-    #   <p>The group attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>GroupId</code>.</p>
+    #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class CreateIamIdentityCenterConfigOptions < Struct.new(
       :instance_arn,
@@ -490,12 +469,10 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifier of the collection in which to create the index.</p>
     #   @return [String]
     # @!attribute index_name
-    #   <p>The name of the index to create. Index names must be lowercase and can't begin with
-    #               underscores (_) or hyphens (-).</p>
+    #   <p>The name of the index to create. Index names must be lowercase and can't begin with underscores (_) or hyphens (-).</p>
     #   @return [String]
     # @!attribute index_schema
-    #   <p>The JSON schema definition for the index, including field mappings and
-    #               settings.</p>
+    #   <p>The JSON schema definition for the index, including field mappings and settings.</p>
     #   @return [JSON]
     class CreateIndexRequest < Struct.new(
       :id,
@@ -554,17 +531,13 @@ module Aws::OpenSearchServerless
     #   <p>A description of the security configuration.</p>
     #   @return [String]
     # @!attribute saml_options
-    #   <p>Describes SAML options in in the form of a key-value map. This field is required if
-    #               you specify <code>SAML</code> for the <code>type</code> parameter.</p>
+    #   <p>Describes SAML options in in the form of a key-value map. This field is required if you specify <code>SAML</code> for the <code>type</code> parameter.</p>
     #   @return [Types::SamlConfigOptions]
     # @!attribute iam_identity_center_options
-    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is
-    #               required if you specify iamidentitycenter for the type parameter.</p>
+    #   <p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>
     #   @return [Types::CreateIamIdentityCenterConfigOptions]
     # @!attribute iam_federation_options
-    #   <p>Describes IAM federation options in the form of a key-value map. This field is
-    #               required if you specify <code>iamFederation</code> for the <code>type</code>
-    #               parameter.</p>
+    #   <p>Describes IAM federation options in the form of a key-value map. This field is required if you specify <code>iamFederation</code> for the <code>type</code> parameter.</p>
     #   @return [Types::IamFederationConfigOptions]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
@@ -597,8 +570,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the policy.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     #   @return [String]
     # @!attribute policy
     #   <p>The JSON policy document to use as the content for the new policy.</p>
@@ -625,9 +597,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Creation details for an OpenSearch Serverless-managed interface endpoint. For more information, see
-    #                 <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access
-    #                 Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
+    # <p>Creation details for an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.</p>
     # @!attribute id
     #   <p>The unique identifier of the endpoint.</p>
     #   @return [String]
@@ -655,8 +625,7 @@ module Aws::OpenSearchServerless
     #   <p>The ID of one or more subnets from which you'll access OpenSearch Serverless.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The unique identifiers of the security groups that define the ports, protocols, and
-    #               sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
@@ -721,8 +690,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute id
-    #   <p>The unique identifier of the collection. For example, <code>1iu5usc406kd</code>. The
-    #               ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
+    #   <p>The unique identifier of the collection. For example, <code>1iu5usc406kd</code>. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>
@@ -784,9 +752,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute id
-    #   <p>The security configuration identifier. For SAML the ID will be
-    #                   <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example,
-    #                   <code>saml/123456789123/OKTADev</code>.</p>
+    #   <p>The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.</p>
     #   @return [String]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
@@ -876,17 +842,13 @@ module Aws::OpenSearchServerless
     #   <p>The name of the lifecycle policy.</p>
     #   @return [String]
     # @!attribute resource_type
-    #   <p>The type of OpenSearch Serverless resource. Currently, the only supported resource is
-    #                   <code>index</code>.</p>
+    #   <p>The type of OpenSearch Serverless resource. Currently, the only supported resource is <code>index</code>.</p>
     #   @return [String]
     # @!attribute retention_period
-    #   <p>The minimum number of index retention in days or hours. This is an optional parameter
-    #               that will return only if it’s set.</p>
+    #   <p>The minimum number of index retention in days or hours. This is an optional parameter that will return only if it’s set.</p>
     #   @return [String]
     # @!attribute no_min_retention_period
-    #   <p>The minimum number of index retention days set. That is an optional param that will
-    #               return as <code>true</code> if the minimum number of days or hours is not set to a index
-    #               resource.</p>
+    #   <p>The minimum number of index retention days set. That is an optional param that will return as <code>true</code> if the minimum number of days or hours is not set to a index resource.</p>
     #   @return [Boolean]
     class EffectiveLifecyclePolicyDetail < Struct.new(
       :type,
@@ -907,8 +869,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of OpenSearch Serverless index resource.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>A description of the error. For example, <code>The specified Index resource is not
-    #                   found</code>.</p>
+    #   <p>A description of the error. For example, <code>The specified Index resource is not found</code>.</p>
     #   @return [String]
     # @!attribute error_code
     #   <p>The error code for the request.</p>
@@ -918,6 +879,20 @@ module Aws::OpenSearchServerless
       :resource,
       :error_message,
       :error_code,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>FIPS-compliant endpoint URLs for an OpenSearch Serverless collection. These endpoints ensure all data transmission uses FIPS 140-3 validated cryptographic implementations, meeting federal security requirements for government workloads.</p>
+    # @!attribute collection_endpoint
+    #   <p>FIPS-compliant collection endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection. This endpoint uses FIPS 140-3 validated cryptography and is required for federal government workloads.</p>
+    #   @return [String]
+    # @!attribute dashboard_endpoint
+    #   <p>FIPS-compliant endpoint used to access OpenSearch Dashboards. This endpoint uses FIPS 140-3 validated cryptography and is required for federal government workloads that need dashboard visualization capabilities.</p>
+    #   @return [String]
+    class FipsEndpoints < Struct.new(
+      :collection_endpoint,
+      :dashboard_endpoint,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -972,8 +947,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute index_schema
-    #   <p>The JSON schema definition for the index, including field mappings and
-    #               settings.</p>
+    #   <p>The JSON schema definition for the index, including field mappings and settings.</p>
     #   @return [JSON]
     class GetIndexResponse < Struct.new(
       :index_schema,
@@ -999,8 +973,7 @@ module Aws::OpenSearchServerless
     #   <p>Information about the lifecycle policies in your account.</p>
     #   @return [Types::LifecyclePolicyStats]
     # @!attribute total_policy_count
-    #   <p>The total number of OpenSearch Serverless security policies and configurations in your
-    #               account.</p>
+    #   <p>The total number of OpenSearch Serverless security policies and configurations in your account.</p>
     #   @return [Integer]
     class GetPoliciesStatsOutput < Struct.new(
       :access_policy_stats,
@@ -1052,16 +1025,12 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes IAM federation options for an OpenSearch Serverless security configuration
-    #             in the form of a key-value map. These options define how OpenSearch Serverless
-    #             integrates with external identity providers using federation.</p>
+    # <p>Describes IAM federation options for an OpenSearch Serverless security configuration in the form of a key-value map. These options define how OpenSearch Serverless integrates with external identity providers using federation.</p>
     # @!attribute group_attribute
-    #   <p>The group attribute for this IAM federation integration. This attribute is used to map
-    #               identity provider groups to OpenSearch Serverless permissions.</p>
+    #   <p>The group attribute for this IAM federation integration. This attribute is used to map identity provider groups to OpenSearch Serverless permissions.</p>
     #   @return [String]
     # @!attribute user_attribute
-    #   <p>The user attribute for this IAM federation integration. This attribute is used to
-    #               identify users in the federated authentication process.</p>
+    #   <p>The user attribute for this IAM federation integration. This attribute is used to identify users in the federated authentication process.</p>
     #   @return [String]
     class IamFederationConfigOptions < Struct.new(
       :group_attribute,
@@ -1070,32 +1039,24 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes IAM Identity Center options for an OpenSearch Serverless security
-    #             configuration in the form of a key-value map.</p>
+    # <p>Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map.</p>
     # @!attribute instance_arn
-    #   <p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch
-    #               Serverless.</p>
+    #   <p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>
     #   @return [String]
     # @!attribute application_arn
-    #   <p>The ARN of the IAM Identity Center application used to integrate with OpenSearch
-    #               Serverless.</p>
+    #   <p>The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>
     #   @return [String]
     # @!attribute application_name
-    #   <p>The name of the IAM Identity Center application used to integrate with OpenSearch
-    #               Serverless.</p>
+    #   <p>The name of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>
     #   @return [String]
     # @!attribute application_description
-    #   <p>The description of the IAM Identity Center application used to integrate with
-    #               OpenSearch Serverless.</p>
+    #   <p>The description of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>
     #   @return [String]
     # @!attribute user_attribute
-    #   <p>The user attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>UserId</code>
-    #            </p>
+    #   <p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code> </p>
     #   @return [String]
     # @!attribute group_attribute
-    #   <p>The group attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>GroupId</code>.</p>
+    #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class IamIdentityCenterConfigOptions < Struct.new(
       :instance_arn,
@@ -1159,8 +1120,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the lifecycle policy.</p>
     #   @return [String]
     # @!attribute error_message
-    #   <p>A description of the error. For example, <code>The specified Lifecycle Policy is not
-    #                   found</code>.</p>
+    #   <p>A description of the error. For example, <code>The specified Lifecycle Policy is not found</code>.</p>
     #   @return [String]
     # @!attribute error_code
     #   <p>The error code for the request. For example, <code>NOT_FOUND</code>.</p>
@@ -1249,14 +1209,10 @@ module Aws::OpenSearchServerless
     #   <p>Resource filters (can be collections or indexes) that policies can apply to.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>If your initial <code>ListAccessPolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListAccessPolicies</code> operations, which returns results in the next
-    #               page.</p>
+    #   <p>If your initial <code>ListAccessPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListAccessPolicies</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListAccessPoliciesInput < Struct.new(
       :type,
@@ -1271,9 +1227,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the requested access policies.</p>
     #   @return [Array<Types::AccessPolicySummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListAccessPoliciesOutput < Struct.new(
       :access_policy_summaries,
@@ -1286,14 +1240,10 @@ module Aws::OpenSearchServerless
     #   <p> A list of filter names and values that you can use for requests.</p>
     #   @return [Types::CollectionFilters]
     # @!attribute next_token
-    #   <p>If your initial <code>ListCollections</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListCollections</code> operations, which returns results in the next
-    #               page.</p>
+    #   <p>If your initial <code>ListCollections</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollections</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>The maximum number of results to return. Default is 20. You can use
-    #                   <code>nextToken</code> to get the next page of results.</p>
+    #   <p>The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.</p>
     #   @return [Integer]
     class ListCollectionsInput < Struct.new(
       :collection_filters,
@@ -1307,9 +1257,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about each collection.</p>
     #   @return [Array<Types::CollectionSummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListCollectionsOutput < Struct.new(
       :collection_summaries,
@@ -1322,19 +1270,13 @@ module Aws::OpenSearchServerless
     #   <p>The type of lifecycle policy.</p>
     #   @return [String]
     # @!attribute resources
-    #   <p>Resource filters that policies can apply to. Currently, the only supported resource
-    #               type is <code>index</code>.</p>
+    #   <p>Resource filters that policies can apply to. Currently, the only supported resource type is <code>index</code>.</p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>If your initial <code>ListLifecyclePolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListLifecyclePolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListLifecyclePolicies</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use use <code>nextToken</code> to get the next page of results. The default is
-    #               10.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use use <code>nextToken</code> to get the next page of results. The default is 10.</p>
     #   @return [Integer]
     class ListLifecyclePoliciesRequest < Struct.new(
       :type,
@@ -1349,9 +1291,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the requested lifecycle policies.</p>
     #   @return [Array<Types::LifecyclePolicySummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListLifecyclePoliciesResponse < Struct.new(
       :lifecycle_policy_summaries,
@@ -1364,14 +1304,10 @@ module Aws::OpenSearchServerless
     #   <p>The type of security configuration.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>If your initial <code>ListSecurityConfigs</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListSecurityConfigs</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListSecurityConfigs</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityConfigs</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListSecurityConfigsInput < Struct.new(
       :type,
@@ -1385,9 +1321,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the security configurations in your account.</p>
     #   @return [Array<Types::SecurityConfigSummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListSecurityConfigsOutput < Struct.new(
       :security_config_summaries,
@@ -1403,14 +1337,10 @@ module Aws::OpenSearchServerless
     #   <p>Resource filters (can be collection or indexes) that policies can apply to. </p>
     #   @return [Array<String>]
     # @!attribute next_token
-    #   <p>If your initial <code>ListSecurityPolicies</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListSecurityPolicies</code> operations, which returns results in the
-    #               next page.</p>
+    #   <p>If your initial <code>ListSecurityPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityPolicies</code> operations, which returns results in the next page.</p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListSecurityPoliciesInput < Struct.new(
       :type,
@@ -1425,9 +1355,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about the security policies in your account.</p>
     #   @return [Array<Types::SecurityPolicySummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListSecurityPoliciesOutput < Struct.new(
       :security_policy_summaries,
@@ -1437,9 +1365,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in
-    #               the <code>DELETING</code> state), and must be owned by the account ID included in the
-    #               request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     #   @return [String]
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
@@ -1457,19 +1383,13 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute vpc_endpoint_filters
-    #   <p>Filter the results according to the current status of the VPC endpoint. Possible
-    #               statuses are <code>CREATING</code>, <code>DELETING</code>, <code>UPDATING</code>,
-    #                   <code>ACTIVE</code>, and <code>FAILED</code>.</p>
+    #   <p>Filter the results according to the current status of the VPC endpoint. Possible statuses are <code>CREATING</code>, <code>DELETING</code>, <code>UPDATING</code>, <code>ACTIVE</code>, and <code>FAILED</code>.</p>
     #   @return [Types::VpcEndpointFilters]
     # @!attribute next_token
-    #   <p>If your initial <code>ListVpcEndpoints</code> operation returns a
-    #                   <code>nextToken</code>, you can include the returned <code>nextToken</code> in
-    #               subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next
-    #               page. </p>
+    #   <p>If your initial <code>ListVpcEndpoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next page. </p>
     #   @return [String]
     # @!attribute max_results
-    #   <p>An optional parameter that specifies the maximum number of results to return. You can
-    #               use <code>nextToken</code> to get the next page of results. The default is 20.</p>
+    #   <p>An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.</p>
     #   @return [Integer]
     class ListVpcEndpointsInput < Struct.new(
       :vpc_endpoint_filters,
@@ -1483,9 +1403,7 @@ module Aws::OpenSearchServerless
     #   <p>Details about each VPC endpoint, including the name and current status.</p>
     #   @return [Array<Types::VpcEndpointSummary>]
     # @!attribute next_token
-    #   <p>When <code>nextToken</code> is returned, there are more results available. The value
-    #               of <code>nextToken</code> is a unique pagination token for each page. Make the call
-    #               again using the returned token to retrieve the next page.</p>
+    #   <p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>
     #   @return [String]
     class ListVpcEndpointsOutput < Struct.new(
       :vpc_endpoint_summaries,
@@ -1494,8 +1412,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Thrown when the collection you're attempting to create results in a number of search
-    #             or indexing OCUs that exceeds the account limit. </p>
+    # <p>Thrown when the collection you're attempting to create results in a number of search or indexing OCUs that exceeds the account limit. </p>
     # @!attribute message
     #   Description of the error.
     #   @return [String]
@@ -1514,8 +1431,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes SAML options for an OpenSearch Serverless security configuration in the form of a key-value
-    #             map.</p>
+    # <p>Describes SAML options for an OpenSearch Serverless security configuration in the form of a key-value map.</p>
     # @!attribute metadata
     #   <p>The XML IdP metadata file generated from your identity provider.</p>
     #   @return [String]
@@ -1526,8 +1442,7 @@ module Aws::OpenSearchServerless
     #   <p>The group attribute for this SAML integration.</p>
     #   @return [String]
     # @!attribute open_search_serverless_entity_id
-    #   <p>Custom entity ID attribute to override the default entity ID for this SAML
-    #               integration.</p>
+    #   <p>Custom entity ID attribute to override the default entity ID for this SAML integration.</p>
     #   @return [String]
     # @!attribute session_timeout
     #   <p>The session timeout, in minutes. Default is 60 minutes (12 hours).</p>
@@ -1562,9 +1477,7 @@ module Aws::OpenSearchServerless
     #   <p>Describes IAM Identity Center options in the form of a key-value map.</p>
     #   @return [Types::IamIdentityCenterConfigOptions]
     # @!attribute iam_federation_options
-    #   <p>Describes IAM federation options in the form of a key-value map. Contains
-    #               configuration details about how OpenSearch Serverless integrates with external identity
-    #               providers through federation.</p>
+    #   <p>Describes IAM federation options in the form of a key-value map. Contains configuration details about how OpenSearch Serverless integrates with external identity providers through federation.</p>
     #   @return [Types::IamFederationConfigOptions]
     # @!attribute created_date
     #   <p>The date the configuration was created.</p>
@@ -1704,8 +1617,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Thrown when you attempt to create more resources than the service allows based on
-    #             service quotas.</p>
+    # <p>Thrown when you attempt to create more resources than the service allows based on service quotas.</p>
     # @!attribute message
     #   Description of the error.
     #   @return [String]
@@ -1746,13 +1658,10 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in
-    #               the <code>DELETING</code> state), and must be owned by the account ID included in the
-    #               request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A list of tags (key-value pairs) to add to the resource. All tag keys in the request
-    #               must be unique.</p>
+    #   <p>A list of tags (key-value pairs) to add to the resource. All tag keys in the request must be unique.</p>
     #   @return [Array<Types::Tag>]
     class TagResourceInput < Struct.new(
       :resource_arn,
@@ -1767,13 +1676,10 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the resource to remove tags from. The resource must
-    #               be active (not in the <code>DELETING</code> state), and must be owned by the account ID
-    #               included in the request.</p>
+    #   <p>The Amazon Resource Name (ARN) of the resource to remove tags from. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.</p>
     #   @return [String]
     # @!attribute tag_keys
-    #   <p>The tag or set of tags to remove from the resource. All tag keys in the request must
-    #               be unique.</p>
+    #   <p>The tag or set of tags to remove from the resource. All tag keys in the request must be unique.</p>
     #   @return [Array<String>]
     class UntagResourceInput < Struct.new(
       :resource_arn,
@@ -1797,8 +1703,7 @@ module Aws::OpenSearchServerless
     #   <p>The version of the policy being updated.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     #   @return [String]
     # @!attribute policy
     #   <p>The JSON policy document to use as the content for the policy.</p>
@@ -1827,10 +1732,7 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute capacity_limits
-    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units
-    #               (OCUs). These limits are used to scale your collections based on the current workload.
-    #               For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing
-    #                   capacity limits for Amazon OpenSearch Serverless</a>.</p>
+    #   <p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>
     #   @return [Types::CapacityLimits]
     class UpdateAccountSettingsInput < Struct.new(
       :capacity_limits,
@@ -1911,15 +1813,12 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes IAM Identity Center options for updating an OpenSearch Serverless security
-    #             configuration in the form of a key-value map.</p>
+    # <p>Describes IAM Identity Center options for updating an OpenSearch Serverless security configuration in the form of a key-value map.</p>
     # @!attribute user_attribute
-    #   <p>The user attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>UserId</code>.</p>
+    #   <p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>
     #   @return [String]
     # @!attribute group_attribute
-    #   <p>The group attribute for this IAM Identity Center integration. Defaults to
-    #                   <code>GroupId</code>.</p>
+    #   <p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>
     #   @return [String]
     class UpdateIamIdentityCenterConfigOptions < Struct.new(
       :user_attribute,
@@ -1935,8 +1834,7 @@ module Aws::OpenSearchServerless
     #   <p>The name of the index to update.</p>
     #   @return [String]
     # @!attribute index_schema
-    #   <p>The updated JSON schema definition for the index, including field mappings and
-    #               settings. </p>
+    #   <p>The updated JSON schema definition for the index, including field mappings and settings. </p>
     #   @return [JSON]
     class UpdateIndexRequest < Struct.new(
       :id,
@@ -1990,14 +1888,10 @@ module Aws::OpenSearchServerless
     end
 
     # @!attribute id
-    #   <p>The security configuration identifier. For SAML the ID will be
-    #                   <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example,
-    #                   <code>saml/123456789123/OKTADev</code>.</p>
+    #   <p>The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.</p>
     #   @return [String]
     # @!attribute config_version
-    #   <p>The version of the security configuration to be updated. You can find the most recent
-    #               version of a security configuration using the <code>GetSecurityPolicy</code>
-    #               command.</p>
+    #   <p>The version of the security configuration to be updated. You can find the most recent version of a security configuration using the <code>GetSecurityPolicy</code> command.</p>
     #   @return [String]
     # @!attribute description
     #   <p>A description of the security configuration.</p>
@@ -2009,9 +1903,7 @@ module Aws::OpenSearchServerless
     #   <p>Describes IAM Identity Center options in the form of a key-value map.</p>
     #   @return [Types::UpdateIamIdentityCenterConfigOptions]
     # @!attribute iam_federation_options
-    #   <p>Describes IAM federation options in the form of a key-value map for updating an
-    #               existing security configuration. Use this field to modify IAM federation settings for
-    #               the security configuration.</p>
+    #   <p>Describes IAM federation options in the form of a key-value map for updating an existing security configuration. Use this field to modify IAM federation settings for the security configuration.</p>
     #   @return [Types::IamFederationConfigOptions]
     # @!attribute client_token
     #   <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
@@ -2047,8 +1939,7 @@ module Aws::OpenSearchServerless
     #   <p>The version of the policy being updated.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the policy. Typically used to store information about the permissions
-    #               defined in the policy.</p>
+    #   <p>A description of the policy. Typically used to store information about the permissions defined in the policy.</p>
     #   @return [String]
     # @!attribute policy
     #   <p>The JSON policy document to use as the content for the new policy.</p>
@@ -2090,8 +1981,7 @@ module Aws::OpenSearchServerless
     #   <p>The ID of the subnets from which you access OpenSearch Serverless.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The unique identifiers of the security groups that define the ports, protocols, and
-    #               sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     # @!attribute last_modified_date
     #   <p>The timestamp of when the endpoint was last modified.</p>
@@ -2117,9 +2007,7 @@ module Aws::OpenSearchServerless
     #   <p>The unique identifiers of the subnets to remove from the endpoint.</p>
     #   @return [Array<String>]
     # @!attribute add_security_group_ids
-    #   <p>The unique identifiers of the security groups to add to the endpoint. Security groups
-    #               define the ports, protocols, and sources for inbound traffic that you are authorizing
-    #               into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups to add to the endpoint. Security groups define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     # @!attribute remove_security_group_ids
     #   <p>The unique identifiers of the security groups to remove from the endpoint.</p>
@@ -2147,8 +2035,7 @@ module Aws::OpenSearchServerless
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Thrown when the HTTP request contains invalid input or is missing required
-    #             input.</p>
+    # <p>Thrown when the HTTP request contains invalid input or is missing required input.</p>
     # @!attribute message
     #   @return [String]
     class ValidationException < Struct.new(
@@ -2171,8 +2058,7 @@ module Aws::OpenSearchServerless
     #   <p>The ID of the subnets from which you access OpenSearch Serverless.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>The unique identifiers of the security groups that define the ports, protocols, and
-    #               sources for inbound traffic that you are authorizing into your endpoint.</p>
+    #   <p>The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>
     #   @return [Array<String>]
     # @!attribute status
     #   <p>The current status of the endpoint.</p>

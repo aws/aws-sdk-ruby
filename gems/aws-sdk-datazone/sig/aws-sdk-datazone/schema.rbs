@@ -65,6 +65,8 @@ module Aws::DataZone
     AssetTypesForRule: StructureShape
     AssociateEnvironmentRoleInput: StructureShape
     AssociateEnvironmentRoleOutput: StructureShape
+    AssociateGovernedTermsInput: StructureShape
+    AssociateGovernedTermsOutput: StructureShape
     AthenaPropertiesInput: StructureShape
     AthenaPropertiesOutput: StructureShape
     AthenaPropertiesPatch: StructureShape
@@ -274,6 +276,8 @@ module Aws::DataZone
     DetailedGlossaryTerms: ListShape
     DisassociateEnvironmentRoleInput: StructureShape
     DisassociateEnvironmentRoleOutput: StructureShape
+    DisassociateGovernedTermsInput: StructureShape
+    DisassociateGovernedTermsOutput: StructureShape
     DomainDescription: StringShape
     DomainId: StringShape
     DomainName: StringShape
@@ -453,6 +457,8 @@ module Aws::DataZone
     GlossaryTermName: StringShape
     GlossaryTermStatus: EnumShape
     GlossaryTerms: ListShape
+    GlossaryUsageRestriction: EnumShape
+    GlossaryUsageRestrictions: ListShape
     GlueConnection: StructureShape
     GlueConnectionInput: StructureShape
     GlueConnectionPatch: StructureShape
@@ -465,6 +471,9 @@ module Aws::DataZone
     GlueRunConfigurationOutput: StructureShape
     GlueSelfGrantStatusOutput: StructureShape
     GovernanceType: EnumShape
+    GovernedEntityType: EnumShape
+    GovernedGlossaryTerms: ListShape
+    GrantIdentifier: StringShape
     GrantedEntity: UnionShape
     GrantedEntityInput: UnionShape
     GreaterThanExpression: StructureShape

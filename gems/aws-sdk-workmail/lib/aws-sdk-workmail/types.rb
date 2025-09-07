@@ -3615,7 +3615,7 @@ module Aws::WorkMail
     #   <p>The ID of the organization for which the email monitoring configuration is set.</p>
     #   @return [String]
     # @!attribute role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration. If absent, the IAM Role Arn of AWSServiceRoleForAmazonWorkMailEvents will be used.</p>
     #   @return [String]
     # @!attribute log_group_arn
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>

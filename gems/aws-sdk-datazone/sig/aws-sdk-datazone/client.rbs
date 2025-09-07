@@ -118,6 +118,7 @@ module Aws::DataZone
 
     interface _AddPolicyGrantResponse
       include Smithy::Client::_Response[Types::AddPolicyGrantOutput]
+      def grant_id: () -> String?
     end
     def add_policy_grant: (
       ?domain_identifier: String,
@@ -204,6 +205,16 @@ module Aws::DataZone
       ?environment_role_arn: String
     ) -> _AssociateEnvironmentRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEnvironmentRoleResponse
 
+    interface _AssociateGovernedTermsResponse
+      include Smithy::Client::_Response[Types::AssociateGovernedTermsOutput]
+    end
+    def associate_governed_terms: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?governed_glossary_terms: Array[String]
+    ) -> _AssociateGovernedTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateGovernedTermsResponse
+
     interface _CancelMetadataGenerationRunResponse
       include Smithy::Client::_Response[Types::CancelMetadataGenerationRunOutput]
     end
@@ -279,6 +290,7 @@ module Aws::DataZone
       def first_revision_created_at: () -> Time?
       def first_revision_created_by: () -> String?
       def glossary_terms: () -> Array[String]?
+      def governed_glossary_terms: () -> Array[String]?
       def owning_project_id: () -> String?
       def domain_id: () -> String?
       def listing: () -> Types::AssetListingDetails?
@@ -414,6 +426,7 @@ module Aws::DataZone
       def first_revision_created_at: () -> Time?
       def first_revision_created_by: () -> String?
       def glossary_terms: () -> Array[String]?
+      def governed_glossary_terms: () -> Array[String]?
       def owning_project_id: () -> String?
       def domain_id: () -> String?
       def listing: () -> Types::AssetListingDetails?
@@ -961,6 +974,7 @@ module Aws::DataZone
       def owning_project_id: () -> String?
       def description: () -> String?
       def status: () -> String?
+      def usage_restrictions: () -> Array[String]?
     end
     def create_glossary: (
       ?domain_identifier: String,
@@ -968,6 +982,7 @@ module Aws::DataZone
       ?owning_project_identifier: String,
       ?description: String,
       ?status: String,
+      ?usage_restrictions: Array[String],
       ?client_token: String
     ) -> _CreateGlossaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlossaryResponse
 
@@ -981,6 +996,7 @@ module Aws::DataZone
       def short_description: () -> String?
       def long_description: () -> String?
       def term_relations: () -> Types::TermRelations?
+      def usage_restrictions: () -> Array[String]?
     end
     def create_glossary_term: (
       ?domain_identifier: String,
@@ -1565,6 +1581,16 @@ module Aws::DataZone
       ?environment_role_arn: String
     ) -> _DisassociateEnvironmentRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEnvironmentRoleResponse
 
+    interface _DisassociateGovernedTermsResponse
+      include Smithy::Client::_Response[Types::DisassociateGovernedTermsOutput]
+    end
+    def disassociate_governed_terms: (
+      ?domain_identifier: String,
+      ?entity_identifier: String,
+      ?entity_type: String,
+      ?governed_glossary_terms: Array[String]
+    ) -> _DisassociateGovernedTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateGovernedTermsResponse
+
     interface _GetAccountPoolResponse
       include Smithy::Client::_Response[Types::GetAccountPoolOutput]
       def domain_id: () -> String?
@@ -1598,6 +1624,7 @@ module Aws::DataZone
       def first_revision_created_at: () -> Time?
       def first_revision_created_by: () -> String?
       def glossary_terms: () -> Array[String]?
+      def governed_glossary_terms: () -> Array[String]?
       def owning_project_id: () -> String?
       def domain_id: () -> String?
       def listing: () -> Types::AssetListingDetails?
@@ -1935,6 +1962,7 @@ module Aws::DataZone
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
+      def usage_restrictions: () -> Array[String]?
     end
     def get_glossary: (
       ?domain_identifier: String,
@@ -1955,6 +1983,7 @@ module Aws::DataZone
       def created_by: () -> String?
       def updated_at: () -> Time?
       def updated_by: () -> String?
+      def usage_restrictions: () -> Array[String]?
     end
     def get_glossary_term: (
       ?domain_identifier: String,
@@ -2891,6 +2920,7 @@ module Aws::DataZone
           }
         }
       },
+      ?grant_identifier: String,
       ?client_token: String
     ) -> _RemovePolicyGrantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePolicyGrantResponse
 
@@ -3560,6 +3590,7 @@ module Aws::DataZone
       def owning_project_id: () -> String?
       def description: () -> String?
       def status: () -> String?
+      def usage_restrictions: () -> Array[String]?
     end
     def update_glossary: (
       ?domain_identifier: String,
@@ -3580,6 +3611,7 @@ module Aws::DataZone
       def short_description: () -> String?
       def long_description: () -> String?
       def term_relations: () -> Types::TermRelations?
+      def usage_restrictions: () -> Array[String]?
     end
     def update_glossary_term: (
       ?domain_identifier: String,

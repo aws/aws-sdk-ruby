@@ -116,12 +116,14 @@ module Aws::B2bi
         ?file_format: String,
         ?format_details: Types::ConversionTargetFormatDetails,
         ?output_sample_file: Types::OutputSampleFileSource,
+        ?advanced_options: Types::AdvancedOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor file_format: String?
       attr_accessor format_details: Types::ConversionTargetFormatDetails?
       attr_accessor output_sample_file: Types::OutputSampleFileSource?
+      attr_accessor advanced_options: Types::AdvancedOptions?
     end
 
     module ConversionTargetFormat
@@ -461,6 +463,11 @@ module Aws::B2bi
       end
       class Unknown < EdiType
       end
+    end
+
+    module ElementRequirement
+      OPTIONAL: String
+      MANDATORY: String
     end
 
     module FileFormat
@@ -950,11 +957,13 @@ module Aws::B2bi
       def initialize: (
         ?to_format: String,
         ?format_options: Types::FormatOptions,
+        ?advanced_options: Types::AdvancedOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor to_format: String?
       attr_accessor format_options: Types::FormatOptions?
+      attr_accessor advanced_options: Types::AdvancedOptions?
     end
 
     class OutputSampleFileSource
@@ -1235,11 +1244,13 @@ module Aws::B2bi
       def initialize: (
         ?parsed_file_content: String,
         ?parsed_split_file_contents: Array[String],
+        ?validation_messages: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor parsed_file_content: String?
       attr_accessor parsed_split_file_contents: Array[String]?
+      attr_accessor validation_messages: Array[String]?
     end
 
     class ThrottlingException
@@ -1574,10 +1585,27 @@ module Aws::B2bi
 
       def initialize: (
         ?split_options: Types::X12SplitOptions,
+        ?validation_options: Types::X12ValidationOptions,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor split_options: Types::X12SplitOptions?
+      attr_accessor validation_options: Types::X12ValidationOptions?
+    end
+
+    class X12CodeListValidationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?element_id: String,
+        ?codes_to_add: Array[String],
+        ?codes_to_remove: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor element_id: String?
+      attr_accessor codes_to_add: Array[String]?
+      attr_accessor codes_to_remove: Array[String]?
     end
 
     class X12ControlNumbers
@@ -1621,6 +1649,34 @@ module Aws::B2bi
 
       attr_accessor transaction_set: String?
       attr_accessor version: String?
+    end
+
+    class X12ElementLengthValidationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?element_id: String,
+        ?max_length: Integer,
+        ?min_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor element_id: String?
+      attr_accessor max_length: Integer?
+      attr_accessor min_length: Integer?
+    end
+
+    class X12ElementRequirementValidationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?element_position: String,
+        ?requirement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor element_position: String?
+      attr_accessor requirement: String?
     end
 
     class X12Envelope
@@ -2082,6 +2138,41 @@ module Aws::B2bi
       X12_837_X292: String
       X12_837_X298: String
       X12_999_X231: String
+    end
+
+    class X12ValidationOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_rules: Array[Types::X12ValidationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_rules: Array[Types::X12ValidationRule]?
+    end
+
+    class X12ValidationRule
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?code_list_validation_rule: Types::X12CodeListValidationRule,
+        ?element_length_validation_rule: Types::X12ElementLengthValidationRule,
+        ?element_requirement_validation_rule: Types::X12ElementRequirementValidationRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code_list_validation_rule: Types::X12CodeListValidationRule?
+      attr_accessor element_length_validation_rule: Types::X12ElementLengthValidationRule?
+      attr_accessor element_requirement_validation_rule: Types::X12ElementRequirementValidationRule?
+
+      class CodeListValidationRule < X12ValidationRule
+      end
+      class ElementLengthValidationRule < X12ValidationRule
+      end
+      class ElementRequirementValidationRule < X12ValidationRule
+      end
+      class Unknown < X12ValidationRule
+      end
     end
 
     module X12Version

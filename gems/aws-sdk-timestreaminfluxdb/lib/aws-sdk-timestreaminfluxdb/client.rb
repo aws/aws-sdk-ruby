@@ -277,7 +277,7 @@ module Aws::TimestreamInfluxDB
     #   response.to_h #=>
     #   {
     #     db_cluster_id: "DbClusterId",
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
     #   }
     # @return [Types::CreateDbClusterOutput]
     def create_db_cluster(params = {}, options = {})
@@ -374,7 +374,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -577,7 +577,7 @@ module Aws::TimestreamInfluxDB
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
     #   }
     # @return [Types::DeleteDbClusterOutput]
     def delete_db_cluster(params = {}, options = {})
@@ -601,7 +601,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -647,7 +647,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbClusterId", # required
     #     name: "DbClusterName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"],
+    #     status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"],
     #     endpoint: "String",
     #     reader_endpoint: "String",
     #     port: 1,
@@ -691,7 +691,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -829,7 +829,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbClusterId", # required
     #         name: "DbClusterName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"],
+    #         status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"],
     #         endpoint: "String",
     #         reader_endpoint: "String",
     #         port: 1,
@@ -869,7 +869,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbInstanceId", # required
     #         name: "DbInstanceName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #         endpoint: "String",
     #         port: 1,
     #         network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -911,7 +911,7 @@ module Aws::TimestreamInfluxDB
     #         id: "DbInstanceId", # required
     #         name: "DbInstanceName", # required
     #         arn: "Arn", # required
-    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #         endpoint: "String",
     #         port: 1,
     #         network_type: "IPV4" # One of: ["IPV4", "DUAL"],
@@ -1064,7 +1064,7 @@ module Aws::TimestreamInfluxDB
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"]
+    #     db_cluster_status: "CREATING" # One of: ["CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"]
     #   }
     # @return [Types::UpdateDbClusterOutput]
     def update_db_cluster(params = {}, options = {})
@@ -1118,7 +1118,7 @@ module Aws::TimestreamInfluxDB
     #     id: "DbInstanceId", # required
     #     name: "DbInstanceName", # required
     #     arn: "Arn", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"],
     #     endpoint: "String",
     #     port: 1,
     #     network_type: "IPV4" # One of: ["IPV4", "DUAL"],

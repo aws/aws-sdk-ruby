@@ -13571,6 +13571,18 @@ module Aws::WAFV2
     # @option params [Types::OnSourceDDoSProtectionConfig] :on_source_d_do_s_protection_config
     #   <p>Specifies the type of DDoS protection to apply to web request data for a web ACL. For most scenarios, it is recommended to use the default protection level, <code>ACTIVE_UNDER_DDOS</code>. 
     #      If a web ACL is associated with multiple Application Load Balancers, the changes you make to DDoS protection in that web ACL will apply to all associated Application Load Balancers.</p>
+    # @option params [Types::ApplicationConfig] :application_config
+    #   <p>Configures the ability for the WAF console to store and retrieve application attributes. 
+    #            Application attributes help WAF give recommendations for protection packs.</p>
+    #            <p>When using <code>UpdateWebACL</code>, <code>ApplicationConfig</code> follows these rules:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If you omit <code>ApplicationConfig</code> from the request, all existing entries in the web ACL are retained.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you include <code>ApplicationConfig</code>, entries must match the existing values exactly. Any attempt to modify existing entries will result in an error.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "EntityName", # required
@@ -14533,6 +14545,14 @@ module Aws::WAFV2
     #     },
     #     on_source_d_do_s_protection_config: {
     #       alb_low_reputation_mode: "ACTIVE_UNDER_DDOS" # One of: ["ACTIVE_UNDER_DDOS", "ALWAYS_ON"], # required
+    #     },
+    #     application_config: {
+    #       attributes: [
+    #         {
+    #           name: "AttributeName",
+    #           values: ["AttributeValue"]
+    #         }
+    #       ]
     #     }
     #   }
     #   options = {}

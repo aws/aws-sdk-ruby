@@ -126,6 +126,10 @@ module Aws::WorkSpaces
     CreateWorkspacesPoolResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#CreateWorkspacesPoolResult', name: 'CreateWorkspacesPoolResult')
     CreateWorkspacesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#CreateWorkspacesRequest', name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#CreateWorkspacesResult', name: 'CreateWorkspacesResult')
+    CustomImageProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#CustomImageProtocol', name: 'CustomImageProtocol')
+    CustomWorkspaceImageImportErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetails', name: 'CustomWorkspaceImageImportErrorDetails')
+    CustomWorkspaceImageImportErrorDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#CustomWorkspaceImageImportErrorDetailsList', name: 'CustomWorkspaceImageImportErrorDetailsList')
+    CustomWorkspaceImageImportState = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#CustomWorkspaceImageImportState', name: 'CustomWorkspaceImageImportState')
     DataReplication = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#DataReplication', name: 'DataReplication')
     DataReplicationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DataReplicationSettings', name: 'DataReplicationSettings')
     DedicatedTenancyAccountType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#DedicatedTenancyAccountType', name: 'DedicatedTenancyAccountType')
@@ -183,6 +187,8 @@ module Aws::WorkSpaces
     DescribeConnectionAliasPermissionsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeConnectionAliasPermissionsResult', name: 'DescribeConnectionAliasPermissionsResult')
     DescribeConnectionAliasesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeConnectionAliasesRequest', name: 'DescribeConnectionAliasesRequest')
     DescribeConnectionAliasesResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeConnectionAliasesResult', name: 'DescribeConnectionAliasesResult')
+    DescribeCustomWorkspaceImageImportRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportRequest', name: 'DescribeCustomWorkspaceImageImportRequest')
+    DescribeCustomWorkspaceImageImportResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeCustomWorkspaceImageImportResult', name: 'DescribeCustomWorkspaceImageImportResult')
     DescribeImageAssociationsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeImageAssociationsRequest', name: 'DescribeImageAssociationsRequest')
     DescribeImageAssociationsResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeImageAssociationsResult', name: 'DescribeImageAssociationsResult')
     DescribeIpGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#DescribeIpGroupsRequest', name: 'DescribeIpGroupsRequest')
@@ -236,7 +242,9 @@ module Aws::WorkSpaces
     DnsIpAddresses = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#DnsIpAddresses', name: 'DnsIpAddresses')
     DomainName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#DomainName', name: 'DomainName', traits: {"smithy.api#pattern" => "^([a-zA-Z0-9]+[.-])+([a-zA-Z0-9])+$"})
     Ec2ImageId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#Ec2ImageId', name: 'Ec2ImageId', traits: {"smithy.api#pattern" => "^ami\\-([a-f0-9]{8}|[a-f0-9]{17})$"})
+    Ec2ImportTaskId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#Ec2ImportTaskId', name: 'Ec2ImportTaskId', traits: {"smithy.api#length" => {"min" => 19, "max" => 28}, "smithy.api#pattern" => "^import-ami\\-([a-zA-Z0-9]{8}|[a-zA-Z0-9]{17})$"})
     EndpointEncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#EndpointEncryptionMode', name: 'EndpointEncryptionMode')
+    ErrorCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#ErrorCode', name: 'ErrorCode', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
     ErrorDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ErrorDetails', name: 'ErrorDetails')
     ErrorDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#ErrorDetailsList', name: 'ErrorDetailsList')
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#ErrorMessage', name: 'ErrorMessage')
@@ -261,16 +269,23 @@ module Aws::WorkSpaces
     IdleDisconnectTimeoutInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.workspaces#IdleDisconnectTimeoutInSeconds', name: 'IdleDisconnectTimeoutInSeconds', traits: {"smithy.api#range" => {"min" => 0, "max" => 36000}})
     ImageAssociatedResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#ImageAssociatedResourceType', name: 'ImageAssociatedResourceType')
     ImageAssociatedResourceTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#ImageAssociatedResourceTypeList', name: 'ImageAssociatedResourceTypeList')
+    ImageBuildVersionArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#ImageBuildVersionArn', name: 'ImageBuildVersionArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"})
+    ImageComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#ImageComputeType', name: 'ImageComputeType')
+    ImageErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#ImageErrorMessage', name: 'ImageErrorMessage', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     ImagePermission = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImagePermission', name: 'ImagePermission')
     ImagePermissions = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#ImagePermissions', name: 'ImagePermissions')
     ImageResourceAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImageResourceAssociation', name: 'ImageResourceAssociation')
     ImageResourceAssociationList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#ImageResourceAssociationList', name: 'ImageResourceAssociationList')
+    ImageSourceIdentifier = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.workspaces#ImageSourceIdentifier', name: 'ImageSourceIdentifier')
     ImageType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#ImageType', name: 'ImageType')
     ImportClientBrandingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportClientBrandingRequest', name: 'ImportClientBrandingRequest')
     ImportClientBrandingResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportClientBrandingResult', name: 'ImportClientBrandingResult')
+    ImportCustomWorkspaceImageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportCustomWorkspaceImageRequest', name: 'ImportCustomWorkspaceImageRequest')
+    ImportCustomWorkspaceImageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportCustomWorkspaceImageResult', name: 'ImportCustomWorkspaceImageResult')
     ImportWorkspaceImageRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportWorkspaceImageRequest', name: 'ImportWorkspaceImageRequest')
     ImportWorkspaceImageResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ImportWorkspaceImageResult', name: 'ImportWorkspaceImageResult')
     IncompatibleApplicationsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#IncompatibleApplicationsException', name: 'IncompatibleApplicationsException', traits: {"smithy.api#error" => "client"})
+    InfrastructureConfigurationArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#InfrastructureConfigurationArn', name: 'InfrastructureConfigurationArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$"})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "client"})
     InternetFallbackProtocol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#InternetFallbackProtocol', name: 'InternetFallbackProtocol')
     InternetFallbackProtocolList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#InternetFallbackProtocolList', name: 'InternetFallbackProtocolList')
@@ -306,6 +321,7 @@ module Aws::WorkSpaces
     ManagementCidrRangeMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.workspaces#ManagementCidrRangeMaxResults', name: 'ManagementCidrRangeMaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
     MaxUserDurationInSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.workspaces#MaxUserDurationInSeconds', name: 'MaxUserDurationInSeconds', traits: {"smithy.api#range" => {"min" => 600, "max" => 432000}})
     MaximumLength = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.workspaces#MaximumLength', name: 'MaximumLength', traits: {"smithy.api#range" => {"min" => 0}})
+    Message = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#Message', name: 'Message')
     MicrosoftEntraConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#MicrosoftEntraConfig', name: 'MicrosoftEntraConfig')
     MicrosoftEntraConfigTenantId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#MicrosoftEntraConfigTenantId', name: 'MicrosoftEntraConfigTenantId', traits: {"smithy.api#pattern" => "^[a-zA-Z0-9-]{1,100}$"})
     MigrateWorkspaceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#MigrateWorkspaceRequest', name: 'MigrateWorkspaceRequest')
@@ -338,6 +354,7 @@ module Aws::WorkSpaces
     ModifyWorkspaceStateResult = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#ModifyWorkspaceStateResult', name: 'ModifyWorkspaceStateResult')
     NetworkAccessConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#NetworkAccessConfiguration', name: 'NetworkAccessConfiguration')
     NonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#NonEmptyString', name: 'NonEmptyString', traits: {"smithy.api#length" => {"min" => 1}})
+    OSVersion = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#OSVersion', name: 'OSVersion')
     OperatingSystem = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#OperatingSystem', name: 'OperatingSystem')
     OperatingSystemName = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#OperatingSystemName', name: 'OperatingSystemName')
     OperatingSystemNameList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#OperatingSystemNameList', name: 'OperatingSystemNameList')
@@ -348,6 +365,7 @@ module Aws::WorkSpaces
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.workspaces#PaginationToken', name: 'PaginationToken', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
     PendingCreateStandbyWorkspacesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest', name: 'PendingCreateStandbyWorkspacesRequest')
     PendingCreateStandbyWorkspacesRequestList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequestList', name: 'PendingCreateStandbyWorkspacesRequestList')
+    Platform = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#Platform', name: 'Platform')
     PoolsRunningMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#PoolsRunningMode', name: 'PoolsRunningMode')
     Protocol = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.workspaces#Protocol', name: 'Protocol')
     ProtocolList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.workspaces#ProtocolList', name: 'ProtocolList')
@@ -822,6 +840,17 @@ module Aws::WorkSpaces
     CreateWorkspacesResult.add_member(:failed_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FailedCreateWorkspaceRequests, location_name: 'FailedRequests'))
     CreateWorkspacesResult.add_member(:pending_requests, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceList, location_name: 'PendingRequests'))
     CreateWorkspacesResult.type = Types::CreateWorkspacesResult
+    CustomImageProtocol.add_member(:pcoip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PCOIP', traits: {"smithy.api#enumValue" => "PCOIP"}))
+    CustomImageProtocol.add_member(:dcv, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DCV', traits: {"smithy.api#enumValue" => "DCV"}))
+    CustomImageProtocol.add_member(:byop, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BYOP', traits: {"smithy.api#enumValue" => "BYOP"}))
+    CustomWorkspaceImageImportErrorDetails.add_member(:error_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorCode, location_name: 'ErrorCode'))
+    CustomWorkspaceImageImportErrorDetails.add_member(:error_message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageErrorMessage, location_name: 'ErrorMessage'))
+    CustomWorkspaceImageImportErrorDetails.type = Types::CustomWorkspaceImageImportErrorDetails
+    CustomWorkspaceImageImportErrorDetailsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportErrorDetails)
+    CustomWorkspaceImageImportState.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING', traits: {"smithy.api#enumValue" => "PENDING"}))
+    CustomWorkspaceImageImportState.add_member(:in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IN_PROGRESS', traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    CustomWorkspaceImageImportState.add_member(:completed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'COMPLETED', traits: {"smithy.api#enumValue" => "COMPLETED"}))
+    CustomWorkspaceImageImportState.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ERROR', traits: {"smithy.api#enumValue" => "ERROR"}))
     DataReplication.add_member(:no_replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NO_REPLICATION', traits: {"smithy.api#enumValue" => "NO_REPLICATION"}))
     DataReplication.add_member(:primary_as_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PRIMARY_AS_SOURCE', traits: {"smithy.api#enumValue" => "PRIMARY_AS_SOURCE"}))
     DataReplicationSettings.add_member(:data_replication, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DataReplication, location_name: 'DataReplication'))
@@ -906,6 +935,7 @@ module Aws::WorkSpaces
     DescribeAccountResult.add_member(:dedicated_tenancy_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: 'DedicatedTenancySupport'))
     DescribeAccountResult.add_member(:dedicated_tenancy_management_cidr_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: 'DedicatedTenancyManagementCidrRange'))
     DescribeAccountResult.add_member(:dedicated_tenancy_account_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedTenancyAccountType, location_name: 'DedicatedTenancyAccountType'))
+    DescribeAccountResult.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: 'Message'))
     DescribeAccountResult.type = Types::DescribeAccountResult
     DescribeApplicationAssociationsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Limit, location_name: 'MaxResults'))
     DescribeApplicationAssociationsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'NextToken'))
@@ -967,6 +997,17 @@ module Aws::WorkSpaces
     DescribeConnectionAliasesResult.add_member(:connection_aliases, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConnectionAliasList, location_name: 'ConnectionAliases'))
     DescribeConnectionAliasesResult.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'NextToken'))
     DescribeConnectionAliasesResult.type = Types::DescribeConnectionAliasesResult
+    DescribeCustomWorkspaceImageImportRequest.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: 'ImageId', traits: {"smithy.api#required" => {}}))
+    DescribeCustomWorkspaceImageImportRequest.type = Types::DescribeCustomWorkspaceImageImportRequest
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: 'ImageId'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:infrastructure_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: 'InfrastructureConfigurationArn'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportState, location_name: 'State'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:created, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'Created'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:last_updated_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'LastUpdatedTime'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSourceIdentifier, location_name: 'ImageSource'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_builder_instance_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'ImageBuilderInstanceId'))
+    DescribeCustomWorkspaceImageImportResult.add_member(:error_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportErrorDetailsList, location_name: 'ErrorDetails'))
+    DescribeCustomWorkspaceImageImportResult.type = Types::DescribeCustomWorkspaceImageImportResult
     DescribeImageAssociationsRequest.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: 'ImageId', traits: {"smithy.api#required" => {}}))
     DescribeImageAssociationsRequest.add_member(:associated_resource_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageAssociatedResourceTypeList, location_name: 'AssociatedResourceTypes', traits: {"smithy.api#required" => {}}))
     DescribeImageAssociationsRequest.type = Types::DescribeImageAssociationsRequest
@@ -1132,6 +1173,8 @@ module Aws::WorkSpaces
     IDCConfig.type = Types::IDCConfig
     ImageAssociatedResourceType.add_member(:application, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'APPLICATION', traits: {"smithy.api#enumValue" => "APPLICATION"}))
     ImageAssociatedResourceTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageAssociatedResourceType)
+    ImageComputeType.add_member(:base, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BASE', traits: {"smithy.api#enumValue" => "BASE"}))
+    ImageComputeType.add_member(:graphics_g4_dn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'GRAPHICS_G4DN', traits: {"smithy.api#enumValue" => "GRAPHICS_G4DN"}))
     ImagePermission.add_member(:shared_account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsAccount, location_name: 'SharedAccountId'))
     ImagePermission.type = Types::ImagePermission
     ImagePermissions.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImagePermission)
@@ -1144,6 +1187,11 @@ module Aws::WorkSpaces
     ImageResourceAssociation.add_member(:state_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AssociationStateReason, location_name: 'StateReason'))
     ImageResourceAssociation.type = Types::ImageResourceAssociation
     ImageResourceAssociationList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageResourceAssociation)
+    ImageSourceIdentifier.add_member(:ec2_import_task_id, Types::ImageSourceIdentifier::Ec2ImportTaskId, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2ImportTaskId, location_name: 'Ec2ImportTaskId'))
+    ImageSourceIdentifier.add_member(:image_build_version_arn, Types::ImageSourceIdentifier::ImageBuildVersionArn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: 'ImageBuildVersionArn'))
+    ImageSourceIdentifier.add_member(:ec2_image_id, Types::ImageSourceIdentifier::Ec2ImageId, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2ImageId, location_name: 'Ec2ImageId'))
+    ImageSourceIdentifier.add_member(:unknown, Types::ImageSourceIdentifier::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ImageSourceIdentifier.type = Types::ImageSourceIdentifier
     ImageType.add_member(:owned, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'OWNED', traits: {"smithy.api#enumValue" => "OWNED"}))
     ImageType.add_member(:shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SHARED', traits: {"smithy.api#enumValue" => "SHARED"}))
     ImportClientBrandingRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'ResourceId', traits: {"smithy.api#required" => {}}))
@@ -1161,6 +1209,19 @@ module Aws::WorkSpaces
     ImportClientBrandingResult.add_member(:device_type_linux, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultClientBrandingAttributes, location_name: 'DeviceTypeLinux'))
     ImportClientBrandingResult.add_member(:device_type_web, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DefaultClientBrandingAttributes, location_name: 'DeviceTypeWeb'))
     ImportClientBrandingResult.type = Types::ImportClientBrandingResult
+    ImportCustomWorkspaceImageRequest.add_member(:image_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageName, location_name: 'ImageName', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:image_description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageDescription, location_name: 'ImageDescription', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:compute_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageComputeType, location_name: 'ComputeType', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:protocol, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomImageProtocol, location_name: 'Protocol', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:image_source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImageSourceIdentifier, location_name: 'ImageSource', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:infrastructure_configuration_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: 'InfrastructureConfigurationArn', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:platform, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Platform, location_name: 'Platform', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:os_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OSVersion, location_name: 'OsVersion', traits: {"smithy.api#required" => {}}))
+    ImportCustomWorkspaceImageRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    ImportCustomWorkspaceImageRequest.type = Types::ImportCustomWorkspaceImageRequest
+    ImportCustomWorkspaceImageResult.add_member(:image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: 'ImageId'))
+    ImportCustomWorkspaceImageResult.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportState, location_name: 'State'))
+    ImportCustomWorkspaceImageResult.type = Types::ImportCustomWorkspaceImageResult
     ImportWorkspaceImageRequest.add_member(:ec2_image_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Ec2ImageId, location_name: 'Ec2ImageId', traits: {"smithy.api#required" => {}}))
     ImportWorkspaceImageRequest.add_member(:ingestion_process, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageIngestionProcess, location_name: 'IngestionProcess', traits: {"smithy.api#required" => {}}))
     ImportWorkspaceImageRequest.add_member(:image_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceImageName, location_name: 'ImageName', traits: {"smithy.api#required" => {}}))
@@ -1243,6 +1304,7 @@ module Aws::WorkSpaces
     ModifyAccountRequest.add_member(:dedicated_tenancy_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedTenancySupportEnum, location_name: 'DedicatedTenancySupport'))
     ModifyAccountRequest.add_member(:dedicated_tenancy_management_cidr_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: 'DedicatedTenancyManagementCidrRange'))
     ModifyAccountRequest.type = Types::ModifyAccountRequest
+    ModifyAccountResult.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Message, location_name: 'Message'))
     ModifyAccountResult.type = Types::ModifyAccountResult
     ModifyCertificateBasedAuthPropertiesRequest.add_member(:resource_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DirectoryId, location_name: 'ResourceId', traits: {"smithy.api#required" => {}}))
     ModifyCertificateBasedAuthPropertiesRequest.add_member(:certificate_based_auth_properties, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CertificateBasedAuthProperties, location_name: 'CertificateBasedAuthProperties'))
@@ -1290,6 +1352,8 @@ module Aws::WorkSpaces
     NetworkAccessConfiguration.add_member(:eni_private_ip_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'EniPrivateIpAddress'))
     NetworkAccessConfiguration.add_member(:eni_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NonEmptyString, location_name: 'EniId'))
     NetworkAccessConfiguration.type = Types::NetworkAccessConfiguration
+    OSVersion.add_member(:windows_10, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Windows_10', traits: {"smithy.api#enumValue" => "Windows_10"}))
+    OSVersion.add_member(:windows_11, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'Windows_11', traits: {"smithy.api#enumValue" => "Windows_11"}))
     OperatingSystem.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperatingSystemType, location_name: 'Type'))
     OperatingSystem.type = Types::OperatingSystem
     OperatingSystemName.add_member(:amazon_linux_2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AMAZON_LINUX_2', traits: {"smithy.api#enumValue" => "AMAZON_LINUX_2"}))
@@ -1320,6 +1384,7 @@ module Aws::WorkSpaces
     PendingCreateStandbyWorkspacesRequest.add_member(:workspace_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WorkspaceId, location_name: 'WorkspaceId'))
     PendingCreateStandbyWorkspacesRequest.type = Types::PendingCreateStandbyWorkspacesRequest
     PendingCreateStandbyWorkspacesRequestList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PendingCreateStandbyWorkspacesRequest)
+    Platform.add_member(:windows, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'WINDOWS', traits: {"smithy.api#enumValue" => "WINDOWS"}))
     PoolsRunningMode.add_member(:auto_stop, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AUTO_STOP', traits: {"smithy.api#enumValue" => "AUTO_STOP"}))
     PoolsRunningMode.add_member(:always_on, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ALWAYS_ON', traits: {"smithy.api#enumValue" => "ALWAYS_ON"}))
     Protocol.add_member(:pcoip, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PCOIP', traits: {"smithy.api#enumValue" => "PCOIP"}))
@@ -2316,6 +2381,15 @@ module Aws::WorkSpaces
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         operation.traits = {}
       end)
+      service.add_operation(:describe_custom_workspace_image_import, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.workspaces#DescribeCustomWorkspaceImageImport"
+        operation.name = "DescribeCustomWorkspaceImageImport"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCustomWorkspaceImageImportRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCustomWorkspaceImageImportResult)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.traits = {}
+      end)
       service.add_operation(:describe_image_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.workspaces#DescribeImageAssociations"
         operation.name = "DescribeImageAssociations"
@@ -2493,6 +2567,19 @@ module Aws::WorkSpaces
         operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportClientBrandingResult)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.traits = {}
+      end)
+      service.add_operation(:import_custom_workspace_image, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.workspaces#ImportCustomWorkspaceImage"
+        operation.name = "ImportCustomWorkspaceImage"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportCustomWorkspaceImageRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportCustomWorkspaceImageResult)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         operation.traits = {}

@@ -325,7 +325,7 @@ module Aws::ServerlessApplicationRepository
       service.id = "com.amazonaws.serverlessapplicationrepository#ServerlessApplicationRepository"
       service.name = "ServerlessApplicationRepository"
       service.version = "2017-09-08"
-      service.traits = {"aws.api#service" => {"sdkId" => "ServerlessApplicationRepository", "arnNamespace" => "serverlessrepo", "cloudFormationName" => "ServerlessApplicationRepository", "cloudTrailEventSource" => "serverlessapplicationrepository.amazonaws.com", "docId" => "serverlessrepo-2017-09-08", "endpointPrefix" => "serverlessrepo"}, "aws.auth#sigv4" => {"name" => "serverlessrepo"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWSServerlessApplicationRepository"}
+      service.traits = {"aws.api#service" => {"sdkId" => "ServerlessApplicationRepository", "arnNamespace" => "serverlessrepo", "cloudFormationName" => "ServerlessApplicationRepository", "cloudTrailEventSource" => "serverlessapplicationrepository.amazonaws.com", "docId" => "serverlessrepo-2017-09-08", "endpointPrefix" => "serverlessrepo"}, "aws.auth#sigv4" => {"name" => "serverlessrepo"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWSServerlessApplicationRepository"}
       service.add_operation(:create_application, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.serverlessapplicationrepository#CreateApplication"
         operation.name = "CreateApplication"

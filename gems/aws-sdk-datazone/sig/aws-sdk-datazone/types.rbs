@@ -277,9 +277,11 @@ module Aws::DataZone
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?grant_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor grant_id: String?
     end
 
     class AddToProjectMemberPoolPolicyGrantDetail
@@ -436,6 +438,7 @@ module Aws::DataZone
         ?glossary_terms: Array[String],
         ?owning_project_id: String,
         ?additional_attributes: Types::AssetItemAdditionalAttributes,
+        ?governed_glossary_terms: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -453,6 +456,7 @@ module Aws::DataZone
       attr_accessor glossary_terms: Array[String]?
       attr_accessor owning_project_id: String?
       attr_accessor additional_attributes: Types::AssetItemAdditionalAttributes?
+      attr_accessor governed_glossary_terms: Array[String]?
     end
 
     class AssetItemAdditionalAttributes
@@ -483,6 +487,7 @@ module Aws::DataZone
         ?forms: String,
         ?latest_time_series_data_point_forms: Array[Types::TimeSeriesDataPointSummaryFormOutput],
         ?glossary_terms: Array[Types::DetailedGlossaryTerm],
+        ?governed_glossary_terms: Array[Types::DetailedGlossaryTerm],
         ?owning_project_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -494,6 +499,7 @@ module Aws::DataZone
       attr_accessor forms: String?
       attr_accessor latest_time_series_data_point_forms: Array[Types::TimeSeriesDataPointSummaryFormOutput]?
       attr_accessor glossary_terms: Array[Types::DetailedGlossaryTerm]?
+      attr_accessor governed_glossary_terms: Array[Types::DetailedGlossaryTerm]?
       attr_accessor owning_project_id: String?
     end
 
@@ -525,6 +531,7 @@ module Aws::DataZone
         ?listing_created_by: String,
         ?listing_updated_by: String,
         ?glossary_terms: Array[Types::DetailedGlossaryTerm],
+        ?governed_glossary_terms: Array[Types::DetailedGlossaryTerm],
         ?owning_project_id: String,
         ?additional_attributes: Types::AssetListingItemAdditionalAttributes,
       ) -> void
@@ -541,6 +548,7 @@ module Aws::DataZone
       attr_accessor listing_created_by: String?
       attr_accessor listing_updated_by: String?
       attr_accessor glossary_terms: Array[Types::DetailedGlossaryTerm]?
+      attr_accessor governed_glossary_terms: Array[Types::DetailedGlossaryTerm]?
       attr_accessor owning_project_id: String?
       attr_accessor additional_attributes: Types::AssetListingItemAdditionalAttributes?
     end
@@ -671,6 +679,32 @@ module Aws::DataZone
     end
 
     class AssociateEnvironmentRoleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateGovernedTermsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?entity_identifier: String,
+        ?entity_type: String,
+        ?governed_glossary_terms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor governed_glossary_terms: Array[String]?
+    end
+
+    class AssociateGovernedTermsOutput
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -1351,6 +1385,7 @@ module Aws::DataZone
         ?first_revision_created_at: Time,
         ?first_revision_created_by: String,
         ?glossary_terms: Array[String],
+        ?governed_glossary_terms: Array[String],
         ?owning_project_id: String,
         ?domain_id: String,
         ?listing: Types::AssetListingDetails,
@@ -1373,6 +1408,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_at: Time?
       attr_accessor first_revision_created_by: String?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor governed_glossary_terms: Array[String]?
       attr_accessor owning_project_id: String?
       attr_accessor domain_id: String?
       attr_accessor listing: Types::AssetListingDetails?
@@ -1425,6 +1461,7 @@ module Aws::DataZone
         ?first_revision_created_at: Time,
         ?first_revision_created_by: String,
         ?glossary_terms: Array[String],
+        ?governed_glossary_terms: Array[String],
         ?owning_project_id: String,
         ?domain_id: String,
         ?listing: Types::AssetListingDetails,
@@ -1447,6 +1484,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_at: Time?
       attr_accessor first_revision_created_by: String?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor governed_glossary_terms: Array[String]?
       attr_accessor owning_project_id: String?
       attr_accessor domain_id: String?
       attr_accessor listing: Types::AssetListingDetails?
@@ -2161,6 +2199,7 @@ module Aws::DataZone
         ?owning_project_identifier: String,
         ?description: String,
         ?status: String,
+        ?usage_restrictions: Array[String],
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2170,6 +2209,7 @@ module Aws::DataZone
       attr_accessor owning_project_identifier: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor usage_restrictions: Array[String]?
       attr_accessor client_token: String?
     end
 
@@ -2183,6 +2223,7 @@ module Aws::DataZone
         ?owning_project_id: String,
         ?description: String,
         ?status: String,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2192,6 +2233,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class CreateGlossaryPolicyGrantDetail
@@ -2242,6 +2284,7 @@ module Aws::DataZone
         ?short_description: String,
         ?long_description: String,
         ?term_relations: Types::TermRelations,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2253,6 +2296,7 @@ module Aws::DataZone
       attr_accessor short_description: String?
       attr_accessor long_description: String?
       attr_accessor term_relations: Types::TermRelations?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class CreateGroupProfileInput
@@ -3849,6 +3893,32 @@ module Aws::DataZone
 
     end
 
+    class DisassociateGovernedTermsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_identifier: String,
+        ?entity_identifier: String,
+        ?entity_type: String,
+        ?governed_glossary_terms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_identifier: String?
+      attr_accessor entity_identifier: String?
+      attr_accessor entity_type: String?
+      attr_accessor governed_glossary_terms: Array[String]?
+    end
+
+    class DisassociateGovernedTermsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     module DomainStatus
       CREATING: String
       AVAILABLE: String
@@ -4633,6 +4703,7 @@ module Aws::DataZone
         ?first_revision_created_at: Time,
         ?first_revision_created_by: String,
         ?glossary_terms: Array[String],
+        ?governed_glossary_terms: Array[String],
         ?owning_project_id: String,
         ?domain_id: String,
         ?listing: Types::AssetListingDetails,
@@ -4654,6 +4725,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_at: Time?
       attr_accessor first_revision_created_by: String?
       attr_accessor glossary_terms: Array[String]?
+      attr_accessor governed_glossary_terms: Array[String]?
       attr_accessor owning_project_id: String?
       attr_accessor domain_id: String?
       attr_accessor listing: Types::AssetListingDetails?
@@ -5357,6 +5429,7 @@ module Aws::DataZone
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5370,6 +5443,7 @@ module Aws::DataZone
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class GetGlossaryTermInput
@@ -5401,6 +5475,7 @@ module Aws::DataZone
         ?created_by: String,
         ?updated_at: Time,
         ?updated_by: String,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5416,6 +5491,7 @@ module Aws::DataZone
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
       attr_accessor updated_by: String?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class GetGroupProfileInput
@@ -6110,6 +6186,7 @@ module Aws::DataZone
         ?owning_project_id: String,
         ?description: String,
         ?status: String,
+        ?usage_restrictions: Array[String],
         ?created_at: Time,
         ?created_by: String,
         ?updated_at: Time,
@@ -6124,6 +6201,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor usage_restrictions: Array[String]?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
       attr_accessor updated_at: Time?
@@ -6156,6 +6234,7 @@ module Aws::DataZone
         ?id: String,
         ?name: String,
         ?short_description: String,
+        ?usage_restrictions: Array[String],
         ?long_description: String,
         ?term_relations: Types::TermRelations,
         ?status: String,
@@ -6172,6 +6251,7 @@ module Aws::DataZone
       attr_accessor id: String?
       attr_accessor name: String?
       attr_accessor short_description: String?
+      attr_accessor usage_restrictions: Array[String]?
       attr_accessor long_description: String?
       attr_accessor term_relations: Types::TermRelations?
       attr_accessor status: String?
@@ -6196,6 +6276,10 @@ module Aws::DataZone
     module GlossaryTermStatus
       ENABLED: String
       DISABLED: String
+    end
+
+    module GlossaryUsageRestriction
+      ASSET_GOVERNED_TERMS: String
     end
 
     class GlueConnection
@@ -6411,6 +6495,10 @@ module Aws::DataZone
     module GovernanceType
       AWS_MANAGED: String
       USER_MANAGED: String
+    end
+
+    module GovernedEntityType
+      ASSET: String
     end
 
     class GrantedEntity
@@ -8794,6 +8882,7 @@ module Aws::DataZone
         ?detail: Types::PolicyGrantDetail,
         ?created_at: Time,
         ?created_by: String,
+        ?grant_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8801,6 +8890,7 @@ module Aws::DataZone
       attr_accessor detail: Types::PolicyGrantDetail?
       attr_accessor created_at: Time?
       attr_accessor created_by: String?
+      attr_accessor grant_id: String?
     end
 
     class PolicyGrantPrincipal
@@ -9002,6 +9092,7 @@ module Aws::DataZone
       DELETE_FAILED: String
       UPDATING: String
       UPDATE_FAILED: String
+      MOVING: String
     end
 
     class ProjectSummary
@@ -9583,6 +9674,7 @@ module Aws::DataZone
         ?entity_identifier: String,
         ?policy_type: String,
         ?principal: Types::PolicyGrantPrincipal,
+        ?grant_identifier: String,
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -9592,6 +9684,7 @@ module Aws::DataZone
       attr_accessor entity_identifier: String?
       attr_accessor policy_type: String?
       attr_accessor principal: Types::PolicyGrantPrincipal?
+      attr_accessor grant_identifier: String?
       attr_accessor client_token: String?
     end
 
@@ -11782,6 +11875,7 @@ module Aws::DataZone
         ?owning_project_id: String,
         ?description: String,
         ?status: String,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11791,6 +11885,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: String?
       attr_accessor description: String?
       attr_accessor status: String?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class UpdateGlossaryTermInput
@@ -11830,6 +11925,7 @@ module Aws::DataZone
         ?short_description: String,
         ?long_description: String,
         ?term_relations: Types::TermRelations,
+        ?usage_restrictions: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -11841,6 +11937,7 @@ module Aws::DataZone
       attr_accessor short_description: String?
       attr_accessor long_description: String?
       attr_accessor term_relations: Types::TermRelations?
+      attr_accessor usage_restrictions: Array[String]?
     end
 
     class UpdateGroupProfileInput

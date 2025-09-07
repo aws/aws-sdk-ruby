@@ -270,7 +270,10 @@ module Aws::CleanRooms
     #               }
     #             ]
     #           }
-    #         ]
+    #         ],
+    #         error_message_configuration: {
+    #           type: "DETAILED" # One of: ["DETAILED"], # required
+    #         }
     #       }
     #     ],
     #     errors: [ # required
@@ -558,6 +561,8 @@ module Aws::CleanRooms
     #   <p>The parameters of the analysis template.</p>
     # @option params [Types::AnalysisSchema] :schema
     #   <p>A relation within an analysis.</p>
+    # @option params [Types::ErrorMessageConfiguration] :error_message_configuration
+    #   <p>The configuration that specifies the level of detail in error messages returned by analyses using this template. When set to <code>DETAILED</code>, error messages include more information to help troubleshoot issues with PySpark jobs. Detailed error messages may expose underlying data, including sensitive information. Recommended for faster troubleshooting in development and testing environments.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     description: "ResourceDescription",
@@ -597,6 +602,9 @@ module Aws::CleanRooms
     #     ],
     #     schema: {
     #       referenced_tables: ["TableAlias"]
+    #     },
+    #     error_message_configuration: {
+    #       type: "DETAILED" # One of: ["DETAILED"], # required
     #     }
     #   }
     #   options = {}
@@ -670,7 +678,10 @@ module Aws::CleanRooms
     #             }
     #           ]
     #         }
-    #       ]
+    #       ],
+    #       error_message_configuration: {
+    #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       }
     #     }
     #   }
     # @return [Types::CreateAnalysisTemplateOperationOutput]
@@ -705,6 +716,8 @@ module Aws::CleanRooms
     #   <p>The collaboration creator's payment responsibilities set by the collaboration creator. </p> <p>If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer.</p>
     # @option params [String] :analytics_engine
     #   <p> The analytics engine.</p> <note> <p>After July 16, 2025, the <code>CLEAN_ROOMS_SQL</code> parameter will no longer be available. </p> </note>
+    # @option params [Array<String>] :auto_approved_change_request_types
+    #   <p>The types of change requests that are automatically approved for this collaboration.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     members: [ # required
@@ -767,7 +780,8 @@ module Aws::CleanRooms
     #         is_responsible: false, # required
     #       }
     #     },
-    #     analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"]
+    #     analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
+    #     auto_approved_change_request_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
     #   }
     #   options = {}
     #   response = client.create_collaboration(params, options)
@@ -794,12 +808,70 @@ module Aws::CleanRooms
     #       },
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"]
+    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
     #     }
     #   }
     # @return [Types::CreateCollaborationOperationOutput]
     def create_collaboration(params = {}, options = {})
       request = build_request(:create_collaboration, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new change request to modify an existing collaboration. This enables post-creation modifications to collaborations through a structured API-driven approach.</p>
+    # @param [Hash, Types::CreateCollaborationChangeRequestInput] params
+    # @option params [String] :collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    # @option params [Array<Types::ChangeInput>] :changes
+    #   <p>The list of changes to apply to the collaboration. Each change specifies the type of modification and the details of what should be changed.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     changes: [ # required
+    #       {
+    #         specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #         specification: { # required
+    #           # One of:
+    #           member: {
+    #             account_id: "AccountId", # required
+    #             member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #             display_name: "DisplayName"
+    #           }
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_collaboration_change_request(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collaboration_change_request: { # required
+    #       id: "UUID", # required
+    #       collaboration_id: "UUID", # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "PENDING" # One of: ["PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"], # required
+    #       is_auto_approved: false, # required
+    #       changes: [ # required
+    #         {
+    #           specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #           specification: { # required
+    #             # One of:
+    #             member: {
+    #               account_id: "AccountId", # required
+    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #               display_name: "DisplayName"
+    #             }
+    #           },
+    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::CreateCollaborationChangeRequestOutput]
+    def create_collaboration_change_request(params = {}, options = {})
+      request = build_request(:create_collaboration_change_request, params)
       request.send_request(options)
     end
 
@@ -1870,7 +1942,10 @@ module Aws::CleanRooms
     #             }
     #           ]
     #         }
-    #       ]
+    #       ],
+    #       error_message_configuration: {
+    #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       }
     #     }
     #   }
     # @return [Types::GetAnalysisTemplateOperationOutput]
@@ -1912,7 +1987,8 @@ module Aws::CleanRooms
     #       },
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"]
+    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
     #     }
     #   }
     # @return [Types::GetCollaborationOperationOutput]
@@ -2002,12 +2078,60 @@ module Aws::CleanRooms
     #             }
     #           ]
     #         }
-    #       ]
+    #       ],
+    #       error_message_configuration: {
+    #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       }
     #     }
     #   }
     # @return [Types::GetCollaborationAnalysisTemplateOperationOutput]
     def get_collaboration_analysis_template(params = {}, options = {})
       request = build_request(:get_collaboration_analysis_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific collaboration change request.</p>
+    # @param [Hash, Types::GetCollaborationChangeRequestInput] params
+    # @option params [String] :collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    # @option params [String] :change_request_identifier
+    #   <p>A unique identifier for the change request to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     change_request_identifier: "CollaborationChangeRequestIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_collaboration_change_request(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collaboration_change_request: { # required
+    #       id: "UUID", # required
+    #       collaboration_id: "UUID", # required
+    #       create_time: Time.now, # required
+    #       update_time: Time.now, # required
+    #       status: "PENDING" # One of: ["PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"], # required
+    #       is_auto_approved: false, # required
+    #       changes: [ # required
+    #         {
+    #           specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #           specification: { # required
+    #             # One of:
+    #             member: {
+    #               account_id: "AccountId", # required
+    #               member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #               display_name: "DisplayName"
+    #             }
+    #           },
+    #           types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    # @return [Types::GetCollaborationChangeRequestOutput]
+    def get_collaboration_change_request(params = {}, options = {})
+      request = build_request(:get_collaboration_change_request, params)
       request.send_request(options)
     end
 
@@ -2666,6 +2790,13 @@ module Aws::CleanRooms
     #       error: {
     #         message: "String", # required
     #         code: "String", # required
+    #       },
+    #       compute_configuration: {
+    #         # One of:
+    #         worker: {
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
+    #           number: 1, # required
+    #         }
     #       }
     #     }
     #   }
@@ -3101,6 +3232,60 @@ module Aws::CleanRooms
     # @return [Types::ListCollaborationAnalysisTemplatesOperationOutput]
     def list_collaboration_analysis_templates(params = {}, options = {})
       request = build_request(:list_collaboration_analysis_templates, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all change requests for a collaboration with pagination support. Returns change requests sorted by creation time.</p>
+    # @param [Hash, Types::ListCollaborationChangeRequestsInput] params
+    # @option params [String] :collaboration_identifier
+    #   <p>The identifier of the collaboration that the change request is made against.</p>
+    # @option params [String] :status
+    #   <p>A filter to only return change requests with the specified status.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token that's used to fetch the next set of results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results that are returned for an API request call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     collaboration_identifier: "CollaborationIdentifier", # required
+    #     status: "PENDING" # One of: ["PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"],
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_collaboration_change_requests(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     collaboration_change_request_summaries: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         collaboration_id: "UUID", # required
+    #         create_time: Time.now, # required
+    #         update_time: Time.now, # required
+    #         status: "PENDING" # One of: ["PENDING", "APPROVED", "CANCELLED", "DENIED", "COMMITTED"], # required
+    #         is_auto_approved: false, # required
+    #         changes: [ # required
+    #           {
+    #             specification_type: "MEMBER" # One of: ["MEMBER"], # required
+    #             specification: { # required
+    #               # One of:
+    #               member: {
+    #                 account_id: "AccountId", # required
+    #                 member_abilities: ["CAN_QUERY" # One of: ["CAN_QUERY", "CAN_RECEIVE_RESULTS", "CAN_RUN_JOB"]], # required
+    #                 display_name: "DisplayName"
+    #               }
+    #             },
+    #             types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]], # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListCollaborationChangeRequestsOutput]
+    def list_collaboration_change_requests(params = {}, options = {})
+      request = build_request(:list_collaboration_change_requests, params)
       request.send_request(options)
     end
 
@@ -3996,6 +4181,8 @@ module Aws::CleanRooms
     #   <p> The job parameters.</p>
     # @option params [Types::ProtectedJobResultConfigurationInput] :result_configuration
     #   <p>The details needed to write the job results.</p>
+    # @option params [Types::ProtectedJobComputeConfiguration] :compute_configuration
+    #   <p>The compute configuration for the protected job.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     type: "PYSPARK" # One of: ["PYSPARK"], # required
@@ -4009,6 +4196,13 @@ module Aws::CleanRooms
     #         member: {
     #           account_id: "AccountId", # required
     #         }
+    #       }
+    #     },
+    #     compute_configuration: {
+    #       # One of:
+    #       worker: {
+    #         type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
+    #         number: 1, # required
     #       }
     #     }
     #   }
@@ -4060,6 +4254,13 @@ module Aws::CleanRooms
     #       error: {
     #         message: "String", # required
     #         code: "String", # required
+    #       },
+    #       compute_configuration: {
+    #         # One of:
+    #         worker: {
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
+    #           number: 1, # required
+    #         }
     #       }
     #     }
     #   }
@@ -4364,7 +4565,10 @@ module Aws::CleanRooms
     #             }
     #           ]
     #         }
-    #       ]
+    #       ],
+    #       error_message_configuration: {
+    #         type: "DETAILED" # One of: ["DETAILED"], # required
+    #       }
     #     }
     #   }
     # @return [Types::UpdateAnalysisTemplateOperationOutput]
@@ -4415,7 +4619,8 @@ module Aws::CleanRooms
     #       },
     #       query_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       job_log_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
-    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"]
+    #       analytics_engine: "SPARK" # One of: ["SPARK", "CLEAN_ROOMS_SQL"],
+    #       auto_approved_change_types: ["ADD_MEMBER" # One of: ["ADD_MEMBER"]]
     #     }
     #   }
     # @return [Types::UpdateCollaborationOperationOutput]
@@ -5148,6 +5353,13 @@ module Aws::CleanRooms
     #       error: {
     #         message: "String", # required
     #         code: "String", # required
+    #       },
+    #       compute_configuration: {
+    #         # One of:
+    #         worker: {
+    #           type: "CR.1X" # One of: ["CR.1X", "CR.4X"], # required
+    #           number: 1, # required
+    #         }
     #       }
     #     }
     #   }

@@ -56,7 +56,11 @@ module Aws::BedrockRuntime
     ConverseStreamRequest: StructureShape
     ConverseStreamResponse: StructureShape
     ConverseStreamTrace: StructureShape
+    ConverseTokensRequest: StructureShape
     ConverseTrace: StructureShape
+    CountTokensInput: UnionShape
+    CountTokensRequest: StructureShape
+    CountTokensResponse: StructureShape
     DocumentBlock: StructureShape
     DocumentCharLocation: StructureShape
     DocumentChunkLocation: StructureShape
@@ -65,6 +69,7 @@ module Aws::BedrockRuntime
     DocumentFormat: EnumShape
     DocumentPageLocation: StructureShape
     DocumentSource: UnionShape
+    FoundationModelVersionIdentifier: StringShape
     GetAsyncInvokeRequest: StructureShape
     GetAsyncInvokeResponse: StructureShape
     GuardrailAction: EnumShape
@@ -184,6 +189,7 @@ module Aws::BedrockRuntime
     InvokeModelIdentifier: StringShape
     InvokeModelRequest: StructureShape
     InvokeModelResponse: StructureShape
+    InvokeModelTokensRequest: StructureShape
     InvokeModelWithBidirectionalStreamInput: UnionShape
     InvokeModelWithBidirectionalStreamOutput: UnionShape
     InvokeModelWithBidirectionalStreamRequest: StructureShape

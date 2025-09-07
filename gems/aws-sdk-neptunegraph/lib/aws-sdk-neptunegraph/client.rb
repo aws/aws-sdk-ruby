@@ -269,31 +269,19 @@ module Aws::NeptuneGraph
     # <p>Creates a new Neptune Analytics graph.</p>
     # @param [Hash, Types::CreateGraphInput] params
     # @option params [String] :graph_name
-    #   <p>A name for the new Neptune Analytics graph to be created.</p>
-    #            <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its
-    #         first character must be a letter. It cannot end with a hyphen or contain two
-    #         consecutive hyphens. Only lowercase letters are allowed.</p>
+    #   <p>A name for the new Neptune Analytics graph to be created.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Adds metadata tags to the new graph.
-    #           These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
+    #   <p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
     # @option params [Boolean] :public_connectivity
-    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.
-    #          (<code>true</code> to enable, or <code>false</code> to disable.</p>
+    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable.</p>
     # @option params [String] :kms_key_identifier
     #   <p>Specifies a KMS key to use to encrypt data in the new graph.</p>
     # @option params [Types::VectorSearchConfiguration] :vector_search_configuration
-    #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph.
-    #         The value is specified as <code>dimension=</code>value. Max = 65,535</p>
+    #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535</p>
     # @option params [Integer] :replica_count
-    #   <p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p>
-    #            <important>
-    #               <p>
-    #           Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.
-    #         </p>
-    #            </important>
+    #   <p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
     # @option params [Boolean] :deletion_protection
-    #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled.
-    #         (<code>true</code> or <code>false</code>).</p>
+    #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>
     # @option params [Integer] :provisioned_memory
     #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 16</p>
     # @example Request syntax with placeholder values
@@ -319,7 +307,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -345,13 +333,9 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [String] :snapshot_name
-    #   <p>The snapshot name. For example: <code>my-snapshot-1</code>.</p>
-    #            <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its
-    #         first character must be a letter. It cannot end with a hyphen or contain two
-    #         consecutive hyphens. Only lowercase letters are allowed.</p>
+    #   <p>The snapshot name. For example: <code>my-snapshot-1</code>.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Adds metadata tags to the new graph.
-    #           These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
+    #   <p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -379,69 +363,38 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database
-    #     or a Neptune database snapshot.</p>
-    #          <p>The data can be loaded from files in S3 that in either the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV
-    #       format</a> or the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher
-    #       load format</a>.</p>
+    # <p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune database snapshot.</p> <p>The data can be loaded from files in S3 that in either the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a> or the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>.</p>
     # @param [Hash, Types::CreateGraphUsingImportTaskInput] params
     # @option params [String] :graph_name
-    #   <p>A name for the new Neptune Analytics graph to be created.</p>
-    #            <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its
-    #         first character must be a letter. It cannot end with a hyphen or contain two
-    #         consecutive hyphens. Only lowercase letters are allowed.</p>
+    #   <p>A name for the new Neptune Analytics graph to be created.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Adds metadata tags to the new graph. These tags can also be used with cost allocation
-    #        reporting, or used in a Condition statement in an IAM policy.</p>
+    #   <p>Adds metadata tags to the new graph. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
     # @option params [Boolean] :public_connectivity
-    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.
-    #          (<code>true</code> to enable, or <code>false</code> to disable).</p>
+    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable).</p>
     # @option params [String] :kms_key_identifier
     #   <p>Specifies a KMS key to use to encrypt data imported into the new graph.</p>
     # @option params [Types::VectorSearchConfiguration] :vector_search_configuration
-    #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph.
-    #       The value is specified as <code>dimension=</code>value. Max = 65,535 </p>
+    #   <p>Specifies the number of dimensions for vector embeddings that will be loaded into the graph. The value is specified as <code>dimension=</code>value. Max = 65,535 </p>
     # @option params [Integer] :replica_count
-    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p>
-    #            <important>
-    #               <p>
-    #           Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.
-    #         </p>
-    #            </important>
+    #   <p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
     # @option params [Boolean] :deletion_protection
-    #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled.
-    #         (<code>true</code> or <code>false</code>).</p>
+    #   <p>Indicates whether or not to enable deletion protection on the graph. The graph can’t be deleted when deletion protection is enabled. (<code>true</code> or <code>false</code>).</p>
     # @option params [Types::ImportOptions] :import_options
-    #   <p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key
-    #         is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to
-    #       <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is
-    #         encountered.</p>
+    #   <p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>
     # @option params [Integer] :max_provisioned_memory
-    #   <p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024,
-    #          or the approved upper limit for your account.</p>
-    #            <p> If both the minimum and maximum values are specified, the final
-    #       <code>provisioned-memory</code> will be chosen per the actual size of your imported data. If neither value is specified, 
-    #        128 m-NCUs are used.</p>
+    #   <p>The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 1024, or the approved upper limit for your account.</p> <p> If both the minimum and maximum values are specified, the final <code>provisioned-memory</code> will be chosen per the actual size of your imported data. If neither value is specified, 128 m-NCUs are used.</p>
     # @option params [Integer] :min_provisioned_memory
     #   <p>The minimum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Default: 16</p>
     # @option params [Boolean] :fail_on_error
-    #   <p>If set to <code>true</code>, the task halts when an import error is encountered. If set to <code>false</code>,
-    #         the task skips the data that caused the error and continues if possible.</p>
+    #   <p>If set to <code>true</code>, the task halts when an import error is encountered. If set to <code>false</code>, the task skips the data that caused the error and continues if possible.</p>
     # @option params [String] :source
-    #   <p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path,
-    #         or can point to a Neptune database endpoint or snapshot.</p>
+    #   <p>A URL identifying to the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     # @option params [String] :format
-    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies
-    #         the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin
-    #           CSV format</a>, <code>OPEN_CYPHER</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher
-    #             load format</a>, or <code>ntriples</code>, which identifies the
-    #         <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html">RDF n-triples</a> format.</p>
+    #   <p>Specifies the format of S3 data to be imported. Valid values are <code>CSV</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html">Gremlin CSV format</a>, <code>OPEN_CYPHER</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html">openCypher load format</a>, or <code>ntriples</code>, which identifies the <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html">RDF n-triples</a> format.</p>
     # @option params [String] :parquet_type
     #   <p>The parquet type of the import task.</p>
     # @option params [String] :blank_node_handling
-    #   <p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, 
-    #         meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. 
-    #         For more information, see <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling">Handling RDF values</a>.</p>
+    #   <p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. For more information, see <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling">Handling RDF values</a>.</p>
     # @option params [String] :role_arn
     #   <p>The ARN of the IAM role that will allow access to the data that is to be imported.</p>
     # @example Request syntax with placeholder values
@@ -503,11 +456,7 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Create a private graph endpoint to allow private access from to the graph from within
-    #     a VPC. You can attach security groups to the private graph endpoint.</p>
-    #          <note>
-    #             <p>VPC endpoint charges apply.</p>
-    #          </note>
+    # <p>Create a private graph endpoint to allow private access from to the graph from within a VPC. You can attach security groups to the private graph endpoint.</p> <note> <p>VPC endpoint charges apply.</p> </note>
     # @param [Hash, Types::CreatePrivateGraphEndpointInput] params
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
@@ -545,9 +494,7 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [Boolean] :skip_snapshot
-    #   <p>Determines whether a final graph snapshot is created before the graph is deleted.
-    #         If <code>true</code> is specified, no graph snapshot is created. If <code>false</code>
-    #         is specified, a graph snapshot is created before the graph is deleted.</p>
+    #   <p>Determines whether a final graph snapshot is created before the graph is deleted. If <code>true</code> is specified, no graph snapshot is created. If <code>false</code> is specified, a graph snapshot is created before the graph is deleted.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -561,7 +508,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -636,22 +583,7 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Execute an openCypher query.</p>
-    #          <p>
-    #       When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached 
-    #       that allows one of the following IAM actions in that cluster, depending on the query:
-    #     </p>
-    #          <ul>
-    #             <li>
-    #                <p>neptune-graph:ReadDataViaQuery</p>
-    #             </li>
-    #             <li>
-    #                <p>neptune-graph:WriteDataViaQuery</p>
-    #             </li>
-    #             <li>
-    #                <p>neptune-graph:DeleteDataViaQuery</p>
-    #             </li>
-    #          </ul>
+    # <p>Execute an openCypher query.</p> <p> When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached that allows one of the following IAM actions in that cluster, depending on the query: </p> <ul> <li> <p>neptune-graph:ReadDataViaQuery</p> </li> <li> <p>neptune-graph:WriteDataViaQuery</p> </li> <li> <p>neptune-graph:DeleteDataViaQuery</p> </li> </ul>
     # @param [Hash, Types::ExecuteQueryInput] params
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
@@ -662,13 +594,9 @@ module Aws::NeptuneGraph
     # @option params [Hash<String, JSON>] :parameters
     #   <p>The data parameters the query can use in JSON format. For example: {"name": "john", "age": 20}. (optional) </p>
     # @option params [String] :plan_cache
-    #   <p>Query plan cache is a feature that saves the query plan and reuses it on successive executions of the same query. 
-    #         This reduces query latency, and works for both <code>READ</code> and <code>UPDATE</code> queries. The plan cache is an 
-    #         LRU cache with a 5 minute TTL and a capacity of 1000.</p>
+    #   <p>Query plan cache is a feature that saves the query plan and reuses it on successive executions of the same query. This reduces query latency, and works for both <code>READ</code> and <code>UPDATE</code> queries. The plan cache is an LRU cache with a 5 minute TTL and a capacity of 1000.</p>
     # @option params [String] :explain_mode
-    #   <p>The explain mode parameter returns a query explain instead of the actual query results. A query explain can 
-    #         be used to gather insights about the query execution such as planning decisions, time spent on each operator, solutions 
-    #         flowing etc.</p>
+    #   <p>The explain mode parameter returns a query explain instead of the actual query results. A query explain can be used to gather insights about the query execution such as planning decisions, time spent on each operator, solutions flowing etc.</p>
     # @option params [Integer] :query_timeout_milliseconds
     #   <p>Specifies the query timeout duration, in milliseconds. (optional)</p>
     # @example Request syntax with placeholder values
@@ -772,7 +700,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -825,8 +753,7 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [String] :mode
-    #   <p>The summary mode can take one of two values: <code>basic</code> (the default), and
-    #      <code>detailed</code>.</p>
+    #   <p>The summary mode can take one of two values: <code>basic</code> (the default), and <code>detailed</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -956,13 +883,7 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
-    # <p>Retrieves the status of a specified query.</p>
-    #          <note>
-    #             <p>
-    #         When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have the 
-    #         <code>neptune-graph:GetQueryStatus</code> IAM action attached.
-    #       </p>
-    #          </note>
+    # <p>Retrieves the status of a specified query.</p> <note> <p> When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have the <code>neptune-graph:GetQueryStatus</code> IAM action attached. </p> </note>
     # @param [Hash, Types::GetQueryInput] params
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
@@ -1035,17 +956,9 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [String] :next_token
-    #   <p>Pagination token used to paginate output.</p>
-    #            <p>When this value is provided as input, the service returns results from where
-    #         the previous response left off. When this value is present in output, it indicates
-    #         that there are more results to retrieve.</p>
+    #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     # @option params [Integer] :max_results
-    #   <p>The total number of records to return in the command's output.</p>
-    #            <p>If the total number of records available is more than the value specified,
-    #         <code>nextToken</code> is provided in the command's output. To resume pagination,
-    #         provide the <code>nextToken</code> output value in the <code>nextToken</code> argument
-    #         of a subsequent command. Do not use the <code>nextToken</code> response element directly
-    #         outside of the Amazon CLI.</p>
+    #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier",
@@ -1079,17 +992,9 @@ module Aws::NeptuneGraph
     # <p>Lists available Neptune Analytics graphs.</p>
     # @param [Hash, Types::ListGraphsInput] params
     # @option params [String] :next_token
-    #   <p>Pagination token used to paginate output.</p>
-    #            <p>When this value is provided as input, the service returns results from where
-    #         the previous response left off. When this value is present in output, it indicates
-    #         that there are more results to retrieve.</p>
+    #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     # @option params [Integer] :max_results
-    #   <p>The total number of records to return in the command's output.</p>
-    #            <p>If the total number of records available is more than the value specified,
-    #         <code>nextToken</code> is provided in the command's output. To resume pagination,
-    #         provide the <code>nextToken</code> output value in the <code>nextToken</code> argument
-    #         of a subsequent command. Do not use the <code>nextToken</code> response element directly
-    #         outside of the Amazon CLI.</p>
+    #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1105,7 +1010,7 @@ module Aws::NeptuneGraph
     #         id: "GraphId", # required
     #         name: "GraphName", # required
     #         arn: "String", # required
-    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #         status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #         provisioned_memory: 1,
     #         public_connectivity: false,
     #         endpoint: "String",
@@ -1125,17 +1030,9 @@ module Aws::NeptuneGraph
     # <p>Lists import tasks.</p>
     # @param [Hash, Types::ListImportTasksInput] params
     # @option params [String] :next_token
-    #   <p>Pagination token used to paginate output.</p>
-    #            <p>When this value is provided as input, the service returns results from where
-    #         the previous response left off. When this value is present in output, it indicates
-    #         that there are more results to retrieve.</p>
+    #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     # @option params [Integer] :max_results
-    #   <p>The total number of records to return in the command's output.</p>
-    #            <p>If the total number of records available is more than the value specified,
-    #         <code>nextToken</code> is provided in the command's output. To resume pagination,
-    #         provide the <code>nextToken</code> output value in the <code>nextToken</code> argument
-    #         of a subsequent command. Do not use the <code>nextToken</code> response element directly
-    #         outside of the Amazon CLI.</p>
+    #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1170,17 +1067,9 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [String] :next_token
-    #   <p>Pagination token used to paginate output.</p>
-    #            <p>When this value is provided as input, the service returns results from where
-    #         the previous response left off. When this value is present in output, it indicates
-    #         that there are more results to retrieve.</p>
+    #   <p>Pagination token used to paginate output.</p> <p>When this value is provided as input, the service returns results from where the previous response left off. When this value is present in output, it indicates that there are more results to retrieve.</p>
     # @option params [Integer] :max_results
-    #   <p>The total number of records to return in the command's output.</p>
-    #            <p>If the total number of records available is more than the value specified,
-    #         <code>nextToken</code> is provided in the command's output. To resume pagination,
-    #         provide the <code>nextToken</code> output value in the <code>nextToken</code> argument
-    #         of a subsequent command. Do not use the <code>nextToken</code> response element directly
-    #         outside of the Amazon CLI.</p>
+    #   <p>The total number of records to return in the command's output.</p> <p>If the total number of records available is more than the value specified, <code>nextToken</code> is provided in the command's output. To resume pagination, provide the <code>nextToken</code> output value in the <code>nextToken</code> argument of a subsequent command. Do not use the <code>nextToken</code> response element directly outside of the Amazon CLI.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -1271,9 +1160,7 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>ID of the graph to reset.</p>
     # @option params [Boolean] :skip_snapshot
-    #   <p>Determines whether a final graph snapshot is created before the graph data is deleted.
-    #         If set to <code>true</code>, no graph snapshot is created. If set to <code>false</code>,
-    #         a graph snapshot is created before the data is deleted.</p>
+    #   <p>Determines whether a final graph snapshot is created before the graph data is deleted. If set to <code>true</code>, no graph snapshot is created. If set to <code>false</code>, a graph snapshot is created before the data is deleted.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -1287,7 +1174,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -1313,29 +1200,17 @@ module Aws::NeptuneGraph
     # @option params [String] :snapshot_identifier
     #   <p>The ID of the snapshot in question.</p>
     # @option params [String] :graph_name
-    #   <p>A name for the new Neptune Analytics graph to be created from the snapshot.</p>
-    #            <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its
-    #         first character must be a letter. It cannot end with a hyphen or contain two
-    #         consecutive hyphens. Only lowercase letters are allowed.</p>
+    #   <p>A name for the new Neptune Analytics graph to be created from the snapshot.</p> <p>The name must contain from 1 to 63 letters, numbers, or hyphens, and its first character must be a letter. It cannot end with a hyphen or contain two consecutive hyphens. Only lowercase letters are allowed.</p>
     # @option params [Integer] :provisioned_memory
-    #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>
-    #            <p>Min = 16</p>
+    #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>
     # @option params [Boolean] :deletion_protection
-    #   <p>A value that indicates whether the graph has deletion protection enabled.
-    #         The graph can't be deleted when deletion protection is enabled.</p>
+    #   <p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>Adds metadata tags to the snapshot.
-    #           These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
+    #   <p>Adds metadata tags to the snapshot. These tags can also be used with cost allocation reporting, or used in a Condition statement in an IAM policy.</p>
     # @option params [Integer] :replica_count
-    #   <p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p>
-    #            <important>
-    #               <p>
-    #           Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.
-    #         </p>
-    #            </important>
+    #   <p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p> <important> <p> Additional charges equivalent to the m-NCUs selected for the graph apply for each replica. </p> </important>
     # @option params [Boolean] :public_connectivity
-    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.
-    #         (<code>true</code> to enable, or <code>false</code> to disable).</p>
+    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable).</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     snapshot_identifier: "SnapshotIdentifier", # required
@@ -1356,7 +1231,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -1476,25 +1351,57 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
+    # <p>Starts the specific graph.</p>
+    # @param [Hash, Types::StartGraphInput] params
+    # @option params [String] :graph_identifier
+    #   <p>The unique identifier of the Neptune Analytics graph.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     graph_identifier: "GraphIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.start_graph(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GraphId", # required
+    #     name: "GraphName", # required
+    #     arn: "String", # required
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
+    #     status_reason: "String",
+    #     create_time: Time.now,
+    #     provisioned_memory: 1,
+    #     endpoint: "String",
+    #     public_connectivity: false,
+    #     vector_search_configuration: {
+    #       dimension: 1, # required
+    #     },
+    #     replica_count: 1,
+    #     kms_key_identifier: "KmsKeyArn",
+    #     source_snapshot_id: "SnapshotId",
+    #     deletion_protection: false,
+    #     build_number: "String"
+    #   }
+    # @return [Types::StartGraphOutput]
+    def start_graph(params = {}, options = {})
+      request = build_request(:start_graph, params)
+      request.send_request(options)
+    end
+
     # <p>Import data into existing Neptune Analytics graph from Amazon Simple Storage Service (S3). The graph needs to be empty and in the AVAILABLE state.</p>
     # @param [Hash, Types::StartImportTaskInput] params
     # @option params [Types::ImportOptions] :import_options
     #   <p>Options for how to perform an import.</p>
     # @option params [Boolean] :fail_on_error
-    #   <p>If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that 
-    #         caused the error and continues if possible.</p>
+    #   <p>If set to true, the task halts when an import error is encountered. If set to false, the task skips the data that caused the error and continues if possible.</p>
     # @option params [String] :source
-    #   <p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a 
-    #         Neptune database endpoint or snapshot.</p>
+    #   <p>A URL identifying the location of the data to be imported. This can be an Amazon S3 path, or can point to a Neptune database endpoint or snapshot.</p>
     # @option params [String] :format
-    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or 
-    #         OPENCYPHER, which identies the openCypher load format.</p>
+    #   <p>Specifies the format of Amazon S3 data to be imported. Valid values are CSV, which identifies the Gremlin CSV format or OPENCYPHER, which identies the openCypher load format.</p>
     # @option params [String] :parquet_type
     #   <p>The parquet type of the import task.</p>
     # @option params [String] :blank_node_handling
-    #   <p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, 
-    #         meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. 
-    #         For more information, see <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling">Handling RDF values</a>.</p>
+    #   <p>The method to handle blank nodes in the dataset. Currently, only <code>convertToIri</code> is supported, meaning blank nodes are converted to unique IRIs at load time. Must be provided when format is <code>ntriples</code>. For more information, see <a href="https://docs.aws.amazon.com/neptune-analytics/latest/userguide/using-rdf-data.html#rdf-handling">Handling RDF values</a>.</p>
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [String] :role_arn
@@ -1546,27 +1453,49 @@ module Aws::NeptuneGraph
       request.send_request(options)
     end
 
+    # <p>Stops the specific graph.</p>
+    # @param [Hash, Types::StopGraphInput] params
+    # @option params [String] :graph_identifier
+    #   <p>The unique identifier of the Neptune Analytics graph.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     graph_identifier: "GraphIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_graph(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "GraphId", # required
+    #     name: "GraphName", # required
+    #     arn: "String", # required
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
+    #     status_reason: "String",
+    #     create_time: Time.now,
+    #     provisioned_memory: 1,
+    #     endpoint: "String",
+    #     public_connectivity: false,
+    #     vector_search_configuration: {
+    #       dimension: 1, # required
+    #     },
+    #     replica_count: 1,
+    #     kms_key_identifier: "KmsKeyArn",
+    #     source_snapshot_id: "SnapshotId",
+    #     deletion_protection: false,
+    #     build_number: "String"
+    #   }
+    # @return [Types::StopGraphOutput]
+    def stop_graph(params = {}, options = {})
+      request = build_request(:stop_graph, params)
+      request.send_request(options)
+    end
+
     # <p>Adds tags to the specified resource.</p>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :resource_arn
     #   <p>ARN of the resource for which tags need to be added.</p>
     # @option params [Hash<String, String>] :tags
-    #   <p>The tags to be assigned to the Neptune Analytics resource.</p>
-    #            <p>The tags are metadata that are specified as a list of key-value pairs:</p>
-    #            <p>
-    #               <b>Key</b> (string)   –  
-    #          A key is the required name of the tag. The string value can be
-    #          from 1 to 128 Unicode characters in length. It can't be
-    #          prefixed with <code>aws:</code> and can only contain the
-    #          set of Unicode characters specified by this Java regular expression:
-    #        <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p>
-    #            <p>
-    #               <b>Value</b> (string)   –  
-    #          A value is the optional value of the tag. The string value can
-    #          be from 1 to 256 Unicode characters in length. It can't be
-    #          prefixed with <code>aws:</code> and can only contain the
-    #          set of Unicode characters specified by this Java regular expression:
-    #        <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p>
+    #   <p>The tags to be assigned to the Neptune Analytics resource.</p> <p>The tags are metadata that are specified as a list of key-value pairs:</p> <p> <b>Key</b> (string)   –   A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p> <p> <b>Value</b> (string)   –   A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length. It can't be prefixed with <code>aws:</code> and can only contain the set of Unicode characters specified by this Java regular expression: <code>"^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$")</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "Arn", # required
@@ -1612,14 +1541,11 @@ module Aws::NeptuneGraph
     # @option params [String] :graph_identifier
     #   <p>The unique identifier of the Neptune Analytics graph.</p>
     # @option params [Boolean] :public_connectivity
-    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.
-    #         (<code>true</code> to enable, or <code>false</code> to disable.</p>
+    #   <p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated. (<code>true</code> to enable, or <code>false</code> to disable.</p>
     # @option params [Integer] :provisioned_memory
-    #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>
-    #            <p>Min = 16</p>
+    #   <p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>
     # @option params [Boolean] :deletion_protection
-    #   <p>A value that indicates whether the graph has deletion protection enabled.
-    #         The graph can't be deleted when deletion protection is enabled.</p>
+    #   <p>A value that indicates whether the graph has deletion protection enabled. The graph can't be deleted when deletion protection is enabled.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     graph_identifier: "GraphIdentifier", # required
@@ -1635,7 +1561,7 @@ module Aws::NeptuneGraph
     #     id: "GraphId", # required
     #     name: "GraphName", # required
     #     arn: "String", # required
-    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"],
+    #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"],
     #     status_reason: "String",
     #     create_time: Time.now,
     #     provisioned_memory: 1,
@@ -1746,6 +1672,7 @@ module Aws::NeptuneGraph
         graph_deleted: Waiters::GraphDeleted,
         graph_snapshot_available: Waiters::GraphSnapshotAvailable,
         graph_snapshot_deleted: Waiters::GraphSnapshotDeleted,
+        graph_stopped: Waiters::GraphStopped,
         import_task_cancelled: Waiters::ImportTaskCancelled,
         import_task_successful: Waiters::ImportTaskSuccessful,
         private_graph_endpoint_available: Waiters::PrivateGraphEndpointAvailable,

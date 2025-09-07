@@ -227,6 +227,17 @@ module Aws::GeoMaps
       attr_accessor message: String?
     end
 
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 

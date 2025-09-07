@@ -48,9 +48,7 @@ module Aws::Billing
       end
     end
 
-    # <p>
-    #       The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.
-    #     </p>
+    # <p> The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::ConflictException] data
@@ -62,23 +60,18 @@ module Aws::Billing
         @data[:message]
       end
 
-      # <p>
-      #       The identifier for the service resource associated with the request.
-      #     </p>
+      # <p> The identifier for the service resource associated with the request. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>
-      #       The type of resource associated with the request.
-      #     </p>
+      # <p> The type of resource associated with the request. </p>
       def resource_type
         @data[:resource_type]
       end
     end
 
-    # <p>The request processing failed because of an unknown error, exception, or failure.
-    #       </p>
+    # <p>The request processing failed because of an unknown error, exception, or failure. </p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::InternalServerException] data
@@ -91,9 +84,7 @@ module Aws::Billing
       end
     end
 
-    # <p>
-    #       The specified ARN in the request doesn't exist.
-    #     </p>
+    # <p> The specified ARN in the request doesn't exist. </p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::ResourceNotFoundException] data
@@ -105,24 +96,18 @@ module Aws::Billing
         @data[:message]
       end
 
-      # <p>
-      #       Value is a list of resource IDs that were not found.
-      #     </p>
+      # <p> Value is a list of resource IDs that were not found. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>
-      #       Value is the type of resource that was not found.
-      #     </p>
+      # <p> Value is the type of resource that was not found. </p>
       def resource_type
         @data[:resource_type]
       end
     end
 
-    # <p>
-    #       You've reached the limit of resources you can create, or exceeded the size of an individual resource.
-    #     </p>
+    # <p> You've reached the limit of resources you can create, or exceeded the size of an individual resource. </p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::ServiceQuotaExceededException] data
@@ -134,37 +119,28 @@ module Aws::Billing
         @data[:message]
       end
 
-      # <p>
-      #       The ID of the resource.
-      #     </p>
+      # <p> The ID of the resource. </p>
       def resource_id
         @data[:resource_id]
       end
 
-      # <p>
-      #       The type of Amazon Web Services resource.
-      #     </p>
+      # <p> The type of Amazon Web Services resource. </p>
       def resource_type
         @data[:resource_type]
       end
 
-      # <p>
-      #       The container for the <code>serviceCode</code>.
-      #     </p>
+      # <p> The container for the <code>serviceCode</code>. </p>
       def service_code
         @data[:service_code]
       end
 
-      # <p>
-      #       The container for the <code>quotaCode</code>.
-      #     </p>
+      # <p> The container for the <code>quotaCode</code>. </p>
       def quota_code
         @data[:quota_code]
       end
     end
 
-    # <p>The request was denied due to request throttling.
-    #       </p>
+    # <p>The request was denied due to request throttling. </p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::ThrottlingException] data
@@ -177,8 +153,7 @@ module Aws::Billing
       end
     end
 
-    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.
-    #       </p>
+    # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service. </p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Billing::Types::ValidationException] data

@@ -114,6 +114,19 @@ module Aws::TranscribeStreaming
       PT_BR: String
     end
 
+    class CallAnalyticsLanguageWithScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor score: Float?
+    end
+
     class CallAnalyticsTranscriptResultStream
       include Smithy::Schema::Union
 
@@ -1027,6 +1040,11 @@ module Aws::TranscribeStreaming
         ?vocabulary_filter_name: String,
         ?vocabulary_filter_method: String,
         ?language_model_name: String,
+        ?identify_language: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
         ?enable_partial_results_stabilization: bool,
         ?partial_results_stability: String,
         ?content_identification_type: String,
@@ -1044,6 +1062,11 @@ module Aws::TranscribeStreaming
       attr_accessor vocabulary_filter_name: String?
       attr_accessor vocabulary_filter_method: String?
       attr_accessor language_model_name: String?
+      attr_accessor identify_language: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
       attr_accessor enable_partial_results_stabilization: bool?
       attr_accessor partial_results_stability: String?
       attr_accessor content_identification_type: String?
@@ -1065,6 +1088,11 @@ module Aws::TranscribeStreaming
         ?vocabulary_filter_name: String,
         ?vocabulary_filter_method: String,
         ?language_model_name: String,
+        ?identify_language: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
         ?enable_partial_results_stabilization: bool,
         ?partial_results_stability: String,
         ?content_identification_type: String,
@@ -1083,6 +1111,11 @@ module Aws::TranscribeStreaming
       attr_accessor vocabulary_filter_name: String?
       attr_accessor vocabulary_filter_method: String?
       attr_accessor language_model_name: String?
+      attr_accessor identify_language: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
       attr_accessor enable_partial_results_stabilization: bool?
       attr_accessor partial_results_stability: String?
       attr_accessor content_identification_type: String?
@@ -1400,6 +1433,8 @@ module Aws::TranscribeStreaming
         ?entities: Array[Types::CallAnalyticsEntity],
         ?sentiment: String,
         ?issues_detected: Array[Types::IssueDetected],
+        ?language_code: String,
+        ?language_identification: Array[Types::CallAnalyticsLanguageWithScore],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1413,6 +1448,8 @@ module Aws::TranscribeStreaming
       attr_accessor entities: Array[Types::CallAnalyticsEntity]?
       attr_accessor sentiment: String?
       attr_accessor issues_detected: Array[Types::IssueDetected]?
+      attr_accessor language_code: String?
+      attr_accessor language_identification: Array[Types::CallAnalyticsLanguageWithScore]?
     end
 
     module VocabularyFilterMethod

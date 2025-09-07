@@ -11,6 +11,9 @@ module Aws::ConnectParticipant
     AttachmentName: StringShape
     AttachmentSizeInBytes: IntegerShape
     Attachments: ListShape
+    Attendee: StructureShape
+    AttendeeId: StringShape
+    AudioFeatures: StructureShape
     AuthenticationUrl: StringShape
     Bool: BooleanShape
     CancelParticipantAuthenticationRequest: StructureShape
@@ -41,11 +44,15 @@ module Aws::ConnectParticipant
     GetAuthenticationUrlResponse: StructureShape
     GetTranscriptRequest: StructureShape
     GetTranscriptResponse: StructureShape
+    GuidString: StringShape
     ISO8601Datetime: StringShape
     Instant: StringShape
     InternalServerException: StructureShape
     Item: StructureShape
+    JoinToken: StringShape
     MaxResults: IntegerShape
+    MeetingFeatureStatus: EnumShape
+    MeetingFeaturesConfiguration: StructureShape
     Message: StringShape
     MessageMetadata: StructureShape
     MostRecent: IntegerShape
@@ -76,6 +83,7 @@ module Aws::ConnectParticipant
     StartPosition: StructureShape
     ThrottlingException: StructureShape
     Transcript: ListShape
+    URI: StringShape
     URLExpiryInSeconds: IntegerShape
     UploadMetadata: StructureShape
     UploadMetadataSignedHeaders: MapShape
@@ -93,6 +101,9 @@ module Aws::ConnectParticipant
     ViewTemplate: StringShape
     ViewToken: StringShape
     ViewVersion: IntegerShape
+    WebRTCConnection: StructureShape
+    WebRTCMediaPlacement: StructureShape
+    WebRTCMeeting: StructureShape
     Websocket: StructureShape
 
     AmazonConnectParticipantServiceLambda: ServiceShape

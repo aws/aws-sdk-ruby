@@ -1840,6 +1840,9 @@ module Aws::CloudFront
     # @!attribute origin_keepalive_timeout
     #   <p>Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout">Keep-alive timeout (custom origins only)</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>
     #   @return [Integer]
+    # @!attribute ip_address_type
+    #   <p>Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose <code>dualstack</code> to help optimize reliability.</p>
+    #   @return [String]
     class CustomOriginConfig < Struct.new(
       :http_port,
       :https_port,
@@ -1847,6 +1850,7 @@ module Aws::CloudFront
       :origin_ssl_protocols,
       :origin_read_timeout,
       :origin_keepalive_timeout,
+      :ip_address_type,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

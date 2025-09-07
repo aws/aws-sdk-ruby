@@ -400,6 +400,7 @@ module Aws::RDS
     EnableHttpEndpointResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#EnableHttpEndpointResponse', name: 'EnableHttpEndpointResponse')
     EncryptionContextMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.rds#EncryptionContextMap', name: 'EncryptionContextMap')
     Endpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#Endpoint', name: 'Endpoint')
+    EndpointNetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.rds#EndpointNetworkType', name: 'EndpointNetworkType')
     Engine = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#Engine', name: 'Engine', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     EngineDefaults = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#EngineDefaults', name: 'EngineDefaults')
     EngineFamily = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.rds#EngineFamily', name: 'EngineFamily')
@@ -511,6 +512,7 @@ module Aws::RDS
     LongOptional = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.rds#LongOptional', name: 'LongOptional')
     MajorEngineVersion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#MajorEngineVersion', name: 'MajorEngineVersion', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
     Marker = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#Marker', name: 'Marker', traits: {"smithy.api#length" => {"min" => 1, "max" => 340}})
+    MasterUserAuthenticationType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.rds#MasterUserAuthenticationType', name: 'MasterUserAuthenticationType')
     MasterUserSecret = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#MasterUserSecret', name: 'MasterUserSecret')
     MaxDBShardGroupLimitReached = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#MaxDBShardGroupLimitReached', name: 'MaxDBShardGroupLimitReached', traits: {"aws.protocols#awsQueryError" => {"code" => "MaxDBShardGroupLimitReached", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     MaxRecords = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.rds#MaxRecords', name: 'MaxRecords', traits: {"smithy.api#range" => {"min" => 20, "max" => 100}})
@@ -749,6 +751,7 @@ module Aws::RDS
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#Tag', name: 'Tag')
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.rds#TagList', name: 'TagList')
     TagListMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.rds#TagListMessage', name: 'TagListMessage')
+    TargetConnectionNetworkType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.rds#TargetConnectionNetworkType', name: 'TargetConnectionNetworkType')
     TargetDBClusterParameterGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#TargetDBClusterParameterGroupName', name: 'TargetDBClusterParameterGroupName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[A-Za-z](?!.*--)[0-9A-Za-z-]*[^-]|^default(?!.*--)(?!.*\\.\\.)[0-9A-Za-z-.]*[^-]$"})
     TargetDBInstanceClass = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#TargetDBInstanceClass', name: 'TargetDBInstanceClass', traits: {"smithy.api#length" => {"min" => 5, "max" => 20}, "smithy.api#pattern" => "^db\\.[0-9a-z]{2,6}\\.[0-9a-z]{4,9}$"})
     TargetDBParameterGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.rds#TargetDBParameterGroupName', name: 'TargetDBParameterGroupName', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[A-Za-z](?!.*--)[0-9A-Za-z-]*[^-]|^default(?!.*--)(?!.*\\.\\.)[0-9A-Za-z-.]*[^-]$"})
@@ -1153,6 +1156,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:enable_local_write_forwarding, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'EnableLocalWriteForwarding'))
     CreateDBClusterMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CACertificateIdentifier'))
     CreateDBClusterMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'EngineLifecycleSupport'))
+    CreateDBClusterMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: 'MasterUserAuthenticationType'))
     CreateDBClusterMessage.type = Types::CreateDBClusterMessage
     CreateDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBClusterParameterGroupName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateDBClusterParameterGroupMessage.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBParameterGroupFamily', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -1233,6 +1237,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'DedicatedLogVolume'))
     CreateDBInstanceMessage.add_member(:multi_tenant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'MultiTenant'))
     CreateDBInstanceMessage.add_member(:engine_lifecycle_support, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'EngineLifecycleSupport'))
+    CreateDBInstanceMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: 'MasterUserAuthenticationType'))
     CreateDBInstanceMessage.type = Types::CreateDBInstanceMessage
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBInstanceIdentifier', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     CreateDBInstanceReadReplicaMessage.add_member(:source_db_instance_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SourceDBInstanceIdentifier'))
@@ -1299,6 +1304,7 @@ module Aws::RDS
     CreateDBProxyEndpointRequest.add_member(:vpc_security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StringList, location_name: 'VpcSecurityGroupIds'))
     CreateDBProxyEndpointRequest.add_member(:target_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBProxyEndpointTargetRole, location_name: 'TargetRole'))
     CreateDBProxyEndpointRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CreateDBProxyEndpointRequest.add_member(:endpoint_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: 'EndpointNetworkType'))
     CreateDBProxyEndpointRequest.type = Types::CreateDBProxyEndpointRequest
     CreateDBProxyEndpointResponse.add_member(:db_proxy_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBProxyEndpoint, location_name: 'DBProxyEndpoint'))
     CreateDBProxyEndpointResponse.type = Types::CreateDBProxyEndpointResponse
@@ -1312,6 +1318,8 @@ module Aws::RDS
     CreateDBProxyRequest.add_member(:idle_client_timeout, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IntegerOptional, location_name: 'IdleClientTimeout'))
     CreateDBProxyRequest.add_member(:debug_logging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DebugLogging'))
     CreateDBProxyRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'Tags'))
+    CreateDBProxyRequest.add_member(:endpoint_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: 'EndpointNetworkType'))
+    CreateDBProxyRequest.add_member(:target_connection_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetConnectionNetworkType, location_name: 'TargetConnectionNetworkType'))
     CreateDBProxyRequest.type = Types::CreateDBProxyRequest
     CreateDBProxyResponse.add_member(:db_proxy, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBProxy, location_name: 'DBProxy'))
     CreateDBProxyResponse.type = Types::CreateDBProxyResponse
@@ -1914,6 +1922,8 @@ module Aws::RDS
     DBProxy.add_member(:debug_logging, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'DebugLogging'))
     DBProxy.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: 'CreatedDate'))
     DBProxy.add_member(:updated_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: 'UpdatedDate'))
+    DBProxy.add_member(:endpoint_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: 'EndpointNetworkType'))
+    DBProxy.add_member(:target_connection_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetConnectionNetworkType, location_name: 'TargetConnectionNetworkType'))
     DBProxy.type = Types::DBProxy
     DBProxyAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     DBProxyAlreadyExistsFault.type = Types::DBProxyAlreadyExistsFault
@@ -1928,6 +1938,7 @@ module Aws::RDS
     DBProxyEndpoint.add_member(:created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TStamp, location_name: 'CreatedDate'))
     DBProxyEndpoint.add_member(:target_role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBProxyEndpointTargetRole, location_name: 'TargetRole'))
     DBProxyEndpoint.add_member(:is_default, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'IsDefault'))
+    DBProxyEndpoint.add_member(:endpoint_network_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EndpointNetworkType, location_name: 'EndpointNetworkType'))
     DBProxyEndpoint.type = Types::DBProxyEndpoint
     DBProxyEndpointAlreadyExistsFault.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: 'message'))
     DBProxyEndpointAlreadyExistsFault.type = Types::DBProxyEndpointAlreadyExistsFault
@@ -2689,6 +2700,9 @@ module Aws::RDS
     Endpoint.add_member(:port, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'Port'))
     Endpoint.add_member(:hosted_zone_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'HostedZoneId'))
     Endpoint.type = Types::Endpoint
+    EndpointNetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4', traits: {"smithy.api#enumValue" => "IPV4"}))
+    EndpointNetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV6', traits: {"smithy.api#enumValue" => "IPV6"}))
+    EndpointNetworkType.add_member(:dual, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DUAL', traits: {"smithy.api#enumValue" => "DUAL"}))
     EngineDefaults.add_member(:db_parameter_group_family, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBParameterGroupFamily'))
     EngineDefaults.add_member(:marker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Marker'))
     EngineDefaults.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametersList, location_name: 'Parameters'))
@@ -2960,6 +2974,8 @@ module Aws::RDS
     LocalWriteForwardingStatus.add_member(:disabling, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLING', traits: {"smithy.api#enumValue" => "disabling"}))
     LocalWriteForwardingStatus.add_member(:requested, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'REQUESTED', traits: {"smithy.api#enumValue" => "requested"}))
     LogTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: String)
+    MasterUserAuthenticationType.add_member(:password, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PASSWORD', traits: {"smithy.api#enumValue" => "password"}))
+    MasterUserAuthenticationType.add_member(:iam_db_auth, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IAM_DB_AUTH', traits: {"smithy.api#enumValue" => "iam-db-auth"}))
     MasterUserSecret.add_member(:secret_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SecretArn'))
     MasterUserSecret.add_member(:secret_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SecretStatus'))
     MasterUserSecret.add_member(:kms_key_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'KmsKeyId'))
@@ -3111,6 +3127,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: 'AwsBackupRecoveryPointArn'))
     ModifyDBClusterMessage.add_member(:enable_limitless_database, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'EnableLimitlessDatabase'))
     ModifyDBClusterMessage.add_member(:ca_certificate_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'CACertificateIdentifier'))
+    ModifyDBClusterMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: 'MasterUserAuthenticationType'))
     ModifyDBClusterMessage.type = Types::ModifyDBClusterMessage
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'DBClusterParameterGroupName', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
     ModifyDBClusterParameterGroupMessage.add_member(:parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ParametersList, location_name: 'Parameters', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
@@ -3187,6 +3204,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Engine'))
     ModifyDBInstanceMessage.add_member(:dedicated_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'DedicatedLogVolume'))
     ModifyDBInstanceMessage.add_member(:multi_tenant, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BooleanOptional, location_name: 'MultiTenant'))
+    ModifyDBInstanceMessage.add_member(:master_user_authentication_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MasterUserAuthenticationType, location_name: 'MasterUserAuthenticationType'))
     ModifyDBInstanceMessage.type = Types::ModifyDBInstanceMessage
     ModifyDBInstanceResult.add_member(:db_instance, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBInstance, location_name: 'DBInstance'))
     ModifyDBInstanceResult.type = Types::ModifyDBInstanceResult
@@ -3442,6 +3460,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:min_storage_throughput_per_iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleOptional, location_name: 'MinStorageThroughputPerIops'))
     OrderableDBInstanceOption.add_member(:max_storage_throughput_per_iops, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DoubleOptional, location_name: 'MaxStorageThroughputPerIops'))
     OrderableDBInstanceOption.add_member(:supports_dedicated_log_volume, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'SupportsDedicatedLogVolume'))
+    OrderableDBInstanceOption.add_member(:supports_http_endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Boolean, location_name: 'SupportsHttpEndpoint'))
     OrderableDBInstanceOption.type = Types::OrderableDBInstanceOption
     OrderableDBInstanceOptionsList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, traits: {"smithy.api#xmlName" => "OrderableDBInstanceOption"})
     OrderableDBInstanceOptionsMessage.add_member(:orderable_db_instance_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrderableDBInstanceOptionsList, location_name: 'OrderableDBInstanceOptions'))
@@ -4158,6 +4177,8 @@ module Aws::RDS
     TagList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Tag, traits: {"smithy.api#xmlName" => "Tag"})
     TagListMessage.add_member(:tag_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagList, location_name: 'TagList'))
     TagListMessage.type = Types::TagListMessage
+    TargetConnectionNetworkType.add_member(:ipv4, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV4', traits: {"smithy.api#enumValue" => "IPV4"}))
+    TargetConnectionNetworkType.add_member(:ipv6, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IPV6', traits: {"smithy.api#enumValue" => "IPV6"}))
     TargetGroupList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DBProxyTargetGroup)
     TargetHealth.add_member(:state, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetState, location_name: 'State'))
     TargetHealth.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TargetHealthReason, location_name: 'Reason'))

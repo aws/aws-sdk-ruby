@@ -47,7 +47,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The descriptions of the current CloudWatch logging options for the SQL-based Kinesis Data Analytics application.</p>
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     # @!attribute operation_id
-    #   Operation ID for tracking AddApplicationCloudWatchLoggingOption request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
       :application_arn,
@@ -279,7 +279,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The parameters of the new VPC configuration.</p>
     #   @return [Types::VpcConfigurationDescription]
     # @!attribute operation_id
-    #   Operation ID for tracking AddApplicationVpcConfiguration request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class AddApplicationVpcConfigurationResponse < Struct.new(
       :application_arn,
@@ -349,7 +349,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSnapshotConfiguration]
     # @!attribute application_system_rollback_configuration
-    #   Describes system rollback configuration for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSystemRollbackConfiguration]
     # @!attribute vpc_configurations
     #   <p>The array of descriptions of VPC configurations available to the application.</p>
@@ -357,6 +357,9 @@ module Aws::KinesisAnalyticsV2
     # @!attribute zeppelin_application_configuration
     #   <p>The configuration parameters for a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::ZeppelinApplicationConfiguration]
+    # @!attribute application_encryption_configuration
+    #   <p>The configuration to manage encryption at rest.</p>
+    #   @return [Types::ApplicationEncryptionConfiguration]
     class ApplicationConfiguration < Struct.new(
       :sql_application_configuration,
       :flink_application_configuration,
@@ -366,6 +369,7 @@ module Aws::KinesisAnalyticsV2
       :application_system_rollback_configuration,
       :vpc_configurations,
       :zeppelin_application_configuration,
+      :application_encryption_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -390,7 +394,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSnapshotConfigurationDescription]
     # @!attribute application_system_rollback_configuration_description
-    #   Describes system rollback configuration for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSystemRollbackConfigurationDescription]
     # @!attribute vpc_configuration_descriptions
     #   <p>The array of descriptions of VPC configurations available to the application.</p>
@@ -398,6 +402,9 @@ module Aws::KinesisAnalyticsV2
     # @!attribute zeppelin_application_configuration_description
     #   <p>The configuration parameters for a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::ZeppelinApplicationConfigurationDescription]
+    # @!attribute application_encryption_configuration_description
+    #   <p>Describes the encryption at rest configuration.</p>
+    #   @return [Types::ApplicationEncryptionConfigurationDescription]
     class ApplicationConfigurationDescription < Struct.new(
       :sql_application_configuration_description,
       :application_code_configuration_description,
@@ -408,6 +415,7 @@ module Aws::KinesisAnalyticsV2
       :application_system_rollback_configuration_description,
       :vpc_configuration_descriptions,
       :zeppelin_application_configuration_description,
+      :application_encryption_configuration_description,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -431,7 +439,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSnapshotConfigurationUpdate]
     # @!attribute application_system_rollback_configuration_update
-    #   Describes system rollback configuration for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Types::ApplicationSystemRollbackConfigurationUpdate]
     # @!attribute vpc_configuration_updates
     #   <p>Updates to the array of descriptions of VPC configurations available to the application.</p>
@@ -439,6 +447,9 @@ module Aws::KinesisAnalyticsV2
     # @!attribute zeppelin_application_configuration_update
     #   <p>Updates to the configuration of a Managed Service for Apache Flink Studio notebook.</p>
     #   @return [Types::ZeppelinApplicationConfigurationUpdate]
+    # @!attribute application_encryption_configuration_update
+    #   <p>Represents an update for encryption at rest configuration.</p>
+    #   @return [Types::ApplicationEncryptionConfigurationUpdate]
     class ApplicationConfigurationUpdate < Struct.new(
       :sql_application_configuration_update,
       :application_code_configuration_update,
@@ -448,6 +459,7 @@ module Aws::KinesisAnalyticsV2
       :application_system_rollback_configuration_update,
       :vpc_configuration_updates,
       :zeppelin_application_configuration_update,
+      :application_encryption_configuration_update,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -500,7 +512,7 @@ module Aws::KinesisAnalyticsV2
     #           the application version when <code>RollbackApplication</code> was called.</p>
     #   @return [Integer]
     # @!attribute application_version_create_timestamp
-    #   The current timestamp when the application version was created.
+    #   <p>The timestamp that indicates when the application version was created.</p>
     #   @return [Time]
     # @!attribute conditional_token
     #   <p>A value you use to implement strong concurrency for application updates.</p>
@@ -534,6 +546,48 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies the configuration to manage encryption at rest.</p>
+    # @!attribute key_id
+    #   <p>The key ARN, key ID, alias ARN, or alias name of the KMS key used for encryption at rest.</p>
+    #   @return [String]
+    # @!attribute key_type
+    #   <p>Specifies the type of key used for encryption at rest.</p>
+    #   @return [String]
+    class ApplicationEncryptionConfiguration < Struct.new(
+      :key_id,
+      :key_type,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the encryption at rest configuration.</p>
+    # @!attribute key_id
+    #   <p>The key ARN, key ID, alias ARN, or alias name of the KMS key used for encryption at rest.</p>
+    #   @return [String]
+    # @!attribute key_type
+    #   <p>Specifies the type of key used for encryption at rest.</p>
+    #   @return [String]
+    class ApplicationEncryptionConfigurationDescription < Struct.new(
+      :key_id,
+      :key_type,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes configuration updates to encryption at rest.</p>
+    # @!attribute key_id_update
+    #   <p>The key ARN, key ID, alias ARN, or alias name of the KMS key to be used for encryption at rest.</p>
+    #   @return [String]
+    # @!attribute key_type_update
+    #   <p>Specifies the type of key to be used for encryption at rest.</p>
+    #   @return [String]
+    class ApplicationEncryptionConfigurationUpdate < Struct.new(
+      :key_id_update,
+      :key_type_update,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details of the maintenance configuration for the application.</p>
     # @!attribute application_maintenance_window_start_time
     #   <p>The start time for the maintenance window.</p>
@@ -558,21 +612,21 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Provides a description of the operation, such as the type and status of operation
+    # <p>A description of the aplication operation that provides information about the updates that were made to the application.</p>
     # @!attribute operation
-    #   Type of operation performed on an application
+    #   <p>The type of operation that is performed on an application.</p>
     #   @return [String]
     # @!attribute operation_id
-    #   Identifier of the Operation
+    #   <p>The operation ID of the request.</p>
     #   @return [String]
     # @!attribute start_time
-    #   The timestamp at which the operation was created
+    #   <p>The timestamp that indicates when the operation was created.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   The timestamp at which the operation finished for the application
+    #   <p>The timestamp that indicates when the operation finished.</p>
     #   @return [Time]
     # @!attribute operation_status
-    #   Status of the operation performed on an application
+    #   <p>The status of the operation.</p>
     #   @return [String]
     class ApplicationOperationInfo < Struct.new(
       :operation,
@@ -584,24 +638,24 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Provides a description of the operation, such as the operation-type and status
+    # <p>A description of the application operation that provides information about the updates that were made to the application.</p>
     # @!attribute operation
-    #   Type of operation performed on an application
+    #   <p>The type of operation that is performed on an application.</p>
     #   @return [String]
     # @!attribute start_time
-    #   The timestamp at which the operation was created
+    #   <p>The timestamp that indicates when the operation was created.</p>
     #   @return [Time]
     # @!attribute end_time
-    #   The timestamp at which the operation finished for the application
+    #   <p>The timestamp that indicates when the operation finished.</p>
     #   @return [Time]
     # @!attribute operation_status
-    #   Status of the operation performed on an application
+    #   <p>The status of the operation.</p>
     #   @return [String]
     # @!attribute application_version_change_details
-    #   Contains information about the application version changes due to an operation
+    #   <p>Contains information about the version changes that the operation applied to the application.</p>
     #   @return [Types::ApplicationVersionChangeDetails]
     # @!attribute operation_failure_details
-    #   Provides a description of the operation failure
+    #   <p>Provides a description of the operation failure.</p>
     #   @return [Types::OperationFailureDetails]
     class ApplicationOperationInfoDetails < Struct.new(
       :operation,
@@ -690,9 +744,9 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Describes system rollback configuration for a Managed Service for Apache Flink application
+    # <p>Describes the system rollback configuration for a Managed Service for Apache Flink application.</p>
     # @!attribute rollback_enabled
-    #   Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfiguration < Struct.new(
       :rollback_enabled,
@@ -700,9 +754,9 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Describes system rollback configuration for a Managed Service for Apache Flink application
+    # <p>Describes the system rollback configuration for a Managed Service for Apache Flink application.</p>
     # @!attribute rollback_enabled
-    #   Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfigurationDescription < Struct.new(
       :rollback_enabled,
@@ -710,9 +764,9 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Describes system rollback configuration for a Managed Service for Apache Flink application
+    # <p>Describes the system rollback configuration for a Managed Service for Apache Flink application.</p>
     # @!attribute rollback_enabled_update
-    #   Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application
+    #   <p>Describes whether system rollbacks are enabled for a Managed Service for Apache Flink application.</p>
     #   @return [Boolean]
     class ApplicationSystemRollbackConfigurationUpdate < Struct.new(
       :rollback_enabled_update,
@@ -720,12 +774,12 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Contains information about the application version changes due to an operation
+    # <p>Contains information about the version changes that the operation applied to the application.</p>
     # @!attribute application_version_updated_from
-    #   The operation was performed on this version of the application
+    #   <p>The new version that the application was updated to.</p>
     #   @return [Integer]
     # @!attribute application_version_updated_to
-    #   The operation execution resulted in the transition to the following version of the application
+    #   <p>The version that the operation execution applied to the applicartion.</p>
     #   @return [Integer]
     class ApplicationVersionChangeDetails < Struct.new(
       :application_version_updated_from,
@@ -806,9 +860,9 @@ module Aws::KinesisAnalyticsV2
     # <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault 
     #       tolerance.
     #       For more information, see 
-    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
+    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
     #         Checkpoints for Fault Tolerance</a> in the
-    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink Documentation</a>.</p>
+    #       <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink Documentation</a>.</p>
     # @!attribute configuration_type
     #   <p>Describes whether the application uses Managed Service for Apache Flink' default checkpointing behavior. 
     #       You must set this property to <code>CUSTOM</code> in order to set the
@@ -852,7 +906,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes the minimum time in milliseconds after a checkpoint operation completes that a
     #         new checkpoint operation can start. If a checkpoint operation takes longer than the
     #           <code>CheckpointInterval</code>, the application otherwise performs continual checkpoint
-    #         operations. For more information, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/large_state_tuning/#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink
+    #         operations. For more information, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/large_state_tuning/#tuning-checkpointing"> Tuning Checkpointing</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
     #           Documentation</a>.</p>
     #            <note>
     #               <p>If <code>CheckpointConfiguration.ConfigurationType</code> is <code>DEFAULT</code>,
@@ -1301,7 +1355,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The descriptions of the remaining CloudWatch logging options for the application.</p>
     #   @return [Array<Types::CloudWatchLoggingOptionDescription>]
     # @!attribute operation_id
-    #   Operation ID for tracking DeleteApplicationCloudWatchLoggingOption request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
       :application_arn,
@@ -1498,7 +1552,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>The updated version ID of the application.</p>
     #   @return [Integer]
     # @!attribute operation_id
-    #   Operation ID for tracking DeleteApplicationVpcConfiguration request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class DeleteApplicationVpcConfigurationResponse < Struct.new(
       :application_arn,
@@ -1539,12 +1593,12 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Request for information about a specific operation performed on a Managed Service for Apache Flink application
+    # <p>A request for information about a specific operation that was performed on a Managed Service for Apache Flink application.</p>
     # @!attribute application_name
-    #   The name of the application
+    #   <p>The name of the application.</p>
     #   @return [String]
     # @!attribute operation_id
-    #   Identifier of the Operation
+    #   <p>The operation ID of the request.</p>
     #   @return [String]
     class DescribeApplicationOperationRequest < Struct.new(
       :application_name,
@@ -1553,9 +1607,9 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Provides details of the operation corresponding to the operation-ID on a Managed Service for Apache Flink application
+    # <p>Provides details of the operation that corresponds to the operation ID on a Managed Service for Apache Flink application.</p>
     # @!attribute application_operation_info_details
-    #   Provides a description of the operation, such as the operation-type and status
+    #   <p>A description of the application operation that provides information about the updates that were made to the application.</p>
     #   @return [Types::ApplicationOperationInfoDetails]
     class DescribeApplicationOperationResponse < Struct.new(
       :application_operation_info_details,
@@ -1725,9 +1779,9 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Provides a description of the operation failure error
+    # <p>A description of the error that caused an operation to fail.</p>
     # @!attribute error_string
-    #   Error message resulting in failure of the operation
+    #   <p>An error message that is returned when an operation fails.</p>
     #   @return [String]
     class ErrorInfo < Struct.new(
       :error_string,
@@ -1740,9 +1794,9 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes an application's checkpointing configuration. Checkpointing is the 
     #         process of persisting application state for fault tolerance.
     #         For more information, see 
-    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
+    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing">
     #           Checkpoints for Fault Tolerance</a> in the 
-    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink Documentation</a>. </p>
+    #         <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink Documentation</a>. </p>
     #   @return [Types::CheckpointConfiguration]
     # @!attribute monitoring_configuration
     #   <p>Describes configuration parameters for Amazon CloudWatch logging for an
@@ -1772,7 +1826,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes parameters for how an application executes multiple tasks simultaneously.</p>
     #   @return [Types::ParallelismConfigurationDescription]
     # @!attribute job_plan_description
-    #   <p>The job plan for an application. For more information about the job plan, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink
+    #   <p>The job plan for an application. For more information about the job plan, see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/internals/job_scheduling.html">Jobs and Scheduling</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
     #           Documentation</a>. To retrieve the job plan for the application, use the <a>DescribeApplicationRequest$IncludeAdditionalDetails</a> parameter of the <a>DescribeApplication</a> operation.</p>
     #   @return [String]
     class FlinkApplicationConfigurationDescription < Struct.new(
@@ -1811,8 +1865,8 @@ module Aws::KinesisAnalyticsV2
     #        This will happen if the program is updated between snapshots to remove stateful parameters, and 
     #        state data in the snapshot no longer 
     #        corresponds to valid application data. For more information, see 
-    #        <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/ops/state/savepoints/#allowing-non-restored-state">
-    #          Allowing Non-Restored State</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink
+    #        <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/savepoints/#allowing-non-restored-state">
+    #          Allowing Non-Restored State</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
     #            documentation</a>.</p>
     #            <note>
     #               <p>This value defaults to <code>false</code>. If you update your application without
@@ -2422,21 +2476,21 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Request to list operations performed on an application
+    # <p>A request for a list of operations performed on an application.</p>
     # @!attribute application_name
-    #   The name of the application
+    #   <p>The name of the application.</p>
     #   @return [String]
     # @!attribute limit
-    #   Limit on the number of records returned in the response
+    #   <p>The limit on the number of records to be returned in the response.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   If a previous command returned a pagination token, pass it into this value to retrieve the next set of results
+    #   <p>A pagination token that can be used in a subsequent request.</p>
     #   @return [String]
     # @!attribute operation
-    #   Type of operation performed on an application
+    #   <p>The type of operation that is performed on an application.</p>
     #   @return [String]
     # @!attribute operation_status
-    #   Status of the operation performed on an application
+    #   <p>The status of the operation.</p>
     #   @return [String]
     class ListApplicationOperationsRequest < Struct.new(
       :application_name,
@@ -2448,12 +2502,12 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Response with the list of operations for an application
+    # <p>A response that returns a list of operations for an application.</p>
     # @!attribute application_operation_info_list
-    #   List of ApplicationOperationInfo for an application
+    #   <p>A list of <code>ApplicationOperationInfo</code> objects that are associated with an application.</p>
     #   @return [Array<Types::ApplicationOperationInfo>]
     # @!attribute next_token
-    #   If a previous command returned a pagination token, pass it into this value to retrieve the next set of results
+    #   <p>A pagination token that can be used in a subsequent request.</p>
     #   @return [String]
     class ListApplicationOperationsResponse < Struct.new(
       :application_operation_info_list,
@@ -2674,12 +2728,12 @@ module Aws::KinesisAnalyticsV2
       include ::Smithy::Schema::Structure
     end
 
-    # Provides a description of the operation failure
+    # <p>Provides a description of the operation failure.</p>
     # @!attribute rollback_operation_id
-    #   Provides the operation ID of a system-rollback operation executed due to failure in the current operation
+    #   <p>The rollback operation ID of the system-rollback operation that executed due to failure in the current operation.</p>
     #   @return [String]
     # @!attribute error_info
-    #   Provides a description of the operation failure error
+    #   <p>A description of the error that caused an operation to fail.</p>
     #   @return [Types::ErrorInfo]
     class OperationFailureDetails < Struct.new(
       :rollback_operation_id,
@@ -2793,20 +2847,21 @@ module Aws::KinesisAnalyticsV2
 
     # <p>Describes parameters for how a Managed Service for Apache Flink application
     #       executes multiple tasks simultaneously. For more information about parallelism,
-    #       see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/dev/parallel.html">Parallel Execution</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.19/">Apache Flink
+    #       see <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/dev/parallel.html">Parallel Execution</a> in the <a href="https://nightlies.apache.org/flink/flink-docs-release-1.20/">Apache Flink
     #         Documentation</a>.</p>
     # @!attribute configuration_type
     #   <p>Describes whether the application uses the default parallelism for the Managed Service for Apache Flink service. You must set this property to <code>CUSTOM</code>
     #       in order to change your application's <code>AutoScalingEnabled</code>, <code>Parallelism</code>, or <code>ParallelismPerKPU</code> properties.</p>
     #   @return [String]
     # @!attribute parallelism
-    #   <p>Describes the initial number of parallel tasks that a Managed Service for Apache Flink application can perform. If <code>AutoScalingEnabled</code> 
-    #         is set to True, Managed Service for Apache Flink increases the <code>CurrentParallelism</code> value in response to application
-    #       load. The service can increase the <code>CurrentParallelism</code> value up to the maximum parallelism, which is 
-    #         <code>ParalellismPerKPU</code> times the maximum KPUs for the application. 
-    #       The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If 
-    #       application load is reduced, the service can
-    #       reduce the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.</p>
+    #   <p>Describes the initial number of parallel tasks that a Managed Service for Apache Flink application can perform. If
+    #           <code>AutoScalingEnabled</code> is set to True, Managed Service for Apache Flink increases the
+    #           <code>CurrentParallelism</code> value in response to application load. The service can
+    #         increase the <code>CurrentParallelism</code> value up to the maximum parallelism, which is
+    #           <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs
+    #         for an application is 64 by default, and can be increased by requesting a limit increase. If
+    #         application load is reduced, the service can reduce the <code>CurrentParallelism</code> value
+    #         down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
     # @!attribute parallelism_per_kpu
     #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per Kinesis Processing Unit 
@@ -2831,11 +2886,14 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes whether the application uses the default parallelism for the Managed Service for Apache Flink service. </p>
     #   @return [String]
     # @!attribute parallelism
-    #   <p>Describes the initial number of parallel tasks that a Managed Service for Apache Flink application can perform. 
-    #         If <code>AutoScalingEnabled</code> is set to True, then Managed Service for Apache Flink can increase the <code>CurrentParallelism</code> value in response to application
-    #       load. The service can increase <code>CurrentParallelism</code> up to the maximum parallelism, which is <code>ParalellismPerKPU</code> times the maximum KPUs for the application. 
-    #       The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can
-    #       reduce the <code>CurrentParallelism</code> value down to the <code>Parallelism</code> setting.</p>
+    #   <p>Describes the initial number of parallel tasks that a Managed Service for Apache Flink application can perform. If
+    #           <code>AutoScalingEnabled</code> is set to True, then Managed Service for Apache Flink can increase the
+    #           <code>CurrentParallelism</code> value in response to application load. The service can
+    #         increase <code>CurrentParallelism</code> up to the maximum parallelism, which is
+    #           <code>ParalellismPerKPU</code> times the maximum KPUs for the application. The maximum KPUs
+    #         for an application is 64 by default, and can be increased by requesting a limit increase. If
+    #         application load is reduced, the service can reduce the <code>CurrentParallelism</code> value
+    #         down to the <code>Parallelism</code> setting.</p>
     #   @return [Integer]
     # @!attribute parallelism_per_kpu
     #   <p>Describes the number of parallel tasks that a Managed Service for Apache Flink application can perform per 
@@ -3066,7 +3124,7 @@ module Aws::KinesisAnalyticsV2
     #         latest version, and input and output configurations.</p>
     #   @return [Types::ApplicationDetail]
     # @!attribute operation_id
-    #   Operation ID for tracking RollbackApplication request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class RollbackApplicationResponse < Struct.new(
       :application_detail,
@@ -3319,12 +3377,16 @@ module Aws::KinesisAnalyticsV2
     # @!attribute runtime_environment
     #   <p>The Flink Runtime for the application snapshot.</p>
     #   @return [String]
+    # @!attribute application_encryption_configuration_description
+    #   <p>Specifies the encryption settings of data at rest for the application snapshot.</p>
+    #   @return [Types::ApplicationEncryptionConfigurationDescription]
     class SnapshotDetails < Struct.new(
       :snapshot_name,
       :snapshot_status,
       :application_version_id,
       :snapshot_creation_timestamp,
       :runtime_environment,
+      :application_encryption_configuration_description,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -3442,7 +3504,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # @!attribute operation_id
-    #   Operation ID for tracking StartApplication request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class StartApplicationResponse < Struct.new(
       :operation_id,
@@ -3475,7 +3537,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # @!attribute operation_id
-    #   Operation ID for tracking StopApplication request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class StopApplicationResponse < Struct.new(
       :operation_id,
@@ -3662,7 +3724,7 @@ module Aws::KinesisAnalyticsV2
     #   <p>Describes application updates.</p>
     #   @return [Types::ApplicationDetail]
     # @!attribute operation_id
-    #   Operation ID for tracking UpdateApplication request
+    #   <p>The operation ID that can be used to track the request.</p>
     #   @return [String]
     class UpdateApplicationResponse < Struct.new(
       :application_detail,

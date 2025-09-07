@@ -66,6 +66,8 @@ module Aws::CleanRooms
     AthenaTableName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#AthenaTableName', name: 'AthenaTableName', traits: {"smithy.api#length" => {"max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_](([a-zA-Z0-9_]+)*([a-zA-Z0-9_]+))?$"})
     AthenaTableReference = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#AthenaTableReference', name: 'AthenaTableReference')
     AthenaWorkGroup = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#AthenaWorkGroup', name: 'AthenaWorkGroup', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^([a-zA-Z0-9._-])*$"})
+    AutoApprovedChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#AutoApprovedChangeType', name: 'AutoApprovedChangeType')
+    AutoApprovedChangeTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#AutoApprovedChangeTypeList', name: 'AutoApprovedChangeTypeList', traits: {"smithy.api#uniqueItems" => {}})
     BatchGetCollaborationAnalysisTemplateError = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateError', name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateErrorList', name: 'BatchGetCollaborationAnalysisTemplateErrorList', traits: {"smithy.api#length" => {"max" => 10}})
     BatchGetCollaborationAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplateOperationInput', name: 'BatchGetCollaborationAnalysisTemplateOperationInput')
@@ -80,6 +82,15 @@ module Aws::CleanRooms
     BatchGetSchemaOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BatchGetSchemaOperationOutput', name: 'BatchGetSchemaOperationOutput')
     BilledJobResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BilledJobResourceUtilization', name: 'BilledJobResourceUtilization')
     BilledResourceUtilization = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#BilledResourceUtilization', name: 'BilledResourceUtilization')
+    Change = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#Change', name: 'Change')
+    ChangeInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ChangeInput', name: 'ChangeInput')
+    ChangeInputList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ChangeInputList', name: 'ChangeInputList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
+    ChangeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ChangeList', name: 'ChangeList', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}, "smithy.api#uniqueItems" => {}})
+    ChangeRequestStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ChangeRequestStatus', name: 'ChangeRequestStatus')
+    ChangeSpecification = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.cleanrooms#ChangeSpecification', name: 'ChangeSpecification')
+    ChangeSpecificationType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ChangeSpecificationType', name: 'ChangeSpecificationType')
+    ChangeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ChangeType', name: 'ChangeType')
+    ChangeTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ChangeTypeList', name: 'ChangeTypeList', traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#uniqueItems" => {}})
     CleanroomsArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#CleanroomsArn', name: 'CleanroomsArn', traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#pattern" => "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:[\\d\\w/-]+$"})
     Collaboration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#Collaboration', name: 'Collaboration')
     CollaborationAnalysisTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationAnalysisTemplate', name: 'CollaborationAnalysisTemplate')
@@ -87,6 +98,10 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationAnalysisTemplateSummary', name: 'CollaborationAnalysisTemplateSummary')
     CollaborationAnalysisTemplateSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#CollaborationAnalysisTemplateSummaryList', name: 'CollaborationAnalysisTemplateSummaryList')
     CollaborationArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#CollaborationArn', name: 'CollaborationArn', traits: {"smithy.api#length" => {"max" => 100}, "smithy.api#pattern" => "^arn:aws:[\\w]+:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:collaboration/[\\d\\w-]+$"})
+    CollaborationChangeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationChangeRequest', name: 'CollaborationChangeRequest')
+    CollaborationChangeRequestIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#CollaborationChangeRequestIdentifier', name: 'CollaborationChangeRequestIdentifier', traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"})
+    CollaborationChangeRequestSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationChangeRequestSummary', name: 'CollaborationChangeRequestSummary')
+    CollaborationChangeRequestSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#CollaborationChangeRequestSummaryList', name: 'CollaborationChangeRequestSummaryList')
     CollaborationConfiguredAudienceModelAssociation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociation', name: 'CollaborationConfiguredAudienceModelAssociation')
     CollaborationConfiguredAudienceModelAssociationSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociationSummary', name: 'CollaborationConfiguredAudienceModelAssociationSummary')
     CollaborationConfiguredAudienceModelAssociationSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#CollaborationConfiguredAudienceModelAssociationSummaryList', name: 'CollaborationConfiguredAudienceModelAssociationSummaryList')
@@ -150,6 +165,8 @@ module Aws::CleanRooms
     ConsolidatedPolicyV1 = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.cleanrooms#ConsolidatedPolicyV1', name: 'ConsolidatedPolicyV1')
     CreateAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateAnalysisTemplateOperationInput', name: 'CreateAnalysisTemplateOperationInput')
     CreateAnalysisTemplateOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateAnalysisTemplateOperationOutput', name: 'CreateAnalysisTemplateOperationOutput')
+    CreateCollaborationChangeRequestInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateCollaborationChangeRequestInput', name: 'CreateCollaborationChangeRequestInput')
+    CreateCollaborationChangeRequestOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateCollaborationChangeRequestOutput', name: 'CreateCollaborationChangeRequestOutput')
     CreateCollaborationOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateCollaborationOperationInput', name: 'CreateCollaborationOperationInput')
     CreateCollaborationOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateCollaborationOperationOutput', name: 'CreateCollaborationOperationOutput')
     CreateConfiguredAudienceModelAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#CreateConfiguredAudienceModelAssociationInput', name: 'CreateConfiguredAudienceModelAssociationInput')
@@ -218,12 +235,16 @@ module Aws::CleanRooms
     DirectAnalysisConfigurationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#DirectAnalysisConfigurationDetails', name: 'DirectAnalysisConfigurationDetails')
     DisplayName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#DisplayName', name: 'DisplayName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
     Epsilon = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cleanrooms#Epsilon', name: 'Epsilon', traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
+    ErrorMessageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ErrorMessageConfiguration', name: 'ErrorMessageConfiguration')
+    ErrorMessageType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ErrorMessageType', name: 'ErrorMessageType')
     FilterableMemberStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#FilterableMemberStatus', name: 'FilterableMemberStatus', traits: {"smithy.api#enum" => [{"name" => "INVITED", "value" => "INVITED"}, {"name" => "ACTIVE", "value" => "ACTIVE"}]})
     GenericResourceName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#GenericResourceName', name: 'GenericResourceName', traits: {"smithy.api#length" => {"min" => 1, "max" => 100}, "smithy.api#pattern" => "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$"})
     GetAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetAnalysisTemplateOperationInput', name: 'GetAnalysisTemplateOperationInput')
     GetAnalysisTemplateOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetAnalysisTemplateOperationOutput', name: 'GetAnalysisTemplateOperationOutput')
     GetCollaborationAnalysisTemplateOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationAnalysisTemplateOperationInput', name: 'GetCollaborationAnalysisTemplateOperationInput')
     GetCollaborationAnalysisTemplateOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationAnalysisTemplateOperationOutput', name: 'GetCollaborationAnalysisTemplateOperationOutput')
+    GetCollaborationChangeRequestInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationChangeRequestInput', name: 'GetCollaborationChangeRequestInput')
+    GetCollaborationChangeRequestOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationChangeRequestOutput', name: 'GetCollaborationChangeRequestOutput')
     GetCollaborationConfiguredAudienceModelAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationConfiguredAudienceModelAssociationInput', name: 'GetCollaborationConfiguredAudienceModelAssociationInput')
     GetCollaborationConfiguredAudienceModelAssociationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationConfiguredAudienceModelAssociationOutput', name: 'GetCollaborationConfiguredAudienceModelAssociationOutput')
     GetCollaborationIdNamespaceAssociationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#GetCollaborationIdNamespaceAssociationInput', name: 'GetCollaborationIdNamespaceAssociationInput')
@@ -296,6 +317,8 @@ module Aws::CleanRooms
     ListAnalysisTemplatesOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListAnalysisTemplatesOperationOutput', name: 'ListAnalysisTemplatesOperationOutput')
     ListCollaborationAnalysisTemplatesOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationAnalysisTemplatesOperationInput', name: 'ListCollaborationAnalysisTemplatesOperationInput')
     ListCollaborationAnalysisTemplatesOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationAnalysisTemplatesOperationOutput', name: 'ListCollaborationAnalysisTemplatesOperationOutput')
+    ListCollaborationChangeRequestsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationChangeRequestsInput', name: 'ListCollaborationChangeRequestsInput')
+    ListCollaborationChangeRequestsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationChangeRequestsOutput', name: 'ListCollaborationChangeRequestsOutput')
     ListCollaborationConfiguredAudienceModelAssociationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationConfiguredAudienceModelAssociationsInput', name: 'ListCollaborationConfiguredAudienceModelAssociationsInput')
     ListCollaborationConfiguredAudienceModelAssociationsOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationConfiguredAudienceModelAssociationsOutput', name: 'ListCollaborationConfiguredAudienceModelAssociationsOutput')
     ListCollaborationIdNamespaceAssociationsInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ListCollaborationIdNamespaceAssociationsInput', name: 'ListCollaborationIdNamespaceAssociationsInput')
@@ -337,6 +360,7 @@ module Aws::CleanRooms
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cleanrooms#MaxResults', name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MemberAbilities = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#MemberAbilities', name: 'MemberAbilities', traits: {"smithy.api#uniqueItems" => {}})
     MemberAbility = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#MemberAbility', name: 'MemberAbility')
+    MemberChangeSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#MemberChangeSpecification', name: 'MemberChangeSpecification')
     MemberList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#MemberList', name: 'MemberList', traits: {"smithy.api#length" => {"min" => 0, "max" => 9}})
     MemberSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#MemberSpecification', name: 'MemberSpecification')
     MemberStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cleanrooms#MemberStatus', name: 'MemberStatus', traits: {"smithy.api#enum" => [{"name" => "INVITED", "value" => "INVITED"}, {"name" => "ACTIVE", "value" => "ACTIVE"}, {"name" => "LEFT", "value" => "LEFT"}, {"name" => "REMOVED", "value" => "REMOVED"}]})
@@ -389,6 +413,7 @@ module Aws::CleanRooms
     PrivacyImpact = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.cleanrooms#PrivacyImpact', name: 'PrivacyImpact')
     ProtectedJob = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJob', name: 'ProtectedJob')
     ProtectedJobAnalysisType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobAnalysisType', name: 'ProtectedJobAnalysisType')
+    ProtectedJobComputeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobComputeConfiguration', name: 'ProtectedJobComputeConfiguration')
     ProtectedJobConfigurationDetails = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobConfigurationDetails', name: 'ProtectedJobConfigurationDetails')
     ProtectedJobDirectAnalysisConfigurationDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobDirectAnalysisConfigurationDetails', name: 'ProtectedJobDirectAnalysisConfigurationDetails')
     ProtectedJobError = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobError', name: 'ProtectedJobError')
@@ -415,6 +440,8 @@ module Aws::CleanRooms
     ProtectedJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobSummary', name: 'ProtectedJobSummary')
     ProtectedJobSummaryList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobSummaryList', name: 'ProtectedJobSummaryList')
     ProtectedJobType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobType', name: 'ProtectedJobType')
+    ProtectedJobWorkerComputeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobWorkerComputeConfiguration', name: 'ProtectedJobWorkerComputeConfiguration')
+    ProtectedJobWorkerComputeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cleanrooms#ProtectedJobWorkerComputeType', name: 'ProtectedJobWorkerComputeType')
     ProtectedQuery = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedQuery', name: 'ProtectedQuery')
     ProtectedQueryDistributeOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedQueryDistributeOutput', name: 'ProtectedQueryDistributeOutput')
     ProtectedQueryDistributeOutputConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cleanrooms#ProtectedQueryDistributeOutputConfiguration', name: 'ProtectedQueryDistributeOutputConfiguration')
@@ -641,6 +668,7 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:source_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisSourceMetadata, location_name: 'sourceMetadata'))
     AnalysisTemplate.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: 'analysisParameters'))
     AnalysisTemplate.add_member(:validations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: 'validations'))
+    AnalysisTemplate.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: 'errorMessageConfiguration'))
     AnalysisTemplate.type = Types::AnalysisTemplate
     AnalysisTemplateArnList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateArn)
     AnalysisTemplateArtifact.add_member(:location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3Location, location_name: 'location', traits: {"smithy.api#required" => {}}))
@@ -686,6 +714,8 @@ module Aws::CleanRooms
     AthenaTableReference.add_member(:database_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AthenaDatabaseName, location_name: 'databaseName', traits: {"smithy.api#required" => {}}))
     AthenaTableReference.add_member(:table_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AthenaTableName, location_name: 'tableName', traits: {"smithy.api#required" => {}}))
     AthenaTableReference.type = Types::AthenaTableReference
+    AutoApprovedChangeType.add_member(:add_member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADD_MEMBER', traits: {"smithy.api#enumValue" => "ADD_MEMBER"}))
+    AutoApprovedChangeTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoApprovedChangeType)
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'code', traits: {"smithy.api#required" => {}}))
     BatchGetCollaborationAnalysisTemplateError.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
@@ -724,6 +754,26 @@ module Aws::CleanRooms
     BilledJobResourceUtilization.type = Types::BilledJobResourceUtilization
     BilledResourceUtilization.add_member(:units, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Double, location_name: 'units', traits: {"smithy.api#required" => {}}))
     BilledResourceUtilization.type = Types::BilledResourceUtilization
+    Change.add_member(:specification_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecificationType, location_name: 'specificationType', traits: {"smithy.api#required" => {}}))
+    Change.add_member(:specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecification, location_name: 'specification', traits: {"smithy.api#required" => {}}))
+    Change.add_member(:types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeTypeList, location_name: 'types', traits: {"smithy.api#required" => {}}))
+    Change.type = Types::Change
+    ChangeInput.add_member(:specification_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecificationType, location_name: 'specificationType', traits: {"smithy.api#required" => {}}))
+    ChangeInput.add_member(:specification, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeSpecification, location_name: 'specification', traits: {"smithy.api#required" => {}}))
+    ChangeInput.type = Types::ChangeInput
+    ChangeInputList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeInput)
+    ChangeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Change)
+    ChangeRequestStatus.add_member(:pending, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PENDING', traits: {"smithy.api#enumValue" => "PENDING"}))
+    ChangeRequestStatus.add_member(:approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'APPROVED', traits: {"smithy.api#enumValue" => "APPROVED"}))
+    ChangeRequestStatus.add_member(:cancelled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CANCELLED', traits: {"smithy.api#enumValue" => "CANCELLED"}))
+    ChangeRequestStatus.add_member(:denied, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DENIED', traits: {"smithy.api#enumValue" => "DENIED"}))
+    ChangeRequestStatus.add_member(:committed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'COMMITTED', traits: {"smithy.api#enumValue" => "COMMITTED"}))
+    ChangeSpecification.add_member(:member, Types::ChangeSpecification::Member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberChangeSpecification, location_name: 'member'))
+    ChangeSpecification.add_member(:unknown, Types::ChangeSpecification::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ChangeSpecification.type = Types::ChangeSpecification
+    ChangeSpecificationType.add_member(:member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'MEMBER', traits: {"smithy.api#enumValue" => "MEMBER"}))
+    ChangeType.add_member(:add_member, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ADD_MEMBER', traits: {"smithy.api#enumValue" => "ADD_MEMBER"}))
+    ChangeTypeList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeType)
     Collaboration.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'id', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     Collaboration.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     Collaboration.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationName, location_name: 'name', traits: {"smithy.api#required" => {}}))
@@ -739,6 +789,7 @@ module Aws::CleanRooms
     Collaboration.add_member(:query_log_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, location_name: 'queryLogStatus', traits: {"smithy.api#required" => {}}))
     Collaboration.add_member(:job_log_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationJobLogStatus, location_name: 'jobLogStatus'))
     Collaboration.add_member(:analytics_engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: 'analyticsEngine'))
+    Collaboration.add_member(:auto_approved_change_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: 'autoApprovedChangeTypes'))
     Collaboration.type = Types::Collaboration
     CollaborationAnalysisTemplate.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, location_name: 'id', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AnalysisTemplateId"}))
     CollaborationAnalysisTemplate.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -755,6 +806,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:source_metadata, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisSourceMetadata, location_name: 'sourceMetadata'))
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: 'analysisParameters'))
     CollaborationAnalysisTemplate.add_member(:validations, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: 'validations'))
+    CollaborationAnalysisTemplate.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: 'errorMessageConfiguration'))
     CollaborationAnalysisTemplate.type = Types::CollaborationAnalysisTemplate
     CollaborationAnalysisTemplateList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate)
     CollaborationAnalysisTemplateSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -768,6 +820,23 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceDescription, location_name: 'description'))
     CollaborationAnalysisTemplateSummary.type = Types::CollaborationAnalysisTemplateSummary
     CollaborationAnalysisTemplateSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummary)
+    CollaborationChangeRequest.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:collaboration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'collaborationId', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    CollaborationChangeRequest.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createTime', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updateTime', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeRequestStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:is_auto_approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isAutoApproved', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.add_member(:changes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeList, location_name: 'changes', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequest.type = Types::CollaborationChangeRequest
+    CollaborationChangeRequestSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:collaboration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'collaborationId', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    CollaborationChangeRequestSummary.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createTime', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:update_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'updateTime', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeRequestStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:is_auto_approved, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'isAutoApproved', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.add_member(:changes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeList, location_name: 'changes', traits: {"smithy.api#required" => {}}))
+    CollaborationChangeRequestSummary.type = Types::CollaborationChangeRequestSummary
+    CollaborationChangeRequestSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationChangeRequestSummary)
     CollaborationConfiguredAudienceModelAssociation.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, location_name: 'id', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ConfiguredAudienceModelAssociationId"}))
     CollaborationConfiguredAudienceModelAssociation.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, location_name: 'arn', traits: {"smithy.api#required" => {}}))
     CollaborationConfiguredAudienceModelAssociation.add_member(:collaboration_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'collaborationId', traits: {"smithy.api#required" => {}}))
@@ -1043,9 +1112,15 @@ module Aws::CleanRooms
     CreateAnalysisTemplateOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     CreateAnalysisTemplateOperationInput.add_member(:analysis_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: 'analysisParameters'))
     CreateAnalysisTemplateOperationInput.add_member(:schema, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisSchema, location_name: 'schema'))
+    CreateAnalysisTemplateOperationInput.add_member(:error_message_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessageConfiguration, location_name: 'errorMessageConfiguration'))
     CreateAnalysisTemplateOperationInput.type = Types::CreateAnalysisTemplateOperationInput
     CreateAnalysisTemplateOperationOutput.add_member(:analysis_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplate, location_name: 'analysisTemplate', traits: {"smithy.api#required" => {}}))
     CreateAnalysisTemplateOperationOutput.type = Types::CreateAnalysisTemplateOperationOutput
+    CreateCollaborationChangeRequestInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationIdentifier, location_name: 'collaborationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    CreateCollaborationChangeRequestInput.add_member(:changes, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeInputList, location_name: 'changes', traits: {"smithy.api#required" => {}}))
+    CreateCollaborationChangeRequestInput.type = Types::CreateCollaborationChangeRequestInput
+    CreateCollaborationChangeRequestOutput.add_member(:collaboration_change_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationChangeRequest, location_name: 'collaborationChangeRequest', traits: {"smithy.api#required" => {}}))
+    CreateCollaborationChangeRequestOutput.type = Types::CreateCollaborationChangeRequestOutput
     CreateCollaborationOperationInput.add_member(:members, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberList, location_name: 'members', traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationInput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationInput.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationDescription, location_name: 'description', traits: {"smithy.api#required" => {}}))
@@ -1058,6 +1133,7 @@ module Aws::CleanRooms
     CreateCollaborationOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'tags'))
     CreateCollaborationOperationInput.add_member(:creator_payment_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: 'creatorPaymentConfiguration'))
     CreateCollaborationOperationInput.add_member(:analytics_engine, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalyticsEngine, location_name: 'analyticsEngine'))
+    CreateCollaborationOperationInput.add_member(:auto_approved_change_request_types, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AutoApprovedChangeTypeList, location_name: 'autoApprovedChangeRequestTypes'))
     CreateCollaborationOperationInput.type = Types::CreateCollaborationOperationInput
     CreateCollaborationOperationOutput.add_member(:collaboration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Collaboration, location_name: 'collaboration', traits: {"smithy.api#required" => {}}))
     CreateCollaborationOperationOutput.type = Types::CreateCollaborationOperationOutput
@@ -1239,6 +1315,9 @@ module Aws::CleanRooms
     DifferentialPrivacyTemplateUpdateParameters.type = Types::DifferentialPrivacyTemplateUpdateParameters
     DirectAnalysisConfigurationDetails.add_member(:receiver_account_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReceiverAccountIds, location_name: 'receiverAccountIds'))
     DirectAnalysisConfigurationDetails.type = Types::DirectAnalysisConfigurationDetails
+    ErrorMessageConfiguration.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: 'type', traits: {"smithy.api#required" => {}}))
+    ErrorMessageConfiguration.type = Types::ErrorMessageConfiguration
+    ErrorMessageType.add_member(:detailed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DETAILED', traits: {"smithy.api#enumValue" => "DETAILED"}))
     GetAnalysisTemplateOperationInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipIdentifier, location_name: 'membershipIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     GetAnalysisTemplateOperationInput.add_member(:analysis_template_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, location_name: 'analysisTemplateIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "AnalysisTemplateId"}))
     GetAnalysisTemplateOperationInput.type = Types::GetAnalysisTemplateOperationInput
@@ -1249,6 +1328,11 @@ module Aws::CleanRooms
     GetCollaborationAnalysisTemplateOperationInput.type = Types::GetCollaborationAnalysisTemplateOperationInput
     GetCollaborationAnalysisTemplateOperationOutput.add_member(:collaboration_analysis_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate, location_name: 'collaborationAnalysisTemplate', traits: {"smithy.api#required" => {}}))
     GetCollaborationAnalysisTemplateOperationOutput.type = Types::GetCollaborationAnalysisTemplateOperationOutput
+    GetCollaborationChangeRequestInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationIdentifier, location_name: 'collaborationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    GetCollaborationChangeRequestInput.add_member(:change_request_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationChangeRequestIdentifier, location_name: 'changeRequestIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetCollaborationChangeRequestInput.type = Types::GetCollaborationChangeRequestInput
+    GetCollaborationChangeRequestOutput.add_member(:collaboration_change_request, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationChangeRequest, location_name: 'collaborationChangeRequest', traits: {"smithy.api#required" => {}}))
+    GetCollaborationChangeRequestOutput.type = Types::GetCollaborationChangeRequestOutput
     GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationIdentifier, location_name: 'collaborationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, location_name: 'configuredAudienceModelAssociationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "ConfiguredAudienceModelAssociationId"}))
     GetCollaborationConfiguredAudienceModelAssociationInput.type = Types::GetCollaborationConfiguredAudienceModelAssociationInput
@@ -1437,6 +1521,14 @@ module Aws::CleanRooms
     ListCollaborationAnalysisTemplatesOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
     ListCollaborationAnalysisTemplatesOperationOutput.add_member(:collaboration_analysis_template_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummaryList, location_name: 'collaborationAnalysisTemplateSummaries', traits: {"smithy.api#required" => {}}))
     ListCollaborationAnalysisTemplatesOperationOutput.type = Types::ListCollaborationAnalysisTemplatesOperationOutput
+    ListCollaborationChangeRequestsInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationIdentifier, location_name: 'collaborationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
+    ListCollaborationChangeRequestsInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ChangeRequestStatus, location_name: 'status', traits: {"smithy.api#httpQuery" => "status"}))
+    ListCollaborationChangeRequestsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListCollaborationChangeRequestsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListCollaborationChangeRequestsInput.type = Types::ListCollaborationChangeRequestsInput
+    ListCollaborationChangeRequestsOutput.add_member(:collaboration_change_request_summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationChangeRequestSummaryList, location_name: 'collaborationChangeRequestSummaries', traits: {"smithy.api#required" => {}}))
+    ListCollaborationChangeRequestsOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken'))
+    ListCollaborationChangeRequestsOutput.type = Types::ListCollaborationChangeRequestsOutput
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:collaboration_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CollaborationIdentifier, location_name: 'collaborationIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "CollaborationId"}))
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PaginationToken, location_name: 'nextToken', traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxResults, location_name: 'maxResults', traits: {"smithy.api#httpQuery" => "maxResults"}))
@@ -1573,6 +1665,10 @@ module Aws::CleanRooms
     MemberAbility.add_member(:can_query, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CAN_QUERY', traits: {"smithy.api#enumValue" => "CAN_QUERY"}))
     MemberAbility.add_member(:can_receive_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CAN_RECEIVE_RESULTS', traits: {"smithy.api#enumValue" => "CAN_RECEIVE_RESULTS"}))
     MemberAbility.add_member(:can_run_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CAN_RUN_JOB', traits: {"smithy.api#enumValue" => "CAN_RUN_JOB"}))
+    MemberChangeSpecification.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'accountId', traits: {"smithy.api#required" => {}}))
+    MemberChangeSpecification.add_member(:member_abilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAbilities, location_name: 'memberAbilities', traits: {"smithy.api#required" => {}}))
+    MemberChangeSpecification.add_member(:display_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisplayName, location_name: 'displayName'))
+    MemberChangeSpecification.type = Types::MemberChangeSpecification
     MemberList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberSpecification)
     MemberSpecification.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'accountId', traits: {"smithy.api#required" => {}}))
     MemberSpecification.add_member(:member_abilities, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MemberAbilities, location_name: 'memberAbilities', traits: {"smithy.api#required" => {}}))
@@ -1771,8 +1867,12 @@ module Aws::CleanRooms
     ProtectedJob.add_member(:statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobStatistics, location_name: 'statistics'))
     ProtectedJob.add_member(:result, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobResult, location_name: 'result'))
     ProtectedJob.add_member(:error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobError, location_name: 'error'))
+    ProtectedJob.add_member(:compute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobComputeConfiguration, location_name: 'computeConfiguration'))
     ProtectedJob.type = Types::ProtectedJob
     ProtectedJobAnalysisType.add_member(:direct_analysis, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DIRECT_ANALYSIS', traits: {"smithy.api#enumValue" => "DIRECT_ANALYSIS"}))
+    ProtectedJobComputeConfiguration.add_member(:worker, Types::ProtectedJobComputeConfiguration::Worker, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobWorkerComputeConfiguration, location_name: 'worker'))
+    ProtectedJobComputeConfiguration.add_member(:unknown, Types::ProtectedJobComputeConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ProtectedJobComputeConfiguration.type = Types::ProtectedJobComputeConfiguration
     ProtectedJobConfigurationDetails.add_member(:direct_analysis_configuration_details, Types::ProtectedJobConfigurationDetails::DirectAnalysisConfigurationDetails, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobDirectAnalysisConfigurationDetails, location_name: 'directAnalysisConfigurationDetails'))
     ProtectedJobConfigurationDetails.add_member(:unknown, Types::ProtectedJobConfigurationDetails::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
     ProtectedJobConfigurationDetails.type = Types::ProtectedJobConfigurationDetails
@@ -1838,6 +1938,11 @@ module Aws::CleanRooms
     ProtectedJobSummary.type = Types::ProtectedJobSummary
     ProtectedJobSummaryList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobSummary)
     ProtectedJobType.add_member(:pyspark, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PYSPARK', traits: {"smithy.api#enumValue" => "PYSPARK"}))
+    ProtectedJobWorkerComputeConfiguration.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobWorkerComputeType, location_name: 'type', traits: {"smithy.api#required" => {}}))
+    ProtectedJobWorkerComputeConfiguration.add_member(:number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'number', traits: {"smithy.api#range" => {"min" => 4, "max" => 128}, "smithy.api#required" => {}}))
+    ProtectedJobWorkerComputeConfiguration.type = Types::ProtectedJobWorkerComputeConfiguration
+    ProtectedJobWorkerComputeType.add_member(:cr1_x, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CR1X', traits: {"smithy.api#enumValue" => "CR.1X"}))
+    ProtectedJobWorkerComputeType.add_member(:cr4_x, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CR4X', traits: {"smithy.api#enumValue" => "CR.4X"}))
     ProtectedQuery.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'id', traits: {"smithy.api#required" => {}}))
     ProtectedQuery.add_member(:membership_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'membershipId', traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     ProtectedQuery.add_member(:membership_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipArn, location_name: 'membershipArn', traits: {"smithy.api#required" => {}}))
@@ -2017,6 +2122,7 @@ module Aws::CleanRooms
     StartProtectedJobInput.add_member(:membership_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MembershipIdentifier, location_name: 'membershipIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "MembershipId"}))
     StartProtectedJobInput.add_member(:job_parameters, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobParameters, location_name: 'jobParameters', traits: {"smithy.api#required" => {}}))
     StartProtectedJobInput.add_member(:result_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobResultConfigurationInput, location_name: 'resultConfiguration'))
+    StartProtectedJobInput.add_member(:compute_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJobComputeConfiguration, location_name: 'computeConfiguration'))
     StartProtectedJobInput.type = Types::StartProtectedJobInput
     StartProtectedJobOutput.add_member(:protected_job, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProtectedJob, location_name: 'protectedJob', traits: {"smithy.api#required" => {}}))
     StartProtectedJobOutput.type = Types::StartProtectedJobOutput
@@ -2220,6 +2326,20 @@ module Aws::CleanRooms
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to create a new collaboration, a shared data collaboration environment", "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/collaborations"}}
+      end)
+      service.add_operation(:create_collaboration_change_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#CreateCollaborationChangeRequest"
+        operation.name = "CreateCollaborationChangeRequest"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCollaborationChangeRequestInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateCollaborationChangeRequestOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/collaborations/{collaborationIdentifier}/changeRequests"}}
       end)
       service.add_operation(:create_configured_audience_model_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#CreateConfiguredAudienceModelAssociation"
@@ -2529,6 +2649,18 @@ module Aws::CleanRooms
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to get an analysis template within a collaboration", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}"}, "smithy.api#readonly" => {}}
       end)
+      service.add_operation(:get_collaboration_change_request, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#GetCollaborationChangeRequest"
+        operation.name = "GetCollaborationChangeRequest"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCollaborationChangeRequestInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetCollaborationChangeRequestOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/collaborations/{collaborationIdentifier}/changeRequests/{changeRequestIdentifier}"}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:get_collaboration_configured_audience_model_association, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#GetCollaborationConfiguredAudienceModelAssociation"
         operation.name = "GetCollaborationConfiguredAudienceModelAssociation"
@@ -2746,6 +2878,19 @@ module Aws::CleanRooms
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.iam#actionPermissionDescription" => "Grants permission to list analysis templates within a collaboration", "smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/collaborations/{collaborationIdentifier}/analysistemplates"}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListCollaborationAnalysisTemplates.new
+      end)
+      service.add_operation(:list_collaboration_change_requests, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.cleanrooms#ListCollaborationChangeRequests"
+        operation.name = "ListCollaborationChangeRequests"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCollaborationChangeRequestsInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListCollaborationChangeRequestsOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/collaborations/{collaborationIdentifier}/changeRequests"}, "smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListCollaborationChangeRequests.new
       end)
       service.add_operation(:list_collaboration_configured_audience_model_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.cleanrooms#ListCollaborationConfiguredAudienceModelAssociations"

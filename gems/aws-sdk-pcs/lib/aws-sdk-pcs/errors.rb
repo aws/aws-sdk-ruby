@@ -71,7 +71,7 @@ module Aws::PCS
       end
     end
 
-    # <p>Amazon Web Services PCS can't process your request right now. Try again later.</p>
+    # <p>PCS can't process your request right now. Try again later.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PCS::Types::InternalServerException] data

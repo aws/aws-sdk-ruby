@@ -15,6 +15,8 @@ module Aws::TranscribeStreaming
     CallAnalyticsItem: StructureShape
     CallAnalyticsItemList: ListShape
     CallAnalyticsLanguageCode: EnumShape
+    CallAnalyticsLanguageIdentification: ListShape
+    CallAnalyticsLanguageWithScore: StructureShape
     CallAnalyticsTranscriptResultStream: UnionShape
     CategoryEvent: StructureShape
     ChannelDefinition: StructureShape

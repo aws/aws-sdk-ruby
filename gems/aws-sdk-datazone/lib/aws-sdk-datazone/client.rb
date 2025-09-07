@@ -186,8 +186,7 @@ module Aws::DataZone
       super
     end
 
-    # <p>Accepts automatically generated business-friendly metadata for your Amazon DataZone
-    #          assets.</p>
+    # <p>Accepts automatically generated business-friendly metadata for your Amazon DataZone assets.</p>
     # @param [Hash, Types::AcceptPredictionsInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
@@ -198,11 +197,9 @@ module Aws::DataZone
     # @option params [Types::AcceptRule] :accept_rule
     #   <p>Specifies the rule (or the conditions) under which a prediction can be accepted.</p>
     # @option params [Array<Types::AcceptChoice>] :accept_choices
-    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the
-    #            target (for example, a column name) that can be accepted.</p>
+    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be accepted.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -243,8 +240,7 @@ module Aws::DataZone
     # @option params [String] :identifier
     #   <p>The unique identifier of the subscription request that is to be accepted.</p>
     # @option params [String] :decision_comment
-    #   <p>A description that specifies the reason for accepting the specified subscription
-    #            request.</p>
+    #   <p>A description that specifies the reason for accepting the specified subscription request.</p>
     # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
     #   <p>The asset scopes of the accept subscription request.</p>
     # @example Request syntax with placeholder values
@@ -358,8 +354,7 @@ module Aws::DataZone
     # @option params [Types::OwnerProperties] :owner
     #   <p>The owner that you want to add to the entity.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -387,8 +382,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Adds a policy grant (an authorization policy) to a specified entity, including domain
-    #          units, environment blueprint configurations, or environment profiles.</p>
+    # <p>Adds a policy grant (an authorization policy) to a specified entity, including domain units, environment blueprint configurations, or environment profiles.</p>
     # @param [Hash, Types::AddPolicyGrantInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to add a policy grant.</p>
@@ -403,8 +397,7 @@ module Aws::DataZone
     # @option params [Types::PolicyGrantDetail] :detail
     #   <p>The details of the policy grant.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -493,7 +486,9 @@ module Aws::DataZone
     #   response = client.add_policy_grant(params, options)
     # @example Response structure with placeholder values
     #   response.to_h #=>
-    #   {}
+    #   {
+    #     grant_id: "GrantIdentifier"
+    #   }
     # @return [Types::AddPolicyGrantOutput]
     def add_policy_grant(params = {}, options = {})
       request = build_request(:add_policy_grant, params)
@@ -525,11 +520,38 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Associates governed terms with an asset.</p>
+    # @param [Hash, Types::AssociateGovernedTermsInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the domain where governed terms are to be associated with an asset.</p>
+    # @option params [String] :entity_identifier
+    #   <p>The ID of the asset with which you want to associate a governed term.</p>
+    # @option params [String] :entity_type
+    #   <p>The type of the asset with which you want to associate a governed term.</p>
+    # @option params [Array<String>] :governed_glossary_terms
+    #   <p>The glossary terms in a restricted glossary.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET" # One of: ["ASSET"], # required
+    #     governed_glossary_terms: ["GlossaryTermId"], # required
+    #   }
+    #   options = {}
+    #   response = client.associate_governed_terms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateGovernedTermsOutput]
+    def associate_governed_terms(params = {}, options = {})
+      request = build_request(:associate_governed_terms, params)
+      request.send_request(options)
+    end
+
     # <p>Cancels the metadata generation run.</p>
     # @param [Hash, Types::CancelMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run is to be
-    #            cancelled.</p>
+    #   <p>The ID of the Amazon DataZone domain in which the metadata generation run is to be cancelled.</p>
     # @option params [String] :identifier
     #   <p>The ID of the metadata generation run.</p>
     # @example Request syntax with placeholder values
@@ -551,8 +573,7 @@ module Aws::DataZone
     # <p>Cancels the subscription to the specified asset.</p>
     # @param [Hash, Types::CancelSubscriptionInput] params
     # @option params [String] :domain_identifier
-    #   <p>The unique identifier of the Amazon DataZone domain where the subscription request is being
-    #            cancelled.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the subscription request is being cancelled.</p>
     # @option params [String] :identifier
     #   <p>The unique identifier of the subscription that is being cancelled.</p>
     # @example Request syntax with placeholder values
@@ -647,9 +668,7 @@ module Aws::DataZone
     # @option params [String] :resolution_strategy
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     # @option params [Types::AccountSource] :account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -714,9 +733,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>Amazon DataZone domain where the asset is created.</p>
     # @option params [String] :external_identifier
-    #   <p>The external identifier of the asset.</p>
-    #            <p>If the value for the <code>externalIdentifier</code> parameter is specified, it must be
-    #            a unique value.</p>
+    #   <p>The external identifier of the asset.</p> <p>If the value for the <code>externalIdentifier</code> parameter is specified, it must be a unique value.</p>
     # @option params [String] :type_identifier
     #   <p>The unique identifier of this asset's type.</p>
     # @option params [String] :type_revision
@@ -730,11 +747,9 @@ module Aws::DataZone
     # @option params [String] :owning_project_identifier
     #   <p>The unique identifier of the project that owns this asset.</p>
     # @option params [Types::PredictionConfiguration] :prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AssetName", # required
@@ -777,6 +792,7 @@ module Aws::DataZone
     #     first_revision_created_at: Time.now,
     #     first_revision_created_by: "CreatedBy",
     #     glossary_terms: ["GlossaryTermId"],
+    #     governed_glossary_terms: ["GlossaryTermId"],
     #     owning_project_id: "ProjectId", # required
     #     domain_id: "DomainId", # required
     #     listing: {
@@ -834,8 +850,7 @@ module Aws::DataZone
     # @option params [Types::AssetFilterConfiguration] :configuration
     #   <p>The configuration of the asset filter.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -1017,11 +1032,9 @@ module Aws::DataZone
     # @option params [Array<Types::FormInput>] :forms_input
     #   <p>The metadata forms to be attached to the asset as part of asset revision.</p>
     # @option params [Types::PredictionConfiguration] :prediction_configuration
-    #   <p>The configuration of the automatically generated business-friendly metadata for the
-    #            asset.</p>
+    #   <p>The configuration of the automatically generated business-friendly metadata for the asset.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "AssetName", # required
@@ -1062,6 +1075,7 @@ module Aws::DataZone
     #     first_revision_created_at: Time.now,
     #     first_revision_created_by: "CreatedBy",
     #     glossary_terms: ["GlossaryTermId"],
+    #     governed_glossary_terms: ["GlossaryTermId"],
     #     owning_project_id: "ProjectId", # required
     #     domain_id: "DomainId", # required
     #     listing: {
@@ -1109,8 +1123,7 @@ module Aws::DataZone
     # <p>Creates a custom asset type.</p>
     # @param [Hash, Types::CreateAssetTypeInput] params
     # @option params [String] :domain_identifier
-    #   <p>The unique identifier of the Amazon DataZone domain where the custom asset type is being
-    #            created.</p>
+    #   <p>The unique identifier of the Amazon DataZone domain where the custom asset type is being created.</p>
     # @option params [String] :name
     #   <p>The name of the custom asset type.</p>
     # @option params [String] :description
@@ -1163,14 +1176,12 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a new connection. In Amazon DataZone, a connection enables you to connect your
-    #          resources (domains, projects, and environments) to external resources and services.</p>
+    # <p>Creates a new connection. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::CreateConnectionInput] params
     # @option params [Types::AwsLocation] :aws_location
     #   <p>The location where the connection is created.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [String] :description
     #   <p>A connection description.</p>
     # @option params [String] :domain_identifier
@@ -1507,8 +1518,7 @@ module Aws::DataZone
     # @option params [Array<Types::DataProductItem>] :items
     #   <p>The data assets of the data product.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -1591,8 +1601,7 @@ module Aws::DataZone
     # @option params [Array<Types::FormInput>] :forms_input
     #   <p>The metadata forms of the data product revision.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -1667,37 +1676,27 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain where the data source is created.</p>
     # @option params [String] :project_identifier
-    #   <p>The identifier of the Amazon DataZone project in which you want to add this data
-    #            source.</p>
+    #   <p>The identifier of the Amazon DataZone project in which you want to add this data source.</p>
     # @option params [String] :environment_identifier
-    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes
-    #            assets. </p>
+    #   <p>The unique identifier of the Amazon DataZone environment to which the data source publishes assets. </p>
     # @option params [String] :connection_identifier
     #   <p>The ID of the connection.</p>
     # @option params [String] :type
-    #   <p>The type of the data source. In Amazon DataZone, you can use data sources to import
-    #            technical metadata of assets (data) from the source databases or data warehouses into
-    #            Amazon DataZone. In the current release of Amazon DataZone, you can create and run data
-    #            sources for Amazon Web Services Glue and Amazon Redshift.</p>
+    #   <p>The type of the data source. In Amazon DataZone, you can use data sources to import technical metadata of assets (data) from the source databases or data warehouses into Amazon DataZone. In the current release of Amazon DataZone, you can create and run data sources for Amazon Web Services Glue and Amazon Redshift.</p>
     # @option params [Types::DataSourceConfigurationInput] :configuration
-    #   <p>Specifies the configuration of the data source. It can be set to either
-    #               <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
+    #   <p>Specifies the configuration of the data source. It can be set to either <code>glueRunConfiguration</code> or <code>redshiftRunConfiguration</code>.</p>
     # @option params [Types::RecommendationConfiguration] :recommendation
-    #   <p>Specifies whether the business name generation is to be enabled for this data
-    #            source.</p>
+    #   <p>Specifies whether the business name generation is to be enabled for this data source.</p>
     # @option params [String] :enable_setting
     #   <p>Specifies whether the data source is enabled.</p>
     # @option params [Types::ScheduleConfiguration] :schedule
     #   <p>The schedule of the data source runs.</p>
     # @option params [Boolean] :publish_on_import
-    #   <p>Specifies whether the assets that this data source creates in the inventory are to be
-    #            also automatically published to the catalog.</p>
+    #   <p>Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.</p>
     # @option params [Array<Types::FormInput>] :asset_forms_input
-    #   <p>The metadata forms that are to be attached to the assets that this data source works
-    #            with.</p>
+    #   <p>The metadata forms that are to be attached to the assets that this data source works with.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -1895,12 +1894,9 @@ module Aws::DataZone
     # @option params [Types::SingleSignOn] :single_sign_on
     #   <p>The single-sign on configuration of the Amazon DataZone domain.</p>
     # @option params [String] :domain_execution_role
-    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The
-    #            domain execution role is created in the Amazon Web Services account that houses the
-    #            Amazon DataZone domain.</p>
+    #   <p>The domain execution role that is created when an Amazon DataZone domain is created. The domain execution role is created in the Amazon Web Services account that houses the Amazon DataZone domain.</p>
     # @option params [String] :kms_key_identifier
-    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used
-    #            to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
+    #   <p>The identifier of the Amazon Web Services Key Management Service (KMS) key that is used to encrypt the Amazon DataZone domain, metadata, and reporting data. </p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags specified for the Amazon DataZone domain.</p>
     # @option params [String] :domain_version
@@ -1908,8 +1904,7 @@ module Aws::DataZone
     # @option params [String] :service_role
     #   <p>The service role of the domain that is created.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "String", # required
@@ -1970,8 +1965,7 @@ module Aws::DataZone
     # @option params [String] :description
     #   <p>The description of the domain unit.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2020,8 +2014,7 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name of the Amazon DataZone environment.</p>
     # @option params [String] :environment_profile_identifier
-    #   <p>The identifier of the environment profile that is used to create this Amazon DataZone
-    #            environment.</p>
+    #   <p>The identifier of the environment profile that is used to create this Amazon DataZone environment.</p>
     # @option params [Array<Types::EnvironmentParameter>] :user_parameters
     #   <p>The user parameters of this Amazon DataZone environment.</p>
     # @option params [Array<String>] :glossary_terms
@@ -2135,8 +2128,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates an action for the environment, for example, creates a console link for an
-    #          analytics tool that is available in this environment.</p>
+    # <p>Creates an action for the environment, for example, creates a console link for an analytics tool that is available in this environment.</p>
     # @param [Hash, Types::CreateEnvironmentActionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which the environment action is created.</p>
@@ -2147,8 +2139,7 @@ module Aws::DataZone
     # @option params [Types::ActionParameters] :parameters
     #   <p>The parameters of the environment action.</p>
     # @option params [String] :description
-    #   <p>The description of the environment action that is being created in the
-    #            environment.</p>
+    #   <p>The description of the environment action that is being created in the environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2309,9 +2300,10 @@ module Aws::DataZone
     #   <p>The description of this business glossary.</p>
     # @option params [String] :status
     #   <p>The status of this business glossary.</p>
+    # @option params [Array<String>] :usage_restrictions
+    #   <p>The usage restriction of the restricted glossary.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2319,6 +2311,7 @@ module Aws::DataZone
     #     owning_project_identifier: "ProjectId", # required
     #     description: "GlossaryDescription",
     #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]],
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -2331,7 +2324,8 @@ module Aws::DataZone
     #     name: "GlossaryName", # required
     #     owning_project_id: "ProjectId", # required
     #     description: "GlossaryDescription",
-    #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::CreateGlossaryOutput]
     def create_glossary(params = {}, options = {})
@@ -2356,8 +2350,7 @@ module Aws::DataZone
     # @option params [Types::TermRelations] :term_relations
     #   <p>The term relations of this business glossary term.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2387,7 +2380,8 @@ module Aws::DataZone
     #     term_relations: {
     #       is_a: ["GlossaryTermId"],
     #       classifies: ["GlossaryTermId"]
-    #     }
+    #     },
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::CreateGlossaryTermOutput]
     def create_glossary_term(params = {}, options = {})
@@ -2402,8 +2396,7 @@ module Aws::DataZone
     # @option params [String] :group_identifier
     #   <p>The identifier of the group for which the group profile is created.</p>
     # @option params [String] :client_token
-    #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2426,8 +2419,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Publishes a listing (a record of an asset at a given time) or removes a listing from the
-    #          catalog. </p>
+    # <p>Publishes a listing (a record of an asset at a given time) or removes a listing from the catalog. </p>
     # @param [Hash, Types::CreateListingChangeSetInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain.</p>
@@ -2440,8 +2432,7 @@ module Aws::DataZone
     # @option params [String] :action
     #   <p>Specifies whether to publish or unpublish a listing.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2477,8 +2468,7 @@ module Aws::DataZone
     # @option params [Array<String>] :glossary_terms
     #   <p>The glossary terms that can be used in this Amazon DataZone project.</p>
     # @option params [String] :domain_unit_id
-    #   <p>The ID of the domain unit. This parameter is not required and if it is not specified,
-    #            then the project is created at the root domain unit level.</p>
+    #   <p>The ID of the domain unit. This parameter is not required and if it is not specified, then the project is created at the root domain unit level.</p>
     # @option params [String] :project_profile_id
     #   <p>The ID of the project profile.</p>
     # @option params [Array<Types::EnvironmentConfigurationUserParameter>] :user_parameters
@@ -2518,7 +2508,7 @@ module Aws::DataZone
     #     id: "ProjectId", # required
     #     name: "ProjectName", # required
     #     description: "Description",
-    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"],
+    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"],
     #     failure_reasons: [
     #       {
     #         code: "String",
@@ -2717,13 +2707,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Creates a rule in Amazon DataZone. A rule is a formal agreement that enforces specific
-    #          requirements across user workflows (e.g., publishing assets to the catalog, requesting
-    #          subscriptions, creating projects) within the Amazon DataZone data portal. These rules help
-    #          maintain consistency, ensure compliance, and uphold governance standards in data management
-    #          processes. For instance, a metadata enforcement rule can specify the required information
-    #          for creating a subscription request or publishing a data asset to the catalog, ensuring
-    #          alignment with organizational standards.</p>
+    # <p>Creates a rule in Amazon DataZone. A rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::CreateRuleInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the rule is created.</p>
@@ -2740,8 +2724,7 @@ module Aws::DataZone
     # @option params [String] :description
     #   <p>The description of the rule.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2841,8 +2824,7 @@ module Aws::DataZone
     # @option params [Array<Types::AssetTargetNameMap>] :asset_target_names
     #   <p>The names of the assets for which the subscription grant is created.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2921,8 +2903,7 @@ module Aws::DataZone
     # @option params [String] :request_reason
     #   <p>The reason for the subscription request.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [Array<Types::FormInput>] :metadata_forms
     #   <p>The metadata form included in the subscription request.</p>
     # @example Request syntax with placeholder values
@@ -3059,8 +3040,7 @@ module Aws::DataZone
     # @option params [String] :provider
     #   <p>The provider of the subscription target.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3120,8 +3100,7 @@ module Aws::DataZone
     # @option params [String] :user_type
     #   <p>The user type of the user for which the user profile is created.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3247,8 +3226,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes and connection. In Amazon DataZone, a connection enables you to connect your
-    #          resources (domains, projects, and environments) to external resources and services.</p>
+    # <p>Deletes and connection. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::DeleteConnectionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the connection is deleted.</p>
@@ -3301,11 +3279,9 @@ module Aws::DataZone
     # @option params [String] :identifier
     #   <p>The identifier of the data source that is deleted.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [Boolean] :retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3447,8 +3423,7 @@ module Aws::DataZone
     # @option params [String] :identifier
     #   <p>The identifier of the Amazon Web Services domain that is to be deleted.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [Boolean] :skip_deletion_check
     #   <p>Specifies the optional flag to delete all child entities within the domain.</p>
     # @example Request syntax with placeholder values
@@ -3514,8 +3489,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes an action for the environment, for example, deletes a console link for an
-    #          analytics tool that is available in this environment.</p>
+    # <p>Deletes an action for the environment, for example, deletes a console link for an analytics tool that is available in this environment.</p>
     # @param [Hash, Types::DeleteEnvironmentActionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain in which an environment action is deleted.</p>
@@ -3748,13 +3722,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Deletes a rule in Amazon DataZone. A rule is a formal agreement that enforces specific
-    #          requirements across user workflows (e.g., publishing assets to the catalog, requesting
-    #          subscriptions, creating projects) within the Amazon DataZone data portal. These rules help
-    #          maintain consistency, ensure compliance, and uphold governance standards in data management
-    #          processes. For instance, a metadata enforcement rule can specify the required information
-    #          for creating a subscription request or publishing a data asset to the catalog, ensuring
-    #          alignment with organizational standards.</p>
+    # <p>Deletes a rule in Amazon DataZone. A rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::DeleteRuleInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain that where the rule is to be deleted.</p>
@@ -3884,8 +3852,7 @@ module Aws::DataZone
     # <p>Deletes the specified time series form for the specified asset. </p>
     # @param [Hash, Types::DeleteTimeSeriesDataPointsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to delete
-    #            a time series form.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to delete a time series form.</p>
     # @option params [String] :entity_identifier
     #   <p>The ID of the asset for which you want to delete a time series form.</p>
     # @option params [String] :entity_type
@@ -3893,8 +3860,7 @@ module Aws::DataZone
     # @option params [String] :form_name
     #   <p>The name of the time series form that you want to delete.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3939,11 +3905,38 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Disassociates restricted terms from an asset.</p>
+    # @param [Hash, Types::DisassociateGovernedTermsInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the domain where you want to disassociate restricted terms from an asset.</p>
+    # @option params [String] :entity_identifier
+    #   <p>The ID of an asset from which you want to disassociate restricted terms.</p>
+    # @option params [String] :entity_type
+    #   <p>The type of the asset from which you want to disassociate restricted terms.</p>
+    # @option params [Array<String>] :governed_glossary_terms
+    #   <p>The restricted glossary terms that you want to disassociate from an asset.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET" # One of: ["ASSET"], # required
+    #     governed_glossary_terms: ["GlossaryTermId"], # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_governed_terms(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisassociateGovernedTermsOutput]
+    def disassociate_governed_terms(params = {}, options = {})
+      request = build_request(:disassociate_governed_terms, params)
+      request.send_request(options)
+    end
+
     # <p>Gets the details of the account pool.</p>
     # @param [Hash, Types::GetAccountPoolInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the domain in which the account pool lives whose details are to be
-    #            displayed.</p>
+    #   <p>The ID of the domain in which the account pool lives whose details are to be displayed.</p>
     # @option params [String] :identifier
     #   <p>The ID of the account pool whose details are to be displayed.</p>
     # @example Request syntax with placeholder values
@@ -3992,11 +3985,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain to which the asset belongs.</p>
     # @option params [String] :identifier
-    #   <p>The ID of the Amazon DataZone asset.</p>
-    #            <p>This parameter supports either the value of <code>assetId</code> or
-    #               <code>externalIdentifier</code> as input. If you are passing the value of
-    #               <code>externalIdentifier</code>, you must prefix this value with
-    #               <code>externalIdentifer%2F</code>.</p>
+    #   <p>The ID of the Amazon DataZone asset.</p> <p>This parameter supports either the value of <code>assetId</code> or <code>externalIdentifier</code> as input. If you are passing the value of <code>externalIdentifier</code>, you must prefix this value with <code>externalIdentifer%2F</code>.</p>
     # @option params [String] :revision
     #   <p>The revision of the Amazon DataZone asset.</p>
     # @example Request syntax with placeholder values
@@ -4022,6 +4011,7 @@ module Aws::DataZone
     #     first_revision_created_at: Time.now,
     #     first_revision_created_by: "CreatedBy",
     #     glossary_terms: ["GlossaryTermId"],
+    #     governed_glossary_terms: ["GlossaryTermId"],
     #     owning_project_id: "ProjectId", # required
     #     domain_id: "DomainId", # required
     #     listing: {
@@ -4208,8 +4198,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a connection. In Amazon DataZone, a connection enables you to connect your
-    #          resources (domains, projects, and environments) to external resources and services.</p>
+    # <p>Gets a connection. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::GetConnectionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where we get the connection.</p>
@@ -4823,8 +4812,7 @@ module Aws::DataZone
     # <p>Gets the specified environment action.</p>
     # @param [Hash, Types::GetEnvironmentActionInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which the <code>GetEnvironmentAction</code> API is
-    #            invoked. </p>
+    #   <p>The ID of the Amazon DataZone domain in which the <code>GetEnvironmentAction</code> API is invoked. </p>
     # @option params [String] :environment_identifier
     #   <p>The environment ID of the environment action.</p>
     # @option params [String] :identifier
@@ -4954,8 +4942,7 @@ module Aws::DataZone
     # <p>Gets the credentials of an environment in Amazon DataZone.</p>
     # @param [Hash, Types::GetEnvironmentCredentialsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which this environment and its credentials
-    #            exist.</p>
+    #   <p>The ID of the Amazon DataZone domain in which this environment and its credentials exist.</p>
     # @option params [String] :environment_identifier
     #   <p>The ID of the environment whose credentials this operation gets.</p>
     # @example Request syntax with placeholder values
@@ -5094,7 +5081,8 @@ module Aws::DataZone
     #     created_at: Time.now,
     #     created_by: "CreatedBy",
     #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy"
+    #     updated_by: "UpdatedBy",
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::GetGlossaryOutput]
     def get_glossary(params = {}, options = {})
@@ -5132,7 +5120,8 @@ module Aws::DataZone
     #     created_at: Time.now,
     #     created_by: "CreatedBy",
     #     updated_at: Time.now,
-    #     updated_by: "UpdatedBy"
+    #     updated_by: "UpdatedBy",
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::GetGlossaryTermOutput]
     def get_glossary_term(params = {}, options = {})
@@ -5272,11 +5261,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain in which you want to get the data lineage node.</p>
     # @option params [String] :identifier
-    #   <p>The ID of the data lineage node that you want to get.</p>
-    #            <p>Both, a lineage node identifier generated by Amazon DataZone and a
-    #               <code>sourceIdentifier</code> of the lineage node are supported. If
-    #               <code>sourceIdentifier</code> is greater than 1800 characters, you can use lineage node
-    #            identifier generated by Amazon DataZone to get the node details.</p>
+    #   <p>The ID of the data lineage node that you want to get.</p> <p>Both, a lineage node identifier generated by Amazon DataZone and a <code>sourceIdentifier</code> of the lineage node are supported. If <code>sourceIdentifier</code> is greater than 1800 characters, you can use lineage node identifier generated by Amazon DataZone to get the node details.</p>
     # @option params [Time] :event_timestamp
     #   <p>The event time stamp for which you want to get the data lineage node.</p>
     # @example Request syntax with placeholder values
@@ -5329,8 +5314,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets a listing (a record of an asset at a given time). If you specify a listing version,
-    #          only details that are specific to that version are returned.</p>
+    # <p>Gets a listing (a record of an asset at a given time). If you specify a listing version, only details that are specific to that version are returned.</p>
     # @param [Hash, Types::GetListingInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain.</p>
@@ -5380,6 +5364,12 @@ module Aws::DataZone
     #             short_description: "ShortDescription"
     #           }
     #         ],
+    #         governed_glossary_terms: [
+    #           {
+    #             name: "GlossaryTermName",
+    #             short_description: "ShortDescription"
+    #           }
+    #         ],
     #         owning_project_id: "ProjectId"
     #       },
     #       data_product_listing: {
@@ -5421,8 +5411,7 @@ module Aws::DataZone
     # <p>Gets a metadata generation run in Amazon DataZone.</p>
     # @param [Hash, Types::GetMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to
-    #            get.</p>
+    #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to get.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the metadata generation run.</p>
     # @example Request syntax with placeholder values
@@ -5474,7 +5463,7 @@ module Aws::DataZone
     #     id: "ProjectId", # required
     #     name: "ProjectName", # required
     #     description: "Description",
-    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"],
+    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"],
     #     failure_reasons: [
     #       {
     #         code: "String",
@@ -5592,13 +5581,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Gets the details of a rule in Amazon DataZone. A rule is a formal agreement that
-    #          enforces specific requirements across user workflows (e.g., publishing assets to the
-    #          catalog, requesting subscriptions, creating projects) within the Amazon DataZone data
-    #          portal. These rules help maintain consistency, ensure compliance, and uphold governance
-    #          standards in data management processes. For instance, a metadata enforcement rule can
-    #          specify the required information for creating a subscription request or publishing a data
-    #          asset to the catalog, ensuring alignment with organizational standards.</p>
+    # <p>Gets the details of a rule in Amazon DataZone. A rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::GetRuleInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where the <code>GetRule</code> action is to be invoked.</p>
@@ -5812,8 +5795,7 @@ module Aws::DataZone
     # <p>Gets the details of the specified subscription request.</p>
     # @param [Hash, Types::GetSubscriptionRequestDetailsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to get the subscription request
-    #            details.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to get the subscription request details.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the subscription request the details of which to get.</p>
     # @example Request syntax with placeholder values
@@ -5958,8 +5940,7 @@ module Aws::DataZone
     # <p>Gets the existing data point for the asset.</p>
     # @param [Hash, Types::GetTimeSeriesDataPointInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to get the
-    #            data point.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the asset for which you want to get the data point.</p>
     # @option params [String] :entity_identifier
     #   <p>The ID of the asset for which you want to get the data point.</p>
     # @option params [String] :entity_type
@@ -6052,16 +6033,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>The sort order in which the existing account pools are to be listed.</p>
     # @option params [String] :next_token
-    #   <p>When the number of account pools is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of account pools, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListAccountPools to list the next set of
-    #            account pools.</p>
+    #   <p>When the number of account pools is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of account pools, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of account pools to return in a single call to ListAccountPools. When
-    #            the number of account pools to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListAccountPools to list the next set of account pools.</p>
+    #   <p>The maximum number of account pools to return in a single call to ListAccountPools. When the number of account pools to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountPools to list the next set of account pools.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6098,21 +6072,13 @@ module Aws::DataZone
     # <p>Lists the accounts in the specified account pool.</p>
     # @param [Hash, Types::ListAccountsInAccountPoolInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the domain in which the accounts in the specified account pool are to be
-    #            listed.</p>
+    #   <p>The ID of the domain in which the accounts in the specified account pool are to be listed.</p>
     # @option params [String] :identifier
     #   <p>The ID of the account pool whose accounts are to be listed.</p>
     # @option params [String] :next_token
-    #   <p>When the number of accounts is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of accounts, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of
-    #            accounts.</p>
+    #   <p>When the number of accounts is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of accounts, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool.
-    #            When the number of accounts to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListAccountsInAccountPool to list the next set of accounts.</p>
+    #   <p>The maximum number of accounts to return in a single call to ListAccountsInAccountPool. When the number of accounts to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListAccountsInAccountPool to list the next set of accounts.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6149,18 +6115,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   <p>The status of the asset filter.</p>
     # @option params [String] :next_token
-    #   <p>When the number of asset filters is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of asset filters, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to
-    #            list the next set of asset filters.</p>
+    #   <p>When the number of asset filters is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of asset filters, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of asset filters to return in a single call to
-    #               <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the
-    #            next set of asset filters.</p>
+    #   <p>The maximum number of asset filters to return in a single call to <code>ListAssetFilters</code>. When the number of asset filters to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetFilters</code> to list the next set of asset filters.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6203,18 +6160,9 @@ module Aws::DataZone
     # @option params [String] :identifier
     #   <p>The identifier of the asset.</p>
     # @option params [String] :next_token
-    #   <p>When the number of revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of revisions, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to
-    #            list the next set of revisions.</p>
+    #   <p>When the number of revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of revisions to return in a single call to
-    #               <code>ListAssetRevisions</code>. When the number of revisions to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListAssetRevisions</code> to list the
-    #            next set of revisions.</p>
+    #   <p>The maximum number of revisions to return in a single call to <code>ListAssetRevisions</code>. When the number of revisions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListAssetRevisions</code> to list the next set of revisions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6244,22 +6192,14 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists connections. In Amazon DataZone, a connection enables you to connect your
-    #          resources (domains, projects, and environments) to external resources and services.</p>
+    # <p>Lists connections. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::ListConnectionsInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to list connections.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of connections to return in a single call to ListConnections. When
-    #            the number of connections to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListConnections to list the next set of connections.</p>
+    #   <p>The maximum number of connections to return in a single call to ListConnections. When the number of connections to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListConnections to list the next set of connections.</p>
     # @option params [String] :next_token
-    #   <p>When the number of connections is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of connections, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListConnections to list the next set of
-    #            connections.</p>
+    #   <p>When the number of connections is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of connections, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListConnections to list the next set of connections.</p>
     # @option params [String] :sort_by
     #   <p>Specifies how you want to sort the listed connections.</p>
     # @option params [String] :sort_order
@@ -6468,20 +6408,9 @@ module Aws::DataZone
     # @option params [String] :identifier
     #   <p>The ID of the data product revision.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of asset filters to return in a single call to
-    #               <code>ListDataProductRevisions</code>. When the number of data product revisions to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListDataProductRevisions</code> to list the next set of data product
-    #            revisions.</p>
+    #   <p>The maximum number of asset filters to return in a single call to <code>ListDataProductRevisions</code>. When the number of data product revisions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     # @option params [String] :next_token
-    #   <p>When the number of data product revisions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data product revisions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataProductRevisions</code> to list the next set of data product
-    #            revisions.</p>
+    #   <p>When the number of data product revisions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data product revisions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataProductRevisions</code> to list the next set of data product revisions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6514,25 +6443,15 @@ module Aws::DataZone
     # <p>Lists data source run activities.</p>
     # @param [Hash, Types::ListDataSourceRunActivitiesInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to list data source run
-    #            activities.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to list data source run activities.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the data source run.</p>
     # @option params [String] :status
     #   <p>The status of the data source run.</p>
     # @option params [String] :next_token
-    #   <p>When the number of activities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of activities, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
+    #   <p>When the number of activities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of activities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of activities to return in a single call to
-    #               <code>ListDataSourceRunActivities</code>. When the number of activities to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
+    #   <p>The maximum number of activities to return in a single call to <code>ListDataSourceRunActivities</code>. When the number of activities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRunActivities</code> to list the next set of activities.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6579,25 +6498,15 @@ module Aws::DataZone
     # <p>Lists data source runs in Amazon DataZone.</p>
     # @param [Hash, Types::ListDataSourceRunsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to invoke the
-    #               <code>ListDataSourceRuns</code> action.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>ListDataSourceRuns</code> action.</p>
     # @option params [String] :data_source_identifier
     #   <p>The identifier of the data source.</p>
     # @option params [String] :status
     #   <p>The status of the data source.</p>
     # @option params [String] :next_token
-    #   <p>When the number of runs is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of runs, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of
-    #            runs.</p>
+    #   <p>When the number of runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of runs to return in a single call to
-    #            <code>ListDataSourceRuns</code>. When the number of runs to be listed is greater than the
-    #            value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that
-    #            you can use in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of
-    #            runs.</p>
+    #   <p>The maximum number of runs to return in a single call to <code>ListDataSourceRuns</code>. When the number of runs to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSourceRuns</code> to list the next set of runs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6663,18 +6572,9 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name of the data source.</p>
     # @option params [String] :next_token
-    #   <p>When the number of data sources is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of data sources, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to
-    #            list the next set of data sources.</p>
+    #   <p>When the number of data sources is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of data sources, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of data sources to return in a single call to
-    #               <code>ListDataSources</code>. When the number of data sources to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListDataSources</code> to list the
-    #            next set of data sources.</p>
+    #   <p>The maximum number of data sources to return in a single call to <code>ListDataSources</code>. When the number of data sources to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDataSources</code> to list the next set of data sources.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6729,21 +6629,13 @@ module Aws::DataZone
     # <p>Lists child domain units for the specified parent domain unit.</p>
     # @param [Hash, Types::ListDomainUnitsForParentInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the domain in which you want to list domain units for a parent domain
-    #            unit.</p>
+    #   <p>The ID of the domain in which you want to list domain units for a parent domain unit.</p>
     # @option params [String] :parent_domain_unit_identifier
     #   <p>The ID of the parent domain unit.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of domain units to return in a single call to
-    #            ListDomainUnitsForParent. When the number of domain units to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
+    #   <p>The maximum number of domain units to return in a single call to ListDomainUnitsForParent. When the number of domain units to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     # @option params [String] :next_token
-    #   <p>When the number of domain units is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of domain units, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set
-    #            of domain units.</p>
+    #   <p>When the number of domain units is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of domain units, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListDomainUnitsForParent to list the next set of domain units.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6775,18 +6667,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   <p>The status of the data source.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of domains to return in a single call to <code>ListDomains</code>.
-    #            When the number of domains to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>ListDomains</code> to list the next set of
-    #            domains.</p>
+    #   <p>The maximum number of domains to return in a single call to <code>ListDomains</code>. When the number of domains to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     # @option params [String] :next_token
-    #   <p>When the number of domains is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of domains, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListDomains</code> to list the next set of
-    #            domains.</p>
+    #   <p>When the number of domains is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of domains, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListDomains</code> to list the next set of domains.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     status: "CREATING" # One of: ["CREATING", "AVAILABLE", "CREATION_FAILED", "DELETING", "DELETED", "DELETION_FAILED"],
@@ -6829,18 +6712,9 @@ module Aws::DataZone
     # @option params [String] :entity_identifier
     #   <p>The ID of the entity that you want to list.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of entities to return in a single call to
-    #               <code>ListEntityOwners</code>. When the number of entities to be listed is greater than
-    #            the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value
-    #            that you can use in a subsequent call to <code>ListEntityOwners</code> to list the next set
-    #            of entities.</p>
+    #   <p>The maximum number of entities to return in a single call to <code>ListEntityOwners</code>. When the number of entities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     # @option params [String] :next_token
-    #   <p>When the number of entities is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of entities, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to
-    #            list the next set of entities.</p>
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEntityOwners</code> to list the next set of entities.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6878,18 +6752,9 @@ module Aws::DataZone
     # @option params [String] :environment_identifier
     #   <p>The ID of the envrironment whose environment actions are listed.</p>
     # @option params [String] :next_token
-    #   <p>When the number of environment actions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment actions, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code>
-    #            to list the next set of environment actions.</p>
+    #   <p>When the number of environment actions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment actions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of environment actions to return in a single call to
-    #               <code>ListEnvironmentActions</code>. When the number of environment actions to be listed
-    #            is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
+    #   <p>The maximum number of environment actions to return in a single call to <code>ListEnvironmentActions</code>. When the number of environment actions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentActions</code> to list the next set of environment actions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6930,20 +6795,9 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of blueprint configurations to return in a single call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code>. When the number of configurations
-    #            to be listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of
-    #            configurations.</p>
+    #   <p>The maximum number of blueprint configurations to return in a single call to <code>ListEnvironmentBlueprintConfigurations</code>. When the number of configurations to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     # @option params [String] :next_token
-    #   <p>When the number of blueprint configurations is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of configurations, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of
-    #            configurations.</p>
+    #   <p>When the number of blueprint configurations is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of configurations, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprintConfigurations</code> to list the next set of configurations.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6992,18 +6846,9 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of blueprints to return in a single call to
-    #               <code>ListEnvironmentBlueprints</code>. When the number of blueprints to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentBlueprints</code> to list the next set of blueprints.</p>
+    #   <p>The maximum number of blueprints to return in a single call to <code>ListEnvironmentBlueprints</code>. When the number of blueprints to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentBlueprints</code> to list the next set of blueprints.</p>
     # @option params [String] :next_token
-    #   <p>When the number of blueprints in the environment is greater than the default value for
-    #            the <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of blueprints in the environment,
-    #            the response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
+    #   <p>When the number of blueprints in the environment is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of blueprints in the environment, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentBlueprints</code>to list the next set of blueprints.</p>
     # @option params [String] :name
     #   <p>The name of the Amazon DataZone environment.</p>
     # @option params [Boolean] :managed
@@ -7050,32 +6895,19 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [String] :aws_account_id
-    #   <p>The identifier of the Amazon Web Services account where you want to list environment
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon Web Services account where you want to list environment profiles.</p>
     # @option params [String] :aws_account_region
     #   <p>The Amazon Web Services region where you want to list environment profiles.</p>
     # @option params [String] :environment_blueprint_identifier
-    #   <p>The identifier of the blueprint that was used to create the environment profiles that
-    #            you want to list.</p>
+    #   <p>The identifier of the blueprint that was used to create the environment profiles that you want to list.</p>
     # @option params [String] :project_identifier
     #   <p>The identifier of the Amazon DataZone project.</p>
     # @option params [String] :name
     #   <p/>
     # @option params [String] :next_token
-    #   <p>When the number of environment profiles is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environment profiles, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListEnvironmentProfiles</code> to list the next set of environment
-    #            profiles.</p>
+    #   <p>When the number of environment profiles is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environment profiles, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of environment profiles to return in a single call to
-    #               <code>ListEnvironmentProfiles</code>. When the number of environment profiles to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListEnvironmentProfiles</code> to list the next set of environment
-    #            profiles.</p>
+    #   <p>The maximum number of environment profiles to return in a single call to <code>ListEnvironmentProfiles</code>. When the number of environment profiles to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironmentProfiles</code> to list the next set of environment profiles.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7120,8 +6952,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [String] :aws_account_id
-    #   <p>The identifier of the Amazon Web Services account where you want to list
-    #            environments.</p>
+    #   <p>The identifier of the Amazon Web Services account where you want to list environments.</p>
     # @option params [String] :status
     #   <p>The status of the environments that you want to list.</p>
     # @option params [String] :aws_account_region
@@ -7137,18 +6968,9 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name of the environment.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of environments to return in a single call to
-    #               <code>ListEnvironments</code>. When the number of environments to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListEnvironments</code> to list the
-    #            next set of environments.</p>
+    #   <p>The maximum number of environments to return in a single call to <code>ListEnvironments</code>. When the number of environments to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     # @option params [String] :next_token
-    #   <p>When the number of environments is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of environments, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to
-    #            list the next set of environments.</p>
+    #   <p>When the number of environments is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of environments, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListEnvironments</code> to list the next set of environments.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7205,16 +7027,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the order in which job runs are to be sorted.</p>
     # @option params [String] :next_token
-    #   <p>When the number of job runs is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of job runs, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListJobRuns to list the next set of job
-    #            runs.</p>
+    #   <p>When the number of job runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of job runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of job runs to return in a single call to ListJobRuns. When the
-    #            number of job runs to be listed is greater than the value of MaxResults, the response
-    #            contains a NextToken value that you can use in a subsequent call to ListJobRuns to list the
-    #            next set of job runs.</p>
+    #   <p>The maximum number of job runs to return in a single call to ListJobRuns. When the number of job runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListJobRuns to list the next set of job runs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7259,10 +7074,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to list lineage events.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of lineage events to return in a single call to ListLineageEvents.
-    #            When the number of lineage events to be listed is greater than the value of MaxResults, the
-    #            response contains a NextToken value that you can use in a subsequent call to
-    #            ListLineageEvents to list the next set of lineage events.</p>
+    #   <p>The maximum number of lineage events to return in a single call to ListLineageEvents. When the number of lineage events to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     # @option params [Time] :timestamp_after
     #   <p>The after timestamp of a lineage event.</p>
     # @option params [Time] :timestamp_before
@@ -7272,11 +7084,7 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>The sort order of the lineage events.</p>
     # @option params [String] :next_token
-    #   <p>When the number of lineage events is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of lineage events, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListLineageEvents to list the next set
-    #            of lineage events.</p>
+    #   <p>When the number of lineage events is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of lineage events, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageEvents to list the next set of lineage events.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7336,32 +7144,19 @@ module Aws::DataZone
     # <p>Lists the history of the specified data lineage node.</p>
     # @param [Hash, Types::ListLineageNodeHistoryInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the domain where you want to list the history of the specified data lineage
-    #            node.</p>
+    #   <p>The ID of the domain where you want to list the history of the specified data lineage node.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of history items to return in a single call to
-    #            ListLineageNodeHistory. When the number of memberships to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListLineageNodeHistory to list the next set of items.</p>
+    #   <p>The maximum number of history items to return in a single call to ListLineageNodeHistory. When the number of memberships to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     # @option params [String] :next_token
-    #   <p>When the number of history items is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of items, the response includes a pagination token named NextToken. You can specify this
-    #            NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of
-    #            items.</p>
+    #   <p>When the number of history items is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of items, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListLineageNodeHistory to list the next set of items.</p>
     # @option params [String] :identifier
     #   <p>The ID of the data lineage node whose history you want to list.</p>
     # @option params [String] :direction
-    #   <p>The direction of the data lineage node refers to the lineage node having neighbors in
-    #            that direction. For example, if direction is <code>UPSTREAM</code>, the
-    #               <code>ListLineageNodeHistory</code> API responds with historical versions with upstream
-    #            neighbors only.</p>
+    #   <p>The direction of the data lineage node refers to the lineage node having neighbors in that direction. For example, if direction is <code>UPSTREAM</code>, the <code>ListLineageNodeHistory</code> API responds with historical versions with upstream neighbors only.</p>
     # @option params [Time] :event_timestamp_gte
-    #   <p>Specifies whether the action is to return data lineage node history from the time after
-    #            the event timestamp.</p>
+    #   <p>Specifies whether the action is to return data lineage node history from the time after the event timestamp.</p>
     # @option params [Time] :event_timestamp_lte
-    #   <p>Specifies whether the action is to return data lineage node history from the time prior
-    #            of the event timestamp.</p>
+    #   <p>Specifies whether the action is to return data lineage node history from the time prior of the event timestamp.</p>
     # @option params [String] :sort_order
     #   <p>The order by which you want data lineage node history to be sorted.</p>
     # @example Request syntax with placeholder values
@@ -7407,24 +7202,15 @@ module Aws::DataZone
     # <p>Lists all metadata generation runs.</p>
     # @param [Hash, Types::ListMetadataGenerationRunsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain where you want to list metadata generation
-    #            runs.</p>
+    #   <p>The ID of the Amazon DataZone domain where you want to list metadata generation runs.</p>
     # @option params [String] :status
     #   <p>The status of the metadata generation runs.</p>
     # @option params [String] :type
     #   <p>The type of the metadata generation runs.</p>
     # @option params [String] :next_token
-    #   <p>When the number of metadata generation runs is greater than the default value for the
-    #            MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than
-    #            the number of metadata generation runs, the response includes a pagination token named
-    #            NextToken. You can specify this NextToken value in a subsequent call to
-    #            ListMetadataGenerationRuns to list the next set of revisions.</p>
+    #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of metadata generation runs to return in a single call to
-    #            ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is
-    #            greater than the value of MaxResults, the response contains a NextToken value that you can
-    #            use in a subsequent call to ListMetadataGenerationRuns to list the next set of
-    #            revisions.</p>
+    #   <p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7477,18 +7263,9 @@ module Aws::DataZone
     # @option params [String] :task_status
     #   <p>The task status of notifications.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of notifications to return in a single call to
-    #               <code>ListNotifications</code>. When the number of notifications to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListNotifications</code> to list the
-    #            next set of notifications.</p>
+    #   <p>The maximum number of notifications to return in a single call to <code>ListNotifications</code>. When the number of notifications to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     # @option params [String] :next_token
-    #   <p>When the number of notifications is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of notifications, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to
-    #            list the next set of notifications.</p>
+    #   <p>When the number of notifications is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notifications, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotifications</code> to list the next set of notifications.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7549,18 +7326,9 @@ module Aws::DataZone
     # @option params [String] :policy_type
     #   <p>The type of policy that you want to list.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of grants to return in a single call to
-    #            <code>ListPolicyGrants</code>. When the number of grants to be listed is greater than the
-    #            value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that
-    #            you can use in a subsequent call to <code>ListPolicyGrants</code> to list the next set of
-    #            grants.</p>
+    #   <p>The maximum number of grants to return in a single call to <code>ListPolicyGrants</code>. When the number of grants to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     # @option params [String] :next_token
-    #   <p>When the number of grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of grants, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of
-    #            grants.</p>
+    #   <p>When the number of grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListPolicyGrants</code> to list the next set of grants.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7654,7 +7422,8 @@ module Aws::DataZone
     #           }
     #         },
     #         created_at: Time.now,
-    #         created_by: "CreatedBy"
+    #         created_by: "CreatedBy",
+    #         grant_id: "GrantIdentifier"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -7668,8 +7437,7 @@ module Aws::DataZone
     # <p>Lists all members of the specified project.</p>
     # @param [Hash, Types::ListProjectMembershipsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to list project
-    #            memberships.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to list project memberships.</p>
     # @option params [String] :project_identifier
     #   <p>The identifier of the project whose memberships you want to list.</p>
     # @option params [String] :sort_by
@@ -7677,18 +7445,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>The sort order of the project memberships.</p>
     # @option params [String] :next_token
-    #   <p>When the number of memberships is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of memberships, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code>
-    #            to list the next set of memberships.</p>
+    #   <p>When the number of memberships is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of memberships, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of memberships to return in a single call to
-    #               <code>ListProjectMemberships</code>. When the number of memberships to be listed is
-    #            greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListProjectMemberships</code> to list the next set of memberships.</p>
+    #   <p>The maximum number of memberships to return in a single call to <code>ListProjectMemberships</code>. When the number of memberships to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjectMemberships</code> to list the next set of memberships.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7736,16 +7495,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the sort order of the project profiles.</p>
     # @option params [String] :next_token
-    #   <p>When the number of project profiles is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of project profiles, the response includes a pagination token named NextToken. You can
-    #            specify this NextToken value in a subsequent call to ListProjectProfiles to list the next
-    #            set of project profiles.</p>
+    #   <p>When the number of project profiles is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of project profiles, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of project profiles to return in a single call to
-    #            ListProjectProfiles. When the number of project profiles to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
+    #   <p>The maximum number of project profiles to return in a single call to ListProjectProfiles. When the number of project profiles to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListProjectProfiles to list the next set of project profiles.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7792,18 +7544,9 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name of the project.</p>
     # @option params [String] :next_token
-    #   <p>When the number of projects is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of projects, the response includes
-    #            a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list
-    #            the next set of projects.</p>
+    #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of projects to return in a single call to <code>ListProjects</code>.
-    #            When the number of projects to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>ListProjects</code> to list the next set of
-    #            projects.</p>
+    #   <p>The maximum number of projects to return in a single call to <code>ListProjects</code>. When the number of projects to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7824,7 +7567,7 @@ module Aws::DataZone
     #         id: "ProjectId", # required
     #         name: "ProjectName", # required
     #         description: "Description",
-    #         project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"],
+    #         project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"],
     #         failure_reasons: [
     #           {
     #             code: "String",
@@ -7845,13 +7588,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Lists existing rules. In Amazon DataZone, a rule is a formal agreement that enforces
-    #          specific requirements across user workflows (e.g., publishing assets to the catalog,
-    #          requesting subscriptions, creating projects) within the Amazon DataZone data portal. These
-    #          rules help maintain consistency, ensure compliance, and uphold governance standards in data
-    #          management processes. For instance, a metadata enforcement rule can specify the required
-    #          information for creating a subscription request or publishing a data asset to the catalog,
-    #          ensuring alignment with organizational standards.</p>
+    # <p>Lists existing rules. In Amazon DataZone, a rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::ListRulesInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain in which the rules are to be listed.</p>
@@ -7872,16 +7609,9 @@ module Aws::DataZone
     # @option params [Boolean] :include_cascaded
     #   <p>Specifies whether to include cascading rules in the results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of rules to return in a single call to <code>ListRules</code>. When
-    #            the number of rules to be listed is greater than the value of <code>MaxResults</code>, the
-    #            response contains a <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListRules</code> to list the next set of rules.</p>
+    #   <p>The maximum number of rules to return in a single call to <code>ListRules</code>. When the number of rules to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     # @option params [String] :next_token
-    #   <p>When the number of rules is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of rules, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
+    #   <p>When the number of rules is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of rules, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListRules</code> to list the next set of rules.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -7958,18 +7688,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the sort order of this action.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of subscription grants to return in a single call to
-    #               <code>ListSubscriptionGrants</code>. When the number of subscription grants to be listed
-    #            is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
+    #   <p>The maximum number of subscription grants to return in a single call to <code>ListSubscriptionGrants</code>. When the number of subscription grants to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     # @option params [String] :next_token
-    #   <p>When the number of subscription grants is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription grants, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code>
-    #            to list the next set of subscription grants.</p>
+    #   <p>When the number of subscription grants is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription grants, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionGrants</code> to list the next set of subscription grants.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8040,11 +7761,7 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [String] :status
-    #   <p>Specifies the status of the subscription requests.</p>
-    #            <note>
-    #               <p>This is not a required parameter, but if not specified, by default, Amazon DataZone
-    #               returns only <code>PENDING</code> subscription requests. </p>
-    #            </note>
+    #   <p>Specifies the status of the subscription requests.</p> <note> <p>This is not a required parameter, but if not specified, by default, Amazon DataZone returns only <code>PENDING</code> subscription requests. </p> </note>
     # @option params [String] :subscribed_listing_id
     #   <p>The identifier of the subscribed listing.</p>
     # @option params [String] :owning_project_id
@@ -8056,20 +7773,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the sort order for the results of this action.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of subscription requests to return in a single call to
-    #               <code>ListSubscriptionRequests</code>. When the number of subscription requests to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionRequests</code> to list the next set of subscription
-    #            requests.</p>
+    #   <p>The maximum number of subscription requests to return in a single call to <code>ListSubscriptionRequests</code>. When the number of subscription requests to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     # @option params [String] :next_token
-    #   <p>When the number of subscription requests is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription requests, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionRequests</code> to list the next set of subscription
-    #            requests.</p>
+    #   <p>When the number of subscription requests is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription requests, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionRequests</code> to list the next set of subscription requests.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8177,8 +7883,7 @@ module Aws::DataZone
     # <p>Lists subscription targets in Amazon DataZone.</p>
     # @param [Hash, Types::ListSubscriptionTargetsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain where you want to list subscription
-    #            targets.</p>
+    #   <p>The identifier of the Amazon DataZone domain where you want to list subscription targets.</p>
     # @option params [String] :environment_identifier
     #   <p>The identifier of the environment where you want to list subscription targets.</p>
     # @option params [String] :sort_by
@@ -8186,20 +7891,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the sort order for the results of this action.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of subscription targets to return in a single call to
-    #               <code>ListSubscriptionTargets</code>. When the number of subscription targets to be
-    #            listed is greater than the value of <code>MaxResults</code>, the response contains a
-    #               <code>NextToken</code> value that you can use in a subsequent call to
-    #               <code>ListSubscriptionTargets</code> to list the next set of subscription targets.
-    #         </p>
+    #   <p>The maximum number of subscription targets to return in a single call to <code>ListSubscriptionTargets</code>. When the number of subscription targets to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets. </p>
     # @option params [String] :next_token
-    #   <p>When the number of subscription targets is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscription targets, the
-    #            response includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to
-    #               <code>ListSubscriptionTargets</code> to list the next set of subscription
-    #            targets.</p>
+    #   <p>When the number of subscription targets is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscription targets, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptionTargets</code> to list the next set of subscription targets.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8251,17 +7945,11 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
     # @option params [String] :subscription_request_identifier
-    #   <p>The identifier of the subscription request for the subscriptions that you want to
-    #            list.</p>
+    #   <p>The identifier of the subscription request for the subscriptions that you want to list.</p>
     # @option params [String] :status
-    #   <p>The status of the subscriptions that you want to list.</p>
-    #            <note>
-    #               <p>This is not a required parameter, but if not provided, by default, Amazon DataZone
-    #               returns only <code>APPROVED</code> subscriptions. </p>
-    #            </note>
+    #   <p>The status of the subscriptions that you want to list.</p> <note> <p>This is not a required parameter, but if not provided, by default, Amazon DataZone returns only <code>APPROVED</code> subscriptions. </p> </note>
     # @option params [String] :subscribed_listing_id
-    #   <p>The identifier of the subscribed listing for the subscriptions that you want to
-    #            list.</p>
+    #   <p>The identifier of the subscribed listing for the subscriptions that you want to list.</p>
     # @option params [String] :owning_project_id
     #   <p>The identifier of the owning project.</p>
     # @option params [String] :approver_project_id
@@ -8271,18 +7959,9 @@ module Aws::DataZone
     # @option params [String] :sort_order
     #   <p>Specifies the sort order for the results of this action.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of subscriptions to return in a single call to
-    #               <code>ListSubscriptions</code>. When the number of subscriptions to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>ListSubscriptions</code> to list the
-    #            next set of Subscriptions. </p>
+    #   <p>The maximum number of subscriptions to return in a single call to <code>ListSubscriptions</code>. When the number of subscriptions to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>ListSubscriptions</code> to list the next set of Subscriptions. </p>
     # @option params [String] :next_token
-    #   <p>When the number of subscriptions is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of subscriptions, the response
-    #            includes a pagination token named <code>NextToken</code>. You can specify this
-    #               <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to
-    #            list the next set of subscriptions.</p>
+    #   <p>When the number of subscriptions is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of subscriptions, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListSubscriptions</code> to list the next set of subscriptions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8403,8 +8082,7 @@ module Aws::DataZone
     # <p>Lists time series data points.</p>
     # @param [Hash, Types::ListTimeSeriesDataPointsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain that houses the assets for which you want to list
-    #            time series data points.</p>
+    #   <p>The ID of the Amazon DataZone domain that houses the assets for which you want to list time series data points.</p>
     # @option params [String] :entity_identifier
     #   <p>The ID of the asset for which you want to list data points.</p>
     # @option params [String] :entity_type
@@ -8416,16 +8094,9 @@ module Aws::DataZone
     # @option params [Time] :ended_at
     #   <p>The timestamp at which the data points that you wanted to list ended.</p>
     # @option params [String] :next_token
-    #   <p>When the number of data points is greater than the default value for the MaxResults
-    #            parameter, or if you explicitly specify a value for MaxResults that is less than the number
-    #            of data points, the response includes a pagination token named NextToken. You can specify
-    #            this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set
-    #            of data points.</p>
+    #   <p>When the number of data points is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of data points, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of data points to return in a single call to
-    #            ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the
-    #            value of MaxResults, the response contains a NextToken value that you can use in a
-    #            subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
+    #   <p>The maximum number of data points to return in a single call to ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8465,11 +8136,9 @@ module Aws::DataZone
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where you want to post a data lineage event.</p>
     # @option params [String] :event
-    #   <p>The data lineage event that you want to post. Only open-lineage run event are supported
-    #            as events. </p>
+    #   <p>The data lineage event that you want to post. Only open-lineage run event are supported as events. </p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8493,8 +8162,7 @@ module Aws::DataZone
     # <p>Posts time series data points to Amazon DataZone for the specified asset.</p>
     # @param [Hash, Types::PostTimeSeriesDataPointsInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data
-    #            points.</p>
+    #   <p>The ID of the Amazon DataZone domain in which you want to post time series data points.</p>
     # @option params [String] :entity_identifier
     #   <p>The ID of the asset for which you want to post time series data points.</p>
     # @option params [String] :entity_type
@@ -8502,8 +8170,7 @@ module Aws::DataZone
     # @option params [Array<Types::TimeSeriesDataPointFormInput>] :forms
     #   <p>The forms that contain the data points that you want to post.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8616,8 +8283,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Rejects automatically generated business-friendly metadata for your Amazon DataZone
-    #          assets.</p>
+    # <p>Rejects automatically generated business-friendly metadata for your Amazon DataZone assets.</p>
     # @param [Hash, Types::RejectPredictionsInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
@@ -8628,11 +8294,9 @@ module Aws::DataZone
     # @option params [Types::RejectRule] :reject_rule
     #   <p>Specifies the rule (or the conditions) under which a prediction can be rejected.</p>
     # @option params [Array<Types::RejectChoice>] :reject_choices
-    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the
-    #            target (for example, a column name) that can be rejected.</p>
+    #   <p>Specifies the prediction (aka, the automatically generated piece of metadata) and the target (for example, a column name) that can be rejected.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8668,8 +8332,7 @@ module Aws::DataZone
     # <p>Rejects the specified subscription request.</p>
     # @param [Hash, Types::RejectSubscriptionRequestInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was
-    #            rejected.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which the subscription request was rejected.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the subscription request that was rejected.</p>
     # @option params [String] :decision_comment
@@ -8779,8 +8442,7 @@ module Aws::DataZone
     # @option params [Types::OwnerProperties] :owner
     #   <p>The owner that you want to remove from an entity.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8820,9 +8482,10 @@ module Aws::DataZone
     #   <p>The type of the policy that you want to remove.</p>
     # @option params [Types::PolicyGrantPrincipal] :principal
     #   <p>The principal from which you want to remove a policy grant.</p>
+    # @option params [String] :grant_identifier
+    #   <p>The ID of the policy grant that is to be removed from a specified entity.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -8862,6 +8525,7 @@ module Aws::DataZone
     #         }
     #       }
     #     },
+    #     grant_identifier: "GrantIdentifier",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -8972,16 +8636,9 @@ module Aws::DataZone
     # @option params [String] :owning_project_identifier
     #   <p>The identifier of the owning project specified for the search.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call to <code>Search</code>. When
-    #            the number of results to be listed is greater than the value of <code>MaxResults</code>,
-    #            the response contains a <code>NextToken</code> value that you can use in a subsequent call
-    #            to <code>Search</code> to list the next set of results.</p>
+    #   <p>The maximum number of results to return in a single call to <code>Search</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>Search</code> to list the next set of results.</p>
     # @option params [String] :next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>Search</code> to list the next set of results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>Search</code> to list the next set of results.</p>
     # @option params [String] :search_scope
     #   <p>The scope of the search.</p>
     # @option params [String] :search_text
@@ -9040,6 +8697,7 @@ module Aws::DataZone
     #         owning_project_id: "ProjectId", # required
     #         description: "GlossaryDescription",
     #         status: "DISABLED" # One of: ["DISABLED", "ENABLED"], # required
+    #         usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]],
     #         created_at: Time.now,
     #         created_by: "CreatedBy",
     #         updated_at: Time.now,
@@ -9068,6 +8726,7 @@ module Aws::DataZone
     #         id: "GlossaryTermId", # required
     #         name: "GlossaryTermName", # required
     #         short_description: "ShortDescription",
+    #         usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]],
     #         long_description: "LongDescription",
     #         term_relations: {
     #           is_a: ["GlossaryTermId"],
@@ -9152,7 +8811,8 @@ module Aws::DataZone
     #               }
     #             ]
     #           }]
-    #         }
+    #         },
+    #         governed_glossary_terms: ["GlossaryTermId"]
     #       },
     #       data_product_item: {
     #         domain_id: "DomainId", # required
@@ -9196,25 +8856,15 @@ module Aws::DataZone
     # <p>Searches group profiles in Amazon DataZone.</p>
     # @param [Hash, Types::SearchGroupProfilesInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to search group
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to search group profiles.</p>
     # @option params [String] :group_type
     #   <p>The group type for which to search.</p>
     # @option params [String] :search_text
     #   <p>Specifies the text for which to search.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call to
-    #               <code>SearchGroupProfiles</code>. When the number of results to be listed is greater
-    #            than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code>
-    #            value that you can use in a subsequent call to <code>SearchGroupProfiles</code> to list the
-    #            next set of results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchGroupProfiles</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results. </p>
     # @option params [String] :next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchGroupProfiles</code> to list the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -9253,23 +8903,13 @@ module Aws::DataZone
     # @option params [Array<Types::SearchInItem>] :search_in
     #   <p>The details of the search.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call to <code>SearchListings</code>.
-    #            When the number of results to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>SearchListings</code> to list the next set of
-    #            results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchListings</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchListings</code> to list the next set of results. </p>
     # @option params [String] :next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchListings</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchListings</code> to list the next set of results.</p>
     # @option params [Types::FilterClause] :filters
     #   <p>Specifies the filters for the search of listings.</p>
     # @option params [Array<Types::AggregationListItem>] :aggregations
-    #   <p>Enables you to specify one or more attributes to compute and return counts grouped by
-    #            field values.</p>
+    #   <p>Enables you to specify one or more attributes to compute and return counts grouped by field values.</p>
     # @option params [Types::SearchSort] :sort
     #   <p>Specifies the way for sorting the search results.</p>
     # @option params [Array<String>] :additional_attributes
@@ -9329,6 +8969,12 @@ module Aws::DataZone
     #         listing_created_by: "CreatedBy",
     #         listing_updated_by: "UpdatedBy",
     #         glossary_terms: [
+    #           {
+    #             name: "GlossaryTermName",
+    #             short_description: "ShortDescription"
+    #           }
+    #         ],
+    #         governed_glossary_terms: [
     #           {
     #             name: "GlossaryTermName",
     #             short_description: "ShortDescription"
@@ -9438,21 +9084,11 @@ module Aws::DataZone
     # <p>Searches for types in Amazon DataZone.</p>
     # @param [Hash, Types::SearchTypesInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>SearchTypes</code>
-    #            action.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which to invoke the <code>SearchTypes</code> action.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call to <code>SearchTypes</code>.
-    #            When the number of results to be listed is greater than the value of
-    #               <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you
-    #            can use in a subsequent call to <code>SearchTypes</code> to list the next set of results.
-    #         </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchTypes</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchTypes</code> to list the next set of results. </p>
     # @option params [String] :next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchTypes</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchTypes</code> to list the next set of results.</p>
     # @option params [String] :search_scope
     #   <p>Specifies the scope of the search for types.</p>
     # @option params [String] :search_text
@@ -9575,25 +9211,15 @@ module Aws::DataZone
     # <p>Searches user profiles in Amazon DataZone.</p>
     # @param [Hash, Types::SearchUserProfilesInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which you want to search user
-    #            profiles.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which you want to search user profiles.</p>
     # @option params [String] :user_type
     #   <p>Specifies the user type for the <code>SearchUserProfiles</code> action.</p>
     # @option params [String] :search_text
     #   <p>Specifies the text for which to search.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return in a single call to
-    #               <code>SearchUserProfiles</code>. When the number of results to be listed is greater than
-    #            the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value
-    #            that you can use in a subsequent call to <code>SearchUserProfiles</code> to list the next
-    #            set of results. </p>
+    #   <p>The maximum number of results to return in a single call to <code>SearchUserProfiles</code>. When the number of results to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results. </p>
     # @option params [String] :next_token
-    #   <p>When the number of results is greater than the default value for the
-    #               <code>MaxResults</code> parameter, or if you explicitly specify a value for
-    #               <code>MaxResults</code> that is less than the number of results, the response includes a
-    #            pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code>
-    #            value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of
-    #            results.</p>
+    #   <p>When the number of results is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of results, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>SearchUserProfiles</code> to list the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -9641,8 +9267,7 @@ module Aws::DataZone
     # @option params [String] :data_source_identifier
     #   <p>The identifier of the data source.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -9686,18 +9311,15 @@ module Aws::DataZone
     # <p>Starts the metadata generation run.</p>
     # @param [Hash, Types::StartMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
-    #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation
-    #            run.</p>
+    #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation run.</p>
     # @option params [String] :type
     #   <p>The type of the metadata generation run.</p>
     # @option params [Types::MetadataGenerationRunTarget] :target
     #   <p>The asset for which you want to start a metadata generation run.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is
-    #            automatically populated if not provided.</p>
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
     # @option params [String] :owning_project_identifier
-    #   <p>The ID of the project that owns the asset for which you want to start a metadata
-    #            generation run.</p>
+    #   <p>The ID of the project that owns the asset for which you want to start a metadata generation run.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -9788,9 +9410,7 @@ module Aws::DataZone
     # @option params [String] :resolution_strategy
     #   <p>The mechanism used to resolve the account selection from the account pool.</p>
     # @option params [Types::AccountSource] :account_source
-    #   <p>The source of accounts for the account pool. In the current release, it's either a
-    #            static list of accounts provided by the customer or a custom Amazon Web Services Lambda
-    #            handler. </p>
+    #   <p>The source of accounts for the account pool. In the current release, it's either a static list of accounts provided by the customer or a custom Amazon Web Services Lambda handler. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10027,8 +9647,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Updates a connection. In Amazon DataZone, a connection enables you to connect your
-    #          resources (domains, projects, and environments) to external resources and services.</p>
+    # <p>Updates a connection. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::UpdateConnectionInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where a connection is to be updated.</p>
@@ -10295,28 +9914,21 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [String] :description
-    #   <p>The description to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [String] :enable_setting
-    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The enable setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Boolean] :publish_on_import
-    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The publish on import setting to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Array<Types::FormInput>] :asset_forms_input
-    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The asset forms to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Types::ScheduleConfiguration] :schedule
     #   <p>The schedule to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Types::DataSourceConfigurationInput] :configuration
-    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Types::RecommendationConfiguration] :recommendation
-    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code>
-    #            action.</p>
+    #   <p>The recommendation to be updated as part of the <code>UpdateDataSource</code> action.</p>
     # @option params [Boolean] :retain_permissions_on_revoke_failure
-    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe
-    #            functionality failure for a data source.</p>
+    #   <p>Specifies that the granted permissions are retained in case of a self-subscribe functionality failure for a data source.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10533,18 +10145,15 @@ module Aws::DataZone
     # @option params [String] :description
     #   <p>The description to be updated as part of the <code>UpdateDomain</code> action.</p>
     # @option params [Types::SingleSignOn] :single_sign_on
-    #   <p>The single sign-on option to be updated as part of the <code>UpdateDomain</code>
-    #            action.</p>
+    #   <p>The single sign-on option to be updated as part of the <code>UpdateDomain</code> action.</p>
     # @option params [String] :domain_execution_role
-    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code>
-    #            action.</p>
+    #   <p>The domain execution role to be updated as part of the <code>UpdateDomain</code> action.</p>
     # @option params [String] :service_role
     #   <p>The service role of the domain.</p>
     # @option params [String] :name
     #   <p>The name to be updated as part of the <code>UpdateDomain</code> action.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "DomainId", # required
@@ -10639,14 +10248,11 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     # @option params [String] :description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     # @option params [Array<String>] :glossary_terms
-    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code>
-    #            action.</p>
+    #   <p>The glossary terms to be updated as part of the <code>UpdateEnvironment</code> action.</p>
     # @option params [String] :blueprint_version
-    #   <p>The blueprint version to which the environment should be updated. You can only specify
-    #            the following string for this parameter: <code>latest</code>.</p>
+    #   <p>The blueprint version to which the environment should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     # @option params [Array<Types::EnvironmentParameter>] :user_parameters
     #   <p>The user parameters of the environment.</p>
     # @example Request syntax with placeholder values
@@ -10797,25 +10403,19 @@ module Aws::DataZone
     # <p>Updates the specified environment profile in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateEnvironmentProfileInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which an environment profile is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which an environment profile is to be updated.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the environment profile that is to be updated.</p>
     # @option params [String] :name
-    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     # @option params [String] :description
-    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The description to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     # @option params [Array<Types::EnvironmentParameter>] :user_parameters
-    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code>
-    #            action.</p>
+    #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentProfile</code> action.</p>
     # @option params [String] :aws_account_id
-    #   <p>The Amazon Web Services account in which a specified environment profile is to be
-    #            udpated.</p>
+    #   <p>The Amazon Web Services account in which a specified environment profile is to be udpated.</p>
     # @option params [String] :aws_account_region
-    #   <p>The Amazon Web Services Region in which a specified environment profile is to be
-    #            updated.</p>
+    #   <p>The Amazon Web Services Region in which a specified environment profile is to be updated.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10867,8 +10467,7 @@ module Aws::DataZone
     # <p>Updates the business glossary in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateGlossaryInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary is to be updated.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the business glossary to be updated.</p>
     # @option params [String] :name
@@ -10878,8 +10477,7 @@ module Aws::DataZone
     # @option params [String] :status
     #   <p>The status to be updated as part of the <code>UpdateGlossary</code> action.</p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the
-    #            request.</p>
+    #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10899,7 +10497,8 @@ module Aws::DataZone
     #     name: "GlossaryName", # required
     #     owning_project_id: "ProjectId", # required
     #     description: "GlossaryDescription",
-    #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"]
+    #     status: "DISABLED" # One of: ["DISABLED", "ENABLED"],
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::UpdateGlossaryOutput]
     def update_glossary(params = {}, options = {})
@@ -10910,8 +10509,7 @@ module Aws::DataZone
     # <p>Updates a business glossary term in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateGlossaryTermInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a business glossary term is to be updated.</p>
     # @option params [String] :glossary_identifier
     #   <p>The identifier of the business glossary in which a term is to be updated.</p>
     # @option params [String] :identifier
@@ -10919,14 +10517,11 @@ module Aws::DataZone
     # @option params [String] :name
     #   <p>The name to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     # @option params [String] :short_description
-    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The short description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     # @option params [String] :long_description
-    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The long description to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     # @option params [Types::TermRelations] :term_relations
-    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code>
-    #            action.</p>
+    #   <p>The term relations to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     # @option params [String] :status
     #   <p>The status to be updated as part of the <code>UpdateGlossaryTerm</code> action.</p>
     # @example Request syntax with placeholder values
@@ -10958,7 +10553,8 @@ module Aws::DataZone
     #     term_relations: {
     #       is_a: ["GlossaryTermId"],
     #       classifies: ["GlossaryTermId"]
-    #     }
+    #     },
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS" # One of: ["ASSET_GOVERNED_TERMS"]]
     #   }
     # @return [Types::UpdateGlossaryTermOutput]
     def update_glossary_term(params = {}, options = {})
@@ -11007,8 +10603,7 @@ module Aws::DataZone
     # @option params [String] :description
     #   <p>The description to be updated as part of the <code>UpdateProject</code> action.</p>
     # @option params [Array<String>] :glossary_terms
-    #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code>
-    #            action.</p>
+    #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code> action.</p>
     # @option params [String] :domain_unit_id
     #   <p>The ID of the domain unit.</p>
     # @option params [Types::EnvironmentDeploymentDetails] :environment_deployment_details
@@ -11016,8 +10611,7 @@ module Aws::DataZone
     # @option params [Array<Types::EnvironmentConfigurationUserParameter>] :user_parameters
     #   <p>The user parameters of the project.</p>
     # @option params [String] :project_profile_version
-    #   <p>The project profile version to which the project should be updated. You can only specify
-    #            the following string for this parameter: <code>latest</code>.</p>
+    #   <p>The project profile version to which the project should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -11065,7 +10659,7 @@ module Aws::DataZone
     #     id: "ProjectId", # required
     #     name: "ProjectName", # required
     #     description: "Description",
-    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"],
+    #     project_status: "ACTIVE" # One of: ["ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"],
     #     failure_reasons: [
     #       {
     #         code: "String",
@@ -11235,13 +10829,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Updates a rule. In Amazon DataZone, a rule is a formal agreement that enforces specific
-    #          requirements across user workflows (e.g., publishing assets to the catalog, requesting
-    #          subscriptions, creating projects) within the Amazon DataZone data portal. These rules help
-    #          maintain consistency, ensure compliance, and uphold governance standards in data management
-    #          processes. For instance, a metadata enforcement rule can specify the required information
-    #          for creating a subscription request or publishing a data asset to the catalog, ensuring
-    #          alignment with organizational standards.</p>
+    # <p>Updates a rule. In Amazon DataZone, a rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::UpdateRuleInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain in which a rule is to be updated.</p>
@@ -11341,22 +10929,17 @@ module Aws::DataZone
     # <p>Updates the status of the specified subscription grant status in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateSubscriptionGrantStatusInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription grant status is to be updated.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the subscription grant the status of which is to be updated.</p>
     # @option params [String] :asset_identifier
-    #   <p>The identifier of the asset the subscription grant status of which is to be
-    #            updated.</p>
+    #   <p>The identifier of the asset the subscription grant status of which is to be updated.</p>
     # @option params [String] :status
-    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code>
-    #            action.</p>
+    #   <p>The status to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     # @option params [Types::FailureCause] :failure_cause
-    #   <p>Specifies the error message that is returned if the operation cannot be successfully
-    #            completed.</p>
+    #   <p>Specifies the error message that is returned if the operation cannot be successfully completed.</p>
     # @option params [String] :target_name
-    #   <p>The target name to be updated as part of the <code>UpdateSubscriptionGrantStatus</code>
-    #            action.</p>
+    #   <p>The target name to be updated as part of the <code>UpdateSubscriptionGrantStatus</code> action.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -11418,8 +11001,7 @@ module Aws::DataZone
     # <p>Updates a specified subscription request in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateSubscriptionRequestInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription request is to be updated.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the subscription request that is to be updated.</p>
     # @option params [String] :request_reason
@@ -11521,31 +11103,23 @@ module Aws::DataZone
     # <p>Updates the specified subscription target in Amazon DataZone.</p>
     # @param [Hash, Types::UpdateSubscriptionTargetInput] params
     # @option params [String] :domain_identifier
-    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the Amazon DataZone domain in which a subscription target is to be updated.</p>
     # @option params [String] :environment_identifier
-    #   <p>The identifier of the environment in which a subscription target is to be
-    #            updated.</p>
+    #   <p>The identifier of the environment in which a subscription target is to be updated.</p>
     # @option params [String] :identifier
     #   <p>Identifier of the subscription target that is to be updated.</p>
     # @option params [String] :name
-    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The name to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [Array<String>] :authorized_principals
-    #   <p>The authorized principals to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The authorized principals to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [Array<String>] :applicable_asset_types
-    #   <p>The applicable asset types to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The applicable asset types to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [Array<Types::SubscriptionTargetForm>] :subscription_target_config
-    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The configuration to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [String] :manage_access_role
-    #   <p>The manage access role to be updated as part of the
-    #               <code>UpdateSubscriptionTarget</code> action.</p>
+    #   <p>The manage access role to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [String] :provider
-    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code>
-    #            action.</p>
+    #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required

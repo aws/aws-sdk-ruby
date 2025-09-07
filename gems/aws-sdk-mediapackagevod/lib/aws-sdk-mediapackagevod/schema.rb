@@ -398,7 +398,7 @@ module Aws::MediaPackageVod
       service.id = "com.amazonaws.mediapackagevod#MediaPackageVod"
       service.name = "MediaPackageVod"
       service.version = "2018-11-07"
-      service.traits = {"aws.api#service" => {"sdkId" => "MediaPackage Vod", "arnNamespace" => "mediapackage-vod", "cloudFormationName" => "MediaPackageVod", "cloudTrailEventSource" => "mediapackagevod.amazonaws.com", "endpointPrefix" => "mediapackage-vod"}, "aws.auth#sigv4" => {"name" => "mediapackage-vod"}, "aws.protocols#restJson1" => {}, "smithy.api#title" => "AWS Elemental MediaPackage VOD"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MediaPackage Vod", "arnNamespace" => "mediapackage-vod", "cloudFormationName" => "MediaPackageVod", "cloudTrailEventSource" => "mediapackagevod.amazonaws.com", "endpointPrefix" => "mediapackage-vod"}, "aws.auth#sigv4" => {"name" => "mediapackage-vod"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Elemental MediaPackage VOD"}
       service.add_operation(:configure_logs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediapackagevod#ConfigureLogs"
         operation.name = "ConfigureLogs"

@@ -86,7 +86,7 @@ module Aws::ECS
     end
 
     # <p>Your Amazon Web Services account was blocked. For more information, contact <a href="http://aws.amazon.com/contact-us/">
-    # 				Amazon Web ServicesSupport</a>.</p>
+    # 				Amazon Web Services Support</a>.</p>
     class BlockedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ECS::Types::BlockedException] data

@@ -1151,7 +1151,7 @@ module Aws::WorkMail
     PutAccessControlRuleRequest.type = Types::PutAccessControlRuleRequest
     PutAccessControlRuleResponse.type = Types::PutAccessControlRuleResponse
     PutEmailMonitoringConfigurationRequest.add_member(:organization_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationId, location_name: 'OrganizationId', traits: {"smithy.api#required" => {}}))
-    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'RoleArn', traits: {"smithy.api#required" => {}}))
+    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RoleArn, location_name: 'RoleArn'))
     PutEmailMonitoringConfigurationRequest.add_member(:log_group_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LogGroupArn, location_name: 'LogGroupArn', traits: {"smithy.api#required" => {}}))
     PutEmailMonitoringConfigurationRequest.type = Types::PutEmailMonitoringConfigurationRequest
     PutEmailMonitoringConfigurationResponse.type = Types::PutEmailMonitoringConfigurationResponse
@@ -2264,6 +2264,7 @@ module Aws::WorkMail
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: MailDomainStateException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: OrganizationStateException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         operation.traits = {"smithy.api#idempotent" => {}}
       end)
       service.add_operation(:reset_password, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

@@ -178,6 +178,8 @@ module Aws::Billing
     #  By default fake responses are generated and returned. You can specify the response data
     #  to return or errors to raise by calling {Stubs#stub_responses}.
     #  @see Stubs
+    # @option options [Boolean] :use_dual_stack_endpoint
+    #  TODO
     # @option options [Boolean] :use_fips_endpoint
     #  TODO
     # @option options [Boolean] :validate_params (true)
@@ -186,30 +188,20 @@ module Aws::Billing
       super
     end
 
-    # <p>
-    # Creates a billing view with the specified billing view attributes.
-    #     </p>
+    # <p> Creates a billing view with the specified billing view attributes. </p>
     # @param [Hash, Types::CreateBillingViewRequest] params
     # @option params [String] :name
-    #   <p>
-    #        The name of the billing view.
-    #       </p>
+    #   <p> The name of the billing view. </p>
     # @option params [String] :description
-    #   <p>
-    #         The description of the billing view.
-    #       </p>
+    #   <p> The description of the billing view. </p>
     # @option params [Array<String>] :source_views
     #   <p>A list of billing views used as the data source for the custom billing view.</p>
     # @option params [Types::Expression] :data_filter_expression
-    #   <p>
-    #         See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.
-    #       </p>
+    #   <p> See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
     # @option params [String] :client_token
-    #   <p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request.
-    #       </p>
+    #   <p>A unique, case-sensitive identifier you specify to ensure idempotency of the request. Idempotency ensures that an API request completes no more than one time. If the original request completes successfully, any subsequent retries complete successfully without performing any further actions with an idempotent request. </p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>A list of key value map specifying tags associated to the billing view being created.
-    #       </p>
+    #   <p>A list of key value map specifying tags associated to the billing view being created. </p>
     # @example Invoke CreateBillingView
     #   # Example operation for create_billing_view
     #   params = {
@@ -274,9 +266,7 @@ module Aws::Billing
     # <p>Deletes the specified billing view.</p>
     # @param [Hash, Types::DeleteBillingViewRequest] params
     # @option params [String] :arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @example Invoke DeleteBillingView
     #   # Example operation for delete_billing_view
     #   params = {
@@ -305,13 +295,10 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>Returns the metadata associated to the specified billing view ARN.
-    #     </p>
+    # <p>Returns the metadata associated to the specified billing view ARN. </p>
     # @param [Hash, Types::GetBillingViewRequest] params
     # @option params [String] :arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @example Invoke GetBillingView
     #   # Example operation for get_billing_view
     #   params = {
@@ -372,12 +359,10 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format.
-    #     </p>
+    # <p>Returns the resource-based policy document attached to the resource in <code>JSON</code> format. </p>
     # @param [Hash, Types::GetResourcePolicyRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.
-    #       </p>
+    #   <p>The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to. </p>
     # @example Invoke GetResourcePolicy
     #   # Example operation for get_resource_policy
     #   params = {
@@ -408,26 +393,18 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>Lists the billing views available for a given time period.
-    #       </p>
-    #          <p>Every Amazon Web Services account has a unique <code>PRIMARY</code> billing view that represents the billing data available by default. Accounts that use Billing Conductor also have <code>BILLING_GROUP</code> billing views representing pro forma costs associated with each created billing group.</p>
+    # <p>Lists the billing views available for a given time period. </p> <p>Every Amazon Web Services account has a unique <code>PRIMARY</code> billing view that represents the billing data available by default. Accounts that use Billing Conductor also have <code>BILLING_GROUP</code> billing views representing pro forma costs associated with each created billing group.</p>
     # @param [Hash, Types::ListBillingViewsRequest] params
     # @option params [Types::ActiveTimeRange] :active_time_range
-    #   <p>
-    #         The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month.
-    #       </p>
+    #   <p> The time range for the billing views listed. <code>PRIMARY</code> billing view is always listed. <code>BILLING_GROUP</code> billing views are listed for time ranges when the associated billing group resource in Billing Conductor is active. The time range must be within one calendar month. </p>
     # @option params [Array<String>] :arns
-    #   <p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.
-    #         </p>
+    #   <p>The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @option params [Array<String>] :billing_view_types
     #   <p>The type of billing view.</p>
     # @option params [String] :owner_account_id
-    #   <p>
-    #         The list of owners of the billing view.
-    #       </p>
+    #   <p> The list of owners of the billing view. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of billing views to retrieve. Default is 100.
-    #         </p>
+    #   <p>The maximum number of billing views to retrieve. Default is 100. </p>
     # @option params [String] :next_token
     #   <p>The pagination token that is used on subsequent calls to list billing views.</p>
     # @example Invoke ListBillingViews
@@ -504,21 +481,14 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view.
-    #     </p>
+    # <p>Lists the source views (managed Amazon Web Services billing views) associated with the billing view. </p>
     # @param [Hash, Types::ListSourceViewsForBillingViewRequest] params
     # @option params [String] :arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @option params [Integer] :max_results
-    #   <p>
-    #         The number of entries a paginated response contains.
-    #       </p>
+    #   <p> The number of entries a paginated response contains. </p>
     # @option params [String] :next_token
-    #   <p>
-    #         The pagination token that is used on subsequent calls to list billing views.
-    #       </p>
+    #   <p> The pagination token that is used on subsequent calls to list billing views. </p>
     # @example Invoke ListSourceViewsForBillingView
     #   # Example operation for list_source_views_for_billing_view
     #   params = {
@@ -552,13 +522,10 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>Lists tags associated with the billing view resource.
-    #     </p>
+    # <p>Lists tags associated with the billing view resource. </p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) of the resource. 
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) of the resource. </p>
     # @example Invoke ListTagsForResource
     #   # Example operation for list_tags_for_resource
     #   params = {
@@ -597,18 +564,12 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>
-    #       An API operation for adding one or more tags (key-value pairs) to a resource.
-    #     </p>
+    # <p> An API operation for adding one or more tags (key-value pairs) to a resource. </p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) of the resource.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) of the resource. </p>
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   <p>
-    #         A list of tag key value pairs that are associated with the resource.
-    #       </p>
+    #   <p> A list of tag key value pairs that are associated with the resource. </p>
     # @example Invoke TagResource
     #   # Example operation for tag_resource
     #   params = {
@@ -645,18 +606,12 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>
-    #       Removes one or more tags from a resource. Specify only tag keys in your request. Don't specify the value.
-    #     </p>
+    # <p> Removes one or more tags from a resource. Specify only tag keys in your request. Don't specify the value. </p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) of the resource.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) of the resource. </p>
     # @option params [Array<String>] :resource_tag_keys
-    #   <p>
-    #         A list of tag key value pairs that are associated with the resource.
-    #       </p>
+    #   <p> A list of tag key value pairs that are associated with the resource. </p>
     # @example Invoke UntagResource
     #   # Example operation for untag_resource
     #   params = {
@@ -685,24 +640,16 @@ module Aws::Billing
       request.send_request(options)
     end
 
-    # <p>An API to update the attributes of the billing view.
-    #     </p>
+    # <p>An API to update the attributes of the billing view. </p>
     # @param [Hash, Types::UpdateBillingViewRequest] params
     # @option params [String] :arn
-    #   <p>
-    #         The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.
-    #       </p>
+    #   <p> The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view. </p>
     # @option params [String] :name
-    #   <p>
-    #         The name of the billing view.
-    #       </p>
+    #   <p> The name of the billing view. </p>
     # @option params [String] :description
-    #   <p>
-    #         The description of the billing view.
-    #       </p>
+    #   <p> The description of the billing view. </p>
     # @option params [Types::Expression] :data_filter_expression
-    #   <p>See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>.
-    #       </p>
+    #   <p>See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html">Expression</a>. Billing view only supports <code>LINKED_ACCOUNT</code> and <code>Tags</code>. </p>
     # @example Invoke UpdateBillingView
     #   # Example operation for update_billing_view
     #   params = {

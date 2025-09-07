@@ -985,13 +985,66 @@ module Aws::GuardDuty
       request.send_request(options)
     end
 
+    # <p>Creates a new threat entity set. In a threat entity set, you can provide known malicious 
+    #         IP addresses and domains for your Amazon Web Services environment. 
+    #         GuardDuty generates findings based on the entries in the threat entity sets. 
+    #         Only users of the administrator account can manage entity sets, which automatically apply
+    #         to member accounts.</p>
+    # @param [Hash, Types::CreateThreatEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :name
+    #   <p>A user-friendly name to identify the threat entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    # @option params [String] :format
+    #   <p>The format of the file that contains the threat entity set.</p>
+    # @option params [String] :location
+    #   <p>The URI of the file that contains the threat entity set.</p>
+    # @option params [String] :expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b> parameter.</p>
+    # @option params [Boolean] :activate
+    #   <p>A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to
+    #           generate findings.</p>
+    # @option params [String] :client_token
+    #   <p>The idempotency token for the create request.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to be added to a new threat entity set resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     name: "Name", # required
+    #     format: "TXT" # One of: ["TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"], # required
+    #     location: "Location", # required
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     activate: false, # required
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_threat_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     threat_entity_set_id: "String", # required
+    #   }
+    # @return [Types::CreateThreatEntitySetResponse]
+    def create_threat_entity_set(params = {}, options = {})
+      request = build_request(:create_threat_entity_set, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses.
     #       GuardDuty generates findings based on ThreatIntelSets. Only users of the administrator
     #       account can use this operation.</p>
     # @param [Hash, Types::CreateThreatIntelSetRequest] params
     # @option params [String] :detector_id
     #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a
-    #         <code>ThreatIntelSet</code>.</p>
+    #         <code>threatIntelSet</code>.</p>
     #            <p>To find the <code>detectorId</code> in the current Region, see the
     #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
     # @option params [String] :name
@@ -1033,6 +1086,61 @@ module Aws::GuardDuty
     # @return [Types::CreateThreatIntelSetResponse]
     def create_threat_intel_set(params = {}, options = {})
       request = build_request(:create_threat_intel_set, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new trusted entity set. In the trusted entity set, you can provide IP addresses
+    #       and domains that you believe are secure for communication in your Amazon Web Services environment. GuardDuty 
+    #       will not generate findings for the entries that are specified in a trusted entity set. At any
+    #       given time, you can have only one trusted entity set. </p>
+    #          <p>Only users of the administrator account can manage the entity sets, which automatically
+    #      apply to member accounts.</p>
+    # @param [Hash, Types::CreateTrustedEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the detector of the GuardDuty account for which you want to create a trusted
+    #         entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    # @option params [String] :format
+    #   <p>The format of the file that contains the trusted entity set.</p>
+    # @option params [String] :location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    # @option params [String] :expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #         parameter.</p>
+    # @option params [Boolean] :activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.</p>
+    # @option params [String] :client_token
+    #   <p>The idempotency token for the create request.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to be added to a new trusted entity set resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     name: "Name", # required
+    #     format: "TXT" # One of: ["TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"], # required
+    #     location: "Location", # required
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     activate: false, # required
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_trusted_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     trusted_entity_set_id: "String", # required
+    #   }
+    # @return [Types::CreateTrustedEntitySetResponse]
+    def create_trusted_entity_set(params = {}, options = {})
+      request = build_request(:create_trusted_entity_set, params)
       request.send_request(options)
     end
 
@@ -1243,6 +1351,31 @@ module Aws::GuardDuty
       request.send_request(options)
     end
 
+    # <p>Deletes the threat entity set that is associated with the specified 
+    #        <code>threatEntitySetId</code>.</p>
+    # @param [Hash, Types::DeleteThreatEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :threat_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     threat_entity_set_id: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_threat_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteThreatEntitySetResponse]
+    def delete_threat_entity_set(params = {}, options = {})
+      request = build_request(:delete_threat_entity_set, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.</p>
     # @param [Hash, Types::DeleteThreatIntelSetRequest] params
     # @option params [String] :detector_id
@@ -1264,6 +1397,31 @@ module Aws::GuardDuty
     # @return [Types::DeleteThreatIntelSetResponse]
     def delete_threat_intel_set(params = {}, options = {})
       request = build_request(:delete_threat_intel_set, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the trusted entity set that is associated with the specified 
+    #        <code>trustedEntitySetId</code>.</p>
+    # @param [Hash, Types::DeleteTrustedEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the detector associated with the trusted entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :trusted_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     trusted_entity_set_id: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_trusted_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteTrustedEntitySetResponse]
+    def delete_trusted_entity_set(params = {}, options = {})
+      request = build_request(:delete_trusted_entity_set, params)
       request.send_request(options)
     end
 
@@ -3344,6 +3502,42 @@ module Aws::GuardDuty
       request.send_request(options)
     end
 
+    # <p>Retrieves the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>
+    # @param [Hash, Types::GetThreatEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the detector associated with the threat entity set resource.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :threat_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify the threat entity set.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     threat_entity_set_id: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.get_threat_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "Name", # required
+    #     format: "TXT" # One of: ["TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"], # required
+    #     location: "Location", # required
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     status: "INACTIVE" # One of: ["INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"], # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     error_details: "String"
+    #   }
+    # @return [Types::GetThreatEntitySetResponse]
+    def get_threat_entity_set(params = {}, options = {})
+      request = build_request(:get_threat_entity_set, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.</p>
     # @param [Hash, Types::GetThreatIntelSetRequest] params
     # @option params [String] :detector_id
@@ -3374,6 +3568,40 @@ module Aws::GuardDuty
     # @return [Types::GetThreatIntelSetResponse]
     def get_threat_intel_set(params = {}, options = {})
       request = build_request(:get_threat_intel_set, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the trusted entity set associated with the specified <code>trustedEntitySetId</code>.</p>
+    # @param [Hash, Types::GetTrustedEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with this trusted entity set.</p>
+    # @option params [String] :trusted_entity_set_id
+    #   <p>The unique ID that helps GuardDuty identify the trusted entity set.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     trusted_entity_set_id: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.get_trusted_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "Name", # required
+    #     format: "TXT" # One of: ["TXT", "STIX", "OTX_CSV", "ALIEN_VAULT", "PROOF_POINT", "FIRE_EYE"], # required
+    #     location: "Location", # required
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     status: "INACTIVE" # One of: ["INACTIVE", "ACTIVATING", "ACTIVE", "DEACTIVATING", "ERROR", "DELETE_PENDING", "DELETED"], # required
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     created_at: Time.now,
+    #     updated_at: Time.now,
+    #     error_details: "String"
+    #   }
+    # @return [Types::GetTrustedEntitySetResponse]
+    def get_trusted_entity_set(params = {}, options = {})
+      request = build_request(:get_trusted_entity_set, params)
       request.send_request(options)
     end
 
@@ -4192,6 +4420,42 @@ module Aws::GuardDuty
       request.send_request(options)
     end
 
+    # <p>Lists the threat entity sets associated with the specified GuardDuty detector ID. If you use this
+    #       operation from a member account, the threat entity sets that are returned as a response, belong to the 
+    #       administrator account.</p>
+    # @param [Hash, Types::ListThreatEntitySetsRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [Integer] :max_results
+    #   <p>You can use this parameter to indicate the maximum number of 
+    #          items you want in the response. The default value is 50.</p>
+    # @option params [String] :next_token
+    #   <p>You can use this parameter when paginating results. Set the value 
+    #          of this parameter to null on your first call to the list action. For
+    #          subsequent calls to the action, fill nextToken in the request 
+    #          with the value of NextToken from the previous response to continue listing data.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_threat_entity_sets(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     threat_entity_set_ids: ["String"], # required
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListThreatEntitySetsResponse]
+    def list_threat_entity_sets(params = {}, options = {})
+      request = build_request(:list_threat_entity_sets, params)
+      request.send_request(options)
+    end
+
     # <p>Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you
     #       use this operation from a member account, the ThreatIntelSets associated with the
     #       administrator account are returned.</p>
@@ -4225,6 +4489,42 @@ module Aws::GuardDuty
     # @return [Types::ListThreatIntelSetsResponse]
     def list_threat_intel_sets(params = {}, options = {})
       request = build_request(:list_threat_intel_sets, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the trusted entity sets associated with the specified GuardDuty detector ID. If you use this
+    #        operation from a member account, the trusted entity sets that are returned as a response, belong to the 
+    #        administrator account.</p>
+    # @param [Hash, Types::ListTrustedEntitySetsRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the GuardDuty detector that is associated with this threat entity set.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [Integer] :max_results
+    #   <p>You can use this parameter to indicate the maximum number of 
+    #          items you want in the response. The default value is 50.</p>
+    # @option params [String] :next_token
+    #   <p>You can use this parameter when paginating results. Set the value 
+    #          of this parameter to null on your first call to the list action. For
+    #          subsequent calls to the action, fill nextToken in the request 
+    #          with the value of NextToken from the previous response to continue listing data.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     max_results: 1,
+    #     next_token: "String"
+    #   }
+    #   options = {}
+    #   response = client.list_trusted_entity_sets(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     trusted_entity_set_ids: ["String"], # required
+    #     next_token: "String"
+    #   }
+    # @return [Types::ListTrustedEntitySetsResponse]
+    def list_trusted_entity_sets(params = {}, options = {})
+      request = build_request(:list_trusted_entity_sets, params)
       request.send_request(options)
     end
 
@@ -4883,6 +5183,48 @@ module Aws::GuardDuty
       request.send_request(options)
     end
 
+    # <p>Updates the threat entity set associated with the specified <code>threatEntitySetId</code>.</p>
+    # @param [Hash, Types::UpdateThreatEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
+    #         update.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :threat_entity_set_id
+    #   <p>The ID returned by GuardDuty after updating the threat entity set resource.</p>
+    # @option params [String] :name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    # @option params [String] :location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    # @option params [String] :expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    # @option params [Boolean] :activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated threat entity set. After you
+    #         update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
+    #         entity set to be effective.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     threat_entity_set_id: "String", # required
+    #     name: "Name",
+    #     location: "Location",
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     activate: false
+    #   }
+    #   options = {}
+    #   response = client.update_threat_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateThreatEntitySetResponse]
+    def update_threat_entity_set(params = {}, options = {})
+      request = build_request(:update_threat_entity_set, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the ThreatIntelSet specified by the ThreatIntelSet ID.</p>
     # @param [Hash, Types::UpdateThreatIntelSetRequest] params
     # @option params [String] :detector_id
@@ -4918,6 +5260,48 @@ module Aws::GuardDuty
     # @return [Types::UpdateThreatIntelSetResponse]
     def update_threat_intel_set(params = {}, options = {})
       request = build_request(:update_threat_intel_set, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the trusted entity set associated with the specified <code>trustedEntitySetId</code>.</p>
+    # @param [Hash, Types::UpdateTrustedEntitySetRequest] params
+    # @option params [String] :detector_id
+    #   <p>The unique ID of the GuardDuty detector associated with the threat entity set that you want to
+    #            update.</p>
+    #            <p>To find the <code>detectorId</code> in the current Region, see the
+    #   Settings page in the GuardDuty console, or run the <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a> API.</p>
+    # @option params [String] :trusted_entity_set_id
+    #   <p>The ID returned by GuardDuty after updating the trusted entity set resource.</p>
+    # @option params [String] :name
+    #   <p>A user-friendly name to identify the trusted entity set.</p>
+    #            <p>The name of your list can include 
+    #                                   lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).</p>
+    # @option params [String] :location
+    #   <p>The URI of the file that contains the trusted entity set.</p>
+    # @option params [String] :expected_bucket_owner
+    #   <p>The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the <b>location</b>
+    #          parameter.</p>
+    # @option params [Boolean] :activate
+    #   <p>A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set. After you
+    #          update an entity set, you will need to activate it again. It might take up to 15 minutes for the updated
+    #          entity set to be effective.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     detector_id: "DetectorId", # required
+    #     trusted_entity_set_id: "String", # required
+    #     name: "Name",
+    #     location: "Location",
+    #     expected_bucket_owner: "ExpectedBucketOwner",
+    #     activate: false
+    #   }
+    #   options = {}
+    #   response = client.update_trusted_entity_set(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateTrustedEntitySetResponse]
+    def update_trusted_entity_set(params = {}, options = {})
+      request = build_request(:update_trusted_entity_set, params)
       request.send_request(options)
     end
 

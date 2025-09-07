@@ -1006,7 +1006,8 @@ module Aws::Glue
     end
 
     # @!attribute inclusion_annotations
-    #   <p>A list of <code>DatapointInclusionAnnotation</code>'s.</p>
+    #   <p>A list of <code>DatapointInclusionAnnotation</code>'s. The InclusionAnnotations must contain a profileId and statisticId.
+    #           If there are multiple InclusionAnnotations, the list must refer to a single statisticId across multiple profileIds.</p>
     #   @return [Array<Types::DatapointInclusionAnnotation>]
     # @!attribute client_token
     #   <p>Client Token.</p>
@@ -4528,6 +4529,30 @@ module Aws::Glue
       end
     end
 
+    # <p>Request to create a new Glue Identity Center configuration.</p>
+    # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center instance to be associated with the Glue configuration.</p>
+    #   @return [String]
+    # @!attribute scopes
+    #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
+    #   @return [Array<String>]
+    class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
+      :instance_arn,
+      :scopes,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response from creating a new Glue Identity Center configuration.</p>
+    # @!attribute application_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center application that was created for the Glue configuration.</p>
+    #   @return [String]
+    class CreateGlueIdentityCenterConfigurationResponse < Struct.new(
+      :application_arn,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a <code>grok</code> classifier for <code>CreateClassifier</code>
     #       to create.</p>
     # @!attribute classification
@@ -6133,6 +6158,48 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The database and table in the Glue Data Catalog that is used for input or output data
+    #             for Data Quality Operations.</p>
+    # @!attribute database_name
+    #   <p>A database name in the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>A table name in the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute catalog_id
+    #   <p>A unique identifier for the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute connection_name
+    #   <p>The name of the connection to the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute additional_options
+    #   <p>Additional options for the table. Currently there are two keys supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>pushDownPredicate</code>: to filter on partitions without having to list and read all the files in your dataset.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>catalogPartitionPredicate</code>: to use server-side partition pruning using partition indexes in the Glue Data Catalog.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Hash<String, String>]
+    # @!attribute pre_processing_query
+    #   <p>SQL Query of SparkSQL format that can be used to pre-process the data for the table in Glue Data Catalog,
+    #               before running the Data Quality Operation.</p>
+    #   @return [String]
+    class DataQualityGlueTable < Struct.new(
+      :database_name,
+      :table_name,
+      :catalog_id,
+      :connection_name,
+      :additional_options,
+      :pre_processing_query,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the data quality metric value according to the analysis of historical data.</p>
     # @!attribute actual_value
     #   <p>The actual value of the data quality metric.</p>
@@ -6491,8 +6558,12 @@ module Aws::Glue
     # @!attribute glue_table
     #   <p>An Glue table.</p>
     #   @return [Types::GlueTable]
+    # @!attribute data_quality_glue_table
+    #   <p>An Glue table for Data Quality Operations.</p>
+    #   @return [Types::DataQualityGlueTable]
     class DataSource < Struct.new(
       :glue_table,
+      :data_quality_glue_table,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -6922,6 +6993,18 @@ module Aws::Glue
     end
 
     class DeleteDevEndpointResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request to delete the existing Glue Identity Center configuration.</p>
+    class DeleteGlueIdentityCenterConfigurationRequest < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response from deleting the Glue Identity Center configuration.</p>
+    class DeleteGlueIdentityCenterConfigurationResponse < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -9808,6 +9891,30 @@ module Aws::Glue
     class GetEntityRecordsResponse < Struct.new(
       :records,
       :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request to retrieve the Glue Identity Center configuration.</p>
+    class GetGlueIdentityCenterConfigurationRequest < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response containing the Glue Identity Center configuration details.</p>
+    # @!attribute application_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center application associated with the Glue configuration.</p>
+    #   @return [String]
+    # @!attribute instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the Identity Center instance associated with the Glue configuration.</p>
+    #   @return [String]
+    # @!attribute scopes
+    #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
+    #   @return [Array<String>]
+    class GetGlueIdentityCenterConfigurationResponse < Struct.new(
+      :application_arn,
+      :instance_arn,
+      :scopes,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -12730,9 +12837,14 @@ module Aws::Glue
     #         can be used to customize the behavior of the ODB source during data integration operations.
     #       </p>
     #   @return [Hash<String, String>]
+    # @!attribute continuous_sync
+    #   <p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift 
+    #         and Amazon S3.</p>
+    #   @return [Boolean]
     class IntegrationConfig < Struct.new(
       :refresh_interval,
       :source_properties,
+      :continuous_sync,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -12792,9 +12904,29 @@ module Aws::Glue
     #         which can lead to performance issues.</p>
     #   @return [String]
     # @!attribute function_spec
-    #   <p>Specifies the function used to partition data on the target. The only accepted value for this parameter is `'identity'` (string). 
-    #         The `'identity'` function ensures that the data partitioning on the target follows the same scheme as the source. In other words, the partitioning 
-    #         structure of the source data is preserved in the target destination.</p>
+    #   <p>Specifies the function used to partition data on the target. The accepted values for this parameter are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>identity</code> - Uses source values directly without transformation</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>year</code> - Extracts the year from timestamp values (e.g., 2023)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>month</code> - Extracts the month from timestamp values (e.g., 2023-01)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>day</code> - Extracts the day from timestamp values (e.g., 2023-01-15)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>hour</code> - Extracts the hour from timestamp values (e.g., 2023-01-15-14)</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute conversion_spec
     #   <p>Specifies the timestamp format of the source data. Valid values are:</p>
@@ -15443,6 +15575,9 @@ module Aws::Glue
     # @!attribute data_filter
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
+    # @!attribute integration_config
+    #   <p>Properties associated with the integration.</p>
+    #   @return [Types::IntegrationConfig]
     # @!attribute integration_name
     #   <p>A unique name for an integration in Glue.</p>
     #   @return [String]
@@ -15450,6 +15585,7 @@ module Aws::Glue
       :integration_identifier,
       :description,
       :data_filter,
+      :integration_config,
       :integration_name,
       keyword_init: true)
       include ::Smithy::Schema::Structure
@@ -15515,6 +15651,9 @@ module Aws::Glue
     # @!attribute data_filter
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
+    # @!attribute integration_config
+    #   <p>Properties associated with the integration.</p>
+    #   @return [Types::IntegrationConfig]
     class ModifyIntegrationResponse < Struct.new(
       :source_arn,
       :target_arn,
@@ -15528,6 +15667,7 @@ module Aws::Glue
       :create_time,
       :errors,
       :data_filter,
+      :integration_config,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -21364,6 +21504,22 @@ module Aws::Glue
     end
 
     class UpdateDevEndpointResponse < Struct.new(
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Request to update an existing Glue Identity Center configuration.</p>
+    # @!attribute scopes
+    #   <p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>
+    #   @return [Array<String>]
+    class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
+      :scopes,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Response from updating an existing Glue Identity Center configuration.</p>
+    class UpdateGlueIdentityCenterConfigurationResponse < Struct.new(
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

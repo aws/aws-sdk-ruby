@@ -169,6 +169,8 @@ module Aws::MediaConvert
     CreatePresetResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#CreatePresetResponse', name: 'CreatePresetResponse')
     CreateQueueRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#CreateQueueRequest', name: 'CreateQueueRequest')
     CreateQueueResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#CreateQueueResponse', name: 'CreateQueueResponse')
+    CreateResourceShareRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#CreateResourceShareRequest', name: 'CreateResourceShareRequest')
+    CreateResourceShareResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#CreateResourceShareResponse', name: 'CreateResourceShareResponse')
     DashAdditionalManifest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#DashAdditionalManifest', name: 'DashAdditionalManifest')
     DashIsoEncryptionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#DashIsoEncryptionSettings', name: 'DashIsoEncryptionSettings')
     DashIsoGroupAudioChannelConfigSchemeIdUri = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#DashIsoGroupAudioChannelConfigSchemeIdUri', name: 'DashIsoGroupAudioChannelConfigSchemeIdUri')
@@ -474,6 +476,7 @@ module Aws::MediaConvert
     MovPaddingControl = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#MovPaddingControl', name: 'MovPaddingControl')
     MovReference = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#MovReference', name: 'MovReference')
     MovSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#MovSettings', name: 'MovSettings')
+    Mp2AudioDescriptionMix = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#Mp2AudioDescriptionMix', name: 'Mp2AudioDescriptionMix')
     Mp2Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#Mp2Settings', name: 'Mp2Settings')
     Mp3RateControlMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#Mp3RateControlMode', name: 'Mp3RateControlMode')
     Mp3Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#Mp3Settings', name: 'Mp3Settings')
@@ -601,6 +604,7 @@ module Aws::MediaConvert
     SearchJobsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#SearchJobsRequest', name: 'SearchJobsRequest')
     SearchJobsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#SearchJobsResponse', name: 'SearchJobsResponse')
     ServiceOverride = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#ServiceOverride', name: 'ServiceOverride')
+    ShareStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#ShareStatus', name: 'ShareStatus')
     SimulateReservedQueue = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#SimulateReservedQueue', name: 'SimulateReservedQueue')
     SpekeKeyProvider = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#SpekeKeyProvider', name: 'SpekeKeyProvider')
     SpekeKeyProviderCmaf = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#SpekeKeyProviderCmaf', name: 'SpekeKeyProviderCmaf')
@@ -672,6 +676,7 @@ module Aws::MediaConvert
     VideoPreprocessor = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#VideoPreprocessor', name: 'VideoPreprocessor')
     VideoProperties = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#VideoProperties', name: 'VideoProperties')
     VideoSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#VideoSelector', name: 'VideoSelector')
+    VideoSelectorType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#VideoSelectorType', name: 'VideoSelectorType')
     VideoTimecodeInsertion = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#VideoTimecodeInsertion', name: 'VideoTimecodeInsertion')
     VorbisSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.mediaconvert#VorbisSettings', name: 'VorbisSettings')
     Vp8FramerateControl = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.mediaconvert#Vp8FramerateControl', name: 'Vp8FramerateControl')
@@ -1742,6 +1747,10 @@ module Aws::MediaConvert
     CreateQueueRequest.type = Types::CreateQueueRequest
     CreateQueueResponse.add_member(:queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Queue, location_name: 'Queue', traits: {"smithy.api#jsonName" => "queue"}))
     CreateQueueResponse.type = Types::CreateQueueResponse
+    CreateResourceShareRequest.add_member(:job_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'JobId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "jobId", "smithy.api#required" => {}}))
+    CreateResourceShareRequest.add_member(:support_case_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'SupportCaseId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "supportCaseId", "smithy.api#required" => {}}))
+    CreateResourceShareRequest.type = Types::CreateResourceShareRequest
+    CreateResourceShareResponse.type = Types::CreateResourceShareResponse
     DashAdditionalManifest.add_member(:manifest_name_modifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringmin1, location_name: 'ManifestNameModifier', traits: {"smithy.api#jsonName" => "manifestNameModifier"}))
     DashAdditionalManifest.add_member(:selected_outputs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofStringmin1, location_name: 'SelectedOutputs', traits: {"smithy.api#jsonName" => "selectedOutputs"}))
     DashAdditionalManifest.type = Types::DashAdditionalManifest
@@ -2565,6 +2574,7 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:timestamp_delta_milliseconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integerminnegative2147483648max2147483647, location_name: 'TimestampDeltaMilliseconds', traits: {"smithy.api#jsonName" => "timestampDeltaMilliseconds"}))
     HlsGroupSettings.type = Types::HlsGroupSettings
     HlsIFrameOnlyManifest.add_member(:include, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INCLUDE', traits: {"smithy.api#enumValue" => "INCLUDE"}))
+    HlsIFrameOnlyManifest.add_member(:include_as_ts, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INCLUDE_AS_TS', traits: {"smithy.api#enumValue" => "INCLUDE_AS_TS"}))
     HlsIFrameOnlyManifest.add_member(:exclude, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'EXCLUDE', traits: {"smithy.api#enumValue" => "EXCLUDE"}))
     HlsImageBasedTrickPlay.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
     HlsImageBasedTrickPlay.add_member(:thumbnail, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'THUMBNAIL', traits: {"smithy.api#enumValue" => "THUMBNAIL"}))
@@ -2759,6 +2769,7 @@ module Aws::MediaConvert
     Job.add_member(:job_engine_version_used, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'JobEngineVersionUsed', traits: {"smithy.api#jsonName" => "jobEngineVersionUsed"}))
     Job.add_member(:job_percent_complete, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'JobPercentComplete', traits: {"smithy.api#jsonName" => "jobPercentComplete"}))
     Job.add_member(:job_template, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'JobTemplate', traits: {"smithy.api#jsonName" => "jobTemplate"}))
+    Job.add_member(:last_share_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'LastShareDetails', traits: {"smithy.api#jsonName" => "lastShareDetails"}))
     Job.add_member(:messages, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobMessages, location_name: 'Messages', traits: {"smithy.api#jsonName" => "messages"}))
     Job.add_member(:output_group_details, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Listofoutputgroupdetail, location_name: 'OutputGroupDetails', traits: {"smithy.api#jsonName" => "outputGroupDetails"}))
     Job.add_member(:priority, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integerminnegative50max50, location_name: 'Priority', traits: {"smithy.api#jsonName" => "priority"}))
@@ -2767,6 +2778,7 @@ module Aws::MediaConvert
     Job.add_member(:retry_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integer, location_name: 'RetryCount', traits: {"smithy.api#jsonName" => "retryCount"}))
     Job.add_member(:role, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Role', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "role", "smithy.api#required" => {}}))
     Job.add_member(:settings, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobSettings, location_name: 'Settings', traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "settings", "smithy.api#required" => {}}))
+    Job.add_member(:share_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ShareStatus, location_name: 'ShareStatus', traits: {"smithy.api#jsonName" => "shareStatus"}))
     Job.add_member(:simulate_reserved_queue, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SimulateReservedQueue, location_name: 'SimulateReservedQueue', traits: {"smithy.api#jsonName" => "simulateReservedQueue"}))
     Job.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: JobStatus, location_name: 'Status', traits: {"smithy.api#jsonName" => "status"}))
     Job.add_member(:status_update_interval, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StatusUpdateInterval, location_name: 'StatusUpdateInterval', traits: {"smithy.api#jsonName" => "statusUpdateInterval"}))
@@ -3265,6 +3277,9 @@ module Aws::MediaConvert
     MovSettings.add_member(:padding_control, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MovPaddingControl, location_name: 'PaddingControl', traits: {"smithy.api#jsonName" => "paddingControl"}))
     MovSettings.add_member(:reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MovReference, location_name: 'Reference', traits: {"smithy.api#jsonName" => "reference"}))
     MovSettings.type = Types::MovSettings
+    Mp2AudioDescriptionMix.add_member(:broadcaster_mixed_ad, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'BROADCASTER_MIXED_AD', traits: {"smithy.api#enumValue" => "BROADCASTER_MIXED_AD"}))
+    Mp2AudioDescriptionMix.add_member(:none, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NONE', traits: {"smithy.api#enumValue" => "NONE"}))
+    Mp2Settings.add_member(:audio_description_mix, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Mp2AudioDescriptionMix, location_name: 'AudioDescriptionMix', traits: {"smithy.api#jsonName" => "audioDescriptionMix"}))
     Mp2Settings.add_member(:bitrate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin32000max384000, location_name: 'Bitrate', traits: {"smithy.api#jsonName" => "bitrate"}))
     Mp2Settings.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max2, location_name: 'Channels', traits: {"smithy.api#jsonName" => "channels"}))
     Mp2Settings.add_member(:sample_rate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin32000max48000, location_name: 'SampleRate', traits: {"smithy.api#jsonName" => "sampleRate"}))
@@ -3769,6 +3784,9 @@ module Aws::MediaConvert
     ServiceOverride.add_member(:override_value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'OverrideValue', traits: {"smithy.api#jsonName" => "overrideValue"}))
     ServiceOverride.add_member(:value, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'Value', traits: {"smithy.api#jsonName" => "value"}))
     ServiceOverride.type = Types::ServiceOverride
+    ShareStatus.add_member(:not_shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'NOT_SHARED', traits: {"smithy.api#enumValue" => "NOT_SHARED"}))
+    ShareStatus.add_member(:initiated, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'INITIATED', traits: {"smithy.api#enumValue" => "INITIATED"}))
+    ShareStatus.add_member(:shared, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SHARED', traits: {"smithy.api#enumValue" => "SHARED"}))
     SimulateReservedQueue.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     SimulateReservedQueue.add_member(:enabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'ENABLED', traits: {"smithy.api#enumValue" => "ENABLED"}))
     SpekeKeyProvider.add_member(:certificate_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Stringpatternarnawsusgovacm, location_name: 'CertificateArn', traits: {"smithy.api#jsonName" => "certificateArn"}))
@@ -4105,7 +4123,11 @@ module Aws::MediaConvert
     VideoSelector.add_member(:program_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integerminnegative2147483648max2147483647, location_name: 'ProgramNumber', traits: {"smithy.api#jsonName" => "programNumber"}))
     VideoSelector.add_member(:rotate, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputRotate, location_name: 'Rotate', traits: {"smithy.api#jsonName" => "rotate"}))
     VideoSelector.add_member(:sample_range, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InputSampleRange, location_name: 'SampleRange', traits: {"smithy.api#jsonName" => "sampleRange"}))
+    VideoSelector.add_member(:selector_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VideoSelectorType, location_name: 'SelectorType', traits: {"smithy.api#jsonName" => "selectorType"}))
+    VideoSelector.add_member(:streams, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListofIntegermin1max2147483647, location_name: 'Streams', traits: {"smithy.api#jsonName" => "streams"}))
     VideoSelector.type = Types::VideoSelector
+    VideoSelectorType.add_member(:auto, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'AUTO', traits: {"smithy.api#enumValue" => "AUTO"}))
+    VideoSelectorType.add_member(:stream, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STREAM', traits: {"smithy.api#enumValue" => "STREAM"}))
     VideoTimecodeInsertion.add_member(:disabled, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'DISABLED', traits: {"smithy.api#enumValue" => "DISABLED"}))
     VideoTimecodeInsertion.add_member(:pic_timing_sei, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'PIC_TIMING_SEI', traits: {"smithy.api#enumValue" => "PIC_TIMING_SEI"}))
     VorbisSettings.add_member(:channels, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Integermin1max2, location_name: 'Channels', traits: {"smithy.api#jsonName" => "channels"}))
@@ -4441,6 +4463,19 @@ module Aws::MediaConvert
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2017-08-29/queues", "code" => 201}}
+      end)
+      service.add_operation(:create_resource_share, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.mediaconvert#CreateResourceShare"
+        operation.name = "CreateResourceShare"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceShareRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CreateResourceShareResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: BadRequestException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ForbiddenException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: NotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/2017-08-29/resourceShares", "code" => 202}}
       end)
       service.add_operation(:delete_job_template, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.mediaconvert#DeleteJobTemplate"

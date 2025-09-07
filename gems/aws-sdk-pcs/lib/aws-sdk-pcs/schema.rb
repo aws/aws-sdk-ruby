@@ -58,7 +58,7 @@ module Aws::PCS
     GetQueueResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#GetQueueResponse', name: 'GetQueueResponse')
     InstanceConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#InstanceConfig', name: 'InstanceConfig')
     InstanceList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.pcs#InstanceList', name: 'InstanceList')
-    InstanceProfileArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pcs#InstanceProfileArn', name: 'InstanceProfileArn', traits: {"smithy.api#pattern" => "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/[/\\w+=,.@-]{1,128}$"})
+    InstanceProfileArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.pcs#InstanceProfileArn', name: 'InstanceProfileArn', traits: {"smithy.api#pattern" => "^arn:aws([a-zA-Z-]{0,10})?:iam::[0-9]{12}:instance-profile/([!-~]{1,510}/)?([\\w+=,.@-]{1,128})$"})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
     ListClustersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#ListClustersRequest', name: 'ListClustersRequest')
     ListClustersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.pcs#ListClustersResponse', name: 'ListClustersResponse')

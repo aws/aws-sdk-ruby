@@ -779,39 +779,83 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     # @!attribute auth_parameters
     #   <p>The authentication parameters. These are inputs corresponding to the
-    #                   <code>AuthFlow</code> that you're invoking. The required values depend on the value
-    #               of <code>AuthFlow</code> for example:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>For <code>USER_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>PREFERRED_CHALLENGE</code>. If you don't provide a value for
-    #                           <code>PREFERRED_CHALLENGE</code>, Amazon Cognito responds with the
-    #                           <code>AvailableChallenges</code> parameter that specifies the available
-    #                       sign-in methods.</p>
-    #               </li>
-    #               <li>
-    #                  <p>For <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>SRP_A</code> (required), <code>SECRET_HASH</code> (required if the app
-    #                       client is configured with a client secret), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>For <code>ADMIN_USER_PASSWORD_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>PASSWORD</code> (required), <code>SECRET_HASH</code> (required if the
-    #                       app client is configured with a client secret), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>For <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>
-    #                       (required), <code>SECRET_HASH</code> (required if the app client is configured
-    #                       with a client secret), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>For <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>SECRET_HASH</code> (if app client is configured with client secret),
-    #                           <code>DEVICE_KEY</code>. To start the authentication flow with password
-    #                       verification, include <code>ChallengeName: SRP_A</code> and <code>SRP_A: (The
-    #                           SRP_A Value)</code>.</p>
-    #               </li>
-    #            </ul>
+    #                   <code>AuthFlow</code> that you're invoking.</p>
+    #            <p>The following are some authentication flows and their parameters. Add a
+    #                   <code>SECRET_HASH</code> parameter if your app client has a client secret. Add
+    #                   <code>DEVICE_KEY</code> if you want to bypass multi-factor authentication with a
+    #               remembered device. </p>
+    #            <dl>
+    #               <dt>USER_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>PREFERRED_CHALLENGE</code>. If you don't provide a
+    #                                   value for <code>PREFERRED_CHALLENGE</code>, Amazon Cognito responds with the
+    #                                       <code>AvailableChallenges</code> parameter that specifies the
+    #                                   available sign-in methods.</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>USER_SRP_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>SRP_A</code> (required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>ADMIN_USER_PASSWORD_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>PASSWORD</code> (required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>REFRESH_TOKEN</code>(required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>CUSTOM_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>ChallengeName: SRP_A</code> (when preceding custom
+    #                                   authentication with SRP authentication)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>SRP_A: (An SRP_A value)</code> (when preceding custom
+    #                                   authentication with SRP authentication)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #            </dl>
     #            <p>For more information about <code>SECRET_HASH</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash">Computing secret hash values</a>. For information about
     #               <code>DEVICE_KEY</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html">Working with user devices in your user pool</a>.</p>
     #   @return [Hash<String, String>]
@@ -926,59 +970,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -1375,59 +1426,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -1547,6 +1605,32 @@ module Aws::CognitoIdentityProvider
     #                     </li>
     #                  </ul>
     #               </dd>
+    #               <dt>WEB_AUTHN</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "WEB_AUTHN", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "CREDENTIAL": "[AuthenticationResponseJSON]"}</code>
+    #                  </p>
+    #                  <p>See <a href="https://www.w3.org/TR/WebAuthn-3/#dictdef-authenticationresponsejson">
+    #                     AuthenticationResponseJSON</a>.</p>
+    #               </dd>
+    #               <dt>PASSWORD</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "PASSWORD", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "PASSWORD": "[password]"}</code>
+    #                  </p>
+    #               </dd>
+    #               <dt>PASSWORD_SRP</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "PASSWORD_SRP", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "SRP_A": "[SRP_A]"}</code>
+    #                  </p>
+    #               </dd>
     #               <dt>SMS_OTP</dt>
     #               <dd>
     #                  <p>
@@ -1580,8 +1664,6 @@ module Aws::CognitoIdentityProvider
     #                       "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #                       [timestamp], "USERNAME": "[username]"}</code>
     #                  </p>
-    #                  <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                   device.</p>
     #               </dd>
     #               <dt>CUSTOM_CHALLENGE</dt>
     #               <dd>
@@ -1589,8 +1671,6 @@ module Aws::CognitoIdentityProvider
     #                     <code>"ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses":
     #                       {"USERNAME": "[username]", "ANSWER": "[challenge_answer]"}</code>
     #                  </p>
-    #                  <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                   device.</p>
     #               </dd>
     #               <dt>NEW_PASSWORD_REQUIRED</dt>
     #               <dd>
@@ -1648,7 +1728,7 @@ module Aws::CognitoIdentityProvider
     #               <dd>
     #                  <p>
     #                     <code>"ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses": {"USERNAME":
-    #                   "[username]", "ANSWER": "[SMS_MFA or SOFTWARE_TOKEN_MFA]"}</code>
+    #                   "[username]", "ANSWER": "[SMS_MFA|EMAIL_MFA|SOFTWARE_TOKEN_MFA]"}</code>
     #                  </p>
     #               </dd>
     #            </dl>
@@ -1754,59 +1834,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -2475,6 +2562,32 @@ module Aws::CognitoIdentityProvider
     #                   </li>
     #                </ul>
     #             </dd>
+    #             <dt>WEB_AUTHN</dt>
+    #             <dd>
+    #                <p>
+    #                   <code>"ChallengeName": "WEB_AUTHN", "ChallengeResponses": {
+    #                   "USERNAME": "[username]",
+    #                   "CREDENTIAL": "[AuthenticationResponseJSON]"}</code>
+    #                </p>
+    #                <p>See <a href="https://www.w3.org/TR/WebAuthn-3/#dictdef-authenticationresponsejson">
+    #                   AuthenticationResponseJSON</a>.</p>
+    #             </dd>
+    #             <dt>PASSWORD</dt>
+    #             <dd>
+    #                <p>
+    #                   <code>"ChallengeName": "PASSWORD", "ChallengeResponses": {
+    #                   "USERNAME": "[username]",
+    #                   "PASSWORD": "[password]"}</code>
+    #                </p>
+    #             </dd>
+    #             <dt>PASSWORD_SRP</dt>
+    #             <dd>
+    #                <p>
+    #                   <code>"ChallengeName": "PASSWORD_SRP", "ChallengeResponses": {
+    #                   "USERNAME": "[username]",
+    #                   "SRP_A": "[SRP_A]"}</code>
+    #                </p>
+    #             </dd>
     #             <dt>SMS_OTP</dt>
     #             <dd>
     #                <p>
@@ -2508,8 +2621,6 @@ module Aws::CognitoIdentityProvider
     #                     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #                     [timestamp], "USERNAME": "[username]"}</code>
     #                </p>
-    #                <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                 device.</p>
     #             </dd>
     #             <dt>CUSTOM_CHALLENGE</dt>
     #             <dd>
@@ -2517,8 +2628,6 @@ module Aws::CognitoIdentityProvider
     #                   <code>"ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses":
     #                     {"USERNAME": "[username]", "ANSWER": "[challenge_answer]"}</code>
     #                </p>
-    #                <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                 device.</p>
     #             </dd>
     #             <dt>NEW_PASSWORD_REQUIRED</dt>
     #             <dd>
@@ -2576,7 +2685,7 @@ module Aws::CognitoIdentityProvider
     #             <dd>
     #                <p>
     #                   <code>"ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses": {"USERNAME":
-    #                 "[username]", "ANSWER": "[SMS_MFA or SOFTWARE_TOKEN_MFA]"}</code>
+    #                 "[username]", "ANSWER": "[SMS_MFA|EMAIL_MFA|SOFTWARE_TOKEN_MFA]"}</code>
     #                </p>
     #             </dd>
     #          </dl>
@@ -3242,13 +3351,37 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     # @!attribute use_cognito_provided_values
     #   <p>When true, applies the default branding style options. These default options are
-    #               managed by Amazon Cognito. You can modify them later in the branding designer.</p>
+    #               managed by Amazon Cognito. You can modify them later in the branding editor.</p>
     #            <p>When you specify <code>true</code> for this option, you must also omit values for
     #                   <code>Settings</code> and <code>Assets</code> in the request.</p>
     #   @return [Boolean]
     # @!attribute settings
     #   <p>A JSON file, encoded as a <code>Document</code> type, with the the settings that you
     #               want to apply to your style.</p>
+    #            <p>The following components are not currently implemented and reserved for future
+    #               use:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>signUp</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>instructions</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>sessionTimerDisplay</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>languageSelector</code> (for localization, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-localization">Managed login localization)</a>
+    #                  </p>
+    #               </li>
+    #            </ul>
     #   @return [JSON]
     # @!attribute assets
     #   <p>An array of image files that you want to apply to functions like backgrounds, logos,
@@ -3308,6 +3441,53 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ResourceServerType]
     class CreateResourceServerResponse < Struct.new(
       :resource_server,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool where you want to create terms documents.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The ID of the app client where you want to create terms documents. Must be an app
+    #               client in the requested user pool.</p>
+    #   @return [String]
+    # @!attribute terms_name
+    #   <p>A friendly name for the document that you want to create in the current request. Must
+    #               begin with <code>terms-of-use</code> or <code>privacy-policy</code> as identification of
+    #               the document type. Provide URLs for both <code>terms-of-use</code> and
+    #                   <code>privacy-policy</code> in separate requests.</p>
+    #   @return [String]
+    # @!attribute terms_source
+    #   <p>This parameter is reserved for future use and currently accepts only one value.</p>
+    #   @return [String]
+    # @!attribute enforcement
+    #   <p>This parameter is reserved for future use and currently accepts only one value.</p>
+    #   @return [String]
+    # @!attribute links
+    #   <p>A map of URLs to languages. For each localized language that will view the requested
+    #                   <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>
+    #               displays for all languages that don't have a language-specific URL.</p>
+    #            <p>For example, <code>"cognito:default": "https://terms.example.com", "cognito:spanish":
+    #                   "https://terms.example.com/es"</code>.</p>
+    #   @return [Hash<String, String>]
+    class CreateTermsRequest < Struct.new(
+      :user_pool_id,
+      :client_id,
+      :terms_name,
+      :terms_source,
+      :enforcement,
+      :links,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms
+    #   <p>A summary of your terms documents. Includes a unique identifier for later changes to
+    #               the terms documents.</p>
+    #   @return [Types::TermsType]
+    class CreateTermsResponse < Struct.new(
+      :terms,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4027,6 +4207,20 @@ module Aws::CognitoIdentityProvider
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute terms_id
+    #   <p>The ID of the terms documents that you want to delete.</p>
+    #   @return [String]
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool that contains the terms documents that you want to
+    #               delete.</p>
+    #   @return [String]
+    class DeleteTermsRequest < Struct.new(
+      :terms_id,
+      :user_pool_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the request to delete user attributes.</p>
     # @!attribute user_attribute_names
     #   <p>An array of strings representing the user attribute names you want to delete.</p>
@@ -4259,6 +4453,30 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::RiskConfigurationType]
     class DescribeRiskConfigurationResponse < Struct.new(
       :risk_configuration,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms_id
+    #   <p>The ID of the terms documents that you want to describe.</p>
+    #   @return [String]
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool that contains the terms documents that you want to
+    #               describe.</p>
+    #   @return [String]
+    class DescribeTermsRequest < Struct.new(
+      :terms_id,
+      :user_pool_id,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms
+    #   <p>A summary of the requested terms documents. Includes a unique identifier for later
+    #               changes to the terms documents.</p>
+    #   @return [Types::TermsType]
+    class DescribeTermsResponse < Struct.new(
+      :terms,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -5042,7 +5260,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute refresh_token
     #   <p>A valid refresh token that can authorize the request for new tokens. When refresh
     #               token rotation is active in the requested app client, this token is invalidated after
-    #               the request is complete.</p>
+    #               the request is complete and after an optional grace period.</p>
     #   @return [String]
     # @!attribute client_id
     #   <p>The app client that issued the refresh token to the user who wants to request new
@@ -5057,8 +5275,8 @@ module Aws::CognitoIdentityProvider
     #                   <code>GetTokensFromRefreshToken</code> in a user pool with device remembering, you
     #               must capture the device key from the initial authentication request. If your application
     #               doesn't provide the key of a registered device, Amazon Cognito issues a new one. You must
-    #               provide the confirmed device key in this request if device remembering is
-    #               enabled in your user pool.</p>
+    #               provide the confirmed device key in this request if device remembering is enabled in
+    #               your user pool.</p>
     #            <p>For more information about device remembering, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html">Working with devices</a>.</p>
     #   @return [String]
     # @!attribute client_metadata
@@ -5635,42 +5853,82 @@ module Aws::CognitoIdentityProvider
     # @!attribute auth_parameters
     #   <p>The authentication parameters. These are inputs corresponding to the
     #                   <code>AuthFlow</code> that you're invoking.</p>
-    #            <p>The required values are specific to the <a>InitiateAuthRequest$AuthFlow</a>.</p>
     #            <p>The following are some authentication flows and their parameters. Add a
-    #                   <code>SECRET_HASH</code> parameter if your app client has a client secret.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>USER_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>PREFERRED_CHALLENGE</code>. If you don't provide a value for
-    #                           <code>PREFERRED_CHALLENGE</code>, Amazon Cognito responds with the
-    #                           <code>AvailableChallenges</code> parameter that specifies the available
-    #                       sign-in methods.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>SRP_A</code> (required), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>USER_PASSWORD_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>PASSWORD</code> (required), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>
-    #                       (required), <code>DEVICE_KEY</code>.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),
-    #                           <code>SECRET_HASH</code> (if app client is configured with client secret),
-    #                           <code>DEVICE_KEY</code>. To start the authentication flow with password
-    #                       verification, include <code>ChallengeName: SRP_A</code> and <code>SRP_A: (The
-    #                           SRP_A Value)</code>.</p>
-    #               </li>
-    #            </ul>
+    #                   <code>SECRET_HASH</code> parameter if your app client has a client secret. Add
+    #                   <code>DEVICE_KEY</code> if you want to bypass multi-factor authentication with a
+    #               remembered device. </p>
+    #            <dl>
+    #               <dt>USER_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>PREFERRED_CHALLENGE</code>. If you don't provide a
+    #                                   value for <code>PREFERRED_CHALLENGE</code>, Amazon Cognito responds with the
+    #                                       <code>AvailableChallenges</code> parameter that specifies the
+    #                                   available sign-in methods.</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>USER_SRP_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>SRP_A</code> (required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>USER_PASSWORD_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>PASSWORD</code> (required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>REFRESH_TOKEN</code>(required)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #               <dt>CUSTOM_AUTH</dt>
+    #               <dd>
+    #                  <ul>
+    #                     <li>
+    #                        <p>
+    #                           <code>USERNAME</code> (required)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>ChallengeName: SRP_A</code> (when doing SRP authentication
+    #                                   before custom challenges)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>SRP_A: (An SRP_A value)</code> (when doing SRP
+    #                                   authentication before custom challenges)</p>
+    #                     </li>
+    #                  </ul>
+    #               </dd>
+    #            </dl>
     #            <p>For more information about <code>SECRET_HASH</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash">Computing secret hash values</a>. For information about
     #               <code>DEVICE_KEY</code>, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-device-tracking.html">Working with user devices in your user pool</a>.</p>
     #   @return [Hash<String, String>]
@@ -5789,59 +6047,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -6300,6 +6565,46 @@ module Aws::CognitoIdentityProvider
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool where you want to list terms documents.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of terms documents that you want Amazon Cognito to return in the
+    #               response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>This API operation returns a limited number of results. The pagination token is
+    #   an identifier that you can present in an additional API request with the same parameters. When
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
+    #   through the full list of items.</p>
+    #   @return [String]
+    class ListTermsRequest < Struct.new(
+      :user_pool_id,
+      :max_results,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms
+    #   <p>A summary of the requested terms documents. Includes unique identifiers for later
+    #               changes to the terms documents.</p>
+    #   @return [Array<Types::TermsDescriptionType>]
+    # @!attribute next_token
+    #   <p>This API operation returns a limited number of results. The pagination token is
+    #   an identifier that you can present in an additional API request with the same parameters. When
+    #   you include the pagination token, Amazon Cognito returns the next set of items after the current list. 
+    #   Subsequent requests return a new pagination token. By use of this token, you can paginate 
+    #   through the full list of items.</p>
+    #   @return [String]
+    class ListTermsResponse < Struct.new(
+      :terms,
+      :next_token,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Represents the request to list the user import jobs.</p>
     # @!attribute user_pool_id
     #   <p>The ID of the user pool where you want to list import jobs.</p>
@@ -6745,13 +7050,37 @@ module Aws::CognitoIdentityProvider
     # @!attribute use_cognito_provided_values
     #   <p>When true, applies the default branding style options. This option reverts to default
     #               style options that are managed by Amazon Cognito. You can modify them later in the branding
-    #               designer.</p>
+    #               editor.</p>
     #            <p>When you specify <code>true</code> for this option, you must also omit values for
     #                   <code>Settings</code> and <code>Assets</code> in the request.</p>
     #   @return [Boolean]
     # @!attribute settings
     #   <p>A JSON file, encoded as a <code>Document</code> type, with the the settings that you
     #               want to apply to your style.</p>
+    #            <p>The following components are not currently implemented and reserved for future
+    #               use:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>signUp</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>instructions</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>sessionTimerDisplay</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>languageSelector</code> (for localization, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-localization">Managed login localization)</a>
+    #                  </p>
+    #               </li>
+    #            </ul>
     #   @return [JSON]
     # @!attribute assets
     #   <p>An array of image files that you want to apply to roles like backgrounds, logos, and
@@ -7271,59 +7600,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -7451,6 +7787,32 @@ module Aws::CognitoIdentityProvider
     #                     </li>
     #                  </ul>
     #               </dd>
+    #               <dt>WEB_AUTHN</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "WEB_AUTHN", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "CREDENTIAL": "[AuthenticationResponseJSON]"}</code>
+    #                  </p>
+    #                  <p>See <a href="https://www.w3.org/TR/WebAuthn-3/#dictdef-authenticationresponsejson">
+    #                     AuthenticationResponseJSON</a>.</p>
+    #               </dd>
+    #               <dt>PASSWORD</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "PASSWORD", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "PASSWORD": "[password]"}</code>
+    #                  </p>
+    #               </dd>
+    #               <dt>PASSWORD_SRP</dt>
+    #               <dd>
+    #                  <p>
+    #                     <code>"ChallengeName": "PASSWORD_SRP", "ChallengeResponses": {
+    #                     "USERNAME": "[username]",
+    #                     "SRP_A": "[SRP_A]"}</code>
+    #                  </p>
+    #               </dd>
     #               <dt>SMS_OTP</dt>
     #               <dd>
     #                  <p>
@@ -7484,8 +7846,6 @@ module Aws::CognitoIdentityProvider
     #                       "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
     #                       [timestamp], "USERNAME": "[username]"}</code>
     #                  </p>
-    #                  <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                   device.</p>
     #               </dd>
     #               <dt>CUSTOM_CHALLENGE</dt>
     #               <dd>
@@ -7493,8 +7853,6 @@ module Aws::CognitoIdentityProvider
     #                     <code>"ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses":
     #                       {"USERNAME": "[username]", "ANSWER": "[challenge_answer]"}</code>
     #                  </p>
-    #                  <p>Add <code>"DEVICE_KEY"</code> when you sign in with a remembered
-    #                   device.</p>
     #               </dd>
     #               <dt>NEW_PASSWORD_REQUIRED</dt>
     #               <dd>
@@ -7552,7 +7910,7 @@ module Aws::CognitoIdentityProvider
     #               <dd>
     #                  <p>
     #                     <code>"ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses": {"USERNAME":
-    #                   "[username]", "ANSWER": "[SMS_MFA or SOFTWARE_TOKEN_MFA]"}</code>
+    #                   "[username]", "ANSWER": "[SMS_MFA|EMAIL_MFA|SOFTWARE_TOKEN_MFA]"}</code>
     #                  </p>
     #               </dd>
     #            </dl>
@@ -7626,59 +7984,66 @@ module Aws::CognitoIdentityProvider
     #            <p>Possible challenges include the following:</p>
     #            <note>
     #               <p>All of the following challenges require <code>USERNAME</code> and, when the app
-    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters.</p>
+    #                   client has a client secret, <code>SECRET_HASH</code> in the parameters. Include a 
+    #                   <code>DEVICE_KEY</code> for device authentication.</p>
     #            </note>
     #            <ul>
     #               <li>
     #                  <p>
     #                     <code>WEB_AUTHN</code>: Respond to the challenge with the results of a
-    #                       successful authentication with a WebAuthn authenticator, or passkey. Examples 
-    #                       of WebAuthn authenticators include biometric devices and security keys.</p>
+    #                       successful authentication with a WebAuthn authenticator, or passkey, as 
+    #                       <code>CREDENTIAL</code>. Examples of WebAuthn authenticators include 
+    #                       biometric devices and security keys.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD</code>: Respond with <code>USER_PASSWORD_AUTH</code>
-    #                       parameters: <code>USERNAME</code> (required), <code>PASSWORD</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD</code>: Respond with the user's password as <code>PASSWORD</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_SRP</code>: Respond with <code>USER_SRP_AUTH</code> parameters:
-    #                           <code>USERNAME</code> (required), <code>SRP_A</code> (required),
-    #                           <code>SECRET_HASH</code> (required if the app client is configured with a
-    #                       client secret), <code>DEVICE_KEY</code>.</p>
+    #                     <code>PASSWORD_SRP</code>: Respond with the initial SRP secret as <code>SRP_A</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SELECT_CHALLENGE</code>: Respond to the challenge with
-    #                           <code>USERNAME</code> and an <code>ANSWER</code> that matches one of the
-    #                       challenge types in the <code>AvailableChallenges</code> response
-    #                       parameter.</p>
+    #                     <code>SELECT_CHALLENGE</code>: Respond with a challenge selection as <code>ANSWER</code>. 
+    #                   It must be one of the challenge types in the <code>AvailableChallenges</code> response 
+    #                   parameter. Add the parameters of the selected challenge, for example <code>USERNAME</code>
+    #                   and <code>SMS_OTP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>SMS_MFA</code>: Respond with an
-    #                       <code>SMS_MFA_CODE</code> that your user pool delivered in an SMS message.</p>
+    #                     <code>SMS_MFA</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>EMAIL_OTP</code>: Respond with an
-    #                           <code>EMAIL_OTP_CODE</code> that your user pool delivered in an email
-    #                       message.</p>
+    #                     <code>EMAIL_MFA</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_MFA_CODE</code>
+    #                  </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>PASSWORD_VERIFIER</code>: Respond with
-    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>,
-    #                           <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, and <code>TIMESTAMP</code> after
-    #                       client-side SRP calculations.</p>
+    #                     <code>EMAIL_OTP</code>: Respond with the code that your user pool delivered in an email
+    #                       message, as <code>EMAIL_OTP_CODE</code> .</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SMS_OTP</code>: Respond with the code that your user pool delivered in an SMS
+    #                       message, as <code>SMS_OTP_CODE</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>PASSWORD_VERIFIER</code>: Respond with the second stage of SRP secrets as
+    #                           <code>PASSWORD_CLAIM_SIGNATURE</code>, <code>PASSWORD_CLAIM_SECRET_BLOCK</code>, 
+    #                           and <code>TIMESTAMP</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>CUSTOM_CHALLENGE</code>: This is returned if your custom authentication
     #                       flow determines that the user should pass another challenge before tokens are
-    #                       issued. The parameters of the challenge are determined by your Lambda function.</p>
+    #                       issued. The parameters of the challenge are determined by your Lambda function
+    #                       and issued in the <code>ChallengeParameters</code> of a challenge response.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -8562,6 +8927,92 @@ module Aws::CognitoIdentityProvider
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The details of a set of terms documents. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents">Terms documents</a>.</p>
+    # @!attribute terms_id
+    #   <p>The ID of the requested terms documents.</p>
+    #   @return [String]
+    # @!attribute terms_name
+    #   <p>The type and friendly name of the requested terms documents.</p>
+    #   @return [String]
+    # @!attribute enforcement
+    #   <p>This parameter is reserved for future use and currently accepts one value.</p>
+    #   @return [String]
+    # @!attribute creation_date
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
+    #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
+    #   @return [Time]
+    # @!attribute last_modified_date
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
+    #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
+    #   @return [Time]
+    class TermsDescriptionType < Struct.new(
+      :terms_id,
+      :terms_name,
+      :enforcement,
+      :creation_date,
+      :last_modified_date,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Terms document names must be unique to the app client. This exception is thrown when
+    #             you attempt to create terms documents with a duplicate <code>TermsName</code>.</p>
+    # @!attribute message
+    #   @return [String]
+    class TermsExistsException < Struct.new(
+      :message,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of a set of terms documents. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents">Terms documents</a>.</p>
+    # @!attribute terms_id
+    #   <p>The ID of the terms documents.</p>
+    #   @return [String]
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool that contains the terms documents.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The ID of the app client that the terms documents are assigned to.</p>
+    #   @return [String]
+    # @!attribute terms_name
+    #   <p>The type and friendly name of the terms documents.</p>
+    #   @return [String]
+    # @!attribute terms_source
+    #   <p>This parameter is reserved for future use and currently accepts one value.</p>
+    #   @return [String]
+    # @!attribute enforcement
+    #   <p>This parameter is reserved for future use and currently accepts one value.</p>
+    #   @return [String]
+    # @!attribute links
+    #   <p>A map of URLs to languages. For each localized language that will view the requested
+    #               <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>
+    #               displays for all languages that don't have a language-specific URL.</p>
+    #            <p>For example, <code>"cognito:default": "https://terms.example.com", "cognito:spanish":
+    #                   "https://terms.example.com/es"</code>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute creation_date
+    #   <p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
+    #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
+    #   @return [Time]
+    # @!attribute last_modified_date
+    #   <p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a 
+    #   human-readable format like ISO 8601 or a Java <code>Date</code> object.</p>
+    #   @return [Time]
+    class TermsType < Struct.new(
+      :terms_id,
+      :user_pool_id,
+      :client_id,
+      :terms_name,
+      :terms_source,
+      :enforcement,
+      :links,
+      :creation_date,
+      :last_modified_date,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This exception is thrown when you've attempted to change your feature plan but
     #             the operation isn't permitted.</p>
     # @!attribute message
@@ -9027,13 +9478,37 @@ module Aws::CognitoIdentityProvider
     # @!attribute use_cognito_provided_values
     #   <p>When <code>true</code>, applies the default branding style options. This option
     #               reverts to default style options that are managed by Amazon Cognito. You can modify them later in
-    #               the branding designer.</p>
+    #               the branding editor.</p>
     #            <p>When you specify <code>true</code> for this option, you must also omit values for
     #                   <code>Settings</code> and <code>Assets</code> in the request.</p>
     #   @return [Boolean]
     # @!attribute settings
     #   <p>A JSON file, encoded as a <code>Document</code> type, with the the settings that you
     #               want to apply to your style.</p>
+    #            <p>The following components are not currently implemented and reserved for future
+    #               use:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>signUp</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>instructions</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>sessionTimerDisplay</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>languageSelector</code> (for localization, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-localization">Managed login localization)</a>
+    #                  </p>
+    #               </li>
+    #            </ul>
     #   @return [JSON]
     # @!attribute assets
     #   <p>An array of image files that you want to apply to roles like backgrounds, logos, and
@@ -9092,6 +9567,48 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::ResourceServerType]
     class UpdateResourceServerResponse < Struct.new(
       :resource_server,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms_id
+    #   <p>The ID of the terms document that you want to update.</p>
+    #   @return [String]
+    # @!attribute user_pool_id
+    #   <p>The ID of the user pool that contains the terms that you want to update.</p>
+    #   @return [String]
+    # @!attribute terms_name
+    #   <p>The new name that you want to apply to the requested terms documents.</p>
+    #   @return [String]
+    # @!attribute terms_source
+    #   <p>This parameter is reserved for future use and currently accepts only one value.</p>
+    #   @return [String]
+    # @!attribute enforcement
+    #   <p>This parameter is reserved for future use and currently accepts only one value.</p>
+    #   @return [String]
+    # @!attribute links
+    #   <p>A map of URLs to languages. For each localized language that will view the requested
+    #               <code>TermsName</code>, assign a URL. A selection of <code>cognito:default</code>
+    #               displays for all languages that don't have a language-specific URL.</p>
+    #            <p>For example, <code>"cognito:default": "https://terms.example.com", "cognito:spanish":
+    #                   "https://terms.example.com/es"</code>.</p>
+    #   @return [Hash<String, String>]
+    class UpdateTermsRequest < Struct.new(
+      :terms_id,
+      :user_pool_id,
+      :terms_name,
+      :terms_source,
+      :enforcement,
+      :links,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute terms
+    #   <p>A summary of the updates to your terms documents.</p>
+    #   @return [Types::TermsType]
+    class UpdateTermsResponse < Struct.new(
+      :terms,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -9520,7 +10037,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute managed_login_version
     #   <p>A version number that indicates the state of managed login for your domain. Version
     #               <code>1</code> is hosted UI (classic). Version <code>2</code> is the newer managed
-    #               login with the branding designer. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">Managed login</a>.</p>
+    #               login with the branding editor. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">Managed login</a>.</p>
     #   @return [Integer]
     # @!attribute custom_domain_config
     #   <p>The configuration for a custom domain that hosts managed login for your application.
@@ -9545,7 +10062,7 @@ module Aws::CognitoIdentityProvider
     # @!attribute managed_login_version
     #   <p>A version number that indicates the state of managed login for your domain. Version
     #               <code>1</code> is hosted UI (classic). Version <code>2</code> is the newer managed
-    #               login with the branding designer. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">Managed login</a>.</p>
+    #               login with the branding editor. For more information, see <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html">Managed login</a>.</p>
     #   @return [Integer]
     # @!attribute cloud_front_domain
     #   <p>The fully-qualified domain name (FQDN) of the Amazon CloudFront distribution that hosts your

@@ -32,6 +32,7 @@ module Aws::Glue
     AnnotationErrorList: ListShape
     AnnotationList: ListShape
     ApiVersion: StringShape
+    ApplicationArn: StringShape
     ApplyMapping: StructureShape
     ArnString: StringShape
     AthenaConnectorSource: StructureShape
@@ -266,6 +267,7 @@ module Aws::Glue
     ContextKey: StringShape
     ContextValue: StringShape
     ContextWords: ListShape
+    ContinuousSync: BooleanShape
     Crawl: StructureShape
     CrawlId: StringShape
     CrawlList: ListShape
@@ -310,6 +312,8 @@ module Aws::Glue
     CreateDatabaseResponse: StructureShape
     CreateDevEndpointRequest: StructureShape
     CreateDevEndpointResponse: StructureShape
+    CreateGlueIdentityCenterConfigurationRequest: StructureShape
+    CreateGlueIdentityCenterConfigurationResponse: StructureShape
     CreateGrokClassifierRequest: StructureShape
     CreateIcebergTableInput: StructureShape
     CreateIntegrationRequest: StructureShape
@@ -394,6 +398,7 @@ module Aws::Glue
     DataQualityEncryption: StructureShape
     DataQualityEncryptionMode: EnumShape
     DataQualityEvaluationRunAdditionalRunOptions: StructureShape
+    DataQualityGlueTable: StructureShape
     DataQualityMetricValues: StructureShape
     DataQualityModelStatus: EnumShape
     DataQualityObservation: StructureShape
@@ -464,6 +469,8 @@ module Aws::Glue
     DeleteDatabaseResponse: StructureShape
     DeleteDevEndpointRequest: StructureShape
     DeleteDevEndpointResponse: StructureShape
+    DeleteGlueIdentityCenterConfigurationRequest: StructureShape
+    DeleteGlueIdentityCenterConfigurationResponse: StructureShape
     DeleteIntegrationRequest: StructureShape
     DeleteIntegrationResponse: StructureShape
     DeleteIntegrationTablePropertiesRequest: StructureShape
@@ -678,6 +685,8 @@ module Aws::Glue
     GetDevEndpointsResponse: StructureShape
     GetEntityRecordsRequest: StructureShape
     GetEntityRecordsResponse: StructureShape
+    GetGlueIdentityCenterConfigurationRequest: StructureShape
+    GetGlueIdentityCenterConfigurationResponse: StructureShape
     GetIntegrationResourcePropertyRequest: StructureShape
     GetIntegrationResourcePropertyResponse: StructureShape
     GetIntegrationTablePropertiesRequest: StructureShape
@@ -826,6 +835,9 @@ module Aws::Glue
     IcebergTransformString: StringShape
     IdString: StringShape
     IdempotentParameterMismatchException: StructureShape
+    IdentityCenterInstanceArn: StringShape
+    IdentityCenterScope: StringShape
+    IdentityCenterScopesList: ListShape
     IdleTimeout: IntegerShape
     IllegalBlueprintStateException: StructureShape
     IllegalSessionStateException: StructureShape
@@ -1122,6 +1134,7 @@ module Aws::Glue
     PositiveLong: IntegerShape
     PostgreSQLCatalogSource: StructureShape
     PostgreSQLCatalogTarget: StructureShape
+    PreProcessingQueryString: StringShape
     Predecessor: StructureShape
     PredecessorList: ListShape
     Predicate: StructureShape
@@ -1500,6 +1513,8 @@ module Aws::Glue
     UpdateDatabaseResponse: StructureShape
     UpdateDevEndpointRequest: StructureShape
     UpdateDevEndpointResponse: StructureShape
+    UpdateGlueIdentityCenterConfigurationRequest: StructureShape
+    UpdateGlueIdentityCenterConfigurationResponse: StructureShape
     UpdateGrokClassifierRequest: StructureShape
     UpdateIcebergInput: StructureShape
     UpdateIcebergTableInput: StructureShape

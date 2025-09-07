@@ -324,6 +324,18 @@ module Aws::DirectoryService
       ?assessment_id: String
     ) -> _DescribeADAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeADAssessmentResponse
 
+    interface _DescribeCAEnrollmentPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeCAEnrollmentPolicyResult]
+      def directory_id: () -> String?
+      def pca_connector_arn: () -> String?
+      def ca_enrollment_policy_status: () -> String?
+      def last_updated_date_time: () -> Time?
+      def ca_enrollment_policy_status_reason: () -> String?
+    end
+    def describe_ca_enrollment_policy: (
+      ?directory_id: String
+    ) -> _DescribeCAEnrollmentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCAEnrollmentPolicyResponse
+
     interface _DescribeCertificateResponse
       include Smithy::Client::_Response[Types::DescribeCertificateResult]
       def certificate: () -> Types::Certificate?
@@ -488,6 +500,13 @@ module Aws::DirectoryService
       ?next_token: String
     ) -> _DescribeUpdateDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUpdateDirectoryResponse
 
+    interface _DisableCAEnrollmentPolicyResponse
+      include Smithy::Client::_Response[Types::DisableCAEnrollmentPolicyResult]
+    end
+    def disable_ca_enrollment_policy: (
+      ?directory_id: String
+    ) -> _DisableCAEnrollmentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableCAEnrollmentPolicyResponse
+
     interface _DisableClientAuthenticationResponse
       include Smithy::Client::_Response[Types::DisableClientAuthenticationResult]
     end
@@ -526,6 +545,14 @@ module Aws::DirectoryService
       ?user_name: String,
       ?password: String
     ) -> _DisableSsoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableSsoResponse
+
+    interface _EnableCAEnrollmentPolicyResponse
+      include Smithy::Client::_Response[Types::EnableCAEnrollmentPolicyResult]
+    end
+    def enable_ca_enrollment_policy: (
+      ?directory_id: String,
+      ?pca_connector_arn: String
+    ) -> _EnableCAEnrollmentPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableCAEnrollmentPolicyResponse
 
     interface _EnableClientAuthenticationResponse
       include Smithy::Client::_Response[Types::EnableClientAuthenticationResult]

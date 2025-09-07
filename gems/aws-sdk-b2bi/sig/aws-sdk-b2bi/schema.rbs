@@ -15,6 +15,7 @@ module Aws::B2bi
     CapabilityOptions: StructureShape
     CapabilitySummary: StructureShape
     CapabilityType: EnumShape
+    CodeList: ListShape
     ConflictException: StructureShape
     ConversionSource: StructureShape
     ConversionSourceFormat: EnumShape
@@ -38,6 +39,9 @@ module Aws::B2bi
     DeleteTransformerRequest: StructureShape
     EdiConfiguration: StructureShape
     EdiType: UnionShape
+    ElementId: StringShape
+    ElementPosition: StringShape
+    ElementRequirement: EnumShape
     Email: StringShape
     ErrorMessage: StringShape
     FileFormat: EnumShape
@@ -154,11 +158,14 @@ module Aws::B2bi
     X12AdvancedOptions: StructureShape
     X12ApplicationReceiverCode: StringShape
     X12ApplicationSenderCode: StringShape
+    X12CodeListValidationRule: StructureShape
     X12ComponentSeparator: StringShape
     X12ControlNumbers: StructureShape
     X12DataElementSeparator: StringShape
     X12Delimiters: StructureShape
     X12Details: StructureShape
+    X12ElementLengthValidationRule: StructureShape
+    X12ElementRequirementValidationRule: StructureShape
     X12Envelope: StructureShape
     X12FunctionalAcknowledgment: EnumShape
     X12FunctionalGroupHeaders: StructureShape
@@ -178,6 +185,9 @@ module Aws::B2bi
     X12TransactionSet: EnumShape
     X12UsageIndicatorCode: StringShape
     X12ValidateEdi: BooleanShape
+    X12ValidationOptions: StructureShape
+    X12ValidationRule: UnionShape
+    X12ValidationRules: ListShape
     X12Version: EnumShape
 
     B2BI: ServiceShape

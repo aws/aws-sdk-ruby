@@ -2842,13 +2842,13 @@ module Aws::WorkMail
     # @option params [String] :organization_id
     #   <p>The ID of the organization for which the email monitoring configuration is set.</p>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>
+    #   <p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration. If absent, the IAM Role Arn of AWSServiceRoleForAmazonWorkMailEvents will be used.</p>
     # @option params [String] :log_group_arn
     #   <p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     organization_id: "OrganizationId", # required
-    #     role_arn: "RoleArn", # required
+    #     role_arn: "RoleArn",
     #     log_group_arn: "LogGroupArn", # required
     #   }
     #   options = {}

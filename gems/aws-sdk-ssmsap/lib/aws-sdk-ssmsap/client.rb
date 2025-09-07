@@ -215,8 +215,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Deregister an SAP application with AWS Systems Manager for SAP. This action does not
-    #          aﬀect the existing setup of your SAP workloads on Amazon EC2.</p>
+    # <p>Deregister an SAP application with AWS Systems Manager for SAP. This action does not aﬀect the existing setup of your SAP workloads on Amazon EC2.</p>
     # @param [Hash, Types::DeregisterApplicationOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -235,8 +234,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Gets an application registered with AWS Systems Manager for SAP. It also returns the
-    #          components of the application.</p>
+    # <p>Gets an application registered with AWS Systems Manager for SAP. It also returns the components of the application.</p>
     # @param [Hash, Types::GetApplicationOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -277,8 +275,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Gets the component of an application registered with AWS Systems Manager for
-    #          SAP.</p>
+    # <p>Gets the component of an application registered with AWS Systems Manager for SAP.</p>
     # @param [Hash, Types::GetComponentOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -356,8 +353,45 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Gets the SAP HANA database of an application registered with AWS Systems Manager for
-    #          SAP.</p>
+    # <p>Gets the details of a configuration check operation by specifying the operation ID.</p>
+    # @param [Hash, Types::GetConfigurationCheckOperationInput] params
+    # @option params [String] :operation_id
+    #   <p>The ID of the configuration check operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     operation_id: "OperationId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_configuration_check_operation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration_check_operation: {
+    #       id: "OperationId",
+    #       application_id: "ApplicationId",
+    #       status: "INPROGRESS" # One of: ["INPROGRESS", "SUCCESS", "ERROR"],
+    #       status_message: "String",
+    #       configuration_check_id: "SAP_CHECK_01" # One of: ["SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"],
+    #       configuration_check_name: "String",
+    #       configuration_check_description: "String",
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #       rule_status_counts: {
+    #         failed: 1,
+    #         warning: 1,
+    #         info: 1,
+    #         passed: 1,
+    #         unknown: 1
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetConfigurationCheckOperationOutput]
+    def get_configuration_check_operation(params = {}, options = {})
+      request = build_request(:get_configuration_check_operation, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the SAP HANA database of an application registered with AWS Systems Manager for SAP.</p>
     # @param [Hash, Types::GetDatabaseOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -473,8 +507,7 @@ module Aws::SsmSap
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
     # @option params [Array<Types::Filter>] :filters
     #   <p>The filter of name, value, and operator.</p>
     # @example Request syntax with placeholder values
@@ -520,10 +553,7 @@ module Aws::SsmSap
     # @option params [String] :next_token
     #   <p>The token for the next page of results.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
-    #            <p>If you do not specify a value for MaxResults, the request returns 50 items per page by
-    #            default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId",
@@ -554,8 +584,98 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Lists the SAP HANA databases of an application registered with AWS Systems Manager for
-    #          SAP.</p>
+    # <p>Lists all configuration check types supported by AWS Systems Manager for SAP.</p>
+    # @param [Hash, Types::ListConfigurationCheckDefinitionsInput] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_configuration_check_definitions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration_checks: [
+    #       {
+    #         id: "SAP_CHECK_01" # One of: ["SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"],
+    #         name: "String",
+    #         description: "String",
+    #         applicable_application_types: ["HANA" # One of: ["HANA", "SAP_ABAP"]]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListConfigurationCheckDefinitionsOutput]
+    def list_configuration_check_definitions(params = {}, options = {})
+      request = build_request(:list_configuration_check_definitions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the configuration check operations performed by AWS Systems Manager for SAP.</p>
+    # @param [Hash, Types::ListConfigurationCheckOperationsInput] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application.</p>
+    # @option params [String] :list_mode
+    #   <p>The mode for listing configuration check operations. Defaults to "LATEST_PER_CHECK".</p> <ul> <li> <p>LATEST_PER_CHECK - Will list the latest configuration check operation per check type.</p> </li> <li> <p>ALL_OPERATIONS - Will list all configuration check operations performed on the application.</p> </li> </ul>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @option params [Array<Types::Filter>] :filters
+    #   <p>The filters of an operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     list_mode: "ALL_OPERATIONS" # One of: ["ALL_OPERATIONS", "LATEST_PER_CHECK"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         value: "FilterValue", # required
+    #         operator: "Equals" # One of: ["Equals", "GreaterThanOrEquals", "LessThanOrEquals"], # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_configuration_check_operations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration_check_operations: [
+    #       {
+    #         id: "OperationId",
+    #         application_id: "ApplicationId",
+    #         status: "INPROGRESS" # One of: ["INPROGRESS", "SUCCESS", "ERROR"],
+    #         status_message: "String",
+    #         configuration_check_id: "SAP_CHECK_01" # One of: ["SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"],
+    #         configuration_check_name: "String",
+    #         configuration_check_description: "String",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         rule_status_counts: {
+    #           failed: 1,
+    #           warning: 1,
+    #           info: 1,
+    #           passed: 1,
+    #           unknown: 1
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListConfigurationCheckOperationsOutput]
+    def list_configuration_check_operations(params = {}, options = {})
+      request = build_request(:list_configuration_check_operations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the SAP HANA databases of an application registered with AWS Systems Manager for SAP.</p>
     # @param [Hash, Types::ListDatabasesOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -564,9 +684,7 @@ module Aws::SsmSap
     # @option params [String] :next_token
     #   <p>The token for the next page of results. </p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value. If you do not specify a value
-    #            for MaxResults, the request returns 50 items per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId",
@@ -599,25 +717,16 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Returns a list of operations events.</p>
-    #          <p>Available parameters include <code>OperationID</code>, as well as optional parameters
-    #             <code>MaxResults</code>, <code>NextToken</code>, and <code>Filters</code>.</p>
+    # <p>Returns a list of operations events.</p> <p>Available parameters include <code>OperationID</code>, as well as optional parameters <code>MaxResults</code>, <code>NextToken</code>, and <code>Filters</code>.</p>
     # @param [Hash, Types::ListOperationEventsInput] params
     # @option params [String] :operation_id
     #   <p>The ID of the operation.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value.</p>
-    #            <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items
-    #            per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for <code>MaxResults</code>, the request returns 50 items per page by default.</p>
     # @option params [String] :next_token
-    #   <p>The token to use to retrieve the next page of results. This value is null when there are
-    #            no more results to return.</p>
+    #   <p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>
     # @option params [Array<Types::Filter>] :filters
-    #   <p>Optionally specify filters to narrow the returned operation event items.</p>
-    #            <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and
-    #               <code>resourceType</code>. The valid operator for all three filters is
-    #               <code>Equals</code>.</p>
+    #   <p>Optionally specify filters to narrow the returned operation event items.</p> <p>Valid filter names include <code>status</code>, <code>resourceID</code>, and <code>resourceType</code>. The valid operator for all three filters is <code>Equals</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     operation_id: "OperationId", # required
@@ -661,9 +770,7 @@ module Aws::SsmSap
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
     # @option params [Integer] :max_results
-    #   <p>The maximum number of results to return with a single call. To retrieve the remaining
-    #            results, make another call with the returned nextToken value. If you do not specify a value
-    #            for MaxResults, the request returns 50 items per page by default.</p>
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>
     # @option params [String] :next_token
     #   <p>The token for the next page of results. </p>
     # @option params [Array<Types::Filter>] :filters
@@ -711,8 +818,80 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Lists all tags on an SAP HANA application and/or database registered with AWS Systems
-    #          Manager for SAP.</p>
+    # <p>Lists the sub-check results of a specified configuration check operation.</p>
+    # @param [Hash, Types::ListSubCheckResultsInput] params
+    # @option params [String] :operation_id
+    #   <p>The ID of the configuration check operation.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     operation_id: "OperationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_sub_check_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     sub_check_results: [
+    #       {
+    #         id: "SubCheckResultId",
+    #         name: "String",
+    #         description: "String",
+    #         references: ["String"]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListSubCheckResultsOutput]
+    def list_sub_check_results(params = {}, options = {})
+      request = build_request(:list_sub_check_results, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the rules of a specified sub-check belonging to a configuration check operation.</p>
+    # @param [Hash, Types::ListSubCheckRuleResultsInput] params
+    # @option params [String] :sub_check_result_id
+    #   <p>The ID of the sub check result.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     sub_check_result_id: "SubCheckResultId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_sub_check_rule_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rule_results: [
+    #       {
+    #         id: "RuleResultId",
+    #         description: "String",
+    #         status: "PASSED" # One of: ["PASSED", "FAILED", "WARNING", "INFO", "UNKNOWN"],
+    #         message: "String",
+    #         metadata: {
+    #           "RuleResultMetadataKey" => "RuleResultMetadataValue"
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListSubCheckRuleResultsOutput]
+    def list_sub_check_rule_results(params = {}, options = {})
+      request = build_request(:list_sub_check_rule_results, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.</p>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
@@ -762,14 +941,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Register an SAP application with AWS Systems Manager for SAP. You must meet the
-    #          following requirements before registering. </p>
-    #          <p>The SAP application you want to register with AWS Systems Manager for SAP is running
-    #          on Amazon EC2.</p>
-    #          <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required
-    #          IAM permissions.</p>
-    #          <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets Manager to
-    #          manage SAP applications and components.</p>
+    # <p>Register an SAP application with AWS Systems Manager for SAP. You must meet the following requirements before registering. </p> <p>The SAP application you want to register with AWS Systems Manager for SAP is running on Amazon EC2.</p> <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required IAM permissions.</p> <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets Manager to manage SAP applications and components.</p>
     # @param [Hash, Types::RegisterApplicationOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -788,11 +960,7 @@ module Aws::SsmSap
     # @option params [String] :database_arn
     #   <p>The Amazon Resource Name of the SAP HANA database.</p>
     # @option params [Array<Types::ComponentInfo>] :components_info
-    #   <p>This is an optional parameter for component details 
-    #            to which the SAP ABAP application is attached, 
-    #            such as Web Dispatcher.</p>
-    #            <p>This is an array of ApplicationComponent objects. 
-    #            You may input 0 to 5 items.</p>
+    #   <p>This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.</p> <p>This is an array of ApplicationComponent objects. You may input 0 to 5 items.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId", # required
@@ -844,8 +1012,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Request is an operation which starts an application.</p>
-    #          <p>Parameter <code>ApplicationId</code> is required.</p>
+    # <p>Request is an operation which starts an application.</p> <p>Parameter <code>ApplicationId</code> is required.</p>
     # @param [Hash, Types::StartApplicationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -887,20 +1054,57 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Request is an operation to stop an application.</p>
-    #          <p>Parameter <code>ApplicationId</code> is required. Parameters
-    #             <code>StopConnectedEntity</code> and <code>IncludeEc2InstanceShutdown</code> are
-    #          optional.</p>
+    # <p>Initiates configuration check operations against a specified application.</p>
+    # @param [Hash, Types::StartConfigurationChecksInput] params
+    # @option params [String] :application_id
+    #   <p>The ID of the application.</p>
+    # @option params [Array<String>] :configuration_check_ids
+    #   <p>The list of configuration checks to perform.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     application_id: "ApplicationId", # required
+    #     configuration_check_ids: ["SAP_CHECK_01" # One of: ["SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"]]
+    #   }
+    #   options = {}
+    #   response = client.start_configuration_checks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     configuration_check_operations: [
+    #       {
+    #         id: "OperationId",
+    #         application_id: "ApplicationId",
+    #         status: "INPROGRESS" # One of: ["INPROGRESS", "SUCCESS", "ERROR"],
+    #         status_message: "String",
+    #         configuration_check_id: "SAP_CHECK_01" # One of: ["SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"],
+    #         configuration_check_name: "String",
+    #         configuration_check_description: "String",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         rule_status_counts: {
+    #           failed: 1,
+    #           warning: 1,
+    #           info: 1,
+    #           passed: 1,
+    #           unknown: 1
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::StartConfigurationChecksOutput]
+    def start_configuration_checks(params = {}, options = {})
+      request = build_request(:start_configuration_checks, params)
+      request.send_request(options)
+    end
+
+    # <p>Request is an operation to stop an application.</p> <p>Parameter <code>ApplicationId</code> is required. Parameters <code>StopConnectedEntity</code> and <code>IncludeEc2InstanceShutdown</code> are optional.</p>
     # @param [Hash, Types::StopApplicationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
     # @option params [String] :stop_connected_entity
-    #   <p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p>
-    #            <p>If this parameter is included, the connected DBMS (Database Management System) will be
-    #            stopped.</p>
+    #   <p>Specify the <code>ConnectedEntityType</code>. Accepted type is <code>DBMS</code>.</p> <p>If this parameter is included, the connected DBMS (Database Management System) will be stopped.</p>
     # @option params [Boolean] :include_ec2_instance_shutdown
-    #   <p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will
-    #            shut down the associated Amazon EC2 instance in addition to the application.</p>
+    #   <p>Boolean. If included and if set to <code>True</code>, the StopApplication operation will shut down the associated Amazon EC2 instance in addition to the application.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId", # required
@@ -949,8 +1153,7 @@ module Aws::SsmSap
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>Adds/updates or removes credentials for applications registered with AWS Systems
-    #            Manager for SAP.</p>
+    #   <p>Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "SsmSapArn", # required
@@ -967,8 +1170,7 @@ module Aws::SsmSap
       request.send_request(options)
     end
 
-    # <p>Updates the settings of an application registered with AWS Systems Manager for
-    #          SAP.</p>
+    # <p>Updates the settings of an application registered with AWS Systems Manager for SAP.</p>
     # @param [Hash, Types::UpdateApplicationSettingsOperationInput] params
     # @option params [String] :application_id
     #   <p>The ID of the application.</p>
@@ -979,8 +1181,7 @@ module Aws::SsmSap
     # @option params [Types::BackintConfig] :backint
     #   <p>Installation of AWS Backint Agent for SAP HANA.</p>
     # @option params [String] :database_arn
-    #   <p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA
-    #            connection with the SAP_ABAP application.</p>
+    #   <p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP_ABAP application.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     application_id: "ApplicationId", # required

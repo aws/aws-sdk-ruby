@@ -188,7 +188,8 @@ module Aws::ServiceDiscovery
       ?max_results: Integer,
       ?query_parameters: Hash[String, String],
       ?optional_parameters: Hash[String, String],
-      ?health_status: String
+      ?health_status: String,
+      ?owner_account: String
     ) -> _DiscoverInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscoverInstancesResponse
 
     interface _DiscoverInstancesRevisionResponse
@@ -197,11 +198,13 @@ module Aws::ServiceDiscovery
     end
     def discover_instances_revision: (
       ?namespace_name: String,
-      ?service_name: String
+      ?service_name: String,
+      ?owner_account: String
     ) -> _DiscoverInstancesRevisionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DiscoverInstancesRevisionResponse
 
     interface _GetInstanceResponse
       include Smithy::Client::_Response[Types::GetInstanceResponse]
+      def resource_owner: () -> String?
       def instance: () -> Types::Instance?
     end
     def get_instance: (
@@ -234,7 +237,8 @@ module Aws::ServiceDiscovery
       def operation: () -> Types::Operation?
     end
     def get_operation: (
-      ?operation_id: String
+      ?operation_id: String,
+      ?owner_account: String
     ) -> _GetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationResponse
 
     interface _GetServiceResponse
@@ -255,6 +259,7 @@ module Aws::ServiceDiscovery
 
     interface _ListInstancesResponse
       include Smithy::Client::_Response[Types::ListInstancesResponse]
+      def resource_owner: () -> String?
       def instances: () -> Array[Types::InstanceSummary]?
       def next_token: () -> String?
     end

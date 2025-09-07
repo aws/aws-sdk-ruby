@@ -175,7 +175,7 @@ module Aws::Snowball
     #         is <code>LOCAL_USE</code>.</p>
     #   @return [String]
     # @!attribute snowball_type
-    #   <p>The type of Snowcone device to use for this cluster.
+    #   <p>The type of Snowball Edge device to use for this cluster.
     #         </p>
     #            <note>
     #               <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the
@@ -563,7 +563,7 @@ module Aws::Snowball
     #   <p>The tax documents required in your Amazon Web Services Region.</p>
     #   @return [Types::TaxDocuments]
     # @!attribute device_configuration
-    #   <p>Defines the device configuration for an Snowcone job.</p>
+    #   <p>Defines the device configuration for an Snowball Edge job.</p>
     #            <p>For more information, see
     #         "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html" (Snow
     #         Family Devices and Capacity) in the <i>Snowcone User Guide</i> or
@@ -843,7 +843,7 @@ module Aws::Snowball
 
     # <p>The container for <code>SnowconeDeviceConfiguration</code>. </p>
     # @!attribute snowcone_device_configuration
-    #   <p>Returns information about the device configuration for an Snowcone
+    #   <p>Returns information about the device configuration for an Snowball Edge
     #         job.</p>
     #   @return [Types::SnowconeDeviceConfiguration]
     class DeviceConfiguration < Struct.new(
@@ -1851,9 +1851,9 @@ module Aws::Snowball
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies the device configuration for an Snowcone job.</p>
+    # <p>Specifies the device configuration for an Snowball Edge job.</p>
     # @!attribute wireless_connection
-    #   <p>Configures the wireless connection for the Snowcone device.</p>
+    #   <p>Configures the wireless connection for the Snowball Edge device.</p>
     #   @return [Types::WirelessConnection]
     class SnowconeDeviceConfiguration < Struct.new(
       :wireless_connection,
@@ -2086,9 +2086,9 @@ module Aws::Snowball
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Configures the wireless connection on an Snowcone device.</p>
+    # <p>Configures the wireless connection on an Snowball Edge device.</p>
     # @!attribute is_wifi_enabled
-    #   <p>Enables the Wi-Fi adapter on an Snowcone device.</p>
+    #   <p>Enables the Wi-Fi adapter on an Snowball Edge device.</p>
     #   @return [Boolean]
     class WirelessConnection < Struct.new(
       :is_wifi_enabled,

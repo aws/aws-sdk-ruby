@@ -1,0 +1,35 @@
+module Aws::BCMRecommendedActions
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AccountId: StringShape
+    ActionFilter: StructureShape
+    ActionFilterList: ListShape
+    ActionType: EnumShape
+    Context: MapShape
+    Feature: EnumShape
+    FilterName: EnumShape
+    FilterValue: StringShape
+    FilterValues: ListShape
+    InternalServerException: StructureShape
+    ListRecommendedActionsRequest: StructureShape
+    ListRecommendedActionsResponse: StructureShape
+    MatchOption: EnumShape
+    MaxResults: IntegerShape
+    NextStep: StringShape
+    NextSteps: ListShape
+    NextToken: StringShape
+    RecommendedAction: StructureShape
+    RecommendedActions: ListShape
+    RequestFilter: StructureShape
+    Severity: EnumShape
+    ThrottlingException: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionField: StructureShape
+    ValidationExceptionFieldList: ListShape
+    ValidationExceptionReason: EnumShape
+
+    AWSBillingAndCostManagementRecommendedActions: ServiceShape
+  end
+end

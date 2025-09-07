@@ -80,8 +80,8 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the contact channel.</p>
     #   @return [String]
     # @!attribute retry_interval_in_minutes
-    #   <p>The number of minutes to wait to retry sending engagement in the case the engagement
-    #            initially fails.</p>
+    #   <p>The number of minutes to wait before retrying to send engagement if the engagement
+    #            initially failed.</p>
     #   @return [Integer]
     class ChannelTargetInfo < Struct.new(
       :contact_channel_id,
@@ -123,8 +123,21 @@ module Aws::SSMContacts
     #   <p>The full name of the contact or escalation plan.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Refers to the type of contact. A single contact is type <code>PERSONAL</code> and an
-    #            escalation plan is type <code>ESCALATION</code>.</p>
+    #   <p>The type of contact.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>PERSONAL</code>: A single, individual contact.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ESCALATION</code>: An escalation plan.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ONCALL_SCHEDULE</code>: An on-call schedule.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     class Contact < Struct.new(
       :contact_arn,
@@ -307,8 +320,21 @@ module Aws::SSMContacts
     #   <p>The full name of the contact or escalation plan.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>To create an escalation plan use <code>ESCALATION</code>. To create a contact use
-    #               <code>PERSONAL</code>.</p>
+    #   <p>The type of contact to create.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>PERSONAL</code>: A single, individual contact.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ESCALATION</code>: An escalation plan.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ONCALL_SCHEDULE</code>: An on-call schedule.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute plan
     #   <p>A list of stages. A contact has an engagement plan with stages that contact specified
@@ -385,6 +411,11 @@ module Aws::SSMContacts
     #   @return [String]
     # @!attribute contact_ids
     #   <p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p>
+    #            <note>
+    #               <p>Only the <code>PERSONAL</code> contact type is supported. The contact types
+    #                  <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this
+    #               operation. </p>
+    #            </note>
     #            <p>The order that you list the contacts in is their shift order in the rotation schedule.
     #            To change the order of the contact's shifts, use the <a>UpdateRotation</a>
     #            operation.</p>
@@ -399,7 +430,7 @@ module Aws::SSMContacts
     #               Database</a> on the IANA website.</p>
     #            <note>
     #               <p>Designators for time zones that don’t support Daylight Savings Time rules, such as
-    #               Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported.</p>
+    #               Pacific Standard Time (PST), are not supported.</p>
     #            </note>
     #   @return [String]
     # @!attribute recurrence
@@ -772,7 +803,7 @@ module Aws::SSMContacts
     #   <p>The full name of the contact or escalation plan.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>.</p>
+    #   <p>The type of contact.</p>
     #   @return [String]
     # @!attribute plan
     #   <p>Details about the specific timing or stages and targets of the escalation plan or
@@ -953,8 +984,7 @@ module Aws::SSMContacts
     #   <p>Used to list only contacts who's aliases start with the specified prefix.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is
-    #            type <code>ESCALATION</code>.</p>
+    #   <p>The type of contact.</p>
     #   @return [String]
     class ListContactsRequest < Struct.new(
       :next_token,
@@ -1309,7 +1339,8 @@ module Aws::SSMContacts
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>
+    #   <p>The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or on-call
+    #            schedule.</p>
     #   @return [String]
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
@@ -1469,11 +1500,12 @@ module Aws::SSMContacts
     #   @return [Array<Types::HandOffTime>]
     # @!attribute number_of_on_calls
     #   <p>The number of contacts, or shift team members designated to be on call concurrently
-    #            during a shift. For example, in an on-call schedule containing ten contacts, a value of
+    #            during a shift. For example, in an on-call schedule that contains ten contacts, a value of
     #               <code>2</code> designates that two of them are on call at any given time.</p>
     #   @return [Integer]
     # @!attribute shift_coverages
-    #   <p>Information about the days of the week included in on-call rotation coverage.</p>
+    #   <p>Information about the days of the week that the on-call rotation coverage
+    #            includes.</p>
     #   @return [Hash<String, Array<Types::CoverageTime>>]
     # @!attribute recurrence_multiplier
     #   <p>The number of days, weeks, or months a single rotation lasts.</p>
@@ -1793,10 +1825,10 @@ module Aws::SSMContacts
 
     # <p>The contact or contact channel that's being engaged.</p>
     # @!attribute channel_target_info
-    #   <p>Information about the contact channel Incident Manager is engaging.</p>
+    #   <p>Information about the contact channel that Incident Manager engages.</p>
     #   @return [Types::ChannelTargetInfo]
     # @!attribute contact_target_info
-    #   <p>Information about the contact that Incident Manager is engaging.</p>
+    #   <p>Information about the contact that Incident Manager engages.</p>
     #   @return [Types::ContactTargetInfo]
     class Target < Struct.new(
       :channel_target_info,
@@ -1913,6 +1945,11 @@ module Aws::SSMContacts
     #   @return [String]
     # @!attribute contact_ids
     #   <p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p>
+    #            <note>
+    #               <p>Only the <code>PERSONAL</code> contact type is supported. The contact types
+    #                  <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this
+    #               operation. </p>
+    #            </note>
     #            <p>The order in which you list the contacts is their shift order in the rotation
     #            schedule.</p>
     #   @return [Array<String>]
@@ -1926,7 +1963,7 @@ module Aws::SSMContacts
     #               Database</a> on the IANA website.</p>
     #            <note>
     #               <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as
-    #               Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't supported.</p>
+    #               Pacific Standard Time (PST), aren't supported.</p>
     #            </note>
     #   @return [String]
     # @!attribute recurrence

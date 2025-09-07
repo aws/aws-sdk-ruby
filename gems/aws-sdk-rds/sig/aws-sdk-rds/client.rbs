@@ -397,7 +397,8 @@ module Aws::RDS
       ?master_user_secret_kms_key_id: String,
       ?enable_local_write_forwarding: bool,
       ?ca_certificate_identifier: String,
-      ?engine_lifecycle_support: String
+      ?engine_lifecycle_support: String,
+      ?master_user_authentication_type: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
     interface _CreateDBClusterEndpointResponse
@@ -536,7 +537,8 @@ module Aws::RDS
       ?db_system_id: String,
       ?dedicated_log_volume: bool,
       ?multi_tenant: bool,
-      ?engine_lifecycle_support: String
+      ?engine_lifecycle_support: String,
+      ?master_user_authentication_type: String
     ) -> _CreateDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBInstanceResponse
 
     interface _CreateDBInstanceReadReplicaResponse
@@ -647,7 +649,9 @@ module Aws::RDS
           key: String,
           value: untyped
         }
-      ]
+      ],
+      ?endpoint_network_type: String,
+      ?target_connection_network_type: String
     ) -> _CreateDBProxyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBProxyResponse
 
     interface _CreateDBProxyEndpointResponse
@@ -665,7 +669,8 @@ module Aws::RDS
           key: String,
           value: untyped
         }
-      ]
+      ],
+      ?endpoint_network_type: String
     ) -> _CreateDBProxyEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBProxyEndpointResponse
 
     interface _CreateDBSecurityGroupResponse
@@ -2111,7 +2116,8 @@ module Aws::RDS
       ?enable_local_write_forwarding: bool,
       ?aws_backup_recovery_point_arn: String,
       ?enable_limitless_database: bool,
-      ?ca_certificate_identifier: String
+      ?ca_certificate_identifier: String,
+      ?master_user_authentication_type: String
     ) -> _ModifyDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterResponse
 
     interface _ModifyDBClusterEndpointResponse
@@ -2241,7 +2247,8 @@ module Aws::RDS
       ?master_user_secret_kms_key_id: String,
       ?engine: String,
       ?dedicated_log_volume: bool,
-      ?multi_tenant: bool
+      ?multi_tenant: bool,
+      ?master_user_authentication_type: String
     ) -> _ModifyDBInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBInstanceResponse
 
     interface _ModifyDBParameterGroupResponse

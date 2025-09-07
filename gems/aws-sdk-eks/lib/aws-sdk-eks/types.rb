@@ -185,6 +185,9 @@ module Aws::EKS
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html">Attach an IAM Role to an Amazon EKS add-on
     #                   using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Array<String>]
+    # @!attribute namespace_config
+    #   <p>The namespace configuration for the addon. This specifies the Kubernetes namespace where the addon is installed.</p>
+    #   @return [Types::AddonNamespaceConfigResponse]
     class Addon < Struct.new(
       :addon_name,
       :cluster_name,
@@ -201,6 +204,7 @@ module Aws::EKS
       :marketplace_information,
       :configuration_values,
       :pod_identity_associations,
+      :namespace_config,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -250,6 +254,9 @@ module Aws::EKS
     # @!attribute marketplace_information
     #   <p>Information about the add-on from the Amazon Web Services Marketplace.</p>
     #   @return [Types::MarketplaceInformation]
+    # @!attribute default_namespace
+    #   <p>The default Kubernetes namespace where this addon is typically installed if no custom namespace is specified.</p>
+    #   @return [String]
     class AddonInfo < Struct.new(
       :addon_name,
       :type,
@@ -257,6 +264,7 @@ module Aws::EKS
       :publisher,
       :owner,
       :marketplace_information,
+      :default_namespace,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -275,6 +283,26 @@ module Aws::EKS
       :code,
       :message,
       :resource_ids,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The namespace configuration request object for specifying a custom namespace when creating an addon.</p>
+    # @!attribute namespace
+    #   <p>The name of the Kubernetes namespace to install the addon in. Must be a valid RFC 1123 DNS label.</p>
+    #   @return [String]
+    class AddonNamespaceConfigRequest < Struct.new(
+      :namespace,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The namespace configuration response object containing information about the namespace where an addon is installed.</p>
+    # @!attribute namespace
+    #   <p>The name of the Kubernetes namespace where the addon is installed.</p>
+    #   @return [String]
+    class AddonNamespaceConfigResponse < Struct.new(
+      :namespace,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1145,6 +1173,9 @@ module Aws::EKS
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html">Attach an IAM Role to an Amazon EKS add-on
     #                   using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>
     #   @return [Array<Types::AddonPodIdentityAssociations>]
+    # @!attribute namespace_config
+    #   <p>The namespace configuration for the addon. If specified, this will override the default namespace for the addon.</p>
+    #   @return [Types::AddonNamespaceConfigRequest]
     class CreateAddonRequest < Struct.new(
       :cluster_name,
       :addon_name,
@@ -1155,6 +1186,7 @@ module Aws::EKS
       :tags,
       :configuration_values,
       :pod_identity_associations,
+      :namespace_config,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -2201,6 +2233,36 @@ module Aws::EKS
     #   @return [Types::Insight]
     class DescribeInsightResponse < Struct.new(
       :insight,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of the cluster associated with the insights refresh operation.</p>
+    #   @return [String]
+    class DescribeInsightsRefreshRequest < Struct.new(
+      :cluster_name,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute message
+    #   <p>The message associated with the insights refresh operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the insights refresh operation.</p>
+    #   @return [String]
+    # @!attribute started_at
+    #   <p>The date and time when the insights refresh operation started.</p>
+    #   @return [Time]
+    # @!attribute ended_at
+    #   <p>The date and time when the insights refresh operation ended.</p>
+    #   @return [Time]
+    class DescribeInsightsRefreshResponse < Struct.new(
+      :message,
+      :status,
+      :started_at,
+      :ended_at,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -4890,6 +4952,28 @@ module Aws::EKS
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute cluster_name
+    #   <p>The name of the cluster for the refresh insights operation.</p>
+    #   @return [String]
+    class StartInsightsRefreshRequest < Struct.new(
+      :cluster_name,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute message
+    #   <p>The message associated with the insights refresh operation.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the insights refresh operation.</p>
+    #   @return [String]
+    class StartInsightsRefreshResponse < Struct.new(
+      :message,
+      :status,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end

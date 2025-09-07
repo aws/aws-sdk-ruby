@@ -138,8 +138,12 @@ module Aws::NeptuneGraph
     SnapshotStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.neptunegraph#SnapshotStatus', name: 'SnapshotStatus')
     StartExportTaskInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartExportTaskInput', name: 'StartExportTaskInput')
     StartExportTaskOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartExportTaskOutput', name: 'StartExportTaskOutput')
+    StartGraphInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartGraphInput', name: 'StartGraphInput')
+    StartGraphOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartGraphOutput', name: 'StartGraphOutput')
     StartImportTaskInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartImportTaskInput', name: 'StartImportTaskInput')
     StartImportTaskOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StartImportTaskOutput', name: 'StartImportTaskOutput')
+    StopGraphInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StopGraphInput', name: 'StopGraphInput')
+    StopGraphOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.neptunegraph#StopGraphOutput', name: 'StopGraphOutput')
     SubnetId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.neptunegraph#SubnetId', name: 'SubnetId', traits: {"smithy.api#pattern" => "^subnet-[a-z0-9]+$"})
     SubnetIds = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.neptunegraph#SubnetIds', name: 'SubnetIds', traits: {"smithy.api#length" => {"min" => 1, "max" => 6}, "smithy.api#uniqueItems" => {}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.neptunegraph#TagKey', name: 'TagKey', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^(?!aws:)[a-zA-Z+-=._:/]+$"})
@@ -482,6 +486,9 @@ module Aws::NeptuneGraph
     GraphStatus.add_member(:snapshotting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SNAPSHOTTING', traits: {"smithy.api#enumValue" => "SNAPSHOTTING"}))
     GraphStatus.add_member(:failed, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FAILED', traits: {"smithy.api#enumValue" => "FAILED"}))
     GraphStatus.add_member(:importing, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'IMPORTING', traits: {"smithy.api#enumValue" => "IMPORTING"}))
+    GraphStatus.add_member(:starting, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STARTING', traits: {"smithy.api#enumValue" => "STARTING"}))
+    GraphStatus.add_member(:stopping, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STOPPING', traits: {"smithy.api#enumValue" => "STOPPING"}))
+    GraphStatus.add_member(:stopped, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'STOPPED', traits: {"smithy.api#enumValue" => "STOPPED"}))
     GraphSummary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphId, location_name: 'id', traits: {"smithy.api#required" => {}}))
     GraphSummary.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphName, location_name: 'name', traits: {"smithy.api#required" => {}}))
     GraphSummary.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'arn', traits: {"smithy.api#required" => {}}))
@@ -696,6 +703,24 @@ module Aws::NeptuneGraph
     StartExportTaskOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'statusReason'))
     StartExportTaskOutput.add_member(:export_filter, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ExportFilter, location_name: 'exportFilter'))
     StartExportTaskOutput.type = Types::StartExportTaskOutput
+    StartGraphInput.add_member(:graph_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphIdentifier, location_name: 'graphIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StartGraphInput.type = Types::StartGraphInput
+    StartGraphOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphId, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    StartGraphOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    StartGraphOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    StartGraphOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphStatus, location_name: 'status'))
+    StartGraphOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'statusReason'))
+    StartGraphOutput.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createTime'))
+    StartGraphOutput.add_member(:provisioned_memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: 'provisionedMemory'))
+    StartGraphOutput.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'endpoint'))
+    StartGraphOutput.add_member(:public_connectivity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'publicConnectivity'))
+    StartGraphOutput.add_member(:vector_search_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: 'vectorSearchConfiguration'))
+    StartGraphOutput.add_member(:replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaCount, location_name: 'replicaCount'))
+    StartGraphOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'kmsKeyIdentifier'))
+    StartGraphOutput.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: 'sourceSnapshotId'))
+    StartGraphOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'deletionProtection'))
+    StartGraphOutput.add_member(:build_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'buildNumber'))
+    StartGraphOutput.type = Types::StartGraphOutput
     StartImportTaskInput.add_member(:import_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportOptions, location_name: 'importOptions'))
     StartImportTaskInput.add_member(:fail_on_error, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'failOnError'))
     StartImportTaskInput.add_member(:source, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'source', traits: {"smithy.api#required" => {}}))
@@ -714,6 +739,24 @@ module Aws::NeptuneGraph
     StartImportTaskOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportTaskStatus, location_name: 'status', traits: {"smithy.api#required" => {}}))
     StartImportTaskOutput.add_member(:import_options, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ImportOptions, location_name: 'importOptions'))
     StartImportTaskOutput.type = Types::StartImportTaskOutput
+    StopGraphInput.add_member(:graph_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphIdentifier, location_name: 'graphIdentifier', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    StopGraphInput.type = Types::StopGraphInput
+    StopGraphOutput.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphId, location_name: 'id', traits: {"smithy.api#required" => {}}))
+    StopGraphOutput.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphName, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    StopGraphOutput.add_member(:arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'arn', traits: {"smithy.api#required" => {}}))
+    StopGraphOutput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GraphStatus, location_name: 'status'))
+    StopGraphOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'statusReason'))
+    StopGraphOutput.add_member(:create_time, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Timestamp, location_name: 'createTime'))
+    StopGraphOutput.add_member(:provisioned_memory, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: 'provisionedMemory'))
+    StopGraphOutput.add_member(:endpoint, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'endpoint'))
+    StopGraphOutput.add_member(:public_connectivity, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'publicConnectivity'))
+    StopGraphOutput.add_member(:vector_search_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: 'vectorSearchConfiguration'))
+    StopGraphOutput.add_member(:replica_count, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ReplicaCount, location_name: 'replicaCount'))
+    StopGraphOutput.add_member(:kms_key_identifier, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: 'kmsKeyIdentifier'))
+    StopGraphOutput.add_member(:source_snapshot_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SnapshotId, location_name: 'sourceSnapshotId'))
+    StopGraphOutput.add_member(:deletion_protection, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Boolean, location_name: 'deletionProtection'))
+    StopGraphOutput.add_member(:build_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'buildNumber'))
+    StopGraphOutput.type = Types::StopGraphOutput
     SubnetIds.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetId)
     TagKeyList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
     TagMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagKey)
@@ -1107,6 +1150,18 @@ module Aws::NeptuneGraph
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/exporttasks"}, "smithy.rules#staticContextParams" => {"ApiType" => {"value" => "ControlPlane"}}}
       end)
+      service.add_operation(:start_graph, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.neptunegraph#StartGraph"
+        operation.name = "StartGraph"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartGraphInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartGraphOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/graphs/{graphIdentifier}/start"}, "smithy.rules#staticContextParams" => {"ApiType" => {"value" => "ControlPlane"}}}
+      end)
       service.add_operation(:start_import_task, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.neptunegraph#StartImportTask"
         operation.name = "StartImportTask"
@@ -1118,6 +1173,18 @@ module Aws::NeptuneGraph
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
         operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"code" => 201, "method" => "POST", "uri" => "/graphs/{graphIdentifier}/importtasks"}, "smithy.rules#staticContextParams" => {"ApiType" => {"value" => "ControlPlane"}}}
+      end)
+      service.add_operation(:stop_graph, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.neptunegraph#StopGraph"
+        operation.name = "StopGraph"
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopGraphInput)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StopGraphOutput)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ThrottlingException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.traits = {"aws.api#controlPlane" => {}, "smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/graphs/{graphIdentifier}/stop"}, "smithy.rules#staticContextParams" => {"ApiType" => {"value" => "ControlPlane"}}}
       end)
       service.add_operation(:tag_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.neptunegraph#TagResource"

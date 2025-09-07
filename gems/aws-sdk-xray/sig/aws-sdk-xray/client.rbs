@@ -101,7 +101,11 @@ module Aws::XRay
         http_method: String,
         url_path: String,
         version: Integer,
-        attributes: Hash[String, String]
+        attributes: Hash[String, String],
+        sampling_rate_boost: {
+          max_rate: Float,
+          cooldown_window_minutes: Integer
+        }
       },
       ?tags: Array[
         {
@@ -254,6 +258,7 @@ module Aws::XRay
       def sampling_target_documents: () -> Array[Types::SamplingTargetDocument]?
       def last_rule_modification: () -> Time?
       def unprocessed_statistics: () -> Array[Types::UnprocessedStatistics]?
+      def unprocessed_boost_statistics: () -> Array[Types::UnprocessedStatistics]?
     end
     def get_sampling_targets: (
       ?sampling_statistics_documents: Array[
@@ -264,6 +269,16 @@ module Aws::XRay
           request_count: Integer,
           sampled_count: Integer,
           borrow_count: Integer
+        }
+      ],
+      ?sampling_boost_statistics_documents: Array[
+        {
+          rule_name: String,
+          service_name: String,
+          timestamp: Time,
+          anomaly_count: Integer,
+          total_count: Integer,
+          sampled_anomaly_count: Integer
         }
       ]
     ) -> _GetSamplingTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSamplingTargetsResponse
@@ -499,7 +514,11 @@ module Aws::XRay
         service_type: String,
         http_method: String,
         url_path: String,
-        attributes: Hash[String, String]
+        attributes: Hash[String, String],
+        sampling_rate_boost: {
+          max_rate: Float,
+          cooldown_window_minutes: Integer
+        }
       }
     ) -> _UpdateSamplingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSamplingRuleResponse
 

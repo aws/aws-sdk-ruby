@@ -797,6 +797,9 @@ module Aws::Route53Domains
       UK_COMPANY_NUMBER: String
       EU_COUNTRY_OF_CITIZENSHIP: String
       AU_PRIORITY_TOKEN: String
+      AU_ELIGIBILITY_TYPE: String
+      AU_POLICY_REASON: String
+      AU_REGISTRANT_NAME: String
     end
 
     class FilterCondition

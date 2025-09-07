@@ -26,6 +26,7 @@ module Aws::Amp
     DeleteAlertManagerDefinitionInput: StructureShape
     DeleteLoggingConfigurationInput: StructureShape
     DeleteQueryLoggingConfigurationRequest: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
     DeleteRuleGroupsNamespaceInput: StructureShape
     DeleteScraperRequest: StructureShape
     DeleteScraperResponse: StructureShape
@@ -36,6 +37,8 @@ module Aws::Amp
     DescribeLoggingConfigurationOutput: StructureShape
     DescribeQueryLoggingConfigurationRequest: StructureShape
     DescribeQueryLoggingConfigurationResponse: StructureShape
+    DescribeResourcePolicyRequest: StructureShape
+    DescribeResourcePolicyResponse: StructureShape
     DescribeRuleGroupsNamespaceInput: StructureShape
     DescribeRuleGroupsNamespaceOutput: StructureShape
     DescribeScraperRequest: StructureShape
@@ -79,6 +82,8 @@ module Aws::Amp
     PaginationToken: StringShape
     PutAlertManagerDefinitionInput: StructureShape
     PutAlertManagerDefinitionOutput: StructureShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
     PutRuleGroupsNamespaceInput: StructureShape
     PutRuleGroupsNamespaceOutput: StructureShape
     QueryLoggingConfigurationMetadata: StructureShape
@@ -141,6 +146,7 @@ module Aws::Amp
     WorkspaceConfigurationStatusCode: StringShape
     WorkspaceDescription: StructureShape
     WorkspaceId: StringShape
+    WorkspacePolicyStatusCode: StringShape
     WorkspaceStatus: StructureShape
     WorkspaceStatusCode: StringShape
     WorkspaceSummary: StructureShape

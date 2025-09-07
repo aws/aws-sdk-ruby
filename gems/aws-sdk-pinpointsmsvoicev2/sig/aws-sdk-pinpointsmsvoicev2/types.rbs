@@ -2150,6 +2150,7 @@ module Aws::PinpointSMSVoiceV2
         ?two_way_channel_role: String,
         ?self_managed_opt_outs_enabled: bool,
         ?opt_out_list_name: String,
+        ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
         ?pool_id: String,
         ?registration_id: String,
@@ -2171,6 +2172,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_role: String?
       attr_accessor self_managed_opt_outs_enabled: bool?
       attr_accessor opt_out_list_name: String?
+      attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor pool_id: String?
       attr_accessor registration_id: String?
@@ -2942,6 +2944,7 @@ module Aws::PinpointSMSVoiceV2
         ?opt_out_list_name: String,
         ?pool_id: String,
         ?registration_id: String,
+        ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
         ?tags: Array[Types::Tag],
         ?client_token: String,
@@ -2955,6 +2958,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor opt_out_list_name: String?
       attr_accessor pool_id: String?
       attr_accessor registration_id: String?
+      attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
@@ -2978,6 +2982,7 @@ module Aws::PinpointSMSVoiceV2
         ?two_way_channel_role: String,
         ?self_managed_opt_outs_enabled: bool,
         ?opt_out_list_name: String,
+        ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
         ?pool_id: String,
         ?registration_id: String,
@@ -3000,6 +3005,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_role: String?
       attr_accessor self_managed_opt_outs_enabled: bool?
       attr_accessor opt_out_list_name: String?
+      attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor pool_id: String?
       attr_accessor registration_id: String?
@@ -3708,6 +3714,7 @@ module Aws::PinpointSMSVoiceV2
         ?two_way_channel_role: String,
         ?self_managed_opt_outs_enabled: bool,
         ?opt_out_list_name: String,
+        ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3718,6 +3725,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_role: String?
       attr_accessor self_managed_opt_outs_enabled: bool?
       attr_accessor opt_out_list_name: String?
+      attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
     end
 
@@ -3739,6 +3747,7 @@ module Aws::PinpointSMSVoiceV2
         ?two_way_channel_role: String,
         ?self_managed_opt_outs_enabled: bool,
         ?opt_out_list_name: String,
+        ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
         ?registration_id: String,
         ?created_timestamp: Time,
@@ -3759,6 +3768,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor two_way_channel_role: String?
       attr_accessor self_managed_opt_outs_enabled: bool?
       attr_accessor opt_out_list_name: String?
+      attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor registration_id: String?
       attr_accessor created_timestamp: Time?

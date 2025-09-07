@@ -188,22 +188,24 @@ module Aws::ServiceDiscovery
       super
     end
 
-    # <p>Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a
-    #     <code>DiscoverInstances</code> request but can't be discovered using DNS.</p>
-    #          <p>For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map
-    #     quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
+    # <p>Creates an HTTP namespace. Service instances registered using an HTTP namespace can be
+    #    discovered using a <code>DiscoverInstances</code> request but can't be discovered using
+    #    DNS.</p>
+    #          <p>For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
+    #     <i>Cloud Map Developer Guide</i>.</p>
     # @param [Hash, Types::CreateHttpNamespaceRequest] params
     # @option params [String] :name
     #   <p>The name that you want to assign to this namespace.</p>
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request and that allows failed <code>CreateHttpNamespace</code>
-    #      requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
-    #      unique string (for example, a date/time stamp).</p>
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>CreateHttpNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>CreatorRequestId</code> can be any unique string (for example, a date/time
+    #      stamp).</p>
     # @option params [String] :description
     #   <p>A description for the namespace.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-    #      Tags keys can be up to 128 characters in length, and tag values can be up to 256
+    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you
+    #      define. Tags keys can be up to 128 characters in length, and tag values can be up to 256
     #                                  characters in length.</p>
     # @example CreateHttpNamespace example
     #   # This example creates an HTTP namespace.
@@ -243,32 +245,35 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The
-    #    namespace defines your service naming scheme. For example, if you name your namespace <code>example.com</code>
-    #    and name your service <code>backend</code>, the resulting DNS name for the service is
-    #     <code>backend.example.com</code>. Service instances that are registered using a private DNS namespace can be
-    #    discovered using either a <code>DiscoverInstances</code> request or using DNS. For the current quota on the
-    #    number of namespaces that you can create using the same Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
+    # <p>Creates a private namespace based on DNS, which is visible only inside a specified Amazon
+    #    VPC. The namespace defines your service naming scheme. For example, if you name your namespace
+    #     <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for
+    #    the service is <code>backend.example.com</code>. Service instances that are registered using a
+    #    private DNS namespace can be discovered using either a <code>DiscoverInstances</code> request or
+    #    using DNS. For the current quota on the number of namespaces that you can create using the same
+    #     Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
     #     <i>Cloud Map Developer Guide</i>.</p>
     # @param [Hash, Types::CreatePrivateDnsNamespaceRequest] params
     # @option params [String] :name
-    #   <p>The name that you want to assign to this namespace. When you create a private DNS namespace, Cloud Map
-    #      automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.</p>
+    #   <p>The name that you want to assign to this namespace. When you create a private DNS namespace,
+    #      Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the
+    #      namespace.</p>
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request and that allows failed <code>CreatePrivateDnsNamespace</code>
-    #      requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
-    #      unique string (for example, a date/timestamp).</p>
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>CreatePrivateDnsNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>CreatorRequestId</code> can be any unique string (for example, a
+    #      date/timestamp).</p>
     # @option params [String] :description
     #   <p>A description for the namespace.</p>
     # @option params [String] :vpc
     #   <p>The ID of the Amazon VPC that you want to associate the namespace with.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-    #      Tags keys can be up to 128 characters in length, and tag values can be up to 256
+    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you
+    #      define. Tags keys can be up to 128 characters in length, and tag values can be up to 256
     #                                  characters in length.</p>
     # @option params [Types::PrivateDnsNamespaceProperties] :properties
-    #   <p>Properties for the private DNS
-    #      namespace.</p>
+    #   <p>Properties for the
+    #      private DNS namespace.</p>
     # @example Example: Create private DNS namespace
     #   # Example: Create private DNS namespace
     #   params = {
@@ -315,36 +320,37 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your
-    #    service naming scheme. For example, if you name your namespace <code>example.com</code> and name your service
-    #     <code>backend</code>, the resulting DNS name for the service is <code>backend.example.com</code>. You can
-    #    discover instances that were registered with a public DNS namespace by using either a
-    #     <code>DiscoverInstances</code> request or using DNS. For the current quota on the number of namespaces that you
-    #    can create using the same Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
+    # <p>Creates a public namespace based on DNS, which is visible on the internet. The namespace
+    #    defines your service naming scheme. For example, if you name your namespace
+    #     <code>example.com</code> and name your service <code>backend</code>, the resulting DNS name for
+    #    the service is <code>backend.example.com</code>. You can discover instances that were registered
+    #    with a public DNS namespace by using either a <code>DiscoverInstances</code> request or using
+    #    DNS. For the current quota on the number of namespaces that you can create using the same Amazon Web Services account, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
     #     <i>Cloud Map Developer Guide</i>.</p>
     #          <important>
-    #             <p>The <code>CreatePublicDnsNamespace</code> API operation is not supported in the Amazon Web Services GovCloud (US)
-    #     Regions.</p>
+    #             <p>The <code>CreatePublicDnsNamespace</code> API operation is not supported in the Amazon Web Services GovCloud (US) Regions.</p>
     #          </important>
     # @param [Hash, Types::CreatePublicDnsNamespaceRequest] params
     # @option params [String] :name
     #   <p>The name that you want to assign to this namespace.</p>
     #            <note>
-    #               <p>Do not include sensitive information in the name. The name is publicly available using DNS queries.</p>
+    #               <p>Do not include sensitive information in the name. The name is publicly available using DNS
+    #       queries.</p>
     #            </note>
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request and that allows failed <code>CreatePublicDnsNamespace</code>
-    #      requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
-    #      unique string (for example, a date/timestamp).</p>
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>CreatePublicDnsNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>CreatorRequestId</code> can be any unique string (for example, a
+    #      date/timestamp).</p>
     # @option params [String] :description
     #   <p>A description for the namespace.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-    #      Tags keys can be up to 128 characters in length, and tag values can be up to 256
+    #   <p>The tags to add to the namespace. Each tag consists of a key and an optional value that you
+    #      define. Tags keys can be up to 128 characters in length, and tag values can be up to 256
     #                                  characters in length.</p>
     # @option params [Types::PublicDnsNamespaceProperties] :properties
-    #   <p>Properties for the public DNS
-    #      namespace.</p>
+    #   <p>Properties for the
+    #      public DNS namespace.</p>
     # @example CreatePublicDnsNamespace example
     #   # This example creates a public namespace based on DNS.
     #   params = {
@@ -427,20 +433,21 @@ module Aws::ServiceDiscovery
     #                <p>Optionally, a health check</p>
     #             </li>
     #          </ul>
-    #          <p>After you create the service, you can submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request, and Cloud Map uses the
-    #    values in the configuration to create the specified entities.</p>
-    #          <p>For the current quota on the number of instances that you can register using the same namespace and using
-    #    the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map
-    #     quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
+    #          <p>After you create the service, you can submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request, and
+    #    Cloud Map uses the values in the configuration to create the specified entities.</p>
+    #          <p>For the current quota on the number of instances that you can register using the same
+    #    namespace and using the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
+    #     <i>Cloud Map Developer Guide</i>.</p>
     # @param [Hash, Types::CreateServiceRequest] params
     # @option params [String] :name
     #   <p>The name that you want to assign to the service.</p>
     #            <note>
-    #               <p>Do not include sensitive information in the name if the namespace is discoverable by public DNS
-    #       queries.</p>
+    #               <p>Do not include sensitive information in the name if the namespace is discoverable by public
+    #       DNS queries.</p>
     #            </note>
-    #            <p>If you want Cloud Map to create an <code>SRV</code> record when you register an instance and you're using
-    #      a system that requires a specific <code>SRV</code> format, such as <a href="http://www.haproxy.org/">HAProxy</a>, specify the following for <code>Name</code>:</p>
+    #            <p>If you want Cloud Map to create an <code>SRV</code> record when you register an instance
+    #      and you're using a system that requires a specific <code>SRV</code> format, such as <a href="http://www.haproxy.org/">HAProxy</a>, specify the following for
+    #      <code>Name</code>:</p>
     #            <ul>
     #               <li>
     #                  <p>Start the name with an underscore (_), such as <code>_exampleservice</code>.</p>
@@ -449,54 +456,58 @@ module Aws::ServiceDiscovery
     #                  <p>End the name with <i>._protocol</i>, such as <code>._tcp</code>.</p>
     #               </li>
     #            </ul>
-    #            <p>When you register an instance, Cloud Map creates an <code>SRV</code> record and assigns a name to the
-    #      record by concatenating the service name and the namespace name (for example,</p>
+    #            <p>When you register an instance, Cloud Map creates an <code>SRV</code> record and assigns a
+    #      name to the record by concatenating the service name and the namespace name (for example,</p>
     #            <p>
     #               <code>_exampleservice._tcp.example.com</code>).</p>
     #            <note>
-    #               <p>For services that are accessible by DNS queries, you can't create multiple services with names that differ
-    #       only by case (such as EXAMPLE and example). Otherwise, these services have the same DNS name and can't be
-    #       distinguished. However, if you use a namespace that's only accessible by API calls, then you can create
-    #       services that with names that differ only by case.</p>
+    #               <p>For services that are accessible by DNS queries, you can't create multiple services with
+    #       names that differ only by case (such as EXAMPLE and example). Otherwise, these services have the
+    #       same DNS name and can't be distinguished. However, if you use a namespace that's only accessible
+    #       by API calls, then you can create services that with names that differ only by case.</p>
     #            </note>
     # @option params [String] :namespace_id
-    #   <p>The ID of the namespace that you want to use to create the service. The namespace ID must be specified, but
-    #      it can be specified either here or in the <code>DnsConfig</code> object.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to use to create the service. For
+    #      namespaces shared with your Amazon Web Services account, specify the namespace ARN. For more information
+    #      about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request and that allows failed <code>CreateService</code> requests to
-    #      be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique
-    #      string (for example, a date/timestamp).</p>
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>CreateService</code> requests to be retried without the risk of running the operation
+    #      twice. <code>CreatorRequestId</code> can be any unique string (for example, a
+    #      date/timestamp).</p>
     # @option params [String] :description
     #   <p>A description for the service.</p>
     # @option params [Types::DnsConfig] :dns_config
-    #   <p>A complex type that contains information about the Amazon Route 53 records that you want Cloud Map to create
-    #      when you register an instance. </p>
+    #   <p>A complex type that contains information about the Amazon Route 53 records that you want
+    #      Cloud Map to create when you register an instance. </p>
     # @option params [Types::HealthCheckConfig] :health_check_config
     #   <p>
-    #               <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an
-    #      optional Route 53 health check. If you specify settings for a health check, Cloud Map associates the health check
-    #      with all the Route 53 DNS records that you specify in <code>DnsConfig</code>.</p>
+    #               <i>Public DNS and HTTP namespaces only.</i> A complex type that contains
+    #      settings for an optional Route 53 health check. If you specify settings for a health check,
+    #      Cloud Map associates the health check with all the Route 53 DNS records that you specify in
+    #       <code>DnsConfig</code>.</p>
     #            <important>
-    #               <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>
-    #       or <code>HealthCheckConfig</code> but not both.</p>
+    #               <p>If you specify a health check configuration, you can specify either
+    #        <code>HealthCheckCustomConfig</code> or <code>HealthCheckConfig</code> but not both.</p>
     #            </important>
     #            <p>For information about the charges for health checks, see <a href="http://aws.amazon.com/cloud-map/pricing/">Cloud Map Pricing</a>.</p>
     # @option params [Types::HealthCheckCustomConfig] :health_check_custom_config
     #   <p>A complex type that contains information about an optional custom health check.</p>
     #            <important>
-    #               <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>
-    #       or <code>HealthCheckConfig</code> but not both.</p>
+    #               <p>If you specify a health check configuration, you can specify either
+    #        <code>HealthCheckCustomConfig</code> or <code>HealthCheckConfig</code> but not both.</p>
     #            </important>
-    #            <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration from an existing
-    #      service.</p>
+    #            <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration from
+    #      an existing service.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags to add to the service. Each tag consists of a key and an optional value that you define.
-    #      Tags keys can be up to 128 characters in length, and tag values can be up to 256
+    #   <p>The tags to add to the service. Each tag consists of a key and an optional value that you
+    #      define. Tags keys can be up to 128 characters in length, and tag values can be up to 256
     #                                  characters in length.</p>
     # @option params [String] :type
     #   <p>If present, specifies that the service instances are only discoverable using the
-    #       <code>DiscoverInstances</code> API operation. No DNS records is registered for the service instances. The only
-    #      valid value is <code>HTTP</code>.</p>
+    #       <code>DiscoverInstances</code> API operation. No DNS records is registered for the service
+    #      instances. The only valid value is <code>HTTP</code>.</p>
     # @example Example: Create service
     #   # Example: Create service
     #   params = {
@@ -522,6 +533,7 @@ module Aws::ServiceDiscovery
     #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
     #       create_date: Time.parse(1587081768.334),
     #       creator_request_id: "567c1193-6b00-4308-bd57-ad38a8822d25",
+    #       created_by_account: "123456789012",
     #       dns_config: {
     #         dns_records: [
     #           {
@@ -533,14 +545,61 @@ module Aws::ServiceDiscovery
     #         routing_policy: MULTIVALUE
     #       },
     #       id: "srv-p5zdwlg5uvvzjita",
+    #       instance_count: 0,
     #       name: "myservice",
-    #       namespace_id: "ns-ylexjili4cdxy3xm"
+    #       namespace_id: "ns-ylexjili4cdxy3xm",
+    #       resource_owner: "123456789012",
+    #       type: DNS_HTTP
+    #     }
+    #   }
+    # @example Create service using namespace ARN
+    #   # Namespace sharee creates a service using a namespace ARN instead of namespace ID, useful when working with shared namespaces.
+    #   params = {
+    #     name: "example-service",
+    #     namespace_id: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-abcd1234xmpl5678",
+    #     description: "Example service using namespace ARN",
+    #     dns_config: {
+    #       dns_records: [
+    #         {
+    #           type: A,
+    #           ttl: 300
+    #         }
+    #       ],
+    #       routing_policy: MULTIVALUE
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_service(params, options)
+    #   response.to_h #=>
+    #   {
+    #     service: {
+    #       id: "srv-abcd1234xmpl5678",
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #       resource_owner: "123456789012",
+    #       name: "example-service",
+    #       namespace_id: "ns-abcd1234xmpl5678",
+    #       description: "Example service using namespace ARN",
+    #       instance_count: 0,
+    #       dns_config: {
+    #         namespace_id: "ns-abcd1234xmpl5678",
+    #         routing_policy: MULTIVALUE,
+    #         dns_records: [
+    #           {
+    #             type: A,
+    #             ttl: 300
+    #           }
+    #         ]
+    #       },
+    #       type: DNS_HTTP,
+    #       create_date: Time.parse(1705161600.0),
+    #       creator_request_id: "abcd1234-xmpl-5678-9012-abcd1234xmpl",
+    #       created_by_account: "111122223333"
     #     }
     #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "ServiceName", # required
-    #     namespace_id: "ResourceId",
+    #     namespace_id: "Arn",
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     dns_config: {
@@ -577,6 +636,7 @@ module Aws::ServiceDiscovery
     #     service: {
     #       id: "ResourceId",
     #       arn: "Arn",
+    #       resource_owner: "AWSAccountId",
     #       name: "ServiceName",
     #       namespace_id: "ResourceId",
     #       description: "ResourceDescription",
@@ -601,7 +661,8 @@ module Aws::ServiceDiscovery
     #         failure_threshold: 1
     #       },
     #       create_date: Time.now,
-    #       creator_request_id: "ResourceId"
+    #       creator_request_id: "ResourceId",
+    #       created_by_account: "AWSAccountId"
     #     }
     #   }
     # @return [Types::CreateServiceResponse]
@@ -610,11 +671,11 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Deletes a namespace from the current account. If the namespace still contains one or more services, the
-    #    request fails.</p>
+    # <p>Deletes a namespace from the current account. If the namespace still contains one or more
+    #    services, the request fails.</p>
     # @param [Hash, Types::DeleteNamespaceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the namespace that you want to delete.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to delete.</p>
     # @example Example: Delete namespace
     #   # Example: Delete namespace
     #   params = {
@@ -624,11 +685,22 @@ module Aws::ServiceDiscovery
     #   response = client.delete_namespace(params, options)
     #   response.to_h #=>
     #   {
-    #     operation_id: "gv4g5meo7ndmeh4fqskygvk23d2fijwa-k98y6drk"
+    #     operation_id: "abcd1234-xmpl-5678-9012-abcd1234xmplabcd"
+    #   }
+    # @example Delete namespace using namespace ARN
+    #   # Deletes a namespace using a namespace ARN instead of namespace ID, useful when working with shared namespaces.
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-abcd1234xmpl5678"
+    #   }
+    #   options = {}
+    #   response = client.delete_namespace(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "abcd1234-xmpl-5678-9012-abcd1234xmplabcd"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   }
     #   options = {}
     #   response = client.delete_namespace(params, options)
@@ -643,11 +715,14 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Deletes a specified service and all associated service attributes. If the service still contains one or more registered instances, the request
-    #    fails.</p>
+    # <p>Deletes a specified service and all associated service attributes. If the service still
+    #    contains one or more registered instances, the request fails.</p>
     # @param [Hash, Types::DeleteServiceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the service that you want to delete.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to delete. If the namespace associated with
+    #      the service is shared with your Amazon Web Services account, specify the service ARN. For more information
+    #      about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace
+    #      sharing</a>.</p>
     # @example Example: Delete service
     #   # Example: Delete service
     #   params = {
@@ -657,9 +732,18 @@ module Aws::ServiceDiscovery
     #   response = client.delete_service(params, options)
     #   response.to_h #=>
     #   {}
+    # @example Delete service using service ARN
+    #   # Deletes a service using a service ARN instead of service ID, useful when working with shared namespaces.
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+    #   }
+    #   options = {}
+    #   response = client.delete_service(params, options)
+    #   response.to_h #=>
+    #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   }
     #   options = {}
     #   response = client.delete_service(params, options)
@@ -675,7 +759,10 @@ module Aws::ServiceDiscovery
     # <p>Deletes specific attributes associated with a service.</p>
     # @param [Hash, Types::DeleteServiceAttributesRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service from which the attributes will be deleted.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service from which the attributes will be deleted. For services
+    #      created in a namespace shared with your Amazon Web Services account, specify the service ARN. For more
+    #      information about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>.</p>
     # @option params [Array<String>] :attributes
     #   <p>A list of keys corresponding to each attribute that you want to delete.</p>
     # @example DeleteServiceAttributes example
@@ -690,9 +777,21 @@ module Aws::ServiceDiscovery
     #   response = client.delete_service_attributes(params, options)
     #   response.to_h #=>
     #   {}
+    # @example Delete service attributes using service ARN
+    #   # Deletes service attributes using a service ARN instead of service ID, useful for cross-account scenarios or when working with shared namespaces.
+    #   params = {
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #     attributes: [
+    #       "Port"
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.delete_service_attributes(params, options)
+    #   response.to_h #=>
+    #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     attributes: ["ServiceAttributeKey"], # required
     #   }
     #   options = {}
@@ -706,11 +805,14 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the specified
-    #    instance.</p>
+    # <p>Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the
+    #    specified instance.</p>
     # @param [Hash, Types::DeregisterInstanceRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that the instance is associated with.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that the instance is associated with. If the namespace
+    #      associated with the service is shared with your account, specify the service ARN. For more
+    #      information about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :instance_id
     #   <p>The value that you specified for <code>Id</code> in the <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html">RegisterInstance</a> request.</p>
     # @example Example: Deregister a service instance
@@ -725,9 +827,21 @@ module Aws::ServiceDiscovery
     #   {
     #     operation_id: "4yejorelbukcjzpnr6tlmrghsjwpngf4-k98rnaiq"
     #   }
+    # @example Deregister instance using service ARN
+    #   # Deregisters an instance using a service ARN instead of service ID, useful when working with shared namespaces.
+    #   params = {
+    #     instance_id: "i-abcd1234xmpl5678",
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+    #   }
+    #   options = {}
+    #   response = client.deregister_instance(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "abcd1234-xmpl-5678-9012-abcd1234xmpl"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #   }
     #   options = {}
@@ -744,32 +858,36 @@ module Aws::ServiceDiscovery
     end
 
     # <p>Discovers registered instances for a specified namespace and service. You can use
-    #     <code>DiscoverInstances</code> to discover instances for any type of namespace. <code>DiscoverInstances</code>
-    #    returns a randomized list of instances allowing customers to distribute traffic evenly across instances. For
-    #    public and private DNS namespaces, you can also use DNS queries to discover instances.</p>
+    #     <code>DiscoverInstances</code> to discover instances for any type of namespace.
+    #     <code>DiscoverInstances</code> returns a randomized list of instances allowing customers to
+    #    distribute traffic evenly across instances. For public and private DNS namespaces, you can also
+    #    use DNS queries to discover instances.</p>
     # @param [Hash, Types::DiscoverInstancesRequest] params
     # @option params [String] :namespace_name
-    #   <p>The <code>HttpName</code> name of the namespace. It's found in the <code>HttpProperties</code> member of
-    #      the <code>Properties</code> member of the namespace. In most cases, <code>Name</code> and <code>HttpName</code>
-    #      match. However, if you reuse <code>Name</code> for namespace creation, a generated hash is added to
-    #      <code>HttpName</code> to distinguish the two.</p>
+    #   <p>The <code>HttpName</code> name of the namespace. The <code>HttpName</code> is
+    #      found in the <code>HttpProperties</code> member of the <code>Properties</code> member of the
+    #      namespace. In most cases, <code>Name</code> and <code>HttpName</code> match. However, if you
+    #      reuse <code>Name</code> for namespace creation, a generated hash is added to
+    #       <code>HttpName</code> to distinguish the two.</p>
     # @option params [String] :service_name
     #   <p>The name of the service that you specified when you registered the instance.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of instances that you want Cloud Map to return in the response to a
-    #       <code>DiscoverInstances</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map
-    #      returns up to 100 instances.</p>
+    #       <code>DiscoverInstances</code> request. If you don't specify a value for
+    #      <code>MaxResults</code>, Cloud Map returns up to 100 instances.</p>
     # @option params [Hash<String, String>] :query_parameters
-    #   <p>Filters to scope the results based on custom attributes for the instance (for example, <code>{version=v1,
-    #       az=1a}</code>). Only instances that match all the specified key-value pairs are returned.</p>
+    #   <p>Filters to scope the results based on custom attributes for the instance (for example,
+    #       <code>{version=v1, az=1a}</code>). Only instances that match all the specified key-value pairs
+    #      are returned.</p>
     # @option params [Hash<String, String>] :optional_parameters
-    #   <p>Opportunistic filters to scope the results based on custom attributes. If there are instances that match
-    #      both the filters specified in both the <code>QueryParameters</code> parameter and this parameter, all of these
-    #      instances are returned. Otherwise, the filters are ignored, and only instances that match the filters that are
-    #      specified in the <code>QueryParameters</code> parameter are returned.</p>
+    #   <p>Opportunistic filters to scope the results based on custom attributes. If there are
+    #      instances that match both the filters specified in both the <code>QueryParameters</code>
+    #      parameter and this parameter, all of these instances are returned. Otherwise, the filters are
+    #      ignored, and only instances that match the filters that are specified in the
+    #       <code>QueryParameters</code> parameter are returned.</p>
     # @option params [String] :health_status
-    #   <p>The health status of the instances that you want to discover. This parameter is ignored for services that
-    #      don't have a health check configured, and
+    #   <p>The health status of the instances that you want to discover. This parameter is ignored for
+    #      services that don't have a health check configured, and
     #      all
     #      instances are returned.</p>
     #            <dl>
@@ -787,10 +905,47 @@ module Aws::ServiceDiscovery
     #               </dd>
     #               <dt>HEALTHY_OR_ELSE_ALL</dt>
     #               <dd>
-    #                  <p>Returns healthy instances, unless none are reporting a healthy state. In that case, return all
-    #         instances. This is also called failing open.</p>
+    #                  <p>Returns healthy instances, unless none are reporting a healthy state. In that case,
+    #         return all instances. This is also called failing open.</p>
     #               </dd>
     #            </dl>
+    # @option params [String] :owner_account
+    #   <p>The ID of the Amazon Web Services account that owns the namespace associated with the instance, as specified in the namespace <code>ResourceOwner</code> field. For
+    #      instances associated with namespaces that are shared with your account, you must specify an <code>OwnerAccount</code>.</p>
+    # @example Discover instances using owner account
+    #   # Discovers instances in a shared namespace by specifying the OwnerAccount parameter, useful when working with shared namespaces.
+    #   params = {
+    #     namespace_name: "example-shared-namespace",
+    #     service_name: "shared-namespace-service",
+    #     owner_account: "123456789012"
+    #   }
+    #   options = {}
+    #   response = client.discover_instances(params, options)
+    #   response.to_h #=>
+    #   {
+    #     instances: [
+    #       {
+    #         instance_id: "i-abcd1234xmpl5678",
+    #         namespace_name: "example-shared-namespace",
+    #         service_name: "shared-service",
+    #         health_status: HEALTHY,
+    #         attributes: {
+    #           "AWS_INSTANCE_IPV4" => "192.0.2.44",
+    #           "AWS_INSTANCE_PORT" => "80"
+    #         }
+    #       },
+    #       {
+    #         instance_id: "i-efgh5678xmpl9012",
+    #         namespace_name: "example-shared-namespace",
+    #         service_name: "shared-service",
+    #         health_status: HEALTHY,
+    #         attributes: {
+    #           "AWS_INSTANCE_IPV4" => "192.0.2.45",
+    #           "AWS_INSTANCE_PORT" => "80"
+    #         }
+    #       }
+    #     ]
+    #   }
     # @example Example: Discover registered instances
     #   # Example: Discover registered instances
     #   params = {
@@ -827,7 +982,8 @@ module Aws::ServiceDiscovery
     #     optional_parameters: {
     #       "AttrKey" => "AttrValue"
     #     },
-    #     health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY", "ALL", "HEALTHY_OR_ELSE_ALL"]
+    #     health_status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY", "ALL", "HEALTHY_OR_ELSE_ALL"],
+    #     owner_account: "AWSAccountId"
     #   }
     #   options = {}
     #   response = client.discover_instances(params, options)
@@ -856,10 +1012,29 @@ module Aws::ServiceDiscovery
     # <p>Discovers the increasing revision associated with an instance.</p>
     # @param [Hash, Types::DiscoverInstancesRevisionRequest] params
     # @option params [String] :namespace_name
-    #   <p>The <code>HttpName</code> name of the namespace. It's found in the <code>HttpProperties</code> member of
-    #      the <code>Properties</code> member of the namespace.</p>
+    #   <p>The <code>HttpName</code> name of the namespace. The <code>HttpName</code> is
+    #      found in the <code>HttpProperties</code> member of the <code>Properties</code> member of the
+    #      namespace.</p>
     # @option params [String] :service_name
     #   <p>The name of the service that you specified when you registered the instance.</p>
+    # @option params [String] :owner_account
+    #   <p>The ID of the Amazon Web Services account that owns the namespace associated with the instance, as specified in the namespace <code>ResourceOwner</code> field. For
+    #      instances associated with namespaces that are shared with your account, you must specify an <code>OwnerAccount</code>. For more information about
+    #      shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #      <i>Cloud Map Developer Guide</i>.</p>
+    # @example Discover instances revision using owner account
+    #   # Discovers the instances revision in a shared namespace by specifying the OwnerAccount parameter, useful when working with shared namespaces.
+    #   params = {
+    #     namespace_name: "example-shared-namespace",
+    #     service_name: "shared-service",
+    #     owner_account: "123456789012"
+    #   }
+    #   options = {}
+    #   response = client.discover_instances_revision(params, options)
+    #   response.to_h #=>
+    #   {
+    #     instances_revision: 1001
+    #   }
     # @example To discover the revision for a registered instance
     #   # The following example discovers the revision ID for a registered instance.
     #   params = {
@@ -876,6 +1051,7 @@ module Aws::ServiceDiscovery
     #   params = {
     #     namespace_name: "NamespaceName", # required
     #     service_name: "ServiceName", # required
+    #     owner_account: "AWSAccountId"
     #   }
     #   options = {}
     #   response = client.discover_instances_revision(params, options)
@@ -893,7 +1069,10 @@ module Aws::ServiceDiscovery
     # <p>Gets information about a specified instance.</p>
     # @param [Hash, Types::GetInstanceRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that the instance is associated with.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that the instance is associated with. For services
+    #      created in a shared namespace, specify the service ARN. For more information about shared
+    #      namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #      <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance that you want to get information about.</p>
     # @example GetInstance example
@@ -906,6 +1085,7 @@ module Aws::ServiceDiscovery
     #   response = client.get_instance(params, options)
     #   response.to_h #=>
     #   {
+    #     resource_owner: "123456789012",
     #     instance: {
     #       id: "i-abcd1234",
     #       attributes: {
@@ -914,12 +1094,36 @@ module Aws::ServiceDiscovery
     #         "color" => "green",
     #         "region" => "us-west-2",
     #         "stage" => "beta"
-    #       }
+    #       },
+    #       created_by_account: "123456789012"
+    #     }
+    #   }
+    # @example Get instance details using service ARN for shared namespace
+    #   # This example gets information about an instance using a service ARN instead of service ID. This is useful for listing instances associated with shared namespaces.
+    #   params = {
+    #     instance_id: "i-abcd1234",
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+    #   }
+    #   options = {}
+    #   response = client.get_instance(params, options)
+    #   response.to_h #=>
+    #   {
+    #     resource_owner: "123456789012",
+    #     instance: {
+    #       id: "i-abcd1234",
+    #       attributes: {
+    #         "AWS_INSTANCE_IPV4" => "192.0.2.44",
+    #         "AWS_INSTANCE_PORT" => "80",
+    #         "color" => "green",
+    #         "region" => "us-west-2",
+    #         "stage" => "beta"
+    #       },
+    #       created_by_account: "111122223333"
     #     }
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #   }
     #   options = {}
@@ -927,12 +1131,14 @@ module Aws::ServiceDiscovery
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     resource_owner: "AWSAccountId",
     #     instance: {
     #       id: "ResourceId", # required
     #       creator_request_id: "ResourceId",
     #       attributes: {
     #         "AttrKey" => "AttrValue"
-    #       }
+    #       },
+    #       created_by_account: "AWSAccountId"
     #     }
     #   }
     # @return [Types::GetInstanceResponse]
@@ -941,31 +1147,37 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Gets the current health status (<code>Healthy</code>, <code>Unhealthy</code>, or <code>Unknown</code>) of
-    #    one or more instances that are associated with a specified service.</p>
+    # <p>Gets the current health status (<code>Healthy</code>, <code>Unhealthy</code>, or
+    #     <code>Unknown</code>) of one or more instances that are associated with a specified
+    #    service.</p>
     #          <note>
-    #             <p>There's a brief delay between when you register an instance and when the health status for the instance is
-    #     available. </p>
+    #             <p>There's a brief delay between when you register an instance and when the health status for
+    #     the instance is available. </p>
     #          </note>
     # @param [Hash, Types::GetInstancesHealthStatusRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that the instance is associated with.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that the instance is associated with. For services
+    #      created in a shared namespace, specify the service ARN. For more information about shared
+    #      namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #      <i>Cloud Map Developer Guide</i>.</p>
     # @option params [Array<String>] :instances
-    #   <p>An array that contains the IDs of all the instances that you want to get the health status for.</p>
-    #            <p>If you omit <code>Instances</code>, Cloud Map returns the health status for all the instances that are
-    #      associated with the specified service.</p>
+    #   <p>An array that contains the IDs of all the instances that you want to get the health status
+    #      for.</p>
+    #            <p>If you omit <code>Instances</code>, Cloud Map returns the health status for all the
+    #      instances that are associated with the specified service.</p>
     #            <note>
-    #               <p>To get the IDs for the instances that you've registered by using a specified service, submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html">ListInstances</a> request.</p>
+    #               <p>To get the IDs for the instances that you've registered by using a specified service,
+    #       submit a <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html">ListInstances</a> request.</p>
     #            </note>
     # @option params [Integer] :max_results
     #   <p>The maximum number of instances that you want Cloud Map to return in the response to a
-    #       <code>GetInstancesHealthStatus</code> request. If you don't specify a value for <code>MaxResults</code>,
-    #      Cloud Map returns up to 100 instances.</p>
+    #       <code>GetInstancesHealthStatus</code> request. If you don't specify a value for
+    #       <code>MaxResults</code>, Cloud Map returns up to 100 instances.</p>
     # @option params [String] :next_token
     #   <p>For the first <code>GetInstancesHealthStatus</code> request, omit this value.</p>
-    #            <p>If more than <code>MaxResults</code> instances match the specified criteria, you can submit another
-    #       <code>GetInstancesHealthStatus</code> request to get the next group of results. Specify the value of
-    #       <code>NextToken</code> from the previous response in the next request.</p>
+    #            <p>If more than <code>MaxResults</code> instances match the specified criteria, you can submit
+    #      another <code>GetInstancesHealthStatus</code> request to get the next group of results. Specify
+    #      the value of <code>NextToken</code> from the previous response in the next request.</p>
     # @example GetInstancesHealthStatus example
     #   # This example gets the current health status of one or more instances that are associate with a specified service.
     #   params = {
@@ -980,9 +1192,23 @@ module Aws::ServiceDiscovery
     #       "i-abcd1235" => UNHEALTHY
     #     }
     #   }
+    # @example Get instances health status using service ARN for shared namespace
+    #   # This example gets the current health status of instances using a service ARN instead of service ID. This is useful for checking health status of instances associated with shared namespaces.
+    #   params = {
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+    #   }
+    #   options = {}
+    #   response = client.get_instances_health_status(params, options)
+    #   response.to_h #=>
+    #   {
+    #     status: {
+    #       "i-abcd1234" => HEALTHY,
+    #       "i-abcd1235" => UNHEALTHY
+    #     }
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instances: ["ResourceId"],
     #     max_results: 1,
     #     next_token: "NextToken"
@@ -1006,10 +1232,14 @@ module Aws::ServiceDiscovery
     # <p>Gets information about a namespace.</p>
     # @param [Hash, Types::GetNamespaceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the namespace that you want to get information about.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to get information about. For namespaces
+    #      shared with your Amazon Web Services account, specify the namespace ARN. For more information about shared
+    #      namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #      <i>Cloud Map Developer Guide</i>
+    #            </p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   }
     #   options = {}
     #   response = client.get_namespace(params, options)
@@ -1019,6 +1249,7 @@ module Aws::ServiceDiscovery
     #     namespace: {
     #       id: "ResourceId",
     #       arn: "Arn",
+    #       resource_owner: "AWSAccountId",
     #       name: "NamespaceName",
     #       type: "DNS_PUBLIC" # One of: ["DNS_PUBLIC", "DNS_PRIVATE", "HTTP"],
     #       description: "ResourceDescription",
@@ -1052,6 +1283,9 @@ module Aws::ServiceDiscovery
     # @param [Hash, Types::GetOperationRequest] params
     # @option params [String] :operation_id
     #   <p>The ID of the operation that you want to get more information about.</p>
+    # @option params [String] :owner_account
+    #   <p>The ID of the Amazon Web Services account that owns the namespace associated with the operation, as specified in the namespace <code>ResourceOwner</code> field. For
+    #      operations associated with namespaces that are shared with your account, you must specify an <code>OwnerAccount</code>.</p>
     # @example Example: Get operation result
     #   # Example: Get operation result
     #   params = {
@@ -1074,7 +1308,8 @@ module Aws::ServiceDiscovery
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     operation_id: "ResourceId", # required
+    #     operation_id: "OperationId", # required
+    #     owner_account: "AWSAccountId"
     #   }
     #   options = {}
     #   response = client.get_operation(params, options)
@@ -1083,6 +1318,7 @@ module Aws::ServiceDiscovery
     #   {
     #     operation: {
     #       id: "OperationId",
+    #       owner_account: "AWSAccountId",
     #       type: "CREATE_NAMESPACE" # One of: ["CREATE_NAMESPACE", "DELETE_NAMESPACE", "UPDATE_NAMESPACE", "UPDATE_SERVICE", "REGISTER_INSTANCE", "DEREGISTER_INSTANCE"],
     #       status: "SUBMITTED" # One of: ["SUBMITTED", "PENDING", "SUCCESS", "FAIL"],
     #       error_message: "Message",
@@ -1103,10 +1339,46 @@ module Aws::ServiceDiscovery
     # <p>Gets the settings for a specified service.</p>
     # @param [Hash, Types::GetServiceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the service that you want to get settings for.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to get settings for. For services created
+    #      by consumers in a shared namespace, specify the service ARN. For more information about shared
+    #      namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #      <i>Cloud Map Developer Guide</i>.</p>
+    # @example Get service using service ARN
+    #   # Gets service settings using a service ARN instead of service ID, useful when working with shared namespaces. Shows a service created by a sharee (111122223333) in a namespace owned by another account (123456789012).
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+    #   }
+    #   options = {}
+    #   response = client.get_service(params, options)
+    #   response.to_h #=>
+    #   {
+    #     service: {
+    #       id: "srv-abcd1234xmpl5678",
+    #       arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #       resource_owner: "123456789012",
+    #       name: "example-service",
+    #       namespace_id: "ns-abcd1234xmpl5678",
+    #       description: "Example service",
+    #       instance_count: 2,
+    #       dns_config: {
+    #         namespace_id: "ns-abcd1234xmpl5678",
+    #         routing_policy: MULTIVALUE,
+    #         dns_records: [
+    #           {
+    #             type: A,
+    #             ttl: 300
+    #           }
+    #         ]
+    #       },
+    #       type: DNS_HTTP,
+    #       create_date: Time.parse(1705161600.0),
+    #       creator_request_id: "abcd1234-xmpl-5678-9012-abcd1234xmpl",
+    #       created_by_account: "111122223333"
+    #     }
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   }
     #   options = {}
     #   response = client.get_service(params, options)
@@ -1116,6 +1388,7 @@ module Aws::ServiceDiscovery
     #     service: {
     #       id: "ResourceId",
     #       arn: "Arn",
+    #       resource_owner: "AWSAccountId",
     #       name: "ServiceName",
     #       namespace_id: "ResourceId",
     #       description: "ResourceDescription",
@@ -1140,7 +1413,8 @@ module Aws::ServiceDiscovery
     #         failure_threshold: 1
     #       },
     #       create_date: Time.now,
-    #       creator_request_id: "ResourceId"
+    #       creator_request_id: "ResourceId",
+    #       created_by_account: "AWSAccountId"
     #     }
     #   }
     # @return [Types::GetServiceResponse]
@@ -1152,7 +1426,27 @@ module Aws::ServiceDiscovery
     # <p>Returns the attributes associated with a specified service.</p>
     # @param [Hash, Types::GetServiceAttributesRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that you want to get attributes for.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to get attributes for. For services created
+    #      in a namespace shared with your Amazon Web Services account, specify the service ARN. For more information
+    #      about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>.</p>
+    # @example Get service attributes using service ARN
+    #   # Gets service attributes using a service ARN instead of service ID, useful when working with shared namespaces. Shows attributes for a service created by a sharee in a namespace owned by another account.
+    #   params = {
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678"
+    #   }
+    #   options = {}
+    #   response = client.get_service_attributes(params, options)
+    #   response.to_h #=>
+    #   {
+    #     service_attributes: {
+    #       service_arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #       attributes: {
+    #         "Port" => "80"
+    #       },
+    #       resource_owner: "123456789012"
+    #     }
+    #   }
     # @example GetServiceAttributes Example
     #   # This example gets the attributes for a specified service.
     #   params = {
@@ -1163,15 +1457,16 @@ module Aws::ServiceDiscovery
     #   response.to_h #=>
     #   {
     #     service_attributes: {
+    #       service_arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004",
     #       attributes: {
     #         "port" => "80"
     #       },
-    #       service_arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+    #       resource_owner: "123456789012"
     #     }
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #   }
     #   options = {}
     #   response = client.get_service_attributes(params, options)
@@ -1180,6 +1475,7 @@ module Aws::ServiceDiscovery
     #   {
     #     service_attributes: {
     #       service_arn: "Arn",
+    #       resource_owner: "AWSAccountId",
     #       attributes: {
     #         "ServiceAttributeKey" => "ServiceAttributeValue"
     #       }
@@ -1191,19 +1487,23 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Lists summary information about the instances that you registered by using a specified service.</p>
+    # <p>Lists summary information about the instances that you registered by using a specified
+    #    service.</p>
     # @param [Hash, Types::ListInstancesRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that you want to list instances for.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to list instances for. For services created
+    #      in a shared namespace, specify the service ARN. For more information about shared namespaces,
+    #      see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account
+    #       Cloud Map namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :next_token
     #   <p>For the first <code>ListInstances</code> request, omit this value.</p>
-    #            <p>If more than <code>MaxResults</code> instances match the specified criteria, you can submit another
-    #       <code>ListInstances</code> request to get the next group of results. Specify the value of
+    #            <p>If more than <code>MaxResults</code> instances match the specified criteria, you can submit
+    #      another <code>ListInstances</code> request to get the next group of results. Specify the value of
     #       <code>NextToken</code> from the previous response in the next request.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of instances that you want Cloud Map to return in the response to a
-    #       <code>ListInstances</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map
-    #      returns up to 100 instances.</p>
+    #       <code>ListInstances</code> request. If you don't specify a value for <code>MaxResults</code>,
+    #      Cloud Map returns up to 100 instances.</p>
     # @example Example: List service instances
     #   # Example: List service instances
     #   params = {
@@ -1223,9 +1523,29 @@ module Aws::ServiceDiscovery
     #       }
     #     ]
     #   }
+    # @example List instances using service ARN for shared namespace
+    #   # This example lists instances using a service ARN instead of service ID. This is useful for listing instances associated with shared namespaces.
+    #   params = {
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004"
+    #   }
+    #   options = {}
+    #   response = client.list_instances(params, options)
+    #   response.to_h #=>
+    #   {
+    #     instances: [
+    #       {
+    #         id: "i-abcd1234",
+    #         attributes: {
+    #           "AWS_INSTANCE_IPV4" => "192.0.2.44",
+    #           "AWS_INSTANCE_PORT" => "80"
+    #         }
+    #       }
+    #     ],
+    #     resource_owner: "123456789012"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     next_token: "NextToken",
     #     max_results: 1
     #   }
@@ -1234,12 +1554,14 @@ module Aws::ServiceDiscovery
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     resource_owner: "AWSAccountId",
     #     instances: [
     #       {
     #         id: "ResourceId",
     #         attributes: {
     #           "AttrKey" => "AttrValue"
-    #         }
+    #         },
+    #         created_by_account: "AWSAccountId"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1250,23 +1572,23 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Lists summary information about the namespaces that were created by the current Amazon Web Services account.</p>
+    # <p>Lists summary information about the namespaces that were created by the current Amazon Web Services account and shared with the current Amazon Web Services account.</p>
     # @param [Hash, Types::ListNamespacesRequest] params
     # @option params [String] :next_token
     #   <p>For the first <code>ListNamespaces</code> request, omit this value.</p>
-    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code> request to get
-    #      the next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
-    #      request.</p>
+    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code>
+    #      request to get the next group of results. Specify the value of <code>NextToken</code> from the
+    #      previous response in the next request.</p>
     #            <note>
-    #               <p>Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the specified criteria.
-    #       It's possible that no namespaces in the first <code>MaxResults</code> namespaces matched the specified criteria
-    #       but that subsequent groups of <code>MaxResults</code> namespaces do contain namespaces that match the
-    #       criteria.</p>
+    #               <p>Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the
+    #       specified criteria. It's possible that no namespaces in the first <code>MaxResults</code>
+    #       namespaces matched the specified criteria but that subsequent groups of <code>MaxResults</code>
+    #       namespaces do contain namespaces that match the criteria.</p>
     #            </note>
     # @option params [Integer] :max_results
     #   <p>The maximum number of namespaces that you want Cloud Map to return in the response to a
-    #       <code>ListNamespaces</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map
-    #      returns up to 100 namespaces.</p>
+    #       <code>ListNamespaces</code> request. If you don't specify a value for <code>MaxResults</code>,
+    #      Cloud Map returns up to 100 namespaces.</p>
     # @option params [Array<Types::NamespaceFilter>] :filters
     #   <p>A complex type that contains specifications for the namespaces that you want to list.</p>
     #            <p>If you specify more than one filter, a namespace must match all filters to be returned by
@@ -1280,49 +1602,104 @@ module Aws::ServiceDiscovery
     #   {
     #     namespaces: [
     #       {
-    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
-    #         create_date: Time.parse(1585354387.357),
     #         id: "ns-a3ccy2e7e3a7rile",
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-a3ccy2e7e3a7rile",
+    #         resource_owner: "123456789012",
     #         name: "local",
+    #         type: DNS_PRIVATE,
     #         properties: {
     #           dns_properties: {
-    #             hosted_zone_id: "Z06752353VBUDTC32S84S"
+    #             hosted_zone_id: "Z06752353VBUDTC32S84S",
+    #             soa: {
+    #               ttl: 60
+    #             }
     #           },
     #           http_properties: {
     #             http_name: "local"
     #           }
     #         },
-    #         type: DNS_PRIVATE
+    #         create_date: Time.parse(1705161600.0),
+    #         service_count: 2
     #       },
     #       {
-    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
-    #         create_date: Time.parse(1586468974.698),
-    #         description: "My second namespace",
     #         id: "ns-pocfyjtrsmwtvcxx",
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-pocfyjtrsmwtvcxx",
+    #         resource_owner: "123456789012",
     #         name: "My-second-namespace",
+    #         type: HTTP,
+    #         description: "My second namespace",
     #         properties: {
     #           dns_properties: {
+    #             soa: {
+    #               ttl: 60
+    #             }
     #           },
     #           http_properties: {
     #             http_name: "My-second-namespace"
     #           }
     #         },
-    #         type: HTTP
+    #         create_date: Time.parse(1705161600.0),
+    #         service_count: 1
     #       },
     #       {
-    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
-    #         create_date: Time.parse(1587055896.798),
     #         id: "ns-ylexjili4cdxy3xm",
+    #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-ylexjili4cdxy3xm",
+    #         resource_owner: "123456789012",
     #         name: "example.com",
+    #         type: DNS_PRIVATE,
     #         properties: {
     #           dns_properties: {
-    #             hosted_zone_id: "Z09983722P0QME1B3KC8I"
+    #             hosted_zone_id: "Z09983722P0QME1B3KC8I",
+    #             soa: {
+    #               ttl: 60
+    #             }
     #           },
     #           http_properties: {
     #             http_name: "example.com"
     #           }
     #         },
-    #         type: DNS_PRIVATE
+    #         create_date: Time.parse(1705161600.0),
+    #         service_count: 3
+    #       }
+    #     ]
+    #   }
+    # @example List namespaces filtered by resource owner
+    #   # This example shows how to list namespaces that are shared with you from other AWS accounts using the RESOURCE_OWNER filter.
+    #   params = {
+    #     filters: [
+    #       {
+    #         name: RESOURCE_OWNER,
+    #         values: [
+    #           "OTHER_ACCOUNTS"
+    #         ]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.list_namespaces(params, options)
+    #   response.to_h #=>
+    #   {
+    #     namespaces: [
+    #       {
+    #         id: "ns-abcd1234xmpl5678",
+    #         arn: "arn:aws:servicediscovery:us-west-2:111122223333:namespace/ns-abcd1234xmpl5678",
+    #         resource_owner: "111122223333",
+    #         name: "example-namespace",
+    #         type: DNS_PRIVATE,
+    #         description: "Example private DNS namespace",
+    #         properties: {
+    #           dns_properties: {
+    #             hosted_zone_id: "Z1D633PJN98FT9",
+    #             soa: {
+    #               ttl: 60
+    #             }
+    #           },
+    #           http_properties: {
+    #             http_name: "example-namespace"
+    #           }
+    #         },
+    #         create_date: Time.parse(1705161600.0),
+    #         service_count: 2
     #       }
     #     ]
     #   }
@@ -1332,7 +1709,7 @@ module Aws::ServiceDiscovery
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "TYPE" # One of: ["TYPE", "NAME", "HTTP_NAME"], # required
+    #         name: "TYPE" # One of: ["TYPE", "NAME", "HTTP_NAME", "RESOURCE_OWNER"], # required
     #         values: ["FilterValue"], # required
     #         condition: "EQ" # One of: ["EQ", "IN", "BETWEEN", "BEGINS_WITH"]
     #       }
@@ -1347,6 +1724,7 @@ module Aws::ServiceDiscovery
     #       {
     #         id: "ResourceId",
     #         arn: "Arn",
+    #         resource_owner: "AWSAccountId",
     #         name: "NamespaceName",
     #         type: "DNS_PUBLIC" # One of: ["DNS_PUBLIC", "DNS_PRIVATE", "HTTP"],
     #         description: "ResourceDescription",
@@ -1377,22 +1755,22 @@ module Aws::ServiceDiscovery
     # @param [Hash, Types::ListOperationsRequest] params
     # @option params [String] :next_token
     #   <p>For the first <code>ListOperations</code> request, omit this value.</p>
-    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListOperations</code> request to get
-    #      the next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
-    #      request.</p>
+    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListOperations</code>
+    #      request to get the next group of results. Specify the value of <code>NextToken</code> from the
+    #      previous response in the next request.</p>
     #            <note>
-    #               <p>Cloud Map gets <code>MaxResults</code> operations and then filters them based on the specified criteria.
-    #       It's possible that no operations in the first <code>MaxResults</code> operations matched the specified criteria
-    #       but that subsequent groups of <code>MaxResults</code> operations do contain operations that match the
-    #       criteria.</p>
+    #               <p>Cloud Map gets <code>MaxResults</code> operations and then filters them based on the
+    #       specified criteria. It's possible that no operations in the first <code>MaxResults</code>
+    #       operations matched the specified criteria but that subsequent groups of <code>MaxResults</code>
+    #       operations do contain operations that match the criteria.</p>
     #            </note>
     # @option params [Integer] :max_results
     #   <p>The maximum number of items that you want Cloud Map to return in the response to a
-    #       <code>ListOperations</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map
-    #      returns up to 100 operations.</p>
+    #       <code>ListOperations</code> request. If you don't specify a value for <code>MaxResults</code>,
+    #      Cloud Map returns up to 100 operations.</p>
     # @option params [Array<Types::OperationFilter>] :filters
-    #   <p>A complex type that contains specifications for the operations that you want to list, for example,
-    #      operations that you started between a specified start date and end date.</p>
+    #   <p>A complex type that contains specifications for the operations that you want to list, for
+    #      example, operations that you started between a specified start date and end date.</p>
     #            <p>If you specify more than one filter, an operation must match all filters to be returned by
     #       <code>ListOperations</code>.</p>
     # @example ListOperations Example
@@ -1464,20 +1842,22 @@ module Aws::ServiceDiscovery
     # @param [Hash, Types::ListServicesRequest] params
     # @option params [String] :next_token
     #   <p>For the first <code>ListServices</code> request, omit this value.</p>
-    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListServices</code> request to get
-    #      the next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
-    #      request.</p>
+    #            <p>If the response contains <code>NextToken</code>, submit another <code>ListServices</code>
+    #      request to get the next group of results. Specify the value of <code>NextToken</code> from the
+    #      previous response in the next request.</p>
     #            <note>
-    #               <p>Cloud Map gets <code>MaxResults</code> services and then filters them based on the specified criteria.
-    #       It's possible that no services in the first <code>MaxResults</code> services matched the specified criteria but
-    #       that subsequent groups of <code>MaxResults</code> services do contain services that match the criteria.</p>
+    #               <p>Cloud Map gets <code>MaxResults</code> services and then filters them based on the
+    #       specified criteria. It's possible that no services in the first <code>MaxResults</code> services
+    #       matched the specified criteria but that subsequent groups of <code>MaxResults</code> services do
+    #       contain services that match the criteria.</p>
     #            </note>
     # @option params [Integer] :max_results
     #   <p>The maximum number of services that you want Cloud Map to return in the response to a
-    #       <code>ListServices</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns
-    #      up to 100 services.</p>
+    #       <code>ListServices</code> request. If you don't specify a value for <code>MaxResults</code>,
+    #      Cloud Map returns up to 100 services.</p>
     # @option params [Array<Types::ServiceFilter>] :filters
-    #   <p>A complex type that contains specifications for the namespaces that you want to list services for. </p>
+    #   <p>A complex type that contains specifications for the namespaces that you want to list
+    #      services for. </p>
     #            <p>If you specify more than one filter, an operation must match all filters to be returned by
     #       <code>ListServices</code>.</p>
     # @example Example: List services
@@ -1489,8 +1869,11 @@ module Aws::ServiceDiscovery
     #   {
     #     services: [
     #       {
+    #         id: "srv-p5zdwlg5uvvzjita",
     #         arn: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-p5zdwlg5uvvzjita",
-    #         create_date: Time.parse(1587081768.334),
+    #         resource_owner: "123456789012",
+    #         name: "myservice",
+    #         type: DNS,
     #         dns_config: {
     #           dns_records: [
     #             {
@@ -1500,8 +1883,8 @@ module Aws::ServiceDiscovery
     #           ],
     #           routing_policy: MULTIVALUE
     #         },
-    #         id: "srv-p5zdwlg5uvvzjita",
-    #         name: "myservice"
+    #         create_date: Time.parse(1587081768.334),
+    #         created_by_account: "123456789012"
     #       }
     #     ]
     #   }
@@ -1511,7 +1894,7 @@ module Aws::ServiceDiscovery
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "NAMESPACE_ID" # One of: ["NAMESPACE_ID"], # required
+    #         name: "NAMESPACE_ID" # One of: ["NAMESPACE_ID", "RESOURCE_OWNER"], # required
     #         values: ["FilterValue"], # required
     #         condition: "EQ" # One of: ["EQ", "IN", "BETWEEN", "BEGINS_WITH"]
     #       }
@@ -1526,6 +1909,7 @@ module Aws::ServiceDiscovery
     #       {
     #         id: "ResourceId",
     #         arn: "Arn",
+    #         resource_owner: "AWSAccountId",
     #         name: "ServiceName",
     #         type: "HTTP" # One of: ["HTTP", "DNS_HTTP", "DNS"],
     #         description: "ResourceDescription",
@@ -1548,7 +1932,8 @@ module Aws::ServiceDiscovery
     #         health_check_custom_config: {
     #           failure_threshold: 1
     #         },
-    #         create_date: Time.now
+    #         create_date: Time.now,
+    #         created_by_account: "AWSAccountId"
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -1605,85 +1990,95 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Creates or updates one or more records and, optionally, creates a health check based on the settings in a
-    #    specified service. When you submit a <code>RegisterInstance</code> request, the following occurs:</p>
+    # <p>Creates or updates one or more records and, optionally, creates a health check based on the
+    #    settings in a specified service. When you submit a <code>RegisterInstance</code> request, the
+    #    following occurs:</p>
     #          <ul>
     #             <li>
-    #                <p>For each DNS record that you define in the service that's specified by <code>ServiceId</code>, a record
-    #      is created or updated in the hosted zone that's associated with the corresponding namespace.</p>
+    #                <p>For each DNS record that you define in the service that's specified by
+    #       <code>ServiceId</code>, a record is created or updated in the hosted zone that's associated
+    #      with the corresponding namespace.</p>
     #             </li>
     #             <li>
-    #                <p>If the service includes <code>HealthCheckConfig</code>, a health check is created based on the settings
-    #      in the health check configuration.</p>
+    #                <p>If the service includes <code>HealthCheckConfig</code>, a health check is created based on
+    #      the settings in the health check configuration.</p>
     #             </li>
     #             <li>
     #                <p>The health check, if any, is associated with each of the new or updated records.</p>
     #             </li>
     #          </ul>
     #          <important>
-    #             <p>One <code>RegisterInstance</code> request must complete before you can submit another request and specify
-    #     the same service ID and instance ID.</p>
+    #             <p>One <code>RegisterInstance</code> request must complete before you can submit another
+    #     request and specify the same service ID and instance ID.</p>
     #          </important>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html">CreateService</a>.</p>
-    #          <p>When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:</p>
+    #          <p>When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable
+    #    value:</p>
     #          <ul>
     #             <li>
     #                <p>
-    #                   <b>If the health check is healthy</b>: returns all the records</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>If the health check is unhealthy</b>: returns the applicable value for the
-    #      last healthy instance</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>If you didn't specify a health check configuration</b>: returns all the
+    #                   <b>If the health check is healthy</b>: returns all the
     #      records</p>
     #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>If the health check is unhealthy</b>: returns the applicable
+    #      value for the last healthy instance</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <b>If you didn't specify a health check configuration</b>:
+    #      returns all the records</p>
+    #             </li>
     #          </ul>
-    #          <p>For the current quota on the number of instances that you can register using the same namespace and using
-    #    the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map
-    #     quotas</a> in the <i>Cloud Map Developer Guide</i>.</p>
+    #          <p>For the current quota on the number of instances that you can register using the same
+    #    namespace and using the same service, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html">Cloud Map quotas</a> in the
+    #     <i>Cloud Map Developer Guide</i>.</p>
     # @param [Hash, Types::RegisterInstanceRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that you want to use for settings for the instance.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to use for settings for the instance. For
+    #      services created in a shared namespace, specify the service ARN. For more information about
+    #      shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :instance_id
     #   <p>An identifier that you want to associate with the instance. Note the following:</p>
     #            <ul>
     #               <li>
-    #                  <p>If the service that's specified by <code>ServiceId</code> includes settings for an <code>SRV</code>
-    #        record, the value of <code>InstanceId</code> is automatically included as part of the value for the
-    #         <code>SRV</code> record. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type">DnsRecord > Type</a>.</p>
+    #                  <p>If the service that's specified by <code>ServiceId</code> includes settings for an
+    #         <code>SRV</code> record, the value of <code>InstanceId</code> is automatically included as
+    #        part of the value for the <code>SRV</code> record. For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type">DnsRecord >
+    #         Type</a>.</p>
     #               </li>
     #               <li>
     #                  <p>You can use this value to update an existing instance.</p>
     #               </li>
     #               <li>
-    #                  <p>To register a new instance, you must specify a value that's unique among instances that you register by
-    #        using the same service. </p>
+    #                  <p>To register a new instance, you must specify a value that's unique among instances that
+    #        you register by using the same service. </p>
     #               </li>
     #               <li>
-    #                  <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, Cloud Map updates the
-    #        existing DNS records, if any. If there's also an existing health check, Cloud Map deletes the old health
-    #        check and creates a new one. </p>
+    #                  <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, Cloud Map
+    #        updates the existing DNS records, if any. If there's also an existing health check, Cloud Map
+    #        deletes the old health check and creates a new one. </p>
     #                  <note>
-    #                     <p>The health check isn't deleted immediately, so it will still appear for a while if you submit a
-    #          <code>ListHealthChecks</code> request, for example.</p>
+    #                     <p>The health check isn't deleted immediately, so it will still appear for a while if you
+    #         submit a <code>ListHealthChecks</code> request, for example.</p>
     #                  </note>
     #               </li>
     #            </ul>
     #            <note>
-    #               <p>Do not include sensitive information in <code>InstanceId</code> if the namespace is discoverable by public
-    #       DNS queries and any <code>Type</code> member of <code>DnsRecord</code> for the service contains
-    #        <code>SRV</code> because the <code>InstanceId</code> is discoverable by public DNS queries.</p>
+    #               <p>Do not include sensitive information in <code>InstanceId</code> if the namespace is
+    #       discoverable by public DNS queries and any <code>Type</code> member of <code>DnsRecord</code>
+    #       for the service contains <code>SRV</code> because the <code>InstanceId</code> is discoverable by
+    #       public DNS queries.</p>
     #            </note>
     # @option params [String] :creator_request_id
-    #   <p>A unique string that identifies the request and that allows failed <code>RegisterInstance</code> requests
-    #      to be retried without the risk of executing the operation twice. You must use a unique
-    #       <code>CreatorRequestId</code> string every time you submit a <code>RegisterInstance</code> request if you're
-    #      registering additional instances for the same namespace and service. <code>CreatorRequestId</code> can be any
-    #      unique string (for example, a date/time stamp).</p>
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>RegisterInstance</code> requests to be retried without the risk of executing the operation
+    #      twice. You must use a unique <code>CreatorRequestId</code> string every time you submit a
+    #       <code>RegisterInstance</code> request if you're registering additional instances for the same
+    #      namespace and service. <code>CreatorRequestId</code> can be any unique string (for example, a
+    #      date/time stamp).</p>
     # @option params [Hash<String, String>] :attributes
     #   <p>A string map that contains the following information for the service that you specify in
     #       <code>ServiceId</code>:</p>
@@ -1696,42 +2091,42 @@ module Aws::ServiceDiscovery
     #               </li>
     #            </ul>
     #            <important>
-    #               <p>Do not include sensitive information in the attributes if the namespace is discoverable by public DNS
-    #       queries.</p>
+    #               <p>Do not include sensitive information in the attributes if the namespace is discoverable by
+    #       public DNS queries.</p>
     #            </important>
     #            <p>The following are the supported attribute keys.</p>
     #            <dl>
     #               <dt>AWS_ALIAS_DNS_NAME</dt>
     #               <dd>
-    #                  <p>If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load
-    #         balancer, specify the DNS name that's associated with the load balancer. For information about how to get the
-    #         DNS name, see "DNSName" in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a> in the
-    #          <i>Route 53 API Reference</i>.</p>
+    #                  <p>If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an
+    #         Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For
+    #         information about how to get the DNS name, see "DNSName" in the topic <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html">AliasTarget</a> in the <i>Route 53 API Reference</i>.</p>
     #                  <p>Note the following:</p>
     #                  <ul>
     #                     <li>
-    #                        <p>The configuration for the service that's specified by <code>ServiceId</code> must include settings for
-    #           an <code>A</code> record, an <code>AAAA</code> record, or both.</p>
+    #                        <p>The configuration for the service that's specified by <code>ServiceId</code> must
+    #           include settings for an <code>A</code> record, an <code>AAAA</code> record, or both.</p>
     #                     </li>
     #                     <li>
-    #                        <p>In the service that's specified by <code>ServiceId</code>, the value of <code>RoutingPolicy</code>
-    #           must be <code>WEIGHTED</code>.</p>
+    #                        <p>In the service that's specified by <code>ServiceId</code>, the value of
+    #            <code>RoutingPolicy</code> must be <code>WEIGHTED</code>.</p>
     #                     </li>
     #                     <li>
-    #                        <p>If the service that's specified by <code>ServiceId</code> includes <code>HealthCheckConfig</code>
-    #           settings, Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the
-    #           alias record.</p>
+    #                        <p>If the service that's specified by <code>ServiceId</code> includes
+    #            <code>HealthCheckConfig</code> settings, Cloud Map will create the Route 53 health check, but
+    #           it doesn't associate the health check with the alias record.</p>
     #                     </li>
     #                     <li>
-    #                        <p>Cloud Map currently doesn't support creating alias records that route traffic to Amazon Web Services
-    #           resources other than Elastic Load Balancing load balancers.</p>
+    #                        <p>Cloud Map currently doesn't support creating alias records that route traffic to
+    #            Amazon Web Services resources other than Elastic Load Balancing load balancers.</p>
     #                     </li>
     #                     <li>
-    #                        <p>If you specify a value for <code>AWS_ALIAS_DNS_NAME</code>, don't specify values for any of the
-    #            <code>AWS_INSTANCE</code> attributes.</p>
+    #                        <p>If you specify a value for <code>AWS_ALIAS_DNS_NAME</code>, don't specify values for
+    #           any of the <code>AWS_INSTANCE</code> attributes.</p>
     #                     </li>
     #                     <li>
-    #                        <p>The <code>AWS_ALIAS_DNS_NAME</code> is not supported in the GovCloud (US) Regions.</p>
+    #                        <p>The <code>AWS_ALIAS_DNS_NAME</code> is not supported in the GovCloud (US)
+    #           Regions.</p>
     #                     </li>
     #                  </ul>
     #               </dd>
@@ -1739,56 +2134,61 @@ module Aws::ServiceDiscovery
     #               <dd>
     #                  <p>
     #                     <i>HTTP namespaces only.</i> The Amazon EC2 instance ID for the instance. If the
-    #          <code>AWS_EC2_INSTANCE_ID</code> attribute is specified, then the only other attribute that can be specified
-    #         is <code>AWS_INIT_HEALTH_STATUS</code>. When the <code>AWS_EC2_INSTANCE_ID</code> attribute is specified,
-    #         then the <code>AWS_INSTANCE_IPV4</code> attribute will be filled out with the primary private IPv4
+    #          <code>AWS_EC2_INSTANCE_ID</code> attribute is specified, then the only other attribute that
+    #         can be specified is <code>AWS_INIT_HEALTH_STATUS</code>. When the
+    #          <code>AWS_EC2_INSTANCE_ID</code> attribute is specified, then the
+    #          <code>AWS_INSTANCE_IPV4</code> attribute will be filled out with the primary private IPv4
     #         address.</p>
     #               </dd>
     #               <dt>AWS_INIT_HEALTH_STATUS</dt>
     #               <dd>
-    #                  <p>If the service configuration includes <code>HealthCheckCustomConfig</code>, you can optionally use
-    #          <code>AWS_INIT_HEALTH_STATUS</code> to specify the initial status of the custom health check,
-    #          <code>HEALTHY</code> or <code>UNHEALTHY</code>. If you don't specify a value for
+    #                  <p>If the service configuration includes <code>HealthCheckCustomConfig</code>, you can
+    #         optionally use <code>AWS_INIT_HEALTH_STATUS</code> to specify the initial status of the custom
+    #         health check, <code>HEALTHY</code> or <code>UNHEALTHY</code>. If you don't specify a value for
     #          <code>AWS_INIT_HEALTH_STATUS</code>, the initial status is <code>HEALTHY</code>.</p>
     #               </dd>
     #               <dt>AWS_INSTANCE_CNAME</dt>
     #               <dd>
-    #                  <p>If the service configuration includes a <code>CNAME</code> record, the domain name that you want Route 53
-    #         to return in response to DNS queries (for example, <code>example.com</code>).</p>
-    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
-    #          <code>CNAME</code> record.</p>
+    #                  <p>If the service configuration includes a <code>CNAME</code> record, the domain name that
+    #         you want Route 53 to return in response to DNS queries (for example,
+    #         <code>example.com</code>).</p>
+    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes
+    #         settings for an <code>CNAME</code> record.</p>
     #               </dd>
     #               <dt>AWS_INSTANCE_IPV4</dt>
     #               <dd>
-    #                  <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you want Route 53 to
-    #         return in response to DNS queries (for example, <code>192.0.2.44</code>).</p>
-    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
-    #          <code>A</code> record. If the service includes settings for an <code>SRV</code> record, you must specify a
-    #         value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p>
+    #                  <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you
+    #         want Route 53 to return in response to DNS queries (for example, <code>192.0.2.44</code>).</p>
+    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes
+    #         settings for an <code>A</code> record. If the service includes settings for an
+    #          <code>SRV</code> record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>,
+    #          <code>AWS_INSTANCE_IPV6</code>, or both.</p>
     #               </dd>
     #               <dt>AWS_INSTANCE_IPV6</dt>
     #               <dd>
-    #                  <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that you want Route 53
-    #         to return in response to DNS queries (for example,
-    #         <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>).</p>
-    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
-    #          <code>AAAA</code> record. If the service includes settings for an <code>SRV</code> record, you must specify
-    #         a value for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both.</p>
+    #                  <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that
+    #         you want Route 53 to return in response to DNS queries (for example,
+    #          <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>).</p>
+    #                  <p>This value is required if the service specified by <code>ServiceId</code> includes
+    #         settings for an <code>AAAA</code> record. If the service includes settings for an
+    #          <code>SRV</code> record, you must specify a value for <code>AWS_INSTANCE_IPV4</code>,
+    #          <code>AWS_INSTANCE_IPV6</code>, or both.</p>
     #               </dd>
     #               <dt>AWS_INSTANCE_PORT</dt>
     #               <dd>
-    #                  <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to return for the
-    #         port.</p>
-    #                  <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to
-    #         send requests to. </p>
-    #                  <p>This value is required if you specified settings for an <code>SRV</code> record or a Route 53 health check
-    #         when you created the service.</p>
+    #                  <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to
+    #         return for the port.</p>
+    #                  <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you
+    #         want Route 53 to send requests to. </p>
+    #                  <p>This value is required if you specified settings for an <code>SRV</code> record or a
+    #         Route 53 health check when you created the service.</p>
     #               </dd>
     #               <dt>Custom attributes</dt>
     #               <dd>
-    #                  <p>You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute
-    #         name is 255 characters, and the maximum length of the attribute value is 1,024 characters. The total size of
-    #         all provided attributes (sum of all keys and values) must not exceed 5,000 characters.</p>
+    #                  <p>You can add up to 30 custom attributes. For each key-value pair, the maximum length of
+    #         the attribute name is 255 characters, and the maximum length of the attribute value is 1,024
+    #         characters. The total size of all provided attributes (sum of all keys and values) must not
+    #         exceed 5,000 characters.</p>
     #               </dd>
     #            </dl>
     # @example Example: Register Instance
@@ -1808,9 +2208,25 @@ module Aws::ServiceDiscovery
     #   {
     #     operation_id: "4yejorelbukcjzpnr6tlmrghsjwpngf4-k95yg2u7"
     #   }
+    # @example Register instance using service ARN
+    #   # Registers an instance using a service ARN instead of service ID, useful when working with shared namespaces. Shows registering an instance to a service created by a sharee in a namespace owned by another account.
+    #   params = {
+    #     instance_id: "i-abcd1234xmpl5678",
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #     attributes: {
+    #       "AWS_INSTANCE_IPV4" => "192.0.2.44",
+    #       "AWS_INSTANCE_PORT" => "80"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.register_instance(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "abcd1234-xmpl-5678-9012-abcd1234xmpl"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "InstanceId", # required
     #     creator_request_id: "ResourceId",
     #     attributes: { # required
@@ -1835,8 +2251,8 @@ module Aws::ServiceDiscovery
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>The tags to add to the specified resource. Specifying the tag key is required. You can set the value of a
-    #      tag to an empty string, but you can't set the value of a tag to null.</p>
+    #   <p>The tags to add to the specified resource. Specifying the tag key is required. You can set
+    #      the value of a tag to an empty string, but you can't set the value of a tag to null.</p>
     # @example TagResource example
     #   # This example adds "Department" and "Project" tags to a resource.
     #   params = {
@@ -1916,16 +2332,14 @@ module Aws::ServiceDiscovery
     #    namespace.</p>
     # @param [Hash, Types::UpdateHttpNamespaceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the namespace that you
-    #      want to update.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to update.</p>
     # @option params [String] :updater_request_id
-    #   <p>A unique string that identifies the
-    #      request and that allows failed <code>UpdateHttpNamespace</code> requests to be retried without the risk of
-    #      running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>UpdateHttpNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
     #      date/timestamp).</p>
     # @option params [Types::HttpNamespaceChange] :namespace
-    #   <p>Updated properties for the the HTTP
-    #      namespace.</p>
+    #   <p>Updated properties for the the HTTP namespace.</p>
     # @example To update a HTTP namespace
     #   # The following example updates the description of a HTTP namespace.
     #   params = {
@@ -1940,9 +2354,23 @@ module Aws::ServiceDiscovery
     #   {
     #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
     #   }
+    # @example Update HTTP namespace using namespace ARN for shared namespace
+    #   # This example updates an HTTP namespace using a namespace ARN instead of namespace ID.
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-vh4nbmexample",
+    #     namespace: {
+    #       description: "Updated description for shared HTTP namespace."
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_http_namespace(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvexample"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription", # required
@@ -1961,19 +2389,34 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Submits a request to change the health status of a custom health check to healthy or unhealthy.</p>
-    #          <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for custom health
-    #    checks, which you define using <code>HealthCheckCustomConfig</code> when you create a service. You can't use it
-    #    to change the status for Route 53 health checks, which you define using <code>HealthCheckConfig</code>.</p>
+    # <p>Submits a request to change the health status of a custom health check to healthy or
+    #    unhealthy.</p>
+    #          <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for
+    #    custom health checks, which you define using <code>HealthCheckCustomConfig</code> when you create
+    #    a service. You can't use it to change the status for Route 53 health checks, which you define using
+    #     <code>HealthCheckConfig</code>.</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html">HealthCheckCustomConfig</a>.</p>
     # @param [Hash, Types::UpdateInstanceCustomHealthStatusRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that includes the configuration for the custom health check that you want to change
-    #      the status for.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that includes the configuration for the custom health
+    #      check that you want to change the status for. For services created in a shared namespace, specify
+    #      the service ARN. For more information about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map
+    #       namespace sharing</a> in the <i>Cloud Map Developer Guide</i>.</p>
     # @option params [String] :instance_id
     #   <p>The ID of the instance that you want to change the health status for.</p>
     # @option params [String] :status
     #   <p>The new status of the instance, <code>HEALTHY</code> or <code>UNHEALTHY</code>.</p>
+    # @example Update instance custom health status using service ARN
+    #   # Updates instance custom health status using a service ARN instead of service ID, useful when working with shared namespaces.
+    #   params = {
+    #     instance_id: "i-abcd1234xmpl5678",
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #     status: HEALTHY
+    #   }
+    #   options = {}
+    #   response = client.update_instance_custom_health_status(params, options)
+    #   response.to_h #=>
+    #   {}
     # @example UpdateInstanceCustomHealthStatus Example
     #   # This example submits a request to change the health status of an instance associated with a service with a custom health check to HEALTHY.
     #   params = {
@@ -1987,7 +2430,7 @@ module Aws::ServiceDiscovery
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #     status: "HEALTHY" # One of: ["HEALTHY", "UNHEALTHY"], # required
     #   }
@@ -2006,16 +2449,14 @@ module Aws::ServiceDiscovery
     #    namespace.</p>
     # @param [Hash, Types::UpdatePrivateDnsNamespaceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the namespace that you
-    #      want to update.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace that you want to update.</p>
     # @option params [String] :updater_request_id
-    #   <p>A unique string that identifies the
-    #      request and that allows failed <code>UpdatePrivateDnsNamespace</code> requests to be retried without the risk of
-    #      running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>UpdatePrivateDnsNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
     #      date/timestamp).</p>
     # @option params [Types::PrivateDnsNamespaceChange] :namespace
-    #   <p>Updated properties for the private
-    #      DNS namespace.</p>
+    #   <p>Updated properties for the private DNS namespace.</p>
     # @example To update a private DNS namespace
     #   # The following example updates the description of a private DNS namespace.
     #   params = {
@@ -2031,24 +2472,23 @@ module Aws::ServiceDiscovery
     #   {
     #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
     #   }
-    # @example To update a public DNS namespace
-    #   # The following example updates the description of a public DNS namespace.
+    # @example Update private DNS namespace using namespace ARN for shared namespace
+    #   # This example updates a private DNS namespace using a namespace ARN instead of namespace ID.
     #   params = {
-    #     id: "ns-bk3aEXAMPLE",
-    #     updater_request_id: "",
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-bk3aexample",
     #     namespace: {
-    #       description: "The updated namespace description."
+    #       description: "Updated description for shared private DNS namespace."
     #     }
     #   }
     #   options = {}
     #   response = client.update_private_dns_namespace(params, options)
     #   response.to_h #=>
     #   {
-    #     operation_id: "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvexample"
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription",
@@ -2074,23 +2514,49 @@ module Aws::ServiceDiscovery
       request.send_request(options)
     end
 
-    # <p>Updates a public DNS
-    #    namespace.</p>
+    # <p>Updates a public DNS namespace.</p>
     # @param [Hash, Types::UpdatePublicDnsNamespaceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the namespace being
-    #      updated.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the namespace being updated.</p>
     # @option params [String] :updater_request_id
-    #   <p>A unique string that identifies the
-    #      request and that allows failed <code>UpdatePublicDnsNamespace</code> requests to be retried without the risk of
-    #      running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+    #   <p>A unique string that identifies the request and that allows failed
+    #       <code>UpdatePublicDnsNamespace</code> requests to be retried without the risk of running the
+    #      operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
     #      date/timestamp).</p>
     # @option params [Types::PublicDnsNamespaceChange] :namespace
-    #   <p>Updated properties for the public
-    #      DNS namespace.</p>
+    #   <p>Updated properties for the public DNS namespace.</p>
+    # @example To update a public DNS namespace
+    #   # The following example updates the description of a public DNS namespace.
+    #   params = {
+    #     id: "ns-bk3aEXAMPLE",
+    #     updater_request_id: "",
+    #     namespace: {
+    #       description: "The updated namespace description."
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_public_dns_namespace(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
+    #   }
+    # @example Update public DNS namespace using namespace ARN for shared namespace
+    #   # This example updates a public DNS namespace using a namespace ARN instead of namespace ID.
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:namespace/ns-bk3aexample",
+    #     namespace: {
+    #       description: "Updated description for shared public DNS namespace."
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_public_dns_namespace(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjexample"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription",
@@ -2124,28 +2590,49 @@ module Aws::ServiceDiscovery
     #             <li>
     #                <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p>
     #                <note>
-    #                   <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration.</p>
+    #                   <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code>
+    #       configuration.</p>
     #                </note>
     #             </li>
     #          </ul>
     #          <p>For public and private DNS namespaces, note the following:</p>
     #          <ul>
     #             <li>
-    #                <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code> configurations from an
-    #       <code>UpdateService</code> request, the configurations are deleted from the service.</p>
+    #                <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code>
+    #      configurations from an <code>UpdateService</code> request, the configurations are deleted from
+    #      the service.</p>
     #             </li>
     #             <li>
     #                <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an
     #       <code>UpdateService</code> request, the configuration isn't deleted from the service.</p>
     #             </li>
     #          </ul>
-    #          <p>When you update settings for a service, Cloud Map also updates the corresponding settings in all the
-    #    records and health checks that were created by using the specified service.</p>
+    #          <note>
+    #             <p>You can't call <code>UpdateService</code> and update settings in the following
+    #     scenarios:</p>
+    #             <ul>
+    #                <li>
+    #                   <p>When the service is associated with an HTTP namespace</p>
+    #                </li>
+    #                <li>
+    #                   <p>When the service is associated with a shared namespace and contains instances that were
+    #       registered by Amazon Web Services accounts other than the account making the <code>UpdateService</code>
+    #       call</p>
+    #                </li>
+    #             </ul>
+    #          </note>
+    #          <p>When you update settings for a service, Cloud Map also updates the corresponding settings
+    #    in all the records and health checks that were created by using the specified service.</p>
     # @param [Hash, Types::UpdateServiceRequest] params
     # @option params [String] :id
-    #   <p>The ID of the service that you want to update.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to update. If the namespace associated with
+    #      the service is shared with your Amazon Web Services account, specify the service ARN. For more information
+    #      about shared namespaces, see <a href="https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html">Cross-account Cloud Map namespace sharing</a> in the
+    #       <i>Cloud Map Developer Guide</i>
+    #            </p>
     # @option params [Types::ServiceChange] :service
-    #   <p>A complex type that contains the new settings for the service. You can specify a maximum of 30 attributes (key-value pairs).</p>
+    #   <p>A complex type that contains the new settings for the service. You can specify a maximum of
+    #      30 attributes (key-value pairs).</p>
     # @example UpdateService Example
     #   # This example submits a request to replace the DnsConfig and HealthCheckConfig settings of a specified service.
     #   params = {
@@ -2172,9 +2659,23 @@ module Aws::ServiceDiscovery
     #   {
     #     operation_id: "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
     #   }
+    # @example Update service using service ARN for shared namespace
+    #   # This example updates a service using a service ARN instead of service ID. This is useful for updating services associated with shared namespaces.
+    #   params = {
+    #     id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-e4anhexample0004",
+    #     service: {
+    #       description: "Updated service description for shared namespace"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_service(params, options)
+    #   response.to_h #=>
+    #   {
+    #     operation_id: "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     service: { # required
     #       description: "ResourceDescription",
     #       dns_config: {
@@ -2208,9 +2709,23 @@ module Aws::ServiceDiscovery
     # <p>Submits a request to update a specified service to add service-level attributes.</p>
     # @param [Hash, Types::UpdateServiceAttributesRequest] params
     # @option params [String] :service_id
-    #   <p>The ID of the service that you want to update.</p>
+    #   <p>The ID or Amazon Resource Name (ARN) of the service that you want to update. For services created in a
+    #      namespace shared with your Amazon Web Services account, specify the service ARN.</p>
     # @option params [Hash<String, String>] :attributes
     #   <p>A string map that contains attribute key-value pairs.</p>
+    # @example Update service attributes using service ARN
+    #   # Updates service attributes using a service ARN instead of service ID, useful when working with shared namespaces.
+    #   params = {
+    #     service_id: "arn:aws:servicediscovery:us-west-2:123456789012:service/srv-abcd1234xmpl5678",
+    #     attributes: {
+    #       "Port" => "8080",
+    #       "Protocol" => "HTTP"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_service_attributes(params, options)
+    #   response.to_h #=>
+    #   {}
     # @example UpdateServiceAttributes Example
     #   # This example submits a request to update the specified service to add a port attribute with the value 80.
     #   params = {
@@ -2225,7 +2740,7 @@ module Aws::ServiceDiscovery
     #   {}
     # @example Request syntax with placeholder values
     #   params = {
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     attributes: { # required
     #       "ServiceAttributeKey" => "ServiceAttributeValue"
     #     }

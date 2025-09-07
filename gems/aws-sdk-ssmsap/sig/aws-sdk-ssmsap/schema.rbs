@@ -14,6 +14,7 @@ module Aws::SsmSap
     ApplicationSummary: StructureShape
     ApplicationSummaryList: ListShape
     ApplicationType: EnumShape
+    ApplicationTypeList: ListShape
     Arn: StringShape
     AssociatedHost: StructureShape
     BackintConfig: StructureShape
@@ -29,6 +30,13 @@ module Aws::SsmSap
     ComponentSummary: StructureShape
     ComponentSummaryList: ListShape
     ComponentType: EnumShape
+    ConfigurationCheckDefinition: StructureShape
+    ConfigurationCheckDefinitionList: ListShape
+    ConfigurationCheckOperation: StructureShape
+    ConfigurationCheckOperationList: ListShape
+    ConfigurationCheckOperationListingMode: EnumShape
+    ConfigurationCheckType: EnumShape
+    ConfigurationCheckTypeList: ListShape
     ConflictException: StructureShape
     ConnectedEntityType: EnumShape
     CredentialType: EnumShape
@@ -55,6 +63,8 @@ module Aws::SsmSap
     GetApplicationOperationOutput: StructureShape
     GetComponentOperationInput: StructureShape
     GetComponentOperationOutput: StructureShape
+    GetConfigurationCheckOperationInput: StructureShape
+    GetConfigurationCheckOperationOutput: StructureShape
     GetDatabaseOperationInput: StructureShape
     GetDatabaseOperationOutput: StructureShape
     GetOperationOperationInput: StructureShape
@@ -73,12 +83,20 @@ module Aws::SsmSap
     ListApplicationsOperationOutput: StructureShape
     ListComponentsOperationInput: StructureShape
     ListComponentsOperationOutput: StructureShape
+    ListConfigurationCheckDefinitionsInput: StructureShape
+    ListConfigurationCheckDefinitionsOutput: StructureShape
+    ListConfigurationCheckOperationsInput: StructureShape
+    ListConfigurationCheckOperationsOutput: StructureShape
     ListDatabasesOperationInput: StructureShape
     ListDatabasesOperationOutput: StructureShape
     ListOperationEventsInput: StructureShape
     ListOperationEventsOutput: StructureShape
     ListOperationsOperationInput: StructureShape
     ListOperationsOperationOutput: StructureShape
+    ListSubCheckResultsInput: StructureShape
+    ListSubCheckResultsOutput: StructureShape
+    ListSubCheckRuleResultsInput: StructureShape
+    ListSubCheckRuleResultsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     MaxResults: IntegerShape
@@ -106,6 +124,14 @@ module Aws::SsmSap
     ResourceId: StringShape
     ResourceNotFoundException: StructureShape
     ResourceType: StringShape
+    RuleResult: StructureShape
+    RuleResultId: StringShape
+    RuleResultList: ListShape
+    RuleResultMetadata: MapShape
+    RuleResultMetadataKey: StringShape
+    RuleResultMetadataValue: StringShape
+    RuleResultStatus: EnumShape
+    RuleStatusCounts: StructureShape
     SAPInstanceNumber: StringShape
     SID: StringShape
     SecretId: StringShape
@@ -114,8 +140,14 @@ module Aws::SsmSap
     StartApplicationOutput: StructureShape
     StartApplicationRefreshInput: StructureShape
     StartApplicationRefreshOutput: StructureShape
+    StartConfigurationChecksInput: StructureShape
+    StartConfigurationChecksOutput: StructureShape
     StopApplicationInput: StructureShape
     StopApplicationOutput: StructureShape
+    SubCheckReferencesList: ListShape
+    SubCheckResult: StructureShape
+    SubCheckResultId: StringShape
+    SubCheckResultList: ListShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagMap: MapShape

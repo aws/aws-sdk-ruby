@@ -1491,6 +1491,7 @@ module Aws::PinpointSMSVoiceV2
     #         two_way_channel_role: "IamRoleArn",
     #         self_managed_opt_outs_enabled: false, # required
     #         opt_out_list_name: "OptOutListName", # required
+    #         international_sending_enabled: false,
     #         deletion_protection_enabled: false, # required
     #         pool_id: "String",
     #         registration_id: "String",
@@ -2700,6 +2701,8 @@ module Aws::PinpointSMSVoiceV2
     #   <p>The pool to associated with the phone number. You can use the PoolId or PoolArn. </p> <important> <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p> </important>
     # @option params [String] :registration_id
     #   <p>Use this field to attach your phone number for an external registration process.</p>
+    # @option params [Boolean] :international_sending_enabled
+    #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
     # @option params [Boolean] :deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -2715,6 +2718,7 @@ module Aws::PinpointSMSVoiceV2
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
     #     registration_id: "RegistrationIdOrArn",
+    #     international_sending_enabled: false,
     #     deletion_protection_enabled: false,
     #     tags: [
     #       {
@@ -2743,6 +2747,7 @@ module Aws::PinpointSMSVoiceV2
     #     two_way_channel_role: "IamRoleArn",
     #     self_managed_opt_outs_enabled: false,
     #     opt_out_list_name: "OptOutListName",
+    #     international_sending_enabled: false,
     #     deletion_protection_enabled: false,
     #     pool_id: "String",
     #     registration_id: "String",
@@ -3351,6 +3356,8 @@ module Aws::PinpointSMSVoiceV2
     #   <p>By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>
     # @option params [String] :opt_out_list_name
     #   <p>The OptOutList to add the phone number to. Valid values for this field can be either the OutOutListName or OutOutListArn.</p>
+    # @option params [Boolean] :international_sending_enabled
+    #   <p>By default this is set to false. When set to true the international sending of phone number is Enabled. </p>
     # @option params [Boolean] :deletion_protection_enabled
     #   <p>By default this is set to false. When set to true the phone number can't be deleted. </p>
     # @example Request syntax with placeholder values
@@ -3361,6 +3368,7 @@ module Aws::PinpointSMSVoiceV2
     #     two_way_channel_role: "IamRoleArn",
     #     self_managed_opt_outs_enabled: false,
     #     opt_out_list_name: "OptOutListNameOrArn",
+    #     international_sending_enabled: false,
     #     deletion_protection_enabled: false
     #   }
     #   options = {}
@@ -3382,6 +3390,7 @@ module Aws::PinpointSMSVoiceV2
     #     two_way_channel_role: "IamRoleArn",
     #     self_managed_opt_outs_enabled: false,
     #     opt_out_list_name: "OptOutListName",
+    #     international_sending_enabled: false,
     #     deletion_protection_enabled: false,
     #     registration_id: "String",
     #     created_timestamp: Time.now

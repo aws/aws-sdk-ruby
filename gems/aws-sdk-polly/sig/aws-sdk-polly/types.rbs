@@ -421,6 +421,7 @@ module Aws::Polly
     module OutputFormat
       JSON: String
       MP3: String
+      OGG_OPUS: String
       OGG_VORBIS: String
       PCM: String
     end

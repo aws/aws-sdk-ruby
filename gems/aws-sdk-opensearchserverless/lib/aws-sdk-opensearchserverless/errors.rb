@@ -34,9 +34,7 @@ module Aws::OpenSearchServerless
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>When creating a resource, thrown when a resource with the same name already exists or
-    #             is being created. When deleting a resource, thrown when the resource is not in the
-    #             ACTIVE or FAILED state.</p>
+    # <p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE or FAILED state.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ConflictException] data
@@ -62,8 +60,7 @@ module Aws::OpenSearchServerless
       end
     end
 
-    # <p>Thrown when the collection you're attempting to create results in a number of search
-    #             or indexing OCUs that exceeds the account limit. </p>
+    # <p>Thrown when the collection you're attempting to create results in a number of search or indexing OCUs that exceeds the account limit. </p>
     class OcuLimitExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::OcuLimitExceededException] data
@@ -90,8 +87,7 @@ module Aws::OpenSearchServerless
       end
     end
 
-    # <p>Thrown when you attempt to create more resources than the service allows based on
-    #             service quotas.</p>
+    # <p>Thrown when you attempt to create more resources than the service allows based on service quotas.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ServiceQuotaExceededException] data
@@ -125,8 +121,7 @@ module Aws::OpenSearchServerless
       end
     end
 
-    # <p>Thrown when the HTTP request contains invalid input or is missing required
-    #             input.</p>
+    # <p>Thrown when the HTTP request contains invalid input or is missing required input.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::OpenSearchServerless::Types::ValidationException] data

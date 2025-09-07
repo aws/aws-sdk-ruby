@@ -380,7 +380,7 @@ module Aws::Polly
     #       request_characters: 1,
     #       sns_topic_arn: "SnsTopicArn",
     #       lexicon_names: ["LexiconName"],
-    #       output_format: "json" # One of: ["json", "mp3", "ogg_vorbis", "pcm"],
+    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
     #       sample_rate: "SampleRate",
     #       speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #       text_type: "ssml" # One of: ["ssml", "text"],
@@ -487,7 +487,7 @@ module Aws::Polly
     #         request_characters: 1,
     #         sns_topic_arn: "SnsTopicArn",
     #         lexicon_names: ["LexiconName"],
-    #         output_format: "json" # One of: ["json", "mp3", "ogg_vorbis", "pcm"],
+    #         output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
     #         sample_rate: "SampleRate",
     #         speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #         text_type: "ssml" # One of: ["ssml", "text"],
@@ -604,7 +604,7 @@ module Aws::Polly
     #     engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #     language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
     #     lexicon_names: ["LexiconName"],
-    #     output_format: "json" # One of: ["json", "mp3", "ogg_vorbis", "pcm"], # required
+    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"], # required
     #     output_s3_bucket_name: "OutputS3BucketName", # required
     #     output_s3_key_prefix: "OutputS3KeyPrefix",
     #     sample_rate: "SampleRate",
@@ -629,7 +629,7 @@ module Aws::Polly
     #       request_characters: 1,
     #       sns_topic_arn: "SnsTopicArn",
     #       lexicon_names: ["LexiconName"],
-    #       output_format: "json" # One of: ["json", "mp3", "ogg_vorbis", "pcm"],
+    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
     #       sample_rate: "SampleRate",
     #       speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #       text_type: "ssml" # One of: ["ssml", "text"],
@@ -657,11 +657,6 @@ module Aws::Polly
     #         the standard engine is selected by default. If a chosen voice isn't supported
     #         by the standard engine, this will result in an error. For information on
     #         Amazon Polly voices and which voices are available for each engine, see <a href="https://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Available Voices</a>.</p>
-    #            <p>Type: String</p>
-    #            <p>Valid Values: <code>standard</code> | <code>neural</code> |
-    #         <code>long-form</code> | <code>generative</code>
-    #            </p>
-    #            <p>Required: Yes</p>
     # @option params [String] :language_code
     #   <p>Optional language code for the Synthesize Speech request. This is only
     #         necessary if using a bilingual voice, such as Aditi, which can be used for
@@ -684,8 +679,7 @@ module Aws::Polly
     #         16-bit, 1 channel (mono), little-endian format. </p>
     # @option params [String] :sample_rate
     #   <p>The audio frequency specified in Hz.</p>
-    #            <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050",
-    #         and "24000". The default value for standard voices is "22050". The default
+    #            <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", "24000", "44100" and "48000". The default value for standard voices is "22050". The default
     #         value for neural voices is "24000". The default value for long-form voices
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
@@ -728,7 +722,7 @@ module Aws::Polly
     #     engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #     language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
     #     lexicon_names: ["LexiconName"],
-    #     output_format: "json" # One of: ["json", "mp3", "ogg_vorbis", "pcm"], # required
+    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"], # required
     #     sample_rate: "SampleRate",
     #     speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #     text: "Text", # required

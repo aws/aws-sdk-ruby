@@ -12,9 +12,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('SsmSap', Module.new) unless Aws.const_defined?('SsmSap')
 
 # @title AWS Systems Manager for SAP
-# <p>This API reference provides descriptions, syntax, and other details about each of the
-#          actions and data types for AWS Systems Manager for SAP. The topic for each action shows
-#          the API request parameters and responses. </p>
+# <p>This API reference provides descriptions, syntax, and other details about each of the actions and data types for AWS Systems Manager for SAP. The topic for each action shows the API request parameters and responses. </p>
 module Aws::SsmSap
   VERSION = '2.0.0.pre0'
 end

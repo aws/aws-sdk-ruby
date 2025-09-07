@@ -1937,9 +1937,14 @@ module Aws::RDS
     # @param [Hash, Types::CreateDBClusterMessage] params
     # @option params [Array<String>] :availability_zones
     #   <p>A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.</p>
-    #            <p>For information on AZs, see 
-    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones">Availability Zones</a>
-    #               in the <i>Amazon Aurora User Guide</i>.</p>
+    #            <p>For the first three DB instances that you create, RDS distributes each DB instance to
+    #               a different AZ that you specify. For additional DB instances that you create, RDS
+    #               randomly distributes them to the AZs that you specified. For example, if you create a DB
+    #               cluster with one writer instance and three reader instances, RDS might distribute the
+    #               writer instance to AZ 1, the first reader instance to AZ 2, the second reader instance
+    #               to AZ 3, and the third reader instance to either AZ 1, AZ 2, or AZ 3. </p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones">Availability Zones</a> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Concepts.AuroraHighAvailability.Instances">High availability for Aurora DB instances</a> in the <i>Amazon Aurora
+    #                   User Guide</i>.</p>
     #            <p>Valid for Cluster Type: Aurora DB clusters only</p>
     #            <p>Constraints:</p>
     #            <ul>
@@ -2605,6 +2610,21 @@ module Aws::RDS
     #            </p>
     #            <p>Default: <code>open-source-rds-extended-support</code>
     #            </p>
+    # @option params [String] :master_user_authentication_type
+    #   <p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB cluster.</p>
+    #            <p>You can specify one of the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>password</code> - Use standard database authentication with a password.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
+    #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     # @example To create a MySQL 5.7-compatible DB cluster
     #   # The following example creates a MySQL 5.7-compatible Aurora DB cluster.
     #   params = {
@@ -2805,7 +2825,8 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
     #     ca_certificate_identifier: "String",
-    #     engine_lifecycle_support: "String"
+    #     engine_lifecycle_support: "String",
+    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
     #   options = {}
     #   response = client.create_db_cluster(params, options)
@@ -4002,15 +4023,8 @@ module Aws::RDS
     # @option params [Boolean] :multi_az
     #   <p>Specifies whether the DB instance is a Multi-AZ deployment. You can't set 
     #             the <code>AvailabilityZone</code> parameter if the DB instance is a Multi-AZ deployment.</p>
-    #            <p>This setting doesn't apply to the following DB instances:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)</p>
-    #               </li>
-    #               <li>
-    #                  <p>RDS Custom</p>
-    #               </li>
-    #            </ul>
+    #            <p>This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs)
+    #             are managed by the DB cluster.</p>
     # @option params [String] :engine_version
     #   <p>The version number of the database engine to use.</p>
     #            <p>This setting doesn't apply to Amazon Aurora DB instances. The version number of the database engine the DB
@@ -4072,11 +4086,12 @@ module Aws::RDS
     # @option params [String] :license_model
     #   <p>The license model information for this DB instance.</p>
     #            <note>
-    #               <p>License models for RDS for Db2 require additional configuration. The Bring Your
-    #                   Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
-    #                   Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-    #                   information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
-    #                       options</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #               <p>License models for RDS for Db2 require additional configuration. The bring your
+    #                   own license (BYOL) model requires a custom parameter group and an Amazon Web Services License
+    #                   Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model
+    #                   requires an Amazon Web Services Marketplace subscription. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon
+    #                       RDS for Db2 licensing options</a> in the <i>Amazon RDS User
+    #                       Guide</i>.</p>
     #               <p>The default for RDS for Db2 is <code>bring-your-own-license</code>.</p>
     #            </note>
     #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
@@ -4563,6 +4578,20 @@ module Aws::RDS
     #            </p>
     #            <p>Default: <code>open-source-rds-extended-support</code>
     #            </p>
+    # @option params [String] :master_user_authentication_type
+    #   <p>Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.</p>
+    #            <p>You can specify one of the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>password</code> - Use standard database authentication with a password.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>
+    #               </li>
+    #            </ul>
+    #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     # @example To create a DB instance
     #   # The following example uses the required options to launch a new DB instance.
     #   params = {
@@ -4745,7 +4774,8 @@ module Aws::RDS
     #     db_system_id: "String",
     #     dedicated_log_volume: false,
     #     multi_tenant: false,
-    #     engine_lifecycle_support: "String"
+    #     engine_lifecycle_support: "String",
+    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
     #   options = {}
     #   response = client.create_db_instance(params, options)
@@ -4972,13 +5002,10 @@ module Aws::RDS
 
     # <p>Creates a new DB instance that acts as a read replica for an existing source DB
     #             instance or Multi-AZ DB cluster. You can create a read replica for a DB instance running
-    #             MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read replica for a
-    #             Multi-AZ DB cluster running MySQL or PostgreSQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html">Working
+    #             Db2, MariaDB, MySQL, Oracle, PostgreSQL, or SQL Server. You can create a read replica
+    #             for a Multi-AZ DB cluster running MySQL or PostgreSQL. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html">Working
     #                 with read replicas</a> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica">Migrating from a Multi-AZ DB cluster to a DB instance using a read replica</a>
     #             in the <i>Amazon RDS User Guide</i>.</p>
-    #          <p>Amazon RDS for Db2 supports this operation for standby replicas. To create a standby
-    #             replica for a DB instance running Db2, you must set <code>ReplicaMode</code> to
-    #                 <code>mounted</code>.</p>
     #          <p>Amazon Aurora doesn't support this operation. To create a DB instance for an Aurora DB cluster, use the <code>CreateDBInstance</code>
     #             operation.</p>
     #          <p>RDS creates read replicas with backups disabled. All other attributes
@@ -5079,14 +5106,14 @@ module Aws::RDS
     # @option params [String] :db_parameter_group_name
     #   <p>The name of the DB parameter group to associate with this read replica DB
     #               instance.</p>
-    #            <p>For the Db2 DB engine, if your source DB instance uses the Bring Your Own License
-    #               model, then a custom parameter group must be associated with the replica. For a same
-    #               Amazon Web Services Region replica, if you don't specify a custom parameter group, Amazon RDS
+    #            <p>For the Db2 DB engine, if your source DB instance uses the bring your own license
+    #               (BYOL) model, then a custom parameter group must be associated with the replica. For a
+    #               same Amazon Web Services Region replica, if you don't specify a custom parameter group, Amazon RDS
     #               associates the custom parameter group associated with the source DB instance. For a
     #               cross-Region replica, you must specify a custom parameter group. This custom parameter
     #               group must include your IBM Site ID and IBM Customer ID. For more information, see
-    #                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info"> IBM IDs
-    #                   for Bring Your Own License for Db2</a>. </p>
+    #                   <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html#db2-prereqs-ibm-info">IBM IDs
+    #                   for bring your own license (BYOL) for Db2</a>. </p>
     #            <p>For Single-AZ or Multi-AZ DB instance read replica instances, if you don't specify a
     #               value for <code>DBParameterGroupName</code>, then Amazon RDS uses the
     #                   <code>DBParameterGroup</code> of the source DB instance for a same Region read
@@ -5380,10 +5407,8 @@ module Aws::RDS
     #            </p>
     # @option params [String] :replica_mode
     #   <p>The open mode of the replica database.</p>
-    #            <note>
-    #               <p>This parameter is only supported for Db2 DB instances and Oracle DB
-    #                   instances.</p>
-    #            </note>
+    #            <p>This parameter is only supported for Db2 DB instances and Oracle DB
+    #               instances.</p>
     #            <dl>
     #               <dt>Db2</dt>
     #               <dd>
@@ -5392,8 +5417,7 @@ module Aws::RDS
     #                           cross-Region disaster recovery. Because it doesn't accept user
     #                           connections, a standby replica can't serve a read-only workload.</p>
     #                  <p>You can create a combination of standby and read-only DB replicas for the
-    #                           same primary DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html">Working with read
-    #                               replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User
+    #                           same primary DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html">Working with replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User
     #                               Guide</i>.</p>
     #                  <p>To create standby DB replicas for RDS for Db2, set this parameter to
     #                               <code>mounted</code>.</p>
@@ -6018,14 +6042,65 @@ module Aws::RDS
     #   <p>The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this
     #           value higher or lower than the connection timeout limit for the associated database.</p>
     # @option params [Boolean] :debug_logging
-    #   <p>Specifies whether the proxy includes detailed information about SQL statements in its logs.
-    #           This information helps you to debug issues involving SQL behavior or the performance
-    #           and scalability of the proxy connections. The debug information includes the text of
-    #           SQL statements that you submit through the proxy. Thus, only enable this setting
-    #           when needed for debugging, and only when you have security measures in place to
-    #           safeguard any sensitive information that appears in the logs.</p>
+    #   <p>Specifies whether the proxy logs detailed connection and query information. 
+    #               When you enable <code>DebugLogging</code>, the proxy captures connection details 
+    #               and connection pool behavior from your queries. Debug logging increases CloudWatch costs 
+    #               and can impact proxy performance. Enable this option only when you need 
+    #               to troubleshoot connection or performance issues.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.</p>
+    # @option params [String] :endpoint_network_type
+    #   <p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>
+    #            <p>Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Default: <code>IPV4</code>
+    #            </p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>
+    #               </li>
+    #            </ul>
+    # @option params [String] :target_connection_network_type
+    #   <p>The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.</p>
+    #            <p>Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV4</code> - The proxy connects to the database using IPv4 only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV6</code> - The proxy connects to the database using IPv6 only.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Default: <code>IPV4</code>
+    #            </p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If you specify <code>IPV6</code>, the database must support dual-stack mode. RDS doesn't support IPv6-only databases.</p>
+    #               </li>
+    #               <li>
+    #                  <p>All targets registered with the proxy must be compatible with the specified network type.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_proxy_name: "String", # required
@@ -6051,7 +6126,9 @@ module Aws::RDS
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"],
+    #     target_connection_network_type: "IPV4" # One of: ["IPV4", "IPV6"]
     #   }
     #   options = {}
     #   response = client.create_db_proxy(params, options)
@@ -6082,7 +6159,9 @@ module Aws::RDS
     #       idle_client_timeout: 1,
     #       debug_logging: false,
     #       created_date: Time.now,
-    #       updated_date: Time.now
+    #       updated_date: Time.now,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"],
+    #       target_connection_network_type: "IPV4" # One of: ["IPV4", "IPV6"]
     #     }
     #   }
     # @return [Types::CreateDBProxyResponse]
@@ -6116,6 +6195,34 @@ module Aws::RDS
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS resources</a> in the <i>Amazon RDS User Guide</i> or 
     #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html">Tagging Amazon Aurora and Amazon RDS resources</a> in the <i>Amazon Aurora User Guide</i>.
     #               </p>
+    # @option params [String] :endpoint_network_type
+    #   <p>The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.</p>
+    #            <p>Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV4</code> - The proxy endpoint supports IPv4 only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IPV6</code> - The proxy endpoint supports IPv6 only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DUAL</code> - The proxy endpoint supports both IPv4 and IPv6.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Default: <code>IPV4</code>
+    #            </p>
+    #            <p>Constraints:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC and all subnets must have an IPv6 CIDR block.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If you specify <code>IPV6</code> or <code>DUAL</code>, the VPC tenancy cannot be <code>dedicated</code>.</p>
+    #               </li>
+    #            </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     db_proxy_name: "DBProxyName", # required
@@ -6128,7 +6235,8 @@ module Aws::RDS
     #         key: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"]
     #   }
     #   options = {}
     #   response = client.create_db_proxy_endpoint(params, options)
@@ -6146,7 +6254,8 @@ module Aws::RDS
     #       endpoint: "String",
     #       created_date: Time.now,
     #       target_role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY"],
-    #       is_default: false
+    #       is_default: false,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"]
     #     }
     #   }
     # @return [Types::CreateDBProxyEndpointResponse]
@@ -8614,7 +8723,9 @@ module Aws::RDS
     #       idle_client_timeout: 1,
     #       debug_logging: false,
     #       created_date: Time.now,
-    #       updated_date: Time.now
+    #       updated_date: Time.now,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"],
+    #       target_connection_network_type: "IPV4" # One of: ["IPV4", "IPV6"]
     #     }
     #   }
     # @return [Types::DeleteDBProxyResponse]
@@ -8649,7 +8760,8 @@ module Aws::RDS
     #       endpoint: "String",
     #       created_date: Time.now,
     #       target_role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY"],
-    #       is_default: false
+    #       is_default: false,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"]
     #     }
     #   }
     # @return [Types::DeleteDBProxyEndpointResponse]
@@ -12153,7 +12265,9 @@ module Aws::RDS
     #         idle_client_timeout: 1,
     #         debug_logging: false,
     #         created_date: Time.now,
-    #         updated_date: Time.now
+    #         updated_date: Time.now,
+    #         endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"],
+    #         target_connection_network_type: "IPV4" # One of: ["IPV4", "IPV6"]
     #       }
     #     ],
     #     marker: "String"
@@ -12216,7 +12330,8 @@ module Aws::RDS
     #         endpoint: "String",
     #         created_date: Time.now,
     #         target_role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY"],
-    #         is_default: false
+    #         is_default: false,
+    #         endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"]
     #       }
     #     ],
     #     marker: "String"
@@ -15137,7 +15252,8 @@ module Aws::RDS
     #         max_storage_throughput_per_db_instance: 1,
     #         min_storage_throughput_per_iops: 1.0,
     #         max_storage_throughput_per_iops: 1.0,
-    #         supports_dedicated_log_volume: false
+    #         supports_dedicated_log_volume: false,
+    #         supports_http_endpoint: false
     #       }
     #     ],
     #     marker: "String"
@@ -17165,8 +17281,7 @@ module Aws::RDS
     #            <p>If you change the value from <code>standard</code> to <code>advanced</code>, you must set the 
     #               <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> and the 
     #               <code>PerformanceInsightsRetentionPeriod</code> parameter to 465.</p>
-    #            <p>If you change the value from <code>advanced</code> to <code>standard</code>, you must 
-    #               set the <code>PerformanceInsightsEnabled</code> parameter to <code>false</code>.</p>
+    #            <p>If you change the value from <code>advanced</code> to <code>standard</code>, you can set the <code>PerformanceInsightsEnabled</code> parameter to <code>true</code> to collect detailed database counter and per-query metrics.</p>
     #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
     # @option params [Boolean] :enable_performance_insights
     #   <p>Specifies whether to turn on Performance Insights for the DB cluster.</p>
@@ -17309,6 +17424,21 @@ module Aws::RDS
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB 
     #               instance</a> in the <i>Amazon RDS User Guide</i>.</p>
     #            <p>Valid for Cluster Type: Multi-AZ DB clusters</p>
+    # @option params [String] :master_user_authentication_type
+    #   <p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>
+    #            <p>You can specify one of the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>password</code> - Use standard database authentication with a password.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>
+    #               </li>
+    #            </ul>
+    #            <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>
+    #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     # @example To modify a DB cluster
     #   # The following example changes the master user password for the DB cluster named cluster-2 and sets the backup retention period to 14 days. The ApplyImmediately parameter causes the changes to be made immediately, instead of waiting until the next maintenance window.
     #   params = {
@@ -17440,7 +17570,8 @@ module Aws::RDS
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
-    #     ca_certificate_identifier: "String"
+    #     ca_certificate_identifier: "String",
+    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
     #   options = {}
     #   response = client.modify_db_cluster(params, options)
@@ -18616,10 +18747,8 @@ module Aws::RDS
     #            <p>This setting doesn't apply to RDS Custom DB instances.</p>
     # @option params [String] :replica_mode
     #   <p>The open mode of a replica database.</p>
-    #            <note>
-    #               <p>This parameter is only supported for Db2 DB instances and Oracle DB
-    #                   instances.</p>
-    #            </note>
+    #            <p>This parameter is only supported for Db2 DB instances and Oracle DB
+    #               instances.</p>
     #            <dl>
     #               <dt>Db2</dt>
     #               <dd>
@@ -18628,9 +18757,9 @@ module Aws::RDS
     #                           cross-Region disaster recovery. Because it doesn't accept user
     #                           connections, a standby replica can't serve a read-only workload.</p>
     #                  <p>You can create a combination of standby and read-only DB replicas for the
-    #                           same primary DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html">Working with read
+    #                           same primary DB instance. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-replication.html">Working with
     #                               replicas for Amazon RDS for Db2</a> in the <i>Amazon RDS User
-    #                                   Guide</i>.</p>
+    #                               Guide</i>.</p>
     #                  <p>To create standby DB replicas for RDS for Db2, set this parameter to
     #                           <code>mounted</code>.</p>
     #               </dd>
@@ -18668,8 +18797,8 @@ module Aws::RDS
     #               <code>all paused</code>, the instance pauses automation for the duration set by 
     #               <code>ResumeFullAutomationModeMinutes</code>.</p>
     # @option params [Integer] :resume_full_automation_mode_minutes
-    #   <p>The number of minutes to pause the automation. When the time period ends, RDS Custom resumes 
-    #               full automation.</p>
+    #   <p>The number of minutes to pause the automation. When the time period ends, RDS Custom
+    #               resumes full automation.</p>
     #            <p>Default: <code>60</code>
     #            </p>
     #            <p>Constraints:</p>
@@ -18809,6 +18938,20 @@ module Aws::RDS
     #                   you can't later convert back to the single-tenant configuration. When you specify
     #                   this parameter, you must also specify <code>ApplyImmediately</code>.</p>
     #            </important>
+    # @option params [String] :master_user_authentication_type
+    #   <p>Specifies the authentication type for the master user. With IAM master user authentication, you can change the master DB user to use IAM database authentication.</p>
+    #            <p>You can specify one of the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>password</code> - Use standard database authentication with a password.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>iam-db-auth</code> - Use IAM database authentication for the master user.</p>
+    #               </li>
+    #            </ul>
+    #            <p>This option is only valid for RDS for PostgreSQL and Aurora PostgreSQL engines.</p>
     # @example To modify a DB instance
     #   # The following example associates an option group and a parameter group with a compatible Microsoft SQL Server DB instance. The ApplyImmediately parameter causes the option and parameter groups to be associated immediately, instead of waiting until the next maintenance window.
     #   params = {
@@ -18925,7 +19068,8 @@ module Aws::RDS
     #     master_user_secret_kms_key_id: "String",
     #     engine: "String",
     #     dedicated_log_volume: false,
-    #     multi_tenant: false
+    #     multi_tenant: false,
+    #     master_user_authentication_type: "password" # One of: ["password", "iam-db-auth"]
     #   }
     #   options = {}
     #   response = client.modify_db_instance(params, options)
@@ -19255,12 +19399,11 @@ module Aws::RDS
     #   <p>The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it. You can set this
     #           value higher or lower than the connection timeout limit for the associated database.</p>
     # @option params [Boolean] :debug_logging
-    #   <p>Whether the proxy includes detailed information about SQL statements in its logs.
-    #           This information helps you to debug issues involving SQL behavior or the performance
-    #           and scalability of the proxy connections. The debug information includes the text of
-    #           SQL statements that you submit through the proxy. Thus, only enable this setting
-    #           when needed for debugging, and only when you have security measures in place to
-    #           safeguard any sensitive information that appears in the logs.</p>
+    #   <p>Specifies whether the proxy logs detailed connection and query information. 
+    #               When you enable <code>DebugLogging</code>, the proxy captures connection details 
+    #               and connection pool behavior from your queries. Debug logging increases CloudWatch costs 
+    #               and can impact proxy performance. Enable this option only when you need 
+    #               to troubleshoot connection or performance issues.</p>
     # @option params [String] :role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in Amazon Web Services Secrets Manager.</p>
     # @option params [Array<String>] :security_groups
@@ -19314,7 +19457,9 @@ module Aws::RDS
     #       idle_client_timeout: 1,
     #       debug_logging: false,
     #       created_date: Time.now,
-    #       updated_date: Time.now
+    #       updated_date: Time.now,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"],
+    #       target_connection_network_type: "IPV4" # One of: ["IPV4", "IPV6"]
     #     }
     #   }
     # @return [Types::ModifyDBProxyResponse]
@@ -19357,7 +19502,8 @@ module Aws::RDS
     #       endpoint: "String",
     #       created_date: Time.now,
     #       target_role: "READ_WRITE" # One of: ["READ_WRITE", "READ_ONLY"],
-    #       is_default: false
+    #       is_default: false,
+    #       endpoint_network_type: "IPV4" # One of: ["IPV4", "IPV6", "DUAL"]
     #     }
     #   }
     # @return [Types::ModifyDBProxyEndpointResponse]
@@ -19635,7 +19781,7 @@ module Aws::RDS
     #             or unencrypted, but not shared or public.
     #         
     #     </p>
-    #          <p>Amazon RDS supports upgrading DB snapshots for MySQL, PostgreSQL, and Oracle. This operation
+    #          <p>Amazon RDS supports upgrading DB snapshots for MariaDB, MySQL, PostgreSQL, and Oracle. This operation
     #           doesn't apply to RDS Custom or RDS for Db2.</p>
     # @param [Hash, Types::ModifyDBSnapshotMessage] params
     # @option params [String] :db_snapshot_identifier
@@ -19643,6 +19789,13 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   <p>The engine version to upgrade the DB snapshot to.</p>
     #            <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot.</p>
+    #            <p>
+    #               <b>MariaDB</b>
+    #            </p>
+    #            <p>For the list of engine versions that are available for upgrading a DB snapshot, see 
+    #               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mariadb-upgrade-snapshot.html">
+    #                   Upgrading a MariaDB DB snapshot engine version</a> in the <i>Amazon RDS User Guide.</i>
+    #            </p>
     #            <p>
     #               <b>MySQL</b>
     #            </p>
@@ -19654,6 +19807,14 @@ module Aws::RDS
     #               <b>Oracle</b>
     #            </p>
     #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>21.0.0.0.ru-2025-04.rur-2025-04.r1</code> (supported for 21.0.0.0.ru-2022-01.rur-2022-01.r1, 21.0.0.0.ru-2022-04.rur-2022-04.r1, 21.0.0.0.ru-2022-07.rur-2022-07.r1, 21.0.0.0.ru-2022-10.rur-2022-10.r1, 21.0.0.0.ru-2023-01.rur-2023-01.r1 and 21.0.0.0.ru-2023-01.rur-2023-01.r2 DB snapshots)</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>19.0.0.0.ru-2025-04.rur-2025-04.r1</code> (supported for 19.0.0.0.ru-2019-07.rur-2019-07.r1, 19.0.0.0.ru-2019-10.rur-2019-10.r1 and 0.0.0.ru-2020-01.rur-2020-01.r1 DB snapshots)</p>
+    #               </li>
     #               <li>
     #                  <p>
     #                     <code>19.0.0.0.ru-2022-01.rur-2022-01.r1</code> (supported for 12.2.0.1 DB
@@ -24320,11 +24481,12 @@ module Aws::RDS
     # @option params [String] :license_model
     #   <p>License model information for the restored DB instance.</p>
     #            <note>
-    #               <p>License models for RDS for Db2 require additional configuration. The Bring Your
-    #                   Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
-    #                   Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-    #                   information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
-    #                       options</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #               <p>License models for RDS for Db2 require additional configuration. The bring your
+    #                   own license (BYOL) model requires a custom parameter group and an Amazon Web Services License
+    #                   Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model
+    #                   requires an Amazon Web Services Marketplace subscription. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon
+    #                       RDS for Db2 licensing options</a> in the <i>Amazon RDS User
+    #                       Guide</i>.</p>
     #            </note>
     #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
     #            <p>Valid Values:</p>
@@ -25035,7 +25197,7 @@ module Aws::RDS
     #             You can create a backup of your on-premises database, 
     #             store it on Amazon Simple Storage Service (Amazon S3), 
     #             and then restore the backup file onto a new Amazon RDS DB instance running MySQL.
-    #             For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html">Importing Data into an Amazon RDS MySQL DB Instance</a> 
+    #             For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html">Restoring a backup into an Amazon RDS for MySQL DB instance</a> 
     #             in the <i>Amazon RDS User Guide.</i>
     #          </p>
     #          <p>This operation doesn't apply to RDS Custom.</p>
@@ -25863,11 +26025,12 @@ module Aws::RDS
     # @option params [String] :license_model
     #   <p>The license model information for the restored DB instance.</p>
     #            <note>
-    #               <p>License models for RDS for Db2 require additional configuration. The Bring Your
-    #                   Own License (BYOL) model requires a custom parameter group and an Amazon Web Services License Manager self-managed license. The Db2 license through
-    #                   Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more
-    #                   information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon RDS for Db2 licensing
-    #                       options</a> in the <i>Amazon RDS User Guide</i>.</p>
+    #               <p>License models for RDS for Db2 require additional configuration. The bring your
+    #                   own license (BYOL) model requires a custom parameter group and an Amazon Web Services License
+    #                   Manager self-managed license. The Db2 license through Amazon Web Services Marketplace model
+    #                   requires an Amazon Web Services Marketplace subscription. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html">Amazon
+    #                       RDS for Db2 licensing options</a> in the <i>Amazon RDS User
+    #                       Guide</i>.</p>
     #            </note>
     #            <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>
     #            <p>Valid Values:</p>

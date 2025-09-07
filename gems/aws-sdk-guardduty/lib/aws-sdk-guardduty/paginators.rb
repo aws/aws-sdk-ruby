@@ -283,6 +283,29 @@ module Aws::GuardDuty
     end
 
     # @api private
+    class ListThreatEntitySets
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.threat_entity_set_ids
+      end
+    end
+
+    # @api private
     class ListThreatIntelSets
       def next_tokens(data)
         next_token = data.next_token
@@ -302,6 +325,29 @@ module Aws::GuardDuty
 
       def items(data)
         data.threat_intel_set_ids
+      end
+    end
+
+    # @api private
+    class ListTrustedEntitySets
+      def next_tokens(data)
+        next_token = data.next_token
+        return {} if next_token.nil? || next_token.empty?
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:next_token]
+        return {} if prev_token.nil? || prev_token.empty?
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:next_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.trusted_entity_set_ids
       end
     end
 

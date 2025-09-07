@@ -22,6 +22,9 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate: StructureShape
     ApplicationDescription: StringShape
     ApplicationDetail: StructureShape
+    ApplicationEncryptionConfiguration: StructureShape
+    ApplicationEncryptionConfigurationDescription: StructureShape
+    ApplicationEncryptionConfigurationUpdate: StructureShape
     ApplicationMaintenanceConfigurationDescription: StructureShape
     ApplicationMaintenanceConfigurationUpdate: StructureShape
     ApplicationMaintenanceWindowEndTime: StringShape
@@ -155,6 +158,8 @@ module Aws::KinesisAnalyticsV2
     InvalidRequestException: StructureShape
     JSONMappingParameters: StructureShape
     JobPlanDescription: StringShape
+    KeyId: StringShape
+    KeyType: EnumShape
     KinesisAnalyticsARN: StringShape
     KinesisFirehoseInput: StructureShape
     KinesisFirehoseInputDescription: StructureShape

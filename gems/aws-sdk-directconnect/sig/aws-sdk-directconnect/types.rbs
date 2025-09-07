@@ -196,6 +196,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -225,6 +226,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -272,6 +274,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -301,6 +304,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -540,6 +544,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -569,6 +574,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -640,6 +646,7 @@ module Aws::DirectConnect
       def initialize: (
         ?bgp_peer_id: String,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?auth_key: String,
         ?address_family: String,
         ?amazon_address: String,
@@ -653,6 +660,7 @@ module Aws::DirectConnect
 
       attr_accessor bgp_peer_id: String?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor auth_key: String?
       attr_accessor address_family: String?
       attr_accessor amazon_address: String?
@@ -1206,6 +1214,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -1235,6 +1244,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -1280,6 +1290,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -1309,6 +1320,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -1385,6 +1397,7 @@ module Aws::DirectConnect
       def initialize: (
         ?virtual_interface_id: String,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?customer_address: String,
         ?bgp_peer_id: String,
       ) -> void
@@ -1392,6 +1405,7 @@ module Aws::DirectConnect
 
       attr_accessor virtual_interface_id: String?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor customer_address: String?
       attr_accessor bgp_peer_id: String?
     end
@@ -1680,10 +1694,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?connections: Array[Types::Connection],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connections: Array[Types::Connection]?
+      attr_accessor next_token: String?
     end
 
     class DescribeConnectionsOnInterconnectRequest
@@ -1702,10 +1718,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?connections: Array[Types::Connection],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connections: Array[Types::Connection]?
+      attr_accessor next_token: String?
     end
 
     class DescribeConnectionsRequest
@@ -1713,10 +1731,14 @@ module Aws::DirectConnect
 
       def initialize: (
         ?connection_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connection_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
     end
 
     class DescribeCustomerMetadataResponse
@@ -1861,10 +1883,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?connections: Array[Types::Connection],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connections: Array[Types::Connection]?
+      attr_accessor next_token: String?
     end
 
     class DescribeHostedConnectionsRequest
@@ -1872,10 +1896,14 @@ module Aws::DirectConnect
 
       def initialize: (
         ?connection_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connection_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
     end
 
     class DescribeInterconnectLoaRequest
@@ -1909,10 +1937,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?interconnects: Array[Types::Interconnect],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor interconnects: Array[Types::Interconnect]?
+      attr_accessor next_token: String?
     end
 
     class DescribeInterconnectsRequest
@@ -1920,10 +1950,14 @@ module Aws::DirectConnect
 
       def initialize: (
         ?interconnect_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor interconnect_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
     end
 
     class DescribeLagsOutput
@@ -1931,10 +1965,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?lags: Array[Types::Lag],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lags: Array[Types::Lag]?
+      attr_accessor next_token: String?
     end
 
     class DescribeLagsRequest
@@ -1942,10 +1978,14 @@ module Aws::DirectConnect
 
       def initialize: (
         ?lag_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor lag_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
     end
 
     class DescribeLoaOutput
@@ -2055,10 +2095,12 @@ module Aws::DirectConnect
 
       def initialize: (
         ?virtual_interfaces: Array[Types::VirtualInterface],
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor virtual_interfaces: Array[Types::VirtualInterface]?
+      attr_accessor next_token: String?
     end
 
     class DescribeVirtualInterfacesRequest
@@ -2067,11 +2109,15 @@ module Aws::DirectConnect
       def initialize: (
         ?connection_id: String,
         ?virtual_interface_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor connection_id: String?
       attr_accessor virtual_interface_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
     end
 
     class DirectConnectClientException
@@ -2557,6 +2603,7 @@ module Aws::DirectConnect
 
       def initialize: (
         ?asn: Integer,
+        ?asn_long: Integer,
         ?auth_key: String,
         ?address_family: String,
         ?amazon_address: String,
@@ -2565,6 +2612,7 @@ module Aws::DirectConnect
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor auth_key: String?
       attr_accessor address_family: String?
       attr_accessor amazon_address: String?
@@ -2578,6 +2626,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?mtu: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -2593,6 +2642,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor mtu: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -2611,6 +2661,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?mtu: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -2623,6 +2674,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor mtu: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -2638,6 +2690,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?auth_key: String,
         ?amazon_address: String,
         ?customer_address: String,
@@ -2650,6 +2703,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
       attr_accessor customer_address: String?
@@ -2665,6 +2719,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?auth_key: String,
         ?amazon_address: String,
         ?customer_address: String,
@@ -2677,6 +2732,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
       attr_accessor customer_address: String?
@@ -2692,6 +2748,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?mtu: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -2706,6 +2763,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor mtu: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -2723,6 +2781,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?mtu: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -2735,6 +2794,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor mtu: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -3110,6 +3170,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -3139,6 +3200,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?
@@ -3201,6 +3263,7 @@ module Aws::DirectConnect
         ?virtual_interface_name: String,
         ?vlan: Integer,
         ?asn: Integer,
+        ?asn_long: Integer,
         ?amazon_side_asn: Integer,
         ?auth_key: String,
         ?amazon_address: String,
@@ -3230,6 +3293,7 @@ module Aws::DirectConnect
       attr_accessor virtual_interface_name: String?
       attr_accessor vlan: Integer?
       attr_accessor asn: Integer?
+      attr_accessor asn_long: Integer?
       attr_accessor amazon_side_asn: Integer?
       attr_accessor auth_key: String?
       attr_accessor amazon_address: String?

@@ -1004,6 +1004,16 @@ module Aws::CleanRoomsML
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for defining custom patterns to be redacted from logs and error messages. This is for the CUSTOM config under entitiesToRedact. Both CustomEntityConfig and entitiesToRedact need to be present or not present.</p>
+    # @!attribute custom_data_identifiers
+    #   <p>Defines data identifiers for the custom entity configuration. Provide this only if CUSTOM redaction is configured. </p>
+    #   @return [Array<String>]
+    class CustomEntityConfig < Struct.new(
+      :custom_data_identifiers,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines information about the Glue data source that contains the training data.</p>
     # @!attribute glue_data_source
     #   <p>A GlueDataSource object that defines the catalog ID, database name, and table name for the training data.</p>
@@ -1365,15 +1375,6 @@ module Aws::CleanRoomsML
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute create_time
-    #   <p>The time at which the ML input channel was created.</p>
-    #   @return [Time]
-    # @!attribute update_time
-    #   <p>The most recent time at which the ML input channel was updated.</p>
-    #   @return [Time]
-    # @!attribute creator_account_id
-    #   <p>The account ID of the member who created the ML input channel.</p>
-    #   @return [String]
     # @!attribute membership_identifier
     #   <p>The membership ID of the membership that contains the ML input channel.</p>
     #   @return [String]
@@ -1404,10 +1405,16 @@ module Aws::CleanRoomsML
     # @!attribute description
     #   <p>The description of the ML input channel.</p>
     #   @return [String]
+    # @!attribute create_time
+    #   <p>The time at which the ML input channel was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The most recent time at which the ML input channel was updated.</p>
+    #   @return [Time]
+    # @!attribute creator_account_id
+    #   <p>The account ID of the member who created the ML input channel.</p>
+    #   @return [String]
     class GetCollaborationMLInputChannelResponse < Struct.new(
-      :create_time,
-      :update_time,
-      :creator_account_id,
       :membership_identifier,
       :collaboration_identifier,
       :ml_input_channel_arn,
@@ -1418,6 +1425,9 @@ module Aws::CleanRoomsML
       :retention_in_days,
       :number_of_records,
       :description,
+      :create_time,
+      :update_time,
+      :creator_account_id,
       keyword_init: true)
       include ::Smithy::Schema::Structure
     end
@@ -1775,23 +1785,11 @@ module Aws::CleanRoomsML
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute create_time
-    #   <p>The time at which the ML input channel was created.</p>
-    #   @return [Time]
-    # @!attribute update_time
-    #   <p>The most recent time at which the ML input channel was updated.</p>
-    #   @return [Time]
     # @!attribute membership_identifier
     #   <p>The membership ID of the membership that contains the ML input channel.</p>
     #   @return [String]
     # @!attribute collaboration_identifier
     #   <p>The collaboration ID of the collaboration that contains the ML input channel.</p>
-    #   @return [String]
-    # @!attribute input_channel
-    #   <p>The input channel that was used to create the ML input channel.</p>
-    #   @return [Types::InputChannel]
-    # @!attribute protected_query_identifier
-    #   <p>The ID of the protected query that was used to create the ML input channel.</p>
     #   @return [String]
     # @!attribute ml_input_channel_arn
     #   <p>The Amazon Resource Name (ARN) of the ML input channel.</p>
@@ -1814,15 +1812,27 @@ module Aws::CleanRoomsML
     # @!attribute number_of_records
     #   <p>The number of records in the ML input channel.</p>
     #   @return [Integer]
+    # @!attribute description
+    #   <p>The description of the ML input channel.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>The time at which the ML input channel was created.</p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>The most recent time at which the ML input channel was updated.</p>
+    #   @return [Time]
+    # @!attribute input_channel
+    #   <p>The input channel that was used to create the ML input channel.</p>
+    #   @return [Types::InputChannel]
+    # @!attribute protected_query_identifier
+    #   <p>The ID of the protected query that was used to create the ML input channel.</p>
+    #   @return [String]
     # @!attribute number_of_files
     #   <p>The number of files in the ML input channel.</p>
     #   @return [Float]
     # @!attribute size_in_gb
     #   <p>The size, in GB, of the ML input channel.</p>
     #   @return [Float]
-    # @!attribute description
-    #   <p>The description of the ML input channel.</p>
-    #   @return [String]
     # @!attribute kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the KMS key that was used to create the ML input channel.</p>
     #   @return [String]
@@ -1830,12 +1840,8 @@ module Aws::CleanRoomsML
     #   <p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>
     #   @return [Hash<String, String>]
     class GetMLInputChannelResponse < Struct.new(
-      :create_time,
-      :update_time,
       :membership_identifier,
       :collaboration_identifier,
-      :input_channel,
-      :protected_query_identifier,
       :ml_input_channel_arn,
       :name,
       :configured_model_algorithm_associations,
@@ -1843,9 +1849,13 @@ module Aws::CleanRoomsML
       :status_details,
       :retention_in_days,
       :number_of_records,
+      :description,
+      :create_time,
+      :update_time,
+      :input_channel,
+      :protected_query_identifier,
       :number_of_files,
       :size_in_gb,
-      :description,
       :kms_key_arn,
       :tags,
       keyword_init: true)
@@ -2811,6 +2821,20 @@ module Aws::CleanRoomsML
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for log redaction.</p>
+    # @!attribute entities_to_redact
+    #   <p>Specifies the entities to be redacted from logs. Entities to redact are "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS","CUSTOM". If CUSTOM is supplied or configured, custom patterns (customDataIdentifiers) should be provided, and the patterns will be redacted in logs or error messages.</p>
+    #   @return [Array<String>]
+    # @!attribute custom_entity_config
+    #   <p>Specifies the configuration for custom entities in the context of log redaction.</p>
+    #   @return [Types::CustomEntityConfig]
+    class LogRedactionConfiguration < Struct.new(
+      :entities_to_redact,
+      :custom_entity_config,
+      keyword_init: true)
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Provides the information necessary for a user to access the logs.</p>
     # @!attribute allowed_account_ids
     #   <p>A list of account IDs that are allowed to access the logs.</p>
@@ -2818,11 +2842,24 @@ module Aws::CleanRoomsML
     # @!attribute filter_pattern
     #   <p>A regular expression pattern that is used to parse the logs and return information that matches the pattern.</p>
     #   @return [String]
+    # @!attribute log_type
+    #   <p>Specifies the type of log this policy applies to. The currently supported policies are ALL or ERROR_SUMMARY.</p>
+    #   @return [String]
+    # @!attribute log_redaction_configuration
+    #   <p>Specifies the log redaction configuration for this policy.</p>
+    #   @return [Types::LogRedactionConfiguration]
     class LogsConfigurationPolicy < Struct.new(
       :allowed_account_ids,
       :filter_pattern,
+      :log_type,
+      :log_redaction_configuration,
       keyword_init: true)
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:log_type] = 'ALL' unless options.key?(:log_type)
+        super
+      end
     end
 
     # <p>Provides summary information about the ML input channel.</p>

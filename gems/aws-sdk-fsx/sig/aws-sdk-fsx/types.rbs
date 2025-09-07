@@ -65,6 +65,7 @@ module Aws::FSx
         ?target_snapshot_values: Types::Snapshot,
         ?total_transfer_bytes: Integer,
         ?remaining_transfer_bytes: Integer,
+        ?message: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -78,6 +79,7 @@ module Aws::FSx
       attr_accessor target_snapshot_values: Types::Snapshot?
       attr_accessor total_transfer_bytes: Integer?
       attr_accessor remaining_transfer_bytes: Integer?
+      attr_accessor message: String?
     end
 
     class AdministrativeActionFailureDetails
@@ -3716,6 +3718,8 @@ module Aws::FSx
       COMPLETED: String
       UPDATED_OPTIMIZING: String
       OPTIMIZING: String
+      PAUSED: String
+      CANCELLED: String
     end
 
     module StorageType

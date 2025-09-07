@@ -19,6 +19,8 @@ module Aws::EKS
     AddonIssue: StructureShape
     AddonIssueCode: EnumShape
     AddonIssueList: ListShape
+    AddonNamespaceConfigRequest: StructureShape
+    AddonNamespaceConfigResponse: StructureShape
     AddonPodIdentityAssociations: StructureShape
     AddonPodIdentityAssociationsList: ListShape
     AddonPodIdentityConfiguration: StructureShape
@@ -125,6 +127,8 @@ module Aws::EKS
     DescribeIdentityProviderConfigResponse: StructureShape
     DescribeInsightRequest: StructureShape
     DescribeInsightResponse: StructureShape
+    DescribeInsightsRefreshRequest: StructureShape
+    DescribeInsightsRefreshResponse: StructureShape
     DescribeNodegroupRequest: StructureShape
     DescribeNodegroupResponse: StructureShape
     DescribePodIdentityAssociationRequest: StructureShape
@@ -174,6 +178,7 @@ module Aws::EKS
     InsightSummaries: ListShape
     InsightSummary: StructureShape
     InsightsFilter: StructureShape
+    InsightsRefreshStatus: EnumShape
     Integer: IntegerShape
     InvalidParameterException: StructureShape
     InvalidRequestException: StructureShape
@@ -267,6 +272,8 @@ module Aws::EKS
     RoleArn: StringShape
     ServerException: StructureShape
     ServiceUnavailableException: StructureShape
+    StartInsightsRefreshRequest: StructureShape
+    StartInsightsRefreshResponse: StructureShape
     StorageConfigRequest: StructureShape
     StorageConfigResponse: StructureShape
     String: StringShape
@@ -323,6 +330,7 @@ module Aws::EKS
     LabelValue: StringShape
     LabelsKeyList: ListShape
     LabelsMap: MapShape
+    Namespace: StringShape
     RequiredClaimsKey: StringShape
     RequiredClaimsMap: MapShape
     RequiredClaimsValue: StringShape

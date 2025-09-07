@@ -661,6 +661,19 @@ module Aws::BedrockRuntime
       attr_accessor prompt_router: Types::PromptRouterTrace?
     end
 
+    class ConverseTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::Message],
+        ?system: Array[Types::SystemContentBlock],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::Message]?
+      attr_accessor system: Array[Types::SystemContentBlock]?
+    end
+
     class ConverseTrace
       include Smithy::Schema::Structure
 
@@ -672,6 +685,50 @@ module Aws::BedrockRuntime
 
       attr_accessor guardrail: Types::GuardrailTraceAssessment?
       attr_accessor prompt_router: Types::PromptRouterTrace?
+    end
+
+    class CountTokensInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?invoke_model: Types::InvokeModelTokensRequest,
+        ?converse: Types::ConverseTokensRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invoke_model: Types::InvokeModelTokensRequest?
+      attr_accessor converse: Types::ConverseTokensRequest?
+
+      class InvokeModel < CountTokensInput
+      end
+      class Converse < CountTokensInput
+      end
+      class Unknown < CountTokensInput
+      end
+    end
+
+    class CountTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?model_id: String,
+        ?input: Types::CountTokensInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor model_id: String?
+      attr_accessor input: Types::CountTokensInput?
+    end
+
+    class CountTokensResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_tokens: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_tokens: Integer?
     end
 
     class DocumentBlock
@@ -1796,6 +1853,17 @@ module Aws::BedrockRuntime
       attr_accessor body: String?
       attr_accessor content_type: String?
       attr_accessor performance_config_latency: String?
+    end
+
+    class InvokeModelTokensRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
     end
 
     class InvokeModelWithBidirectionalStreamInput

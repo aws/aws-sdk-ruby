@@ -556,6 +556,8 @@ module Aws::EKS
     #               an IAM role.</p>
     #            <p>For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html">Attach an IAM Role to an Amazon EKS add-on
     #                   using EKS Pod Identity</a> in the <i>Amazon EKS User Guide</i>.</p>
+    # @option params [Types::AddonNamespaceConfigRequest] :namespace_config
+    #   <p>The namespace configuration for the addon. If specified, this will override the default namespace for the addon.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     cluster_name: "ClusterName", # required
@@ -573,7 +575,10 @@ module Aws::EKS
     #         service_account: "String", # required
     #         role_arn: "String", # required
     #       }
-    #     ]
+    #     ],
+    #     namespace_config: {
+    #       namespace: "namespace"
+    #     }
     #   }
     #   options = {}
     #   response = client.create_addon(params, options)
@@ -608,7 +613,10 @@ module Aws::EKS
     #         product_url: "String"
     #       },
     #       configuration_values: "String",
-    #       pod_identity_associations: ["String"]
+    #       pod_identity_associations: ["String"],
+    #       namespace_config: {
+    #         namespace: "namespace"
+    #       }
     #     }
     #   }
     # @return [Types::CreateAddonResponse]
@@ -1646,7 +1654,10 @@ module Aws::EKS
     #         product_url: "String"
     #       },
     #       configuration_values: "String",
-    #       pod_identity_associations: ["String"]
+    #       pod_identity_associations: ["String"],
+    #       namespace_config: {
+    #         namespace: "namespace"
+    #       }
     #     }
     #   }
     # @return [Types::DeleteAddonResponse]
@@ -2260,7 +2271,10 @@ module Aws::EKS
     #         product_url: "String"
     #       },
     #       configuration_values: "String",
-    #       pod_identity_associations: ["String"]
+    #       pod_identity_associations: ["String"],
+    #       namespace_config: {
+    #         namespace: "namespace"
+    #       }
     #     }
     #   }
     # @return [Types::DescribeAddonResponse]
@@ -2380,7 +2394,8 @@ module Aws::EKS
     #         marketplace_information: {
     #           product_id: "String",
     #           product_url: "String"
-    #         }
+    #         },
+    #         default_namespace: "String"
     #       }
     #     ],
     #     next_token: "String"
@@ -2836,6 +2851,30 @@ module Aws::EKS
     # @return [Types::DescribeInsightResponse]
     def describe_insight(params = {}, options = {})
       request = build_request(:describe_insight, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the status of the latest on-demand cluster insights refresh operation.</p>
+    # @param [Hash, Types::DescribeInsightsRefreshRequest] params
+    # @option params [String] :cluster_name
+    #   <p>The name of the cluster associated with the insights refresh operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_name: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_insights_refresh(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message: "String",
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "FAILED", "COMPLETED"],
+    #     started_at: Time.now,
+    #     ended_at: Time.now
+    #   }
+    # @return [Types::DescribeInsightsRefreshResponse]
+    def describe_insights_refresh(params = {}, options = {})
+      request = build_request(:describe_insights_refresh, params)
       request.send_request(options)
     end
 
@@ -3914,6 +3953,28 @@ module Aws::EKS
     # @return [Types::RegisterClusterResponse]
     def register_cluster(params = {}, options = {})
       request = build_request(:register_cluster, params)
+      request.send_request(options)
+    end
+
+    # <p>Initiates an on-demand refresh operation for cluster insights, getting the latest analysis outside of the standard refresh schedule.</p>
+    # @param [Hash, Types::StartInsightsRefreshRequest] params
+    # @option params [String] :cluster_name
+    #   <p>The name of the cluster for the refresh insights operation.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     cluster_name: "String", # required
+    #   }
+    #   options = {}
+    #   response = client.start_insights_refresh(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     message: "String",
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "FAILED", "COMPLETED"]
+    #   }
+    # @return [Types::StartInsightsRefreshResponse]
+    def start_insights_refresh(params = {}, options = {})
+      request = build_request(:start_insights_refresh, params)
       request.send_request(options)
     end
 

@@ -40,6 +40,7 @@ module Aws::ServiceDiscovery
       def message: () -> String?
       def creator_request_id: () -> String?
       def service_id: () -> String?
+      def service_arn: () -> String?
     end
     class ServiceAttributesLimitExceededException < Smithy::Client::ServiceError
       def message: () -> String?

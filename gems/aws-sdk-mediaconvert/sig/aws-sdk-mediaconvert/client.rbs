@@ -336,7 +336,9 @@ module Aws::MediaConvert
               pid: untyped,
               program_number: untyped,
               rotate: String,
-              sample_range: String
+              sample_range: String,
+              selector_type: String,
+              streams: untyped
             }
           }
         ],
@@ -732,6 +734,7 @@ module Aws::MediaConvert
                         sample_rate: Integer
                       },
                       mp2_settings: {
+                        audio_description_mix: String,
                         bitrate: Integer,
                         channels: Integer,
                         sample_rate: untyped
@@ -1690,7 +1693,9 @@ module Aws::MediaConvert
               pid: untyped,
               program_number: untyped,
               rotate: String,
-              sample_range: String
+              sample_range: String,
+              selector_type: String,
+              streams: untyped
             }
           }
         ],
@@ -2086,6 +2091,7 @@ module Aws::MediaConvert
                         sample_rate: Integer
                       },
                       mp2_settings: {
+                        audio_description_mix: String,
                         bitrate: Integer,
                         channels: Integer,
                         sample_rate: Integer
@@ -2897,6 +2903,7 @@ module Aws::MediaConvert
                 sample_rate: Integer
               },
               mp2_settings: {
+                audio_description_mix: String,
                 bitrate: Integer,
                 channels: Integer,
                 sample_rate: Integer
@@ -3632,6 +3639,14 @@ module Aws::MediaConvert
       ?tags: Hash[String, String]
     ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
 
+    interface _CreateResourceShareResponse
+      include Smithy::Client::_Response[Types::CreateResourceShareResponse]
+    end
+    def create_resource_share: (
+      ?job_id: String,
+      ?support_case_id: String
+    ) -> _CreateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceShareResponse
+
     interface _DeleteJobTemplateResponse
       include Smithy::Client::_Response[Types::DeleteJobTemplateResponse]
     end
@@ -4092,7 +4107,9 @@ module Aws::MediaConvert
               pid: untyped,
               program_number: untyped,
               rotate: String,
-              sample_range: String
+              sample_range: String,
+              selector_type: String,
+              streams: untyped
             }
           }
         ],
@@ -4488,6 +4505,7 @@ module Aws::MediaConvert
                         sample_rate: Integer
                       },
                       mp2_settings: {
+                        audio_description_mix: String,
                         bitrate: Integer,
                         channels: Integer,
                         sample_rate: Integer
@@ -5298,6 +5316,7 @@ module Aws::MediaConvert
                 sample_rate: Integer
               },
               mp2_settings: {
+                audio_description_mix: String,
                 bitrate: Integer,
                 channels: Integer,
                 sample_rate: Integer

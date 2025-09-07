@@ -62,6 +62,8 @@ module Aws::CleanRooms
     AthenaTableName: StringShape
     AthenaTableReference: StructureShape
     AthenaWorkGroup: StringShape
+    AutoApprovedChangeType: EnumShape
+    AutoApprovedChangeTypeList: ListShape
     BatchGetCollaborationAnalysisTemplateError: StructureShape
     BatchGetCollaborationAnalysisTemplateErrorList: ListShape
     BatchGetCollaborationAnalysisTemplateOperationInput: StructureShape
@@ -76,6 +78,15 @@ module Aws::CleanRooms
     BatchGetSchemaOperationOutput: StructureShape
     BilledJobResourceUtilization: StructureShape
     BilledResourceUtilization: StructureShape
+    Change: StructureShape
+    ChangeInput: StructureShape
+    ChangeInputList: ListShape
+    ChangeList: ListShape
+    ChangeRequestStatus: EnumShape
+    ChangeSpecification: UnionShape
+    ChangeSpecificationType: EnumShape
+    ChangeType: EnumShape
+    ChangeTypeList: ListShape
     CleanroomsArn: StringShape
     Collaboration: StructureShape
     CollaborationAnalysisTemplate: StructureShape
@@ -83,6 +94,10 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary: StructureShape
     CollaborationAnalysisTemplateSummaryList: ListShape
     CollaborationArn: StringShape
+    CollaborationChangeRequest: StructureShape
+    CollaborationChangeRequestIdentifier: StringShape
+    CollaborationChangeRequestSummary: StructureShape
+    CollaborationChangeRequestSummaryList: ListShape
     CollaborationConfiguredAudienceModelAssociation: StructureShape
     CollaborationConfiguredAudienceModelAssociationSummary: StructureShape
     CollaborationConfiguredAudienceModelAssociationSummaryList: ListShape
@@ -146,6 +161,8 @@ module Aws::CleanRooms
     ConsolidatedPolicyV1: UnionShape
     CreateAnalysisTemplateOperationInput: StructureShape
     CreateAnalysisTemplateOperationOutput: StructureShape
+    CreateCollaborationChangeRequestInput: StructureShape
+    CreateCollaborationChangeRequestOutput: StructureShape
     CreateCollaborationOperationInput: StructureShape
     CreateCollaborationOperationOutput: StructureShape
     CreateConfiguredAudienceModelAssociationInput: StructureShape
@@ -214,12 +231,16 @@ module Aws::CleanRooms
     DirectAnalysisConfigurationDetails: StructureShape
     DisplayName: StringShape
     Epsilon: IntegerShape
+    ErrorMessageConfiguration: StructureShape
+    ErrorMessageType: EnumShape
     FilterableMemberStatus: StringShape
     GenericResourceName: StringShape
     GetAnalysisTemplateOperationInput: StructureShape
     GetAnalysisTemplateOperationOutput: StructureShape
     GetCollaborationAnalysisTemplateOperationInput: StructureShape
     GetCollaborationAnalysisTemplateOperationOutput: StructureShape
+    GetCollaborationChangeRequestInput: StructureShape
+    GetCollaborationChangeRequestOutput: StructureShape
     GetCollaborationConfiguredAudienceModelAssociationInput: StructureShape
     GetCollaborationConfiguredAudienceModelAssociationOutput: StructureShape
     GetCollaborationIdNamespaceAssociationInput: StructureShape
@@ -292,6 +313,8 @@ module Aws::CleanRooms
     ListAnalysisTemplatesOperationOutput: StructureShape
     ListCollaborationAnalysisTemplatesOperationInput: StructureShape
     ListCollaborationAnalysisTemplatesOperationOutput: StructureShape
+    ListCollaborationChangeRequestsInput: StructureShape
+    ListCollaborationChangeRequestsOutput: StructureShape
     ListCollaborationConfiguredAudienceModelAssociationsInput: StructureShape
     ListCollaborationConfiguredAudienceModelAssociationsOutput: StructureShape
     ListCollaborationIdNamespaceAssociationsInput: StructureShape
@@ -333,6 +356,7 @@ module Aws::CleanRooms
     MaxResults: IntegerShape
     MemberAbilities: ListShape
     MemberAbility: EnumShape
+    MemberChangeSpecification: StructureShape
     MemberList: ListShape
     MemberSpecification: StructureShape
     MemberStatus: StringShape
@@ -385,6 +409,7 @@ module Aws::CleanRooms
     PrivacyImpact: UnionShape
     ProtectedJob: StructureShape
     ProtectedJobAnalysisType: EnumShape
+    ProtectedJobComputeConfiguration: UnionShape
     ProtectedJobConfigurationDetails: UnionShape
     ProtectedJobDirectAnalysisConfigurationDetails: StructureShape
     ProtectedJobError: StructureShape
@@ -411,6 +436,8 @@ module Aws::CleanRooms
     ProtectedJobSummary: StructureShape
     ProtectedJobSummaryList: ListShape
     ProtectedJobType: EnumShape
+    ProtectedJobWorkerComputeConfiguration: StructureShape
+    ProtectedJobWorkerComputeType: EnumShape
     ProtectedQuery: StructureShape
     ProtectedQueryDistributeOutput: StructureShape
     ProtectedQueryDistributeOutputConfiguration: StructureShape

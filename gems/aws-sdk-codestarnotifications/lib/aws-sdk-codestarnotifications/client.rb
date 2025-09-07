@@ -189,7 +189,7 @@ module Aws::Codestarnotifications
     end
 
     # <p>Creates a notification rule for a resource. The rule specifies the events you want
-    #             notifications about and the targets (such as Chatbot topics or Chatbot clients configured for Slack) where you want to receive
+    #             notifications about and the targets (such as Amazon Q Developer in chat applications topics or Amazon Q Developer in chat applications clients configured for Slack) where you want to receive
     #             them.</p>
     # @param [Hash, Types::CreateNotificationRuleRequest] params
     # @option params [String] :name
@@ -201,7 +201,7 @@ module Aws::Codestarnotifications
     #   <p>The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in CodePipeline,
     #         repositories in CodeCommit, and build projects in CodeBuild.</p>
     # @option params [Array<Types::Target>] :targets
-    #   <p>A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the
+    #   <p>A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Amazon Q Developer in chat applications clients to associate with the
     #         notification rule.</p>
     # @option params [String] :detail_type
     #   <p>The level of detail to include in the notifications for this resource. <code>BASIC</code> will include only the 
@@ -276,9 +276,9 @@ module Aws::Codestarnotifications
     # <p>Deletes a specified target for notifications.</p>
     # @param [Hash, Types::DeleteTargetRequest] params
     # @option params [String] :target_address
-    #   <p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.</p>
     # @option params [Boolean] :force_unsubscribe_all
-    #   <p>A Boolean value that can be used to delete all associations with this Chatbot topic. The
+    #   <p>A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic. The
     #               default value is FALSE. If set to TRUE, all associations between that target and every
     #               notification rule in your Amazon Web Services account are deleted.</p>
     # @example Request syntax with placeholder values
@@ -497,14 +497,14 @@ module Aws::Codestarnotifications
       request.send_request(options)
     end
 
-    # <p>Creates an association between a notification rule and an Chatbot topic or Chatbot client so that the
+    # <p>Creates an association between a notification rule and an Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client so that the
     #             associated target can receive notifications when the events described in the rule are
     #             triggered.</p>
     # @param [Hash, Types::SubscribeRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.</p>
     # @option params [Types::Target] :target
-    #   <p>Information about the Chatbot topics or Chatbot clients associated with a  notification rule.</p>
+    #   <p>Information about the Amazon Q Developer in chat applications topics or Amazon Q Developer in chat applications clients associated with a  notification rule.</p>
     # @option params [String] :client_request_token
     #   <p>An enumeration token that, when provided in a request, returns the next batch of the
     #               results.</p>
@@ -558,14 +558,14 @@ module Aws::Codestarnotifications
       request.send_request(options)
     end
 
-    # <p>Removes an association between a notification rule and an Chatbot topic so that
+    # <p>Removes an association between a notification rule and an Amazon Q Developer in chat applications topic so that
     #             subscribers to that topic stop receiving notifications when the events described in the
     #             rule are triggered.</p>
     # @param [Hash, Types::UnsubscribeRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the notification rule.</p>
     # @option params [String] :target_address
-    #   <p>The ARN of the Chatbot topic to unsubscribe from the notification rule.</p>
+    #   <p>The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "NotificationRuleArn", # required

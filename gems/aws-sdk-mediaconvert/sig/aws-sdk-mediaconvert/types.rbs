@@ -1871,6 +1871,28 @@ module Aws::MediaConvert
       attr_accessor queue: Types::Queue?
     end
 
+    class CreateResourceShareRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?support_case_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor support_case_id: String?
+    end
+
+    class CreateResourceShareResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DashAdditionalManifest
       include Smithy::Schema::Structure
 
@@ -3971,6 +3993,7 @@ module Aws::MediaConvert
 
     module HlsIFrameOnlyManifest
       INCLUDE: String
+      INCLUDE_AS_TS: String
       EXCLUDE: String
     end
 
@@ -4470,6 +4493,7 @@ module Aws::MediaConvert
         ?job_engine_version_used: String,
         ?job_percent_complete: Integer,
         ?job_template: String,
+        ?last_share_details: String,
         ?messages: Types::JobMessages,
         ?output_group_details: Array[Types::OutputGroupDetail],
         ?priority: Integer,
@@ -4478,6 +4502,7 @@ module Aws::MediaConvert
         ?retry_count: Integer,
         ?role: String,
         ?settings: Types::JobSettings,
+        ?share_status: String,
         ?simulate_reserved_queue: String,
         ?status: String,
         ?status_update_interval: String,
@@ -4502,6 +4527,7 @@ module Aws::MediaConvert
       attr_accessor job_engine_version_used: String?
       attr_accessor job_percent_complete: Integer?
       attr_accessor job_template: String?
+      attr_accessor last_share_details: String?
       attr_accessor messages: Types::JobMessages?
       attr_accessor output_group_details: Array[Types::OutputGroupDetail]?
       attr_accessor priority: Integer?
@@ -4510,6 +4536,7 @@ module Aws::MediaConvert
       attr_accessor retry_count: Integer?
       attr_accessor role: String?
       attr_accessor settings: Types::JobSettings?
+      attr_accessor share_status: String?
       attr_accessor simulate_reserved_queue: String?
       attr_accessor status: String?
       attr_accessor status_update_interval: String?
@@ -5514,16 +5541,23 @@ module Aws::MediaConvert
       attr_accessor reference: String?
     end
 
+    module Mp2AudioDescriptionMix
+      BROADCASTER_MIXED_AD: String
+      NONE: String
+    end
+
     class Mp2Settings
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?audio_description_mix: String,
         ?bitrate: Integer,
         ?channels: Integer,
         ?sample_rate: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor audio_description_mix: String?
       attr_accessor bitrate: Integer?
       attr_accessor channels: Integer?
       attr_accessor sample_rate: Integer?
@@ -6886,6 +6920,12 @@ module Aws::MediaConvert
       attr_accessor value: String?
     end
 
+    module ShareStatus
+      NOT_SHARED: String
+      INITIATED: String
+      SHARED: String
+    end
+
     module SimulateReservedQueue
       DISABLED: String
       ENABLED: String
@@ -7787,6 +7827,8 @@ module Aws::MediaConvert
         ?program_number: Integer,
         ?rotate: String,
         ?sample_range: String,
+        ?selector_type: String,
+        ?streams: Array[Integer],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7801,6 +7843,13 @@ module Aws::MediaConvert
       attr_accessor program_number: Integer?
       attr_accessor rotate: String?
       attr_accessor sample_range: String?
+      attr_accessor selector_type: String?
+      attr_accessor streams: Array[Integer]?
+    end
+
+    module VideoSelectorType
+      AUTO: String
+      STREAM: String
     end
 
     module VideoTimecodeInsertion

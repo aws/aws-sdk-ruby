@@ -1,0 +1,5 @@
+  module Aws
+    module BCMRecommendedActions
+      VERSION: String
+    end
+  end

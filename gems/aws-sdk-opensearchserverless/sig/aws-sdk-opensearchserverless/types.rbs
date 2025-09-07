@@ -194,6 +194,7 @@ module Aws::OpenSearchServerless
         ?last_modified_date: Integer,
         ?collection_endpoint: String,
         ?dashboard_endpoint: String,
+        ?fips_endpoints: Types::FipsEndpoints,
         ?failure_code: String,
         ?failure_message: String,
       ) -> void
@@ -211,6 +212,7 @@ module Aws::OpenSearchServerless
       attr_accessor last_modified_date: Integer?
       attr_accessor collection_endpoint: String?
       attr_accessor dashboard_endpoint: String?
+      attr_accessor fips_endpoints: Types::FipsEndpoints?
       attr_accessor failure_code: String?
       attr_accessor failure_message: String?
     end
@@ -772,6 +774,19 @@ module Aws::OpenSearchServerless
       attr_accessor resource: String?
       attr_accessor error_message: String?
       attr_accessor error_code: String?
+    end
+
+    class FipsEndpoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_endpoint: String,
+        ?dashboard_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_endpoint: String?
+      attr_accessor dashboard_endpoint: String?
     end
 
     class GetAccessPolicyInput

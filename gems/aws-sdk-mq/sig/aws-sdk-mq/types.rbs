@@ -17,6 +17,7 @@ module Aws::Mq
     module AuthenticationStrategy
       SIMPLE: String
       LDAP: String
+      CONFIG_MANAGED: String
     end
 
     class AvailabilityZone

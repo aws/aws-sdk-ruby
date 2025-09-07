@@ -1032,6 +1032,7 @@ module Aws::RDS
         ?enable_local_write_forwarding: bool,
         ?ca_certificate_identifier: String,
         ?engine_lifecycle_support: String,
+        ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1091,6 +1092,7 @@ module Aws::RDS
       attr_accessor enable_local_write_forwarding: bool?
       attr_accessor ca_certificate_identifier: String?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor master_user_authentication_type: String?
     end
 
     class CreateDBClusterParameterGroupMessage
@@ -1226,6 +1228,7 @@ module Aws::RDS
         ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
         ?engine_lifecycle_support: String,
+        ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1293,6 +1296,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
       attr_accessor engine_lifecycle_support: String?
+      attr_accessor master_user_authentication_type: String?
     end
 
     class CreateDBInstanceReadReplicaMessage
@@ -1458,6 +1462,7 @@ module Aws::RDS
         ?vpc_security_group_ids: Array[String],
         ?target_role: String,
         ?tags: Array[Types::Tag],
+        ?endpoint_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1467,6 +1472,7 @@ module Aws::RDS
       attr_accessor vpc_security_group_ids: Array[String]?
       attr_accessor target_role: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor endpoint_network_type: String?
     end
 
     class CreateDBProxyEndpointResponse
@@ -1494,6 +1500,8 @@ module Aws::RDS
         ?idle_client_timeout: Integer,
         ?debug_logging: bool,
         ?tags: Array[Types::Tag],
+        ?endpoint_network_type: String,
+        ?target_connection_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1507,6 +1515,8 @@ module Aws::RDS
       attr_accessor idle_client_timeout: Integer?
       attr_accessor debug_logging: bool?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor endpoint_network_type: String?
+      attr_accessor target_connection_network_type: String?
     end
 
     class CreateDBProxyResponse
@@ -3234,6 +3244,8 @@ module Aws::RDS
         ?debug_logging: bool,
         ?created_date: Time,
         ?updated_date: Time,
+        ?endpoint_network_type: String,
+        ?target_connection_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3252,6 +3264,8 @@ module Aws::RDS
       attr_accessor debug_logging: bool?
       attr_accessor created_date: Time?
       attr_accessor updated_date: Time?
+      attr_accessor endpoint_network_type: String?
+      attr_accessor target_connection_network_type: String?
     end
 
     class DBProxyAlreadyExistsFault
@@ -3280,6 +3294,7 @@ module Aws::RDS
         ?created_date: Time,
         ?target_role: String,
         ?is_default: bool,
+        ?endpoint_network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3294,6 +3309,7 @@ module Aws::RDS
       attr_accessor created_date: Time?
       attr_accessor target_role: String?
       attr_accessor is_default: bool?
+      attr_accessor endpoint_network_type: String?
     end
 
     class DBProxyEndpointAlreadyExistsFault
@@ -5872,6 +5888,12 @@ module Aws::RDS
       attr_accessor hosted_zone_id: String?
     end
 
+    module EndpointNetworkType
+      IPV4: String
+      IPV6: String
+      DUAL: String
+    end
+
     class EngineDefaults
       include Smithy::Schema::Structure
 
@@ -6878,6 +6900,11 @@ module Aws::RDS
       REQUESTED: String
     end
 
+    module MasterUserAuthenticationType
+      PASSWORD: String
+      IAM_DB_AUTH: String
+    end
+
     class MasterUserSecret
       include Smithy::Schema::Structure
 
@@ -7244,6 +7271,7 @@ module Aws::RDS
         ?aws_backup_recovery_point_arn: String,
         ?enable_limitless_database: bool,
         ?ca_certificate_identifier: String,
+        ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7293,6 +7321,7 @@ module Aws::RDS
       attr_accessor aws_backup_recovery_point_arn: String?
       attr_accessor enable_limitless_database: bool?
       attr_accessor ca_certificate_identifier: String?
+      attr_accessor master_user_authentication_type: String?
     end
 
     class ModifyDBClusterParameterGroupMessage
@@ -7423,6 +7452,7 @@ module Aws::RDS
         ?engine: String,
         ?dedicated_log_volume: bool,
         ?multi_tenant: bool,
+        ?master_user_authentication_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -7487,6 +7517,7 @@ module Aws::RDS
       attr_accessor engine: String?
       attr_accessor dedicated_log_volume: bool?
       attr_accessor multi_tenant: bool?
+      attr_accessor master_user_authentication_type: String?
     end
 
     class ModifyDBInstanceResult
@@ -8228,6 +8259,7 @@ module Aws::RDS
         ?min_storage_throughput_per_iops: Float,
         ?max_storage_throughput_per_iops: Float,
         ?supports_dedicated_log_volume: bool,
+        ?supports_http_endpoint: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -8267,6 +8299,7 @@ module Aws::RDS
       attr_accessor min_storage_throughput_per_iops: Float?
       attr_accessor max_storage_throughput_per_iops: Float?
       attr_accessor supports_dedicated_log_volume: bool?
+      attr_accessor supports_http_endpoint: bool?
     end
 
     class OrderableDBInstanceOptionsMessage
@@ -10494,6 +10527,11 @@ module Aws::RDS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    module TargetConnectionNetworkType
+      IPV4: String
+      IPV6: String
     end
 
     class TargetHealth

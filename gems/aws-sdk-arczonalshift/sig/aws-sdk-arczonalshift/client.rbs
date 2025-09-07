@@ -91,6 +91,7 @@ module Aws::ARCZonalShift
           alarm_identifier: String
         }
       ],
+      ?allowed_windows: Array[String],
       ?outcome_alarms: Array[
         {
           type: String,
@@ -220,6 +221,7 @@ module Aws::ARCZonalShift
           alarm_identifier: String
         }
       ],
+      ?allowed_windows: Array[String],
       ?outcome_alarms: Array[
         {
           type: String,

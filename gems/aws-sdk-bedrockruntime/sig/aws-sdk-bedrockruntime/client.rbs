@@ -473,6 +473,147 @@ module Aws::BedrockRuntime
       }
     ) -> _ConverseStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConverseStreamResponse
 
+    interface _CountTokensResponse
+      include Smithy::Client::_Response[Types::CountTokensResponse]
+      def input_tokens: () -> Integer?
+    end
+    def count_tokens: (
+      ?model_id: String,
+      ?input: {
+        invoke_model: {
+          body: String
+        },
+        converse: {
+          messages: Array[
+            {
+              role: String,
+              content: Array[
+                {
+                  text: String,
+                  image: {
+                    format: String,
+                    source: {
+                      bytes: String,
+                      s3_location: {
+                        uri: String,
+                        bucket_owner: String
+                      }
+                    }
+                  },
+                  document: {
+                    format: String,
+                    name: untyped,
+                    source: {
+                      bytes: untyped,
+                      s3_location: untyped,
+                      text: untyped,
+                      content: Array[
+                        {
+                          text: untyped
+                        }
+                      ]
+                    },
+                    context: untyped,
+                    citations: {
+                      enabled: bool
+                    }
+                  },
+                  video: {
+                    format: String,
+                    source: {
+                      bytes: untyped,
+                      s3_location: untyped
+                    }
+                  },
+                  tool_use: {
+                    tool_use_id: String,
+                    name: String,
+                    input: Smithy::Schema::document
+                  },
+                  tool_result: {
+                    tool_use_id: untyped,
+                    content: Array[
+                      {
+                        json: untyped,
+                        text: untyped,
+                        image: untyped,
+                        document: untyped,
+                        video: untyped
+                      }
+                    ],
+                    status: String
+                  },
+                  guard_content: {
+                    text: {
+                      text: untyped,
+                      qualifiers: Array[String]
+                    },
+                    image: {
+                      format: String,
+                      source: {
+                        bytes: untyped
+                      }
+                    }
+                  },
+                  cache_point: {
+                    type: String
+                  },
+                  reasoning_content: {
+                    reasoning_text: {
+                      text: untyped,
+                      signature: untyped
+                    },
+                    redacted_content: untyped
+                  },
+                  citations_content: {
+                    content: Array[
+                      {
+                        text: untyped
+                      }
+                    ],
+                    citations: Array[
+                      {
+                        title: untyped,
+                        source_content: Array[
+                          {
+                            text: untyped
+                          }
+                        ],
+                        location: {
+                          document_char: {
+                            document_index: Integer,
+                            start: untyped,
+                            end: untyped
+                          },
+                          document_page: {
+                            document_index: untyped,
+                            start: untyped,
+                            end: untyped
+                          },
+                          document_chunk: {
+                            document_index: untyped,
+                            start: untyped,
+                            end: untyped
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          system: Array[
+            {
+              text: String,
+              guard_content: untyped,
+              cache_point: untyped
+            }
+          ]
+        }
+      }
+    ) -> _CountTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CountTokensResponse
+
     interface _GetAsyncInvokeResponse
       include Smithy::Client::_Response[Types::GetAsyncInvokeResponse]
       def invocation_arn: () -> String?

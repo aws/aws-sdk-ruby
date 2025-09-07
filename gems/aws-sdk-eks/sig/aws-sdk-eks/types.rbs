@@ -124,6 +124,7 @@ module Aws::EKS
         ?marketplace_information: Types::MarketplaceInformation,
         ?configuration_values: String,
         ?pod_identity_associations: Array[String],
+        ?namespace_config: Types::AddonNamespaceConfigResponse,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -142,6 +143,7 @@ module Aws::EKS
       attr_accessor marketplace_information: Types::MarketplaceInformation?
       attr_accessor configuration_values: String?
       attr_accessor pod_identity_associations: Array[String]?
+      attr_accessor namespace_config: Types::AddonNamespaceConfigResponse?
     end
 
     class AddonCompatibilityDetail
@@ -178,6 +180,7 @@ module Aws::EKS
         ?publisher: String,
         ?owner: String,
         ?marketplace_information: Types::MarketplaceInformation,
+        ?default_namespace: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -187,6 +190,7 @@ module Aws::EKS
       attr_accessor publisher: String?
       attr_accessor owner: String?
       attr_accessor marketplace_information: Types::MarketplaceInformation?
+      attr_accessor default_namespace: String?
     end
 
     class AddonIssue
@@ -215,6 +219,28 @@ module Aws::EKS
       K8S_RESOURCE_NOT_FOUND: String
       ADDON_SUBSCRIPTION_NEEDED: String
       ADDON_PERMISSION_FAILURE: String
+    end
+
+    class AddonNamespaceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+    end
+
+    class AddonNamespaceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
     end
 
     class AddonPodIdentityAssociations
@@ -801,6 +827,7 @@ module Aws::EKS
         ?tags: Hash[String, String],
         ?configuration_values: String,
         ?pod_identity_associations: Array[Types::AddonPodIdentityAssociations],
+        ?namespace_config: Types::AddonNamespaceConfigRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -813,6 +840,7 @@ module Aws::EKS
       attr_accessor tags: Hash[String, String]?
       attr_accessor configuration_values: String?
       attr_accessor pod_identity_associations: Array[Types::AddonPodIdentityAssociations]?
+      attr_accessor namespace_config: Types::AddonNamespaceConfigRequest?
     end
 
     class CreateAddonResponse
@@ -1517,6 +1545,34 @@ module Aws::EKS
       attr_accessor insight: Types::Insight?
     end
 
+    class DescribeInsightsRefreshRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+    end
+
+    class DescribeInsightsRefreshResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?status: String,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+    end
+
     class DescribeNodegroupRequest
       include Smithy::Schema::Structure
 
@@ -2004,6 +2060,12 @@ module Aws::EKS
       attr_accessor categories: Array[String]?
       attr_accessor kubernetes_versions: Array[String]?
       attr_accessor statuses: Array[String]?
+    end
+
+    module InsightsRefreshStatus
+      IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
     end
 
     class InvalidParameterException
@@ -3100,6 +3162,30 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class StartInsightsRefreshRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+    end
+
+    class StartInsightsRefreshResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor status: String?
     end
 
     class StorageConfigRequest

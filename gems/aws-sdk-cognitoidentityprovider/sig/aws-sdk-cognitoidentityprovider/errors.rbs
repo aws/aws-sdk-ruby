@@ -94,6 +94,9 @@ module Aws::CognitoIdentityProvider
     class SoftwareTokenMFANotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class TermsExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class TierChangeNotAllowedException < Smithy::Client::ServiceError
       def message: () -> String?
     end

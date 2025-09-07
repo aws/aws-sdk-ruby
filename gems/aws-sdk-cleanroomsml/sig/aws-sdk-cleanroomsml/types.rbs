@@ -784,6 +784,17 @@ module Aws::CleanRoomsML
       attr_accessor training_dataset_arn: String?
     end
 
+    class CustomEntityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_data_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_data_identifiers: Array[String]?
+    end
+
     class DataSource
       include Smithy::Schema::Structure
 
@@ -954,6 +965,12 @@ module Aws::CleanRoomsML
       attr_accessor s3_destination: Types::S3ConfigMap?
     end
 
+    module EntityType
+      ALL_PERSONALLY_IDENTIFIABLE_INFORMATION: String
+      NUMBERS: String
+      CUSTOM: String
+    end
+
     class GetAudienceGenerationJobRequest
       include Smithy::Schema::Structure
 
@@ -1107,9 +1124,6 @@ module Aws::CleanRoomsML
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?create_time: Time,
-        ?update_time: Time,
-        ?creator_account_id: String,
         ?membership_identifier: String,
         ?collaboration_identifier: String,
         ?ml_input_channel_arn: String,
@@ -1120,12 +1134,12 @@ module Aws::CleanRoomsML
         ?retention_in_days: Integer,
         ?number_of_records: Integer,
         ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?creator_account_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor create_time: Time?
-      attr_accessor update_time: Time?
-      attr_accessor creator_account_id: String?
       attr_accessor membership_identifier: String?
       attr_accessor collaboration_identifier: String?
       attr_accessor ml_input_channel_arn: String?
@@ -1136,6 +1150,9 @@ module Aws::CleanRoomsML
       attr_accessor retention_in_days: Integer?
       attr_accessor number_of_records: Integer?
       attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor creator_account_id: String?
     end
 
     class GetCollaborationTrainedModelRequest
@@ -1403,12 +1420,8 @@ module Aws::CleanRoomsML
       include Smithy::Schema::Structure
 
       def initialize: (
-        ?create_time: Time,
-        ?update_time: Time,
         ?membership_identifier: String,
         ?collaboration_identifier: String,
-        ?input_channel: Types::InputChannel,
-        ?protected_query_identifier: String,
         ?ml_input_channel_arn: String,
         ?name: String,
         ?configured_model_algorithm_associations: Array[String],
@@ -1416,20 +1429,20 @@ module Aws::CleanRoomsML
         ?status_details: Types::StatusDetails,
         ?retention_in_days: Integer,
         ?number_of_records: Integer,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?input_channel: Types::InputChannel,
+        ?protected_query_identifier: String,
         ?number_of_files: Float,
         ?size_in_gb: Float,
-        ?description: String,
         ?kms_key_arn: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
-      attr_accessor create_time: Time?
-      attr_accessor update_time: Time?
       attr_accessor membership_identifier: String?
       attr_accessor collaboration_identifier: String?
-      attr_accessor input_channel: Types::InputChannel?
-      attr_accessor protected_query_identifier: String?
       attr_accessor ml_input_channel_arn: String?
       attr_accessor name: String?
       attr_accessor configured_model_algorithm_associations: Array[String]?
@@ -1437,9 +1450,13 @@ module Aws::CleanRoomsML
       attr_accessor status_details: Types::StatusDetails?
       attr_accessor retention_in_days: Integer?
       attr_accessor number_of_records: Integer?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor input_channel: Types::InputChannel?
+      attr_accessor protected_query_identifier: String?
       attr_accessor number_of_files: Float?
       attr_accessor size_in_gb: Float?
-      attr_accessor description: String?
       attr_accessor kms_key_arn: String?
       attr_accessor tags: Hash[String, String]?
     end
@@ -1710,7 +1727,6 @@ module Aws::CleanRoomsML
       ML_R6I_LARGE: String
       ML_G5_2XLARGE: String
       ML_M5_LARGE: String
-      ML_P3_16XLARGE: String
       ML_M7I_48XLARGE: String
       ML_M6I_16XLARGE: String
       ML_P2_16XLARGE: String
@@ -1758,7 +1774,6 @@ module Aws::CleanRoomsML
       ML_M6I_2XLARGE: String
       ML_G5_16XLARGE: String
       ML_M7I_4XLARGE: String
-      ML_P3_2XLARGE: String
       ML_R6I_32XLARGE: String
       ML_M6I_4XLARGE: String
       ML_M5_XLARGE: String
@@ -1784,8 +1799,10 @@ module Aws::CleanRoomsML
       ML_P2_8XLARGE: String
       ML_R6I_4XLARGE: String
       ML_M6I_32XLARGE: String
-      ML_P3_8XLARGE: String
       ML_M4_4XLARGE: String
+      ML_P3_16XLARGE: String
+      ML_P3_2XLARGE: String
+      ML_P3_8XLARGE: String
     end
 
     class InferenceOutputConfiguration
@@ -1879,10 +1896,6 @@ module Aws::CleanRoomsML
       ML_P2_XLARGE: String
       ML_P2_8XLARGE: String
       ML_P2_16XLARGE: String
-      ML_P3_2XLARGE: String
-      ML_P3_8XLARGE: String
-      ML_P3_16XLARGE: String
-      ML_P3DN_24XLARGE: String
       ML_P4D_24XLARGE: String
       ML_P4DE_24XLARGE: String
       ML_P5_48XLARGE: String
@@ -1944,6 +1957,54 @@ module Aws::CleanRoomsML
       ML_R5_12XLARGE: String
       ML_R5_16XLARGE: String
       ML_R5_24XLARGE: String
+      ML_C7I_LARGE: String
+      ML_C7I_XLARGE: String
+      ML_C7I_2XLARGE: String
+      ML_C7I_4XLARGE: String
+      ML_C7I_8XLARGE: String
+      ML_C7I_12XLARGE: String
+      ML_C7I_16XLARGE: String
+      ML_C7I_24XLARGE: String
+      ML_C7I_48XLARGE: String
+      ML_M7I_LARGE: String
+      ML_M7I_XLARGE: String
+      ML_M7I_2XLARGE: String
+      ML_M7I_4XLARGE: String
+      ML_M7I_8XLARGE: String
+      ML_M7I_12XLARGE: String
+      ML_M7I_16XLARGE: String
+      ML_M7I_24XLARGE: String
+      ML_M7I_48XLARGE: String
+      ML_R7I_LARGE: String
+      ML_R7I_XLARGE: String
+      ML_R7I_2XLARGE: String
+      ML_R7I_4XLARGE: String
+      ML_R7I_8XLARGE: String
+      ML_R7I_12XLARGE: String
+      ML_R7I_16XLARGE: String
+      ML_R7I_24XLARGE: String
+      ML_R7I_48XLARGE: String
+      ML_G6_XLARGE: String
+      ML_G6_2XLARGE: String
+      ML_G6_4XLARGE: String
+      ML_G6_8XLARGE: String
+      ML_G6_12XLARGE: String
+      ML_G6_16XLARGE: String
+      ML_G6_24XLARGE: String
+      ML_G6_48XLARGE: String
+      ML_G6E_XLARGE: String
+      ML_G6E_2XLARGE: String
+      ML_G6E_4XLARGE: String
+      ML_G6E_8XLARGE: String
+      ML_G6E_12XLARGE: String
+      ML_G6E_16XLARGE: String
+      ML_G6E_24XLARGE: String
+      ML_G6E_48XLARGE: String
+      ML_P5EN_48XLARGE: String
+      ML_P3_2XLARGE: String
+      ML_P3_8XLARGE: String
+      ML_P3_16XLARGE: String
+      ML_P3DN_24XLARGE: String
     end
 
     class InternalServiceException
@@ -2437,17 +2498,39 @@ module Aws::CleanRoomsML
       attr_accessor training_datasets: Array[Types::TrainingDatasetSummary]?
     end
 
+    class LogRedactionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities_to_redact: Array[String],
+        ?custom_entity_config: Types::CustomEntityConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities_to_redact: Array[String]?
+      attr_accessor custom_entity_config: Types::CustomEntityConfig?
+    end
+
+    module LogType
+      ALL: String
+      ERROR_SUMMARY: String
+    end
+
     class LogsConfigurationPolicy
       include Smithy::Schema::Structure
 
       def initialize: (
         ?allowed_account_ids: Array[String],
         ?filter_pattern: String,
+        ?log_type: String,
+        ?log_redaction_configuration: Types::LogRedactionConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor allowed_account_ids: Array[String]?
       attr_accessor filter_pattern: String?
+      attr_accessor log_type: String?
+      attr_accessor log_redaction_configuration: Types::LogRedactionConfiguration?
     end
 
     module LogsStatus

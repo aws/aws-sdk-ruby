@@ -17,6 +17,9 @@ module Aws::Synthetics
     BaseScreenshotIgnoreCoordinates = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates', name: 'BaseScreenshotIgnoreCoordinates', traits: {"smithy.api#length" => {"min" => 0, "max" => 20}})
     BaseScreenshots = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BaseScreenshots', name: 'BaseScreenshots')
     Blob = ::Smithy::Schema::Shapes::BlobShape.new(id: 'com.amazonaws.synthetics#Blob', name: 'Blob', traits: {"smithy.api#length" => {"min" => 1, "max" => 10000000}})
+    BrowserConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#BrowserConfig', name: 'BrowserConfig')
+    BrowserConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#BrowserConfigs', name: 'BrowserConfigs', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    BrowserType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.synthetics#BrowserType', name: 'BrowserType')
     Canaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#Canaries', name: 'Canaries')
     CanariesLastRun = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#CanariesLastRun', name: 'CanariesLastRun')
     Canary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#Canary', name: 'Canary')
@@ -66,10 +69,12 @@ module Aws::Synthetics
     DisassociateResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#DisassociateResourceResponse', name: 'DisassociateResourceResponse')
     DryRunConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#DryRunConfigOutput', name: 'DryRunConfigOutput')
     EncryptionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.synthetics#EncryptionMode', name: 'EncryptionMode')
+    EngineConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#EngineConfig', name: 'EngineConfig')
+    EngineConfigs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#EngineConfigs', name: 'EngineConfigs')
     EnvironmentVariableName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#EnvironmentVariableName', name: 'EnvironmentVariableName', traits: {"smithy.api#pattern" => "^[a-zA-Z]([a-zA-Z0-9_])+$"})
     EnvironmentVariableValue = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#EnvironmentVariableValue', name: 'EnvironmentVariableValue')
     EnvironmentVariablesMap = ::Smithy::Schema::Shapes::MapShape.new(id: 'com.amazonaws.synthetics#EnvironmentVariablesMap', name: 'EnvironmentVariablesMap')
-    EphemeralStorageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.synthetics#EphemeralStorageSize', name: 'EphemeralStorageSize', traits: {"smithy.api#range" => {"min" => 1024, "max" => 5120}})
+    EphemeralStorageSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.synthetics#EphemeralStorageSize', name: 'EphemeralStorageSize', traits: {"smithy.api#range" => {"min" => 1024, "max" => 10240}})
     ErrorMessage = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#ErrorMessage', name: 'ErrorMessage')
     FunctionArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#FunctionArn', name: 'FunctionArn', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2,4}(-[a-z]{2,4})?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"})
     GetCanaryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#GetCanaryRequest', name: 'GetCanaryRequest')
@@ -150,6 +155,8 @@ module Aws::Synthetics
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VisualReferenceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#VisualReferenceInput', name: 'VisualReferenceInput')
     VisualReferenceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#VisualReferenceOutput', name: 'VisualReferenceOutput')
+    VisualReferences = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#VisualReferences', name: 'VisualReferences', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
+    VisualReferencesOutput = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.synthetics#VisualReferencesOutput', name: 'VisualReferencesOutput', traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     VpcConfigInput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#VpcConfigInput', name: 'VpcConfigInput')
     VpcConfigOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.synthetics#VpcConfigOutput', name: 'VpcConfigOutput')
     VpcId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.synthetics#VpcId', name: 'VpcId')
@@ -172,6 +179,11 @@ module Aws::Synthetics
     BaseScreenshot.type = Types::BaseScreenshot
     BaseScreenshotIgnoreCoordinates.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshotConfigIgnoreCoordinate)
     BaseScreenshots.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshot)
+    BrowserConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
+    BrowserConfig.type = Types::BrowserConfig
+    BrowserConfigs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfig)
+    BrowserType.add_member(:chrome, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'CHROME', traits: {"smithy.api#enumValue" => "CHROME"}))
+    BrowserType.add_member(:firefox, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'FIREFOX', traits: {"smithy.api#enumValue" => "FIREFOX"}))
     Canaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Canary)
     CanariesLastRun.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryLastRun)
     Canary.add_member(:id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'Id'))
@@ -190,6 +202,9 @@ module Aws::Synthetics
     Canary.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigOutput, location_name: 'VpcConfig'))
     Canary.add_member(:visual_reference, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceOutput, location_name: 'VisualReference'))
     Canary.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: 'ProvisionedResourceCleanup'))
+    Canary.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: 'BrowserConfigs'))
+    Canary.add_member(:engine_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineConfigs, location_name: 'EngineConfigs'))
+    Canary.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferencesOutput, location_name: 'VisualReferences'))
     Canary.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags'))
     Canary.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigOutput, location_name: 'ArtifactConfig'))
     Canary.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunConfigOutput, location_name: 'DryRunConfig'))
@@ -218,6 +233,7 @@ module Aws::Synthetics
     CanaryRun.add_member(:timeline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryRunTimeline, location_name: 'Timeline'))
     CanaryRun.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ArtifactS3Location'))
     CanaryRun.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryDryRunConfigOutput, location_name: 'DryRunConfig'))
+    CanaryRun.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
     CanaryRun.type = Types::CanaryRun
     CanaryRunConfigInput.add_member(:timeout_in_seconds, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: 'TimeoutInSeconds'))
     CanaryRunConfigInput.add_member(:memory_in_mb, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize3008, location_name: 'MemoryInMB'))
@@ -300,6 +316,7 @@ module Aws::Synthetics
     CreateCanaryRequest.add_member(:vpc_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VpcConfigInput, location_name: 'VpcConfig'))
     CreateCanaryRequest.add_member(:resources_to_replicate_tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceList, location_name: 'ResourcesToReplicateTags'))
     CreateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: 'ProvisionedResourceCleanup'))
+    CreateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: 'BrowserConfigs'))
     CreateCanaryRequest.add_member(:tags, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TagMap, location_name: 'Tags'))
     CreateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: 'ArtifactConfig'))
     CreateCanaryRequest.type = Types::CreateCanaryRequest
@@ -326,6 +343,7 @@ module Aws::Synthetics
     DescribeCanariesLastRunRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken'))
     DescribeCanariesLastRunRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: MaxSize100, location_name: 'MaxResults'))
     DescribeCanariesLastRunRequest.add_member(:names, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DescribeCanariesLastRunNameFilter, location_name: 'Names'))
+    DescribeCanariesLastRunRequest.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
     DescribeCanariesLastRunRequest.type = Types::DescribeCanariesLastRunRequest
     DescribeCanariesLastRunResponse.add_member(:canaries_last_run, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanariesLastRun, location_name: 'CanariesLastRun'))
     DescribeCanariesLastRunResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Token, location_name: 'NextToken'))
@@ -353,6 +371,10 @@ module Aws::Synthetics
     DryRunConfigOutput.type = Types::DryRunConfigOutput
     EncryptionMode.add_member(:sse_s3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SSE_S3', traits: {"smithy.api#enumValue" => "SSE_S3"}))
     EncryptionMode.add_member(:sse_kms, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SSE_KMS', traits: {"smithy.api#enumValue" => "SSE_KMS"}))
+    EngineConfig.add_member(:engine_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FunctionArn, location_name: 'EngineArn'))
+    EngineConfig.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
+    EngineConfig.type = Types::EngineConfig
+    EngineConfigs.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EngineConfig)
     EnvironmentVariablesMap.key = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariableName)
     EnvironmentVariablesMap.value = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
     GetCanaryRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CanaryName, location_name: 'Name', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -453,6 +475,8 @@ module Aws::Synthetics
     StartCanaryDryRunRequest.add_member(:artifact_s3_location, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'ArtifactS3Location'))
     StartCanaryDryRunRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: 'ArtifactConfig'))
     StartCanaryDryRunRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: 'ProvisionedResourceCleanup'))
+    StartCanaryDryRunRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: 'BrowserConfigs'))
+    StartCanaryDryRunRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferences, location_name: 'VisualReferences'))
     StartCanaryDryRunRequest.type = Types::StartCanaryDryRunRequest
     StartCanaryDryRunResponse.add_member(:dry_run_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DryRunConfigOutput, location_name: 'DryRunConfig'))
     StartCanaryDryRunResponse.type = Types::StartCanaryDryRunResponse
@@ -491,16 +515,22 @@ module Aws::Synthetics
     UpdateCanaryRequest.add_member(:artifact_config, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ArtifactConfigInput, location_name: 'ArtifactConfig'))
     UpdateCanaryRequest.add_member(:provisioned_resource_cleanup, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ProvisionedResourceCleanupSetting, location_name: 'ProvisionedResourceCleanup'))
     UpdateCanaryRequest.add_member(:dry_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: UUID, location_name: 'DryRunId'))
+    UpdateCanaryRequest.add_member(:visual_references, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferences, location_name: 'VisualReferences'))
+    UpdateCanaryRequest.add_member(:browser_configs, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserConfigs, location_name: 'BrowserConfigs'))
     UpdateCanaryRequest.type = Types::UpdateCanaryRequest
     UpdateCanaryResponse.type = Types::UpdateCanaryResponse
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     ValidationException.type = Types::ValidationException
     VisualReferenceInput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: 'BaseScreenshots'))
     VisualReferenceInput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'BaseCanaryRunId', traits: {"smithy.api#required" => {}}))
+    VisualReferenceInput.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
     VisualReferenceInput.type = Types::VisualReferenceInput
     VisualReferenceOutput.add_member(:base_screenshots, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BaseScreenshots, location_name: 'BaseScreenshots'))
     VisualReferenceOutput.add_member(:base_canary_run_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: String, location_name: 'BaseCanaryRunId'))
+    VisualReferenceOutput.add_member(:browser_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: BrowserType, location_name: 'BrowserType'))
     VisualReferenceOutput.type = Types::VisualReferenceOutput
+    VisualReferences.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceInput)
+    VisualReferencesOutput.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisualReferenceOutput)
     VpcConfigInput.add_member(:subnet_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SubnetIds, location_name: 'SubnetIds'))
     VpcConfigInput.add_member(:security_group_ids, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: 'SecurityGroupIds'))
     VpcConfigInput.add_member(:ipv6_allowed_for_dual_stack, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NullableBoolean, location_name: 'Ipv6AllowedForDualStack'))

@@ -194,6 +194,7 @@ module Aws::CloudFormation
     HandlerErrorCode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudformation#HandlerErrorCode', name: 'HandlerErrorCode')
     HookFailureMode = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudformation#HookFailureMode', name: 'HookFailureMode')
     HookInvocationCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: 'com.amazonaws.cloudformation#HookInvocationCount', name: 'HookInvocationCount', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
+    HookInvocationId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookInvocationId', name: 'HookInvocationId', traits: {"smithy.api#length" => {"min" => 36, "max" => 36}, "smithy.api#pattern" => "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     HookInvocationPoint = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudformation#HookInvocationPoint', name: 'HookInvocationPoint')
     HookResultId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookResultId', name: 'HookResultId', traits: {"smithy.api#length" => {"min" => 1, "max" => 1600}, "smithy.api#pattern" => "^[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"})
     HookResultNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.cloudformation#HookResultNotFoundException', name: 'HookResultNotFoundException', traits: {"aws.protocols#awsQueryError" => {"code" => "HookResultNotFound", "httpResponseCode" => 404}, "smithy.api#error" => "client", "smithy.api#httpError" => 404})
@@ -204,6 +205,7 @@ module Aws::CloudFormation
     HookTargetType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.cloudformation#HookTargetType', name: 'HookTargetType')
     HookTargetTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookTargetTypeName', name: 'HookTargetTypeName', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}::[a-zA-Z0-9]{2,64}$"})
     HookType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookType', name: 'HookType', traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    HookTypeArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookTypeArn', name: 'HookTypeArn', traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#pattern" => "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/[A-Za-z0-9-]+/?$"})
     HookTypeConfigurationVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookTypeConfigurationVersionId', name: 'HookTypeConfigurationVersionId', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9-]+$"})
     HookTypeName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookTypeName', name: 'HookTypeName', traits: {"smithy.api#length" => {"min" => 10, "max" => 196}})
     HookTypeVersionId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.cloudformation#HookTypeVersionId', name: 'HookTypeVersionId', traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[A-Za-z0-9-]+$"})
@@ -1225,6 +1227,7 @@ module Aws::CloudFormation
     HookResultNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ErrorMessage, location_name: 'Message'))
     HookResultNotFoundException.type = Types::HookResultNotFoundException
     HookResultSummaries.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookResultSummary)
+    HookResultSummary.add_member(:hook_result_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookInvocationId, location_name: 'HookResultId'))
     HookResultSummary.add_member(:invocation_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: 'InvocationPoint'))
     HookResultSummary.add_member(:failure_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookFailureMode, location_name: 'FailureMode'))
     HookResultSummary.add_member(:type_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookTypeName, location_name: 'TypeName'))
@@ -1232,6 +1235,11 @@ module Aws::CloudFormation
     HookResultSummary.add_member(:type_configuration_version_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookTypeConfigurationVersionId, location_name: 'TypeConfigurationVersionId'))
     HookResultSummary.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatus, location_name: 'Status'))
     HookResultSummary.add_member(:hook_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatusReason, location_name: 'HookStatusReason'))
+    HookResultSummary.add_member(:invoked_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Timestamp, location_name: 'InvokedAt'))
+    HookResultSummary.add_member(:target_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHookResultsTargetType, location_name: 'TargetType'))
+    HookResultSummary.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookResultId, location_name: 'TargetId'))
+    HookResultSummary.add_member(:type_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookTypeArn, location_name: 'TypeArn'))
+    HookResultSummary.add_member(:hook_execution_target, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookResultId, location_name: 'HookExecutionTarget'))
     HookResultSummary.type = Types::HookResultSummary
     HookStatus.add_member(:hook_in_progress, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HOOK_IN_PROGRESS', traits: {"smithy.api#enumValue" => "HOOK_IN_PROGRESS"}))
     HookStatus.add_member(:hook_complete_succeeded, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'HOOK_COMPLETE_SUCCEEDED', traits: {"smithy.api#enumValue" => "HOOK_COMPLETE_SUCCEEDED"}))
@@ -1282,8 +1290,10 @@ module Aws::CloudFormation
     ListGeneratedTemplatesOutput.add_member(:summaries, ::Smithy::Schema::Shapes::ShapeRef.new(shape: TemplateSummaries, location_name: 'Summaries'))
     ListGeneratedTemplatesOutput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListGeneratedTemplatesOutput.type = Types::ListGeneratedTemplatesOutput
-    ListHookResultsInput.add_member(:target_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHookResultsTargetType, location_name: 'TargetType', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
-    ListHookResultsInput.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookResultId, location_name: 'TargetId', traits: {"smithy.api#clientOptional" => {}, "smithy.api#required" => {}}))
+    ListHookResultsInput.add_member(:target_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHookResultsTargetType, location_name: 'TargetType'))
+    ListHookResultsInput.add_member(:target_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookResultId, location_name: 'TargetId'))
+    ListHookResultsInput.add_member(:type_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookTypeArn, location_name: 'TypeArn'))
+    ListHookResultsInput.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatus, location_name: 'Status'))
     ListHookResultsInput.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: NextToken, location_name: 'NextToken'))
     ListHookResultsInput.type = Types::ListHookResultsInput
     ListHookResultsOutput.add_member(:target_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListHookResultsTargetType, location_name: 'TargetType'))
@@ -1810,6 +1820,7 @@ module Aws::CloudFormation
     StackEvent.add_member(:hook_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatus, location_name: 'HookStatus'))
     StackEvent.add_member(:hook_status_reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookStatusReason, location_name: 'HookStatusReason'))
     StackEvent.add_member(:hook_invocation_point, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: 'HookInvocationPoint'))
+    StackEvent.add_member(:hook_invocation_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookInvocationId, location_name: 'HookInvocationId'))
     StackEvent.add_member(:hook_failure_mode, ::Smithy::Schema::Shapes::ShapeRef.new(shape: HookFailureMode, location_name: 'HookFailureMode'))
     StackEvent.add_member(:detailed_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DetailedStatus, location_name: 'DetailedStatus'))
     StackEvent.type = Types::StackEvent

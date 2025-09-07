@@ -1074,8 +1074,14 @@ module Aws::Neptune
     #            </p>
     #   @return [String]
     # @!attribute publicly_accessible
-    #   <p>This flag should no longer be used.</p>
-    #   @deprecated
+    #   <p>Indicates whether the DB instance is publicly accessible.</p>
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #         to the DB cluster doesn't permit it.</p>
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute tags
     #   <p>The tags to assign to the new instance.</p>
@@ -2394,8 +2400,14 @@ module Aws::Neptune
     #         multi-AZ support.</p>
     #   @return [String]
     # @!attribute publicly_accessible
-    #   <p>This flag should no longer be used.</p>
-    #   @deprecated
+    #   <p>Indicates whether the DB instance is publicly accessible.</p>
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #         to the DB cluster doesn't permit it.</p>
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute status_infos
     #   <p>The status of a Read Replica. If the instance is not a Read Replica, this is blank.</p>
@@ -5404,8 +5416,14 @@ module Aws::Neptune
     #            </p>
     #   @return [Integer]
     # @!attribute publicly_accessible
-    #   <p>This flag should no longer be used.</p>
-    #   @deprecated
+    #   <p>Indicates whether the DB instance is publicly accessible.</p>
+    #            <p>When the DB instance is publicly accessible and you connect from outside of the DB instance's virtual private 
+    #         cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within 
+    #         the same VPC as the DB instance, the endpoint resolves to the private IP address. Access to the DB instance is 
+    #         ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned 
+    #         to the DB cluster doesn't permit it.</p>
+    #            <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a 
+    #         private IP address.</p>
     #   @return [Boolean]
     # @!attribute monitoring_role_arn
     #   <p>The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to

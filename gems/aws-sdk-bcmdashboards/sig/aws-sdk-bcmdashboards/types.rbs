@@ -1,0 +1,713 @@
+module Aws::BCMDashboards
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CostAndUsageQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[String],
+        ?time_range: Types::DateTimeRange,
+        ?granularity: String,
+        ?group_by: Array[Types::GroupDefinition],
+        ?filter: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[String]?
+      attr_accessor time_range: Types::DateTimeRange?
+      attr_accessor granularity: String?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor filter: Types::Expression?
+    end
+
+    class CostCategoryValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class CreateDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?widgets: Array[Types::Widget],
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor widgets: Array[Types::Widget]?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DashboardReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module DashboardType
+      CUSTOM: String
+    end
+
+    class DateTimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Types::DateTimeValue,
+        ?end_time: Types::DateTimeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Types::DateTimeValue?
+      attr_accessor end_time: Types::DateTimeValue?
+    end
+
+    module DateTimeType
+      ABSOLUTE: String
+      RELATIVE: String
+    end
+
+    class DateTimeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class DeleteDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    module Dimension
+      AZ: String
+      INSTANCE_TYPE: String
+      LINKED_ACCOUNT: String
+      OPERATION: String
+      PURCHASE_TYPE: String
+      REGION: String
+      SERVICE: String
+      USAGE_TYPE: String
+      USAGE_TYPE_GROUP: String
+      RECORD_TYPE: String
+      RESOURCE_ID: String
+      SUBSCRIPTION_ID: String
+      TAG_KEY: String
+      OPERATING_SYSTEM: String
+      TENANCY: String
+      BILLING_ENTITY: String
+      RESERVATION_ID: String
+      COST_CATEGORY_NAME: String
+      DATABASE_ENGINE: String
+      LEGAL_ENTITY_NAME: String
+      SAVINGS_PLANS_TYPE: String
+      INSTANCE_TYPE_FAMILY: String
+      CACHE_ENGINE: String
+      DEPLOYMENT_OPTION: String
+      SCOPE: String
+      PLATFORM: String
+    end
+
+    class DimensionValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class DisplayConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?graph: Hash[String, Types::GraphDisplayConfig],
+        ?table: Types::TableDisplayConfigStruct,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor graph: Hash[String, Types::GraphDisplayConfig]?
+      attr_accessor table: Types::TableDisplayConfigStruct?
+
+      class Graph < DisplayConfig
+      end
+      class Table < DisplayConfig
+      end
+      class Unknown < DisplayConfig
+      end
+    end
+
+    class Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?or: Array[Types::Expression],
+        ?and: Array[Types::Expression],
+        ?not: Types::Expression,
+        ?dimensions: Types::DimensionValues,
+        ?tags: Types::TagValues,
+        ?cost_categories: Types::CostCategoryValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor or: Array[Types::Expression]?
+      attr_accessor and: Array[Types::Expression]?
+      attr_accessor not: Types::Expression?
+      attr_accessor dimensions: Types::DimensionValues?
+      attr_accessor tags: Types::TagValues?
+      attr_accessor cost_categories: Types::CostCategoryValues?
+    end
+
+    class GetDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?type: String,
+        ?widgets: Array[Types::Widget],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor widgets: Array[Types::Widget]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_document: String?
+    end
+
+    module Granularity
+      HOURLY: String
+      DAILY: String
+      MONTHLY: String
+    end
+
+    class GraphDisplayConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?visual_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor visual_type: String?
+    end
+
+    class GroupDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor type: String?
+    end
+
+    module GroupDefinitionType
+      DIMENSION: String
+      TAG: String
+      COST_CATEGORY: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDashboardsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDashboardsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dashboards: Array[Types::DashboardReference],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dashboards: Array[Types::DashboardReference]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    module MatchOption
+      EQUALS: String
+      ABSENT: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+      GREATER_THAN_OR_EQUAL: String
+      CASE_SENSITIVE: String
+      CASE_INSENSITIVE: String
+    end
+
+    module MetricName
+      AmortizedCost: String
+      BlendedCost: String
+      NetAmortizedCost: String
+      NetUnblendedCost: String
+      NormalizedUsageAmount: String
+      UnblendedCost: String
+      UsageQuantity: String
+      SpendCoveredBySavingsPlans: String
+      Hour: String
+      Unit: String
+      Cost: String
+    end
+
+    class QueryParameters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?cost_and_usage: Types::CostAndUsageQuery,
+        ?savings_plans_coverage: Types::SavingsPlansCoverageQuery,
+        ?savings_plans_utilization: Types::SavingsPlansUtilizationQuery,
+        ?reservation_coverage: Types::ReservationCoverageQuery,
+        ?reservation_utilization: Types::ReservationUtilizationQuery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_and_usage: Types::CostAndUsageQuery?
+      attr_accessor savings_plans_coverage: Types::SavingsPlansCoverageQuery?
+      attr_accessor savings_plans_utilization: Types::SavingsPlansUtilizationQuery?
+      attr_accessor reservation_coverage: Types::ReservationCoverageQuery?
+      attr_accessor reservation_utilization: Types::ReservationUtilizationQuery?
+
+      class CostAndUsage < QueryParameters
+      end
+      class SavingsPlansCoverage < QueryParameters
+      end
+      class SavingsPlansUtilization < QueryParameters
+      end
+      class ReservationCoverage < QueryParameters
+      end
+      class ReservationUtilization < QueryParameters
+      end
+      class Unknown < QueryParameters
+      end
+    end
+
+    class ReservationCoverageQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::DateTimeRange,
+        ?group_by: Array[Types::GroupDefinition],
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?metrics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::DateTimeRange?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor metrics: Array[String]?
+    end
+
+    class ReservationUtilizationQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::DateTimeRange,
+        ?group_by: Array[Types::GroupDefinition],
+        ?granularity: String,
+        ?filter: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::DateTimeRange?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class SavingsPlansCoverageQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::DateTimeRange,
+        ?metrics: Array[String],
+        ?granularity: String,
+        ?group_by: Array[Types::GroupDefinition],
+        ?filter: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::DateTimeRange?
+      attr_accessor metrics: Array[String]?
+      attr_accessor granularity: String?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor filter: Types::Expression?
+    end
+
+    class SavingsPlansUtilizationQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_range: Types::DateTimeRange,
+        ?granularity: String,
+        ?filter: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_range: Types::DateTimeRange?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TableDisplayConfigStruct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDashboardRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?widgets: Array[Types::Widget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor widgets: Array[Types::Widget]?
+    end
+
+    class UpdateDashboardResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VisualType
+      LINE: String
+      BAR: String
+      STACK: String
+    end
+
+    class Widget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?width: Integer,
+        ?height: Integer,
+        ?horizontal_offset: Integer,
+        ?configs: Array[Types::WidgetConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor width: Integer?
+      attr_accessor height: Integer?
+      attr_accessor horizontal_offset: Integer?
+      attr_accessor configs: Array[Types::WidgetConfig]?
+    end
+
+    class WidgetConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_parameters: Types::QueryParameters,
+        ?display_config: Types::DisplayConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_parameters: Types::QueryParameters?
+      attr_accessor display_config: Types::DisplayConfig?
+    end
+  end
+end

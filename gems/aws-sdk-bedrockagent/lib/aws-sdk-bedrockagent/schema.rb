@@ -183,6 +183,7 @@ module Aws::BedrockAgent
     FilterPattern = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FilterPattern', name: 'FilterPattern', traits: {"smithy.api#length" => {"min" => 1, "max" => 1000}, "smithy.api#sensitive" => {}})
     FilteredObjectType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FilteredObjectType', name: 'FilteredObjectType', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
     FixedSizeChunkingConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#FixedSizeChunkingConfiguration', name: 'FixedSizeChunkingConfiguration')
+    FlowAgentAliasArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowAgentAliasArn', name: 'FlowAgentAliasArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"})
     FlowAliasArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowAliasArn', name: 'FlowAliasArn', traits: {"smithy.api#pattern" => "^arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}/alias/(TSTALIASID|[0-9a-zA-Z]{10})$"})
     FlowAliasConcurrencyConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#FlowAliasConcurrencyConfiguration', name: 'FlowAliasConcurrencyConfiguration')
     FlowAliasId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowAliasId', name: 'FlowAliasId', traits: {"smithy.api#pattern" => "^(TSTALIASID|[0-9a-zA-Z]{10})$"})
@@ -208,6 +209,10 @@ module Aws::BedrockAgent
     FlowExecutionRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowExecutionRoleArn', name: 'FlowExecutionRoleArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/(service-role/)?.+$"})
     FlowId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowId', name: 'FlowId', traits: {"smithy.api#pattern" => "^[0-9a-zA-Z]{10}$"})
     FlowIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowIdentifier', name: 'FlowIdentifier', traits: {"smithy.api#pattern" => "^(arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10})|([0-9a-zA-Z]{10})$"})
+    FlowKnowledgeBaseId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowKnowledgeBaseId', name: 'FlowKnowledgeBaseId', traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^$|^[0-9a-zA-Z]+$"})
+    FlowLambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowLambdaArn', name: 'FlowLambdaArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:lambda:([a-z]{2,}-){2,}\\d:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"})
+    FlowLexBotAliasArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowLexBotAliasArn', name: 'FlowLexBotAliasArn', traits: {"smithy.api#length" => {"max" => 78}, "smithy.api#pattern" => "^$|^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:lex:([a-z]{2,}-){2,}\\d:\\d{12}:bot-alias/[0-9a-zA-Z]+/[0-9a-zA-Z]+$"})
+    FlowLexBotLocaleId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowLexBotLocaleId', name: 'FlowLexBotLocaleId', traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
     FlowName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowName', name: 'FlowName', traits: {"smithy.api#pattern" => "^([0-9a-zA-Z][_-]?){1,100}$"})
     FlowNode = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#FlowNode', name: 'FlowNode')
     FlowNodeConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: 'com.amazonaws.bedrockagent#FlowNodeConfiguration', name: 'FlowNodeConfiguration')
@@ -223,6 +228,9 @@ module Aws::BedrockAgent
     FlowNodeOutputs = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#FlowNodeOutputs', name: 'FlowNodeOutputs', traits: {"smithy.api#length" => {"max" => 5}})
     FlowNodeType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagent#FlowNodeType', name: 'FlowNodeType')
     FlowNodes = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#FlowNodes', name: 'FlowNodes', traits: {"smithy.api#length" => {"max" => 40}})
+    FlowPromptArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowPromptArn', name: 'FlowPromptArn', traits: {"smithy.api#pattern" => "^$|^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?)$"})
+    FlowPromptModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowPromptModelIdentifier', name: 'FlowPromptModelIdentifier', traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^$|^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"})
+    FlowS3BucketName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#FlowS3BucketName', name: 'FlowS3BucketName', traits: {"smithy.api#length" => {"min" => 0, "max" => 63}, "smithy.api#pattern" => "^$|^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"})
     FlowStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagent#FlowStatus', name: 'FlowStatus')
     FlowSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#FlowSummaries', name: 'FlowSummaries', traits: {"smithy.api#length" => {"max" => 10}})
     FlowSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#FlowSummary', name: 'FlowSummary')
@@ -295,7 +303,7 @@ module Aws::BedrockAgent
     IngestionJobStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagent#IngestionJobStatus', name: 'IngestionJobStatus')
     IngestionJobSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#IngestionJobSummaries', name: 'IngestionJobSummaries')
     IngestionJobSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#IngestionJobSummary', name: 'IngestionJobSummary')
-    InlineCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#InlineCode', name: 'InlineCode', traits: {"smithy.api#length" => {"min" => 1, "max" => 5000000}, "smithy.api#sensitive" => {}})
+    InlineCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#InlineCode', name: 'InlineCode', traits: {"smithy.api#length" => {"min" => 0, "max" => 5000000}, "smithy.api#sensitive" => {}})
     InlineCodeFlowNodeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#InlineCodeFlowNodeConfiguration', name: 'InlineCodeFlowNodeConfiguration')
     InlineContent = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#InlineContent', name: 'InlineContent')
     InlineContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagent#InlineContentType', name: 'InlineContentType')
@@ -317,7 +325,6 @@ module Aws::BedrockAgent
     KnowledgeBaseDocumentDetails = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseDocumentDetails', name: 'KnowledgeBaseDocumentDetails')
     KnowledgeBaseDocuments = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseDocuments', name: 'KnowledgeBaseDocuments', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     KnowledgeBaseFlowNodeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseFlowNodeConfiguration', name: 'KnowledgeBaseFlowNodeConfiguration')
-    KnowledgeBaseId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseId', name: 'KnowledgeBaseId', traits: {"smithy.api#length" => {"max" => 10}, "smithy.api#pattern" => "^[0-9a-zA-Z]+$"})
     KnowledgeBaseModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseModelIdentifier', name: 'KnowledgeBaseModelIdentifier', traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"})
     KnowledgeBaseOrchestrationConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseOrchestrationConfiguration', name: 'KnowledgeBaseOrchestrationConfiguration')
     KnowledgeBasePromptTemplate = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBasePromptTemplate', name: 'KnowledgeBasePromptTemplate')
@@ -331,8 +338,6 @@ module Aws::BedrockAgent
     KnowledgeBaseType = ::Smithy::Schema::Shapes::EnumShape.new(id: 'com.amazonaws.bedrockagent#KnowledgeBaseType', name: 'KnowledgeBaseType')
     LambdaArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#LambdaArn', name: 'LambdaArn', traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"})
     LambdaFunctionFlowNodeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#LambdaFunctionFlowNodeConfiguration', name: 'LambdaFunctionFlowNodeConfiguration')
-    LexBotAliasArn = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#LexBotAliasArn', name: 'LexBotAliasArn', traits: {"smithy.api#length" => {"max" => 78}, "smithy.api#pattern" => "^arn:aws(|-us-gov):lex:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:bot-alias/[0-9a-zA-Z]+/[0-9a-zA-Z]+$"})
-    LexBotLocaleId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.bedrockagent#LexBotLocaleId', name: 'LexBotLocaleId', traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     LexFlowNodeConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#LexFlowNodeConfiguration', name: 'LexFlowNodeConfiguration')
     ListAgentActionGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#ListAgentActionGroupsRequest', name: 'ListAgentActionGroupsRequest')
     ListAgentActionGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.bedrockagent#ListAgentActionGroupsResponse', name: 'ListAgentActionGroupsResponse')
@@ -799,7 +804,7 @@ module Aws::BedrockAgent
     AgentCollaboratorSummary.type = Types::AgentCollaboratorSummary
     AgentDescriptor.add_member(:alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentAliasArn, location_name: 'aliasArn'))
     AgentDescriptor.type = Types::AgentDescriptor
-    AgentFlowNodeConfiguration.add_member(:agent_alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AgentAliasArn, location_name: 'agentAliasArn', traits: {"smithy.api#required" => {}}))
+    AgentFlowNodeConfiguration.add_member(:agent_alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowAgentAliasArn, location_name: 'agentAliasArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     AgentFlowNodeConfiguration.type = Types::AgentFlowNodeConfiguration
     AgentKnowledgeBase.add_member(:agent_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: 'agentId', traits: {"smithy.api#required" => {}}))
     AgentKnowledgeBase.add_member(:agent_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: 'agentVersion', traits: {"smithy.api#required" => {}}))
@@ -1689,8 +1694,8 @@ module Aws::BedrockAgent
     IngestionJobSummary.add_member(:updated_at, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DateTimestamp, location_name: 'updatedAt', traits: {"smithy.api#required" => {}}))
     IngestionJobSummary.add_member(:statistics, ::Smithy::Schema::Shapes::ShapeRef.new(shape: IngestionJobStatistics, location_name: 'statistics'))
     IngestionJobSummary.type = Types::IngestionJobSummary
-    InlineCodeFlowNodeConfiguration.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InlineCode, location_name: 'code', traits: {"smithy.api#required" => {}}))
-    InlineCodeFlowNodeConfiguration.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedLanguages, location_name: 'language', traits: {"smithy.api#required" => {}}))
+    InlineCodeFlowNodeConfiguration.add_member(:code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InlineCode, location_name: 'code', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
+    InlineCodeFlowNodeConfiguration.add_member(:language, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SupportedLanguages, location_name: 'language', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "Python_3", "smithy.api#required" => {}}))
     InlineCodeFlowNodeConfiguration.type = Types::InlineCodeFlowNodeConfiguration
     InlineContent.add_member(:type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: InlineContentType, location_name: 'type', traits: {"smithy.api#required" => {}}))
     InlineContent.add_member(:byte_content, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ByteContentDoc, location_name: 'byteContent'))
@@ -1739,7 +1744,7 @@ module Aws::BedrockAgent
     KnowledgeBaseDocumentDetail.type = Types::KnowledgeBaseDocumentDetail
     KnowledgeBaseDocumentDetails.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KnowledgeBaseDocumentDetail)
     KnowledgeBaseDocuments.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: KnowledgeBaseDocument)
-    KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KnowledgeBaseId, location_name: 'knowledgeBaseId', traits: {"smithy.api#required" => {}}))
+    KnowledgeBaseFlowNodeConfiguration.add_member(:knowledge_base_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowKnowledgeBaseId, location_name: 'knowledgeBaseId', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     KnowledgeBaseFlowNodeConfiguration.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: KnowledgeBaseModelIdentifier, location_name: 'modelId'))
     KnowledgeBaseFlowNodeConfiguration.add_member(:guardrail_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: 'guardrailConfiguration'))
     KnowledgeBaseFlowNodeConfiguration.add_member(:number_of_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'numberOfResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 100}}))
@@ -1781,10 +1786,10 @@ module Aws::BedrockAgent
     KnowledgeBaseType.add_member(:vector, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'VECTOR', traits: {"smithy.api#enumValue" => "VECTOR"}))
     KnowledgeBaseType.add_member(:kendra, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'KENDRA', traits: {"smithy.api#enumValue" => "KENDRA"}))
     KnowledgeBaseType.add_member(:sql, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit, location_name: 'SQL', traits: {"smithy.api#enumValue" => "SQL"}))
-    LambdaFunctionFlowNodeConfiguration.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LambdaArn, location_name: 'lambdaArn', traits: {"smithy.api#required" => {}}))
+    LambdaFunctionFlowNodeConfiguration.add_member(:lambda_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowLambdaArn, location_name: 'lambdaArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     LambdaFunctionFlowNodeConfiguration.type = Types::LambdaFunctionFlowNodeConfiguration
-    LexFlowNodeConfiguration.add_member(:bot_alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexBotAliasArn, location_name: 'botAliasArn', traits: {"smithy.api#required" => {}}))
-    LexFlowNodeConfiguration.add_member(:locale_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: LexBotLocaleId, location_name: 'localeId', traits: {"smithy.api#required" => {}}))
+    LexFlowNodeConfiguration.add_member(:bot_alias_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowLexBotAliasArn, location_name: 'botAliasArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
+    LexFlowNodeConfiguration.add_member(:locale_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowLexBotLocaleId, location_name: 'localeId', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     LexFlowNodeConfiguration.type = Types::LexFlowNodeConfiguration
     ListAgentActionGroupsRequest.add_member(:agent_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Id, location_name: 'agentId', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListAgentActionGroupsRequest.add_member(:agent_version, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Version, location_name: 'agentVersion', traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -2074,13 +2079,13 @@ module Aws::BedrockAgent
     PromptFlowNodeConfiguration.add_member(:source_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptFlowNodeSourceConfiguration, location_name: 'sourceConfiguration', traits: {"smithy.api#required" => {}}))
     PromptFlowNodeConfiguration.add_member(:guardrail_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: GuardrailConfiguration, location_name: 'guardrailConfiguration'))
     PromptFlowNodeConfiguration.type = Types::PromptFlowNodeConfiguration
-    PromptFlowNodeInlineConfiguration.add_member(:template_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptTemplateType, location_name: 'templateType', traits: {"smithy.api#required" => {}}))
+    PromptFlowNodeInlineConfiguration.add_member(:template_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptTemplateType, location_name: 'templateType', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "TEXT", "smithy.api#required" => {}}))
     PromptFlowNodeInlineConfiguration.add_member(:template_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptTemplateConfiguration, location_name: 'templateConfiguration', traits: {"smithy.api#required" => {}}))
-    PromptFlowNodeInlineConfiguration.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptModelIdentifier, location_name: 'modelId', traits: {"smithy.api#required" => {}}))
+    PromptFlowNodeInlineConfiguration.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowPromptModelIdentifier, location_name: 'modelId', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     PromptFlowNodeInlineConfiguration.add_member(:inference_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptInferenceConfiguration, location_name: 'inferenceConfiguration'))
     PromptFlowNodeInlineConfiguration.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Document, location_name: 'additionalModelRequestFields'))
     PromptFlowNodeInlineConfiguration.type = Types::PromptFlowNodeInlineConfiguration
-    PromptFlowNodeResourceConfiguration.add_member(:prompt_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptArn, location_name: 'promptArn', traits: {"smithy.api#required" => {}}))
+    PromptFlowNodeResourceConfiguration.add_member(:prompt_arn, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowPromptArn, location_name: 'promptArn', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     PromptFlowNodeResourceConfiguration.type = Types::PromptFlowNodeResourceConfiguration
     PromptFlowNodeSourceConfiguration.add_member(:resource, Types::PromptFlowNodeSourceConfiguration::Resource, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptFlowNodeResourceConfiguration, location_name: 'resource'))
     PromptFlowNodeSourceConfiguration.add_member(:inline, Types::PromptFlowNodeSourceConfiguration::Inline, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PromptFlowNodeInlineConfiguration, location_name: 'inline'))
@@ -2232,7 +2237,7 @@ module Aws::BedrockAgent
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     RetrievalFlowNodeConfiguration.add_member(:service_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrievalFlowNodeServiceConfiguration, location_name: 'serviceConfiguration', traits: {"smithy.api#required" => {}}))
     RetrievalFlowNodeConfiguration.type = Types::RetrievalFlowNodeConfiguration
-    RetrievalFlowNodeS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: 'bucketName', traits: {"smithy.api#required" => {}}))
+    RetrievalFlowNodeS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowS3BucketName, location_name: 'bucketName', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     RetrievalFlowNodeS3Configuration.type = Types::RetrievalFlowNodeS3Configuration
     RetrievalFlowNodeServiceConfiguration.add_member(:s3, Types::RetrievalFlowNodeServiceConfiguration::S3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RetrievalFlowNodeS3Configuration, location_name: 's3'))
     RetrievalFlowNodeServiceConfiguration.add_member(:unknown, Types::RetrievalFlowNodeServiceConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))
@@ -2326,7 +2331,7 @@ module Aws::BedrockAgent
     StorageConfiguration.type = Types::StorageConfiguration
     StorageFlowNodeConfiguration.add_member(:service_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageFlowNodeServiceConfiguration, location_name: 'serviceConfiguration', traits: {"smithy.api#required" => {}}))
     StorageFlowNodeConfiguration.type = Types::StorageFlowNodeConfiguration
-    StorageFlowNodeS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: S3BucketName, location_name: 'bucketName', traits: {"smithy.api#required" => {}}))
+    StorageFlowNodeS3Configuration.add_member(:bucket_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FlowS3BucketName, location_name: 'bucketName', traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => "", "smithy.api#required" => {}}))
     StorageFlowNodeS3Configuration.type = Types::StorageFlowNodeS3Configuration
     StorageFlowNodeServiceConfiguration.add_member(:s3, Types::StorageFlowNodeServiceConfiguration::S3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StorageFlowNodeS3Configuration, location_name: 's3'))
     StorageFlowNodeServiceConfiguration.add_member(:unknown, Types::StorageFlowNodeServiceConfiguration::Unknown, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit))

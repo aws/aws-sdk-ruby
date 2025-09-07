@@ -209,7 +209,8 @@ module Aws::HealthLake
       },
       ?datastore_id: String,
       ?data_access_role_arn: String,
-      ?client_token: String
+      ?client_token: String,
+      ?validation_level: String
     ) -> _StartFHIRImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFHIRImportJobResponse
 
     interface _TagResourceResponse

@@ -184,6 +184,7 @@ module Aws::EC2
     AttachVpnGatewayResult: StructureShape
     AttachmentEnaSrdSpecification: StructureShape
     AttachmentEnaSrdUdpSpecification: StructureShape
+    AttachmentLimitType: EnumShape
     AttachmentStatus: EnumShape
     AttributeBooleanValue: StructureShape
     AttributeSummary: StructureShape
@@ -487,6 +488,8 @@ module Aws::EC2
     CreateFpgaImageResult: StructureShape
     CreateImageRequest: StructureShape
     CreateImageResult: StructureShape
+    CreateImageUsageReportRequest: StructureShape
+    CreateImageUsageReportResult: StructureShape
     CreateInstanceConnectEndpointRequest: StructureShape
     CreateInstanceConnectEndpointResult: StructureShape
     CreateInstanceEventWindowRequest: StructureShape
@@ -706,6 +709,8 @@ module Aws::EC2
     DeleteFlowLogsResult: StructureShape
     DeleteFpgaImageRequest: StructureShape
     DeleteFpgaImageResult: StructureShape
+    DeleteImageUsageReportRequest: StructureShape
+    DeleteImageUsageReportResult: StructureShape
     DeleteInstanceConnectEndpointRequest: StructureShape
     DeleteInstanceConnectEndpointResult: StructureShape
     DeleteInstanceEventWindowRequest: StructureShape
@@ -987,6 +992,17 @@ module Aws::EC2
     DescribeIdentityIdFormatResult: StructureShape
     DescribeImageAttributeOutput: StructureShape
     DescribeImageAttributeRequest: StructureShape
+    DescribeImageReferencesImageIdStringList: ListShape
+    DescribeImageReferencesMaxResults: IntegerShape
+    DescribeImageReferencesRequest: StructureShape
+    DescribeImageReferencesResult: StructureShape
+    DescribeImageUsageReportEntriesMaxResults: IntegerShape
+    DescribeImageUsageReportEntriesRequest: StructureShape
+    DescribeImageUsageReportEntriesResult: StructureShape
+    DescribeImageUsageReportsImageIdStringList: ListShape
+    DescribeImageUsageReportsMaxResults: IntegerShape
+    DescribeImageUsageReportsRequest: StructureShape
+    DescribeImageUsageReportsResult: StructureShape
     DescribeImagesRequest: StructureShape
     DescribeImagesResult: StructureShape
     DescribeImportImageTasksRequest: StructureShape
@@ -1496,6 +1512,7 @@ module Aws::EC2
     EnclaveOptionsRequest: StructureShape
     EncryptionInTransitSupported: BooleanShape
     EndDateType: EnumShape
+    EndpointIpAddressType: EnumShape
     EndpointSet: ListShape
     EphemeralNvmeSupport: EnumShape
     ErrorSet: ListShape
@@ -1808,8 +1825,32 @@ module Aws::EC2
     ImageProviderRequestList: ListShape
     ImageRecycleBinInfo: StructureShape
     ImageRecycleBinInfoList: ListShape
+    ImageReference: StructureShape
+    ImageReferenceList: ListShape
+    ImageReferenceOptionName: EnumShape
+    ImageReferenceResourceType: EnumShape
     ImageState: EnumShape
     ImageTypeValues: EnumShape
+    ImageUsageReport: StructureShape
+    ImageUsageReportEntry: StructureShape
+    ImageUsageReportEntryList: ListShape
+    ImageUsageReportId: StringShape
+    ImageUsageReportIdStringList: ListShape
+    ImageUsageReportList: ListShape
+    ImageUsageReportState: StringShape
+    ImageUsageReportStateReason: StringShape
+    ImageUsageReportUserIdStringList: ListShape
+    ImageUsageResourceType: StructureShape
+    ImageUsageResourceTypeList: ListShape
+    ImageUsageResourceTypeName: StringShape
+    ImageUsageResourceTypeOption: StructureShape
+    ImageUsageResourceTypeOptionList: ListShape
+    ImageUsageResourceTypeOptionRequest: StructureShape
+    ImageUsageResourceTypeOptionRequestList: ListShape
+    ImageUsageResourceTypeOptionValue: StringShape
+    ImageUsageResourceTypeOptionValuesList: ListShape
+    ImageUsageResourceTypeRequest: StructureShape
+    ImageUsageResourceTypeRequestList: ListShape
     ImdsSupportValues: EnumShape
     ImportClientVpnClientCertificateRevocationListRequest: StructureShape
     ImportClientVpnClientCertificateRevocationListResult: StructureShape
@@ -1865,8 +1906,10 @@ module Aws::EC2
     InstanceBlockDeviceMappingSpecificationList: ListShape
     InstanceBootModeValues: EnumShape
     InstanceCapacity: StructureShape
+    InstanceConnectEndpointDnsNames: StructureShape
     InstanceConnectEndpointId: StringShape
     InstanceConnectEndpointMaxResults: IntegerShape
+    InstanceConnectEndpointPublicDnsNames: StructureShape
     InstanceConnectEndpointSet: ListShape
     InstanceCount: StructureShape
     InstanceCountList: ListShape
@@ -2288,6 +2331,7 @@ module Aws::EC2
     MaxResults2: IntegerShape
     MaxResultsParam: IntegerShape
     MaximumBandwidthInMbps: IntegerShape
+    MaximumEbsAttachments: IntegerShape
     MaximumEfaInterfaces: IntegerShape
     MaximumEnaQueueCount: IntegerShape
     MaximumEnaQueueCountPerInterface: IntegerShape
@@ -2341,6 +2385,8 @@ module Aws::EC2
     ModifyInstanceAttributeRequest: StructureShape
     ModifyInstanceCapacityReservationAttributesRequest: StructureShape
     ModifyInstanceCapacityReservationAttributesResult: StructureShape
+    ModifyInstanceConnectEndpointRequest: StructureShape
+    ModifyInstanceConnectEndpointResult: StructureShape
     ModifyInstanceCpuOptionsRequest: StructureShape
     ModifyInstanceCpuOptionsResult: StructureShape
     ModifyInstanceCreditSpecificationRequest: StructureShape
@@ -2878,6 +2924,12 @@ module Aws::EC2
     ResourceStatement: StructureShape
     ResourceStatementRequest: StructureShape
     ResourceType: EnumShape
+    ResourceTypeOption: StructureShape
+    ResourceTypeOptionList: ListShape
+    ResourceTypeOptionValue: StringShape
+    ResourceTypeOptionValuesList: ListShape
+    ResourceTypeRequest: StructureShape
+    ResourceTypeRequestList: ListShape
     ResponseError: StructureShape
     ResponseHostIdList: ListShape
     ResponseHostIdSet: ListShape
@@ -3216,6 +3268,7 @@ module Aws::EC2
     TotalNeuronMemory: IntegerShape
     TpmSupportValues: EnumShape
     TrafficDirection: EnumShape
+    TrafficIpAddressType: EnumShape
     TrafficMirrorFilter: StructureShape
     TrafficMirrorFilterId: StringShape
     TrafficMirrorFilterIdList: ListShape
@@ -3382,6 +3435,7 @@ module Aws::EC2
     UserIdGroupPair: StructureShape
     UserIdGroupPairList: ListShape
     UserIdGroupPairSet: ListShape
+    UserIdList: ListShape
     UserIdStringList: ListShape
     UserTrustProviderType: EnumShape
     VCpuCount: IntegerShape

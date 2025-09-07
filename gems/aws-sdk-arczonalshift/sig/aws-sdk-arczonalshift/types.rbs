@@ -159,6 +159,7 @@ module Aws::ARCZonalShift
       PRACTICE_BLOCKING_ALARMS_RED: String
       PRACTICE_IN_BLOCKED_DATES: String
       PRACTICE_IN_BLOCKED_WINDOWS: String
+      PRACTICE_OUTSIDE_ALLOWED_WINDOWS: String
     end
 
     class ControlCondition
@@ -186,6 +187,7 @@ module Aws::ARCZonalShift
         ?blocked_windows: Array[String],
         ?blocked_dates: Array[String],
         ?blocking_alarms: Array[Types::ControlCondition],
+        ?allowed_windows: Array[String],
         ?outcome_alarms: Array[Types::ControlCondition],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -194,6 +196,7 @@ module Aws::ARCZonalShift
       attr_accessor blocked_windows: Array[String]?
       attr_accessor blocked_dates: Array[String]?
       attr_accessor blocking_alarms: Array[Types::ControlCondition]?
+      attr_accessor allowed_windows: Array[String]?
       attr_accessor outcome_alarms: Array[Types::ControlCondition]?
     end
 
@@ -421,6 +424,7 @@ module Aws::ARCZonalShift
         ?blocking_alarms: Array[Types::ControlCondition],
         ?outcome_alarms: Array[Types::ControlCondition],
         ?blocked_windows: Array[String],
+        ?allowed_windows: Array[String],
         ?blocked_dates: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -428,6 +432,7 @@ module Aws::ARCZonalShift
       attr_accessor blocking_alarms: Array[Types::ControlCondition]?
       attr_accessor outcome_alarms: Array[Types::ControlCondition]?
       attr_accessor blocked_windows: Array[String]?
+      attr_accessor allowed_windows: Array[String]?
       attr_accessor blocked_dates: Array[String]?
     end
 
@@ -576,6 +581,7 @@ module Aws::ARCZonalShift
         ?blocked_windows: Array[String],
         ?blocked_dates: Array[String],
         ?blocking_alarms: Array[Types::ControlCondition],
+        ?allowed_windows: Array[String],
         ?outcome_alarms: Array[Types::ControlCondition],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -584,6 +590,7 @@ module Aws::ARCZonalShift
       attr_accessor blocked_windows: Array[String]?
       attr_accessor blocked_dates: Array[String]?
       attr_accessor blocking_alarms: Array[Types::ControlCondition]?
+      attr_accessor allowed_windows: Array[String]?
       attr_accessor outcome_alarms: Array[Types::ControlCondition]?
     end
 
@@ -695,6 +702,8 @@ module Aws::ARCZonalShift
       FIS_EXPERIMENT_UPDATE_NOT_ALLOWED: String
       AUTOSHIFT_UPDATE_NOT_ALLOWED: String
       UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE: String
+      INVALID_PRACTICE_ALLOWED_WINDOW: String
+      CONFLICTING_PRACTICE_WINDOWS: String
     end
 
     module ZonalAutoshiftStatus

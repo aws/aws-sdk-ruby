@@ -2079,6 +2079,7 @@ module Aws::QConnect
     UpdateAIPromptRequest.add_member(:visibility_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: VisibilityStatus, location_name: 'visibilityStatus', traits: {"smithy.api#required" => {}}))
     UpdateAIPromptRequest.add_member(:template_configuration, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AIPromptTemplateConfiguration, location_name: 'templateConfiguration'))
     UpdateAIPromptRequest.add_member(:description, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Description, location_name: 'description'))
+    UpdateAIPromptRequest.add_member(:model_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AIPromptModelIdentifier, location_name: 'modelId'))
     UpdateAIPromptRequest.type = Types::UpdateAIPromptRequest
     UpdateAIPromptResponse.add_member(:ai_prompt, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AIPromptData, location_name: 'aiPrompt'))
     UpdateAIPromptResponse.type = Types::UpdateAIPromptResponse

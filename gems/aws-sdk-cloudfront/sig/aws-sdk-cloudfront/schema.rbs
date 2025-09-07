@@ -367,6 +367,7 @@ module Aws::CloudFront
     InvalidationList: StructureShape
     InvalidationSummary: StructureShape
     InvalidationSummaryList: ListShape
+    IpAddressType: EnumShape
     ItemSelection: EnumShape
     KGKeyPairIds: StructureShape
     KGKeyPairIdsList: ListShape

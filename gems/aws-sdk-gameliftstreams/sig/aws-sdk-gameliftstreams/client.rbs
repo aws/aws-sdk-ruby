@@ -412,7 +412,8 @@ module Aws::GameLiftStreams
           on_demand_capacity: Integer
         }
       ],
-      ?description: String
+      ?description: String,
+      ?default_application_identifier: String
     ) -> _UpdateStreamGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStreamGroupResponse
   end
 end

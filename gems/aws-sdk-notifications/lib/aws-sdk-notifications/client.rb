@@ -186,15 +186,12 @@ module Aws::Notifications
       super
     end
 
-    # <p>Associates a delivery <a href="https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html">Channel</a> with a particular <code>NotificationConfiguration</code>. Supported Channels include Chatbot,
-    # the Console Mobile Application, and emails (notifications-contacts).</p>
+    # <p>Associates a delivery <a href="https://docs.aws.amazon.com/notifications/latest/userguide/managing-delivery-channels.html">Channel</a> with a particular <code>NotificationConfiguration</code>. Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>
     # @param [Hash, Types::AssociateChannelRequest] params
     # @option params [String] :arn
-    #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>NotificationConfiguration</code>.</p>
-    #            <p>Supported ARNs include Chatbot, the Console Mobile Application, and notifications-contacts.</p>
+    #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>NotificationConfiguration</code>.</p> <p>Supported ARNs include Amazon Q Developer in chat applications, the Console Mobile Application, and notifications-contacts.</p>
     # @option params [String] :notification_configuration_arn
-    #   <p>The ARN of the <code>NotificationConfiguration</code> to associate with the
-    #            Channel.</p>
+    #   <p>The ARN of the <code>NotificationConfiguration</code> to associate with the Channel.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "ChannelArn", # required
@@ -233,12 +230,10 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Associates an additional Channel with a particular <code>ManagedNotificationConfiguration</code>.</p>
-    #          <p>Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>
+    # <p>Associates an additional Channel with a particular <code>ManagedNotificationConfiguration</code>.</p> <p>Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>
     # @param [Hash, Types::AssociateManagedNotificationAdditionalChannelRequest] params
     # @option params [String] :channel_arn
-    #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p>
-    #            <p>Supported ARNs include Chatbot, the Console Mobile Application, and email (notifications-contacts).</p>
+    #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p> <p>Supported ARNs include Amazon Q Developer in chat applications, the Console Mobile Application, and email (notifications-contacts).</p>
     # @option params [String] :managed_notification_configuration_arn
     #   <p>The Amazon Resource Name (ARN) of the <code>ManagedNotificationConfiguration</code> to associate with the additional Channel.</p>
     # @example Request syntax with placeholder values
@@ -257,28 +252,40 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Creates an <a href="https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html">
-    #                <code>EventRule</code>
-    #             </a> that
-    #          is associated with a specified <code>NotificationConfiguration</code>.</p>
+    # <p>Associates an organizational unit with a notification configuration.</p>
+    # @param [Hash, Types::AssociateOrganizationalUnitRequest] params
+    # @option params [String] :organizational_unit_id
+    #   <p>The unique identifier of the organizational unit to associate.</p>
+    # @option params [String] :notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the notification configuration to associate with the organizational unit.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     organizational_unit_id: "OrganizationalUnitId", # required
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #   }
+    #   options = {}
+    #   response = client.associate_organizational_unit(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AssociateOrganizationalUnitResponse]
+    def associate_organizational_unit(params = {}, options = {})
+      request = build_request(:associate_organizational_unit, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates an <a href="https://docs.aws.amazon.com/notifications/latest/userguide/glossary.html"> <code>EventRule</code> </a> that is associated with a specified <code>NotificationConfiguration</code>.</p>
     # @param [Hash, Types::CreateEventRuleRequest] params
     # @option params [String] :notification_configuration_arn
-    #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> associated
-    #            with this <code>EventRule</code>.</p>
+    #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> associated with this <code>EventRule</code>.</p>
     # @option params [String] :source
-    #   <p>The matched event source.</p>
-    #            <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+    #   <p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     # @option params [String] :event_type
-    #   <p>The event type to match.</p>
-    #            <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+    #   <p>The event type to match.</p> <p>Must match one of the valid Amazon EventBridge event types. For example, EC2 Instance State-change Notification and Amazon CloudWatch Alarm State Change. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     # @option params [String] :event_pattern
-    #   <p>An additional event pattern used to further filter the events this
-    #               <code>EventRule</code> receives.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>
-    #            </p>
+    #   <p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>
     # @option params [Array<String>] :regions
-    #   <p>A list of Amazon Web Services Regions that send events to this
-    #            <code>EventRule</code>.</p>
+    #   <p>A list of Amazon Web Services Regions that send events to this <code>EventRule</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     notification_configuration_arn: "NotificationConfigurationArn", # required
@@ -314,44 +321,7 @@ module Aws::Notifications
     # @option params [String] :description
     #   <p>The description of the <code>NotificationConfiguration</code>.</p>
     # @option params [String] :aggregation_duration
-    #   <p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Values:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>LONG</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Aggregate notifications for long periods of time (12 hours).</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>SHORT</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Aggregate notifications for short periods of time (5 minutes).</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>NONE</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Don't aggregate notifications.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>
     # @option params [Hash<String, String>] :tags
     #   <p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>
     # @example Request syntax with placeholder values
@@ -399,8 +369,7 @@ module Aws::Notifications
     # <p>Deletes a <code>NotificationConfiguration</code>.</p>
     # @param [Hash, Types::DeleteNotificationConfigurationRequest] params
     # @option params [String] :arn
-    #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to
-    #            delete.</p>
+    #   <p>The Amazon Resource Name (ARN) of the <code>NotificationConfiguration</code> to delete.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "NotificationConfigurationArn", # required
@@ -416,13 +385,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p>
-    #          <note>
-    #             <p>You can't deregister the last <code>NotificationHub</code> in the account.
-    #                <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no
-    #             longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access
-    #             to those <code>NotificationEvents</code>.</p>
-    #          </note>
+    # <p>Deregisters a <code>NotificationConfiguration</code> in the specified Region.</p> <note> <p>You can't deregister the last <code>NotificationHub</code> in the account. <code>NotificationEvents</code> stored in the deregistered <code>NotificationConfiguration</code> are no longer be visible. Recreating a new <code>NotificationConfiguration</code> in the same Region restores access to those <code>NotificationEvents</code>.</p> </note>
     # @param [Hash, Types::DeregisterNotificationHubRequest] params
     # @option params [String] :notification_hub_region
     #   <p>The <code>NotificationConfiguration</code> Region.</p>
@@ -462,7 +425,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Disassociates a Channel from a specified <code>NotificationConfiguration</code>. Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>
+    # <p>Disassociates a Channel from a specified <code>NotificationConfiguration</code>. Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>
     # @param [Hash, Types::DisassociateChannelRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the Channel to disassociate.</p>
@@ -506,8 +469,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Disassociates an additional Channel from a particular <code>ManagedNotificationConfiguration</code>.</p>
-    #          <p>Supported Channels include Chatbot, the Console Mobile Application, and emails (notifications-contacts).</p>
+    # <p>Disassociates an additional Channel from a particular <code>ManagedNotificationConfiguration</code>.</p> <p>Supported Channels include Amazon Q Developer in chat applications, the Console Mobile Application, and emails (notifications-contacts).</p>
     # @param [Hash, Types::DisassociateManagedNotificationAdditionalChannelRequest] params
     # @option params [String] :channel_arn
     #   <p>The Amazon Resource Name (ARN) of the Channel to associate with the <code>ManagedNotificationConfiguration</code>.</p>
@@ -526,6 +488,28 @@ module Aws::Notifications
     # @return [Types::DisassociateManagedNotificationAdditionalChannelResponse]
     def disassociate_managed_notification_additional_channel(params = {}, options = {})
       request = build_request(:disassociate_managed_notification_additional_channel, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes the association between an organizational unit and a notification configuration.</p>
+    # @param [Hash, Types::DisassociateOrganizationalUnitRequest] params
+    # @option params [String] :organizational_unit_id
+    #   <p>The unique identifier of the organizational unit to disassociate.</p>
+    # @option params [String] :notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the notification configuration to disassociate from the organizational unit.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     organizational_unit_id: "OrganizationalUnitId", # required
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #   }
+    #   options = {}
+    #   response = client.disassociate_organizational_unit(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DisassociateOrganizationalUnitResponse]
+    def disassociate_organizational_unit(params = {}, options = {})
+      request = build_request(:disassociate_organizational_unit, params)
       request.send_request(options)
     end
 
@@ -778,7 +762,8 @@ module Aws::Notifications
     #     description: "NotificationConfigurationDescription", # required
     #     status: "NotificationConfigurationStatus", # required
     #     creation_time: Time.now, # required
-    #     aggregation_duration: "AggregationDuration"
+    #     aggregation_duration: "AggregationDuration",
+    #     subtype: "NotificationConfigurationSubtype"
     #   }
     # @return [Types::GetNotificationConfigurationResponse]
     def get_notification_configuration(params = {}, options = {})
@@ -786,12 +771,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Returns a specified <code>NotificationEvent</code>.</p>
-    #          <important>
-    #             <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. <code>GetNotificationEvent</code> only returns notifications stored in the same Region in which the action is called.
-    # 	  User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. 
-    # 	  For more information, see <a href="https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p>
-    #          </important>
+    # <p>Returns a specified <code>NotificationEvent</code>.</p> <important> <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. <code>GetNotificationEvent</code> only returns notifications stored in the same Region in which the action is called. User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. For more information, see <a href="https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p> </important>
     # @param [Hash, Types::GetNotificationEventRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the <code>NotificationEvent</code> to return.</p>
@@ -897,7 +877,8 @@ module Aws::Notifications
     #           url: "Url", # required
     #           caption: "TextPartReference", # required
     #         }
-    #       ]
+    #       ],
+    #       organizational_unit_id: "OrganizationalUnitId"
     #     }
     #   }
     # @return [Types::GetNotificationEventResponse]
@@ -916,7 +897,7 @@ module Aws::Notifications
     #   response.to_h #=>
     #   {
     #     notifications_access_for_organization: { # required
-    #       access_status: "ENABLED" # One of: ["ENABLED", "DISABLED", "PENDING"], # required
+    #       access_status: "ENABLED" # One of: ["ENABLED", "DISABLED", "PENDING", "FAILED"], # required
     #     }
     #   }
     # @return [Types::GetNotificationsAccessForOrganizationResponse]
@@ -932,8 +913,7 @@ module Aws::Notifications
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned in this call. The default value is 20.</p>
     # @option params [String] :next_token
-    #   <p>The start token for paginated calls. Retrieved from the response of a previous
-    #            ListNotificationEvents call. <code>NextToken</code> uses Base64 encoding.</p>
+    #   <p>The start token for paginated calls. Retrieved from the response of a previous ListNotificationEvents call. <code>NextToken</code> uses Base64 encoding.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     notification_configuration_arn: "NotificationConfigurationArn", # required
@@ -961,8 +941,7 @@ module Aws::Notifications
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned in this call. The default value is 20.</p>
     # @option params [String] :next_token
-    #   <p>The start token for paginated calls. Retrieved from the response of a previous
-    #               <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
+    #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     notification_configuration_arn: "NotificationConfigurationArn", # required
@@ -1238,79 +1217,71 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Returns a list of abbreviated <code>NotificationConfigurations</code> according to
-    #          specified filters, in reverse chronological order (newest first).</p>
+    # <p>Returns a list of member accounts associated with a notification configuration.</p>
+    # @param [Hash, Types::ListMemberAccountsRequest] params
+    # @option params [String] :notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the notification configuration used to filter the member accounts.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Valid values are 1-100.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
+    # @option params [String] :member_account
+    #   <p>The member account identifier used to filter the results.</p>
+    # @option params [String] :status
+    #   <p>The status used to filter the member accounts.</p>
+    # @option params [String] :organizational_unit_id
+    #   <p>The organizational unit ID used to filter the member accounts.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     member_account: "AccountId",
+    #     status: "MemberAccountNotificationConfigurationStatus",
+    #     organizational_unit_id: "OrganizationalUnitId"
+    #   }
+    #   options = {}
+    #   response = client.list_member_accounts(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     member_accounts: [ # required
+    #       {
+    #         notification_configuration_arn: "NotificationConfigurationArn",
+    #         account_id: "AccountId", # required
+    #         status: "MemberAccountNotificationConfigurationStatus", # required
+    #         status_reason: "String", # required
+    #         organizational_unit_id: "OrganizationalUnitId", # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListMemberAccountsResponse]
+    def list_member_accounts(params = {}, options = {})
+      request = build_request(:list_member_accounts, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of abbreviated <code>NotificationConfigurations</code> according to specified filters, in reverse chronological order (newest first).</p>
     # @param [Hash, Types::ListNotificationConfigurationsRequest] params
     # @option params [String] :event_rule_source
-    #   <p>The matched event source.</p>
-    #            <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+    #   <p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     # @option params [String] :channel_arn
     #   <p>The Amazon Resource Name (ARN) of the Channel to match.</p>
     # @option params [String] :status
-    #   <p>The <code>NotificationConfiguration</code> status to match.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Values:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>ACTIVE</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>PARTIALLY_ACTIVE</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p>
-    #                           </li>
-    #                           <li>
-    #                              <p>Any call can be run.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>INACTIVE</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>All <code>EventRules</code> are <code>INACTIVE</code> and any call can be run.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>DELETING</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>This <code>NotificationConfiguration</code> is being deleted.</p>
-    #                           </li>
-    #                           <li>
-    #                              <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The <code>NotificationConfiguration</code> status to match.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>ACTIVE</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>ACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>PARTIALLY_ACTIVE</code> </p> <ul> <li> <p>Some <code>EventRules</code> are <code>ACTIVE</code> and some are <code>INACTIVE</code>. Any call can be run.</p> </li> <li> <p>Any call can be run.</p> </li> </ul> </li> <li> <p> <code>INACTIVE</code> </p> <ul> <li> <p>All <code>EventRules</code> are <code>INACTIVE</code> and any call can be run.</p> </li> </ul> </li> <li> <p> <code>DELETING</code> </p> <ul> <li> <p>This <code>NotificationConfiguration</code> is being deleted.</p> </li> <li> <p>Only <code>GET</code> and <code>LIST</code> calls can be run.</p> </li> </ul> </li> </ul> </li> </ul>
+    # @option params [String] :subtype
+    #   <p>The subtype used to filter the notification configurations in the request.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned in this call. Defaults to 20.</p>
     # @option params [String] :next_token
-    #   <p>The start token for paginated calls. Retrieved from the response of a previous
-    #               <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
+    #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     event_rule_source: "Source",
     #     channel_arn: "ChannelArn",
     #     status: "NotificationConfigurationStatus",
+    #     subtype: "NotificationConfigurationSubtype",
     #     max_results: 1,
     #     next_token: "NextToken"
     #   }
@@ -1327,7 +1298,8 @@ module Aws::Notifications
     #         description: "NotificationConfigurationDescription", # required
     #         status: "NotificationConfigurationStatus", # required
     #         creation_time: Time.now, # required
-    #         aggregation_duration: "AggregationDuration"
+    #         aggregation_duration: "AggregationDuration",
+    #         subtype: "NotificationConfigurationSubtype"
     #       }
     #     ]
     #   }
@@ -1337,12 +1309,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Returns a list of <code>NotificationEvents</code> according to specified filters, in reverse chronological order (newest first).</p>
-    #          <important>
-    #             <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. ListNotificationEvents only returns notifications stored in the same Region in which the action is called.
-    # 	  User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub.
-    # 	  For more information, see <a href="https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p>
-    #          </important>
+    # <p>Returns a list of <code>NotificationEvents</code> according to specified filters, in reverse chronological order (newest first).</p> <important> <p>User Notifications stores notifications in the individual Regions you register as notification hubs and the Region of the source event rule. ListNotificationEvents only returns notifications stored in the same Region in which the action is called. User Notifications doesn't backfill notifications to new Regions selected as notification hubs. For this reason, we recommend that you make calls in your oldest registered notification hub. For more information, see <a href="https://docs.aws.amazon.com/notifications/latest/userguide/notification-hubs.html">Notification hubs</a> in the <i>Amazon Web Services User Notifications User Guide</i>.</p> </important>
     # @param [Hash, Types::ListNotificationEventsRequest] params
     # @option params [Time] :start_time
     #   <p>The earliest time of events to return from this call.</p>
@@ -1351,18 +1318,17 @@ module Aws::Notifications
     # @option params [String] :locale
     #   <p>The locale code of the language used for the retrieved <code>NotificationEvent</code>. The default locale is English <code>(en_US)</code>.</p>
     # @option params [String] :source
-    #   <p>The matched event source.</p>
-    #            <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+    #   <p>The matched event source.</p> <p>Must match one of the valid EventBridge sources. Only Amazon Web Services service sourced events are supported. For example, <code>aws.ec2</code> and <code>aws.cloudwatch</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-service-event.html#eb-service-event-delivery-level">Event delivery from Amazon Web Services services</a> in the <i>Amazon EventBridge User Guide</i>.</p>
     # @option params [Boolean] :include_child_events
     #   <p>Include aggregated child events in the result.</p>
     # @option params [String] :aggregate_notification_event_arn
-    #   <p>The Amazon Resource Name (ARN) of the <code>aggregatedNotificationEventArn</code> to
-    #            match.</p>
+    #   <p>The Amazon Resource Name (ARN) of the <code>aggregatedNotificationEventArn</code> to match.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to be returned in this call. Defaults to 20.</p>
     # @option params [String] :next_token
-    #   <p>The start token for paginated calls. Retrieved from the response of a previous
-    #               <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
+    #   <p>The start token for paginated calls. Retrieved from the response of a previous <code>ListEventRules</code> call. Next token uses Base64 encoding.</p>
+    # @option params [String] :organizational_unit_id
+    #   <p>The unique identifier of the organizational unit used to filter notification events.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     start_time: Time.now,
@@ -1372,7 +1338,8 @@ module Aws::Notifications
     #     include_child_events: false,
     #     aggregate_notification_event_arn: "NotificationEventArn",
     #     max_results: 1,
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     organizational_unit_id: "OrganizationalUnitId"
     #   }
     #   options = {}
     #   response = client.list_notification_events(params, options)
@@ -1431,7 +1398,8 @@ module Aws::Notifications
     #               sample_values: ["String"]
     #             }
     #           ]
-    #         }
+    #         },
+    #         organizational_unit_id: "OrganizationalUnitId"
     #       }
     #     ]
     #   }
@@ -1476,11 +1444,35 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>
-    #          <note>
-    #             <p>This is only supported for <code>NotificationConfigurations</code>.</p>
-    #          </note>
+    # <p>Returns a list of organizational units associated with a notification configuration.</p>
+    # @param [Hash, Types::ListOrganizationalUnitsRequest] params
+    # @option params [String] :notification_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of the notification configuration used to filter the organizational units.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of organizational units to return in a single call. Valid values are 1-100.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results. Use the value returned in the previous response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     notification_configuration_arn: "NotificationConfigurationArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_organizational_units(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     organizational_units: ["OrganizationalUnitId"], # required
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListOrganizationalUnitsResponse]
+    def list_organizational_units(params = {}, options = {})
+      request = build_request(:list_organizational_units, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns a list of tags for a specified Amazon Resource Name (ARN).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p> <note> <p>This is only supported for <code>NotificationConfigurations</code>.</p> </note>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) to use to list tags.</p>
@@ -1503,9 +1495,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p>
-    #          <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a
-    #          maximum of 3 <code>NotificationHub</code> resources at a time.</p>
+    # <p>Registers a <code>NotificationConfiguration</code> in the specified Region.</p> <p>There is a maximum of one <code>NotificationConfiguration</code> per Region. You can have a maximum of 3 <code>NotificationHub</code> resources at a time.</p>
     # @param [Hash, Types::RegisterNotificationHubRequest] params
     # @option params [String] :notification_hub_region
     #   <p>The Region of the <code>NotificationHub</code>.</p>
@@ -1532,11 +1522,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Tags the resource with a tag key and value.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>
-    #          <note>
-    #             <p>This is only supported for <code>NotificationConfigurations</code>.</p>
-    #          </note>
+    # <p>Tags the resource with a tag key and value.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p> <note> <p>This is only supported for <code>NotificationConfigurations</code>.</p> </note>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) to use to tag a resource.</p>
@@ -1560,8 +1546,7 @@ module Aws::Notifications
       request.send_request(options)
     end
 
-    # <p>Untags a resource with a specified Amazon Resource Name (ARN).</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>
+    # <p>Untags a resource with a specified Amazon Resource Name (ARN).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) to use to untag a resource.</p>
@@ -1588,9 +1573,7 @@ module Aws::Notifications
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) to use to update the <code>EventRule</code>.</p>
     # @option params [String] :event_pattern
-    #   <p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p>
-    #            <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i>
-    #            </p>
+    #   <p>An additional event pattern used to further filter the events this <code>EventRule</code> receives.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide.</i> </p>
     # @option params [Array<String>] :regions
     #   <p>A list of Amazon Web Services Regions that sends events to this <code>EventRule</code>.</p>
     # @example Request syntax with placeholder values
@@ -1628,44 +1611,7 @@ module Aws::Notifications
     # @option params [String] :description
     #   <p>The description of the <code>NotificationConfiguration</code>.</p>
     # @option params [String] :aggregation_duration
-    #   <p>The aggregation preference of the <code>NotificationConfiguration</code>.</p>
-    #            <ul>
-    #               <li>
-    #                  <p>Values:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>LONG</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Aggregate notifications for long periods of time (12 hours).</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>SHORT</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Aggregate notifications for short periods of time (5 minutes).</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>NONE</code>
-    #                        </p>
-    #                        <ul>
-    #                           <li>
-    #                              <p>Don't aggregate notifications.</p>
-    #                           </li>
-    #                        </ul>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The aggregation preference of the <code>NotificationConfiguration</code>.</p> <ul> <li> <p>Values:</p> <ul> <li> <p> <code>LONG</code> </p> <ul> <li> <p>Aggregate notifications for long periods of time (12 hours).</p> </li> </ul> </li> <li> <p> <code>SHORT</code> </p> <ul> <li> <p>Aggregate notifications for short periods of time (5 minutes).</p> </li> </ul> </li> <li> <p> <code>NONE</code> </p> <ul> <li> <p>Don't aggregate notifications.</p> </li> </ul> </li> </ul> </li> </ul>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "NotificationConfigurationArn", # required

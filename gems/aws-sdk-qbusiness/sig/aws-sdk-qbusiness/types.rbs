@@ -4117,6 +4117,7 @@ module Aws::QBusiness
 
     module OutputFormat
       RAW: String
+      EXTRACTED: String
     end
 
     class PermissionCondition

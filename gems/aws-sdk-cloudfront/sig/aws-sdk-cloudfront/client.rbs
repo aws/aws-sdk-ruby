@@ -257,7 +257,8 @@ module Aws::CloudFront
                   items: Array[String]
                 },
                 origin_read_timeout: untyped,
-                origin_keepalive_timeout: untyped
+                origin_keepalive_timeout: untyped,
+                ip_address_type: String
               },
               vpc_origin_config: {
                 vpc_origin_id: untyped,
@@ -550,7 +551,8 @@ module Aws::CloudFront
                     items: Array[String]
                   },
                   origin_read_timeout: untyped,
-                  origin_keepalive_timeout: untyped
+                  origin_keepalive_timeout: untyped,
+                  ip_address_type: String
                 },
                 vpc_origin_config: {
                   vpc_origin_id: untyped,
@@ -2247,7 +2249,8 @@ module Aws::CloudFront
                   items: Array[String]
                 },
                 origin_read_timeout: untyped,
-                origin_keepalive_timeout: untyped
+                origin_keepalive_timeout: untyped,
+                ip_address_type: String
               },
               vpc_origin_config: {
                 vpc_origin_id: untyped,

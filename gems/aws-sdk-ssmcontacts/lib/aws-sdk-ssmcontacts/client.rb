@@ -262,8 +262,21 @@ module Aws::SSMContacts
     # @option params [String] :display_name
     #   <p>The full name of the contact or escalation plan.</p>
     # @option params [String] :type
-    #   <p>To create an escalation plan use <code>ESCALATION</code>. To create a contact use
-    #               <code>PERSONAL</code>.</p>
+    #   <p>The type of contact to create.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>PERSONAL</code>: A single, individual contact.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ESCALATION</code>: An escalation plan.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ONCALL_SCHEDULE</code>: An on-call schedule.</p>
+    #               </li>
+    #            </ul>
     # @option params [Types::Plan] :plan
     #   <p>A list of stages. A contact has an engagement plan with stages that contact specified
     #            contact channels. An escalation plan uses stages that contact specified contacts.</p>
@@ -396,6 +409,11 @@ module Aws::SSMContacts
     #   <p>The name of the rotation.</p>
     # @option params [Array<String>] :contact_ids
     #   <p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p>
+    #            <note>
+    #               <p>Only the <code>PERSONAL</code> contact type is supported. The contact types
+    #                  <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this
+    #               operation. </p>
+    #            </note>
     #            <p>The order that you list the contacts in is their shift order in the rotation schedule.
     #            To change the order of the contact's shifts, use the <a>UpdateRotation</a>
     #            operation.</p>
@@ -408,7 +426,7 @@ module Aws::SSMContacts
     #               Database</a> on the IANA website.</p>
     #            <note>
     #               <p>Designators for time zones that don’t support Daylight Savings Time rules, such as
-    #               Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported.</p>
+    #               Pacific Standard Time (PST), are not supported.</p>
     #            </note>
     # @option params [Types::RecurrenceSettings] :recurrence
     #   <p>Information about the rule that specifies when a shift's team members rotate.</p>
@@ -546,10 +564,11 @@ module Aws::SSMContacts
       request.send_request(options)
     end
 
-    # <p>To remove a contact from Incident Manager, you can delete the contact. Deleting a contact
-    #          removes them from all escalation plans and related response plans. Deleting an escalation
-    #          plan removes it from all related response plans. You will have to recreate the contact and
-    #          its contact channels before you can use it again.</p>
+    # <p>To remove a contact from Incident Manager, you can delete the contact. However, deleting a
+    #          contact does not remove it from escalation plans and related response plans. Deleting an
+    #          escalation plan also does not remove it from all related response plans. To modify an
+    #          escalation plan, we recommend using the <a>UpdateContact</a> action to specify a
+    #          different existing contact.</p>
     # @param [Hash, Types::DeleteContactRequest] params
     # @option params [String] :contact_id
     #   <p>The Amazon Resource Name (ARN) of the contact that you're deleting.</p>
@@ -568,10 +587,11 @@ module Aws::SSMContacts
       request.send_request(options)
     end
 
-    # <p>To no longer receive engagements on a contact channel, you can delete the channel from a
-    #          contact. Deleting the contact channel removes it from the contact's engagement plan. If you
-    #          delete the only contact channel for a contact, you won't be able to engage that contact
-    #          during an incident.</p>
+    # <p>To stop receiving engagements on a contact channel, you can delete the channel from a
+    #          contact. Deleting the contact channel does not remove it from the contact's engagement
+    #          plan, but the stage that includes the channel will be ignored. If you delete the only
+    #          contact channel for a contact, you'll no longer be able to engage that contact during an
+    #          incident.</p>
     # @param [Hash, Types::DeleteContactChannelRequest] params
     # @option params [String] :contact_channel_id
     #   <p>The Amazon Resource Name (ARN) of the contact channel.</p>
@@ -937,8 +957,7 @@ module Aws::SSMContacts
     # @option params [String] :alias_prefix
     #   <p>Used to list only contacts who's aliases start with the specified prefix.</p>
     # @option params [String] :type
-    #   <p>The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is
-    #            type <code>ESCALATION</code>.</p>
+    #   <p>The type of contact.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "PaginationToken",
@@ -1442,10 +1461,11 @@ module Aws::SSMContacts
       request.send_request(options)
     end
 
-    # <p>Lists the tags of an escalation plan or contact.</p>
+    # <p>Lists the tags of a contact, escalation plan, rotation, or on-call schedule.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>
+    #   <p>The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or on-call
+    #            schedule.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "AmazonResourceName", # required
@@ -1712,6 +1732,11 @@ module Aws::SSMContacts
     #   <p>The Amazon Resource Name (ARN) of the rotation to update.</p>
     # @option params [Array<String>] :contact_ids
     #   <p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p>
+    #            <note>
+    #               <p>Only the <code>PERSONAL</code> contact type is supported. The contact types
+    #                  <code>ESCALATION</code> and <code>ONCALL_SCHEDULE</code> are not supported for this
+    #               operation. </p>
+    #            </note>
     #            <p>The order in which you list the contacts is their shift order in the rotation
     #            schedule.</p>
     # @option params [Time] :start_time
@@ -1723,7 +1748,7 @@ module Aws::SSMContacts
     #               Database</a> on the IANA website.</p>
     #            <note>
     #               <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as
-    #               Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't supported.</p>
+    #               Pacific Standard Time (PST), aren't supported.</p>
     #            </note>
     # @option params [Types::RecurrenceSettings] :recurrence
     #   <p>Information about how long the updated rotation lasts before restarting at the beginning

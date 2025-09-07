@@ -190,7 +190,7 @@ module Aws::PCS
     #   <p>The provisioning status of the compute node group.</p> <note> <p>The provisioning status doesn't indicate the overall health of the compute node group.</p> </note> <important> <p>The resource enters the <code>SUSPENDING</code> and <code>SUSPENDED</code> states when the scheduler is beyond end of life and we have suspended the cluster. When in these states, you can't use the cluster. The cluster controller is down and all compute instances are terminated. The resources still count toward your service quotas. You can delete a resource if its status is <code>SUSPENDED</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions_faq.html">Frequently asked questions about Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> </important>
     #   @return [String]
     # @!attribute ami_id
-    #   <p>The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to launch instances. If not provided, Amazon Web Services PCS uses the AMI ID specified in the custom launch template.</p>
+    #   <p>The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If not provided, PCS uses the AMI ID specified in the custom launch template.</p>
     #   @return [String]
     # @!attribute subnet_ids
     #   <p>The list of subnet IDs where instances are provisioned by the compute node group. The subnets must be in the same VPC as the cluster.</p>
@@ -199,10 +199,10 @@ module Aws::PCS
     #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
-    #   <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     #   @return [Types::CustomLaunchTemplate]
     # @!attribute iam_instance_profile_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission. The resource identifier of the ARN must start with <code>AWSPCS</code> or it must have <code>/aws-pcs/</code> in its path.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1</code> </p> </li> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2</code> </p> </li> </ul>
+    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     #   @return [String]
     # @!attribute scaling_configuration
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
@@ -371,7 +371,7 @@ module Aws::PCS
     #   <p>A name to identify the cluster. Example: <code>MyCluster</code> </p>
     #   @return [String]
     # @!attribute ami_id
-    #   <p> The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to launch compute nodes (Amazon EC2 instances). If you don't provide this value, Amazon Web Services PCS uses the AMI ID specified in the custom launch template.</p>
+    #   <p> The ID of the Amazon Machine Image (AMI) that PCS uses to launch compute nodes (Amazon EC2 instances). If you don't provide this value, PCS uses the AMI ID specified in the custom launch template.</p>
     #   @return [String]
     # @!attribute subnet_ids
     #   <p>The list of subnet IDs where the compute node group launches instances. Subnets must be in the same VPC as the cluster.</p>
@@ -380,10 +380,10 @@ module Aws::PCS
     #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
     #   @return [String]
     # @!attribute custom_launch_template
-    #   <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     #   @return [Types::CustomLaunchTemplate]
     # @!attribute iam_instance_profile_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission. The resource identifier of the ARN must start with <code>AWSPCS</code> or it must have <code>/aws-pcs/</code> in its path.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1</code> </p> </li> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2</code> </p> </li> </ul>
+    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     #   @return [String]
     # @!attribute scaling_configuration
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
@@ -464,7 +464,7 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    # <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     # @!attribute id
     #   <p>The ID of the EC2 launch template to use to provision instances.</p> <p> Example: <code>lt-xxxx</code> </p>
     #   @return [String]
@@ -642,9 +642,9 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An EC2 instance configuration Amazon Web Services PCS uses to launch compute nodes.</p>
+    # <p>An EC2 instance configuration PCS uses to launch compute nodes.</p>
     # @!attribute instance_type
-    #   <p>The EC2 instance type that Amazon Web Services PCS can provision in the compute node group.</p> <p> Example: <code>t2.xlarge</code> </p>
+    #   <p>The EC2 instance type that PCS can provision in the compute node group.</p> <p> Example: <code>t2.xlarge</code> </p>
     #   @return [String]
     class InstanceConfig < Struct.new(
       :instance_type,
@@ -652,7 +652,7 @@ module Aws::PCS
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Amazon Web Services PCS can't process your request right now. Try again later.</p>
+    # <p>PCS can't process your request right now. Try again later.</p>
     # @!attribute message
     #   @return [String]
     class InternalServerException < Struct.new(
@@ -767,7 +767,7 @@ module Aws::PCS
 
     # <p>The networking configuration for the cluster's control plane.</p>
     # @!attribute subnet_ids
-    #   <p>The ID of the subnet where Amazon Web Services PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and Amazon Web Services PCS resources. The subnet must have an available IP address, cannot reside in AWS Outposts, AWS Wavelength, or an AWS Local Zone.</p> <p> Example: <code>subnet-abcd1234</code> </p>
+    #   <p>The ID of the subnet where PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and PCS resources. The subnet must have an available IP address, cannot reside in Outposts, Wavelength, or an Amazon Web Services Local Zone.</p> <p> Example: <code>subnet-abcd1234</code> </p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
     #   <p>The list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.</p> <p>The following rules are required:</p> <ul> <li> <p>Inbound rule 1</p> <ul> <li> <p>Protocol: All</p> </li> <li> <p>Ports: All</p> </li> <li> <p>Source: Self</p> </li> </ul> </li> <li> <p>Outbound rule 1</p> <ul> <li> <p>Protocol: All</p> </li> <li> <p>Ports: All</p> </li> <li> <p>Destination: 0.0.0.0/0 (IPv4) or ::/0 (IPv6)</p> </li> </ul> </li> <li> <p>Outbound rule 2</p> <ul> <li> <p>Protocol: All</p> </li> <li> <p>Ports: All</p> </li> <li> <p>Destination: Self</p> </li> </ul> </li> </ul>
@@ -966,10 +966,10 @@ module Aws::PCS
 
     # <p>The cluster management and job scheduling software associated with the cluster.</p>
     # @!attribute type
-    #   <p>The software Amazon Web Services PCS uses to manage cluster scaling and job scheduling.</p>
+    #   <p>The software PCS uses to manage cluster scaling and job scheduling.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in Amazon Web Services PCS</a> in the <i>Amazon Web Services PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
+    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
     #   @return [String]
     class Scheduler < Struct.new(
       :type,
@@ -980,10 +980,10 @@ module Aws::PCS
 
     # <p>The cluster management and job scheduling software associated with the cluster.</p>
     # @!attribute type
-    #   <p>The software Amazon Web Services PCS uses to manage cluster scaling and job scheduling.</p>
+    #   <p>The software PCS uses to manage cluster scaling and job scheduling.</p>
     #   @return [String]
     # @!attribute version
-    #   <p>The version of the specified scheduling software that Amazon Web Services PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in Amazon Web Services PCS</a> in the <i>Amazon Web Services PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
+    #   <p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11</code> </p>
     #   @return [String]
     class SchedulerRequest < Struct.new(
       :type,
@@ -1033,7 +1033,7 @@ module Aws::PCS
 
     # <p>Additional settings that directly map to Slurm settings.</p>
     # @!attribute parameter_name
-    #   <p>Amazon Web Services PCS supports configuration of the following Slurm parameters:</p> <ul> <li> <p>For <b>clusters</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1"> <code>Prolog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1"> <code>Epilog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters"> <code>SelectTypeParameters</code> </a> </p> </li> </ul> </li> <li> <p>For <b>compute node groups</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>Weight</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>RealMemory</code> </a> </p> </li> </ul> </li> </ul>
+    #   <p>PCS supports configuration of the following Slurm parameters:</p> <ul> <li> <p>For <b>clusters</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1"> <code>Prolog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1"> <code>Epilog</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters"> <code>SelectTypeParameters</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_AccountingStorageEnforce"> <code>AccountingStorageEnforce</code> </a> </p> <important> <p>PCS supports a subset of the options for <code>AccountingStorageEnforce</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/slurm-accounting.html">Slurm accounting in PCS</a> in the <i>PCS User Guide</i>.</p> </important> </li> </ul> </li> <li> <p>For <b>compute node groups</b> </p> <ul> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>Weight</code> </a> </p> </li> <li> <p> <a href="https://slurm.schedmd.com/slurm.conf.html#OPT_Weight"> <code>RealMemory</code> </a> </p> </li> </ul> </li> </ul>
     #   @return [String]
     # @!attribute parameter_value
     #   <p>The values for the configured Slurm settings.</p>
@@ -1101,13 +1101,13 @@ module Aws::PCS
     #   <p>The name or ID of the compute node group.</p>
     #   @return [String]
     # @!attribute ami_id
-    #   <p>The ID of the Amazon Machine Image (AMI) that Amazon Web Services PCS uses to launch instances. If not provided, Amazon Web Services PCS uses the AMI ID specified in the custom launch template.</p>
+    #   <p>The ID of the Amazon Machine Image (AMI) that PCS uses to launch instances. If not provided, PCS uses the AMI ID specified in the custom launch template.</p>
     #   @return [String]
     # @!attribute subnet_ids
     #   <p>The list of subnet IDs where the compute node group provisions instances. The subnets must be in the same VPC as the cluster.</p>
     #   @return [Array<String>]
     # @!attribute custom_launch_template
-    #   <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
+    #   <p>An Amazon EC2 launch template PCS uses to launch compute nodes.</p>
     #   @return [Types::CustomLaunchTemplate]
     # @!attribute purchase_option
     #   <p>Specifies how EC2 instances are purchased on your behalf. Amazon Web Services PCS supports On-Demand and Spot instances. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html">Instance purchasing options</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. If you don't provide this option, it defaults to On-Demand.</p>
@@ -1119,7 +1119,7 @@ module Aws::PCS
     #   <p>Specifies the boundaries of the compute node group auto scaling.</p>
     #   @return [Types::ScalingConfigurationRequest]
     # @!attribute iam_instance_profile_arn
-    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission. The resource identifier of the ARN must start with <code>AWSPCS</code> or it must have <code>/aws-pcs/</code> in its path.</p> <p class="title"> <b>Examples</b> </p> <ul> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1</code> </p> </li> <li> <p> <code>arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2</code> </p> </li> </ul>
+    #   <p>The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have the <code>pcs:RegisterComputeNodeGroupInstance</code> permission and the role name must start with <code>AWSPCS</code> or must have the path <code>/aws-pcs/</code>. For more information, see <a href="https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html">IAM instance profiles for PCS</a> in the <i>PCS User Guide</i>.</p>
     #   @return [String]
     # @!attribute slurm_configuration
     #   <p>Additional options related to the Slurm scheduler.</p>

@@ -412,7 +412,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           container_metrics: {
@@ -434,7 +441,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           max_output_size: {
@@ -568,7 +582,7 @@ module Aws::CleanRoomsML
     #     },
     #     resource_config: { # required
     #       instance_count: 1,
-    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"], # required
+    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.c7i.large", "ml.c7i.xlarge", "ml.c7i.2xlarge", "ml.c7i.4xlarge", "ml.c7i.8xlarge", "ml.c7i.12xlarge", "ml.c7i.16xlarge", "ml.c7i.24xlarge", "ml.c7i.48xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.12xlarge", "ml.g6e.16xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5en.48xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge"], # required
     #       volume_size_in_gb: 1, # required
     #     },
     #     stopping_condition: {
@@ -1003,7 +1017,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           container_metrics: {
@@ -1025,7 +1046,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           max_output_size: {
@@ -1058,9 +1086,6 @@ module Aws::CleanRoomsML
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     create_time: Time.now, # required
-    #     update_time: Time.now, # required
-    #     creator_account_id: "AccountId", # required
     #     membership_identifier: "UUID", # required
     #     collaboration_identifier: "UUID", # required
     #     ml_input_channel_arn: "MLInputChannelArn", # required
@@ -1073,7 +1098,10 @@ module Aws::CleanRoomsML
     #     },
     #     retention_in_days: 1, # required
     #     number_of_records: 1,
-    #     description: "ResourceDescription"
+    #     description: "ResourceDescription",
+    #     create_time: Time.now, # required
+    #     update_time: Time.now, # required
+    #     creator_account_id: "AccountId", # required
     #   }
     # @return [Types::GetCollaborationMLInputChannelResponse]
     def get_collaboration_ml_input_channel(params = {}, options = {})
@@ -1121,7 +1149,7 @@ module Aws::CleanRoomsML
     #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
     #     resource_config: {
     #       instance_count: 1,
-    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"], # required
+    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.c7i.large", "ml.c7i.xlarge", "ml.c7i.2xlarge", "ml.c7i.4xlarge", "ml.c7i.8xlarge", "ml.c7i.12xlarge", "ml.c7i.16xlarge", "ml.c7i.24xlarge", "ml.c7i.48xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.12xlarge", "ml.g6e.16xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5en.48xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge"], # required
     #       volume_size_in_gb: 1, # required
     #     },
     #     training_input_mode: "File" # One of: ["File", "FastFile", "Pipe"],
@@ -1284,7 +1312,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           container_metrics: {
@@ -1306,7 +1341,14 @@ module Aws::CleanRoomsML
     #           container_logs: [
     #             {
     #               allowed_account_ids: ["String"], # required
-    #               filter_pattern: "String"
+    #               filter_pattern: "String",
+    #               log_type: "ALL" # One of: ["ALL", "ERROR_SUMMARY"],
+    #               log_redaction_configuration: {
+    #                 entities_to_redact: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" # One of: ["ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", "NUMBERS", "CUSTOM"]], # required
+    #                 custom_entity_config: {
+    #                   custom_data_identifiers: ["CustomDataIdentifier"], # required
+    #                 }
+    #               }
     #             }
     #           ],
     #           max_output_size: {
@@ -1374,10 +1416,21 @@ module Aws::CleanRoomsML
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     create_time: Time.now, # required
-    #     update_time: Time.now, # required
     #     membership_identifier: "UUID", # required
     #     collaboration_identifier: "UUID", # required
+    #     ml_input_channel_arn: "MLInputChannelArn", # required
+    #     name: "NameString", # required
+    #     configured_model_algorithm_associations: ["ConfiguredModelAlgorithmAssociationArn"], # required
+    #     status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"], # required
+    #     status_details: {
+    #       status_code: "String",
+    #       message: "String"
+    #     },
+    #     retention_in_days: 1, # required
+    #     number_of_records: 1,
+    #     description: "ResourceDescription",
+    #     create_time: Time.now, # required
+    #     update_time: Time.now, # required
     #     input_channel: { # required
     #       data_source: { # required
     #         # One of:
@@ -1402,19 +1455,8 @@ module Aws::CleanRoomsML
     #       role_arn: "IamRoleArn", # required
     #     },
     #     protected_query_identifier: "UUID",
-    #     ml_input_channel_arn: "MLInputChannelArn", # required
-    #     name: "NameString", # required
-    #     configured_model_algorithm_associations: ["ConfiguredModelAlgorithmAssociationArn"], # required
-    #     status: "CREATE_PENDING" # One of: ["CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_PENDING", "DELETE_IN_PROGRESS", "DELETE_FAILED", "INACTIVE"], # required
-    #     status_details: {
-    #       status_code: "String",
-    #       message: "String"
-    #     },
-    #     retention_in_days: 1, # required
-    #     number_of_records: 1,
     #     number_of_files: 1.0,
     #     size_in_gb: 1.0,
-    #     description: "ResourceDescription",
     #     kms_key_arn: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -1466,7 +1508,7 @@ module Aws::CleanRoomsML
     #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn", # required
     #     resource_config: {
     #       instance_count: 1,
-    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"], # required
+    #       instance_type: "ml.m4.xlarge" # One of: ["ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.8xlarge", "ml.c6i.4xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.8xlarge", "ml.r5d.12xlarge", "ml.r5d.16xlarge", "ml.r5d.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.c7i.large", "ml.c7i.xlarge", "ml.c7i.2xlarge", "ml.c7i.4xlarge", "ml.c7i.8xlarge", "ml.c7i.12xlarge", "ml.c7i.16xlarge", "ml.c7i.24xlarge", "ml.c7i.48xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.12xlarge", "ml.g6e.16xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5en.48xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge"], # required
     #       volume_size_in_gb: 1, # required
     #     },
     #     training_input_mode: "File" # One of: ["File", "FastFile", "Pipe"],
@@ -1529,7 +1571,7 @@ module Aws::CleanRoomsML
     #     trained_model_arn: "TrainedModelArn", # required
     #     trained_model_version_identifier: "UUID",
     #     resource_config: { # required
-    #       instance_type: "ml.r7i.48xlarge" # One of: ["ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.p3.16xlarge", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.p3.2xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.p3.8xlarge", "ml.m4.4xlarge"], # required
+    #       instance_type: "ml.r7i.48xlarge" # One of: ["ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.m4.4xlarge", "ml.p3.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge"], # required
     #       instance_count: 1
     #     },
     #     output_configuration: { # required
@@ -2596,7 +2638,7 @@ module Aws::CleanRoomsML
     #     trained_model_version_identifier: "UUID",
     #     configured_model_algorithm_association_arn: "ConfiguredModelAlgorithmAssociationArn",
     #     resource_config: { # required
-    #       instance_type: "ml.r7i.48xlarge" # One of: ["ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.p3.16xlarge", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.p3.2xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.p3.8xlarge", "ml.m4.4xlarge"], # required
+    #       instance_type: "ml.r7i.48xlarge" # One of: ["ml.r7i.48xlarge", "ml.r6i.16xlarge", "ml.m6i.xlarge", "ml.m5.4xlarge", "ml.p2.xlarge", "ml.m4.16xlarge", "ml.r7i.16xlarge", "ml.m7i.xlarge", "ml.m6i.12xlarge", "ml.r7i.8xlarge", "ml.r7i.large", "ml.m7i.12xlarge", "ml.m6i.24xlarge", "ml.m7i.24xlarge", "ml.r6i.8xlarge", "ml.r6i.large", "ml.g5.2xlarge", "ml.m5.large", "ml.m7i.48xlarge", "ml.m6i.16xlarge", "ml.p2.16xlarge", "ml.g5.4xlarge", "ml.m7i.16xlarge", "ml.c4.2xlarge", "ml.c5.2xlarge", "ml.c6i.32xlarge", "ml.c4.4xlarge", "ml.g5.8xlarge", "ml.c6i.xlarge", "ml.c5.4xlarge", "ml.g4dn.xlarge", "ml.c7i.xlarge", "ml.c6i.12xlarge", "ml.g4dn.12xlarge", "ml.c7i.12xlarge", "ml.c6i.24xlarge", "ml.g4dn.2xlarge", "ml.c7i.24xlarge", "ml.c7i.2xlarge", "ml.c4.8xlarge", "ml.c6i.2xlarge", "ml.g4dn.4xlarge", "ml.c7i.48xlarge", "ml.c7i.4xlarge", "ml.c6i.16xlarge", "ml.c5.9xlarge", "ml.g4dn.16xlarge", "ml.c7i.16xlarge", "ml.c6i.4xlarge", "ml.c5.xlarge", "ml.c4.xlarge", "ml.g4dn.8xlarge", "ml.c7i.8xlarge", "ml.c7i.large", "ml.g5.xlarge", "ml.c6i.8xlarge", "ml.c6i.large", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.m7i.2xlarge", "ml.c5.18xlarge", "ml.g5.48xlarge", "ml.m6i.2xlarge", "ml.g5.16xlarge", "ml.m7i.4xlarge", "ml.r6i.32xlarge", "ml.m6i.4xlarge", "ml.m5.xlarge", "ml.m4.10xlarge", "ml.r6i.xlarge", "ml.m5.12xlarge", "ml.m4.xlarge", "ml.r7i.2xlarge", "ml.r7i.xlarge", "ml.r6i.12xlarge", "ml.m5.24xlarge", "ml.r7i.12xlarge", "ml.m7i.8xlarge", "ml.m7i.large", "ml.r6i.24xlarge", "ml.r6i.2xlarge", "ml.m4.2xlarge", "ml.r7i.24xlarge", "ml.r7i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.large", "ml.m5.2xlarge", "ml.p2.8xlarge", "ml.r6i.4xlarge", "ml.m6i.32xlarge", "ml.m4.4xlarge", "ml.p3.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge"], # required
     #       instance_count: 1
     #     },
     #     output_configuration: { # required
