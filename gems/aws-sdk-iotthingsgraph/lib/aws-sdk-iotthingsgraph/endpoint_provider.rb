@@ -11,9 +11,11 @@ module Aws::IoTThingsGraph
     def resolve(parameters)
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-          raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"        end
+          raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+        end
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
-          raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"        end
+          raise ArgumentError, "Invalid Configuration: Dualstack and custom endpoint are not supported"
+        end
         return Smithy::Client::EndpointRules::Endpoint.new(uri: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
@@ -22,17 +24,20 @@ module Aws::IoTThingsGraph
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://iotthingsgraph-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
-            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"          end
+            raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
+          end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
               return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://iotthingsgraph-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
-            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"          end
+            raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
+          end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://iotthingsgraph.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
-            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"          end
+            raise ArgumentError, "DualStack is enabled but this partition does not support DualStack"
+          end
           if Smithy::Client::EndpointRules.string_equals?("aws", Smithy::Client::EndpointRules.attr(partition_result, "name"))
             return Smithy::Client::EndpointRules::Endpoint.new(uri: "https://iotthingsgraph.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
           end
@@ -40,6 +45,7 @@ module Aws::IoTThingsGraph
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
+
     end
   end
 end
