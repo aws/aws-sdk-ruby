@@ -6,8 +6,8 @@ AllCops:
     - 'build/**/*'
     - 'tasks/release/**/*'
     - 'vendor/**/*'
-    # exclude all files under gems/ except for the aws-sdk-core gem
-    - !ruby/regexp /\/gems\/(?!aws-sdk-core\/).*/
+    # exclude all files under gems/ except for special gems
+    - !ruby/regexp /\/gems\/(?!aws-sdk-core|aws-partitions\/).*/
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -48,6 +48,8 @@ Naming/FileName:
     - 'tasks/**/*.rake'
     - '**/spec/**/*.rb'
     - 'gems/aws-sdk-core/lib/aws-sdk-core.rb'
+    - 'gems/aws-partitions/lib/aws-partitions.rb'
+    - 'gems/aws-partitions/spec/aws-partitions_spec.rb'
     - 'build_tools/aws-sdk-code-generator/lib/aws-sdk-code-generator.rb'
 
 Style/BlockComments:
