@@ -11,7 +11,8 @@ module Aws::Billing
     def resolve(parameters)
       if Smithy::Client::EndpointRules.set?(parameters.endpoint)
         if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
-          raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"        end
+          raise ArgumentError, "Invalid Configuration: FIPS and custom endpoint are not supported"
+        end
         return Smithy::Client::EndpointRules::Endpoint.new(uri: parameters.endpoint, headers: {}, properties: {})
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
@@ -23,6 +24,7 @@ module Aws::Billing
         end
       end
       raise ArgumentError, "Invalid Configuration: Missing Region"
+
     end
   end
 end
